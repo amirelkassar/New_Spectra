@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spectra.Application\Spectra.Application.csproj" />
+    <ProjectReference Include="..\Spectra.Domain.Shared\Spectra.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Spectra.Domain\Spectra.Domain.csproj" />
+    <ProjectReference Include="..\Spectra.Infrastructure\Spectra.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
