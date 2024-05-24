@@ -13,17 +13,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B36CC57E-D8E2-4D5D-8554-8442F517B232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.Domain", "Spectra.Domain\Spectra.Domain.csproj", "{D88CAD5F-74B7-414A-9B6C-BEAA8AE28028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.Domain", "Spectra.Domain\Spectra.Domain.csproj", "{D88CAD5F-74B7-414A-9B6C-BEAA8AE28028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.Domain.Shared", "Spectra.Domain.Shared\Spectra.Domain.Shared.csproj", "{8633554C-79D3-4B8D-9C41-A57ECE168D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.Domain.Shared", "Spectra.Domain.Shared\Spectra.Domain.Shared.csproj", "{8633554C-79D3-4B8D-9C41-A57ECE168D6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.Application", "Spectra.Application\Spectra.Application.csproj", "{44420995-A786-4761-BDAE-91E4E72BD2CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.Application", "Spectra.Application\Spectra.Application.csproj", "{44420995-A786-4761-BDAE-91E4E72BD2CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.Infrastructure", "Spectra.Infrastructure\Spectra.Infrastructure.csproj", "{754AD6E6-DF5C-4DD4-95ED-830AF6514815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.Infrastructure", "Spectra.Infrastructure\Spectra.Infrastructure.csproj", "{754AD6E6-DF5C-4DD4-95ED-830AF6514815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.WebAPI", "Spectra.WebAPI\Spectra.WebAPI.csproj", "{AEDEFDF4-0940-4F82-92E7-BDD28B8F9D7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.WebAPI", "Spectra.WebAPI\Spectra.WebAPI.csproj", "{AEDEFDF4-0940-4F82-92E7-BDD28B8F9D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.Web", "Spectra.Web\Spectra.Web.csproj", "{ACCF7754-EF15-4D59-8A86-872710B4FF1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.Web", "Spectra.Web\Spectra.Web.csproj", "{ACCF7754-EF15-4D59-8A86-872710B4FF1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC1CB514-9AB9-45C3-A2EB-0EF8AFE89E80}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
