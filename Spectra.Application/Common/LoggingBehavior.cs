@@ -16,16 +16,10 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 	{
 		_logger.LogInformation("Handling {RequestName} with request data: {@Request}", typeof(TRequest).Name, request);
 
-		try
-		{
-			var response = await next();
-			_logger.LogInformation("Handled {RequestName} successfully", typeof(TRequest).Name);
-			return response;
-		}
-		catch (Exception ex)
-		{
-			_logger.LogError(ex, "Error handling {RequestName} with request data: {@Request}", typeof(TRequest).Name, request);
-			throw;
-		}
+		var response = await next();
+
+		_logger.LogInformation("Handled {RequestName} successfully", typeof(TRequest).Name);
+
+		return response;
 	}
 }
