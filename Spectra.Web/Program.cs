@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Entities;
+using Spectra.Infrastructure.Middleware;
 using System.Reflection;
 
 
@@ -50,6 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseSerilogRequestLogging();
 

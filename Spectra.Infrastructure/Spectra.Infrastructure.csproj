@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
+    <PackageReference Include="JsonConverter.Newtonsoft.Json" Version="0.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
   </ItemGroup>
 
