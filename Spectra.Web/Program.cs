@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Spectra.Infrastructure.Data;
-using Spectra.Infrastructure.Entities;
 using Spectra.Infrastructure.Middleware;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System.Reflection;
@@ -32,13 +31,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseMongoDB(ConnectionString, databaseName)
 );
 
-
-// Configure ASP.NET Core Identity to use MongoDB
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-	.AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
-		ConnectionString, databaseName
-	)
-	.AddDefaultTokenProviders();
 // Add services to the container.
 
 builder.Services.AddControllers();
