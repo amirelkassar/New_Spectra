@@ -1,4 +1,16 @@
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Register Logging Behavior
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+builder.Host.UseSerilog((context, loggerConfig)
+	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
+
 
 // Add services to the container.
 
@@ -15,6 +27,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
