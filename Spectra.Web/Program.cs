@@ -1,8 +1,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Spectra.Infrastructure.Data;
+using Spectra.Infrastructure.Entities;
 using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +20,21 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
+// Read MongoDB settings from configuration
+var ConnectionString = builder.Configuration.GetConnectionString("MongoDb");
+var databaseName = builder.Configuration["DatabaseName"];
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseMongoDB(ConnectionString, databaseName)
+);
+
+
+// Configure ASP.NET Core Identity to use MongoDB
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+	.AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
+		ConnectionString, databaseName
+	)
+	.AddDefaultTokenProviders();
 // Add services to the container.
 
 builder.Services.AddControllers();
