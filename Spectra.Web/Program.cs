@@ -7,6 +7,7 @@ using Serilog;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Entities;
 using Spectra.Infrastructure.Middleware;
+using Spectra.Infrastructure.PipelineBehaviors;
 using System.Reflection;
 
 
@@ -15,8 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Register the Mediator
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-// Register Logging Behavior
+// Register  Behavior
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
+
 
 builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
