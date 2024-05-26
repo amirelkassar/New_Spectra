@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Spectra.Application\Spectra.Application.csproj" />
     <ProjectReference Include="..\Spectra.Domain.Shared\Spectra.Domain.Shared.csproj" />
     <ProjectReference Include="..\Spectra.Domain\Spectra.Domain.csproj" />
