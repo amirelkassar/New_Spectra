@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using MongoDB.Bson.IO;
+using Newtonsoft.Json;
 using Spectra.Application.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using JsonConvert = Newtonsoft.Json.JsonConvert;
-
 
 namespace Spectra.Infrastructure.Middleware
 {
@@ -32,6 +28,7 @@ namespace Spectra.Infrastructure.Middleware
 				await HandleExceptionAsync(context, ex);
 			}
 		}
+
 		private static Task HandleExceptionAsync(HttpContext context, Exception exception)
 		{
 			var statusCode = HttpStatusCode.InternalServerError;
@@ -41,23 +38,34 @@ namespace Spectra.Infrastructure.Middleware
 			var success = false;
 			var errorCollection = new Dictionary<string, string[]>();
 
-			// Handle custom exceptions
-			if (exception is RequestErrorException)
+			switch (exception)
 			{
-				errorType = "RequestError";
-				errorMessage = exception.Message;
+				case RequestErrorException _:
+					errorType = "RequestError";
+					errorMessage = exception.Message;
+					statusCode = HttpStatusCode.BadRequest;
+					break;
+
+				case DbErrorException _:
+					errorType = "DbError";
+					errorMessage = exception.Message;
+					statusCode = HttpStatusCode.InternalServerError;
+					break;
+
+				case ValidationException validationException:
+					errorType = "ValidationError";
+					errorMessage = "One or more validation errors occurred.";
+					statusCode = HttpStatusCode.UnprocessableEntity;
+					errorCollection = (Dictionary<string, string[]>)validationException.Errors;
+					break;
+
+
+				default:
+					errorType = "UnknownError";
+					errorMessage = exception.Message;
+					statusCode = HttpStatusCode.InternalServerError;
+					break;
 			}
-			else if (exception is DbErrorException)
-			{
-				errorType = "DbError";
-				errorMessage = exception.Message;
-			}
-			else if (exception is ValidationErrorException)
-			{
-				errorType = "ValidationError";
-				errorMessage = exception.Message;
-			}
-			// Add handling for other custom exception types
 
 			var errorResponse = new
 			{
@@ -80,4 +88,3 @@ namespace Spectra.Infrastructure.Middleware
 		}
 	}
 }
-
