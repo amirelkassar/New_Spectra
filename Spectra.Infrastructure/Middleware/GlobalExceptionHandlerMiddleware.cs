@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Spectra.Application.Common.Exceptions;
 using Spectra.Application.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Middleware
 {
-	public class GlobalExceptionHandlerMiddleware
+    public class GlobalExceptionHandlerMiddleware
 	{
 		private readonly RequestDelegate _next;
 
@@ -58,7 +59,41 @@ namespace Spectra.Infrastructure.Middleware
 					statusCode = HttpStatusCode.UnprocessableEntity;
 					errorCollection = (Dictionary<string, string[]>)validationException.Errors;
 					break;
+				case NotFoundException notFoundException:
+					errorType = "NotFoundError";
+					errorMessage = notFoundException.Message;
+					statusCode = HttpStatusCode.NotFound;
+					break;
 
+				case ForbiddenAccessException forbiddenAccessException:
+					errorType = "ForbiddenAccessError";
+					errorMessage = forbiddenAccessException.Message;
+					statusCode = HttpStatusCode.Forbidden;
+					break;
+
+				case NoDefaultValueException noDefaultValueException:
+					errorType = "NoDefaultValueError";
+					errorMessage = noDefaultValueException.Message;
+					statusCode = HttpStatusCode.BadRequest;
+					break;
+
+				case InvalidValueException invalidValueException:
+					errorType = "InvalidValueError";
+					errorMessage = invalidValueException.Message;
+					statusCode = HttpStatusCode.BadRequest;
+					break;
+
+				case InvalidRequestException invalidRequestException:
+					errorType = "InvalidRequestError";
+					errorMessage = invalidRequestException.Message;
+					statusCode = HttpStatusCode.BadRequest;
+					break;
+
+				case NotImplementedFeatureException notImplementedFeatureException:
+					errorType = "NotImplementedFeatureError";
+					errorMessage = notImplementedFeatureException.Message;
+					statusCode = HttpStatusCode.NotImplemented;
+					break;
 
 				default:
 					errorType = "UnknownError";
