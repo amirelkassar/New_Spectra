@@ -1,8 +1,0 @@
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.csproj.AssemblyReference.cache
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.AssemblyInfoInputs.cache
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.AssemblyInfo.cs
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.csproj.CoreCompileInputs.cache
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\adeln\source\repos\SpectraNewProject\IdentityServer\obj\Debug\net8.0\IdentityServer.sourcelink.json
