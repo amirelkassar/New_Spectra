@@ -8,6 +8,7 @@ namespace Spectra.Application.Interfaces
 {
 	public interface IApplicationDbContext
 	{
-		Task<int> SaveChangesAsync();
-	}
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+    }
 }

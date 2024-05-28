@@ -2,12 +2,9 @@
 using Newtonsoft.Json;
 using Spectra.Application.Common.Exceptions;
 using Spectra.Application.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
-namespace Spectra.Infrastructure.Middleware
+namespace Spectra.WebAPI.Middlewares
 {
     public class GlobalExceptionHandlerMiddleware
 	{

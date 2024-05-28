@@ -17,9 +17,6 @@ namespace Spectra.Infrastructure.Data
 
 		}
 
-		public  async Task<int> SaveChangesAsync()
-		{
-			return await base.SaveChangesAsync();
-		}
+	
 	}
 }
