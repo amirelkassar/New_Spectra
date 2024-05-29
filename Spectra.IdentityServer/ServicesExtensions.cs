@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Spectra.Domain.Models;
 using Spectra.IdentityServer.Data;
-using Spectra.IdentityServer.Data.Models;
 using System.Reflection;
 
 namespace Spectra.IdentityServer
@@ -49,7 +49,9 @@ namespace Spectra.IdentityServer
                 options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
                     sql => sql.MigrationsAssembly(migrationsAssembly));
             });
-            return services;
+
+			services.AddTransient<SeedDataService>();
+			return services;
         }
     }
 }
