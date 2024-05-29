@@ -1,4 +1,4 @@
-﻿using Spectra.Domain.Interfaces;
+﻿using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
