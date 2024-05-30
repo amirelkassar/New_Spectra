@@ -6,13 +6,14 @@ namespace Spectra.IdentityServer.Settings
     {
         public IReadOnlyCollection<ApiScope> ApiScopes { get; init; }
         public IReadOnlyCollection<ApiResource> ApiResources { get; init; }
-
         public IReadOnlyCollection<Client> Clients { get; init; }
-
         public IReadOnlyCollection<IdentityResource> IdentityResources =>
             [
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new IdentityResources.Phone(),
+                new IdentityResources.Address()
             ];
     }
 }
