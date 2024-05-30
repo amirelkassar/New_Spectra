@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Spectra.Application.Exceptions;
 using Spectra.Application.Messaging;
 using System.Linq;
@@ -12,11 +13,14 @@ namespace Spectra.Application.Common
 		where TRequest : ICommandBase
 	{
 		private readonly IEnumerable<IValidator<TRequest>> _validators;
+        private readonly ILogger _logger;
 
-		public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators,
+			ILogger logger)
 		{
 			_validators = validators;
-		}
+            _logger = logger;
+        }
 
 		public async Task<TResponse> Handle(TRequest request,
 			RequestHandlerDelegate<TResponse> next,
@@ -32,6 +36,10 @@ namespace Spectra.Application.Common
 
 			if (failures.Count != 0)
 			{
+				for (int i = 0; i < failures.Count; i++)
+				{
+					_logger.LogError(failures[i].ErrorMessage, failures[i]);
+                }
 				throw new Exceptions.ValidationException(failures);
 			}
 
