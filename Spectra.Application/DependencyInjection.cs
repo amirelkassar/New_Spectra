@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
@@ -17,6 +18,8 @@ namespace Spectra.Application
         public static IServiceCollection ConfigureApplication(this IServiceCollection services,
             IConfiguration configuration) 
         {
+            // Register FluentValidation
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             //Register the Mediator
             services.AddMediatR(cfg =>
             {
@@ -26,7 +29,6 @@ namespace Spectra.Application
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
-
             return services;
         }
 

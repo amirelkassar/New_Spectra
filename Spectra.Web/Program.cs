@@ -11,9 +11,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register FluentValidation
-builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
 //Serilog
 builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
@@ -29,7 +26,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
