@@ -4,6 +4,9 @@ using Serilog;
 using Spectra.IdentityServer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.InitServices(builder.Configuration);
+
 var app = builder.InitApplication()
     .Build();
 Log.Information("Application has built!");

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Interfaces
+namespace Spectra.Domain.Shared.Common
 {
 	public class AuthorizationResult
 	{
