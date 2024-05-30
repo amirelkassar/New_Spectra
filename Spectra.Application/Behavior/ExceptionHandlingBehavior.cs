@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 using Spectra.Domain.Shared.GlobalExceptions;
 namespace Spectra.Infrastructure.PipelineBehaviors
 {
-	public class ExceptionHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+	public class ExceptionHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse?> where TRequest : notnull
 	{
-		public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+		public async Task<TResponse?> Handle(TRequest request, RequestHandlerDelegate<TResponse?> next, CancellationToken cancellationToken)
 		{
 			try
 			{
@@ -13,11 +13,11 @@ namespace Spectra.Infrastructure.PipelineBehaviors
 			}
 			catch (Exception ex)
 			{
-				return ExceptionHandlingBehavior<TRequest, TResponse>.HandleException(ex);
+				return ExceptionHandlingBehavior<TRequest, TResponse?>.HandleException(ex);
 			}
 		}
 
-		private static TResponse HandleException(Exception exception)
+		private static TResponse? HandleException(Exception exception)
 		{
 			var errorResponse = new ErrorResponse
 			{
@@ -35,7 +35,7 @@ namespace Spectra.Infrastructure.PipelineBehaviors
 			var jsonResponse = JsonConvert.SerializeObject(errorResponse);
 
 			// Return the error response
-			return JsonConvert.DeserializeObject<TResponse>(jsonResponse);
+			return JsonConvert.DeserializeObject<TResponse?>(jsonResponse);
 		}
 	}
 
