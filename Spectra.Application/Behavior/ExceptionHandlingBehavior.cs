@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
+using Spectra.Domain.Shared.GlobalExceptions;
 namespace Spectra.Infrastructure.PipelineBehaviors
 {
 	public class ExceptionHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
@@ -17,11 +13,11 @@ namespace Spectra.Infrastructure.PipelineBehaviors
 			}
 			catch (Exception ex)
 			{
-				return HandleException(ex);
+				return ExceptionHandlingBehavior<TRequest, TResponse>.HandleException(ex);
 			}
 		}
 
-		private TResponse HandleException(Exception exception)
+		private static TResponse HandleException(Exception exception)
 		{
 			var errorResponse = new ErrorResponse
 			{
@@ -43,12 +39,4 @@ namespace Spectra.Infrastructure.PipelineBehaviors
 		}
 	}
 
-	public class ErrorResponse
-	{
-		public string ErrorType { get; set; }
-		public string ErrorCode { get; set; }
-		public string ErrorMessage { get; set; }
-		public bool Success { get; set; }
-		public Dictionary<string, string[]> ErrorCollection { get; set; }
-	}
 }
