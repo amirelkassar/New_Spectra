@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
+using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Spectra.Application
         public static IServiceCollection ConfigureApplication(this IServiceCollection services,
             IConfiguration configuration) 
         {
+            //Domain
+            services.ConfigureDomain(configuration);
             // Register FluentValidation
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             //Register the Mediator

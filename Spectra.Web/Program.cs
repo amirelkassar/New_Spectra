@@ -5,6 +5,7 @@ using Serilog;
 using Spectra.Application.Common;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
+using Spectra.Web;
 using Spectra.WebAPI.Middlewares;
 using System.Reflection;
 
@@ -15,20 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-// Read MongoDB settings from configuration
-var ConnectionString = builder.Configuration.GetConnectionString("MongoDb");
-var databaseName = builder.Configuration["DatabaseName"];
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseMongoDB(ConnectionString, databaseName)
-);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.ConfigureWebHost(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
