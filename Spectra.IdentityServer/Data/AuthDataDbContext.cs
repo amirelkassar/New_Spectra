@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Spectra.IdentityServer.Data.Models;
+using Spectra.Domain.AppRole;
+using Spectra.Domain.AppUser;
 
 namespace Spectra.IdentityServer.Data
 {

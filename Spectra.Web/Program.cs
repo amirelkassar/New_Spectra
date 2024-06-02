@@ -6,6 +6,7 @@ using Spectra.Application.Common;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
 using Spectra.Web;
+using Spectra.WebAPI;
 using Spectra.WebAPI.Middlewares;
 using System.Reflection;
 
@@ -17,6 +18,9 @@ builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.ConfigureWebHost(builder.Configuration);
+
+builder.Services.ConfigureWebAPIs(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,8 +35,10 @@ app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers().RequireAuthorization("ApiScope");
 
 app.Run();

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Spectra.Application.Common.Exceptions;
 using Spectra.Application.Exceptions;
 using System.Net;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Spectra.Application;
 using Spectra.Infrastructure;
@@ -20,7 +21,27 @@ namespace Spectra.Web
             services.ConfigureWebAPIs(configuration);
             ConfigureDataAccess(services, configuration);
 
-            return services;
+			services.AddAuthentication("Bearer")
+			   .AddJwtBearer("Bearer", options =>
+			   {
+				   options.Authority = "https://localhost:22413";
+				   options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+				   {
+					   ValidateAudience = false
+				   };
+			   });
+
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy("ApiScope", policy =>
+				{
+					policy.RequireAuthenticatedUser();
+					policy.RequireClaim("scope", "api1");
+				});
+			});
+
+
+			return services;
         }
 
 
@@ -31,6 +52,9 @@ namespace Spectra.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMongoDB(ConnectionString, databaseName)
             );
-        }
+
+
+			
+		}
     }
 }
