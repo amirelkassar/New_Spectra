@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Spectra.Application.Exceptions;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
 
 namespace Spectra.WebAPI.Middlewares

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Application.Exceptions
+namespace Spectra.Domain.Shared.Common.Exceptions
 {
 	internal class UnauthorizedException : CleanArchitectureApplicationException
 	{

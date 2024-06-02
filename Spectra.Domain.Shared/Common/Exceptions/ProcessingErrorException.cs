@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Application.Exceptions
+namespace Spectra.Domain.Shared.Common.Exceptions
 {
 	[Serializable]
 	public class ProcessingErrorException : CleanArchitectureApplicationException
