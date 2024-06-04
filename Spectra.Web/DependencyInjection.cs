@@ -52,9 +52,6 @@ namespace Spectra.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMongoDB(ConnectionString, databaseName)
             );
-
-
-			
 		}
     }
 }

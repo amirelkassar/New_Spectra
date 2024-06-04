@@ -1,13 +1,10 @@
-﻿using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
-using Serilog;
+﻿using Serilog;
 using Spectra.IdentityServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.InitServices(builder.Configuration);
-
-var app = builder.InitApplication()
+var app = builder
+    .InitApplication()
     .Build();
 Log.Information("Application has built!");
 Log.Information("Application started...");
@@ -18,8 +15,12 @@ try
     {
         app.UseDeveloperExceptionPage();
     }
-
     app.UseIdentityServer();
+    using (var scope = app.Services.CreateScope())
+    {
+        var seedDataService = scope.ServiceProvider.GetService<SeedDataService>();
+        await seedDataService.SeedAsync();
+    }
     await app.RunAsync();
 
 

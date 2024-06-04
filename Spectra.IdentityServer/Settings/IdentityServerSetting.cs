@@ -1,12 +1,13 @@
 ﻿using IdentityServer4.Models;
+using Spectra.IdentityServer.Models;
 
 namespace Spectra.IdentityServer.Settings
 {
     public class IdentityServerSetting
     {
-        public IReadOnlyCollection<ApiScope> ApiScopes { get; init; }
-        public IReadOnlyCollection<ApiResource> ApiResources { get; init; }
-        public IReadOnlyCollection<Client> Clients { get; init; }
+        public IReadOnlyCollection<ApiScope> ApiScopes { get; set; }
+        public IReadOnlyCollection<ApiResource> ApiResources { get; set; }
+        public IReadOnlyCollection<Client> Clients { get; set; }
         public IReadOnlyCollection<IdentityResource> IdentityResources =>
             [
                 new IdentityResources.OpenId(),
@@ -15,5 +16,7 @@ namespace Spectra.IdentityServer.Settings
                 new IdentityResources.Phone(),
                 new IdentityResources.Address()
             ];
+        public IReadOnlyCollection<UserDataModel> AppUsers { get; set; }
+        public IReadOnlyCollection<RoleDataModel> AppRoles { get; set; }
     }
 }

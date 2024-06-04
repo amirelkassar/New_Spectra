@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IdentityServer4.EntityFramework.Mappers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.IdentityServer.Data;
+using Spectra.IdentityServer.Settings;
 using System.Reflection;
 
 namespace Spectra.IdentityServer
@@ -35,6 +37,10 @@ namespace Spectra.IdentityServer
             .AddEntityFrameworkStores<AuthDataDbContext>()
             .AddSignInManager()
             .AddDefaultTokenProviders();
+            //adding identity server configs
+            var identitySettings = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
+            if (identitySettings is not null)
+            services.AddSingleton(identitySettings);
 
             services.AddIdentityServer(options =>
             {
@@ -51,8 +57,8 @@ namespace Spectra.IdentityServer
                     sql => sql.MigrationsAssembly(migrationsAssembly));
             });
 
-			services.AddTransient<SeedDataService>();
-			return services;
+            services.AddTransient<SeedDataService>();
+            return services;
         }
     }
 }
