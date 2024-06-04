@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Spectra.Application;
 using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
+using Spectra.Web.Models;
 using Spectra.WebAPI;
 
 namespace Spectra.Web
@@ -20,38 +21,49 @@ namespace Spectra.Web
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
             ConfigureDataAccess(services, configuration);
+            ConfigureIdentityManagement(services, configuration);
 
-			services.AddAuthentication("Bearer")
-			   .AddJwtBearer("Bearer", options =>
-			   {
-				   options.Authority = "https://localhost:22413";
-				   options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-				   {
-					   ValidateAudience = false
-				   };
-			   });
-
-			services.AddAuthorization(options =>
-			{
-				options.AddPolicy("ApiScope", policy =>
-				{
-					policy.RequireAuthenticatedUser();
-					policy.RequireClaim("scope", "api1");
-				});
-			});
-
-
-			return services;
+            return services;
         }
 
+        private static void ConfigureIdentityManagement(IServiceCollection services, IConfiguration configuration)
+        {
+            var _identityServerSetting = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
 
-        private static void ConfigureDataAccess(IServiceCollection services,IConfiguration configuration)
+            if (_identityServerSetting != null)
+            {
+                services.AddAuthentication("Bearer")
+                   .AddJwtBearer("Bearer", options =>
+                   {
+                       options.Authority = _identityServerSetting.Authority;
+                       options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                       {
+                           SaveSigninToken = _identityServerSetting.SaveToken,
+                           ValidAudience = _identityServerSetting.Audience
+                       };
+                   });
+
+                services.AddAuthorization(options =>
+                {
+                    foreach (var scope in _identityServerSetting.ApiScopes)
+                    {
+                        options.AddPolicy(scope.Key, policy =>
+                        {
+                            policy.RequireAuthenticatedUser();
+                            policy.RequireClaim(scope.Key, scope.Value);
+                        });
+                    }
+
+                });
+            }
+        }
+        private static void ConfigureDataAccess(IServiceCollection services, IConfiguration configuration)
         {
             var ConnectionString = configuration.GetConnectionString("MongoDb");
             var databaseName = configuration["SpectraDb"];
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMongoDB(ConnectionString, databaseName)
             );
-		}
+        }
     }
 }

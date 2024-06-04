@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Exceptions;
 using Spectra.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Spectra.Application.Common
 			var authorizationResult = await _authorizer.AuthorizeAsync(request, cancellationToken);
 			if (!authorizationResult.IsAuthorized)
 			{
-				throw new UnauthorizedException(authorizationResult.FailureMessage ?? "Unauthorized");
+				throw new UnauthorizedAccessException(authorizationResult.FailureMessage ?? "Unauthorized");
 			}
 
 			return await next();

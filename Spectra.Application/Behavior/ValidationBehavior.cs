@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Spectra.Application.Exceptions;
 using Spectra.Application.Messaging;
 using System.Linq;
 using System.Threading;
@@ -38,9 +37,9 @@ namespace Spectra.Application.Common
 			{
 				for (int i = 0; i < failures.Count; i++)
 				{
-					_logger.LogError(failures[i].ErrorMessage, failures[i]);
+                    _logger.LogError(message: failures[i].ErrorMessage, failures[i]);
                 }
-				throw new Exceptions.ValidationException(failures);
+				throw new ValidationException([.. failures]);
 			}
 
 			return await next();
