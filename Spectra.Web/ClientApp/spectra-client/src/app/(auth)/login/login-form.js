@@ -31,7 +31,7 @@ const LoginForm = () => {
         setPassword={setPassword}
         inputContainerClassName="gap-3"
       />
-      <div className="ms-auto  w-fit">
+      <div className="me-auto  w-fit">
         <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>نسيت كلمة السر؟</Link>
       </div>
       <Button variant="secondary" className={"w-full "} type="submit">

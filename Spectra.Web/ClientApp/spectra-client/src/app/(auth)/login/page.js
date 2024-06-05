@@ -5,11 +5,12 @@ import GoogleIcon from "@/assets/icons/google";
 import AppleIcon from "@/assets/icons/apple";
 import Link from "next/link";
 import ROUTES from "@/routes";
+import SignupModal from "./signup-modal";
 
 const LoginPage = () => {
   return (
     <div className="space-y-16 text-xl">
-      <h1 className="text-black text-3xl ">أهلًا بعودتك</h1>
+      <h1 className=" ">أهلًا بعودتك</h1>
       <LoginForm />
       <div className="space-y-5">
         <Button dir="ltr" className={"w-full border-greenMain"}>
@@ -18,17 +19,10 @@ const LoginPage = () => {
         </Button>
         <Button dir="ltr" className={"w-full border-greenMain"}>
           <AppleIcon />
-          Sign in with Google
+          Sign in with Apple
         </Button>
       </div>
-      <div className="w-fit mx-auto ">
-        <Link
-          href={ROUTES.AUTH.REGISTER}
-          className="block border border-transparent hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain rounded-xl py-3 px-5   transition-all"
-        >
-          ليس لديك حساب؟ اشترك الان
-        </Link>
-      </div>
+      <SignupModal />
     </div>
   );
 };

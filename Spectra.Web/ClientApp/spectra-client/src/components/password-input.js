@@ -36,7 +36,7 @@ const PasswordInput = ({
       <button
         onClick={toggleHidePassword}
         type="button"
-        className="absolute end-3 bottom-5"
+        className="absolute end-4 bottom-[18px]"
       >
         <PasswordIcon hidePassword={hidePassword} />
       </button>

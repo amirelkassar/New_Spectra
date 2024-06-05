@@ -8,3 +8,6 @@
   }
 }
 
+h1 {
+  @apply text-black text-[28px] font-bold;
+}
