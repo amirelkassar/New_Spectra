@@ -1,5 +1,4 @@
-﻿using IdentityServer4.EntityFramework.Mappers;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;

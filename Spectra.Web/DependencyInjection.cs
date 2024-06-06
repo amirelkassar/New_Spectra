@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Flurl.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Spectra.Application;
@@ -22,7 +23,7 @@ namespace Spectra.Web
             services.ConfigureWebAPIs(configuration);
             ConfigureDataAccess(services, configuration);
             ConfigureIdentityManagement(services, configuration);
-
+            ConfigureIdentityServerSettings(services, configuration);
             return services;
         }
 
@@ -64,6 +65,12 @@ namespace Spectra.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMongoDB(ConnectionString, databaseName)
             );
+        }
+        private static void ConfigureIdentityServerSettings(IServiceCollection services, IConfiguration configuration)
+        {
+            var _identityServerSetting = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
+            if (_identityServerSetting != null)
+                services.AddSingleton(_identityServerSetting);
         }
     }
 }
