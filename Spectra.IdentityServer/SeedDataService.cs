@@ -93,167 +93,28 @@ public class SeedDataService
     {
         foreach (var identityResource in _identityServerSetting.IdentityResources)
         {
-            yield return new IdentityServer4.EntityFramework.Entities.IdentityResource
-            {
-                Description = identityResource.Description,
-                DisplayName = identityResource.DisplayName,
-                Emphasize = identityResource.Emphasize,
-                Enabled = identityResource.Enabled,
-                Name = identityResource.Name,
-                Required = identityResource.Required,
-                ShowInDiscoveryDocument = identityResource.ShowInDiscoveryDocument,
-                Properties=identityResource.Properties.Select(p=>new IdentityServer4.EntityFramework.Entities.IdentityResourceProperty
-                {
-                    Key = p.Key,
-                    Value = p.Value
-                }).ToList(),
-                UserClaims=identityResource.UserClaims.Select(u => new IdentityServer4.EntityFramework.Entities.IdentityResourceClaim
-                {
-                    Type = u
-                }).ToList()
-            };
+            yield return identityResource.ToEntity();
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.ApiScope> GetApiScopes()
     {
         foreach (var apiScope in _identityServerSetting.ApiScopes)
         {
-            yield return new IdentityServer4.EntityFramework.Entities.ApiScope
-            {
-                Description = apiScope.Description,
-                DisplayName = apiScope.DisplayName,
-                Emphasize = apiScope.Emphasize,
-                Enabled = apiScope.Enabled,
-                Name = apiScope.Name,
-                Required = apiScope.Required,
-                ShowInDiscoveryDocument = apiScope.ShowInDiscoveryDocument,
-                UserClaims= apiScope.UserClaims.Select(u=>new IdentityServer4.EntityFramework.Entities.ApiScopeClaim
-                {
-                    Type=u
-                }).ToList()
-            };
+            yield return apiScope.ToEntity();
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.ApiResource> GetApiResources()
     {
         foreach (var apiResource in _identityServerSetting.ApiResources)
         {
-            yield return new IdentityServer4.EntityFramework.Entities.ApiResource
-            {
-                Name = apiResource.Name,
-                Enabled = apiResource.Enabled,
-                Description = apiResource.Description,
-                DisplayName = apiResource.DisplayName,
-                Scopes = apiResource.Scopes.Select(s => new IdentityServer4.EntityFramework.Entities.ApiResourceScope
-                {
-                    Scope= s,
-                }).ToList(),
-                ShowInDiscoveryDocument= apiResource.ShowInDiscoveryDocument,
-                Secrets=apiResource.ApiSecrets.Select(s=>new IdentityServer4.EntityFramework.Entities.ApiResourceSecret
-                {
-                    Description= s.Description,
-                    Expiration=s.Expiration,
-                    Type=s.Type,
-                    Value = s.Value
-                }).ToList(),
-                Properties=apiResource.Properties.Select(p=>new IdentityServer4.EntityFramework.Entities.ApiResourceProperty
-                {
-                    Value=p.Value,
-                    Key=p.Key,
-                }).ToList(),
-                UserClaims=apiResource.UserClaims.Select(u=>new IdentityServer4.EntityFramework.Entities.ApiResourceClaim
-                {
-                    Type=u,
-                }).ToList()
-            };
+            yield return apiResource.ToEntity();
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.Client> GetClients()
     {
         foreach (var client in _identityServerSetting.Clients)
         {
-            yield return new IdentityServer4.EntityFramework.Entities.Client
-            {
-                ClientId= client.ClientId,
-                ClientName= client.ClientName,
-                ClientClaimsPrefix= client.ClientClaimsPrefix,
-                ClientUri= client.ClientUri,
-                Description= client.Description,
-                AbsoluteRefreshTokenLifetime= client.AbsoluteRefreshTokenLifetime,
-                AllowAccessTokensViaBrowser= client.AllowAccessTokensViaBrowser,
-                AccessTokenLifetime= client.AccessTokenLifetime,
-                AccessTokenType = (int)client.AccessTokenType,
-                AllowedCorsOrigins = client.AllowedCorsOrigins.Select(c=>new IdentityServer4.EntityFramework.Entities.ClientCorsOrigin
-                {
-                    Origin= c,
-                }).ToList(),
-                AllowedGrantTypes= client.AllowedGrantTypes.Select(g=>new IdentityServer4.EntityFramework.Entities.ClientGrantType
-                {
-                    GrantType=g
-                }).ToList(),
-                AllowedScopes=client.AllowedScopes.Select(s=>new IdentityServer4.EntityFramework.Entities.ClientScope
-                {
-                    Scope=s
-                }).ToList(),
-                AllowOfflineAccess=client.AllowOfflineAccess,
-                AllowPlainTextPkce=client.AllowPlainTextPkce,
-                AllowRememberConsent=client.AllowRememberConsent,
-                AlwaysIncludeUserClaimsInIdToken = client.AlwaysIncludeUserClaimsInIdToken,
-                AlwaysSendClientClaims=client.AlwaysSendClientClaims,
-                AuthorizationCodeLifetime= client.AuthorizationCodeLifetime,
-                BackChannelLogoutSessionRequired=client.BackChannelLogoutSessionRequired,
-                BackChannelLogoutUri = client.BackChannelLogoutUri,
-                Claims= client.Claims.Select(c=>new IdentityServer4.EntityFramework.Entities.ClientClaim
-                {
-                    Type=c.Type,
-                    Value=c.Value,
-                }).ToList(),
-                ClientSecrets=client.ClientSecrets.Select(s=>new IdentityServer4.EntityFramework.Entities.ClientSecret
-                {
-                    Description=s.Description,
-                    Expiration=s.Expiration,
-                    Type=s.Type,
-                    Value = s.Value
-                }).ToList(),
-                ConsentLifetime=client.ConsentLifetime,
-                DeviceCodeLifetime=client.DeviceCodeLifetime,
-                Enabled=client.Enabled,
-                EnableLocalLogin=client.EnableLocalLogin,
-                FrontChannelLogoutSessionRequired= client.FrontChannelLogoutSessionRequired,
-                FrontChannelLogoutUri = client.FrontChannelLogoutUri,
-                IdentityProviderRestrictions= client.IdentityProviderRestrictions.Select(ipr=>new IdentityServer4.EntityFramework.Entities.ClientIdPRestriction
-                {
-                    Provider=ipr
-                }).ToList(),
-                IdentityTokenLifetime=client.IdentityTokenLifetime,
-                IncludeJwtId=client.IncludeJwtId,
-                LogoUri=client.LogoUri,
-                PairWiseSubjectSalt=client.PairWiseSubjectSalt,
-                PostLogoutRedirectUris = client.PostLogoutRedirectUris.Select(uri=>new IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri
-                {
-                    PostLogoutRedirectUri=uri,
-                }).ToList(),
-                Properties= client.Properties.Select(p=>new IdentityServer4.EntityFramework.Entities.ClientProperty
-                {
-                    Key = p.Key,
-                    Value = p.Value
-                }).ToList(),
-                ProtocolType=client.ProtocolType,
-                RedirectUris=client.RedirectUris.Select(uri=>new IdentityServer4.EntityFramework.Entities.ClientRedirectUri
-                {
-                    RedirectUri=uri,
-                }).ToList(),
-                RefreshTokenExpiration=(int)client.RefreshTokenExpiration,
-                RefreshTokenUsage=(int)client.RefreshTokenUsage,
-                RequireClientSecret=client.RequireClientSecret,
-                RequireConsent= client.RequireConsent,
-                RequirePkce= client.RequirePkce,
-                RequireRequestObject= client.RequireRequestObject,
-                SlidingRefreshTokenLifetime=client.SlidingRefreshTokenLifetime,
-                UpdateAccessTokenClaimsOnRefresh=client.UpdateAccessTokenClaimsOnRefresh,
-                UserCodeType=client.UserCodeType,
-                UserSsoLifetime = client.UserSsoLifetime,
-            };
+            yield return client.ToEntity();
         }
     }
 }
