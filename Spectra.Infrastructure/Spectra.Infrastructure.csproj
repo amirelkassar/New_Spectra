@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
+    <PackageReference Include="JsonConverter.Newtonsoft.Json" Version="0.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Spectra.Application\Spectra.Application.csproj" />
     <ProjectReference Include="..\Spectra.Domain.Shared\Spectra.Domain.Shared.csproj" />
     <ProjectReference Include="..\Spectra.Domain\Spectra.Domain.csproj" />

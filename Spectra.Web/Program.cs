@@ -1,11 +1,25 @@
+using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Spectra.Application.Common;
+using Spectra.Infrastructure.Data;
+using Spectra.Infrastructure.PipelineBehaviors;
+using Spectra.Web;
+using Spectra.WebAPI;
+using Spectra.WebAPI.Middlewares;
+using System.Reflection;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Serilog
+builder.Host.UseSerilog((context, loggerConfig)
+	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureWebHost(builder.Configuration);
+
+builder.Services.ConfigureWebAPIs(builder.Configuration);
 
 var app = builder.Build();
 
@@ -15,11 +29,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers().RequireAuthorization("ApiScope");
 
 app.Run();

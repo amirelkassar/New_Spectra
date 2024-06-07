@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace Spectra.Domain.Shared.Common
@@ -25,7 +26,14 @@ namespace Spectra.Domain.Shared.Common
 
         public void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
 
-        public void RemoveDomainEvent(BaseEvent domainEvent) => _domainEvents.Remove(domainEvent);
+        public void RemoveDomainEvent(Guid eventId)
+        {
+            var domainEvent=_domainEvents.Find(e => e.Id == eventId);
+            if (domainEvent != null)
+            {
+                _domainEvents.Remove(domainEvent);
+            }
+        }
 
         public void ClearDomainEvents() => _domainEvents.Clear();
     }
