@@ -15,8 +15,7 @@
 /Spectra.Web/obj
 /Spectra.WebAPI/bin/Debug/net8.0
 /Spectra.WebAPI/obj
-/Spectra.IdentityServer/bin/Debug/net8.0
-/Spectra.IdentityServer/obj/Debug
-/Spectra.Domain.Shared/bin/Debug/net8.0
-/Spectra.Domain/bin/Debug/net8.0
 /Spectra.IdentityServer/obj
+/Spectra.IdentityServer/bin/Debug/net8.0
+**/bin/*
+**/obj/*
