@@ -2,6 +2,8 @@
 
 import Input from "@/components/input";
 import useOrg from "@/store/client/signup/org-slice";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 const ManInfo = () => {
   const org = useOrg();
@@ -19,20 +21,36 @@ const ManInfo = () => {
         setValue={org.setManJob}
         label={"المسمى الوظيفى"}
         placeholder={"المسمى الوظيفى"}
+        isOptional
       />
-      <Input
-        value={org.manPhone}
-        setValue={org.setManPhone}
-        label={"رقم الهاتف"}
-        placeholder={"رقم الهاتف"}
-      />
+      <div className="space-y-2">
+        <label htmlFor="phone" className="">
+          رقم الهاتف
+        </label>
+        <div dir="ltr">
+          <PhoneInput
+            specialLabel=""
+            enableSearch={true}
+            country={"sa"}
+            enableAreaCodes={true}
+            autoFormat={false}
+            inputProps={{
+              type: "text",
+              required: true,
+              className: "default-field !ps-14 w-full",
+              placeholder: "",
+              id: "phone",
+            }}
+            onChange={(phone) => org.setManPhone(`+${phone}`)}
+          />
+        </div>
+      </div>
       <Input
         value={org.manEmail}
         setValue={org.setManEmail}
         label={"البريد الالكترونى"}
         placeholder={"البريد الالكترونى"}
       />
-
     </>
   );
 };
