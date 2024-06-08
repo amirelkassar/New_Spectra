@@ -8,6 +8,16 @@ const ROUTES = {
     FORGOT_PASSWORD: "/forgot-password",
     RESET_PASSWORD: "/reset-password",
   },
+  DASHBOARD: {
+    MAIN: "/main",
+    APPOINTMENTS: "/appointments",
+    REQUESTS: "/requests",
+    PATIENTS: "/patients",
+    REPORST: "/reports",
+    PERMISSIONS: "/permissions",
+    CONTENT: "/content",
+    PLANS: "/plans",
+  },
 };
 
 export default ROUTES;
