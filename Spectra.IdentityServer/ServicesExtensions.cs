@@ -45,6 +45,7 @@ namespace Spectra.IdentityServer
             {
                 options.EmitStaticAudienceClaim = true;
             })
+                .AddDeveloperSigningCredential()
             .AddConfigurationStore<AuthConfigDbContext>(options =>
             {
                 options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
@@ -54,7 +55,10 @@ namespace Spectra.IdentityServer
             {
                 options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
                     sql => sql.MigrationsAssembly(migrationsAssembly));
-            });
+
+                options.EnableTokenCleanup = true;
+            })
+            .AddAspNetIdentity<AppUser>();
 
             services.AddTransient<SeedDataService>();
             return services;

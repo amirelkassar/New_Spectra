@@ -3,6 +3,7 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.IdentityServer.Data;
@@ -114,6 +115,7 @@ public class SeedDataService
     {
         foreach (var client in _identityServerSetting.Clients)
         {
+            client.ClientSecrets.ToList().ForEach(s => s.Value = s.Value.Sha256());
             yield return client.ToEntity();
         }
     }

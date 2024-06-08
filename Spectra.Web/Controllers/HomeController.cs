@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Spectra.Web.Controllers
@@ -7,5 +8,12 @@ namespace Spectra.Web.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> GetAsync()
+        {
+            var user=HttpContext.User;
+            return Ok();
+        }
     }
 }
