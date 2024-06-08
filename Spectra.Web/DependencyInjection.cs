@@ -21,7 +21,6 @@ namespace Spectra.Web
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
-            ConfigureDataAccess(services, configuration);
             ConfigureIdentityManagement(services, configuration);
             ConfigureIdentityServerSettings(services, configuration);
             return services;
@@ -58,14 +57,7 @@ namespace Spectra.Web
                 });
             }
         }
-        private static void ConfigureDataAccess(IServiceCollection services, IConfiguration configuration)
-        {
-            var ConnectionString = configuration.GetConnectionString("MongoDb");
-            var databaseName = configuration["SpectraDb"];
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMongoDB(ConnectionString, databaseName)
-            );
-        }
+
         private static void ConfigureIdentityServerSettings(IServiceCollection services, IConfiguration configuration)
         {
             var _identityServerSetting = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();

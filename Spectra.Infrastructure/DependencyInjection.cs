@@ -14,6 +14,7 @@ namespace Spectra.Infrastructure
 {
 	public static class DependencyInjection
 	{
+
 		public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services,
 			IConfiguration configuration)
 		{
@@ -24,22 +25,7 @@ namespace Spectra.Infrastructure
 		private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
 			IConfiguration configuration)
 		{
-			var connectionString = configuration.GetConnectionString("MongoDb");
-			var databaseName = configuration.GetValue<string>("DatabaseName");
-			var mongoClient = new MongoClient(connectionString);
-
-			services.AddDbContext<ApplicationDbContext>(options =>
-			{
-
-				options.EnableDetailedErrors();
-				options.EnableThreadSafetyChecks();
-				options.UseMongoDB(mongoClient, databaseName);
-			});
-
-
-			services.AddSingleton<IMongoClient>(sp => mongoClient);
-
-			services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+			services.AddScoped<IMongoDbService, MongoDbService>();
 			return services;
 		}
 	}
