@@ -13,17 +13,19 @@ import { useEffect, useState } from "react";
 
 const signupOptions = [
   {
-    icon: <FamilyIcon />,
+    icon: <FamilyIcon className={"w-[44px] h-[50px] mdl:w-auto mdl:h-auto"} />,
     name: "عائلة طفل",
     route: ROUTES.AUTH.SIGNUP_FAMILY,
   },
   {
-    icon: <OrgIcon />,
+    icon: <OrgIcon className={"w-[44px] h-[50px] mdl:w-auto mdl:h-auto"} />,
     name: "منظمة",
     route: ROUTES.AUTH.SIGNUP_ORG,
   },
   {
-    icon: <ProviderIcon />,
+    icon: (
+      <ProviderIcon className={"w-[44px] h-[50px] mdl:w-auto mdl:h-auto"} />
+    ),
     name: "مقدم الخدمة الطبية",
     route: ROUTES.AUTH.SIGNUP_PROVIDER,
   },
@@ -53,27 +55,27 @@ const SignupModal = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         containerClassName={
-          "container max-w-5xl bg-white rounded-3xl py-16 flex flex-col gap-14 items-center"
+          "container max-w-5xl bg-white rounded-3xl py-5 mdl:py-16 flex flex-col gap-8 mdl:gap-14 items-center"
         }
       >
-        <h1>اهلا وسهلا , اختر نوع المستخدم</h1>
+        <h1 className="text-center">اهلا وسهلا , اختر نوع المستخدم</h1>
         <RadioGroup
           by="name"
           value={selected}
           onChange={setSelected}
-          className="flex gap-14"
+          className="flex gap-5 mdl:gap-14 flex-wrap w-full items-center justify-center"
         >
           {signupOptions.map((option) => (
             <Radio
               key={option.name}
               value={option}
-              className=" group w-[241px] h-[310px] relative flex flex-col gap-14 items-center justify-center cursor-pointer rounded-lg shadow-md transition border border-transparent  data-[checked]:border-greenMain"
+              className=" group w-full mdl:w-[241px] h-[137px] mdl:h-[310px] relative flex flex-col gap-3 mdl:gap-14 items-center mdl:justify-center cursor-pointer rounded-lg shadow-md transition border border-transparent text-center pt-5 data-[checked]:border-greenMain"
             >
-              <div className=" flex items-center justify-center size-10 rounded-full bg-greenMain absolute -top-5 left-1/2 -translate-x-1/2 transition opacity-0 group-data-[checked]:opacity-100">
-                <CheckIcon />
+              <div className=" flex items-center justify-center size-4 mdl:size-10 rounded-full bg-greenMain absolute -top-2 left-1/2 -translate-x-1/2 transition opacity-0 group-data-[checked]:opacity-100">
+                <CheckIcon className={"size-2 mdl:size-6"} />
               </div>
               {option.icon}
-              <p className="text-2xl font-bold">{option.name}</p>
+              <p className="text-sm mdl:text-2xl font-bold">{option.name}</p>
             </Radio>
           ))}
         </RadioGroup>

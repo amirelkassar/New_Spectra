@@ -6,7 +6,7 @@ import authImage from "@/assets/images/auth.png";
 
 const LeftSide = () => {
   return (
-    <section className="w-[487px] space-y-16 self-center ">
+    <section className="w-1/2 lgl:w-[487px] space-y-16 self-center hidden mdl:block ">
       <div className="w-full rounded-3xl overflow-hidden flex items-center justify-center">
         <Image
           src={authImage}
@@ -15,11 +15,11 @@ const LeftSide = () => {
           priority
         />
       </div>
-      <div className="text-xl flex items-center justify-between px-3">
-        <Button className={"whitespace-nowrap"}>
+      <div className="text-xl flex-col lgl:flex-row gap-3 flex items-center justify-between lgl:px-3">
+        <Button className={"whitespace-nowrap w-full"}>
           طلب المساعدة <MessageIcon />
         </Button>
-        <Button className={"whitespace-nowrap"}>
+        <Button className={"whitespace-nowrap w-full"}>
           العودة للرئيسية <ArrowLeft />
         </Button>
       </div>

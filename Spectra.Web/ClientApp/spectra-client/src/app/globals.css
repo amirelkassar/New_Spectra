@@ -9,7 +9,7 @@
 }
 
 h1 {
-  @apply text-black text-[28px] font-bold;
+  @apply text-black text-2xl mdl:text-[28px] font-bold;
 }
 
 .default-field {
@@ -17,5 +17,5 @@ h1 {
 }
 
 label {
-  @apply text-xl;
+  @apply text-base mdl:text-xl;
 }
