@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Spectra.Application.Common;
+using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
 using Spectra.Web;
@@ -17,7 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.ConfigureWebHost(builder.Configuration);
+builder.Services.ConfigureWebHost(builder.Configuration)
+    .ConfigureInfrastructure(builder.Configuration);
+
+
 
 builder.Services.ConfigureWebAPIs(builder.Configuration);
 
