@@ -7,7 +7,7 @@ import SignupModal from "./signup-modal";
 
 const LoginPage = () => {
   return (
-    <div className="space-y-16 text-base mdl:text-xl ">
+    <div className="space-y-5 text-base mdl:text-xl ">
       <h1 className=" ">أهلًا بعودتك</h1>
       <LoginForm />
       <div className="space-y-5">

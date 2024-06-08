@@ -13,7 +13,7 @@ const ResetPasswordPage = ({ params }) => {
     console.log({ token, password, confirmPassword });
   };
   return (
-    <div className="space-y-16 text-xl">
+    <div className="space-y-5 text-xl">
       <h1>اعادة تعيين كلمة المرور الخاصة بك</h1>
       <form onSubmit={onSubmit} className="space-y-5">
         <PasswordInput

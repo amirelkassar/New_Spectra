@@ -11,7 +11,7 @@ const LeftSide = () => {
         <Image
           src={authImage}
           alt={"Family"}
-          className="max-w-max h-[715px] "
+          className="max-w-max h-[560px] "
           priority
         />
       </div>
