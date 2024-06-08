@@ -5,11 +5,11 @@ import LeftSide from "./left-side";
 
 export default function authLayout({ children }) {
   return (
-    <main className="container flex items-center  h-screen justify-center">
+    <main className="container flex items-center py-10 justify-center">
       <section className="flex items-stretch justify-center gap-28">
         <section className="w-[433px]">
           <div className="mb-14">
-            <Link href={ROUTES.HOME}>
+            <Link href={ROUTES.HOME} className="block w-fit">
               <Logo />
             </Link>
           </div>

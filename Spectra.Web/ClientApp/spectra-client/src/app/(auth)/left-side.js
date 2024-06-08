@@ -6,7 +6,7 @@ import authImage from "@/assets/images/auth.png";
 
 const LeftSide = () => {
   return (
-    <section className="w-[487px] space-y-16 self-center">
+    <section className="w-[487px] space-y-16 self-center ">
       <div className="w-full rounded-3xl overflow-hidden flex items-center justify-center">
         <Image
           src={authImage}

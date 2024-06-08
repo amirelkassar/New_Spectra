@@ -69,13 +69,11 @@ const SignupModal = () => {
               value={option}
               className=" group w-[241px] h-[310px] relative flex flex-col gap-14 items-center justify-center cursor-pointer rounded-lg shadow-md transition border border-transparent  data-[checked]:border-greenMain"
             >
-              <span className=" absolute -top-4 left-1/2 -translate-x-1/2 transition opacity-0 group-data-[checked]:opacity-100">
+              <div className=" flex items-center justify-center size-10 rounded-full bg-greenMain absolute -top-5 left-1/2 -translate-x-1/2 transition opacity-0 group-data-[checked]:opacity-100">
                 <CheckIcon />
-              </span>
+              </div>
               {option.icon}
               <p className="text-2xl font-bold">{option.name}</p>
-              {/*                   <CheckCircleIcon className="size-6 fill-white opacity-0 transition group-data-[checked]:opacity-100" />
-               */}{" "}
             </Radio>
           ))}
         </RadioGroup>

@@ -1,5 +1,7 @@
+import FamilyForm from "./family-form";
+
 const SignupFamilyPage = () => {
-  return <div>SignupFamilyPage</div>;
+  return <FamilyForm />;
 };
 
 export default SignupFamilyPage;
