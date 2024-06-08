@@ -1,7 +1,9 @@
-﻿using Flurl.Http;
+﻿using Amazon.Auth.AccessControlPolicy;
+using Flurl.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Spectra.Application;
 using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
@@ -37,7 +39,7 @@ namespace Spectra.Web
                    .AddJwtBearer("Bearer", options =>
                    {
                        options.Authority = _identityServerSetting.Authority;
-                       options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                       options.TokenValidationParameters = new TokenValidationParameters
                        {
                            SaveSigninToken = _identityServerSetting.SaveToken,
                            ValidAudience = _identityServerSetting.Audience
@@ -46,15 +48,15 @@ namespace Spectra.Web
 
                 services.AddAuthorization(options =>
                 {
-                    foreach (var scope in _identityServerSetting.ApiScopes)
+                    options.AddPolicy("SuperAdmin", policy =>
                     {
-                        options.AddPolicy(scope.Key, policy =>
-                        {
-                            policy.RequireAuthenticatedUser();
-                            policy.RequireClaim(scope.Key, scope.Value);
-                        });
-                    }
-
+                        policy.RequireAuthenticatedUser();
+                        policy.RequireRole("SuperAdmin");
+                    });
+                    options.AddPolicy("ApiScope", policy =>
+                    {
+                        policy.RequireAuthenticatedUser();
+                    });
                 });
             }
         }
