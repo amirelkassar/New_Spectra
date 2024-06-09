@@ -93,7 +93,7 @@ const ClientDetailsBody = () => {
   return (
     <div className="grow   bg-white rounded-xl p-8">
       <h1 className="ms-5 mb-5">مواعيد اليوم</h1>
-      <div className="grid grid-cols-4 w-full max-h-[calc(100vh-430px)] overflow-auto">
+      <div className="grid grid-cols-4 w-full max-h-[calc(100vh-440px)] overflow-auto">
         {data.today.map((item, index) => (
           <div key={item.id} className="contents">
             <div

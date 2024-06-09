@@ -30,9 +30,9 @@ const ClientDetails = () => {
   };
 
   return (
-    <div className="h-full flex flex-col gap-5">
+    <div className="h-full flex flex-col gap-6">
       <ClientDetailsHeader />
-      <div className="grow flex gap-5">
+      <div className="grow flex gap-6">
         <ClientDetailsAside />
         <ClientDetailsBody />
       </div>

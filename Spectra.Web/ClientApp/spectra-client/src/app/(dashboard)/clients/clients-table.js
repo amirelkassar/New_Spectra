@@ -143,15 +143,15 @@ const ClientsTable = () => {
     <div className="grow max-h-[calc(100vh-325px)] overflow-auto ">
       <div className="grid grid-cols-[repeat(4,auto),1fr] text-center gap-y-1">
         <div className="contents ">
-          <div className="bg-greenLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0">
+          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0">
             الاسم
           </div>
-          <div className="bg-greenLight py-3 px-10 sticky top-0">
+          <div className="bg-blueLight py-3 px-10 sticky top-0">
             عدد الاطفال
           </div>
-          <div className="bg-greenLight py-3 px-10 sticky top-0">الايميل</div>
-          <div className="bg-greenLight py-3 px-10 sticky top-0">اخر دخول</div>
-          <div className="bg-greenLight rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0">الايميل</div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0">اخر دخول</div>
+          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
         </div>
         {data.map((item, index) => (
           <div
@@ -161,7 +161,7 @@ const ClientsTable = () => {
           >
             <div
               className={clsx(
-                "py-5 ms-8",
+                "py-5 ms-8 font-bold",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -169,7 +169,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10",
+                "py-5 px-10 font-bold",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -177,7 +177,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10",
+                "py-5 px-10 font-bold",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -185,7 +185,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10",
+                "py-5 px-10 font-bold",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
