@@ -12,7 +12,7 @@ const ROUTES = {
     MAIN: "/main",
     APPOINTMENTS: "/appointments",
     REQUESTS: "/requests",
-    PATIENTS: "/patients",
+    CLIENTS: "/clients",
     REPORST: "/reports",
     PERMISSIONS: "/permissions",
     CONTENT: "/content",

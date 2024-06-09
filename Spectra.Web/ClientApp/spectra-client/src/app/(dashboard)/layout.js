@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }) {
       <Aside />
       <section className="space-y-5 h-full flex flex-col ">
         <DashboardHeader />
-        <section className=" bg-[#F5F6FB] rounded-[35px] grow overflow-auto p-10 ">
+        <section className=" bg-[#F5F6FB] rounded-[35px] grow overflow-auto p-6 ">
           {children}
         </section>
       </section>

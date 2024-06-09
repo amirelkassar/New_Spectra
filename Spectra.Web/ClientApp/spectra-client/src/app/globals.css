@@ -11,6 +11,9 @@
 h1 {
   @apply text-black text-2xl mdl:text-[28px] font-bold text-center mdl:text-start;
 }
+h2 {
+  @apply text-black text-lg mdl:text-xl font-bold text-center mdl:text-start;
+}
 
 .default-field {
   @apply h-14 ps-5 pe-3 rounded-xl border border-greenMain ring-1 ring-transparent focus:ring-greenMain outline-none transition-all placeholder:text-base;

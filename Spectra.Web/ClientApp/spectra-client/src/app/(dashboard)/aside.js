@@ -14,27 +14,27 @@ const Aside = () => {
     {
       name: "الرئيسية",
       route: ROUTES.DASHBOARD.MAIN,
-      isActive: ROUTES.DASHBOARD.MAIN === path,
+      isActive: path.includes(ROUTES.DASHBOARD.MAIN),
     },
     {
       name: "المواعيد",
       route: ROUTES.DASHBOARD.APPOINTMENTS,
-      isActive: ROUTES.DASHBOARD.APPOINTMENTS === path,
+      isActive: path.includes(ROUTES.DASHBOARD.APPOINTMENTS),
     },
     {
       name: "طلبات الاشتراك",
       route: ROUTES.DASHBOARD.REQUESTS,
-      isActive: ROUTES.DASHBOARD.REQUESTS === path,
+      isActive: path.includes(ROUTES.DASHBOARD.REQUESTS),
     },
     {
-      name: "المرضى",
-      route: ROUTES.DASHBOARD.PATIENTS,
-      isActive: ROUTES.DASHBOARD.PATIENTS === path,
+      name: "العملاء",
+      route: ROUTES.DASHBOARD.CLIENTS,
+      isActive: path.includes(ROUTES.DASHBOARD.CLIENTS),
     },
     {
       name: "تقارير",
       route: ROUTES.DASHBOARD.REPORST,
-      isActive: ROUTES.DASHBOARD.REPORST === path,
+      isActive: path.includes(ROUTES.DASHBOARD.REPORST),
     },
   ];
 
@@ -42,17 +42,17 @@ const Aside = () => {
     {
       name: "الأذونات",
       route: ROUTES.DASHBOARD.PERMISSIONS,
-      isActive: ROUTES.DASHBOARD.PERMISSIONS === path,
+      isActive: path.includes(ROUTES.DASHBOARD.PERMISSIONS),
     },
     {
       name: "المحتوى",
       route: ROUTES.DASHBOARD.CONTENT,
-      isActive: ROUTES.DASHBOARD.CONTENT === path,
+      isActive: path.includes(ROUTES.DASHBOARD.CONTENT),
     },
     {
       name: "الخطط",
       route: ROUTES.DASHBOARD.PLANS,
-      isActive: ROUTES.DASHBOARD.PLANS === path,
+      isActive: path.includes(ROUTES.DASHBOARD.PLANS),
     },
   ];
 

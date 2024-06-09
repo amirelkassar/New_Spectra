@@ -9,7 +9,7 @@ import Modal from "@/components/modal";
 import ROUTES from "@/routes";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const signupOptions = [
   {
@@ -35,6 +35,7 @@ const SignupModal = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState();
+  
   const handleOpen = () => setIsOpen(true);
   const handleRouting = () => {
     router.push(selected.route);
