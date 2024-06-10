@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
-using Spectra.Application.Countries.Handlers;
 using Spectra.Application.Countries.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain;

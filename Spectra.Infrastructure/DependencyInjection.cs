@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using Spectra.Application.Countries.Handlers;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
 using Spectra.Infrastructure.Data;
