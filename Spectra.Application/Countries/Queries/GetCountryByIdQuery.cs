@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.DTOs;
+using Spectra.Application.Interfaces.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,28 @@ namespace Spectra.Application.Countries.Queries
 	public class GetCountryByIdQuery : IRequest<CountryData>
 	{
 		public string Id { get; set; }
-	}
+
+        public class GetCountryByIdQueryHandler : IRequestHandler<GetCountryByIdQuery, CountryData>
+        {
+            private readonly ICountryRepository _countryRepository;
+
+            public GetCountryByIdQueryHandler(ICountryRepository countryRepository)
+            {
+                _countryRepository = countryRepository;
+            }
+
+            public async Task<CountryData> Handle(GetCountryByIdQuery request, CancellationToken cancellationToken)
+            {
+                var country = await _countryRepository.GetByIdAsync(request.Id);
+                if (country == null) return null;
+
+                return new CountryData
+                {
+                    Name = country.EnName,
+                    Flag = country.Flag,
+                    Iso2 = country.Id,
+                };
+            }
+        }
+    }
 }
