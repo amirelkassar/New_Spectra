@@ -8,6 +8,8 @@ using Spectra.Application.Interfaces.IRepository;
 using Spectra.Infrastructure.Api;
 using System.Linq;
 using Microsoft.Extensions.Options;
+using Spectra.Domain.Entities.Countries;
+using Spectra.Domain.Entities.States;
 
 namespace Spectra.Infrastructure.Services
 {

@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities;
+using Spectra.Domain.Entities.Countries;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Repositories
 {
-	public class CountryRepository : ICountryRepository
+    public class CountryRepository : ICountryRepository
 	{
 		private readonly IMongoCollection<Country> _countries;
 

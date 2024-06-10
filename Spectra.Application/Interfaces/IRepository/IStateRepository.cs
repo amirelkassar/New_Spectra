@@ -1,4 +1,4 @@
-﻿using Spectra.Domain.Entities;
+﻿using Spectra.Domain.Entities.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;

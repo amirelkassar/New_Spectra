@@ -34,6 +34,7 @@ using (var scope = app.Services.CreateScope())
 	await seedService.SeedDataAsync();
 }
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

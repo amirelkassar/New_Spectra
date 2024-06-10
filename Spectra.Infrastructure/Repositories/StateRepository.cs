@@ -1,11 +1,11 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities;
+using Spectra.Domain.Entities.States;
 
 namespace Spectra.Infrastructure.Repositories
 {
-	public class StateRepository : IStateRepository
+    public class StateRepository : IStateRepository
 	{
 		private readonly IMongoCollection<State> _states;
 

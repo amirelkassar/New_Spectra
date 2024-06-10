@@ -3,6 +3,9 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
+using Spectra.Application.Countries.Handlers;
+using Spectra.Application.Countries.Queries;
+using Spectra.Application.Interfaces;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System;
@@ -23,8 +26,9 @@ namespace Spectra.Application
             services.ConfigureDomain(configuration);
             // Register FluentValidation
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //Register the Mediator
-            services.AddMediatR(cfg =>
+
+			//Register the Mediator
+			services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
@@ -32,7 +36,9 @@ namespace Spectra.Application
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
-            return services;
+
+			return services;
+
         }
 
     }

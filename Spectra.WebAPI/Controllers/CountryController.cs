@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Countries.DTOs;
+using Spectra.Application.Countries.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities;
+using Spectra.Application.States.DTOs;
+using Spectra.Application.States.Queries;
+using Spectra.Domain.Entities.Countries;
+using Spectra.Domain.Entities.States;
 using Spectra.Infrastructure.Repositories;
 using Spectra.Infrastructure.Services;
 using System.Threading.Tasks;
@@ -13,29 +19,29 @@ namespace Spectra.WebAPI.Controllers
     [Route("api/[controller]")]
     public class CountryController : ControllerBase
     {
-		private readonly ICountryRepository _countryRepository;
-		private readonly IStateRepository _stateRepository;
+		private readonly IMediator _mediator;
 
-		public CountryController(ICountryRepository countryRepository , IStateRepository stateRepository)
+		public CountryController(IMediator mediator)
 		{
-			_countryRepository = countryRepository;
-			_stateRepository = stateRepository;
+			_mediator = mediator;
 		}
-
 
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<ActionResult<IEnumerable<Country>>> GetAllCountries()
+		public async Task<ActionResult<IEnumerable<CountryData>>> GetAllCountries()
 		{
-			var countries = await _countryRepository.GetAllAsync();
+			var query = new GetAllCountriesQuery();
+			var countries = await _mediator.Send(query);
 			return Ok(countries);
 		}
 
+
 		[HttpGet("{countryId}/states")]
 		[AllowAnonymous]
-		public async Task<ActionResult<IEnumerable<State>>> GetStatesByCountryId(string countryId)
+		public async Task<ActionResult<IEnumerable<StateData>>> GetStatesByCountryId(string countryId)
 		{
-			var states = await _stateRepository.GetByCountryIdAsync(countryId);
+			var query = new GetStatesByCountryIdQuery { CountryId = countryId };
+			var states = await _mediator.Send(query);
 			return Ok(states);
 		}
 	}
