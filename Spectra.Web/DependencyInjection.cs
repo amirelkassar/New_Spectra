@@ -47,10 +47,9 @@ namespace Spectra.Web
                 {
                     foreach (var scope in _identityServerSetting.ApiScopes)
                     {
-                        options.AddPolicy(scope.Key, policy =>
+                        options.AddPolicy("ApiScope", policy =>
                         {
                             policy.RequireAuthenticatedUser();
-                            policy.RequireClaim(scope.Key, scope.Value);
                         });
                     }
 
