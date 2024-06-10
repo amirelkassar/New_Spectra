@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Application.States.DTOs
+namespace Spectra.Application.Countries.States.DTOs
 {
     public class StateData
     {
