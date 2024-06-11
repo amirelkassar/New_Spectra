@@ -1,7 +1,11 @@
+import RequestsTable from "./requests-table";
+
 const RequestsPage = () => {
   return (
-    <div>RequestsPage</div>
-  )
-}
+    <div className="default-page">
+      <RequestsTable />
+    </div>
+  );
+};
 
-export default RequestsPage
+export default RequestsPage;

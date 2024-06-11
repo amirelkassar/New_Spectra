@@ -71,7 +71,7 @@ const Aside = () => {
   );
 
   return (
-    <div className=" pt-3 flex flex-col ">
+    <div className=" pt-3 flex flex-col font-bold">
       <Link href={"#"} className="block w-fit mb-20">
         <Logo className={"w-[91px] h-[37px]"} />
       </Link>

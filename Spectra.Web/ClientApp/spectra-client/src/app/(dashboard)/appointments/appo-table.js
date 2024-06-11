@@ -3,7 +3,7 @@ import Statue from "@/components/status";
 import clsx from "clsx";
 import Image from "next/image";
 
-const LastAppointments = () => {
+const AppoTable = () => {
   const data = [
     {
       id: 0,
@@ -91,15 +91,14 @@ const LastAppointments = () => {
     },
   ];
   return (
-    <div className="rounded-xl bg-white p-8 grow">
-      <h1 className="ms-5 mb-5">اخر المواعيد</h1>
-      <div className="max-h-[calc(100vh-480px)] overflow-auto grid grid-cols-[repeat(4,minmax(max-content,1fr))] gap-y-1 w-full ">
+    <div className="rounded-xl bg-white grow">
+      <div className="max-h-[calc(100vh-290px)] overflow-auto grid grid-cols-[repeat(4,minmax(max-content,1fr))] gap-y-1 w-full ">
         <div className="contents ">
           <div className="bg-blueLight rounded-s-xl py-3 px-10 sticky top-0 text-xl">
-            اسم الطبيب
+            اسم العميل
           </div>
           <div className="bg-blueLight py-3 px-10 sticky top-0 text-xl">
-            اسم المريض{" "}
+            الموظفين
           </div>
           <div className="bg-blueLight py-3 px-10 sticky top-0 text-xl">
             الـميعاد
@@ -157,4 +156,4 @@ const LastAppointments = () => {
   );
 };
 
-export default LastAppointments;
+export default AppoTable;

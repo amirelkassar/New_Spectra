@@ -7,7 +7,7 @@ import Separetor from "@/components/separator";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-const Filteration = () => {
+const ClientFilteration = () => {
   const options = [
     {
       name: "الكل",
@@ -69,4 +69,4 @@ const Filteration = () => {
   );
 };
 
-export default Filteration;
+export default ClientFilteration;

@@ -1,11 +1,11 @@
 import ClientsTable from "./clients-table";
-import Filteration from "./filteration";
+import ClientFilteration from "./client-filteration";
 
 const PatientsPage = () => {
   return (
-    <div className="bg-white h-full px-12 py-5 rounded-xl flex flex-col gap-y-6">
+    <div className="default-page">
       <h2>العملاء</h2>
-      <Filteration />
+      <ClientFilteration />
       <ClientsTable />
     </div>
   );

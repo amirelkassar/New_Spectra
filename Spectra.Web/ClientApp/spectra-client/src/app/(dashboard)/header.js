@@ -7,7 +7,7 @@ const DashboardHeader = () => {
   return (
     <header className="h-16 flex items-center gap-2.5">
       <div className="flex items-center gap-2.5 grow">
-        <button className="size-10 bg-greenMain rounded-full flex items-center justify-center">
+        <button className="size-[45px] bg-greenMain rounded-full flex items-center justify-center">
           <SearchIcon />
         </button>
         <input
@@ -16,7 +16,7 @@ const DashboardHeader = () => {
           placeholder="بحث..."
         />
       </div>
-      <button className="size-14 bg-greenLight rounded-full flex items-center justify-center">
+      <button className="size-[52px] bg-greenLight rounded-full flex items-center justify-center">
         <NotificationIcon />
       </button>
     </header>
