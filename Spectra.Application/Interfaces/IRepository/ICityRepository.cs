@@ -1,4 +1,4 @@
-﻿using Spectra.Domain.Entities;
+﻿using Spectra.Domain.Entities.Cities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

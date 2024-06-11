@@ -1,5 +1,4 @@
 ﻿using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities;
 using Spectra.Domain.Entities.Countries;
 using Spectra.Domain.Entities.States;
 using Spectra.Infrastructure.Api;
@@ -9,10 +8,11 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Spectra.Domain.Entities.Cities;
 
 namespace Spectra.Infrastructure.Services
 {
-	public class SeedService
+    public class SeedService
 	{
 		private readonly ICountryRepository _countryRepository;
 		private readonly HttpClient _httpClient;

@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Enumeration;
+﻿using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Enumeration;
 using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Spectra.Domain.Entities.ValueObjects
         public string? LogoPath { get; set; }
         public PhoneNumber? LandLine { get; set; }
         public OrganizationTypes OrganizationType { get; set; }
+		public ICollection<Document> Documents { get; set; }
+
 
 		protected override IEnumerable<object> GetEqualityComponents()
 		{
