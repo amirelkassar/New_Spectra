@@ -11,5 +11,6 @@ namespace Spectra.Application.Countries.DTOs
         public string Name { get; set; }
         public string Flag { get; set; }
         public string Iso2 { get; set; }
+
    }
 }

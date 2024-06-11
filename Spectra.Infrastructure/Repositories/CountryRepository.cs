@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Entities.Countries;
@@ -38,9 +39,24 @@ namespace Spectra.Infrastructure.Repositories
 			return count > 0;
 		}
 
-		public Task<State> GetStateByIdAsync(string stateId)
+		public async  Task<State> GetStateByIdAsync(string stateId)
 		{
-			throw new NotImplementedException();
+			var filter = Builders<Country>.Filter.ElemMatch(c => c.States, s => s.Id == stateId);
+			var projection = Builders<Country>.Projection
+				.ElemMatch(c => c.States, s => s.Id == stateId);
+
+			var result = await _countries.Find(filter).Project(projection).FirstOrDefaultAsync();
+
+			if (result == null) return null;
+
+			var stateBson = result["States"].AsBsonArray.FirstOrDefault();
+			return stateBson == null ? null : BsonSerializer.Deserialize<State>(stateBson.AsBsonDocument);
+		}
+
+		public async Task<bool> AnyCountriesAsync()
+		{
+			var count = await _countries.CountDocumentsAsync(_ => true);
+			return count > 0;
 		}
 	}
 }

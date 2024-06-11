@@ -1,4 +1,5 @@
-﻿using Spectra.Application.Countries.DTOs;
+﻿using Spectra.Application.Countries.Cities.DTOs;
+using Spectra.Application.Countries.DTOs;
 using Spectra.Application.Countries.States.DTOs;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Spectra.Application.Interfaces.IServices
 	{
 		Task<IEnumerable<CountryData>> GetAllCountriesAsync();
 		Task<IEnumerable<StateData>> GetStatesByCountryIdAsync(string countryId);
+		Task<IEnumerable<CityData>> GetCitiesByStateIdAsync(string stateId); 
 	}
 }

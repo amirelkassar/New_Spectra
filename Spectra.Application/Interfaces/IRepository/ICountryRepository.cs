@@ -14,6 +14,7 @@ namespace Spectra.Application.Interfaces.IRepository
 		Task<Country> GetByIdAsync(string id);
 		Task<State> GetStateByIdAsync(string stateId);
 		Task AddAsync(Country country);
+		Task<bool> AnyCountriesAsync();
 		Task<bool> ExistsAsync(string id);
 	}
 }

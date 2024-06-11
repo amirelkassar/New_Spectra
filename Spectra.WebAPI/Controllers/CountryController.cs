@@ -37,5 +37,14 @@ namespace Spectra.WebAPI.Controllers
 			var states = await _countryService.GetStatesByCountryIdAsync(countryId);
 			return Ok(states);
 		}
+
+		[HttpGet]
+		[Route("states/{stateId}/cities")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetCitiesByStateId(string stateId)
+		{
+			var cities = await _countryService.GetCitiesByStateIdAsync(stateId);
+			return Ok(cities);
+		}
 	}
 }

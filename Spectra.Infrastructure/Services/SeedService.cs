@@ -27,6 +27,13 @@ namespace Spectra.Infrastructure.Services
 
 		public async Task SeedDataAsync()
 		{
+			// Check if the countries collection is already seeded
+			if (await _countryRepository.AnyCountriesAsync())
+			{
+				_logger.LogInformation("The countries collection is already seeded.");
+				return;
+			}
+
 			await SeedCountriesAsync();
 		}
 

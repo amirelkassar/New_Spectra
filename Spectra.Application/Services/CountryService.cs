@@ -7,6 +7,8 @@ using Spectra.Application.Countries.Queries;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Spectra.Application.Countries.Cities.DTOs;
+using Spectra.Application.Countries.Cities.Queries;
 
 namespace Spectra.Application.Services
 {
@@ -31,6 +33,13 @@ namespace Spectra.Application.Services
 			var query = new GetStatesByCountryIdQuery { CountryId = countryId };
 			var states = await _mediator.Send(query);
 			return states;
+		}
+
+		public async Task<IEnumerable<CityData>> GetCitiesByStateIdAsync(string stateId)
+		{
+			var query = new GetCitiesByStateIdQuery { StateId = stateId };
+			var cities = await _mediator.Send(query);
+			return cities;
 		}
 	}
 }

@@ -10,5 +10,6 @@ namespace Spectra.Application.Countries.States.DTOs
     {
         public string Name { get; set; }
         public string state_code { get; set; }
+
     }
 }
