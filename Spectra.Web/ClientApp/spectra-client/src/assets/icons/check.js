@@ -1,6 +1,6 @@
 import React from "react";
 
-const CheckIcon = (rest) => {
+const CheckIcon = ({ className, rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ const CheckIcon = (rest) => {
       height="16"
       fill="none"
       viewBox="0 0 23 16"
+      className={className}
       {...rest}
     >
       <path

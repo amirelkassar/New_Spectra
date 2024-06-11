@@ -25,7 +25,7 @@ export default function Input({
       )}{" "}
       <label
         htmlFor={id ? id : label}
-        className={clsx("text-xl", labelClassName)}
+        className={clsx("", labelClassName)}
       >
         {label}
       </label>

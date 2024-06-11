@@ -1,4 +1,4 @@
-const OrgIcon = () => {
+const OrgIcon = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ const OrgIcon = () => {
       height="81"
       fill="none"
       viewBox="0 0 77 81"
+      className={className}
     >
       <path
         stroke="#10B0C1"
