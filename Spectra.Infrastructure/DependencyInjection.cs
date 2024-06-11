@@ -25,8 +25,8 @@ namespace Spectra.Infrastructure
 			services.ConfigureDataBase(configuration);
 
 			services.AddScoped<ICountryRepository, CountryRepository>();
-			services.AddScoped<IStateRepository, StateRepository>();
-			services.AddScoped<ICityRepository, CityRepository>();
+			services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+			services.AddScoped<IClientRepository, ClientRepository>();
 			services.AddScoped<SeedService>();
 
 			services.AddHttpClient();

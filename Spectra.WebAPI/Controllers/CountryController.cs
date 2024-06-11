@@ -5,7 +5,6 @@ using Spectra.Application.Countries.States.DTOs;
 using Spectra.Application.Countries.States.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IServices;
-using Spectra.Application.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
