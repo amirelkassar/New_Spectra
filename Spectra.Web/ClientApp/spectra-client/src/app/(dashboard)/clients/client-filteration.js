@@ -54,7 +54,7 @@ const ClientFilteration = () => {
             {option.name ? (
               <Radio
                 value={option}
-                className="px-5 cursor-pointer bg-transparent data-[checked]:bg-greenLight transition h-full min-w-40 flex items-center justify-center font-bold rounded-xl gap-3"
+                className="px-5 cursor-pointer bg-transparent data-[checked]:bg-blueLight transition h-full min-w-40 flex items-center justify-center font-bold rounded-xl gap-3"
               >
                 {option.icon}
                 {option.name}

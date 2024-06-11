@@ -31,8 +31,8 @@ const ClientDetails = () => {
 
   return (
     <div className="sec-page">
-      <ClientDetailsHeader />
-      <div className="grow flex gap-6">
+{/*       <ClientDetailsHeader />
+ */}      <div className="grow flex gap-6">
         <ClientDetailsAside />
         <ClientDetailsBody />
       </div>
