@@ -1,13 +1,15 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Entities.Countries;
+using Spectra.Domain.Entities.States;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Repositories
 {
-    public class CountryRepository : ICountryRepository
+	public class CountryRepository : ICountryRepository
 	{
 		private readonly IMongoCollection<Country> _countries;
 
@@ -34,6 +36,26 @@ namespace Spectra.Infrastructure.Repositories
 		public async Task<bool> ExistsAsync(string id)
 		{
 			var count = await _countries.CountDocumentsAsync(c => c.Id == id);
+			return count > 0;
+		}
+
+		public async  Task<State> GetStateByIdAsync(string stateId)
+		{
+			var filter = Builders<Country>.Filter.ElemMatch(c => c.States, s => s.Id == stateId);
+			var projection = Builders<Country>.Projection
+				.ElemMatch(c => c.States, s => s.Id == stateId);
+
+			var result = await _countries.Find(filter).Project(projection).FirstOrDefaultAsync();
+
+			if (result == null) return null;
+
+			var stateBson = result["States"].AsBsonArray.FirstOrDefault();
+			return stateBson == null ? null : BsonSerializer.Deserialize<State>(stateBson.AsBsonDocument);
+		}
+
+		public async Task<bool> AnyCountriesAsync()
+		{
+			var count = await _countries.CountDocumentsAsync(_ => true);
 			return count > 0;
 		}
 	}

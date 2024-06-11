@@ -1,4 +1,4 @@
-﻿using Spectra.Application.States.DTOs;
+﻿using Spectra.Application.Countries.States.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
