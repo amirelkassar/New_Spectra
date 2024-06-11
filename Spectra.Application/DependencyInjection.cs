@@ -6,6 +6,7 @@ using Spectra.Application.Common;
 using Spectra.Application.Countries.Handlers;
 using Spectra.Application.Countries.Queries;
 using Spectra.Application.Interfaces;
+using Spectra.Application.Messaging;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System;
@@ -33,7 +34,13 @@ namespace Spectra.Application
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
-                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+
+                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedQuery, IRequestResponse>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<IRequestResponse>, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedQuery<IRequestResponse>, IRequestResponse>));
+
+                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedCommand, IRequestResponse>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<IRequestResponse>, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedCommand<IRequestResponse>, IRequestResponse>));
+
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 
