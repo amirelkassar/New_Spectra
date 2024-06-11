@@ -7,6 +7,7 @@ using Spectra.Application.Countries.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Interfaces.IServices;
+using Spectra.Application.Messaging;
 using Spectra.Application.Services;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
@@ -38,11 +39,11 @@ namespace Spectra.Application
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
 
-                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedQuery, IRequestResponse>));
-                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<IRequestResponse>, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedQuery<IRequestResponse>, IRequestResponse>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, object>), typeof(AuthorizationBehavior<IAuthorizedQuery, object>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<object>, object>), typeof(AuthorizationBehavior<IAuthorizedQuery<object>, object>));
 
-                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedCommand, IRequestResponse>));
-                cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<IRequestResponse>, IRequestResponse>), typeof(AuthorizationBehavior<IAuthorizedCommand<IRequestResponse>, IRequestResponse>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, object>), typeof(AuthorizationBehavior<IAuthorizedCommand, object>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<object>, object>), typeof(AuthorizationBehavior<IAuthorizedCommand<object>, object>));
 
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
