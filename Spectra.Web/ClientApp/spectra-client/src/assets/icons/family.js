@@ -1,6 +1,6 @@
 import React from "react";
 
-const FamilyIcon = () => {
+const FamilyIcon = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ const FamilyIcon = () => {
       height="87"
       fill="none"
       viewBox="0 0 81 87"
+      className={className}
     >
       <path
         stroke="#10B0C1"

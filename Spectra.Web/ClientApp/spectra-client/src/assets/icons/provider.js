@@ -1,4 +1,4 @@
-const ProviderIcon = () => {
+const ProviderIcon = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ const ProviderIcon = () => {
       height="90"
       fill="none"
       viewBox="0 0 82 90"
+      className={className}
     >
       <path
         stroke="#10B0C1"
