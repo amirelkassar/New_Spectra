@@ -15,6 +15,8 @@ namespace Spectra.IdentityServer
             var connectionString = configuration.GetConnectionString("AuthCS");
             var migrationsAssembly = Assembly.GetExecutingAssembly().GetName().Name;
 
+            services.AddControllersWithViews();
+
             services.AddDbContext<AuthDataDbContext>(options =>
             options.UseSqlServer(connectionString));
 

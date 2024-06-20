@@ -20,10 +20,6 @@ builder.Host.UseSerilog((context, loggerConfig)
 	=> loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.ConfigureWebHost(builder.Configuration);
-builder.Services.ConfigureWebAPIs(builder.Configuration);
-
-builder.Services.ConfigureInfrastructure(builder.Configuration);
-
 
 
 var app = builder.Build();

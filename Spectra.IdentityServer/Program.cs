@@ -21,6 +21,14 @@ try
         var seedDataService = scope.ServiceProvider.GetService<SeedDataService>();
         await seedDataService.SeedAsync();
     }
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseIdentityServer();
+    app.UseAuthorization();
+
+    app.MapDefaultControllerRoute()
+        .RequireAuthorization();
+
     await app.RunAsync();
 
 
