@@ -13,46 +13,46 @@ const Aside = () => {
   const mainLinks = [
     {
       name: "الرئيسية",
-      route: ROUTES.DASHBOARD.MAIN,
-      isActive: path.includes(ROUTES.DASHBOARD.MAIN),
+      route: ROUTES.ADMIN.MAIN,
+      isActive: path.includes(ROUTES.ADMIN.MAIN),
     },
     {
       name: "المواعيد",
-      route: ROUTES.DASHBOARD.APPOINTMENTS,
-      isActive: path.includes(ROUTES.DASHBOARD.APPOINTMENTS),
+      route: ROUTES.ADMIN.APPOINTMENTS,
+      isActive: path.includes(ROUTES.ADMIN.APPOINTMENTS),
     },
     {
       name: "طلبات الاشتراك",
-      route: ROUTES.DASHBOARD.REQUESTS,
-      isActive: path.includes(ROUTES.DASHBOARD.REQUESTS),
+      route: ROUTES.ADMIN.REQUESTS,
+      isActive: path.includes(ROUTES.ADMIN.REQUESTS),
     },
     {
       name: "العملاء",
-      route: ROUTES.DASHBOARD.CLIENTS,
-      isActive: path.includes(ROUTES.DASHBOARD.CLIENTS),
+      route: ROUTES.ADMIN.CLIENTS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.CLIENTS.DASHBOARD),
     },
     {
       name: "تقارير",
-      route: ROUTES.DASHBOARD.REPORST,
-      isActive: path.includes(ROUTES.DASHBOARD.REPORST),
+      route: ROUTES.ADMIN.REPORST,
+      isActive: path.includes(ROUTES.ADMIN.REPORST),
     },
   ];
 
   const settingsLinks = [
     {
       name: "الأذونات",
-      route: ROUTES.DASHBOARD.PERMISSIONS,
-      isActive: path.includes(ROUTES.DASHBOARD.PERMISSIONS),
+      route: ROUTES.ADMIN.PERMISSIONS,
+      isActive: path.includes(ROUTES.ADMIN.PERMISSIONS),
     },
     {
       name: "المحتوى",
-      route: ROUTES.DASHBOARD.CONTENT,
-      isActive: path.includes(ROUTES.DASHBOARD.CONTENT),
+      route: ROUTES.ADMIN.CONTENT,
+      isActive: path.includes(ROUTES.ADMIN.CONTENT),
     },
     {
       name: "الخطط",
-      route: ROUTES.DASHBOARD.PLANS,
-      isActive: path.includes(ROUTES.DASHBOARD.PLANS),
+      route: ROUTES.ADMIN.PLANS,
+      isActive: path.includes(ROUTES.ADMIN.PLANS),
     },
   ];
 
@@ -71,7 +71,7 @@ const Aside = () => {
   );
 
   return (
-    <div className=" pt-3 flex flex-col font-bold">
+    <aside className="sticky top-0 start-0  py-3 flex flex-col font-bold">
       <Link href={"#"} className="block w-fit mb-20">
         <Logo className={"w-[91px] h-[37px]"} />
       </Link>
@@ -106,7 +106,7 @@ const Aside = () => {
         </div>
       </ul>
       <button className="w-fit">تسجيل الخروج</button>
-    </div>
+    </aside>
   );
 };
 

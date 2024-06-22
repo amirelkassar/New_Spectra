@@ -111,7 +111,7 @@ const RequestsTable = () => {
               )}
             >
               <Link
-                href={`${ROUTES.DASHBOARD.REQUESTS}/${item.id}`}
+                href={`${ROUTES.ADMIN.REQUESTS}/${item.id}`}
                 className={
                   "border border-greenMain rounded-full block py-2 text-greenMain font-bold w-36 "
                 }

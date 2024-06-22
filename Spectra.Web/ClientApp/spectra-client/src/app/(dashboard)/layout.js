@@ -3,7 +3,7 @@ import DashboardHeader from "./header";
 
 export default function DashboardLayout({ children }) {
   return (
-    <main className="grid grid-cols-[230px,1fr]  px-8 py-5 gap-x-5 h-screen ">
+    <main className="relative grid grid-cols-[230px,1fr]  px-8 py-5 gap-x-5 min-h-screen ">
       <Aside />
       <section className="space-y-5 h-full flex flex-col ">
         <DashboardHeader />

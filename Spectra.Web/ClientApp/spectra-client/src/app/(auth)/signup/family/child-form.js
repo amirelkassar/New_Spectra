@@ -2,7 +2,7 @@
 
 import Input from "@/components/input";
 import SelectBox from "@/components/select-box";
-import useFamily from "@/store/client/signup/family-slice";
+import useFamily from "@/store/auth/signup/family-slice";
 
 const ChildForm = ({ index }) => {
   const { children, editChildAttribute } = useFamily();
