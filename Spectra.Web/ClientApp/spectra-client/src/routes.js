@@ -8,11 +8,28 @@ const ROUTES = {
     FORGOT_PASSWORD: "/forgot-password",
     RESET_PASSWORD: "/reset-password",
   },
-  DASHBOARD: {
+  ADMIN: {
     MAIN: "/main",
     APPOINTMENTS: "/appointments",
     REQUESTS: "/requests",
-    CLIENTS: "/clients",
+    CLIENTS: {
+      DASHBOARD: "/clients",
+      ORGANIZATION: {
+        DETAILS: (id) => `/clients/organization/${id}/details`,
+        EMPLOYEE: (id) => `/clients/organization/${id}/employee`,
+        CLIENTS: (id) => `/clients/organization/${id}/clients`,
+        DOCTORS: (id) => `/clients/organization/${id}/doctors`,
+        APPOINTMENTS: (id) => `/clients/organization/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/clients/organization/${id}/prescriptions`,
+        PATIENTS: (id) => `/clients/organization/${id}/patients`,
+      },
+      FAMILY: {
+        DETAILS: (id) => `/clients/family/${id}/details`,
+        APPOINTMENTS: (id) => `/clients/family/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/clients/family/${id}/prescriptions`,
+        PATIENTS: (id) => `/clients/family/${id}/patients`,
+      },
+    },
     REPORST: "/reports",
     PERMISSIONS: "/permissions",
     CONTENT: "/content",

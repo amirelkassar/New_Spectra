@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import ParentForm from "./parent-form";
 import { useState } from "react";
 import ChildForm from "./child-form";
-import useFamily from "@/store/client/signup/family-slice";
+import useFamily from "@/store/auth/signup/family-slice";
 
 const FamilyForm = () => {
   const { addChild } = useFamily();
@@ -70,7 +70,9 @@ const FamilyForm = () => {
                 <Button onClick={handlePrevPage} className={"w-full"}>
                   السابق
                 </Button>
-                <Button className={"col-span-2"}>ليس الآن / تسجيل الدخول</Button>
+                <Button className={"col-span-2"}>
+                  ليس الآن / تسجيل الدخول
+                </Button>
               </div>
             </>
           )}

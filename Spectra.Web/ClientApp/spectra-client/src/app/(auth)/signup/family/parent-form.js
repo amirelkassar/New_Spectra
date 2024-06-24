@@ -2,7 +2,7 @@
 
 import Input from "@/components/input";
 import SelectBox from "@/components/select-box";
-import useFamily from "@/store/client/signup/family-slice";
+import useFamily from "@/store/auth/signup/family-slice";
 
 const cites = ["مدينة 1", " مدينة 2", "مدينة 3", "مدينة 4", "مدينة 5"];
 const countries = ["بلد 1", " بلد 2", "بلد 3", "بلد 4", "بلد 5"];

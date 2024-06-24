@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/input";
 import SelectBox from "@/components/select-box";
-import useOrg from "@/store/client/signup/org-slice";
+import useOrg from "@/store/auth/signup/org-slice";
 
 const OrgInfo = () => {
   const cites = ["مدينة 1", " مدينة 2", "مدينة 3", "مدينة 4", "مدينة 5"];

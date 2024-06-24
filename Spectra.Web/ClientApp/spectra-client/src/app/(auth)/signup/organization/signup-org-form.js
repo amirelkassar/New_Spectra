@@ -1,5 +1,5 @@
 "use client";
-import useOrg from "@/store/client/signup/org-slice";
+import useOrg from "@/store/auth/signup/org-slice";
 import { useState } from "react";
 import OrgInfo from "./org-info";
 import Button from "@/components/button";

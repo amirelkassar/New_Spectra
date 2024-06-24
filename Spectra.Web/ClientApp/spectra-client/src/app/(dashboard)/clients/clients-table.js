@@ -18,6 +18,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 1,
@@ -26,6 +27,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "منظمة",
+      route: "organization",
     },
     {
       id: 2,
@@ -34,6 +36,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "مقدم الخدمة الطبية",
+      route: "provider",
     },
     {
       id: 3,
@@ -42,6 +45,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 4,
@@ -50,6 +54,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "منظمة",
+      route: "organization",
     },
     {
       id: 5,
@@ -58,6 +63,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "مقدم الخدمة الطبية",
+      route: "provider",
     },
     {
       id: 6,
@@ -66,6 +72,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 7,
@@ -74,6 +81,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 8,
@@ -82,6 +90,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 10,
@@ -90,6 +99,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 11,
@@ -98,6 +108,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 12,
@@ -106,6 +117,7 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
+      route: "family",
     },
     {
       id: 13,
@@ -114,51 +126,17 @@ const ClientsTable = () => {
       email: "Abdullah@gmail.com",
       lastLogin: "20/4/2024",
       type: "عائلة طفل",
-    },
-    {
-      id: 14,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-    },
-    {
-      id: 15,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-    },
-    {
-      id: 16,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-    },
-    {
-      id: 17,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-    },
-    {
-      id: 18,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
+      route: "family",
     },
   ];
 
-  const handleRouting = (id) => {
-    router.push(`${ROUTES.DASHBOARD.CLIENTS}/${id}`);
+  const handleRouting = (item) => {
+    if (item.route === "organization") {
+      router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
+    }
+    if (item.route === "family") {
+      router.push(ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(item.id));
+    }
   };
 
   return (
@@ -178,7 +156,7 @@ const ClientsTable = () => {
         </div>
         {data.map((item, index) => (
           <div
-            onClick={() => handleRouting(item.id)}
+            onClick={() => handleRouting(item)}
             key={item.id}
             className="contents cursor-pointer group "
           >
