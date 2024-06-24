@@ -17,8 +17,9 @@ const FamilyAside = () => {
     },
     {
       name: "المواعيد",
-      route: "",
-      isActive: false,
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
+      isActive:
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
     },
     {
       name: "الوصفات الطبية",

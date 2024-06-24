@@ -24,7 +24,7 @@ label {
 }
 
 .default-page {
-  @apply bg-white h-full px-12 py-6 rounded-xl flex flex-col gap-y-6;
+  @apply bg-white h-full px-4 lg:px-6 xl:px-12 py-6 rounded-xl flex flex-col gap-y-6;
 }
 .sec-page {
   @apply h-full flex flex-col gap-6;

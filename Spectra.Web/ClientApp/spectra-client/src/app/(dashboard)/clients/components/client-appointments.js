@@ -1,150 +1,157 @@
+import Statue from "@/components/status";
 import clsx from "clsx";
+import Image from "next/image";
+import placeholderImage from "@/assets/images/placeholder-person.png";
+import MenuActions from "@/components/menu-actions";
 
 const ClientAppointments = () => {
-  const data = {
-    details: {
+  const data = [
+    {
+      id: 0,
+      image: placeholderImage,
       name: "عبدالله الشيخ",
-      email: "Abdallah@gmail.com",
-      lastLogin: "25/4/2024",
-      numberOfChildren: "1",
-      diagnosis: "اضطراب طيف التوحد",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "لم يبدأ بعد",
     },
-    today: [
-      {
-        id: 0,
-        type: "كشف 1",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "الطبيب: احمد محمد كمال",
-      },
-      {
-        id: 1,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 2,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 3,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 4,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 5,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 6,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 7,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 8,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 9,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 10,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 11,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-      {
-        id: 12,
-        type: "متابعة 3",
-        date: "6/9/224",
-        time: "8:00 مساءا",
-        doctor: "المختص: كمال احمد",
-      },
-    ],
-  };
+    {
+      id: 1,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "لم يبدأ بعد",
+    },
+    {
+      id: 2,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "تتم الان",
+    },
+    {
+      id: 4,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "تمت",
+    },
+    {
+      id: 5,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "تمت",
+    },
+    {
+      id: 6,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "تمت",
+    },
+    {
+      id: 7,
+      image: placeholderImage,
+      name: "عبدالله الشيخ",
+      specialisation: " اخصائى نفسى",
+      patientName: "احمد محمد كمال",
+      patientDiagnosis: "انفصام",
+      date: "25/4/2024",
+      time: "10:00 pm",
+      doctor: "عبدالله الشيخ",
+      statu: "تمت",
+    },
+  ];
   return (
-    <section className="bg-white flex-1 overflow-auto   rounded-xl p-8">
-      <h2 className="ms-5 mb-5">مواعيد اليوم</h2>
-      <div className="grid grid-cols-4 w-full ">
-        {data.today.map((item, index) => (
-          <div key={item.id} className="contents">
+    <div className="rounded-xl bg-white p-8 grow">
+      <h1 className="ms-5 mb-5">الـمواعيد</h1>
+      <div className="max-h-[calc(100vh-300px)] overflow-auto grid grid-cols-[repeat(4,minmax(max-content,1fr))] gap-y-1 w-full ">
+        <div className="contents ">
+          <div className="bg-blueLight rounded-s-xl py-3 px-10 sticky top-0 text-xl">
+            اسم الاخصائي
+          </div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-xl">
+            الـميعاد
+          </div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-xl ">
+            الحالة
+          </div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 rounded-e-xl text-xl me-5"></div>
+        </div>
+        {data.map((row, index) => (
+          <div key={row.id} className="contents">
             <div
               className={clsx(
-                "text-xl py-5 ",
-                index !== data.today.length - 1 && "border-b  border-grayMedium"
+                "flex items-center gap-5 py-5 px-10",
+                index !== data.length - 1 && "border-b border-grayMedium"
               )}
             >
-              {item.type}
+              <div className="size-14 rounded-full bg-red flex items-start justify-center overflow-hidden">
+                <Image src={row.image} alt="Doctor image" />
+              </div>
+              <div>
+                <p className="font-bold">{row.name}</p>
+                <p>{row.specialisation}</p>
+              </div>
             </div>
             <div
               className={clsx(
-                "text-xl py-3",
-                index !== data.today.length - 1 && "border-b  border-grayMedium"
+                "py-5 px-10",
+                index !== data.length - 1 && "border-b border-grayMedium"
               )}
             >
-              {item.date}
+              <p className="font-bold">{row.date}</p>
+              <p>{row.time}</p>
+            </div>{" "}
+            <div
+              className={clsx(
+                "py-5 px-10 content-center",
+                index !== data.length - 1 && "border-b border-grayMedium"
+              )}
+            >
+              <Statue statue={row.statu} />
             </div>
             <div
               className={clsx(
-                "text-xl py-3",
-                index !== data.today.length - 1 && "border-b  border-grayMedium"
+                "py-5 px-10   me-5  flex justify-end items-center",
+                index !== data.length - 1 && "border-b border-grayMedium"
               )}
             >
-              {item.time}
-            </div>
-            <div
-              className={clsx(
-                "text-xl py-3 me-5",
-                index !== data.today.length - 1 && "border-b  border-grayMedium"
-              )}
-            >
-              {item.doctor}
+              <MenuActions />
             </div>
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

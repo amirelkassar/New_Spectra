@@ -71,7 +71,7 @@ const Aside = () => {
   );
 
   return (
-    <aside className="sticky top-0 start-0  py-3 flex flex-col font-bold">
+    <aside className="hidden sticky top-0 start-0  py-3 mdl:flex flex-col font-bold">
       <Link href={"#"} className="block w-fit mb-20">
         <Logo className={"w-[91px] h-[37px]"} />
       </Link>
