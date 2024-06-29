@@ -23,6 +23,7 @@ namespace Spectra.Web
             services.ConfigureWebAPIs(configuration);
             ConfigureIdentityManagement(services, configuration);
             ConfigureIdentityServerSettings(services, configuration);
+
             return services;
         }
 
@@ -45,13 +46,7 @@ namespace Spectra.Web
 
                 services.AddAuthorization(options =>
                 {
-                    foreach (var scope in _identityServerSetting.ApiScopes)
-                    {
-                        options.AddPolicy("ApiScope", policy =>
-                        {
-                            policy.RequireAuthenticatedUser();
-                        });
-                    }
+                   
 
                 });
             }

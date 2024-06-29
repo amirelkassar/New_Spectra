@@ -3,37 +3,47 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
+using Spectra.Application.Countries.Services;
+using Spectra.Application.Interfaces.IRepository;
+using Spectra.Application.Interfaces.IServices;
+using Spectra.Application.Messaging;
+using Spectra.Application.Services;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application
 {
     public static class DependencyInjection
-    {
-        public static IServiceCollection ConfigureApplication(this IServiceCollection services,
-            IConfiguration configuration) 
-        {
-            //Domain
-            services.ConfigureDomain(configuration);
-            // Register FluentValidation
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //Register the Mediator
-            services.AddMediatR(cfg =>
+	{
+		public static IServiceCollection ConfigureApplication(this IServiceCollection services,
+			IConfiguration configuration)
+		{
+			//Domain
+			services.ConfigureDomain(configuration);
+			// Register FluentValidation
+			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+			services.AddScoped<ICountryService, CountryService>();
+			//Register the Mediator
+			services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
-                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, object>), typeof(AuthorizationBehavior<IAuthorizedQuery, object>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<object>, object>), typeof(AuthorizationBehavior<IAuthorizedQuery<object>, object>));
+
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, object>), typeof(AuthorizationBehavior<IAuthorizedCommand, object>));
+                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<object>, object>), typeof(AuthorizationBehavior<IAuthorizedCommand<object>, object>));
+
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
-            return services;
-        }
 
-    }
+			return services;
+
+		}
+
+	}
 }

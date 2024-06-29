@@ -3,8 +3,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Spectra.Application.Common;
+using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
+using Spectra.Infrastructure.Services;
 using Spectra.Web;
 using Spectra.WebAPI;
 using Spectra.WebAPI.Middlewares;
@@ -19,9 +21,15 @@ builder.Host.UseSerilog((context, loggerConfig)
 
 builder.Services.ConfigureWebHost(builder.Configuration);
 
-builder.Services.ConfigureWebAPIs(builder.Configuration);
 
 var app = builder.Build();
+// Seed data before handling requests
+using (var scope = app.Services.CreateScope())
+{
+	var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
+	await seedService.SeedDataAsync();
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,6 +44,7 @@ app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
 
 app.UseAuthorization();
 

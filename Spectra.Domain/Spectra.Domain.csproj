@@ -13,9 +13,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Spectra.Domain.Shared\Spectra.Domain.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Clients\" />
-    <Folder Include="Patients\" />
-  </ItemGroup>
 
 </Project>
