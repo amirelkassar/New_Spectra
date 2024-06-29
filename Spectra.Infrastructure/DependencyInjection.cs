@@ -27,8 +27,10 @@ namespace Spectra.Infrastructure
 			services.AddScoped<ICountryRepository, CountryRepository>();
 			services.AddScoped<IClientRepository, ClientRepository>();
 			services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
 
-			services.AddScoped<SeedService>();
+
+            services.AddScoped<SeedService>();
 
 			services.AddHttpClient();
 			return services;

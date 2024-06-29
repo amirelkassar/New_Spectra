@@ -32,7 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthServer", "AuthServer", "{651B8CE8-89EA-49AE-B7C1-E51E4F2AA4A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectra.IdentityServer", "Spectra.IdentityServer\Spectra.IdentityServer.csproj", "{11E88783-56F1-4481-BF71-9D6CBB85ED92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectra.IdentityServer", "Spectra.IdentityServer\Spectra.IdentityServer.csproj", "{11E88783-56F1-4481-BF71-9D6CBB85ED92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
