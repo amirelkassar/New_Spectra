@@ -1,6 +1,8 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 using Spectra.Application.Common;
 using Spectra.Infrastructure;
@@ -8,9 +10,11 @@ using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
 using Spectra.Infrastructure.Services;
 using Spectra.Web;
+using Spectra.Web.Models;
 using Spectra.WebAPI;
 using Spectra.WebAPI.Middlewares;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,8 +38,20 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    var swaggerClientId = app.Configuration["IdentityServerSetting:Clients:0:ClientId"];
+    var swaggerClientSecret = app.Configuration["IdentityServerSetting:Clients:0:Secret"];
+    var swaggerClientName = app.Configuration["IdentityServerSetting:Clients:0:ClientName"];
+
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
+
+        options.OAuthClientId(swaggerClientId);
+        options.OAuthClientSecret(swaggerClientSecret);
+        options.OAuthAppName(swaggerClientName);
+        options.OAuthUsePkce();
+    });
 }
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 

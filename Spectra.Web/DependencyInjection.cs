@@ -2,11 +2,15 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 using Spectra.Application;
 using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
+using Spectra.Web.CustomFilters;
 using Spectra.Web.Models;
 using Spectra.WebAPI;
+using System.Reflection;
 
 namespace Spectra.Web
 {
@@ -17,13 +21,12 @@ namespace Spectra.Web
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
             ConfigureIdentityManagement(services, configuration);
             ConfigureIdentityServerSettings(services, configuration);
-
+            ConfigureSwagger(services, configuration);
             return services;
         }
 
@@ -34,22 +37,44 @@ namespace Spectra.Web
             if (_identityServerSetting != null)
             {
                 services.AddAuthentication("Bearer")
-                   .AddJwtBearer("Bearer", options =>
+                   .AddIdentityServerAuthentication("Bearer", options =>
                    {
                        options.Authority = _identityServerSetting.Authority;
-                       options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                       {
-                           SaveSigninToken = _identityServerSetting.SaveToken,
-                           ValidAudience = _identityServerSetting.Audience
-                       };
+                       options.ApiName = "apis";
                    });
-
-                services.AddAuthorization(options =>
-                {
-                   
-
-                });
             }
+        }
+
+        private static void ConfigureSwagger(IServiceCollection services, IConfiguration configuration)
+        {
+            var authServer = configuration["IdentityServerSetting:Authority"];
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Spctra Web App", Version = "v1" });
+
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri($"{authServer}/connect/authorize"),
+                            TokenUrl = new Uri($"{authServer}/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"apis","" }
+                            }
+                        }
+                    }
+                });
+                var filePath = Path.Combine(Environment.CurrentDirectory, "SpectraApiDocs.xml");
+                if (File.Exists(filePath))
+                {
+                    c.IncludeXmlComments(filePath);
+                }
+                c.OperationFilter<AuthorizeCheckOperationFilter>();
+            });
         }
 
         private static void ConfigureIdentityServerSettings(IServiceCollection services, IConfiguration configuration)

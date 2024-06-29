@@ -21,21 +21,21 @@ public class SeedDataService
         ILogger<SeedDataService> logger,
         AuthConfigDbContext authConfigDbContext,
         UserManager<AppUser> userManager,
-		RoleManager<AppRole> roleManager)
-	{
-        _authConfigDbContext=authConfigDbContext;
+        RoleManager<AppRole> roleManager)
+    {
+        _authConfigDbContext = authConfigDbContext;
         _identityServerSetting = identityServerSetting;
         _logger = logger;
         _userManager = userManager;
         _roleManager = roleManager;
     }
 
-	public async Task SeedAsync()
-	{
+    public async Task SeedAsync()
+    {
 
-        if (!_roleManager.Roles.Any())
+        foreach (var role in _identityServerSetting.AppRoles)
         {
-            foreach (var role in _identityServerSetting.AppRoles)
+            if (await _roleManager.FindByNameAsync(role.Name) == null)
             {
                 await _roleManager.CreateAsync(new AppRole
                 {
@@ -44,9 +44,9 @@ public class SeedDataService
                 });
             }
         }
-        if (!_userManager.Users.Any())
+        foreach (var userData in _identityServerSetting.AppUsers)
         {
-            foreach (var userData in _identityServerSetting.AppUsers)
+            if (await _userManager.FindByEmailAsync(userData.Email) == null)
             {
                 var user = new AppUser
                 {
@@ -64,59 +64,57 @@ public class SeedDataService
                 }
             }
         }
-        if (!_authConfigDbContext.ApiScopes.Any())
-        {
-            var apiScopes = GetApiScopes();
-            await _authConfigDbContext.ApiScopes.AddRangeAsync(apiScopes);
-        }
-        if (!_authConfigDbContext.ApiResources.Any())
-        {
-            var apiResources = GetApiResources();
-            await _authConfigDbContext.ApiResources.AddRangeAsync(apiResources);
-        }
-        if (!_authConfigDbContext.IdentityResources.Any())
-        {
-            var identityRescources = GetIdentityResources();
-            await _authConfigDbContext.IdentityResources.AddRangeAsync(identityRescources);
-        }
-		
-       
-        if (!_authConfigDbContext.Clients.Any())
-        {
-            var clients = GetClients();
-            await _authConfigDbContext.Clients.AddRangeAsync(clients);
-        }
-       
-		await _authConfigDbContext.SaveChangesAsync();
-	}
+        //api scopes
+        var apiScopes = GetApiScopes();
+        //api resourcs
+        var apiResources = GetApiResources();
+        // identity resourcs
+        var identityRescources = GetIdentityResources();
+        //clients
+        var clients = GetClients();
+
+        await Task.WhenAll(_authConfigDbContext.ApiScopes.AddRangeAsync(apiScopes),
+            _authConfigDbContext.ApiResources.AddRangeAsync(apiResources),
+            _authConfigDbContext.IdentityResources.AddRangeAsync(identityRescources),
+            _authConfigDbContext.Clients.AddRangeAsync(clients));
+
+        await _authConfigDbContext.SaveChangesAsync();
+    }
 
     private IEnumerable<IdentityServer4.EntityFramework.Entities.IdentityResource> GetIdentityResources()
     {
         foreach (var identityResource in _identityServerSetting.IdentityResources)
         {
-            yield return identityResource.ToEntity();
+            if (!_authConfigDbContext.IdentityResources.Any(i => i.Name == identityResource.Name))
+                yield return identityResource.ToEntity();
+
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.ApiScope> GetApiScopes()
     {
         foreach (var apiScope in _identityServerSetting.ApiScopes)
         {
-            yield return apiScope.ToEntity();
+            if (!_authConfigDbContext.ApiScopes.Any(s => s.Name == apiScope.Name))
+                yield return apiScope.ToEntity();
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.ApiResource> GetApiResources()
     {
         foreach (var apiResource in _identityServerSetting.ApiResources)
         {
-            yield return apiResource.ToEntity();
+            if (!_authConfigDbContext.ApiResources.Any(i => i.Name == apiResource.Name))
+                yield return apiResource.ToEntity();
         }
     }
     private IEnumerable<IdentityServer4.EntityFramework.Entities.Client> GetClients()
     {
         foreach (var client in _identityServerSetting.Clients)
         {
-            client.ClientSecrets.ToList().ForEach(s => s.Value = s.Value.Sha256());
-            yield return client.ToEntity();
+            if (!_authConfigDbContext.Clients.Any(c=>c.ClientId==client.ClientId))
+            {
+                client.ClientSecrets.ToList().ForEach(s => s.Value = s.Value.Sha256());
+                yield return client.ToEntity();
+            }
         }
     }
 }
