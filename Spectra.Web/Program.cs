@@ -64,6 +64,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapControllers().RequireAuthorization("ApiScope");
+app.MapControllers()
+    .RequireAuthorization();
 
 app.Run();

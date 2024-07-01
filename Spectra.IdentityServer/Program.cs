@@ -15,7 +15,6 @@ try
     {
         app.UseDeveloperExceptionPage();
     }
-    app.UseIdentityServer();
     using (var scope = app.Services.CreateScope())
     {
         var seedDataService = scope.ServiceProvider.GetService<SeedDataService>();

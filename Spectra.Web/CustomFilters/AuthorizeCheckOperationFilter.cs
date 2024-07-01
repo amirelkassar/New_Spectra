@@ -21,7 +21,7 @@ namespace Spectra.Web.CustomFilters
                     new OpenApiSecurityRequirement
                     {
                         [new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}}]
-                            = new[] {"api1"}
+                            = ["apis"]
                     }
                 };
             }

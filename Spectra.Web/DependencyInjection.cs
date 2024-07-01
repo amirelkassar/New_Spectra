@@ -1,16 +1,10 @@
-﻿using Flurl.Http;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Any;
+﻿using IdentityServer4.AccessTokenValidation;
 using Microsoft.OpenApi.Models;
 using Spectra.Application;
 using Spectra.Infrastructure;
-using Spectra.Infrastructure.Data;
 using Spectra.Web.CustomFilters;
 using Spectra.Web.Models;
 using Spectra.WebAPI;
-using System.Reflection;
 
 namespace Spectra.Web
 {
@@ -19,7 +13,8 @@ namespace Spectra.Web
         public static IServiceCollection ConfigureWebHost(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(opts => opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddEndpointsApiExplorer();
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
@@ -36,11 +31,13 @@ namespace Spectra.Web
 
             if (_identityServerSetting != null)
             {
-                services.AddAuthentication("Bearer")
-                   .AddIdentityServerAuthentication("Bearer", options =>
+                var webClient = _identityServerSetting.Clients.FirstOrDefault(c=>c.ClientId.Equals("spectra_web"));
+                services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                   .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
                    {
                        options.Authority = _identityServerSetting.Authority;
-                       options.ApiName = "apis";
+                       options.ApiName = "IS4API";
+
                    });
             }
         }
@@ -63,7 +60,7 @@ namespace Spectra.Web
                             TokenUrl = new Uri($"{authServer}/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                {"apis","" }
+                                {"apis","IS4API" }
                             }
                         }
                     }

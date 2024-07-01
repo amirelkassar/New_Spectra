@@ -9,11 +9,11 @@ namespace Spectra.Web.Controllers
     public class HomeController : ControllerBase
     {
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles ="SuperAdmin")]
         public async Task<IActionResult> GetAsync()
         {
             var user=HttpContext.User;
-            return Ok();
+            return Ok(user.Identity);
         }
     }
 }
