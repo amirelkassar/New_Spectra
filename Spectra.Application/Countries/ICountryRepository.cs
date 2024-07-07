@@ -1,10 +1,5 @@
 ﻿using Spectra.Domain.Countries;
 using Spectra.Domain.Countries.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Countries
 {
@@ -12,9 +7,10 @@ namespace Spectra.Application.Countries
     {
         Task<IEnumerable<Country>> GetAllAsync();
         Task<Country> GetByIdAsync(string id);
-        Task<State> GetStateByIdAsync(string stateId);
         Task AddAsync(Country country);
-        Task<bool> AnyCountriesAsync();
+        Task AddManyAsync(params Country[] countries);
+        Task<bool> AnyAsync();
         Task<bool> ExistsAsync(string id);
+        Task DeleteAsync(string id);
     }
 }
