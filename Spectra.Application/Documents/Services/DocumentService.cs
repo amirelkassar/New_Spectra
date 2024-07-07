@@ -2,7 +2,6 @@
 using Spectra.Application.Documents.Commands;
 using Spectra.Application.Documents.Queries;
 using Spectra.Domain.Documents;
-using Spectra.Domain.Entities.ValueObjects;
 using Spectra.Domain.Enumeration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,7 +17,16 @@ namespace Spectra.Application.Documents.Services
 			_mediator = mediator;
 		}
 
-		public async Task<string> CreateDocument(string name, Guid documentKey, DocumentSources documentSource, string documentSourceId, string path, bool external, bool isPublic, Type documentTypes, string ownerId, string documentId)
+		public async Task<string> CreateDocument(string name,
+			Guid documentKey, 
+			DocumentSources documentSource, 
+			string documentSourceId, 
+			string path, 
+			bool external,
+			bool isPublic,
+			Type documentTypes, 
+			string ownerId, 
+			string documentId)
 		{
 			var command = new CreateDocumentCommand
 			{
@@ -37,7 +45,17 @@ namespace Spectra.Application.Documents.Services
 			return await _mediator.Send(command);
 		}
 
-		public async Task UpdateDocument(string id, string name, Guid documentKey, DocumentSources documentSource, string documentSourceId, string path, bool external, bool isPublic, Type documentTypes, string ownerId, string documentId)
+		public async Task UpdateDocument(string id, 
+			string name, 
+			Guid documentKey, 
+			DocumentSources documentSource, 
+			string documentSourceId,
+			string path, 
+			bool external,
+			bool isPublic, 
+			Type documentTypes, 
+			string ownerId,
+			string documentId)
 		{
 			var command = new UpdateDocumentCommand
 			{

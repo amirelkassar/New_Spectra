@@ -14,12 +14,10 @@ namespace Spectra.Domain.Countries.States
         {
             ArgumentNullException.ThrowIfNull(countryId);
             CountryId = countryId;
-            Cities = new HashSet<City>();
         }
         public string CountryId { get;}
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public ICollection<City> Cities { get; set; }
 
     }
 }

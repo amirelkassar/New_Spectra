@@ -8,9 +8,9 @@ namespace Spectra.Application.Countries.SeedService
 {
     public interface ICountrySeedService
     {
-        Task<IEnumerable<CountryApiResponse>> FetchCountryAsync();
-        Task<IEnumerable<StateApiResponse>> FetchStatesAsync(string countryId);
-        Task<IEnumerable<CityApiResponse>> FetchCityAsync(string stateId);
+        Task SeedCountriesAsync();
+        Task SeedStatesAsync(string countryId);
+        Task SeedCitiesAsync(string stateId);
 
     }
 }

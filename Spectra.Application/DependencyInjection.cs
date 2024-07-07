@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Services;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;

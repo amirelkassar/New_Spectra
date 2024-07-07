@@ -2,15 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Clients;
 using Spectra.Application.Countries;
+using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Documents;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Patients;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.Countries;
-using Spectra.Infrastructure.Country;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Repositories;
-using Spectra.Infrastructure.Services;
 
 namespace Spectra.Infrastructure
 {
@@ -28,8 +27,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
 
-
-            services.AddScoped<SeedService>();
+            services.AddScoped<ICountrySeedService, CountrySeedService>();
 
             services.AddHttpClient();
             return services;

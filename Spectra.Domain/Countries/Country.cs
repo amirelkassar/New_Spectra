@@ -8,15 +8,10 @@ using System.Threading.Tasks;
 
 namespace Spectra.Domain.Countries
 {
-    public class Country :BaseEntity<string>
+    public class Country(string id) : BaseEntity<string>(id)
     {
-        public Country(string id) : base(id)
-        {
-            States = new HashSet<State>();
-        }
         public string EnName { get; set; }
         public string ArName { get; set; }
         public string Flag { get; set; }
-        public ICollection<State> States { get; set; }
     }
 }

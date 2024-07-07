@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using Spectra.Application.Countries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Countries;
-using Spectra.Domain.Countries.States;
 
 namespace Spectra.Infrastructure.Countries
 {

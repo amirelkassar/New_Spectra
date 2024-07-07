@@ -11,6 +11,7 @@ namespace Spectra.Domain.Countries.Cities
     {
         public City(string id,string stateId):base(id)
         {
+            ArgumentNullException.ThrowIfNull(nameof(stateId));
             StateId = stateId;
         }
         public string StateId { get; }

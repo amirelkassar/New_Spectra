@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.States.DTOs;
-using Spectra.Domain.Entities.Countries;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -24,17 +23,8 @@ namespace Spectra.Application.Countries.States.Queries
 			public async Task<IEnumerable<StateData>> Handle(GetStatesByCountryIdQuery request, CancellationToken cancellationToken)
 			{
 				var country = await _countryRepository.GetByIdAsync(request.CountryId);
-				if (country == null || country.States == null)
-				{
-					return Enumerable.Empty<StateData>();
-				}
-
-				return country.States.Select(s => new StateData
-				{
-					Name = s.EnName,
-					state_code = s.Id
-				});
-			}
+                return Enumerable.Empty<StateData>();
+            }
 		}
 	}
 }

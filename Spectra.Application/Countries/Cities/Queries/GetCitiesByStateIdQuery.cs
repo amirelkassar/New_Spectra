@@ -26,21 +26,7 @@ namespace Spectra.Application.Countries.Cities.Queries
 		{
 			var stateId = request.StateId;
 
-			var state = await _countryRepository.GetStateByIdAsync(stateId);
-
-			if (state == null)
-			{
-				return Enumerable.Empty<CityData>();
-			}
-
-			// Map cities to DTOs
-			var cityDataList = state.Cities.Select(city => new CityData
-			{
-				Id = city.Id,
-				Name = city.EnName,
-			});
-
-			return cityDataList;
-		}
+            return Enumerable.Empty<CityData>();
+        }
 	}
 }
