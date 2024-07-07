@@ -16,6 +16,7 @@ namespace Spectra.Web
             services.AddControllers()
                 .AddNewtonsoftJson(opts => opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddEndpointsApiExplorer();
+            services.AddHttpContextAccessor();
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
@@ -37,7 +38,7 @@ namespace Spectra.Web
                    {
                        options.Authority = _identityServerSetting.Authority;
                        options.ApiName = "IS4API";
-
+                       options.SaveToken = true;
                    });
             }
         }

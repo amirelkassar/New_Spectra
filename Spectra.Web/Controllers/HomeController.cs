@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.Web.Controllers
 {
@@ -9,7 +10,7 @@ namespace Spectra.Web.Controllers
     public class HomeController : ControllerBase
     {
         [HttpGet]
-        [Authorize(Roles ="SuperAdmin")]
+        [Authorize(Roles = Roles.SystemAdmin)]
         public async Task<IActionResult> GetAsync()
         {
             var user=HttpContext.User;
