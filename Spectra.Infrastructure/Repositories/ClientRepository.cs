@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
+using Spectra.Application.Clients;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Clients;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Repositories
 {
-	public class ClientRepository : IClientRepository
+    public class ClientRepository : IClientRepository
 	{
 		private readonly IMongoCollection<Client> _clients;
 

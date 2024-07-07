@@ -2,8 +2,8 @@
 using Spectra.Application.Clients.Commands;
 using Spectra.Application.Clients.Queries;
 using Spectra.Domain.Clients;
-using Spectra.Domain.Entities.ValueObjects;
 using Spectra.Domain.Enumeration;
+using Spectra.Domain.ValueObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

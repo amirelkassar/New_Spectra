@@ -1,13 +1,12 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Documents;
 using Spectra.Domain.Enumeration;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Spectra.Application.Documents.Commands
 {
-	public class CreateDocumentCommand : IRequest<string>
+    public class CreateDocumentCommand : IRequest<string>
 	{
 		public string Name { get; set; }
 		public Guid DocumentKey { get; set; }

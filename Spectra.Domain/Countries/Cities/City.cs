@@ -1,0 +1,20 @@
+﻿using Spectra.Domain.Shared.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.Domain.Countries.Cities
+{
+    public class City : BaseEntity<string>
+    {
+        public City(string id,string stateId):base(id)
+        {
+            StateId = stateId;
+        }
+        public string StateId { get; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+    }
+}

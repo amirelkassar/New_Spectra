@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IRepository;
+using Spectra.Application.Patients;
 using Spectra.Domain.Patients;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Repositories
 {
-	public class PatientRepository : IPatientRepository
+    public class PatientRepository : IPatientRepository
 	{
 		private readonly IMongoCollection<Patient> _patients;
 

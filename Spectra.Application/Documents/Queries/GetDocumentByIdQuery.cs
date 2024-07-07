@@ -1,12 +1,11 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Documents;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Spectra.Application.Documents.Queries
 {
-	public class GetDocumentByIdQuery : IRequest<Document>
+    public class GetDocumentByIdQuery : IRequest<Document>
 	{
 		public string Id { get; set; }
 	}

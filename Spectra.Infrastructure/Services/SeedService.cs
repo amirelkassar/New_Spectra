@@ -1,14 +1,14 @@
-﻿using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities.Countries;
-using Spectra.Domain.Entities.States;
-using Spectra.Infrastructure.Api;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Spectra.Domain.Entities.Cities;
+using Spectra.Domain.Countries.Cities;
+using Spectra.Domain.Countries.States;
+using Spectra.Domain.Countries;
+using Spectra.Application.Countries;
+using Spectra.Application.Countries.SeedService;
 
 namespace Spectra.Infrastructure.Services
 {
@@ -18,7 +18,9 @@ namespace Spectra.Infrastructure.Services
 		private readonly HttpClient _httpClient;
 		private readonly ILogger<SeedService> _logger;
 
-		public SeedService(ICountryRepository countryRepository, HttpClient httpClient, ILogger<SeedService> logger)
+		public SeedService(ICountryRepository countryRepository,
+			HttpClient httpClient,
+			ILogger<SeedService> logger)
 		{
 			_countryRepository = countryRepository;
 			_httpClient = httpClient;
@@ -47,16 +49,15 @@ namespace Spectra.Infrastructure.Services
 			{
 				PropertyNameCaseInsensitive = true
 			};
-			var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonResponse, options);
+			var apiResponse = JsonSerializer.Deserialize<CountryApiResponse>(jsonResponse, options);
 
 			if (apiResponse != null && apiResponse.Data != null)
 			{
 				foreach (var countryData in apiResponse.Data)
 				{
 					var states = await FetchStatesForCountryAsync(countryData.Name); // Use country name for fetching states
-					var country = new Country
+					var country = new Country(countryData.Iso2)
 					{
-						Id = countryData.Iso2,
 						EnName = countryData.Name,
 						ArName = "",
 						Flag = countryData.Flag,
@@ -81,7 +82,7 @@ namespace Spectra.Infrastructure.Services
 			{
 				PropertyNameCaseInsensitive = true
 			};
-			var statesApiResponse = JsonSerializer.Deserialize<StatesApiResponse>(jsonResponse, options);
+			var statesApiResponse = JsonSerializer.Deserialize<StateApiResponse>(jsonResponse, options);
 
 			var states = new List<State>();
 			if (statesApiResponse != null && statesApiResponse.Data != null)
@@ -94,15 +95,12 @@ namespace Spectra.Infrastructure.Services
 						{
 							var cities = await FetchCitiesForStateAsync(countryName, stateData.Name);
 
-							var state = new State
+							var state = new State(stateData.Name, countryStates.Iso2)
 							{
-								Id = $"{countryStates.Iso2}-{stateData.state_code}",
-								CountryId = countryStates.Iso2,
 								EnName = stateData.Name,
 								ArName = "",
 								Cities = cities
 							};
-
 							states.Add(state);
 						}
 					}
@@ -116,7 +114,7 @@ namespace Spectra.Infrastructure.Services
 		{
 			var cities = new List<City>();
 
-			var requestData = new { country = country, state = state };
+			var requestData = new { country, state };
 			var content = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
 
 			var response = await _httpClient.PostAsync("https://countriesnow.space/api/v0.1/countries/state/cities", content);
@@ -138,16 +136,14 @@ namespace Spectra.Infrastructure.Services
 			{
 				PropertyNameCaseInsensitive = true
 			};
-			var citiesApiResponse = JsonSerializer.Deserialize<CitiesApiResponse>(jsonResponse, options);
+			var citiesApiResponse = JsonSerializer.Deserialize<CityApiResponse>(jsonResponse, options);
 
 			if (citiesApiResponse != null && citiesApiResponse.Data != null)
 			{
 				foreach (var cityName in citiesApiResponse.Data)
 				{
-					var city = new City
+					var city = new City(cityName, state)
 					{
-						Id = $"{country}-{state}-{cityName}",
-						StateId = state,
 						EnName = cityName,
 						ArName = ""
 					};

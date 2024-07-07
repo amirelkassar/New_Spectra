@@ -1,7 +1,7 @@
-﻿using Spectra.Domain.Entities.ValueObjects;
-using Spectra.Domain.Enumeration;
+﻿using Spectra.Domain.Enumeration;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common;
+using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Domain.Clients
 {
-	public class Client: BaseAuditableEntity<string>
+    public class Client: BaseAuditableEntity<string>
 	{
         public Name Name { get; set; }
         public string NationalId { get; set; }

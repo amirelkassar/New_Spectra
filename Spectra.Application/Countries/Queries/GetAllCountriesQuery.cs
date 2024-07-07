@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.DTOs;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using System;
 using System.Collections.Generic;

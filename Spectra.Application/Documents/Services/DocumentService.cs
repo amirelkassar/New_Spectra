@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Documents.Commands;
 using Spectra.Application.Documents.Queries;
-using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Documents;
 using Spectra.Domain.Entities.ValueObjects;
 using Spectra.Domain.Enumeration;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Documents.Services
 {
-	public class DocumentService
+    public class DocumentService
 	{
 		private readonly IMediator _mediator;
 

@@ -1,45 +1,52 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
+using Spectra.Application.Clients;
+using Spectra.Application.Countries;
+using Spectra.Application.Documents;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IRepository;
+using Spectra.Application.Patients;
+using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Repositories;
 using Spectra.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure
 {
-	public static class DependencyInjection
-	{
+    public static class DependencyInjection
+    {
 
-		public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services,
-			IConfiguration configuration)
-		{
-			services.ConfigureDataBase(configuration);
+        public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.ConfigureDataBase(configuration);
+            services.ConfigureCountriesNow(configuration);
 
-			services.AddScoped<ICountryRepository, CountryRepository>();
-			services.AddScoped<IClientRepository, ClientRepository>();
-			services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
 
 
             services.AddScoped<SeedService>();
 
-			services.AddHttpClient();
-			return services;
-		}
-		private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
-			IConfiguration configuration)
-		{
-			services.AddScoped<IMongoDbService, MongoDbService>(); 
-			return services;
-		}
-	}
+            services.AddHttpClient();
+            return services;
+        }
+        private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddScoped<IMongoDbService, MongoDbService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureCountriesNow(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var countriesNow = configuration
+                .GetSection("ThirdParty")
+                .GetSection(nameof(CountriesNow));
+            services.Configure<CountriesNow>(countriesNow);
+            return services;
+        }
+    }
 }

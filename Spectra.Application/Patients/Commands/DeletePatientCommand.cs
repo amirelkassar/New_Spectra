@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using System;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients.Commands
 {
-	public class DeletePatientCommand : ICommand<Unit>
+    public class DeletePatientCommand : ICommand<Unit>
 	{
 		public string Id { get; set; }
 	}

@@ -15,6 +15,7 @@ namespace Spectra.Domain.Shared.Common
         protected BaseEntity(TKey id)
         {
             Id = id;
+            ArgumentNullException.ThrowIfNull(id);
         }
 
         public TKey Id { get; }

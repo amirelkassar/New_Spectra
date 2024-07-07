@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.Cities.DTOs;
-using Spectra.Application.Interfaces.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Countries.Cities.Queries
 {
-	public class GetCitiesByStateIdQuery : IRequest<IEnumerable<CityData>>
+    public class GetCitiesByStateIdQuery : IRequest<IEnumerable<CityData>>
 	{
 		public string StateId { get; set; }
 	}

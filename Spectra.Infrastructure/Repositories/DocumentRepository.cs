@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
+using Spectra.Application.Documents;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Documents;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Repositories
 {
-	public class DocumentRepository : IDocumentRepository
+    public class DocumentRepository : IDocumentRepository
 	{
 		private readonly IMongoCollection<Document> _documents;
 

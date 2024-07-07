@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.States.DTOs;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Entities.Countries;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Countries.States.Queries
 {
-	public class GetStatesByCountryIdQuery : IRequest<IEnumerable<StateData>>
+    public class GetStatesByCountryIdQuery : IRequest<IEnumerable<StateData>>
 	{
 		public string CountryId { get; set; }
 

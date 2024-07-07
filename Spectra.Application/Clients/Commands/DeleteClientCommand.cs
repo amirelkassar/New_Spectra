@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using System.Windows.Input;
 
 namespace Spectra.Application.Clients.Commands
 {
-	public class DeleteClientCommand : ICommand<Unit>
+    public class DeleteClientCommand : ICommand<Unit>
 	{
 		public string Id { get; set; }
 	}

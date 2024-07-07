@@ -1,17 +1,16 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Entities.ValueObjects;
 using Spectra.Domain.Enumeration;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.ValueObjects;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients.Commands
 {
-	public class CreatePatientCommand : ICommand<string>
+    public class CreatePatientCommand : ICommand<string>
 	{
 		public Name Name { get; set; }
 		public string NationalId { get; set; }
