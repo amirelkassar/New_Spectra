@@ -10,7 +10,7 @@ const Cards = () => {
       number: 50,
       text: "طلب على خدمة الاستشارة الفردية",
       icon: (
-        <div className="size-12 rounded-full bg-[#10B0C1]/20 flex items-center justify-center ">
+        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#10B0C1]/20 flex items-center justify-center ">
           <SessionIcon />
         </div>
       ),
@@ -20,7 +20,7 @@ const Cards = () => {
       number: 85,
       text: "طلب على خدمة الكشف المبكر",
       icon: (
-        <div className="size-12 rounded-full bg-[#F5E4F9]  flex items-center justify-center ">
+        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#F5E4F9]  flex items-center justify-center ">
           <DoctorIcon />{" "}
         </div>
       ),
@@ -30,7 +30,7 @@ const Cards = () => {
       number: 45,
       text: "طلب على خدمة فريق تشخيص متعدد الخدمات",
       icon: (
-        <div className="size-12 rounded-full bg-[#E9F7FF] flex items-center justify-center ">
+        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#E9F7FF] flex items-center justify-center ">
           <ShakeIcon />
         </div>
       ),
@@ -40,24 +40,24 @@ const Cards = () => {
       number: 60,
       text: "طلب على الخدمات التدريبية والتأهيلية",
       icon: (
-        <div className="size-12 rounded-full bg-[#F5E4F9] flex items-center justify-center ">
+        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#F5E4F9] flex items-center justify-center ">
           <HeartWithPlus />
         </div>
       ),
     },
   ];
   return (
-    <div className="w-full grid grid-cols-4 gap-5">
+    <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
       {data.map((item) => (
         <div
           key={item.id}
-          className="p-6 rounded-xl bg-white flex flex-col justify-between gap-6"
+          className="p-6 rounded-xl bg-white flex flex-col justify-between gap-2 md:gap-6"
         >
           <div className="flex items-center justify-between">
-            <p className="font-bold text-4xl">{item.number}</p>
+            <p className="font-bold text-[24px] md:tex-[34px]">{item.number}</p>
             {item.icon}
           </div>
-          <p className="text-xl text-balance ">{item.text}</p>
+          <p className="text-[14px] md:tex-[20px] text-balance ">{item.text}</p>
         </div>
       ))}
     </div>

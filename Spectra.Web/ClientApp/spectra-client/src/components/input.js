@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useState } from "react";
 
 export default function Input({
   label,
@@ -18,15 +19,15 @@ export default function Input({
   handleOnChange,
   isOptional = false,
 }) {
+  const [hideErr, setHideErr] = useState(false);
   return (
     <div className={clsx("flex flex-col gap-2 relative", containerClassName)}>
       {isOptional && (
-        <div className="absolute end-0 top-2 text-xs text-grayDark">اختياري</div>
+        <div className="absolute end-0 top-2 text-xs text-grayDark">
+          اختياري
+        </div>
       )}{" "}
-      <label
-        htmlFor={id ? id : label}
-        className={clsx("", labelClassName)}
-      >
+      <label htmlFor={id ? id : label} className={clsx("", labelClassName)}>
         {label}
       </label>
       <input
@@ -44,14 +45,16 @@ export default function Input({
             ? handleOnChange
             : (e) => {
                 setValue(e.target.value);
-                error && setError(null);
+                setHideErr(true);
               }
         }
         readOnly={readOnly}
         min={min}
         minLength={minLength}
       />
-      {error && <p className="text-red whitespace-pre-line">{error}</p>}
+      {error && (
+        <p className="text-red whitespace-pre-line">{hideErr ? "" : error}</p>
+      )}
     </div>
   );
 }

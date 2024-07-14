@@ -21,6 +21,7 @@ const SelectBox = ({
   isObject = false,
   displayedKey,
   isOptional = false,
+  error,
   ...rest
 }) => {
   const key = (option) => (isObject ? option.id : option);
@@ -92,9 +93,11 @@ const SelectBox = ({
               ))}
             </ListboxOptions>
           </Transition>
+          {error && <p className="text-red whitespace-pre-line">{error}</p>}
         </>
       )}
     </Listbox>
+    
   );
 };
 

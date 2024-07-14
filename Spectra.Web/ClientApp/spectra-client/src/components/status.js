@@ -16,7 +16,7 @@ const Statue = ({ statue }) => {
   return (
     <div
       style={{ backgroundColor: bg, color: text }}
-      className="w-36 h-9 rounded-xl flex items-center justify-center"
+      className="w-[96px] md:w-[136px] h-9 rounded-xl text-[12px] md:text-[16px] flex items-center justify-center"
     >
       {statue}
     </div>

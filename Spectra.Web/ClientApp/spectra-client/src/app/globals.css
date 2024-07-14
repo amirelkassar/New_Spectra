@@ -8,6 +8,10 @@
   }
 }
 
+:root {
+  --main-color: #10b0c1;
+  --main-color-text: #010036;
+}
 h1 {
   @apply text-black text-2xl mdl:text-[28px] font-bold text-center mdl:text-start;
 }
@@ -28,4 +32,116 @@ label {
 }
 .sec-page {
   @apply h-full flex flex-col gap-6;
+}
+/*aside*/
+aside{
+  color: var(--main-color-text);
+}
+aside.closeMenue p {
+  display: none;
+}
+aside.closeMenue ul .arrowLinkNav {
+  display: none;
+}
+aside ul li a svg path {
+  transition: 0.5s;
+}
+aside ul li a.active svg path {
+  fill: var(--main-color);
+}
+aside ul  button.active svg path {
+  fill: var(--main-color);
+}
+aside .topMobNav {
+  display: none;
+}
+header .hideShowLinks {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+header .hideShowLinks:hover {
+  background-color: #dff0f4f6;
+}
+
+header .hideShowLinks svg {
+  width: 9px;
+  transition: 0.5s;
+}
+header .hideShowLinks.closeArrow svg {
+  transform: rotateY(180deg);
+}
+aside .topMobNav {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+}
+aside .topMobNav .hideShowLinks {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+aside .topMobNav .hideShowLinks svg {
+  width: 9px;
+  transition: 0.5s;
+}
+header  .hideShowLinks2 {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  display: none;
+}
+header  .hideShowLinks2 svg {
+  width: 15px;
+  transition: 0.5s;
+}
+aside .dropMenuDash li a p{
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+.numNotfication{
+  border-radius: 50% !important;
+}
+@media (max-width: 768px) {
+  aside .topMobNav {
+    display: flex;
+  }
+  aside {
+    width: 180px !important;
+    min-width: 180px !important;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    background-color: white;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    padding-top: 0px !important;
+    padding: 20px !important;
+    z-index: 500;
+    box-shadow: 0px -14px 51.7px 8px #0000001A;
+
+  }
+  aside.openMob {
+    right: -180px !important;
+  }
+  header  .hideShowLinks2 {
+    display: flex;
+  }
+  header  .hideShowLinks {
+    display: none !important;
+  }
+}
+/**/
+.showMore{
+  border: 1px solid #939393;
+}
+.showMore svg{
+  @apply w-[15px] 
 }

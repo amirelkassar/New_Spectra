@@ -12,6 +12,8 @@ const ROUTES = {
     MAIN: "/main",
     APPOINTMENTS: "/appointments",
     REQUESTS: "/requests",
+    REQUESTSNEW: "/requests",
+    REQUESTSOLD: "/requests/old",
     CLIENTS: {
       DASHBOARD: "/clients",
       ORGANIZATION: {
@@ -34,6 +36,7 @@ const ROUTES = {
     PERMISSIONS: "/permissions",
     CONTENT: "/content",
     PLANS: "/plans",
+    STEFF: "/staff",
   },
 };
 

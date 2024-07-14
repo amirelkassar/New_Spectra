@@ -1,5 +1,7 @@
+import SignupProvForm from "./signup-prov-form";
+
 const SignupProviderPage = () => {
-  return <div>SignupProviderPage</div>;
+   return <SignupProvForm />;;
 };
 
 export default SignupProviderPage;

@@ -5,13 +5,14 @@ import ParentForm from "./parent-form";
 import { useState } from "react";
 import ChildForm from "./child-form";
 import useFamily from "@/store/auth/signup/family-slice";
-
+import ROUTES from "@/routes";
+import { useRouter } from "next/navigation";
 const FamilyForm = () => {
   const { addChild } = useFamily();
   const [active, setActive] = useState(0);
   const [activeChildIndex, setActiveChildIndex] = useState(0);
   const [isConfirmed, setIsConfirmed] = useState(false);
-
+  const router = useRouter();
   const handleNextPage = () => {
     setActive((prev) => prev + 1);
   };
@@ -26,6 +27,9 @@ const FamilyForm = () => {
     setIsConfirmed(false);
   };
 
+  const handleRouting = () => {
+    router.push(ROUTES.AUTH.LOGIN);
+  };
   return (
     <form className="space-y-5">
       {active === 0 && (
@@ -70,7 +74,7 @@ const FamilyForm = () => {
                 <Button onClick={handlePrevPage} className={"w-full"}>
                   السابق
                 </Button>
-                <Button className={"col-span-2"}>
+                <Button className={"col-span-2"} onClick={handleRouting}>
                   ليس الآن / تسجيل الدخول
                 </Button>
               </div>
