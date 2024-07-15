@@ -211,3 +211,19 @@ html[dir='ltr'] .lineAfterLinks{
 .BtnheaderRequests svg{
   @apply md:w-[20px] w-[15px] md:h-[20px] h-[15px] 
 }
+/*modelReq*/
+.modelReq .mantine-Modal-content{
+  border-radius: 32px;
+
+}
+
+.modelReq .mantine-Modal-inner{
+  top: 50% !important;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.modelReq .mantine-Modal-body{
+  padding: 66px 72px 58px;
+  @apply px-[14px] pb-[40px] pt-[90px] md:pt-[66px] md:px-[72px] md:pb-[58px]
+}
+.modelReq .mantine-Modal-body{}
