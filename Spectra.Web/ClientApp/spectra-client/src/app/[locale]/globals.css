@@ -108,6 +108,15 @@ aside .dropMenuDash li a p{
 .numNotfication{
   border-radius: 50% !important;
 }
+html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
+ transform:rotateY(180deg);
+}
+.lineAfterLinks{
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition
+}
+html[dir='ltr'] .lineAfterLinks{
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition
+}
 @media (max-width: 768px) {
   aside .topMobNav {
     display: flex;
@@ -130,6 +139,14 @@ aside .dropMenuDash li a p{
   }
   aside.openMob {
     right: -180px !important;
+  }
+ html[dir='ltr'] aside {
+    left: 0px;
+    right: auto;
+  }
+  html[dir='ltr'] aside.openMob {
+    left: -180px !important;
+    right: auto;
   }
   header  .hideShowLinks2 {
     display: flex;

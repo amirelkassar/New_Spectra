@@ -113,7 +113,7 @@ const Aside = ({ close }) => {
     <li className="relative">
       <div
         className={clsx(
-          "h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition",
+          "lineAfterLinks ",
           link.isActive ? "opacity-100" : "opacity-0"
         )}
       />
