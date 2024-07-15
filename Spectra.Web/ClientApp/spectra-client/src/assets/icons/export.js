@@ -10,23 +10,23 @@ const ExportIcon = () => {
       <path
         d="M18.0526 11.4209C18.0526 14.263 16.1579 18.9998 9.5263 18.9998C2.89473 18.9998 1 14.263 1 11.4209"
         stroke="#010036"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.5293 1.04785V14.2634"
         stroke="#010036"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.8418 6.6842L9.526 1L15.2102 6.6842"
         stroke="#010036"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

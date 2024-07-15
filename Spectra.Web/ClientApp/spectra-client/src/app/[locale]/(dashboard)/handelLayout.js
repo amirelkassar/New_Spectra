@@ -16,8 +16,7 @@ export default function HandelDashboardLayout({ Children}) {
   const pathname = usePathname();
   const menue = useMenu();
  const locale = useLocale();
-  console.log(locale);
-  console.log(menue.menueOpen);
+
   return (
     <>
       <header className="h-9 md:h-16 flex items-center gap-[10px] md:gap-[28px]">

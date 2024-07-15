@@ -26,7 +26,6 @@ const Aside = ({ close }) => {
   const [opened, { toggle }] = useDisclosure(false);
   const [openMenuMob, setopenMenuMob] = useState(close);
   const menue = useMenu();
-  console.log(menue.menueOpen);
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const path = usePathname();
@@ -70,7 +69,7 @@ const Aside = ({ close }) => {
     },
     {
       name: "الإعدادات",
-      route: "settings",
+      route: ROUTES.ADMIN.PERMISSIONS,
       isActive:
         path.includes(ROUTES.ADMIN.PERMISSIONS) ||
         path.includes(ROUTES.ADMIN.CONTENT) ||
@@ -104,8 +103,8 @@ const Aside = ({ close }) => {
     },
     {
       name: "الطلبات المرفوضة ",
-      route: ROUTES.ADMIN.REQUESTSOLD,
-      isActive: path.includes(ROUTES.ADMIN.REQUESTSOLD),
+      route: ROUTES.ADMIN.REQUESTSREJECTED,
+      isActive: path.includes(ROUTES.ADMIN.REQUESTSREJECTED),
     },
   ];
 
@@ -129,7 +128,30 @@ const Aside = ({ close }) => {
       </Link>
     </li>
   );
+  const AsideLink2 = ({ link }) => (
+    <li className="relative">
+      <div
+        className={clsx(
+          "lineAfterLinks ",
+          link.isActive ? "opacity-0 " : "opacity-0"
+        )}
+      />
+      <Link
+        href={link.route}
+        className={`flex gap-[10px] md:gap-[18px] w-fit py-1`}
+      >
+        {link.icon}
 
+        <p
+          className={`text-[14px] lg:text-[18px] ${
+            link.isActive ? "!font-bold" : "font-normal"
+          }`}
+        >
+          {link.name}
+        </p>
+      </Link>
+    </li>
+  );
   return (
     <aside
       className={`  top-0 start-0 ${menue.menueOpen ? "openMob" : ""} ${
@@ -157,18 +179,16 @@ const Aside = ({ close }) => {
             <div key={link.route}>
               <div className="flex ">
                 <button
-                  className={` flex gap-[10px] items-center ${link.isActive ? "active" : "" } `}
+                  className={` flex gap-[10px] items-center ${
+                    link.isActive ? "active" : ""
+                  } `}
                   onClick={() => {
                     setIsOpenSubscription(!isOpenSubscription);
                   }}
                 >
-                  {link.icon}
-                  <p className="text-[14px] lg:text-[18px] font-bold">
-                    {" "}
-                    {link.name}{" "}
-                  </p>
+                  <AsideLink key={link.route} link={link} />
                   <span
-                    className={`arrowLinkNav hidden md:block ${
+                    className={`arrowLinkNav hidden lg:block ${
                       isOpenSubscription ? " rotate-180" : "rotate-0"
                     }`}
                   >
@@ -176,32 +196,31 @@ const Aside = ({ close }) => {
                   </span>
                 </button>
               </div>
-
-              <Collapse
-                in={isOpenSubscription}
-                className=" dropMenuDash flex flex-col gap-3 mt-4 px-4"
-              >
-                {SubscriptionLinks.map((link) => (
-                  <AsideLink key={link.route} link={link} />
-                ))}
-              </Collapse>
+              <div className="  lg:!block hidden">
+                <Collapse
+                  in={isOpenSubscription}
+                  className=" dropMenuDash   flex flex-col gap-3 mt-4 px-4"
+                >
+                  {SubscriptionLinks.map((link) => (
+                    <AsideLink2 key={link.route} link={link} />
+                  ))}
+                </Collapse>
+              </div>
             </div>
           ) : link.type === "settings" ? (
             <div key={link.route}>
               <div className="flex ">
                 <button
-                  className={` flex gap-[10px] items-center ${link.isActive ? "active" : "" }`}
+                  className={` flex gap-[10px] items-center ${
+                    link.isActive ? "active" : ""
+                  }`}
                   onClick={() => {
                     setIsOpenSettings(!isOpenSettings);
                   }}
                 >
-                  {link.icon}
-                  <p className="text-[14px] lg:text-[18px] font-bold">
-                    {" "}
-                    {link.name}{" "}
-                  </p>
+                  <AsideLink key={link.route} link={link} />
                   <span
-                    className={` arrowLinkNav  hidden md:block  ${
+                    className={` arrowLinkNav  hidden lg:block  ${
                       isOpenSettings ? " rotate-180" : "rotate-0"
                     }`}
                   >
@@ -209,15 +228,16 @@ const Aside = ({ close }) => {
                   </span>
                 </button>
               </div>
-
-              <Collapse
-                in={isOpenSettings}
-                className=" dropMenuDash flex flex-col gap-3 mt-4 px-4"
-              >
-                {settingsLinks.map((link) => (
-                  <AsideLink key={link.route} link={link} />
-                ))}
-              </Collapse>
+              <div className="  lg:!block hidden" >
+                <Collapse
+                  in={isOpenSettings}
+                  className=" dropMenuDash  flex flex-col gap-3 mt-4 px-4"
+                >
+                  {settingsLinks.map((link) => (
+                    <AsideLink2 key={link.route} link={link} />
+                  ))}
+                </Collapse>
+              </div>
             </div>
           ) : (
             <AsideLink key={link.route} link={link} />

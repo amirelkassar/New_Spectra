@@ -4,12 +4,15 @@ import DeleteIcon from "@/assets/icons/delete";
 import EditIcon from "@/assets/icons/edit";
 import DeleteButton from "@/components/delete-button";
 import EditButton from "@/components/edit-button";
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
+import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 const ClientsTable = () => {
   const router = useRouter();
+  const locale = useLocale()
   const data = [
     {
       id: 0,
@@ -135,7 +138,7 @@ const ClientsTable = () => {
       router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
     }
     if (item.route === "family") {
-      router.push(ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(item.id));
+      router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
     }
   };
 
@@ -155,8 +158,9 @@ const ClientsTable = () => {
           <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
         </div>
         {data.map((item, index) => (
-          <div
-            onClick={() => handleRouting(item)}
+          <Link
+          href={item.route === "organization"?ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id):ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id)}
+            //onClick={() => handleRouting(item)}
             key={item.id}
             className="contents cursor-pointer group "
           >
@@ -209,7 +213,7 @@ const ClientsTable = () => {
               <EditButton />
               <DeleteButton />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -28,7 +28,7 @@ label {
 }
 
 .default-page {
-  @apply bg-white h-full px-4 lg:px-6 xl:px-12 py-6 rounded-xl flex flex-col gap-y-6;
+  @apply bg-white h-full px-0 md:px-4 lg:px-6 xl:px-12 py-6 rounded-xl flex flex-col gap-y-6;
 }
 .sec-page {
   @apply h-full flex flex-col gap-6;
@@ -70,8 +70,14 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
+html[dir='ltr']  header .hideShowLinks svg {
+  transform: rotateY(180deg);
+}
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
+}
+html[dir='ltr']  header .hideShowLinks.closeArrow svg {
+  transform: rotateY(0deg);
 }
 aside .topMobNav {
   justify-content: space-between;
@@ -103,7 +109,7 @@ header  .hideShowLinks2 svg {
 }
 aside .dropMenuDash li a p{
   font-size: 16px !important;
-  font-weight: 400 !important;
+
 }
 .numNotfication{
   border-radius: 50% !important;
@@ -195,4 +201,13 @@ html[dir='ltr'] .lineAfterLinks{
 }
 .showMore svg{
   @apply w-[15px] 
+}
+.contents{
+  border-bottom: 1px solid;
+}
+.headTitleDash{
+  @apply text-[16px] md:text-[20px] ms-0 md:ms-5
+}
+.BtnheaderRequests svg{
+  @apply md:w-[20px] w-[15px] md:h-[20px] h-[15px] 
 }

@@ -1,9 +1,9 @@
-import RequestsTable from "./requests-table";
+import RequestsTable from "../requests-table";
 
 const RequestsPage = () => {
   return (
     <div className="default-page">
-      <RequestsTable type={'all'}/>
+      <RequestsTable type={'rejected'} />
     </div>
   );
 };

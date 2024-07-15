@@ -12,7 +12,7 @@ const AppoFilteration = () => {
     { name: "جلسات", value: "4" },
   ];
   const [selected, setSelected] = useState(options[0].value);
-console.log(selected);
+
   return (
     <div className="flex items-center gap-4 lg:gap-10 flex-wrap">
       <div className="flex items-center gap-3">

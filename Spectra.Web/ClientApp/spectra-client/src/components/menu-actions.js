@@ -7,6 +7,7 @@ import ExportIcon from "@/assets/icons/export";
 import ImportIcon from "@/assets/icons/import";
 import PrintIcon from "@/assets/icons/print";
 import ReschedulingIcon from "@/assets/icons/rescheduling";
+import ShowIcon from "@/assets/icons/show";
 import StarIcon from "@/assets/icons/start";
 import ThreeDotsIcon from "@/assets/icons/three-dots";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -47,8 +48,8 @@ export default function MenuActions({ id, className,type=1 }) {
   ];
   const options2 = [
     {
-      icon: <DeleteIcon />,
-      name: "مسddح",
+      icon: <ShowIcon />,
+      name: "عرض",
       action: () => {},
     },
     {

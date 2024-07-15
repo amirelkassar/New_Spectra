@@ -12,8 +12,8 @@ const ROUTES = {
     MAIN: "/main",
     APPOINTMENTS: "/appointments",
     REQUESTS: "/requests",
-    REQUESTSNEW: "/requests",
-    REQUESTSOLD: "/requests/old",
+    REQUESTSNEW: "/requests/new",
+    REQUESTSREJECTED: "/requests/rejected",
     CLIENTS: {
       DASHBOARD: "/clients",
       ORGANIZATION: {
