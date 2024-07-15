@@ -117,6 +117,40 @@ html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
 html[dir='ltr'] .lineAfterLinks{
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition
 }
+.mantine-Pagination-control {
+ 
+  color: black;
+  background: #F5F5F5;
+  border: none !important;
+  font-weight: bold;
+  border-radius: 10px !important;
+}
+.mantine-Pagination-control:where([data-active])  {
+ 
+  color: black !important;
+  background: #F5F5F5 !important;
+  border: none;
+  font-weight: bold;
+}
+.paginationBtn{
+  border: 1px solid #010036;
+  transition: 0.4s;
+}
+.paginationBtn{
+  position: relative;
+}
+.paginationBtn svg{
+ 
+  width: 18px;
+  height: 17px;
+ 
+}
+.paginationBtn:hover{
+  box-shadow: 0px 0px 5px #010036;
+} 
+.paginationNext svg{
+  transform: rotateY(180deg);
+}
 @media (max-width: 768px) {
   aside .topMobNav {
     display: flex;
