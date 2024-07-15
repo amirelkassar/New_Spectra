@@ -4,8 +4,9 @@ import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
+
 import ROUTES from "@/routes";
+import { Link } from "@/navigation";
 const LastAppointments = () => {
   
   const data = [

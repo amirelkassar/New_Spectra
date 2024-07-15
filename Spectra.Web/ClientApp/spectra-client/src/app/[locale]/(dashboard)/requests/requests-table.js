@@ -2,9 +2,10 @@
 import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import MenuActions from "@/components/menu-actions";
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 

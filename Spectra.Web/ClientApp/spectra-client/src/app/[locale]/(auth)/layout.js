@@ -1,7 +1,8 @@
-import Link from "next/link";
+
 import Logo from "@/assets/icons/logo";
 import ROUTES from "@/routes";
 import LeftSide from "./left-side";
+import { Link } from "@/navigation";
 
 export default function authLayout({ children }) {
   return (

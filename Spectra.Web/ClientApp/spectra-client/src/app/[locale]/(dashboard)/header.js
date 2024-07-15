@@ -3,7 +3,8 @@ import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
 import NotificationIcon from "@/assets/icons/notification";
 import SearchIcon from "@/assets/icons/search";
-import Link from "next/link";
+import { Link } from "@/navigation";
+
 import { useState } from "react";
 
 const DashboardHeader = () => {

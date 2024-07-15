@@ -4,7 +4,7 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Collapse, Box } from "@mantine/core";
@@ -20,6 +20,7 @@ import Logo from "@/assets/icons/logo";
 import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
+import { Link } from "@/navigation";
 
 const Aside = ({ close }) => {
   const [opened, { toggle }] = useDisclosure(false);

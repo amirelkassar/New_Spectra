@@ -1,41 +1,26 @@
 "use client";
 
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import Link from "next/link";
+
 import { useParams, usePathname } from "next/navigation";
 
-const OrgAside = () => {
+const FamilyAside = () => {
   const params = useParams();
   const path = usePathname();
 
   const pages = [
     {
-      name: "بيانات المنظمة",
-      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(params.orgId),
-      isActive:
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(params.orgId),
-    },
-    {
-      name: "موظفين المنظمة",
-      route: "",
-      isActive: false,
-    },
-    {
-      name: "عملاء المنظمة",
-      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.orgId),
-      isActive:
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.orgId),
-    },
-    {
-      name: "اطباء المنظمة",
-      route: "",
-      isActive: false,
+      name: "بيانات عائلة الطفل",
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
+      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
     },
     {
       name: "المواعيد",
-      route: "",
-      isActive: false,
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
+      isActive:
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
     },
     {
       name: "الوصفات الطبية",
@@ -43,12 +28,12 @@ const OrgAside = () => {
       isActive: false,
     },
     {
-      name: "المرضى/الاطفال",
-      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
-      isActive:
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
+      name: "المرضى / الاطفال",
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId),
+      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId),
     },
   ];
+
   return (
     <div className="w-56 shrink-0 bg-white rounded-xl pt-8 ps-12 pe-6">
       <ul className="grid grid-cols-1 items-center gap-5">
@@ -72,4 +57,4 @@ const OrgAside = () => {
   );
 };
 
-export default OrgAside;
+export default FamilyAside;

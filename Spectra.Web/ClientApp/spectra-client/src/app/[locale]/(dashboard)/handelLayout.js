@@ -1,17 +1,19 @@
 "use client"
 import ArrowNav from "@/assets/icons/arrow-nav";
 import Aside from "./aside";
-import Link from "next/link";
+
 import Logo from "@/assets/icons/logo";
 import SearchIcon from "@/assets/icons/search";
 import NotificationIcon from "@/assets/icons/notification";
 import { useState } from "react";
 import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
+import { Link, usePathname } from "@/navigation";
 
 export default function HandelDashboardLayout({ Children }) {
-
+  const pathname = usePathname();
   const menue = useMenu();
+  console.log(pathname);
   console.log(menue.menueOpen);
   return (
     <>

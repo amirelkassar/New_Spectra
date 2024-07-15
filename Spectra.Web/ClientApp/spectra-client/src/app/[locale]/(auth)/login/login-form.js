@@ -3,8 +3,9 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import PasswordInput from "@/components/password-input";
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import Link from "next/link";
+
 import { useState } from "react";
 
 const LoginForm = () => {
