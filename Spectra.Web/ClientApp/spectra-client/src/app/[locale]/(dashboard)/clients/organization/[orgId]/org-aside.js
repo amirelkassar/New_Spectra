@@ -31,7 +31,7 @@ const OrgAside = () => {
     {
       name: "اطباء المنظمة",
       route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.DOCTORS(params.orgId),
-      isActive:  path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.DOCTORS(params.orgId),
+      isActive:  path.includes('/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.DOCTORS(params.orgId)),
     },
     {
       name: "المواعيد",
