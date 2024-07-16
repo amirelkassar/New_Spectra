@@ -6,6 +6,9 @@ import docrotImg from "@/assets/images/placeholder-person.png";
 import StarWhiteIcon from "@/assets/icons/starWhite";
 import BriefIcon from "@/assets/icons/brief";
 import QualificationsIcon from "@/assets/icons/qualifications";
+import DaqeqaIcon from "@/assets/icons/daqeqa";
+import { Link } from "@/navigation";
+import ArrowLeft from "@/assets/icons/arrow-left";
 function DoctorDEtails() {
   const data = {
     name: "احمد محمد كمال",
@@ -92,11 +95,9 @@ function DoctorDEtails() {
            </div>
           </div>
           <div className="flex items-start gap-5">
-           <BriefIcon className={'min-w-[25px] h-auto'}/>
+           <DaqeqaIcon className={'min-w-[25px] h-auto'}/>
            <div>
-           <h2 className="text-[14px] md:text-[20px] font-bold">
-            التخصصات الدقيقة
-          </h2>
+           <h3 className=" text-[14px] lg:text-[16px] font-bold mb-0"> التخصصات الدقيقة</h3>
           <div className="max-w-[850px] mt-4 flex flex-wrap gap-x-2 gap-y-2">
             {data.daqeqa.map((item, index) => (
               <div
@@ -111,6 +112,15 @@ function DoctorDEtails() {
           </div>
          
 
+        </div>
+      </div>
+      <div className="w-[100%]">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <h2>اراء المرضى</h2>
+          <Link href={'#'} className="h-[54px] flex items-center gap-4 justify-between px-[34px] border py-3 rounded-[10px] border-solid w-[300px] border-[#939393]">
+          <p className=" text-[14px] font-bold md:text-[20px] flex-1 text-center">عرض المزيد</p>
+          <ArrowLeft/>
+          </Link>
         </div>
       </div>
     </div>
