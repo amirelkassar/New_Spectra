@@ -73,7 +73,7 @@ export default function MenuActions({ id, className, type = 1, path }) {
   ];
   return (
     <Menu as={"div"} className={className}>
-      <MenuButton className={"p-1"}>
+      <MenuButton className={"md:p-1"}>
         <ThreeDotsIcon />
       </MenuButton>
       <MenuItems
