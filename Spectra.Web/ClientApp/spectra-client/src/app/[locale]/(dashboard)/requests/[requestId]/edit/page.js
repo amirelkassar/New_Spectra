@@ -43,17 +43,16 @@ const EditPage = ({ params: { requestId } }) => {
       }, 0);
     }
   };
-
   return (
     <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
-      <div className="max-w-[700px] w-[100%] flex flex-col gap-2">
+      <div className="max-w-[700px] w-[100%] flex flex-col gap-2 px-1 md:px-0">
         <input
           value={Data.name}
           onChange={(e) => {
             setData({ ...Data, name: e.target.value });
           }}
           className={
-            "mb-0 outline-none py-2 px-4 h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
+            "mb-0 outline-none py-2 px-4 h-[38px] md:h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
           }
         />
         <input
@@ -62,7 +61,7 @@ const EditPage = ({ params: { requestId } }) => {
             setData({ ...Data, spec: e.target.value });
           }}
           className={
-            "mb-0 outline-none py-2 px-4 h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
+            "mb-0 outline-none py-2 px-4 h-[38px] md:h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
           }
         />
         <textarea
@@ -118,7 +117,7 @@ const EditPage = ({ params: { requestId } }) => {
         <Button
          
           className={
-            "!py-0 text-[14px] md:text-[20px] min-w-[200px] max-w-[260px] flex-1 !px-5 font-bold items-center  flex items-center bg-[#10B0C1] justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+            "!py-0 text-[14px] md:text-[20px]  min-w-[200px] max-w-[100%] md:max-w-[260px] flex-1 !px-5 font-bold items-center  flex items-center bg-[#10B0C1] justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
           }
         >
           <SaveIcon />
