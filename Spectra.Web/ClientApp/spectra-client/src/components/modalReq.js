@@ -8,7 +8,6 @@ import Button from './button';
 
 function ModalReq({state,id}) {
     const {modalOneOpen,setModalOneOpen} = useMenu();
-console.log(modalOneOpen);
   return (
     <Modal opened={modalOneOpen} size={'lg'}  withCloseButton={false} centered onClose={()=>{setModalOneOpen(false)}} className='modelReq' >
   <div className='mainModal'>

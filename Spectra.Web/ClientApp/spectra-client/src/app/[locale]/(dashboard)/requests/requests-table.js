@@ -13,13 +13,11 @@ import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 const RequestsTable = ({ type }) => {
   const path = usePathname();
-  console.log(type);
-  const router = useRouter();
   const [selected, setSelected] = useState([]);
   const toggleRow = (id) => {
     setSelected((prev) =>

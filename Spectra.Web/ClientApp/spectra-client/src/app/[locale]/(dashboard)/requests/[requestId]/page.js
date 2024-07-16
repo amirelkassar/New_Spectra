@@ -9,7 +9,6 @@ import useMenu from "@/store/auth/signup/menu-store";
 import React, { useState } from "react";
 
 const RequestDetailsPage = ({params:{requestId}}) => {
-  console.log(requestId);
   const data = {
     name: "احمد محمد كمال",
     spec: ["طبيب"],
@@ -31,7 +30,6 @@ const RequestDetailsPage = ({params:{requestId}}) => {
   const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
   const {modalOneOpen,setModalOneOpen} = useMenu();
   const [State,setState] = useState('accept');
-console.log(modalOneOpen);
   return (
     <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
       <div >

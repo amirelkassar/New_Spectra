@@ -10,9 +10,10 @@ import ReschedulingIcon from "@/assets/icons/rescheduling";
 import ShowIcon from "@/assets/icons/show";
 import StarIcon from "@/assets/icons/start";
 import ThreeDotsIcon from "@/assets/icons/three-dots";
+import { Link } from "@/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-export default function MenuActions({ id, className,type=1 }) {
+export default function MenuActions({ id, className, type = 1, path }) {
   const options = [
     {
       icon: <DeleteIcon />,
@@ -25,7 +26,7 @@ export default function MenuActions({ id, className,type=1 }) {
       action: () => {},
     },
     {
-      icon: <StarIcon/>,
+      icon: <StarIcon />,
       name: " تقييم",
       action: () => {},
     },
@@ -51,6 +52,7 @@ export default function MenuActions({ id, className,type=1 }) {
       icon: <ShowIcon />,
       name: "عرض",
       action: () => {},
+      path: path,
     },
     {
       icon: <EditIcon />,
@@ -79,31 +81,39 @@ export default function MenuActions({ id, className,type=1 }) {
         anchor="bottom end"
         className="w-52 shadow-[3px_4px_4px_rgba(0,_0,_0,_0.08)] origin-top-right rounded-xl border border-white bg-white p-1 text-sm/6  transition duration-100 ease-out  data-[closed]:scale-95 data-[closed]:opacity-0"
       >
-        {
-          type===1 ? options.map((option, index) => (
-            <MenuItem key={option.name}>
-              <button
-                onClick={option.action}
-                className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
-              >
-                {option.icon}
-                {option.name}
-              </button>
-            </MenuItem>
-          )):
-          options2.map((option, index) => (
-            <MenuItem key={option.name}>
-              <button
-                onClick={option.action}
-                className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
-              >
-                {option.icon}
-                {option.name}
-              </button>
-            </MenuItem>
-          ))
-        }
-       
+        {type === 1
+          ? options.map((option, index) => (
+              <MenuItem key={option.name}>
+                <button
+                  onClick={option.action}
+                  className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
+                >
+                  {option.icon}
+                  {option.name}
+                </button>
+              </MenuItem>
+            ))
+          : options2.map((option, index) => (
+              <MenuItem key={option.name}>
+                {option.path ? (
+                  <Link
+                    href={option.path + "/" + id}
+                    className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
+                  >
+                    {option.icon}
+                    {option.name}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={option.action}
+                    className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
+                  >
+                    {option.icon}
+                    {option.name}
+                  </button>
+                )}
+              </MenuItem>
+            ))}
       </MenuItems>
     </Menu>
   );
