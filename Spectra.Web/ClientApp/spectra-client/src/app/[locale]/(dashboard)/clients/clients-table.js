@@ -141,21 +141,21 @@ const ClientsTable = () => {
       router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
     }
   };
-
+  
   return (
-    <div className="grow max-h-[calc(100vh-325px)] overflow-auto ">
-      <div className="grid grid-cols-[repeat(5,auto),1fr] text-center gap-y-1">
+    <div className="grow max-h-[calc(100vh-325px)] overflow-auto min-h-[600px]">
+      <div className="grid grid-cols-[repeat(5,minmax(80px,1fr))] lg:grid-cols-[repeat(5,auto),1fr] text-center gap-y-1">
         <div className="contents ">
-          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0">
+          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">
             الاسم
           </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">
             عدد الاطفال
           </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">الايميل</div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">اخر دخول</div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">نوع العميل</div>
-          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]  hidden lg:block">الايميل</div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">اخر دخول</div>
+          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">نوع العميل</div>
+          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px] me-6"></div>
         </div>
         {data.map((item, index) => (
           <Link
@@ -166,7 +166,7 @@ const ClientsTable = () => {
           >
             <div
               className={clsx(
-                "py-5 ms-8 font-bold",
+                " py-2 lg:py-5 lg:text-[16px] text-[12px] ms-0 lg:ms-8 font-bold",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -174,7 +174,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -182,7 +182,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10  hidden lg:block",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -190,7 +190,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -198,7 +198,7 @@ const ClientsTable = () => {
             </div>{" "}
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -206,7 +206,7 @@ const ClientsTable = () => {
             </div>
             <div
               className={clsx(
-                "py-3 px-10 me-14 flex items-center gap-3 content-end",
+                "py-3 px-3 lg:px-10 me-14 flex items-center gap-3 content-end",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >

@@ -83,19 +83,19 @@ const OrganizationClientsPage = () => {
   return (
     <section className="default-page grow">
       <div className="flex items-center justify-between">
-        <h2>عملاء المنظمة</h2>
+        <h2 className=" lg:block hidden text-[20px]">عملاء المنظمة</h2>
         <MenuActions />
       </div>
-      <div className="grid grid-cols-[repeat(3,auto),1fr] text-center gap-y-1 max-h-[calc(100vh-260px)] overflow-auto">
+      <div className="grid grid-cols-[repeat(4,minmax(120px,1fr))] md:grid-cols-[repeat(4,minmax(max-content,1fr))] text-center gap-y-1 max-h-[calc(100vh-260px)] w-full overflow-auto">
         <div className="contents ">
-          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0">
+          <div className="bg-blueLight text-nowrap rounded-s-xl py-3 pe-10 ps-8 sticky top-0">
             الاسم
           </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">
+          <div className="bg-blueLight text-nowrap py-3 px-10 sticky top-0">
             عدد الاطفال
           </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0">اخر دخول</div>
-          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
+          <div className="bg-blueLight text-nowrap py-3 px-10 sticky top-0">اخر دخول</div>
+          <div className="bg-blueLight text-nowrap rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
         </div>
         {data.map((item, index) => (
           <div
@@ -113,7 +113,7 @@ const OrganizationClientsPage = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                "py-5 px-10 ",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -121,7 +121,7 @@ const OrganizationClientsPage = () => {
             </div>
             <div
               className={clsx(
-                "py-5 px-10 font-bold",
+                "py-5 px-10 ",
                 index === data.length - 1 ? "" : "border-b border-b-grayMedium"
               )}
             >
@@ -129,12 +129,12 @@ const OrganizationClientsPage = () => {
             </div>{" "}
             <div
               className={clsx(
-                "py-3 px-10 me-14 flex items-center gap-3 content-end justify-end",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
+                "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 md:px-10 justify-center items-center",
+                index !== data.length - 1 && "border-b border-grayMedium"
               )}
             >
-              <EditButton />
-              <DeleteButton />
+              
+              <MenuActions />
             </div>
           </div>
         ))}

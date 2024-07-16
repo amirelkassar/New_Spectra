@@ -4,7 +4,7 @@ import Image from "next/image";
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import MenuActions from "@/components/menu-actions";
 
-const ClientAppointments = () => {
+const DoctorsOrg = () => {
   const data = [
     {
       id: 0,
@@ -152,4 +152,4 @@ const ClientAppointments = () => {
   );
 };
 
-export default ClientAppointments;
+export default DoctorsOrg;
