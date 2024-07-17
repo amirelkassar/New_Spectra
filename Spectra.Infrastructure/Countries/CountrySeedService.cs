@@ -31,6 +31,19 @@ namespace Spectra.Infrastructure.Countries
             throw new NotImplementedException();
         }
 
+        public async Task SeedCitiesAsync()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while seeding countries");
+                throw;
+            }
+        }
+
         public async Task SeedCountriesAsync()
         {
             try
@@ -63,13 +76,30 @@ namespace Spectra.Infrastructure.Countries
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error while seeding countries");
+
                 throw;
             }           
         }
 
-        public Task SeedStatesAsync(string countryId)
+        public async Task SeedStatesAsync(string countryId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task SeedStatesAsync()
+        {
+            try
+            {
+                if (true)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while seeding states");
+                throw;
+            }
         }
     }
 }

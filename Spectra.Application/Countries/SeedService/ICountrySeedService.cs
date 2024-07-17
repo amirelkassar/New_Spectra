@@ -11,6 +11,8 @@ namespace Spectra.Application.Countries.SeedService
         Task SeedCountriesAsync();
         Task SeedStatesAsync(string countryId);
         Task SeedCitiesAsync(string stateId);
+        Task SeedCitiesAsync();
+        Task SeedStatesAsync();
 
     }
 }
