@@ -34,10 +34,6 @@ namespace Spectra.Infrastructure.Countries
             _cityRepository = cityRepository;
             _countriesNowOptions = countriesNowOptions.Value;
         }
-        public Task SeedCitiesAsync(string stateId)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task SeedCitiesAsync()
         {
@@ -89,17 +85,32 @@ namespace Spectra.Infrastructure.Countries
             }           
         }
 
-        public async Task SeedStatesAsync(string countryId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task SeedStatesAsync()
         {
             try
             {
-                if (! await _stateRepository.any)
+                if (! await _stateRepository.AnyAsync())
                 {
+                    var httpResponse = await _httpClient
+                       .GetAsync(_countriesNowOptions.ApiBaseUrl + "countries/states");
+
+                    if (httpResponse.IsSuccessStatusCode) 
+                    {
+                        var statesData = await httpResponse.Content.ReadFromJsonAsync<StateApiResponse>();
+                        if (statesData is not null && statesData.Data is not null)
+                        {
+                            var countries=await _countryRepository.GetAllAsync();
+                            var countriesWithStates = statesData.Data;
+                            foreach (var countryWithState in countriesWithStates) 
+                            {
+                                var targetCountry = countries.First(c => c.EnName.Equals(countryWithState.Name,StringComparison.OrdinalIgnoreCase));
+                                await _stateRepository.AddManyAsync(countryWithState.States.Select(s => new State(s.state_code, targetCountry.Id)
+                                {
+                                    EnName = s.Name
+                                }).ToArray());
+                            }
+                        }
+                    }
 
                 }
             }

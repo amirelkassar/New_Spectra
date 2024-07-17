@@ -9,8 +9,6 @@ namespace Spectra.Application.Countries.SeedService
     public interface ICountrySeedService
     {
         Task SeedCountriesAsync();
-        Task SeedStatesAsync(string countryId);
-        Task SeedCitiesAsync(string stateId);
         Task SeedCitiesAsync();
         Task SeedStatesAsync();
 
