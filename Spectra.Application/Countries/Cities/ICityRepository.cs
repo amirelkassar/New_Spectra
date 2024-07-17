@@ -1,4 +1,5 @@
 ﻿using Spectra.Domain.Countries.Cities;
+using Spectra.Domain.Countries.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace Spectra.Application.Countries.Cities
         Task<City> GetByIdAsync(string id);
         Task AddAsync(City city);
         Task<bool> ExistsAsync(string id);
+        Task AddManyAsync(params City[] states);
     }
 }
