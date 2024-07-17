@@ -1,3 +1,6 @@
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import "./globals.css";
 import clsx from "clsx";
 import localFont from "next/font/local";
