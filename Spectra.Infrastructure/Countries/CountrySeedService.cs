@@ -99,15 +99,15 @@ namespace Spectra.Infrastructure.Countries
                         var statesData = await httpResponse.Content.ReadFromJsonAsync<StateApiResponse>();
                         if (statesData is not null && statesData.Data is not null)
                         {
-                            var countries=await _countryRepository.GetAllAsync();
-                            var countriesWithStates = statesData.Data;
-                            foreach (var countryWithState in countriesWithStates) 
+                            foreach (var country in statesData.Data) 
                             {
-                                var targetCountry = countries.First(c => c.EnName.Equals(countryWithState.Name,StringComparison.OrdinalIgnoreCase));
-                                await _stateRepository.AddManyAsync(countryWithState.States.Select(s => new State(s.state_code, targetCountry.Id)
+                                var states = country.States.Select(s => new State(Ulid.NewUlid().ToString(),s.state_code, country.Iso2)
                                 {
                                     EnName = s.Name
-                                }).ToArray());
+                                }).ToArray();
+
+                                if(states != null && states.Length>0)
+                                await _stateRepository.AddManyAsync(states);
                             }
                         }
                     }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Clients;
 using Spectra.Application.Countries;
+using Spectra.Application.Countries.Cities;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Countries.States;
 using Spectra.Application.Documents;
@@ -10,6 +11,7 @@ using Spectra.Application.Patients;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Countries;
+using Spectra.Infrastructure.Countries.Cities;
 using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Documents;
@@ -57,6 +59,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
             return services;
         }
 

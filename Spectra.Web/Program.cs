@@ -32,6 +32,7 @@ using (var scope = app.Services.CreateScope())
 {
 	var seedService = scope.ServiceProvider.GetRequiredService<ICountrySeedService>();
     await seedService.SeedCountriesAsync();
+    await seedService.SeedStatesAsync();
 }
 
 
