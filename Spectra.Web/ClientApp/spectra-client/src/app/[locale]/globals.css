@@ -242,3 +242,17 @@ max-width: 100%;
 .opinions .swiper-slide-active{
   opacity: 1;
 }
+
+/*clientEdit*/
+form.clientEdit label{
+  @apply text-[16px] font-normal  px-4 mb-1
+}
+
+form.clientEdit .mantine-Input-input{
+  @apply h-[48px]  border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold rounded-[10px];
+
+
+} 
+.clientEdit .mantine-Select-wrapper{
+  border: none !important;
+}

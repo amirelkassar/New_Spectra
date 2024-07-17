@@ -18,6 +18,7 @@ const ROUTES = {
       DASHBOARD: "/clients",
       ORGANIZATION: {
         DETAILS: (id) => `/clients/organization/${id}/details`,
+        DETAILSEDIT: (id) => `/clients/organization/${id}/details/edit`,
         EMPLOYEE: (id) => `/clients/organization/${id}/employee`,
         CLIENTS: (id) => `/clients/organization/${id}/clients`,
         DOCTORS: (id) => `/clients/organization/${id}/doctors`,
@@ -28,6 +29,7 @@ const ROUTES = {
       },
       FAMILY: {
         DETAILS: (id) => `/clients/family/${id}/details`,
+        DETAILSEDIT: (id) => `/clients/family/${id}/details/edit`,
         APPOINTMENTS: (id) => `/clients/family/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/clients/family/${id}/prescriptions`,
         PATIENTS: (id) => `/clients/family/${id}/patients`,

@@ -72,6 +72,7 @@ console.log(params);
       star: 3,
     },
     {
+      id:6,
       name: "عبدالله الشيخ",
       kinshipName: "عائلة طفل",
       doctor: "احمد محمد كمال",

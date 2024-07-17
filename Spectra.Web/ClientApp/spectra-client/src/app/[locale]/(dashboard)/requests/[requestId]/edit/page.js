@@ -104,7 +104,7 @@ const EditPage = ({ params: { requestId } }) => {
         {addMore ? (
           <form onSubmit={(e)=>{e.preventDefault(); console.log(valueDaqeqa);setValueDaqeqa('');setAddMore(false) }}>
             <input
-            className="h-[46px] rounded-[10px] px-2 py-1 w-[200px] border border-[#CFD0D7] outline-none"
+            className="h-[34px] text-[14px] md:text-[16px] font-bold md:h-[46px] rounded-[10px] px-2 py-1 w-[150px] md:w-[200px] border border-[#CFD0D7] outline-none"
              value={valueDaqeqa}
               onChange={(e) => {
                 setValueDaqeqa(e.target.value)
