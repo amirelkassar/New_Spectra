@@ -6,6 +6,8 @@ using Spectra.Domain.Countries.States;
 using Spectra.Domain.Countries;
 using Spectra.Domain.Shared.OptionDtos;
 using System.Net.Http.Json;
+using Spectra.Application.Countries.States;
+using Spectra.Application.Countries.Cities;
 
 
 namespace Spectra.Infrastructure.Countries
@@ -15,15 +17,21 @@ namespace Spectra.Infrastructure.Countries
         private readonly ILogger<CountrySeedService> _logger;
         private readonly HttpClient _httpClient;
         private readonly ICountryRepository _countryRepository;
+        private readonly IStateRepository _stateRepository;
+        private readonly ICityRepository _cityRepository;
         private readonly CountriesNow _countriesNowOptions;
         public CountrySeedService(ILogger<CountrySeedService> logger,
             HttpClient httpClient,
             ICountryRepository countryRepository,
+            IStateRepository stateRepository,
+            ICityRepository cityRepository,
             IOptions<CountriesNow> countriesNowOptions)
         {
             _logger = logger;
             _httpClient = httpClient;
             _countryRepository = countryRepository;
+            _stateRepository = stateRepository;
+            _cityRepository = cityRepository;
             _countriesNowOptions = countriesNowOptions.Value;
         }
         public Task SeedCitiesAsync(string stateId)
@@ -90,7 +98,7 @@ namespace Spectra.Infrastructure.Countries
         {
             try
             {
-                if (true)
+                if (! await _stateRepository.any)
                 {
 
                 }

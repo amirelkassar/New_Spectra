@@ -14,5 +14,6 @@ namespace Spectra.Application.Countries.States
         Task AddAsync(State state);
         Task AddManyAsync(params State[] states);
         Task<bool> ExistsAsync(string id);
+        Task<bool> AnyAsync();
     }
 }

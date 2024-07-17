@@ -22,6 +22,12 @@ namespace Spectra.Infrastructure.Countries.States
             await _states.InsertManyAsync(states);
         }
 
+        public async Task<bool> AnyAsync()
+        {
+            var count = await _states.CountDocumentsAsync(_ => true);
+            return count > 0;
+        }
+
         public async Task<bool> ExistsAsync(string id)
         {
             var count = await _states.FindAsync(c => c.Id == id);

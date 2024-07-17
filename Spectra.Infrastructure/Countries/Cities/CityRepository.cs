@@ -37,5 +37,10 @@ namespace Spectra.Infrastructure.Countries.Cities
         {
             return await _cities.Find(c=>c.StateId == stateId).ToListAsync();
         }
+        public async Task<bool> AnyAsync()
+        {
+            var count = await _cities.CountDocumentsAsync(_ => true);
+            return count > 0;
+        }
     }
 }
