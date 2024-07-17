@@ -8,10 +8,12 @@ using Spectra.Application.Documents;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Patients;
 using Spectra.Domain.Shared.OptionDtos;
+using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Countries;
 using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
-using Spectra.Infrastructure.Repositories;
+using Spectra.Infrastructure.Documents;
+using Spectra.Infrastructure.Patients;
 
 namespace Spectra.Infrastructure
 {
