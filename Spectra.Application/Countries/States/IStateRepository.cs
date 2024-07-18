@@ -9,6 +9,7 @@ namespace Spectra.Application.Countries.States
 {
     public interface IStateRepository
     {
+        Task<IEnumerable<State>> GetListAsync();
         Task<IEnumerable<State>> GetByCountryIdAsync(string countryId);
         Task<State> GetByIdAsync(string id);
         Task AddAsync(State state);

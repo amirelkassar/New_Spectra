@@ -14,7 +14,7 @@ namespace Spectra.Domain.Countries.Cities
             ArgumentNullException.ThrowIfNull(nameof(stateId));
             StateId = stateId;
         }
-        public string StateId { get; }
+        public string StateId { get;private set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
     }

@@ -18,7 +18,7 @@ namespace Spectra.Domain.Shared.Common
             ArgumentNullException.ThrowIfNull(id);
         }
 
-        public TKey Id { get; }
+        public TKey Id { get; protected set; }
 
         private readonly List<BaseEvent> _domainEvents = [];
 

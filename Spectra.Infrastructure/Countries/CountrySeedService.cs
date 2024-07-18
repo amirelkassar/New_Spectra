@@ -8,6 +8,7 @@ using Spectra.Domain.Shared.OptionDtos;
 using System.Net.Http.Json;
 using Spectra.Application.Countries.States;
 using Spectra.Application.Countries.Cities;
+using Spectra.Domain.Countries.Cities;
 
 
 namespace Spectra.Infrastructure.Countries
@@ -39,11 +40,36 @@ namespace Spectra.Infrastructure.Countries
         {
             try
             {
+                if (!await _cityRepository.AnyAsync())
+                {
+                    var states = await _stateRepository.GetListAsync();
+                    foreach (var state in states)
+                    {
+                        var httpResponse = await _httpClient
+                            .PostAsJsonAsync(_countriesNowOptions.ApiBaseUrl + "countries/state/cities", new CityApiRequestBody
+                            {
+                                Country = state.Country,
+                                State = state.EnName
+                            });
 
+                        if (httpResponse.IsSuccessStatusCode)
+                        {
+                            var citiesData = await httpResponse.Content.ReadFromJsonAsync<CityApiResponse>();
+                            var cities = citiesData.Data.Select(c => new City(Ulid.NewUlid().ToString(), state.Id)
+                            {
+                                EnName = c
+                            }).ToArray();
+
+                            if (cities is not null && cities.Length > 0)
+                                await _cityRepository.AddManyAsync(cities);
+                        }
+                    }
+
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while seeding countries");
+                _logger.LogError(ex, "Error while seeding cities");
                 throw;
             }
         }
@@ -75,39 +101,39 @@ namespace Spectra.Infrastructure.Countries
                     var stringContent = await httpResponse.Content.ReadAsStringAsync();
                     throw new Exception(stringContent);
                 }
-               
+
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error while seeding countries");
 
                 throw;
-            }           
+            }
         }
 
         public async Task SeedStatesAsync()
         {
             try
             {
-                if (! await _stateRepository.AnyAsync())
+                if (!await _stateRepository.AnyAsync())
                 {
                     var httpResponse = await _httpClient
                        .GetAsync(_countriesNowOptions.ApiBaseUrl + "countries/states");
 
-                    if (httpResponse.IsSuccessStatusCode) 
+                    if (httpResponse.IsSuccessStatusCode)
                     {
                         var statesData = await httpResponse.Content.ReadFromJsonAsync<StateApiResponse>();
                         if (statesData is not null && statesData.Data is not null)
                         {
-                            foreach (var country in statesData.Data) 
+                            foreach (var country in statesData.Data)
                             {
-                                var states = country.States.Select(s => new State(Ulid.NewUlid().ToString(),s.state_code, country.Iso2)
+                                var states = country.States.Select(s => new State(Ulid.NewUlid().ToString(), s.state_code, country.Iso2, country.Name)
                                 {
                                     EnName = s.Name
                                 }).ToArray();
 
-                                if(states != null && states.Length>0)
-                                await _stateRepository.AddManyAsync(states);
+                                if (states != null && states.Length > 0)
+                                    await _stateRepository.AddManyAsync(states);
                             }
                         }
                     }
