@@ -10,6 +10,7 @@ import Button from "@/components/button";
 import Checkbox from "@/components/checkbox";
 import MenuActions from "@/components/menu-actions";
 import ModalReq from "@/components/modalReq";
+import TableComponents from "@/components/table-comp";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import useMenu from "@/store/auth/signup/menu-store";
@@ -255,128 +256,8 @@ const RequestsTable = ({ type }) => {
           })}
         </div>
       </div>
-      <div className="mdl:max-h-[calc(100vh-280px)] overflow-auto grid  grid-cols-[36px,repeat(4,1fr)]    mdl:grid-cols-[22px,repeat(4,1fr)]  mdl:text-center mdl:gap-y-1">
-        <div className=" contents ">
-          <div className="bg-blueLight text-center rounded-s-xl w-full flex items-center justify-center sticky top-0"></div>
-          <div className="bg-blueLight  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[98px]">
-            الاسم
-          </div>
-          <div className="bg-blueLight py-3 px-3 xl:px-10 sticky top-0 text-nowrap text-[12px] md:text-[16px]">
-            نوع العميل
-          </div>{" "}
-          <div className="bg-blueLight py-3 px-3 xl:px-10 sticky top-0 text-nowrap text-[12px] md:text-[16px]">
-            تاريخ الطلب
-          </div>
-          <div
-            className="bg-blueLight py-3 px-3
-           xl:px-10 sticky top-0 rounded-e-xl me-6 xl:me-12"
-          ></div>
-        </div>
-        {data.map((item, index) => (
-          <div key={item.id} className="contents ">
-            <div
-              className={clsx(
-                "mb-0 mdl:mb-0 row-span-1 col-span-1  mx-auto  flex items-center w-full justify-center transition text-[12px] md:text-[16px] ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium",
-                selected.includes(item.id) ? "bg-grayLight" : "bg-transparent"
-              )}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Checkbox
-                id={item.id}
-                checked={selected.includes(item.id)}
-                onChange={() => toggleRow(item.id)}
-                className=" bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]"
-              />
-            </div>{" "}
-            <div
-              className={clsx(
-                " items-center block gap-3 row-span-1 col-span-1 mdl:py-3 py-1  content-center  transition text-[12px] md:text-[16px]",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium",
-                selected.includes(item.id) ? "bg-grayLight" : "bg-transparent"
-              )}
-            >
-              <strong className="text-sm mdl:text-base">{item.name}</strong>
-            </div>
-            <div
-              className={clsx(
-                " items-center text-center block gap-3 row-span-1 col-span-1 mdl:py-3 py-1 mdl:px-3 xl:px-10 content-center transition text-[12px] md:text-[16px]",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium",
-                selected.includes(item.id) ? "bg-grayLight" : "bg-transparent"
-              )}
-            >
-              {" "}
-              <p>{item.job}</p>
-            </div>{" "}
-            <div
-              className={clsx(
-                "mb-0 mdl:mb-0 text-center  items-center block gap-3 row-span-1 col-span-1 mdl:py-3 py-1 mdl:px-3 xl:px-10  content-center  transition text-[12px] md:text-[16px]",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium",
-                selected.includes(item.id) ? "bg-grayLight" : "bg-transparent"
-              )}
-            >
-              {" "}
-              <p> {item.date}</p>
-            </div>
-            <div
-              className={clsx(
-                " flex  py-3 ps-4 pe-2 xl:ps-10 me-7 xl:me-12 content-center  items-center gap-5 justify-end transition",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium",
-                selected.includes(item.id) ? "bg-grayLight" : "bg-transparent"
-              )}
-            >
-              {selected.length > 0 ? (
-                <>
-                  <MenuActions
-                    type={2}
-                    path={ROUTES.ADMIN.REQUESTS}
-                    id={item.id}
-                  />
-                </>
-              ) : (
-                <>
-                  {type === "rejected" ? (
-                    <Button
-                      className={
-                        "  !py-0 !px-5 font-bold items-center hidden lg:flex items-center  justify-center h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
-                      }
-                    >
-                      <RecoveryIcon />
-                      استعادة
-                    </Button>
-                  ) : (
-                    <Button
-                    onClick={()=>{setState('accept');setModalOneOpen(true)}}
-                      className={
-                        "!py-0 !px-5 font-bold items-center hidden lg:flex items-center bg-[#10B0C1] justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
-                      }
-                    >
-                      <AcceptIcon />
-                      قبول
-                    </Button>
-                  )}
-
-                  <Button
-                    onClick={()=>{setState('req');setModalOneOpen(true)}}
-                    className={
-                      "!py-0 !px-5 hidden lg:flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none "
-                    }
-                  >
-                    <RefuseIcon />
-                    رفض
-                  </Button>
-
-                  <MenuActions
-                    type={2}
-                    path={ROUTES.ADMIN.REQUESTS}
-                    id={item.id}
-                  />
-                </>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <TableComponents data={data} header={['','الاسم',' نوع العميل',"تاريخ الطلب",'']} order={['name','date','job','Req&Res']} selectPage={selected} setSelected={setSelected} type={type} route={ROUTES.ADMIN.REQUESTS}/>
+     
       <ModalReq state={State} GroubId={selected} numItem={selected.length}/>
     </>
   );
