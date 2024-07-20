@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Countries;
 using Spectra.Application.Countries.DTOs;
 using Spectra.Application.Countries.States.DTOs;
 using Spectra.Application.Countries.States.Queries;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/[controller]")]
 	public class CountryController : ControllerBase
 	{

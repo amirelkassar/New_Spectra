@@ -5,10 +5,15 @@
   position: relative;
   top: -4px;
 }
+.navbar-brand{
+    display:flex;
+    height:100%;
+    gap:2rem;
+}
 .navbar-brand > .icon-banner {
-  position: relative;
-  top: -2px;
-  display: inline;
+    position: relative;
+    top: -2px;
+    display: inline;
 }
 .icon {
   position: relative;

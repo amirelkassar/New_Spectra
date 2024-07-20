@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Clients;
 
 namespace Spectra.Application.Clients.Queries
 {
-	public class GetAllClientsQuery : IRequest<IEnumerable<Client>>
+    public class GetAllClientsQuery : IRequest<IEnumerable<Client>>
 	{
 	}
 
