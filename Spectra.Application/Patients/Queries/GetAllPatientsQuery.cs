@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Patients;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients.Queries
 {
-	public class GetAllPatientsQuery : IRequest<IEnumerable<Patient>>
+    public class GetAllPatientsQuery : IRequest<IEnumerable<Patient>>
 	{
 	}
 

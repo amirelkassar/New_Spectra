@@ -1,13 +1,12 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
-using Spectra.Domain.Entities.Documents;
+using Spectra.Domain.Documents;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Spectra.Application.Documents.Queries
 {
-	public class GetAllDocumentsQuery : IRequest<IEnumerable<Document>>
+    public class GetAllDocumentsQuery : IRequest<IEnumerable<Document>>
 	{
 	}
 

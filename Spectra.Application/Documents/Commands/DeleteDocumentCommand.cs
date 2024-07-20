@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Windows.Input;
 
 namespace Spectra.Application.Documents.Commands
 {
-	public class DeleteDocumentCommand : ICommand<Unit>
+    public class DeleteDocumentCommand : ICommand<Unit>
 	{
 		public string Id { get; set; }
 	}

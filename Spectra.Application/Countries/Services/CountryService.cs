@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.DTOs;
 using Spectra.Application.Countries.States.DTOs;
-using Spectra.Application.Interfaces.IServices;
 using Spectra.Application.Countries.States.Queries;
 using Spectra.Application.Countries.Queries;
 using System.Collections.Generic;

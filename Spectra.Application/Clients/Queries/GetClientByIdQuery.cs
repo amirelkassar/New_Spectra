@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Clients;
 
 namespace Spectra.Application.Clients.Queries
 {
-	public class GetClientByIdQuery : IRequest<Client>
+    public class GetClientByIdQuery : IRequest<Client>
 	{
 		public string Id { get; set; }
 	}

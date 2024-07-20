@@ -1,14 +1,13 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Clients;
-using Spectra.Domain.Entities.ValueObjects;
 using Spectra.Domain.Enumeration;
+using Spectra.Domain.ValueObjects;
 using System.Windows.Input;
 
 namespace Spectra.Application.Clients.Commands
 {
-	public class CreateClientCommand : ICommand<string>
+    public class CreateClientCommand : ICommand<string>
 	{
 		public Name Name { get; set; }
 		public string NationalId { get; set; }

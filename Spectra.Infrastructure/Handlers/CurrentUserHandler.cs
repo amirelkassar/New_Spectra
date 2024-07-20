@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Spectra.Application.Interfaces.IServices;
+using Spectra.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
