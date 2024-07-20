@@ -1,18 +1,19 @@
 "use client";
-
 import DeleteIcon from "@/assets/icons/delete";
 import EditIcon from "@/assets/icons/edit";
 import DeleteButton from "@/components/delete-button";
 import EditButton from "@/components/edit-button";
+import TableComponents from "@/components/table-comp";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const ClientsTable = () => {
   const router = useRouter();
-  const locale = useLocale()
+  const locale = useLocale();
   const data = [
     {
       id: 0,
@@ -141,81 +142,33 @@ const ClientsTable = () => {
       router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
     }
   };
-  
+  const [selected, setSelected] = useState([]);
+  const updateRoute = (id) => {
+   return  ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(id)
+  };
+
   return (
     <div className="grow max-h-[calc(100vh-325px)] overflow-auto min-h-[600px]">
-      <div className="grid grid-cols-[repeat(5,minmax(80px,1fr))] lg:grid-cols-[repeat(5,auto),1fr] text-center gap-y-1">
-        <div className="contents ">
-          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">
-            الاسم
-          </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">
-            عدد الاطفال
-          </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]  hidden lg:block">الايميل</div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">اخر دخول</div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">نوع العميل</div>
-          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px] me-6"></div>
-        </div>
-        {data.map((item, index) => (
-          <Link
-          href={item.route === "organization"?ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id):ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id)}
-            //onClick={() => handleRouting(item)}
-            key={item.id}
-            className="contents cursor-pointer group "
-          >
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] ms-0 lg:ms-8 font-bold",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.name}
-            </div>
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.numberOfChildren}
-            </div>
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10  hidden lg:block",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.email}
-            </div>
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.lastLogin}
-            </div>{" "}
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.type}
-            </div>
-            <div
-              className={clsx(
-                "py-3 px-3 lg:px-10 me-14 flex items-center gap-3 content-end",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              <EditButton />
-              <DeleteButton />
-            </div>
-          </Link>
-        ))}
-      </div>
+      <TableComponents
+        data={data}
+        colNum={6}
+        dataLine={1}
+        header={[
+          "الاسم",
+          " عدد الاطفال",
+          "الايميل",
+          "اخر دخول",
+          "نوع العميل",
+          "",
+        ]}
+        order={["name", "numberOfChildren", "email", "lastLogin", "type", ""]}
+        selectPage={selected}
+        setSelected={setSelected}
+        type={2}
+        routeClients={true}
+        route={ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(5)}
+        RouteFun={updateRoute}
+      />
     </div>
   );
 };

@@ -285,3 +285,16 @@ form.clientEdit .mantine-Input-input {
   background-color: var(--main-color);
   border-radius: 50%;
 }
+.btnReqTable svg{
+  @apply hidden lg:block
+}
+.grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
+}
+.grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
+}
+.grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
+}
+

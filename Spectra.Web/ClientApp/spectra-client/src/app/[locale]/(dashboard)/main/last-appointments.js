@@ -1,3 +1,4 @@
+'use client'
 import ArrowLeft from "@/assets/icons/arrow-left";
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import MenuActions from "@/components/menu-actions";
@@ -7,6 +8,8 @@ import Image from "next/image";
 
 import ROUTES from "@/routes";
 import { Link } from "@/navigation";
+import TableComponents from "@/components/table-comp";
+import { useState } from "react";
 const LastAppointments = () => {
   
   const data = [
@@ -95,6 +98,8 @@ const LastAppointments = () => {
       statu: "تمت",
     },
   ];
+  const [selected, setSelected] = useState([]);
+
   return (
     <div className="rounded-xl bg-white p-0 md:p-8 grow">
       <div className="flex items-center justify-between gap-4 flex-wrap mb-[18px]">
@@ -104,75 +109,8 @@ const LastAppointments = () => {
           <ArrowLeft />
         </Link>
       </div>
-      <div className=" max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid grid-cols-[repeat(3,minmax(108px,1fr))] md:grid-cols-[repeat(4,minmax(max-content,1fr))] gap-y-1 w-full ">
-        <div className="contents bg-[#F1FCFF] ">
-          <div className="bg-blueLight  h-[40px] md:h-[48px] rounded-s-xl py-[8px] px-[14px] md:px-[20px] sticky top-0 text-[12px] md:text-[20px]">
-            اسم الطبيب
-          </div>
-          <div className="bg-blueLight  h-[40px] md:h-[48px] py-[8px] px-[14px] md:px-[20px] sticky top-0 text-[12px] md:text-[20px]">
-            اسم المريض{" "}
-          </div>
-          <div className="bg-blueLight  h-[40px] md:h-[48px]  py-[8px] px-[14px] md:px-[20px] hidden md:block md:sticky top-0 text-[12px] md:text-[20px]">
-            الـميعاد
-          </div>
-          <div className="bg-blueLight  h-[40px] md:h-[48px] py-[8px] px-[14px] md:px-[20px] sticky top-0 rounded-e-xl text-[12px] md:text-[20px] me-0 md:me-5">
-            الحالة
-          </div>
-        </div>
-        {data.map((row, index) => (
-          <div key={row.id} className="contents">
-            <div
-              className={clsx(
-                "flex items-center gap-5 py-2 md:py-5 px-3 md:px-10",
-                index !== data.length - 1 && "border-b border-grayMedium"
-              )}
-            >
-              <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
-                <Image src={row.image} alt="Doctor image" />
-              </div>
-              <div>
-                <p className="font-bold text-[12px] md:text-[16px]">
-                  {row.name}
-                </p>
-                <p className="text-[12px] md:text-[16px]">
-                  {row.specialisation}
-                </p>
-              </div>
-            </div>
-            <div
-              className={clsx(
-                "py-2 md:py-5 px-3 md:px-10",
-                index !== data.length - 1 && "border-b border-grayMedium"
-              )}
-            >
-              <p className="font-bold text-[12px] md:text-[16px]">
-                {row.patientName}
-              </p>
-              <p className="text-[12px] md:text-[16px]">
-                {row.patientDiagnosis}
-              </p>
-            </div>
-            <div
-              className={clsx(
-                "py-2 md:py-5 px-3 md:px-10 hidden md:block border-b  border-grayMedium ",
-                index !== data.length - 1 && " "
-              )}
-            >
-              <p className="font-bold text-[12px] md:text-[16px]">{row.date}</p>
-              <p className="text-[12px] md:text-[16px]">{row.time}</p>
-            </div>
-            <div
-              className={clsx(
-                "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 md:px-10 content-center items-start ",
-                index !== data.length - 1 && "border-b border-grayMedium"
-              )}
-            >
-              <Statue statue={row.statu} />
-              <MenuActions />
-            </div>
-          </div>
-        ))}
-      </div>
+      <TableComponents data={data} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
+     
     </div>
   );
 };

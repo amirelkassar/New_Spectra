@@ -13,7 +13,7 @@ import ThreeDotsIcon from "@/assets/icons/three-dots";
 import { Link } from "@/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-export default function MenuActions({ id, className, type = 1, path,pathEdit }) {
+export default function MenuActions({ id, className, type = 1, path,pathEdit ,routeClients}) {
   const options = [
     {
       icon: <DeleteIcon />,
@@ -98,7 +98,7 @@ export default function MenuActions({ id, className, type = 1, path,pathEdit }) 
               <MenuItem key={option.name}>
                 {option.path ? (
                   <Link
-                    href={option.path + "/" + id}
+                    href={routeClients ? option.path:option.path + "/" + id}
                     className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
                   >
                     {option.icon}

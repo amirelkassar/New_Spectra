@@ -256,11 +256,11 @@ const RequestsTable = ({ type }) => {
           })}
         </div>
       </div>
-      <TableComponents data={data} header={['','الاسم',' نوع العميل',"تاريخ الطلب",'']} order={['name','date','job','Req&Res']} selectPage={selected} setSelected={setSelected} type={type} route={ROUTES.ADMIN.REQUESTS}/>
-     
+      <TableComponents colNum={4} setState={setState} hide={false} data={data} dataLine={1} header={['الاسم',' نوع العميل',"تاريخ الطلب",'']} order={['name','date','job','Req&Res']} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS} reqType={type} />
+      
       <ModalReq state={State} GroubId={selected} numItem={selected.length}/>
     </>
   );
 };
 
-export default RequestsTable;
+export default RequestsTable; 
