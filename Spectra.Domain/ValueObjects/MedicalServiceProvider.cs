@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Enumeration;
+using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,19 @@ namespace Spectra.Domain.ValueObjects
         public string? LogoPath { get; set; }
         public PhoneNumber? LandLine { get; set; }
         public string? LegalPermissionNumber { get; set; }
-        public ICollection<Document> Documents { get; set; }
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new NotImplementedException();
+            yield return Name;
+            yield return PhoneNumber;
+            yield return Industry;
+            yield return TaxNumber;
+            yield return EmailAddress;
+            yield return Website;
+            yield return RegistrationNumber;
+            yield return Address;
+            yield return LogoPath;
+            yield return LandLine;
+            yield return LegalPermissionNumber;
         }
     }
 }

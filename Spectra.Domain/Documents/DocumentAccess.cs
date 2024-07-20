@@ -10,6 +10,5 @@ namespace Spectra.Domain.Documents
     {
         public string UserId { get; set; }
         public string DocumentId { get; set; }
-        public Document Document { get; set; }
     }
 }

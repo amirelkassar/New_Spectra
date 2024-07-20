@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Spectra.Application.Countries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Countries;
+using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Countries
 {
@@ -15,9 +16,10 @@ namespace Spectra.Infrastructure.Countries
             _countries = mongoDbService.DataBase.GetCollection<Country>(Conses.CollectionName);
         }
 
-        public async Task<IEnumerable<Country>> GetAllAsync()
+        public async Task<IEnumerable<Country>> GetAllAsync(Expression<Func<Country, bool>>? filter = null)
         {
-            return await _countries.Find(_ => true).ToListAsync();
+            filter ??= _ => true;
+            return await _countries.Find(filter).ToListAsync();
         }
 
         public async Task<Country> GetByIdAsync(string id)

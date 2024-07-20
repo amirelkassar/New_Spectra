@@ -22,8 +22,6 @@ namespace Spectra.Domain.ValueObjects
         public string? LogoPath { get; set; }
         public PhoneNumber? LandLine { get; set; }
         public OrganizationTypes OrganizationType { get; set; }
-        public ICollection<Document> Documents { get; set; }
-
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

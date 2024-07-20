@@ -30,13 +30,13 @@ namespace Spectra.Application
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
 
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, object>), typeof(AuthorizationBehavior<IAuthorizedQuery, object>));
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<object>, object>), typeof(AuthorizationBehavior<IAuthorizedQuery<object>, object>));
+				cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, object>), typeof(AuthorizationBehavior<IAuthorizedQuery, object>));
+				cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<object>, object>), typeof(AuthorizationBehavior<IAuthorizedQuery<object>, object>));
 
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, object>), typeof(AuthorizationBehavior<IAuthorizedCommand, object>));
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<object>, object>), typeof(AuthorizationBehavior<IAuthorizedCommand<object>, object>));
+				cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, object>), typeof(AuthorizationBehavior<IAuthorizedCommand, object>));
+				cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<object>, object>), typeof(AuthorizationBehavior<IAuthorizedCommand<object>, object>));
 
-                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+				cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 
 			return services;

@@ -4,8 +4,6 @@ using Spectra.Application.Clients.Queries;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Enumeration;
 using Spectra.Domain.ValueObjects;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Clients.Services
 {

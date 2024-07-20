@@ -18,10 +18,9 @@ namespace Spectra.Domain.Documents
         public string Path { get; set; }
         public bool External { get; set; }
         public bool IsPublic { get; set; }
-        public Type DocumentTypes { get; set; }
+        public Type DocumentType { get; set; }
         public string OwnerId { get; set; }
         public string DocumentId { get; set; }
-        public ICollection<DocumentAccess> DocumentAccesses { get; set; }
 
         protected Document() { }
         private Document(string name, Guid documentKey, DocumentSources documentSource,
