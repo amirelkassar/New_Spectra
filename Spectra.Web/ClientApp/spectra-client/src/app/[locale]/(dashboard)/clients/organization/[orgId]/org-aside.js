@@ -35,8 +35,8 @@ const OrgAside = () => {
     },
     {
       name: "المواعيد",
-      route: "",
-      isActive: false,
+      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.APPOINTMENTS(params.orgId),
+      isActive:  path.includes('/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.APPOINTMENTS(params.orgId)),
     },
     {
       name: "الوصفات الطبية",

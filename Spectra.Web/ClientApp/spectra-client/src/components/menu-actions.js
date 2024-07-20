@@ -13,7 +13,7 @@ import ThreeDotsIcon from "@/assets/icons/three-dots";
 import { Link } from "@/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-export default function MenuActions({ id, className, type = 1, path }) {
+export default function MenuActions({ id, className, type = 1, path,pathEdit }) {
   const options = [
     {
       icon: <DeleteIcon />,
@@ -58,6 +58,7 @@ export default function MenuActions({ id, className, type = 1, path }) {
       icon: <EditIcon />,
       name: "تعديل",
       action: () => {},
+      path:pathEdit
     },
     {
       icon: <ExportIcon />,

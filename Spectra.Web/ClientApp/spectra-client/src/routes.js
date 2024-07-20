@@ -39,7 +39,10 @@ const ROUTES = {
     PERMISSIONS: "/permissions",
     CONTENT: "/content",
     PLANS: "/plans",
-    STEFF: "/staff",
+    STAFF:{
+      DASHBOARD: "/staff",
+      STAFFID:(id)=> `/staff/${id}`
+    }
   },
 };
 

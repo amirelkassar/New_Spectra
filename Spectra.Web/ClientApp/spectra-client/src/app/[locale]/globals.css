@@ -13,10 +13,10 @@
   --main-color-text: #010036;
 }
 h1 {
-  @apply text-black text-2xl mdl:text-[28px] font-bold text-center mdl:text-start;
+  @apply text-black text-2xl mdl:text-[28px] font-bold  mdl:text-start;
 }
 h2 {
-  @apply text-black text-lg mdl:text-xl font-bold text-center mdl:text-start;
+  @apply text-black text-lg mdl:text-xl font-bold mdl:text-start;
 }
 
 .default-field {
@@ -37,7 +37,7 @@ label {
   @apply h-full flex flex-col gap-6;
 }
 /*aside*/
-aside{
+aside {
   color: var(--main-color-text);
 }
 aside.closeMenue p {
@@ -52,7 +52,7 @@ aside ul li a svg path {
 aside ul li a.active svg path {
   fill: var(--main-color);
 }
-aside ul  button.active svg path {
+aside ul button.active svg path {
   fill: var(--main-color);
 }
 aside .topMobNav {
@@ -73,13 +73,13 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir='ltr']  header .hideShowLinks svg {
+html[dir="ltr"] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir='ltr']  header .hideShowLinks.closeArrow svg {
+html[dir="ltr"] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
 aside .topMobNav {
@@ -98,7 +98,7 @@ aside .topMobNav .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-header  .hideShowLinks2 {
+header .hideShowLinks2 {
   background-color: #f1fcff;
   min-width: 34px;
   justify-content: center;
@@ -106,58 +106,53 @@ header  .hideShowLinks2 {
   transition: 0.3s;
   display: none;
 }
-header  .hideShowLinks2 svg {
+header .hideShowLinks2 svg {
   width: 15px;
   transition: 0.5s;
 }
-aside .dropMenuDash li a p{
+aside .dropMenuDash li a p {
   font-size: 16px !important;
-
 }
-.numNotfication{
+.numNotfication {
   border-radius: 50% !important;
 }
-html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
- transform:rotateY(180deg);
+html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
+  transform: rotateY(180deg);
 }
-.lineAfterLinks{
-  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition
+.lineAfterLinks {
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir='ltr'] .lineAfterLinks{
-  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition
+html[dir="ltr"] .lineAfterLinks {
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
- 
   color: black;
-  background: #F5F5F5;
+  background: #f5f5f5;
   border: none !important;
   font-weight: bold;
   border-radius: 10px !important;
 }
-.mantine-Pagination-control:where([data-active])  {
- 
+.mantine-Pagination-control:where([data-active]) {
   color: black !important;
-  background: #F5F5F5 !important;
+  background: #f5f5f5 !important;
   border: none;
   font-weight: bold;
 }
-.paginationBtn{
+.paginationBtn {
   border: 1px solid #010036;
   transition: 0.4s;
 }
-.paginationBtn{
+.paginationBtn {
   position: relative;
 }
-.paginationBtn svg{
- 
+.paginationBtn svg {
   width: 18px;
   height: 17px;
- 
 }
-.paginationBtn:hover{
+.paginationBtn:hover {
   box-shadow: 0px 0px 5px #010036;
-} 
-.paginationNext svg{
+}
+.paginationNext svg {
   transform: rotateY(180deg);
 }
 @media (max-width: 768px) {
@@ -177,82 +172,116 @@ html[dir='ltr'] .lineAfterLinks{
     padding-top: 0px !important;
     padding: 20px !important;
     z-index: 500;
-    box-shadow: 0px -14px 51.7px 8px #0000001A;
-
+    box-shadow: 0px -14px 51.7px 8px #0000001a;
   }
   aside.openMob {
     right: -180px !important;
   }
- html[dir='ltr'] aside {
+  html[dir="ltr"] aside {
     left: 0px;
     right: auto;
   }
-  html[dir='ltr'] aside.openMob {
+  html[dir="ltr"] aside.openMob {
     left: -180px !important;
     right: auto;
   }
-  header  .hideShowLinks2 {
+  header .hideShowLinks2 {
     display: flex;
   }
-  header  .hideShowLinks {
+  header .hideShowLinks {
     display: none !important;
   }
 }
 /**/
-.showMore{
+.showMore {
   border: 1px solid #939393;
 }
-.showMore svg{
-  @apply w-[15px] 
+.showMore svg {
+  @apply w-[15px];
 }
-.contents{
+.contents {
   border-bottom: 1px solid;
 }
-.headTitleDash{
-  @apply text-[16px] md:text-[20px] ms-0 md:ms-5
+.headTitleDash {
+  @apply text-[16px] md:text-[20px] ms-0 md:ms-5;
 }
-.BtnheaderRequests svg{
-  @apply md:w-[20px] w-[15px] md:h-[20px] h-[15px] 
+.BtnheaderRequests svg {
+  @apply md:w-[20px] w-[15px] md:h-[20px] h-[15px];
 }
 /*modelReq*/
-.modelReq .mantine-Modal-content{
+.modelReq .mantine-Modal-content {
   border-radius: 32px;
-
 }
 
-.modelReq .mantine-Modal-inner{
+.modelReq .mantine-Modal-inner {
   top: 50% !important;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
-.modelReq .mantine-Modal-body{
+.modelReq .mantine-Modal-body {
   padding: 66px 72px 58px;
-  @apply px-[14px] pb-[40px] pt-[90px] md:pt-[66px] md:px-[72px] md:pb-[58px]
+  @apply px-[14px] pb-[40px] pt-[90px] md:pt-[66px] md:px-[72px] md:pb-[58px];
 }
-.modelReq .mantine-Modal-body{}
+.modelReq .mantine-Modal-body {
+}
 /*opinions*/
-.opinions{
-
-max-width: 100%;
+.opinions {
+  max-width: 100%;
 }
-.opinions .swiper-slide{
+.opinions .swiper-slide {
   opacity: 0.5;
   transition: 0.4s;
 }
-.opinions .swiper-slide-active{
+.opinions .swiper-slide-active {
   opacity: 1;
 }
 
 /*clientEdit*/
-form.clientEdit label{
-  @apply text-[16px] font-normal  px-4 mb-1
+form.clientEdit label {
+  @apply text-[16px] font-normal  px-4 mb-1;
 }
 
-form.clientEdit .mantine-Input-input{
+form.clientEdit .mantine-Input-input {
   @apply h-[48px]  border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold rounded-[10px];
-
-
-} 
-.clientEdit .mantine-Select-wrapper{
+}
+.clientEdit .mantine-Select-wrapper {
   border: none !important;
+}
+.staffDetils .mantine-DatePicker-calendarHeader{
+  gap: 16px;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderLevel {
+  color: #10b0c1;
+  font-size: 20px;
+  font-weight: bold;
+  order: 3;
+  justify-content: flex-end;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl{
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F9F7FC;
+  border-radius: 10px;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
+  color: #10b0c1;
+  fill: #10b0c1;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg  {
+  width: 20px !important;
+  height: 20px !important;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='previous']{
+  order: 1;
+}
+
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next']{
+  order: 2;
+}
+.staffDetils .mantine-DatePicker-day[data-selected='true']{
+  background-color: var(--main-color);
+  border-radius: 50%;
 }

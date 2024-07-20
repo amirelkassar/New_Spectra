@@ -1,4 +1,6 @@
 "use client";
+import EditImgIcon from "@/assets/icons/editImg";
+import ImagePlaceholderIcon from "@/assets/icons/image-placeholder";
 import Input from "@/components/input";
 import SelectBox from "@/components/select-box";
 import { Select } from "@mantine/core";
@@ -29,10 +31,22 @@ function ClientEdit() {
       <h2>بيانات {params.orgId ? "المنظمه" : " عائلة الطفل"}</h2>
       <form className="w-[100%] clientEdit">
         <div className="flex flex-col flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
+          <div className=" relative">
+            <div className=" w-[100%] lg:w-auto lg:size-24 rounded-full overflow-hidden flex items-center justify-center">
+              <label htmlFor="file" className="cursor-pointer">
+                <ImagePlaceholderIcon />
+              </label>
+              <input id="file" type="file" className="hidden" />
+            </div>
+            <div className="bg-[#10B0C1] flex items-center justify-center p-[7px] rounded-[50%] size-[32px] absolute left-[50%] bottom-[-12px] border-[2px] border-white translate-x-[-50%]">
+              <EditImgIcon />
+            </div>
+          </div>
+
           <Input
             label={"الاسم"}
             value={data.name}
-            containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
+            containerClassName={"!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"}
             labelClassName={"!text-[16px] !mb-0 px-4"}
             inputClassName={
               "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
@@ -41,11 +55,12 @@ function ClientEdit() {
           <Input
             label={"اخر دخول"}
             value={data.lastEntry}
-            containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
+            containerClassName={"!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"}
             labelClassName={"!text-[16px] !mb-0 px-4"}
             inputClassName={
               "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
             }
+            readOnly={true}
           />
           <Select
             className=" min-w-[calc(50%-10px)]  !border-[#CFD0D7] !outline-none"

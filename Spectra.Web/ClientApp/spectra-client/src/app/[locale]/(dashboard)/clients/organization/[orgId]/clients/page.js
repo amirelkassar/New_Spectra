@@ -2,6 +2,7 @@
 import DeleteButton from "@/components/delete-button";
 import EditButton from "@/components/edit-button";
 import MenuActions from "@/components/menu-actions";
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -98,8 +99,8 @@ const OrganizationClientsPage = () => {
           <div className="bg-blueLight text-nowrap rounded-e-xl py-3 px-10 sticky top-0 me-6"></div>
         </div>
         {data.map((item, index) => (
-          <div
-            onClick={() => handleRouting(item.id)}
+          <Link
+           href={ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(item.id)}
             key={item.id}
             className="contents cursor-pointer group "
           >
@@ -136,7 +137,7 @@ const OrganizationClientsPage = () => {
               
               <MenuActions />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

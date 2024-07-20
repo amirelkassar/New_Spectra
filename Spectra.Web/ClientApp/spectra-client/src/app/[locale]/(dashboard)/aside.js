@@ -57,8 +57,8 @@ const Aside = ({ close }) => {
     },
     {
       name: "الموظفين",
-      route: ROUTES.ADMIN.STEFF,
-      isActive: path.includes(ROUTES.ADMIN.STEFF),
+      route: ROUTES.ADMIN.STAFF.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.STAFF.DASHBOARD),
       icon: <StaffIcon />,
     },
     {
