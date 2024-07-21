@@ -109,7 +109,7 @@ const LastAppointments = () => {
           <ArrowLeft />
         </Link>
       </div>
-      <TableComponents data={data} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
+      <TableComponents data={data} colNum={4} colNumSmall={3} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
      
     </div>
   );

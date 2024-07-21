@@ -101,7 +101,7 @@ const AppoTable = () => {
   const [selected, setSelected] = useState([]);
   return (
     <div className="rounded-xl bg-white p-0 md:p-8 grow">
-      <TableComponents data={data} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
+      <TableComponents data={data} colNum={4} colNumSmall={3} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
       <Pagination.Root total={10} onChange={(e)=>{setValuePage(e)}}  value={valuePage} dir="ltr" className=" max-w-[1200px] mx-auto flex justify-between items-center mt-6 md:mt-[70px] px-[20px] md:px-[60px]"> 
         <button
         className="paginationPrev  paginationBtn flex justify-between items-center gap-0 py-[13px] px-[24px] w-[160px] h-[52px] rounded-[10px]"
