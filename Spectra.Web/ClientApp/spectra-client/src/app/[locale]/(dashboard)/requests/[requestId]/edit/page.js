@@ -134,7 +134,7 @@ const EditPage = ({ params: { requestId } }) => {
       <div className="flex px-1 gap-5 md:gap-8 max-w-[950px] w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
         <Button
           className={
-            "!py-0 text-[14px] md:text-[20px]  min-w-[200px] max-w-[100%] md:max-w-[260px] flex-1 !px-5 font-bold items-center  flex items-center bg-[#10B0C1] justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+            "!py-0 text-[14px] md:text-[20px]  min-w-[200px] max-w-[100%] md:max-w-[260px] flex-1 !px-5 font-bold items-center  flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
           }
         >
           <SaveIcon />

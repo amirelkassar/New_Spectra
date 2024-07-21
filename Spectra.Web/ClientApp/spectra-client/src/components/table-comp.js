@@ -107,7 +107,7 @@ let col = hide ?colNum-1:colNum
                           setModalOneOpen(true);
                         }}
                         className={
-                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-[#10B0C1] justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
                         }
                       >
                         <AcceptIcon />
@@ -121,7 +121,7 @@ let col = hide ?colNum-1:colNum
                         setModalOneOpen(true);
                       }}
                       className={
-                        "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none "
+                        "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
                       }
                     >
                       <RefuseIcon />

@@ -17,31 +17,31 @@ export const metadata = {
 const ibm = localFont({
   src: [
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Thin.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicThin.ttf",
       weight: "100",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-ExtraLight.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicExtraLight.ttf",
       weight: "200",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Light.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicLight.ttf",
       weight: "300",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Regular.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicRegular.ttf",
       weight: "400",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Medium.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicMedium.ttf",
       weight: "500",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-SemiBold.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicSemiBold.ttf",
       weight: "600",
     },
     {
-      path: "../../assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Bold.ttf",
+      path: "../../assets/fonts/IBMPlexSansArabicBold.ttf",
       weight: "700",
     },
   ],

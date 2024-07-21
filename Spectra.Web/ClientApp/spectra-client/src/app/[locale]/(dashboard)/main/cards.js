@@ -10,7 +10,7 @@ const Cards = () => {
       number: 50,
       text: "طلب على خدمة الاستشارة الفردية",
       icon: (
-        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#10B0C1]/20 flex items-center justify-center ">
+        <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-greenMain/20 flex items-center justify-center ">
           <SessionIcon />
         </div>
       ),

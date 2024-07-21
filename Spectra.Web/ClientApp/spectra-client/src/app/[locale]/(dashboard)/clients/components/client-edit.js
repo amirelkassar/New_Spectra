@@ -38,7 +38,7 @@ function ClientEdit() {
               </label>
               <input id="file" type="file" className="hidden" />
             </div>
-            <div className="bg-[#10B0C1] flex items-center justify-center p-[7px] rounded-[50%] size-[32px] absolute left-[50%] bottom-[-12px] border-[2px] border-white translate-x-[-50%]">
+            <div className="bg-greenMain flex items-center justify-center p-[7px] rounded-[50%] size-[32px] absolute left-[50%] bottom-[-12px] border-[2px] border-white translate-x-[-50%]">
               <EditImgIcon />
             </div>
           </div>

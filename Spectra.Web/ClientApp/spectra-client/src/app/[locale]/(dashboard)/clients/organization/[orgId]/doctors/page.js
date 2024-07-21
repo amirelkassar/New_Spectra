@@ -5,6 +5,8 @@ import StarGoldIcon from "@/assets/icons/starGold";
 import { Link } from "@/navigation";
 import { useParams, usePathname } from "next/navigation";
 import ROUTES from "@/routes";
+import TableComponents from "@/components/table-comp";
+import { useState } from "react";
 
 const DoctorsOrg = ({}) => {
     const params = useParams();
@@ -99,10 +101,27 @@ console.log(params);
     }
     return stars;
   };
-
+  const [selected, setSelected] = useState([]);
+  const updateRoute = (id) => {
+    return  ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(id)
+   };
   return (
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
-      <h1 className="ms-5 mb-5 lg:block hidden ">الـمواعيد</h1>
+      <h1 className="ms-5 mb-5 lg:block hidden ">اطباء المنظمة</h1>
+      <TableComponents
+        data={data}
+        colNum={4}
+        dataLine={2}
+        header={["الاسم", " عدد الاطفال", "اخر دخول", ""]}
+        order={[["doctor",'specialisationDoctor'], ["name",'kinshipName'], ["date",'time'], ""]}
+        selectPage={selected}
+        setSelected={setSelected}
+        type={2}
+        routeClients={true}
+        route={ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(5)}
+        RouteFun={updateRoute}
+
+      />
       <div className=" min-h-[600px] overflow-auto grid grid-cols-[repeat(4,minmax(120px,1fr))] lg:grid-cols-[repeat(4,minmax(200px,1fr))] gap-y-1 max-w-[100%]">
         <div className="contents  ">
           <div className="bg-blueLight  items-center lg:text-[16px] text-[12px] text-nowrap rounded-s-xl py-1 lg:py-3 px-4 lg:px-5 sticky top-0  flex">

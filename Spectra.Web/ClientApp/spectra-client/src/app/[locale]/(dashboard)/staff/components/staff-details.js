@@ -96,7 +96,7 @@ function StaffDetails() {
           <div className=" flex md:hidden items-center justify-between gap-4 flex-wrap">
             <h2>المواعيد</h2>
             <button
-              className={`${ShowDate?'bg-[#E9F7FF]':'bg-[#10B0C1]'} size-[50px] rounded-[50%]  flex items-center justify-center`}
+              className={`${ShowDate?'bg-[#E9F7FF]':'bg-greenMain'} size-[50px] rounded-[50%]  flex items-center justify-center`}
               onClick={(e) => {
                 e.preventDefault;
                 setShowDate(!ShowDate);

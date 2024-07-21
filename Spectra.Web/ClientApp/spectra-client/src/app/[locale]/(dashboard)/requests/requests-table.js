@@ -213,7 +213,7 @@ const RequestsTable = ({ type }) => {
               <Button
                onClick={()=>{setState('accept');setModalOneOpen(true)}}
                 className={
-                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-[#10B0C1] justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                 }
               >
                 <AcceptIcon />
@@ -247,7 +247,7 @@ const RequestsTable = ({ type }) => {
                 key={item.route}
                 href={item.route}
                 className={`text-[12px] py-[9px] px-[12px] rounded-[10px] ${
-                  item.isActive ? "bg-[#10B0C1] text-white font-bold" : ""
+                  item.isActive ? "bg-greenMain text-white font-bold" : ""
                 }  `}
               >
                 {item.name}

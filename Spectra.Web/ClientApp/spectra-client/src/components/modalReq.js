@@ -49,7 +49,7 @@ function ModalReq({ state, id, GroubId, numItem }) {
               setModalOneOpen(false);
             }}
             className={
-              "bg-[#10B0C1] text-white h-[50px] font-bold text-[16px] md:text-[20px] border-none flex-1 min-w-[180px]"
+              "bg-greenMain text-white h-[50px] font-bold text-[16px] md:text-[20px] border-none flex-1 min-w-[180px]"
             }
           >
             نعم , متأكد

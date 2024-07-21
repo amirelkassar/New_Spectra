@@ -7,7 +7,58 @@
     text-wrap: balance;
   }
 }
-
+*{
+  font-family: "IBMPlexSansArabicRegular";
+}
+@font-face {
+  font-family: "IBMPlexSansArabicThin";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+    src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicExtraLight";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicLight";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicMedium";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicSemiBold";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
+}
+@font-face {
+  font-family: "IBMPlexSansArabicBold";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicBold.ttf');
+}
 :root {
   --main-color: #10b0c1;
   --main-color-text: #010036;
@@ -247,7 +298,7 @@ form.clientEdit .mantine-Input-input {
 .clientEdit .mantine-Select-wrapper {
   border: none !important;
 }
-.staffDetils .mantine-DatePicker-calendarHeader{
+.staffDetils .mantine-DatePicker-calendarHeader {
   gap: 16px;
 }
 .staffDetils .mantine-DatePicker-calendarHeaderLevel {
@@ -257,36 +308,37 @@ form.clientEdit .mantine-Input-input {
   order: 3;
   justify-content: flex-end;
 }
-.staffDetils .mantine-DatePicker-calendarHeaderControl{
+.staffDetils .mantine-DatePicker-calendarHeaderControl {
   width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F9F7FC;
+  background-color: #f9f7fc;
   border-radius: 10px;
 }
 .staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
-.staffDetils .mantine-DatePicker-calendarHeaderControl svg  {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg {
   width: 20px !important;
   height: 20px !important;
 }
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='previous']{
+.staffDetils
+  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next']{
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected='true']{
+.staffDetils .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
-.btnReqTable svg{
-  @apply hidden lg:block
+.btnReqTable svg {
+  @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
   grid-template-columns: repeat(3, minmax(max-content, 1fr));
@@ -297,4 +349,3 @@ form.clientEdit .mantine-Input-input {
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
   grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
-

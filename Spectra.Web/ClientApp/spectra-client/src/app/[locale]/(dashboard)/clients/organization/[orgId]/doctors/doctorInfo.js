@@ -17,7 +17,7 @@ function DoctorInfo({data}) {
         />
         <div
           dir="ltr"
-          className=" w-fit flex gap-2 lg:gap-1 items-center justify-center py-1 px-2 lg:px-5 bg-[#10B0C1] text-white rounded-[15px] h-5 lg:h-[32px] absolute bottom-0 right-3 lg:right-[0px] "
+          className=" w-fit flex gap-2 lg:gap-1 items-center justify-center py-1 px-2 lg:px-5 bg-greenMain text-white rounded-[15px] h-5 lg:h-[32px] absolute bottom-0 right-3 lg:right-[0px] "
         >
           <p className="font-bold text-[12px] lg:text-[20px] text-white">{data.star}</p>
 
