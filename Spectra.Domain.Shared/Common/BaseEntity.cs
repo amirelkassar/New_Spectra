@@ -15,9 +15,10 @@ namespace Spectra.Domain.Shared.Common
         protected BaseEntity(TKey id)
         {
             Id = id;
+            ArgumentNullException.ThrowIfNull(id);
         }
 
-        public TKey Id { get; }
+        public TKey Id { get; protected set; }
 
         private readonly List<BaseEvent> _domainEvents = [];
 

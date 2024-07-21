@@ -1,12 +1,11 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Domain.Patients;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients.Queries
 {
-	public class GetPatientByIdQuery : IRequest<Patient>
+    public class GetPatientByIdQuery : IRequest<Patient>
 	{
 		public string Id { get; set; }
 	}

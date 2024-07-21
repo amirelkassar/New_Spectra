@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces.IRepository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Enumeration;
 using System;
@@ -11,7 +10,7 @@ using System.Windows.Input;
 
 namespace Spectra.Application.Documents.Commands
 {
-	public class UpdateDocumentCommand : ICommand<Unit>
+    public class UpdateDocumentCommand : ICommand<Unit>
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

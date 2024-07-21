@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Serilog;
 using Spectra.Application.Common;
+using Spectra.Application.Countries.SeedService;
 using Spectra.Infrastructure;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.PipelineBehaviors;
-using Spectra.Infrastructure.Services;
 using Spectra.Web;
 using Spectra.Web.Models;
 using Spectra.WebAPI;
@@ -30,8 +30,10 @@ var app = builder.Build();
 // Seed data before handling requests
 using (var scope = app.Services.CreateScope())
 {
-	var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
-	await seedService.SeedDataAsync();
+	var seedService = scope.ServiceProvider.GetRequiredService<ICountrySeedService>();
+    await seedService.SeedCountriesAsync();
+    await seedService.SeedStatesAsync();
+    await seedService.SeedCitiesAsync();
 }
 
 
