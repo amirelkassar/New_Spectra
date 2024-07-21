@@ -5,15 +5,17 @@ import EditIcon from "@/assets/icons/edit";
 import DeleteButton from "@/components/delete-button";
 import EditButton from "@/components/edit-button";
 import MenuActions from "@/components/menu-actions";
+import TableComponents from "@/components/table-comp";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const StaffTable = () => {
   const router = useRouter();
-  const locale = useLocale()
+  const locale = useLocale();
   const data = [
     {
       id: 0,
@@ -142,82 +144,23 @@ const StaffTable = () => {
       router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
     }
   };
-  
+  const [selected, setSelected] = useState([]);
   return (
     <div className="grow max-h-[calc(100vh-325px)] overflow-auto min-h-[600px]">
-      <div className="grid  grid-cols-[repeat(6,minmax(120px,1fr))] md:grid-cols-[repeat(6,minmax(max-content,1fr))] text-center gap-y-1">
-        <div className="contents ">
-          <div className="bg-blueLight rounded-s-xl py-3 pe-10 ps-8 sticky top-0 text-nowrap  lg:text-[16px] text-[12px] text-start">
-            الاسم
-          </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">
-          الايميل
-          </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]  hidden lg:block">الوظيفة</div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]">تاريخ الانضمام </div>
-          <div className="bg-blueLight py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px]"> عدد المرضى</div>
-          <div className="bg-blueLight rounded-e-xl py-3 px-10 sticky top-0 text-nowrap  lg:text-[16px] text-[12px] me-6"></div>
-        </div>
-        {data.map((item, index) => (
-          <Link
-          href={ROUTES.ADMIN.STAFF.STAFFID(item.id)}
-            //onClick={() => handleRouting(item)}
-            key={item.id}
-            className="contents cursor-pointer group "
-          >
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] ms-0 lg:ms-8 font-bold text-start",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.name}
-            </div>
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10  hidden lg:block",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.email}
-            </div>
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.type}
-            </div>
-           
-          
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.lastLogin}
-            </div>{" "}
-            <div
-              className={clsx(
-                " py-2 lg:py-5 lg:text-[16px] text-[12px] px-3 lg:px-10 ",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-              {item.numberOfChildren}
-            </div>
-            <div
-              className={clsx(
-                "py-3 px-3 lg:px-10 me-14 flex items-center gap-3 content-end",
-                index === data.length - 1 ? "" : "border-b border-b-grayMedium"
-              )}
-            >
-            <MenuActions/>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <TableComponents
+        colNum={6}
+        colNumSmall={5}
+        hide={2}
+        data={data}
+        dataLine={1}
+        header={["الاسم", "الايميل", "الوظيفة", "  تاريخ الانضمام",' عدد المرضى','']}
+        order={["name", "email", "type", "lastLogin",'numberOfChildren','']}
+        selectPage={selected}
+        setSelected={setSelected}
+        type={1}
+        route={ROUTES.ADMIN.STAFF}
+      />
+    
     </div>
   );
 };

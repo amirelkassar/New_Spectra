@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Button from "./button";
 import DeleteModalIcon from "@/assets/icons/deleteModal";
 
-function ModalReq({ state, id, GroubId, numItem }) {
+function ModalReq({ state, id, GroubId, numItem ,cancel}) {
   console.log(GroubId);
   const { modalOneOpen, setModalOneOpen } = useMenu();
   const getTextWithSelect = () => {
@@ -22,6 +22,8 @@ function ModalReq({ state, id, GroubId, numItem }) {
       ? "هل انت متأكد من قبول الطلب"
       : state === "req"
       ? "هل انت متأكد من رفض الطلب"
+      : state === "cancellation"
+      ? "هل انت متأكد من الغاء الميعاد" 
       : "هل انت متأكد من مسح الطلب";
   };
   return (
@@ -37,7 +39,7 @@ function ModalReq({ state, id, GroubId, numItem }) {
     >
       <div className="mainModal">
         <div className="flex justify-center items-center mx-auto">
-          {state === "delete" ? <DeleteModalIcon /> : <ModalIcon />}
+          {state === "delete"||state === "cancellation" ? <DeleteModalIcon /> : <ModalIcon />}
         </div>
         <p className="text-[22px] lg:text-[28px] text-center mt-3 font-bold">
           {GroubId?.length > 1 ? getTextWithSelect() : getText()}

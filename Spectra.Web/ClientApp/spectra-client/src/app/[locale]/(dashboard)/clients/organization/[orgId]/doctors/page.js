@@ -112,9 +112,9 @@ console.log(params);
         data={data}
         colNum={5}
         colNumSmall={4}
-        dataLine={2}
-        header={["الاسم", " تخصص الطبيب", "تاريخ الانضمام", "التقييم",'']}
-        order={[["doctor",'specialisationDoctor'], ["name",'kinshipName'], ["date",'time'], "stars",'']}
+        dataLine={1}
+        header={["الاسم", " تخصص الطبيب", "تاريخ الانضمام", "التقييم"]}
+        order={["doctor", "specialisationDoctor", "date", "stars",'']}
         selectPage={selected}
         setSelected={setSelected}
         type={2}
