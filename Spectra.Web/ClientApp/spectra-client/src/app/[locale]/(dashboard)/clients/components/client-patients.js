@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import childPlaceholder from "@/assets/images/child-placeholder.jpg";
 import MenuActions from "@/components/menu-actions";
@@ -5,6 +6,7 @@ import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import { useParams } from "next/navigation";
 
 const ClientPatients = () => {
   const patients = [
@@ -36,6 +38,8 @@ const ClientPatients = () => {
       relation: "الابن",
     },
   ];
+  const params = useParams();
+
   return (
     <section className="default-page grow">
       <div className="flex items-start justify-between gap-4">
@@ -54,7 +58,7 @@ const ClientPatients = () => {
             <p className="text-[12px] md:text-[16px] font-bold"> أضافة طفل</p>
           </button>
         </div>
-        <MenuActions type={2} />
+        <MenuActions type={2} pathEdit={ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId)} routeClients={true} />
       </div>
       <div className=" my-9 px-3 block md:hidden">
         <ul className="flex flex-col gap-3">
@@ -80,9 +84,10 @@ const ClientPatients = () => {
           </li>
         </ul>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-5">
+      <div className="flex  gap-5 max-w-[100px] overflow-auto min-w-[100%]">
         {patients.map((patient) => (
-          <div
+          <Link
+          href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)}
             key={patient.id}
             className="p-5 border-2 border-blueLight rounded-xl flex flex-col gap-2 relative"
           >
@@ -93,26 +98,26 @@ const ClientPatients = () => {
               <Image priority src={patient.image} alt="child" />
             </div>
             <div className="flex items-center gap-3">
-              <p>الاسم/</p>
+              <p className="min-w-[94px] text-[12px]">الاسم/</p>
               <strong>{patient.name}</strong>
             </div>{" "}
             <div className="flex items-center gap-3">
-              <p>الرقم القومي/</p>
+              <p className="min-w-[94px] text-[12px]">الرقم القومي/</p>
               <strong>{patient.nationalId}</strong>
             </div>{" "}
             <div className="flex items-center gap-3">
-              <p>الجنس/</p>
+              <p className="min-w-[94px] text-[12px]">الجنس/</p>
               <strong>{patient.gender}</strong>
             </div>{" "}
             <div className="flex items-center gap-3">
-              <p>تاريخ الميلاد/</p>
+              <p className="min-w-[94px] text-[12px]">تاريخ الميلاد/</p>
               <strong>{patient.dateOfBirth}</strong>
             </div>{" "}
             <div className="flex items-center gap-3">
-              <p>علاقة العملاء بالمريض/</p>
+              <p className="min-w-[94px] text-[12px]">علاقة العملاء بالمريض/</p>
               <strong>{patient.relation}</strong>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

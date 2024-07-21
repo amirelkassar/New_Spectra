@@ -47,7 +47,7 @@ const OrgAside = () => {
       name: "المرضى/الاطفال",
       route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
       isActive:
-        path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
+        path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId)||path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId),
     },
   ];
   return (

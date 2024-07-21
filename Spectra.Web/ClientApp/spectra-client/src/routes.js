@@ -26,6 +26,8 @@ const ROUTES = {
         APPOINTMENTS: (id) => `/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/clients/organization/${id}/prescriptions`,
         PATIENTS: (id) => `/clients/organization/${id}/patients`,
+        PATIENTSEDIT: (id) => `/clients/organization/${id}/patients/edit`,
+        PATIENTSDETAILS: (id,id2) => `/clients/organization/${id}/patients/${id2}`,
       },
       FAMILY: {
         DETAILS: (id) => `/clients/family/${id}/details`,
@@ -33,7 +35,13 @@ const ROUTES = {
         APPOINTMENTS: (id) => `/clients/family/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/clients/family/${id}/prescriptions`,
         PATIENTS: (id) => `/clients/family/${id}/patients`,
+        PATIENTSDETAILS: (id,id2) => `/clients/family/${id}/patients/${id2}`,
+        
       },
+      PATIENTSDETAILS:{
+        DETAILS: (id) => `/clients/patientDetails/${id}/details`,
+        EDIT: (id) => `/clients/patientDetails/${id}/edit`,
+      }
     },
     REPORST: "/reports",
     PERMISSIONS: "/permissions",

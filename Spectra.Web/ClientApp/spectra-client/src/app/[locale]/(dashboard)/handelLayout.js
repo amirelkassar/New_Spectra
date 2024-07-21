@@ -47,7 +47,7 @@ export default function HandelDashboardLayout({ Children}) {
           </button>
           <input
             type="text"
-            className="grow hidden md:block h-10 bg-gray rounded-full px-5 focus:outline-greenMain"
+            className="grow hidden mdl:block h-10 bg-gray rounded-full px-5 focus:outline-greenMain"
             placeholder="بحث..."
           />
         </div>

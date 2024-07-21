@@ -237,7 +237,7 @@ function TableComponents({
                   selectPage.includes(item.id)
                     ? "bg-grayLight"
                     : "bg-transparent",
-                  j === hide - 1 ? " hidden md:block" : "block"
+                  j === hide - 1 ? " hidden md:flex" : "flex"
                 )}
               >
                 <div
