@@ -124,7 +124,7 @@ const Aside = ({ close }) => {
       >
         {link.icon}
 
-        <p className="text-[14px] lg:text-[18px] font-bold">{link.name}</p>
+        <p className="text-[14px] lg:text-[18px] font-Bold">{link.name}</p>
       </Link>
     </li>
   );

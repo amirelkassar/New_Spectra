@@ -39,6 +39,15 @@ module.exports = {
         xl: "1280px",
         xxl: "1536px",
       },
+      fontFamily:{
+        Thin:"IBMPlexSansArabicThin",
+        ExtraLight:"IBMPlexSansArabicExtraLight",
+        Light:"IBMPlexSansArabicLight",
+        Regular:"IBMPlexSansArabicRegular",
+        Medium:"IBMPlexSansArabicMedium",
+        SemiBold:"IBMPlexSansArabicSemiBold",
+        Bold:"IBMPlexSansArabicBold"
+      }
     },
   },
   plugins: [],
