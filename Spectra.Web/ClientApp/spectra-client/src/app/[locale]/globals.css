@@ -271,7 +271,7 @@ html[dir="ltr"] .lineAfterLinks {
 }
 .modelReq .mantine-Modal-body {
   padding: 66px 72px 58px;
-  @apply px-[14px] pb-[40px] pt-[90px] md:pt-[66px] md:px-[72px] md:pb-[58px];
+  @apply px-[14px] pb-[40px] pt-[30px] md:pt-[40px] md:px-[60px] md:pb-[58px];
 }
 .modelReq .mantine-Modal-body {
 }
@@ -357,4 +357,46 @@ form.clientEdit .mantine-Input-input {
   .custom-grid2 {
     grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr)) ;
   }
+}
+.boxDate .mantine-DatePicker-calendarHeader {
+  gap: 16px;
+}
+.boxDate .mantine-DatePicker-calendarHeaderLevel {
+  color: #10b0c1;
+  font-size: 20px;
+  font-weight: bold;
+  order: 3;
+  justify-content: flex-end;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f7fc;
+  border-radius: 10px;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
+  color: #10b0c1;
+  fill: #10b0c1;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+.boxDate
+  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+  order: 1;
+}
+
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+  order: 2;
+}
+.boxDate .mantine-DatePicker-day[data-selected="true"] {
+  background-color: var(--main-color);
+  border-radius: 50%;
+}
+.iconSearchModal path{
+  fill: #939393;
 }

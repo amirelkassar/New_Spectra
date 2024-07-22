@@ -11,19 +11,21 @@ import ShowIcon from "@/assets/icons/show";
 import StarIcon from "@/assets/icons/start";
 import ThreeDotsIcon from "@/assets/icons/three-dots";
 import { Link } from "@/navigation";
+import useMenu from "@/store/auth/signup/menu-store";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 export default function MenuActions({ id, className, type = 1, path,pathEdit ,routeClients}) {
+  const { modalOneOpen, setModalOneOpen ,modal,editModal} = useMenu();
   const options = [
     {
       icon: <DeleteIcon />,
       name: "الغاء الميعاد",
-      action: () => {},
+      action: () => { editModal('type','cancellation');editModal('open',true); },
     },
     {
       icon: <ReschedulingIcon />,
       name: "اعادة الجدولة",
-      action: () => {},
+      action: () => { editModal('type','date');editModal('open',true); },
     },
     {
       icon: <StarIcon />,
@@ -84,7 +86,7 @@ export default function MenuActions({ id, className, type = 1, path,pathEdit ,ro
       >
         {type === 1
           ? options.map((option, index) => (
-              <MenuItem key={option.name}>
+              <MenuItem key={index}>
                 <button
                   onClick={option.action}
                   className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
@@ -95,7 +97,7 @@ export default function MenuActions({ id, className, type = 1, path,pathEdit ,ro
               </MenuItem>
             ))
           : options2.map((option, index) => (
-              <MenuItem key={option.name}>
+              <MenuItem key={index+"o"}>
                 {option.path ? (
                   <Link
                     href={routeClients ? option.path:option.path + "/" + id}
