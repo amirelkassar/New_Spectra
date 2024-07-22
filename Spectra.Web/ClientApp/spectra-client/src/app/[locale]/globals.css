@@ -7,53 +7,53 @@
     text-wrap: balance;
   }
 }
-*{
-  font-family: "IBMPlexSansArabicRegular";
+* {
+  font-family: 'IBMPlexSansArabicRegular';
 }
 @font-face {
-  font-family: "IBMPlexSansArabicThin";
+  font-family: 'IBMPlexSansArabicThin';
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-    src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+  src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicExtraLight";
+  font-family: 'IBMPlexSansArabicExtraLight';
   font-style: normal;
   font-weight: 200;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicLight";
+  font-family: 'IBMPlexSansArabicLight';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicRegular";
+  font-family: 'IBMPlexSansArabicRegular';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicMedium";
+  font-family: 'IBMPlexSansArabicMedium';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicSemiBold";
+  font-family: 'IBMPlexSansArabicSemiBold';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicBold";
+  font-family: 'IBMPlexSansArabicBold';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -86,6 +86,9 @@ label {
 }
 .sec-page {
   @apply h-full flex flex-col gap-6;
+}
+.paragraph {
+  @apply !text-[20px] !font-Regular !leading-[30px] !text-black;
 }
 /*aside*/
 aside {
@@ -124,13 +127,13 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir="ltr"] header .hideShowLinks svg {
+html[dir='ltr'] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir="ltr"] header .hideShowLinks.closeArrow svg {
+html[dir='ltr'] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
 aside .topMobNav {
@@ -167,13 +170,13 @@ aside .dropMenuDash li a p {
 .numNotfication {
   border-radius: 50% !important;
 }
-html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
+html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir="ltr"] .lineAfterLinks {
+html[dir='ltr'] .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
@@ -228,11 +231,11 @@ html[dir="ltr"] .lineAfterLinks {
   aside.openMob {
     right: -180px !important;
   }
-  html[dir="ltr"] aside {
+  html[dir='ltr'] aside {
     left: 0px;
     right: auto;
   }
-  html[dir="ltr"] aside.openMob {
+  html[dir='ltr'] aside.openMob {
     left: -180px !important;
     right: auto;
   }
@@ -326,14 +329,14 @@ form.clientEdit .mantine-Input-input {
   height: 20px !important;
 }
 .staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
   order: 1;
 }
 
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected="true"] {
+.staffDetils .mantine-DatePicker-day[data-selected='true'] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
