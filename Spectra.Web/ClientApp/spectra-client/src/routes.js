@@ -1,28 +1,39 @@
 const ROUTES = {
-  HOME: "/",
+  HOME: '/',
+  CLIENT: {
+    HOME: '/',
+    ABOUT: '/about',
+    TEAM: '/team',
+    SERVICES: '/services',
+    TREATMENT: '/treatment',
+    SUCCESS_STORIES: '/success-stories',
+    BLOG: '/blog',
+    CONTACT: '/contact',
+  },
   AUTH: {
-    LOGIN: "/login",
-    SIGNUP_FAMILY: "/signup/family",
-    SIGNUP_ORG: "/signup/organization",
-    SIGNUP_PROVIDER: "/signup/provider",
-    FORGOT_PASSWORD: "/forgot-password",
-    RESET_PASSWORD: "/reset-password",
+    LOGIN: '/login',
+    SIGNUP_FAMILY: '/signup/family',
+    SIGNUP_ORG: '/signup/organization',
+    SIGNUP_PROVIDER: '/signup/provider',
+    FORGOT_PASSWORD: '/forgot-password',
+    RESET_PASSWORD: '/reset-password',
   },
   ADMIN: {
-    MAIN: "/main",
-    APPOINTMENTS: "/appointments",
-    REQUESTS: "/requests",
-    REQUESTSNEW: "/requests/new",
-    REQUESTSREJECTED: "/requests/rejected",
+    MAIN: '/main',
+    APPOINTMENTS: '/appointments',
+    REQUESTS: '/requests',
+    REQUESTSNEW: '/requests/new',
+    REQUESTSREJECTED: '/requests/rejected',
     CLIENTS: {
-      DASHBOARD: "/clients",
+      DASHBOARD: '/clients',
       ORGANIZATION: {
         DETAILS: (id) => `/clients/organization/${id}/details`,
         DETAILSEDIT: (id) => `/clients/organization/${id}/details/edit`,
         EMPLOYEE: (id) => `/clients/organization/${id}/employee`,
         CLIENTS: (id) => `/clients/organization/${id}/clients`,
         DOCTORS: (id) => `/clients/organization/${id}/doctors`,
-        DOCTORSDETAILS: (id,id2) => `/clients/organization/${id}/doctors/${id2}`,
+        DOCTORSDETAILS: (id, id2) =>
+          `/clients/organization/${id}/doctors/${id2}`,
         APPOINTMENTS: (id) => `/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/clients/organization/${id}/prescriptions`,
         PATIENTS: (id) => `/clients/organization/${id}/patients`,
@@ -35,14 +46,14 @@ const ROUTES = {
         PATIENTS: (id) => `/clients/family/${id}/patients`,
       },
     },
-    REPORST: "/reports",
-    PERMISSIONS: "/permissions",
-    CONTENT: "/content",
-    PLANS: "/plans",
-    STAFF:{
-      DASHBOARD: "/staff",
-      STAFFID:(id)=> `/staff/${id}`
-    }
+    REPORST: '/reports',
+    PERMISSIONS: '/permissions',
+    CONTENT: '/content',
+    PLANS: '/plans',
+    STAFF: {
+      DASHBOARD: '/staff',
+      STAFFID: (id) => `/staff/${id}`,
+    },
   },
 };
 
