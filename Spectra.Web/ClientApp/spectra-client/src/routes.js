@@ -1,6 +1,6 @@
 const ROUTES = {
   HOME: '/',
-  CLIENT: {
+  ROOT: {
     HOME: '/',
     ABOUT: '/about',
     TEAM: '/team',
@@ -17,6 +17,17 @@ const ROUTES = {
     SIGNUP_PROVIDER: '/signup/provider',
     FORGOT_PASSWORD: '/forgot-password',
     RESET_PASSWORD: '/reset-password',
+  },
+  CLIENT: {
+    MAIN: '/customer/main',
+    CONTROL_MENU: '/customer/control',
+    PROFILE: '/customer/profile',
+    SCHEDULES: '/customer/schedules',
+    STEPS: '/customer/steps',
+    TEAM: '/customer/team',
+    REPORTS: '/customer/reports',
+    CHATS: '/customer/chats',
+    SETTINGS: '/customer/settings',
   },
   ADMIN: {
     MAIN: '/main',

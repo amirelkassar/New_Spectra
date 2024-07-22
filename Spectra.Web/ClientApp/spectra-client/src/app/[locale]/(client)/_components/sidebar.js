@@ -5,77 +5,82 @@ import MainIcon from '@/assets/icons/main';
 import ROUTES from '@/routes';
 import clsx from 'clsx';
 
-import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { Collapse, Box } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import Appointments from '@/assets/icons/appointments';
-import Subscription from '@/assets/icons/subscription';
-import Customer from '@/assets/icons/customer';
-import ReportsIcon from '@/assets/icons/reportsIcon';
+
 import SettingsIcon from '@/assets/icons/settings';
 import StaffIcon from '@/assets/icons/staff';
 import ArrowNav from '@/assets/icons/arrow-nav';
 import Logo from '@/assets/icons/logo';
-import MenuDash from '@/assets/icons/menuDash';
 import LogoutIcon from '@/assets/icons/logOut';
-import { Link } from '@/navigation';
+import { Link, usePathname } from '@/navigation';
 import { useSidebar } from '@/store/client/sidebar/menu-slice';
+import ControlIcon from '@/assets/icons/control';
+import ProfileIcon from '@/assets/icons/profile';
+import ClockIcon from '@/assets/icons/clock';
+import StepsIcon from '@/assets/icons/steps';
+import ReportsIcon from '@/assets/icons/reportsIcon';
+import ChatIcon from '@/assets/icons/chat';
 
-const Sidebar = ({ close }) => {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [openMenuMob, setopenMenuMob] = useState(close);
+const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
-  const [isOpenSettings, setIsOpenSettings] = useState(false);
-  const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const path = usePathname();
+
   const mainLinks = [
     {
       name: 'الرئيسية',
-      route: ROUTES.ADMIN.MAIN,
-      isActive: path.includes(ROUTES.ADMIN.MAIN),
+      route: ROUTES.CLIENT.MAIN,
+      isActive: path === ROUTES.CLIENT.MAIN,
       icon: <MainIcon />,
     },
     {
+      name: 'قائمة التحكم',
+      route: ROUTES.CLIENT.CONTROL_MENU,
+      isActive: path === ROUTES.CLIENT.CONTROL_MENU,
+      icon: <ControlIcon />,
+    },
+    {
+      name: 'ملفي',
+      route: ROUTES.CLIENT.PROFILE,
+      isActive: path === ROUTES.CLIENT.PROFILE,
+      icon: <ProfileIcon />,
+    },
+    {
       name: 'المواعيد',
-      route: ROUTES.ADMIN.APPOINTMENTS,
-      isActive: path.includes(ROUTES.ADMIN.APPOINTMENTS),
-      icon: <Appointments />,
+      route: ROUTES.CLIENT.SCHEDULES,
+      isActive: path === ROUTES.CLIENT.SCHEDULES,
+      icon: <ClockIcon />,
     },
     {
-      name: 'طلبات الاشتراك',
-      route: ROUTES.ADMIN.REQUESTS,
-      isActive: path.includes(ROUTES.ADMIN.REQUESTS),
-      icon: <Subscription />,
-      type: 'subscription',
+      name: 'الخطوات',
+      route: ROUTES.CLIENT.STEPS,
+      isActive: path === ROUTES.CLIENT.STEPS,
+      icon: <StepsIcon />,
     },
     {
-      name: 'العملاء',
-      route: ROUTES.ADMIN.CLIENTS.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.CLIENTS.DASHBOARD),
-      icon: <Customer />,
-    },
-    {
-      name: 'الموظفين',
-      route: ROUTES.ADMIN.STAFF.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.STAFF.DASHBOARD),
+      name: 'الفريق',
+      route: ROUTES.CLIENT.TEAM,
+      isActive: path === ROUTES.CLIENT.TEAM,
       icon: <StaffIcon />,
     },
     {
       name: 'تقارير',
-      route: ROUTES.ADMIN.REPORST,
-      isActive: path.includes(ROUTES.ADMIN.REPORST),
+      route: ROUTES.CLIENT.REPORTS,
+      isActive: path === ROUTES.CLIENT.REPORTS,
       icon: <ReportsIcon />,
     },
     {
+      name: 'محادثات',
+      route: ROUTES.CLIENT.CHATS,
+      isActive: path === ROUTES.CLIENT.CHATS,
+      icon: <ChatIcon />,
+    },
+    {
       name: 'الإعدادات',
-      route: ROUTES.ADMIN.PERMISSIONS,
-      isActive:
-        path.includes(ROUTES.ADMIN.PERMISSIONS) ||
-        path.includes(ROUTES.ADMIN.CONTENT) ||
-        path.includes(ROUTES.ADMIN.PLANS),
+      route: ROUTES.CLIENT.SETTINGS,
+      isActive: path === ROUTES.CLIENT.SETTINGS,
       icon: <SettingsIcon />,
-      type: 'settings',
     },
   ];
   const settingsLinks = [
@@ -95,36 +100,29 @@ const Sidebar = ({ close }) => {
       isActive: path.includes(ROUTES.ADMIN.PLANS),
     },
   ];
-  const SubscriptionLinks = [
-    {
-      name: 'الطلبات الجديدة',
-      route: ROUTES.ADMIN.REQUESTSNEW,
-      isActive: path.includes(ROUTES.ADMIN.REQUESTSNEW),
-    },
-    {
-      name: 'الطلبات المرفوضة ',
-      route: ROUTES.ADMIN.REQUESTSREJECTED,
-      isActive: path.includes(ROUTES.ADMIN.REQUESTSREJECTED),
-    },
-  ];
 
   const AsideLink = ({ link }) => (
     <li className='relative'>
-      <div
-        className={clsx(
-          'lineAfterLinks ',
-          link.isActive ? 'opacity-100' : 'opacity-0'
-        )}
-      />
       <Link
         href={link.route}
-        className={`flex gap-[10px] md:gap-[18px] w-fit py-1 ${
+        className={`flex items-center gap-[10px] md:gap-[18px] w-fit py-1 ${
           link.isActive ? 'active' : ''
         }`}
       >
         {link.icon}
-
-        <p className='text-[14px] lg:text-[18px] font-Bold'>{link.name}</p>
+        <span
+          className={clsx('text-[14px] lg:text-[18px] font-Bold', {
+            hidden: isOpen,
+          })}
+        >
+          {link.name}
+        </span>
+        <div
+          className={clsx(
+            'lineAfterLinks',
+            link.isActive ? 'opacity-100' : 'opacity-0'
+          )}
+        />
       </Link>
     </li>
   );
@@ -155,7 +153,7 @@ const Sidebar = ({ close }) => {
   return (
     <aside
       className={`  top-0 start-0 ${isOpen ? 'openMob' : ''} ${
-        isOpen ? 'min-w-[50px] w-[50px] closeMenue' : 'min-w-[230px] w-[230px]'
+        isOpen ? 'min-w-[50px] w-[50px] closeMenu' : 'min-w-[230px] w-[230px]'
       }  py-10 mdl:flex flex-col font-bold duration-300`}
     >
       <div className='topMobNav'>
@@ -169,80 +167,22 @@ const Sidebar = ({ close }) => {
           <ArrowNav />
         </div>
       </div>
-      <ul className='space-y-5 grow'>
-        {mainLinks.map((link) => {
-          return link.type === 'subscription' ? (
-            <div key={link.route}>
-              <div className='flex '>
-                <button
-                  className={` flex gap-[10px] items-center transition-all hover:active ${
-                    link.isActive ? 'active' : ''
-                  } `}
-                  onClick={() => {
-                    setIsOpenSubscription(!isOpenSubscription);
-                  }}
-                >
-                  <AsideLink key={link.route} link={link} />
-                  <span
-                    className={`arrowLinkNav hidden lg:block ${
-                      isOpenSubscription ? ' rotate-180' : 'rotate-0'
-                    }`}
-                  >
-                    <ArrowDownIcon />
-                  </span>
-                </button>
-              </div>
-              <div className='  lg:!block hidden'>
-                <Collapse
-                  in={isOpenSubscription}
-                  className=' dropMenuDash   flex flex-col gap-3 mt-4 px-4'
-                >
-                  {SubscriptionLinks.map((link) => (
-                    <AsideLink2 key={link.route} link={link} />
-                  ))}
-                </Collapse>
-              </div>
-            </div>
-          ) : link.type === 'settings' ? (
-            <div key={link.route}>
-              <div className='flex '>
-                <button
-                  className={` flex gap-[10px] items-center ${
-                    link.isActive ? 'active' : ''
-                  }`}
-                  onClick={() => {
-                    setIsOpenSettings(!isOpenSettings);
-                  }}
-                >
-                  <AsideLink key={link.route} link={link} />
-                  <span
-                    className={` arrowLinkNav  hidden lg:block  ${
-                      isOpenSettings ? ' rotate-180' : 'rotate-0'
-                    }`}
-                  >
-                    <ArrowDownIcon />
-                  </span>
-                </button>
-              </div>
-              <div className='  lg:!block hidden'>
-                <Collapse
-                  in={isOpenSettings}
-                  className=' dropMenuDash  flex flex-col gap-3 mt-4 px-4'
-                >
-                  {settingsLinks.map((link) => (
-                    <AsideLink2 key={link.route} link={link} />
-                  ))}
-                </Collapse>
-              </div>
-            </div>
-          ) : (
+      <nav>
+        <ul className='space-y-5 grow'>
+          {mainLinks.map((link) => (
             <AsideLink key={link.route} link={link} />
-          );
-        })}
-      </ul>
-      <button className='w-fit flex justify-center gap-[10px] items-center mt-5 md:mt-8'>
+          ))}
+        </ul>
+      </nav>
+      <button className='w-fit flex justify-center gap-[10px] items-center mt-auto'>
         <LogoutIcon />
-        <p className='text-[14px] lg:text-[16px] font-bold'> تسجيل الخروج</p>
+        <span
+          className={clsx('text-[14px] lg:text-[16px] font-bold', {
+            hidden: isOpen,
+          })}
+        >
+          تسجيل الخروج
+        </span>
       </button>
     </aside>
   );

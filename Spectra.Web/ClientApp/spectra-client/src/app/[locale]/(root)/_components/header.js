@@ -10,35 +10,35 @@ export const Header = async () => {
   const navLinks = [
     {
       label: 'الرئيسية',
-      href: ROUTES.CLIENT.HOME,
+      href: ROUTES.ROOT.HOME,
     },
     {
       label: 'من نحن',
-      href: ROUTES.CLIENT.ABOUT,
+      href: ROUTES.ROOT.ABOUT,
     },
     {
       label: 'فريقنا الطبي',
-      href: ROUTES.CLIENT.TEAM,
+      href: ROUTES.ROOT.TEAM,
     },
     {
       label: 'خدمتنا',
-      href: ROUTES.CLIENT.SERVICES,
+      href: ROUTES.ROOT.SERVICES,
     },
     {
       label: 'ماذا نعالج',
-      href: ROUTES.CLIENT.TREATMENT,
+      href: ROUTES.ROOT.TREATMENT,
     },
     {
       label: 'قصص النجاح',
-      href: ROUTES.CLIENT.SUCCESS_STORIES,
+      href: ROUTES.ROOT.SUCCESS_STORIES,
     },
     {
       label: 'المدونات',
-      href: ROUTES.CLIENT.BLOG,
+      href: ROUTES.ROOT.BLOG,
     },
     {
       label: 'تواصل معنا',
-      href: ROUTES.CLIENT.CONTACT,
+      href: ROUTES.ROOT.CONTACT,
     },
   ];
   return (
