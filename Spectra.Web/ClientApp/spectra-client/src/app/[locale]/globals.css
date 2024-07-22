@@ -349,3 +349,12 @@ form.clientEdit .mantine-Input-input {
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
   grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
+@layer components {
+  .custom-grid {
+  
+    grid-template-columns: repeat(var(--colNum), minmax(max-content, 1fr)) !important;
+  }
+  .custom-grid2 {
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr)) ;
+  }
+}

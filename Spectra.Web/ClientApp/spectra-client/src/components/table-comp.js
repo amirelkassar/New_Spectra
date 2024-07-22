@@ -7,11 +7,11 @@ import AcceptIcon from "@/assets/icons/accept";
 import RefuseIcon from "@/assets/icons/refuse";
 import Checkbox from "./checkbox";
 import useMenu from "@/store/auth/signup/menu-store";
-
 import clsx from "clsx";
 import Statue from "./status";
 import Image from "next/image";
 import StarGoldIcon from "@/assets/icons/starGold";
+import ReportDecIcon from "@/assets/icons/reportDec";
 
 function TableComponents({
   data,
@@ -26,10 +26,11 @@ function TableComponents({
   reqType,
   setState,
   hide,
-  colNum ,
+  colNum,
   routeClients,
   RouteFun,
-  colNumSmall
+  colNumSmall,
+  report,
 }) {
   const { modalOneOpen, setModalOneOpen } = useMenu();
 
@@ -47,13 +48,19 @@ function TableComponents({
   const getStar = (num) => {
     const stars = [];
     for (let i = 1; i <= num; i++) {
-      stars.push(<StarGoldIcon key={i} className={'w-[14px] lg:w-[18px] h-auto'}/>);
+      stars.push(
+        <StarGoldIcon key={i} className={"w-[14px] lg:w-[18px] h-auto"} />
+      );
     }
     return stars;
   };
   return (
     <div
-      className={`  max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid grid-cols-[repeat(${hide ? colNumSmall : colNum},minmax(min-content,1fr))] md:grid-cols-[repeat(${colNum},minmax(max-content,1fr))] gap-y-1 w-full`}
+      className={`  max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid  custom-grid2 md:custom-grid  gap-y-1 w-full`}
+      style={{
+        "--colNum": colNum,
+        "--colNumSmall": hide ? colNumSmall : colNum,
+      }}
     >
       <div className=" contents ">
         {header.map((item, i) => {
@@ -70,7 +77,7 @@ function TableComponents({
                   ? "rounded-e-xl"
                   : ""
               } ${
-                i === hide-1 ? " hidden md:block" : "block"
+                i === hide - 1 ? " hidden md:block" : "block"
               }   bg-blueLight h-[44px] md:h-auto  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px]`}
             >
               {item}
@@ -155,7 +162,7 @@ function TableComponents({
                 <Statue statue={item.statu} />
                 <MenuActions />
               </div>
-            )  : j === order.length - 1 ? (
+            ) : j === order.length - 1 ? (
               <div
                 className={clsx(
                   " flex  py-3 md:ps-4 md:pe-2 xl:ps-10 me-2 md:me-7 xl:me-12 content-center  items-center gap-5 justify-end transition ",
@@ -167,12 +174,35 @@ function TableComponents({
                     : "bg-transparent"
                 )}
               >
+                {report && (
+                  <div className="mx-6">
+                    <div className="flex items-center justify-center p-3 rounded-[50%] bg-blueLight">
+                      <ReportDecIcon />
+                    </div>
+                  </div>
+                )}
                 <MenuActions
                   type={type || 1}
                   routeClients={routeClients}
                   path={routeClients ? RouteFun(item.id) : route}
                   id={item.id}
                 />
+              </div>
+            ) : orderItem === "stars" ? (
+              <div
+                className={clsx(
+                  "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 justify-start items-start",
+                  index !== data.length - 1 && "border-b border-grayMedium",
+                  selectPage.includes(item.id)
+                    ? "bg-grayLight"
+                    : "bg-transparent",
+                  j === hide - 1 ? " hidden md:flex" : "flex"
+                )}
+              >
+                <div className="flex gap-[6px] items-center justify-start w-[116px]">
+                  {" "}
+                  {getStar(item.star)}
+                </div>
               </div>
             ) : dataLine === 1 ? (
               <div
@@ -204,11 +234,16 @@ function TableComponents({
                     />
                   </div>
                 )}
+                {j === 0 && haveImg && (
+                  <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
+                    <Image src={item.image} alt="Doctor image" />
+                  </div>
+                )}
                 <strong className="text-sm mdl:text-base">
                   {item[orderItem]}
                 </strong>
               </div>
-            ) : j === 0  ? (
+            ) : j === 0 ? (
               <div
                 className={clsx(
                   "flex items-center gap-5 py-2 md:py-5 px-3 min-w-40",
@@ -235,11 +270,11 @@ function TableComponents({
                     className=" bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]"
                   />
                 </div>{" "}
-                {
-                  haveImg && <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
-                  <Image src={item.image} alt="Doctor image" />
-                </div>
-                }
+                {haveImg && (
+                  <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
+                    <Image src={item.image} alt="Doctor image" />
+                  </div>
+                )}
                 <div>
                   <p className="font-bold text-[12px] md:text-[16px]">
                     {item[orderItem[0]]}

@@ -50,14 +50,14 @@ const ReportsFiltration = () => {
         by="name"
         value={selected}
         onChange={setSelected}
-        className="flex items-center gap-1 md:gap-7  flex-wrap"
+        className="flex items-center gap-1 md:gap-5  flex-wrap"
       >
         {options.map((option, index) => (
           <Fragment key={index}>
             {option.name ? (
               <Radio
                 value={option}
-                className=" text-[14px] h-[32px] lg:h-[42px]  md:text-[16px] py-2 px-3 lg:px-5 cursor-pointer bg-transparent data-[checked]:bg-blueLight transition  lg:min-w-40 flex items-center justify-center  rounded-xl gap-1 lg:gap-3"
+                className=" text-[14px] h-[32px] lg:h-[42px]  md:text-[16px] py-2 px-2 lg:px-3 cursor-pointer bg-transparent data-[checked]:bg-blueLight transition  lg:min-w-32 flex items-center justify-center  rounded-xl gap-1 lg:gap-3"
               >
                 {option.icon}
                 {option.name}

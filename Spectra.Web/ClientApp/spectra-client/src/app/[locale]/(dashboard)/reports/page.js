@@ -6,6 +6,7 @@ import Report from "./report";
 const ReportsPage = () => {
   const reports = [
     {
+      id: 1,
       state: "new",
       number: "2325",
       date: "20/2/2024",
@@ -19,6 +20,7 @@ const ReportsPage = () => {
       imgPatient: imgPatient,
     },
     {
+      id: 2,
       state: "old",
       number: "2325",
       date: "20/2/2024",
@@ -32,6 +34,7 @@ const ReportsPage = () => {
       imgPatient: imgPatient,
     },
     {
+      id: 3,
       state: "old",
       number: "2325",
       date: "20/2/2024",

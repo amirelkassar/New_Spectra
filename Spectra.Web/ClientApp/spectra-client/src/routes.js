@@ -43,7 +43,10 @@ const ROUTES = {
         EDIT: (id) => `/clients/patientDetails/${id}/edit`,
       }
     },
-    REPORST: "/reports",
+    REPORT:{
+      DASHBOARD: "/reports",
+      REPORTID:(id)=> `/reports/${id}`
+    },
     PERMISSIONS: "/permissions",
     CONTENT: "/content",
     PLANS: "/plans",
