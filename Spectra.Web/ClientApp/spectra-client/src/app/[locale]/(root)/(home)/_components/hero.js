@@ -54,7 +54,7 @@ export const Hero = () => {
         <Image
           src={CareImg}
           alt='hero-section-img'
-          className='absolute bottom-[95px] right-[-75px]'
+          className='absolute bottom-[95px] right-[-75px] h-[110px] w-[212px]'
           width={212}
           height={110}
         />
