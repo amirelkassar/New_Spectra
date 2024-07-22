@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 const useMenu = create((set) => ({
-  menueOpen: false,
+  menuOpen: false,
   modalOneOpen: false,
-  setMenueOpen: (menueOpen) => set({ menueOpen }),
+  setmenuOpen: (menuOpen) => set({ menuOpen }),
   setModalOneOpen: (modalOneOpen) => set({ modalOneOpen }),
 
 }));

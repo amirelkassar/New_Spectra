@@ -154,8 +154,8 @@ const Aside = ({ close }) => {
   );
   return (
     <aside
-      className={`  top-0 start-0 ${menue.menueOpen ? "openMob" : ""} ${
-        menue.menueOpen
+      className={`  top-0 start-0 ${menue.menuOpen ? "openMob" : ""} ${
+        menue.menuOpen
           ? "min-w-[50px] w-[50px] closeMenue"
           : "min-w-[230px] w-[230px]"
       }  py-10 mdl:flex flex-col font-bold duration-300`}
@@ -167,7 +167,7 @@ const Aside = ({ close }) => {
         <div
           className={`hideShowLinks  flex  w-[34px] h-[34px] rounded-[50%] `}
           onClick={() => {
-            menue.setMenueOpen(!menue.menueOpen);
+            menue.setmenuOpen(!menue.menuOpen);
           }}
         >
           <ArrowNav />

@@ -26,7 +26,7 @@ function TableComponents({
   reqType,
   setState,
   hide,
-  colNum = 4,
+  colNum ,
   routeClients,
   RouteFun,
   colNumSmall
@@ -174,25 +174,7 @@ function TableComponents({
                   id={item.id}
                 />
               </div>
-            ) : orderItem === "stars" ? (
-              <div
-                className={clsx(
-                  "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 justify-start items-start",
-                  index !== data.length - 1 && "border-b border-grayMedium",
-                  selectPage.includes(item.id)
-                  ? "bg-grayLight"
-                  : "bg-transparent",
-                j === hide - 1 ? " hidden md:flex" : "flex"
-                )}
-              >
-                <div className="flex gap-[6px] items-center justify-start w-[116px]">
-                  {" "}
-                  {getStar(item.star)}
-                </div>
-
-              
-              </div>
-            ): dataLine === 1 ? (
+            ) : dataLine === 1 ? (
               <div
                 key={j + orderItem}
                 className={clsx(
