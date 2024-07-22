@@ -16,25 +16,25 @@ const ReportsFiltration = () => {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: " رؤساء اقسام",
+      name: "التقارير التشخيصية",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "مختص",
+      name: "التقارير العلاجية",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "طبيب",
+      name: "التقارير السلوكية",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "سكرتير",
+      name: "التقارير النفسية الاجتماعية",
     },
   ];
 

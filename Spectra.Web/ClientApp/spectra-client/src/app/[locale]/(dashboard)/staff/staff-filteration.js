@@ -16,25 +16,25 @@ const StaffFilteration = () => {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير التشخيصية",
+      name: " رؤساء اقسام",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير العلاجية",
+      name: "مختص",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير السلوكية",
+      name: "طبيب",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير النفسية الاجتماعية",
+      name: "سكرتير",
     },
   ];
 
