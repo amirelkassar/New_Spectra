@@ -85,7 +85,7 @@ export const OurServices = () => {
         {services.map((service, index) => (
           <SwiperSlide key={index + 1321056}>
             <div
-              className={`rounded-[10px] w-[100px] h-[120px] mdl:w-[300px] mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 ${service.color} cursor-grabbing`}
+              className={`rounded-[10px] h-[120px] w-full mdl:max-w-full mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 ${service.color} cursor-grabbing`}
             >
               <div
                 className={`mdl:size-9 size-8 rounded-full ${service.color}`}

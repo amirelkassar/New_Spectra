@@ -12,7 +12,7 @@ export const OurTeam = () => {
   return (
     <Section type='both' heading='تعرف علي فريقنا' btnLabel='جميع التخصصات'>
       {/* SCREEN */}
-      <div className='hidden mdl:grid mdl:grid-cols-3 lg:grid-cols-4 gap-y-10 py-10'>
+      <div className='hidden mdl:grid mdl:grid-cols-3 lgl:grid-cols-4 gap-y-10 gap-x-3 py-10'>
         {Array(8)
           .fill(0)
           .map((item, index) => (
@@ -59,7 +59,7 @@ const TeamMember = ({
   rating = 4.9,
 }) => {
   return (
-    <div className='rounded-[20px] cursor-grabbing mdl:cursor-default w-fit bg-gradient-to-b from-[#f5f5f5] to-white p-5 mdl:p-8 max-w-[228px] flex items-center justify-center'>
+    <div className='rounded-[20px] cursor-grabbing mdl:cursor-default bg-gradient-to-b from-[#f5f5f5] to-white p-5 mdl:p-8 w-full max-w-full flex items-center justify-center'>
       <div className='flex flex-col items-center gap-2'>
         {/* AVATAR */}
         <Avatar
