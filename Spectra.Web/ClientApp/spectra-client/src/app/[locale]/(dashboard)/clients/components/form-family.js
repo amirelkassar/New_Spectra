@@ -20,45 +20,42 @@ function FormFamily() {
   return (
     <div>
       <form className="flex flex-col gap-5 mb-14">
-        <Input
+        <Input labelClassName={'text-[12px] md:text-[16px]'}
           value={family.parentName}
           setValue={family.setParentName}
           label={"اسم ولي الامر بالكامل"}
-          placeholder={"اسم ولي الامر بالكامل"}
           error={error.parentName}
         />
         <SelectBox
           options={countries}
           selectedOption={family.country}
           setSelectedOption={family.setCountry}
-          placeholder="اختر البلد"
           label={"البلد"}
           error={error.country}
+          labelClassName={'text-[12px] md:text-[16px]'}
         />
         <SelectBox
           options={cites}
           selectedOption={family.city}
           setSelectedOption={family.setCity}
-          placeholder="اختر المدينة"
           label={"المدينة"}
           error={error.city}
+          labelClassName={'text-[12px] md:text-[16px]'}
         />
-        <Input
+        <Input labelClassName={'text-[12px] md:text-[16px]'}
           value={family.job}
           setValue={family.setJob}
           label={"الوظيفة"}
-          placeholder={"اكتب الوظيفة"}
           isOptional
           error={error.job}
         />
-        <Input
+        <Input labelClassName={'text-[12px] md:text-[16px]'}
           value={family.nationalId}
           setValue={family.setNationalId}
           label={"رقم الهوية"}
-          placeholder={"اكتب رقم الهوية"}
           error={error.nationalId}
         />
-        <Input label={"البريد الالكترونى"} />
+        <Input labelClassName={'text-[12px] md:text-[16px]'} label={"البريد الالكترونى"} />
       </form>
       <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
         <Button

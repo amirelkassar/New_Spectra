@@ -22,6 +22,7 @@ const SelectBox = ({
   displayedKey,
   isOptional = false,
   error,
+  labelClassName,
   ...rest
 }) => {
   const key = (option) => (isObject ? option.id : option);
@@ -45,7 +46,7 @@ const SelectBox = ({
                 اختياري
               </div>
             )}
-            <Label>{label}</Label>
+            <Label className={clsx(labelClassName)}>{label}</Label>
             <ListboxButton
               className={clsx(
                 "default-field relative z-0 w-full transition flex items-center justify-between gap-3",

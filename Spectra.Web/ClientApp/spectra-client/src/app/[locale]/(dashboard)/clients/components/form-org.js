@@ -16,38 +16,45 @@ function FormOrg() {
         <Input
           value={org.orgName}
           setValue={org.setOrgName}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={"اسم المنظمة"}
         />
         <Input
           value={org.orgAddress}
           setValue={org.setOrgAddress}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={"عنوان المنظمة"}
         />
         <SelectBox
           options={countries}
           selectedOption={org.orgCountry}
           setSelectedOption={org.setOrgCountry}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={"بلد المنظمة"}
         />
         <SelectBox
           options={cites}
           selectedOption={org.orgCity}
           setSelectedOption={org.setOrgCity}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={" مدينة المنظمة"}
         />
         <Input
           value={org.orgSpecialist}
           setValue={org.setOrgSpecialist}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={" تخصص المنظمة"}
         />{" "}
         <Input
           value={org.orgSpecialist}
           setValue={org.setOrgSpecialist}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={"نوع المنظمة"}
         />{" "}
         <Input
           value={org.orgWebsite}
           setValue={org.setOrgWebsite}
+          labelClassName={'text-[12px] md:text-[16px]'}
           label={" الموقع الالكترونى للمنظمة"}
           
         />

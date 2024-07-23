@@ -50,7 +50,7 @@ function ReportsTable() {
       childName: "احمد عبدالله",
       date: "25/4/2024",
       reportTitle: "تقرير تحليل صحي شامل",
-      image: placeholderImage,
+        
     },
     {
       id: 6,

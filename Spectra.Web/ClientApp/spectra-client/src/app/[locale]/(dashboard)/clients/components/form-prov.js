@@ -26,28 +26,32 @@ function FormProvider() {
             <Input
               value={prov.ProvName}
               setValue={prov.setProvName}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={"اسم المنظمة"}
             />
             <SelectBox
               options={["ولد", "بنت"]}
               selectedOption={prov.ProvGender}
               handleOnChange={(selected) => prov.seProvGender(selected)}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={"النوع"}
             />
             <SelectBox
               options={countries}
               selectedOption={prov.ProvCountry}
               setSelectedOption={prov.setProvCountry}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={"بلد المنظمة"}
             />
             <SelectBox
               options={cites}
               selectedOption={prov.ProvCity}
               setSelectedOption={prov.setProvCity}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={" مدينة المنظمة"}
             />
             <div className="space-y-2">
-              <label htmlFor="phone2" className="">
+              <label htmlFor="phone2" className={'text-[12px] md:text-[16px]'}>
                 رقم الهاتف
               </label>
               <div dir="ltr">
@@ -71,11 +75,13 @@ function FormProvider() {
             <Input
               value={prov.ProvEmail}
               setValue={prov.setEmail}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={"البريد الالكترونى"}
             />
             <Input
               value={prov.ProvNationalId}
               setValue={prov.setNationalId}
+             labelClassName={'text-[12px] md:text-[16px]'}
               label={"رقم الهوية"}
             />
           </form>
@@ -95,12 +101,12 @@ function FormProvider() {
       ) : (
         <div>
           <form className="flex flex-col gap-5 mb-14">
-            <SelectBox options={specialties} label={" مدينة المنظمة"} />
-            <Input label={"رقم الترخيص / الاعتماد"} />
-            <Input label={"مرخص / معتمد من "} />
-            <Input label={"الدرجة العلمية"} />
-            <div className="flex gap-4 items-end ">
-              <Input label={"الشهادات "} containerClassName={"flex-1"} />
+            <SelectBox options={specialties} label={" مدينة المنظمة"} labelClassName={'text-[12px] md:text-[16px]'}  />
+            <Input label={"رقم الترخيص / الاعتماد"} labelClassName={'text-[12px] md:text-[16px]'}  />
+            <Input label={"مرخص / معتمد من "} labelClassName={'text-[12px] md:text-[16px]'}  />
+            <Input label={"الدرجة العلمية"} labelClassName={'text-[12px] md:text-[16px]'}  />
+            <div className="flex gap-4 items-end flex-wrap">
+              <Input label={"الشهادات "} containerClassName={"flex-1"} labelClassName={'text-[12px] md:text-[16px]'}  />
               <div className="h-[56px] flex items-center justify-center gap-4 px-5 py-3 rounded-[10px] bg-greenMain w-[132px]">
                 <ArrowRight />
                 <p className="text-white text-[16px] font-Bold">رفع ملف</p>

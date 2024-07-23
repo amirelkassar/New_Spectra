@@ -12,6 +12,7 @@ import Statue from "./status";
 import Image from "next/image";
 import StarGoldIcon from "@/assets/icons/starGold";
 import ReportDecIcon from "@/assets/icons/reportDec";
+import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
 
 function TableComponents({
   data,
@@ -31,8 +32,9 @@ function TableComponents({
   RouteFun,
   colNumSmall,
   report,
+  contracts,
 }) {
-  const {modal, editModal } = useMenu();
+  const { modal, editModal } = useMenu();
 
   console.log("dfdsfdsf");
   console.log(RouteFun);
@@ -78,7 +80,7 @@ function TableComponents({
                   : ""
               } ${
                 i === hide - 1 ? " hidden md:block" : "block"
-              }   bg-blueLight h-[44px] md:h-auto  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px]`}
+              }   bg-blueLight h-[44px] md:h-auto  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px] z-[2]`}
             >
               {item}
             </div>
@@ -119,8 +121,8 @@ function TableComponents({
                       <Button
                         onClick={() => {
                           setState("accept");
-                          editModal('type','accept');
-                          editModal('open',true);
+                          editModal("type", "accept");
+                          editModal("open", true);
                         }}
                         className={
                           "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
@@ -134,9 +136,8 @@ function TableComponents({
                     <Button
                       onClick={() => {
                         setState("req");
-                        editModal('type','req');
-                        editModal('open',true);
-                        
+                        editModal("type", "req");
+                        editModal("open", true);
                       }}
                       className={
                         "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
@@ -184,6 +185,66 @@ function TableComponents({
                     </div>
                   </div>
                 )}
+                {contracts.open && contracts.type === "old" ? (
+                  item.active ? (
+                    <div className="mx-6 flex items-center gap-4">
+                      <div className="bg-[#F1FCFF] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                        <span className=" size-3 rounded-[50%]  bg-greenMain animate-pulse z-[1] md:block hidden"></span>
+                        <p className="font-Bold text-[12px] md:text-[16px] text-greenMain">
+                          نشط
+                        </p>
+                      </div>
+                      <Button
+                        className={
+                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                        }
+                      >
+                        الغاء العقد
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="mx-6 flex items-center gap-4" key={j + orderItem}>
+                      <div className="bg-[#FFF2F2] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                        <span className=" size-3 rounded-[50%]  bg-red  z-[1] md:block hidden"></span>
+                        <p className="font-Bold text-[12px] md:text-[16px] text-red">
+                          منتهى
+                        </p>
+                      </div>
+                      <Button
+                        className={
+                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                        }
+                      >
+                        تجديد العقد
+                      </Button>
+                    </div>
+                  )
+                ) : (
+                  <div className="mx-6 flex items-center gap-4" key={j + orderItem}>
+                    <Button
+                      onClick={() => {
+                        
+                      }}
+                      className={
+                        "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                      }
+                    >
+                      <ContractsWhiteIcon />
+                      ارسال عقد
+                    </Button>
+                    <Button
+                      onClick={() => {
+
+                      }}
+                      className={
+                        "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                      }
+                    >
+                      <RefuseIcon />
+                      رفض
+                    </Button>
+                  </div>
+                )}
                 <MenuActions
                   type={type || 1}
                   routeClients={routeClients}
@@ -201,6 +262,7 @@ function TableComponents({
                     : "bg-transparent",
                   j === hide - 1 ? " hidden md:flex" : "flex"
                 )}
+                key={j + orderItem}
               >
                 <div className="flex gap-[6px] items-center justify-start w-[116px]">
                   {" "}
@@ -238,7 +300,7 @@ function TableComponents({
                   </div>
                 )}
                 {j === 0 && haveImg && (
-                  <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
+                  <div className=" size-14 rounded-full bg-red flex items-start justify-center overflow-hidden">
                     <Image src={item.image} alt="Doctor image" />
                   </div>
                 )}
@@ -259,6 +321,7 @@ function TableComponents({
                     : "bg-transparent",
                   j === hide - 1 ? " hidden md:flex" : "flex"
                 )}
+                key={j + orderItem}
               >
                 <div
                   className={clsx(

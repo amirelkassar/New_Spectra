@@ -21,6 +21,7 @@ import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
 import { Link } from "@/navigation";
+import ContractsIcon from "@/assets/icons/contracts";
 
 const Aside = ({ close }) => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -66,6 +67,12 @@ const Aside = ({ close }) => {
       route: ROUTES.ADMIN.REPORT.DASHBOARD,
       isActive: path.includes(ROUTES.ADMIN.REPORT.DASHBOARD),
       icon: <ReportsIcon />,
+    },
+    {
+      name: "العقود",
+      route: ROUTES.ADMIN.CONTRACTS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.CONTRACTS.DASHBOARD),
+      icon: <ContractsIcon />,
     },
     {
       name: "الإعدادات",

@@ -43,17 +43,23 @@ const ROUTES = {
         EDIT: (id) => `/clients/patientDetails/${id}/edit`,
       }
     },
+    STAFF:{
+      DASHBOARD: "/staff",
+      STAFFID:(id)=> `/staff/${id}`
+    },
     REPORT:{
       DASHBOARD: "/reports",
       REPORTID:(id)=> `/reports/${id}`
     },
+    CONTRACTS:{
+      DASHBOARD: "/contracts",
+      REQUESTS: "/contracts/requests",
+      EXPIRED: "/contracts/expired",
+      CONTRACTSID:(id)=> `/contracts/${id}`
+    },
     PERMISSIONS: "/permissions",
     CONTENT: "/content",
     PLANS: "/plans",
-    STAFF:{
-      DASHBOARD: "/staff",
-      STAFFID:(id)=> `/staff/${id}`
-    }
   },
 };
 
