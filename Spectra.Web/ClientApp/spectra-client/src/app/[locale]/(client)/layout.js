@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
       <Header />
       <div className='space-y-5 flex-1 h-full flex'>
         <Sidebar />
-        <main className='bg-grayBlueLight max-w-[100%] rounded-3xl xl:rounded-[35px] grow overflow-auto p-0 ms:p-4 lg:p-3 xl:p-6'>
+        <main className='bg-grayBlueLight max-w-[100%] rounded-3xl xl:rounded-[35px] grow overflow-auto p-0 mdl:p-4 xl:p-6'>
           {children}
         </main>
       </div>
