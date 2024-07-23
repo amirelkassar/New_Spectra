@@ -3,6 +3,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import "react-phone-input-2/lib/material.css";
 import { MantineProvider } from '@mantine/core';
 import './globals.css';
 import clsx from 'clsx';

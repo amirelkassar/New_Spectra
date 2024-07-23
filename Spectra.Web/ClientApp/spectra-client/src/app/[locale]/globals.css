@@ -262,12 +262,14 @@ html[dir="ltr"] .lineAfterLinks {
 /*modelReq*/
 .modelReq .mantine-Modal-content {
   border-radius: 32px;
+  flex: 1;
 }
 
 .modelReq .mantine-Modal-inner {
   top: 50% !important;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 1020px;
 }
 .modelReq .mantine-Modal-body {
   padding: 66px 72px 58px;

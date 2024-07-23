@@ -6,9 +6,10 @@ import OrgIcon from "@/assets/icons/org";
 import ProviderIcon from "@/assets/icons/provider";
 import Button from "@/components/button";
 import Modal from "@/components/modal";
+import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
 import { Radio, RadioGroup } from "@headlessui/react";
-import { useRouter } from "next/navigation";
+
 import {  useState } from "react";
 
 const signupOptions = [

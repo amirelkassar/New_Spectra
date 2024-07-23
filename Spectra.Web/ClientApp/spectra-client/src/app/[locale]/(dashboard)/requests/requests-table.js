@@ -130,7 +130,7 @@ const RequestsTable = ({ type }) => {
       type: "rejected",
     },
   ];
-  const {modalOneOpen,setModalOneOpen} = useMenu();
+  const {modal, editModal} = useMenu();
   const [State,setState] = useState('accept');
 
   return (
@@ -187,7 +187,7 @@ const RequestsTable = ({ type }) => {
           {selected.length > 0 ? (
             <div className="flex flex-wrap items-center justify-start gap-3 md:gap-5 mt-5 md:mt-8 mb-6 md:mb-10">
               <Button
-                onClick={()=>{setState('delete');setModalOneOpen(true)}}
+                onClick={()=>{setState('delete');editModal('type','delete');editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-[#F5F5F5] text-red border-none w-[80px] md:w-[120px] !gap-[8px]"
                 }
@@ -211,7 +211,7 @@ const RequestsTable = ({ type }) => {
                 طباعة
               </Button>
               <Button
-               onClick={()=>{setState('accept');setModalOneOpen(true)}}
+               onClick={()=>{setState('accept');editModal('type','accept');editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                 }
@@ -220,7 +220,7 @@ const RequestsTable = ({ type }) => {
                 قبول
               </Button>
               <Button
-               onClick={()=>{setState('req');setModalOneOpen(true)}}
+               onClick={()=>{setState('req');editModal('type','req');editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none w-[80px] md:w-[120px] !gap-[8px]"
                 }

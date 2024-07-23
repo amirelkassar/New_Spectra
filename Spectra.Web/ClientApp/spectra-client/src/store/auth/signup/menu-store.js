@@ -4,7 +4,7 @@ const useMenu = create((set) => ({
   modal: {
     open: false,
     id: 1,
-    type: "date",
+    type: "",
   },
   editModal: (key, value) =>
     set((state) => ({

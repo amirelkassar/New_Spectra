@@ -32,7 +32,7 @@ function TableComponents({
   colNumSmall,
   report,
 }) {
-  const { modalOneOpen, setModalOneOpen } = useMenu();
+  const {modal, editModal } = useMenu();
 
   console.log("dfdsfdsf");
   console.log(RouteFun);
@@ -119,7 +119,8 @@ function TableComponents({
                       <Button
                         onClick={() => {
                           setState("accept");
-                          setModalOneOpen(true);
+                          editModal('type','accept');
+                          editModal('open',true);
                         }}
                         className={
                           "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
@@ -133,7 +134,9 @@ function TableComponents({
                     <Button
                       onClick={() => {
                         setState("req");
-                        setModalOneOpen(true);
+                        editModal('type','req');
+                        editModal('open',true);
+                        
                       }}
                       className={
                         "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
