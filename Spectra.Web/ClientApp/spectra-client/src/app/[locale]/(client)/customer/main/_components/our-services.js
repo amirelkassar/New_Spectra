@@ -1,9 +1,10 @@
 'use client';
-import { Section } from '../../../_components/section';
-import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+import { Section } from '../../../_components/section';
 import HeartIcon from '@/assets/icons/heart';
 import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
@@ -52,33 +53,46 @@ export const OurServices = () => {
       color: 'bg-greenMain/[0.18]',
     },
   ];
+
   return (
-    <Section type='both' btnLabel='تصفح جميع الخدمات' heading='خدماتنا'>
+    <Section
+      className='hidden mdl:block'
+      type='both'
+      btnLabel='تصفح جميع الخدمات'
+      heading='خدماتنا'
+    >
+      <h2 className='mdl:hidden font-bold text-black mb-5'>
+        كيف يمكننا مساعدتك
+      </h2>
       <Swiper
-        modules={[Pagination]}
-        className='mySwiper'
+        spaceBetween={10}
         breakpoints={{
           0: {
             slidesPerView: 3.1,
-            spaceBetween: 10,
           },
-          1536: {
-            slidesPerView: 4,
-            spaceBetween: 10,
+          500: {
+            slidesPerView: 4.1,
+          },
+          768: {
+            slidesPerView: 2.2,
+          },
+          1100: {
+            slidesPerView: 3.1,
           },
         }}
+        modules={[Pagination]}
       >
         {services.map((service, index) => (
           <SwiperSlide key={index + 1321056}>
             <div
-              className={`xl:h-[120px] h-[170px] xl:w-[300px] flex-col xl:flex-row px-2 xl:px-5 py-5 flex items-center cursor-grab xl:justify-center xl:text-start text-center gap-7 rounded-[10px] ${service.color}`}
+              className={`rounded-[10px] w-[100px] h-[120px] mdl:w-[300px] mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 ${service.color} cursor-grabbing`}
             >
-              <div className={`w-9 h-9 rounded-full ${service.color}`}>
+              <div
+                className={`mdl:size-9 size-8 rounded-full ${service.color}`}
+              >
                 {service.icon}
               </div>
-              <span className='lg:paragraph text-black text-xs'>
-                {service.label}
-              </span>
+              <span>{service.label}</span>
             </div>
           </SwiperSlide>
         ))}

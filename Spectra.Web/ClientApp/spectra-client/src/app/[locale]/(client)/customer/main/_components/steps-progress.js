@@ -1,6 +1,8 @@
-import HelloHandIcon from '@/assets/icons/hello-hand';
+import clsx from 'clsx';
 import { Progress } from '@mantine/core';
-import { Step } from './step';
+
+import HelloHandIcon from '@/assets/icons/hello-hand';
+import CheckIcon from '@/assets/icons/check';
 
 export const StepsProgress = () => {
   const progressValue = 10;
@@ -32,16 +34,18 @@ export const StepsProgress = () => {
   return (
     <section className='flex items-center flex-col xl:flex-row justify-center'>
       <div className='space-y-3 w-full xl:w-fit'>
-        <h2 className='paragraph font-[400] flex items-center gap-x-2'>
+        <h2 className='text-black text-base mdl:text-[20px] font-medium flex items-center gap-x-2'>
           <span>مرحبا احمد</span>
-          <HelloHandIcon />
+          <HelloHandIcon className='mdl:size-7 size-5' />
         </h2>
-        <p className='paragraph text-center xl:text-start font-bold xl:max-w-[162px]'>
+        <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[162px]'>
           اكمل الخطوات وسنرشح لك أفضل حل لطفلك
         </p>
       </div>
-      <div className='flex-1 space-y-3 max-w-[887px]'>
-        <span className='paragraph'>{progressValue}% من ملفك تم اكماله</span>
+      <div className='flex-1 xl:mt-0 mt-5 space-y-3 max-w-[887px]'>
+        <span className='text-black mdl:text-medium text-base'>
+          {progressValue}% من ملفك تم اكماله
+        </span>
         <Progress
           transitionDuration={200}
           color='#10B0C1'
@@ -63,5 +67,34 @@ export const StepsProgress = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const Step = ({ step, isDone = false, length, index }) => {
+  return (
+    <div className={clsx('space-y-2 w-full', !isDone && 'opacity-40')}>
+      <div
+        className={clsx(
+          'relative after:absolute after:h-[1px] after:w-full after:bg-grayDark after:top-1/2 after:-translate-y-1/2 after:left-0',
+          isDone && 'after:bg-greenMain',
+          length === index + 1 && 'after:hidden'
+        )}
+      >
+        <div
+          className={clsx(
+            'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10',
+            isDone ? 'bg-greenMain' : 'bg-grayDark text-white text-[20px]'
+          )}
+        >
+          {isDone ? <CheckIcon /> : index + 1}
+        </div>
+      </div>
+      <p className='text-black w-full flex items-center font-semibold'>
+        {step.label}
+      </p>
+      <p className='text-black text-xs lgl:max-w-[187px] text-end lgl:text-start'>
+        {step.description}
+      </p>
+    </div>
   );
 };

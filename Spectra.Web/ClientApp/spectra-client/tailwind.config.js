@@ -15,6 +15,9 @@ module.exports = {
           lgl: '3rem',
         },
       },
+      fontSize: {
+        medium: ['20px', '30px'],
+      },
       colors: {
         greenMain: '#10B0C1',
         green: '#B3D9E2',

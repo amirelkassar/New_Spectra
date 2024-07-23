@@ -87,9 +87,7 @@ label {
 .sec-page {
   @apply h-full flex flex-col gap-6;
 }
-.paragraph {
-  @apply !text-[20px] !font-Regular !leading-[30px] !text-black;
-}
+
 /*aside*/
 aside {
   color: var(--main-color-text);
