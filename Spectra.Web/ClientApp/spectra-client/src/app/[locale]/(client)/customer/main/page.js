@@ -7,14 +7,14 @@ import Container from '../../_components/container';
 
 const MainPage = () => {
   return (
-    <div className='bg-white rounded-[10px] h-full p-1 mdl:p-4 xl:p-6'>
-      <Container>
+    <Container>
+      <div className='bg-white rounded-[10px] h-full p-1 mdl:p-4 xl:p-6'>
         <StepsProgress />
         <OurServices />
         <Packages />
         <OurTeam />
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 };
 
