@@ -1,5 +1,11 @@
-const Container = ({ children }) => {
-  return <div className='max-w-[1100px] mx-auto'>{children}</div>;
+import clsx from 'clsx';
+
+const Container = ({ children, className }) => {
+  return (
+    <div className={clsx('max-w-[1100px] mx-auto relative', className)}>
+      {children}
+    </div>
+  );
 };
 
 export default Container;

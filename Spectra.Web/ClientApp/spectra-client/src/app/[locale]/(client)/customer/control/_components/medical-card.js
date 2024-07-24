@@ -30,11 +30,11 @@ export const MedicalCards = () => {
     },
   ];
   return (
-    <div className='flex items-center gap-3 overflow-x-auto mdl:overflow-x-hidden mdl:flex-wrap my-5 w-full'>
+    <section className='flex items-center gap-3 overflow-x-auto mdl:overflow-x-hidden mdl:flex-wrap my-5 w-full'>
       {data.map((item, index) => (
         <Card key={'medical-card' + index} {...item} />
       ))}
-    </div>
+    </section>
   );
 };
 

@@ -7,11 +7,13 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
       {size === 'lg' && (
         <div
           className={clsx(
-            'mdl:rounded-[10px] mdl:bg-white my-8 p-1 mdl:p-5 relative w-full max-w-full',
+            'mdl:rounded-[10px] mdl:bg-white p-1 mdl:p-5 relative w-full max-w-full',
             className
           )}
         >
-          <h3 className='mdl:text-medium text-black text-sm mb-3'>{title}</h3>
+          {title && (
+            <h3 className='mdl:text-medium text-black text-sm mb-3'>{title}</h3>
+          )}
           {children}
         </div>
       )}

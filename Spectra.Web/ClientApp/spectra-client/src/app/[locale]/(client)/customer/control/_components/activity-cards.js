@@ -23,11 +23,11 @@ export const ActivityCards = () => {
     },
   ];
   return (
-    <div className='flex gap-5 overflow-x-auto mdl:overflow-x-hidden mdl:flex-wrap'>
+    <section className='flex gap-5 overflow-x-auto mdl:overflow-x-hidden mdl:flex-wrap'>
       {data.map((item, index) => (
         <Activity key={'activity-card' + index} {...item} />
       ))}
-    </div>
+    </section>
   );
 };
 

@@ -24,15 +24,17 @@ export const ReminderMessages = () => {
     },
   ];
   return (
-    <Card title='رسائل التذكير'>
-      <button className='absolute top-1 left-1 mdl:top-5 mdl:left-5'>
-        <PlusInsideCircleIcon className='size-8' />
-      </button>
+    <section>
+      <Card title='رسائل التذكير' className='my-8'>
+        <button className='absolute top-1 left-1 mdl:top-5 mdl:left-5'>
+          <PlusInsideCircleIcon className='size-8' />
+        </button>
 
-      {data.map((item, index) => (
-        <Medical key={'ReminderMessages' + index} {...item} />
-      ))}
-    </Card>
+        {data.map((item, index) => (
+          <Medical key={'ReminderMessages' + index} {...item} />
+        ))}
+      </Card>
+    </section>
   );
 };
 

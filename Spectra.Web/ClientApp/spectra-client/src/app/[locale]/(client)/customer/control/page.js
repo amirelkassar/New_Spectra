@@ -8,14 +8,12 @@ import { ActivityCards } from './_components/activity-cards';
 
 const ControlPage = () => {
   return (
-    <Container>
-      <div className='p-1 mdl:p-4 xl:p-6 bg-white mdl:bg-transparent'>
-        <Heading label='ملخص النشاطات' />
-        <MedicalCards />
-        <ProgressCard />
-        <ReminderMessages />
-        <ActivityCards />
-      </div>
+    <Container className='p-1 mdl:p-4 xl:p-6 bg-white mdl:bg-transparent'>
+      <Heading label='ملخص النشاطات' />
+      <MedicalCards />
+      <ProgressCard />
+      <ReminderMessages />
+      <ActivityCards />
     </Container>
   );
 };
