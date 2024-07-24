@@ -46,7 +46,12 @@ const Card = ({
   percentage = 0,
 }) => {
   return (
-    <div className='bg-white flex-1 w-fit max-w-full space-y-3 py-3 px-8 rounded-[10px] min-w-[213px] mdl:min-w-max'>
+    <div
+      style={{
+        boxShadow: '0px 4px 12px 0px #0000000A',
+      }}
+      className='bg-white flex-1 w-fit max-w-full space-y-3 py-3 px-8 rounded-[10px] min-w-[213px] mdl:min-w-max'
+    >
       {/* ICON AND LABEL */}
       <div className='flex items-center gap-x-3'>
         {/* ICON */}

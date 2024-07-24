@@ -62,6 +62,7 @@
 :root {
   --main-color: #10b0c1;
   --main-color-text: #010036;
+  --blue-light: #e9f7ff;
 }
 h1 {
   @apply text-black text-2xl mdl:text-[28px] font-bold  mdl:text-start;
