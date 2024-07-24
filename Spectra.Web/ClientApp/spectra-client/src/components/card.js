@@ -23,7 +23,7 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
             boxShadow: '0px 4px 12px 0px #0000000A',
           }}
           className={clsx(
-            'bg-white flex-1 w-fit max-w-full py-3 px-8 rounded-[10px] min-w-[213px] mdl:min-w-max',
+            'bg-white flex-1 w-fit max-w-full py-3 px-8 rounded-[10px] min-w-[213px] mdl:min-w-max relative',
             className
           )}
         >
