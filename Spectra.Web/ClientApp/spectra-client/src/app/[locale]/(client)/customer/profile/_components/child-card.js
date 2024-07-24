@@ -91,7 +91,6 @@ const Child = ({
   child,
   setChild,
 }) => {
-  console.log(child === id);
   return (
     <Card
       size='sm'
@@ -219,7 +218,7 @@ const ChildDetails = ({
               >
                 {doc.name?.slice(0, 2)?.toUpperCase()}
               </Avatar>
-              <div className='text-black text-xs mdl:text-base space-y-1'>
+              <div className='text-black text-center mdl:text-start text-xs mdl:text-base space-y-1'>
                 <h5 className='font-bold'>{doc?.name}</h5>
                 <p>{doc?.profession}</p>
                 <p className='text-grayDark rounded-full border border-grayDark w-fit font-bold flex items-center justify-center gap-x-1 px-2'>

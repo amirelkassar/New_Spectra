@@ -1,8 +1,7 @@
-import clsx from 'clsx';
 import { Progress } from '@mantine/core';
 
-import HelloHandIcon from '@/assets/icons/hello-hand';
 import CheckIcon from '@/assets/icons/check';
+import clsx from 'clsx';
 
 export const StepsProgress = () => {
   const progressValue = 10;
@@ -48,7 +47,7 @@ export const StepsProgress = () => {
           size='xl'
           value={progressValue}
         />
-        <div className='h-fit bg-grayLight rounded-[10px] p-4 flex items-start justify-between gap-2 w-full lgl:flex-row flex-col'>
+        <div className='h-fit bg-grayLight rounded-[10px] p-4 flex items-start justify-between gap-4 w-full lgl:flex-row flex-col'>
           {steps.map((step, index) => (
             <div key={index + 261652}>
               <Step
@@ -67,29 +66,52 @@ export const StepsProgress = () => {
 
 const Step = ({ step, isDone = false, length, index }) => {
   return (
-    <div className={clsx('space-y-2 w-full', !isDone && 'opacity-40')}>
+    <div
+      className={clsx(
+        'space-y-2 w-full relative flex items-start gap-5 lgl:block',
+        !isDone && 'opacity-40'
+      )}
+    >
+      {/* ICON */}
+
       <div
         className={clsx(
-          'relative after:absolute after:h-[1px] after:w-full after:bg-grayDark after:top-1/2 after:-translate-y-1/2 after:left-0',
-          isDone && 'after:bg-greenMain',
-          length === index + 1 && 'after:hidden'
+          'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10',
+          isDone ? 'bg-greenMain' : 'bg-grayDark text-white text-[20px]'
         )}
       >
-        <div
-          className={clsx(
-            'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10',
-            isDone ? 'bg-greenMain' : 'bg-grayDark text-white text-[20px]'
-          )}
-        >
-          {isDone ? <CheckIcon /> : index + 1}
-        </div>
+        {isDone ? <CheckIcon /> : index + 1}
       </div>
-      <p className='text-black w-full flex items-center font-semibold'>
-        {step.label}
-      </p>
-      <p className='text-black text-xs lgl:max-w-[187px] text-end lgl:text-start'>
-        {step.description}
-      </p>
+
+      <div className='space-y-1 items-start flex flex-1 lgl:block'>
+        {/* LABEL */}
+        <p className='text-black min-w-40 lgl:min-w-fit font-semibold'>
+          {step.label}
+        </p>
+
+        {/* DESCRIPTION */}
+        <p className='text-black text-xs lgl:max-w-[187px]'>
+          {step.description}
+        </p>
+      </div>
+
+      {/* STEP LINE */}
+      {index !== length - 1 && (
+        <>
+          <div
+            className={clsx(
+              'absolute w-full hidden lgl:block h-[1px] start-0 !m-0 top-4 bg-grayDark',
+              isDone && 'bg-greenMain'
+            )}
+          />
+          <div
+            className={clsx(
+              'absolute w-[1px] h-[calc(100%-16px)] lgl:hidden start-4 top-5 bg-grayDark',
+              isDone && 'bg-greenMain'
+            )}
+          />
+        </>
+      )}
     </div>
   );
 };
