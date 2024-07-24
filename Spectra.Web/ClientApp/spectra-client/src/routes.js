@@ -9,57 +9,57 @@ const ROUTES = {
     RESET_PASSWORD: "/reset-password",
   },
   ADMIN: {
-    MAIN: "/main",
-    APPOINTMENTS: "/appointments",
-    REQUESTS: "/requests",
-    REQUESTSNEW: "/requests/new",
-    REQUESTSREJECTED: "/requests/rejected",
+    MAIN: "/admin/main",
+    APPOINTMENTS: "/admin/appointments",
+    REQUESTS: "/admin/requests",
+    REQUESTSNEW: "/admin/requests/new",
+    REQUESTSREJECTED: "/admin/requests/rejected",
     CLIENTS: {
-      DASHBOARD: "/clients",
+      DASHBOARD: "/admin/clients",
       ORGANIZATION: {
-        DETAILS: (id) => `/clients/organization/${id}/details`,
-        DETAILSEDIT: (id) => `/clients/organization/${id}/details/edit`,
-        EMPLOYEE: (id) => `/clients/organization/${id}/employee`,
-        CLIENTS: (id) => `/clients/organization/${id}/clients`,
-        DOCTORS: (id) => `/clients/organization/${id}/doctors`,
-        DOCTORSDETAILS: (id,id2) => `/clients/organization/${id}/doctors/${id2}`,
-        APPOINTMENTS: (id) => `/clients/organization/${id}/appointments`,
-        PRESCRIPTIONS: (id) => `/clients/organization/${id}/prescriptions`,
-        PATIENTS: (id) => `/clients/organization/${id}/patients`,
-        PATIENTSEDIT: (id) => `/clients/organization/${id}/patients/edit`,
-        PATIENTSDETAILS: (id,id2) => `/clients/organization/${id}/patients/${id2}`,
+        DETAILS: (id) => `/admin/clients/organization/${id}/details`,
+        DETAILSEDIT: (id) => `/admin/clients/organization/${id}/details/edit`,
+        EMPLOYEE: (id) => `/admin/clients/organization/${id}/employee`,
+        CLIENTS: (id) => `/admin/clients/organization/${id}/clients`,
+        DOCTORS: (id) => `/admin/clients/organization/${id}/doctors`,
+        DOCTORSDETAILS: (id,id2) => `/admin/clients/organization/${id}/doctors/${id2}`,
+        APPOINTMENTS: (id) => `/admin/clients/organization/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/admin/clients/organization/${id}/prescriptions`,
+        PATIENTS: (id) => `/admin/clients/organization/${id}/patients`,
+        PATIENTSEDIT: (id) => `/admin/clients/organization/${id}/patients/edit`,
+        PATIENTSDETAILS: (id,id2) => `/admin/clients/organization/${id}/patients/${id2}`,
       },
       FAMILY: {
-        DETAILS: (id) => `/clients/family/${id}/details`,
-        DETAILSEDIT: (id) => `/clients/family/${id}/details/edit`,
-        APPOINTMENTS: (id) => `/clients/family/${id}/appointments`,
-        PRESCRIPTIONS: (id) => `/clients/family/${id}/prescriptions`,
-        PATIENTS: (id) => `/clients/family/${id}/patients`,
-        PATIENTSDETAILS: (id,id2) => `/clients/family/${id}/patients/${id2}`,
+        DETAILS: (id) => `/admin/clients/family/${id}/details`,
+        DETAILSEDIT: (id) => `/admin/clients/family/${id}/details/edit`,
+        APPOINTMENTS: (id) => `/admin/clients/family/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/admin/clients/family/${id}/prescriptions`,
+        PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
+        PATIENTSDETAILS: (id,id2) => `/admin/clients/family/${id}/patients/${id2}`,
         
       },
       PATIENTSDETAILS:{
-        DETAILS: (id) => `/clients/patientDetails/${id}/details`,
-        EDIT: (id) => `/clients/patientDetails/${id}/edit`,
+        DETAILS: (id) => `/admin/clients/patientDetails/${id}/details`,
+        EDIT: (id) => `/admin/clients/patientDetails/${id}/edit`,
       }
     },
     STAFF:{
-      DASHBOARD: "/staff",
-      STAFFID:(id)=> `/staff/${id}`
+      DASHBOARD: "/admin/staff",
+      STAFFID:(id)=> `/admin/staff/${id}`
     },
     REPORT:{
-      DASHBOARD: "/reports",
-      REPORTID:(id)=> `/reports/${id}`
+      DASHBOARD: "/admin/reports",
+      REPORTID:(id)=> `/admin/reports/${id}`
     },
     CONTRACTS:{
-      DASHBOARD: "/contracts",
-      REQUESTS: "/contracts/requests",
-      EXPIRED: "/contracts/expired",
-      CONTRACTSID:(id)=> `/contracts/${id}`
+      DASHBOARD: "/admin/contracts",
+      REQUESTS: "/admin/contracts/requests",
+      EXPIRED: "/admin/contracts/expired",
+      CONTRACTSID:(id)=> `/admin/contracts/${id}`
     },
-    PERMISSIONS: "/permissions",
-    CONTENT: "/content",
-    PLANS: "/plans",
+    PERMISSIONS: "/admin/permissions",
+    CONTENT: "/admin/content",
+    PLANS: "/admin/plans",
   },
 };
 

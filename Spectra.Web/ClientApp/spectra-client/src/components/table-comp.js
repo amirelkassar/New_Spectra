@@ -80,7 +80,7 @@ function TableComponents({
                   : ""
               } ${
                 i === hide - 1 ? " hidden md:block" : "block"
-              }   bg-blueLight h-[44px] md:h-auto  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px] z-[2]`}
+              }   bg-blueLight h-[44px] md:h-auto  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px] z-[0]`}
             >
               {item}
             </div>
@@ -185,7 +185,7 @@ function TableComponents({
                     </div>
                   </div>
                 )}
-                {contracts.open && contracts.type === "old" ? (
+                {contracts?.open && contracts?.type === "old" ? (
                   item.active ? (
                     <div className="mx-6 flex items-center gap-4">
                       <div className="bg-[#F1FCFF] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
@@ -202,7 +202,7 @@ function TableComponents({
                         الغاء العقد
                       </Button>
                     </div>
-                  ) : (
+                  )  : (
                     <div className="mx-6 flex items-center gap-4" key={j + orderItem}>
                       <div className="bg-[#FFF2F2] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
                         <span className=" size-3 rounded-[50%]  bg-red  z-[1] md:block hidden"></span>
@@ -219,7 +219,7 @@ function TableComponents({
                       </Button>
                     </div>
                   )
-                ) : (
+                ) :contracts?.open && contracts?.type === "new" ? (
                   <div className="mx-6 flex items-center gap-4" key={j + orderItem}>
                     <Button
                       onClick={() => {
@@ -244,7 +244,7 @@ function TableComponents({
                       رفض
                     </Button>
                   </div>
-                )}
+                ):null}
                 <MenuActions
                   type={type || 1}
                   routeClients={routeClients}

@@ -8,7 +8,7 @@ import Button from "./button";
 import DeleteModalIcon from "@/assets/icons/deleteModal";
 import ModalType from "./modalType";
 import ModalDate from "./modalDate";
-import ModalSelect from "@/app/[locale]/(dashboard)/clients/components/modalSelect";
+import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
 
 function ModalReq({ state, id, GroubId, numItem, cancel }) {
   const { modalOneOpen, setModalOneOpen, modal, editModal } = useMenu();
