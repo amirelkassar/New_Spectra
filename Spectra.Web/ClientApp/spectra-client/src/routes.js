@@ -66,6 +66,9 @@ const ROUTES = {
     APPOINTMENTS: "/doctor/appointments",
     APPOINTMENTSCANCELD: "/doctor/appointments/cancelled",
     APPOINTMENTSDEFERRED: "/doctor/appointments/deferred",
+    RATINGS:{
+      DASHBOARD: "/doctor/ratings",
+    },
     CLIENTS: {
       DASHBOARD: "/doctor/clients",
       ORGANIZATION: {
@@ -95,7 +98,12 @@ const ROUTES = {
         EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
       }
     },
-   
+    WALLET:{
+      DASHBOARD: "/doctor/wallet",
+    },
+    PROFILE:{
+      DASHBOARD: "/doctor/profile",
+    },
     CONTRACTS:{
       DASHBOARD: "/doctor/contracts",
       REQUESTS: "/doctor/contracts/requests",

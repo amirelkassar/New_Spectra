@@ -22,7 +22,7 @@ const AppoFilteration = () => {
       <RadioGroup
         value={selected}
         onChange={setSelected}
-        className="flex items-center gap-3 lg:gap-7 h-auto flex-wrap gap-y-3"
+        className="flex items-center gap-3 lg:gap-7 h-auto max-w-full overflow-auto px-4 mdl:px-0 mdl:flex-wrap gap-y-3"
       >
         {options.map((option) => (
           <Radio

@@ -14,7 +14,7 @@ import ModalJoin from "./modalJoin";
 function ModalReq({ state, id, GroubId, numItem, cancel }) {
   const { modalOneOpen, setModalOneOpen, modal, editModal } = useMenu();
 
-  console.log(modal);
+
   return (
     <Modal
       opened={modal.open}

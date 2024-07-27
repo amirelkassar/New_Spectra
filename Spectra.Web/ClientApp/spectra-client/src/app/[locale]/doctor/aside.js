@@ -4,20 +4,14 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Collapse, Box } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import Appointments from "@/assets/icons/appointments";
-import Subscription from "@/assets/icons/subscription";
 import Customer from "@/assets/icons/customer";
-import ReportsIcon from "@/assets/icons/reportsIcon";
 import SettingsIcon from "@/assets/icons/settings";
-import StaffIcon from "@/assets/icons/staff";
 import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
-import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
 import { Link } from "@/navigation";
@@ -27,76 +21,77 @@ import WalletIcon from "@/assets/icons/wallet";
 import ProfileIcon from "@/assets/icons/profile";
 import ChatsIcon from "@/assets/icons/chats";
 
-const Aside = ({ close }) => {
-  
-  const [openMenuMob, setopenMenuMob] = useState(close);
-  const menue = useMenu();
+const Aside = () => {
+  const menu = useMenu();
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenAppointments, setIsOpenAppointments] = useState(false);
   const path = usePathname();
-  const mainLinks = [
-    {
-      name: "الرئيسية",
-      route: ROUTES.DOCTOR.MAIN,
-      isActive: path.includes(ROUTES.DOCTOR.MAIN),
-      icon: <MainIcon />,
-    },
-    {
-      name: "المواعيد",
-      route: ROUTES.DOCTOR.APPOINTMENTS,
-      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
-      icon: <Appointments />,
-      type:'appointments'
-    },
-    {
-      name: "تقييمات",
-      route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
-      icon: <RatingsIcon />,
-    },
-    {
-      name: "العملاء",
-      route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
-      icon: <Customer />,
-    },
-    {
-      name: "المحفظة",
-      route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
-      icon: <WalletIcon />,
-    },
-    {
-      name: "ملف",
-      route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
-      icon: <ProfileIcon />,
-    },
-    {
-      name: "العقود",
-      route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
-      icon: <ContractsIcon />,
-    },
-  
-    {
-      name: "محادثات",
-      route: ROUTES.DOCTOR.CHATS.DASHBOARD,
-      isActive: path.includes(ROUTES.DOCTOR.CHATS.DASHBOARD),
-      icon: <ChatsIcon />,
-    },
-   
-    {
-      name: "الإعدادات",
-      route: ROUTES.DOCTOR.PERMISSIONS,
-      isActive:
-        path.includes(ROUTES.DOCTOR.PERMISSIONS) ||
-        path.includes(ROUTES.DOCTOR.CONTENT) ||
-        path.includes(ROUTES.DOCTOR.PLANS),
-      icon: <SettingsIcon />,
-      type: "settings",
-    },
-  ];
+  const mainLinks = useMemo(
+    () => [
+      {
+        name: "الرئيسية",
+        route: ROUTES.DOCTOR.MAIN,
+        isActive: path.includes(ROUTES.DOCTOR.MAIN),
+        icon: <MainIcon />,
+      },
+      {
+        name: "المواعيد",
+        route: ROUTES.DOCTOR.APPOINTMENTS,
+        isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
+        icon: <Appointments />,
+        type: "appointments",
+      },
+      {
+        name: "تقييمات",
+        route: ROUTES.DOCTOR.RATINGS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.RATINGS.DASHBOARD),
+        icon: <RatingsIcon />,
+      },
+      {
+        name: "العملاء",
+        route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
+        icon: <Customer />,
+      },
+      {
+        name: "المحفظة",
+        route: ROUTES.DOCTOR.WALLET.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
+        icon: <WalletIcon />,
+      },
+      {
+        name: "ملف",
+        route: ROUTES.DOCTOR.PROFILE.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.PROFILE.DASHBOARD),
+        icon: <ProfileIcon />,
+      },
+      {
+        name: "العقود",
+        route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
+        icon: <ContractsIcon />,
+      },
+
+      {
+        name: "محادثات",
+        route: ROUTES.DOCTOR.CHATS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.CHATS.DASHBOARD),
+        icon: <ChatsIcon />,
+      },
+
+      {
+        name: "الإعدادات",
+        route: ROUTES.DOCTOR.PERMISSIONS,
+        isActive:
+          path.includes(ROUTES.DOCTOR.PERMISSIONS) ||
+          path.includes(ROUTES.DOCTOR.CONTENT) ||
+          path.includes(ROUTES.DOCTOR.PLANS),
+        icon: <SettingsIcon />,
+        type: "settings",
+      },
+    ],
+    [path]
+  );
   const settingsLinks = [
     {
       name: "الأذونات",
@@ -173,8 +168,8 @@ const Aside = ({ close }) => {
   );
   return (
     <aside
-      className={`  top-0 start-0 ${menue.menuOpen ? "openMob" : ""} ${
-        menue.menuOpen
+      className={`  top-0 start-0 ${menu.menuOpen ? "openMob" : ""} ${
+        menu.menuOpen
           ? "min-w-[50px] w-[50px] closeMenue"
           : "min-w-[230px] w-[230px]"
       }  py-10 mdl:flex flex-col font-bold duration-300`}
@@ -186,7 +181,7 @@ const Aside = ({ close }) => {
         <div
           className={`hideShowLinks  flex  w-[34px] h-[34px] rounded-[50%] `}
           onClick={() => {
-            menue.setmenuOpen(!menue.menuOpen);
+            menu.setmenuOpen(!menu.menuOpen);
           }}
         >
           <ArrowNav />
@@ -247,7 +242,7 @@ const Aside = ({ close }) => {
                   </span>
                 </button>
               </div>
-              <div className="  lg:!block hidden" >
+              <div className="  lg:!block hidden">
                 <Collapse
                   in={isOpenSettings}
                   className=" dropMenuDash  flex flex-col gap-3 mt-4 px-4"

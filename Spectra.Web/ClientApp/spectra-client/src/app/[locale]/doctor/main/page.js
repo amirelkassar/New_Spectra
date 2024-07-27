@@ -15,7 +15,7 @@ const MainDashboardPage = () => {
         <Cards />
         <LastAppointments />
         <BookingCode/>
-        <ModalReq state={"cancellation"} />
+        
 
       </div>
     </div>
