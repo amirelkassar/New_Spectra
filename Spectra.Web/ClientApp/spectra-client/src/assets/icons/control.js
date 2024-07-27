@@ -6,7 +6,6 @@ const ControlIcon = () => {
       width='22'
       height='18'
       viewBox='0 0 22 18'
-      fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
       <mask
@@ -56,10 +55,7 @@ const ControlIcon = () => {
         />
       </mask>
       <g mask='url(#mask0_2978_11236)'>
-        <path
-          d='M-0.949219 -2.70117H22.4508V20.6988H-0.949219V-2.70117Z'
-          fill='#010036'
-        />
+        <path d='M-0.949219 -2.70117H22.4508V20.6988H-0.949219V-2.70117Z' />
       </g>
     </svg>
   );

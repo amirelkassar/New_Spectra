@@ -18,6 +18,9 @@ module.exports = {
       fontSize: {
         medium: ['20px', '30px'],
       },
+      boxShadow: {
+        sidebar: '0px -14px 51.7px 8px #0000001A',
+      },
       colors: {
         greenMain: '#10B0C1',
         green: '#B3D9E2',

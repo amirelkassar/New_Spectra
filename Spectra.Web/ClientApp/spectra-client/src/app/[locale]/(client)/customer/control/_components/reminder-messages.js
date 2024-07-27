@@ -26,7 +26,7 @@ export const ReminderMessages = () => {
   return (
     <section>
       <Card title='رسائل التذكير' className='my-8'>
-        <button className='absolute top-1 left-1 mdl:top-5 mdl:left-5'>
+        <button className='absolute top-1 end-1 mdl:top-5 mdl:end-5'>
           <PlusInsideCircleIcon className='size-8' />
         </button>
 

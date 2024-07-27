@@ -1,14 +1,11 @@
 'use client';
-import { Avatar } from '@mantine/core';
+import { Avatar, Popover } from '@mantine/core';
 import { useState } from 'react';
 
 import Card from '@/components/card';
-import ThreeDotsIcon from '@/assets/icons/three-dots';
-import ArrowLeftMainGreen from '@/assets/icons/arrow-left-mainGreen';
-import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
 import StarGoldIcon from '@/assets/icons/starGold';
 import Button from '@/components/button';
-import clsx from 'clsx';
+import ChildPopover from '../../../_components/child-popover';
 
 const data = [
   {
@@ -61,77 +58,47 @@ const data = [
       },
     ],
   },
+  {
+    id: 2,
+    avatar: '',
+    fullname: 'علي محمد علي',
+    diagnosis: 'فرط حركة',
+    gender: 'ذكر',
+    age: 10,
+    reports: 2,
+    sessions: 8,
+    followUps: 8,
+    treatmentTeam: [
+      {
+        name: 'احمد محمد كمال',
+        profession: 'اخصائى نفسي',
+        rate: '9.4',
+        avatar: '',
+      },
+      {
+        name: 'احمد محمد كمال',
+        profession: 'اخصائى نفسي',
+        rate: '9.2',
+        avatar: '',
+      },
+    ],
+  },
 ];
+
 export const ChildCards = () => {
   const [selectedChild, setSelectedChild] = useState(0);
 
   return (
-    <section className='mdl:flex gap-8 my-8'>
-      <div className='flex shrink-0 gap-x-4 overflow-x-auto mdl:block mdl:overflow-hidden mdl:space-y-3 bg-white max-h-[781px] overflow-y-scroll'>
-        {data.map((data) => (
-          <Child
-            key={'child_info' + data.id}
-            {...data}
-            child={selectedChild}
-            setChild={setSelectedChild}
-          />
-        ))}
+    <section className='gap-8 my-8 relative space-y-5'>
+      <div className='w-full'>
+        <ChildPopover
+          data={data}
+          selectedChild={selectedChild}
+          setSelectedChild={setSelectedChild}
+        />
       </div>
-
       <ChildDetails {...data[selectedChild]} />
     </section>
-  );
-};
-
-const Child = ({
-  avatar = '',
-  fullname = '',
-  diagnosis = '',
-  id,
-  child,
-  setChild,
-}) => {
-  return (
-    <Card
-      size='sm'
-      className={clsx(
-        'transition group hover:bg-blueLight min-w-[220px] mdl:w-full mdl:py-10 !px-3 mdl:!px-8 min-h-20',
-        child === id && 'bg-blueLight'
-      )}
-    >
-      {/* MAIN INFO */}
-      <div
-        onClick={() => setChild(id)}
-        role='button'
-        className='mdl:space-y-4 flex items-start mdl:block gap-x-2'
-      >
-        <Avatar
-          variant='filled'
-          src={avatar || ''}
-          className='size-[25px] mdl:size-[58px] min-w-max rounded-full inline-flex'
-          color='cyan'
-          radius='xl'
-        >
-          {fullname?.slice(0, 2)?.toUpperCase()}
-        </Avatar>
-
-        <div className='text-black text-xs mdl:text-base w-fit'>
-          <h4 className='font-bold w-fit'>الطفل / {fullname}</h4>
-          <p className='w-fit'>{diagnosis}</p>
-        </div>
-      </div>
-
-      {/* ACTION ICONS */}
-      <span className='absolute size-5 mdl:size-9 bg-transparent rounded-full flex items-center justify-center cursor-pointer top-3 end-1 mdl:top-3 mdl:end-3'>
-        <ThreeDotsIcon />
-      </span>
-      <span className='absolute bottom-3 end-3 bg-blueLight group-hover:bg-white rounded-full size-9 items-center justify-center hidden mdl:flex'>
-        <ArrowLeftMainGreen />
-      </span>
-      <span className='absolute bottom-3 end-1 bg-blueLight group-hover:bg-white rounded-full size-5 items-center justify-center flex mdl:hidden'>
-        <ArrowDownMainGreen />
-      </span>
-    </Card>
   );
 };
 
@@ -231,7 +198,7 @@ const ChildDetails = ({
         </div>
 
         {/* ACTION BUTTONS */}
-        <div className='flex *:flex-1 gap-5 font-bold text-sm mdl:text-medium text-black flex-col mdl:flex-row'>
+        <div className='flex *:flex-1 gap-5 font-bold text-sm mdl:text-medium text-black flex-col px-2 mdl:flex-row'>
           <Button>مرفقات</Button>
           <Button>وصفات طبية</Button>
         </div>

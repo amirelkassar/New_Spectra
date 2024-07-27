@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 import React from 'react';
 
-const Button = ({ className, variant = 'primary', children, ...rest }) => {
+const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
   const baseClasses =
-    'flex items-center justify-center gap-5  transition-all  px-7 ';
+    'flex items-center justify-center gap-5 transition-all px-7';
 
   let variantClasses = '';
 
@@ -21,7 +21,7 @@ const Button = ({ className, variant = 'primary', children, ...rest }) => {
       break;
     case 'blueLight':
       variantClasses =
-        'rounded-[10px] text-black bg-blueLight py-3 font-bold mdl:text-base text-xs !px-5';
+        'rounded-[10px] py-2 text-black bg-blueLight font-bold mdl:text-base text-xs';
       break;
     default:
       variantClasses = '';
@@ -30,7 +30,7 @@ const Button = ({ className, variant = 'primary', children, ...rest }) => {
   return (
     <button
       type='button'
-      className={clsx(baseClasses, variantClasses, className)}
+      className={cn(baseClasses, variantClasses, className)}
       {...rest}
     >
       {children}

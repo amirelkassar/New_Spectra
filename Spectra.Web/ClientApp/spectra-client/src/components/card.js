@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 const Card = ({ title = '', children, className, size = 'lg' }) => {
@@ -6,7 +6,7 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
     <>
       {size === 'lg' && (
         <div
-          className={clsx(
+          className={cn(
             'mdl:rounded-[10px] mdl:bg-white p-1 mdl:p-5 relative w-full max-w-full',
             className
           )}
@@ -22,7 +22,7 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
           style={{
             boxShadow: '0px 4px 12px 0px #0000000A',
           }}
-          className={clsx(
+          className={cn(
             'bg-white flex-1 w-fit max-w-full py-3 px-8 rounded-[10px] min-w-[213px] mdl:min-w-max relative',
             className
           )}

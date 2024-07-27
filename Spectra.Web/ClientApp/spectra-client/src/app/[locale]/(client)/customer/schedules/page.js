@@ -1,7 +1,7 @@
-import React from 'react';
-
-const schedulesPage = () => {
-  return <div>schedulesPage</div>;
+import { redirect } from '@/navigation';
+const Page = () => {
+  redirect('/customer/schedules/current');
+  return null;
 };
 
-export default schedulesPage;
+export default Page;

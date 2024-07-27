@@ -11,7 +11,7 @@ export const Section = ({
   props,
 }) => {
   return (
-    <section role='region' {...props} className='my-16 w-full'>
+    <section role='region' {...props} className='mt-16 w-full'>
       <div className={className}>
         {type === 'basic' && (
           <h2
@@ -31,15 +31,15 @@ export const Section = ({
             </h2>
             <Button className='flex items-center text-black font-bold md:leading-6 text-xs md:text-base'>
               <span>{btnLabel}</span>
-              <ArrowLeft />
+              <ArrowLeft className='ltr:rotate-180' />
             </Button>
           </div>
         )}
         {type === 'button' && (
           <div className='w-full relative mb-10'>
-            <Button className='block mr-auto text-black font-bold leading-6'>
+            <Button className='flex ms-auto text-black font-bold leading-6'>
               <span>{btnLabel}</span>
-              <ArrowLeft />
+              <ArrowLeft className='ltr:rotate-180' />
             </Button>
           </div>
         )}

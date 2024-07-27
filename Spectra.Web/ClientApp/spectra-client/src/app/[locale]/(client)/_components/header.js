@@ -1,67 +1,107 @@
 'use client';
 
-import ArrowNav from '@/assets/icons/arrow-nav';
+// GLOBAL IMPORTS
+import { useCallback } from 'react';
+import { useLocale } from 'next-intl';
+import { usePathname, Link } from '@/navigation';
+
+// STORE
+import { useSidebar } from '@/store/client/sidebar/menu-slice';
+
+// ICONS
 import Logo from '@/assets/icons/logo';
+import ArrowNav from '@/assets/icons/arrow-nav';
 import MenuDash from '@/assets/icons/menuDash';
 import NotificationIcon from '@/assets/icons/notification';
 import SearchIcon from '@/assets/icons/search';
-import { Link, usePathname } from '@/navigation';
-import { useSidebar } from '@/store/client/sidebar/menu-slice';
-import { useLocale } from 'next-intl';
+import Button from '@/components/button';
 
+// COMPONENT
 export const Header = () => {
   const { isOpen, setIsOpen } = useSidebar();
   const locale = useLocale();
   const pathname = usePathname();
 
+  //  HANDLE OPEN & CLOSE SIDEBAR BUTTON ON BOTH LANGUAGES
+  const handleOpenNavButton = useCallback(() => {
+    if (!isOpen && locale === 'ar') {
+      return {
+        transform: 'rotateY(180deg)',
+      };
+    }
+
+    if (isOpen && locale === 'en') {
+      return {
+        transform: 'rotateY(180deg)',
+      };
+    }
+
+    return {};
+  }, [isOpen, locale]);
+
   return (
-    <header className='h-9 md:h-16 flex items-center gap-[10px] md:gap-[28px]'>
+    <header className='h-9 lg:h-16 flex items-center gap-[10px] lg:gap-[28px]'>
+      {/* OPEN & CLOSE SIDEBAR */}
+
+      {/* MOBILE */}
       <button
-        className={`hideShowLinks2   w-[34px] h-[34px] rounded-[50%] `}
+        className={`size-9 items-center justify-center rounded-full flex lg:hidden bg-blueLight`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <MenuDash />
       </button>
+
+      {/* DESKTOP */}
       <button
-        className={`hideShowLinks flex  w-[34px] h-[34px] rounded-[50%] ${
-          isOpen ? 'closeArrow' : ''
-        }`}
+        className='hidden lg:flex size-9 rounded-full items-center justify-center transition bg-blueLight'
+        style={handleOpenNavButton()}
         onClick={() => setIsOpen(!isOpen)}
       >
         <ArrowNav />
       </button>
+
+      {/* LOGO */}
       <Link href={'#'} className='block w-fit '>
-        <Logo className={'w-[91px] h-[37px]'} />
+        <Logo className={'w-[91px] h-9'} />
       </Link>
+
+      {/* SEARCH INPUT  */}
       <div className='flex items-center justify-end  grow'>
-        <button className='  p-[9px] md:p-0 size-[34px] md:size-[45px] bg-greenMain mx-[10p] md:mx-[20px]  rounded-full flex items-center justify-center'>
+        <button className='p-[9px] md:p-0 size-[34px] md:size-[45px] bg-greenMain mx-[10p] md:mx-[20px] rounded-full flex items-center justify-center'>
           <SearchIcon />
         </button>
+
         <input
           type='text'
           className='grow hidden md:block h-10 bg-gray rounded-full px-5 focus:outline-greenMain'
           placeholder='بحث...'
         />
       </div>
-      <button className=' font-bold text-[12px]  relative p-[10px] md:p-5 size-[34px] md:size-[52px] bg-greenLight rounded-full flex items-center justify-center'>
-        <Link
-          href={pathname}
-          locale={locale === 'en' ? 'ar' : 'en'}
-          className=' font-bold text-[12px]  relative p-[10px] md:p-5 size-[34px] md:size-[52px] bg-greenLight rounded-full flex items-center justify-center'
-        >
+
+      {/* LANGUAGE BUTTON */}
+      <Button
+        variant='blueLight'
+        className='!rounded-full block shrink-0 text-xs lg:text-base p-4'
+      >
+        <Link href={pathname} locale={locale === 'en' ? 'ar' : 'en'}>
           {locale === 'en' ? 'عربي' : 'En'}
         </Link>
-      </button>
-      <button className=' relative p-[9px] md:p-0 size-[34px] md:size-[52px] bg-greenLight rounded-full flex items-center justify-center'>
-        <p
+      </Button>
+
+      {/* NOTIFICATION BUTTON */}
+      <Button
+        variant='blueLight'
+        className='relative shrink-0 p-3 !rounded-full'
+      >
+        <span
           className={
-            'numNotfication size-[18px] md:size-[22px]  p-1 rounded-full bg-[#FF3D3D] absolute bottom-0 right-[-6px] text-white flex items-center justify-center text-[10px] md:text-[12px] font-bold'
+            'size-5 text-sm p-1 rounded-full bg-red absolute bottom-0 -start-1 text-white flex items-center justify-center font-bold'
           }
         >
           1
-        </p>
+        </span>
         <NotificationIcon />
-      </button>
+      </Button>
     </header>
   );
 };

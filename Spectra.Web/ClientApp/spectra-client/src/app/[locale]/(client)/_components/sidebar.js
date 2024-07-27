@@ -1,21 +1,17 @@
 'use client';
-import ArrowDownIcon from '@/assets/icons/arrow-down';
 
-import MainIcon from '@/assets/icons/main';
-import ROUTES from '@/routes';
 import clsx from 'clsx';
+import React, { useMemo, useCallback, useRef, useEffect } from 'react';
+import { Link, usePathname } from '@/navigation';
 
-import React, { useState } from 'react';
-import { Collapse, Box } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-
+import { useSidebar } from '@/store/client/sidebar/menu-slice';
+import ROUTES from '@/routes';
+import MainIcon from '@/assets/icons/main';
 import SettingsIcon from '@/assets/icons/settings';
 import StaffIcon from '@/assets/icons/staff';
 import ArrowNav from '@/assets/icons/arrow-nav';
 import Logo from '@/assets/icons/logo';
 import LogoutIcon from '@/assets/icons/logOut';
-import { Link, usePathname } from '@/navigation';
-import { useSidebar } from '@/store/client/sidebar/menu-slice';
 import ControlIcon from '@/assets/icons/control';
 import ProfileIcon from '@/assets/icons/profile';
 import ClockIcon from '@/assets/icons/clock';
@@ -26,166 +22,141 @@ import ChatIcon from '@/assets/icons/chat';
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
   const path = usePathname();
-
-  const mainLinks = [
-    {
-      name: 'الرئيسية',
-      route: ROUTES.CLIENT.MAIN,
-      isActive: path === ROUTES.CLIENT.MAIN,
-      icon: <MainIcon />,
-    },
-    {
-      name: 'قائمة التحكم',
-      route: ROUTES.CLIENT.CONTROL_MENU,
-      isActive: path === ROUTES.CLIENT.CONTROL_MENU,
-      icon: <ControlIcon />,
-    },
-    {
-      name: 'ملفي',
-      route: ROUTES.CLIENT.PROFILE,
-      isActive: path === ROUTES.CLIENT.PROFILE,
-      icon: <ProfileIcon />,
-    },
-    {
-      name: 'المواعيد',
-      route: ROUTES.CLIENT.SCHEDULES,
-      isActive: path === ROUTES.CLIENT.SCHEDULES,
-      icon: <ClockIcon />,
-    },
-    {
-      name: 'الخطوات',
-      route: ROUTES.CLIENT.STEPS,
-      isActive: path === ROUTES.CLIENT.STEPS,
-      icon: <StepsIcon />,
-    },
-    {
-      name: 'الفريق',
-      route: ROUTES.CLIENT.TEAM,
-      isActive: path === ROUTES.CLIENT.TEAM,
-      icon: <StaffIcon />,
-    },
-    {
-      name: 'تقارير',
-      route: ROUTES.CLIENT.REPORTS,
-      isActive: path === ROUTES.CLIENT.REPORTS,
-      icon: <ReportsIcon />,
-    },
-    {
-      name: 'محادثات',
-      route: ROUTES.CLIENT.CHATS,
-      isActive: path === ROUTES.CLIENT.CHATS,
-      icon: <ChatIcon />,
-    },
-    {
-      name: 'الإعدادات',
-      route: ROUTES.CLIENT.SETTINGS,
-      isActive: path === ROUTES.CLIENT.SETTINGS,
-      icon: <SettingsIcon />,
-    },
-  ];
-  const settingsLinks = [
-    {
-      name: 'الأذونات',
-      route: ROUTES.ADMIN.PERMISSIONS,
-      isActive: path.includes(ROUTES.ADMIN.PERMISSIONS),
-    },
-    {
-      name: 'المحتوى',
-      route: ROUTES.ADMIN.CONTENT,
-      isActive: path.includes(ROUTES.ADMIN.CONTENT),
-    },
-    {
-      name: 'الخطط',
-      route: ROUTES.ADMIN.PLANS,
-      isActive: path.includes(ROUTES.ADMIN.PLANS),
-    },
-  ];
-
-  const AsideLink = ({ link }) => (
-    <li className='relative'>
-      <Link
-        href={link.route}
-        className={`flex items-center gap-[10px] md:gap-[18px] w-fit py-1 ${
-          link.isActive ? 'active' : ''
-        }`}
-      >
-        {link.icon}
-        <span
-          className={clsx('text-[14px] lg:text-[18px] font-Bold', {
-            hidden: isOpen,
-          })}
-        >
-          {link.name}
-        </span>
-        <div
-          className={clsx(
-            'lineAfterLinks',
-            link.isActive ? 'opacity-100' : 'opacity-0'
-          )}
-        />
-      </Link>
-    </li>
+  const links = useMemo(
+    () => [
+      {
+        name: 'الرئيسية',
+        route: ROUTES.CLIENT.MAIN,
+        isActive: path === ROUTES.CLIENT.MAIN,
+        icon: <MainIcon />,
+      },
+      {
+        name: 'قائمة التحكم',
+        route: ROUTES.CLIENT.CONTROL_MENU,
+        isActive: path === ROUTES.CLIENT.CONTROL_MENU,
+        icon: <ControlIcon />,
+      },
+      {
+        name: 'ملفي',
+        route: ROUTES.CLIENT.PROFILE,
+        isActive: path === ROUTES.CLIENT.PROFILE,
+        icon: <ProfileIcon />,
+      },
+      {
+        name: 'المواعيد',
+        route: ROUTES.CLIENT.SCHEDULES,
+        isActive: path.includes(ROUTES.CLIENT.SCHEDULES),
+        icon: <ClockIcon />,
+      },
+      {
+        name: 'الخطوات',
+        route: ROUTES.CLIENT.STEPS,
+        isActive: path === ROUTES.CLIENT.STEPS,
+        icon: <StepsIcon />,
+      },
+      {
+        name: 'الفريق',
+        route: ROUTES.CLIENT.TEAM,
+        isActive: path === ROUTES.CLIENT.TEAM,
+        icon: <StaffIcon />,
+      },
+      {
+        name: 'تقارير',
+        route: ROUTES.CLIENT.REPORTS,
+        isActive: path === ROUTES.CLIENT.REPORTS,
+        icon: <ReportsIcon />,
+      },
+      {
+        name: 'محادثات',
+        route: ROUTES.CLIENT.CHATS,
+        isActive: path === ROUTES.CLIENT.CHATS,
+        icon: <ChatIcon />,
+      },
+      {
+        name: 'الإعدادات',
+        route: ROUTES.CLIENT.SETTINGS,
+        isActive: path === ROUTES.CLIENT.SETTINGS,
+        icon: <SettingsIcon />,
+      },
+    ],
+    [path]
   );
-  const AsideLink2 = ({ link }) => (
-    <li className='relative'>
-      <div
-        className={clsx(
-          'lineAfterLinks ',
-          link.isActive ? 'opacity-0 ' : 'opacity-0'
-        )}
-      />
-      <Link
-        href={link.route}
-        className={`flex gap-[10px] md:gap-[18px] w-fit py-1`}
-      >
-        {link.icon}
 
-        <p
-          className={`text-[14px] lg:text-[18px] ${
-            link.isActive ? '!font-bold' : 'font-normal'
-          }`}
-        >
-          {link.name}
-        </p>
-      </Link>
-    </li>
-  );
+  const toggleSidebar = useCallback(() => {
+    setIsOpen(!isOpen);
+  }, [isOpen, setIsOpen]);
   return (
     <aside
-      className={`  top-0 start-0 ${isOpen ? 'openMob' : ''} ${
-        isOpen ? 'min-w-[50px] w-[50px] closeMenu' : 'min-w-[230px] w-[230px]'
-      }  py-10 mdl:flex flex-col font-bold duration-300`}
+      className={clsx(
+        'transition-all w-44 lg:w-14 !bg-white h-screen lg:h-full rounded-xl lg:rounded-none fixed lg:sticky top-0 -start-44 z-[999]',
+        isOpen && '!start-0 lg:!w-52'
+      )}
     >
-      <div className='topMobNav'>
-        <Link href={'#'} className='block w-fit '>
-          <Logo className={'w-[91px] h-[37px]'} />
+      <div className='flex lg:hidden items-center p-7 gap-4'>
+        <Link href={ROUTES.CLIENT.MAIN}>
+          <Logo className={'w-[82px] h-[33px]'} />
         </Link>
-        <div
-          className={`hideShowLinks  flex  w-[34px] h-[34px] rounded-[50%] `}
-          onClick={() => setIsOpen(!isOpen)}
+
+        <button
+          className='size-9 ltr:rotate-180 shrink-0 bg-blueLight rounded-full flex items-center justify-center'
+          onClick={toggleSidebar}
         >
           <ArrowNav />
-        </div>
+        </button>
       </div>
-      <nav>
-        <ul className='space-y-5 grow'>
-          {mainLinks.map((link) => (
-            <AsideLink key={link.route} link={link} />
+
+      <nav className='space-y-12 mt-5'>
+        <ul className='space-y-3 p-2 lg:ps-0'>
+          {links.map((link) => (
+            <NavLinks key={link.route} link={link} />
           ))}
         </ul>
+
+        <button className='text-sm lg:text-lg font-bold p-2 lg:ps-0 flex gap-3 items-center'>
+          <span className='size-5'>
+            <LogoutIcon />
+          </span>
+
+          <span className={clsx('text-nowrap', !isOpen && 'lg:hidden')}>
+            تسجيل الخروج
+          </span>
+        </button>
       </nav>
-      <button className='w-fit flex justify-center gap-[10px] items-center mt-auto'>
-        <LogoutIcon />
-        <span
-          className={clsx('text-[14px] lg:text-[16px] font-bold', {
-            hidden: isOpen,
-          })}
-        >
-          تسجيل الخروج
-        </span>
-      </button>
     </aside>
   );
 };
 
 export default Sidebar;
+
+const NavLinks = React.memo(({ link }) => {
+  const { isOpen } = useSidebar();
+
+  return (
+    <li className='relative lg:h-11'>
+      <Link
+        className='flex gap-3 text-sm lg:text-lg text-black p-2 font-bold relative w-fit rounded-lg group'
+        href={link.route}
+      >
+        {/* LINK ICON */}
+        <span
+          className={clsx(
+            'size-5 group-hover:fill-greenMain lg:mt-1',
+            link.isActive && 'fill-greenMain'
+          )}
+        >
+          {link.icon}
+        </span>
+
+        {/* LINK LABEL */}
+        <span className={clsx('text-nowrap', !isOpen && 'lg:hidden')}>
+          {link.name}
+        </span>
+      </Link>
+
+      {/* ACTIVE LINE */}
+      {link.isActive && (
+        <div className='absolute h-full w-3 bg-greenMain rounded-e-md top-0 -start-3 lg:-start-5 z-[999]' />
+      )}
+    </li>
+  );
+});

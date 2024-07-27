@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CalenderIcon = ({ className }) => {
+const CalenderIcon = ({ className = '' }) => {
   return (
     <svg
       width='31'
