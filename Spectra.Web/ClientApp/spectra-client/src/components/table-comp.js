@@ -36,8 +36,7 @@ function TableComponents({
 }) {
   const { modal, editModal } = useMenu();
 
-  console.log("dfdsfdsf");
-  console.log(RouteFun);
+
 
   const toggleRow = (id) => {
     setSelected((prev) =>
@@ -46,7 +45,7 @@ function TableComponents({
         : [...prev, id]
     );
   };
-  console.log(header.length);
+
   const getStar = (num) => {
     const stars = [];
     for (let i = 1; i <= num; i++) {
@@ -66,10 +65,9 @@ function TableComponents({
     >
       <div className=" contents ">
         {header.map((item, i) => {
-          console.log(i);
           return (
             <div
-              key={i}
+              key={i*10}
               className={` ${
                 i === 0
                   ? "rounded-s-xl"
@@ -97,6 +95,7 @@ function TableComponents({
             {order.map((orderItem, j) => {
               return orderItem === "Req&Res" ? (
                 <div
+                key={j}
                   className={clsx(
                     " flex  py-3 ps-4 pe-2 xl:ps-10 me-1 md:me-7 xl:me-5 content-center  items-center gap-3 lg:gap-5 justify-end transition",
                     index === data.length - 1
@@ -158,6 +157,7 @@ function TableComponents({
                 </div>
               ) : orderItem === "status" ? (
                 <div
+                key={j}
                   className={clsx(
                     "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 content-center items-start ",
                     index === data.length - 1
@@ -180,6 +180,7 @@ function TableComponents({
                 </div>
               ) : j === order.length - 1 ? (
                 <div
+                key={j}
                   className={clsx(
                     " flex  py-3 md:ps-4 md:pe-2 xl:ps-10 me-2 md:me-7 xl:me-12 content-center  items-center gap-5 justify-end transition ",
                     index === data.length - 1
