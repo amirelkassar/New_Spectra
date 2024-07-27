@@ -9,6 +9,7 @@ import DeleteModalIcon from "@/assets/icons/deleteModal";
 import ModalType from "./modalType";
 import ModalDate from "./modalDate";
 import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
+import ModalJoin from "./modalJoin";
 
 function ModalReq({ state, id, GroubId, numItem, cancel }) {
   const { modalOneOpen, setModalOneOpen, modal, editModal } = useMenu();
@@ -27,7 +28,7 @@ function ModalReq({ state, id, GroubId, numItem, cancel }) {
     >
       {modal.type === "date" ? (
         <ModalDate id={id}/>
-      ) : modal.type==='addClient'?<ModalSelect/>:(
+      ) :modal.type === "join"? <ModalJoin/> : modal.type==='addClient'?<ModalSelect/>:(
         <ModalType state={modal.type} GroubId={GroubId} />
       )}
     </Modal>

@@ -59,7 +59,7 @@ function HeaderTop() {
       <button className=" relative p-[9px] md:p-0 size-[34px] md:size-[52px] bg-greenLight rounded-full flex items-center justify-center">
         <p
           className={
-            "numNotification size-[18px] md:size-[22px]  p-1 rounded-full bg-[#FF3D3D] absolute bottom-0 right-[-6px] text-white flex items-center justify-center text-[10px] md:text-[12px] font-bold"
+            "numNotification size-[18px] md:size-[22px]  p-1 rounded-full bg-[#FF3D3D] absolute bottom-0  start-[-6px] text-white flex items-center justify-center text-[10px] md:text-[12px] font-bold"
           }
         >
           1

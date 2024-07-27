@@ -83,7 +83,7 @@ function ModalDate({ id }) {
             </div>
           <input
             type="text"
-            className="grow hidden mdl:block !outline-none   rounded-none px-5  flex-1 h-[100%] "
+            className="grow block !outline-none   rounded-none px-5  flex-1 h-[100%] "
            
           />
         </div>

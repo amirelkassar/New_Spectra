@@ -61,6 +61,54 @@ const ROUTES = {
     CONTENT: "/admin/content",
     PLANS: "/admin/plans",
   },
+  DOCTOR: {
+    MAIN: "/doctor/main",
+    APPOINTMENTS: "/doctor/appointments",
+    APPOINTMENTSCANCELD: "/doctor/appointments/cancelled",
+    APPOINTMENTSDEFERRED: "/doctor/appointments/deferred",
+    CLIENTS: {
+      DASHBOARD: "/doctor/clients",
+      ORGANIZATION: {
+        DETAILS: (id) => `/doctor/clients/organization/${id}/details`,
+        DETAILSEDIT: (id) => `/doctor/clients/organization/${id}/details/edit`,
+        EMPLOYEE: (id) => `/doctor/clients/organization/${id}/employee`,
+        CLIENTS: (id) => `/doctor/clients/organization/${id}/clients`,
+        DOCTORS: (id) => `/doctor/clients/organization/${id}/doctors`,
+        DOCTORSDETAILS: (id,id2) => `/doctor/clients/organization/${id}/doctors/${id2}`,
+        APPOINTMENTS: (id) => `/doctor/clients/organization/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/doctor/clients/organization/${id}/prescriptions`,
+        PATIENTS: (id) => `/doctor/clients/organization/${id}/patients`,
+        PATIENTSEDIT: (id) => `/doctor/clients/organization/${id}/patients/edit`,
+        PATIENTSDETAILS: (id,id2) => `/doctor/clients/organization/${id}/patients/${id2}`,
+      },
+      FAMILY: {
+        DETAILS: (id) => `/doctor/clients/family/${id}/details`,
+        DETAILSEDIT: (id) => `/doctor/clients/family/${id}/details/edit`,
+        APPOINTMENTS: (id) => `/doctor/clients/family/${id}/appointments`,
+        PRESCRIPTIONS: (id) => `/doctor/clients/family/${id}/prescriptions`,
+        PATIENTS: (id) => `/doctor/clients/family/${id}/patients`,
+        PATIENTSDETAILS: (id,id2) => `/doctor/clients/family/${id}/patients/${id2}`,
+        
+      },
+      PATIENTSDETAILS:{
+        DETAILS: (id) => `/doctor/clients/patientDetails/${id}/details`,
+        EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
+      }
+    },
+   
+    CONTRACTS:{
+      DASHBOARD: "/doctor/contracts",
+      REQUESTS: "/doctor/contracts/requests",
+      EXPIRED: "/doctor/contracts/expired",
+      CONTRACTSID:(id)=> `/doctor/contracts/${id}`
+    },
+    CHATS:{
+      DASHBOARD: "/doctor/chats",
+    },
+    PERMISSIONS: "/doctor/permissions",
+    CONTENT: "/doctor/content",
+    PLANS: "/doctor/plans",
+  },
 };
 
 export default ROUTES;
