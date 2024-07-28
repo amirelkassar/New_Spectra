@@ -11,7 +11,7 @@ function Comment({comment}) {
     return stars;
   };
   return (
-    <div className="p-5 rounded-2xl bg-white flex items-end justify-between">
+    <div className="p-4 gap-2 flex-col md:flex-row mdl:p-5 md:rounded-2xl bg-white flex md:items-end md:justify-between border-b md:border-none border-grayLight">
       <div className="flex  gap-5 mdl:gap-7 flex-1">
         <AvatarIcon className={'mt-3 size-[38px] mdl:size-[48px]'}/>
         <div className="">
@@ -22,7 +22,7 @@ function Comment({comment}) {
           <h3 className="text-[12px] mdl:text-[16px] ">{comment.title}</h3>
         </div>
       </div>
-      <p className="text-[12px] text-[#808080] min-w-fit">{comment.date}</p>
+      <p className="text-[12px] text-[#808080] min-w-fit self-end">{comment.date}</p>
     </div>
   );
 }
