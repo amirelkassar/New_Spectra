@@ -3,7 +3,7 @@ import React from 'react';
 
 const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
   const baseClasses =
-    'flex items-center justify-center gap-5 transition-all px-7';
+    'flex items-center disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none justify-center gap-5 transition-all px-7';
 
   let variantClasses = '';
 

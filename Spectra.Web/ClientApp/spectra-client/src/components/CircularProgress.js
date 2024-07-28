@@ -2,13 +2,13 @@
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const CircularProgress = ({ percentage }) => {
+const CircularProgress = ({ percentage, text, variant = 'green' }) => {
   return (
     <>
       <CircularProgressbar
         strokeWidth={16}
         value={percentage}
-        text={`${percentage}%`}
+        text={text}
         styles={{
           path: {
             stroke: 'var(--main-color)',

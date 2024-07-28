@@ -37,7 +37,7 @@ const Activity = ({ label = '', done = 20, total = 30, percentage = 70 }) => {
       {/* PROGRESS */}
       <div className='flex items-center'>
         <div className='mdl:size-20 size-14'>
-          <CircularProgress percentage={percentage} />
+          <CircularProgress percentage={percentage} text={`${percentage}%`} />
         </div>
 
         <h4 className='mdl:text-2xl max-w-[120px] flex-1 text-center text-base text-black font-normal'>

@@ -1,6 +1,9 @@
 import Card from '@/components/card';
 import { DataTable } from '@/components/data-table';
 import { columns } from './columns';
+import CalenderIcon from '@/assets/icons/calender';
+import { DoctorIconGreen } from '@/assets/icons/doctor';
+import SessionIcon from '@/assets/icons/session';
 
 async function getData() {
   // Fetch data from your API here.
@@ -33,6 +36,19 @@ async function getData() {
   ];
 }
 
+const FilterOptions = [
+  {
+    label: 'كشف',
+    icon: <DoctorIconGreen />,
+    key: 'appointment',
+  },
+  {
+    label: 'جلسة',
+    icon: <SessionIcon />,
+    key: 'session',
+  },
+];
+
 export const Schedules = async ({ slug }) => {
   const data = await getData();
 
@@ -40,7 +56,13 @@ export const Schedules = async ({ slug }) => {
     <Card className=''>
       {slug.includes('current') && (
         <div>
-          <DataTable columns={columns} data={data} />
+          <DataTable
+            columns={columns}
+            data={data}
+            filter='buttons'
+            filterBy='type'
+            filterData={FilterOptions}
+          />
         </div>
       )}
 
