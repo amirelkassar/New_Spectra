@@ -28,6 +28,8 @@ function ModalReq({ state, id, GroubId, numItem, cancel }) {
     >
       {modal.type === "date" ? (
         <ModalDate id={id}/>
+      ) :modal.type === "addDate" ? (
+        <ModalDate id={id}/>
       ) :modal.type === "join"? <ModalJoin/> : modal.type==='addClient'?<ModalSelect/>:(
         <ModalType state={modal.type} GroubId={GroubId} />
       )}

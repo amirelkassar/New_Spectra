@@ -24,7 +24,7 @@ function ModalDate({ id }) {
   return (
     <div className="">
       <div
-        className=" size-[30px] mdl:size-[45px] rounded-[50%] mb-4 md:mb-6"
+        className=" size-[30px] mdl:size-[45px] rounded-[50%] mb-4 md:mb-6 cursor-pointer"
         onClick={() => {
           editModal("open", false);
         }}

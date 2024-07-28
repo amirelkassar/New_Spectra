@@ -13,6 +13,8 @@ import Image from "next/image";
 import StarGoldIcon from "@/assets/icons/starGold";
 import ReportDecIcon from "@/assets/icons/reportDec";
 import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
+import DeleteIcon from "@/assets/icons/delete";
+import ReschedulingIcon from "@/assets/icons/rescheduling";
 
 function TableComponents({
   data,
@@ -27,6 +29,7 @@ function TableComponents({
   reqType,
   setState,
   hide,
+  hide2,
   colNum,
   routeClients,
   RouteFun,
@@ -35,8 +38,6 @@ function TableComponents({
   contracts,
 }) {
   const { modal, editModal } = useMenu();
-
-
 
   const toggleRow = (id) => {
     setSelected((prev) =>
@@ -57,7 +58,11 @@ function TableComponents({
   };
   return (
     <div
-      className={`${data.length>0 ?'md:h-[calc(100vh-480px)] min-h-[600px]':'md:h-[calc(100vh-550px)] min-h-[260px]'} relative  max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid  custom-grid2 md:custom-grid  gap-y-1 w-full`}
+      className={`${
+        data.length > 0
+          ? "md:h-[calc(100vh-480px)] min-h-[600px]"
+          : "md:h-[calc(100vh-550px)] min-h-[260px]"
+      } relative  max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid  custom-grid2 md:custom-grid  gap-y-1 w-full`}
       style={{
         "--colNum": colNum,
         "--colNumSmall": hide ? colNumSmall : colNum,
@@ -67,7 +72,7 @@ function TableComponents({
         {header.map((item, i) => {
           return (
             <div
-              key={i*10}
+              key={i * 10}
               className={` ${
                 i === 0
                   ? "rounded-s-xl"
@@ -77,7 +82,7 @@ function TableComponents({
                   ? "rounded-e-xl"
                   : ""
               } ${
-                i === hide - 1 ? " hidden md:block" : "block"
+                i === hide - 1 || i === hide2 - 1 ? " hidden md:block" : "block"
               }   bg-blueLight h-[44px] md:h-[52px]  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px] z-[0]`}
             >
               {item}
@@ -95,7 +100,7 @@ function TableComponents({
             {order.map((orderItem, j) => {
               return orderItem === "Req&Res" ? (
                 <div
-                key={j}
+                  key={j}
                   className={clsx(
                     " flex  py-3 ps-4 pe-2 xl:ps-10 me-1 md:me-7 xl:me-5 content-center  items-center gap-3 lg:gap-5 justify-end transition",
                     index === data.length - 1
@@ -113,43 +118,80 @@ function TableComponents({
                   ) : (
                     <>
                       {reqType === "rejected" ? (
-                        <Button
-                          className={
-                            " btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
-                          }
-                        >
-                          <RecoveryIcon />
-                          استعادة
-                        </Button>
+                        <>
+                          <Button
+                            className={
+                              " btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
+                            }
+                          >
+                            <RecoveryIcon />
+                            استعادة
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              editModal("type", "delete");
+                              editModal("open", true);
+                            }}
+                            className={
+                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                            }
+                          >
+                            <DeleteIcon />
+                            مسح
+                          </Button>
+                        </>
+                      ) : reqType === "deferred" ? (
+                        <>
+                          <Button
+                          onClick={()=>{editModal('type','date');editModal('open',true); }}
+                            className={
+                              " btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
+                            }
+                          >
+                          <ReschedulingIcon />
+                            اعادة جدولة
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              editModal("type", "delete");
+                              editModal("open", true);
+                            }}
+                            className={
+                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                            }
+                          >
+                            <DeleteIcon />
+                            مسح
+                          </Button>
+                        </>
                       ) : (
-                        <Button
-                          onClick={() => {
-                            setState("accept");
-                            editModal("type", "accept");
-                            editModal("open", true);
-                          }}
-                          className={
-                            "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
-                          }
-                        >
-                          <AcceptIcon />
-                          قبول
-                        </Button>
+                        <>
+                          <Button
+                            onClick={() => {
+                              editModal("type", "accept");
+                              editModal("open", true);
+                            }}
+                            className={
+                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                            }
+                          >
+                            <AcceptIcon />
+                            قبول
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              editModal("type", "req");
+                              editModal("open", true);
+                            }}
+                            className={
+                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                            }
+                          >
+                            <RefuseIcon />
+                            رفض
+                          </Button>
+                        </>
                       )}
-
-                      <Button
-                        onClick={() => {
-                          setState("req");
-                          editModal("type", "req");
-                          editModal("open", true);
-                        }}
-                        className={
-                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
-                        }
-                      >
-                        <RefuseIcon />
-                        رفض
-                      </Button>
 
                       <MenuActions type={type || 1} path={route} id={item.id} />
                     </>
@@ -157,7 +199,7 @@ function TableComponents({
                 </div>
               ) : orderItem === "status" ? (
                 <div
-                key={j}
+                  key={j}
                   className={clsx(
                     "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 content-center items-start ",
                     index === data.length - 1
@@ -180,7 +222,7 @@ function TableComponents({
                 </div>
               ) : j === order.length - 1 ? (
                 <div
-                key={j}
+                  key={j}
                   className={clsx(
                     " flex  py-3 md:ps-4 md:pe-2 xl:ps-10 me-2 md:me-7 xl:me-12 content-center  items-center gap-5 justify-end transition ",
                     index === data.length - 1
@@ -275,7 +317,9 @@ function TableComponents({
                     selectPage.includes(item.id)
                       ? "bg-grayLight"
                       : "bg-transparent",
-                    j === hide - 1 ? " hidden md:flex" : "flex"
+                    j === hide - 1 || j === hide2 - 1
+                      ? " hidden md:flex"
+                      : "flex"
                   )}
                   key={j + orderItem}
                 >
@@ -296,7 +340,9 @@ function TableComponents({
                     selectPage.includes(item.id)
                       ? "bg-grayLight"
                       : "bg-transparent",
-                    j === hide - 1 ? " hidden md:flex" : "flex"
+                    j === hide - 1 || j === hide2 - 1
+                      ? " hidden md:flex"
+                      : "flex"
                   )}
                 >
                   {j === 0 && (
@@ -334,7 +380,9 @@ function TableComponents({
                     selectPage.includes(item.id)
                       ? "bg-grayLight"
                       : "bg-transparent",
-                    j === hide - 1 ? " hidden md:flex" : "flex"
+                    j === hide - 1 || j === hide2 - 1
+                      ? " hidden md:flex"
+                      : "flex"
                   )}
                   key={j + orderItem}
                 >
@@ -377,7 +425,9 @@ function TableComponents({
                     selectPage.includes(item.id)
                       ? "bg-grayLight"
                       : "bg-transparent",
-                    j === hide - 1 ? " hidden md:block" : "block"
+                    j === hide - 1 || j === hide2 - 1
+                      ? " hidden md:block"
+                      : "block"
                   )}
                 >
                   <p className="font-bold text-[12px] md:text-[16px]">
