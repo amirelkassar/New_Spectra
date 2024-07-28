@@ -1,7 +1,7 @@
 "use client";
 import ModalIcon from "@/assets/icons/modalImg";
 import useMenu from "@/store/auth/signup/menu-store";
-import { Modal } from "@mantine/core";
+import { Modal, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
 import Button from "./button";
@@ -24,6 +24,7 @@ function ModalReq({ state, id, GroubId, numItem, cancel }) {
       onClose={() => {
         editModal("open", false);
       }}
+      scrollAreaComponent={ScrollArea.Autosize}
       className="modelReq"
     >
       {modal.type === "date" ? (

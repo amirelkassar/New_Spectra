@@ -71,19 +71,9 @@ const ROUTES = {
     },
     CLIENTS: {
       DASHBOARD: "/doctor/clients",
-      ORGANIZATION: {
-        DETAILS: (id) => `/doctor/clients/organization/${id}/details`,
-        DETAILSEDIT: (id) => `/doctor/clients/organization/${id}/details/edit`,
-        EMPLOYEE: (id) => `/doctor/clients/organization/${id}/employee`,
-        CLIENTS: (id) => `/doctor/clients/organization/${id}/clients`,
-        DOCTORS: (id) => `/doctor/clients/organization/${id}/doctors`,
-        DOCTORSDETAILS: (id,id2) => `/doctor/clients/organization/${id}/doctors/${id2}`,
-        APPOINTMENTS: (id) => `/doctor/clients/organization/${id}/appointments`,
-        PRESCRIPTIONS: (id) => `/doctor/clients/organization/${id}/prescriptions`,
-        PATIENTS: (id) => `/doctor/clients/organization/${id}/patients`,
-        PATIENTSEDIT: (id) => `/doctor/clients/organization/${id}/patients/edit`,
-        PATIENTSDETAILS: (id,id2) => `/doctor/clients/organization/${id}/patients/${id2}`,
-      },
+      PRESCRIPTIONS: "/doctor/clients/prescriptions",
+      REPORT: "/doctor/clients/reports",
+      INVITATIONCODE: "/doctor/clients/invitationCode",
       FAMILY: {
         DETAILS: (id) => `/doctor/clients/family/${id}/details`,
         DETAILSEDIT: (id) => `/doctor/clients/family/${id}/details/edit`,
