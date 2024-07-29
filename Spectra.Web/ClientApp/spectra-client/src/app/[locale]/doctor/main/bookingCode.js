@@ -36,7 +36,7 @@ function BookingCode() {
               مشاركة
             </p>
           </button>
-          <CopyButton value="https://mantine.dev">
+          <CopyButton value="646545564545">
             {({ copied, copy }) => (
               <button
                 className="flex h-[38px] mdl:h-[48px] items-center justify-center gap-3 px-4 py-2 mdl:py-3 rounded-[10px] bg-greenMain flex-1"
