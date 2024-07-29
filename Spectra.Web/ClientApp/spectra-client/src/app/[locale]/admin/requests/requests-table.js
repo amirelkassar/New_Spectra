@@ -149,7 +149,7 @@ const RequestsTable = ({ type }) => {
               <>
                 <Link
                   href={ROUTES.ADMIN.REQUESTS}
-                  className="p-2 w-[30px] h-[30px] rounded-[50%] bg-[#E9F7FF]"
+                  className=" w-[30px] h-[30px] rounded-[50%] "
                 >
                   <BackIcon />
                 </Link>

@@ -31,9 +31,9 @@ function PatientsDetails() {
             onClick={() => {
               router.back();
             }}
-            className="p-2 size-[30px]  md:size-[54px] flex items-center justify-center rounded-[50%] bg-[#E9F7FF]"
+            className=" size-[30px]  md:size-[44px] flex items-center justify-center rounded-[50%] "
           >
-            <BackIcon className={"w-[15px] md:w-[28px] h-auto"} />
+            <BackIcon className={"w-full h-full"} />
           </div>
           <h2 className="text-[16px] md:text-[20px] font-Bold">عبدالله الشيخ - محمد عبدالله الشيخ</h2>
         </div>

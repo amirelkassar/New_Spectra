@@ -13,10 +13,10 @@ function ContractInformation({ id }) {
       <div className="flex mb-1   items-center gap-4 ">
         <Link
           href={ROUTES.ADMIN.CONTRACTS.CONTRACTSID(id)}
-          className="p-2 w-[30px] lg:w-[56px] h-[30px] lg:h-[56px] rounded-[50%] bg-[#E9F7FF] flex items-center justify-center"
+          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
         >
           <BackIcon
-            className={"lg:w-[28px] w-[15px] h-[12px] lg:h-[23px] mb-1"}
+            className={"w-full h-full"}
           />
         </Link>
         <h2 className="headTitleDash">العقد</h2>

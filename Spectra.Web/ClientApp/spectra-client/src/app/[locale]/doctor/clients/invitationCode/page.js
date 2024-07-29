@@ -85,7 +85,7 @@ function Page() {
 
   return (
     <LayoutHome>
-      <div className="default-page flex-1w-[100%] lg:max-w-[calc(100%-250px)]">
+      <div className="default-page flex-1w-[100%] lg:max-w-[calc(100%-250px)] w-full">
         <div className="flex items-center justify-between">
           <h2 className="headTitleDash">جلسات كود الدعوة</h2>
           <MenuActions />

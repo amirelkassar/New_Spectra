@@ -44,14 +44,15 @@ const ClientPatients = () => {
     <section className="default-page grow">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4 lg:gap-9">
+       
           <Link
-            href={ROUTES.ADMIN.REQUESTS}
-            className="p-2 w-[30px] lg:w-[56px] h-[30px] lg:h-[56px] rounded-[50%] bg-[#E9F7FF] flex items-center justify-center"
-          >
-            <BackIcon
-              className={"lg:w-[28px] w-[15px] h-[12px] lg:h-[23px] mb-1"}
-            />
-          </Link>
+              href={ROUTES.ADMIN.REQUESTS}
+              className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+            >
+              <BackIcon
+                className={"w-full h-full"}
+              />
+            </Link>
           <h2>عبدالله الشيخ</h2>
           <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
             <PlusInsideCircleIcon />
