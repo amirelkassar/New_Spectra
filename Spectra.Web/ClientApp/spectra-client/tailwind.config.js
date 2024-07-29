@@ -55,6 +55,9 @@ module.exports = {
         SemiBold: 'IBMPlexSansArabicSemiBold', // 600
         Bold: 'IBMPlexSansArabicBold', // 700
       },
+      gridTemplateColumns: {
+        'fill-250': 'repeat(auto-fill, minmax(250px, 1fr))',
+      },
     },
   },
   plugins: [],

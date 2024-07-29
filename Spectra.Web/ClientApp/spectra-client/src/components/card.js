@@ -7,7 +7,7 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
       {size === 'lg' && (
         <div
           className={cn(
-            'lg:rounded-lg bg-white p-1 lg:p-5 relative w-full max-w-full',
+            'rounded-lg bg-white p-1 lg:p-5 relative w-full max-w-full',
             className
           )}
         >

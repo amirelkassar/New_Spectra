@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Avatar as MantineAvatar } from '@mantine/core';
 
-const Avatar = ({ src = '', name = '', className = '' }) => {
+const Avatar = ({ src = '', name = '', className = '', size = 'md' }) => {
   return (
     <MantineAvatar
       variant='filled'
@@ -9,9 +9,9 @@ const Avatar = ({ src = '', name = '', className = '' }) => {
       className={cn('size-12', className)}
       color='cyan'
       radius='xl'
-    >
-      {name?.slice(0, 2)?.toUpperCase()}
-    </MantineAvatar>
+      size={size}
+      name={name}
+    />
   );
 };
 
