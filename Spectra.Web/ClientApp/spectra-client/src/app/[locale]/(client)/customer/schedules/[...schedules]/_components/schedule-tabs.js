@@ -22,7 +22,7 @@ export const ScheduleTabs = ({ slug }) => {
     },
   ]);
   return (
-    <Card className='lg:h-auto flex items-center gap-4 lg:block lg:max-w-52 lg:space-y-5'>
+    <Card className='lg:h-auto flex items-center gap-4 lg:block lg:space-y-5 lg:row-span-3 lg:-order-1 lg:col-span-1'>
       {data.map((item) => (
         <Link
           key={item.value}

@@ -11,17 +11,17 @@ const schedulesPage = ({ params }) => {
 
   return (
     <Container className='p-1 mdl:p-4 xl:p-6 bg-white lg:bg-transparent'>
-      <section className='lg:flex space-y-5 w-full lg:space-y-0 gap-5'>
-        <ScheduleTabs slug={schedules} />
-        <div className='w-full space-y-5 relative'>
-          <Heading
-            className='lg:gap-x-9 flex-col lg:flex-row gap-3 items-start lg:items-center'
-            label='المواعيد'
-            icon={<AddAppointment />}
-          />
+      <section className='lg:grid lg:grid-cols-5 space-y-5 w-full lg:space-y-0 gap-5'>
+        <Heading
+          className='lg:gap-x-9 flex-col lg:flex-row gap-3 items-start lg:items-center lg:col-span-4'
+          label='المواعيد'
+          icon={<AddAppointment />}
+        />
+        <div className='lg:col-span-4 lg:order-2'>
           <ChildPopover className='lg:min-w-[65%]' data={childPopupData} />
-          <Schedules slug={schedules} />
         </div>
+        <ScheduleTabs slug={schedules} />
+        <Schedules slug={schedules} />
       </section>
     </Container>
   );

@@ -53,7 +53,7 @@ export const Schedules = async ({ slug }) => {
   const data = await getData();
 
   return (
-    <Card className=''>
+    <Card className='lg:col-span-4 lg:order-4'>
       {slug.includes('current') && (
         <div>
           <DataTable
