@@ -1,10 +1,11 @@
 import React from "react";
-import LayoutHome from "../components/layoutHome";
-import ReportsNumber from "../components/reports-number";
-import Report from "../components/report";
+
 import imgDoctor from "@/assets/images/placeholder-person.png";
 import imgPatient from "@/assets/images/placeholder-person.png";
-import ReportsFiltration from "../components/reports-filtration";
+import ReportsNumber from "../../components/reports-number";
+import ReportsFiltration from "../../components/reports-filtration";
+import Report from "../../components/report";
+import LayoutClientID from "../components/layoutClientID";
 
 function page() {
   const reports = [
@@ -66,9 +67,9 @@ function page() {
     },
   ];
   return (
-    <LayoutHome>
+    <LayoutClientID>
       <div className="flex-1">
-        <ReportsNumber title={"التقارير"}  />
+        <ReportsNumber title={"التقارير"} haveBack={true} addReport={true}/>
         <div className="default-page w-full !h-auto">
           <ReportsFiltration />
           <div className="flex gap-6 flex-wrap mt-9 justify-center">
@@ -78,7 +79,7 @@ function page() {
           </div>
         </div>
       </div>
-    </LayoutHome>
+    </LayoutClientID>
   );
 }
 

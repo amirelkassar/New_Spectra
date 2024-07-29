@@ -79,7 +79,11 @@ const ClientsTable = () => {
   ];
 
   
+
   const [selected, setSelected] = useState([]);
+  const updateRoute = (id) => {
+   return  ROUTES.DOCTOR.CLIENTS.DETAILS(id)
+  };
 
 
   return (
@@ -87,16 +91,16 @@ const ClientsTable = () => {
      <TableComponents
       data={data}
       colNum={4}
-
       dataLine={1}
       header={["الاسم", "اسم الطفل", "التاريخ", ""]}
       order={["doctor", "childName", "date", ""]}
       selectPage={selected}
       setSelected={setSelected}
       type={2}
-     
       haveImg={true}
       report={true}
+      routeClients={true}
+      RouteFun={updateRoute}
     />
     </div>
   );

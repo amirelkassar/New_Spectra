@@ -1,7 +1,7 @@
 import React from "react";
-import LayoutHome from "../components/layoutHome";
-import ReportsNumber from "../components/reports-number";
-import PrescriptionCard from "../components/prescriptionCard";
+import ReportsNumber from "../../components/reports-number";
+import PrescriptionCard from "../../components/prescriptionCard";
+import LayoutClientID from "../components/layoutClientID";
 
 function page() {
   const reports = [
@@ -13,9 +13,9 @@ function page() {
       specialistDoctor: "اخصائى نفسى",
       nameFamily: "عبدالله الشيخ",
       patient: "الطفل / احمد عبدالله",
-      therapy:['سيترالين','100 جم'],
-      treatment_dates:'اخذه طوال الشهر  يوميا مع الاكل',
-      pills:true
+      therapy: ["سيترالين", "100 جم"],
+      treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+      pills: true,
     },
     {
       id: 2,
@@ -25,8 +25,8 @@ function page() {
       specialistDoctor: "اخصائى نفسى",
       nameFamily: "عبدالله الشيخ",
       patient: "الطفل / احمد عبدالله",
-      therapy:['علاج تربوى'],
-      pills:false
+      therapy: ["علاج تربوى"],
+      pills: false,
     },
     {
       id: 3,
@@ -36,8 +36,8 @@ function page() {
       specialistDoctor: "اخصائى نفسى",
       nameFamily: "عبدالله الشيخ",
       patient: "الطفل / احمد عبدالله",
-      therapy:['علاج تربوى'],
-      pills:false
+      therapy: ["علاج تربوى"],
+      pills: false,
     },
     {
       id: 4,
@@ -47,27 +47,25 @@ function page() {
       specialistDoctor: "اخصائى نفسى",
       nameFamily: "عبدالله الشيخ",
       patient: "الطفل / احمد عبدالله",
-      therapy:['علاج تربوى'],
-      pills:false
-    }
-
+      therapy: ["علاج تربوى"],
+      pills: false,
+    },
   ];
   return (
-    <LayoutHome>
+    <LayoutClientID>
       <div className="flex-1">
-        <ReportsNumber title={"الوصفات الطبية"} addPrescriptions={true} />
-        <div className="default-page w-full h-auto">
+        <ReportsNumber title={"الوصفات الطبية"} haveBack={true} addPrescriptions={true} />
+        <div className="default-page w-full !h-auto">
           <div className="flex gap-6 flex-wrap mt-9 justify-center">
-            {
-              reports.map((report)=>{
-              return  <PrescriptionCard key={report.id} data={report} type="all" />
-
-              })
-            }
+            {reports.map((report) => {
+              return (
+                <PrescriptionCard key={report.id} data={report} type="one" />
+              );
+            })}
           </div>
         </div>
       </div>
-    </LayoutHome>
+    </LayoutClientID>
   );
 }
 

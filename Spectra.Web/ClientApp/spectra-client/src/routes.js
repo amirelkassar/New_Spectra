@@ -74,15 +74,12 @@ const ROUTES = {
       PRESCRIPTIONS: "/doctor/clients/prescriptions",
       REPORT: "/doctor/clients/reports",
       INVITATIONCODE: "/doctor/clients/invitationCode",
-      FAMILY: {
-        DETAILS: (id) => `/doctor/clients/family/${id}/details`,
-        DETAILSEDIT: (id) => `/doctor/clients/family/${id}/details/edit`,
-        APPOINTMENTS: (id) => `/doctor/clients/family/${id}/appointments`,
-        PRESCRIPTIONS: (id) => `/doctor/clients/family/${id}/prescriptions`,
-        PATIENTS: (id) => `/doctor/clients/family/${id}/patients`,
-        PATIENTSDETAILS: (id,id2) => `/doctor/clients/family/${id}/patients/${id2}`,
-        
-      },
+      DETAILS: (id) => `/doctor/clients/${id}/details`,
+      REPORTPATIENTS: (id) => `/doctor/clients/${id}/reports`,
+      PRESCRIPTIONSPATIENTS: (id) => `/doctor/clients/${id}/prescriptions`,
+      ACTIVITIESSPATIENTS: (id) => `/doctor/clients/${id}/activities`,
+      ADDREPORTPATIENTS: (id) => `/doctor/clients/${id}/addReport`,
+      ADDPRESCRIPTIONSPATIENTS: (id) => `/doctor/clients/${id}/addPrescriptions`,
       PATIENTSDETAILS:{
         DETAILS: (id) => `/doctor/clients/patientDetails/${id}/details`,
         EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
