@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 
 export const TabsFilter = ({
-  tabs = [{ label: '', icon: '' }],
+  data = [{ label: '', icon: '' }],
   className = '',
   setTab = () => {},
   tab = 'الكل',
 }) => {
   return (
     <div className={cn('flex items-center *:flex-1', className)}>
-      {tabs.map((t) => (
+      {data.map((t) => (
         <div className='border-e border-grayMedium last:border-transparent flex justify-center'>
           <button
             key={t?.label}
