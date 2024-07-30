@@ -75,6 +75,8 @@ function Validity() {
               classNames={{
                 body: "flex items-center justify-between gap-3 flex-1 w-full",
                 label: "text-[14px] md:text-[20px] font-Bold",
+                track:` h-[35px]  ${selectedValues.includes("svelte")?'':'bg-grayDark'}`,
+                thumb:'bg-white size-[28px]',         
               }}
               value="svelte"
               label="انشاء جديد"
@@ -89,6 +91,8 @@ function Validity() {
               classNames={{
                 body: "flex items-center justify-between gap-3 flex-1 w-full",
                 label: "text-[14px] md:text-[20px] font-Bold",
+                track:` h-[35px]  ${selectedValues.includes("ng")?'':'bg-grayDark'}`,
+                thumb:'bg-white size-[28px]',         
               }}
               value="ng"
               label="تعديل"
@@ -103,6 +107,8 @@ function Validity() {
               classNames={{
                 body: "flex items-center justify-between gap-3 flex-1 w-full",
                 label: "text-[14px] md:text-[20px] font-Bold",
+                track:` h-[35px]  ${selectedValues.includes("vue")?'':'bg-grayDark'}`,
+                thumb:'bg-white size-[28px]',         
               }}
               value="vue"
               label="مسح"
