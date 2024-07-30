@@ -7,53 +7,53 @@
     text-wrap: balance;
   }
 }
-*{
-  font-family: "IBMPlexSansArabicRegular";
+* {
+  font-family: 'IBMPlexSansArabicRegular';
 }
 @font-face {
-  font-family: "IBMPlexSansArabicThin";
+  font-family: 'IBMPlexSansArabicThin';
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-    src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+  src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicExtraLight";
+  font-family: 'IBMPlexSansArabicExtraLight';
   font-style: normal;
   font-weight: 200;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicLight";
+  font-family: 'IBMPlexSansArabicLight';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicRegular";
+  font-family: 'IBMPlexSansArabicRegular';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicMedium";
+  font-family: 'IBMPlexSansArabicMedium';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicSemiBold";
+  font-family: 'IBMPlexSansArabicSemiBold';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
   src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
 }
 @font-face {
-  font-family: "IBMPlexSansArabicBold";
+  font-family: 'IBMPlexSansArabicBold';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -62,9 +62,37 @@
 :root {
   --main-color: #10b0c1;
   --main-color-text: #010036;
+  --blue-light: #e9f7ff;
 }
+
+/* SCROLLBAR */
+/* Custom scrollbar for WebKit browsers (Chrome, Safari) */
+*::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar for horizontal scrollbars */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+/* Custom scrollbar for Firefox */
+* {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+}
+
 h1 {
-  @apply text-black text-2xl mdl:text-[28px] font-bold  mdl:text-start;
+  @apply text-black text-2xl mdl:text-[28px] font-bold mdl:text-start;
 }
 h2 {
   @apply text-black text-lg mdl:text-xl font-bold mdl:text-start;
@@ -87,8 +115,9 @@ label {
 .sec-page {
   @apply h-full flex flex-col gap-6;
 }
+
 /*aside*/
-aside {
+/* aside {
   color: var(--main-color-text);
 }
 aside.closeMenue p {
@@ -108,7 +137,7 @@ aside ul button.active svg path {
 }
 aside .topMobNav {
   display: none;
-}
+} */
 header .hideShowLinks {
   background-color: #f1fcff;
   min-width: 34px;
@@ -124,16 +153,16 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir="ltr"] header .hideShowLinks svg {
+html[dir='ltr'] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir="ltr"] header .hideShowLinks.closeArrow svg {
+html[dir='ltr'] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
-aside .topMobNav {
+/* aside .topMobNav {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 64px;
@@ -148,7 +177,7 @@ aside .topMobNav .hideShowLinks {
 aside .topMobNav .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
-}
+} */
 header .hideShowLinks2 {
   background-color: #f1fcff;
   min-width: 34px;
@@ -161,19 +190,19 @@ header .hideShowLinks2 svg {
   width: 15px;
   transition: 0.5s;
 }
-aside .dropMenuDash li a p {
+/* aside .dropMenuDash li a p {
   font-size: 16px !important;
-}
-.numNotification {
+} */
+.numNotfication {
   border-radius: 50% !important;
 }
-html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
+html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir="ltr"] .lineAfterLinks {
+html[dir='ltr'] .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
@@ -207,7 +236,7 @@ html[dir="ltr"] .lineAfterLinks {
   transform: rotateY(180deg);
 }
 @media (max-width: 768px) {
-  aside .topMobNav {
+  /* aside .topMobNav {
     display: flex;
   }
   aside {
@@ -227,15 +256,15 @@ html[dir="ltr"] .lineAfterLinks {
   }
   aside.openMob {
     right: -180px !important;
-  }
-  html[dir="ltr"] aside {
+  } */
+  /* html[dir='ltr'] aside {
     left: 0px;
     right: auto;
   }
-  html[dir="ltr"] aside.openMob {
+  html[dir='ltr'] aside.openMob {
     left: -180px !important;
     right: auto;
-  }
+  } */
   header .hideShowLinks2 {
     display: flex;
   }
@@ -328,14 +357,14 @@ form.clientEdit .mantine-Input-input {
   height: 20px !important;
 }
 .staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
   order: 1;
 }
 
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected="true"] {
+.staffDetils .mantine-DatePicker-day[data-selected='true'] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -353,11 +382,13 @@ form.clientEdit .mantine-Input-input {
 }
 @layer components {
   .custom-grid {
-  
-    grid-template-columns: repeat(var(--colNum), minmax(max-content, 1fr)) !important;
+    grid-template-columns: repeat(
+      var(--colNum),
+      minmax(max-content, 1fr)
+    ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr)) ;
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
 .boxDate .mantine-DatePicker-calendarHeader {
@@ -387,22 +418,22 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
   order: 1;
 }
 
-.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
-.boxDate .mantine-DatePicker-day[data-selected="true"] {
+.boxDate .mantine-DatePicker-day[data-selected='true'] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
-.iconSearchModal path{
+.iconSearchModal path {
   fill: #939393;
 }
-.MultiSelect{}
+.MultiSelect {
+}
 .MultiSelect .mantine-MultiSelect-input {
   height: 56px;
   border-radius: 10px;
