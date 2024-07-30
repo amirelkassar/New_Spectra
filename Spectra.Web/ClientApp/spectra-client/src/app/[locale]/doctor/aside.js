@@ -95,18 +95,18 @@ const Aside = () => {
   const settingsLinks = [
     {
       name: "الأذونات",
-      route: ROUTES.ADMIN.SETTINGS.PERMISSIONS,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PERMISSIONS),
+      route: ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD),
     },
     {
       name: "المحتوى",
-      route: ROUTES.ADMIN.SETTINGS.CONTENT,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT),
+      route: ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD),
     },
     {
       name: "الخطط",
-      route: ROUTES.ADMIN.SETTINGS.PLANS,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS),
+      route: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD),
     },
   ];
   const AppointmentsLinks = [

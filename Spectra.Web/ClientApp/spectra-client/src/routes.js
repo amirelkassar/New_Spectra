@@ -59,9 +59,19 @@ const ROUTES = {
     },
     SETTINGS:{
       DASHBOARD: "/admin/settings",
-      PERMISSIONS: "/admin/settings/permissions",
-      CONTENT: "/admin/settings/content",
-      PLANS: "/admin/settings/plans",
+      PERMISSIONS: {
+        DASHBOARD:"/admin/settings/permissions",
+        USERS:"/admin/settings/permissions/users",
+        PERMISSIONSEDIT:(id)=> `/admin/settings/permissions/${id}/edit`
+
+      },
+      CONTENT: {
+        DASHBOARD:"/admin/settings/content"
+      },
+      PLANS: {
+        DASHBOARD:"/admin/settings/plans"
+      },
+     
     }
    
   },
