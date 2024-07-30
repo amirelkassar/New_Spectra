@@ -33,13 +33,13 @@ const Sidebar = () => {
       {
         name: 'قائمة التحكم',
         route: ROUTES.CLIENT.CONTROL_MENU,
-        isActive: path === ROUTES.CLIENT.CONTROL_MENU,
+        isActive: path.includes(ROUTES.CLIENT.CONTROL_MENU),
         icon: <ControlIcon />,
       },
       {
         name: 'ملفي',
         route: ROUTES.CLIENT.PROFILE,
-        isActive: path === ROUTES.CLIENT.PROFILE,
+        isActive: path.includes(ROUTES.CLIENT.PROFILE),
         icon: <ProfileIcon />,
       },
       {
@@ -51,31 +51,31 @@ const Sidebar = () => {
       {
         name: 'الخطوات',
         route: ROUTES.CLIENT.STEPS,
-        isActive: path === ROUTES.CLIENT.STEPS,
+        isActive: path.includes(ROUTES.CLIENT.STEPS),
         icon: <StepsIcon />,
       },
       {
         name: 'الفريق',
         route: ROUTES.CLIENT.TEAM,
-        isActive: path === ROUTES.CLIENT.TEAM,
+        isActive: path.includes(ROUTES.CLIENT.TEAM),
         icon: <StaffIcon />,
       },
       {
         name: 'تقارير',
         route: ROUTES.CLIENT.REPORTS,
-        isActive: path === ROUTES.CLIENT.REPORTS,
+        isActive: path.includes(ROUTES.CLIENT.REPORTS),
         icon: <ReportsIcon />,
       },
       {
         name: 'محادثات',
         route: ROUTES.CLIENT.CHATS,
-        isActive: path === ROUTES.CLIENT.CHATS,
+        isActive: path.includes(ROUTES.CLIENT.CHATS),
         icon: <ChatIcon />,
       },
       {
         name: 'الإعدادات',
         route: ROUTES.CLIENT.SETTINGS,
-        isActive: path === ROUTES.CLIENT.SETTINGS,
+        isActive: path.includes(ROUTES.CLIENT.SETTINGS),
         icon: <SettingsIcon />,
       },
     ],

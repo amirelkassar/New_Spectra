@@ -6,6 +6,8 @@ import StarGoldIcon from '@/assets/icons/starGold';
 import Button from '@/components/button';
 import ChildPopover from '../../../_components/child-popover';
 import Avatar from '@/components/avatar';
+import { useRouter } from '@/navigation';
+import ROUTES from '@/routes';
 
 const data = [
   {
@@ -113,6 +115,7 @@ const ChildDetails = ({
   reports,
   sessions,
 }) => {
+  const router = useRouter();
   return (
     <Card className='space-y-10'>
       {/* INFO */}
@@ -183,7 +186,13 @@ const ChildDetails = ({
           {/* ACTION BUTTONS */}
           <div className='flex *:flex-1 gap-5 font-bold text-sm lg:text-medium text-black flex-col px-2 lg:flex-row'>
             <Button>مرفقات</Button>
-            <Button>وصفات طبية</Button>
+            <Button
+              onClick={() =>
+                router.push(`${ROUTES.CLIENT.PROFILE}/prescriptions`)
+              }
+            >
+              وصفات طبية
+            </Button>
           </div>
         </div>
       </div>
