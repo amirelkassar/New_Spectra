@@ -4,7 +4,9 @@ import CopyCode from "./components/copyCode";
 import BriefIcon from "@/assets/icons/brief";
 import QualificationsIcon from "@/assets/icons/qualifications";
 import DaqeqaIcon from "@/assets/icons/daqeqa";
-
+import doctorImg from "@/assets/images/placeholder-person.png";
+import DoctorInfo from "./components/doctorInfo";
+import SessionIcon from "@/assets/icons/session";
 function MainProfile() {
   const data = {
     name: "احمد محمد كمال",
@@ -23,20 +25,27 @@ function MainProfile() {
       "القلق الاجتماعي ، الفوبيا",
       "فرط الحركة",
     ],
-    star: 4,
+    star: 4.9,
     rating: 281,
     bookingCode: "DR-AHMED-2024",
+    image: doctorImg,
+    service: {
+      counseling: "100.00 $",
+      early: "100.00 $",
+      early2: "100.00 $",
+    },
   };
   return (
-    <div className="flex-1 w-full flex flex-col gap-7">
+    <div className="flex-1 w-full flex flex-col gap-3 mdl:gap-7">
       <div className="default-page flex-1  w-full">
         <div className="flex items-center justify-between">
           <h2 className="headTitleDash">ملفى</h2>
           <MenuActions />
         </div>
+        <DoctorInfo data={data} />
       </div>
       <div className=" flex flex-col gap-4 flex-1  w-full">
-        <CopyCode/>
+        <CopyCode />
       </div>
       <div className="default-page flex-1  w-full">
         <div>

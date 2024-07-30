@@ -1,6 +1,6 @@
 import React from "react";
 
-function PillsIcon() {
+function PillsIcon({className}) {
   return (
     <svg
       width="41"
@@ -8,6 +8,7 @@ function PillsIcon() {
       viewBox="0 0 41 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         fillRule="evenodd"

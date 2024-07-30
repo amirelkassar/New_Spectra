@@ -6,7 +6,7 @@ import React from "react";
 
 function CopyCode() {
   return (
-    <div className=" flex flex-col mdl:gap-4 flex-1  w-full border-y border-y-grayDark mdl:border-none py-5 mdl:p-0">
+    <div className=" flex flex-col mdl:gap-4 flex-1  w-full border-y border-y-grayDark md:border-none py-5 mdl:p-0">
       <div className="flex bg-white  items-center justify-between gap-4 mdl:gap-7   py-4 px-1 mdl:px-7 mdl:rounded-[10px] ">
         <div>
           <h3 className="text-[12px]  mb-1 mdl:mb-4 mdl:text-[16px]">
