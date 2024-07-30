@@ -76,11 +76,8 @@ const Aside = ({ close }) => {
     },
     {
       name: "الإعدادات",
-      route: ROUTES.ADMIN.PERMISSIONS,
-      isActive:
-        path.includes(ROUTES.ADMIN.PERMISSIONS) ||
-        path.includes(ROUTES.ADMIN.CONTENT) ||
-        path.includes(ROUTES.ADMIN.PLANS),
+      route: ROUTES.ADMIN.SETTINGS.DASHBOARD,
+      isActive:path.includes(ROUTES.ADMIN.SETTINGS.DASHBOARD),
       icon: <SettingsIcon />,
       type: "settings",
     },
@@ -88,18 +85,18 @@ const Aside = ({ close }) => {
   const settingsLinks = [
     {
       name: "الأذونات",
-      route: ROUTES.ADMIN.PERMISSIONS,
-      isActive: path.includes(ROUTES.ADMIN.PERMISSIONS),
+      route: ROUTES.ADMIN.SETTINGS.PERMISSIONS,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PERMISSIONS),
     },
     {
       name: "المحتوى",
-      route: ROUTES.ADMIN.CONTENT,
-      isActive: path.includes(ROUTES.ADMIN.CONTENT),
+      route: ROUTES.ADMIN.SETTINGS.CONTENT,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT),
     },
     {
       name: "الخطط",
-      route: ROUTES.ADMIN.PLANS,
-      isActive: path.includes(ROUTES.ADMIN.PLANS),
+      route: ROUTES.ADMIN.SETTINGS.PLANS,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS),
     },
   ];
   const SubscriptionLinks = [

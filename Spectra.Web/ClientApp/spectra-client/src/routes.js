@@ -57,9 +57,13 @@ const ROUTES = {
       EXPIRED: "/admin/contracts/expired",
       CONTRACTSID:(id)=> `/admin/contracts/${id}`
     },
-    PERMISSIONS: "/admin/permissions",
-    CONTENT: "/admin/content",
-    PLANS: "/admin/plans",
+    SETTINGS:{
+      DASHBOARD: "/admin/settings",
+      PERMISSIONS: "/admin/settings/permissions",
+      CONTENT: "/admin/settings/content",
+      PLANS: "/admin/settings/plans",
+    }
+   
   },
   DOCTOR: {
     MAIN: "/doctor/main",
