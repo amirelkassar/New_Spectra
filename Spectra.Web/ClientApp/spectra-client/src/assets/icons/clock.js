@@ -59,7 +59,9 @@ function ClockIcon({ className }) {
   );
 }
 
-export const ClockIcon = () => {
+export default ClockIcon;
+
+export const ClockIcon2 = () => {
   return (
     <svg
       width='20'

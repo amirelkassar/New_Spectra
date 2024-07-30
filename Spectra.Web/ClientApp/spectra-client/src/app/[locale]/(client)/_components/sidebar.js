@@ -14,7 +14,7 @@ import Logo from '@/assets/icons/logo';
 import LogoutIcon from '@/assets/icons/logOut';
 import ControlIcon from '@/assets/icons/control';
 import ProfileIcon from '@/assets/icons/profile';
-import ClockIcon from '@/assets/icons/clock';
+import { ClockIcon2 } from '@/assets/icons/clock';
 import StepsIcon from '@/assets/icons/steps';
 import ReportsIcon from '@/assets/icons/reportsIcon';
 import ChatIcon from '@/assets/icons/chat';
@@ -46,7 +46,7 @@ const Sidebar = () => {
         name: 'المواعيد',
         route: ROUTES.CLIENT.SCHEDULES,
         isActive: path.includes(ROUTES.CLIENT.SCHEDULES),
-        icon: <ClockIcon />,
+        icon: <ClockIcon2 />,
       },
       {
         name: 'الخطوات',
