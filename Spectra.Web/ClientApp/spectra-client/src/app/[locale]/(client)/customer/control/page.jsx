@@ -2,17 +2,22 @@ import React from 'react';
 import Container from '../../_components/container';
 import { MedicalCards } from './_components/medical-card';
 import { Heading } from '../../_components/heading';
-import { ProgressCard } from './_components/progress-card';
+import { Chart } from './_components/chart';
 import { ReminderMessages } from './_components/reminder-messages';
 import { ActivityCards } from './_components/activity-cards';
+import ChildPopover from '../../_components/child-popover';
+import { childPopupData } from '@/lib/demoData';
 
 const ControlPage = () => {
   return (
-    <Container className='p-1 mdl:p-4 xl:p-6 bg-white mdl:bg-transparent'>
+    <Container className='space-y-5'>
       <Heading label='ملخص النشاطات' />
+      <ChildPopover data={childPopupData} />
       <MedicalCards />
-      <ProgressCard />
-      <ReminderMessages />
+      <div className='flex flex-col lg:flex-row gap-5 *:flex-1 space-y-5 lg:space-y-0'>
+        <Chart />
+        <ReminderMessages />
+      </div>
       <ActivityCards />
     </Container>
   );

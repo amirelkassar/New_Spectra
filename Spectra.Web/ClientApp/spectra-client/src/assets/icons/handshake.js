@@ -1,4 +1,4 @@
-const HandshakeIcon = () => {
+const HandshakeIcon = ({ className = '' }) => {
   return (
     <svg
       width='42'
@@ -6,6 +6,7 @@ const HandshakeIcon = () => {
       viewBox='0 0 42 38'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      className={className}
     >
       <mask
         id='path-1-outside-1_2934_11467'

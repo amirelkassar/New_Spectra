@@ -64,6 +64,33 @@
   --main-color-text: #010036;
   --blue-light: #e9f7ff;
 }
+
+/* SCROLLBAR */
+/* Custom scrollbar for WebKit browsers (Chrome, Safari) */
+*::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar for horizontal scrollbars */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+/* Custom scrollbar for Firefox */
+* {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+}
+
 h1 {
   @apply text-black text-2xl mdl:text-[28px] font-bold mdl:text-start;
 }

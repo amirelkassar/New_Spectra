@@ -1,4 +1,7 @@
-import { redirect } from '@/navigation';
+'use client';
+
+import { Link, redirect } from '@/navigation';
+import { useState } from 'react';
 
 import Card from '@/components/card';
 import { Filter } from './filter';
@@ -25,68 +28,23 @@ const filterData = [
   },
 ];
 
-const reportsData = [
-  {
-    id: 1,
-    date: '2023-05-15',
-    doctor: 'احمد محمد كمال',
-    avatar: '',
-    isNew: true,
-    type: 'diagnostic',
-  },
-  {
-    id: 2,
-    date: '2023-01-10',
-    doctor: 'احمد محمد كمال',
-    avatar: '',
-    isNew: false,
-    type: 'treatment',
-  },
-  {
-    id: 3,
-    date: '2024-10-10',
-    doctor: 'احمد محمد كمال',
-    avatar: '',
-    isNew: false,
-    type: 'psychological',
-  },
-  {
-    id: 4,
-    date: '2024-10-10',
-    doctor: 'احمد محمد كمال',
-    avatar: '',
-    isNew: false,
-    type: 'psychological',
-  },
-];
+export const Reports = ({ reportsData = [] }) => {
+  const [filter, setFilter] = useState(null);
 
-export const Reports = ({ repo }) => {
-  const handleDisplayReports = () => {
-    if (!repo) {
-      return reportsData;
-    }
+  const filteredData = () => {
+    if (!filter) return reportsData;
 
-    if (repo.includes('diagnostic')) {
-      return reportsData.filter((report) => report.type === 'diagnostic');
-    }
-
-    if (repo.includes('treatment')) {
-      return reportsData.filter((report) => report.type === 'treatment');
-    }
-
-    if (repo.includes('psychological')) {
-      return reportsData.filter((report) => report.type === 'psychological');
-    }
-
-    redirect(ROUTES.CLIENT.REPORTS);
+    return reportsData.filter((item) => item?.type === filter);
   };
 
   return (
     <Card className='space-y-10'>
-      <Filter filterData={filterData} />
+      <Filter filterData={filterData} setFilter={setFilter} />
       <div className='grid grid-cols-fill-250 gap-5'>
-        {handleDisplayReports().map((report) => (
-          <Report key={report.id} {...report} />
+        {filteredData()?.map((report) => (
+          <Link key={report.id} href={`${ROUTES.CLIENT.REPORTS}/${report.id}`}>
+            <Report {...report} />
+          </Link>
         ))}
       </div>
     </Card>

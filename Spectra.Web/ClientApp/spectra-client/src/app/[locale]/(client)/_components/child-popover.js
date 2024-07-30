@@ -6,7 +6,7 @@ import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
 import { cn } from '@/lib/utils';
 
 const ChildPopover = ({
-  data,
+  data = [],
   selectedChild = 0,
   setSelectedChild = () => {},
   className = '',

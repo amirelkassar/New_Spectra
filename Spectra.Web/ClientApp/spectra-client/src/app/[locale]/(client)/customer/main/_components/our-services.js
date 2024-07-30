@@ -5,57 +5,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { Section } from '../../../_components/section';
-import HeartIcon from '@/assets/icons/heart';
-import TeamIcon from '@/assets/icons/team';
-import FollowUpIcon from '@/assets/icons/followup';
-import HandshakeIcon from '@/assets/icons/handshake';
+import { useRouter } from '@/navigation';
+import ROUTES from '@/routes';
+import { servicesData } from '@/lib/demoData';
 
 export const OurServices = () => {
-  const services = [
-    {
-      label: 'خدمة الكشف المبكر الالكتروني',
-      icon: <HeartIcon />,
-      color: 'bg-red/[0.18]',
-    },
-    {
-      label: 'خدمات التشخيص الطبي عبر فرق متعددة التخصصات',
-      icon: <TeamIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-    {
-      label: 'خدمات المتابعة الدوائية',
-      icon: <FollowUpIcon />,
-      color: 'bg-purple/[0.18]',
-    },
-    {
-      label: 'خدمات الاستشارات التخصصية',
-      icon: <HandshakeIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-    {
-      label: 'خدمات التأهيل العلاجي في مختلف التخصصات',
-      icon: <HandshakeIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-    {
-      label: 'خدمات التقارير الطبية والتخصصية',
-      icon: <HandshakeIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-    {
-      label: 'خدمات دعم المراكز والجهات',
-      icon: <HandshakeIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-    {
-      label: 'خدمات التدريب',
-      icon: <HandshakeIcon />,
-      color: 'bg-greenMain/[0.18]',
-    },
-  ];
+  const router = useRouter();
 
   return (
     <Section
+      onClick={() => router.push(`${ROUTES.CLIENT.MAIN}/services`)}
       className='hidden mdl:block'
       type='both'
       btnLabel='تصفح جميع الخدمات'
@@ -82,13 +41,15 @@ export const OurServices = () => {
         }}
         modules={[Pagination]}
       >
-        {services.map((service, index) => (
+        {servicesData.map((service, index) => (
           <SwiperSlide key={index + 1321056}>
             <div
-              className={`rounded-[10px] h-[120px] w-full mdl:max-w-full mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 ${service.color} cursor-grabbing`}
+              className={`rounded-[10px] h-[120px] w-full mdl:max-w-full mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 cursor-grabbing`}
+              style={{ backgroundColor: service.color }}
             >
               <div
-                className={`mdl:size-9 size-8 rounded-full ${service.color}`}
+                className={`lg:size-9 size-8 rounded-full flex items-center justify-center shrink-0`}
+                style={{ backgroundColor: service.color }}
               >
                 {service.icon}
               </div>

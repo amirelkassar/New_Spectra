@@ -27,7 +27,7 @@ const Sidebar = () => {
       {
         name: 'الرئيسية',
         route: ROUTES.CLIENT.MAIN,
-        isActive: path === ROUTES.CLIENT.MAIN,
+        isActive: path.includes(ROUTES.CLIENT.MAIN),
         icon: <MainIcon />,
       },
       {
@@ -88,7 +88,7 @@ const Sidebar = () => {
   return (
     <aside
       className={clsx(
-        'transition-all w-44 lg:w-14 !bg-white h-screen lg:h-full rounded-xl lg:rounded-none fixed lg:sticky top-0 -start-44 z-[999]',
+        'transition-all w-44 lg:w-14 !bg-white h-screen lg:h-full rounded-xl lg:rounded-none shadow-md lg:shadow-none fixed lg:sticky top-0 -start-44 z-[999]',
         isOpen && '!start-0 lg:!w-52'
       )}
     >

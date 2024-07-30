@@ -5,7 +5,7 @@ import { ChildCards } from './_components/child-card';
 
 const ProfilePage = () => {
   return (
-    <Container className='p-1 mdl:p-4 xl:p-6 bg-white mdl:bg-transparent'>
+    <Container className=''>
       <ProfileInfo />
       <ChildCards />
     </Container>

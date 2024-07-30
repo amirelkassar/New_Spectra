@@ -1,4 +1,4 @@
-const FollowUpIcon = () => {
+const FollowUpIcon = ({ className = '' }) => {
   return (
     <svg
       width='36'
@@ -6,6 +6,7 @@ const FollowUpIcon = () => {
       viewBox='0 0 36 43'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      className={className}
     >
       <path
         d='M33.75 41.375V35.4688C33.75 29.9011 33.75 27.1153 32.0195 25.3868C30.2909 23.6562 27.5051 23.6562 21.9375 23.6562L18 27.5938L14.0625 23.6562C8.49487 23.6562 5.70909 23.6562 3.98053 25.3868C2.25 27.1153 2.25 29.9011 2.25 35.4688V41.375M25.875 23.6562V34.4844'

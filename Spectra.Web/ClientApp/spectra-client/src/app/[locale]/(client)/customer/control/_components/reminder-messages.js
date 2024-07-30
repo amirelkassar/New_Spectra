@@ -25,11 +25,15 @@ export const ReminderMessages = () => {
   ];
   return (
     <section>
-      <Card title='رسائل التذكير' className='my-8'>
-        <button className='absolute top-1 end-1 mdl:top-5 mdl:end-5'>
-          <PlusInsideCircleIcon className='size-8' />
-        </button>
-
+      <Card>
+        <div className='flex items-center justify-between'>
+          <h3 className='font-bold text-sm lg:text-medium text-black'>
+            رسائل التذكير
+          </h3>
+          <button>
+            <PlusInsideCircleIcon className='lg:size-8 size-5' />
+          </button>
+        </div>
         {data.map((item, index) => (
           <Medical key={'ReminderMessages' + index} {...item} />
         ))}
