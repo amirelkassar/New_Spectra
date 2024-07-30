@@ -10,7 +10,7 @@ import React from "react";
 
 function ClientEdit() {
   const params = useParams();
-  console.log(params);
+
   const data = {
     name: "عبدالله الشيخ",
     lastEntry: "25/4/2024",

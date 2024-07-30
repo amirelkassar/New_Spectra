@@ -77,7 +77,7 @@ function DoctorDEtails() {
 
   const params = useParams();
   const [showMore, setShowMore] = useState(false);
-  console.log(params);
+
   return (
     <div className="default-page2 lg:w-[calc(100%-246px)] max-w-[100%]  text-xl  !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
       <div className="detailsDocor flex flex-col lg:flex-row items-start gap-8 lg:gap-10 mt-10 flex-wrap px-2 lg:px-7">
