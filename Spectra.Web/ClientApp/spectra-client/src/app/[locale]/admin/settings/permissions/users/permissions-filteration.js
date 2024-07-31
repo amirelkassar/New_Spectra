@@ -4,7 +4,7 @@ import Separetor from "@/components/separator";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-const ContractsFilteration = () => {
+const PermissionsFilteration = () => {
   const options = [
     {
       name: "الكل",
@@ -13,31 +13,20 @@ const ContractsFilteration = () => {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "طبيب",
+      name: "الموظفين",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "مختص",
+      name: "العملاء",
     },
-    {
-      icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
-    },
-    {
-      name: "محاسب",
-    },
-    {
-      icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
-    },
-    {
-      name: "سكرتير",
-    },
+   
   ];
 
   const [selected, setSelected] = useState(options[0]);
   return (
-    <div className="flex flex-col lg:flex-row gap-3 md:gap-6 items-start mb-8">
+    <div className="flex flex-col lg:flex-row gap-3 md:gap-6 items-start mb-8 mt-5 mdl:mt-10">
       <div className="flex items-center gap-3">
         <FilterIcon />
         <p className="font-bold text-[12px] lg:text-[16px]">فلتر بالنوع</p>
@@ -69,4 +58,4 @@ const ContractsFilteration = () => {
   );
 };
 
-export default ContractsFilteration;
+export default PermissionsFilteration;

@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import HeaderPage from "./header-page";
-import ROUTES from "@/routes";
 import { Group, Switch } from "@mantine/core";
-
-function Validity() {
-  const [selectedValues, setSelectedValues] = useState(["react"]);
+import { useMediaQuery } from "@mantine/hooks";
+function Validity({ dataSwitch }) {
+  const [selectedValues, setSelectedValues] = useState([]);
 
   const handleCheckAll = () => {
-    if (selectedValues.length === 4) {
+    if (selectedValues.length === dataSwitch.length) {
       setSelectedValues([]);
     } else {
-      setSelectedValues(["react", "svelte", "ng", "vue"]);
+      setSelectedValues(dataSwitch);
     }
   };
   const handleSwitchChange = (value) => {
@@ -21,103 +19,57 @@ function Validity() {
         : [...current, value]
     );
   };
- 
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <div className="default-page">
-      <HeaderPage
-        title={"الاعدادات - الأذونات - مستويات الصلاحية "}
-        linkBack={ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD}
+    <div className="px-3">
+      <Switch
+        size={isMobile ? "md" : "xl"}
+        color="#10B0C1"
+        labelPosition="left"
+        className="flex items-center justify-between gap-3 flex-1 w-full mb-12 mdl:mb-20"
+        classNames={{
+          body: "flex items-center justify-between gap-3 flex-1 w-full",
+          label: "text-[14px] md:text-[20px] font-Bold",
+          track: ` h-[26px] mdl:h-[35px]  ${
+            selectedValues.length === dataSwitch.length ? "" : "bg-grayDark"
+          }`,
+          thumb: "bg-white size-[19px] mdl:size-[28px]",
+        }}
+        value="all"
+        label="جميع الصلاحيات"
+        checked={selectedValues.length === dataSwitch.length}
+        onChange={() => {
+          handleCheckAll();
+        }}
       />
-      <div>
-        <h2 className="text-[16px] mdl:text-[24px] font-Bold">طبيب</h2>
-      </div>
-      <div>
-        <Switch
-         size="xl"
-         color="#10B0C1"
-          labelPosition="left"
-          className="flex items-center justify-between gap-3 flex-1 w-full mb-20"
-          classNames={{
-            body: "flex items-center justify-between gap-3 flex-1 w-full",
-            label: "text-[14px] md:text-[20px] font-Bold",
-          }}
-          value="all"
-          label="جميع الصلاحيات"
-          checked={selectedValues.length === 4}
-          onChange={() => {
-            handleCheckAll();
-          }}
-        />
-        <Switch.Group value={selectedValues} onChange={setSelectedValues}>
-          <Group mt="xs" className="flex flex-col gap-9">
-            <Switch
-            size="xl"
-            color="#10B0C1"
 
-              labelPosition="left"
-              className="flex items-center justify-between gap-3 flex-1 w-full"
-              classNames={{
-                body: "flex items-center justify-between gap-3 flex-1 w-full",
-                label: "text-[14px] md:text-[20px] font-Bold",
-                track:` h-[35px]  ${selectedValues.includes("react")?'':'bg-grayDark'}`,
-                thumb:'bg-white size-[28px]',         
-              }}
-              value="react"
-              label="ادارة"
-              checked={selectedValues.includes("react")}
-              onChange={() => handleSwitchChange("react")}
-            />
-            <Switch
-             size="xl"
-             color="#10B0C1"
-              labelPosition="left"
-              className="flex items-center justify-between gap-3 flex-1 w-full"
-              classNames={{
-                body: "flex items-center justify-between gap-3 flex-1 w-full",
-                label: "text-[14px] md:text-[20px] font-Bold",
-                track:` h-[35px]  ${selectedValues.includes("svelte")?'':'bg-grayDark'}`,
-                thumb:'bg-white size-[28px]',         
-              }}
-              value="svelte"
-              label="انشاء جديد"
-              checked={selectedValues.includes("svelte")}
-              onChange={() => handleSwitchChange("svelte")}
-            />
-            <Switch
-             size="xl"
-             color="#10B0C1"
-              labelPosition="left"
-              className="flex items-center justify-between gap-3 flex-1 w-full"
-              classNames={{
-                body: "flex items-center justify-between gap-3 flex-1 w-full",
-                label: "text-[14px] md:text-[20px] font-Bold",
-                track:` h-[35px]  ${selectedValues.includes("ng")?'':'bg-grayDark'}`,
-                thumb:'bg-white size-[28px]',         
-              }}
-              value="ng"
-              label="تعديل"
-              checked={selectedValues.includes("ng")}
-              onChange={() => handleSwitchChange("ng")}
-            />
-            <Switch
-             size="xl"
-             color="#10B0C1"
-              labelPosition="left"
-              className="flex items-center justify-between gap-3 flex-1 w-full"
-              classNames={{
-                body: "flex items-center justify-between gap-3 flex-1 w-full",
-                label: "text-[14px] md:text-[20px] font-Bold",
-                track:` h-[35px]  ${selectedValues.includes("vue")?'':'bg-grayDark'}`,
-                thumb:'bg-white size-[28px]',         
-              }}
-              value="vue"
-              label="مسح"
-              checked={selectedValues.includes("vue")}
-              onChange={() => handleSwitchChange("vue")}
-            />
-          </Group>
-        </Switch.Group>
-      </div>
+      <Switch.Group value={selectedValues} onChange={setSelectedValues}>
+        <Group mt="xs" className="flex flex-col gap- mb-126mdl: mdl:gap-9">
+          {dataSwitch.map((item, i) => {
+            return (
+              <Switch
+                key={i}
+                size={isMobile ? "md" : "xl"}
+                color="#10B0C1"
+                labelPosition="left"
+                className="flex items-center justify-between gap-3 flex-1 w-full"
+                classNames={{
+                  body: "flex items-center justify-between gap-3 flex-1 w-full",
+                  label: "text-[14px] md:text-[20px] font-Bold",
+                  track: `  h-[26px] mdl:h-[35px]  ${
+                    selectedValues.includes(item) ? "" : "bg-grayDark"
+                  }`,
+                  thumb: "bg-white size-[19px] mdl:size-[28px]",
+                }}
+                value={item}
+                label={item}
+                checked={selectedValues.includes(item)}
+                onChange={() => handleSwitchChange(item)}
+              />
+            );
+          })}
+        </Group>
+      </Switch.Group>
     </div>
   );
 }

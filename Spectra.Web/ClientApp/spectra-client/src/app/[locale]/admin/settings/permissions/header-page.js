@@ -5,7 +5,7 @@ import React from "react";
 
 function HeaderPage({ linkBack, title }) {
   return (
-    <div className="flex items-start justify-between gap-6 mb-8">
+    <div className="flex items-start justify-between gap-6 mb-3 mdl:mb-8">
       <div className="flex mb-1   items-center gap-4 ">
         <Link
           href={linkBack}
