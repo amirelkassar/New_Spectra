@@ -1,19 +1,15 @@
 "use client";
-import ModalIcon from "@/assets/icons/modalImg";
 import useMenu from "@/store/auth/signup/menu-store";
 import { Modal, ScrollArea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import React, { useState } from "react";
-import Button from "./button";
-import DeleteModalIcon from "@/assets/icons/deleteModal";
+import React from "react";
 import ModalType from "./modalType";
 import ModalDate from "./modalDate";
 import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
 import ModalJoin from "./modalJoin";
+import UserModal from "./permissions-modal/userModal";
 
-function ModalReq({ state, id, GroubId, numItem, cancel }) {
-  const { modalOneOpen, setModalOneOpen, modal, editModal } = useMenu();
-
+function ModalReq({ state, id, GroubId }) {
+  const { modal, editModal } = useMenu();
 
   return (
     <Modal
@@ -28,10 +24,16 @@ function ModalReq({ state, id, GroubId, numItem, cancel }) {
       className="modelReq"
     >
       {modal.type === "date" ? (
-        <ModalDate id={id}/>
-      ) :modal.type === "addDate" ? (
-        <ModalDate id={id}/>
-      ) :modal.type === "join"? <ModalJoin/> : modal.type==='addClient'?<ModalSelect/>:(
+        <ModalDate id={id} />
+      ) : modal.type === "addDate" ? (
+        <ModalDate id={id} />
+      ) : modal.type === "join" ? (
+        <ModalJoin />
+      ) : modal.type === "addClient" ? (
+        <ModalSelect />
+      ) : modal.type === "addPermissionsUser" ? (
+        <UserModal />
+      ) : (
         <ModalType state={modal.type} GroubId={GroubId} />
       )}
     </Modal>

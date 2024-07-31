@@ -7,6 +7,8 @@ import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import TableComponents from "@/components/table-comp";
 import PermissionsFilteration from './permissions-filteration'
 import placeholderImage from "@/assets/images/placeholder-person.png";
+import useMenu from "@/store/auth/signup/menu-store";
+import ModalReq from "@/components/modalReq";
 
 function UserPage() {
   const data = [
@@ -102,7 +104,12 @@ function UserPage() {
     },
 
   ];
+  const {  modal, editModal } = useMenu();
+
   const [selected, setSelected] = useState([]);
+  const updateRoute = (id) => {
+    return  ROUTES.ADMIN.SETTINGS.PERMISSIONS.PERMISSIONSUSEREDIT(id)
+   };
   return (
     <LayoutPermissions>
       <HeaderPage
@@ -111,7 +118,9 @@ function UserPage() {
       />
       <div className="flex items-center gap-7 flex-wrap">
         <h2 className="headTitleDash">المستخدمين</h2>
-        <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
+        <button onClick={()=>{
+        editModal('open',true); editModal('type','addPermissionsUser')
+      }} className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
           <PlusInsideCircleIcon />
           <p className="text-[12px] md:text-[16px] font-bold"> أضافة مستخدم </p>
         </button>
@@ -132,9 +141,12 @@ function UserPage() {
         type={2}
         haveImg={true}
         contracts={{open:true,type:'old',}}
+        routeClients={true}
+        RouteFun={updateRoute}
       />
     </div>
     </LayoutPermissions>
+
   );
 }
 

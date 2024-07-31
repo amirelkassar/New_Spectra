@@ -1,8 +1,10 @@
+"use client"
 import ROUTES from "@/routes";
 import HeaderPage from "./header-page";
 import LayoutPermissions from "./layoutPermissions";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { Link } from "@/navigation";
+import useMenu from "@/store/auth/signup/menu-store";
 
 const PermissionsPage = () => {
   const Permissions = [
@@ -23,17 +25,21 @@ const PermissionsPage = () => {
       title: "محاسب",
     },
     {
-      id: 4,
+      id: 5,
       title: "عائلة طفل",
     },
   ];
+  const {  modal, editModal } = useMenu();
+
   return (
     <LayoutPermissions>
       <HeaderPage
         linkBack={ROUTES.ADMIN.SETTINGS.DASHBOARD}
         title={"الاعدادات - الأذونات"}
       />
-      <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
+      <button onClick={()=>{
+        editModal('open',true); editModal('type','addClient')
+      }} className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
         <PlusInsideCircleIcon />
         <p className="text-[12px] md:text-[16px] font-bold"> أضافة مستوى</p>
       </button>

@@ -87,6 +87,7 @@ const ROUTES = {
         DASHBOARD: '/admin/settings/permissions',
         USERS: '/admin/settings/permissions/users',
         PERMISSIONSEDIT: (id) => `/admin/settings/permissions/${id}/edit`,
+        PERMISSIONSUSEREDIT: (id) => `/admin/settings/permissions/users/${id}/edit`,
       },
       CONTENT: {
         DASHBOARD: '/admin/settings/content',

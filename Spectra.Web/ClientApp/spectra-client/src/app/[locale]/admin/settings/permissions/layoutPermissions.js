@@ -1,17 +1,19 @@
-import React from 'react'
-import PermissionsAside from './permissions-aside'
+import React from "react";
+import PermissionsAside from "./permissions-aside";
+import ModalReq from "@/components/modalReq";
 
-function LayoutPermissions({children}) {
+function LayoutPermissions({ children }) {
   return (
     <section className="sec-page">
-    <section className="grow flex flex-col lg:flex-row lg:gap-6">
-      <PermissionsAside />
-      <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
-      {children}
-      </div>
+      <section className="grow flex flex-col lg:flex-row lg:gap-6">
+        <PermissionsAside />
+        <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
+          {children}
+        </div>
+      </section>
+      <ModalReq />
     </section>
-  </section>
-  )
+  );
 }
 
-export default LayoutPermissions
+export default LayoutPermissions;
