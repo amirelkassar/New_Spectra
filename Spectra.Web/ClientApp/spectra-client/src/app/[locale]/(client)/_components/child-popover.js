@@ -17,7 +17,7 @@ const ChildPopover = ({
     <Popover
       position='bottom'
       classNames={{
-        dropdown: cn('min-w-[85%]', className),
+        dropdown: cn('min-w-[80%] !max-w-5xl', className),
       }}
       opened={open}
       onChange={setOpen}
@@ -42,7 +42,7 @@ const ChildPopover = ({
         </div>
       </Popover.Target>
 
-      <div className='max-w-full'>
+      <div className='max-w-5xl'>
         <Popover.Dropdown className='shadow-md border-none space-y-5 px-0'>
           {data.map(
             (child) =>

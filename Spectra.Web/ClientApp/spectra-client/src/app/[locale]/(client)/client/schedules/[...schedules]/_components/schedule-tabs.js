@@ -1,6 +1,7 @@
 import Card from '@/components/card';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
+import ROUTES from '@/routes';
 import { useMemo } from 'react';
 
 export const ScheduleTabs = ({ slug }) => {
@@ -30,7 +31,7 @@ export const ScheduleTabs = ({ slug }) => {
             'w-full text-center lg:text-start px-5 py-1 text-xs lg:text-base block text-black font-bold transition hover:bg-greenLight rounded-lg',
             item.isActive && 'bg-greenMain text-white hover:bg-greenMain'
           )}
-          href={`/customer/schedules/${item.value}`}
+          href={`${ROUTES.CLIENT.SCHEDULES}/${item.value}`}
         >
           {item.label}
         </Link>

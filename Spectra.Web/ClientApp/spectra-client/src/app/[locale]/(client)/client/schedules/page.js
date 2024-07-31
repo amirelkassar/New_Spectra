@@ -1,6 +1,6 @@
 import { redirect } from '@/navigation';
 const Page = () => {
-  redirect('/customer/schedules/current');
+  redirect('/client/schedules/current');
   return null;
 };
 
