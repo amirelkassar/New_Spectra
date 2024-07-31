@@ -1,6 +1,6 @@
 import React from "react";
 
-const SessionIcon = () => {
+const SessionIcon = ({className}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ const SessionIcon = () => {
       height="27"
       fill="none"
       viewBox="0 0 29 27"
+      className={className}
     >
       <path
         fill="#10B0C1"
