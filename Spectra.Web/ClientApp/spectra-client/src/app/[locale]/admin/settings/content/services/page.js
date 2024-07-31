@@ -54,7 +54,7 @@ function page() {
   ];
   return (
     <Card>
-      <h1 className="text-center my-8 text-[24px] mdl:text-[36px] font-Bold">
+      <h1 className="text-center my-4 mdl:my-8 text-[24px] mdl:text-[36px] font-Bold">
         خدماتنا
       </h1>
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 mdl:gap-8">
@@ -62,14 +62,14 @@ function page() {
           return <CardService key={item.id} data={item} />;
         })}
         <div className="py-3 mdl:py-8 px-3 mdl:px-4 rounded-[10px] bg-white border-dashed border-2 border-grayDark">
-          <div className=" mx-auto cursor-pointer relative w-[136px] h-[80px] rounded-[10px] bg-greenMain flex items-center overflow-hidden flex-col justify-center gap-1 py-4">
+          <div className=" mx-auto cursor-pointer relative w-[90px] mdl:w-[136px] h-[54px] mdl:h-[80px] rounded-[10px] bg-greenMain flex items-center overflow-hidden flex-col justify-center gap-1 py-2 mdl:py-4">
             <input type={"file"} className=" absolute inset-0 w-full h-full opacity-0 !cursor-pointer"/>
-            <UploadIcon className={'h-[24px] w-[20px]'}/>
+            <UploadIcon className={'h-[14px] mdl:h-[24px] w-[11px] mdl:w-[20px]'}/>
             <p className="text-[12px] mdl:text-[16px] font-Bold text-white"> رفع رمز الخدمة</p>
           </div>
-          <div className="flex flex-col gap-2 mt-4">
-            <Input labelClassName={'text-[12px] mdl:text-[16px] mb-[0px]'} label={'اسم الخدمة'}/>
-            <Input labelClassName={'text-[12px] mdl:text-[16px] mb-[0px]'} label={' محتوى الخدمة'}/>
+          <div className="flex flex-col gap-2 mt-2 mdl:mt-4">
+            <Input labelClassName={'text-[12px] mdl:text-[16px] mb-[0px]'} inputClassName={'!h-[30px] mdl:!h-[50px]'} label={'اسم الخدمة'}/>
+            <Input labelClassName={'text-[12px] mdl:text-[16px] mb-[0px]'} inputClassName={'!h-[30px] mdl:!h-[50px]'} label={' محتوى الخدمة'}/>
           </div>
         </div>
       </div>

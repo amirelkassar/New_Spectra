@@ -8,7 +8,7 @@ function CardService({data}) {
       <button className="size-[30px] mdl:size-[48px] rounded-[10px] border-red border flex items-center justify-center p-[6px] mdl:p-3 ">
         <DeleteIcon className={"w-full h-auto"} />
       </button>
-      <div className="flex items-center justify-center flex-col gap-5 px-2 -mt-3 mdl:-mt-6">
+      <div className="flex items-center justify-center flex-col gap-2 mdl:gap-5 px-2 -mt-3 mdl:-mt-6">
         <div className=" size-[54px] mdl:size-[90px] rounded-[50%] items-center flex justify-center bg-greenMain/20 p-3 mdl:p-5 relative">
           {data.icon}
           <button className=" mdl:size-[32px] size-[20px] absolute -bottom-2 start-0 p-1 flex items-center justify-center mdl:p-2 bg-greenMain rounded-[50%]">
