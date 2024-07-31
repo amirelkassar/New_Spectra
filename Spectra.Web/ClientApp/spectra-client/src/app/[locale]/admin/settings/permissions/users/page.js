@@ -8,7 +8,6 @@ import TableComponents from "@/components/table-comp";
 import PermissionsFilteration from './permissions-filteration'
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import useMenu from "@/store/auth/signup/menu-store";
-import ModalReq from "@/components/modalReq";
 
 function UserPage() {
   const data = [

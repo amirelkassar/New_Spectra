@@ -1,7 +1,5 @@
 import React from "react";
 import PermissionsAside from "./permissions-aside";
-import ModalReq from "@/components/modalReq";
-
 function LayoutPermissions({ children }) {
   return (
     <section className="sec-page">
@@ -11,7 +9,6 @@ function LayoutPermissions({ children }) {
           {children}
         </div>
       </section>
-      <ModalReq />
     </section>
   );
 }

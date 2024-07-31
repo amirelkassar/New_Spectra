@@ -113,7 +113,7 @@ const Aside = ({ close }) => {
   ];
 
   const AsideLink = ({ link }) => (
-    <li className="relative">
+    <li className="relative h-11">
       <div
         className={clsx(
           "lineAfterLinks ",

@@ -4,18 +4,13 @@ import BackIcon from "@/assets/icons/back";
 import DeleteIcon from "@/assets/icons/delete";
 import ExportIcon from "@/assets/icons/export";
 import PrintIcon from "@/assets/icons/print";
-import RecoveryIcon from "@/assets/icons/recovery";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
-import Checkbox from "@/components/checkbox";
 import MenuActions from "@/components/menu-actions";
-import ModalReq from "@/components/modalReq";
 import TableComponents from "@/components/table-comp";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import useMenu from "@/store/auth/signup/menu-store";
-import clsx from "clsx";
-
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
@@ -187,7 +182,7 @@ const RequestsTable = ({ type }) => {
           {selected.length > 0 ? (
             <div className="flex flex-wrap items-center justify-start gap-3 md:gap-5 mt-5 md:mt-8 mb-6 md:mb-10">
               <Button
-                onClick={()=>{setState('delete');editModal('type','delete');editModal('open',true)}}
+                onClick={()=>{editModal('type','delete');editModal('countSelect',selected.length);editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-[#F5F5F5] text-red border-none w-[80px] md:w-[120px] !gap-[8px]"
                 }
@@ -211,7 +206,7 @@ const RequestsTable = ({ type }) => {
                 طباعة
               </Button>
               <Button
-               onClick={()=>{setState('accept');editModal('type','accept');editModal('open',true)}}
+               onClick={()=>{editModal('type','accept');editModal('countSelect',selected.length);editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                 }
@@ -220,7 +215,7 @@ const RequestsTable = ({ type }) => {
                 قبول
               </Button>
               <Button
-               onClick={()=>{setState('req');editModal('type','req');editModal('open',true)}}
+               onClick={()=>{editModal('type','req');editModal('countSelect',selected.length);editModal('open',true)}}
                 className={
                   "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none w-[80px] md:w-[120px] !gap-[8px]"
                 }
@@ -257,8 +252,6 @@ const RequestsTable = ({ type }) => {
         </div>
       </div>
       <TableComponents colNum={4} setState={setState} hide={false} data={data} dataLine={1} header={['الاسم',' نوع العميل',"تاريخ الطلب",'']} order={['name','date','job','Req&Res']} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS} reqType={type} />
-      
-      <ModalReq state={State} GroubId={selected} numItem={selected.length}/>
     </>
   );
 };

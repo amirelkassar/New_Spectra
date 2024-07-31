@@ -8,9 +8,10 @@ import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
 import ModalJoin from "./modalJoin";
 import UserModal from "./permissions-modal/userModal";
 
-function ModalReq({ state, id, GroubId }) {
+function ModalReq({  id }) {
   const { modal, editModal } = useMenu();
-
+//TODO
+//add in request admin count select GroubId
   return (
     <Modal
       opened={modal.open}
@@ -34,7 +35,7 @@ function ModalReq({ state, id, GroubId }) {
       ) : modal.type === "addPermissionsUser" ? (
         <UserModal />
       ) : (
-        <ModalType state={modal.type} GroubId={GroubId} />
+        <ModalType state={modal.type}  />
       )}
     </Modal>
   );

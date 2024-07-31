@@ -5,6 +5,7 @@ const useMenu = create((set) => ({
     open: false,
     id: 1,
     type: "",
+    countSelect:1
   },
   editModal: (key, value) =>
     set((state) => ({

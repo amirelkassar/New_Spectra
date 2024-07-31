@@ -1,6 +1,5 @@
 "use client";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
-import ModalReq from "@/components/modalReq";
 import useMenu from "@/store/auth/signup/menu-store";
 import React from "react";
 
@@ -14,7 +13,6 @@ function AddClient() {
         <PlusInsideCircleIcon />
         <p className=" text-[14px] md:text-[16px] font-bold">إضافة عميل</p>
       </button>
-      <ModalReq/>
     </div>
   );
 }

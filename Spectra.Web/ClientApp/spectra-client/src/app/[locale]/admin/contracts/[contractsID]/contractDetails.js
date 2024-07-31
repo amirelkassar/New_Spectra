@@ -4,7 +4,7 @@ import AcceptIcon from "@/assets/icons/accept";
 import EditIcon from "@/assets/icons/edit";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
-import ModalReq from "@/components/modalReq";
+
 import { Link, useRouter } from "@/navigation";
 import useMenu from "@/store/auth/signup/menu-store";
 import placeholderImage from "@/assets/images/placeholder-person.png";
@@ -225,7 +225,6 @@ function ContractDetails({ id }) {
           تعديل
         </Link>
       </div>
-      <ModalReq state={State} id={id} />
     </div>
   );
 }
