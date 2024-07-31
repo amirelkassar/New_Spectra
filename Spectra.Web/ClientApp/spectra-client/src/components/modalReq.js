@@ -1,5 +1,4 @@
 "use client";
-import useMenu from "@/store/auth/signup/menu-store";
 import { Modal, ScrollArea } from "@mantine/core";
 import React from "react";
 import ModalType from "./modalType";
@@ -7,11 +6,11 @@ import ModalDate from "./modalDate";
 import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
 import ModalJoin from "./modalJoin";
 import UserModal from "./permissions-modal/userModal";
+import useModal from "@/store/modal-slice";
 
 function ModalReq({  id }) {
-  const { modal, editModal } = useMenu();
-//TODO
-//add in request admin count select GroubId
+  const { modal, editModal } = useModal();
+
   return (
     <Modal
       opened={modal.open}

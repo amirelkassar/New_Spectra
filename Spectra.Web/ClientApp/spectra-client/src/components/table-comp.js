@@ -1,12 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import MenuActions from "./menu-actions";
 import Button from "./button";
 import RecoveryIcon from "@/assets/icons/recovery";
 import AcceptIcon from "@/assets/icons/accept";
 import RefuseIcon from "@/assets/icons/refuse";
 import Checkbox from "./checkbox";
-import useMenu from "@/store/auth/signup/menu-store";
 import clsx from "clsx";
 import Statue from "./status";
 import Image from "next/image";
@@ -15,6 +14,7 @@ import ReportDecIcon from "@/assets/icons/reportDec";
 import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
 import DeleteIcon from "@/assets/icons/delete";
 import ReschedulingIcon from "@/assets/icons/rescheduling";
+import useModal from "@/store/modal-slice";
 
 function TableComponents({
   data,
@@ -37,7 +37,7 @@ function TableComponents({
   report,
   contracts,
 }) {
-  const { modal, editModal } = useMenu();
+  const { modal, editModal } = useModal();
 
   const toggleRow = (id) => {
     setSelected((prev) =>

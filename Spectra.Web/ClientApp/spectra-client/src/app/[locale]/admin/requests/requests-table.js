@@ -10,7 +10,7 @@ import MenuActions from "@/components/menu-actions";
 import TableComponents from "@/components/table-comp";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
@@ -125,7 +125,8 @@ const RequestsTable = ({ type }) => {
       type: "rejected",
     },
   ];
-  const {modal, editModal} = useMenu();
+
+  const {modal, editModal} = useModal();
   const [State,setState] = useState('accept');
 
   return (

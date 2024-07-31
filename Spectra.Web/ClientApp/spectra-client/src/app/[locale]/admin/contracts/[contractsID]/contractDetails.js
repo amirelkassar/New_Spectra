@@ -1,18 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import AcceptIcon from "@/assets/icons/accept";
 import EditIcon from "@/assets/icons/edit";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
 
 import { Link, useRouter } from "@/navigation";
-import useMenu from "@/store/auth/signup/menu-store";
+
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import certificates from "@/assets/images/certificates.png";
 import Image from "next/image";
 import PdfIcon from "@/assets/icons/pdf";
 import ShareIcon from "@/assets/icons/share";
 import ContractsIcon from "@/assets/icons/contracts";
+import useModal from "@/store/modal-slice";
+
 function ContractDetails({ id }) {
   const data = {
     name: "احمد محمد كمال",
@@ -38,7 +39,9 @@ function ContractDetails({ id }) {
     ],
   };
 
-  const { modal, editModal } = useMenu();
+
+  const {modal,editModal } = useModal();
+
   const router = useRouter()
   const [State, setState] = useState("accept");
   return (
@@ -204,6 +207,7 @@ function ContractDetails({ id }) {
         </Button>
         <Button
           onClick={() => {
+            console.log('fdgfd');
             setState("req");
             editModal("type", "req");
             editModal("open", true);

@@ -7,7 +7,7 @@ import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import TableComponents from "@/components/table-comp";
 import PermissionsFilteration from './permissions-filteration'
 import placeholderImage from "@/assets/images/placeholder-person.png";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 
 function UserPage() {
   const data = [
@@ -103,7 +103,7 @@ function UserPage() {
     },
 
   ];
-  const {  modal, editModal } = useMenu();
+  const {  modal, editModal } = useModal();
 
   const [selected, setSelected] = useState([]);
   const updateRoute = (id) => {

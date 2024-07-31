@@ -4,7 +4,7 @@ import EditIcon from "@/assets/icons/edit";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
 import { Link } from "@/navigation";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 import React, { useState } from "react";
 
 const RequestDetailsPage = ({params:{requestId}}) => {
@@ -27,7 +27,8 @@ const RequestDetailsPage = ({params:{requestId}}) => {
   };
 
   const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
-  const {modal, editModal} = useMenu();
+
+  const {modal, editModal} = useModal();
   const [State,setState] = useState('accept');
   return (
     <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">

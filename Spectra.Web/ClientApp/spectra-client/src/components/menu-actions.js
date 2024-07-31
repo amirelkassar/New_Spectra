@@ -1,21 +1,18 @@
 "use client";
-
-import CreateIcon from "@/assets/icons/create";
 import DeleteIcon from "@/assets/icons/delete";
 import EditIcon from "@/assets/icons/edit";
 import ExportIcon from "@/assets/icons/export";
-import ImportIcon from "@/assets/icons/import";
 import PrintIcon from "@/assets/icons/print";
 import ReschedulingIcon from "@/assets/icons/rescheduling";
 import ShowIcon from "@/assets/icons/show";
 import StarIcon from "@/assets/icons/start";
 import ThreeDotsIcon from "@/assets/icons/three-dots";
 import { Link } from "@/navigation";
-import useMenu from "@/store/auth/signup/menu-store";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import useModal from "@/store/modal-slice";
 
 export default function MenuActions({ id, className, type = 1, path,pathEdit ,routeClients}) {
-  const { modalOneOpen, setModalOneOpen ,modal,editModal} = useMenu();
+  const { modal,editModal} = useModal();
   const options = [
     {
       icon: <DeleteIcon />,

@@ -4,12 +4,12 @@ import { ActionIcon } from "@mantine/core";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import React, { useRef, useState } from "react";
 import Button from "./button";
-import useMenu from "@/store/auth/signup/menu-store";
 import SearchIcon from "@/assets/icons/search";
+import useModal from "@/store/modal-slice";
 
 function ModalDate({ id }) {
   const [valueDate, setValueDate] = useState();
-  const { modal, editModal } = useMenu();
+  const { modal, editModal } = useModal();
 
   const ref = useRef(null);
   const pickerControl = (

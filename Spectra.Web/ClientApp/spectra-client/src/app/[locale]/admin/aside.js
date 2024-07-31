@@ -26,7 +26,7 @@ import ContractsIcon from "@/assets/icons/contracts";
 const Aside = ({ close }) => {
   const [opened, { toggle }] = useDisclosure(false);
   const [openMenuMob, setopenMenuMob] = useState(close);
-  const menue = useMenu();
+  const menu = useMenu();
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const path = usePathname();
@@ -158,8 +158,8 @@ const Aside = ({ close }) => {
   );
   return (
     <aside
-      className={`  top-0 start-0 ${menue.menuOpen ? "openMob" : ""} ${
-        menue.menuOpen
+      className={`  top-0 start-0 ${menu.menuOpen ? "openMob" : ""} ${
+        menu.menuOpen
           ? "min-w-[50px] w-[50px] closeMenue"
           : "min-w-[230px] w-[230px]"
       }  py-10 mdl:flex flex-col font-bold duration-300`}
@@ -171,7 +171,7 @@ const Aside = ({ close }) => {
         <div
           className={`hideShowLinks  flex  w-[34px] h-[34px] rounded-[50%] `}
           onClick={() => {
-            menue.setmenuOpen(!menue.menuOpen);
+            menu.setmenuOpen(!menu.menuOpen);
           }}
         >
           <ArrowNav />

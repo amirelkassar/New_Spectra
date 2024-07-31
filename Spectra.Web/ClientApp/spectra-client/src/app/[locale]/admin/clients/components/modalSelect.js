@@ -7,8 +7,6 @@ import Button from "@/components/button";
 import ROUTES from "@/routes";
 import { Radio, RadioGroup } from "@headlessui/react";
 import React, { useState } from "react";
-
-import useMenu from "@/store/auth/signup/menu-store";
 import CloseModalClient from "@/components/closeModalClient";
 import FormFamily from "./form-family";
 import FormOrg from "./form-org";
@@ -42,10 +40,8 @@ function ModalSelect() {
 
   const [selected, setSelected] = useState();
   const [IsOpen, setIsOpen] = useState(false);
-  const { modal, editModal } = useMenu();
-  const handlePrevPage = () => {
-    setActive(0);
-  };
+
+
   return (
     <div className="">
       <div className="flex items-center gap-1 mb-10">

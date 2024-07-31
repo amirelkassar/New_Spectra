@@ -2,11 +2,11 @@ import React from "react";
 import Button from "./button";
 import DeleteModalIcon from "@/assets/icons/deleteModal";
 import ModalIcon from "@/assets/icons/modalImg";
-import useMenu from "@/store/auth/signup/menu-store";
 import CancelDateIcon from "@/assets/icons/cancelDate";
+import useModal from "@/store/modal-slice";
 
 function ModalType({ }) {
-  const { modal, editModal } = useMenu();
+  const { modal, editModal } = useModal();
   const getTextWithSelect = () => {
     return modal.type === "accept"
       ? `هل انت متأكد من قبول ${modal.countSelect} طلبات`

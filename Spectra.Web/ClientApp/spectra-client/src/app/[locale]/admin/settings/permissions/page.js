@@ -4,7 +4,7 @@ import HeaderPage from "./header-page";
 import LayoutPermissions from "./layoutPermissions";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { Link } from "@/navigation";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 
 const PermissionsPage = () => {
   const Permissions = [
@@ -29,7 +29,8 @@ const PermissionsPage = () => {
       title: "عائلة طفل",
     },
   ];
-  const {  modal, editModal } = useMenu();
+
+  const {  modal, editModal } = useModal();
 
   return (
     <LayoutPermissions>
