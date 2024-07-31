@@ -1,38 +1,36 @@
-import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import Card from '@/components/card';
-import React from 'react';
+import { AddReminderModal } from './add-reminder-modal';
+
+const data = [
+  {
+    title: 'كشف 2',
+    subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
+    time: '10:30',
+    date: '10/10/2021',
+  },
+  {
+    title: 'كشف 2',
+    subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
+    time: '10:30',
+    date: '10/10/2021',
+  },
+  {
+    title: 'كشف 2',
+    subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
+    time: '10:30',
+    date: '10/10/2021',
+  },
+];
 
 export const ReminderMessages = () => {
-  const data = [
-    {
-      title: 'كشف 2',
-      subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
-      time: '10:30',
-      date: '10/10/2021',
-    },
-    {
-      title: 'كشف 2',
-      subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
-      time: '10:30',
-      date: '10/10/2021',
-    },
-    {
-      title: 'كشف 2',
-      subtitle: 'كشف ابنى محمد مع الدكتور احمد ',
-      time: '10:30',
-      date: '10/10/2021',
-    },
-  ];
   return (
     <section>
-      <Card>
+      <Card className='h-full'>
         <div className='flex items-center justify-between'>
           <h3 className='font-bold text-sm lg:text-medium text-black'>
             رسائل التذكير
           </h3>
-          <button>
-            <PlusInsideCircleIcon className='lg:size-8 size-5' />
-          </button>
+          <AddReminderModal />
         </div>
         {data.map((item, index) => (
           <Medical key={'ReminderMessages' + index} {...item} />
