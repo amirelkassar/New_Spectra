@@ -1,11 +1,11 @@
 "use client";
 import { Modal, ScrollArea } from "@mantine/core";
 import React from "react";
-import ModalType from "./modalType";
-import ModalDate from "./modalDate";
+import ModalType from "./comp_modal/modalType";
+import ModalDate from "./comp_modal/modalDate";
 import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
-import ModalJoin from "./modalJoin";
-import UserModal from "./permissions-modal/userModal";
+import ModalJoin from "./comp_modal/modalJoin";
+import UserModal from "./comp_modal/permissions-modal/userModal";
 import useModal from "@/store/modal-slice";
 
 function ModalReq({  id }) {
