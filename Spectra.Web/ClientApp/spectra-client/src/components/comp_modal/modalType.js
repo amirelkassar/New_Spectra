@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./button";
+import Button from "../button";
 import DeleteModalIcon from "@/assets/icons/deleteModal";
 import ModalIcon from "@/assets/icons/modalImg";
 import CancelDateIcon from "@/assets/icons/cancelDate";

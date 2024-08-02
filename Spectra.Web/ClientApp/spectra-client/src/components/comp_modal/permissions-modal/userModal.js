@@ -1,8 +1,8 @@
 import React from "react";
-import Input from "../input";
-import SelectBox from "../select-box";
-import Button from "../button";
-import CloseModalClient from "../closeModalClient";
+import Input from "../../input";
+import SelectBox from "../../select-box";
+import Button from "../../button";
+import CloseModalClient from "../../closeModalClient";
 const cites = ["موظفين 1", " موظفين 2", "موظفين 3", "موظفين 4", "موظفين 5"];
 const countries = ["عملاء 1", " عملاء 2", "عملاء 3", "عملاء 4", "عملاء 5"];
 function UserModal() {

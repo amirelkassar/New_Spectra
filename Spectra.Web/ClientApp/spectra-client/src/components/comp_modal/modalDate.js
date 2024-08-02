@@ -3,7 +3,7 @@ import TimeIcon from "@/assets/icons/time";
 import { ActionIcon } from "@mantine/core";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import React, { useRef, useState } from "react";
-import Button from "./button";
+import Button from "../button";
 import SearchIcon from "@/assets/icons/search";
 import useModal from "@/store/modal-slice";
 
