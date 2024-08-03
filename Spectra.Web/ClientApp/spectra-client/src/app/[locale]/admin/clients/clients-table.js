@@ -1,174 +1,155 @@
 "use client";
-import DeleteIcon from "@/assets/icons/delete";
-import EditIcon from "@/assets/icons/edit";
-import DeleteButton from "@/components/delete-button";
-import EditButton from "@/components/edit-button";
+import { DataTable } from "@/components/data-table";
 import TableComponents from "@/components/table-comp";
-import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import clsx from "clsx";
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { columns } from "./components/columns";
+import FamilyIcon from "@/assets/icons/family";
+import OrgIcon from "@/assets/icons/org";
+import ProviderIcon from "@/assets/icons/provider";
+const data = [
+  {
+    id: 0,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 1,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'organization',
+    route: "organization",
+  },
+  {
+    id: 2,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'provider',
+    route: "provider",
+  },
+  {
+    id: 3,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 4,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'organization',
+    route: "organization",
+  },
+  {
+    id: 5,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'provider',
+    route: "provider",
+  },
+  {
+    id: 6,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 7,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 8,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 10,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 11,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 12,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+  {
+    id: 13,
+    name: "عبدالله الشيخ",
+    numberOfChildren: "1",
+    email: "Abdullah@gmail.com",
+    lastLogin: "20/4/2024",
+    type: 'family',
+    route: "family",
+  },
+];
+const FilterOptions = [
+  {
+    label:  "عائلة طفل",
+    icon: <FamilyIcon className={"w-[14px] lg:w-[18px] h-[15px] lg:h-[19px]"} />,
+    key: "family",
+  },
+  {
+    label:"منظمة",
+    icon: <OrgIcon className={" size-3 lg:size-4"} />,
+    key: "organization",
+  },
+  {
+    label: "مقدم الخدمة الطبية",
+    icon: <ProviderIcon className={"w-[14px] lg:w-[18px] h-[15px] lg:h-[19px]"} />,
+    key: "provider",
+  },
+];
 const ClientsTable = () => {
-  const router = useRouter();
-  const locale = useLocale();
-  const data = [
-    {
-      id: 0,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 1,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "منظمة",
-      route: "organization",
-    },
-    {
-      id: 2,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "مقدم الخدمة الطبية",
-      route: "provider",
-    },
-    {
-      id: 3,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 4,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "منظمة",
-      route: "organization",
-    },
-    {
-      id: 5,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "مقدم الخدمة الطبية",
-      route: "provider",
-    },
-    {
-      id: 6,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 7,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 8,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 10,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 11,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 12,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-    {
-      id: 13,
-      name: "عبدالله الشيخ",
-      numberOfChildren: "1",
-      email: "Abdullah@gmail.com",
-      lastLogin: "20/4/2024",
-      type: "عائلة طفل",
-      route: "family",
-    },
-  ];
 
-  const handleRouting = (item) => {
-    if (item.route === "organization") {
-      router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
-    }
-    if (item.route === "family") {
-      router.push(ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(item.id));
-    }
-  };
-  const [selected, setSelected] = useState([]);
-  const updateRoute = (id) => {
-   return  ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(id)
-  };
 
   return (
-    <div className="grow max-h-[calc(100vh-325px)] overflow-auto min-h-[600px]">
-      <TableComponents
-        data={data}
-        colNum={6}
-        dataLine={1}
-        header={[
-          "الاسم",
-          " عدد الاطفال",
-          "الايميل",
-          "اخر دخول",
-          "نوع العميل",
-          "",
-        ]}
-        order={["name", "numberOfChildren", "email", "lastLogin", "type", ""]}
-        selectPage={selected}
-        setSelected={setSelected}
-        type={2}
-        routeClients={true}
-        route={ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(5)}
-        RouteFun={updateRoute}
-      />
+    <div className="grow  overflow-auto ">
+     
+      <DataTable mdHide={3} data={data} columns={columns} filterData={FilterOptions} filter="buttons" filterBy="type" filterText="فلتر بالنوع"/>
     </div>
   );
 };

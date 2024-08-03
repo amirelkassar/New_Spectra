@@ -1,4 +1,4 @@
-import ClientAppointments from "../../../components/client-appointments";
+import ClientAppointments from "./_components/client-appointments";
 
 const FamilyAppointmentsPage = () => {
   return <ClientAppointments />;

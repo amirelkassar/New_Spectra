@@ -1,6 +1,6 @@
 "use client";
 import { DataTable } from "@/components/data-table";
-import { columns } from "../../main/_components/columns";
+import { columns } from "./columns";
 const data = [
   {
     id: 0,

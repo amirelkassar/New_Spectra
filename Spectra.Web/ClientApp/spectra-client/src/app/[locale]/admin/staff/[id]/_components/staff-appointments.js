@@ -1,6 +1,7 @@
 "use client";
 import { DataTable } from "@/components/data-table";
-import { columns } from "../../main/_components/columns";
+import { columns } from "./columns";
+
 const data = [
   {
     id: 0,
@@ -43,7 +44,7 @@ const data = [
     statu: "تمت",
   },
 ];
-const PatientsDetailsAppointments = () => {
+const StaffAppointments = () => {
   return (
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%] lg:max-w-[calc(100%-250px)]">
       <DataTable data={data} columns={columns} />
@@ -51,4 +52,4 @@ const PatientsDetailsAppointments = () => {
   );
 };
 
-export default PatientsDetailsAppointments;
+export default StaffAppointments;

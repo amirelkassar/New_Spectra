@@ -44,6 +44,7 @@ interface DataTableProps<TData, TValue> {
   filterData?: FilterData[];
   sortingData?: SortingData[];
   selectData?: string[];
+  mdHide: Number | null;
 }
 
 export function DataTable<TData, TValue>({
@@ -56,6 +57,7 @@ export function DataTable<TData, TValue>({
   filterData = [],
   sortingData = [],
   selectData = [],
+  mdHide = null,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -154,9 +156,10 @@ export function DataTable<TData, TValue>({
                     }
                     variant="blueLight"
                     className={cn(
-                      "  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5",
+                      "  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5 min-w-fit",
                       {
-                        "bg-white font-Regular": option.key !== getFillterValue(),
+                        "bg-white font-Regular":
+                          option.key !== getFillterValue(),
                       }
                     )}
                   >
@@ -233,7 +236,7 @@ export function DataTable<TData, TValue>({
       )}
 
       {/* Table */}
-      <Table >
+      <Table>
         <Table.Thead className="bg-blueLight h-[50px] min-h-[50px]  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Tr key={headerGroup.id} className="!border-b-0 ">
@@ -247,7 +250,7 @@ export function DataTable<TData, TValue>({
                         : i === headerGroup.headers.length - 1
                         ? "rounded-e-xl pe-5"
                         : ""
-                    }`}
+                    } ${mdHide === i + 1 ? " hidden mdl:block" : ""}`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -265,13 +268,15 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <Table.Tr
-                className=" text-black text-xs lg:text-base "
+                className="text-black text-xs lg:text-base"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
-                {row.getVisibleCells().map((cell) => (
+                {row.getVisibleCells().map((cell, i) => (
                   <Table.Td
-                    className="py-3 first:font-Bold first:lg:text-base max-w-[280px]"
+                    className={`py-3 first:font-Bold first:lg:text-base max-w-[280px] ${
+                      mdHide === i + 1 ? " hidden mdl:block" : ""
+                    }`}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

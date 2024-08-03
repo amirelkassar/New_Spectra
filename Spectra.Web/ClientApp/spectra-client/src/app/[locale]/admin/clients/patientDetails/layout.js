@@ -1,6 +1,6 @@
 import React from 'react'
 import PatientsDetilsAside from '../components/patientDetails-aside'
-import PatientsDetailsAppointments from '../components/patientsDetails-appointments'
+import PatientsDetailsAppointments from './_components/patients-appointments'
 
 function layout( {children}) {
   return (

@@ -1,6 +1,7 @@
 "use client";
+import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
-import { useRouter } from "next/navigation";
+
 import { useEffect } from "react";
 
 const FamilyPage = () => {
