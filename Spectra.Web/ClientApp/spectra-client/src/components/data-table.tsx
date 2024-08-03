@@ -244,7 +244,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <Table.Th
                     key={header.id}
-                    className={` text-black max-w-[280px] w-[280px]   text-xs font-ExtraLight lg:text-base ${
+                    className={` text-black max-w-[300px] w-[280px]   text-xs font-ExtraLight lg:text-base ${
                       i === 0
                         ? "rounded-s-xl ps-5"
                         : i === headerGroup.headers.length - 1

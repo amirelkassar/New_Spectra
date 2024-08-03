@@ -1,8 +1,4 @@
 import MenuActions from "@/components/menu-actions";
-import Statue from "@/components/status";
-import { Badge } from "@mantine/core";
-import Image from "next/image";
-
 export const columns = [
   {
     accessorKey: "name",

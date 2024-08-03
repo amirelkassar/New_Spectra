@@ -1,7 +1,7 @@
 "use client";
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import { DataTable } from "@/components/data-table";
-import { columns } from "./components/columns";
+import { columns } from "./columns";
 const data = [
   {
     id: 0,
@@ -130,9 +130,9 @@ const FilterOptions = [
     key: "secretary",
   },
 ];
-const ContractsTable = () => {
+const NewContractsTable = () => {
   return (
-    <div className="grow">
+    <div className="grow min-h-[600px]">
       <DataTable
         data={data}
         columns={columns}
@@ -145,4 +145,4 @@ const ContractsTable = () => {
   );
 };
 
-export default ContractsTable;
+export default NewContractsTable;
