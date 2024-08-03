@@ -12,8 +12,6 @@ function LayContracts({ children }) {
         <ContractsAside />
         <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
           <HeaderContracts />
-          <ContractsFilteration/>
-
           {children}
         </div>
       </section>

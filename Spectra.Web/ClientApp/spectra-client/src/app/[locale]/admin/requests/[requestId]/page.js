@@ -3,9 +3,8 @@ import AcceptIcon from "@/assets/icons/accept";
 import EditIcon from "@/assets/icons/edit";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
-import ModalReq from "@/components/modalReq";
 import { Link } from "@/navigation";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 import React, { useState } from "react";
 
 const RequestDetailsPage = ({params:{requestId}}) => {
@@ -28,7 +27,8 @@ const RequestDetailsPage = ({params:{requestId}}) => {
   };
 
   const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
-  const {modal, editModal} = useMenu();
+
+  const {modal, editModal} = useModal();
   const [State,setState] = useState('accept');
   return (
     <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
@@ -60,7 +60,7 @@ const RequestDetailsPage = ({params:{requestId}}) => {
       </div>
       <div className="flex px-1 gap-5 md:gap-8 max-w-[950px] w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
         <Button 
-        onClick={()=>{setState('accept');editModal('type','accept');editModal('open',true)}}
+        onClick={()=>{editModal('type','accept');editModal('open',true)}}
           className={
             "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold items-center  flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
           }
@@ -69,7 +69,7 @@ const RequestDetailsPage = ({params:{requestId}}) => {
           قبول
         </Button>
         <Button
-       onClick={()=>{setState('req');editModal('type','req');editModal('open',true)}}
+       onClick={()=>{editModal('type','req');editModal('open',true)}}
           className={
             "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none "
           }
@@ -88,7 +88,7 @@ const RequestDetailsPage = ({params:{requestId}}) => {
         </Link>
  
       </div>
-      <ModalReq state={State} id={requestId}/>
+   
     </div>
   );
 };

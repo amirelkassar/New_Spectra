@@ -1,4 +1,4 @@
-import DoctorIcon from "@/assets/icons/doctor";
+import DoctorIcon2 from "@/assets/icons/doctorIcon2";
 import HeartWithPlus from "@/assets/icons/heart-with-plus";
 import SessionIcon from "@/assets/icons/session";
 import ShakeIcon from "@/assets/icons/shake";
@@ -21,7 +21,7 @@ const Cards = () => {
       text: "طلب على خدمة الكشف المبكر",
       icon: (
         <div className=" size-[32px] p-[7px] md:p-0 md:size-12 rounded-full bg-[#F5E4F9]  flex items-center justify-center ">
-          <DoctorIcon />{" "}
+          <DoctorIcon2 />{" "}
         </div>
       ),
     },

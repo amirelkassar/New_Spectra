@@ -1,11 +1,11 @@
 "use client";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
-import ModalReq from "@/components/modalReq";
-import useMenu from "@/store/auth/signup/menu-store";
+import useModal from "@/store/modal-slice";
 import React from "react";
 
 function AddClient() {
-    const { modalOneOpen, setModalOneOpen, modal, editModal } = useMenu();
+
+    const {editModal } = useModal();
   return (
     <div>
       <button className="flex items-center justify-center w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold" onClick={()=>{
@@ -14,7 +14,6 @@ function AddClient() {
         <PlusInsideCircleIcon />
         <p className=" text-[14px] md:text-[16px] font-bold">إضافة عميل</p>
       </button>
-      <ModalReq/>
     </div>
   );
 }

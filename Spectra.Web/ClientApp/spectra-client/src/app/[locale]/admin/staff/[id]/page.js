@@ -1,7 +1,7 @@
 import React from 'react'
 import StaffDetails from '../components/staff-details'
 import StaffAside from '../staff-aside'
-import StaffAppointments from '../components/staff-appointments'
+import StaffAppointments from './_components/staff-appointments'
 
 function page() {
   return (

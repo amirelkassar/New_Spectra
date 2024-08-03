@@ -2,11 +2,11 @@
 
 import ContractsIcon from "@/assets/icons/contracts";
 import HelloIcon from "@/assets/icons/hello";
-import useMenu from "@/store/auth/signup/menu-store";
 import React from "react";
+import useModal from "@/store/modal-slice";
 
 function HeaderMain({setActive}) {
-    const {modal,editModal} = useMenu();
+    const {modal,editModal} = useModal();
   return (
     <div className="p-7">
       <div className="flex items-center gap-4">

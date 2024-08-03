@@ -1,7 +1,7 @@
 import React from 'react'
 import PatientsDetails from '../../../../components/patients-details'
 import PatientsDetilsAside from '../../../../components/patientDetails-aside'
-import PatientsDetailsAppointments from '../../../../components/patientsDetails-appointments'
+import PatientsDetailsAppointments from '../_components/patients-appointments'
 
 function page() {
   return (

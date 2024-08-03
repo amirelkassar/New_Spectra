@@ -10,7 +10,6 @@ const PatientsPage = () => {
         <h2 className="headTitleDash">العملاء</h2>
         <AddClient />
       </div>
-      <ClientFilteration />
       <ClientsTable />
     </div>
   );

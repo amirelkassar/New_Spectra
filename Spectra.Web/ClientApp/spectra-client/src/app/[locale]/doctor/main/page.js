@@ -1,5 +1,4 @@
 "use client"
-import ModalReq from "@/components/modalReq";
 import Cards from "./cards";
 import LastAppointments from "./last-appointments";
 import HeaderMain from "./headerMain";
@@ -15,8 +14,6 @@ const MainDashboardPage = () => {
         <Cards />
         <LastAppointments />
         <BookingCode/>
-        
-
       </div>
     </div>
   );

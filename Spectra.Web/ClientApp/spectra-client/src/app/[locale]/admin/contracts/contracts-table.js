@@ -1,135 +1,145 @@
 "use client";
-
-import TableComponents from "@/components/table-comp";
-import ROUTES from "@/routes";
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import placeholderImage from "@/assets/images/placeholder-person.png";
+import { DataTable } from "@/components/data-table";
+import { columns } from "./components/columns";
+const data = [
+  {
+    id: 0,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "accountant",
+  },
+  {
+    id: 1,
+    name: "عبدالله الشيخ",
+    active: false,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "secretary",
+  },
+  {
+    id: 2,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "accountant",
+  },
+  {
+    id: 3,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "accountant",
+  },
+  {
+    id: 4,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "secretary",
+  },
+  {
+    id: 5,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: " accountant",
+  },
+  {
+    id: 6,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "doctor ",
+  },
+  {
+    id: 7,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "specialist ",
+  },
+  {
+    id: 8,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "doctor ",
+  },
+  {
+    id: 10,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "doctor ",
+  },
+  {
+    id: 11,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "specialist ",
+  },
+  {
+    id: 12,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "doctor ",
+  },
+  {
+    id: 13,
+    name: "عبدالله الشيخ",
+    active: true,
+    image: placeholderImage,
+    date: "20/4/2024",
+    job: "specialist ",
+  },
+];
+const FilterOptions = [
+  {
+    label: "طبيب",
+    icon: null,
+    key: "doctor",
+  },
+  {
+    label: "مختص",
+    icon: null,
+    key: "specialist",
+  },
+  {
+    label: "محاسب",
+    icon: null,
+    key: "accountant",
+  },
+  {
+    label: "سكرتير",
+    icon: null,
+    key: "secretary",
+  },
+];
 const ContractsTable = () => {
-  const router = useRouter();
-  const locale = useLocale();
-  const data = [
-    {
-      id: 0,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "سكرتير",
-    },
-    {
-      id: 1,
-      name: "عبدالله الشيخ",
-      active:false,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب",
-    },
-    {
-      id: 2,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "سكرتير",
-    },
-    {
-      id: 3,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "سكرتير",
-    },
-    {
-      id: 4,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "سكرتير",
-    },
-    {
-      id: 5,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: " طبيب",
-    },
-    {
-      id: 6,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 7,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 8,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 10,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 11,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 12,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-    {
-      id: 13,
-      name: "عبدالله الشيخ",
-      active:true,
-      image: placeholderImage,
-      date: "20/4/2024",
-      job: "طبيب ",
-    },
-  ];
-
-  const [selected, setSelected] = useState([]);
   return (
-    <div className="grow min-h-[600px]">
-      <TableComponents
+    <div className="grow">
+      <DataTable
         data={data}
-        colNum={4}
-        dataLine={1}
-        header={["الاسم ", "الوظيفة", "تاريخ التوقيع", "حالة العقد"]}
-        order={["name", "job", "date", ""]}
-        selectPage={selected}
-        setSelected={setSelected}
-        type={2}
-        haveImg={true}
-        contracts={{open:true,type:'old',}}
+        columns={columns}
+        filterData={FilterOptions}
+        filter="buttons"
+        filterText="فلتر بالنوع"
+        filterBy="job"
       />
     </div>
   );

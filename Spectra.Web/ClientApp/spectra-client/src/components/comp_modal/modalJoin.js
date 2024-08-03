@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import Input from "./input";
-import SelectBox from "./select-box";
-import Button from "./button";
-import CloseModalClient from "./closeModalClient";
+import Input from "../input";
+import SelectBox from "../select-box";
+import Button from "../button";
+import CloseModalClient from "../closeModalClient";
 import ArrowRight from "@/assets/icons/arrow-right";
 import { MultiSelect } from "@mantine/core";
 import ArrowDownIcon from "@/assets/icons/arrow-down";

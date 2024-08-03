@@ -1,6 +1,5 @@
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import React from "react";
-import StaffFilteration from "./staff-filteration";
 import StaffTable from "./staff-table";
 import MenuActions from "@/components/menu-actions";
 
@@ -17,8 +16,6 @@ function page() {
         </div>
         <MenuActions/>
       </div>
-
-      <StaffFilteration />
       <StaffTable />
     </div>
   );

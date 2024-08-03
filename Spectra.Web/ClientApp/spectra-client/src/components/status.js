@@ -12,6 +12,16 @@ const Statue = ({ statue }) => {
       bg = "#10B0C1";
       text = "white";
       break;
+    case "notStarted":
+      bg = "#F5F5F5";
+      break;
+    case "processing":
+      bg = "#E9F7FF";
+      break;
+    case "done":
+      bg = "#10B0C1";
+      text = "white";
+      break;
   }
   return (
     <div
