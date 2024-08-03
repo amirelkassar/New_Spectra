@@ -13,9 +13,9 @@ function UploadIcon({className}) {
       <path
         d="M2 26H21M11.5 20V2M11.5 2L17.0417 7.25M11.5 2L5.95833 7.25"
         stroke="white"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

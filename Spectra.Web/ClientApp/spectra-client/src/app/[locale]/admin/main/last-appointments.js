@@ -10,94 +10,107 @@ import ROUTES from "@/routes";
 import { Link } from "@/navigation";
 import TableComponents from "@/components/table-comp";
 import { useState } from "react";
+import { DataTable } from "@/components/data-table";
+import {columns} from './_components/columns'
+
+const data = [
+  {
+    id: 0,
+    image: placeholderImage,
+    type:"consultations",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "لم يبدأ بعد",
+  },
+  {
+    id: 1,
+    image: placeholderImage,
+    type:"disclosures",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "لم يبدأ بعد",
+  },
+  {
+    id: 2,
+    image: placeholderImage,
+    type:"sessions",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تتم الان",
+  },
+  {
+    id: 4,
+    image: placeholderImage,
+    type:"disclosures",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 5,
+    image: placeholderImage,
+    type:"consultations",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 6,
+    image: placeholderImage,
+    type:"disclosures",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 7,
+    image: placeholderImage,
+    type:"sessions",
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+];
+
+
 const LastAppointments = () => {
   
-  const data = [
-    {
-      id: 0,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "لم يبدأ بعد",
-    },
-    {
-      id: 1,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "لم يبدأ بعد",
-    },
-    {
-      id: 2,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تتم الان",
-    },
-    {
-      id: 4,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 5,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 6,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 7,
-      image: placeholderImage,
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-  ];
+ 
   const [selected, setSelected] = useState([]);
 
   return (
@@ -109,8 +122,8 @@ const LastAppointments = () => {
           <ArrowLeft />
         </Link>
       </div>
-      <TableComponents data={data} colNum={4} colNumSmall={3} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  />
-     
+      {/* <TableComponents data={data} colNum={4} colNumSmall={3} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  /> */}
+      <DataTable data={data} columns={columns} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ColumnDef,
@@ -9,19 +9,19 @@ import {
   useReactTable,
   getPaginationRowModel,
   getSortedRowModel,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
-import { Select, Table } from '@mantine/core';
-import { Pagination } from '@mantine/core';
+import { Select, Table } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 
-import { Fragment, useState } from 'react';
+import { Fragment, useState } from "react";
 
-import FilterIcon from '@/assets/icons/filter';
-import Button from '@/components/button';
-import { cn } from '@/lib/utils';
-import ArrowLeft from '@/assets/icons/arrow-left';
-import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
-import { SortingState } from '@tanstack/react-table';
+import FilterIcon from "@/assets/icons/filter";
+import Button from "@/components/button";
+import { cn } from "@/lib/utils";
+import ArrowLeft from "@/assets/icons/arrow-left";
+import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
+import { SortingState } from "@tanstack/react-table";
 
 export interface FilterData {
   label: string;
@@ -38,8 +38,9 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   sort?: boolean;
-  filter?: 'select' | 'buttons' | null;
+  filter?: "select" | "buttons" | null;
   filterBy?: string;
+  filterText?: string;
   filterData?: FilterData[];
   sortingData?: SortingData[];
   selectData?: string[];
@@ -50,7 +51,8 @@ export function DataTable<TData, TValue>({
   data,
   sort = false,
   filter = null,
-  filterBy = '',
+  filterBy = "",
+  filterText = "",
   filterData = [],
   sortingData = [],
   selectData = [],
@@ -86,62 +88,62 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <div className='space-y-5'>
+    <div className="space-y-5">
       {/* Filter */}
       {filter && (
-        <div className='flex mdl:items-center flex-col mdl:flex-row gap-4 my-5 w-full'>
-          {filter === 'select' && (
+        <div className="flex mdl:items-center flex-col mdl:flex-row gap-4 my-5 w-full">
+          {filter === "select" && (
             <div>
               <Select
                 searchable
                 classNames={{
                   input:
-                    'focus:border-greenMain border-black placeholder:text-black placeholder:text-xs disabled:border-black/10 disabled:text-black/50 disabled:placeholder:text-black/50 rounded-lg',
+                    "focus:border-greenMain border-black placeholder:text-black placeholder:text-xs disabled:border-black/10 disabled:text-black/50 disabled:placeholder:text-black/50 rounded-lg",
                 }}
-                checkIconPosition='right'
+                checkIconPosition="right"
                 data={selectData}
                 disabled={selectData?.length === 0}
-                placeholder='اختر التخصص'
+                placeholder="اختر التخصص"
                 value={
-                  (table.getColumn(filterBy)?.getFilterValue() as string) ?? ''
+                  (table.getColumn(filterBy)?.getFilterValue() as string) ?? ""
                 }
                 onChange={(value) =>
                   table.getColumn(filterBy)?.setFilterValue(value)
                 }
                 rightSection={
                   <ArrowDownBlack
-                    className={selectData?.length === 0 ? 'opacity-10' : ''}
+                    className={selectData?.length === 0 ? "opacity-10" : ""}
                   />
                 }
               />
             </div>
           )}
 
-          <div className='flex items-center gap-3'>
+          <div className="flex items-center gap-3">
             <FilterIcon />
-            <span className='font-bold text-xs lg:text-base text-black'>
-              فلتر
+            <span className="font-bold text-xs lg:text-base text-black">
+              {filterText ? filterText : "فلتر"}
             </span>
           </div>
 
-          {filter === 'buttons' && (
-            <div className='flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto'>
+          {filter === "buttons" && (
+            <div className="flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto">
               <Button
                 onClick={() =>
                   table.getColumn(filterBy)?.setFilterValue(undefined)
                 }
-                variant='blueLight'
+                variant="blueLight"
                 className={cn(
-                  'font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5',
+                  " font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5",
                   {
-                    'bg-white': getFillterValue() !== undefined,
+                    "bg-white font-Regular ": getFillterValue() !== undefined,
                   }
                 )}
               >
                 الكل
               </Button>
 
-              <span className='w-[1px] h-6 bg-grayMedium mx-1' />
+              <span className="w-[1px] h-6 bg-grayMedium mx-1" />
 
               {filterData.map((option, index) => (
                 <Fragment key={option.label}>
@@ -150,11 +152,11 @@ export function DataTable<TData, TValue>({
                     onClick={() =>
                       table.getColumn(filterBy)?.setFilterValue(option.key)
                     }
-                    variant='blueLight'
+                    variant="blueLight"
                     className={cn(
-                      'font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5',
+                      "  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5",
                       {
-                        'bg-white': option.key !== getFillterValue(),
+                        "bg-white font-Regular": option.key !== getFillterValue(),
                       }
                     )}
                   >
@@ -162,7 +164,7 @@ export function DataTable<TData, TValue>({
                     {option.label}
                   </Button>
                   {index !== filterData.length - 1 && (
-                    <span className='w-[1px] h-6 bg-grayMedium mx-1' />
+                    <span className="w-[1px] h-6 bg-grayMedium mx-1 " />
                   )}
                 </Fragment>
               ))}
@@ -170,14 +172,14 @@ export function DataTable<TData, TValue>({
           )}
 
           {sort && (
-            <div className='flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto'>
+            <div className="flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto">
               <Button
                 onClick={() => table.resetSorting()}
-                variant='blueLight'
+                variant="blueLight"
                 className={cn(
-                  'font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5',
+                  "font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5",
                   {
-                    'bg-white': table
+                    "bg-white": table
                       .getAllColumns()
                       .some((column) => column.getIsSorted()),
                   }
@@ -186,33 +188,33 @@ export function DataTable<TData, TValue>({
                 الكل
               </Button>
 
-              <span className='w-[1px] h-6 bg-grayMedium mx-1' />
+              <span className="w-[1px] h-6 bg-grayMedium mx-1" />
 
               {sortingData.map((option, index) => (
                 <Fragment key={option.label}>
                   <Button
                     key={option.label}
                     onClick={() => table.getColumn(option.key)?.toggleSorting()}
-                    variant='blueLight'
-                    className={cn('font-normal flex-1 mdl:flex-initial gap-1', {
-                      'bg-white': option.key !== getFillterValue(),
+                    variant="blueLight"
+                    className={cn("font-normal flex-1 mdl:flex-initial gap-1", {
+                      "bg-white": option.key !== getFillterValue(),
                     })}
                   >
                     {table.getColumn(option.key)?.getIsSorted() && (
                       <>
                         {table.getColumn(option.key)?.getIsSorted() ===
-                          'asc' && (
+                          "asc" && (
                           <ArrowLeft
-                            className='rotate-90 size-3'
-                            fill='#10B0C1'
+                            className="rotate-90 size-3"
+                            fill="#10B0C1"
                           />
                         )}
 
                         {table.getColumn(option.key)?.getIsSorted() ===
-                          'desc' && (
+                          "desc" && (
                           <ArrowLeft
-                            className='-rotate-90 size-3'
-                            fill='#10B0C1'
+                            className="-rotate-90 size-3"
+                            fill="#10B0C1"
                           />
                         )}
                       </>
@@ -221,7 +223,7 @@ export function DataTable<TData, TValue>({
                     {option.label}
                   </Button>
                   {index !== sortingData.length - 1 && (
-                    <span className='w-[1px] h-6 bg-grayMedium mx-1' />
+                    <span className="w-[1px] h-6 bg-grayMedium mx-1" />
                   )}
                 </Fragment>
               ))}
@@ -231,15 +233,21 @@ export function DataTable<TData, TValue>({
       )}
 
       {/* Table */}
-      <Table withRowBorders={false}>
-        <Table.Thead className='bg-blueLight'>
+      <Table >
+        <Table.Thead className="bg-blueLight h-[50px] min-h-[50px]  ">
           {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+            <Table.Tr key={headerGroup.id} className="!border-b-0 ">
+              {headerGroup.headers.map((header, i) => {
                 return (
                   <Table.Th
                     key={header.id}
-                    className='max-w-20 text-black text-xs font-normal lg:text-base'
+                    className={` text-black max-w-[280px] w-[280px]   text-xs font-ExtraLight lg:text-base ${
+                      i === 0
+                        ? "rounded-s-xl ps-5"
+                        : i === headerGroup.headers.length - 1
+                        ? "rounded-e-xl pe-5"
+                        : ""
+                    }`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -257,13 +265,13 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <Table.Tr
-                className=' text-black text-xs lg:text-base'
+                className=" text-black text-xs lg:text-base "
                 key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
+                data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
                   <Table.Td
-                    className='py-3 first:font-bold first:lg:text-medium'
+                    className="py-3 first:font-Bold first:lg:text-base max-w-[280px]"
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -273,7 +281,7 @@ export function DataTable<TData, TValue>({
             ))
           ) : (
             <Table.Tr>
-              <Table.Td colSpan={columns.length} className='h-24 text-center'>
+              <Table.Td colSpan={columns.length} className="h-24 text-center">
                 No results.
               </Table.Td>
             </Table.Tr>
@@ -283,31 +291,31 @@ export function DataTable<TData, TValue>({
 
       {/* Pagination */}
       {data.length > 10 && (
-        <div className='font-bold flex items-center justify-between'>
+        <div className="font-bold flex items-center justify-between">
           <Button
-            className='py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg'
+            className="py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <ArrowLeft className='rotate-180' />
+            <ArrowLeft className="rotate-180" />
             التالي
           </Button>
 
           <Pagination
             total={table.getPageCount()}
-            dir='ltr'
+            dir="ltr"
             classNames={{
-              control: '!bg-white hover:!bg-black/5 !transition',
+              control: "!bg-white hover:!bg-black/5 !transition",
             }}
-            size='sm'
-            radius='xl'
+            size="sm"
+            radius="xl"
             withControls={false}
             value={table.getState().pagination.pageIndex + 1}
             onChange={(value) => table.setPageIndex(value - 1)}
           />
 
           <Button
-            className='py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg'
+            className="py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
