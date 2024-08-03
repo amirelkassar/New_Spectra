@@ -2,9 +2,9 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 
+import { MakeAppointment } from './make-appointment';
 import { formatCurrency } from '@/lib/utils';
 import Avatar from '@/components/avatar';
-import Button from '@/components/button';
 import MessageIconGreenMain from '@/assets/icons/message-green';
 import StarGoldIcon from '@/assets/icons/starGold';
 
@@ -71,12 +71,6 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
   {
     id: 'action',
-    cell: () => (
-      <Button variant='secondary' className='px-2 py-1 rounded-lg'>
-        <span>
-          حجز <span className='hidden lg:inline'>ميعاد</span>
-        </span>
-      </Button>
-    ),
+    cell: ({ row }) => <MakeAppointment doctorId={row.original.id} />,
   },
 ];

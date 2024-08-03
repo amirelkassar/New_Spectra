@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 
 const ChildPopover = ({
   data = [],
+  disabled = false,
   selectedChild = 0,
   setSelectedChild = () => {},
   className = '',
@@ -21,6 +22,7 @@ const ChildPopover = ({
       }}
       opened={open}
       onChange={setOpen}
+      disabled={disabled}
     >
       <Popover.Target>
         <div

@@ -1,11 +1,19 @@
 // Cspell: disable
+import React from 'react';
 
-import { MedicalTeamTableData } from '@/app/[locale]/(client)/customer/team/_components/columns';
+import { MedicalTeamTableData } from '@/app/[locale]/(client)/client/team/_components/columns';
 import HeartIcon from '@/assets/icons/heart';
 import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
-import React from 'react';
+import Autism from '@/assets/icons/autism';
+import LanguageIssues from '@/assets/icons/language-issues';
+import ADHD from '@/assets/icons/adhd';
+import Disability from '@/assets/icons/disability';
+import BehavioralIssues from '@/assets/icons/behavioral-issues';
+import LearningDifficulties from '@/assets/icons/learning-difficulties';
+import DevelopmentalDelay from '@/assets/icons/developmental-delay';
+import AllSpecializations from '@/assets/icons/all-specializations';
 
 export const childPopupData = [
   {
@@ -200,5 +208,65 @@ export const packagesDataFlex = [
       '1 جلسة اضافية لقياس الذكاء',
     ],
     color: '#010036',
+  },
+];
+
+export const SpecialNeedsData = [
+  {
+    id: 1,
+    label: 'اضراب طيف التوحد',
+    icon: React.createElement(Autism, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+
+  {
+    id: 2,
+    label: 'مشاكل اللغة والتواصل',
+    icon: React.createElement(LanguageIssues, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 3,
+    label: 'فرط الحركة و نقص الانتباه',
+    icon: React.createElement(ADHD, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 4,
+    label: 'الاعاقة الذهنية والجسدية',
+    icon: React.createElement(Disability, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 5,
+    label: 'العناد والعنف والخوف والقلق',
+    icon: React.createElement(BehavioralIssues, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 6,
+    label: 'صعوبات التعلم',
+    icon: React.createElement(LearningDifficulties, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 7,
+    label: 'التأخر النمائى',
+    icon: React.createElement(DevelopmentalDelay, {
+      className: 'size-11 lg:size-14',
+    }),
+  },
+  {
+    id: 8,
+    label: 'جميع التخصصات',
+    icon: React.createElement(AllSpecializations, {
+      className: 'size-11 lg:size-14',
+    }),
   },
 ];
