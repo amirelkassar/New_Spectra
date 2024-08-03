@@ -7,32 +7,45 @@ const ContentPage = () => {
     {
       id: 0,
       title: "الخدمات",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.SERVICES
     },
     {
       id: 1,
       title: "البانرات الدعائية",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.BANNERSAD
+
     },
     {
       id: 2,
       title: "المقالات",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+
     },
     {
       id: 3,
       title: "التخصصات الطبية",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+
     },
     {
       id: 4,
       title: "قصص النجاح",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+
     },
   ];
   const media = [
     {
       id: 0,
       title: "تسجيل الدخول",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+
     },
     {
       id: 1,
       title: "ماذا نعالج",
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+
     },
   ];
 
@@ -55,9 +68,7 @@ const ContentPage = () => {
                       {item.title}
                     </h3>
                     <Link
-                      href={ROUTES.ADMIN.SETTINGS.PERMISSIONS.PERMISSIONSEDIT(
-                        5
-                      )}
+                      href={item.link}
                       className="w-fit md:w-[140px] flex items-center justify-center py-2 px-7 rounded-[10px] bg-greenMain text-white font-Bold text-[14px] md:text-[20px]"
                     >
                       تعديل

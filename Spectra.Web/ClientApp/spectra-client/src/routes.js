@@ -91,6 +91,8 @@ const ROUTES = {
       },
       CONTENT: {
         DASHBOARD: '/admin/settings/content',
+        SERVICES: '/admin/settings/content/services',
+        BANNERSAD: '/admin/settings/content/bannersAD',
       },
       PLANS: {
         DASHBOARD: '/admin/settings/plans',
