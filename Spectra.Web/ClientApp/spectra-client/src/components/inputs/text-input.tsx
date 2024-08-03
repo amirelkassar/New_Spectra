@@ -6,8 +6,8 @@ const TextInput = ({ size = 'md', ...props }) => {
       {...props}
       size={size}
       classNames={{
-        input: 'rounded-xl focus:border-greenMain',
-        label: 'font-bold text-xs lg:text-base mb-2 ps-1',
+        input: 'rounded-lg focus:border-greenMain',
+        label: 'text-xs lg:text-base mb-2 ps-1',
       }}
     />
   );

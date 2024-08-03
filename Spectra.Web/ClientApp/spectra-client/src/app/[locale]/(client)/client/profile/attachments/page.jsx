@@ -5,12 +5,13 @@ import ROUTES from '@/routes';
 import BackIcon from '@/assets/icons/back-black';
 import ChildPopover from '../../../_components/child-popover';
 import { childPopupData } from '@/lib/demoData';
-import { Prescriptions } from './_components/prescriptions';
-const PrescriptionsPage = () => {
+import { Atthachments } from './_components/atthachments';
+
+const AtthachmentsPage = () => {
   return (
     <Container className='space-y-5'>
       <Heading
-        label='ملفي - الوصفات الطبية'
+        label='ملفي - المرفقات'
         icon={
           <Link href={ROUTES.CLIENT.PROFILE}>
             <BackIcon className='ltr:rotate-180' />
@@ -21,9 +22,9 @@ const PrescriptionsPage = () => {
 
       <ChildPopover data={childPopupData} />
 
-      <Prescriptions />
+      <Atthachments />
     </Container>
   );
 };
 
-export default PrescriptionsPage;
+export default AtthachmentsPage;

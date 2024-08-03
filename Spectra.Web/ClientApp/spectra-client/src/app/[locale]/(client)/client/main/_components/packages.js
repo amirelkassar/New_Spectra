@@ -18,12 +18,7 @@ const adv = [ADV_1, ADV_2, ADV_3];
 export const Packages = () => {
   const router = useRouter();
   return (
-    <Section
-      onClick={() => router.push(`${ROUTES.CLIENT.MAIN}/packages`)}
-      type='button'
-      btnLabel='جميع الباقات'
-      className='hidden mdl:block'
-    >
+    <Section type='basic' btnLabel='جميع الباقات' className='hidden mdl:block'>
       <div>
         <Swiper
           modules={[Autoplay]}
@@ -33,10 +28,11 @@ export const Packages = () => {
           {adv.map((item, index) => (
             <SwiperSlide key={'adv' + index}>
               <Image
+                onClick={() => router.push(ROUTES.CLIENT.PACKAGES)}
                 priority
                 src={item}
                 alt='adv'
-                className='max-w-full h-auto px-2'
+                className='max-w-full h-auto px-2 cursor-pointer'
               />
             </SwiperSlide>
           ))}

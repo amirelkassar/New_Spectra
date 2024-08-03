@@ -1,6 +1,6 @@
 import Card from '@/components/card';
 import { Heading } from '../../../_components/heading';
-import { AddChild } from './add-child';
+import { AddChildModal } from './add-child-modal';
 import Button from '@/components/button';
 import EditIcon from '@/assets/icons/edit';
 import Avatar from '@/components/avatar';
@@ -25,7 +25,7 @@ export const ProfileInfo = () => {
       <Heading
         className='lg:gap-x-9 gap-x-5'
         label='ملفي'
-        icon={<AddChild />}
+        icon={<AddChildModal />}
       />
       <section className='my-8 flex flex-col lg:flex-row lg:items-center gap-5'>
         {/* CUSTOMER AVATAR, NAME AND EMAIL */}

@@ -22,6 +22,7 @@ const ROUTES = {
     MAIN: '/client/main',
     CONTROL_MENU: '/client/control',
     PROFILE: '/client/profile',
+    PACKAGES: '/client/packages',
     SCHEDULES: '/client/schedules',
     STEPS: '/client/steps',
     TEAM: '/client/team',

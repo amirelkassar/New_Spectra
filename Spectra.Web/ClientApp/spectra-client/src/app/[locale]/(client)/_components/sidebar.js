@@ -18,6 +18,7 @@ import { ClockIcon2 } from '@/assets/icons/clock';
 import StepsIcon from '@/assets/icons/steps';
 import ReportsIcon from '@/assets/icons/reportsIcon';
 import ChatIcon from '@/assets/icons/chat';
+import HeartIcon from '@/assets/icons/heart-checked';
 
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
@@ -41,6 +42,12 @@ const Sidebar = () => {
         route: ROUTES.CLIENT.PROFILE,
         isActive: path.includes(ROUTES.CLIENT.PROFILE),
         icon: <ProfileIcon />,
+      },
+      {
+        name: 'الباقات',
+        route: ROUTES.CLIENT.PACKAGES,
+        isActive: path.includes(ROUTES.CLIENT.PACKAGES),
+        icon: <HeartIcon />,
       },
       {
         name: 'المواعيد',

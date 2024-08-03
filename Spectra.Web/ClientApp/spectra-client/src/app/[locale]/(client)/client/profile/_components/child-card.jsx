@@ -185,7 +185,13 @@ const ChildDetails = ({
 
           {/* ACTION BUTTONS */}
           <div className='flex *:flex-1 gap-5 font-bold text-sm lg:text-medium text-black flex-col px-2 lg:flex-row'>
-            <Button>مرفقات</Button>
+            <Button
+              onClick={() =>
+                router.push(`${ROUTES.CLIENT.PROFILE}/attachments`)
+              }
+            >
+              مرفقات
+            </Button>
             <Button
               onClick={() =>
                 router.push(`${ROUTES.CLIENT.PROFILE}/prescriptions`)
