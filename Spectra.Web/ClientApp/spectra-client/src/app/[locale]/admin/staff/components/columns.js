@@ -1,4 +1,5 @@
 import MenuActions from "@/components/menu-actions";
+import ROUTES from "@/routes";
 export const columns = [
   {
     accessorKey: "name",
@@ -33,12 +34,13 @@ export const columns = [
 
     cell: ({ getValue, row }) => {
       const status = row.original.statu;
+      const id = row.original.id;
 
       return (
         <div
           className={"flex gap-[10px] md:gap-[40px] items-center justify-end "}
         >
-          <MenuActions />
+          <MenuActions type={2} path={ROUTES.ADMIN.STAFF.STAFFID(id)} />
         </div>
       );
     },

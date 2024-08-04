@@ -1,20 +1,17 @@
 "use client";
 import Image from "next/image";
 import childPlaceholder from "@/assets/images/child-placeholder.jpg";
-import MenuActions from "@/components/menu-actions";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
-import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { useParams } from "next/navigation";
 import Input from "@/components/input";
 import { useState } from "react";
 import { Select } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import Button from "@/components/button";
-import EditIcon from "@/assets/icons/edit";
-import EditImgIcon from "@/assets/icons/editImg";
+
 import SaveIcon from "@/assets/icons/save";
+import { useRouter } from "@/navigation";
+
 
 const ClientPatientsEdit = () => {
   const [data, setData] = useState([
@@ -67,18 +64,19 @@ const ClientPatientsEdit = () => {
     );
   };
   const params = useParams();
+  const router = useRouter();
   return (
     <section className="default-page grow">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4 lg:gap-9">
-          <Link
-            href={ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId)}
+          <button
+           onClick={()=>{router.back()}}
             className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
           >
             <BackIcon
               className={"w-full h-full"}
             />
-          </Link>
+          </button>
           <h2>عبدالله الشيخ</h2>
         </div>
       </div>

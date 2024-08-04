@@ -4,8 +4,11 @@ import Button from "@/components/button";
 import AcceptIcon from "@/assets/icons/accept";
 import RefuseIcon from "@/assets/icons/refuse";
 import useModal from "@/store/modal-slice";
-function RequestAction() {
+import ROUTES from "@/routes";
+function RequestAction({id}) {
   const { modal, editModal } = useModal();
+  console.log(id);
+  
   return (
     <div
       className={"   flex w-full justify-end items-center  gap-3 lg:gap-5  "}
@@ -35,7 +38,7 @@ function RequestAction() {
         رفض
       </Button>
 
-      <MenuActions />
+      <MenuActions type={2} path={ROUTES.ADMIN.REQUESTSID(id)}/>
     </div>
   );
 }
