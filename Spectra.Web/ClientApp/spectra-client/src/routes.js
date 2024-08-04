@@ -35,6 +35,7 @@ const ROUTES = {
     REQUESTS: '/admin/requests',
     REQUESTSNEW: '/admin/requests/new',
     REQUESTSREJECTED: '/admin/requests/rejected',
+    REQUESTSID: (id) => `/admin/requests/${id}`,
     CLIENTS: {
       DASHBOARD: '/admin/clients',
       ORGANIZATION: {
@@ -50,8 +51,6 @@ const ROUTES = {
           `/admin/clients/organization/${id}/prescriptions`,
         PATIENTS: (id) => `/admin/clients/organization/${id}/patients`,
         PATIENTSEDIT: (id) => `/admin/clients/organization/${id}/patients/edit`,
-        PATIENTSDETAILS: (id, id2) =>
-          `/admin/clients/organization/${id}/patients/${id2}`,
       },
       FAMILY: {
         DETAILS: (id) => `/admin/clients/family/${id}/details`,
@@ -59,8 +58,7 @@ const ROUTES = {
         APPOINTMENTS: (id) => `/admin/clients/family/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/admin/clients/family/${id}/prescriptions`,
         PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
-        PATIENTSDETAILS: (id, id2) =>
-          `/admin/clients/family/${id}/patients/${id2}`,
+        PATIENTSEDIT: (id) => `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
         DETAILS: (id) => `/admin/clients/patientDetails/${id}/details`,

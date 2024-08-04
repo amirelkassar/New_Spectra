@@ -1,8 +1,5 @@
 "use client";
 import { DataTable } from "@/components/data-table";
-import TableComponents from "@/components/table-comp";
-import ROUTES from "@/routes";
-import { useState } from "react";
 import { columns } from "./components/columns";
 import FamilyIcon from "@/assets/icons/family";
 import OrgIcon from "@/assets/icons/org";

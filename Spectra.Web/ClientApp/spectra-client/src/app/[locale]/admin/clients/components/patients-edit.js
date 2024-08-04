@@ -47,9 +47,7 @@ function PatientsEdit() {
             عبدالله الشيخ - محمد عبدالله الشيخ
           </h2>
         </div>
-        <div className="block ">
-          <MenuActions />
-        </div>
+       
       </div>
 
       <form className=" flex gap-5 clientEdit ">
@@ -166,7 +164,7 @@ function PatientsEdit() {
                 ShowDate ? "flex" : " hidden"
               }`}
             >
-              <DatePicker   value={new Date()}  />
+              <DatePicker   value={value} onChange={setValue}  />
             </div>
           </div>
         </div>
