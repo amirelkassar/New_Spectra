@@ -188,10 +188,10 @@ const FilterOptions = [
 ];
 
 const AppoTable = () => {
-
   return (
     <div className="rounded-xl bg-white  grow">
       <DataTable
+        IsWidth={true}
         data={data}
         columns={columns}
         filterData={FilterOptions}

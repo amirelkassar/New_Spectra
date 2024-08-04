@@ -1,5 +1,4 @@
 import RequestAction from "./requestAction";
-import RequestOldAction from "./requestOldAction";
 export const columns = [
   {
     accessorKey: "name",
@@ -16,17 +15,14 @@ export const columns = [
     header: "تاريخ الطلب",
     id: "date",
   },
-
   {
-    accessorKey: "type",
-    header: "",
-    id: "type",
-
+    id: "actions",
     cell: ({ getValue, row }) => {
       const id = row.original.id;
       return <RequestAction id={id} />;
     },
   },
+  
 ];
 export const columnsOld = [
   {
@@ -49,7 +45,6 @@ export const columnsOld = [
     accessorKey: "type",
     header: "",
     id: "type",
-
     cell: ({ getValue, row }) => {
       const id = row.original.id;
       return <RequestAction id={id} />;

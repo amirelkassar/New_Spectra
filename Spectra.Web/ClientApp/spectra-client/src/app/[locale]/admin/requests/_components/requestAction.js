@@ -11,7 +11,7 @@ function RequestAction({id}) {
   
   return (
     <div
-      className={"   flex w-full justify-end items-center  gap-3 lg:gap-5  "}
+      className={"   flex  justify-end items-center  gap-3 lg:gap-5  "}
     >
       <Button
         onClick={() => {

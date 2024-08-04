@@ -38,6 +38,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   sort?: boolean;
+  IsWidth?: boolean;
   filter?: "select" | "buttons" | null;
   filterBy?: string;
   filterText?: string;
@@ -51,6 +52,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   sort = false,
+  IsWidth = false,
   filter = null,
   filterBy = "",
   filterText = "",
@@ -244,7 +246,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <Table.Th
                     key={header.id}
-                    className={` text-black max-w-[300px] w-[280px]   text-xs font-ExtraLight lg:text-base ${
+                    className={` text-black ${IsWidth&&'max-w-[300px] w-[280px]'}   text-xs font-ExtraLight lg:text-base ${
                       i === 0
                         ? "rounded-s-xl ps-5"
                         : i === headerGroup.headers.length - 1

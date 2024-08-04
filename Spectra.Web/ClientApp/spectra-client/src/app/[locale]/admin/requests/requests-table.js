@@ -14,7 +14,74 @@ import useModal from "@/store/modal-slice";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { columns, columnsOld } from "./_components/columns";
-
+const data = [
+  {
+    id: 0,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 1,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 2,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 3,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 4,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 5,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 6,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 7,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 8,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 9,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+  {
+    id: 10,
+    name: "احمد محمد كمال",
+    job: "طبيب",
+    date: "22/5/2024",
+  },
+];
 const RequestsTable = ({ type }) => {
   const path = usePathname();
   const [selected, setSelected] = useState([]);
@@ -25,75 +92,6 @@ const RequestsTable = ({ type }) => {
         : [...prev, id]
     );
   };
-
-  const data = [
-    {
-      id: 0,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 1,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 2,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 3,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 4,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 5,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 6,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 7,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 8,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 9,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-    {
-      id: 10,
-      name: "احمد محمد كمال",
-      job: "طبيب",
-      date: "22/5/2024",
-    },
-  ];
 
   const reset = () => {
     setSelected([]);
@@ -263,10 +261,11 @@ const RequestsTable = ({ type }) => {
           })}
         </div>
       </div>
-    {
-      type==='rejected'?  <DataTable data={data} columns={columnsOld} /> :  <DataTable data={data} columns={columns} />
-    }
-    
+      {type === "rejected" ? (
+        <DataTable IsWidth={true} data={data} columns={columnsOld} />
+      ) : (
+        <DataTable IsWidth={true} data={data} columns={columns} />
+      )}
     </>
   );
 };
