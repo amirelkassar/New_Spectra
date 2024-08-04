@@ -81,7 +81,7 @@ export const columns = [
       return (
         <div
           className={
-            "flex gap-[10px] md:gap-[40px]  content-center items-start "
+            "flex gap-[10px] md:gap-[40px] justify-center items-start "
           }
         >
           <Statue statue={status} />

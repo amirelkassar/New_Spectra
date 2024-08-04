@@ -156,7 +156,7 @@ const StaffTable = () => {
   return (
     <div className="grow">
       <DataTable
-        IsWidth={true}
+       
         data={data}
         columns={columns}
         filterData={FilterOptions}

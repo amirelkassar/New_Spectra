@@ -15,6 +15,7 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
       const ctx = chartRef.current.getContext('2d');
       const newChart = new Chart(ctx, {
         type: 'line',
+        
         data: {
           labels: chartData.map((d) => d.x),
           datasets: [
@@ -34,7 +35,16 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
                   return '#10B0C1'; // أخضر
                 }
               },
-              pointBorderColor: '#fff',
+              pointBorderColor: function (context) {
+                const value = context.raw;
+                if (value >= 10 && value <= 30) {
+                  return '#FF3D3D'; // أحمر
+                } else if (value >= 40 && value <= 70) {
+                  return '#8A22A0'; // بنفسجي
+                } else {
+                  return '#10B0C1'; // أخضر
+                }
+              },
               pointHoverBackgroundColor: '#fff',
               pointHoverBorderColor: function (context) {
                 const value = context.raw;
@@ -46,8 +56,8 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
                   return '#10B0C1'; // أخضر
                 }
               },
-              pointRadius: 10,
-              borderWidth: 4,
+              pointRadius: 14,
+              borderWidth: 10,
               tension: 0,
             },
           ],

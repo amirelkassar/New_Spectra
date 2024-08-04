@@ -1,4 +1,4 @@
-const ArrowNav = ({ className }) => {
+const ArrowNav = ({ className,path='#10B0C1' }) => {
   return (
     <svg
       className={className}
@@ -10,7 +10,7 @@ const ArrowNav = ({ className }) => {
     >
       <path
         d='M1.5 2L10 11L1.5 20.5'
-        stroke='#10B0C1'
+        stroke={path}
         strokeWidth='3'
         strokeLinecap='round'
       />
