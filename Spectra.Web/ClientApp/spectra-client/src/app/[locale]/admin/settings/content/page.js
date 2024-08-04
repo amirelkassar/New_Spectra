@@ -24,7 +24,7 @@ const ContentPage = () => {
     {
       id: 3,
       title: "التخصصات الطبية",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.MEDICAL
 
     },
     {
