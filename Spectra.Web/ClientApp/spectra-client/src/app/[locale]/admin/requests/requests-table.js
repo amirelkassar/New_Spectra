@@ -216,7 +216,7 @@ const RequestsTable = ({ type }) => {
                   editModal("open", true);
                 }}
                 className={
-                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex  bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                 }
               >
                 <AcceptIcon />
