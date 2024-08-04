@@ -14,6 +14,7 @@ import BehavioralIssues from '@/assets/icons/behavioral-issues';
 import LearningDifficulties from '@/assets/icons/learning-difficulties';
 import DevelopmentalDelay from '@/assets/icons/developmental-delay';
 import AllSpecializations from '@/assets/icons/all-specializations';
+import { ClientsTableData } from '@/app/[locale]/(client)/client/profile/_components/clients-table-columns';
 
 export const childPopupData = [
   {
@@ -78,6 +79,44 @@ export const MedicalTeamData: MedicalTeamTableData[] = [
     rate: 8.6,
     avatar: '',
     cost: 120,
+  },
+];
+
+export const ClientsData: ClientsTableData[] = [
+  {
+    id: '1',
+    clientName: 'عبد الله الشيخ',
+    childrensNo: '1',
+    email: 'sH9zZ@example.com',
+    kind: 'family',
+  },
+  {
+    id: '2',
+    clientName: 'عبد الله الشيخ',
+    childrensNo: '2',
+    email: 'sH9zZ@example.com',
+    kind: 'family',
+  },
+  {
+    id: '3',
+    clientName: 'عبد الله الشيخ',
+    childrensNo: '3',
+    email: 'sH9zZ@example.com',
+    kind: 'medicalProvider',
+  },
+  {
+    id: '4',
+    clientName: 'عبد الله الشيخ',
+    childrensNo: '4',
+    email: 'sH9zZ@example.com',
+    kind: 'firm',
+  },
+  {
+    id: '5',
+    clientName: 'عبد الله الشيخ',
+    childrensNo: '5',
+    email: 'sH9zZ@example.com',
+    kind: 'medicalProvider',
   },
 ];
 

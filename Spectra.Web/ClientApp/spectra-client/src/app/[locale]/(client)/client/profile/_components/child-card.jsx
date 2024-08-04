@@ -91,7 +91,7 @@ export const ChildCards = () => {
   const [selectedChild, setSelectedChild] = useState(0);
 
   return (
-    <section className='gap-8 my-8 relative space-y-5'>
+    <section className='gap-5 relative space-y-5'>
       <div className='w-full'>
         <ChildPopover
           data={data}

@@ -1,15 +1,13 @@
 'use client';
 import Card from '@/components/card';
-import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import BarsOutline from '@/assets/icons/bars-outline';
 import FileOutline from '@/assets/icons/file-outline';
 import PlayOutline from '@/assets/icons/play-outline';
-import Button from '@/components/button';
 import { File } from './file';
-import UploadIcon from '@/assets/icons/upload-icon';
 import { TabsCard } from '@/app/[locale]/(client)/_components/tabs-card';
 import { TabsFilter } from '@/app/[locale]/(client)/_components/tabs-filter';
+import UploadButton from '@/components/buttons/upload-button';
 
 const tabsFilterData = [
   {
@@ -70,23 +68,7 @@ export const Atthachments = () => {
         </div>
 
         {/* UPLOAD BUTTON */}
-        <Button
-          variant='secondary'
-          className='gap-3 ms-auto px-2 w-full max-w-40  py-2'
-        >
-          <label className='flex items-center justify-center gap-3 cursor-pointer w-full h-full'>
-            <input
-              onChange={onUpload}
-              type='file'
-              className='hidden'
-              accept='image/*,video/*,.pdf'
-            />
-            <UploadIcon fill='white' className='size-6' />
-            <span className='!text-xs lg:!text-base font-semibold'>
-              رفع ملف
-            </span>
-          </label>
-        </Button>
+        <UploadButton onUpload={onUpload} />
       </Card>
     </div>
   );

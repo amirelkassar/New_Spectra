@@ -13,18 +13,20 @@ export const TabsFilter = ({
           key={t?.label}
           className='border-e border-grayMedium last:border-transparent flex justify-center'
         >
-          <button
-            onClick={() => setTab(t?.label)}
-            className={cn(
-              'flex items-center gap-2 px-7 py-1 rounded-lg hover:bg-blueLight font-bold text-xs lg:text-base',
-              {
-                'bg-blueLight': tab === t?.label,
-              }
-            )}
-          >
-            {t?.icon}
-            {t?.label}
-          </button>
+          <div className='px-5'>
+            <button
+              onClick={() => setTab(t?.label)}
+              className={cn(
+                'flex items-center gap-2 px-7 py-1 rounded-lg hover:bg-blueLight font-bold text-xs lg:text-base',
+                {
+                  'bg-blueLight': tab === t?.label,
+                }
+              )}
+            >
+              {t?.icon}
+              {t?.label}
+            </button>
+          </div>
         </div>
       ))}
     </div>

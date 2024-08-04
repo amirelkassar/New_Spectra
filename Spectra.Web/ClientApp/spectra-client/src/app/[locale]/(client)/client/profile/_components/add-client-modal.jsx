@@ -7,13 +7,13 @@ import { AddButton } from './add-button';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 
-export const AddChildModal = () => {
+export const AddClientModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
       <div className='w-fit' role='dialog' onClick={open}>
-        <AddButton label='اضافة طفل' />
+        <AddButton label='اضافة عميل' />
       </div>
 
       {/* MODAL */}
