@@ -28,19 +28,25 @@ const ChildPopover = ({
         <div
           role='button'
           onClick={() => setOpen(!open)}
-          className='cursor-pointer bg-white w-full flex items-center justify-between mdl:rounded-xl px-2 p-1 lg:p-3 max-w-full border border-greenLight lg:border-none'
+          className={cn(
+            'bg-white w-full flex items-center justify-between mdl:rounded-xl cursor-pointer px-2 p-1 lg:p-3 max-w-full border border-greenLight lg:border-none',
+            disabled && '!cursor-default opacity-70'
+          )}
         >
           <Child className='hover:bg-white' {...data[selectedChild]} />
-          <span
-            className={cn(
-              'bg-blueLight rounded-full size-7 lg:size-10 items-center justify-center flex transition',
-              {
-                'rotate-180': open,
-              }
-            )}
-          >
-            <ArrowDownMainGreen className='size-4 lg:size-7' />
-          </span>
+
+          {!disabled && (
+            <span
+              className={cn(
+                'bg-blueLight rounded-full size-7 lg:size-10 items-center justify-center flex transition',
+                {
+                  'rotate-180': open,
+                }
+              )}
+            >
+              <ArrowDownMainGreen className='size-4 lg:size-7' />
+            </span>
+          )}
         </div>
       </Popover.Target>
 

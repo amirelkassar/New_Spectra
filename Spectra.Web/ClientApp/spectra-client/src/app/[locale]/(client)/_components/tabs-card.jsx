@@ -16,21 +16,23 @@ export const TabsCard = ({
         className
       )}
     >
-      {tabs?.map((t) => (
-        <button
-          type='button'
-          key={t}
-          onClick={() => setTab(t)}
-          className={cn(
-            'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs lg:text-base w-full px-3 py-1',
-            {
-              'bg-greenMain text-white hover:bg-greenMain': tab === t,
-            }
-          )}
-        >
-          {t}
-        </button>
-      ))}
+      <div className='space-y-3'>
+        {tabs?.map((t) => (
+          <button
+            type='button'
+            key={t}
+            onClick={() => setTab(t)}
+            className={cn(
+              'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs lg:text-base w-full px-3 py-1',
+              {
+                'bg-greenMain text-white hover:bg-greenMain': tab === t,
+              }
+            )}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
     </Card>
   );
 };
