@@ -16,7 +16,7 @@ console.log(params);
       name: "بيانات عائلة الطفل",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId)||path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
     },
     {
       name: "المواعيد",

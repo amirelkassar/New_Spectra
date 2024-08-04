@@ -64,7 +64,7 @@ const ClientPatients = () => {
           type={2}
           pathEdit={
             params.orgId
-              ? ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId)
+              ? ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID)
               : ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId)
           }
         />

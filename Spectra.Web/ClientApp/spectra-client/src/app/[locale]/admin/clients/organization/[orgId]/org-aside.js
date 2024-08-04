@@ -46,13 +46,7 @@ const OrgAside = () => {
       route: "",
       isActive: false,
     },
-    {
-      name: "المرضى/الاطفال",
-      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
-      isActive:
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId) ||
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId),
-    },
+   
   ];
   const pages2 = [
     {
@@ -69,9 +63,9 @@ const OrgAside = () => {
     },
     {
       name: "المرضى / الاطفال ",
-      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
+      route:ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId,params.clientID),
       isActive:
-        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId),
+        path ===ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId,params.clientID)||path===ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID),
     },
 
     {
@@ -83,7 +77,7 @@ const OrgAside = () => {
   return (
     <div className="w-[100%] lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-12 px-2 pe-6">
       <ul className="flex lg:flex-col  items-start  gap-5">
-        {path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId)
+        {path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId,params.clientID) ||path===ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID)
           ? pages2.map((page) => (
               <li key={page.name} className="lg:w-[100%] ">
                 <Link

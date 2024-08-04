@@ -49,8 +49,8 @@ const ROUTES = {
         APPOINTMENTS: (id) => `/admin/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
           `/admin/clients/organization/${id}/prescriptions`,
-        PATIENTS: (id) => `/admin/clients/organization/${id}/patients`,
-        PATIENTSEDIT: (id) => `/admin/clients/organization/${id}/patients/edit`,
+        PATIENTS: (id,id2) => `/admin/clients/organization/${id}/clients/${id2}/patients`,
+        PATIENTSEDIT: (id,id2) => `/admin/clients/organization/${id}/clients/${id2}/patients/edit`,
       },
       FAMILY: {
         DETAILS: (id) => `/admin/clients/family/${id}/details`,
