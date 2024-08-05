@@ -1,7 +1,4 @@
-import BackIcon from '@/assets/icons/back-black';
 import Card from '@/components/card';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
 import Container from '../../_components/container';
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import { Heading } from '../../_components/heading';
@@ -17,18 +14,13 @@ const PackagesPage = () => {
           {/* Section Heading */}
           <Heading
             label='جميع الباقات'
-            icon={
-              <Link href={ROUTES.CLIENT.MAIN}>
-                <BackIcon className='ltr:rotate-180' />
-              </Link>
-            }
             className='flex-row-reverse justify-end gap-5'
           />
 
           {/* Spectra Packages */}
           <div className='w-full'>
             <PackageHeader text='باقات سبيكترا' />
-            <div className='lg:grid lg:grid-cols-fill-250 gap-5 overflow-x-auto py-4 flex items-center *:flex-[1_0_250px]'>
+            <div className='lg:flex-wrap lg:justify-center gap-5 overflow-x-auto py-4 flex items-center *:flex-[1_0_250px] lg:*:flex-none'>
               {packagesDataSpectra.map((p) => (
                 <Package key={p.label} {...p} />
               ))}
@@ -38,7 +30,7 @@ const PackagesPage = () => {
           {/* Flex Packages */}
           <div className='w-full'>
             <PackageHeader text='الباقات المرنة' />
-            <div className='lg:grid lg:grid-cols-fill-250 gap-5 overflow-x-auto py-4 flex items-center *:flex-[1_0_250px]'>
+            <div className='lg:flex-wrap lg:justify-center gap-5 overflow-x-auto py-4 flex items-center *:flex-[1_0_250px] lg:*:flex-none'>
               {packagesDataFlex.map((p) => (
                 <Package key={p.label} {...p} />
               ))}
@@ -61,7 +53,7 @@ const Package = ({
 }) => {
   return (
     <div
-      className={`rounded-lg border-2 border-grayLight p-5 border-t-[6px]  w-full`}
+      className={`rounded-lg lg:min-w-[300px] border-2 border-grayLight p-5 border-t-[6px] w-fit`}
       style={{ borderTopColor: color }}
     >
       <div className='mx-auto w-fit space-y-5'>
