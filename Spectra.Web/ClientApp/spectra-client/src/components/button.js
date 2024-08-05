@@ -21,7 +21,7 @@ const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
       break;
     case 'blueLight':
       variantClasses =
-        'rounded-[10px] py-2 text-black bg-blueLight font-bold mdl:text-base text-xs';
+        'rounded-lg py-2 text-black bg-blueLight font-bold mdl:text-base text-xs';
       break;
     default:
       variantClasses = '';

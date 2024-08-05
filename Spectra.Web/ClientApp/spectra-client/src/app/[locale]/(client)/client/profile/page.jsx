@@ -38,7 +38,7 @@ const ProfilePage = () => {
   return (
     <Container className='space-y-5'>
       <ProfileInfo
-        data={isPerson ? personData : firmData}
+        info={isPerson ? personData : firmData}
         type={isPerson ? 'person' : 'firm'}
       />
 
