@@ -59,7 +59,8 @@ export function DataTable<TData, TValue>({
   selectData = [],
   mdHide = null,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] =
+    useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -107,14 +108,22 @@ export function DataTable<TData, TValue>({
                 disabled={selectData?.length === 0}
                 placeholder='اختر التخصص'
                 value={
-                  (table.getColumn(filterBy)?.getFilterValue() as string) ?? ''
+                  (table
+                    .getColumn(filterBy)
+                    ?.getFilterValue() as string) ?? ''
                 }
                 onChange={(value) =>
-                  table.getColumn(filterBy)?.setFilterValue(value)
+                  table
+                    .getColumn(filterBy)
+                    ?.setFilterValue(value)
                 }
                 rightSection={
                   <ArrowDownBlack
-                    className={selectData?.length === 0 ? 'opacity-10' : ''}
+                    className={
+                      selectData?.length === 0
+                        ? 'opacity-10'
+                        : ''
+                    }
                   />
                 }
               />
@@ -129,16 +138,19 @@ export function DataTable<TData, TValue>({
           </div>
 
           {filter === 'buttons' && (
-            <div className='flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto'>
+            <div className='flex items-center w-full lg:w-auto gap-1 lg:gap-3 lg:pb-0 pb-2 overflow-x-auto'>
               <Button
                 onClick={() =>
-                  table.getColumn(filterBy)?.setFilterValue(undefined)
+                  table
+                    .getColumn(filterBy)
+                    ?.setFilterValue(undefined)
                 }
                 variant='blueLight'
                 className={cn(
-                  ' font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5',
+                  'font-bold flex-1 lg:flex-initial gap-3 lg:gap-5',
                   {
-                    'bg-white font-Regular ': getFillterValue() !== undefined,
+                    'bg-white font-regular ':
+                      getFillterValue() !== undefined,
                   }
                 )}
               >
@@ -152,13 +164,15 @@ export function DataTable<TData, TValue>({
                   <Button
                     key={option.label}
                     onClick={() =>
-                      table.getColumn(filterBy)?.setFilterValue(option.key)
+                      table
+                        .getColumn(filterBy)
+                        ?.setFilterValue(option.key)
                     }
                     variant='blueLight'
                     className={cn(
-                      '  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5 min-w-fit',
+                      'font-bold flex-1 lg:flex-initial gap-3 lg:gap-5 min-w-fit',
                       {
-                        'bg-white font-Regular':
+                        'bg-white font-regular':
                           option.key !== getFillterValue(),
                       }
                     )}
@@ -184,7 +198,9 @@ export function DataTable<TData, TValue>({
                   {
                     'bg-white': table
                       .getAllColumns()
-                      .some((column) => column.getIsSorted()),
+                      .some((column) =>
+                        column.getIsSorted()
+                      ),
                   }
                 )}
               >
@@ -197,24 +213,36 @@ export function DataTable<TData, TValue>({
                 <Fragment key={option.label}>
                   <Button
                     key={option.label}
-                    onClick={() => table.getColumn(option.key)?.toggleSorting()}
+                    onClick={() =>
+                      table
+                        .getColumn(option.key)
+                        ?.toggleSorting()
+                    }
                     variant='blueLight'
-                    className={cn('font-normal flex-1 mdl:flex-initial gap-1', {
-                      'bg-white': option.key !== getFillterValue(),
-                    })}
+                    className={cn(
+                      'font-normal flex-1 mdl:flex-initial gap-1',
+                      {
+                        'bg-white':
+                          option.key !== getFillterValue(),
+                      }
+                    )}
                   >
-                    {table.getColumn(option.key)?.getIsSorted() && (
+                    {table
+                      .getColumn(option.key)
+                      ?.getIsSorted() && (
                       <>
-                        {table.getColumn(option.key)?.getIsSorted() ===
-                          'asc' && (
+                        {table
+                          .getColumn(option.key)
+                          ?.getIsSorted() === 'asc' && (
                           <ArrowLeft
                             className='rotate-90 size-3'
                             fill='#10B0C1'
                           />
                         )}
 
-                        {table.getColumn(option.key)?.getIsSorted() ===
-                          'desc' && (
+                        {table
+                          .getColumn(option.key)
+                          ?.getIsSorted() === 'desc' && (
                           <ArrowLeft
                             className='-rotate-90 size-3'
                             fill='#10B0C1'
@@ -239,7 +267,10 @@ export function DataTable<TData, TValue>({
       <Table>
         <Table.Thead className='bg-blueLight h-[50px] min-h-[50px]  '>
           {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Tr key={headerGroup.id} className='!border-b-0 '>
+            <Table.Tr
+              key={headerGroup.id}
+              className='!border-b-0 '
+            >
               {headerGroup.headers.map((header, i) => {
                 return (
                   <Table.Th
@@ -247,10 +278,15 @@ export function DataTable<TData, TValue>({
                     className={` text-black  text-xs font-ExtraLight lg:text-base ${
                       i === 0
                         ? 'rounded-s-xl ps-5'
-                        : i === headerGroup.headers.length - 1
+                        : i ===
+                          headerGroup.headers.length - 1
                         ? 'rounded-e-xl pe-5'
                         : ''
-                    } ${mdHide === i + 1 ? ' hidden mdl:block' : ''}`}
+                    } ${
+                      mdHide === i + 1
+                        ? ' hidden mdl:block'
+                        : ''
+                    }`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -270,23 +306,33 @@ export function DataTable<TData, TValue>({
               <Table.Tr
                 className='text-black text-xs lg:text-base'
                 key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
+                data-state={
+                  row.getIsSelected() && 'selected'
+                }
               >
                 {row.getVisibleCells().map((cell, i) => (
                   <Table.Td
                     className={`py-3 first:font-Bold first:lg:text-base max-w-[280px] ${
-                      mdHide === i + 1 ? ' hidden mdl:block' : ''
+                      mdHide === i + 1
+                        ? ' hidden mdl:block'
+                        : ''
                     }`}
                     key={cell.id}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )}
                   </Table.Td>
                 ))}
               </Table.Tr>
             ))
           ) : (
             <Table.Tr>
-              <Table.Td colSpan={columns.length} className='h-24 text-center'>
+              <Table.Td
+                colSpan={columns.length}
+                className='h-24 text-center'
+              >
                 No results.
               </Table.Td>
             </Table.Tr>
@@ -310,13 +356,18 @@ export function DataTable<TData, TValue>({
             total={table.getPageCount()}
             dir='ltr'
             classNames={{
-              control: '!bg-white hover:!bg-black/5 !transition',
+              control:
+                '!bg-white hover:!bg-black/5 !transition',
             }}
             size='sm'
             radius='xl'
             withControls={false}
-            value={table.getState().pagination.pageIndex + 1}
-            onChange={(value) => table.setPageIndex(value - 1)}
+            value={
+              table.getState().pagination.pageIndex + 1
+            }
+            onChange={(value) =>
+              table.setPageIndex(value - 1)
+            }
           />
 
           <Button

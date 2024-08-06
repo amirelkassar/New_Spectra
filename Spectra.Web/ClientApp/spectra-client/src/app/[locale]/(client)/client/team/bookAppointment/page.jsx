@@ -18,7 +18,10 @@ import BackIcon from '@/assets/icons/back-black';
 import CreditCardIcon from '@/assets/icons/credit-card';
 import InsurancePayIcon from '@/assets/icons/insurance-pay';
 import Card from '@/components/card';
-import { MedicalTeamData, SpecialNeedsData } from '@/lib/demoData';
+import {
+  MedicalTeamData,
+  SpecialNeedsData,
+} from '@/lib/demoData';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import TextInput from '@/components/inputs/text-input';
@@ -45,6 +48,7 @@ const BookAppointmentPage = () => {
     <Container>
       <section>
         <form className='space-y-5'>
+          {/* Selected Data */}
           <Card className='space-y-5'>
             {/* Section Heading */}
             <Heading
@@ -99,7 +103,10 @@ const BookAppointmentPage = () => {
           <Card className='!font-bold !text-sm lg:!text-medium !text-black'>
             <h4>حدد تاريخ</h4>
             <div className='w-fit mx-auto'>
-              <DatePicker value={value} onChange={setValue} />
+              <DatePicker
+                value={value}
+                onChange={setValue}
+              />
             </div>
           </Card>
 
@@ -109,7 +116,8 @@ const BookAppointmentPage = () => {
               size='lg'
               radius='md'
               classNames={{
-                input: 'focus-within:border-greenMain active:border-greenMain',
+                input:
+                  'focus-within:border-greenMain active:border-greenMain',
                 label: 'text-xs lg:text-base mb-2 ps-1',
               }}
               label='ملاحظات'
@@ -128,10 +136,7 @@ const BookAppointmentPage = () => {
             </h4>
             <div className='flex items-center gap-5 flex-col lg:flex-row'>
               <InsuranceModal />
-              <Button variant='blueLight' className='w-full py-5 px-2'>
-                <CreditCardIcon className='size-10 lg:size-14' />
-                البطاقة الائتمانية
-              </Button>
+              <CreditCardModal />
             </div>
           </Card>
           <Button
@@ -155,7 +160,11 @@ const InsuranceModal = () => {
   return (
     <>
       {/* Modal button trigger */}
-      <Button onClick={open} variant='blueLight' className='w-full py-5 px-2'>
+      <Button
+        onClick={open}
+        variant='blueLight'
+        className='w-full py-5 px-2'
+      >
         <InsurancePayIcon className='size-10 lg:size-14' />
         التأمين
       </Button>
@@ -170,7 +179,9 @@ const InsuranceModal = () => {
         size={'md'}
         title='ادخل التأمين'
         classNames={{
-          title: 'text-black font-bold text-sm lg:text-medium',
+          title:
+            'text-black font-bold text-sm lg:text-medium',
+          content: 'rounded-xl',
         }}
       >
         <div className='mt-3 space-y-3'>
@@ -297,6 +308,43 @@ const InsuranceModal = () => {
             </Button>
           </div>
         </div>
+      </Modal>
+    </>
+  );
+};
+
+const CreditCardModal = () => {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      {/* Modal button trigger */}
+      <Button
+        onClick={open}
+        variant='blueLight'
+        className='w-full py-5 px-2'
+      >
+        <CreditCardIcon className='size-10 lg:size-14' />
+        البطاقة الائتمانية
+      </Button>
+
+      {/* MODAL */}
+      <Modal
+        opened={opened}
+        onClose={() => {
+          close();
+        }}
+        withCloseButton={false}
+        size={'lg'}
+        centered
+        title='طريقة الدفع'
+        classNames={{
+          title:
+            'text-black font-bold text-sm lg:text-medium text-center w-full',
+          content: 'rounded-xl',
+        }}
+      >
+        <div className=''>بطاقة</div>
       </Modal>
     </>
   );

@@ -1,7 +1,8 @@
+import ROUTES from '@/routes';
 import { redirect } from '@/navigation';
+
 const Page = () => {
-  redirect('/client/schedules/current');
-  return null;
+  redirect(`${ROUTES.CLIENT.SCHEDULES}/current`);
 };
 
 export default Page;
