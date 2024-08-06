@@ -1,3 +1,4 @@
+import ConfirmModal from '@/components/modal/confirm-modal';
 import { Header } from './_components/header';
 import Sidebar from './_components/sidebar';
 
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
           {children}
         </main>
       </div>
+      <ConfirmModal />
     </div>
   );
 };
