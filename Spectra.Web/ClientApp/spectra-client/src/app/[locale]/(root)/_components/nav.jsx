@@ -2,10 +2,10 @@
 
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import Button from '@/components/button';
+import { cn } from '@/lib/utils';
 import { Link, usePathname } from '@/navigation';
 import ROUTES from '@/routes';
 import { Menu } from '@mantine/core';
-import clsx from 'clsx';
 
 export const Nav = ({ currentLocale, navLinks }) => {
   const pathName = usePathname();
@@ -20,7 +20,7 @@ export const Nav = ({ currentLocale, navLinks }) => {
           <Link
             key={link.href}
             href={link.href}
-            className={clsx(
+            className={cn(
               'font-bold leading-6 pb-2 border-b-2 border-transparent transition hover:border-black',
               pathName === link.href && 'border-black'
             )}
@@ -46,13 +46,21 @@ export const Nav = ({ currentLocale, navLinks }) => {
         >
           تسجيل الدخول
         </Link>
-        <Menu trigger='click-hover' openDelay={100} closeDelay={400}>
+        <Menu
+          trigger='click-hover'
+          openDelay={100}
+          closeDelay={400}
+        >
           <Menu.Target>
             <button
               className='font-bold leading-6 flex items-center pb-2'
               aria-haspopup='true'
             >
-              <span>{currentLocale === 'en' ? 'English' : 'عربي'}</span>
+              <span>
+                {currentLocale === 'en'
+                  ? 'English'
+                  : 'عربي'}
+              </span>
               <ArrowDownIcon />
             </button>
           </Menu.Target>
@@ -60,14 +68,18 @@ export const Nav = ({ currentLocale, navLinks }) => {
             <Menu.Item className='w-fit h-10 font-bold leading-6 text-base'>
               <Link
                 href={pathName}
-                locale={currentLocale === 'en' ? 'ar' : 'en'}
+                locale={
+                  currentLocale === 'en' ? 'ar' : 'en'
+                }
                 title={
                   currentLocale === 'ar'
                     ? 'Switch to English'
                     : 'التبديل إلى العربي'
                 }
               >
-                {currentLocale === 'ar' ? 'English' : 'عربي'}
+                {currentLocale === 'ar'
+                  ? 'English'
+                  : 'عربي'}
               </Link>
             </Menu.Item>
           </Menu.Dropdown>

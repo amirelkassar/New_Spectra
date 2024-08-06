@@ -4,7 +4,7 @@ import { WhatWeCure } from './_components/what-we-cure';
 
 export default function page() {
   return (
-    <main className='container'>
+    <main className='container max-w-5xl mx-auto'>
       <Hero />
       <WhatWeCure />
       <Services />

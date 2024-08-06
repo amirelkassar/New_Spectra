@@ -1,4 +1,4 @@
-const PlayIcon = ({ className }) => {
+const PlayIcon = ({ className = '' }) => {
   return (
     <svg
       width='34'
