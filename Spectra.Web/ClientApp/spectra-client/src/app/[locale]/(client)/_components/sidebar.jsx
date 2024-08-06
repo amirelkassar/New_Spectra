@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useMemo, useCallback, useRef, useEffect } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Link, usePathname } from '@/navigation';
 
 import { useSidebar } from '@/store/client/sidebar/menu-slice';
@@ -19,6 +19,7 @@ import StepsIcon from '@/assets/icons/steps';
 import ReportsIcon from '@/assets/icons/reportsIcon';
 import ChatIcon from '@/assets/icons/chat';
 import HeartIcon from '@/assets/icons/heart-checked';
+import WalletIcon from '@/assets/icons/wallet';
 
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
@@ -78,6 +79,12 @@ const Sidebar = () => {
         route: ROUTES.CLIENT.CHATS,
         isActive: path.includes(ROUTES.CLIENT.CHATS),
         icon: <ChatIcon />,
+      },
+      {
+        name: 'المحفظة',
+        route: ROUTES.CLIENT.WALLET,
+        isActive: path.includes(ROUTES.CLIENT.WALLET),
+        icon: <WalletIcon />,
       },
       {
         name: 'الإعدادات',
