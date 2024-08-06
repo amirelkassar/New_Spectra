@@ -4,8 +4,12 @@ import Button from '@/components/button';
 import AcceptIcon from '@/assets/icons/accept';
 import RefuseIcon from '@/assets/icons/refuse';
 import useModal from '@/store/modal-slice';
-function RequestAction() {
+import ROUTES from '@/routes';
+
+function RequestAction({ id }) {
   const { modal, editModal } = useModal();
+  console.log(id);
+
   return (
     <div className={'w-fit mx-auto'}>
       <div className='flex items-center gap-3 lg:gap-5'>
@@ -27,14 +31,17 @@ function RequestAction() {
             editModal('open', true);
           }}
           className={
-            ' !py-0 text-[12px] lg:text-[14px] !px-4 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
+            '!py-0 text-[12px] lg:text-[14px] !px-4 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
           }
         >
           <RefuseIcon className={'mdl:block hidden'} />
           رفض
         </Button>
 
-        <MenuActions />
+        <MenuActions
+          type={2}
+          path={ROUTES.ADMIN.REQUESTSID(id)}
+        />
       </div>
     </div>
   );

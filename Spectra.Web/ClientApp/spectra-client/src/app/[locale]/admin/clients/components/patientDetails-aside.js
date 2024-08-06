@@ -1,43 +1,39 @@
 "use client";
 
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const PatientsDetilsAside = () => {
   const params = useParams();
   const path = usePathname();
-console.log(params);
+
   const pages = [
-    {
-      name: "بيانات الطفل ",
-      route: ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.patientsID),
-      isActive:
-        path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.patientsID),
-    },
+   
     {
       name: "الـمواعيد",
       route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID),
-      isActive:  path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID)||path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID),
+      isActive:
+        path ===
+          ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID) ||
+        path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID),
     },
     {
       name: "الوصفات الطبية ",
-      route:  ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
-      isActive:
-        path === '/'+params.locale+ ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
+      route: "",
+      isActive: path === "",
     },
     {
       name: "تقارير ",
-      route:  ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
-      isActive:  path.includes('/'+params.locale+ ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID)),
+      route: "",
+      isActive: path === "",
     },
-   
   ];
   return (
     <div className="w-[100%]  lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-12 px-2 pe-6">
-        <ul className="flex lg:flex-col  items-start  gap-5">
+      <ul className="flex lg:flex-col  items-start  gap-5">
         {pages.map((page) => (
           <li key={page.name} className="lg:w-[100%] ">
             <Link

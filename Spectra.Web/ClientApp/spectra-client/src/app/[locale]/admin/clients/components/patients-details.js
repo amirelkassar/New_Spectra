@@ -6,23 +6,26 @@ import { DatePicker } from "@mantine/dates";
 import Image from "next/image";
 import React, { useState } from "react";
 import person from "@/assets/images/child.png";
-import Link from "next/link";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import { useRouter } from "@/navigation";
-
+import { useParams } from "next/navigation";
+const data = {
+  name: "محمد عبدالله",
+  nationalID:'25814739658',
+  gender:'ذكر',
+  dateBirth:'10/10/2024',
+  relationship:'الابن',
+  diagnosis:'اضطراب طيف التوحد'
+};
 function PatientsDetails() {
-  const data = {
-    name: "محمد عبدالله",
-    nationalID:'25814739658',
-    gender:'ذكر',
-    dateBirth:'10/10/2024',
-    relationship:'الابن',
-    diagnosis:'اضطراب طيف التوحد'
-  };
+
   const [value, setValue] = useState(new Date());
   const [ShowDate, setShowDate] = useState(true);
   const router = useRouter();
+  const params = useParams()
+  console.log(params);
+  
   return (
     <div className="py-4 md:py-8 px-2 md:px-6 bg-white lg:rounded-[10px] staffDetils">
       <div className=" mb-5 md:mb-16 flex items-start justify-between gap-4">
@@ -38,7 +41,7 @@ function PatientsDetails() {
           <h2 className="text-[16px] md:text-[20px] font-Bold">عبدالله الشيخ - محمد عبدالله الشيخ</h2>
         </div>
         <div className="block ">
-          <MenuActions />
+          <MenuActions type={2} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID)} />
         </div>
       </div>
 

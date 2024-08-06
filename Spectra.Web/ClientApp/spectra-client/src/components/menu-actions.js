@@ -97,7 +97,7 @@ export default function MenuActions({ id, className, type = 1, path,pathEdit ,ro
               <MenuItem key={index+"o"}>
                 {option.path ? (
                   <Link
-                    href={routeClients ? option.path:option.path + "/" + id}
+                    href={ option.path}
                     className="group flex w-full items-center gap-5 rounded-lg py-1.5 px-3 bg-transparent data-[focus]:bg-gray/80 transition font-bold "
                   >
                     {option.icon}

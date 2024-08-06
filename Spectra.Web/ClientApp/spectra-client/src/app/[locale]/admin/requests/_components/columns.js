@@ -24,8 +24,9 @@ export const columns = [
     header: '',
     id: 'type',
 
-    cell: () => {
-      return <RequestAction />;
+    cell: ({ getValue, row }) => {
+      const id = row.original.id;
+      return <RequestAction id={id} />;
     },
   },
 ];
@@ -51,8 +52,9 @@ export const columnsOld = [
     header: '',
     id: 'type',
 
-    cell: () => {
-      return <RequestOldAction />;
+    cell: ({ getValue, row }) => {
+      const id = row.original.id;
+      return <RequestAction id={id} />;
     },
   },
 ];
