@@ -3,6 +3,9 @@ import { Hero } from './_components/hero';
 import { OurMedicalTeam } from './_components/our-medical-team';
 import { Services } from './_components/services';
 import { WhatWeCure } from './_components/what-we-cure';
+import { Testimonials } from './_components/testimonials';
+import { Statistics } from './_components/statistics';
+import { FAQ } from './_components/FAQ';
 
 export default function page() {
   return (
@@ -12,6 +15,9 @@ export default function page() {
       <Services />
       <AboutUs />
       <OurMedicalTeam />
+      <Testimonials />
+      <Statistics />
+      <FAQ />
     </main>
   );
 }
