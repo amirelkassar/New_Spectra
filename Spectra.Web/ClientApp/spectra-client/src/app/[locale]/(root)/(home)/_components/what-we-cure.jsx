@@ -10,39 +10,40 @@ import IMG_5 from '@/assets/images/what-we-cure/5.png';
 import IMG_6 from '@/assets/images/what-we-cure/6.png';
 import IMG_7 from '@/assets/images/what-we-cure/7.png';
 import ArrowLeft from '@/assets/icons/arrow-left';
-import ArrowRightIcon from '@/assets/icons/arrow-right';
+import { ArrowRightIcon } from '@/assets/icons/arrow-right';
+
+const data = [
+  {
+    image: IMG_1,
+    label: 'اضراب طيف التوحد',
+  },
+  {
+    image: IMG_2,
+    label: 'مشاكل اللغة والتواصل',
+  },
+  {
+    image: IMG_3,
+    label: 'فرط الحركة و نقص الانتباه',
+  },
+  {
+    image: IMG_4,
+    label: 'الاعاقة الذهنية والجسدية',
+  },
+  {
+    image: IMG_5,
+    label: 'العناد والعنف والخوف والقلق',
+  },
+  {
+    image: IMG_6,
+    label: 'صعوبات التعلم',
+  },
+  {
+    image: IMG_7,
+    label: 'التأخر النمائى',
+  },
+];
 
 export const WhatWeCure = () => {
-  const data = [
-    {
-      image: IMG_1,
-      label: 'اضراب طيف التوحد',
-    },
-    {
-      image: IMG_2,
-      label: 'مشاكل اللغة والتواصل',
-    },
-    {
-      image: IMG_3,
-      label: 'فرط الحركة و نقص الانتباه',
-    },
-    {
-      image: IMG_4,
-      label: 'الاعاقة الذهنية والجسدية',
-    },
-    {
-      image: IMG_5,
-      label: 'العناد والعنف والخوف والقلق',
-    },
-    {
-      image: IMG_6,
-      label: 'صعوبات التعلم',
-    },
-    {
-      image: IMG_7,
-      label: 'التأخر النمائى',
-    },
-  ];
   return (
     <Section
       aria-label='What We Cure'
@@ -50,36 +51,39 @@ export const WhatWeCure = () => {
       aria-labelledby='what-we-cure'
       heading='ماذا نعالج'
     >
-      <div className='grid grid-cols-4 gap-y-5'>
+      <div className='grid grid-cols-3 lg:grid-cols-4 gap-y-5'>
         {data.map((item, index) => (
           <div
             key={index + 1354942}
-            className='flex flex-col items-center gap-y-4 text-center relative'
+            className='flex flex-col items-center gap-y-4 text-center'
           >
-            <Image
-              src={item.image}
-              alt={item.label}
-              width={150}
-              height={150}
-              className='w-[150px] h-[150px] object-cover rounded-full'
-            />
-            <p className='text-black text-[20px] font-Regular leading-[30px]'>
+            <div className='w-fit relative'>
+              <Image
+                src={item.image}
+                alt={item.label}
+                width={150}
+                height={150}
+                className='size-20 mdl:size-36 object-center object-cover rounded-full'
+              />
+
+              <span className='absolute size-6 mdl:size-10 rounded-full flex items-center justify-center bg-greenLight bottom-0 end-0'>
+                <ArrowRightIcon className='size-4 mdl:size-6' />
+              </span>
+            </div>
+            <p className='text-black text-base mdl:text-medium'>
               {item.label}
             </p>
-            <div className='absolute w-[42px] h-[42px] rounded-full flex items-center justify-center bg-greenLight bottom-[55px] left-[40px]'>
-              <ArrowRightIcon />
-            </div>
           </div>
         ))}
         <div className='flex flex-col items-center gap-y-4'>
-          <div className='w-[150px] h-[150px] bg-greenLight flex items-center justify-center rounded-full'>
-            <ThreeDotsRowIcon />
+          <div className='size-20 mdl:size-36 bg-greenLight flex items-center justify-center rounded-full'>
+            <ThreeDotsRowIcon className='w-6 mdl:w-11' />
           </div>
-          <div className='flex items-center gap-x-5'>
-            <span className='text-black text-[20px] font-Regular leading-[30px]'>
-              اخري
+          <div className='flex items-center gap-x-3 text-black mdl:text-medium text-base'>
+            <span>اخري</span>
+            <span className='ltr:rotate-180 block text-2xl mdl:text-4xl'>
+              &larr;
             </span>
-            <ArrowLeft />
           </div>
         </div>
       </div>

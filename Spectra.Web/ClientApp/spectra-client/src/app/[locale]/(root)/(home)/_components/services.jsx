@@ -4,30 +4,31 @@ import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 
+const data = [
+  {
+    color: 'bg-[#EB4335]/[0.18]',
+    icon: <ScreeningIcon className='size-6 mdl:size-11' />,
+    label: 'خدمة الكشف المبكر الالكتروني',
+  },
+  {
+    color: 'bg-[#10B0C1]/[0.18]',
+    icon: <TeamIcon className='size-6 mdl:size-11' />,
+    label: `خدمات التشخيص الطبي 
+    عبر فرق متعددة التخصصات`,
+  },
+  {
+    color: 'bg-[#8A22A0]/[0.18]',
+    icon: <FollowUpIcon className='size-6 mdl:size-11' />,
+    label: 'خدمات المتابعة الدوائية',
+  },
+  {
+    color: 'bg-[#6FC1BF]/[0.18]',
+    icon: <HandshakeIcon className='size-6 mdl:size-11' />,
+    label: 'خدمات الاستشارات التخصصية',
+  },
+];
+
 export const Services = () => {
-  const data = [
-    {
-      color: 'bg-[#EB4335]/[0.18]',
-      icon: <ScreeningIcon />,
-      label: 'خدمة الكشف المبكر الالكتروني',
-    },
-    {
-      color: 'bg-[#10B0C1]/[0.18]',
-      icon: <TeamIcon />,
-      label: `خدمات التشخيص الطبي 
-      عبر فرق متعددة التخصصات`,
-    },
-    {
-      color: 'bg-[#8A22A0]/[0.18]',
-      icon: <FollowUpIcon />,
-      label: 'خدمات المتابعة الدوائية',
-    },
-    {
-      color: 'bg-[#6FC1BF]/[0.18]',
-      icon: <HandshakeIcon />,
-      label: 'خدمات الاستشارات التخصصية',
-    },
-  ];
   return (
     <Section
       aria-label='Services'
@@ -37,18 +38,18 @@ export const Services = () => {
       type='more'
       btnLabel='تصفح جميع الخدمات'
     >
-      <div className='grid grid-cols-4 gap-5'>
-        {data.map((item, index) => (
+      <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
+        {data.map((item) => (
           <div
-            key={index + 51353489}
+            key={item.label}
             className='flex flex-col items-center gap-y-4 text-center relative'
           >
             <div
-              className={`w-[90px] h-[90px] flex items-center justify-center rounded-full ${item.color}`}
+              className={`size-16 mdl:size-20 flex items-center justify-center rounded-full ${item.color}`}
             >
               {item.icon}
             </div>
-            <h3 className='text-[20px] font-bold text-black leading-[30px]'>
+            <h3 className='text-sm mdl:text-medium text-black font-bold'>
               {item.label}
             </h3>
           </div>

@@ -9,7 +9,7 @@ export const Hero = () => {
       role='region'
       aria-label='Hero Section'
       aria-labelledby='hero-heading'
-      className='mdl:mt-20 mt-10'
+      className='mdl:py-20 py-10 container max-w-5xl mx-auto'
     >
       <div className='flex justify-between'>
         {/* TEXT */}

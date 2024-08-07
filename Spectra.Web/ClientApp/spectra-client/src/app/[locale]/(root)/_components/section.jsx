@@ -1,37 +1,39 @@
 import ArrowLeft from '@/assets/icons/arrow-left';
 import Button from '@/components/button';
+import { cn } from '@/lib/utils';
 
 export const Section = ({
-  heading,
+  heading = '',
   type = 'basic',
   btnLabel = '',
   children,
   id,
+  className,
   props,
 }) => {
   return (
     <section
       role='region'
       {...props}
-      className='my-20 w-full'
+      className={cn(
+        'mdl:py-20 py-10 w-full text-black container max-w-5xl mx-auto',
+        className
+      )}
     >
       {type === 'basic' && (
         <h2
           id={id}
-          className='text-2xl text-black leading-9 text-center mb-10'
+          className='text-base mdl:text-2xl text-center mb-10'
         >
           {heading}
         </h2>
       )}
       {type === 'more' && (
         <div className='flex items-center justify-between mb-10'>
-          <h2
-            id={id}
-            className='text-2xl text-black leading-9'
-          >
+          <h2 id={id} className='text-base mdl:text-2xl'>
             {heading}
           </h2>
-          <Button className='flex items-center text-black text-[20px] font-bold leading-[30px]'>
+          <Button className='text-sm mdl:text-medium gap-3 font-bold min-w-52 mdl:min-w-72'>
             <span>{btnLabel}</span>
             <ArrowLeft />
           </Button>
@@ -41,11 +43,11 @@ export const Section = ({
         <div className='w-full relative mb-10'>
           <h2
             id={id}
-            className='text-2xl text-black leading-9 text-center pt-2'
+            className='text-base mdl:text-2xl text-center'
           >
             {heading}
           </h2>
-          <Button className='flex items-center absolute left-0 top-0 text-black text-[20px] font-bold leading-[30px]'>
+          <Button className='flex items-center absolute left-0 top-0 text-sm mdl:text-medium gap-3 font-bold'>
             <span>{btnLabel}</span>
             <ArrowLeft />
           </Button>

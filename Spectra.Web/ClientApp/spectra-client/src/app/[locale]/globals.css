@@ -348,7 +348,10 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
+.staffDetils
+  .mantine-DatePicker-calendarHeaderControl
+  svg
+  path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -361,7 +364,8 @@ form.clientEdit .mantine-Input-input {
   order: 1;
 }
 
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.staffDetils
+  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
 .staffDetils .mantine-DatePicker-day[data-selected='true'] {
@@ -372,13 +376,22 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(3, minmax(max-content, 1fr));
+  grid-template-columns: repeat(
+    3,
+    minmax(max-content, 1fr)
+  );
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(4, minmax(max-content, 1fr));
+  grid-template-columns: repeat(
+    4,
+    minmax(max-content, 1fr)
+  );
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(5, minmax(max-content, 1fr));
+  grid-template-columns: repeat(
+    5,
+    minmax(max-content, 1fr)
+  );
 }
 @layer components {
   .custom-grid {
@@ -388,7 +401,10 @@ form.clientEdit .mantine-Input-input {
     ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
+    grid-template-columns: repeat(
+      var(--colNumSmall),
+      minmax(max-content, 1fr)
+    );
   }
 }
 .boxDate .mantine-DatePicker-calendarHeader {
@@ -410,7 +426,10 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
+.boxDate
+  .mantine-DatePicker-calendarHeaderControl
+  svg
+  path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -418,11 +437,13 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+.boxDate
+  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
   order: 1;
 }
 
-.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.boxDate
+  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
 .boxDate .mantine-DatePicker-day[data-selected='true'] {
