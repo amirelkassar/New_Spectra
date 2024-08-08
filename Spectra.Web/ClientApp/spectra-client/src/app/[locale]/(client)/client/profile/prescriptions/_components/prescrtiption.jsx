@@ -18,12 +18,14 @@ export const Prescription = ({
   description = 'اخده طوال الشهر يوميا مع الاكل',
   type = 'medication',
   isNew = true,
+  isDetailed = false,
 }) => {
   return (
     <Card
       className={cn(
         'w-full bg-gray/70 space-y-3 text-xs lg:text-base px-5 py-3 lg:py-5',
-        isNew && 'bg-greenLight'
+        isNew && 'bg-greenLight',
+        isDetailed && 'mdl:w-1/2 mx-auto'
       )}
     >
       {/* Actions */}
@@ -38,20 +40,30 @@ export const Prescription = ({
       </span>
 
       {/* Doctor */}
-      <div className='flex items-center flex-col justify-between pb-2 border-b border-black !text-xs lg:!text-base text-black'>
+      <div
+        className={cn(
+          'flex items-center flex-col justify-between pb-2 border-b border-black !text-xs lg:!text-base text-black',
+          isDetailed && 'flex-row justify-between'
+        )}
+      >
         <h4 className='font-bold'>الاخصائى {doctor}</h4>
         <p>{proffession}</p>
       </div>
 
       {/* content */}
       {type === 'عقاقير' && (
-        <div className='flex flex-col items-center justify-center gap-2 min-h-40'>
+        <div
+          className={cn(
+            'flex flex-col items-center justify-center gap-2 min-h-40',
+            isDetailed && 'flex-row justify-between'
+          )}
+        >
           <PillsIcon />
-          <div className='flex font-bold items-center gap-5'>
-            <p>{drug}</p>
-            <p>{dose}</p>
+          <div className='font-bold text-center'>
+            <span className='me-5'>{drug}</span>
+            <span>{dose}</span>
+            <p className='font-normal'>{description}</p>
           </div>
-          <p>{description}</p>
           <span>{date}</span>
         </div>
       )}
@@ -64,11 +76,13 @@ export const Prescription = ({
       )}
 
       {/* footer */}
-      <Link href={`${ROUTES.CLIENT.PROFILE}/prescriptions/${id}`}>
-        <Button className='w-full' variant='secondary'>
-          عرض
-        </Button>
-      </Link>
+      {!isDetailed && (
+        <Link href={`${ROUTES.CLIENT.PROFILE}/prescriptions/${id}`}>
+          <Button className='w-full' variant='secondary'>
+            عرض
+          </Button>
+        </Link>
+      )}
     </Card>
   );
 };

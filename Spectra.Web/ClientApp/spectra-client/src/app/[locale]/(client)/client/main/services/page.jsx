@@ -32,17 +32,25 @@ const ServicesPage = () => {
 
 export default ServicesPage;
 
-const Service = ({ label = '', icon = '', color = '', description = '' }) => {
+const Service = ({
+  label = '',
+  icon = '',
+  color = '',
+  description = '',
+  id = '',
+}) => {
   return (
-    <div className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'>
-      <div
-        className={`lg:size-9 size-8 rounded-full flex items-center justify-center`}
-        style={{ backgroundColor: color }}
-      >
-        {icon}
+    <Link href={`${ROUTES.CLIENT.MAIN}/services/${id}`}>
+      <div className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'>
+        <div
+          className={`lg:size-9 size-8 rounded-full flex items-center justify-center`}
+          style={{ backgroundColor: color }}
+        >
+          {icon}
+        </div>
+        <h2 className='font-bold text-center min-h-14'>{label}</h2>
+        <p className=''>{description}</p>
       </div>
-      <h2 className='font-bold text-center min-h-14'>{label}</h2>
-      <p className=''>{description}</p>
-    </div>
+    </Link>
   );
 };

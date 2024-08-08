@@ -122,13 +122,13 @@ const Aside = ({ close }) => {
       />
       <Link
         href={link.route}
-        className={`flex gap-[10px] md:gap-[18px] w-fit py-1 ${
+        className={`flex gap-[10px] md:gap-[18px] w-fit py-1 items-center ${
           link.isActive ? "active" : ""
         }`}
       >
         {link.icon}
 
-        <p className="text-[14px] lg:text-[18px] font-Bold">{link.name}</p>
+        <p className="text-[14px] lg:text-[18px] font-Bold text-nowrap">{link.name}</p>
       </Link>
     </li>
   );

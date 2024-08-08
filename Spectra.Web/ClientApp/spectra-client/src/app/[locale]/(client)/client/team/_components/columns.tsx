@@ -63,11 +63,13 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
   {
     id: 'message',
-    cell: () => (
-      <span className='lg:size-14 size-8 rounded-full bg-blueLight flex items-center justify-center'>
-        <MessageIconGreenMain className='size-4 lg:size-7' />
-      </span>
-    ),
+    cell: ({ column }) => {
+      return (
+        <span className='lg:size-14 size-8 rounded-full bg-blueLight flex items-center justify-center'>
+          <MessageIconGreenMain className='size-4 lg:size-7' />
+        </span>
+      );
+    },
   },
   {
     id: 'action',

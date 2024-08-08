@@ -1,6 +1,8 @@
 import ChildPopover from '@/app/[locale]/(client)/_components/child-popover';
 import Container from '@/app/[locale]/(client)/_components/container';
 import { Heading } from '@/app/[locale]/(client)/_components/heading';
+import { PrescriptionDetails } from './_components/prescription-details';
+import { ActionButton } from './_components/action-button';
 import BackIcon from '@/assets/icons/back-black';
 import { childPopupData } from '@/lib/demoData';
 import { Link } from '@/navigation';
@@ -17,6 +19,11 @@ const prescriptionsData = [
     type: 'عقاقير',
     description: 'اخذه طوال الشهر يوميا مع الاكل',
     isNew: true,
+    warnings: [
+      'يجب عدم تطبيق الدواء لدى مرضى القصور الكبدي الشديد. يجب إنقاص الجرعة بمقدار النصف لدى مرضى القصور الكبدي البسيط إلى متوسط الشدة.',
+      'يجب تطبيق الدواء بحذر وتحت المراقبة لدى مرضى الصرع، داء السكري؛ سابقة: نزف هضمي، اضطراب ثنائي القطب، أفكار انتحارية (لدى البالغين الصغار)، زرق مغلق الزاوية.',
+      'يمكن أن يسبب: اضطرابات هضمية، نعاس (يتم استخدامه بحذر عند القيادة أو تشغيل الآلات)، إجهاد، صداع، دوار، نوبات، خلل أداء الوظيفة الجنسية، تغيم الرؤية، نقص صوديوم الدم بشكل خاص لدى المرضى المسنين. ',
+    ],
   },
   {
     id: 2,
@@ -52,12 +59,16 @@ const Page = ({ params }) => {
       <Heading
         label='ملفي - الوصفات الطبية'
         icon={
-          <Link href={ROUTES.CLIENT.PROFILE}>
+          <Link href={`${ROUTES.CLIENT.PROFILE}/prescriptions`}>
             <BackIcon className='ltr:rotate-180' />
           </Link>
         }
         className='flex-row-reverse justify-end gap-5'
       />
+      <ActionButton className='absolute top-0 end-5' />
+      <ChildPopover disabled data={childPopupData} />
+
+      <PrescriptionDetails prescription={currentPrescription()} />
     </Container>
   );
 };

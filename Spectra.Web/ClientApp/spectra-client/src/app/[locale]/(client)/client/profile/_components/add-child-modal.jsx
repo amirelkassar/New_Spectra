@@ -3,7 +3,7 @@
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { AddChild } from './add-child';
+import { AddButton } from './add-button';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 
@@ -13,7 +13,7 @@ export const AddChildModal = () => {
   return (
     <>
       <div className='w-fit' role='dialog' onClick={open}>
-        <AddChild />
+        <AddButton label='اضافة طفل' />
       </div>
 
       {/* MODAL */}

@@ -16,7 +16,7 @@ console.log(params);
       name: "بيانات عائلة الطفل",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId)||path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
     },
     {
       name: "المواعيد",
@@ -33,7 +33,7 @@ console.log(params);
       name: "المرضى / الاطفال",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId)||path===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSDETAILS(params.familyId,params.patientsID),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId)||path===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId),
     },
   ];
 

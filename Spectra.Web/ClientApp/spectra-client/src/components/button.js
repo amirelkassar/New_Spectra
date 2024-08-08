@@ -1,7 +1,12 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
+const Button = ({
+  className = '',
+  variant = 'primary',
+  children,
+  ...rest
+}) => {
   const baseClasses =
     'flex items-center disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none justify-center gap-5 transition-all px-7';
 
@@ -13,7 +18,8 @@ const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
         'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain rounded-xl py-3';
       break;
     case 'secondary':
-      variantClasses = 'bg-greenMain text-white rounded-xl py-3';
+      variantClasses =
+        'bg-greenMain text-white rounded-xl py-3';
       break;
     case 'ternary':
       variantClasses =
@@ -21,7 +27,7 @@ const Button = ({ className = '', variant = 'primary', children, ...rest }) => {
       break;
     case 'blueLight':
       variantClasses =
-        'rounded-[10px] py-2 text-black bg-blueLight font-bold mdl:text-base text-xs';
+        'rounded-lg py-2 text-black bg-blueLight font-bold lg:text-base text-xs';
       break;
     default:
       variantClasses = '';

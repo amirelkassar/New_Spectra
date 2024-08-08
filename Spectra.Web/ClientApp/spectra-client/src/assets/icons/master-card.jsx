@@ -1,0 +1,17 @@
+const MasterCard = ({ className = '' }) => {
+  return (
+    <svg
+      className={className}
+      width={43}
+      height={26}
+      viewBox='0 0 43 26'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <circle opacity='0.5' cx={30} cy={13} r={13} fill='white' />
+      <circle opacity='0.8' cx={13} cy={13} r={13} fill='white' />
+    </svg>
+  );
+};
+
+export default MasterCard;
