@@ -4,5 +4,6 @@ namespace Spectra.Domain.AppUser
 {
     public class AppUser : IdentityUser
     {
+
     }
 }
