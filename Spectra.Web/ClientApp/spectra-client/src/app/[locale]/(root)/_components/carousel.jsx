@@ -5,18 +5,32 @@ import {
 import ArrowLeftMainGreen from '@/assets/icons/arrow-left-mainGreen';
 import { useId } from 'react';
 
-export const Carousel = ({ data = [] }) => {
+export const Carousel = ({
+  data = [],
+  withIndicators = true,
+  height = '100%',
+  slideSize = { base: '50%', sm: '33.3333%' },
+  slideGap = 'xl',
+  align = 'start',
+  slidesToScroll = 1,
+  dragFree = true,
+  classNames = {
+    root: 'mdl:px-24 px-16',
+  },
+  ...props
+}) => {
   const id = useId();
   return (
     <MantineCarousel
-      withIndicators
-      height={'100%'}
-      slideSize={{ base: '50%', sm: '33.3333%' }}
-      slideGap='xl'
-      align='start'
-      slidesToScroll={1}
+      {...props}
+      withIndicators={withIndicators}
+      height={height}
+      slideSize={slideSize}
+      slideGap={slideGap}
+      align={align}
+      slidesToScroll={slidesToScroll}
       controlsOffset='lg'
-      dragFree
+      dragFree={dragFree}
       nextControlIcon={
         <span className='rotate-180 h-32 mdl:h-52 -mt-14 mdl:-mt-20 mdl:w-16 w-10 rounded-full flex justify-center bg-[#f5f5f5] items-center'>
           <ArrowLeftMainGreen
@@ -33,9 +47,7 @@ export const Carousel = ({ data = [] }) => {
           />
         </span>
       }
-      classNames={{
-        root: 'mdl:px-24 px-16',
-      }}
+      classNames={classNames}
       dir='ltr'
     >
       {data.map((slide, index) => (

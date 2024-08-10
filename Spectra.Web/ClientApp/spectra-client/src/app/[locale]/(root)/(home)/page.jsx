@@ -6,6 +6,8 @@ import { WhatWeCure } from './_components/what-we-cure';
 import { Testimonials } from './_components/testimonials';
 import { Statistics } from './_components/statistics';
 import { FAQ } from './_components/FAQ';
+import { Sponsors } from './_components/sponsors';
+import { Steps } from './_components/steps';
 
 export default function page() {
   return (
@@ -18,6 +20,8 @@ export default function page() {
       <Testimonials />
       <Statistics />
       <FAQ />
+      <Sponsors />
+      <Steps />
     </main>
   );
 }

@@ -1,10 +1,12 @@
-import { Section } from '../../_components/section';
 import {
   Accordion,
   AccordionItem,
   AccordionControl,
   AccordionPanel,
 } from '@mantine/core';
+
+import { Section } from '../../_components/section';
+import PlusCircleOutlineIcon from '@/assets/icons/plus-circle-outline';
 
 const FAQData = [
   {
@@ -46,11 +48,28 @@ export const FAQ = () => {
       heading='أسئلة شائعة'
       type='basic'
     >
-      <Accordion radius='md'>
-        <AccordionItem value='item'>
-          <AccordionControl>control</AccordionControl>
-          <AccordionPanel>content</AccordionPanel>
-        </AccordionItem>
+      <Accordion
+        classNames={{
+          root: 'space-y-5',
+          item: 'border-none',
+          chevron:
+            'w-fit data-[rotate=true]:rotate-[135deg]',
+          control:
+            'text-black bg-blueLight hover:bg-blueLight/80 text-base mdl:text-2xl',
+        }}
+        radius='xl'
+        chevron={
+          <PlusCircleOutlineIcon className='size-5 mdl:size-7' />
+        }
+      >
+        {FAQData.map((item) => (
+          <AccordionItem key={item.id} value={item.label}>
+            <AccordionControl>
+              {item.label}
+            </AccordionControl>
+            <AccordionPanel>{item.content}</AccordionPanel>
+          </AccordionItem>
+        ))}
       </Accordion>
     </Section>
   );
