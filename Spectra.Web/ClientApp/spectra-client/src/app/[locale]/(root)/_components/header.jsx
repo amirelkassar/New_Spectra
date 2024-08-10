@@ -2,10 +2,11 @@ import { getLocale } from 'next-intl/server';
 
 import { Nav } from './nav';
 import { MobileDrawer } from './mobile-drawer';
+import { Link } from '@/navigation';
 import Logo from '@/assets/icons/logo';
 import ROUTES from '@/routes';
 
-const NAVDATA = [
+export const NAVDATA = [
   {
     label: 'الرئيسية',
     href: ROUTES.ROOT.HOME,
@@ -49,10 +50,16 @@ export const Header = async () => {
       aria-label='Site header'
       className='w-full flex py-8 xl:max-w-7xl mx-auto gap-x-12 items-center max-w-5xl container justify-between xl:justify-normal'
     >
-      <Logo className='w-24 h-10' />
+      <Link href={ROUTES.ROOT.HOME}>
+        <Logo className='w-24 h-10' />
+      </Link>
 
       <MobileDrawer />
-      <Nav currentLocale={locale} navLinks={NAVDATA} />
+      <Nav
+        currentLocale={locale}
+        navLinks={NAVDATA}
+        showAuth
+      />
     </header>
   );
 };
