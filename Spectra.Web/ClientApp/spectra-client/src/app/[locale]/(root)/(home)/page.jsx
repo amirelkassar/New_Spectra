@@ -10,6 +10,7 @@ import { Sponsors } from './_components/sponsors';
 import { Steps } from './_components/steps';
 import { LastNews } from './_components/last-news';
 import { Licenses } from './_components/licenses';
+import { SuccessStories } from './_components/success-stories';
 
 export default function page() {
   return (
@@ -26,6 +27,7 @@ export default function page() {
       <Steps />
       <LastNews />
       <Licenses />
+      <SuccessStories />
     </main>
   );
 }

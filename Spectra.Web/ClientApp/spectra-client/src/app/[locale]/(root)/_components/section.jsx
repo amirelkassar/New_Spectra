@@ -35,7 +35,7 @@ export const Section = ({
           </h2>
           <Button className='text-sm mdl:text-medium gap-3 font-bold min-w-52 mdl:min-w-72'>
             <span>{btnLabel}</span>
-            <ArrowLeft />
+            <ArrowLeft className='ltr:rotate-180' />
           </Button>
         </div>
       )}
