@@ -39,20 +39,7 @@ export const Section = ({
           </Button>
         </div>
       )}
-      {type === 'moreCenter' && (
-        <div className='w-full relative mb-10'>
-          <h2
-            id={id}
-            className='text-base mdl:text-2xl text-center'
-          >
-            {heading}
-          </h2>
-          <Button className='flex items-center absolute left-0 top-0 text-sm mdl:text-medium gap-3 font-bold'>
-            <span>{btnLabel}</span>
-            <ArrowLeft />
-          </Button>
-        </div>
-      )}
+
       {children}
     </section>
   );
