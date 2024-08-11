@@ -3,7 +3,7 @@ import { Footer } from './_components/footer';
 
 const Layout = ({ children }) => {
   return (
-    <div className='overflow-x-hidden'>
+    <div className='overflow-hidden relative'>
       <Header />
       {children}
       <Footer />

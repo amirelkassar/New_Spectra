@@ -9,7 +9,7 @@ const AboutPage = () => {
   return (
     <main>
       <AboutUs
-        className='bg-white'
+        className='bg-white mt-20 mdl:mt-28'
         heading='رعاية مبكرة, لغد مشرق'
       />
       <OurValues />

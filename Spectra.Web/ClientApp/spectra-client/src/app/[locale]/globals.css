@@ -462,3 +462,15 @@ form.clientEdit .mantine-Input-input {
   display: flex;
   align-items: center;
 }
+
+.custom-clip-path-triangle {
+  clip-path: polygon(
+    0% 0%,
+    0 80%,
+    50% 100%,
+    100% 80%,
+    100% 100%,
+    100% 100%,
+    100% 0%
+  );
+}

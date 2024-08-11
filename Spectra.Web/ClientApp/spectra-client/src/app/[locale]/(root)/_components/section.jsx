@@ -21,7 +21,7 @@ export const Section = ({
         className
       )}
     >
-      {type === 'basic' && (
+      {type === 'basic' && heading && (
         <h2
           id={id}
           className='text-base mdl:text-2xl text-center mb-10'

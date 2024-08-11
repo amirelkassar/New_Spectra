@@ -29,16 +29,17 @@ export const AboutUs = ({
         heading={heading}
       >
         <div className='flex flex-col items-center gap-5 mdl:flex-row'>
-          <div className='flex-[0.35] relative'>
-            <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none absolute w-5/6 h-5/6 bottom-0 end-1/2 rtl:-translate-x-1/2 ltr:translate-x-1/2' />
-            <Image
-              src={AboutUsImg}
-              alt='about-us-img'
-              priority={false}
-              className='w-full h-full relative'
-              width={414}
-              height={442}
-            />
+          <div className='flex-[0.35] relative overflow-hidden'>
+            <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none'>
+              <Image
+                src={AboutUsImg}
+                alt='about-us-img'
+                priority={false}
+                className='w-full h-full object-cover object-center'
+                width={414}
+                height={442}
+              />
+            </div>
           </div>
 
           <ul className='flex-[0.65] space-y-10'>

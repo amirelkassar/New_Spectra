@@ -75,23 +75,26 @@ export const Nav = ({
               </button>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item className='w-fit h-10 font-bold leading-6 text-base'>
-                <Link
-                  href={pathName}
-                  locale={
-                    currentLocale === 'en' ? 'ar' : 'en'
-                  }
-                  title={
-                    currentLocale === 'ar'
-                      ? 'Switch to English'
-                      : 'التبديل إلى العربي'
-                  }
-                >
-                  {currentLocale === 'ar'
-                    ? 'English'
-                    : 'عربي'}
-                </Link>
-              </Menu.Item>
+              <Link
+                className='w-full h-full'
+                href={pathName}
+                locale={
+                  currentLocale === 'en' ? 'ar' : 'en'
+                }
+                title={
+                  currentLocale === 'ar'
+                    ? 'Switch to English'
+                    : 'التبديل إلى العربي'
+                }
+              >
+                <Menu.Item className='w-fit h-10 font-bold leading-6 text-base'>
+                  <span>
+                    {currentLocale === 'ar'
+                      ? 'English'
+                      : 'عربي'}
+                  </span>
+                </Menu.Item>
+              </Link>
             </Menu.Dropdown>
           </Menu>
         </div>

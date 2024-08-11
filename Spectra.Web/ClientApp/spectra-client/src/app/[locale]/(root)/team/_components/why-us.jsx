@@ -22,7 +22,7 @@ export const WhyUs = () => {
       >
         <div className='flex items-center gap-5'>
           <div className='w-1/2 overflow-hidden'>
-            <div className='bg-greenLight rounded-full rtl:rounded-tl-none overflow-hidden ltr:rounded-tr-none w-5/6 h-full'>
+            <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none overflow-hidden w-5/6 h-full'>
               <Image
                 src='https://s3-alpha-sig.figma.com/img/391b/edf5/36786b690ef4a5d764b071431d2c58dd?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IXlBpEQrZXBz-PUud4a17X0vNaVuUZ-WMrNnfFvR~OR2HxtaXc~6zIuFnjyEzE0HMM3R~gEZv5tfeyq0SAOUj-WpTBT5~nkoMhcs0XsxkTLHsG6gZjDxxUaREPezMAEIzuEnFrNxOhA49UEZATuTvXrQ3ZIfW-EZWbzEWFdcBD7inUZ2oeLI0CiELGyMuYKEUwFHQcI1BhIHtG64KAT462pU4NH-5L1iOF2IoE3KJCu4KPGXUumVZLmrPuATKSGUdXCj7fmARlpM29diNHyx5ZXytxsaa-0SHnqCF8RbKa9A9daVKIibXoVsnouEeDKqL-cC6f0~bznXFhDnz0PC6g__'
                 alt='happy child'
