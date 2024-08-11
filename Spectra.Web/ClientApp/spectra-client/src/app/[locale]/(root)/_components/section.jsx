@@ -6,6 +6,7 @@ export const Section = ({
   heading = '',
   type = 'basic',
   btnLabel = '',
+  customBtn = <></>,
   children,
   id,
   className,
@@ -37,6 +38,14 @@ export const Section = ({
             <span>{btnLabel}</span>
             <ArrowLeft className='ltr:rotate-180' />
           </Button>
+        </div>
+      )}
+      {type === 'custombtn' && (
+        <div className='flex items-center justify-between mb-10'>
+          <h2 id={id} className='text-base mdl:text-2xl'>
+            {heading}
+          </h2>
+          <div>{customBtn}</div>
         </div>
       )}
 

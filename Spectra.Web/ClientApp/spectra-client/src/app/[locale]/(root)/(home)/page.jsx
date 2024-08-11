@@ -12,7 +12,7 @@ import { LastNews } from './_components/last-news';
 import { Licenses } from './_components/licenses';
 import { SuccessStories } from './_components/success-stories';
 
-export default function page() {
+export default function Homepage() {
   return (
     <main>
       <Hero />

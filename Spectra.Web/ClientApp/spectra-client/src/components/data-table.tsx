@@ -44,7 +44,7 @@ interface DataTableProps<TData, TValue> {
   filterData?: FilterData[];
   sortingData?: SortingData[];
   selectData?: string[];
-  mdHide: Number | null;
+  mdHide?: Number | null;
 }
 
 export function DataTable<TData, TValue>({

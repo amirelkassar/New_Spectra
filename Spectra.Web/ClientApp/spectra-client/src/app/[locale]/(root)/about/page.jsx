@@ -1,7 +1,11 @@
 import { AboutUs } from '../(home)/_components/about-us';
 import { OurValues } from './_components/our-values';
+import { Licenses } from '../(home)/_components/licenses';
+import { Sponsors } from '../(home)/_components/sponsors';
+import { Testimonials } from '../(home)/_components/testimonials';
+import { Statistics } from '../(home)/_components/statistics';
 
-const Page = () => {
+const AboutPage = () => {
   return (
     <main>
       <AboutUs
@@ -9,8 +13,12 @@ const Page = () => {
         heading='رعاية مبكرة, لغد مشرق'
       />
       <OurValues />
+      <Licenses />
+      <Sponsors />
+      <Testimonials />
+      <Statistics />
     </main>
   );
 };
 
-export default Page;
+export default AboutPage;
