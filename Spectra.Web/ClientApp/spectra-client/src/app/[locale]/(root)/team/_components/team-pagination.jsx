@@ -14,7 +14,7 @@ export const PaginationBtns = ({
 
   return (
     data.length > noPerPage && (
-      <div className='font-bold flex items-center justify-between'>
+      <div className='font-bold flex ltr:flex-row-reverse items-center justify-between'>
         <Button
           className='py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg'
           onClick={() =>

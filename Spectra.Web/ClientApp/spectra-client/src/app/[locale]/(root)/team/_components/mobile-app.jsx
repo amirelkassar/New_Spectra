@@ -59,7 +59,7 @@ export const MobileApp = () => {
         </div>
       </div>
 
-      <div className='absolute top-14 end-0 w-3/6 h-full'>
+      <div className='absolute top-5 end-2 w-2/6 h-full'>
         <Image
           src={MobileAppIMG}
           alt='mobile app'

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const CheckHeartIcon = ({ className = '' }) => {
+const CheckHeartIcon = ({ className = '', style = {} }) => {
   return (
     <svg
       className={className}
+      style={style}
       xmlns='http://www.w3.org/2000/svg'
       width='72'
       height='71'
