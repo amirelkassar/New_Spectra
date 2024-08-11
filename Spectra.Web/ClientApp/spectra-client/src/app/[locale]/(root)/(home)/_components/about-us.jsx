@@ -18,7 +18,7 @@ export const AboutUs = ({
   return (
     <div
       className={cn(
-        'relative bg-blueLight overflow-hidden',
+        'relative bg-blueLight overflow-hidden custom-clip-path-triangle-up',
         className
       )}
     >

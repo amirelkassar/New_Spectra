@@ -474,3 +474,13 @@ form.clientEdit .mantine-Input-input {
     100% 0%
   );
 }
+
+.custom-clip-path-triangle-up {
+  clip-path: polygon(
+    0 100%,
+    0 10%,
+    50% 0%,
+    100% 10%,
+    100% 100%
+  );
+}

@@ -1,5 +1,9 @@
 import Image from 'next/image';
 import { Section } from '../../_components/section';
+import Button from '@/components/button';
+import PlayIcon from '@/assets/icons/play';
+import NotificationIcon from '@/assets/icons/notification';
+import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
 
 export const Intro = () => {
   return (
@@ -22,15 +26,44 @@ export const Intro = () => {
             className='w-full h-full object-cover object-center'
           />
         </div>
-        <div className='w-1/2'>
-          <h1 className='text-medium mdl:text-4xl font-bold'>
-            نصنع ابتسامة طفلك
-          </h1>
-          <p className='text-sm mdl:text-medium mt-3'>
-            نساعدك على التعامل مع طفلك بمرونة عالية وبكل حب
-          </p>
+        <div className='w-1/2 mdl:space-y-5 space-y-2 pb-16 mdl:pb-0'>
+          <div>
+            <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold'>
+              نصنع ابتسامة طفلك
+            </h1>
+            <p className='text-sm mdl:text-medium'>
+              نساعدك على التعامل مع طفلك بمرونة عالية وبكل
+              حب
+            </p>
+          </div>
+          <div className='flex flex-col mdl:flex-row *:flex-1 gap-1 mdl:gap-3 font-bold text-sm mdl:text-base'>
+            <Button
+              className='mdl:py-3 py-2 gap-3 px-1'
+              variant='secondary'
+            >
+              <span className='shrink-0 size-5 mdl:size-7 rounded-full bg-white flex items-center justify-center'>
+                <NotificationIcon className='size-3 mdl:size-4' />
+              </span>
+              خدمة الكشف المبكر
+            </Button>
+            <Button className='mdl:py-3 py-2 gap-3 px-1'>
+              <span className='shrink-0'>
+                <PlayIcon
+                  fill='black'
+                  className='size-5 mdl:size-7'
+                />
+              </span>
+              فيديو تعريفي
+            </Button>
+          </div>
         </div>
       </Section>
+      <a
+        href='#services'
+        className='absolute bottom-1 end-1/2 ltr:translate-x-1/2 rtl:-translate-x-1/2'
+      >
+        <ArrowGreenDownCircleWhite className='size-10 mdl:size-16' />
+      </a>
     </div>
   );
 };
