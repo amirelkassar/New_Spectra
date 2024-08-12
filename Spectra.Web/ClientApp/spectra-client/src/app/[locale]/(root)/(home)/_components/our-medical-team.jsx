@@ -22,6 +22,8 @@ export const OurMedicalTeam = () => {
               <TeamMember />,
               <TeamMember />,
               <TeamMember />,
+              <TeamMember />,
+              <TeamMember />,
             ]}
           />
         </div>
@@ -31,6 +33,8 @@ export const OurMedicalTeam = () => {
 
         <Carousel
           data={[
+            <TeamMember />,
+            <TeamMember />,
             <TeamMember />,
             <TeamMember />,
             <TeamMember />,

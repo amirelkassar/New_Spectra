@@ -30,7 +30,10 @@ export const Nav = ({
             href={link.href}
             className={cn(
               'font-bold leading-6 pb-2 border-b-2 border-transparent transition hover:border-black',
-              pathName === link.href && 'border-black'
+              (pathName === link.href ||
+                (link.href !== ROUTES.ROOT.HOME &&
+                  pathName.includes(link.href))) &&
+                'border-black'
             )}
             aria-label={link.label}
             title={link.label}

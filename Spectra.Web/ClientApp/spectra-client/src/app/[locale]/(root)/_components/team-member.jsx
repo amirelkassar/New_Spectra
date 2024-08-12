@@ -27,8 +27,11 @@ export const TeamMember = ({
             </p>
           </div>
           {/* RATING */}
-          <span className='bg-greenMain block text-white text-sm mdl:text-base text-center rounded-xl w-full py-1 px-2'>
-            &#9733; {rating}
+          <span
+            dir='ltr'
+            className='bg-greenMain font-bold block text-white text-sm mdl:text-base text-center rounded-xl w-full py-1 px-2'
+          >
+            {rating} &#9733;
           </span>
         </div>
       </div>

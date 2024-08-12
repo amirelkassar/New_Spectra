@@ -124,9 +124,12 @@ export const servicesData = [
   {
     id: '1',
     label: 'خدمة الكشف المبكر الالكتروني',
-    icon: React.createElement(HeartIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HeartIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(255 61 61 / 0.18)',
-    description: 'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية',
+    description:
+      'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية',
     fullDescription:
       'الكشف المبكر للاضطرابات النمائية والسلوكية هو عبارة عن إخضاع قدرات الطفل المهارية و السلوكية والنفسية للتقييم للكشف عن وجود إحدى الاضطرابات النمائية والسلوكية للبدء بوضع خطط علاجية تدخلية وتنفيذها قبل تطور الأعراض ويتم تنفيذ التقييم في مركزنا من خلال توفير مقاييس عالمية معتمدة يتم الإجابة عنها من قبل ولي أمر الطفل إلكترونياً عبر الموقع بكل سهولة دون الحاجة لمغادرة المنزل أو إضاعة المزيد من الوقت وبعد ذلك يتم استعراض النتائج وتقديم المشورة والتوجيه المناسب .',
 
@@ -146,19 +149,23 @@ export const servicesData = [
       {
         id: '3',
         label: 'سعر الخدمة:',
-        value: 'نقدم خدمة الكشف المبكر مجاناً لفترة محدودة.',
+        value:
+          'نقدم خدمة الكشف المبكر مجاناً لفترة محدودة.',
       },
       {
         id: '4',
         label: 'طريقة طلب الخدمة :',
-        value: 'بامكانكم طلب الخدمة من خلال التسجيل و الاشتراك بموقعنا.',
+        value:
+          'بامكانكم طلب الخدمة من خلال التسجيل و الاشتراك بموقعنا.',
       },
     ],
   },
   {
     id: '2',
     label: 'خدمات التشخيص الطبي عبر فرق متعددة التخصصات',
-    icon: React.createElement(TeamIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(TeamIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية كالتوحد و فرط الحركة وغيرها',
@@ -166,7 +173,9 @@ export const servicesData = [
   {
     id: '3',
     label: 'خدمات المتابعة الدوائية',
-    icon: React.createElement(FollowUpIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(FollowUpIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(138 34 160 / 0.18)',
     description:
       'نقوم بتشخيص الحالات التي تعاني من الاضطرابات النمائية والسلوكية عبر فريق محترف متعدد التخصصات',
@@ -174,7 +183,9 @@ export const servicesData = [
   {
     id: '4',
     label: 'خدمات الاستشارات التخصصية',
-    icon: React.createElement(HandshakeIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HandshakeIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
@@ -182,7 +193,9 @@ export const servicesData = [
   {
     id: '5',
     label: 'خدمات التأهيل العلاجي في مختلف التخصصات',
-    icon: React.createElement(HandshakeIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HandshakeIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
@@ -190,7 +203,9 @@ export const servicesData = [
   {
     id: '6',
     label: 'خدمات التقارير الطبية والتخصصية',
-    icon: React.createElement(HandshakeIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HandshakeIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
@@ -198,7 +213,9 @@ export const servicesData = [
   {
     id: '7',
     label: 'خدمات دعم المراكز والجهات',
-    icon: React.createElement(HandshakeIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HandshakeIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
@@ -206,7 +223,9 @@ export const servicesData = [
   {
     id: '8',
     label: 'خدمات التدريب',
-    icon: React.createElement(HandshakeIcon, { className: 'size-4 lg:size-5' }),
+    icon: React.createElement(HandshakeIcon, {
+      className: 'size-4 lg:size-5',
+    }),
     color: 'rgb(16 176 193 / 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
@@ -342,5 +361,267 @@ export const SpecialNeedsData = [
     icon: React.createElement(AllSpecializations, {
       className: 'size-11 lg:size-14',
     }),
+  },
+];
+
+export const storiesData = [
+  {
+    id: 'story-1',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/20cb/48fd/6de565a9eca735dac8000b04c6c22c0c?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YlycV9LxfCaK3Yvl6qs-CQ7FvImTCE7glC5jkubXDuCNTAPer3irSjBEmQb49X2mGA1oWChtdV5-vd3yYoBMN~88ySH6BDlzdsHaKAKby2Nt9CoM~T1TYgLH37LJzy1Hge2xERpatZ9XZfPuc6CIOFoxjyPFx3CjIQD654n5MZi4wSceHk7UUFTGsjWPtdap8DQTDmXTyMk7GUoo7ZGgcfy67C9dRpnIALhsDY4mzG8czhmpBcQUF2djRoRZiYTnirIiRTDktie-SY91HP9c2PMU~DPHLUzNP6~YOX6hxBHESm1S7ULgdVyHKSFJRqv47KQsjtQrrgFgLZRGf8rStg__',
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '01',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '02',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '03',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
+  },
+  {
+    id: 'story-2',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/6d9b/594e/00075896c0a7cba9c1ac0866293ec93b?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiT15ThXi7CPqNbpH0AgwgxFIFWATYthv8gRFYeL6Fhk17kDjV2qvtw4Q7bRfrIXDmfWkxYvLTdQhMrILH1230H5Ka9X105RSODSaTuuvQJyc3Fq-Elw4RAS9TXYIv6iu6BIYBUayXpu2MrKUxP~PkhC7MDKh3LzQaHTcSkTzLYBzsqO5HPMNAWX9fMWEwi9nqhh8BepKelNY0ehedToIH7c7KTAhB48HpTiUyi2Gb~UaK8XrrK6sya8yZl~wZhvObYWfEXquV9PgoKnYGVKisN06sbTC~AHqjd~N7~n~jL1nB0H5W6gsUodn9uZDA9ALSAY224enLcUAK-z-SA8vQ__',
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '1',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '2',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '3',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
+  },
+  {
+    id: 'story-3',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/b354/cc9d/8b891f91393d57cf404798b3b490d2bb?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CpKnRuKSHLd-e0EXbsT8dea29kwkMvY6Cmb-o3scVn9dLGp6Pr1-iAPeke~422CwnFex1IuBTv9s23PqQtFGlC2jY2jwLQOIv6JgAYXGv-KM5LCLB9q8Rx~SQCJnAaWYgoU1UgEhm58Zfkxf1v52zDy10DcudsE9ef8PTguylT7VEkL36wunRvgX0bv2P5Xhanur8NQjNufSFHco5gqtI0coWcH6fSkd03AOtHy~E~dE1DCah98hcwOqa0kRDzgAllr47VbvMyYRONDNBI7X44RTR~HHhBYCjs6TmB7PPDFbfZj4-EqBN1Tgi7wVrmTCFRfvixgDmIX7ll3XPbRkpA__',
+
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '1',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '2',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '3',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
+  },
+  {
+    id: 'story-4',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/20cb/48fd/6de565a9eca735dac8000b04c6c22c0c?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YlycV9LxfCaK3Yvl6qs-CQ7FvImTCE7glC5jkubXDuCNTAPer3irSjBEmQb49X2mGA1oWChtdV5-vd3yYoBMN~88ySH6BDlzdsHaKAKby2Nt9CoM~T1TYgLH37LJzy1Hge2xERpatZ9XZfPuc6CIOFoxjyPFx3CjIQD654n5MZi4wSceHk7UUFTGsjWPtdap8DQTDmXTyMk7GUoo7ZGgcfy67C9dRpnIALhsDY4mzG8czhmpBcQUF2djRoRZiYTnirIiRTDktie-SY91HP9c2PMU~DPHLUzNP6~YOX6hxBHESm1S7ULgdVyHKSFJRqv47KQsjtQrrgFgLZRGf8rStg__',
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '1',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '2',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '3',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
+  },
+  {
+    id: 'story-5',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/6d9b/594e/00075896c0a7cba9c1ac0866293ec93b?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiT15ThXi7CPqNbpH0AgwgxFIFWATYthv8gRFYeL6Fhk17kDjV2qvtw4Q7bRfrIXDmfWkxYvLTdQhMrILH1230H5Ka9X105RSODSaTuuvQJyc3Fq-Elw4RAS9TXYIv6iu6BIYBUayXpu2MrKUxP~PkhC7MDKh3LzQaHTcSkTzLYBzsqO5HPMNAWX9fMWEwi9nqhh8BepKelNY0ehedToIH7c7KTAhB48HpTiUyi2Gb~UaK8XrrK6sya8yZl~wZhvObYWfEXquV9PgoKnYGVKisN06sbTC~AHqjd~N7~n~jL1nB0H5W6gsUodn9uZDA9ALSAY224enLcUAK-z-SA8vQ__',
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '1',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '2',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '3',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
+  },
+  {
+    id: 'story-6',
+    childName: 'حلا محمد العانزي',
+    daignosis: 'اضطراب طيف التوحد',
+    image:
+      'https://s3-alpha-sig.figma.com/img/b354/cc9d/8b891f91393d57cf404798b3b490d2bb?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CpKnRuKSHLd-e0EXbsT8dea29kwkMvY6Cmb-o3scVn9dLGp6Pr1-iAPeke~422CwnFex1IuBTv9s23PqQtFGlC2jY2jwLQOIv6JgAYXGv-KM5LCLB9q8Rx~SQCJnAaWYgoU1UgEhm58Zfkxf1v52zDy10DcudsE9ef8PTguylT7VEkL36wunRvgX0bv2P5Xhanur8NQjNufSFHco5gqtI0coWcH6fSkd03AOtHy~E~dE1DCah98hcwOqa0kRDzgAllr47VbvMyYRONDNBI7X44RTR~HHhBYCjs6TmB7PPDFbfZj4-EqBN1Tgi7wVrmTCFRfvixgDmIX7ll3XPbRkpA__',
+    story: {
+      description:
+        'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
+      beforeTreatment: [
+        'يرفض العناق والإمساك به، ويبدو أنه يفضل اللعب بمفرده؛ أي ينسحب إلى عالمه الخاص',
+        'عدم الكلام أو التأخر في الكلام، أو قد يفقد الطفل قدرته السابقة على التلفظ بالكلمات والجمل',
+        'يتكلم بنبرة أو إيقاع غير طبيعي؛ وقد يستخدم صوتًا رتيبًا أو يتكلم مثل الإنسان الآلي',
+      ],
+      cureMethod: [
+        {
+          id: '1',
+          text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
+          image:
+            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+        },
+        {
+          id: '2',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+        },
+        {
+          id: '3',
+          text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
+          image:
+            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+        },
+      ],
+      afterTreatment: [
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوملوري',
+        'لوريم إيبسو ملوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم إيبسوم لوريم إيبسوملوريم',
+      ],
+      familyReview:
+        'شكرا سبيكترا وكل الرفيق الطبى لطريقة العلاج المرنة جدا وشوط طريق طويل والنتيجة جدا رائعة',
+      video: '',
+    },
   },
 ];

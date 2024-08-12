@@ -11,6 +11,7 @@ import { Steps } from './_components/steps';
 import { LastNews } from './_components/last-news';
 import { Licenses } from './_components/licenses';
 import { SuccessStories } from './_components/success-stories';
+import { storiesData } from '@/lib/demoData';
 
 export default function Homepage() {
   return (
@@ -27,7 +28,7 @@ export default function Homepage() {
       <Steps />
       <LastNews />
       <Licenses />
-      <SuccessStories />
+      <SuccessStories data={storiesData.slice(0, 3)} />
     </main>
   );
 }

@@ -9,7 +9,6 @@ import IMG_4 from '@/assets/images/what-we-cure/4.png';
 import IMG_5 from '@/assets/images/what-we-cure/5.png';
 import IMG_6 from '@/assets/images/what-we-cure/6.png';
 import IMG_7 from '@/assets/images/what-we-cure/7.png';
-import ArrowLeft from '@/assets/icons/arrow-left';
 import { ArrowRightIcon } from '@/assets/icons/arrow-right';
 
 const data = [
@@ -43,13 +42,14 @@ const data = [
   },
 ];
 
-export const WhatWeCure = () => {
+export const WhatWeCure = ({ className = '' }) => {
   return (
     <Section
       aria-label='What We Cure'
       id='what-we-cure'
       aria-labelledby='what-we-cure'
       heading='ماذا نعالج'
+      className={className}
     >
       <div className='grid grid-cols-3 lg:grid-cols-4 gap-y-5'>
         {data.map((item, index) => (
