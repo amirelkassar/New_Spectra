@@ -51,7 +51,7 @@ function filterTeamMember(profession) {
   );
 }
 
-function handlePagination(
+export function handlePagination(
   noPerPage = 4,
   page = 1,
   data = []

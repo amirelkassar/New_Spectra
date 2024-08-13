@@ -625,3 +625,226 @@ export const storiesData = [
     },
   },
 ];
+
+export const ARTICLES = [
+  {
+    id: 1,
+    type: ['general', 'psychology'],
+    title:
+      'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
+    poster:
+      'https://s3-alpha-sig.figma.com/img/a3bd/bb3a/4547df8e70f54ab7187d82409932f6f1?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=atRWt7WGhF7Jeie0jS9Xyr~pXpHUTSrPJuiuL7eq8B1nmC7m3eyJ29AW6n4IRngPeIZRcr-BPU3nxesGVW4iQy2ha9~t2EmXgNjkWX6lTr7V9FzRdj7Ib38aEJNkvw3Y420lhC9I7LWrBR18nLZ9zxV~S2hVDFBXOUc3ULNgoCc~BPurMaKRxHPIpzZvSUyYd838QrJXPjTyNZvSUvFgPSSKGv2YE7SFQBolwB2uEeRdyJE0VacEMttBsmAUe98prQCwrgDnpiGqgsaJ5PIzrSmktWNWm-XKDMuTA~gwzWe0kyY12VEAKL91zYuV3T0uVkvxCerGQtToaHErhQb41Q__',
+    writer: 'د/ايمان',
+    date: '12/08/2024',
+    mainContent:
+      'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير، التي تنتج بسبب نقص بكمية النواقل الكميائية الدوبامين والنورأدرينالين في الجبهة الأمامية من الدماغ.',
+    likes: '10',
+    isNew: true,
+    readCount: 4,
+    rate: null,
+    content: [
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        paragraphs: [
+          'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
+          'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
+        ],
+      },
+      {
+        title:
+          'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
+        image: '',
+        paragraphs: [
+          'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
+          'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        paragraphs: [
+          'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    type: ['general', 'meetings', 'counseling'],
+    title:
+      'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
+    poster:
+      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    writer: 'د/ايمان',
+    date: '12/08/2024',
+    mainContent:
+      'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير، التي تنتج بسبب نقص بكمية النواقل الكميائية الدوبامين والنورأدرينالين في الجبهة الأمامية من الدماغ.',
+    likes: '10',
+    isNew: true,
+    readCount: 4,
+    rate: 4.5,
+    content: [
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        paragraphs: [
+          'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
+          'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
+        ],
+      },
+      {
+        title:
+          'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
+        image: '',
+        paragraphs: [
+          'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
+          'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        paragraphs: [
+          'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    type: ['general', 'autism'],
+    title:
+      'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
+    poster:
+      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    writer: 'د/ايمان',
+    date: '12/08/2024',
+    mainContent:
+      'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير، التي تنتج بسبب نقص بكمية النواقل الكميائية الدوبامين والنورأدرينالين في الجبهة الأمامية من الدماغ.',
+    likes: '10',
+    isNew: true,
+    readCount: 4,
+    rate: 4.5,
+    content: [
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        paragraphs: [
+          'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
+          'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
+        ],
+      },
+      {
+        title:
+          'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
+        image: '',
+        paragraphs: [
+          'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
+          'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        paragraphs: [
+          'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    type: ['general', 'hyperactivity', 'awareness'],
+    title:
+      'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
+    poster:
+      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    writer: 'د/ايمان',
+    date: '12/08/2024',
+    mainContent:
+      'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير، التي تنتج بسبب نقص بكمية النواقل الكميائية الدوبامين والنورأدرينالين في الجبهة الأمامية من الدماغ.',
+    likes: '10',
+    isNew: true,
+    readCount: 4,
+    rate: 4.5,
+    content: [
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        paragraphs: [
+          'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
+          'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
+        ],
+      },
+      {
+        title:
+          'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
+        image: '',
+        paragraphs: [
+          'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
+          'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        paragraphs: [
+          'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 5,
+    type: ['general', 'family-relationships'],
+    title:
+      'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
+    poster:
+      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    writer: 'د/ايمان',
+    date: '12/08/2024',
+    mainContent:
+      'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير، التي تنتج بسبب نقص بكمية النواقل الكميائية الدوبامين والنورأدرينالين في الجبهة الأمامية من الدماغ.',
+    likes: '10',
+    isNew: true,
+    readCount: 4,
+    rate: 4.5,
+    content: [
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        paragraphs: [
+          'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
+          'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
+        ],
+      },
+      {
+        title:
+          'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
+        image: '',
+        paragraphs: [
+          'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
+          'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+      {
+        title: '',
+        image:
+          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        paragraphs: [
+          'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
+        ],
+      },
+    ],
+  },
+];

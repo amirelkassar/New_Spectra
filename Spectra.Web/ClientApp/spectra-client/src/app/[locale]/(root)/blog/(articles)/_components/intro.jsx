@@ -1,4 +1,4 @@
-import { Section } from '../../_components/section';
+import { Section } from '../../../_components/section';
 
 export const Intro = () => {
   return (

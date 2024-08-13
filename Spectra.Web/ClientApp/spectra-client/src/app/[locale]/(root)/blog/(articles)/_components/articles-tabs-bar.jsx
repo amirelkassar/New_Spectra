@@ -38,7 +38,7 @@ export const ArticlesTabsBar = () => {
         isActive: pathName === '/blog/hyperactivity',
       },
       {
-        key: 'family relationships',
+        key: 'family-relationships',
         value: 'العلاقات الأسرية',
         isActive: pathName === '/blog/family-relationships',
       },
@@ -77,7 +77,7 @@ export const ArticlesTabsBar = () => {
 
   return (
     <div className='my-10 h-16 w-full border-t border-b border-black/10 py-1'>
-      <div className='container mx-auto max-w-5xl gap-5 mdl:gap-10 flex items-center h-full'>
+      <div className='container mx-auto max-w-5xl gap-5 mdl:gap-10 flex ltr:flex-row-reverse items-center h-full'>
         <button
           onClick={scrollRight}
           className='h-full px-2 rounded-lg transition hover:bg-[#F5F5F5]'
