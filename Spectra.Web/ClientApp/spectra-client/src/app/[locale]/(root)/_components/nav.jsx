@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Link, usePathname } from '@/navigation';
 import ROUTES from '@/routes';
 import { Menu } from '@mantine/core';
+import { RegisterModal } from './register-modal';
 
 export const Nav = ({
   currentLocale,
@@ -45,13 +46,8 @@ export const Nav = ({
 
       {showAuth && (
         <div className='flex items-center gap-x-6'>
-          <Button
-            variant='secondary'
-            className='font-bold rounded-[10px] leading-6 !min-w-[140px] !py-1 min-h-[33px] !text-center mb-2'
-            aria-label='اشترك الان'
-          >
-            اشترك الان
-          </Button>
+          <RegisterModal />
+
           <Link
             href={ROUTES.AUTH.LOGIN}
             className='font-bold leading-6 pb-2 border-b-2 border-transparent transition hover:border-black'
