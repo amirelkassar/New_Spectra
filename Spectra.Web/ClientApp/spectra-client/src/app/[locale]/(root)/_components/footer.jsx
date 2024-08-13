@@ -29,7 +29,7 @@ const socialData = [
 
 export const Footer = () => {
   return (
-    <div>
+    <footer className='footer-cn'>
       {/* Footer IMG AND SUBSCRIBE */}
       <div
         className='w-full bg-cover bg-center bg-no-repeat relative before:absolute before:w-full before:h-full before:bg-greenMain/60 top-0 start-0'
@@ -122,6 +122,6 @@ export const Footer = () => {
 
         <Link href='#'>صنع بوساطة شركة بروفاوند جروب</Link>
       </div>
-    </div>
+    </footer>
   );
 };
