@@ -3,6 +3,7 @@ import Comment from "./comment";
 import StarWhiteIcon from "@/assets/icons/starWhite";
 import Image from "next/image";
 import docrotImg from "@/assets/images/placeholder-person.png";
+import CircularProgress from "../../../../components/CircularProgress";
 const comments = [
   {
     id: 0,
@@ -88,9 +89,26 @@ function RatingsPage() {
             </div>
           </div>
           {/*TODO When merge*/}
-          <div className="flex flex-1 items-center gap-6 bg-white rounded-[10px] py-8 px-9">
+          <div className="flex flex-1 items-center justify-between flex-wrap flex-row-reverse gap-6 bg-white rounded-[10px] py-8 px-9">
             <div className="w-[90px]">
-              <p className="mb-7 mdl:text-[16px] text-[12px] font-Bold ">50%</p>
+              <CircularProgress percentage={75} text={'1'} pathColor="#E4A33D"/>
+              <p className="mt-3 mdl:text-[16px] text-[12px] font-Bold text-center">75%</p>
+            </div>
+            <div className="w-[90px]">
+              <CircularProgress percentage={75} text={'2'} pathColor="#E4A33D"/>
+              <p className="mt-3 mdl:text-[16px] text-[12px] font-Bold text-center">75%</p>
+            </div>
+            <div className="w-[90px]">
+              <CircularProgress percentage={75} text={'3'} pathColor="#E4A33D"/>
+              <p className="mt-3 mdl:text-[16px] text-[12px] font-Bold text-center">75%</p>
+            </div>
+            <div className="w-[90px]">
+              <CircularProgress percentage={75} text={'4'} pathColor="#E4A33D"/>
+              <p className="mt-3 mdl:text-[16px] text-[12px] font-Bold text-center">75%</p>
+            </div>
+            <div className="w-[90px]">
+              <CircularProgress percentage={75} text={'5'} pathColor="#E4A33D"/>
+              <p className="mt-3 mdl:text-[16px] text-[12px] font-Bold text-center">75%</p>
             </div>
           </div>
         </div>
