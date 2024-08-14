@@ -94,6 +94,9 @@ const ROUTES = {
         BANNERSAD: '/admin/settings/content/bannersAD',
         MEDICAL: '/admin/settings/content/medicalSpecialties',
         MEDICALID: (id)=>`/admin/settings/content/medicalSpecialties/${id}`,
+        ARTICLES: '/admin/settings/content/articles',
+        ADDARTICLES: '/admin/settings/content/articles/add-articles',
+        EDITARTICLES:(id)=> `/admin/settings/content/articles/${id}`,
       },
       PLANS: {
         DASHBOARD: '/admin/settings/plans',
