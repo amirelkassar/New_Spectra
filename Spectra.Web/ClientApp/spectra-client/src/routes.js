@@ -93,6 +93,7 @@ const ROUTES = {
         SERVICES: '/admin/settings/content/services',
         BANNERSAD: '/admin/settings/content/bannersAD',
         MEDICAL: '/admin/settings/content/medicalSpecialties',
+        MEDICALID: (id)=>`/admin/settings/content/medicalSpecialties/${id}`,
       },
       PLANS: {
         DASHBOARD: '/admin/settings/plans',

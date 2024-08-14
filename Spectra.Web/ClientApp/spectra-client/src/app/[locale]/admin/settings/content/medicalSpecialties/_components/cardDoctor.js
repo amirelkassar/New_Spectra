@@ -1,14 +1,29 @@
+'use client'
 import React from "react";
 import DeleteIcon from "@/assets/icons/delete";
 import ChangeIcon from "@/assets/icons/change";
 import doctor from "@/assets/images/placeholder-person.png";
 import Image from "next/image";
 import StarWhiteIcon from "@/assets/icons/starWhite";
+import useModal from '@/store/modal-slice'
+import Button from "@/components/button";
 function CardDoctor() {
-  return (
+  const {editModal}= useModal()
+ 
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
+    console.log("Button clicked!");
+    alert("Button clicked!");
+    editModal('open', true);
+    editModal('type', 'delete');
+  };
+
+    return (
     <div className="min-w-[230px] flex-1">
+      <Button onClick={()=>{console.log('fdgfd');
+      }}>ff</Button>
       <div className="flex items-center justify-center gap-4 mb-4">
-        <button className="border border-red rounded-[10px] size-[48px] flex items-center justify-center p-3">
+        <button onClick={handleButtonClick} className="border hover:bg-red z-50 border-red rounded-[10px] size-[48px] flex items-center justify-center p-3">
           <DeleteIcon className={"w-full h-full"} />
         </button>
         <button className="border border-greenMain rounded-[10px] size-[48px] flex items-center justify-center p-3">
