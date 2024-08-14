@@ -13,7 +13,7 @@ export const Messages = ({
   setIsOpen = () => {},
 }) => {
   return (
-    <Card className={cn('lg:col-span-2', isOpen && 'hidden lg:block')}>
+    <Card className={cn('lg:col-span-2 lg:order-3', isOpen && 'hidden lg:block')}>
       <CardHeading label='رسائل' />
       {data?.map((chat) => (
         <Chat

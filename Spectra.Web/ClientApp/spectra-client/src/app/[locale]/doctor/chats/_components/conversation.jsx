@@ -10,7 +10,7 @@ export const Conversation = ({ selectedConversation, isOpen, setIsOpen }) => {
   return (
     <Card
       className={cn(
-        'lg:h-auto lg:row-span-2 flex flex-col gap-5 lg:col-span-3 lg:order-2 h-full',
+        'lg:h-auto lg:row-span-3 flex flex-col gap-5 lg:col-span-3 lg:order-2 h-full',
         !isOpen && 'hidden lg:flex'
       )}
     >

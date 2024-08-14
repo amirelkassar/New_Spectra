@@ -12,7 +12,7 @@ export const Groups = ({
 }) => {
   return (
     <Card
-      className={cn('lg:order-3 lg:col-span-2', isOpen && 'hidden lg:block')}
+      className={cn('lg:order-4 lg:col-span-2', isOpen && 'hidden lg:block')}
     >
       <CardHeading label='مجموعة' />
 
