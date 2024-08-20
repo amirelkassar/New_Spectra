@@ -109,6 +109,7 @@ const ROUTES = {
     MAIN: '/doctor/main',
     APPOINTMENTS: '/doctor/appointments',
     APPOINTMENTSCANCELD: '/doctor/appointments/cancelled',
+    APPOINTMENTSCALENDAR: '/doctor/appointments/calendar',
     APPOINTMENTSDEFERRED: '/doctor/appointments/deferred',
     RATINGS: {
       DASHBOARD: '/doctor/ratings',
