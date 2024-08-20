@@ -22,6 +22,7 @@ import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
 import { Link } from "@/navigation";
 import ContractsIcon from "@/assets/icons/contracts";
+import DrugsIcon from "@/assets/icons/drugs";
 
 const Aside = ({ close }) => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -67,6 +68,12 @@ const Aside = ({ close }) => {
       route: ROUTES.ADMIN.REPORT.DASHBOARD,
       isActive: path.includes(ROUTES.ADMIN.REPORT.DASHBOARD),
       icon: <ReportsIcon />,
+    },
+    {
+      name: "عقاقير",
+      route: ROUTES.ADMIN.DRUGS,
+      isActive: path.includes(ROUTES.ADMIN.DRUGS),
+      icon: <DrugsIcon />,
     },
     {
       name: "العقود",

@@ -74,6 +74,8 @@ const ROUTES = {
       DASHBOARD: '/admin/reports',
       REPORTID: (id) => `/admin/reports/${id}`,
     },
+    DRUGS: '/admin/drugs',
+    DRUGSADD: '/admin/drugs/add',
     CONTRACTS: {
       DASHBOARD: '/admin/contracts',
       REQUESTS: '/admin/contracts/requests',
