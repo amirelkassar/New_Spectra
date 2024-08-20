@@ -11,10 +11,8 @@ function CalendarComp() {
   const params = useParams();
   console.log(params);
   const renderEventContent = (eventInfo) => {
-    console.log(eventInfo);
-
     return (
-      <dFiv className="flex flex-col py-4 px-2 gap-1">
+      <div className="flex flex-col py-4 px-2 gap-1">
         <Image
           src={eventInfo.event.extendedProps.src.src}
           alt="Avatar"
@@ -24,10 +22,25 @@ function CalendarComp() {
         />
         <h3 className="text-[14px] font-Bold">{eventInfo.event.title}</h3>
         <b>{eventInfo.timeText}</b>
-      </dFiv>
+      </div>
     );
   };
+  const dayCellClassNames = (arg) => {
+    return "size-[110px]";
+  };
+  const dayHeaderContent = (args) => {
+    const daysMap = {
+      Sunday: "الأحد",
+      Monday: "الاثنين",
+      Tuesday: "الثلاثاء",
+      Wednesday: "الأربعاء",
+      Thursday: "الخميس",
+      Friday: "الجمعة",
+      Saturday: "السبت",
+    };
 
+    return daysMap[args.text]; // Replace the day name with the corresponding Arabic name
+  };
   return (
     <FullCalendar
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -55,13 +68,15 @@ function CalendarComp() {
       ]}
       editable={true}
       droppable={true}
-      locale="ar"
+      locale={params.locale}
       headerToolbar={{
         left: params.locale === "en" ? "prev,title,next" : "",
         right: params.locale === "en" ? "" : "prev,title,next",
       }}
       direction={params.locale === "en" ? "ltr" : "rtl"}
       eventContent={renderEventContent}
+      dayCellClassNames={dayCellClassNames}
+      
     />
   );
 }
