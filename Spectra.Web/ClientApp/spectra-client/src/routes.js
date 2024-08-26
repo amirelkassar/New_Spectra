@@ -74,8 +74,17 @@ const ROUTES = {
       DASHBOARD: '/admin/reports',
       REPORTID: (id) => `/admin/reports/${id}`,
     },
-    DRUGS: '/admin/drugs',
-    DRUGSADD: '/admin/drugs/add',
+    DATAMAIN:{
+      HOME:'/admin/main-data',
+      DRUGSADD: '/admin/main-data/add-drugs',
+      DRUGSDETAILS: (id)=>`/admin/main-data/${id}`,
+      SPECIALTIES: '/admin/main-data/doctors-specialties',
+      ANALYSISRUMORS: '/admin/main-data/analysis-rumors',
+      DIAGNOSTICS: '/admin/main-data/diagnostics',
+      DIAGNOSTICSDETAILS: (id)=>`/admin/main-data/diagnostics/${id}`,
+      COMPLAINTS: '/admin/main-data/complaints',
+    },
+   
     CONTRACTS: {
       DASHBOARD: '/admin/contracts',
       REQUESTS: '/admin/contracts/requests',

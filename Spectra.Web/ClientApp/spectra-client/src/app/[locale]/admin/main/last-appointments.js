@@ -1,15 +1,8 @@
 "use client";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import placeholderImage from "@/assets/images/placeholder-person.png";
-import MenuActions from "@/components/menu-actions";
-import Statue from "@/components/status";
-import clsx from "clsx";
-import Image from "next/image";
-
 import ROUTES from "@/routes";
 import { Link } from "@/navigation";
-import TableComponents from "@/components/table-comp";
-import { useState } from "react";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./_components/columns";
 
@@ -108,7 +101,6 @@ const data = [
 ];
 
 const LastAppointments = () => {
-  const [selected, setSelected] = useState([]);
 
   return (
     <div className="rounded-xl bg-white p-0 md:p-8 grow">
@@ -121,8 +113,7 @@ const LastAppointments = () => {
           <p className="text-[14px] md:text-[20px]">عرض الكل</p>
           <ArrowLeft />
         </Link>
-      </div>
-      {/* <TableComponents data={data} colNum={4} colNumSmall={3} hide={3} dataLine={2} header={[' اسم الطبيب','  اسم المريض',"الـميعاد",'الحالة']}   haveImg={true} order={[['name','specialisation'],['patientName','patientDiagnosis'],['date','time'],"status"]} selectPage={selected} setSelected={setSelected} type={1} route={ROUTES.ADMIN.REQUESTS}  /> */}
+      </div>  
       <DataTable IsWidth={true} data={data} columns={columns} />
     </div>
   );
