@@ -18,7 +18,7 @@ function ContractInformation({ id }) {
 
   return (
     <div>
-      <Card className={"!pe-12 "}>
+      <Card className={"mdl:!pe-12 "}>
         <ServicesFreelancer />
         <ServicesMember />
         <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
@@ -69,8 +69,8 @@ function ContractInformation({ id }) {
             </div>
           </div>
         </div>
-        {pathname === ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id) ? (
-          <div className="flex px-1 gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
+        {pathname !== ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id) ? (
+          <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Button
               onClick={() => {
                 editModal("type", "accept");
@@ -78,7 +78,7 @@ function ContractInformation({ id }) {
                 editModal("open", true);
               }}
               className={
-                "text-[12px] lg:text-[16px]  max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex  bg-greenMain justify-center  md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
               }
             >
               <AcceptIcon />
@@ -91,7 +91,7 @@ function ContractInformation({ id }) {
                 editModal("open", true);
               }}
               className={
-                "text-[12px] lg:text-[16px] max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
               }
             >
               <RefuseIcon />
@@ -101,7 +101,7 @@ function ContractInformation({ id }) {
             <Link
               href={`#`}
               className={
-                " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+                "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
               }
             >
               <EditIcon />
@@ -109,11 +109,11 @@ function ContractInformation({ id }) {
             </Link>
           </div>
         ) : (
-          <div className="flex px-1 gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
+          <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Link
               href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`}
               className={
-                " max-w-[260px] rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
+                " mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
               }
             >
               <ContractsWhiteIcon />
@@ -123,7 +123,7 @@ function ContractInformation({ id }) {
             <Link
               href={`#`}
               className={
-                " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+                " mdl:max-w-[260px] !py-0 text-[14px]  !min-h-11  md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
               }
             >
               <EditIcon />
