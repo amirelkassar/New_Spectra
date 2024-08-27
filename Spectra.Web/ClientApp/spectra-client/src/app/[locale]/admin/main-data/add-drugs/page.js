@@ -21,16 +21,16 @@ function page() {
         <h2 className="headTitleDash">اضافة وصفة طبية</h2>
       </div>
       <div>
-        <form className="flex flex-col gap-8 px-3 mb-14">
+        <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
           <div className="flex gap-4 items-end flex-wrap">
             <Input
               label={"مرفقات "}
               containerClassName={"flex-1"}
               labelClassName={"text-[12px] md:text-[16px]"}
             />
-            <div className="h-[56px] flex items-center justify-center gap-4 px-5 py-3 rounded-[10px] bg-greenMain w-[132px]">
+            <div className="h-12 lg:h-[56px] flex items-center justify-center gap-2 lg:gap-4 px-5 py-1 lg:py-3 rounded-[10px] bg-greenMain w-[132px]">
               <ArrowRight />
-              <p className="text-white text-[16px] font-Bold">رفع ملف</p>
+              <p className="text-white text-[12px] lg:text-[16px] font-Bold">رفع ملف</p>
             </div>
           </div>
 

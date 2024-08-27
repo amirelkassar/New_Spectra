@@ -21,7 +21,9 @@ const MainDataAside = () => {
     {
       name: "تخصصات الاطباء",
       route: ROUTES.ADMIN.DATAMAIN.SPECIALTIES,
-      isActive: path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES ||
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD,
     },
     {
       name: "التحاليل و الاشاعات",
@@ -33,6 +35,7 @@ const MainDataAside = () => {
       route: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS ||
+        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD ||
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID),
     },
     {

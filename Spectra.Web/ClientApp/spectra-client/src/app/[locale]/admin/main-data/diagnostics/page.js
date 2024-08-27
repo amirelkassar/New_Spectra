@@ -74,11 +74,11 @@ const DiagnosticsData = [
 function page() {
   return (
     <div>
-      <div className="flex mb-10 flex-col mb-1 flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6">
+      <div className="flex mb-10 flex-col mt-6 lg:mt-0 flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6">
         <h2 className="headTitleDash">التشخيصات </h2>
         <AddMainData
           title={"أضافة تشخيص "}
-          path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
+          path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD}
         />
       </div>
 

@@ -11,8 +11,8 @@ export const DrugsColumns = [
       const name = getValue();
       const imageUrl = row.original.imageUrl;
       return (
-        <div className={" items-center gap-5   flex"}>
-          <div className=" size-12 hidden md:flex items-start justify-center ">
+        <div className={" items-center gap-2 lg:gap-5   flex"}>
+          <div className=" size-7 lg:size-12  flex items-start justify-center ">
             <Image
               src={imageUrl}
               alt={name}
