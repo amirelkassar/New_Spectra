@@ -89,7 +89,10 @@ const ROUTES = {
       DASHBOARD: '/admin/contracts',
       REQUESTS: '/admin/contracts/requests',
       EXPIRED: '/admin/contracts/expired',
-      CONTRACTSID: (id) => `/admin/contracts/${id}`,
+      CONTRACTSUSER: (id) => `/admin/contracts/${id}`,
+      CONTRACTSUSERNEW: (id) => `/admin/contracts/${id}/new-contacts`,
+      CONTRACTSUSERDETAILS: (id,id2) => `/admin/contracts/${id}/contracts-details/${id2}`,
+      
     },
     SETTINGS: {
       DASHBOARD: '/admin/settings',

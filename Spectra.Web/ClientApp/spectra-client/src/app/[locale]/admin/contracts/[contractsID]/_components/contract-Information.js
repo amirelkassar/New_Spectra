@@ -1,21 +1,26 @@
-import BackIcon from "@/assets/icons/back";
+"use client";
 import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
 import EditIcon from "@/assets/icons/edit";
-import Button from "@/components/button";
 import Card from "@/components/card";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import ROUTES from "@/routes";
 import React from "react";
-import ServicesFreelancer from './services-freelancer'
-import ServicesMember from './services-member'
+import ServicesFreelancer from "./services-freelancer";
+import ServicesMember from "./services-member";
+import { Textarea } from "@mantine/core";
+import Button from "@/components/button";
+import RefuseIcon from "@/assets/icons/refuse";
+import AcceptIcon from "@/assets/icons/accept";
 function ContractInformation({ id }) {
-  console.log(id);
+  const pathname = usePathname();
+  console.log(pathname);
+  console.log(ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id));
+
   return (
     <div>
-      
-      <Card className={'!pe-12 '} >
-        <ServicesFreelancer/>
-        <ServicesMember/>
+      <Card className={"!pe-12 "}>
+        <ServicesFreelancer />
+        <ServicesMember />
         <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
           <div className="pb-7 border-t pt-6 border-grayLight">
             <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
@@ -50,28 +55,82 @@ function ContractInformation({ id }) {
               customers.
             </p>
           </div>
-       
+          <div className="pb-7 border-t pt-10 border-grayLight">
+            <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
+              Notes *
+            </h3>
+            <div className="w-full border-b ">
+              <Textarea
+                classNames={{
+                  input:
+                    "border-none text-start py-0 text-[12px] md:text-[16px] ",
+                }}
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex px-1 gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
-          <Button
-            className={
-              " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
-            }
-          >
-            <ContractsWhiteIcon />
-            ارسال عقد
-          </Button>
+        {pathname === ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id) ? (
+          <div className="flex px-1 gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
+            <Button
+              onClick={() => {
+                editModal("type", "accept");
+                editModal("countSelect", selected.length);
+                editModal("open", true);
+              }}
+              className={
+                "text-[12px] lg:text-[16px]  max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex  bg-greenMain justify-center  md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+              }
+            >
+              <AcceptIcon />
+              قبول
+            </Button>
+            <Button
+              onClick={() => {
+                editModal("type", "req");
+                editModal("countSelect", selected.length);
+                editModal("open", true);
+              }}
+              className={
+                "text-[12px] lg:text-[16px] max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+              }
+            >
+              <RefuseIcon />
+              رفض
+            </Button>
 
-          <Link
-            href={`#`}
-            className={
-              " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
-            }
-          >
-            <EditIcon />
-            تعديل
-          </Link>
-        </div>
+            <Link
+              href={`#`}
+              className={
+                " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+              }
+            >
+              <EditIcon />
+              تعديل
+            </Link>
+          </div>
+        ) : (
+          <div className="flex px-1 gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
+            <Link
+              href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`}
+              className={
+                " max-w-[260px] rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
+              }
+            >
+              <ContractsWhiteIcon />
+              ارسال عقد
+            </Link>
+
+            <Link
+              href={`#`}
+              className={
+                " max-w-[260px] !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+              }
+            >
+              <EditIcon />
+              تعديل
+            </Link>
+          </div>
+        )}
       </Card>
     </div>
   );

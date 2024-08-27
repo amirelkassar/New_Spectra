@@ -1,3 +1,4 @@
+import EditIcon from "@/assets/icons/edit";
 import { TextInput } from "@mantine/core";
 import React from "react";
 
@@ -8,16 +9,17 @@ function ServicesFreelancer() {
       <ul className="flex flex-col gap-3 pe-7">
         <li  className="flex items-center gap-3">
           <p className="font-Regular text-[15px] min-w-[150px]">examination service</p>
-          <div>
-            <div  className="flex items-center w-[200px] justify-between h-11 rounded-xl border border-grayDark px-4 py-2">
-              <TextInput type='number' className="flex-1" classNames={{input:'border-none h-full flex-1 text-start px-4'}}/>
+          <div className="flex items-center gap-3"> 
+            <div  className="flex items-center w-[200px] justify-between h-11 rounded-xl border border-greenMain px-4 py-2">
+              <TextInput type='number' className="flex-1" classNames={{input:'border-none  h-full flex-1 text-start px-4'}}/>
               <span className="font-SemiBold">$</span>
             </div>
+            <EditIcon pathColor="#10B0C1"/>
           </div>
         </li>
         <li  className="flex items-center gap-3">
           <p className="font-Regular text-[15px] min-w-[150px]">Counseling Service</p>
-          <div>
+          <div className="flex items-center gap-3"> 
             <div  className="flex items-center w-[200px] justify-between h-11 rounded-xl border border-grayDark px-4 py-2">
               <TextInput type='number' className="flex-1" classNames={{input:'border-none h-full flex-1 text-start px-4'}}/>
               <span className="font-SemiBold">$</span>
@@ -26,7 +28,7 @@ function ServicesFreelancer() {
         </li>
         <li  className="flex items-center gap-3">
           <p className="font-Regular text-[15px] min-w-[150px]">Diagnostic Service </p>
-          <div>
+          <div className="flex items-center gap-3"> 
             <div  className="flex items-center w-[200px] justify-between h-11 rounded-xl border border-grayDark px-4 py-2">
               <TextInput type='number' className="flex-1" classNames={{input:'border-none h-full flex-1 text-start px-4'}}/>
               <span className="font-SemiBold">$</span>
@@ -35,7 +37,7 @@ function ServicesFreelancer() {
         </li>
         <li  className="flex items-center gap-3">
           <p className="font-Regular text-[15px] min-w-[150px]">Follow-up Service  </p>
-          <div>
+          <div className="flex items-center gap-3"> 
             <div  className="flex items-center w-[200px] justify-between h-11 rounded-xl border border-grayDark px-4 py-2">
               <TextInput type='number' className="flex-1" classNames={{input:'border-none h-full flex-1 text-start px-4'}}/>
               <span className="font-SemiBold">$</span>

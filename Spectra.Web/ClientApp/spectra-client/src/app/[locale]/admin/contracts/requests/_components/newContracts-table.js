@@ -10,6 +10,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
+    haveContracts:true
   },
   {
     id: 1,
@@ -18,6 +19,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "secretary",
+    haveContracts:false
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
+    haveContracts:false
   },
   {
     id: 3,
@@ -34,6 +37,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
+    haveContracts:true
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "secretary",
+    haveContracts:false
   },
   {
     id: 5,
@@ -50,6 +55,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: " accountant",
+    haveContracts:false
   },
   {
     id: 6,
@@ -58,6 +64,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
+    haveContracts:false
   },
   {
     id: 7,
@@ -66,6 +73,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
+    haveContracts:false
   },
   {
     id: 8,
@@ -74,6 +82,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
+    haveContracts:false
   },
   {
     id: 10,
@@ -82,6 +91,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
+    haveContracts:false
   },
   {
     id: 11,
@@ -90,6 +100,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
+    haveContracts:false
   },
   {
     id: 12,
@@ -98,6 +109,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
+    haveContracts:false
   },
   {
     id: 13,
@@ -106,6 +118,7 @@ const data = [
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
+    haveContracts:false
   },
 ];
 const FilterOptions = [
