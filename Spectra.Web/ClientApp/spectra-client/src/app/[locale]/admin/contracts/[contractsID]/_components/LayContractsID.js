@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-
+import React  from "react";
 import imgDoc from "@/assets/images/placeholder-person.png";
 import Image from "next/image";
 import ChatsIcon from "@/assets/icons/chats";
@@ -14,7 +13,6 @@ import { Textarea } from "@mantine/core";
 import SendIcon from "@/assets/icons/send";
 import ContractsIcon from "@/assets/icons/contracts";
 import { useSearchParams } from "next/navigation";
-import CloseModalClient from "@/components/closeModalClient";
 import CloseIcon from "@/assets/icons/close";
 const dataChat = [
   {
