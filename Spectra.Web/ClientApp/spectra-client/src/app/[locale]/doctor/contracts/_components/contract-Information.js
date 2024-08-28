@@ -11,11 +11,12 @@ import { Textarea } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
+import useModal from "@/store/modal-slice";
 function ContractInformation({ id }) {
   const pathname = usePathname();
   console.log(pathname);
   console.log(ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id));
-
+  const { modal, editModal } = useModal();
   return (
     <div>
       <Card className={"mdl:!pe-12 "}>
@@ -55,6 +56,20 @@ function ContractInformation({ id }) {
               customers.
             </p>
           </div>
+          <div className="pb-7 rounded-xl px-6 py-4 border-t pt-6 border-grayLight bg-grayLight">
+            <div className=" mb-2 md:mb-3 flex items-center gap-3">
+              <h3 className="text-[16px] font-Bold md:text-[20px] ">Note</h3>
+              <button>
+                <EditIcon pathColor="#10B0C1" className={"w-4 h-auto"} />
+              </button>
+            </div>
+            <p className={"text-[12px] md:text-[16px]"}>
+              [Replace the placeholder text with a concise and factual
+              description of the company. This could include their founding
+              year, core business activities, target audience, or any relevant
+              achievements.]
+            </p>
+          </div>
           <div className="pb-7 border-t pt-10 border-grayLight">
             <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
               Notes *
@@ -69,12 +84,11 @@ function ContractInformation({ id }) {
             </div>
           </div>
         </div>
-        {pathname !== ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id) ? (
+        {pathname === ROUTES.DOCTOR.CONTRACTS.CONTRACTSID(id) ? (
           <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Button
               onClick={() => {
-                editModal("type", "accept");
-                editModal("countSelect", selected.length);
+                editModal("type", "contractsAccept");
                 editModal("open", true);
               }}
               className={
@@ -86,8 +100,7 @@ function ContractInformation({ id }) {
             </Button>
             <Button
               onClick={() => {
-                editModal("type", "req");
-                editModal("countSelect", selected.length);
+                editModal("type", "contractsReq");
                 editModal("open", true);
               }}
               className={
@@ -111,23 +124,17 @@ function ContractInformation({ id }) {
         ) : (
           <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Link
-              href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`}
+              href={pathname+`?chat=true`}
+              onClick={() => {
+                editModal("type", "contractsSend");
+                editModal("open", true);
+              }}
               className={
                 " mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
               }
             >
               <ContractsWhiteIcon />
               ارسال عقد
-            </Link>
-
-            <Link
-              href={`#`}
-              className={
-                " mdl:max-w-[260px] !py-0 text-[14px]  !min-h-11  md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
-              }
-            >
-              <EditIcon />
-              تعديل
             </Link>
           </div>
         )}

@@ -5,10 +5,12 @@ import ModalType from "./comp_modal/modalType";
 import ModalDate from "./comp_modal/modalDate";
 import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
 import ModalJoin from "./comp_modal/modalJoin";
+import ModalContacts from "./comp_modal/modalContacts";
+import ModalContactsState from "./comp_modal/modalContactsState";
 import UserModal from "./comp_modal/permissions-modal/userModal";
 import useModal from "@/store/modal-slice";
 
-function ModalReq({  id }) {
+function ModalReq({ id }) {
   const { modal, editModal } = useModal();
 
   return (
@@ -33,8 +35,14 @@ function ModalReq({  id }) {
         <ModalSelect />
       ) : modal.type === "addPermissionsUser" ? (
         <UserModal />
+      ) : modal.type === "contractsSend" ? (
+        <ModalContacts />
+      ) : modal.type === "contractsReq" ? (
+        <ModalContactsState accept={false} />
+      ) : modal.type === "contractsAccept" ? (
+        <ModalContactsState accept={true} />
       ) : (
-        <ModalType state={modal.type}  />
+        <ModalType state={modal.type} />
       )}
     </Modal>
   );

@@ -11,11 +11,13 @@ import { Textarea } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
+import useModal from "@/store/modal-slice";
 function ContractInformation({ id }) {
   const pathname = usePathname();
   console.log(pathname);
   console.log(ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id));
-
+  const { modal, editModal } = useModal();
+  console.log(useModal);
   return (
     <div>
       <Card className={"mdl:!pe-12 "}>
@@ -73,9 +75,8 @@ function ContractInformation({ id }) {
           <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Button
               onClick={() => {
-                editModal("type", "accept");
-                editModal("countSelect", selected.length);
-                editModal("open", true);
+              console.log('fdgsdfdf');
+              
               }}
               className={
                 "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
@@ -86,8 +87,7 @@ function ContractInformation({ id }) {
             </Button>
             <Button
               onClick={() => {
-                editModal("type", "req");
-                editModal("countSelect", selected.length);
+                editModal("type", "contractsReq");
                 editModal("open", true);
               }}
               className={

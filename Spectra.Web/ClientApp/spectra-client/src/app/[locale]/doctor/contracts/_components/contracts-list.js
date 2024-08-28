@@ -67,7 +67,7 @@ function ContractsList({idUser}) {
                 </div>
               </div>
               <Link
-                href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(idUser,item.id)}
+                href={ROUTES.DOCTOR.CONTRACTS.CONTRACTSID(item.id)}
                 className="bg-greenMain rounded-xl h-12 w-[104px] lg:w-[168px] flex items-center justify-center text-sm lg:text-xl font-Bold text-white duration-300 hover:shadow-md"
               >
                 عرض
