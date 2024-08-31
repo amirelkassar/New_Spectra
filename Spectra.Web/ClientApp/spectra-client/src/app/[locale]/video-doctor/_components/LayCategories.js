@@ -41,29 +41,27 @@ function LayCategories() {
   ];
 
   const ViewComp = () => {
-    switch (searchParams.get('category')){
+    switch (searchParams.get("category")) {
       case "complaints":
-        return <ComplaintsVideo/>;
+        return <ComplaintsVideo />;
       case "diagnoses":
-        return <DiagnosesVideo/>;
+        return <DiagnosesVideo />;
       case "nominations":
-        return <Nominations/>;
+        return <Nominations />;
       case "rumors":
-        return <Rumors/>;
+        return <Rumors />;
       case "medicine":
-        return <Drugs/>;
+        return <Drugs />;
       case "notes":
-        return <Notes/>;
+        return <Notes />;
       default:
-        return <ChatVideo/>;
-        
+        return <ChatVideo />;
     }
- 
   };
   return (
-    <div className="h-full pb-12">
-      <div className="flex items-center  justify-between gap-4 pb-5 border-b-2 border-grayLight">
-        <h2 className="text-base font-Bold">
+    <div className="h-full lgl:pb-12">
+      <div className=" lgl:flex hidden items-center  justify-between gap-4 pb-5 border-b-2 border-grayLight">
+        <h2 className="text-base font-Bold ">
           {CategoriesData.find((item) => item.active === true)?.label ||
             "المحادثات"}
         </h2>
@@ -81,7 +79,7 @@ function LayCategories() {
           </div>
         )}
       </div>
-      <ViewComp/>
+      <ViewComp />
     </div>
   );
 }

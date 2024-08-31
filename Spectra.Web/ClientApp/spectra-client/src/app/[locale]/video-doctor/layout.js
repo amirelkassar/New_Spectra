@@ -4,7 +4,7 @@ import LayoutVideo from "./_components/LayoutVideo";
 
 function layout({ children }) {
   return (
-    <main className="relative flex flex-col gap-4    py-5 gap-x-5 min-h-screen ">
+    <main className="relative flex flex-col gap-4     lgl:py-5 gap-x-5 min-h-screen ">
       <LayoutVideo Children={children} />
       <ModalReq />
     </main>

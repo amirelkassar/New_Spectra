@@ -48,7 +48,7 @@ function Rumors() {
         <Tabs.List justify="center" classNames={{ list: "mt-3" }}>
           <Tabs.Tab
             classNames={{
-              tab: " text-xl font-Regular data-[active]:font-bold",
+              tab: "text-sm lgl:text-xl font-Regular data-[active]:font-bold",
             }}
             value="analyses"
           >
@@ -56,7 +56,7 @@ function Rumors() {
           </Tabs.Tab>
           <Tabs.Tab
             classNames={{
-              tab: " text-xl font-Regular data-[active]:font-bold",
+              tab: "text-sm lgl:text-xl font-Regular data-[active]:font-bold",
             }}
             value="rumors"
           >
@@ -66,11 +66,16 @@ function Rumors() {
 
         <Tabs.Panel value="rumors">
           <Checkbox.Group>
-            <div className="flex flex-col gap-8 mt-11 ps-4">
+            <div className="flex flex-col gap-4 lgl:gap-8 mt-7 lgl:mt-11 ps-4">
               {dataRumors.map((item, i) => {
                 return (
                   <Checkbox
-                    classNames={{ label: "font-Bold text-base" }}
+                    classNames={{
+                      label: "font-Bold text-[12px] lgl:text-base",
+                      input: "lgl:w-5 lgl:h-5 w-4 h-4",
+                      inner: "lgl:w-5 lgl:h-5 w-4 h-4",
+                      body: "items-center",
+                    }}
                     color="#10B0C1"
                     key={i}
                     value={item.value}
@@ -83,11 +88,16 @@ function Rumors() {
         </Tabs.Panel>
         <Tabs.Panel value="analyses">
           <Checkbox.Group>
-            <div className="flex flex-col gap-8 mt-11 ps-4">
+            <div className="flex flex-col gap-4 lgl:gap-8 mt-7 lgl:mt-11 ps-4">
               {dataAnalyses.map((item, i) => {
                 return (
                   <Checkbox
-                    classNames={{ label: "font-Bold text-base" }}
+                    classNames={{
+                      label: "font-Bold text-[12px] lgl:text-base",
+                      input: "lgl:w-5 lgl:h-5 w-4 h-4",
+                      inner: "lgl:w-5 lgl:h-5 w-4 h-4",
+                      body: "items-center",
+                    }}
                     color="#10B0C1"
                     key={i}
                     value={item.value}

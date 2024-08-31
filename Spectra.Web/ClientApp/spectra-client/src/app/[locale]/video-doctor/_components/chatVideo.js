@@ -19,8 +19,8 @@ const dataChat = [
 ];
 function ChatVideo() {
   return (
-    <div className="w-full h-full flex flex-col justify-between duration-500 px-1 pb-10 relative pt-8">
-      <div className="flex flex-1 flex-col gap-10 ">
+    <div className="w-full h-full flex flex-col justify-between duration-500 px-1 lgl:pb-10 relative pt-8">
+      <div className="flex flex-1 flex-col gap-4 lgl:gap-10 ">
         {dataChat.map((item, index) => {
           return (
             <div
@@ -37,13 +37,13 @@ function ChatVideo() {
                 className=" size-12 min-w-12 bg-grayMedium rounded-full object-cover object-top"
               />
               <div
-                className={` gap-4 rounded-xl  w-fit lg:w-auto pe-9   ${
+                className={` gap-4 rounded-xl  w-fit lg:w-auto lgl:pe-9   ${
                   item.name === "admin"
                     ? "bg-greenMain text-white"
                     : "bg-grayLight text-black"
-                } px-5 py-3 flex-row-reverse`}
+                } px-4 lgl:px-5 py-2 lgl:py-3 flex-row-reverse`}
               >
-                <h3 className="text-[12px] lg:text-base  font-Bold mt-2">
+                <h3 className="text-[12px] lg:text-base  font-Bold lgl:mt-2">
                   {item.title}
                 </h3>
               </div>
@@ -51,7 +51,7 @@ function ChatVideo() {
           );
         })}
       </div>
-      <div className="flex  items-center gap-5">
+      <div className="flex  items-center gap-5 py-4">
         <button>
           <SendIcon />
         </button>

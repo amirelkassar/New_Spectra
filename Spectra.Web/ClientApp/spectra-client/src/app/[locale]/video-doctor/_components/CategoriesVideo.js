@@ -51,22 +51,23 @@ function CategoriesVideo() {
     },
   ];
   return (
-    <div className="flex flex-wrap gap-3 justify-center">
+    <div className="flex lgl:flex-wrap gap-3 overflow-x-auto snap-none hideScroll	 max-w-[calc(100%-0px)] px-5 lgl:px-0 lgl:justify-center"
+    >
       {CategoriesData.map((category, index) => {
         return (
           <Link
             scroll={false}
             href={pathName + "?category=" + category.name}
             key={index}
-            className={`bg-white duration-300 hover:shadow-md border-2 ${
-              category.active ? "border-greenMain" : "border-white"
-            } min-w-[154px] px-2 max-h-[154px] cursor-pointer flex-1  py-8 w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
+            className={`bg-white duration-300 hover:shadow-md border-2  ${
+              category.active ? "border-greenMain" : "border-grayLight lgl:border-white"
+            } min-w-[96px] lgl:min-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
           >
-            <div className=" size-[58px] rounded-lg p-[14px] mb-2 mx-auto bg-greenLight flex items-center justify-center ">
+            <div className=" size-9 lgl:size-[58px] rounded-lg p-2 lgl:p-[14px] mb-1 lgl:mb-2 mx-auto bg-greenLight flex items-center justify-center ">
               {category.icon}
             </div>
 
-            <h2 className="font-Bold text-nowrap text-center">
+            <h2 className="font-Bold lgl:text-nowrap leading-5 text-[12px] lgl:text-base text-center">
               {category.label}
             </h2>
           </Link>

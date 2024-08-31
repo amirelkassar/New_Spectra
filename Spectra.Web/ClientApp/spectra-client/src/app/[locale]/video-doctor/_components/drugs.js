@@ -84,29 +84,37 @@ function Drugs() {
         return (
           <div
             key={index}
-            className="flex items-center gap-4 pb-5 border-b border-grayLight"
+            className="flex items-center gap-2 lgl:gap-4 pb-5 border-b border-grayLight"
           >
             <Checkbox
+              color="#10B0C1"
               checked={selectedIndices.includes(index)}
               onChange={() => handleSelect(index)}
+              classNames={{
+                input: "lgl:w-5 lgl:h-5 w-4 h-4",
+                inner: "lgl:w-5 lgl:h-5 w-4 h-4",
+                body: "items-center",
+              }}
             />
-            <div className="flex flex-1 items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-1 items-center justify-between gap-2 lgl:gap-3 flex-wrap">
+              <div className="flex items-center gap-2 lgl:gap-3">
                 <Image
                   alt={item.name}
                   src={item.imageUrl}
                   width={50}
                   height={50}
-                  className=" size-[50px] object-cover object-top"
+                  className=" size-7 lgl:size-[50px] object-cover object-top"
                 />
-                <h3 className="text-base font-Bold">{item.name}</h3>
+                <h3 className="text-[12px] lgl:text-base font-Bold">
+                  {item.name}
+                </h3>
               </div>
               <button
                 onClick={() => {
                   setSelectedIdModal(item.id);
                   open();
                 }}
-                className="px-6 py-3 w-fit rounded-xl flex items-center justify-center border text-base font-Bold duration-300 hover:shadow-md"
+                className="px-6 py-3 w-fit rounded-xl flex items-center justify-center border text-[12px] lgl:text-base font-Bold duration-300 hover:shadow-md"
               >
                 تحديد الجرعة
               </button>
@@ -134,7 +142,9 @@ function Drugs() {
           <CloseIcon className={"w-[100%] h-[100%] rounded-[50%]"} />
         </div>
         <div className="-mt-14">
-          <h2 className="text-sm lg:text-xl text-center mb-4 lg:mb-8 font-Bold">تحديد الجرعة</h2>
+          <h2 className="text-sm lg:text-xl text-center mb-4 lg:mb-8 font-Bold">
+            تحديد الجرعة
+          </h2>
           <Image
             alt={"item"}
             src={imgDrugs}
@@ -142,25 +152,35 @@ function Drugs() {
             height={50}
             className=" size-[64px] lg:size-[80px] mb-5 object-contain mx-auto block"
           />
-          <h3 className="text-[12px] lg:text-base text-center mb-5 font-Bold">سيترالين</h3>
+          <h3 className="text-[12px] lg:text-base text-center mb-5 font-Bold">
+            سيترالين
+          </h3>
           <form className="pt-5 lg:pt-8 border-t-2 border-grayLight flex flex-col gap-4 lg:gap-8 ">
             <Input
               label="وصف تحديد الجرعة "
-              labelClassName={"text-[12px] lg:text-base font-Regular text-grayDark"}
+              labelClassName={
+                "text-[12px] lg:text-base font-Regular text-grayDark"
+              }
               inputClassName={"min-h-[84px] border"}
             />
             <div className="flex items-center w-full flex-1 lgl:flex-row gap-5">
               <Input
                 label="وصف تحديد الجرعة "
-                labelClassName={"text-[12px] lg:text-base font-Regular text-grayDark"}
-                inputClassName={"min-h-[44px] !h-[44px] lg:min-h-[84px] w-full border"}
-                containerClassName={'flex-1 w-full'}
+                labelClassName={
+                  "text-[12px] lg:text-base font-Regular text-grayDark"
+                }
+                inputClassName={
+                  "min-h-[44px] !h-[44px] lg:min-h-[84px] w-full border"
+                }
+                containerClassName={"flex-1 w-full"}
               />
               <Select
                 classNames={{
                   root: "flex-1 w-full",
-                  input: "min-h-[44px] !h-[44px] lg:min-h-[84px] w-full border border-greenMain rounded-xl",
-                  label: "text-[12px] lg:text-base font-Regular text-grayDark mb-2",
+                  input:
+                    "min-h-[44px] !h-[44px] lg:min-h-[84px] w-full border border-greenMain rounded-xl",
+                  label:
+                    "text-[12px] lg:text-base font-Regular text-grayDark mb-2",
                 }}
                 label={"الفترة الزمنية"}
                 data={["عائلة طفل", "منظمه"]}
@@ -170,12 +190,12 @@ function Drugs() {
             </div>
             <Input
               label="ملاحظات "
-              labelClassName={"text-[12px] lg:text-base font-Regular text-grayDark"}
+              labelClassName={
+                "text-[12px] lg:text-base font-Regular text-grayDark"
+              }
               inputClassName={"min-h-[84px] border"}
             />
-            <Button variant='secondary'>
-            ارسال
-            </Button>
+            <Button variant="secondary">ارسال</Button>
           </form>
         </div>
       </Modal>

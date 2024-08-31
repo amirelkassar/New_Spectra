@@ -481,3 +481,10 @@ form.clientEdit .mantine-Input-input {
   padding: 10px;
   font-size: 16px;
 }
+
+@media (max-width: 768px) {
+  .hideScroll {
+    scrollbar-width: none;
+    padding-bottom: 10px;
+  }
+}
