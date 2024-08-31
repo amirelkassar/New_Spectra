@@ -7,7 +7,7 @@ function LayoutVideo({ Children }) {
         <HeaderTop />
       </div>
 
-      <div className="flex-1 flex flex-col ">{Children}</div>
+      <div className="flex-1 flex flex-col  justify-end h-full">{Children}</div>
     </>
   );
 }
