@@ -2,6 +2,12 @@
 import ChatsIcon from "@/assets/icons/chats";
 import React from "react";
 import ChatVideo from "./chatVideo";
+import ComplaintsVideo from "./complaints";
+import DiagnosesVideo from "./diagnoses";
+import Nominations from "./nominations";
+import Notes from "./notes";
+import Rumors from "./rumors";
+import Drugs from "./drugs";
 import { useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/navigation";
 function LayCategories() {
@@ -33,9 +39,30 @@ function LayCategories() {
       active: searchParams.get("category") === "notes",
     },
   ];
+
+  const ViewComp = () => {
+    switch (searchParams.get('category')){
+      case "complaints":
+        return <ComplaintsVideo/>;
+      case "diagnoses":
+        return <DiagnosesVideo/>;
+      case "nominations":
+        return <Nominations/>;
+      case "rumors":
+        return <Rumors/>;
+      case "medicine":
+        return <Drugs/>;
+      case "notes":
+        return <Notes/>;
+      default:
+        return <ChatVideo/>;
+        
+    }
+ 
+  };
   return (
     <div className="h-full pb-12">
-      <div className="flex items-center justify-between gap-4 pb-5 border-b-2 border-grayLight">
+      <div className="flex items-center  justify-between gap-4 pb-5 border-b-2 border-grayLight">
         <h2 className="text-base font-Bold">
           {CategoriesData.find((item) => item.active === true)?.label ||
             "المحادثات"}
@@ -54,7 +81,7 @@ function LayCategories() {
           </div>
         )}
       </div>
-      <ChatVideo />
+      <ViewComp/>
     </div>
   );
 }
