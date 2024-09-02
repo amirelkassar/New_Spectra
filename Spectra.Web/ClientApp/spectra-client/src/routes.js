@@ -98,10 +98,12 @@ const ROUTES = {
       SPECIALTIES: '/admin/main-data/doctors-specialties',
       SPECIALTIESADD: '/admin/main-data/doctors-specialties/add',
       ANALYSISRUMORS: '/admin/main-data/analysis-rumors',
+      ANALYSISRUMORSADD: '/admin/main-data/analysis-rumors/add',
       DIAGNOSTICS: '/admin/main-data/diagnostics',
       DIAGNOSTICSADD: '/admin/main-data/diagnostics/add',
       DIAGNOSTICSDETAILS: (id)=>`/admin/main-data/diagnostics/${id}`,
       COMPLAINTS: '/admin/main-data/complaints',
+      COMPLAINTSADD: '/admin/main-data/complaints/add',
     },
    
     CONTRACTS: {

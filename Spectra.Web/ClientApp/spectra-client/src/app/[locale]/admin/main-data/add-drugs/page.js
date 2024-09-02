@@ -30,7 +30,9 @@ function page() {
             />
             <div className="h-12 lg:h-[56px] flex items-center justify-center gap-2 lg:gap-4 px-5 py-1 lg:py-3 rounded-[10px] bg-greenMain w-[132px]">
               <ArrowRight />
-              <p className="text-white text-[12px] lg:text-[16px] font-Bold">رفع ملف</p>
+              <p className="text-white text-[12px] lg:text-[16px] font-Bold">
+                رفع ملف
+              </p>
             </div>
           </div>
 
@@ -65,6 +67,10 @@ function page() {
           />
           <Input
             label={"موانع الاستخدام"}
+            labelClassName={"text-[12px] md:text-[16px]"}
+          />
+          <Input
+            label={"ملاحظات"}
             labelClassName={"text-[12px] md:text-[16px]"}
           />
         </form>

@@ -19,7 +19,9 @@ function page() {
       </div>
       <div className="flex flex-col gap-5">
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">صور العقار </h3>
+          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+            صور العقار{" "}
+          </h3>
           <div className="flex items-center gap-2 mt-6 flex-wrap">
             <Image
               alt="drugs"
@@ -49,7 +51,9 @@ function page() {
           <p className=" text-[14px] lg:text-[20px] font-Regular">سيترالين </p>
         </div>
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">المادة الفعالة</h3>
+          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+            المادة الفعالة
+          </h3>
           <p className=" text-[14px] lg:text-[20px] font-Regular">الريتنول </p>
         </div>
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
@@ -61,7 +65,9 @@ function page() {
           <p className=" text-[14px] lg:text-[20px] font-Regular">#1245 </p>
         </div>
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">الجرعة الموصى بها</h3>
+          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+            الجرعة الموصى بها
+          </h3>
           <p className=" font-Regular text-[12px] lg:text-[16px]">
             الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم
             الكبسولات لبدء العلاج. <br />
@@ -70,7 +76,9 @@ function page() {
           </p>
         </div>
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">موانع الاستخدام</h3>
+          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+            موانع الاستخدام
+          </h3>
           <p className=" font-Regular text-[12px] lg:text-[16px]">
             فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.
             <br /> الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين
@@ -79,23 +87,11 @@ function page() {
           </p>
         </div>
         <div className="bg-blueLight rounded-xl px-8 py-7">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">ملاحظات</h3>
-          <p className=" text-[14px] lg:text-[20px] font-Regular pb-5 border-b border-black/15">
+          <h3 className="font-bold mb-3 text-[12px] lg:text-[16px]">ملاحظات</h3>
+          <p className=" text-[14px] lg:text-[20px] font-Regular pb-3 ">
             يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن
             الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.
           </p>
-          <div className="flex gap-2 items-center mt-6">
-            <Image
-              width={38}
-              height={38}
-              src={man}
-              alt="man"
-              className=" rounded-[50%] min-w-[38px] w-[38px] h-[38px] object-cover object-top"
-            />
-            <h2 className="text-[12px] lg:text-[16px] font-ExtraLight">
-              الاخصائى : احمد محمد كمال
-            </h2>
-          </div>
         </div>
       </div>
     </div>

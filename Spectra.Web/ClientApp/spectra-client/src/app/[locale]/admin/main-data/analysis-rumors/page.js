@@ -70,7 +70,7 @@ function page() {
         <h2 className="headTitleDash">التحاليل و الاشاعات </h2>
         <AddMainData
           title={"أضافة نوع "}
-          path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
+          path={ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD}
         />
       </div>
 

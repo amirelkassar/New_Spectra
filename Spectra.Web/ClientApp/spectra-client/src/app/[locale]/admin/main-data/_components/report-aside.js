@@ -28,7 +28,9 @@ const MainDataAside = () => {
     {
       name: "التحاليل و الاشاعات",
       route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
-      isActive: path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD,
     },
     {
       name: "التشخيصات",
@@ -41,7 +43,9 @@ const MainDataAside = () => {
     {
       name: "الشكاوى العامة",
       route: ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
-      isActive: path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD,
     },
   ];
   return (
