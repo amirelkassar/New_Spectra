@@ -4,13 +4,15 @@ import AppoFilteration from "./appo-filteration";
 import AppoTable from "./appo-table";
 import ROUTES from "@/routes";
 import AppointmentSummary from "./appointment-summary";
-import DateIcon from "@/assets/icons/date";
 import DateIcon2 from "@/assets/icons/date2";
 
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import { useSearchParams } from "next/navigation";
 
 const AppointmentsPage = () => {
   const path = usePathname();
+ 
+  
 
   const AppointmentsLinks = [
     {
@@ -36,13 +38,13 @@ const AppointmentsPage = () => {
           <h2 className="md:block hidden mdl:text-[20px] text-[14px] ">
             المواعيد
           </h2>
-          <button
+          <Link href={ROUTES.DOCTOR.APPOINTMENTSCALENDAR}
             className={`
               bg-greenMain
            size-[45px] md:size-[50px] rounded-[50%]  flex items-center justify-center`}
           >
             <DateIcon2 />
-          </button>
+          </Link>
         </div>
         <button className="flex mdl:hidden items-center justify-center w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold">
             <PlusInsideCircleIcon />

@@ -155,15 +155,15 @@ const StaffTable = () => {
   const [selected, setSelected] = useState([]);
   return (
     <div className="grow">
-     
       <DataTable
+       
         data={data}
         columns={columns}
         filterData={FilterOptions}
         filterBy="type"
         filterText="فلتر بالنوع"
         filter="buttons"
-       mdHide={2}
+        mdHide={2}
       />
     </div>
   );

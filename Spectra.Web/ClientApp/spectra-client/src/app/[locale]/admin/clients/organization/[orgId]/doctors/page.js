@@ -94,7 +94,7 @@ const DoctorsOrg = ({}) => {
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
       <h1 className="ms-5 mb-5 lg:block hidden ">اطباء المنظمة</h1>
       
-      <DataTable data={data} columns={columns}/>
+      <DataTable IsWidth={true} data={data} columns={columns}/>
     </div>
   );
 };

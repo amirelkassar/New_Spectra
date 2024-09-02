@@ -75,11 +75,27 @@ const ROUTES = {
       DASHBOARD: '/admin/reports',
       REPORTID: (id) => `/admin/reports/${id}`,
     },
+    DATAMAIN:{
+      HOME:'/admin/main-data',
+      DRUGSADD: '/admin/main-data/add-drugs',
+      DRUGSDETAILS: (id)=>`/admin/main-data/${id}`,
+      SPECIALTIES: '/admin/main-data/doctors-specialties',
+      SPECIALTIESADD: '/admin/main-data/doctors-specialties/add',
+      ANALYSISRUMORS: '/admin/main-data/analysis-rumors',
+      DIAGNOSTICS: '/admin/main-data/diagnostics',
+      DIAGNOSTICSADD: '/admin/main-data/diagnostics/add',
+      DIAGNOSTICSDETAILS: (id)=>`/admin/main-data/diagnostics/${id}`,
+      COMPLAINTS: '/admin/main-data/complaints',
+    },
+   
     CONTRACTS: {
       DASHBOARD: '/admin/contracts',
       REQUESTS: '/admin/contracts/requests',
       EXPIRED: '/admin/contracts/expired',
-      CONTRACTSID: (id) => `/admin/contracts/${id}`,
+      CONTRACTSUSER: (id) => `/admin/contracts/${id}`,
+      CONTRACTSUSERNEW: (id) => `/admin/contracts/${id}/new-contacts`,
+      CONTRACTSUSERDETAILS: (id,id2) => `/admin/contracts/${id}/contracts-details/${id2}`,
+      
     },
     SETTINGS: {
       DASHBOARD: '/admin/settings',
@@ -94,6 +110,11 @@ const ROUTES = {
         DASHBOARD: '/admin/settings/content',
         SERVICES: '/admin/settings/content/services',
         BANNERSAD: '/admin/settings/content/bannersAD',
+        MEDICAL: '/admin/settings/content/medicalSpecialties',
+        MEDICALID: (id)=>`/admin/settings/content/medicalSpecialties/${id}`,
+        ARTICLES: '/admin/settings/content/articles',
+        ADDARTICLES: '/admin/settings/content/articles/add-articles',
+        EDITARTICLES:(id)=> `/admin/settings/content/articles/${id}`,
       },
       PLANS: {
         DASHBOARD: '/admin/settings/plans',
@@ -104,6 +125,7 @@ const ROUTES = {
     MAIN: '/doctor/main',
     APPOINTMENTS: '/doctor/appointments',
     APPOINTMENTSCANCELD: '/doctor/appointments/cancelled',
+    APPOINTMENTSCALENDAR: '/doctor/appointments/calendar',
     APPOINTMENTSDEFERRED: '/doctor/appointments/deferred',
     RATINGS: {
       DASHBOARD: '/doctor/ratings',
@@ -135,8 +157,7 @@ const ROUTES = {
     },
     CONTRACTS: {
       DASHBOARD: '/doctor/contracts',
-      REQUESTS: '/doctor/contracts/requests',
-      EXPIRED: '/doctor/contracts/expired',
+      CONTRACTSNEW: '/doctor/contracts/new',
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
     },
     CHATS: {

@@ -61,7 +61,7 @@ const RequestDetailsPage = ({params:{requestId}}) => {
         <Button 
         onClick={()=>{editModal('type','accept');editModal('open',true)}}
           className={
-            "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold items-center  flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+            "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
           }
         >
           <AcceptIcon />

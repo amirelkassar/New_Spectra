@@ -46,7 +46,7 @@ const data = [
 const PatientsDetailsAppointments = () => {
   return (
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%] lg:max-w-[calc(100%-250px)]">
-      <DataTable data={data} columns={columns} />
+      <DataTable IsWidth={true} data={data} columns={columns} />
     </div>
   );
 };

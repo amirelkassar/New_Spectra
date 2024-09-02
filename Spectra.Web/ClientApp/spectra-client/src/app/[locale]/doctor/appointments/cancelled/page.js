@@ -3,104 +3,103 @@ import DateIcon2 from "@/assets/icons/date2";
 import { Link, usePathname } from "@/navigation";
 import React, { useState } from "react";
 import AppoFilteration from "../appo-filteration";
-import AppoTable from "../appo-table";
 import ROUTES from "@/routes";
 import TableComponents from "@/components/table-comp";
+const data = [
+  {
+    id: 0,
 
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "لم يبدأ بعد",
+  },
+  {
+    id: 1,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "لم يبدأ بعد",
+  },
+  {
+    id: 2,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تتم الان",
+  },
+  {
+    id: 4,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 5,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 6,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+  {
+    id: 7,
+
+    name: "عبدالله الشيخ",
+    specialisation: " اخصائى نفسى",
+    patientName: "احمد محمد كمال",
+    patientDiagnosis: "انفصام",
+    date: "25/4/2024",
+    numChild: "طفل واحد",
+    time: "10:00 pm",
+    doctor: "عبدالله الشيخ",
+    statu: "تمت",
+  },
+]
 function AppointmentsCancelledPage() {
-  const data = [
-    {
-      id: 0,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "لم يبدأ بعد",
-    },
-    {
-      id: 1,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "لم يبدأ بعد",
-    },
-    {
-      id: 2,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تتم الان",
-    },
-    {
-      id: 4,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 5,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 6,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-    {
-      id: 7,
-
-      name: "عبدالله الشيخ",
-      specialisation: " اخصائى نفسى",
-      patientName: "احمد محمد كمال",
-      patientDiagnosis: "انفصام",
-      date: "25/4/2024",
-      numChild: "طفل واحد",
-      time: "10:00 pm",
-      doctor: "عبدالله الشيخ",
-      statu: "تمت",
-    },
-  ];
+;
   const path = usePathname();
 
   const AppointmentsLinks = [

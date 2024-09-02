@@ -79,7 +79,7 @@ const OrganizationClientsPage = () => {
         <MenuActions />
       </div>
 
-      <DataTable data={data} columns={columns} />
+      <DataTable IsWidth={true} data={data} columns={columns} />
     </section>
   );
 };

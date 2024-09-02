@@ -1,14 +1,11 @@
 "use client";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
-
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { Collapse, Box } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Collapse } from "@mantine/core";
 import Appointments from "@/assets/icons/appointments";
 import Subscription from "@/assets/icons/subscription";
 import Customer from "@/assets/icons/customer";
@@ -17,15 +14,14 @@ import SettingsIcon from "@/assets/icons/settings";
 import StaffIcon from "@/assets/icons/staff";
 import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
-import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
 import { Link } from "@/navigation";
 import ContractsIcon from "@/assets/icons/contracts";
+import DatabaseIcon from "@/assets/icons/database";
 
-const Aside = ({ close }) => {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [openMenuMob, setopenMenuMob] = useState(close);
+const Aside = () => {
+
   const menu = useMenu();
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
@@ -67,6 +63,12 @@ const Aside = ({ close }) => {
       route: ROUTES.ADMIN.REPORT.DASHBOARD,
       isActive: path.includes(ROUTES.ADMIN.REPORT.DASHBOARD),
       icon: <ReportsIcon />,
+    },
+    {
+      name: "البيانات الرئيسية",
+      route: ROUTES.ADMIN.DATAMAIN.HOME,
+      isActive: path.includes(ROUTES.ADMIN.DATAMAIN.HOME),
+      icon: <DatabaseIcon />,
     },
     {
       name: "العقود",

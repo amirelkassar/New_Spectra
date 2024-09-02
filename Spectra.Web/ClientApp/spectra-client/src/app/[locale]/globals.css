@@ -8,56 +8,56 @@
   }
 }
 * {
-  font-family: 'IBMPlexSansArabicRegular';
+  font-family: "IBMPlexSansArabicRegular";
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicThin';
+  font-family: "IBMPlexSansArabicThin";
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicThin.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicExtraLight';
+  font-family: "IBMPlexSansArabicExtraLight";
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicExtraLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicLight';
+  font-family: "IBMPlexSansArabicLight";
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicRegular';
+  font-family: "IBMPlexSansArabicRegular";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicRegular.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicMedium';
+  font-family: "IBMPlexSansArabicMedium";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicMedium.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicSemiBold';
+  font-family: "IBMPlexSansArabicSemiBold";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicSemiBold.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicBold';
+  font-family: "IBMPlexSansArabicBold";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicBold.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicBold.ttf");
 }
 :root {
   --main-color: #10b0c1;
@@ -153,13 +153,13 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir='ltr'] header .hideShowLinks svg {
+html[dir="ltr"] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir='ltr'] header .hideShowLinks.closeArrow svg {
+html[dir="ltr"] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
 /* aside .topMobNav {
@@ -196,13 +196,13 @@ header .hideShowLinks2 svg {
 .numNotfication {
   border-radius: 50% !important;
 }
-html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
+html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir='ltr'] .lineAfterLinks {
+html[dir="ltr"] .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
@@ -357,14 +357,14 @@ form.clientEdit .mantine-Input-input {
   height: 20px !important;
 }
 .staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected='true'] {
+.staffDetils .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -418,14 +418,14 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.boxDate .mantine-DatePicker-day[data-selected='true'] {
+.boxDate .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -440,4 +440,51 @@ form.clientEdit .mantine-Input-input {
   border: 1px solid var(--main-color);
   display: flex;
   align-items: center;
+}
+.fc-toolbar-chunk div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  margin-top: -20px;
+}
+.fc-toolbar-chunk div .fc-button {
+  background-color: #f5f5f5;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  transition: 0.5s;
+}
+.fc-toolbar-chunk div .fc-button span::before {
+  color: #010036;
+  width: 6px;
+}
+.fc-toolbar-chunk div .fc-button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 5px rgb(162, 162, 162);
+}
+.fc-daygrid-day {
+  width: 120px;
+  height: 120px;
+}
+.fc-day .fc-col-header-cell-cushion {
+  color: #939393;
+  font-weight: 400;
+  text-align: end;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .hideScroll {
+    scrollbar-width: none;
+    padding-bottom: 10px;
+  }
 }
