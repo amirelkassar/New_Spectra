@@ -128,6 +128,8 @@ const ROUTES = {
       CONTENT: {
         DASHBOARD: '/admin/settings/content',
         SERVICES: '/admin/settings/content/services',
+        SERVICESADD: '/admin/settings/content/services/add',
+        SERVICESDETAILS:(id)=> `/admin/settings/content/services/${id}`,
         BANNERSAD: '/admin/settings/content/bannersAD',
         MEDICAL: '/admin/settings/content/medicalSpecialties',
         MEDICALID: (id)=>`/admin/settings/content/medicalSpecialties/${id}`,
