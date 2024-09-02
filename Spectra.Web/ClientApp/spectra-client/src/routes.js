@@ -155,8 +155,7 @@ const ROUTES = {
     },
     CONTRACTS: {
       DASHBOARD: '/doctor/contracts',
-      REQUESTS: '/doctor/contracts/requests',
-      EXPIRED: '/doctor/contracts/expired',
+      CONTRACTSNEW: '/doctor/contracts/new',
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
     },
     CHATS: {
