@@ -1,5 +1,6 @@
 import React from "react";
 import MenuActions from "@/components/menu-actions";
+import ROUTES from "@/routes";
 function CardService({ data }) {
   return (
     <div className="flex items-center justify-between gap-3">
@@ -24,7 +25,11 @@ function CardService({ data }) {
         )}
       </div>
       <div>
-        <MenuActions />
+        <MenuActions
+          type={2}
+          path={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESDETAILS(data.id)}
+          pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESDETAILS(data.id)}
+        />
       </div>
     </div>
   );
