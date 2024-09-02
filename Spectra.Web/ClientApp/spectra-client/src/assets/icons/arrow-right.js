@@ -22,9 +22,10 @@ function ArrowRight() {
 
 export default ArrowRight;
 
-export const ArrowRightIcon = () => {
+export const ArrowRightIcon = ({ className = '' }) => {
   return (
     <svg
+      className={className}
       width='10'
       height='22'
       viewBox='0 0 10 22'

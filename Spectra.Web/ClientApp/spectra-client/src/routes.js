@@ -41,30 +41,46 @@ const ROUTES = {
     CLIENTS: {
       DASHBOARD: '/admin/clients',
       ORGANIZATION: {
-        DETAILS: (id) => `/admin/clients/organization/${id}/details`,
-        DETAILSEDIT: (id) => `/admin/clients/organization/${id}/details/edit`,
-        EMPLOYEE: (id) => `/admin/clients/organization/${id}/employee`,
-        CLIENTS: (id) => `/admin/clients/organization/${id}/clients`,
-        DOCTORS: (id) => `/admin/clients/organization/${id}/doctors`,
+        DETAILS: (id) =>
+          `/admin/clients/organization/${id}/details`,
+        DETAILSEDIT: (id) =>
+          `/admin/clients/organization/${id}/details/edit`,
+        EMPLOYEE: (id) =>
+          `/admin/clients/organization/${id}/employee`,
+        CLIENTS: (id) =>
+          `/admin/clients/organization/${id}/clients`,
+        DOCTORS: (id) =>
+          `/admin/clients/organization/${id}/doctors`,
         DOCTORSDETAILS: (id, id2) =>
           `/admin/clients/organization/${id}/doctors/${id2}`,
-        APPOINTMENTS: (id) => `/admin/clients/organization/${id}/appointments`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
           `/admin/clients/organization/${id}/prescriptions`,
-        PATIENTS: (id,id2) => `/admin/clients/organization/${id}/clients/${id2}/patients`,
-        PATIENTSEDIT: (id,id2) => `/admin/clients/organization/${id}/clients/${id2}/patients/edit`,
+        PATIENTS: (id, id2) =>
+          `/admin/clients/organization/${id}/clients/${id2}/patients`,
+        PATIENTSEDIT: (id, id2) =>
+          `/admin/clients/organization/${id}/clients/${id2}/patients/edit`,
       },
       FAMILY: {
-        DETAILS: (id) => `/admin/clients/family/${id}/details`,
-        DETAILSEDIT: (id) => `/admin/clients/family/${id}/details/edit`,
-        APPOINTMENTS: (id) => `/admin/clients/family/${id}/appointments`,
-        PRESCRIPTIONS: (id) => `/admin/clients/family/${id}/prescriptions`,
-        PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
-        PATIENTSEDIT: (id) => `/admin/clients/family/${id}/patients/edit`,
+        DETAILS: (id) =>
+          `/admin/clients/family/${id}/details`,
+        DETAILSEDIT: (id) =>
+          `/admin/clients/family/${id}/details/edit`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/family/${id}/appointments`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/family/${id}/prescriptions`,
+        PATIENTS: (id) =>
+          `/admin/clients/family/${id}/patients`,
+        PATIENTSEDIT: (id) =>
+          `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
-        DETAILS: (id) => `/admin/clients/patientDetails/${id}/details`,
-        EDIT: (id) => `/admin/clients/patientDetails/${id}/edit`,
+        DETAILS: (id) =>
+          `/admin/clients/patientDetails/${id}/details`,
+        EDIT: (id) =>
+          `/admin/clients/patientDetails/${id}/edit`,
       },
     },
     STAFF: {
@@ -102,7 +118,8 @@ const ROUTES = {
       PERMISSIONS: {
         DASHBOARD: '/admin/settings/permissions',
         USERS: '/admin/settings/permissions/users',
-        PERMISSIONSEDIT: (id) => `/admin/settings/permissions/${id}/edit`,
+        PERMISSIONSEDIT: (id) =>
+          `/admin/settings/permissions/${id}/edit`,
         PERMISSIONSUSEREDIT: (id) =>
           `/admin/settings/permissions/users/${id}/edit`,
       },
@@ -136,15 +153,21 @@ const ROUTES = {
       REPORT: '/doctor/clients/reports',
       INVITATIONCODE: '/doctor/clients/invitationCode',
       DETAILS: (id) => `/doctor/clients/${id}/details`,
-      REPORTPATIENTS: (id) => `/doctor/clients/${id}/reports`,
-      PRESCRIPTIONSPATIENTS: (id) => `/doctor/clients/${id}/prescriptions`,
-      ACTIVITIESSPATIENTS: (id) => `/doctor/clients/${id}/activities`,
-      ADDREPORTPATIENTS: (id) => `/doctor/clients/${id}/addReport`,
+      REPORTPATIENTS: (id) =>
+        `/doctor/clients/${id}/reports`,
+      PRESCRIPTIONSPATIENTS: (id) =>
+        `/doctor/clients/${id}/prescriptions`,
+      ACTIVITIESSPATIENTS: (id) =>
+        `/doctor/clients/${id}/activities`,
+      ADDREPORTPATIENTS: (id) =>
+        `/doctor/clients/${id}/addReport`,
       ADDPRESCRIPTIONSPATIENTS: (id) =>
         `/doctor/clients/${id}/addPrescriptions`,
       PATIENTSDETAILS: {
-        DETAILS: (id) => `/doctor/clients/patientDetails/${id}/details`,
-        EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
+        DETAILS: (id) =>
+          `/doctor/clients/patientDetails/${id}/details`,
+        EDIT: (id) =>
+          `/doctor/clients/patientDetails/${id}/edit`,
       },
     },
     WALLET: {
