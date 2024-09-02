@@ -11,7 +11,9 @@ export default function authLayout({ children }) {
   return (
     <>
       <header className='container py-8 w-full max-w-5xl mx-auto'>
-        <Logo />
+        <Link href={ROUTES.HOME}>
+          <Logo />
+        </Link>
       </header>
 
       <main className='w-full mdl:flex mdl:gap-10 mdl:*:flex-1 text-black container max-w-5xl mx-auto'>
