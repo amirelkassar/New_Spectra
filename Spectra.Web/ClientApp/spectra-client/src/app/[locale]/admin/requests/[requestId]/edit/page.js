@@ -1,7 +1,8 @@
 "use client";
-import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import ArrowDownIcon from "@/assets/icons/arrow-down";
 import SaveIcon from "@/assets/icons/save";
 import Button from "@/components/button";
+import { MultiSelect } from "@mantine/core";
 import React, { useState } from "react";
 
 const EditPage = ({ params: { requestId } }) => {
@@ -43,8 +44,7 @@ const EditPage = ({ params: { requestId } }) => {
       }, 0);
     }
   };
-  const [addMore, setAddMore] = useState(false);
-  const [valueDaqeqa, setValueDaqeqa] = useState('');
+
   return (
     <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
       <div className="max-w-[700px] w-[100%] flex flex-col gap-2 px-1 md:px-0">
@@ -77,19 +77,17 @@ const EditPage = ({ params: { requestId } }) => {
         />
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-5 w-full">
         <h2 className="text-[14px] md:text-[20px] font-bold">
           التخصصات الدقيقة
         </h2>
-        <button
-          onClick={() => {
-            setAddMore(true);
-          }}
-          className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF]"
-        >
-          <PlusInsideCircleIcon />
-          <p className="text-[12px] md:text-[16px] font-bold">أضافة تخصص</p>
-        </button>
+
+        <MultiSelect
+          data={["نفسى", "اجتماعى", "طيف توحد"]}
+          placeholder="اختر تخصص"
+          rightSection={<ArrowDownIcon />}
+          className="MultiSelect flex-1"
+        />
       </div>
 
       <div className="max-w-[850px] flex flex-wrap gap-x-5 gap-y-2">
@@ -101,17 +99,6 @@ const EditPage = ({ params: { requestId } }) => {
             {item}
           </div>
         ))}
-        {addMore ? (
-          <form onSubmit={(e)=>{e.preventDefault(); console.log(valueDaqeqa);setValueDaqeqa('');setAddMore(false) }}>
-            <input
-            className="h-[34px] text-[14px] md:text-[16px] font-bold md:h-[46px] rounded-[10px] px-2 py-1 w-[150px] md:w-[200px] border border-[#CFD0D7] outline-none"
-             value={valueDaqeqa}
-              onChange={(e) => {
-                setValueDaqeqa(e.target.value)
-              }}
-            />
-          </form>
-        ) : null}
       </div>
       <h2 className="text-[14px] md:text-[20px] font-bold">إضافة صلاحية</h2>
       <div className="flex gap-3 md:gap-5 flex-wrap px-1">

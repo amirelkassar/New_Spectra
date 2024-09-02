@@ -3,6 +3,7 @@ import Button from "../button";
 import DeleteModalIcon from "@/assets/icons/deleteModal";
 import ModalIcon from "@/assets/icons/modalImg";
 import CancelDateIcon from "@/assets/icons/cancelDate";
+import CancelReqIcon from "@/assets/icons/CancelReq";
 import useModal from "@/store/modal-slice";
 
 function ModalType({ }) {
@@ -31,6 +32,8 @@ function ModalType({ }) {
           <DeleteModalIcon />
         ) : modal.type === "cancellation" ? (
           <CancelDateIcon />
+        ): modal.type === "req" ? (
+          <CancelReqIcon />
         ) : (
           <ModalIcon />
         )}

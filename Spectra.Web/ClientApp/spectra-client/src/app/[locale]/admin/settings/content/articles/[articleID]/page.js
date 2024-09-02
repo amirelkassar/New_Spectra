@@ -9,7 +9,7 @@ import WhatsAppIcon from "@/assets/icons/whatsApp";
 import Image from "next/image";
 import image1 from "@/assets/images/child.png";
 import EditIcon from "@/assets/icons/edit";
-import StarIcon from "@/assets/icons/start";
+import StarWhiteIcon from "@/assets/icons/starWhite";
 
 function page() {
   return (
@@ -34,11 +34,11 @@ function page() {
         <div className="flex items-center gap-4 text-base mr-3">
           <p>لا يوجد تقييم حتى الآن</p>
           <div className="flex items-center gap-1 ">
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
+            <StarWhiteIcon fill="#939393" className={'w-5 h-auto'} />
+            <StarWhiteIcon fill="#939393" className={'w-5 h-auto'} />
+            <StarWhiteIcon fill="#939393" className={'w-5 h-auto'} />
+            <StarWhiteIcon fill="#939393" className={'w-5 h-auto'} />
+            <StarWhiteIcon fill="#939393" className={'w-5 h-auto'} />
           </div>
         </div>
         <Textarea
@@ -137,7 +137,7 @@ function page() {
           تأكيد
         </Button>
         <Link
-          href={ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD}
+          href={ROUTES.ADMIN.SETTINGS.CONTENT.ARTICLES}
           className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[60px] text-[20px] font-Bold"
         >
           إلغاء
