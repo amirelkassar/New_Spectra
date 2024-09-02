@@ -122,7 +122,7 @@ function Page() {
                 setYear(year + 1);
               }}
             >
-              <ArrowNav path="#010036" className={"w-[7px]"} />
+              <ArrowNav fill="#010036" className={"w-[7px]"} />
             </button>
             <p className="text-center font-extrabold  text-[14px] mdl:text-[20px]">
               {" "}
@@ -134,7 +134,7 @@ function Page() {
                 setYear(year - 1);
               }}
             >
-              <ArrowLeftMainGreen path="#010036" className={"w-[7px]"} />
+              <ArrowLeftMainGreen fill="#010036" className={"w-[7px]"} />
             </button>
           </div>
         </div>
