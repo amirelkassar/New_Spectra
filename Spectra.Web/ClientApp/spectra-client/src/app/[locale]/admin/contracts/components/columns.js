@@ -135,7 +135,7 @@ export const columns = [
             )}
           </div>
 
-          <MenuActions />
+          <MenuActions type={2} path={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id)}/>
         </div>
       );
     },

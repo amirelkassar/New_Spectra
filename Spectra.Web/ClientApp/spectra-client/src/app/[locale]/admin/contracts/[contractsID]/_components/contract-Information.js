@@ -4,25 +4,65 @@ import EditIcon from "@/assets/icons/edit";
 import Card from "@/components/card";
 import { Link, usePathname } from "@/navigation";
 import ROUTES from "@/routes";
-import React from "react";
+import React, { useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { Textarea } from "@mantine/core";
+import { MultiSelect, Textarea, TextInput } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
 import useModal from "@/store/modal-slice";
+const serviceOptions = [
+  { value: "examination", label: "Examination Service" },
+  { value: "counseling", label: "Counseling Service" },
+  { value: "diagnostic", label: "Diagnostic Service" },
+  { value: "followup", label: "Follow-up Service" },
+];
+
 function ContractInformation({ id }) {
   const pathname = usePathname();
-  console.log(pathname);
-  console.log(ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id));
   const { modal, editModal } = useModal();
-  console.log(useModal);
+
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [serviceData, setServiceData] = useState({});
+
+  const handleServiceChange = (values) => {
+    setSelectedServices(values);
+    const updatedData = { ...serviceData };
+    values.forEach((service) => {
+      if (!updatedData[service]) {
+        updatedData[service] = { price: "", duration: "", discount: "" };
+      }
+    });
+    setServiceData(updatedData);
+  };
+
+  const handleInputChange = (service, field, value) => {
+    setServiceData({
+      ...serviceData,
+      [service]: { ...serviceData[service], [field]: value },
+    });
+  };
   return (
     <div>
       <Card className={"mdl:!pe-12 "}>
-        <ServicesFreelancer />
-        <ServicesMember />
+        <div className="mb-6 flex items-start justify-start" dir="ltr">
+          <MultiSelect
+            data={serviceOptions}
+            placeholder="Choose Services"
+            value={selectedServices}
+            onChange={handleServiceChange}
+            searchable
+            nothingFound="No services found"
+            className="w-[500px] min-w-fit "
+            classNames={{ input: "border-black min-h-[54px] flex items-center text-xl placeholder:text-xl placeholder:text-black",
+
+              pill:'text-lg py-1 h-auto'
+             }}
+          />
+        </div>
+        <ServicesFreelancer selectedServices={selectedServices} />
+        <ServicesMember selectedServices={selectedServices} />
         <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
           <div className="pb-7 border-t pt-6 border-grayLight">
             <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
@@ -75,8 +115,7 @@ function ContractInformation({ id }) {
           <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Button
               onClick={() => {
-              console.log('fdgsdfdf');
-              
+                console.log("fdgsdfdf");
               }}
               className={
                 "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"

@@ -2,7 +2,7 @@ import EditIcon from "@/assets/icons/edit";
 import { TextInput } from "@mantine/core";
 import React from "react";
 
-function ServicesFreelancer() {
+function ServicesFreelancer({selectedServices}) {
   return (
     <div dir="ltr" className="pb-8">
       <h2 className="text-[16px] mdl:text-xl font-Bold mb-4"> Price of your services as a freelancer</h2>
