@@ -22,7 +22,7 @@ export const DiagnosticsColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <MenuActions type={2} path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id)} />;
+      return <MenuActions type={2} path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id)}  />;
     },
   },
 ];

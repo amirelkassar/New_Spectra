@@ -5,7 +5,7 @@ import { Link } from "@/navigation";
 import Button from "@/components/button";
 import ROUTES from "@/routes";
 import Input from "@/components/input";
-import { Textarea } from "@mantine/core";
+import { Textarea, TextInput } from "@mantine/core";
 function page() {
   return (
     <div>
@@ -20,10 +20,38 @@ function page() {
       </div>
       <div>
         <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
-          <Input
+         
+          <TextInput
+            label={"كود 1"}
+            classNames={{
+              input:
+                "min-h-[60px] h-auto  w-full rounded-xl   border-greenMain text-[24px] ",
+              label: "text-base mb-2",
+            }}
+          />
+          <TextInput
+            label={"كود 2"}
+            classNames={{
+              input:
+                "min-h-[60px] h-auto  w-full rounded-xl   border-greenMain text-[24px] ",
+              label: "text-base mb-2",
+            }}
+          />
+          <TextInput
+            label={"كود 3"}
+            classNames={{
+              input:
+                "min-h-[60px] h-auto  w-full rounded-xl   border-greenMain text-[24px] ",
+              label: "text-base mb-2",
+            }}
+          />
+          <TextInput
             label={"اسم التشخيص"}
-            labelClassName={"text-[12px] md:text-[16px]"}
-            inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
+            classNames={{
+              input:
+                "min-h-[60px] h-auto  w-full rounded-xl   border-greenMain text-[24px] ",
+              label: "text-base mb-2",
+            }}
           />
           <Textarea
             classNames={{

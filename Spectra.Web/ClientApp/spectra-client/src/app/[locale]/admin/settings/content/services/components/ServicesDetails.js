@@ -37,7 +37,9 @@ function ServicesDetails() {
     setLargeFile("");
     setDataImg(URL.createObjectURL(e[0]));
   };
-
+  const handleAddSection = () => {
+    setSections([...sections, { title: "", content: "" }]);
+  };
   const handleInputChange = (index, e) => {
     const { name, value } = e.target;
     const newSections = sections.map((section, i) =>
@@ -166,7 +168,16 @@ function ServicesDetails() {
               />
             </div>
           ))}
-         
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleAddSection();
+            }}
+            className="flex flex-col gap-4 duration-200 hover:shadow-md py-8 items-center justify-center w-full px-4 min-h-[150px]  bg-blueLight border border-greenMain rounded-xl font-bold"
+          >
+            <PlusInsideCircleIcon className={"w-11 h-auto"} />
+            <p className="text-xl font-Bold text-center"> إضافة قسم</p>
+          </button>
         </div>
         <div className="lgl:max-w-[80%] mx-auto">
           <div className="flex flex-col gap-8 w-full">

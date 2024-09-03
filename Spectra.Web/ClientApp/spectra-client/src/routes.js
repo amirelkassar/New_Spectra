@@ -136,6 +136,10 @@ const ROUTES = {
         ARTICLES: '/admin/settings/content/articles',
         ADDARTICLES: '/admin/settings/content/articles/add-articles',
         EDITARTICLES:(id)=> `/admin/settings/content/articles/${id}`,
+        STORIES: '/admin/settings/content/stories',
+        STORIESID:(id)=> `/admin/settings/content/stories/${id}`,
+        STORIESADD: '/admin/settings/content/stories/add',
+
       },
       PLANS: {
         DASHBOARD: '/admin/settings/plans',
