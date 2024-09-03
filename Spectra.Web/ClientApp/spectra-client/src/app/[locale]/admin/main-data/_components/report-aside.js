@@ -47,6 +47,14 @@ const MainDataAside = () => {
         path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
         path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD,
     },
+    {
+      name: "الخدمات",
+      route: ROUTES.ADMIN.DATAMAIN.SERVICES,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.SERVICES ||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESADD||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID),
+    },
   ];
   return (
     path !== ROUTES.ADMIN.DATAMAIN.DRUGSADD && (

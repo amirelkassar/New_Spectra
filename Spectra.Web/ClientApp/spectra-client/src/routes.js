@@ -104,6 +104,9 @@ const ROUTES = {
       DIAGNOSTICSDETAILS: (id)=>`/admin/main-data/diagnostics/${id}`,
       COMPLAINTS: '/admin/main-data/complaints',
       COMPLAINTSADD: '/admin/main-data/complaints/add',
+      SERVICES: '/admin/main-data/services',
+      SERVICESADD: '/admin/main-data/services/add',
+      SERVICESDETAILS:(id)=> `/admin/main-data/services/${id}`,
     },
    
     CONTRACTS: {
