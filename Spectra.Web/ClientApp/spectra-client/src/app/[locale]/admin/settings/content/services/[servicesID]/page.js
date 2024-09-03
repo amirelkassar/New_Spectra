@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import ServicesDetails from "../components/ServicesDetails";
+import Card from "@/components/card";
 
 function page() {
   return (
-    <div>details</div>
-  )
+    <Card>
+      <ServicesDetails />
+    </Card>
+  );
 }
 
-export default page
+export default page;
