@@ -15,7 +15,7 @@ function ServicesNotShow() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-[36px]"> اضافة خدمة - داخلية</h2>
+        <h2 className="text-base lg:text-[36px]"> اضافة خدمة - داخلية</h2>
       </div>
       <form className="lgl:max-w-[80%] flex flex-col gap-6 lg:gap-10 w-full mx-auto lgl:mt-20">
         <TextInput
@@ -57,7 +57,7 @@ function ServicesNotShow() {
         />
         <div className="flex flex-col mt-16 items-center gap-3">
           <Button
-            className="w-full h-[60px] text-[20px] font-Bold duration-300 hover:shadow-md"
+            className="w-full h-12 lg:h-[60px] text-sm lg:text-[20px] font-Bold duration-300 hover:shadow-md"
             variant="secondary"
           >
             حفظ
@@ -65,7 +65,7 @@ function ServicesNotShow() {
 
           <Link
             href={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESADD}
-            className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[60px] text-[20px] font-Bold"
+            className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-12 lg:h-[60px] text-sm lg:text-[20px] font-Bold"
           >
             إلغاء
           </Link>

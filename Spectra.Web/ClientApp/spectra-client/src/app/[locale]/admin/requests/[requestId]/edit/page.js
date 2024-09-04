@@ -96,7 +96,7 @@ const EditPage = ({ params: { requestId } }) => {
       <div className="default-page w-full max-w-[100%] mb-11  text-xl  !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
         <h2>البيانات الشخصية </h2>
         <form className="w-[100%] clientEdit">
-          <div className="flex flex-col items-end flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
+          <div className="flex flex-col flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
             <div className=" relative">
               <div className=" w-[100%] lg:w-auto lg:size-24 rounded-full overflow-hidden flex items-center justify-center">
                 <label htmlFor="file" className="cursor-pointer">
@@ -194,7 +194,7 @@ const EditPage = ({ params: { requestId } }) => {
       </h2>
       <div className="default-page w-full max-w-[100%] mb-5  text-xl  !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
         <form className="w-[100%] clientEdit">
-          <div className="flex flex-col items-end flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
+          <div className="flex flex-col  flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
             <Select
               className=" min-w-[calc(50%-10px)]  !border-[#CFD0D7] !outline-none"
               label={"التخصص"}

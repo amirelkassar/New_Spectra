@@ -22,25 +22,25 @@ function Page() {
 
   return (
     <Card>
-      <div className="flex items-center gap-4 lg:gap-7 mb-12">
+      <div className="flex items-center gap-4 lg:gap-7 mb-6 lg:mb-12">
         <Link
           href={ROUTES.ADMIN.SETTINGS.CONTENT.ARTICLES}
           className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%] flex items-center justify-center"
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-[36px]"> اضافة مقال</h2>
+        <h2 className="text-base lg:text-[36px]"> اضافة مقال</h2>
       </div>
       <div className="flex flex-col gap-8">
         <TextInput
           placeholder="اكتب العنوان هنا"
           classNames={{
             input:
-              "min-h-[64px] h-auto pe-6 w-full lg:max-w-[660px]  border-[#CFD0D7] text-[24px] font-Bold",
+              "min-h-11 lg:min-h-[64px] h-auto pe-6 w-full lg:max-w-[660px]  border-[#CFD0D7] text-base rounded-lg  lg:text-[24px] font-Bold",
           }}
         />
         {dataImg ? (
-          <div className="relative w-full max-w-[890px] h-[290px]">
+          <div className="relative w-full max-w-[890px] h-[160px] lg:h-[290px]">
             <Image
               src={dataImg}
               width={890}
@@ -66,9 +66,9 @@ function Page() {
               )
             }
             maxSize={5 * 1024 ** 2}
-            className="mb-10 rounded-xl"
+            className="lg:mb-10 mb-0 rounded-xl"
           >
-            <div className="flex gap-4 py-8 flex-col justify-center h-[300px] items-center">
+            <div className="flex gap-4 py-8 flex-col  justify-center h-[160px] lg:h-[300px] items-center">
               <UploadImgIcon />
               <h2 className="text-base text-grayDark font-Light">
                 اضغط هنا لرفع صورة
@@ -85,20 +85,20 @@ function Page() {
           autosize
           minRows={4}
           classNames={{
-            input: "min-h-[400px] bg-[#FCFCFD]  border border-[#CFD0D7] ",
+            input: "min-h-[320px] lg:min-h-[400px] bg-[#FCFCFD] text-base lg:text-[20px] border border-[#CFD0D7] ",
           }}
         />
       </div>
       <div className="flex flex-col mt-10 items-center gap-3">
         <Button
-          className="w-full h-[60px] text-[20px] font-Bold duration-300 hover:shadow-md"
+          className="w-full h-12 lg:h-[60px] text-base lg:text-[20px] font-Bold duration-300 hover:shadow-md"
           variant="secondary"
         >
           تأكيد
         </Button>
         <Link
           href={ROUTES.ADMIN.SETTINGS.CONTENT.ARTICLES}
-          className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[60px] text-[20px] font-Bold"
+          className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-12 lg:h-[60px] text-base lg:text-[20px] font-Bold"
         >
           إلغاء
         </Link>
