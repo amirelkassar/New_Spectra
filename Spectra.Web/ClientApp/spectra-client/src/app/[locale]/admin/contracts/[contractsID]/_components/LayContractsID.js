@@ -97,7 +97,7 @@ function LayContractsID({ children }) {
               : "lg:max-w-[366px]  w-full top-full lg:w-0 opacity-0 bg !p-0 px-0"
           } duration-300 overflow-hidden lg:relative fixed rounded-t-3xl lg:rounded-lg `}
         >
-          <div className="min-w-[366px] duration-500 px-1 relative " dir="ltr">
+          <div className="lg:min-w-[366px] duration-500 px-1 relative " dir="ltr">
             <Link
               href={
                 searchparams.get("chat") === "true"

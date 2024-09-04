@@ -54,15 +54,15 @@ function ContractInformation({ id }) {
             onChange={handleServiceChange}
             searchable
             nothingFound="No services found"
-            className="w-[500px] min-w-fit "
-            classNames={{ input: "border-black min-h-[54px] flex items-center text-xl placeholder:text-xl placeholder:text-black",
+            className="lg:w-[500px] w-full lgl:min-w-fit "
+            classNames={{ input: "border-black min-h-[54px] flex items-center text-sm lgl:text-xl placeholder:text-xl rounded-xl placeholder:text-black",
 
-              pill:'text-lg py-1 h-auto'
+              pill:'text-sm lgl:text-lg py-1 h-auto'
              }}
           />
         </div>
-        <ServicesFreelancer selectedServices={selectedServices} />
-        <ServicesMember selectedServices={selectedServices} />
+        <ServicesFreelancer selectedServices={selectedServices}   serviceOptions={serviceOptions}/>
+        <ServicesMember selectedServices={selectedServices}  serviceOptions={serviceOptions} />
         <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
           <div className="pb-7 border-t pt-6 border-grayLight">
             <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
