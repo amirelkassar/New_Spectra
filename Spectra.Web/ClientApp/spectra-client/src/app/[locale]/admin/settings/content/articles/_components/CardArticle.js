@@ -34,7 +34,7 @@ function CardArticle({ data }) {
         </div>
       </Link>
       <div>
-        <MenuActions />
+      <MenuActions type={2} path={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(data.id)} pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(data.id)} />
       </div>
     </div>
   );

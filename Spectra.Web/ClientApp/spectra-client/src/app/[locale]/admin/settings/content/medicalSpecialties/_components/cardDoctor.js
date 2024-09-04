@@ -20,8 +20,7 @@ function CardDoctor() {
 
     return (
     <div className="min-w-[230px] flex-1">
-      <Button onClick={()=>{console.log('fdgfd');
-      }}>ff</Button>
+    
       <div className="flex items-center justify-center gap-4 mb-4">
         <button onClick={handleButtonClick} className="border hover:bg-red z-50 border-red rounded-[10px] size-[48px] flex items-center justify-center p-3">
           <DeleteIcon className={"w-full h-full"} />

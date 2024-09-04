@@ -19,18 +19,18 @@ console.log(params);
     },
     {
       name: "الوصفات الطبية",
-      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID),
+      route: '#',
       isActive:  path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID)||path === '/'+params.locale+ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID),
     },
     {
       name: "التقارير",
-      route:  ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
+      route:  '#',
       isActive:
         path === '/'+params.locale+ ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
     },
     {
       name: "جلسات كود الدعوة",
-      route:  ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID),
+      route:  '#',
       isActive:  path.includes('/'+params.locale+ ROUTES.ADMIN.CLIENTS.ORGANIZATION.CLIENTS(params.patientsID)),
     },
    

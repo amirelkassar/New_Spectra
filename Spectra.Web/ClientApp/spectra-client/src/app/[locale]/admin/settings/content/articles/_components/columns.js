@@ -60,7 +60,7 @@ export const columns = [
   {
     id: "actions",
     cell: ({ getValue, row }) => {
-      return <MenuActions />;
+      return <MenuActions type={2} path={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(row.original.id)} pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(row.original.id)} />;
     },
   },
 ];

@@ -1,8 +1,6 @@
 "use client";
-import { columns } from "../_components/columns";
 import Button from "@/components/button";
 import Card from "@/components/card";
-import { DataTable } from "@/components/data-table";
 import { Checkbox, Table } from "@mantine/core";
 import Image from "next/image";
 import avatar from "@/assets/images/placeholder-person.png";
@@ -115,11 +113,10 @@ function Page() {
   return (
     <Card>
       <h1 className="text-center my-4 mdl:my-8 text-[18px] mdl:text-[24px] font-Bold">
-        البانرات الدعائية
+      اخصائيين التوحد
       </h1>
       <p className="text-center text-grayDark my-4 mdl:my-8 text-[16px] mdl:text-[20px] font-Regular">
-        السحب والإفلات للأقسام لإعادة ترتيبها، قم بالضغط مطولًا على القسم
-        المطلوب وسحبه إلى المكان الجديد.
+      يرجى تحديد الأطباء الذين ترغب في ظهورهم على الموقع الذي يتصفحه العملاء و الزوار
       </p>
       <div>
         <Table>

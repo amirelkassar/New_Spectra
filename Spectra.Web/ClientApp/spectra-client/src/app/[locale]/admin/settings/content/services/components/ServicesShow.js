@@ -196,7 +196,7 @@ function ServicesShow() {
           </Button>
 
           <Link
-            href={ROUTES.ADMIN.SETTINGS.CONTENT.ARTICLES}
+            href={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESADD}
             className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[60px] text-[20px] font-Bold"
           >
             إلغاء
