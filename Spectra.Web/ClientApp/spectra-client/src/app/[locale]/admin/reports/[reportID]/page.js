@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import ReportsTable from "../report-table";
 import MenuActions from "@/components/menu-actions";
 import LinerChart from "@/components/liner-chart";
-import ReportAside from "../report-aside";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";

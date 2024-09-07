@@ -12,6 +12,12 @@ import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
 import useModal from "@/store/modal-slice";
+const serviceOptions = [
+  { value: "examination", label: "Examination Service" },
+  { value: "counseling", label: "Counseling Service" },
+  { value: "diagnostic", label: "Diagnostic Service" },
+  { value: "followup", label: "Follow-up Service" },
+];
 function ContractInformation({ id }) {
   const pathname = usePathname();
   console.log(pathname);
@@ -57,8 +63,14 @@ function ContractInformation({ id }) {
             }}
           />
         </div>
-        <ServicesFreelancer selectedServices={selectedServices}   serviceOptions={serviceOptions}/>
-        <ServicesMember selectedServices={selectedServices}  serviceOptions={serviceOptions} />
+        <ServicesFreelancer
+          selectedServices={selectedServices}
+          serviceOptions={serviceOptions}
+        />
+        <ServicesMember
+          selectedServices={selectedServices}
+          serviceOptions={serviceOptions}
+        />
         <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
           <div className="pb-7 border-t pt-6 border-grayLight">
             <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
