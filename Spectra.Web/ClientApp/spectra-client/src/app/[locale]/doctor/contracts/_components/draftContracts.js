@@ -3,8 +3,6 @@ import Card from "@/components/card";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import MenuActions from "@/components/menu-actions";
-import ContractsIcon from "@/assets/icons/contracts";
-import ArrowLeft from "@/assets/icons/arrow-left";
 import DraftIcon from "@/assets/icons/draft";
 const dataContacts = [
   {

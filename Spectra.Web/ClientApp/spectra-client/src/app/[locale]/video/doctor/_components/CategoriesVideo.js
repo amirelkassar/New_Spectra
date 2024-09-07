@@ -15,37 +15,37 @@ function CategoriesVideo() {
   const pathName = usePathname();
   const CategoriesData = [
     {
-      icon: <ComplaintsIcon className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <ComplaintsIcon className={"w-auto h-8"} />,
       label: "الشكاوى العامة",
       name: "complaints",
       active: searchParams.get("category") === "complaints",
     },
     {
-      icon: <Autism className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <Autism className={"w-auto h-8"} />,
       label: "التشخيصات",
       name: "diagnoses",
       active: searchParams.get("category") === "diagnoses",
     },
     {
-      icon: <NominationsIcon className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <NominationsIcon className={"w-auto h-8"} />,
       label: "الترشيحات",
       name: "nominations",
       active: searchParams.get("category") === "nominations",
     },
     {
-      icon: <RumorsIcon className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <RumorsIcon className={"w-auto h-8"} />,
       label: "التحاليل والفحوصات",
       name: "rumors",
       active: searchParams.get("category") === "rumors",
     },
     {
-      icon: <MedicineIcon className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <MedicineIcon className={"w-auto h-8"} />,
       label: "عقاقير",
       name: "medicine",
       active: searchParams.get("category") === "medicine",
     },
     {
-      icon: <NotesIcon className={"w-auto h-8"} />, // Replace with the actual icon file or path
+      icon: <NotesIcon className={"w-auto h-8"} />,
       label: "ملاحظات",
       name: "notes",
       active: searchParams.get("category") === "notes",
