@@ -2,6 +2,7 @@ import React from "react";
 import BtnSendReq from "./_components/btnSendReq";
 import ContractInformation from "./_components/contract-Information";
 import ContractsList from "./_components/contracts-list";
+import DraftContracts from "./_components/draftContracts";
 function page({params}) {
   return (
     <div className="h-full flex-1">
@@ -11,6 +12,7 @@ function page({params}) {
       <div className="mt-5">
       <ContractInformation id={params.contractsID}/>
       <ContractsList/>
+      <DraftContracts/>
       </div>
     </div>
   );
