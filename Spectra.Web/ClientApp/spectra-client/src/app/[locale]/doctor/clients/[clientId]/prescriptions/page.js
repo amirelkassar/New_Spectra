@@ -2,6 +2,7 @@ import React from "react";
 import ReportsNumber from "../../components/reports-number";
 import PrescriptionCard from "../../components/prescriptionCard";
 import LayoutClientID from "../components/layoutClientID";
+import Card from "@/components/card";
 const reports = [
   {
     id: 1,
@@ -58,7 +59,7 @@ function page() {
           haveBack={true}
           addPrescriptions={true}
         />
-        <div className="default-page w-full !h-auto">
+        <Card className=" w-full ">
           <div className="flex gap-6 flex-wrap mt-9 justify-center">
             {reports.map((report) => {
               return (
@@ -66,7 +67,7 @@ function page() {
               );
             })}
           </div>
-        </div>
+        </Card>
       </div>
     </LayoutClientID>
   );
