@@ -1,0 +1,443 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+* {
+  font-family: 'IBMPlexSansArabicRegular';
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicThin';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicExtraLight';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicLight';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicRegular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicMedium';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicSemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansArabicBold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../assets/fonts/IBMPlexSansArabicBold.ttf');
+}
+:root {
+  --main-color: #10b0c1;
+  --main-color-text: #010036;
+  --blue-light: #e9f7ff;
+}
+
+/* SCROLLBAR */
+/* Custom scrollbar for WebKit browsers (Chrome, Safari) */
+*::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar for horizontal scrollbars */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the scrollbar thumb */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+/* Custom scrollbar for Firefox */
+* {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+}
+
+h1 {
+  @apply text-black text-2xl mdl:text-[28px] font-bold mdl:text-start;
+}
+h2 {
+  @apply text-black text-lg mdl:text-xl font-bold mdl:text-start;
+}
+
+.default-field {
+  @apply h-14 ps-5 pe-3 rounded-xl border border-greenMain ring-1 ring-transparent focus:ring-greenMain outline-none transition-all placeholder:text-base;
+}
+
+label {
+  @apply text-base mdl:text-xl;
+}
+
+.default-page {
+  @apply bg-white h-full px-0 md:px-4 lg:px-6 xl:px-12 py-6 md:rounded-xl flex flex-col gap-y-6;
+}
+.default-page2 {
+  @apply bg-white h-full    py-6 md:rounded-xl  gap-y-6;
+}
+.sec-page {
+  @apply h-full flex flex-col gap-6;
+}
+
+/*aside*/
+/* aside {
+  color: var(--main-color-text);
+}
+aside.closeMenue p {
+  display: none;
+}
+aside.closeMenue ul .arrowLinkNav {
+  display: none;
+}
+aside ul li a svg path {
+  transition: 0.5s;
+}
+aside ul li a.active svg path {
+  fill: var(--main-color);
+}
+aside ul button.active svg path {
+  fill: var(--main-color);
+}
+aside .topMobNav {
+  display: none;
+} */
+header .hideShowLinks {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+header .hideShowLinks:hover {
+  background-color: #dff0f4f6;
+}
+
+header .hideShowLinks svg {
+  width: 9px;
+  transition: 0.5s;
+}
+html[dir='ltr'] header .hideShowLinks svg {
+  transform: rotateY(180deg);
+}
+header .hideShowLinks.closeArrow svg {
+  transform: rotateY(180deg);
+}
+html[dir='ltr'] header .hideShowLinks.closeArrow svg {
+  transform: rotateY(0deg);
+}
+/* aside .topMobNav {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+}
+aside .topMobNav .hideShowLinks {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+aside .topMobNav .hideShowLinks svg {
+  width: 9px;
+  transition: 0.5s;
+} */
+header .hideShowLinks2 {
+  background-color: #f1fcff;
+  min-width: 34px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  display: none;
+}
+header .hideShowLinks2 svg {
+  width: 15px;
+  transition: 0.5s;
+}
+/* aside .dropMenuDash li a p {
+  font-size: 16px !important;
+} */
+.numNotfication {
+  border-radius: 50% !important;
+}
+html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
+  transform: rotateY(180deg);
+}
+.lineAfterLinks {
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
+}
+html[dir='ltr'] .lineAfterLinks {
+  @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
+}
+.mantine-Pagination-control {
+  color: black;
+  background: #f5f5f5;
+  border: none !important;
+  font-weight: bold;
+  border-radius: 10px !important;
+}
+.mantine-Pagination-control:where([data-active]) {
+  color: black !important;
+  background: #f5f5f5 !important;
+  border: none;
+  font-weight: bold;
+}
+.paginationBtn {
+  border: 1px solid #010036;
+  transition: 0.4s;
+}
+.paginationBtn {
+  position: relative;
+}
+.paginationBtn svg {
+  width: 18px;
+  height: 17px;
+}
+.paginationBtn:hover {
+  box-shadow: 0px 0px 5px #010036;
+}
+.paginationNext svg {
+  transform: rotateY(180deg);
+}
+@media (max-width: 768px) {
+  /* aside .topMobNav {
+    display: flex;
+  }
+  aside {
+    width: 180px !important;
+    min-width: 180px !important;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    background-color: white;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    padding-top: 0px !important;
+    padding: 20px !important;
+    z-index: 500;
+    box-shadow: 0px -14px 51.7px 8px #0000001a;
+  }
+  aside.openMob {
+    right: -180px !important;
+  } */
+  /* html[dir='ltr'] aside {
+    left: 0px;
+    right: auto;
+  }
+  html[dir='ltr'] aside.openMob {
+    left: -180px !important;
+    right: auto;
+  } */
+  header .hideShowLinks2 {
+    display: flex;
+  }
+  header .hideShowLinks {
+    display: none !important;
+  }
+}
+/**/
+.showMore {
+  border: 1px solid #939393;
+}
+.showMore svg {
+  @apply w-[15px];
+}
+.contents {
+  border-bottom: 1px solid;
+}
+.headTitleDash {
+  @apply text-[16px] md:text-[20px] ms-0 md:ms-5;
+}
+.BtnheaderRequests svg {
+  @apply md:w-[20px] w-[15px] md:h-[20px] h-[15px];
+}
+/*modelReq*/
+.modelReq .mantine-Modal-content {
+  border-radius: 32px;
+  flex: 1;
+}
+
+.modelReq .mantine-Modal-inner {
+  top: 50% !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 1020px;
+}
+.modelReq .mantine-Modal-body {
+  padding: 66px 72px 58px;
+  @apply px-[14px] pb-[40px] pt-[30px] md:pt-[40px] md:px-[60px] md:pb-[58px];
+}
+.modelReq .mantine-Modal-body {
+}
+/*opinions*/
+.opinions {
+  max-width: 100%;
+}
+.opinions .swiper-slide {
+  opacity: 0.5;
+  transition: 0.4s;
+}
+.opinions .swiper-slide-active {
+  opacity: 1;
+}
+
+/*clientEdit*/
+form.clientEdit label {
+  @apply text-[16px] font-normal  px-4 mb-1;
+}
+
+form.clientEdit .mantine-Input-input {
+  @apply h-[48px]  border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold rounded-[10px];
+}
+.clientEdit .mantine-Select-wrapper {
+  border: none !important;
+}
+.staffDetils .mantine-DatePicker-calendarHeader {
+  gap: 16px;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderLevel {
+  color: #10b0c1;
+  font-size: 20px;
+  font-weight: bold;
+  order: 3;
+  justify-content: flex-end;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f7fc;
+  border-radius: 10px;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
+  color: #10b0c1;
+  fill: #10b0c1;
+}
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+.staffDetils
+  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+  order: 1;
+}
+
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+  order: 2;
+}
+.staffDetils .mantine-DatePicker-day[data-selected='true'] {
+  background-color: var(--main-color);
+  border-radius: 50%;
+}
+.btnReqTable svg {
+  @apply hidden lg:block;
+}
+.grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
+}
+.grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
+}
+.grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
+}
+@layer components {
+  .custom-grid {
+    grid-template-columns: repeat(
+      var(--colNum),
+      minmax(max-content, 1fr)
+    ) !important;
+  }
+  .custom-grid2 {
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
+  }
+}
+.boxDate .mantine-DatePicker-calendarHeader {
+  gap: 16px;
+}
+.boxDate .mantine-DatePicker-calendarHeaderLevel {
+  color: #10b0c1;
+  font-size: 20px;
+  font-weight: bold;
+  order: 3;
+  justify-content: flex-end;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f7fc;
+  border-radius: 10px;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
+  color: #10b0c1;
+  fill: #10b0c1;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+  order: 1;
+}
+
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+  order: 2;
+}
+.boxDate .mantine-DatePicker-day[data-selected='true'] {
+  background-color: var(--main-color);
+  border-radius: 50%;
+}
+.iconSearchModal path {
+  fill: #939393;
+}
+.MultiSelect {
+}
+.MultiSelect .mantine-MultiSelect-input {
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid var(--main-color);
+  display: flex;
+  align-items: center;
+}

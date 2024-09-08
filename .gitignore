@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Spectra.Application/bin/Debug/net8.0
+/Spectra.Application/obj
+/Spectra.Domain/bin/Debug/netstandard2.1
+/Spectra.Domain/obj
+/Spectra.Domain.Shared/bin/Debug/netstandard2.1
+/Spectra.Domain.Shared/obj
+/Spectra.Infrastructure/bin/Debug/net8.0
+/Spectra.Infrastructure/obj
+/Spectra.Web/bin/Debug/net8.0
+/Spectra.Web/obj
+/Spectra.WebAPI/bin/Debug/net8.0
+/Spectra.WebAPI/obj
+/Spectra.IdentityServer/obj
+/Spectra.IdentityServer/bin/Debug/net8.0
+**/bin/*
+**/obj/*
