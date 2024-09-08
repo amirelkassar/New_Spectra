@@ -46,6 +46,8 @@ interface DataTableProps<TData, TValue> {
   sortingData?: SortingData[];
   selectData?: string[];
   mdHide?: Number | null;
+  haveComp?: boolean;
+  Component?: React.ComponentType<{ dataCard: TData }>;
 }
 
 export function DataTable<TData, TValue>({
@@ -60,6 +62,8 @@ export function DataTable<TData, TValue>({
   sortingData = [],
   selectData = [],
   mdHide = null,
+  haveComp = false,
+  Component,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -236,9 +240,19 @@ export function DataTable<TData, TValue>({
           )}
         </div>
       )}
-
+      {haveComp && (
+        <div className=" flex flex-col w-full gap-5 lg:hidden mb-14">
+          {table
+            .getRowModel()
+            .rows.map((row, i) =>
+              row.original !== null ? (
+                <Component key={i} dataCard={row.original as TData} />
+              ) : null
+            )}
+        </div>
+      )}
       {/* Table */}
-      <Table>
+      <Table className={`${haveComp && " hidden lg:table"}`}>
         <Table.Thead className="bg-blueLight h-[50px] min-h-[50px]  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Tr key={headerGroup.id} className="!border-b-0 ">
@@ -246,7 +260,9 @@ export function DataTable<TData, TValue>({
                 return (
                   <Table.Th
                     key={header.id}
-                    className={` text-black ${IsWidth&&'max-w-[300px] w-[280px]'}   text-xs font-ExtraLight lg:text-base ${
+                    className={` text-black ${
+                      IsWidth && "max-w-[300px] w-[280px]"
+                    }   text-xs font-ExtraLight lg:text-base ${
                       i === 0
                         ? "rounded-s-xl ps-5"
                         : i === headerGroup.headers.length - 1

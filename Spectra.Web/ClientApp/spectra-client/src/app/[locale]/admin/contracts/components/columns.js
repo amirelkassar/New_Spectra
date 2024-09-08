@@ -35,7 +35,6 @@ export const columns = [
     header: "تاريخ التوقيع",
     id: "date",
   },
-
   {
     accessorKey: "status",
     header: "حالة العقد",
@@ -47,13 +46,74 @@ export const columns = [
         <div className="mx-1 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             {status === "active" && (
-              <Button
-                className={
-                  "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
-                }
-              >
-                الغاء العقد
-              </Button>
+              <div className="bg-blueLight py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-greenMain">
+                  نشط
+                </p>
+              </div>
+            )}
+            {status === "ultimate" && (
+              <div className="bg-red/20 py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-red">
+                  غير نشط
+                </p>
+              </div>
+            )}
+            {status === "rejected" && (
+              <div className="bg-red/20 py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-red">
+                  مرفوض
+                </p>
+              </div>
+            )}
+            {status === "manger" && (
+              <div className="bg-blueLight py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-greenMain">
+                  قيد المراجعة من رئيس القسم
+                </p>
+              </div>
+            )}
+            {status === "admin" && (
+              <div className="bg-grayLight py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-grayDark">
+                  قيد المراجعة من الادارى
+                </p>
+              </div>
+            )}
+            {status === "reviewed" && (
+              <div className="bg-[#F5E4F9] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
+                <p className="font-Bold text-[12px] md:text-[16px] text-[#8A22A0]">
+                  قيد المراجعة من الطبيب
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const status = row.original.status;
+      const id = row.original.id;
+      return (
+        <div className="mx-1 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            {status === "active" && (
+              <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
+                <Button
+                  onClick={() => {
+                    editModal("type", "contractsReq");
+                    editModal("open", true);
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                  }
+                >
+                  الغاء العقد
+                </Button>
+              </div>
             )}
             {status === "ultimate" && (
               <Link
@@ -66,47 +126,89 @@ export const columns = [
               </Link>
             )}
             {status === "rejected" && (
-              <div className="bg-red/20 py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
-                <span className=" size-3 rounded-[50%]  bg-red  z-[1] md:block hidden"></span>
-                <p className="font-Bold text-[12px] md:text-[16px] text-red">
-                  مرفوض
-                </p>
-              </div>
+              <Button
+                onClick={() => {
+                  editModal("type", "contractsReq");
+                  editModal("open", true);
+                }}
+                className={
+                  "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                }
+              >
+                حذف
+              </Button>
             )}
             {status === "manger" && (
-              <div className="bg-grayLight py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
-                <span className=" size-3 rounded-[50%]  bg-grayDark  z-[1] md:block hidden"></span>
-                <p className="font-Bold text-[12px] md:text-[16px] text-grayDark">
-                  قيد المراجعة من رئيس القسم
-                </p>
+              <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
+                <Button
+                  onClick={() => {
+                    console.log("fdgsdfdf");
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  }
+                >
+                  قبول
+                </Button>
+                <Button
+                  onClick={() => {
+                    editModal("type", "contractsReq");
+                    editModal("open", true);
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                  }
+                >
+                  رفض
+                </Button>
               </div>
             )}
             {status === "admin" && (
-              <div className="bg-grayLight py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
-                <span className=" size-3 rounded-[50%]  bg-grayDark  z-[1] md:block hidden"></span>
-                <p className="font-Bold text-[12px] md:text-[16px] text-grayDark">
-                  قيد المراجعة من الإدارة
-                </p>
+              <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
+                <Button
+                  onClick={() => {
+                    console.log("fdgsdfdf");
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  }
+                >
+                  قبول
+                </Button>
+                <Button
+                  onClick={() => {
+                    editModal("type", "contractsReq");
+                    editModal("open", true);
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                  }
+                >
+                  رفض
+                </Button>
               </div>
             )}
             {status === "reviewed" && (
-              <div className="flex items-center gap-4">
-                <Link
-                  href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id)}
-                  className={
-                    "btnReqTable text-nowrap !py-0 text-[12px] rounded-xl duration-300 hover:shadow-md lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
-                  }
-                >
-                  <ContractsWhiteIcon />
-                  ارسال
-                </Link>
+              <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
                 <Button
-                  onClick={() => {}}
+                  onClick={() => {
+                    console.log("fdgsdfdf");
+                  }}
                   className={
-                    "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                    "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
                 >
-                  <RefuseIcon />
+                  قبول
+                </Button>
+                <Button
+                  onClick={() => {
+                    editModal("type", "contractsReq");
+                    editModal("open", true);
+                  }}
+                  className={
+                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                  }
+                >
                   رفض
                 </Button>
               </div>
@@ -135,7 +237,10 @@ export const columns = [
             )}
           </div>
 
-          <MenuActions type={2} path={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id)}/>
+          <MenuActions
+            type={2}
+            path={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id)}
+          />
         </div>
       );
     },
