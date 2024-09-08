@@ -7,7 +7,7 @@ import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-wh
 
 export const Intro = () => {
   return (
-    <div className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clip-path-triangle relative'>
+    <div className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'>
       <div className='absolute top-0 end-0 max-w-full max-h-full'>
         <BGSVG />
       </div>

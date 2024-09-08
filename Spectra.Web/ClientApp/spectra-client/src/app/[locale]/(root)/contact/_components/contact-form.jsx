@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Section } from '../../_components/section';
 import { Link } from '@/navigation';
-import WhatsappIcon from '@/assets/icons/whatsapp';
+import WhatsAppIcon from '@/assets/icons/whatsapp';
 import PhoneGreenIcon from '@/assets/icons/phone-green';
 import TextInput from '@/components/inputs/text-input';
 import { Textarea } from '@mantine/core';
@@ -32,7 +32,7 @@ export const ContactForm = () => {
                 href='https://wa.me/+966500000000'
                 className='size-14 mdl:size-24 rounded-lg flex items-center justify-center bg-blueLight'
               >
-                <WhatsappIcon className='size-8 mdl:size-14' />
+                <WhatsAppIcon className='size-8 mdl:size-14' />
               </Link>
               <span className='block text-sm mdl:text-medium'>
                 عبر الواتساب

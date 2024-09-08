@@ -1,42 +1,91 @@
 import React from "react";
-import PdfIcon from "@/assets/icons/pdf";
 import MenuActions from "@/components/menu-actions";
+import DocumentIcon from "@/assets/icons/document";
+import { Accordion } from "@mantine/core";
+import Image from "next/image";
+import imgDrugs from "@/assets/images/drugs.png";
+import ArrowAccordionIcon from "@/assets/icons/arrowAccordion";
 const files = [
   {
     id: 0,
-    name: "File Title.pdf",
+    name: "File Title.Document",
     date: "313 KB . 31 Aug, 2022  ",
+    nameDru: "سيترالين",
+    imageUrl: imgDrugs,
+    describe: "سيتم اخذ الجرعة يوميا  على فترتين كل 12 ساعة لمدة اسبوعين",
+    number: "2",
+    time: "12 ساعة",
+    nots: "مراجعة الطبيب فى حالة ظهور اثار جانبية شديدة",
   },
   {
     id: 1,
-    name: "File Title.pdf",
+    name: "File Title.Document",
     date: "313 KB . 31 Aug, 2022  ",
+    nameDru: "سيترالين",
+    imageUrl: imgDrugs,
+    describe: "سيتم اخذ الجرعة يوميا  على فترتين كل 12 ساعة لمدة اسبوعين",
+    number: "2",
+    time: "12 ساعة",
+    nots: "مراجعة الطبيب فى حالة ظهور اثار جانبية شديدة",
   },
 ];
+
 function Drugs() {
+  const items = files.map((item) => (
+    <Accordion.Item key={item.id} value={item.id.toString()}>
+      <Accordion.Control icon={item.emoji} className="px-0">
+        <div className="flex items-center gap-5">
+          <DocumentIcon />
+          <div>
+            <h3 className="text-sm lg:text-lg ">{item.name}</h3>
+            <p className=" text-[12px] lg:text-sm font-Regular text-[#71839B]">
+              {item.date}
+            </p>
+          </div>
+        </div>
+      </Accordion.Control>
+      <Accordion.Panel>
+        {" "}
+        <div className="flex flex-col  gap-4 pt-7 px-3 py-6 shadow-lg rounded-xl">
+          <div className="flex items-center gap-3 border-b border-grayLight pb-4">
+            <Image
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-12 lg:w-16 h-auto"
+            />
+            <h3 className="text-sm lg:text-base font-bold">{item.nameDru}</h3>
+          </div>
+          <div className=" border-b border-grayLight pb-4">
+            <h4 className="text-sm lg:text-base font-regular mb-2 text-grayDark">
+              وصف تحديد الجرعة
+            </h4>
+            <p className="text-sm lg:text-base font-Regular">{item.describe}</p>
+          </div>
+          <div className=" border-b border-grayLight pb-4">
+            <h4 className="text-sm lg:text-base font-regular mb-2 text-grayDark">
+              عدد الجرعات
+            </h4>
+            <p className="text-sm lg:text-base font-Regular">{item.number}</p>
+          </div>
+          <div className=" border-b border-grayLight pb-4">
+            <h4 className="text-sm lg:text-base font-regular mb-2 text-grayDark">
+              الفترة الزمنية
+            </h4>
+            <p className="text-sm lg:text-base font-Regular">{item.time}</p>
+          </div>
+          <div className=" ">
+            <h4 className="text-sm lg:text-base font-regular mb-2 text-grayDark">
+            ملاحظات
+            </h4>
+            <p className="text-sm lg:text-base font-Regular">{item.nots}</p>
+          </div>
+        </div>
+      </Accordion.Panel>
+    </Accordion.Item>
+  ));
   return (
     <div className="flex flex-col gap-5 mt-5">
-      {files.length > 0 && (
-        <div className="flex  gap-7 flex-wrap  flex-col">
-          {files.map((file, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between gap-4"
-            >
-              <div className="flex items-center gap-5">
-                <PdfIcon />
-                <div>
-                  <h3 className="text-sm lg:text-lg ">{file.name}</h3>
-                  <p className=" text-[12px] lg:text-sm font-Regular text-[#71839B]">
-                    {file.date}
-                  </p>
-                </div>
-              </div>
-              <MenuActions />
-            </div>
-          ))}
-        </div>
-      )}
+      <Accordion chevron={<ArrowAccordionIcon />}>{items}</Accordion>
     </div>
   );
 }

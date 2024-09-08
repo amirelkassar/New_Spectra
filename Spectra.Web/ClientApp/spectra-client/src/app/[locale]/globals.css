@@ -506,8 +506,8 @@ form.clientEdit .mantine-Input-input {
     padding-bottom: 10px;
   }
 
-.custom-clip-path-triangle {
-  clip-path: polygon(
+.custom-clipPath-triangle {
+  clipPath: polygon(
     0% 0%,
     0 80%,
     50% 100%,
@@ -518,8 +518,8 @@ form.clientEdit .mantine-Input-input {
   );
 }
 
-.custom-clip-path-triangle-up {
-  clip-path: polygon(
+.custom-clipPath-triangle-up {
+  clipPath: polygon(
     0 100%,
     0 10%,
     50% 0%,
