@@ -38,12 +38,7 @@ function ContractInformation({ id }) {
     setServiceData(updatedData);
   };
 
-  const handleInputChange = (service, field, value) => {
-    setServiceData({
-      ...serviceData,
-      [service]: { ...serviceData[service], [field]: value },
-    });
-  };
+
   return (
     <div>
       <Card className={"mdl:!pe-12 "}>
