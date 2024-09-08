@@ -1,10 +1,10 @@
 "use client";
 import DateIcon2 from "@/assets/icons/date2";
 import { Link, usePathname } from "@/navigation";
-import React, { useState } from "react";
+import React from "react";
 import ROUTES from "@/routes";
 import { DataTable } from "@/components/data-table";
-import { columns } from "../_components/columnsCancelled";
+import { columns } from "../_components/columnsPrevious";
 import BackIcon from "@/assets/icons/back";
 const FilterOptions = [
   { label: "الاستشارات الفردية", icon: null, key: "1" },
@@ -15,7 +15,6 @@ const FilterOptions = [
 const data = [
   {
     id: 0,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -28,7 +27,6 @@ const data = [
   },
   {
     id: 1,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -41,7 +39,6 @@ const data = [
   },
   {
     id: 2,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -54,7 +51,6 @@ const data = [
   },
   {
     id: 4,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -67,7 +63,6 @@ const data = [
   },
   {
     id: 5,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -80,7 +75,6 @@ const data = [
   },
   {
     id: 6,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -93,7 +87,6 @@ const data = [
   },
   {
     id: 7,
-
     name: "عبدالله الشيخ",
     specialisation: " اخصائى نفسى",
     patientName: "احمد محمد كمال",
@@ -105,7 +98,7 @@ const data = [
     statu: "تمت",
   },
 ];
-function AppointmentsCancelledPage() {
+function AppointmentsDeferredPage() {
   const path = usePathname();
 
   const AppointmentsLinks = [
@@ -130,7 +123,7 @@ function AppointmentsCancelledPage() {
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSDEFERRED),
     },
   ];
-  const [selected, setSelected] = useState([]);
+
   return (
     <div className="default-page">
       <div className="  mb-4 md:mb-9 pt-3 px-5 md:px-2">
@@ -142,9 +135,8 @@ function AppointmentsCancelledPage() {
             >
               <BackIcon className={"w-full h-full"} />
             </Link>
-            <h2 className="  mdl:text-[20px] text-[14px] ">المواعيد الملغاة</h2>
+            <h2 className="  mdl:text-[20px] text-[14px] ">المواعيد السابقة</h2>
           </div>
-
           <button
             className={`
               bg-greenMain
@@ -187,10 +179,9 @@ function AppointmentsCancelledPage() {
         filterData={FilterOptions}
         filterBy="patientDiagnosis"
         filterText="فلتر بالنوع"
-        IsWidth
       />
     </div>
   );
 }
 
-export default AppointmentsCancelledPage;
+export default AppointmentsDeferredPage;

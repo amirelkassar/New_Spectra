@@ -28,19 +28,7 @@ function CalendarComp() {
   const dayCellClassNames = (arg) => {
     return "size-[110px]";
   };
-  const dayHeaderContent = (args) => {
-    const daysMap = {
-      Sunday: "الأحد",
-      Monday: "الاثنين",
-      Tuesday: "الثلاثاء",
-      Wednesday: "الأربعاء",
-      Thursday: "الخميس",
-      Friday: "الجمعة",
-      Saturday: "السبت",
-    };
 
-    return daysMap[args.text]; // Replace the day name with the corresponding Arabic name
-  };
   return (
     <FullCalendar
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
