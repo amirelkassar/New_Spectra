@@ -1,6 +1,7 @@
 import { Card } from "@mantine/core";
 import React from "react";
 import ContractsIcon from "@/assets/icons/contracts";
+import ContractsTrueIcon from "@/assets/icons/contractsTrue";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
@@ -49,7 +50,17 @@ function ContractsList({ idUser }) {
               </div>
               <div className="flex items-center gap-5 lg:gap-8">
                 <div className="bg-white py-2 lg:py-4 px-2 lg:px-5 w-10 h-9 lg:w-[64px] lg:h-[61px] rounded-xl flex items-center justify-center">
-                  <ContractsIcon fill={"#10B0C1"} className={"w-auto h-full"} />
+                  {item.done ? (
+                    <ContractsTrueIcon
+                      fill={"#10B0C1"}
+                      className={"w-auto h-full"}
+                    />
+                  ) : (
+                    <ContractsIcon
+                      fill={"#10B0C1"}
+                      className={"w-auto h-full"}
+                    />
+                  )}
                 </div>
                 <div className="lg:min-w-[172px] flex flex-col gap-2 lg:gap-4">
                   <div className="flex items-center gap-2">
