@@ -38,6 +38,7 @@ const ROUTES = {
     REQUESTSNEW: "/admin/requests/new",
     REQUESTSREJECTED: "/admin/requests/rejected",
     REQUESTSID: (id) => `/admin/requests/${id}`,
+    REQUESTSIDEdit: (id) => `/admin/requests/${id}/edit`,
     CLIENTS: {
       DASHBOARD: "/admin/clients",
       ORGANIZATION: {

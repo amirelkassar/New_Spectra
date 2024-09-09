@@ -11,6 +11,7 @@ import React from "react";
 import ImagePlaceholderIcon from "@/assets/icons/image-placeholder";
 import certificates from "@/assets/images/certificates.png";
 import Image from "next/image";
+import ROUTES from "@/routes";
 const data = {
   name: "احمد محمد كمال",
   spec: ["طبيب"],
@@ -47,7 +48,6 @@ const ListCertificates = [
     date: "20/8/2022",
     title: "دكتوراه العلوم الطبية",
   },
-
 ];
 const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
 const Card = ({ title, values }) => {
@@ -220,7 +220,7 @@ const RequestDetailsPage = ({ params: { requestId } }) => {
             رفض
           </Button>
           <Link
-            href={`${requestId}/edit`}
+            href={ROUTES.ADMIN.REQUESTSIDEdit(requestId)}
             className={
               "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
             }

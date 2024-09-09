@@ -4,7 +4,8 @@ import Button from "@/components/button";
 import useModal from "@/store/modal-slice";
 import RecoveryIcon from "@/assets/icons/recovery";
 import DeleteIcon from "@/assets/icons/delete";
-function RequestOldAction() {
+import ActionMenu from "./ActionMenu";
+function RequestOldAction({id}) {
   const { modal, editModal } = useModal();
   return (
     <div
@@ -33,7 +34,7 @@ function RequestOldAction() {
         </Button>
       </>
 
-      <MenuActions />
+      <ActionMenu id={id}/>
     </div>
   );
 }
