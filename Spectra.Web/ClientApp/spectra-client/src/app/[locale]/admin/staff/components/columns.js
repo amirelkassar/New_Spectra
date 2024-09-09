@@ -32,10 +32,9 @@ export const columns = [
     header: "",
     id: "type",
 
-    cell: ({ getValue, row }) => {
+    cell: ({row }) => {
       const status = row.original.statu;
       const id = row.original.id;
-
       return (
         <div
           className={"flex gap-[10px] md:gap-[40px] items-center justify-end "}

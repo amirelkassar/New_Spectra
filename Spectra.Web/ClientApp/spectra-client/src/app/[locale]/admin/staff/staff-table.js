@@ -1,11 +1,5 @@
 "use client";
-
 import { DataTable } from "@/components/data-table";
-import TableComponents from "@/components/table-comp";
-import ROUTES from "@/routes";
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { columns } from "./components/columns";
 const data = [
   {
@@ -150,13 +144,10 @@ const FilterOptions = [
 ];
 
 const StaffTable = () => {
-  const router = useRouter();
-  const locale = useLocale();
-  const [selected, setSelected] = useState([]);
+
   return (
     <div className="grow">
       <DataTable
-       
         data={data}
         columns={columns}
         filterData={FilterOptions}
