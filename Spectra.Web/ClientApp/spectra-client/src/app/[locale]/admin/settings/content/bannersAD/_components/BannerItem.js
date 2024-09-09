@@ -15,13 +15,13 @@ export function BannerItem({ imageSrc, onDelete, setDataImg, dataImg, id }) {
   const [largeFile, setLargeFile] = useState("");
   return (
     <div>
-      <div className="flex items-start gap-6">
+      <div className="flex items-start gap-2 lgl:gap-6">
         <Button
           onClick={() => {
             onDelete();
           }}
           className={
-            "text-[12px] lg:text-[16px] font-Light !py-0 px-4 flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none w-fit !gap-3"
+            "text-[12px] lg:text-[16px] font-Light !py-0 px-4 flex font-bold items-center justify-center h-8 lgl:h-11 ring-1 !ring-red text-red border-none w-fit !gap-3"
           }
         >
           <DeleteIcon /> مسح
@@ -36,11 +36,11 @@ export function BannerItem({ imageSrc, onDelete, setDataImg, dataImg, id }) {
             }
             maxSize={5 * 1024 ** 2}
             accept={IMAGE_MIME_TYPE}
-            className=" rounded-xl w-fit h-11 p-0 flex items-center justify-center px-4 border-solid border-black"
+            className=" rounded-xl w-fit h-8 lgl:h-11 p-0 flex items-center justify-center px-4 border-solid border-black"
           >
             <div className="flex items-center gap-3">
               <ReplaceImgIcon />
-              <h2 className="text-base font-Light">تبديل</h2>
+              <h2 className="text-[12px] lgl:text-base font-Light">تبديل</h2>
             </div>
           </Dropzone>
           {largeFile && <p className="text-rose-500 text-sm">{largeFile}</p>}
@@ -52,7 +52,7 @@ export function BannerItem({ imageSrc, onDelete, setDataImg, dataImg, id }) {
         priority={true}
         width={960}
         height={266}
-        className="w-full mt-4 mb-9 h-[265px] object-contain"
+        className="w-full mt-2 lgl:mt-4 mb-6 lgl:mb-9 h-[100px] lgl:h-[265px] object-contain"
       />
     </div>
   );

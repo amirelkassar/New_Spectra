@@ -49,16 +49,16 @@ function page() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="headTitleDash ">الاعدادات - المحتوى</h2>
+        <h2 className="text-base lg:text-xl font-bold ">الاعدادات - المحتوى</h2>
       </div>
       <div className="flex flex-col  flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6 mb-8 lg:mb-10">
-        <h2 className="headTitleDash">قصص النجاح</h2>
+        <h2 className="text-sm lg:text-xl">قصص النجاح</h2>
         <Link
           href={ROUTES.ADMIN.SETTINGS.CONTENT.STORIESADD}
-          className="flex items-center justify-center w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold"
+          className="flex items-center justify-center w-36 lg:w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold"
         >
           <PlusInsideCircleIcon />
-          <p className=" text-[14px] md:text-[16px] font-bold">أضافة قصة </p>
+          <p className=" text-[12px] lg:text-[16px] font-bold">أضافة قصة </p>
         </Link>
       </div>
       <div className="hidden lg:block">

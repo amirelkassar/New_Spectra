@@ -4,35 +4,49 @@ import Button from "@/components/button";
 import DoctorsContainer from "./_components/DoctorsContainer";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
+import BackIcon from "@/assets/icons/back";
 
 function Page() {
   return (
     <Card>
-      <h1 className="text-center my-4 mdl:my-8 text-[24px] mdl:text-[36px] font-Bold">
-        البانرات الدعائية
-      </h1>
-      <p className="text-center text-grayDark my-4 mdl:my-8 text-[16px] mdl:text-[24px] font-Bold">
-        السحب والإفلات للأقسام لإعادة ترتيبها، قم بالضغط مطولًا على القسم
-        المطلوب وسحبه إلى المكان الجديد.
-      </p>
+      <div className=" mb-7 lgl:mb-14 ">
+        <div className="flex items-center  gap-2 lg:gap-3">
+          <Link
+            href={ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD}
+            className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          >
+            <BackIcon className={"w-full h-full"} />
+          </Link>
+          <h2 className="text-base lg:text-[36px] font-bold ">
+            التخصصات الطبية
+          </h2>
+        </div>
+        <p className="text-center lgl:text-start text-grayDark my-4 lgl:my-8 text-sm lgl:text-[24px] font-Regular">
+          السحب والإفلات للأقسام لإعادة ترتيبها، قم بالضغط مطولًا على القسم
+          المطلوب وسحبه إلى المكان الجديد.
+        </p>
+      </div>
+
       <div>
-        <h2 className=" mb-4 mdl:mb-8 text-[18px] mdl:text-[28px] mdl:ms-14 font-Bold">
+        <h2 className=" mb-4 lgl:mb-8 text-[18px] lgl:text-[28px] lgl:ms-14 font-Bold">
           فريقنا الطبى
         </h2>
         <DoctorsContainer />
       </div>
-      <Button
-        variant={"secondary"}
-        className="w-[80%] h-[60px] font-Bold max-w-full mx-auto my-12"
-      >
-        تأكيد
-      </Button>
-      <Link
-        href={ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD}
-        className="w-[80%] mx-auto h-[60px] duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl text-[20px] font-Bold"
-      >
-        إلغاء
-      </Link>
+      <div className="flex flex-col gap-5 mt-14 lgl:mt-20 w-full md:w-[80%]  mx-auto ">
+        <Button
+          variant={"secondary"}
+          className=" h-[48px] lgl:h-[60px] text-sm lgl:text-xl font-Bold max-w-full  w-full"
+        >
+          تأكيد
+        </Button>
+        <Link
+          href={ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD}
+          className="w-full  h-[48px] lgl:h-[60px] text-sm lgl:text-xl duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl text-[20px] font-Bold"
+        >
+          إلغاء
+        </Link>
+      </div>
     </Card>
   );
 }

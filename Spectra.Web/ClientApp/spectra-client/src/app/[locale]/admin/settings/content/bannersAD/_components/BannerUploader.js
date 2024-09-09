@@ -20,11 +20,11 @@ export function BannerUploader({ setDataImg, dataImg }) {
         }
         maxSize={5 * 1024 ** 2}
         accept={IMAGE_MIME_TYPE}
-        className="mb-10 rounded-xl"
+        className=" mb-7 lgl:mb-10 rounded-xl h-[120px] lgl:h-[176px]"
       >
-        <div className="flex gap-4 py-8 flex-col justify-center items-center">
-          <UploadImgIcon />
-          <h2 className="text-base text-grayDark font-Light">
+        <div className="flex gap-4 lgl:py-8 flex-col justify-center items-center">
+          <UploadImgIcon className={'h-auto w-8 lgl:w-[50px]'} />
+          <h2 className="text-[12px] lgl:text-base text-grayDark font-Light">
             اضغط هنا لرفع صورة
           </h2>
         </div>
