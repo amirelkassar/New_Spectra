@@ -1,13 +1,8 @@
 "use client";
-import Image from "next/image";
-import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import docrotImg from "@/assets/images/placeholder-person.png";
-import StarWhiteIcon from "@/assets/icons/starWhite";
 import BriefIcon from "@/assets/icons/brief";
 import QualificationsIcon from "@/assets/icons/qualifications";
 import DaqeqaIcon from "@/assets/icons/daqeqa";
-import { Link } from "@/navigation";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import Opinions from "../../../../components/opinions";
 import DoctorInfo from "../doctorInfo";
@@ -75,7 +70,6 @@ function DoctorDEtails() {
 
   const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
 
-  const params = useParams();
   const [showMore, setShowMore] = useState(false);
 
   return (

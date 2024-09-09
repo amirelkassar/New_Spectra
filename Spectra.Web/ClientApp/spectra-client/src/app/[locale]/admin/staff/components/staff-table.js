@@ -1,6 +1,6 @@
 "use client";
 import { DataTable } from "@/components/data-table";
-import { columns } from "./components/columns";
+import { columns } from "./columns";
 const data = [
   {
     id: 0,
@@ -18,7 +18,7 @@ const data = [
     email: "Abdullah@gmail.com",
     lastLogin: "20/4/2024",
     type: "secretary",
-    route: "organization",
+    route: "specialist",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const data = [
     numberOfChildren: "50",
     email: "Abdullah@gmail.com",
     lastLogin: "20/4/2024",
-    type: "organization  ",
+    type: "specialist  ",
     route: "provider",
   },
   {
@@ -45,7 +45,7 @@ const data = [
     email: "Abdullah@gmail.com",
     lastLogin: "20/4/2024",
     type: "secretary",
-    route: "organization",
+    route: "specialist",
   },
   {
     id: 5,
@@ -129,7 +129,7 @@ const FilterOptions = [
   {
     label: "مختص",
     icon: null,
-    key: "organization",
+    key: "specialist",
   },
   {
     label: "طبيب",

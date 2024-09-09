@@ -33,13 +33,13 @@ export const columns = [
     id: "type",
 
     cell: ({row }) => {
-      const status = row.original.statu;
+      const type = row.original.type;
       const id = row.original.id;
       return (
         <div
           className={"flex gap-[10px] md:gap-[40px] items-center justify-end "}
         >
-          <MenuActions type={2} path={ROUTES.ADMIN.STAFF.STAFFID(id)} />
+          <MenuActions type={2} path={ROUTES.ADMIN.STAFF.STAFFID(id)+'?type='+type} />
         </div>
       );
     },

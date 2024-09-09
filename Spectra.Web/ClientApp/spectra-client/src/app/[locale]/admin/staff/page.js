@@ -1,6 +1,6 @@
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import React from "react";
-import StaffTable from "./staff-table";
+import StaffTable from "./components/staff-table";
 import MenuActions from "@/components/menu-actions";
 
 function page() {
