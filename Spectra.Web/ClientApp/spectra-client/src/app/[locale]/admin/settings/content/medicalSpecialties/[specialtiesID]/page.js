@@ -123,11 +123,11 @@ function Page() {
           >
             <BackIcon className={"w-full h-full"} />
           </Link>
-          <h2 className="text-base lg:text-[36px] font-bold ">
+          <h2 className="text-base lg:text-[20px] font-bold ">
             اخصائيين التوحد
           </h2>
         </div>
-        <p className="text-center lgl:text-start text-grayDark my-4 lgl:my-8 text-sm lgl:text-[24px] font-Regular">
+        <p className="text-center lgl:text-start text-grayDark my-4 lgl:my-8 text-sm lgl:text-[18px] font-Regular">
           يرجى تحديد الأطباء الذين ترغب في ظهورهم على الموقع الذي يتصفحه العملاء
           و الزوار
         </p>

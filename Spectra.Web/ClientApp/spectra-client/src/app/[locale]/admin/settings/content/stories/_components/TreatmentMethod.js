@@ -50,9 +50,9 @@ function TreatmentMethod({ sectionsMethod, setSectionsMethod }) {
                 {index >= 10 ? index + 1 : "0" + (index + 1)}
               </p>
             </div>
-            <div className=" relative max-w-full w-[480px] max-h-[110px]">
+            <div className=" relative max-w-full w-[480px] max-h-[270pxpx]">
               {section.image ? (
-                <div className="relative w-full max-w-full h-auto">
+                <div className="relative w-full max-w-full h-full">
                   <Image
                     src={section.image}
                     width={890}

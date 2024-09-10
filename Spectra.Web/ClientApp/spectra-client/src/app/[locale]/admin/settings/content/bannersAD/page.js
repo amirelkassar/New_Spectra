@@ -26,7 +26,7 @@ function PFage() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-base lg:text-[36px] font-bold ">
+        <h2 className="text-base lg:text-[20px] font-bold ">
           {" "}
           البانرات الدعائية
         </h2>

@@ -45,7 +45,7 @@ function PatientsDetails() {
       </div>
 
       <div className=" flex gap-5 ">
-        <div className="flex justify-center md:justify-between gap-5 flex-wrap flex-1 flex-col md:flex-row">
+        <div className="flex justify-center md:justify-between mdl:items-center gap-5 flex-wrap flex-1 flex-col md:flex-row">
           <div className="flex gap-6 md:gap-[40px] flex-1 flex-wrap md:flex-nowrap flex-col sml:flex-row ">
             <div className=" size-[64px] sml:size-[228px] rounded-[50%] sml:rounded-[10px]">
               <Image

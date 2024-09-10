@@ -41,6 +41,11 @@ function page() {
             labelClassName={"text-[12px] md:text-[16px]"}
             placeholder={"اسم العقار او نوع التوصية"}
           />
+             <Input
+            label={"الكود"}
+            labelClassName={"text-[12px] md:text-[16px]"}
+            placeholder={"اسم العقار او نوع التوصية"}
+          />
           <Input
             label={"المادة الفعالة"}
             labelClassName={"text-[12px] md:text-[16px]"}

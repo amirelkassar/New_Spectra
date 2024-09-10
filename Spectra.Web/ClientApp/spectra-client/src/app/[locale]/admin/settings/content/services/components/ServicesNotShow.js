@@ -15,7 +15,7 @@ function ServicesNotShow() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-base lg:text-[36px]"> اضافة خدمة - داخلية</h2>
+        <h2 className="text-base lg:text-[20px]"> اضافة خدمة - داخلية</h2>
       </div>
       <form className="lgl:max-w-[80%] flex flex-col gap-6 lg:gap-10 w-full mx-auto lgl:mt-20">
         <TextInput

@@ -275,7 +275,7 @@ export function DataTable<TData, TValue>({
             <Table.Tr key={headerGroup.id} className="!border-b-0 ">
               <Table.Th className="   rounded-s-xl max-w-7  px-2 ">
                 <Checkbox
-                  size={isMobile ? "xs" : "md"}
+                  size={isMobile ? "xs" : "sm"}
                   color="#10B0C1"
                   classNames={{
                     input: "bg-transparent ",
@@ -315,7 +315,7 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row, index) => (
               <Table.Tr
-                className="text-black text-xs lg:text-base"
+                className={`text-black text-xs lg:text-base ${selectedUsers.has(index)?"bg-blueLight/40":""}`}
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
@@ -326,7 +326,7 @@ export function DataTable<TData, TValue>({
                       input: "bg-transparent ",
                       icon: " ",
                     }}
-                    size={isMobile ? "xs" : "md"}
+                    size={isMobile ? "xs" : "sm"}
                     checked={selectedUsers.has(index)}
                     onChange={() => toggleUser(index)}
                     className="w-fit"

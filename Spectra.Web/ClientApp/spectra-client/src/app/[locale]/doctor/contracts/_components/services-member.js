@@ -55,7 +55,7 @@ function ServicesMember({ selectedServices, serviceOptions }) {
                     %
                   </span>
                 </div>
-                <EditIcon pathColor="#10B0C1" />
+              
               </div>
             </li>
           );

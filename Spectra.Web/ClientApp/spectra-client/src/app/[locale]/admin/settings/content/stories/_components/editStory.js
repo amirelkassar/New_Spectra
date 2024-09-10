@@ -57,7 +57,7 @@ function EditStory() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-base lgl:text-[36px]"> قصص النجاح </h2>
+        <h2 className="text-base lgl:text-[20px]"> قصص النجاح </h2>
       </div>
       <div className="flex lgl:items-center gap-7 lgl:gap-9 lgl:justify-between  mb-14 lgl:mb-20 lgl:flex-row flex-col">
         <div className="flex lgl:items-end gap-4 md:gap-7 flex-1 flex-col md:flex-row">

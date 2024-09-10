@@ -40,7 +40,7 @@ function ServicesShow() {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="text-base lgl:text-[36px]"> اضافة خدمة </h2>
+        <h2 className="text-base lgl:text-[20px]"> اضافة خدمة </h2>
       </div>
       <form className=" w-full ">
         <div className="flex gap-3 items-center lgl:items-start mb-10 lgl:mb-20 pb-10 before:content-[''] relative before:absolute before:bg-blueLight before:left-1/2 before:-translate-x-1/2  md:before:w-[calc(100%+40px)] before:w-[calc(100%+8px)] before:h-[calc(100%+40px)] before:rounded-t-xl before:top-[-46px]  ">

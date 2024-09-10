@@ -1,21 +1,17 @@
 import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
-import Image from "next/image";
 
 export const columns = [
   {
     accessorKey: "doctor",
-    header:"اسم الاخصائي",
+    header: "اسم الاخصائي",
     id: "doctor",
     cell: ({ getValue, row }) => {
       const doctor = getValue();
-      const specialisationDoctor = row.original.specialisationDoctor;
+
       return (
         <div>
           <p className="font-bold text-[12px] md:text-[16px]">{doctor}</p>
-          <p className="text-[12px] font-ExtraLight md:text-[16px]">
-            {specialisationDoctor}
-          </p>
         </div>
       );
     },
@@ -27,7 +23,7 @@ export const columns = [
 
     cell: ({ getValue, row }) => {
       const name = getValue();
-      const kinshipName = row.original.kinshipName;
+
       return (
         <div
           className={
@@ -35,7 +31,6 @@ export const columns = [
           }
         >
           <p className=" text-[12px] md:text-[16px]">{name}</p>
-          <p className="text-[12px] md:text-[16px]">{kinshipName}</p>
         </div>
       );
     },
@@ -71,9 +66,7 @@ export const columns = [
 
       return (
         <div
-          className={
-            "flex gap-[10px] md:gap-[40px] justify-end items-start "
-          }
+          className={"flex gap-[10px] md:gap-[40px] justify-end items-start "}
         >
           <Statue statue={status} />
 

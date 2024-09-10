@@ -47,12 +47,6 @@ function PrescriptionCard({ type = "all", data }) {
             اخذه طوال الشهر يوميا مع الاكل
           </p>
           <p className="text-[14px] text-center sml:text-[16px]">20/4/2024</p>
-          <Link
-            href={"#"}
-            className="w-full h-[48px] rounded-[10px] text-white font-Bold bg-greenMain flex items-center justify-center mt-4"
-          >
-            عرض
-          </Link>
         </div>
       </div>
     </div>

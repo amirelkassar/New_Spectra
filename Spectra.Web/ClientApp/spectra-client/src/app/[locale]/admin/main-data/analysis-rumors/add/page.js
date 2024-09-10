@@ -6,12 +6,10 @@ import ROUTES from "@/routes";
 import Input from "@/components/input";
 import { Textarea } from "@mantine/core";
 import BackIcon from "@/assets/icons/back";
-import PillsIcon from "@/assets/icons/pills";
-import TherapyIcon from "@/assets/icons/therapy";
 import AnalysisIcon from "@/assets/icons/analysis";
 import RumorsIcon from "@/assets/icons/rumors";
 function Page() {
-  const [selectType, setSelectType] = useState("pills");
+  const [selectType, setSelectType] = useState("");
   return (
     <div>
       <div className="flex mb-10 lgl:mt-0 mt-6   items-center gap-4 ">
@@ -26,9 +24,7 @@ function Page() {
       <div>
         <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
           <div className="mdl:mb-12 mb-7">
-            <h2 className="text-[14px] mb-4 mdl:text-[20px]">
-            اختر نوع
-            </h2>
+            <h2 className="text-[14px] mb-4 mdl:text-[20px]">اختر نوع</h2>
             <div className="flex items-center justify-center gap-8">
               <div
                 className={`flex-1 md:max-w-[380px] px-4 mdl:px-7 py-4 mdl:py-6 rounded-[10px] flex flex-col mdl:flex-row items-center gap-5 mdl:gap-8 ${
@@ -39,7 +35,7 @@ function Page() {
                 }}
               >
                 <div className=" size-[44px] mdl:size-[80px] rounded-[10px] bg-white flex items-center justify-center p-3 ">
-                  <AnalysisIcon  className={'w-6 lg:w-8 h-auto'} />
+                  <AnalysisIcon className={"w-6 lg:w-8 h-auto"} />
                 </div>
                 <h3
                   className={`text-[14px]  mdl:text-[20px] font-Bold ${
@@ -58,7 +54,7 @@ function Page() {
                 }}
               >
                 <div className=" size-[44px] mdl:size-[80px] rounded-[10px] bg-white flex items-center justify-center p-3 ">
-                  <RumorsIcon  className={'w-6 lg:w-8 h-auto'}/>
+                  <RumorsIcon className={"w-6 lg:w-8 h-auto"} />
                 </div>
                 <h3
                   className={`text-[14px]  mdl:text-[20px] font-Bold ${
@@ -72,6 +68,11 @@ function Page() {
           </div>
           <Input
             label={"الاسم العلمى  "}
+            labelClassName={"text-[12px] md:text-[16px]"}
+            inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
+          />
+          <Input
+            label={"الكود  "}
             labelClassName={"text-[12px] md:text-[16px]"}
             inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
           />
