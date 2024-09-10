@@ -66,8 +66,10 @@ const ROUTES = {
         PATIENTSEDIT: (id) => `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
-        DETAILS: (id) => `/admin/clients/patientDetails/${id}/details`,
-        EDIT: (id) => `/admin/clients/patientDetails/${id}/edit`,
+        DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
+        PRESCRIPTIONS: (id) => `/admin/clients/patientDetails/${id}/prescriptions`,
+        REPORTS: (id) => `/admin/clients/patientDetails/${id}/reports`,
+        
       },
     },
     STAFF: {

@@ -27,7 +27,7 @@ function ActionMenu({ id }) {
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(id),
+      link: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(id)+'?edit=true',
       type: "link",
     },
     {

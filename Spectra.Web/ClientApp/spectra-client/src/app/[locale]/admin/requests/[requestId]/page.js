@@ -11,6 +11,7 @@ import ImagePlaceholderIcon from "@/assets/icons/image-placeholder";
 import certificates from "@/assets/images/certificates.png";
 import Image from "next/image";
 import ROUTES from "@/routes";
+import ActionMenu from "../_components/ActionMenuPage";
 const data = {
   name: "احمد محمد كمال",
   spec: ["طبيب"],
@@ -74,7 +75,9 @@ const RequestDetailsPage = ({ params: { requestId } }) => {
       </h2>
       <section className="grow grid w-full grid-cols-1 lg:grid-cols-2 lg:gap-y-2.5 lg:!mb-10 !mb-5 lg:gap-x-5 ">
         <div className="col-span-1 lg:col-span-2 bg-white py-4 px-6 lg:px-10 lg:py-8  lg:rounded-xl relative">
-          <MenuActions className={"absolute top-5 end-5"} />
+          <div className={"absolute top-5 end-5"}>
+            <ActionMenu />
+          </div>
           <h3 className=" text-sm mdl:text-medium block mb-8 ">
             {" "}
             البيانات الشخصية

@@ -14,6 +14,7 @@ import useModal from "@/store/modal-slice";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { columns, columnsOld } from "./_components/columns";
+import ActionMenu from "./_components/ActionMenuPage";
 const data = [
   {
     id: 0,
@@ -172,7 +173,7 @@ const RequestsTable = ({ type }) => {
             )}
 
             <div className="w-3">
-              <MenuActions type={2} />
+              <ActionMenu type={2} />
             </div>
           </div>
         </div>

@@ -56,10 +56,7 @@ const ClientPatients = () => {
             <BackIcon className={"w-full h-full"} />
           </button>
           <h2>عبدالله الشيخ</h2>
-          <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
-            <PlusInsideCircleIcon />
-            <p className="text-[12px] md:text-[16px] font-bold"> أضافة طفل</p>
-          </button>
+        
         </div>
         <ActionMenu
           type={params.orgId ? "organization" : "family"}
