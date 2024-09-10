@@ -1,6 +1,5 @@
 "use client";
 import AcceptIcon from "@/assets/icons/accept";
-import BackIcon from "@/assets/icons/back";
 import EditIcon from "@/assets/icons/edit";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";

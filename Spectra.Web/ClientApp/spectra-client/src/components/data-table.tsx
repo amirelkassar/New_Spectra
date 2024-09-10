@@ -11,17 +11,16 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 
-import { Select, Table } from "@mantine/core";
+import { Checkbox, Select, Table } from "@mantine/core";
 import { Pagination } from "@mantine/core";
-
 import { Fragment, useState } from "react";
-
 import FilterIcon from "@/assets/icons/filter";
 import Button from "@/components/button";
 import { cn } from "@/lib/utils";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
 import { SortingState } from "@tanstack/react-table";
+import { useMediaQuery } from "@mantine/hooks";
 
 export interface FilterData {
   label: string;
@@ -94,7 +93,25 @@ export function DataTable<TData, TValue>({
 
     if (tableColumn) return tableColumn.getFilterValue();
   };
+  const isMobile = useMediaQuery("(max-width: 992px)");
+  const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
+  const toggleAll = () => {
+    if (selectedUsers.size === data.length) {
+      setSelectedUsers(new Set());
+    } else {
+      setSelectedUsers(new Set(data.map((_, i) => i)));
+    }
+  };
 
+  const toggleUser = (index: number) => {
+    const newSelectedUsers = new Set(selectedUsers);
+    if (newSelectedUsers.has(index)) {
+      newSelectedUsers.delete(index);
+    } else {
+      newSelectedUsers.add(index);
+    }
+    setSelectedUsers(newSelectedUsers);
+  };
   return (
     <div className="space-y-5">
       {/* Filter */}
@@ -256,6 +273,20 @@ export function DataTable<TData, TValue>({
         <Table.Thead className="bg-blueLight h-[50px] min-h-[50px]  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Tr key={headerGroup.id} className="!border-b-0 ">
+              <Table.Th className="   rounded-s-xl max-w-7  px-2 ">
+                <Checkbox
+                  size={isMobile ? "xs" : "md"}
+                  color="#10B0C1"
+                  classNames={{
+                    input: "bg-transparent ",
+                  }}
+                  checked={selectedUsers.size === data.length}
+                  indeterminate={
+                    selectedUsers.size > 0 && selectedUsers.size < data.length
+                  }
+                  onChange={toggleAll}
+                />
+              </Table.Th>
               {headerGroup.headers.map((header, i) => {
                 return (
                   <Table.Th
@@ -263,9 +294,7 @@ export function DataTable<TData, TValue>({
                     className={` text-black ${
                       IsWidth && "max-w-[300px] w-[280px]"
                     }   text-xs font-ExtraLight lg:text-base ${
-                      i === 0
-                        ? "rounded-s-xl ps-5"
-                        : i === headerGroup.headers.length - 1
+                      i === headerGroup.headers.length - 1
                         ? "rounded-e-xl pe-5"
                         : ""
                     } ${mdHide === i + 1 ? " hidden mdl:block" : ""}`}
@@ -284,12 +313,25 @@ export function DataTable<TData, TValue>({
         </Table.Thead>
         <Table.Tbody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
+            table.getRowModel().rows.map((row, index) => (
               <Table.Tr
                 className="text-black text-xs lg:text-base"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
+                <Table.Td className="px-2 max-w-7 w-6  ps-2">
+                  <Checkbox
+                    color="#10B0C1"
+                    classNames={{
+                      input: "bg-transparent ",
+                      icon: " ",
+                    }}
+                    size={isMobile ? "xs" : "md"}
+                    checked={selectedUsers.has(index)}
+                    onChange={() => toggleUser(index)}
+                    className="w-fit"
+                  />
+                </Table.Td>
                 {row.getVisibleCells().map((cell, i) => (
                   <Table.Td
                     className={`py-3 first:font-Bold first:lg:text-base max-w-[280px] ${
