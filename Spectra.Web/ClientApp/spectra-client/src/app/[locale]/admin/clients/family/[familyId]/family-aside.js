@@ -9,8 +9,6 @@ import { useParams } from "next/navigation";
 const FamilyAside = () => {
   const params = useParams();
   const path = usePathname();
-console.log(params);
-
   const pages = [
     {
       name: "بيانات عائلة الطفل",

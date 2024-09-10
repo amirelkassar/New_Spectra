@@ -298,7 +298,8 @@ html[dir="ltr"] .lineAfterLinks {
   top: 50% !important;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 1020px;
+  width: 1020px;
+  max-width: 100%;
 }
 .modelReq .mantine-Modal-body {
   padding: 66px 72px 58px;
@@ -348,10 +349,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -375,22 +373,13 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    3,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    4,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    5,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
 @layer components {
   .custom-grid {
@@ -400,10 +389,7 @@ form.clientEdit .mantine-Input-input {
     ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(
-      var(--colNumSmall),
-      minmax(max-content, 1fr)
-    );
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
 .boxDate .mantine-DatePicker-calendarHeader {
@@ -425,10 +411,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -506,25 +489,19 @@ form.clientEdit .mantine-Input-input {
     padding-bottom: 10px;
   }
 
-.custom-clipPath-triangle {
-  clipPath: polygon(
-    0% 0%,
-    0 80%,
-    50% 100%,
-    100% 80%,
-    100% 100%,
-    100% 100%,
-    100% 0%
-  );
-}
+  .custom-clipPath-triangle {
+    clippath: polygon(
+      0% 0%,
+      0 80%,
+      50% 100%,
+      100% 80%,
+      100% 100%,
+      100% 100%,
+      100% 0%
+    );
+  }
 
-.custom-clipPath-triangle-up {
-  clipPath: polygon(
-    0 100%,
-    0 10%,
-    50% 0%,
-    100% 10%,
-    100% 100%
-  );
-}
+  .custom-clipPath-triangle-up {
+    clippath: polygon(0 100%, 0 10%, 50% 0%, 100% 10%, 100% 100%);
+  }
 }

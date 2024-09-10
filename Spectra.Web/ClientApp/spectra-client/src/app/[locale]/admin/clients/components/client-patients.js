@@ -7,6 +7,7 @@ import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { useParams } from "next/navigation";
+import ActionMenu from "./ActionMenuPatients";
 
 const ClientPatients = () => {
   const patients = [
@@ -60,8 +61,10 @@ const ClientPatients = () => {
             <p className="text-[12px] md:text-[16px] font-bold"> أضافة طفل</p>
           </button>
         </div>
-        <MenuActions
-          type={2}
+        <ActionMenu
+          type={params.orgId ? "organization" : "family"}
+          id={params.orgId?params.orgId:params.familyId}
+          id2={params.clientID}
           pathEdit={
             params.orgId
               ? ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID)

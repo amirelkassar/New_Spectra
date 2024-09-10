@@ -1,15 +1,14 @@
 "use client";
 import DateIcon from "@/assets/icons/date";
 import DateIcon2 from "@/assets/icons/date2";
-import MenuActions from "@/components/menu-actions";
 import { DatePicker } from "@mantine/dates";
 import Image from "next/image";
 import React, { useState } from "react";
 import person from "@/assets/images/child.png";
-import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import { useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
+import ActionMenu from "./ActionMenuPatientsDetails";
 const data = {
   name: "محمد عبدالله",
   nationalID:'25814739658',
@@ -41,7 +40,7 @@ function PatientsDetails() {
           <h2 className="text-[16px] md:text-[20px] font-Bold">عبدالله الشيخ - محمد عبدالله الشيخ</h2>
         </div>
         <div className="block ">
-          <MenuActions type={2} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID)} />
+          <ActionMenu id={params.patientsID}  />
         </div>
       </div>
 

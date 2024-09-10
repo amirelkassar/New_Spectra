@@ -27,11 +27,11 @@ function ModalType({ }) {
   };
   return (
     <div className="mainModal">
-      <div className="flex justify-center items-center mx-auto">
+      <div className="flex justify-center mb-10 mt-4 items-center mx-auto">
         {modal.type === "delete" ? (
           <DeleteModalIcon />
         ) : modal.type === "cancellation" ? (
-          <CancelDateIcon />
+          <CancelDateIcon className={'w-[170px] h-auto mdl:w-[220px]'} />
         ): modal.type === "req" ? (
           <CancelReqIcon />
         ) : (
@@ -42,13 +42,13 @@ function ModalType({ }) {
         {modal.countSelect > 1 ? getTextWithSelect() : getText()}
       </p>
 
-      <div className="actionModal flex gap-5 md:gap-8 justify-center items-center max-w-[98%] w-[470px] mx-auto mt-8 flex-wrap">
+      <div className="actionModal flex-col mdl:flex-row flex gap-5 md:gap-8 justify-center items-center max-w-[98%] w-full mdl::w-[470px] mx-auto mt-8 flex-wrap">
         <Button
           onClick={() => {
             editModal("open", false);
           }}
           className={
-            "bg-greenMain text-white h-[50px] font-bold text-[16px] md:text-[20px] border-none flex-1 min-w-[180px]"
+            "bg-greenMain text-white h-[50px] font-bold text-[16px] md:text-[20px] border-none w-full !flex-1 "
           }
         >
           نعم , متأكد
@@ -58,7 +58,7 @@ function ModalType({ }) {
             editModal("open", false);
           }}
           className={
-            "h-[50px] font-bold text-[16px] md:text-[20px]  flex-1 min-w-[180px]"
+            "h-[50px] font-bold text-[16px] md:text-[20px]  !flex-1 w-full"
           }
         >
           لا

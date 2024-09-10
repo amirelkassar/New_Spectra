@@ -6,26 +6,41 @@ import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
+import DeleteIcon from "@/assets/icons/delete";
+import useModal from "@/store/modal-slice";
 
-function ActionMenu({id}) {
+function ActionMenu({ id, type, id2 }) {
+  const { modal, editModal } = useModal();
+
   const options = [
     {
-      label: "عرض",
-      icon: <ShowIcon />,
-      link: ROUTES.ADMIN.REQUESTSID(id),
-      type: "link",
+      label: "مسح",
+      icon: <DeleteIcon />,
+      type: "btn",
+      action: () => {
+        editModal("type", "delete");
+        editModal("open", true);
+      },
+      color: "red",
     },
+   
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.REQUESTSIDEdit(id),
+      link:
+        type === "family"
+          ? ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(id)
+          : ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(
+              id,
+              id2
+            ),
       type: "link",
     },
     {
       label: "تصدير",
       icon: <ExportIcon />,
       type: "btn",
-      action: ()=>{},
+      action: () => {},
     },
 
     {

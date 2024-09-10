@@ -1,10 +1,6 @@
 import MenuActions from "@/components/menu-actions";
-import ROUTES from "@/routes";
-import { useParams } from "next/navigation";
-const GetParams = ()=>{
-  const params = useParams()
-  return params.orgId
-}
+import ActionMenu from "./ActionMenu";
+
 export const columns = [
   {
     accessorKey: "name",
@@ -21,18 +17,19 @@ export const columns = [
     header: "اخر دخول",
     id: "lastLogin",
   },
-
   {
     accessorKey: "",
     header: "",
     id: "type",
-    cell: ({row}) => {
-      const id = row.original.id
+    cell: ({ row }) => {
+      const id = row.original.id;
       return (
         <div
-          className={"flex gap-[10px] md:gap-[40px] justify-end items-start me-5 "}
+          className={
+            "flex gap-[10px] md:gap-[40px] justify-end items-start me-5 "
+          }
         >
-          <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(GetParams(),id)}/>
+          <ActionMenu type={2} id={id} />
         </div>
       );
     },
