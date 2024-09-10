@@ -334,9 +334,11 @@ export function DataTable<TData, TValue>({
                 </Table.Td>
                 {row.getVisibleCells().map((cell, i) => (
                   <Table.Td
-                    className={`py-3 first:font-Bold first:lg:text-base max-w-[280px] ${
+                    className={`py-3   first:lg:text-base max-w-[280px] ${
                       mdHide === i + 1 ? " hidden mdl:block" : ""
-                    }`}
+                    }
+                    ${i === 0 ? "font-Bold" : ""}
+                    `}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
