@@ -24,7 +24,6 @@ const dataAnalyses = [
 ];
 
 function Rumors() {
-  console.log("dfgfdg");
 
   return (
     <div>

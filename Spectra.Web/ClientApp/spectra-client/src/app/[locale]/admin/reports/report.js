@@ -6,8 +6,7 @@ import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 
 function Report({ data }) {
-  console.log(data.id);
-
+  
   return (
     <Link
       href={ROUTES.ADMIN.REPORT.REPORTID(data.id)}

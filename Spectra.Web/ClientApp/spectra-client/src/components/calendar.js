@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 function CalendarComp() {
   const params = useParams();
-  console.log(params);
+ 
   const renderEventContent = (eventInfo) => {
     return (
       <div className="flex flex-col py-4 px-2 gap-1">

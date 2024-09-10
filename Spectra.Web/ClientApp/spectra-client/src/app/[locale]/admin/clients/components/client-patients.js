@@ -41,7 +41,7 @@ const ClientPatients = () => {
   ];
   const params = useParams();
   const router = useRouter();
-  console.log(params);
+
 
   return (
     <section className="default-page grow">

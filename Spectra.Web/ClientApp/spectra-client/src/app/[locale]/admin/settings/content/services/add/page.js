@@ -13,7 +13,6 @@ function Page() {
   const [selectShow, setSelectShow] = useState(true);
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  console.log(searchParams.get("show"));
 
   return (
     <Card>

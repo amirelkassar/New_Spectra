@@ -21,8 +21,7 @@ const serviceOptions = [
 ];
 function ContractInformation({ id }) {
   const pathname = usePathname();
-  console.log(pathname);
-  console.log(ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id));
+
   const { modal, editModal } = useModal();
   const [selectedServices, setSelectedServices] = useState([]);
   const [serviceData, setServiceData] = useState({});

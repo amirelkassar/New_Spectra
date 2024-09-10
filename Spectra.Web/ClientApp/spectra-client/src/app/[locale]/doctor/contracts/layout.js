@@ -32,7 +32,6 @@ const dataChat = [
 function Layout({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  console.log(searchparams.get("chat"));
   const [active, setActive] = useState(2);
   return (
     <div className="flex flex-col ">

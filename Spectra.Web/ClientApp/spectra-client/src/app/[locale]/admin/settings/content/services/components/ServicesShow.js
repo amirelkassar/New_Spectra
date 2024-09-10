@@ -29,7 +29,7 @@ function ServicesShow() {
     );
     setSections(newSections);
   };
-  console.log(sections);
+
 
   return (
     <div>

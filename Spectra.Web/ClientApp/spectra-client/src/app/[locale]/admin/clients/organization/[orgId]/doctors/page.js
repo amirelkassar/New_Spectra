@@ -1,6 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
-import ROUTES from "@/routes";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./_components/columns";
 const data = [
@@ -86,9 +84,6 @@ const data = [
   },
 ];
 const DoctorsOrg = ({}) => {
-  const params = useParams();
-  console.log(params);
-
 
   return (
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">

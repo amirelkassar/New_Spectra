@@ -18,7 +18,7 @@ function Page() {
     setLargeFile("");
     setDataImg(URL.createObjectURL(e[0]));
   };
-  console.log(dataImg);
+
 
   return (
     <Card>

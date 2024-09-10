@@ -6,13 +6,11 @@ import doctor from "@/assets/images/placeholder-person.png";
 import Image from "next/image";
 import StarWhiteIcon from "@/assets/icons/starWhite";
 import useModal from '@/store/modal-slice'
-import Button from "@/components/button";
 function CardDoctor() {
   const {editModal}= useModal()
  
   const handleButtonClick = (e) => {
     e.stopPropagation();
-    console.log("Button clicked!");
     alert("Button clicked!");
     editModal('open', true);
     editModal('type', 'delete');

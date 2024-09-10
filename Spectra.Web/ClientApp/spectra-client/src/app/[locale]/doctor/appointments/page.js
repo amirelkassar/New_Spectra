@@ -31,7 +31,7 @@ const AppointmentsPage = () => {
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSDEFERRED),
     },
   ];
-  console.log(path);
+
 
   return (
     <div className="bg-white mdl:bg-transparent">

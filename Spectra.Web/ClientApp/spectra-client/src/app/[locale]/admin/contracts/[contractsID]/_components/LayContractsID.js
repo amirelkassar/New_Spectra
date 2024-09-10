@@ -34,7 +34,7 @@ const dataChat = [
 function LayContractsID({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  console.log(searchparams.get("chat"));
+ 
 
   return (
     <div>

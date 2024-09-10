@@ -6,7 +6,6 @@ import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 
 function Report({ data }) {
-  console.log(data.id);
 
   return (
     <Link

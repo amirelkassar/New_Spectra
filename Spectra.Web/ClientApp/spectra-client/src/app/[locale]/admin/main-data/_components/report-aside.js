@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 const MainDataAside = () => {
   const params = useParams();
   const path = usePathname();
-  console.log(params);
+
   const pages = [
     {
       name: "عقاقير",
