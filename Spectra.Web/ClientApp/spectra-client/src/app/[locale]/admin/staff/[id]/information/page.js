@@ -5,7 +5,7 @@ import DaqeqaIcon from "@/assets/icons/daqeqa";
 import BriefIcon from "@/assets/icons/brief";
 import Image from "next/image";
 import certificates from "@/assets/images/certificates.png";
-
+import DateIcon from "@/assets/icons/date";
 const data = {
   name: "احمد محمد كمال",
   spec: " اخصائى نفسى",
@@ -24,6 +24,7 @@ const data = {
     "فرط الحركة",
   ],
   star: 4,
+  date: "20/8/2022",
   rating: 281,
   bookingCode: "DR-AHMED-2024",
   allReviews: [
@@ -66,37 +67,50 @@ const data = {
   ],
 };
 const ListCertificates = [
-    {
-      id: 0,
-      image: certificates,
-      date: "20/8/2022",
-      title: "دكتوراه العلوم الطبية",
-    },
-    {
-      id: 1,
-      image: certificates,
-      date: "20/8/2022",
-      title: "دكتوراه العلوم الطبية",
-    },
-    {
-      id: 2,
-      image: certificates,
-      date: "20/8/2022",
-      title: "دكتوراه العلوم الطبية",
-    },
-    {
-      id: 3,
-      image: certificates,
-      date: "20/8/2022",
-      title: "دكتوراه العلوم الطبية",
-    },
-  ];
+  {
+    id: 0,
+    image: certificates,
+    date: "20/8/2022",
+    title: "دكتوراه العلوم الطبية",
+  },
+  {
+    id: 1,
+    image: certificates,
+    date: "20/8/2022",
+    title: "دكتوراه العلوم الطبية",
+  },
+  {
+    id: 2,
+    image: certificates,
+    date: "20/8/2022",
+    title: "دكتوراه العلوم الطبية",
+  },
+  {
+    id: 3,
+    image: certificates,
+    date: "20/8/2022",
+    title: "دكتوراه العلوم الطبية",
+  },
+];
 function page() {
   return (
     <Card>
       <h2 className="text-sm lgl:text-xl mb-8 lgl:mb-14">الوصف الوظيفى</h2>
 
       <div className="w-full">
+        <div className="flex items-start gap-4 lg:gap-5">
+          <DateIcon
+            className={"min-w-[22px] w-[22px] lg:min-w-[25px] h-auto mt-3"}
+          />
+          <div>
+            <h3 className=" text-[14px] lg:text-[16px] font-bold lg:mb-2">
+              تاريخ الانضمام
+            </h3>
+            <p className=" text-[14px] lg:text-[20px] font-normal min-h-[110px]">
+              {data.date}
+            </p>
+          </div>
+        </div>
         <div className="flex items-start gap-4 lg:gap-5">
           <BriefIcon
             className={"min-w-[22px] w-[22px] lg:min-w-[25px] h-auto mt-3"}

@@ -2,16 +2,16 @@
 import StarGoldIcon from "@/assets/icons/starGold";
 import MenuActions from "@/components/menu-actions";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import person from "@/assets/images/placeholder-person.png";
 import CallIcon from "@/assets/icons/call";
 import EmailIcon from "@/assets/icons/email";
 import SmsIcon from "@/assets/icons/sms";
-import { DatePicker } from "@mantine/dates";
-import DateIcon from "@/assets/icons/date";
-import DateIcon2 from "@/assets/icons/date2";
-import EditIcon from "@/assets/icons/edit";
 import SessionIcon from "@/assets/icons/session";
+import { Link } from "@/navigation";
+import BackIcon from "@/assets/icons/back";
+import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 const data = {
   name: "احمد محمد كمال",
   spec: "طبيب نفسى",
@@ -44,11 +44,24 @@ function StaffDetails() {
     }
     return stars;
   };
-  const [value, setValue] = useState(new Date());
-  const [ShowDate, setShowDate] = useState(true);
 
   return (
-    <div className="py-8 px-6 bg-white flex gap-5 lg:rounded-[10px] staffDetils">
+    <div className="py-8 px-6 bg-white flex flex-col gap-5 lg:rounded-[10px] staffDetils">
+      <div className="flex items-center gap-4 mb-8 justify-between">
+        <div className="flex items-center  gap-2 lg:gap-3">
+          <Link
+            href={ROUTES.ADMIN.STAFF.DASHBOARD}
+            className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          >
+            <BackIcon className={"w-full h-full"} />
+          </Link>
+          <h2 className="text-base lg:text-xl font-bold ">الموظفين</h2>
+        </div>
+        <div className="md:block hidden">
+          <ActionMenu />
+        </div>
+      </div>
+
       <div className="flex justify-center md:justify-between gap-5 flex-wrap flex-1 flex-col md:flex-row">
         <div className="flex gap-6 md:gap-[40px] flex-1 flex-wrap md:flex-nowrap ">
           <div className=" size-[120px] md:size-[228px] rounded-[10px]">
@@ -141,9 +154,6 @@ function StaffDetails() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="md:block hidden">
-        <MenuActions />
       </div>
     </div>
   );

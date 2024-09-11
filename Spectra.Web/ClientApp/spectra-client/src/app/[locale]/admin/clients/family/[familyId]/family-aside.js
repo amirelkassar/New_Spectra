@@ -14,24 +14,32 @@ const FamilyAside = () => {
       name: "بيانات عائلة الطفل",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId)||path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId) ||
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
     },
     {
       name: "المواعيد",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
     },
     {
       name: "الوصفات الطبية",
-      route: "",
-      isActive: false,
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId),
+      isActive:
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId),
+    },
+    {
+      name: " التقارير",
+      route: ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId),
+      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId),
     },
     {
       name: "المرضى / الاطفال",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId),
       isActive:
-        path ===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId)||path===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId),
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId) ||
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId),
     },
   ];
 

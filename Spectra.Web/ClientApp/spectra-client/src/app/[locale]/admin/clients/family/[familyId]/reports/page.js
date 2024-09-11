@@ -1,9 +1,8 @@
-import MenuActions from "@/components/menu-actions";
-import ReportsFiltration from "./reports-filtration";
-import imgDoctor from '../../../../assets/images/placeholder-person.png'
-import imgPatient from '../../../../assets/images/placeholder-person.png'
-import Report from "./_components/report";
-import ActionMenu from "./_components/ActionMenuPage";
+import React from "react";
+import Card from "@/components/card";
+import Report from "../../../components/report";
+import imgDoctor from "@/assets/images/placeholder-person.png";
+import imgPatient from "@/assets/images/placeholder-person.png";
 const reports = [
   {
     id: 1,
@@ -46,29 +45,21 @@ const reports = [
     patient: "عبدالله الشيخ",
     specialistPatient: " الطفل / احمد",
     imgPatient: imgPatient,
-  }
+  },
 ];
-const ReportsPage = () => {
+function page({ params }) {
+  console.log(params);
 
   return (
-    <div className="default-page">
-      <div className="flex items-start justify-between gap-6">
-        <div className="flex flex-col mb-1 flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6">
-          <h2 className="headTitleDash">تقارير</h2>
-        </div>
-        <ActionMenu />
-      </div>
-      <ReportsFiltration />
+    <Card>
+      <h2 className="text-base mb-7 lg:text-xl font-bold">التقارير </h2>
       <div className="flex gap-6 flex-wrap mt-9">
-        {
-          reports.map((report,i)=>{
-            return  <Report key={i} data={report} />
-          })
-        }
-       
+        {reports.map((report, i) => {
+          return <Report key={i} data={report} />;
+        })}
       </div>
-    </div>
+    </Card>
   );
-};
+}
 
-export default ReportsPage;
+export default page;

@@ -8,12 +8,9 @@ import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
-import { useParams } from "next/navigation";
 
-function ActionMenu({ id }) {
+function ActionMenu({ id,type }) {
   const { modal, editModal } = useModal();
-  const params = useParams()
-
   const options = [
     {
       label: "مسح",
@@ -28,13 +25,13 @@ function ActionMenu({ id }) {
     {
       label: "عرض",
       icon: <ShowIcon />,
-      link: ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTS(params.orgId,id),
+      link: ROUTES.ADMIN.STAFF.STAFFID(id)+'?type='+type,
       type: "link",
     },
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(id)+"?edit=true",
+      link: ROUTES.ADMIN.REQUESTSIDEdit(id),
       type: "link",
     },
     {

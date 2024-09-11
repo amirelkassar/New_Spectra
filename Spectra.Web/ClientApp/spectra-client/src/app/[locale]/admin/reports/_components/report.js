@@ -1,12 +1,11 @@
-import MenuActions from "@/components/menu-actions";
 import Image from "next/image";
 import React from "react";
-import man from "../../../../assets/images/placeholder-person.png";
+import man from "@/assets/images/placeholder-person.png";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 
 function Report({ data }) {
-  
   return (
     <Link
       href={ROUTES.ADMIN.REPORT.REPORTID(data.id)}
@@ -30,7 +29,7 @@ function Report({ data }) {
             </span>
           )}
         </div>
-        <MenuActions />
+        <ActionMenu />
       </div>
       <h4 className="  text-[16px] border-b border-grayDark/50 pb-4 md:text-[20px] font-Bold mb-6">
         تقرير تحليل صحي شامل

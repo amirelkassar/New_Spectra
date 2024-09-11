@@ -100,10 +100,10 @@ const ClientPatients = () => {
             className=" border-2 border-blueLight rounded-xl  relative"
           >
             <div className=" absolute left-4 top-[18px]">
-              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(patient.id)} />
+              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)+'/edit'} />
             </div>
             <Link
-              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)}
+              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)}
               className=" p-5 flex flex-col gap-2 "
             >
               <div className="size-28 rounded-full flex items-center justify-center overflow-hidden self-center">
