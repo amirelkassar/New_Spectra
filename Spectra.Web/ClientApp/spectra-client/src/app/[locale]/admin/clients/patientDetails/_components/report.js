@@ -1,15 +1,15 @@
-import MenuActions from "@/components/menu-actions";
+
 import Image from "next/image";
 import React from "react";
 import man from "@/assets/images/placeholder-person.png";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 
-function Report({ data }) {
+function Report({ data ,id}) {
   
   return (
     <Link
-      href={ROUTES.ADMIN.REPORT.REPORTID(data.id)}
+      href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTSID(id,data.id)}
       className={` rounded-[10px] ${
         data.state === "new" ? "bg-[#F1FCFF]" : "bg-grayLight"
       } min-w-[100%]  md:min-w-[calc(50%-20px)] w-full max-w-[350px] p-3 ps-6 border-s-4 flex-1  border-greenMain`}
@@ -30,7 +30,7 @@ function Report({ data }) {
             </span>
           )}
         </div>
-        <MenuActions />
+     
       </div>
       <h4 className="  text-[16px] border-b border-grayDark/50 pb-4 md:text-[20px] font-Bold mb-6">
         تقرير تحليل صحي شامل

@@ -47,13 +47,15 @@ const reports = [
       imgPatient: imgPatient,
     }
   ];
-function page() {
+function page({params}) {
+  console.log(params);
+  
   return (
     <Card>
       <div className="flex gap-6 flex-wrap mt-9">
         {
           reports.map((report,i)=>{
-            return  <Report key={i} data={report} />
+            return  <Report key={i} data={report} id={params.patientsID}/>
           })
         }
        

@@ -20,13 +20,20 @@ const PatientsDetilsAside = () => {
     },
     {
       name: "الوصفات الطبية ",
-      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(params.patientsID),
-      isActive: path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(params.patientsID),
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(
+        params.patientsID
+      ),
+      isActive:
+        path ===
+        ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(params.patientsID),
     },
     {
       name: "تقارير ",
       route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTS(params.patientsID),
-      isActive: path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTS(params.patientsID),
+      isActive:
+        path ===
+          ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTS(params.patientsID) ||
+        path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTSID(params.patientsID, params.reportID),
     },
   ];
   return (

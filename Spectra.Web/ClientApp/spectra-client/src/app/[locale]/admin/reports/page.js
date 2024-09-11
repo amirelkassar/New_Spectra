@@ -3,51 +3,52 @@ import ReportsFiltration from "./reports-filtration";
 import imgDoctor from '../../../../assets/images/placeholder-person.png'
 import imgPatient from '../../../../assets/images/placeholder-person.png'
 import Report from "./report";
+const reports = [
+  {
+    id: 1,
+    state: "new",
+    number: "2325",
+    date: "20/2/2024",
+    specialist: "احمد محمد كمال",
+    typeReport: "تقرير تحليل صحي شامل",
+    doctor: "احمد محمد كمال",
+    specialistDoctor: "اخصائى نفسى",
+    imgdoctor: imgDoctor,
+    patient: "عبدالله الشيخ",
+    specialistPatient: " الطفل / احمد",
+    imgPatient: imgPatient,
+  },
+  {
+    id: 2,
+    state: "old",
+    number: "2325",
+    date: "20/2/2024",
+    specialist: "احمد محمد كمال",
+    typeReport: "تقرير تحليل صحي شامل",
+    doctor: "احمد محمد كمال",
+    specialistDoctor: "اخصائى نفسى",
+    imgdoctor: imgDoctor,
+    patient: "عبدالله الشيخ",
+    specialistPatient: " الطفل / احمد",
+    imgPatient: imgPatient,
+  },
+  {
+    id: 3,
+    state: "old",
+    number: "2325",
+    date: "20/2/2024",
+    specialist: "احمد محمد كمال",
+    typeReport: "تقرير تحليل صحي شامل",
+    doctor: "احمد محمد كمال",
+    specialistDoctor: "اخصائى نفسى",
+    imgdoctor: imgDoctor,
+    patient: "عبدالله الشيخ",
+    specialistPatient: " الطفل / احمد",
+    imgPatient: imgPatient,
+  }
+];
 const ReportsPage = () => {
-  const reports = [
-    {
-      id: 1,
-      state: "new",
-      number: "2325",
-      date: "20/2/2024",
-      specialist: "احمد محمد كمال",
-      typeReport: "تقرير تحليل صحي شامل",
-      doctor: "احمد محمد كمال",
-      specialistDoctor: "اخصائى نفسى",
-      imgdoctor: imgDoctor,
-      patient: "عبدالله الشيخ",
-      specialistPatient: " الطفل / احمد",
-      imgPatient: imgPatient,
-    },
-    {
-      id: 2,
-      state: "old",
-      number: "2325",
-      date: "20/2/2024",
-      specialist: "احمد محمد كمال",
-      typeReport: "تقرير تحليل صحي شامل",
-      doctor: "احمد محمد كمال",
-      specialistDoctor: "اخصائى نفسى",
-      imgdoctor: imgDoctor,
-      patient: "عبدالله الشيخ",
-      specialistPatient: " الطفل / احمد",
-      imgPatient: imgPatient,
-    },
-    {
-      id: 3,
-      state: "old",
-      number: "2325",
-      date: "20/2/2024",
-      specialist: "احمد محمد كمال",
-      typeReport: "تقرير تحليل صحي شامل",
-      doctor: "احمد محمد كمال",
-      specialistDoctor: "اخصائى نفسى",
-      imgdoctor: imgDoctor,
-      patient: "عبدالله الشيخ",
-      specialistPatient: " الطفل / احمد",
-      imgPatient: imgPatient,
-    }
-  ];
+
   return (
     <div className="default-page">
       <div className="flex items-start justify-between gap-6">
