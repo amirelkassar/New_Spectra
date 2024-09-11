@@ -1,5 +1,5 @@
-import MenuActions from "@/components/menu-actions";
 import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 
 export const columns = [
   {
@@ -47,8 +47,9 @@ export const columns = [
     cell: ({ getValue, row }) => {
       const id = row.original.id;
       return (
-        <MenuActions
+        <ActionMenu
           type={2}
+          id={id}
           path={ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)}
           pathEdit={ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)}
         />

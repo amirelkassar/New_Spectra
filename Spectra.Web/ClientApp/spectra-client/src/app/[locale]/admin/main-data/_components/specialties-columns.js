@@ -1,4 +1,4 @@
-import MenuActions from "@/components/menu-actions";
+import ActionMenu from "./ActionMenuSpecialties";
 
 export const SpecialtiesColumns = [
   {
@@ -17,7 +17,7 @@ export const SpecialtiesColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <MenuActions />;
+      return <ActionMenu />;
     },
   },
 ];

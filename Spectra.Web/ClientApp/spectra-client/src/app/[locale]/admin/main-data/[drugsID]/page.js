@@ -4,18 +4,21 @@ import ROUTES from "@/routes";
 import Image from "next/image";
 import React from "react";
 import imgDrugs from "@/assets/images/drugs.png";
-import man from "@/assets/images/placeholder-person.png";
+import ActionMenu from "../_components/ActionMenuDetails";
 function page() {
   return (
     <div>
-      <div className="flex mb-10   items-center gap-4 ">
-        <Link
-          href={ROUTES.ADMIN.DATAMAIN.HOME}
-          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
-        >
-          <BackIcon className={"w-full h-full"} />
-        </Link>
-        <h2 className="headTitleDash">العقاقير</h2>
+      <div className="flex items-center  mb-10 justify-between gap-4">
+        <div className="flex   items-center gap-4 ">
+          <Link
+            href={ROUTES.ADMIN.DATAMAIN.HOME}
+            className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          >
+            <BackIcon className={"w-full h-full"} />
+          </Link>
+          <h2 className="headTitleDash">العقاقير</h2>
+        </div>
+        <ActionMenu />
       </div>
       <div className="flex flex-col gap-5">
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">

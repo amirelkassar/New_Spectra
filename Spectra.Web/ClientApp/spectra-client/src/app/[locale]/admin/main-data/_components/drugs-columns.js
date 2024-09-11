@@ -1,6 +1,6 @@
-import MenuActions from "@/components/menu-actions";
 import ROUTES from "@/routes";
 import Image from "next/image";
+import ActionMenu from "./ActionMenu";
 
 export const DrugsColumns = [
   {
@@ -45,9 +45,7 @@ export const DrugsColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return (
-        <MenuActions type={2} path={ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(id)} />
-      );
+      return <ActionMenu id={id} />;
     },
   },
 ];

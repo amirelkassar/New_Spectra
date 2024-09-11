@@ -1,6 +1,6 @@
-import MenuActions from "@/components/menu-actions";
 import AnalysisIcon from "@/assets/icons/analysis";
 import RumorsIcon from "@/assets/icons/rumors";
+import ActionMenu from "./ActionMenuAnalysis";
 export const ProceduresColumns = [
   {
     accessorKey: "name",
@@ -29,7 +29,7 @@ export const ProceduresColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <MenuActions />;
+      return <ActionMenu />;
     },
   },
 ];
