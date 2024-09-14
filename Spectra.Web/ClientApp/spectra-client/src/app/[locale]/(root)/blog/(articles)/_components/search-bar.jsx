@@ -25,7 +25,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className='container mx-auto w-full max-w-5xl mdl:mb-10 mb-5'>
+    <div className='container mx-auto w-full max-w-[1400px] mdl:mb-10 mb-5'>
       <form
         onSubmit={handleSearch}
         className='flex items-center mdl:gap-5 gap-2 w-full'

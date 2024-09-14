@@ -17,7 +17,7 @@ export const Section = ({
       role='region'
       {...props}
       className={cn(
-        'mdl:py-20 py-10 w-full text-black container max-w-5xl mx-auto',
+        'mdl:py-20 py-10 w-full px-5 xl:px-14 text-black  max-w-[1400px] mx-auto',
         className
       )}
     >

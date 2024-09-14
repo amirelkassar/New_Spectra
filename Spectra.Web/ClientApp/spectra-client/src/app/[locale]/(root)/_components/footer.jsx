@@ -67,7 +67,7 @@ export const Footer = () => {
       </div>
 
       {/* NAV & SOCIAL */}
-      <div className='py-3 px-16 lg:px-3 flex items-center justify-between container max-w-5xl mx-auto'>
+      <div className='py-3 px-16 lg:px-3 flex items-center justify-between container max-w-[1400px] mx-auto'>
         <Nav
           navLinks={NAVDATA}
           className='hidden lg:block'
@@ -92,7 +92,7 @@ export const Footer = () => {
       </div>
 
       {/* LOGO & PARAGRAPH */}
-      <div className='flex gap-5 flex-col mdl:flex-row items-center mdl:justify-between container max-w-5xl mx-auto py-3'>
+      <div className='flex gap-5 flex-col mdl:flex-row items-center mdl:justify-between container max-w-[1400px] mx-auto py-3'>
         <Link href={ROUTES.ROOT.HOME}>
           <Logo className='w-28 h-11' />
         </Link>
@@ -113,7 +113,7 @@ export const Footer = () => {
       </div>
 
       {/* COPYRIGHT */}
-      <div className='text-xs mdl:text-base text-black container max-w-5xl mx-auto py-5 border-t border-t-grayMedium flex gap-10 items-center justify-center flex-wrap'>
+      <div className='text-xs mdl:text-base text-black container max-w-[1400px] mx-auto py-5 border-t border-t-grayMedium flex gap-10 items-center justify-center flex-wrap'>
         <Link href='#'>سياسة الخصوصية</Link>
 
         <Link href='#'>سياسة ملفات تعريف الارتباط</Link>

@@ -19,12 +19,12 @@ export const Nav = ({
   return (
     <nav
       className={cn(
-        'xl:flex hidden items-center gap-x-6',
+        'xl:flex hidden flex-1 justify-between items-center gap-x-6',
         className
       )}
       aria-label='Main navigation'
     >
-      <div className='flex items-center gap-x-6'>
+      <div className='flex items-center flex-1 justify-center gap-x-6'>
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -45,7 +45,7 @@ export const Nav = ({
       </div>
 
       {showAuth && (
-        <div className='flex items-center gap-x-6'>
+        <div className='flex items-center  gap-x-6'>
           <RegisterModal />
 
           <Link

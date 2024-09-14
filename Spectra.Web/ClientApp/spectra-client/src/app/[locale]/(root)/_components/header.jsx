@@ -48,7 +48,7 @@ export const Header = async () => {
     <header
       role='banner'
       aria-label='Site header'
-      className='w-full flex py-8 z-50 xl:max-w-7xl mx-auto gap-x-12 items-center max-w-5xl container justify-between xl:justify-normal absolute top-0 end-1/2 rtl:-translate-x-1/2 ltr:translate-x-1/2'
+      className='w-full flex py-8 z-50 xl:max-w-screen-2xl mx-auto gap-x-12 items-center max-w-[1400px] container justify-between xl:justify-normal absolute top-0 end-1/2 rtl:-translate-x-1/2 ltr:translate-x-1/2'
     >
       <Link href={ROUTES.ROOT.HOME}>
         <Logo className='w-24 h-10' />

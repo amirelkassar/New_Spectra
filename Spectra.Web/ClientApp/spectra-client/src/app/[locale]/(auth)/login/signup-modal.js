@@ -57,7 +57,7 @@ const SignupModal = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         containerClassName={
-          "container max-w-5xl bg-white rounded-3xl py-5 mdl:py-16 flex flex-col gap-8 mdl:gap-14 items-center"
+          "container max-w-[1400px] bg-white rounded-3xl py-5 mdl:py-16 flex flex-col gap-8 mdl:gap-14 items-center"
         }
       >
         <h1 className="text-center">اهلا وسهلا , اختر نوع المستخدم</h1>

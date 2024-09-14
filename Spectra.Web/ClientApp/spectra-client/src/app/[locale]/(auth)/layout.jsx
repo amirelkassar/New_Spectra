@@ -10,13 +10,13 @@ import authImage from '@/assets/images/auth.png';
 export default function authLayout({ children }) {
   return (
     <>
-      <header className='container py-8 w-full max-w-5xl mx-auto'>
+      <header className='container py-8 w-full max-w-[1400px] mx-auto'>
         <Link href={ROUTES.HOME}>
           <Logo />
         </Link>
       </header>
 
-      <main className='w-full mdl:flex mdl:gap-10 mdl:*:flex-1 text-black container max-w-5xl mx-auto'>
+      <main className='w-full mdl:flex mdl:gap-10 mdl:*:flex-1 text-black container max-w-[1400px] mx-auto'>
         {children}
 
         <section className='mx-auto w-fit hidden mdl:flex mdl:flex-col mdl:justify-between gap-5'>
