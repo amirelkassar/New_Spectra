@@ -9,7 +9,7 @@ import ModalContacts from "./comp_modal/modalContacts";
 import ModalContactsState from "./comp_modal/modalContactsState";
 import UserModal from "./comp_modal/permissions-modal/userModal";
 import useModal from "@/store/modal-slice";
-
+import AddLevelModal from './comp_modal/permissions-modal/AddLevelModal'
 function ModalReq({ id }) {
   const { modal, editModal } = useModal();
 
@@ -41,6 +41,8 @@ function ModalReq({ id }) {
         <ModalContactsState accept={false} />
       ) : modal.type === "contractsAccept" ? (
         <ModalContactsState accept={true} />
+      ) : modal.type === "addLevelPermissions" ? (
+        <AddLevelModal accept={true} />
       ) : (
         <ModalType state={modal.type} />
       )}

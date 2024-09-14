@@ -1,8 +1,8 @@
-import MenuActions from "@/components/menu-actions";
 import StarGoldIcon from "@/assets/icons/starGold";
 import Image from "next/image";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 const getStar = (num) => {
   const stars = [];
   for (let i = 1; i <= num; i++) {
@@ -60,7 +60,8 @@ export const columns = [
   {
     id: "actions",
     cell: ({ getValue, row }) => {
-      return <MenuActions type={2} path={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(row.original.id)} pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(row.original.id)} />;
+      const id = row.original.id;
+      return <ActionMenu id={id} />;
     },
   },
 ];

@@ -7,7 +7,7 @@ import ROUTES from "@/routes";
 import React, { useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect, Textarea, TextInput } from "@mantine/core";
+import { MultiSelect, Textarea } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";

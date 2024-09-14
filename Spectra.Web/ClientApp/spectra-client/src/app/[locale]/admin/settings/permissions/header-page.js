@@ -1,7 +1,7 @@
 import BackIcon from "@/assets/icons/back";
-import MenuActions from "@/components/menu-actions";
 import { Link } from "@/navigation";
 import React from "react";
+import ActionMenu from "./_components/ActionMenuPage";
 
 function HeaderPage({ linkBack, title }) {
   return (
@@ -15,7 +15,7 @@ function HeaderPage({ linkBack, title }) {
         </Link>
         <h2 className="headTitleDash">{title}</h2>
       </div>
-      <MenuActions type={2} />
+      <ActionMenu  />
     </div>
   );
 }

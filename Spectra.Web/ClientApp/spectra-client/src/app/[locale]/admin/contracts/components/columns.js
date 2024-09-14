@@ -1,11 +1,10 @@
-import ContractsIcon from "@/assets/icons/contracts";
 import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
 import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
-import MenuActions from "@/components/menu-actions";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import Image from "next/image";
+import ActionMenu from "./ActionMenu";
 
 export const columns = [
   {
@@ -141,9 +140,7 @@ export const columns = [
             {status === "manger" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
                 <Button
-                  onClick={() => {
-                 
-                  }}
+                  onClick={() => {}}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
@@ -166,9 +163,7 @@ export const columns = [
             {status === "admin" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
                 <Button
-                  onClick={() => {
-                    
-                  }}
+                  onClick={() => {}}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
@@ -191,9 +186,7 @@ export const columns = [
             {status === "reviewed" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
                 <Button
-                  onClick={() => {
-                    
-                  }}
+                  onClick={() => {}}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
@@ -237,10 +230,7 @@ export const columns = [
             )}
           </div>
 
-          <MenuActions
-            type={2}
-            path={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id)}
-          />
+          <ActionMenu id={id} />
         </div>
       );
     },

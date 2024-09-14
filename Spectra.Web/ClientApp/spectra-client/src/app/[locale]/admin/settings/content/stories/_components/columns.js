@@ -1,17 +1,8 @@
-import MenuActions from "@/components/menu-actions";
-import StarGoldIcon from "@/assets/icons/starGold";
 import Image from "next/image";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-const getStar = (num) => {
-  const stars = [];
-  for (let i = 1; i <= num; i++) {
-    stars.push(
-      <StarGoldIcon key={i} className={"w-[14px] lg:w-[18px] h-auto"} />
-    );
-  }
-  return stars;
-};
+import ActionMenu from "./ActionMenu";
+
 export const columns = [
   {
     accessorKey: "name",
@@ -54,13 +45,7 @@ export const columns = [
     id: "actions",
     cell: ({ getValue, row }) => {
       const id = row.original.id;
-      return (
-        <MenuActions
-          type={2}
-          path={ROUTES.ADMIN.SETTINGS.CONTENT.STORIESID(id)}
-          pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.STORIESID(id)}
-        />
-      );
+      return <ActionMenu id={id} />;
     },
   },
 ];
