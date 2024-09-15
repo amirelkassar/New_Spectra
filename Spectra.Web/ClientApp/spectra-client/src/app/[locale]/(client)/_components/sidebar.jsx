@@ -142,7 +142,7 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-const NavLinks = React.memo(({ link }) => {
+const NavLinks = (({ link }) => {
   const { isOpen } = useSidebar();
 
   return (

@@ -1,14 +1,11 @@
 import React from "react";
-import MenuActions from "@/components/menu-actions";
 import Button from "@/components/button";
 import AcceptIcon from "@/assets/icons/accept";
 import RefuseIcon from "@/assets/icons/refuse";
 import useModal from "@/store/modal-slice";
-import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 function RequestAction({id}) {
   const { modal, editModal } = useModal();
-  console.log(id);
-  
   return (
     <div
       className={"   flex  justify-end items-center  gap-3 lg:gap-5  "}
@@ -38,7 +35,7 @@ function RequestAction({id}) {
         رفض
       </Button>
 
-      <MenuActions type={2} path={ROUTES.ADMIN.REQUESTSID(id)}/>
+      <ActionMenu id={id}/>
     </div>
   );
 }

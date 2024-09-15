@@ -2,9 +2,16 @@
 import DateIcon2 from "@/assets/icons/date2";
 import { Link, usePathname } from "@/navigation";
 import React, { useState } from "react";
-import AppoFilteration from "../appo-filteration";
 import ROUTES from "@/routes";
-import TableComponents from "@/components/table-comp";
+import { DataTable } from "@/components/data-table";
+import { columns } from "../_components/columnsCancelled";
+import BackIcon from "@/assets/icons/back";
+const FilterOptions = [
+  { label: "الاستشارات الفردية", icon: null, key: "1" },
+  { label: "خدمة الكشف المبكر", icon: null, key: "2" },
+  { label: "فريق التشخيص متعدد التخصصات", icon: null, key: "3" },
+  { label: "الخدمات التدريبية والتاهيلية", icon: null, key: "4" },
+];
 const data = [
   {
     id: 0,
@@ -97,12 +104,21 @@ const data = [
     doctor: "عبدالله الشيخ",
     statu: "تمت",
   },
-]
+];
 function AppointmentsCancelledPage() {
-;
   const path = usePathname();
 
   const AppointmentsLinks = [
+    {
+      name: "المواعيد القادمة",
+      route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
+      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSUPCOMING),
+    },
+    {
+      name: "المواعيد السابقة",
+      route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
+      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSPREVIOUS),
+    },
     {
       name: "المواعيد الملغاة",
       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
@@ -119,7 +135,16 @@ function AppointmentsCancelledPage() {
     <div className="default-page">
       <div className="  mb-4 md:mb-9 pt-3 px-5 md:px-2">
         <div className=" flex  items-center justify-between gap-4 flex-wrap ">
-          <h2 className="  mdl:text-[20px] text-[14px] ">المواعيد الملغاة</h2>
+          <div className="flex mb-10   items-center gap-4 ">
+            <Link
+              href={ROUTES.DOCTOR.APPOINTMENTS}
+              className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+            >
+              <BackIcon className={"w-full h-full"} />
+            </Link>
+            <h2 className="  mdl:text-[20px] text-[14px] ">المواعيد الملغاة</h2>
+          </div>
+
           <button
             className={`
               bg-greenMain
@@ -155,21 +180,14 @@ function AppointmentsCancelledPage() {
           );
         })}
       </div>
-      <AppoFilteration />
-      <TableComponents
-        colNum={6}
-        hide={5}
-        hide2={3}
-        colNumSmall={4}
+      <DataTable
         data={data}
-        dataLine={1}
-        header={["الاسم", "اسم الطفل", "عدد الاطفال", "التاريخ", "الميعاد", ""]}
-        order={["name", "patientName", "numChild", "date", "time", "Req&Res"]}
-        selectPage={selected}
-        setSelected={setSelected}
-        type={1}
-        route={ROUTES.DOCTOR.APPOINTMENTS}
-        reqType={"rejected"}
+        columns={columns}
+        filter="buttons"
+        filterData={FilterOptions}
+        filterBy="patientDiagnosis"
+        filterText="فلتر بالنوع"
+        IsWidth
       />
     </div>
   );

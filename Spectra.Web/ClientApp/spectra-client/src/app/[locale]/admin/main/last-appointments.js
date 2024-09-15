@@ -114,7 +114,7 @@ const LastAppointments = () => {
           <ArrowLeft />
         </Link>
       </div>  
-      <DataTable IsWidth={true} data={data} columns={columns} />
+      <DataTable  data={data} columns={columns} />
     </div>
   );
 };

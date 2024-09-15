@@ -7,6 +7,7 @@ import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { useParams } from "next/navigation";
+import ActionMenu from "./ActionMenuPatients";
 
 const ClientPatients = () => {
   const patients = [
@@ -40,7 +41,7 @@ const ClientPatients = () => {
   ];
   const params = useParams();
   const router = useRouter();
-  console.log(params);
+
 
   return (
     <section className="default-page grow">
@@ -55,13 +56,12 @@ const ClientPatients = () => {
             <BackIcon className={"w-full h-full"} />
           </button>
           <h2>عبدالله الشيخ</h2>
-          <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
-            <PlusInsideCircleIcon />
-            <p className="text-[12px] md:text-[16px] font-bold"> أضافة طفل</p>
-          </button>
+        
         </div>
-        <MenuActions
-          type={2}
+        <ActionMenu
+          type={params.orgId ? "organization" : "family"}
+          id={params.orgId?params.orgId:params.familyId}
+          id2={params.clientID}
           pathEdit={
             params.orgId
               ? ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID)
@@ -100,10 +100,10 @@ const ClientPatients = () => {
             className=" border-2 border-blueLight rounded-xl  relative"
           >
             <div className=" absolute left-4 top-[18px]">
-              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(patient.id)} />
+              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)+'/edit'} />
             </div>
             <Link
-              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)}
+              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)}
               className=" p-5 flex flex-col gap-2 "
             >
               <div className="size-28 rounded-full flex items-center justify-center overflow-hidden self-center">

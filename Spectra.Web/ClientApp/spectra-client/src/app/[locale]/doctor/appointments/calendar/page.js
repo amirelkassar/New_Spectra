@@ -9,7 +9,7 @@ function page() {
     <Card>
       <div className="flex mb-10   items-center gap-4 ">
         <Link
-          href={ROUTES.ADMIN.DATAMAIN.HOME}
+          href={ROUTES.DOCTOR.APPOINTMENTS}
           className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
         >
           <BackIcon className={"w-full h-full"} />

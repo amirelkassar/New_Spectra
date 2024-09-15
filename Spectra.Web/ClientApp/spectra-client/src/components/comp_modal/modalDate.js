@@ -7,10 +7,18 @@ import Button from "../button";
 import SearchIcon from "@/assets/icons/search";
 import useModal from "@/store/modal-slice";
 
+const times = [
+  { id: 1, time: "12:00 م" },
+  { id: 2, time: "1:00 م" },
+  { id: 3, time: "5:00 م" },
+  { id: 4, time: "8:00 م" },
+  { id: 5, time: "10:00 ص" },
+  { id: 6, time: "8:00 ص" },
+];
 function ModalDate({ id }) {
   const [valueDate, setValueDate] = useState();
   const { modal, editModal } = useModal();
-
+  const [selectedTime, setSelectedTime] = useState(null);
   const ref = useRef(null);
   const pickerControl = (
     <ActionIcon
@@ -65,6 +73,24 @@ function ModalDate({ id }) {
         <DatePicker onChange={setValueDate} size="md" />
       </div>
       <h4 className=" text-[14px] md:text-[20px] font-Bold   mb-9">التوقيت</h4>
+      <div className=" flex flex-wrap gap-5 mb-10">
+        {times.map((time, i) => {
+          return (
+            <div
+              key={i}
+              onClick={() => setSelectedTime(time.id)}
+              className={` border-2 ${
+                selectedTime === time.id
+                  ? "border-greenMain"
+                  : "border-grayLight"
+              }  rounded-lg flex items-center justify-center px-6 lg:px-8 py-3 lg:py-5 cursor-pointer duration-200 hover:shadow-md w-fit`}
+            >
+              <p className="text-sm lg:text-xl font-Regular">{time.time}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <div className="boxDate flex items-center justify-center">
         <TimeInput
           size="md"
@@ -73,18 +99,20 @@ function ModalDate({ id }) {
           className="w-[100%] max-w-[270px] mx-auto"
         />
       </div>
+      <p className="text-[12px] lg:text-base font-Regular mt-12">
+        جميع الأوقات بتوقيت السعودية
+      </p>
       <div>
         <h4 className=" text-[14px] md:text-[20px] font-Bold mb-3  mt-9">
           اسم الطبيب
         </h4>
         <div className="h-[60px] w-[100%] relative outline-greenMain flex border-greenMain border rounded-[10px] items-center px-5">
-            <div className="iconSearchModal ">
-                <SearchIcon/>
-            </div>
+          <div className="iconSearchModal ">
+            <SearchIcon />
+          </div>
           <input
             type="text"
             className="grow block !outline-none   rounded-none px-5  flex-1 h-[100%] "
-           
           />
         </div>
         <Button

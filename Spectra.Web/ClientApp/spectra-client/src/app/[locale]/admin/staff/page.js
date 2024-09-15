@@ -1,7 +1,7 @@
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import React from "react";
-import StaffTable from "./staff-table";
-import MenuActions from "@/components/menu-actions";
+import StaffTable from "./components/staff-table";
+import ActionMenu from "./components/ActionMenuPage";
 
 function page() {
   return (
@@ -14,7 +14,7 @@ function page() {
             <p className=" text-[14px] md:text-[16px] font-bold">أضافة موظف </p>
           </button>
         </div>
-        <MenuActions/>
+        <ActionMenu />
       </div>
       <StaffTable />
     </div>

@@ -3,7 +3,7 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+
 import React, { useState } from "react";
 import { Collapse } from "@mantine/core";
 import Appointments from "@/assets/icons/appointments";
@@ -16,7 +16,7 @@ import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import ContractsIcon from "@/assets/icons/contracts";
 import DatabaseIcon from "@/assets/icons/database";
 
@@ -30,7 +30,7 @@ const Aside = () => {
     {
       name: "الرئيسية",
       route: ROUTES.ADMIN.MAIN,
-      isActive: path.includes(ROUTES.ADMIN.MAIN),
+      isActive: path=== ROUTES.ADMIN.MAIN,
       icon: <MainIcon />,
     },
     {

@@ -1,5 +1,5 @@
-import MenuActions from "@/components/menu-actions";
 import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenuDiagnostics";
 export const DiagnosticsColumns = [
   {
     accessorKey: "name",
@@ -22,7 +22,7 @@ export const DiagnosticsColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <MenuActions type={2} path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id)} />;
+      return <ActionMenu id={id}  />;
     },
   },
 ];

@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import ReportsTable from "../report-table";
 import MenuActions from "@/components/menu-actions";
 import LinerChart from "@/components/liner-chart";
-import ReportAside from "../report-aside";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
@@ -122,7 +120,7 @@ function Page() {
                 setYear(year + 1);
               }}
             >
-              <ArrowNav path="#010036" className={"w-[7px]"} />
+              <ArrowNav fill="#010036" className={"w-[7px]"} />
             </button>
             <p className="text-center font-extrabold  text-[14px] mdl:text-[20px]">
               {" "}
@@ -134,7 +132,7 @@ function Page() {
                 setYear(year - 1);
               }}
             >
-              <ArrowLeftMainGreen path="#010036" className={"w-[7px]"} />
+              <ArrowLeftMainGreen fill="#010036" className={"w-[7px]"} />
             </button>
           </div>
         </div>

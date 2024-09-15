@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import DoctorInfo from "../components/doctorInfo";
 import MenuActions from "@/components/menu-actions";
-import { Link } from "@/navigation";
-import BackIcon from "@/assets/icons/back";
-import ROUTES from "@/routes";
 import doctorImg from "@/assets/images/placeholder-person.png";
-import ProfileFilteration from "../components/profile-filteration";
-import TableComponents from "@/components/table-comp";
+import { DataTable } from "@/components/data-table";
+import { columns } from "../components/columns_prescriptions";
+import PillsIcon from "@/assets/icons/pills";
+import TherapyIcon from "@/assets/icons/therapy";
 
 function Page() {
   const data = {
@@ -89,7 +88,22 @@ function Page() {
     },
   ];
   const [selected, setSelected] = useState([]);
-
+  const FilterOptions = [
+    {
+      label: "عقاقير",
+      icon: (
+        <PillsIcon className={"w-[10px] lg:w-[20px] h-[12px] lg:h-[20px]"} />
+      ),
+      key: "ستيرال",
+    },
+    {
+      label: "توصيات",
+      icon: (
+        <TherapyIcon className={"w-[10px] lg:w-[20px] h-[12px] lg:h-[20px]"} />
+      ),
+      key: "تربوية",
+    },
+  ];
   return (
     <div className="flex-1 w-full flex flex-col gap-7">
       <div className="default-page flex-1  w-full">
@@ -101,16 +115,14 @@ function Page() {
         <DoctorInfo data={data} />
       </div>
       <div className="default-page flex-1  w-full">
-        <ProfileFilteration />
-        <TableComponents
+      
+        <DataTable
           data={dataTable}
-          colNum={5}
-          dataLine={1}
-          header={["رقم الوصفة", "اسم المريض", "التاريخ", "الوصفة", ""]}
-          order={["recipeNumber", "childName", "date", "recipe", ""]}
-          selectPage={selected}
-          setSelected={setSelected}
-          type={2}
+          columns={columns}
+          filterBy="recipe"
+          filterData={FilterOptions}
+          filter="buttons"
+          filterText="فلتر بالنوع"
         />
       </div>
     </div>

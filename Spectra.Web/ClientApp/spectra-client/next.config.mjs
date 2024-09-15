@@ -3,8 +3,16 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+  optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3-alpha-sig.figma.com',
+      },
+    ],
+  },
+}
 
 export default withNextIntl(nextConfig);

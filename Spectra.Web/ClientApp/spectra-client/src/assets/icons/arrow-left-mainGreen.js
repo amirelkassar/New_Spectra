@@ -1,4 +1,7 @@
-const ArrowLeftMainGreen = ({ className,path='#10B0C1' }) => {
+const ArrowLeftMainGreen = ({
+  className = '',
+  fill = '#10B0C1',
+}) => {
   return (
     <svg
       width={13}
@@ -10,7 +13,7 @@ const ArrowLeftMainGreen = ({ className,path='#10B0C1' }) => {
     >
       <path
         d='M11.5 2L3 11L11.5 20.5'
-        stroke={path}
+        stroke={fill}
         strokeWidth={3}
         strokeLinecap='round'
       />

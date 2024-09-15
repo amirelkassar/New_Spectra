@@ -11,16 +11,24 @@ const icons: Icon[] = getIcons();
 
 const IconsDemo: React.FC = () => {
   return (
-    <div>
+    <div className='bg-slate-300'>
       <h1>Icons Demo</h1>
       <div style={{ display: 'block' }}>
         {icons.map((icon, index) => {
           const IconComponent = dynamic(() =>
-            import(`src/assets/icons/${icon.name}`).then((mod) => mod.default)
+            import(`src/assets/icons/${icon.name}`).then(
+              (mod) => mod.default
+            )
           );
 
           return (
-            <div key={index} style={{ margin: '10px', textAlign: 'center' }}>
+            <div
+              key={index}
+              style={{
+                margin: '10px',
+                textAlign: 'center',
+              }}
+            >
               <span className='size-10'>
                 <IconComponent />
               </span>

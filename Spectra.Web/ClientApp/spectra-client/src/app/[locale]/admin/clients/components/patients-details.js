@@ -1,15 +1,14 @@
 "use client";
 import DateIcon from "@/assets/icons/date";
 import DateIcon2 from "@/assets/icons/date2";
-import MenuActions from "@/components/menu-actions";
 import { DatePicker } from "@mantine/dates";
 import Image from "next/image";
 import React, { useState } from "react";
 import person from "@/assets/images/child.png";
-import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import { useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
+import ActionMenu from "./ActionMenuPatientsDetails";
 const data = {
   name: "محمد عبدالله",
   nationalID:'25814739658',
@@ -24,7 +23,7 @@ function PatientsDetails() {
   const [ShowDate, setShowDate] = useState(true);
   const router = useRouter();
   const params = useParams()
-  console.log(params);
+
   
   return (
     <div className="py-4 md:py-8 px-2 md:px-6 bg-white lg:rounded-[10px] staffDetils">
@@ -41,12 +40,12 @@ function PatientsDetails() {
           <h2 className="text-[16px] md:text-[20px] font-Bold">عبدالله الشيخ - محمد عبدالله الشيخ</h2>
         </div>
         <div className="block ">
-          <MenuActions type={2} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID)} />
+          <ActionMenu id={params.patientsID}  />
         </div>
       </div>
 
       <div className=" flex gap-5 ">
-        <div className="flex justify-center md:justify-between gap-5 flex-wrap flex-1 flex-col md:flex-row">
+        <div className="flex justify-center md:justify-between mdl:items-center gap-5 flex-wrap flex-1 flex-col md:flex-row">
           <div className="flex gap-6 md:gap-[40px] flex-1 flex-wrap md:flex-nowrap flex-col sml:flex-row ">
             <div className=" size-[64px] sml:size-[228px] rounded-[50%] sml:rounded-[10px]">
               <Image

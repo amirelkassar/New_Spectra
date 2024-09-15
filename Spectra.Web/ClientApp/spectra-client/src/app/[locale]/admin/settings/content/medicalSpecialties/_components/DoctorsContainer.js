@@ -53,7 +53,7 @@ const DoctorsContainer = () => {
     >
       
       <SortableContext items={doctors} strategy={verticalListSortingStrategy}>
-        <div className="flex flex-col gap-9">
+        <div className="flex flex-col gap-7 lgl:gap-9">
           {doctors.map((doctor) => (
             <SortableItem key={doctor.id} id={doctor.id}>
               <RowDoctors title={doctor.title} />

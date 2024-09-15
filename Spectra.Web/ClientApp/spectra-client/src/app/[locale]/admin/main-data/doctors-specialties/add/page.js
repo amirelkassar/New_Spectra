@@ -38,6 +38,11 @@ function page() {
             labelClassName={"text-[12px] md:text-[16px]"}
             inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
           />
+           <Input
+            label={"الكود"}
+            labelClassName={"text-[12px] md:text-[16px]"}
+            inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
+          />
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button

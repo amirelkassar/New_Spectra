@@ -30,7 +30,7 @@ const ContentPage = () => {
     {
       id: 4,
       title: "قصص النجاح",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.STORIES
 
     },
   ];

@@ -32,7 +32,6 @@ const dataChat = [
 function Layout({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  console.log(searchparams.get("chat"));
   const [active, setActive] = useState(2);
   return (
     <div className="flex flex-col ">
@@ -59,7 +58,7 @@ function Layout({ children }) {
               } duration-300 mt-5 overflow-hidden lg:relative fixed rounded-t-3xl lg:rounded-lg `}
             >
               <div
-                className="min-w-[366px] duration-500 px-1 relative "
+                className="lg:min-w-[366px] duration-500 px-1 relative "
                 dir="ltr"
               >
                 <Link

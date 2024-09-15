@@ -1,5 +1,6 @@
 import MenuActions from "@/components/menu-actions";
 import ROUTES from "@/routes";
+import ActionMenu from "./ActionMenu";
 export const columns = [
   {
     accessorKey: "name",
@@ -32,15 +33,14 @@ export const columns = [
     header: "",
     id: "type",
 
-    cell: ({ getValue, row }) => {
-      const status = row.original.statu;
+    cell: ({row }) => {
+      const type = row.original.type;
       const id = row.original.id;
-
       return (
         <div
           className={"flex gap-[10px] md:gap-[40px] items-center justify-end "}
         >
-          <MenuActions type={2} path={ROUTES.ADMIN.STAFF.STAFFID(id)} />
+          <ActionMenu id={id} type={type}  />
         </div>
       );
     },

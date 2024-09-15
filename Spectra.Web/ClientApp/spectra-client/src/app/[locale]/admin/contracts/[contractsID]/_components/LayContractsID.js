@@ -1,5 +1,5 @@
 "use client";
-import React  from "react";
+import React from "react";
 import imgDoc from "@/assets/images/placeholder-person.png";
 import Image from "next/image";
 import ChatsIcon from "@/assets/icons/chats";
@@ -14,6 +14,7 @@ import SendIcon from "@/assets/icons/send";
 import ContractsIcon from "@/assets/icons/contracts";
 import { useSearchParams } from "next/navigation";
 import CloseIcon from "@/assets/icons/close";
+import ActionMenu from "../../components/ActionMenuPage";
 const dataChat = [
   {
     id: 1,
@@ -34,18 +35,20 @@ const dataChat = [
 function LayContractsID({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  console.log(searchparams.get("chat"));
 
   return (
     <div>
-      <div className="flex  px-6 mb-6   items-center gap-4 ">
-        <Link
-          href={ROUTES.ADMIN.CONTRACTS.DASHBOARD}
-          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
-        >
-          <BackIcon className={"w-full h-full"} />
-        </Link>
-        <h2 className="text-xl">العقود</h2>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex  px-6 mb-6   items-center gap-4 ">
+          <Link
+            href={ROUTES.ADMIN.CONTRACTS.DASHBOARD}
+            className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          >
+            <BackIcon className={"w-full h-full"} />
+          </Link>
+          <h2 className="text-xl">العقود</h2>
+        </div>
+        <ActionMenu/>
       </div>
       <div className="flex justify-between items-center gap-7 border-2 border-grayLight  flex-1 bg-white py-5 mdl:py-8 px-5 mdl:px-0 mdl:ps-16 mdl:pe-6 mb-4 rounded-2xl ">
         <div className="flex items-center gap-3 md:gap-4   xl:max-w-[60%] w-full flex-wrap">
@@ -97,7 +100,10 @@ function LayContractsID({ children }) {
               : "lg:max-w-[366px]  w-full top-full lg:w-0 opacity-0 bg !p-0 px-0"
           } duration-300 overflow-hidden lg:relative fixed rounded-t-3xl lg:rounded-lg `}
         >
-          <div className="min-w-[366px] duration-500 px-1 relative " dir="ltr">
+          <div
+            className="lg:min-w-[366px] duration-500 px-1 relative "
+            dir="ltr"
+          >
             <Link
               href={
                 searchparams.get("chat") === "true"

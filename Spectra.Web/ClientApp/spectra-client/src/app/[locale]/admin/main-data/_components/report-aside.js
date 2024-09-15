@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 const MainDataAside = () => {
   const params = useParams();
   const path = usePathname();
-  console.log(params);
+
   const pages = [
     {
       name: "عقاقير",
@@ -28,7 +28,9 @@ const MainDataAside = () => {
     {
       name: "التحاليل و الاشاعات",
       route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
-      isActive: path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD,
     },
     {
       name: "التشخيصات",
@@ -41,7 +43,17 @@ const MainDataAside = () => {
     {
       name: "الشكاوى العامة",
       route: ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
-      isActive: path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD,
+    },
+    {
+      name: "الخدمات",
+      route: ROUTES.ADMIN.DATAMAIN.SERVICES,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.SERVICES ||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESADD||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID),
     },
   ];
   return (

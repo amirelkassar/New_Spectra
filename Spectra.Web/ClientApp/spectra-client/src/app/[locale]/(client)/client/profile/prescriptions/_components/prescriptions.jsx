@@ -70,8 +70,8 @@ export const Prescriptions = () => {
       </div>
 
       <div className='grid grid-cols-fill-250 gap-5'>
-        {filteredData()?.map((prescription) => (
-          <Prescription {...prescription} />
+        {filteredData()?.map((prescription,i) => (
+          <Prescription  key={i} {...prescription} />
         ))}
       </div>
     </Card>

@@ -22,7 +22,7 @@ function page() {
         <h2 className="headTitleDash"> الشكاوى العامة</h2>
         <AddMainData
           title={" أضافة شكوى"}
-          path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
+          path={ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD}
         />
       </div>
       <DataTable data={ComplaintsData} columns={ComplaintsColumns} />

@@ -1,4 +1,5 @@
-import MenuActions from "@/components/menu-actions";
+
+import ActionMenu from "./ActionMenuComplaints";
 
 export const ComplaintsColumns = [
   {
@@ -13,7 +14,7 @@ export const ComplaintsColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <MenuActions />;
+      return <ActionMenu />;
     },
   },
 ];

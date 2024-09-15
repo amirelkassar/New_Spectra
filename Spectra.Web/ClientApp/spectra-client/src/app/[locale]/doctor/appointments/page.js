@@ -1,20 +1,25 @@
 "use client";
 import { Link, usePathname } from "@/navigation";
-import AppoFilteration from "./appo-filteration";
 import AppoTable from "./appo-table";
 import ROUTES from "@/routes";
 import AppointmentSummary from "./appointment-summary";
 import DateIcon2 from "@/assets/icons/date2";
-
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
-import { useSearchParams } from "next/navigation";
 
 const AppointmentsPage = () => {
   const path = usePathname();
- 
-  
 
   const AppointmentsLinks = [
+    {
+      name: "المواعيد القادمة",
+      route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
+      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSUPCOMING),
+    },
+    {
+      name: "المواعيد السابقة",
+      route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
+      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSPREVIOUS),
+    },
     {
       name: "المواعيد الملغاة",
       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
@@ -26,8 +31,8 @@ const AppointmentsPage = () => {
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSDEFERRED),
     },
   ];
-  console.log(path);
-  
+
+
   return (
     <div className="bg-white mdl:bg-transparent">
       <div className="  mb-4 md:mb-9 pt-3 px-5 md:px-2">
@@ -38,7 +43,8 @@ const AppointmentsPage = () => {
           <h2 className="md:block hidden mdl:text-[20px] text-[14px] ">
             المواعيد
           </h2>
-          <Link href={ROUTES.DOCTOR.APPOINTMENTSCALENDAR}
+          <Link
+            href={ROUTES.DOCTOR.APPOINTMENTSCALENDAR}
             className={`
               bg-greenMain
            size-[45px] md:size-[50px] rounded-[50%]  flex items-center justify-center`}
@@ -47,9 +53,9 @@ const AppointmentsPage = () => {
           </Link>
         </div>
         <button className="flex mdl:hidden items-center justify-center w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold">
-            <PlusInsideCircleIcon />
-            <p className=" text-[14px] md:text-[16px] font-bold">أضافة ميعاد  </p>
-          </button>
+          <PlusInsideCircleIcon />
+          <p className=" text-[14px] md:text-[16px] font-bold">أضافة ميعاد </p>
+        </button>
       </div>
       <div className=" mdl:hidden linksReqMob flex items-center max-w-[96%] w-[400px] justify-between mx-auto gap-[20px] flex-wrap pt-8 mb-6">
         <Link
@@ -79,7 +85,6 @@ const AppointmentsPage = () => {
       </div>
       <AppointmentSummary />
       <div className="default-page">
-        <AppoFilteration />
         <AppoTable />
       </div>
     </div>

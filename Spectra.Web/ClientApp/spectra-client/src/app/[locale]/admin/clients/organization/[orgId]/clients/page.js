@@ -1,7 +1,5 @@
 "use client";
-
 import { DataTable } from "@/components/data-table";
-import MenuActions from "@/components/menu-actions";
 import { columns } from "./_components/columns";
 const data = [
   {
@@ -76,7 +74,7 @@ const OrganizationClientsPage = () => {
     <section className="default-page grow">
       <div className="flex items-center justify-between">
         <h2 className=" lg:block hidden text-[20px]">عملاء المنظمة</h2>
-        <MenuActions />
+      
       </div>
 
       <DataTable IsWidth={true} data={data} columns={columns} />
