@@ -4,10 +4,10 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM
 {
     public interface IGeneralComplaintRepository
     {
-        Task AddAsync(GeneralComplaints GeneralComplaint);
-        Task DeleteAsync(GeneralComplaints GeneralComplaint);
-        Task<IEnumerable<GeneralComplaints>> GetAllAsync();
-        Task<GeneralComplaints> GetByIdAsync(string id);
-        Task UpdateAsync(GeneralComplaints GeneralComplaint);
+        Task AddAsync(GeneralComplaint GeneralComplaint);
+        Task DeleteAsync(GeneralComplaint GeneralComplaint);
+        Task<IEnumerable<GeneralComplaint>> GetAllAsync();
+        Task<GeneralComplaint> GetByIdAsync(string id);
+        Task UpdateAsync(GeneralComplaint GeneralComplaint);
     }
 }

@@ -1,12 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectra.Domain.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Services;
@@ -14,6 +6,8 @@ using Spectra.Application.MasterData.Drug.Queries;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Domain.Shared.Wrappers;
+using Spectra.Application.MasterData;
 
 namespace Spectra.Infrastructure.MasterData.Drug
 {
@@ -30,13 +24,13 @@ namespace Spectra.Infrastructure.MasterData.Drug
             _mediator = mediator;
             _excelProcessingService = excelProcessingService;
         }
-        public async Task<string> CreateDrug(CreateDrugCommand input)
+        public async Task<OperationResult<string>> CreateDrug(CreateDrugCommand input)
         {
 
             var command = new CreateDrugCommand
             {
-                DrugsName = input.DrugsName,
-                DrugDoncentration = input.DrugDoncentration,
+                Name = input.Name,
+                Doncentration = input.Doncentration,
                 ActiveIngredient = input.ActiveIngredient,
                 Contraindications = input.Contraindications,
                 DrugInteractionsWithOtherdrugs = input.DrugInteractionsWithOtherdrugs,
@@ -52,8 +46,8 @@ namespace Spectra.Infrastructure.MasterData.Drug
 
             List<CreateDrugCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateDrugCommand
             {
-                DrugsName = cells[0],
-                DrugDoncentration = cells[1],
+                Name = cells[0],
+                Doncentration = cells[1],
                 ActiveIngredient = cells[2],
                 Contraindications = cells[3],
                 DrugInteractionsWithOtherdrugs = cells[4],
@@ -70,15 +64,15 @@ namespace Spectra.Infrastructure.MasterData.Drug
 
         }
 
-        public async Task UpdateDrug(string id, UpdateDrugCommand input)
+        public async Task<OperationResult<Unit>> UpdateDrug(string id, UpdateDrugCommand input)
         {
 
             var command = new UpdateDrugCommand
             {
 
                 Id = id,
-                DrugsName = input.DrugsName,
-                DrugDoncentration = input.DrugDoncentration,
+                Name = input.Name,
+                Doncentration = input.Doncentration,
                 ActiveIngredient = input.ActiveIngredient,
                 Contraindications = input.Contraindications,
                 DrugInteractionsWithOtherdrugs = input.DrugInteractionsWithOtherdrugs,
@@ -89,28 +83,39 @@ namespace Spectra.Infrastructure.MasterData.Drug
 
             };
 
-            await _mediator.Send(command);
+        return    await _mediator.Send(command);
         }
 
-        public async Task DeleteDrug(string id)
+        public async Task<OperationResult<Unit>> DeleteDrug(string id)
         {
             var command = new DeleteDrugCommand { Id = id };
-            await _mediator.Send(command);
+           return await _mediator.Send(command);
         }
 
-        public async Task<Drugs> GetDrugById(string id)
+        public async Task<OperationResult<DrugMD>> GetDrugById(string id)
         {
             var query = new GetDrugsByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<IEnumerable<Drugs>> GetAllDrugs()
+        public async Task<OperationResult<IEnumerable<DrugMD>>> GetAllDrugs()
         {
             var query = new GetAllDrugQuery();
             return await _mediator.Send(query);
         }
 
+        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugsNames()
+        {
+            var query = new GetAllDrugNamesQuery();
 
+            return await _mediator.Send(query);
+
+        }
+
+        public Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugNames()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -1,24 +1,15 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.MasterData.Drug;
-using Spectra.Domain.Clients;
 using Spectra.Domain.MasterData.Drug;
-using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Queries
 {
 
-    public class GetAllDrugQuery : IRequest<IEnumerable<Drugs>>
+    public class GetAllDrugQuery : IRequest<OperationResult<IEnumerable<DrugMD>>>
     {
 
     }
-    public class GetAllDrugeQueryHandler : IRequestHandler<GetAllDrugQuery, IEnumerable<Drugs>>
+    public class GetAllDrugeQueryHandler : IRequestHandler<GetAllDrugQuery, OperationResult<IEnumerable<DrugMD>>>
     {
         private readonly IDrugRepository _drugRepository;
 
@@ -26,10 +17,17 @@ namespace Spectra.Application.MasterData.Drug.Queries
         {
             _drugRepository = drugRepository;
         }
-        public async Task<IEnumerable<Drugs>> Handle(GetAllDrugQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<DrugMD>>> Handle(GetAllDrugQuery request, CancellationToken cancellationToken)
         {
-            var drugs = await _drugRepository.GetAllAsync();
-            return drugs;
+         
+         
+                var drugs = await _drugRepository.GetAllAsync();
+
+
+                return OperationResult<IEnumerable<DrugMD>>.Success(drugs);
+         
+   
+
         }
     }
 }

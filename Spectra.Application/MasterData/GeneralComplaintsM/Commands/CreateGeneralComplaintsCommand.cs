@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Spectra.Application.Clients;
 using Spectra.Application.Clients.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM;
@@ -6,6 +7,7 @@ using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 {
-    public class CreateGeneralComplaintsCommand : ICommand<string>
+    public class CreateGeneralComplaintsCommand : ICommand<OperationResult<string>>
     {
         public string ComplaintName { get; set; }
         public string Code1 { get; set; }
@@ -26,7 +28,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
 
 
-    public class CreateGeneralComplaintsCommandHandler : IRequestHandler<CreateGeneralComplaintsCommand, string>
+    public class CreateGeneralComplaintsCommandHandler : IRequestHandler<CreateGeneralComplaintsCommand, OperationResult<string>>
     {
         private readonly IGeneralComplaintRepository _generalComplaintRepository;
 
@@ -36,17 +38,35 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
             _generalComplaintRepository = generalComplaintRepository;
         }
 
-        public async Task<string> Handle(CreateGeneralComplaintsCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(CreateGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
+         
+                var generalComplaint = GeneralComplaint.Create(
 
-            var generalComplaint = GeneralComplaints.Create(
+                    Ulid.NewUlid().ToString(),
 
-                Ulid.NewUlid().ToString(),
+                    request.ComplaintName, request.Code1, request.DescriptionOfTheComplaint
+                    );
+                await _generalComplaintRepository.AddAsync(generalComplaint);
+            return OperationResult<string>.Success( generalComplaint.Id);
 
-                request.ComplaintName,request.Code1, request.DescriptionOfTheComplaint
-                );
-            await _generalComplaintRepository.AddAsync(generalComplaint);
-            return generalComplaint.Id;
+           
+        }
+    }
+    public class CreateGeneralComplaintsCommandValidator : AbstractValidator<CreateGeneralComplaintsCommand>
+    {
+        public CreateGeneralComplaintsCommandValidator()
+        {
+            RuleFor(x => x.ComplaintName)
+                .NotEmpty().WithMessage("Complaint name is required.")
+                .MaximumLength(100).WithMessage("Complaint name must be less than 100 characters.");
+            RuleFor(x => x.Code1)
+           .NotEmpty().WithMessage("Code name is required.")
+           .MaximumLength(20).WithMessage("Complaint name must be less than 20 characters.");
+
+            RuleFor(x => x.DescriptionOfTheComplaint)
+                .NotEmpty().WithMessage("Description of the complaint is required.")
+                .MaximumLength(500).WithMessage("Description of the complaint must be less than 500 characters.");
         }
     }
 }

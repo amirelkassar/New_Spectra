@@ -7,6 +7,7 @@ using Spectra.Application.Messaging;
 using Spectra.Application.Patients;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,15 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
-    public class UpdateServicesMCommand : ICommand<Unit>
+    public class UpdateServicesMCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
         public AvailableSrvice AvailableSrvices { get; set; }
         public string ServicesName { get; set; }
         public string DefinitionServices { get; set; }
-        public decimal ServicePrice { get; set; }
+        public double Price { get; set; }
         public string TermsAndConditions { get; set; }
-        public string? ServiceAddress { get; set; }
+        public string? Address { get; set; }
         public string? Content { get; set; }
 
         public List<Secation>? Secations { get; set; }
@@ -32,7 +33,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
 
 
-        public class UpdateServicesMCommandHandler : IRequestHandler<UpdateServicesMCommand, Unit>
+        public class UpdateServicesMCommandHandler : IRequestHandler<UpdateServicesMCommand, OperationResult<Unit>>
         {
 
             private readonly IServiceMDRepository _serviceMRepository;
@@ -46,34 +47,33 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 _addPhoto = addPhoto;
             }
 
-            public async Task<Unit> Handle(UpdateServicesMCommand request, CancellationToken cancellationToken)
+            public async Task<OperationResult<Unit>> Handle(UpdateServicesMCommand request, CancellationToken cancellationToken)
             {
-
+               
                 var entity = await _serviceMRepository.GetByIdAsync(request.Id);
-                if (entity == null)
-                {
-                    throw new Exception("drug not found");
-                }
+          
 
-                entity.ServicesName = request.ServicesName;
+                entity.Name = request.ServicesName;
                 entity.DefinitionServices = request.DefinitionServices;
                 entity.AvailableSrvices = request.AvailableSrvices;
-                entity.ServicePrice = request.ServicePrice;
+                entity.Price = request.Price;
                 entity.TermsAndConditions = request.TermsAndConditions;
-                entity.ServiceAddress = request.ServiceAddress;
+                entity.Address = request.Address;
                 entity.Content = request.Content;
                 entity.Secations = request.Secations;
 
                 if (request.Photo != null)
                 {
 
-                    entity.AttachmentPath = await _addPhoto.UpdatePhoto(entity.AttachmentPath, request.Photo);
+                    entity.AttachmentPath = await _addPhoto.Updateattachment(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
 
                 }
 
                 await _serviceMRepository.UpdateAsync(entity);
-                return Unit.Value;
-            }
+                return OperationResult<Unit>.Success(Unit.Value);
+            
+
+    }
 
         }
     }

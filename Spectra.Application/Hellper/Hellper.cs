@@ -18,25 +18,25 @@ namespace Spectra.Application.MasterData.HellperFunc
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<string> CreatePhoto(IFormFile photo)
+        public async Task<string> Createattachment(IFormFile attachment, string fileName)
         {
 
 
-            if (photo != null)
+            if (attachment != null)
             {
                 if (string.IsNullOrEmpty(_webHostEnvironment.WebRootPath))
                 {
                     _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
                 }
 
-                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, fileName);
 
                 // Ensure the directory exists
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
-                var uniqueFileName = $"{Guid.NewGuid()}_{photo.FileName}";
+                var uniqueFileName = $"{Guid.NewGuid()}_{attachment.FileName}";
 
 
                 var filePath = Path.Combine(uploadsFolder, uniqueFileName);
@@ -44,20 +44,20 @@ namespace Spectra.Application.MasterData.HellperFunc
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await photo.CopyToAsync(fileStream);
+                    await attachment.CopyToAsync(fileStream);
                 }
 
 
-                return $"/uploads/{uniqueFileName}";
+                return $"/{fileName}/{uniqueFileName}";
 
             }
             return null;
         }
-        public async Task DeletePhoto(string? photo)
+        public async Task Deleteattachment(string? attachment)
         {
-            if (!string.IsNullOrEmpty(photo))
+            if (!string.IsNullOrEmpty(attachment))
             {
-                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, photo);
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, attachment);
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
@@ -67,11 +67,11 @@ namespace Spectra.Application.MasterData.HellperFunc
 
 
         }
-        public async Task<string> UpdatePhoto(string? photo, IFormFile upload)
+        public async Task<string> Updateattachment(string? attachment, IFormFile upload, string fileName)
         {
 
-            // Delete the existing photo if any
-            await DeletePhoto(photo);
+            // Delete the existing attachment if any
+            await Deleteattachment(attachment);
 
             // Save the new attachment
             var newFileName = Guid.NewGuid() + Path.GetExtension(upload.FileName);
@@ -80,7 +80,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                 _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             }
 
-            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, fileName);
 
             if (!Directory.Exists(uploadsFolder))
             {
@@ -95,7 +95,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             }
 
             // Update the drug with the new attachment path
-            return Path.Combine("uploads", newFileName);
+            return Path.Combine(fileName, newFileName);
         }
 
     }

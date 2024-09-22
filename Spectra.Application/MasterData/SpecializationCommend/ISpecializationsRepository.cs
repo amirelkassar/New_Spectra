@@ -6,10 +6,14 @@ namespace Spectra.Application.MasterData.SpecializationCommend
 {
     public interface ISpecializationsRepository
     {
-        Task AddAsync(Specializations Specializations);
-        Task DeleteAsync(Specializations Specializations);
-        Task<IEnumerable<Specializations>> GetAllAsync();
-        Task<Specializations> GetByIdAsync(string id);
-        Task UpdateAsync(Specializations Specializations);
+        Task AddAsync(Specialization Specializations);
+        Task DeleteAsync(Specialization Specializations);
+        Task<IEnumerable<Specialization>> GetAllAsync();
+        Task<Specialization> GetByIdAsync(string id);
+        Task UpdateAsync(Specialization Specializations);
+        Task<Specialization> GetByNameAsync(string name);
+
+        Task<IEnumerable<string>> GetAllNamesAsync();
+
     }
 }

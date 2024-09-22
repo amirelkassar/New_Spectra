@@ -24,7 +24,13 @@ namespace Spectra.WebAPI.Controllers
             return Ok(MasterDataServicesies);
         }
 
-
+        [HttpGet("Name&&Terms")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllNameAndTermsAndConditions()
+        {
+            var MasterDataServicesies = await _serviceMDService.GetAllNameAndTermsAndConditions();
+            return Ok(MasterDataServicesies);
+        }
 
         [HttpGet("id")]
         [AllowAnonymous]
@@ -48,15 +54,15 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            await _serviceMDService.Updateservices(id, input);
-            return NoContent();
+            var MasterDataServicesies = await _serviceMDService.Updateservices(id, input);
+            return Ok(MasterDataServicesies);
         }
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteMasterDataServices(string id)
         {
-            await _serviceMDService.DeleteMedicalTestsAndXray(id);
-            return NoContent();
+            var MasterDataServicesies = await _serviceMDService.DeleteMedicalTestsAndXray(id);
+            return Ok(MasterDataServicesies);
         }
 
     }

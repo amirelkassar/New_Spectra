@@ -2,12 +2,6 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Domain.MasterData.Diagnoses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.Diagnoses
 {
@@ -19,25 +13,28 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
         {
             var database = mongoDbService.DataBase;
             _Diagnose = database.GetCollection<Diagnose>("Diagnose");
+           
         }
         public async Task<Diagnose> GetByIdAsync(string id)
         {
             return await _Diagnose.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task AddAsync(Diagnose Diagnose)
+        public async Task AddAsync(Diagnose diagnose)
         {
-            await _Diagnose.InsertOneAsync(Diagnose);
+
+          
+            await _Diagnose.InsertOneAsync(diagnose);
         }
 
-        public async Task UpdateAsync(Diagnose Diagnose)
+        public async Task UpdateAsync(Diagnose diagnose)
         {
-            await _Diagnose.ReplaceOneAsync(c => c.Id == Diagnose.Id, Diagnose);
+            await _Diagnose.ReplaceOneAsync(c => c.Id == diagnose.Id, diagnose);
         }
 
-        public async Task DeleteAsync(Diagnose Diagnose)
+        public async Task DeleteAsync(Diagnose diagnose)
         {
-            await _Diagnose.DeleteOneAsync(c => c.Id == Diagnose.Id);
+            await _Diagnose.DeleteOneAsync(c => c.Id == diagnose.Id);
         }
 
         public async Task<IEnumerable<Diagnose>> GetAllAsync()
@@ -45,5 +42,7 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
 
             return await _Diagnose.Find(p => true).ToListAsync();
         }
+
+     
     }
 }

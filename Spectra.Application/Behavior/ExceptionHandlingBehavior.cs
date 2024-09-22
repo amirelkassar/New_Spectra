@@ -13,7 +13,7 @@ namespace Spectra.Infrastructure.PipelineBehaviors
             }
             catch (Exception ex)
             {
-                return ExceptionHandlingBehavior<TRequest, TResponse?>.HandleException(ex);
+                throw;
             }
         }
 

@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Queries;
 using Spectra.Application.MasterData.UploadExcel.Services;
 using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.Infrastructure.MasterData.Services;
 
 namespace Spectra.Infrastructure.MasterData.ServicesMD
@@ -21,7 +23,7 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
             _excelProcessingService = excelProcessingService;
         }
 
-        public async Task<string> CreateServicesM(CreateServicesMCommand input)
+        public async Task<OperationResult<string>> CreateServicesM(CreateServicesMCommand input)
         {
 
          
@@ -31,7 +33,7 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
                 ServicesName = input.ServicesName,
                 DefinitionServices = input.DefinitionServices,
                 AvailableSrvices = input.AvailableSrvices,
-                ServicePrice = input.ServicePrice,
+                Price = input.Price,
                 TermsAndConditions = input.TermsAndConditions,
                 ServiceAddress = input.ServiceAddress,
                 Content = input.Content,
@@ -61,7 +63,7 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
 
         //}
 
-        public async Task Updateservices(string id, UpdateServicesMCommand input)
+        public async Task<OperationResult<Unit>> Updateservices(string id, UpdateServicesMCommand input)
         {
 
             var command = new UpdateServicesMCommand
@@ -71,33 +73,38 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
                 ServicesName = input.ServicesName,
                 DefinitionServices = input.DefinitionServices,
                 AvailableSrvices = input.AvailableSrvices,
-                ServicePrice = input.ServicePrice,
+                Price = input.Price,
                 TermsAndConditions = input.TermsAndConditions,
-                ServiceAddress = input.ServiceAddress,
+                Address = input.Address,
                 Content = input.Content,
                 Secations = input.Secations,
                 Photo = input.Photo
 
             };
 
-            await _mediator.Send(command);
+         return   await _mediator.Send(command);
         }
 
-        public async Task DeleteMedicalTestsAndXray(string id)
+        public async Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id)
         {
             var command = new DeleteServicesMCommand { Id = id };
-            await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
-        public async Task<MasterDataServices> GetServicesMById(string id)
+        public async Task<OperationResult<MasterDataServices>> GetServicesMById(string id)
         {
             var query = new GetServicesMDByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<IEnumerable<MasterDataServices>> GetAllServicesM()
+        public async  Task<OperationResult <IEnumerable<MasterDataServices>>> GetAllServicesM()
         {
             var query = new GetAllServicesMDQuery();
+            return await _mediator.Send(query);
+        }
+        public async Task<OperationResult<IEnumerable<ServicesDto>>> GetAllNameAndTermsAndConditions()
+        {
+            var query = new GetAllNameAndTermServicesQuery();
             return await _mediator.Send(query);
         }
 

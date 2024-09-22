@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Clients.Services;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Services;
+using Spectra.Domain.MasterData.Drug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,14 @@ namespace Spectra.WebAPI.Controllers
             return Ok(Drugies);
         }
 
+        [HttpGet("DrugsNames")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllDrugNames()
+        {
+            var Drugies = await _drugtService.GetAllDrugsNames();
+
+            return Ok(Drugies);
+        }
 
 
         [HttpGet("id")]
@@ -54,15 +64,27 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            await _drugtService.UpdateDrug(id, input);
-            return NoContent();
+            var Drugies = await _drugtService.UpdateDrug(id, input);
+            return Ok(Drugies);
         }
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteDrug(string id)
         {
-            await _drugtService.DeleteDrug(id);
-            return NoContent();
+            var Drugies = await _drugtService.DeleteDrug(id);
+            return Ok(Drugies);
+        }
+        [HttpPost("upload")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        {
+
+
+            var data = _drugtService.CreateFromExcel(file);
+
+
+
+            return Ok(data);
         }
 
     }

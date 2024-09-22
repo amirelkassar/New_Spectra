@@ -1,13 +1,17 @@
 ﻿using MediatR;
+using Spectra.Application.Clients;
+using Spectra.Domain.Clients;
+using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Patients;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Patients.Queries
 {
-    public class GetAllPatientsQuery : IRequest<IEnumerable<Patient>>
+    public class GetAllPatientsQuery : IRequest<OperationResult<IEnumerable<Patient>>>
     {
     }
 
-    public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, IEnumerable<Patient>>
+    public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, OperationResult<IEnumerable<Patient>>>
     {
         private readonly IPatientRepository _patientRepository;
 
@@ -16,9 +20,15 @@ namespace Spectra.Application.Patients.Queries
             _patientRepository = patientRepository;
         }
 
-        public async Task<IEnumerable<Patient>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<Patient>>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
         {
-            return await _patientRepository.GetAllAsync();
+             await _patientRepository.GetAllAsync();
+
+          
+                var patient = await _patientRepository.GetAllAsync(); ;
+
+                return OperationResult<IEnumerable<Patient>>.Success(patient);
+          
         }
     }
 }

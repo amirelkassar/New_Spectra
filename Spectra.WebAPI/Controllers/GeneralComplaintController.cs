@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
@@ -31,6 +32,14 @@ namespace Spectra.WebAPI.Controllers
             return Ok(GeneralComplaintsies);
         }
 
+        [HttpGet("GeneralComplaints")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllGeneralComplaintsNames()
+        {
+            var Drugies = await _generalComplaintService.GetAllGeneralComplaintNames();
+
+            return Ok(Drugies);
+        }
         [HttpGet("id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetOneGeneralComplaints(string id)
@@ -41,7 +50,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateGeneralComplaintss([FromForm] CreateGeneralComplaintsCommand input)
+        public async Task<ActionResult> CreateGeneralComplaintss( CreateGeneralComplaintsCommand input)
         {
 
 
@@ -54,16 +63,30 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> UpdateGeneralComplaints(string id, UpdateGeneralComplaintsCommand input)
         {
 
-            await _generalComplaintService.UpdateGeneralComplaints(id, input);
-            return NoContent();
+
+            var GeneralComplaintsies = await _generalComplaintService.UpdateGeneralComplaints(id, input);
+            return Ok(GeneralComplaintsies);
         }
 
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteGeneralComplaints(string id)
         {
-            await _generalComplaintService.DeleteGeneralComplaints(id);
-            return NoContent();
+
+            var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(id);
+            return Ok(GeneralComplaintsies);
+        }
+        [HttpPost("upload")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        {
+
+
+            var data = _generalComplaintService.CreateFromExcel(file);
+
+
+
+            return Ok(data);
         }
 
     }

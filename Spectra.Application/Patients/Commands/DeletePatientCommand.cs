@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Patients.Commands
 {
-    public class DeletePatientCommand : ICommand<Unit>
+    public class DeletePatientCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
 
-    public class DeletePatientCommandHandler : IRequestHandler<DeletePatientCommand, Unit>
+    public class DeletePatientCommandHandler : IRequestHandler<DeletePatientCommand, OperationResult<Unit>>
     {
         private readonly IPatientRepository _patientRepository;
 
@@ -17,8 +18,9 @@ namespace Spectra.Application.Patients.Commands
             _patientRepository = patientRepository;
         }
 
-        public async Task<Unit> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
         {
+           
             var patient = await _patientRepository.GetByIdAsync(request.Id);
             if (patient == null)
             {
@@ -26,7 +28,10 @@ namespace Spectra.Application.Patients.Commands
             }
 
             await _patientRepository.DeleteAsync(request.Id);
-            return Unit.Value;
-        }
+            return OperationResult<Unit>.Success(Unit.Value);
+        
+
+         
+}
     }
 }

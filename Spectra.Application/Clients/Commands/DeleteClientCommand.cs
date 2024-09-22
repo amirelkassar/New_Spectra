@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Clients.Commands
 {
-    public class DeleteClientCommand : ICommand<Unit>
+    public class DeleteClientCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
 
-    public class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, Unit>
+    public class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, OperationResult<Unit>>
     {
         private readonly IClientRepository _clientRepository;
 
@@ -17,18 +18,17 @@ namespace Spectra.Application.Clients.Commands
             _clientRepository = clientRepository;
         }
 
-        public async Task<Unit> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
+            
             var client = await _clientRepository.GetByIdAsync(request.Id);
-            if (client == null)
-            {
-                throw new Exception("Client not found");
-            }
-
+       
             await _clientRepository.DeleteAsync(client);
-            return Unit.Value;
-        }
+            return OperationResult<Unit>.Success(Unit.Value);
+      
+}
 
 
     }
+
 }

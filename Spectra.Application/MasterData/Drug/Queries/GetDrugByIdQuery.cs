@@ -1,23 +1,19 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.MasterData.Drug;
-using Spectra.Domain.Clients;
 using Spectra.Domain.MasterData.Drug;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Queries
 {
 
-    public class GetDrugsByIdQuery : IRequest<Drugs>
+    public class GetDrugsByIdQuery : IRequest<OperationResult<DrugMD>>
     {
         public string Id { get; set; }
+
+
     }
 
-    public class GetDrugsByIdQueryHandler : IRequestHandler<GetDrugsByIdQuery, Drugs>
+    public class GetDrugsByIdQueryHandler : IRequestHandler<GetDrugsByIdQuery, OperationResult<DrugMD>>
     {
         private readonly IDrugRepository _drugRepository;
 
@@ -26,9 +22,20 @@ namespace Spectra.Application.MasterData.Drug.Queries
             _drugRepository = drugRepository;
         }
 
-        public async Task<Drugs> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<DrugMD>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _drugRepository.GetByIdAsync(request.Id);
+           
+          
+           
+                var entitiy =  await _drugRepository.GetByIdAsync(request.Id);
+                if (entitiy == null)
+                {
+                    throw new NotFoundException("Drugs", request.Id);
+                }
+
+                return OperationResult<DrugMD>.Success(entitiy);
+            
+            
         }
     }
 }

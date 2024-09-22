@@ -11,19 +11,15 @@ namespace Spectra.Application.Clients.DTOs
     public class CreateNormalClientDto
     {
      
-        //public Name Name { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Prefix { get; set; }
         public string NationalId { get; set; }
-        //public PhoneNumber PhoneNumber { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
         public ClientTypes ClientType { get; set; }
         public string UserId { get; set; }
-        public string Emailaddress { get; set; }
-        //public EmailAddress EmailAddress { get; set; }
-        //public Address Address { get; set; }
+        public string Emailaddress { get; set; }  
         public string Country { get; set; }
         public string City { get; set; }
         public string State { get; set; }

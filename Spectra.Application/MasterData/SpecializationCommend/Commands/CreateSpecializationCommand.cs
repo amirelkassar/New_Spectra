@@ -1,15 +1,9 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
+using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Patients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Application.MasterData.SpecializationCommend;
-using FluentValidation;
-using System.ComponentModel.DataAnnotations;
 using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
 
 
 
@@ -17,34 +11,65 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 {
 
 
-    public class CreateSpecializationCommand : ICommand<string>
+    public class CreateSpecializationCommand : ICommand<OperationResult<string>>
     {
 
         public string SpecializationName { get; set; }
         public string Description { get; set; }
-        public decimal ConsultationCost { get; set; }
+        public string Code { get; set; }
+       
+
+        public double ConsultationCost { get; set; }
     }
 
-    public class CreateSpecializationCommandHandler : IRequestHandler<CreateSpecializationCommand, string>
+    public class CreateSpecializationCommandHandler : IRequestHandler<CreateSpecializationCommand, OperationResult<string>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
-        private readonly IValidator<CreateSpecializationCommand> _createValidator;
-        public CreateSpecializationCommandHandler(IValidator<CreateSpecializationCommand> createValidator, ISpecializationsRepository specializationRepository)
+     
+        public CreateSpecializationCommandHandler(ISpecializationsRepository specializationRepository)
         {
             _specializationRepository = specializationRepository;
-            _createValidator = createValidator;
+          
         }
 
-        public async Task<string> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
+            var specialization = await _specializationRepository.GetAllAsync();
+            if (specialization.Any(x => x.Name == request.SpecializationName))
             {
-                throw new FluentValidation.ValidationException(validationResult.Errors);
+                throw new DbErrorException("A specialization with the same Name already exists.");
             }
-            var Specialization = Domain.MasterData.DoctorsSpecialization.Specializations.Create(Ulid.NewUlid().ToString(), request.Description,  request.SpecializationName,request.ConsultationCost);
+
+            var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(Ulid.NewUlid().ToString(),  
+                request.SpecializationName.ToLower() , 0, request.Code ,request.Description, request.ConsultationCost);
+
             await _specializationRepository.AddAsync(Specialization);
-            return Specialization.Id;
+            return OperationResult<string>.Success(Specialization.Id);
+
+        }
+         
+
+    }
+    public class CreateSpecializationCommandValidator : AbstractValidator<CreateSpecializationCommand>
+    {
+        public CreateSpecializationCommandValidator()
+        {
+            RuleFor(x => x.SpecializationName)
+                .NotEmpty().WithMessage("Specialization Name is required.")
+                .MaximumLength(100).WithMessage("Specialization Name must not exceed 100 characters.");
+
+            RuleFor(x => x.Description).NotEmpty()
+                .MaximumLength(1000).WithMessage("Description must not exceed 500 characters.");
+
+            RuleFor(x => x.ConsultationCost)
+     .GreaterThan(0).WithMessage("Consultation Cost must be greater than 0.")
+     .Must(HaveValidDecimalPlaces).WithMessage("Consultation Cost must have up to 2 decimal places.");
+
+
+        }
+        private bool HaveValidDecimalPlaces(double cost)
+        {
+            return Math.Round(cost, 2) == cost;
         }
     }
 }

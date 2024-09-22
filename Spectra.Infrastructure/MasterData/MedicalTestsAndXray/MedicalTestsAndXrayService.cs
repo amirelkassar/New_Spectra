@@ -1,21 +1,13 @@
 ﻿using MediatR;
-using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 {
@@ -31,7 +23,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
             _excelProcessingService = excelProcessingService;
         }
 
-        public async Task<string> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input)
+        public async Task<OperationResult<string>> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input)
         {
 
             var command = new CreateMedicalTestsAndXraysCommand
@@ -61,7 +53,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 
         }
 
-        public async Task UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input)
+        public async Task<OperationResult<Unit>> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input)
         {
 
             var command = new UpdateMedicalTestsAndXraysCommand
@@ -74,27 +66,39 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 
             };
 
-            await _mediator.Send(command);
+         return   await _mediator.Send(command);
         }
 
-        public async Task DeleteMedicalTestsAndXray(string id)
+        public async Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id)
         {
             var command = new DeleteMedicalTestsAndXraysCommand { Id = id };
-            await _mediator.Send(command);
+         return   await _mediator.Send(command);
         }
 
-        public async Task<MedicalTestsAndXrays> GetMedicalTestsAndXrayById(string id)
+        public async Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetMedicalTestsAndXrayById(string id)
         {
             var query = new GetMedicalTestsAndXraysByIdQuery { Id = id };
+
             return await _mediator.Send(query);
         }
 
-        public async Task<IEnumerable<MedicalTestsAndXrays>> GetAllMedicalTestsAndXray()
+        public async Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>>> GetAllMedicalTestsAndXray()
         {
+
             var query = new GetAllMedicalTestsAndXraysQuery();
+
             return await _mediator.Send(query);
+
         }
 
+        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllMedicalTestsAndXrayNames()
+        {
+
+            var query = new GetAllMedicalTestsAndXrayNamesQuery();
+
+            return await _mediator.Send(query);
+
+        }
 
     }
 }

@@ -1,19 +1,9 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Clients.Commands;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.Countries;
-using Spectra.Application.Countries.DTOs;
-using Spectra.Application.Countries.Services;
-using Spectra.Application.Countries.States.DTOs;
-using Spectra.Application.Interfaces;
-using Spectra.Domain.Clients;
-using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -22,16 +12,13 @@ namespace Spectra.WebAPI.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientService _clientService;
-        //private readonly IValidator<CreateNormalClientDto> _normalClientvalidator;
-        //private readonly IValidator<CreateOrganizationClientDto> _organizationvalidator;
+
      
 
-        public ClientController(IClientService clientService/* IValidator<CreateNormalClientDto> normalClientvalidator, IValidator<CreateOrganizationClientDto> organizationvalidator*/)
+        public ClientController(IClientService clientService )
         {
 
             _clientService = clientService;
-          
-     
         }
 
 
@@ -57,11 +44,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> CreateNormalClient(CreateNormalClientDto input)
         {
 
-            //var result = _normalClientvalidator.Validate(input);
-            //if (!result.IsValid)
-            //{
-            //    return Badinput(result.Errors);
-            //}
+            
             var clienties = await _clientService.CreateClient(input);
             return Ok(clienties);
         }
@@ -70,17 +53,17 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> UpdateClient(string id, UpdateClientDto input)
         {
 
-           
-        await _clientService.UpdateClient(id,input.Name,input.NationalId,
-                input.PhoneNumber,input.ClientType,emailAddress:input.EmailAddress,address:input.Address);
-            return NoContent();
+
+            var client = await _clientService.UpdateClient(id,input);
+
+            return Ok(client);
         }
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteClient(string id)
         {
-            await _clientService.DeleteClient(id);
-            return NoContent();
+          var client=  await _clientService.DeleteClient(id);
+            return Ok(client);
         }
 
 

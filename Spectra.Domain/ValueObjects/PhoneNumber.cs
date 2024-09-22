@@ -9,7 +9,6 @@ namespace Spectra.Domain.ValueObjects
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
 
-     
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return PhoneNumbers;

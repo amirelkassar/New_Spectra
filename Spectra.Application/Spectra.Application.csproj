@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Spectra.Domain\Spectra.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MasterData\ServicesMD\Commands\Dto\" />
-  </ItemGroup>
-
 </Project>

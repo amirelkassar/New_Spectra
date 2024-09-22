@@ -6,37 +6,46 @@ using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.UploadExcel.Command
 {
     public class CreateSpecializationCommandFormExcelCommand
     {
-      
 
-        public class CreateBulkDataCommandHandler : IRequestHandler<CreateBulkDataCommand<CreateSpecializationCommand>, Unit>
+
+        public class CreateBulkDataCommandHandler : IRequestHandler<CreateBulkDataCommand<CreateSpecializationCommand>, OperationResult<Unit>>
         {
-            private readonly ISpecializationsRepository _specializationRepository;
-        
+
+
+             private readonly ISpecializationsRepository _specializationRepository;
+
             public CreateBulkDataCommandHandler(IValidator<CreateSpecializationCommand> createValidator, ISpecializationsRepository specializationRepository)
             {
+
                 _specializationRepository = specializationRepository;
-                
+
             }
 
 
-            public async Task<Unit> Handle(CreateBulkDataCommand<CreateSpecializationCommand> request, CancellationToken cancellationToken)
+            public async Task<OperationResult<Unit>> Handle(CreateBulkDataCommand<CreateSpecializationCommand> request, CancellationToken cancellationToken)
             {
-                foreach (var item in request.Data)
-                {
-                    var entity = Specializations.Create(
-                Ulid.NewUlid().ToString(), item.Description, item.SpecializationName, item.ConsultationCost
-              );
 
+              
+                    foreach (var item in request.Data)
+                    {
 
+                        var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.SpecializationName,0 , item.Code, item.Description , item.ConsultationCost
 
-                    await _specializationRepository.AddAsync(entity);
-                }
-                return Unit.Value;
+                   );
+                      
+                        await _specializationRepository.AddAsync(entity);
+
+                    }
+                    return OperationResult<Unit>.Success(Unit.Value);
+
+                
+               
             }
         }
 

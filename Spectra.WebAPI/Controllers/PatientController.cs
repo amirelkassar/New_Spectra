@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Patients.Commands;
 using Spectra.Infrastructure.Patients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -52,16 +47,16 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            await _patientService.UpdatePatient(id, input.Name,
+            var Patienties = await _patientService.UpdatePatient(id, input.Name,
                     input.Gender,  input.RelationToClient,input.DateOfBirth, input.NationalId);
-            return NoContent();
+            return Ok(Patienties);
         }
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeletePatient(string id)
         {
-            await _patientService.DeletePatient(id);
-            return NoContent();
+            var Patienties = await _patientService.DeletePatient(id);
+            return Ok(Patienties);
         }
 
     }

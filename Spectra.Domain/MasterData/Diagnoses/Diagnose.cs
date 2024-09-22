@@ -1,10 +1,6 @@
 ﻿
 using Spectra.Domain.Shared.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MasterData.Diagnoses
 {
@@ -13,9 +9,9 @@ namespace Spectra.Domain.MasterData.Diagnoses
         public string Code1 { get; set; }
         public string Code2 { get; set; }
         public string Code3 { get; set; }
-        public string DiagnosisName { get; set; }
+        public string Name { get; set; }
 
-        public string DiagnosisDescription { get; set; }
+        public string Description { get; set; }
 
 
 
@@ -25,34 +21,35 @@ namespace Spectra.Domain.MasterData.Diagnoses
                string code1,
                string code2,
                string code3,
-           string diagnosisName,
-           string diagnosisDescription
+           string name,
+           string description
                ) : base(id)
         {
             Id = id;
             Code1 = code1;
             Code2 = code2;
             Code3 = code3;
-            DiagnosisName = diagnosisName;
-            DiagnosisDescription = diagnosisDescription;
+            Name = name;
+            Description = description;
         }
         public static Diagnose Create(string id, string code1,
                string code2,
-               string code3 , string diagnosisName,
-           string diagnosisDescription
+               string code3 , 
+               string name,
+               string description
        )
         {
 
             ArgumentNullException.ThrowIfNull(id, nameof(id));
 
-            ArgumentNullException.ThrowIfNull(diagnosisName, nameof(diagnosisName));
+            ArgumentNullException.ThrowIfNull(name, nameof(name));
 
-            ArgumentNullException.ThrowIfNull(diagnosisDescription, nameof(diagnosisDescription));
+            ArgumentNullException.ThrowIfNull(description, nameof(description));
             ArgumentNullException.ThrowIfNull(code1, nameof(code1));
             ArgumentNullException.ThrowIfNull(code2, nameof(code2));
             ArgumentNullException.ThrowIfNull(code3, nameof(code3));
 
-            return new Diagnose(id, code1, code2, code3, diagnosisName, diagnosisDescription);
+            return new Diagnose(id, code1, code2, code3, name, description);
              
         }
     }

@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 
 namespace Spectra.Infrastructure.MasterData.ServicesM
@@ -39,6 +40,24 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
         {
 
             return await _medicalTestsAndXrays.Find(p => true).ToListAsync();
+        }
+        public async Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions()
+        {
+            var filter = Builders<MasterDataServices>.Filter
+        .Eq(x => x.AvailableSrvices, AvailableSrvice.ServicesView);  
+
+            var projection = Builders<MasterDataServices>.Projection
+                .Include(x => x.Name)  
+                .Include(x => x.TermsAndConditions);  
+
+            var result = await _medicalTestsAndXrays
+                .Find(filter)
+                .Project<MasterDataServices>(projection)  
+                .ToListAsync();
+
+            return result;
+
+           
         }
     }
 }

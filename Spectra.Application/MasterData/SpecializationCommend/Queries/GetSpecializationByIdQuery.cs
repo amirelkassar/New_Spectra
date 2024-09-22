@@ -1,7 +1,11 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Patients;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Patients;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
+using Spectra.Infrastructure.MasterData.ServicesMD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +15,12 @@ using System.Threading.Tasks;
 namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 {
 
-    public class GetSpecializationByIdQuery : IRequest<Domain.MasterData.DoctorsSpecialization.Specializations>
+    public class GetSpecializationByIdQuery : IRequest<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>>
     {
         public string Id { get; set; }
     }
 
-    public class GetSpecializationByIdQueryHandler : IRequestHandler<GetSpecializationByIdQuery, Domain.MasterData.DoctorsSpecialization.Specializations>
+    public class GetSpecializationByIdQueryHandler : IRequestHandler<GetSpecializationByIdQuery, OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
 
@@ -26,14 +30,23 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
         }
 
 
-        public async Task<Domain.MasterData.DoctorsSpecialization.Specializations> Handle(GetSpecializationByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>> Handle(GetSpecializationByIdQuery request, CancellationToken cancellationToken)
         {
-            var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
-            if (Specialization == null)
-            {
-                throw new Exception("Specialization not found");
-            }
-            return Specialization;
+
+            
+            
+                var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
+                if (Specialization == null)
+                {
+                    throw new NotFoundException("Specialization", request.Id);
+                }
+
+
+                return OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>.Success(Specialization);
+            
+         
+           
+         
         }
     }
 

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Spectra.WebAPI.Middlewares
 {

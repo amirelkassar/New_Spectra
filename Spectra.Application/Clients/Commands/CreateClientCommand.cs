@@ -1,15 +1,17 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Spectra.Application.Messaging;
+using Spectra.Application.Validator;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Clients.Commands
 {
-
-
-    public class CreateClientCommand : ICommand<string>
+    public class CreateClientCommand : ICommand<OperationResult<string>>
     {
+      
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
@@ -22,9 +24,10 @@ namespace Spectra.Application.Clients.Commands
         public Organization Organization { get; set; }
         public MedicalServiceProvider medicalServiceProvider { get; set; }
 
+
     }
 
-    public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, string>
+    public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, OperationResult<string>>
     {
         private readonly IClientRepository _clientRepository;
 
@@ -32,12 +35,9 @@ namespace Spectra.Application.Clients.Commands
         {
             _clientRepository = clientRepository;
         }
-        public async Task<string> Handle(CreateClientCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(CreateClientCommand request, CancellationToken cancellationToken)
         {
-            // Create individual objects from the request
-            
 
-            // Create the client object
             var client = Client.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
@@ -49,13 +49,50 @@ namespace Spectra.Application.Clients.Commands
                request.Address,
                 request.Organization,
                request.medicalServiceProvider
-            );
 
-            // Add the client to the repository
+            );
             await _clientRepository.AddAsync(client);
 
-            // Return the client's ID
-            return client.Id;
+            return OperationResult<string>.Success(client.Id);
+       
+         
         }
     }
+    public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>
+    {
+        public CreateClientCommandValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotNull().WithMessage("Name is required.")
+                .SetValidator(new NameValidator());
+
+            RuleFor(x => x.NationalId)
+                .NotEmpty().WithMessage("National ID is required.")
+                .Matches(@"^\d{10,12}$").WithMessage("National ID must be between 10 and 12 digits.");
+
+            RuleFor(x => x.PhoneNumber)
+                .NotNull().WithMessage("Phone number is required.")
+                .SetValidator(new PhoneNumberValidator());
+
+            RuleFor(x => x.ClientType)
+                .IsInEnum().WithMessage("Invalid client type.");
+
+            RuleFor(x => x.EmailAddress)
+                .NotNull().WithMessage("Email address is required.")
+                .SetValidator(new EmailAddressValidator());
+
+            RuleFor(x => x.Address)
+                .NotNull().WithMessage("Address is required.")
+                .SetValidator(new AddressValidator());
+
+            RuleFor(x => x.Organization)
+                .NotNull().WithMessage("Organization is required.")
+                .SetValidator(new OrganizationValidator());
+
+            RuleFor(x => x.medicalServiceProvider)
+                .NotNull().WithMessage("Medical service provider is required.")
+                .SetValidator(new MedicalServiceProviderValidator());
+        }
+    }
+  
 }

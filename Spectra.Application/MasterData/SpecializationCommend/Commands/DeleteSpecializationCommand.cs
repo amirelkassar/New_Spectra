@@ -3,6 +3,7 @@ using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
 using Spectra.Application.Patients;
 using Spectra.Domain.Patients;
+using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ using System.Threading.Tasks;
 namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 {
 
-    public class DeleteSpecializationCommand : ICommand<Unit>
+    public class DeleteSpecializationCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
 
-    public class DeleteSpecializationCommandHandler : IRequestHandler<DeleteSpecializationCommand, Unit>
+    public class DeleteSpecializationCommandHandler : IRequestHandler<DeleteSpecializationCommand, OperationResult<Unit>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
 
@@ -27,8 +28,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
         }
 
 
-        public async Task<Unit> Handle(DeleteSpecializationCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteSpecializationCommand request, CancellationToken cancellationToken)
         {
+            
             var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
             if (Specialization == null)
             {
@@ -36,8 +38,10 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             }
 
             await _specializationRepository.DeleteAsync(Specialization);
+            return OperationResult<Unit>.Success(Unit.Value);
+        
 
-            return Unit.Value;
-        }
+   
+}
     }
 }

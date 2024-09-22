@@ -9,5 +9,6 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
         Task<IEnumerable<MasterDataServices>> GetAllAsync();
         Task<MasterDataServices> GetByIdAsync(string id);
         Task UpdateAsync(MasterDataServices masterDataServices);
+        Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions();
     }
 }

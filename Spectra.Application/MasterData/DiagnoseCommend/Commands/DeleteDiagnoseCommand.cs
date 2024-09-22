@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectra.Application.MasterData.DiagnoseCommend;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.MasterData.Drug;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
 {
-    public class DeleteDiagnoseCommand : ICommand<Unit>
+    public class DeleteDiagnoseCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
-    public class DeleteDiagnoseCommandHandler : IRequestHandler<DeleteDiagnoseCommand, Unit>
+    public class DeleteDiagnoseCommandHandler : IRequestHandler<DeleteDiagnoseCommand, OperationResult<Unit>>
     {
         private readonly IDiagnoseRepository _diagnoseRepository;
 
@@ -24,17 +27,19 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
             _diagnoseRepository = diagnoseRepository;
         }
 
-        public async Task<Unit> Handle(DeleteDiagnoseCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteDiagnoseCommand request, CancellationToken cancellationToken)
         {
+
             var diagnoses = await _diagnoseRepository.GetByIdAsync(request.Id);
-            if (diagnoses == null)
-            {
-                throw new Exception("Diagnose not found");
-            }
+
 
             await _diagnoseRepository.DeleteAsync(diagnoses);
-            return Unit.Value;
+            return OperationResult<Unit>.Success(Unit.Value);
         }
+            
+
+
+       
     }
 
 }

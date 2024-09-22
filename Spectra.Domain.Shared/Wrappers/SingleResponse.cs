@@ -18,7 +18,7 @@ namespace Spectra.Domain.Shared.Wrappers
             Data = operation.Data;
             Code = (HttpStatusCode)operation.Code;
             Message = operation.Message;
-            Success = operation.Success;
+            Success = operation.SuccessOpration;
             Errors = operation.Errors;
         }
         public bool Success { get; }

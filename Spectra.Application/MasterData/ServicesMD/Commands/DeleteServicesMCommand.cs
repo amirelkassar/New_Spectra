@@ -1,51 +1,38 @@
 ﻿using MediatR;
-using Spectra.Application.Clients.Commands;
-using Spectra.Application.Clients;
-using Spectra.Application.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
-    public class DeleteServicesMCommand : ICommand<Unit>
+    public class DeleteServicesMCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
-    public class DeleteDrugCommandHandler : IRequestHandler<DeleteServicesMCommand, Unit>
+    public class DeleteDrugCommandHandler : IRequestHandler<DeleteServicesMCommand, OperationResult<Unit>>
     {
         private readonly IServiceMDRepository _serviceMRepository;
         private readonly IHellper _addPhoto;
 
-
-
         public DeleteDrugCommandHandler(IServiceMDRepository serviceMRepository, IHellper addPhoto)
         {
             _serviceMRepository = serviceMRepository;
+
             _addPhoto = addPhoto;
+
         }
 
-
-
-        public async Task<Unit> Handle(DeleteServicesMCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteServicesMCommand request, CancellationToken cancellationToken)
         {
+
             var entity = await _serviceMRepository.GetByIdAsync(request.Id);
-            if (entity == null)
-            {
-                throw new ("service not found");
-            }
 
+            await _addPhoto.Deleteattachment(entity.AttachmentPath);
 
-          await  _addPhoto.DeletePhoto(entity.AttachmentPath);
+            await _serviceMRepository.DeleteAsync(entity);
+            return OperationResult<Unit>.Success(Unit.Value);
 
-             await _serviceMRepository.DeleteAsync(entity);
-            return Unit.Value;
         }
     }
 

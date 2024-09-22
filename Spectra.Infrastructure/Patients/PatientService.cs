@@ -8,6 +8,8 @@ using Spectra.Application.Interfaces;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
+using Spectra.Domain.Clients;
+using Spectra.Domain.Shared.Wrappers;
 
 
 namespace Spectra.Infrastructure.Patients
@@ -24,7 +26,7 @@ namespace Spectra.Infrastructure.Patients
 
         }
 
-        public async Task<string> CreatePatient(CreatePatientCommand input)
+        public async Task<OperationResult<string>> CreatePatient(CreatePatientCommand input)
         {
 
             var command = new CreatePatientCommand
@@ -42,7 +44,7 @@ namespace Spectra.Infrastructure.Patients
             return await _mediator.Send(command);
         }
 
-        public async Task UpdatePatient(string id, Name name, HumenGender gender, ClientPatientRelations relationToClient, DateOnly dateOfBirth, string nationalId)
+        public async Task<OperationResult<Unit>> UpdatePatient(string id, Name name, HumenGender gender, ClientPatientRelations relationToClient, DateOnly dateOfBirth, string nationalId)
         {
 
             var command = new UpdatePatientCommand
@@ -56,22 +58,22 @@ namespace Spectra.Infrastructure.Patients
                 DateOfBirth = dateOfBirth
             };
 
-            await _mediator.Send(command);
+          return  await _mediator.Send(command);
         }
 
-        public async Task DeletePatient(string id)
+        public async Task<OperationResult<Unit>> DeletePatient(string id)
         {
             var command = new DeletePatientCommand { Id = id };
-            await _mediator.Send(command);
+          return  await _mediator.Send(command);
         }
 
-        public async Task<Patient> GetPatientById(string id)
+        public async  Task<OperationResult<Patient>> GetPatientById(string id)
         {
             var query = new GetPatientByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<IEnumerable<Patient>> GetAllPatients()
+        public async Task<OperationResult<IEnumerable<Patient>>> GetAllPatients()
         {
             var query = new GetAllPatientsQuery();
             return await _mediator.Send(query);

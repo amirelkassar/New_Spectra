@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
@@ -28,7 +29,15 @@ namespace Spectra.WebAPI.Controllers
             var MedicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXray();
             return Ok(MedicalTestsAndXrayies);
         }
+        [HttpGet("GetAllNames")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAlllMedicalTestsAndXrayNames()
+        {
 
+            var MedicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXrayNames();
+
+            return Ok(MedicalTestsAndXrayies);
+        }
 
 
         [HttpGet("id")]
@@ -49,15 +58,26 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input)
         {
-            await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(id, input);
-            return NoContent();
+            var MedicalTestsAndXrayies = await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(id, input);
+
+            return Ok(MedicalTestsAndXrayies);
         }
+
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteMedicalTestsAndXray(string id)
         {
-            await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(id);
-            return NoContent();
+            var MedicalTestsAndXrayies = await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(id);
+            return Ok(MedicalTestsAndXrayies);
+        }
+        [HttpPost("upload")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        {
+
+            var data = _medicalTestsAndXrayService.CreateFromExcel(file);
+            return Ok(data);
+
         }
     }
 }

@@ -1,7 +1,11 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Patients;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Patients;
+using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +16,12 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 {
 
 
-    public class GetAllSpecializationQuery : IRequest<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specializations>>
+    public class GetAllSpecializationQuery : IRequest<OperationResult<IEnumerable<Specialization>>>
     {
+        public int DoctorCount { get; set; }
     }
 
-    public class GetAllSpecializationQueryHandler : IRequestHandler<GetAllSpecializationQuery, IEnumerable<Domain.MasterData.DoctorsSpecialization.Specializations>>
+    public class GetAllSpecializationQueryHandler : IRequestHandler<GetAllSpecializationQuery, OperationResult<IEnumerable<Specialization>>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
 
@@ -25,9 +30,16 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
             _specializationRepository = specializationRepository;
         }
 
-        public async Task<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specializations>> Handle(GetAllSpecializationQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<Specialization>>> Handle(GetAllSpecializationQuery request, CancellationToken cancellationToken)
         {
-            return await _specializationRepository.GetAllAsync();
+          
+      
+    
+                var entity = await _specializationRepository.GetAllAsync();
+
+                return OperationResult<IEnumerable<Specialization>>.Success(entity);
+            
+          
         }
     }
 }

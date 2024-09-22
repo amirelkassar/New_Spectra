@@ -8,6 +8,6 @@ namespace Spectra.Application.Countries
     {
         Task<IEnumerable<CountryData>> GetAllCountriesAsync();
         Task<IEnumerable<StateData>> GetStatesByCountryIdAsync(string countryId);
-        Task<IEnumerable<CityData>> GetCitiesByStateIdAsync(string stateId);
+        Task<IEnumerable<CityData>> GetCitiesByStateIdAsync(string stateId);    
     }
 }

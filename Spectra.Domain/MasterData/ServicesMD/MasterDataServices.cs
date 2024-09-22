@@ -1,39 +1,30 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Spectra.Domain.MasterData.ServicesMD
 {
     public class MasterDataServices : BaseAuditableEntity<string>
     {
         public AvailableSrvice AvailableSrvices { get; set; }
-        public string ServicesName { get; set; }
+        public string Name { get; set; }
         public string DefinitionServices { get; set; }
-        public decimal ServicePrice { get; set; }
-
+        public double Price { get; set; }
         public string TermsAndConditions { get; set; }
-        public string? ServiceAddress { get; set; }
-
+        public string? Address { get; set; }
         public string? Content { get; set; }
-
         public List<Secation>? Secations { get; set; }
         public string? AttachmentPath { get; set; }
-
 
         protected MasterDataServices() { }
         private MasterDataServices(
         string id,
-        string servicesName,
+        string name,
         string definitionServices,
         AvailableSrvice availableServices,
-        decimal servicePrice,
+        double servicePrice,
         string termsAndConditions,
         string? serviceAddress = null,
         string? content = null,
@@ -42,12 +33,12 @@ namespace Spectra.Domain.MasterData.ServicesMD
                ) : base(id)
         {
             Id = id;
-            ServicesName = servicesName;
+            Name = name;
             DefinitionServices = definitionServices;
             AvailableSrvices = availableServices;
-            ServicePrice = servicePrice;
+            Price = servicePrice;
             TermsAndConditions = termsAndConditions;
-            ServiceAddress = serviceAddress;
+            Address = serviceAddress;
             Content = content;
             Secations = secations;
             AttachmentPath = attachmentPath;
@@ -56,7 +47,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string servicesName,
         string definitionServices,
         AvailableSrvice availableServices,
-        decimal servicePrice,
+        double servicePrice,
         string termsAndConditions,
         string? serviceAddress = null,
         string? content = null,

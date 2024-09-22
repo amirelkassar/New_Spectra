@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using Spectra.Domain.Shared.Wrappers;
 
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
-    public class DeleteMedicalTestsAndXraysCommand : ICommand<Unit>
+    public class DeleteMedicalTestsAndXraysCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
-    public class DeleteMedicalTestsAndXraysCommandHandler : IRequestHandler<DeleteMedicalTestsAndXraysCommand, Unit>
+    public class DeleteMedicalTestsAndXraysCommandHandler : IRequestHandler<DeleteMedicalTestsAndXraysCommand, OperationResult<Unit>>
     {
         private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
 
@@ -28,17 +29,19 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
         }
 
 
-        public async Task<Unit> Handle(DeleteMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
+
+
             var medicalTestsAndXrayRepository = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
-            if (medicalTestsAndXrayRepository == null)
-            {
-                throw new Exception("Examination Type not found");
-            }
+
 
             await _medicalTestsAndXrayRepository.DeleteAsync(medicalTestsAndXrayRepository);
-            return Unit.Value;
+            return OperationResult<Unit>.Success(Unit.Value);
         }
-    }
 
+
+    }
 }
+
+

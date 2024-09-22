@@ -1,6 +1,7 @@
 using Serilog;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Interfaces;
+using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Handlers;
 using Spectra.Web;
 using Spectra.WebAPI.Middlewares;
@@ -54,8 +55,9 @@ app.UseAuthentication();
 
 
 app.UseAuthorization();
+app.MapControllers().RequireAuthorization();  // Map API controllers
+app.MapHub<ChatHub>("/chathub");
 
-app.MapControllers()
-    .RequireAuthorization();
+
 
 app.Run();

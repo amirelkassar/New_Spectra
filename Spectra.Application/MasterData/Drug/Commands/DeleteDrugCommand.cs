@@ -9,44 +9,41 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Spectra.Application.MasterData.Drug;
+using Spectra.Domain.Shared.Wrappers;
+using Spectra.Application.MasterData.HellperFunc;
 
 namespace Spectra.Application.MasterData.Drug.Commands
 {
-    public class DeleteDrugCommand : ICommand<Unit>
+    public class DeleteDrugCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
-    public class DeleteDrugCommandHandler : IRequestHandler<DeleteDrugCommand, Unit>
+    public class DeleteDrugCommandHandler : IRequestHandler<DeleteDrugCommand, OperationResult<Unit>>
     {
         private readonly IDrugRepository _drugRepository;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHellper _addPhoto;
 
-        public DeleteDrugCommandHandler(IDrugRepository drugRepository, IWebHostEnvironment webHostEnvironment)
+        public DeleteDrugCommandHandler(IDrugRepository drugRepository, IHellper addPhoto)
         {
             _drugRepository = drugRepository;
-            _webHostEnvironment = webHostEnvironment;
+            _addPhoto = addPhoto;
         }
 
 
 
-        public async Task<Unit> Handle(DeleteDrugCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteDrugCommand request, CancellationToken cancellationToken)
         {
+          
             var drugs = await _drugRepository.GetByIdAsync(request.Id);
-            if (drugs == null)
-            {
-                throw new Exception("drug not found");
-            }
-            if (!string.IsNullOrEmpty(drugs.AttachmentPath))
-            {
-                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, drugs.AttachmentPath);
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-            }
+       
+
+            await _addPhoto.Deleteattachment(drugs.AttachmentPath);
 
             await _drugRepository.DeleteAsync(drugs);
-            return Unit.Value;
+            return OperationResult<Unit>.Success(Unit.Value);
+      
+
+   
         }
     }
 

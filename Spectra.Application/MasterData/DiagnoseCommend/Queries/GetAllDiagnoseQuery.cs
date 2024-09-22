@@ -5,6 +5,7 @@ using Spectra.Domain.Clients;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,12 @@ using System.Threading.Tasks;
 namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
 {
 
-    public class GetAllDiagnoseQuery : IRequest<IEnumerable<Diagnose>>
+    public class GetAllDiagnoseQuery : IRequest<OperationResult<IEnumerable<Diagnose>>>
     {
 
     }
 
-    public class GetAllDiagnoseQueryHandler : IRequestHandler<GetAllDiagnoseQuery, IEnumerable<Diagnose>>
+    public class  GetAllDiagnoseQueryHandler : IRequestHandler<GetAllDiagnoseQuery, OperationResult<IEnumerable<Diagnose>>>
     {
 
 
@@ -29,10 +30,17 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
         {
             _diagnoseRepository = diagnoseRepository;
         }
-        public async Task<IEnumerable<Diagnose>> Handle(GetAllDiagnoseQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<Diagnose>>> Handle(GetAllDiagnoseQuery request, CancellationToken cancellationToken)
         {
-            var drugs = await _diagnoseRepository.GetAllAsync();
-            return drugs;
+          
+                var drugs = await _diagnoseRepository.GetAllAsync(); 
+
+                return OperationResult<IEnumerable<Diagnose>>.Success(drugs);
+            
+ 
+
         }
     }
-}
+    }
+
+

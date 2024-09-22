@@ -1,14 +1,18 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Domain.Clients;
+using Spectra.Domain.MasterData.Drug;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Clients.Queries
 {
-    public class GetClientByIdQuery : IRequest<Client>
+    public class GetClientByIdQuery : IRequest<OperationResult<Client>>
     {
         public string Id { get; set; }
     }
 
-    public class GetClientByIdQueryHandler : IRequestHandler<GetClientByIdQuery, Client>
+    public class GetClientByIdQueryHandler : IRequestHandler<GetClientByIdQuery, OperationResult<Client>>
     {
         private readonly IClientRepository _clientRepository;
 
@@ -17,9 +21,23 @@ namespace Spectra.Application.Clients.Queries
             _clientRepository = clientRepository;
         }
 
-        public async Task<Client> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Client>> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _clientRepository.GetByIdAsync(request.Id);
+    
+         
+
+        
+                var client = await _clientRepository.GetByIdAsync(request.Id);
+
+
+                if (client == null)
+                {
+                    throw new NotFoundException("client", request.Id);
+                }
+
+                return OperationResult<Client>.Success(client);
+            
+        
         }
     }
 }

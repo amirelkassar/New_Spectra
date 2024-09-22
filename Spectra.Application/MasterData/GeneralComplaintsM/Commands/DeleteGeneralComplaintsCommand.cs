@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Domain.Shared.Wrappers;
 
 
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 {
-    public class DeleteGeneralComplaintsCommand : ICommand<Unit>
+    public class DeleteGeneralComplaintsCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
     }
-    public class DeleteGeneralComplaintsCommandHandler : IRequestHandler<DeleteGeneralComplaintsCommand, Unit>
+    public class DeleteGeneralComplaintsCommandHandler : IRequestHandler<DeleteGeneralComplaintsCommand, OperationResult<Unit>>
     {
         private readonly IGeneralComplaintRepository _generalComplaintRepository;
 
@@ -29,17 +30,16 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
 
 
-        public async Task<Unit> Handle(DeleteGeneralComplaintsCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(DeleteGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
+          
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
-            if (generalComplaint == null)
-            {
-                throw new Exception(" General Complaint not found");
-            }
+        
 
             await _generalComplaintRepository.DeleteAsync(generalComplaint);
-            return Unit.Value;
-        }
+            return OperationResult<Unit>.Success(Unit.Value);
+       
+}
     }
 
 }

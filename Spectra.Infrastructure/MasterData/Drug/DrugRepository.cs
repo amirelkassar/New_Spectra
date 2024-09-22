@@ -13,34 +13,34 @@ namespace Spectra.Infrastructure.MasterData.Drug
 {
     public class DrugRepository : IDrugRepository
     {
-        private readonly IMongoCollection<Drugs> _Drug;
+        private readonly IMongoCollection<DrugMD> _Drug;
 
         public DrugRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
-            _Drug = database.GetCollection<Drugs>("Drugs");
+            _Drug = database.GetCollection<DrugMD>("Drugs");
         }
-        public async Task<Drugs> GetByIdAsync(string id)
+        public async Task<DrugMD> GetByIdAsync(string id)
         {
             return await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task AddAsync(Drugs Drug)
+        public async Task AddAsync(DrugMD Drug)
         {
             await _Drug.InsertOneAsync(Drug);
         }
 
-        public async Task UpdateAsync(Drugs Drug)
+        public async Task UpdateAsync(DrugMD Drug)
         {
             await _Drug.ReplaceOneAsync(c => c.Id == Drug.Id, Drug);
         }
 
-        public async Task DeleteAsync(Drugs Drug)
+        public async Task DeleteAsync(DrugMD Drug)
         {
             await _Drug.DeleteOneAsync(c => c.Id == Drug.Id);
         }
 
-        public async Task<IEnumerable<Drugs>> GetAllAsync()
+        public async Task<IEnumerable<DrugMD>> GetAllAsync()
         {
 
             return await _Drug.Find(p => true).ToListAsync();

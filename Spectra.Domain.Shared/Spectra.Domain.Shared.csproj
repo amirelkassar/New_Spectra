@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Common\AppResults\" />
     <Folder Include="Constants\Policies\" />
   </ItemGroup>
 

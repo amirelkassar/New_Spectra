@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using FluentValidation;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
-    public class UpdateMedicalTestsAndXraysCommand : ICommand<Unit>
+    public class UpdateMedicalTestsAndXraysCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
         public string ScientificName { get; set; }
@@ -21,7 +23,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 
     }
 
-    public class UpdateMedicalTestsAndXraysCommandHandler : IRequestHandler<UpdateMedicalTestsAndXraysCommand, Unit>
+    public class UpdateMedicalTestsAndXraysCommandHandler : IRequestHandler<UpdateMedicalTestsAndXraysCommand, OperationResult<Unit>>
     {
 
         private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
@@ -33,22 +35,38 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
         }
 
 
-        public async Task<Unit> Handle(UpdateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(UpdateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
-
+           
             var medicalTestsAndXrys = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
-            if (medicalTestsAndXrys == null)
-            {
-                throw new Exception("Examination Type Not found");
-            }
+          
 
             medicalTestsAndXrys.ScientificName = request.ScientificName;
             medicalTestsAndXrys.Notes = request.Notes;
             medicalTestsAndXrys.ExaminationTypes = request.ExaminationTypes;
 
             await _medicalTestsAndXrayRepository.UpdateAsync(medicalTestsAndXrys);
-            return Unit.Value;
-        }
+            return OperationResult<Unit>.Success(Unit.Value);
+       
+}
 
+    }
+    public class UpdateMedicalTestsAndXraysCommandValidator : AbstractValidator<UpdateMedicalTestsAndXraysCommand>
+    {
+        public UpdateMedicalTestsAndXraysCommandValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("Id is required.");
+
+            RuleFor(x => x.ScientificName)
+                .NotEmpty().WithMessage("Scientific Name is required.")
+                .MaximumLength(100).WithMessage("Scientific Name must not exceed 100 characters.");
+
+            RuleFor(x => x.Notes)
+                .MaximumLength(500).WithMessage("Notes must not exceed 500 characters.");
+
+            RuleFor(x => x.ExaminationTypes)
+                .IsInEnum().WithMessage("Invalid Examination Type.");
+        }
     }
 }

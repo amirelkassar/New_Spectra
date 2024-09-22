@@ -1,13 +1,17 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
+using Spectra.Application.MasterData.Drug.Queries;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Queries;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +33,12 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
             _mediator = mediator;
             _excelProcessingService = excelProcessingService;
         }
-        public async Task<string> CreateGeneralComplaints(CreateGeneralComplaintsCommand input)
+        public async Task<OperationResult<string>> CreateGeneralComplaints(CreateGeneralComplaintsCommand input)
         {
 
             var command = new CreateGeneralComplaintsCommand
             {
+                Code1= input.Code1,
                 ComplaintName = input.ComplaintName,
                 DescriptionOfTheComplaint = input.DescriptionOfTheComplaint
 
@@ -59,41 +64,47 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
 
         }
 
-        public async Task UpdateGeneralComplaints(string id, UpdateGeneralComplaintsCommand input)
+        public async Task<OperationResult<Unit>> UpdateGeneralComplaints(string id, UpdateGeneralComplaintsCommand input)
         {
 
             var command = new UpdateGeneralComplaintsCommand
             {
 
                 Id = id,
-
+                Code1 = input.Code1,
                 ComplaintName = input.ComplaintName,
                 DescriptionOfTheComplaint = input.DescriptionOfTheComplaint
 
             };
 
-            await _mediator.Send(command);
+          return  await _mediator.Send(command);
         }
 
-        public async Task DeleteGeneralComplaints(string id)
+        public async Task<OperationResult<Unit>> DeleteGeneralComplaints(string id)
         {
             var command = new DeleteGeneralComplaintsCommand { Id = id };
-            await _mediator.Send(command);
+       return     await _mediator.Send(command);
         }
 
-        public async Task<GeneralComplaints> GetGeneralComplaintsById(string id)
+        public async  Task<OperationResult<Domain.MasterData.GeneralComplaints.GeneralComplaint>>  GetGeneralComplaintsById(string id)
         {
             var query = new GetGeneralComplaintsByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<IEnumerable<GeneralComplaints>> GetAllGeneralComplaintss()
+        public async  Task<OperationResult<IEnumerable<Domain.MasterData.GeneralComplaints.GeneralComplaint>>> GetAllGeneralComplaintss()
         {
             var query = new GetAllGeneralComplaintsQuery();
             return await _mediator.Send(query);
         }
 
+        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllGeneralComplaintNames()
+        {
+            var query = new GetAllGeneralComplaintNameQuery();
 
+            return await _mediator.Send(query);
+
+        }
     }
 }
 
