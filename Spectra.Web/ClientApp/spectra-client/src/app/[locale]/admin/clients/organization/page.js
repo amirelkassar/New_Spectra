@@ -7,7 +7,7 @@ const OrgPage = () => {
   const router = useRouter();
   useEffect(() => {
     router.push(ROUTES.ADMIN.CLIENTS.DASHBOARD);
-  }, []);
+  },);
   return null;
 };
 

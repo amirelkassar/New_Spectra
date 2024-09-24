@@ -62,8 +62,8 @@ export const OurValues = () => {
       aria-label='Our Values'
     >
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
-        {data.map((item) => (
-          <div className='bg-blueLight text-center text-sm mdl:text-medium rounded-3xl p-3 text-black'>
+        {data.map((item,i) => (
+          <div key={i} className='bg-blueLight text-center text-sm mdl:text-medium rounded-3xl p-3 text-black'>
             <span className='block mb-2 mx-auto w-fit'>
               {item.icon}
             </span>

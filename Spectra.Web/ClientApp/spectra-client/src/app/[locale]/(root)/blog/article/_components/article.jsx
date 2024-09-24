@@ -39,7 +39,7 @@ export const Article = ({ data = [] }) => {
       {/* CONTENT*/}
       <div className='space-y-10'>
         {data?.content?.map((c, i) => (
-          <div className='space-y-5'>
+          <div className='space-y-5' key={i}>
             {c?.title && (
               <h2 className='text-sm mdl:text-medium font-bold'>
                 {c?.title}
@@ -58,8 +58,8 @@ export const Article = ({ data = [] }) => {
             )}
 
             {c?.paragraphs.length > 0 &&
-              c?.paragraphs?.map((p, i) => (
-                <p className='text-sm mdl:text-medium'>
+              c?.paragraphs?.map((p, j) => (
+                <p className='text-sm mdl:text-medium' key={j}>
                   {p}
                 </p>
               ))}
