@@ -13,7 +13,7 @@ const IconsDemo = () => {
       <div style={{ display: 'block' }}>
         {icons.map((icon, index) => {
           const IconComponent = dynamic(() =>
-            import(`src/assets/icons/${icon.name}`).then(
+            import(`../../../assets/icons/${icon.name}`).then(
               (mod) => mod.default
             )
           );
