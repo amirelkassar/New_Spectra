@@ -1,12 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-interface Icon {
-  name: string;
-  path: string;
-}
 
-export function getIcons(): Icon[] {
+
+export function getIcons() {
   const iconDir = path.resolve('src/assets/icons');
   const files = fs.readdirSync(iconDir);
 

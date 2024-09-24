@@ -5,12 +5,9 @@ import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import { Textarea, TextInput } from "@mantine/core";
 import Button from "@/components/button";
-import WhatsAppIcon from "@/assets/icons/whatsApp";
 import Image from "next/image";
 import image1 from "@/assets/images/child.png";
 import EditIcon from "@/assets/icons/edit";
-import StarWhiteIcon from "@/assets/icons/starWhite";
-
 function page() {
   return (
     <Card>

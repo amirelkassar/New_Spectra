@@ -22,34 +22,10 @@ import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
 import { SortingState } from "@tanstack/react-table";
 import { useMediaQuery } from "@mantine/hooks";
 
-export interface FilterData {
-  label: string;
-  icon: JSX.Element;
-  key: string;
-}
 
-export interface SortingData {
-  label: string;
-  key: string;
-}
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  sort?: boolean;
-  IsWidth?: boolean;
-  filter?: "select" | "buttons" | null;
-  filterBy?: string;
-  filterText?: string;
-  filterData?: FilterData[];
-  sortingData?: SortingData[];
-  selectData?: string[];
-  mdHide?: Number | null;
-  haveComp?: boolean;
-  Component?: React.ComponentType<{ dataCard: TData }>;
-}
 
-export function DataTable<TData, TValue>({
+export function DataTable({
   columns,
   data,
   sort = false,
@@ -63,9 +39,9 @@ export function DataTable<TData, TValue>({
   mdHide = null,
   haveComp = false,
   Component,
-}: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [sorting, setSorting] = useState<SortingState>([]);
+}) {
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [sorting, setSorting] = useState([]);
 
   const table = useReactTable({
     data,
@@ -94,7 +70,7 @@ export function DataTable<TData, TValue>({
     if (tableColumn) return tableColumn.getFilterValue();
   };
   const isMobile = useMediaQuery("(max-width: 992px)");
-  const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
+  const [selectedUsers, setSelectedUsers] = useState(new Set());
   const toggleAll = () => {
     if (selectedUsers.size === data.length) {
       setSelectedUsers(new Set());
@@ -103,7 +79,7 @@ export function DataTable<TData, TValue>({
     }
   };
 
-  const toggleUser = (index: number) => {
+  const toggleUser = (index) => {
     const newSelectedUsers = new Set(selectedUsers);
     if (newSelectedUsers.has(index)) {
       newSelectedUsers.delete(index);
@@ -130,7 +106,7 @@ export function DataTable<TData, TValue>({
                 disabled={selectData?.length === 0}
                 placeholder="اختر التخصص"
                 value={
-                  (table.getColumn(filterBy)?.getFilterValue() as string) ?? ""
+                  (table.getColumn(filterBy)?.getFilterValue()) ?? ""
                 }
                 onChange={(value) =>
                   table.getColumn(filterBy)?.setFilterValue(value)
@@ -263,7 +239,7 @@ export function DataTable<TData, TValue>({
             .getRowModel()
             .rows.map((row, i) =>
               row.original !== null ? (
-                <Component key={i} dataCard={row.original as TData} />
+                <Component key={i} dataCard={row.original} />
               ) : null
             )}
         </div>

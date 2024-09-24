@@ -6,21 +6,14 @@ import ThreeDotsIcon from '@/assets/icons/three-dots';
 import { cn } from '@/lib/utils';
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type TableData = {
-  id: string;
-  type: 'session' | 'appointment';
-  doctor: string;
-  child: string;
-  date: string;
-  status: 'notStarted' | 'processing' | 'done';
-};
 
-export const columns: ColumnDef<TableData>[] = [
+
+export const columns= [
   {
     accessorKey: 'type',
     header: 'رقم الكشف/جلسة',
     cell: ({ getValue, row }) => {
-      const type = getValue<string>();
+      const type = getValue();
       const id = row.original.id;
       switch (type) {
         case 'session':
@@ -48,7 +41,7 @@ export const columns: ColumnDef<TableData>[] = [
     accessorKey: 'status',
     header: 'الحالة',
     cell: ({ getValue }) => {
-      const status = getValue<string>();
+      const status = getValue();
       switch (status) {
         case 'notStarted':
           return <Badge status={status}>لم يبدأ</Badge>;
