@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import RowDoctors from "./RowDoctors";
 import {
   DndContext,
   closestCenter,
@@ -11,16 +10,16 @@ import {
 import {
   arrayMove,
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "./SortableItem";
+import RowDoctors from "./rowDoctors";
 
 const DoctorsContainer = () => {
   const initialDoctors = [
-    { id: '1', title: 'اخصائيين التوحد' },
-    { id: '2', title: 'اخصائيين التغذية' },
-    { id: '3', title: 'اخصائيين الاسرة' },
+    { id: "1", title: "اخصائيين التوحد" },
+    { id: "2", title: "اخصائيين التغذية" },
+    { id: "3", title: "اخصائيين الاسرة" },
   ];
 
   const [doctors, setDoctors] = useState(initialDoctors);
@@ -40,18 +39,16 @@ const DoctorsContainer = () => {
     }
   };
 
-
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
       screenReaderInstructions={{
-        start: 'Drag started. Move item to the desired position.',
-        end: 'Drag ended. Item has been moved.'
+        start: "Drag started. Move item to the desired position.",
+        end: "Drag ended. Item has been moved.",
       }}
     >
-      
       <SortableContext items={doctors} strategy={verticalListSortingStrategy}>
         <div className="flex flex-col gap-7 lgl:gap-9">
           {doctors.map((doctor) => (
