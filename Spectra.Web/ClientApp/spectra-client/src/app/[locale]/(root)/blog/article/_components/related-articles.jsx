@@ -13,10 +13,11 @@ export const RelatedArticles = () => {
       heading='مقالات ذات صلة'
     >
       <div className='flex flex-wrap gap-5 justify-center'>
-        {ARTICLES?.slice(0, 3)?.map((article) => (
+        {ARTICLES?.slice(0, 3)?.map((article,i) => (
           <Link
             href={`${ROUTES.ROOT.BLOG}/article/${article?.id}`}
             className='w-72 block space-y-3'
+            key={i}
           >
             <Image
               src={article?.poster}

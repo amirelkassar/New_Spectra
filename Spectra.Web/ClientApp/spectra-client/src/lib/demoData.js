@@ -1,7 +1,5 @@
 // Cspell: disable
 import React from 'react';
-
-import { MedicalTeamTableData } from '@/app/[locale]/(client)/client/team/_components/columns';
 import HeartIcon from '@/assets/icons/heart';
 import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
@@ -14,7 +12,6 @@ import BehavioralIssues from '@/assets/icons/behavioral-issues';
 import LearningDifficulties from '@/assets/icons/learning-difficulties';
 import DevelopmentalDelay from '@/assets/icons/developmental-delay';
 import AllSpecializations from '@/assets/icons/all-specializations';
-import { ClientsTableData } from '@/app/[locale]/(client)/client/profile/_components/clients-table-columns';
 
 export const childPopupData = [
   {
@@ -39,7 +36,7 @@ export const childPopupData = [
   },
 ];
 
-export const MedicalTeamData: MedicalTeamTableData[] = [
+export const MedicalTeamData= [
   {
     id: '1',
     doctor: 'احمد محمد كمال',
@@ -82,7 +79,7 @@ export const MedicalTeamData: MedicalTeamTableData[] = [
   },
 ];
 
-export const ClientsData: ClientsTableData[] = [
+export const ClientsData = [
   {
     id: '1',
     clientName: 'عبد الله الشيخ',

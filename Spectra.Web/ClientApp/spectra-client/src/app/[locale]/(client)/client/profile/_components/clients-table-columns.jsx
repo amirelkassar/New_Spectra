@@ -5,15 +5,9 @@ import ThreeDotsIcon from '@/assets/icons/three-dots';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type ClientsTableData = {
-  id: string;
-  clientName: string;
-  childrensNo: string;
-  email: string;
-  kind: 'family' | 'firm' | 'medicalProvider';
-};
 
-export const columns: ColumnDef<ClientsTableData>[] = [
+
+export const columns = [
   {
     accessorKey: 'clientName',
     header: 'الاسم',
@@ -31,7 +25,7 @@ export const columns: ColumnDef<ClientsTableData>[] = [
     accessorKey: 'kind',
     header: 'النوع',
     cell: ({ getValue }) => {
-      const kind = getValue<string>();
+      const kind = getValue();
       if (kind === 'family') {
         return 'عائلة طفل';
       } else if (kind === 'firm') {

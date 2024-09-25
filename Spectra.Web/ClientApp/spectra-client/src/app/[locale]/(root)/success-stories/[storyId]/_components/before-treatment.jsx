@@ -5,9 +5,9 @@ import SpeechBubbleIcon from '@/assets/icons/speech-bubble';
 import RobotRedIcon from '@/assets/icons/robot-red';
 
 const Icons = [
-  <SadFaceIcon className='size-4 mdl:size-6' />,
-  <SpeechBubbleIcon className='size-4 mdl:size-6' />,
-  <RobotRedIcon className='size-4 mdl:size-6' />,
+  <SadFaceIcon className='size-4 mdl:size-6' key={3} />,
+  <SpeechBubbleIcon className='size-4 mdl:size-6'key={1} />,
+  <RobotRedIcon className='size-4 mdl:size-6' key={2} />,
 ];
 
 export const BeforeTreatment = ({ data = [] }) => {
@@ -39,7 +39,7 @@ export const BeforeTreatment = ({ data = [] }) => {
         <ul className='space-y-5'>
           {data.map((item, index) => (
             <li
-              key={item}
+              key={index}
               className='flex items-center gap-5'
             >
               <span className='rounded-full shrink-0 flex items-center justify-center bg-red/10 size-7 mdl:size-12'>

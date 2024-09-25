@@ -4,8 +4,8 @@ import TeamIcon from '@/assets/icons/team';
 import TallBreakArrowIcon from '@/assets/icons/tall-break-arrow';
 
 const icons = [
-  <TallBreakArrowIcon className='w-3 h-2 mdl:w-7 mdl:h-4' />,
-  <TeamIcon className='size-4 mdl:size-8' />,
+  <TallBreakArrowIcon className='w-3 h-2 mdl:w-7 mdl:h-4' key={1} />,
+  <TeamIcon className='size-4 mdl:size-8' key={2} />,
 ];
 
 export const AfterTreatment = ({ data = [] }) => {

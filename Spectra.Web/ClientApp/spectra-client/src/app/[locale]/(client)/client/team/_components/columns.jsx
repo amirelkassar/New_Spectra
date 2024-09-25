@@ -10,21 +10,14 @@ import StarGoldIcon from '@/assets/icons/starGold';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type MedicalTeamTableData = {
-  id: string;
-  doctor: string;
-  profession: string;
-  avatar: string;
-  rate: number;
-  cost: number;
-};
 
-export const columns: ColumnDef<MedicalTeamTableData>[] = [
+
+export const columns= [
   {
     accessorKey: 'doctor',
     header: 'الطبيب',
     cell: ({ getValue, row }) => {
-      const doctor = getValue<string>();
+      const doctor = getValue();
       const avatar = row.original.avatar;
       return (
         <div className='lg:flex items-center gap-5 w-full min-w-max'>
@@ -47,7 +40,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     accessorKey: 'rate',
     header: 'التقييم',
     cell: ({ getValue }) => {
-      const rate = getValue<number>();
+      const rate = getValue();
       return (
         <span className='flex items-center gap-1 text-grayDark'>
           <span className='mt-0.5'>{rate}</span>
@@ -59,7 +52,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
     accessorKey: 'cost',
     header: 'السعر',
-    cell: ({ getValue }) => formatCurrency(getValue<number>() || 0),
+    cell: ({ getValue }) => formatCurrency(getValue() || 0),
   },
   {
     id: 'message',

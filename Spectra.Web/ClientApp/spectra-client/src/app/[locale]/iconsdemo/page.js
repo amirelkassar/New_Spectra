@@ -2,21 +2,18 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { getIcons } from '../../../iconLoader';
 
-interface Icon {
-  name: string;
-  path: string;
-}
 
-const icons: Icon[] = getIcons();
 
-const IconsDemo: React.FC = () => {
+const icons = getIcons();
+
+const IconsDemo = () => {
   return (
     <div className='bg-slate-300'>
       <h1>Icons Demo</h1>
       <div style={{ display: 'block' }}>
         {icons.map((icon, index) => {
           const IconComponent = dynamic(() =>
-            import(`src/assets/icons/${icon.name}`).then(
+            import(`../../../assets/icons/${icon.name}`).then(
               (mod) => mod.default
             )
           );

@@ -27,8 +27,8 @@ export const Testimonials = () => {
         id='testimonials'
       >
         <div className='flex justify-between text-center items-center flex-col mdl:flex-row gap-5'>
-          {data.map((item) => (
-            <div className='space-y-3'>
+          {data.map((item ,i) => (
+            <div className='space-y-3' key={i}>
               <span className='bg-greenMain rounded-full size-10 mdl:size-20 flex items-center justify-center mx-auto'>
                 {item.icon}
               </span>
