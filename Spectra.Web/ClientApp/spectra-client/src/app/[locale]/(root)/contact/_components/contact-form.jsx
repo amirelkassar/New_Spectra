@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { Section } from '../../_components/section';
 import { Link } from '@/navigation';
-import WhatsAppIcon from '@/assets/icons/whatsapp';
 import PhoneGreenIcon from '@/assets/icons/phone-green';
 import TextInput from '@/components/inputs/text-input';
 import { Textarea } from '@mantine/core';
 import Button from '@/components/button';
+import WhatsAppIcon from '@/assets/icons/whatsApp';
+
 
 export const ContactForm = () => {
   return (
