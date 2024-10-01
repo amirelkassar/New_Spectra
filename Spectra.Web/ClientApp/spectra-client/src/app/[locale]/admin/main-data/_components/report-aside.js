@@ -23,14 +23,16 @@ const MainDataAside = () => {
       route: ROUTES.ADMIN.DATAMAIN.SPECIALTIES,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES ||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD,
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD||
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID),
     },
     {
       name: "التحاليل و الاشاعات",
       route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD,
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD||
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(params.analysisRumorsID),
     },
     {
       name: "التشخيصات",

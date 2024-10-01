@@ -1,6 +1,5 @@
 'use client'
 import React from "react";
-
 import { DataTable } from "@/components/data-table";
 import {SpecialtiesColumns} from '../_components/specialties-columns'
 import AddMainData from "../_components/add-drugs";

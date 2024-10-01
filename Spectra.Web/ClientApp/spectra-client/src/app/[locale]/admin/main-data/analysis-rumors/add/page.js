@@ -66,11 +66,21 @@ function Page() {
               </div>
             </div>
           </div>
-          <Input
-            label={"الاسم العلمى  "}
-            labelClassName={"text-[12px] md:text-[16px]"}
-            inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
-          />
+          <div className="flex  gap-4 mdl:gap-8 flex-col mdl:flex-row w-full flex-1">
+            <Input
+              label={"الاسم العلمى  باللغة العربية  "}
+              labelClassName={"text-[12px] md:text-[16px]"}
+              inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
+              containerClassName={'flex-1'}
+            />
+            <Input
+              label={"الاسم العلمى  باللغة الانجليزية  "}
+              labelClassName={"text-[12px] md:text-[16px]"}
+              inputClassName={" !h-10 text-[12px] md:text-[16px] lgl:!h-[66px]"}
+              containerClassName={'flex-1'}
+            />
+          </div>
+        
           <Input
             label={"الكود  "}
             labelClassName={"text-[12px] md:text-[16px]"}
@@ -82,7 +92,7 @@ function Page() {
                 "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px]  border-greenMain rounded-2xl",
               label: "text-[12px]  md:text-[16px]",
             }}
-            label={"وصف التشخيص"}
+            label={"ملاحظة "}
           />
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">

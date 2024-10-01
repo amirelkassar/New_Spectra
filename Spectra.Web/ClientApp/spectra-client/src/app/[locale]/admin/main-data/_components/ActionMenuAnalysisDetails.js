@@ -5,7 +5,6 @@ import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
-import ShowIcon from "@/assets/icons/show";
 import EditIcon from "@/assets/icons/edit";
 import ROUTES from "@/routes";
 
@@ -22,12 +21,6 @@ function ActionMenu({ id }) {
         editModal("open", true);
       },
       color: "red",
-    },
-    {
-      label: "عرض",
-      icon: <ShowIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(id),
-      type: "link",
     },
     {
       label: "تعديل",

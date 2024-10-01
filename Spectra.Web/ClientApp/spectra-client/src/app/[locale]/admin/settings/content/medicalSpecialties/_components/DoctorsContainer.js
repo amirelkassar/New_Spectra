@@ -14,6 +14,9 @@ const DoctorsContainer = () => {
       <ReactSortable
         list={doctors}
         setList={setDoctors}
+        animation={200}
+        delayOnTouchStart={false}
+        delay={2}
         className="flex flex-col gap-7 lgl:gap-9"
       >
         {doctors.map((doctor) => (
