@@ -8,14 +8,10 @@ import StarWhiteIcon from "@/assets/icons/starWhite";
 import useModal from '@/store/modal-slice'
 function CardDoctor() {
   const {editModal}= useModal()
- 
   const handleButtonClick = (e) => {
-    e.stopPropagation();
-    alert("Button clicked!");
     editModal('open', true);
     editModal('type', 'delete');
   };
-
     return (
     <div className="lgl:min-w-[230px] flex-1">
     
