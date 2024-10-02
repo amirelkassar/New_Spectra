@@ -32,7 +32,7 @@ function ActionMenu({ id }) {
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(id),
+      link: ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(id),
       type: "link",
     },
     {

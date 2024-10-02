@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import imgDrugs from "@/assets/images/drugs.png";
 import ActionMenu from "../_components/ActionMenuDetails";
-function page() {
+function page({ params }) {
   return (
     <div>
       <div className="flex items-center  mb-10 justify-between gap-4">
@@ -18,7 +18,7 @@ function page() {
           </Link>
           <h2 className="headTitleDash">العقاقير</h2>
         </div>
-        <ActionMenu />
+        <ActionMenu id={params.drugsID} />
       </div>
       <div className="flex flex-col gap-5">
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">

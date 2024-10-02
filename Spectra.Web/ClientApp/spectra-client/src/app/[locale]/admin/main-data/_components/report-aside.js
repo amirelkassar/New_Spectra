@@ -16,7 +16,8 @@ const MainDataAside = () => {
       route: ROUTES.ADMIN.DATAMAIN.HOME,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.HOME ||
-        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(params.drugsID),
+        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(params.drugsID)||
+        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(params.drugsID),
     },
     {
       name: "تخصصات الاطباء",
@@ -24,7 +25,8 @@ const MainDataAside = () => {
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES ||
         path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID),
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID)||
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(params.doctorsSpecialtiesID),
     },
     {
       name: "التحاليل و الاشاعات",
@@ -32,7 +34,8 @@ const MainDataAside = () => {
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
         path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(params.analysisRumorsID),
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(params.analysisRumorsID)||
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILSEDIT(params.analysisRumorsID),
     },
     {
       name: "التشخيصات",
@@ -40,14 +43,17 @@ const MainDataAside = () => {
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS ||
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD ||
-        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID),
+        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID)||
+        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(params.diagnosticsID),
     },
     {
       name: "الشكاوى العامة",
       route: ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD,
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD||
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(params.complaintsID)||
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(params.complaintsID),
     },
     {
       name: "الخدمات",

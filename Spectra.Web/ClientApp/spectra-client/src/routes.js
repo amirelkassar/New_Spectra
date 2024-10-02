@@ -68,10 +68,11 @@ const ROUTES = {
       },
       PATIENTSDETAILS: {
         DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
-        PRESCRIPTIONS: (id) => `/admin/clients/patientDetails/${id}/prescriptions`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/patientDetails/${id}/prescriptions`,
         REPORTS: (id) => `/admin/clients/patientDetails/${id}/reports`,
-        REPORTSID: (id,id2) => `/admin/clients/patientDetails/${id}/reports/${id2}`,
-        
+        REPORTSID: (id, id2) =>
+          `/admin/clients/patientDetails/${id}/reports/${id2}`,
       },
     },
     STAFF: {
@@ -89,16 +90,24 @@ const ROUTES = {
       HOME: "/admin/main-data",
       DRUGSADD: "/admin/main-data/add-drugs",
       DRUGSDETAILS: (id) => `/admin/main-data/${id}`,
+      DRUGSDETAILSEDIT: (id) => `/admin/main-data/${id}/edit`,
       SPECIALTIES: "/admin/main-data/doctors-specialties",
-      SPECIALTIESID:(id)=> `/admin/main-data/doctors-specialties/${id}`,
+      SPECIALTIESID: (id) => `/admin/main-data/doctors-specialties/${id}`,
+      SPECIALTIESIDEDIT: (id) =>
+        `/admin/main-data/doctors-specialties/${id}/edit`,
       SPECIALTIESADD: "/admin/main-data/doctors-specialties/add",
       ANALYSISRUMORS: "/admin/main-data/analysis-rumors",
-      ANALYSISRUMORSDETAILS: (id)=>`/admin/main-data/analysis-rumors/${id}`,
+      ANALYSISRUMORSDETAILS: (id) => `/admin/main-data/analysis-rumors/${id}`,
+      ANALYSISRUMORSDETAILSEDIT: (id) =>
+        `/admin/main-data/analysis-rumors/${id}/edit`,
       ANALYSISRUMORSADD: "/admin/main-data/analysis-rumors/add",
       DIAGNOSTICS: "/admin/main-data/diagnostics",
       DIAGNOSTICSADD: "/admin/main-data/diagnostics/add",
       DIAGNOSTICSDETAILS: (id) => `/admin/main-data/diagnostics/${id}`,
+      DIAGNOSTICSDETAILSEDIT: (id) => `/admin/main-data/diagnostics/${id}/edit`,
       COMPLAINTS: "/admin/main-data/complaints",
+      COMPLAINTSDETAILS: (id) => `/admin/main-data/complaints/${id}`,
+      COMPLAINTSDETAILSEDIT: (id) => `/admin/main-data/complaints/${id}/edit`,
       COMPLAINTSADD: "/admin/main-data/complaints/add",
       SERVICES: "/admin/main-data/services",
       SERVICESADD: "/admin/main-data/services/add",

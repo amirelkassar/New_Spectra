@@ -14,7 +14,7 @@ export const ComplaintsColumns = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      return <ActionMenu />;
+      return <ActionMenu id={id} />;
     },
   },
 ];

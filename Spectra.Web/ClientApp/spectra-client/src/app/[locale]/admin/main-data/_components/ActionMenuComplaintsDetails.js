@@ -22,10 +22,11 @@ function ActionMenu({ id }) {
       },
       color: "red",
     },
+   
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(id),
+      link: ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(id),
       type: "link",
     },
     {

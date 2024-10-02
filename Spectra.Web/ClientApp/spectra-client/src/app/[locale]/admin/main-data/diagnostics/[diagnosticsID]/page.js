@@ -2,7 +2,7 @@ import React from "react";
 import AddMainData from "../../_components/add-drugs";
 import ROUTES from "@/routes";
 import ActionMenu from "../../_components/ActionMenuDiagnosticsDetails";
-function page() {
+function page({ params }) {
   return (
     <div>
       <div className="flex items-center justify-between gap-5 mb-10">
@@ -13,7 +13,7 @@ function page() {
             path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD}
           />
         </div>
-        <ActionMenu/>
+        <ActionMenu id={params.diagnosticsID}/>
       </div>
       <div className="flex flex-col gap-5">
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">

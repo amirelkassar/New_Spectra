@@ -4,6 +4,7 @@ import ROUTES from "@/routes";
 import ActionMenu from "../../_components/ActionMenuAnalysisDetails";
 import { Link } from "@/navigation";
 import BackIcon from "@/assets/icons/back";
+import AnalysisIcon from "@/assets/icons/analysis";
 function page({ params }) {
   console.log(params);
 
@@ -26,6 +27,15 @@ function page({ params }) {
         <ActionMenu id={params.analysisRumorsID} />
       </div>
       <div className="flex flex-col gap-5">
+        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">النوع</h3>
+          <div className="flex items-center gap-6">
+            <div className="flex bg-blueLight size-[38px] rounded-full items-center justify-center p-2">
+              <AnalysisIcon />
+            </div>
+            <p className="text-[14px] lg:text-[20px]  font-Regular">تحاليل</p>
+          </div>
+        </div>
         <div className="pb-5 border-b last-of-type:border-none border-grayLight">
           <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
             الاسم العلمى باللغة العربية
