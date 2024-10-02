@@ -34,6 +34,7 @@ const ROUTES = {
   ADMIN: {
     MAIN: "/admin/main",
     APPOINTMENTS: "/admin/appointments",
+    APPOINTMENTSDETAILS:(id)=> `/admin/appointments/${id}`,
     REQUESTS: "/admin/requests",
     REQUESTSNEW: "/admin/requests/new",
     REQUESTSREJECTED: "/admin/requests/rejected",
