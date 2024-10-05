@@ -29,13 +29,13 @@ const servicesData = [
 function Nominations() {
   return (
     <Card>
-      <h2 className="text-base mdl:text-lg  mb-10">الترشيحات</h2>
+      <h2 className="text-base mdl:text-lg mb-4  mdl:mb-10">الترشيحات</h2>
       <div>
-        <h3 className="text-base mdl:text-lg font-Regular mb-7">الباقات</h3>
-        <div className="flex  w-full  flex-wrap  mt-10 px-5 lgl-px-0   gap-10">
+        <h3 className="text-base mdl:text-lg font-Regular mb-6">الباقات</h3>
+        <div className="flex  w-full  flex-wrap  mt-10 px-5 lgl-px-0 gap-2   mdl:gap-10">
           {pricingPlans.map((plan, i) => (
             <div
-              className="flex  flex-col gap-2 min-w-[232px]   w-[232px]  p-5 border-t-[6px] overflow-hidden border-t-greenMain border-2 border-grayLight rounded-[10px] "
+              className="flex  flex-col gap-2 min-w-[180px] mdl:min-w-[232px]   w-[180px] mdl:w-[232px]  p-5 border-t-[6px] overflow-hidden border-t-greenMain border-2 border-grayLight rounded-[10px] "
               key={i}
             >
               <h2 className="lgl:text-lg text-sm mb-3 font-Bold text-greenMain">

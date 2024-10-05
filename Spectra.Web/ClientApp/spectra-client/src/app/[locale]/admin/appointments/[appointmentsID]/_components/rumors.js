@@ -19,7 +19,7 @@ const dataRumors = [
 function Rumors() {
   return (
     <Card>
-      <h2 className="text-base mdl:text-lg mb-10">
+      <h2 className="text-base mdl:text-lg mb-5 mdl:mb-10">
       التحاليل و الاشعات الخارجية
       </h2>
       <div className="flex flex-col gap-4 lgl:gap-8 mt-7 lgl:mt-11 ps-4">

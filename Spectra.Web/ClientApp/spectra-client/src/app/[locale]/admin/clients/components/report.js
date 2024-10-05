@@ -1,12 +1,14 @@
 import Image from "next/image";
 import React from "react";
 import man from "@/assets/images/placeholder-person.png";
+import { Link } from "@/navigation";
 
 
-function Report({ data }) {
+function Report({ data,link="#" }) {
   return (
-    <div
-      className={` rounded-[10px] ${
+    <Link
+      href={link}
+      className={` duration-300 hover:shadow-md rounded-[10px] ${
         data.state === "new" ? "bg-[#F1FCFF]" : "bg-grayLight"
       } min-w-[100%]  md:min-w-[calc(50%-20px)] w-full max-w-[350px] p-3 ps-6 border-s-4 flex-1  border-greenMain`}
     >
@@ -43,7 +45,7 @@ function Report({ data }) {
           احمد محمد كمال
         </h2>
       </div>
-    </div>
+    </Link>
   );
 }
 
