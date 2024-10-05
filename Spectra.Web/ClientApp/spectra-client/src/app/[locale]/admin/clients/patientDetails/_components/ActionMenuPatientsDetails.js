@@ -4,7 +4,6 @@ import EditIcon from "@/assets/icons/edit";
 import ExportIcon from "@/assets/icons/export";
 import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
-import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
@@ -23,11 +22,10 @@ function ActionMenu({ id }) {
       },
       color: "red",
     },
-
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(id)+'?edit=true',
+      link: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(id) + "?edit=true",
       type: "link",
     },
     {

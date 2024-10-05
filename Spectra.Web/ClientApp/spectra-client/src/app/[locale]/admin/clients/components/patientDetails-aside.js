@@ -12,11 +12,18 @@ const PatientsDetilsAside = () => {
 
   const pages = [
     {
-      name: "الـمواعيد",
+      name: "بيانات الطفل",
       route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(params.patientsID),
       isActive:
         path ===
         ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(params.patientsID),
+    },
+    {
+      name: "الـمواعيد",
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.APPOINTMENTS(params.patientsID),
+      isActive:
+        path ===
+        ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.APPOINTMENTS(params.patientsID),
     },
     {
       name: "الوصفات الطبية ",
