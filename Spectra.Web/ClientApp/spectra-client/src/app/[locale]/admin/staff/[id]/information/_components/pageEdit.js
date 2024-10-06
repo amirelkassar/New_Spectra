@@ -350,7 +350,6 @@ function PageEdit({ id }) {
           <h2 className="text-[14px] md:text-[20px] font-bold">
             التخصصات الدقيقة
           </h2>
-
           <MultiSelect
             data={allSpecialties}
             defaultValue={Data.daqeqa}
@@ -361,7 +360,6 @@ function PageEdit({ id }) {
             onChange={handleAddSpecialty}
           />
         </div>
-
         <div className="max-w-[850px] flex flex-wrap gap-x-5 gap-y-2">
           {Data.daqeqa.map((item, index) => (
             <div
@@ -382,21 +380,18 @@ function PageEdit({ id }) {
       <div className="w-full bg-white py-4 px-6 lg:px-10 lg:py-8 !mb-4 lg:rounded-xl relative">
         <div className="flex gap-4 items-center mb-10">
           <h2 className="text-[14px] md:text-[20px] font-bold">رسوم الخدمات</h2>
-
-          {/* MultiSelect to choose services */}
           <MultiSelect
-            data={allAvailableServices} // Names of services
+            data={allAvailableServices}
             placeholder="إضافة خدمة"
             rightSection={<ArrowDownIcon />}
             className="MultiSelect !h-auto  flex-1"
             classNames={{
               input: "!h-auto min-h-12",
             }}
-            value={Data.Services.map((service) => service.name)} // Currently selected services
+            value={Data.Services.map((service) => service.name)}
             onChange={handleAddService}
           />
         </div>
-
         <div className=" w-full flex flex-col gap-4">
           {Data.Services.map((service, index) => (
             <div key={index} className="flex items-center gap-4">

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Card from "@/components/card";
 import { Link } from "@/navigation";
@@ -6,8 +7,14 @@ import ROUTES from "@/routes";
 import Image from "next/image";
 import imgStaff from "@/assets/images/staff.png";
 import ActionMenu from "./ActionMenu";
+import PageEditStaff from "./pageEditStaff";
+import { useSearchParams } from "next/navigation";
 function StaffInformation() {
-  return (
+  const searchParams = useSearchParams();
+
+  return searchParams.get("edit") === "true" ? (
+    <PageEditStaff />
+  ) : (
     <div className="flex flex-col gap-5 w-full">
       <Card>
         <div className="flex items-center justify-between mb-8  gap-5">
