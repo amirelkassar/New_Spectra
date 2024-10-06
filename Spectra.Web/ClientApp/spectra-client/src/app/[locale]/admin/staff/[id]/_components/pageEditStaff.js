@@ -4,89 +4,23 @@ import { Link, useRouter } from "@/navigation";
 import ROUTES from "@/routes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import certificates from "@/assets/images/certificates.png";
-import React, { useState } from "react";
+import React from "react";
 import BackIcon from "@/assets/icons/back";
 import Input from "@/components/input";
 import imgStaff from "@/assets/images/staff.png";
 import { Select } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
+import Button from "@/components/button";
 
 function PageEditStaff({ id }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [Data, setData] = useState({
-    name: "احمد محمد كمال",
-    gender: "ذكر",
-    nationalID: "1225854",
-    address: "السعودية",
-    city: "دمام",
-    phone: "9874563+",
-    email: "safwa@gmail.com",
-    brief:
-      "دكتوراه في الفلسفة بالخدمة الاجتماعية مختص في تطوير الذات والعلاقات الاسرية والزوجية والمشاكل النفسية والإدمان والمشكلات ",
-    qualifications: "مرخص معتمد من الهيئة السعودية للتخصصات الصحية",
-    daqeqa: [
-      "القلق",
-      "الضغوط",
-      "مشكلات في العلاقات",
-      "مشكلات بالتواصل",
-      "اضطرابات الشخصية",
-      "التعامل مع الغضب",
-      "ثنائي القطب",
-      "القلق الاجتماعي ، الفوبيا",
-      "فرط الحركة",
-    ],
-    licenseNumber: "5215664",
-    star: 4,
-    date: "2/8/2022",
-    rating: 281,
-    bookingCode: "DR-AHMED-2024",
-    ListCertificates: [
-      {
-        id: 0,
-        image: certificates,
-        date: "20/8/2022",
-        title: "دكتوراه العلوم الطبية",
-      },
-      {
-        id: 1,
-        image: certificates,
-        date: "20/8/2022",
-        title: "دكتوراه العلوم الطبية",
-      },
-      {
-        id: 2,
-        image: certificates,
-        date: "20/8/2022",
-        title: "دكتوراه العلوم الطبية",
-      },
-      {
-        id: 3,
-        image: certificates,
-        date: "20/8/2022",
-        title: "دكتوراه العلوم الطبية",
-      },
-    ],
-    Services: [
-      {
-        id: 0,
-        name: "خدمة الاستشارة",
-        price: "100",
-      },
-      {
-        id: 1,
-        name: "خدمة الكشف المبكر",
-        price: "100",
-      },
-      {
-        id: 2,
-        name: "خدمة أخرى",
-        price: "100",
-      },
-    ],
-  });
-  console.log(Data.Services);
+
+  const handleRemoveEdit = () => {
+    router.push(
+      ROUTES.ADMIN.STAFF.STAFFID(id) + "?type=" + searchParams.get("type")
+    );
+  };
   return (
     <div className="flex flex-col gap-5 w-full">
       <Card>
@@ -234,7 +168,6 @@ function PageEditStaff({ id }) {
                 placeholder="Pick date"
                 valueFormat="DD/MM/YYYY"
                 defaultValue={new Date("5/5/2020")}
-               
                 classNames={{
                   input:
                     "h-auto w-full min-h-11 py-2 text-[12px] md:text-xl !font-Regular  !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] rounded-xl",
@@ -268,6 +201,13 @@ function PageEditStaff({ id }) {
               />
             </li>
           </ul>
+          <Button
+            variant="secondary"
+            onClick={handleRemoveEdit}
+            className="h-14 mt-14 max-w-full w-[360px] text-xl font-Bold"
+          >
+            حفظ التعديلات
+          </Button>
         </form>
       </Card>
     </div>

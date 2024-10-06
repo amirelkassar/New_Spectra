@@ -6,14 +6,15 @@ import BackIcon from "@/assets/icons/back";
 import ROUTES from "@/routes";
 import Image from "next/image";
 import imgStaff from "@/assets/images/staff.png";
-import ActionMenu from "./ActionMenu";
+import ActionMenu from "./ActionMenuStaff";
 import PageEditStaff from "./pageEditStaff";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 function StaffInformation() {
   const searchParams = useSearchParams();
+  const params = useParams();
 
   return searchParams.get("edit") === "true" ? (
-    <PageEditStaff />
+    <PageEditStaff id={params.id}/>
   ) : (
     <div className="flex flex-col gap-5 w-full">
       <Card>
@@ -27,7 +28,7 @@ function StaffInformation() {
             </Link>
             <h2 className="text-base lg:text-xl font-bold ">الموظفين</h2>
           </div>
-          <ActionMenu />
+          <ActionMenu id={params.id} />
         </div>
         <div className="flex flex-wrap gap-3 mdl:gap-6 items-center">
           <Image

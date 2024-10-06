@@ -34,7 +34,7 @@ const ROUTES = {
   ADMIN: {
     MAIN: "/admin/main",
     APPOINTMENTS: "/admin/appointments",
-    APPOINTMENTSDETAILS:(id)=> `/admin/appointments/${id}`,
+    APPOINTMENTSDETAILS: (id) => `/admin/appointments/${id}`,
     REQUESTS: "/admin/requests",
     REQUESTSNEW: "/admin/requests/new",
     REQUESTSREJECTED: "/admin/requests/rejected",
@@ -63,16 +63,20 @@ const ROUTES = {
         DETAILSEDIT: (id) => `/admin/clients/family/${id}/details/edit`,
         APPOINTMENTS: (id) => `/admin/clients/family/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/admin/clients/family/${id}/prescriptions`,
-        PRESCRIPTIONSDETAILS: (id,id2) => `/admin/clients/family/${id}/prescriptions/${id2}`,
-        PRESCRIPTIONSEDIT: (id,id2) => `/admin/clients/family/${id}/prescriptions/${id2}/edit`,
+        PRESCRIPTIONSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}`,
+        PRESCRIPTIONSEDIT: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}/edit`,
         REPORTS: (id) => `/admin/clients/family/${id}/reports`,
-        REPORTSDETAILS: (id,id2) => `/admin/clients/family/${id}/reports/${id2}`,
+        REPORTSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/reports/${id2}`,
         PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
         PATIENTSEDIT: (id) => `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
         DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
-        APPOINTMENTS: (id) => `/admin/clients/patientDetails/${id}/appointments`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/patientDetails/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
           `/admin/clients/patientDetails/${id}/prescriptions`,
         REPORTS: (id) => `/admin/clients/patientDetails/${id}/reports`,
@@ -83,8 +87,10 @@ const ROUTES = {
     STAFF: {
       DASHBOARD: "/admin/staff",
       STAFFID: (id) => `/admin/staff/${id}`,
+      STAFFIDEDIT: (id) => `/admin/staff/${id}?edit=true`,
       STAFFIDINFORMATION: (id) => `/admin/staff/${id}/information`,
-      STAFFIDINFORMATIONEDIT: (id) => `/admin/staff/${id}/information?edit=true`,
+      STAFFIDINFORMATIONEDIT: (id) =>
+        `/admin/staff/${id}/information?edit=true`,
       STAFFIDPRESCRIPTIONS: (id) => `/admin/staff/${id}/prescriptions`,
       STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
     },
@@ -118,6 +124,11 @@ const ROUTES = {
       SERVICES: "/admin/main-data/services",
       SERVICESADD: "/admin/main-data/services/add",
       SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
+      TESTSINTERIOR: "/admin/main-data/testsInterior",
+      TESTSINTERIORDETAILS: (id) => `/admin/main-data/testsInterior/${id}`,
+      TESTSINTERIORDETAILSEDIT: (id) =>
+        `/admin/main-data/testsInterior/${id}/edit`,
+      TESTSINTERIORADD: "/admin/main-data/testsInterior/add",
     },
 
     CONTRACTS: {

@@ -356,7 +356,10 @@ function PageEdit({ id }) {
             value={Data.daqeqa}
             placeholder="اختر تخصص"
             rightSection={<ArrowDownIcon />}
-            className="MultiSelect flex-1"
+            className="MultiSelect h-auto flex-1"
+            classNames={{
+              input:" !h-auto"
+            }}
             onChange={handleAddSpecialty}
           />
         </div>

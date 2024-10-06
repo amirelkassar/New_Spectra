@@ -63,6 +63,15 @@ const MainDataAside = () => {
         path === ROUTES.ADMIN.DATAMAIN.SERVICESADD||
         path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID),
     },
+    {
+      name: "الفحوصات الداخلية",
+      route: ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR ||
+        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORADD||
+        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(params.testsInteriorID)||
+        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(params.testsInteriorID),
+    },
   ];
   return (
     path !== ROUTES.ADMIN.DATAMAIN.DRUGSADD && (

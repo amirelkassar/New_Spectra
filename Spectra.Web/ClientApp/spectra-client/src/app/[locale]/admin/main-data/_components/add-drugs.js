@@ -6,7 +6,7 @@ function AddMainData({title,path}) {
   return (
     <Link
       href={path}
-      className="flex items-center justify-center w-40 h-10 rounded-xl bg-blueLight gap-4 font-bold"
+      className="flex px-5 items-center justify-center w-fit h-10 rounded-xl bg-blueLight gap-4 font-bold"
     >
       <PlusInsideCircleIcon />
       <p className=" text-[14px] md:text-[16px] font-bold">{title} </p>
