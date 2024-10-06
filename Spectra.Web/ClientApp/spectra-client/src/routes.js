@@ -87,6 +87,7 @@ const ROUTES = {
     STAFF: {
       DASHBOARD: "/admin/staff",
       STAFFID: (id) => `/admin/staff/${id}`,
+      STAFFADD:  `/admin/staff/add`,
       STAFFIDEDIT: (id) => `/admin/staff/${id}?edit=true`,
       STAFFIDINFORMATION: (id) => `/admin/staff/${id}/information`,
       STAFFIDINFORMATIONEDIT: (id) =>
