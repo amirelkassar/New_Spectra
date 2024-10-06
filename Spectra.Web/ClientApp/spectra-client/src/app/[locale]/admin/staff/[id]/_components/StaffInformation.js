@@ -20,29 +20,53 @@ function StaffInformation() {
             </Link>
             <h2 className="text-base lg:text-xl font-bold ">الموظفين</h2>
           </div>
-          <ActionMenu/>
+          <ActionMenu />
         </div>
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-3 mdl:gap-6 items-center">
           <Image
             src={imgStaff}
             alt="imgStaff"
             width={230}
             height={230}
-            className=" size-[158px] lg:size-[230px] aspect-square"
+            className=" size-[142px] lg:size-[230px] aspect-square"
           />
-          <div>
-            <h3 className="text-xs lg:text-base font-bold mb-3">
-              فاطمة على محمد
-            </h3>
-            <ul className="flex flex-col gap-3">
-              <li className="text-xs lg:text-base font-Regular">5/5/1980</li>
-              <li className="text-xs lg:text-base font-Regular">95255411+</li>
-              <li className="text-xs lg:text-base font-Regular">
+
+          <ul className="flex flex-col gap-4 mdl:gap-7">
+            <li className=" flex items-center gap-5 text-xs lg:text-base font-Regular">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[84px] mdl:min-w-[130px]">
+                الاسم
+              </h4>
+              <p className="text-xs lg:text-base font-bold    ">
+                فاطمة على محمد
+              </p>
+            </li>
+            <li className=" flex items-center gap-4 lg:gap-8 text-xs lg:text-base font-Regular">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[84px] mdl:min-w-[130px]">
+                رقم الهاتف
+              </h4>
+              <p className="text-xs lg:text-base font-bold    ">9852146+</p>
+            </li>
+            <li className=" flex items-center gap-5 text-xs lg:text-base font-Regular">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[84px] mdl:min-w-[130px]">
+                البريد الالكترونى
+              </h4>
+              <p className="text-xs lg:text-base font-bold    ">
                 Fatma@gmail.com
-              </li>
-              <li className="text-xs lg:text-base font-Regular">50 عميل</li>
-            </ul>
-          </div>
+              </p>
+            </li>
+            <li className=" flex items-center gap-5 text-xs lg:text-base font-Regular">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[84px] mdl:min-w-[130px]">
+                رقم الهوية
+              </h4>
+              <p className="text-xs lg:text-base font-bold    ">58226541</p>
+            </li>
+            <li className=" flex items-center gap-5 text-xs lg:text-base font-Regular">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[84px] mdl:min-w-[130px]">
+                عدد العملاء
+              </h4>
+              <p className="text-xs lg:text-base font-bold    ">50 عميل</p>
+            </li>
+          </ul>
         </div>
       </Card>
       <Card>

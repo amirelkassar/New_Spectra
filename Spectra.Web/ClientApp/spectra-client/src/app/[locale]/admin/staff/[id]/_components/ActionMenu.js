@@ -5,10 +5,13 @@ import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
+import EditIcon from "@/assets/icons/edit";
+import ROUTES from "@/routes";
+import { useSearchParams } from "next/navigation";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
-
+const searchParams = useSearchParams()
   const options = [
     {
       label: "مسح",
@@ -20,7 +23,12 @@ function ActionMenu({ id }) {
       },
       color: "red",
     },
-
+    {
+      label: "تعديل",
+      icon: <EditIcon />,
+      link: ROUTES.ADMIN.STAFF.STAFFIDINFORMATIONEDIT(id)+'&type='+searchParams.get("type"),
+      type: "link",
+    },
     {
       label: "تصدير",
       icon: <ExportIcon />,
