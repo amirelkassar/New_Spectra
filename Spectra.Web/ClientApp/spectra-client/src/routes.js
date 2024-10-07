@@ -167,8 +167,8 @@ const ROUTES = {
         STORIESID: (id) => `/admin/settings/content/stories/${id}`,
         STORIESADD: "/admin/settings/content/stories/add",
       },
-      PLANS: {
-        DASHBOARD: "/admin/settings/plans",
+      PACKAGES: {
+        DASHBOARD: "/admin/settings/packages",
       },
     },
   },

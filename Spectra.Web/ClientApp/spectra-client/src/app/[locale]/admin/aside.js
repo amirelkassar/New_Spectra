@@ -96,9 +96,9 @@ const Aside = () => {
       isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD),
     },
     {
-      name: "الخطط",
-      route: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD),
+      name: "الباقات",
+      route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
     },
   ];
   const SubscriptionLinks = [
