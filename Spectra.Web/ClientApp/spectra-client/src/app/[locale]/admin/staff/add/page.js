@@ -1,15 +1,21 @@
 "use client";
-import ArrowDownIcon from "@/assets/icons/arrow-down";
 import BackIcon from "@/assets/icons/back";
 import Card from "@/components/card";
-import Input from "@/components/input";
-import SelectBox from "@/components/select-box";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import { Select } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
+import FormOne from "./_components/formOne";
+import FormDocSpe from "./_components/formDocSpe";
+import FormStaff from "./_components/formStaff";
+import { ST } from "next/dist/shared/lib/utils";
 
-function page() {
+function Page() {
+  const [firstData, setFirstData] = useState("");
+  const [DocSpeData, setDocSpeData] = useState("");
+  const [StaffData, setStaffData] = useState("");
+  const [NextForm, setNextForm] = useState(false);
+  console.log(firstData);
+
   return (
     <Card>
       <div className="flex mb-10   items-center gap-4 ">
@@ -21,37 +27,18 @@ function page() {
         </Link>
         <h2 className="headTitleDash">اضافة موظف</h2>
       </div>
-      <div>
-        <form className="flex flex-col gap-3 lg:gap-5 px-3 mb-14">
-          <SelectBox
-            options={["سكرتير", "دكتور"]}
-            label={"المهنة"}
-            placeholder="اختر المهنة"
-            containerClassName="MultiSelect h-auto flex-1"
-            labelClassName="text-sm mdl:text-xl mb-2 mb-2"
-          />
-          <Input
-            label={"الاسم كامل"}
-            placeholder={"ادخل الاسم كامل"}
-            labelClassName={"text-sm mdl:text-xl mb-2"}
-            inputClassName={" !h-10 text-sm mdl:text-xl mb-2 lgl:!h-[66px]"}
-          />
-          <SelectBox
-            options={["انثى", "ذكر"]}
-            label={"اختر النوع"}
-            placeholder="اختر النوع"
-            containerClassName="MultiSelect h-auto flex-1"
-          />
-          <SelectBox
-            options={["سعوديه", "مصر"]}
-            label={"اختر البلد"}
-            placeholder="اختر البلد"
-            labelClassName="text-sm mdl:text-xl mb-2 mb-2"
-          />
-        </form>
-      </div>
+      {NextForm ? (
+        firstData.profession === "دكتور" ||
+        firstData.profession === "متخصص" ? (
+          <FormDocSpe setNextForm={setNextForm} setDocSpeData={setDocSpeData} DocSpeData={DocSpeData}/>
+        ) : (
+          <FormStaff setNextForm={setNextForm} setStaffData={setStaffData} StaffData={StaffData} />
+        )
+      ) : (
+        <FormOne firstData={firstData} setFirstData={setFirstData} setNextForm={setNextForm} />
+      )}
     </Card>
   );
 }
 
-export default page;
+export default Page;
