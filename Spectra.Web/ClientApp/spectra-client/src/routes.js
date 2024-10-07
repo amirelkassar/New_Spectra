@@ -92,6 +92,8 @@ const ROUTES = {
       STAFFIDINFORMATION: (id) => `/admin/staff/${id}/information`,
       STAFFIDINFORMATIONEDIT: (id) =>
         `/admin/staff/${id}/information?edit=true`,
+      STAFFIDCONTRACTS: (id) => `/admin/staff/${id}/contracts`,
+
       STAFFIDPRESCRIPTIONS: (id) => `/admin/staff/${id}/prescriptions`,
       STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
     },

@@ -43,6 +43,14 @@ const StaffAside = () => {
         searchParams.get("type"),
       isActive: path === ROUTES.ADMIN.STAFF.STAFFIDINFORMATION(params.id),
     },
+    {
+      name: "العقد",
+      route:
+        ROUTES.ADMIN.STAFF.STAFFIDCONTRACTS(params.id) +
+        "?type=" +
+        searchParams.get("type"),
+      isActive: path === ROUTES.ADMIN.STAFF.STAFFIDCONTRACTS(params.id),
+    },
   ];
   const pageSpecialist = [
     {
