@@ -1,7 +1,9 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MedicalStaff.Doctors;
+using Spectra.Domain.Contracts;
 using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Doctors
@@ -18,7 +20,13 @@ namespace Spectra.Infrastructure.Doctors
         }
         public async Task<Doctor> GetByIdAsync(string id)
         {
-            return await _doctors.Find(c => c.Id == id).FirstOrDefaultAsync();
+            var entity = await _doctors.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Doctor", id);
+            }
+            return entity;
+         
         }
 
         public async Task AddAsync(Doctor doctor)

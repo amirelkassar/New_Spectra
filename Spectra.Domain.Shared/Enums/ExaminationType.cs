@@ -13,4 +13,5 @@ namespace Spectra.Domain.Shared.Enums
         Xrays=2
 
     }
+   
 }

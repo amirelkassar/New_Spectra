@@ -2,12 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Commands;
 using Spectra.Application.ChatHub.Services;
-using Spectra.Infrastructure.ChatHub;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -22,7 +17,7 @@ namespace Spectra.WebAPI.Controllers
             _chatService = chatService;
         }
 
-        // API to send a private message
+     
          [AllowAnonymous]
         [HttpPost("send-private-message")]
         public async Task<IActionResult> SendPrivateMessage(SaveChatMessageCommand request)
@@ -31,7 +26,6 @@ namespace Spectra.WebAPI.Controllers
             return Ok(new { Message = "Message sent successfully." });
         }
 
-        // API to broadcast a message
         [AllowAnonymous]
         [HttpPost("broadcast-message")]
         public async Task<IActionResult> BroadcastMessage(SaveChatMessageCommand request)

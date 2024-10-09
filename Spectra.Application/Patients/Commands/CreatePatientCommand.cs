@@ -17,6 +17,11 @@ namespace Spectra.Application.Patients.Commands
         public HumenGender Gender { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public ClientPatientRelations RelationToClient { get; set; }
+        public string ClientId { get; private set; }
+        public double ChildHeight { get; set; }
+        public double ChildWeightt { get; set; }
+        public string DateOfOnSetOfSymptoms { get; set; }
+        public TypeOfDisease InheritedOrAcquired { get; set; }
     }
 
     public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, OperationResult<string>>
@@ -37,9 +42,13 @@ namespace Spectra.Application.Patients.Commands
                 request.NationalId,
                 request.Gender,
                 request.DateOfBirth,
-                request.RelationToClient,
+                request.RelationToClient,       
+                request.ChildHeight,
+                request.ChildWeightt,
+                request.DateOfOnSetOfSymptoms,
+                request.InheritedOrAcquired,request.ClientId
 
-                Ulid.NewUlid().ToString());
+                );
             await _patientRepository.AddAsync(patient);
             return OperationResult<string>.Success(patient.Id);
 

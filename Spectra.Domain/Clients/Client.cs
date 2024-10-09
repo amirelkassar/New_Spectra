@@ -1,11 +1,11 @@
-﻿using MediatR;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿
+using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Collections.Generic;
+
 
 namespace Spectra.Domain.Clients
 {
@@ -24,6 +24,10 @@ namespace Spectra.Domain.Clients
         public Address Address { get; set; }
         public Organization? Organization { get; set; }
         public MedicalServiceProvider? MedicalServiceProvider { get; set; }
+        public List<Patient>? Patients { get; set; }
+        public List<ServicePackage>? ServicePackages { get; set; }
+
+        //public EarlyDetection EarlyDetection { get; set; }
         protected Client() { }
 
         private Client(
@@ -35,9 +39,11 @@ namespace Spectra.Domain.Clients
             string userId,
             EmailAddress emailAddress,
             Address address,
+            List<Patient>? patients,
             Organization? organization = null,
             MedicalServiceProvider? medicalServiceProvider = null
-
+            ,
+            List<ServicePackage>? servicePackages = null
             ) : base(id)
         {
             Id = id;
@@ -48,9 +54,10 @@ namespace Spectra.Domain.Clients
             UserId = userId;
             EmailAddress = emailAddress;
             Address = address;
+            Patients = patients;
             Organization = organization;
             MedicalServiceProvider = medicalServiceProvider;
-
+            ServicePackages = servicePackages;
         }
 
         public static Client Create(
@@ -62,8 +69,10 @@ namespace Spectra.Domain.Clients
             string userId,
             EmailAddress emailAddress,
             Address address,
+            List<Patient>? patients,
             Organization organization,
-             MedicalServiceProvider? medicalServiceProvider
+            MedicalServiceProvider? medicalServiceProvider,
+            List<ServicePackage>? ServicePackages
             )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -74,7 +83,8 @@ namespace Spectra.Domain.Clients
             ArgumentNullException.ThrowIfNull(emailAddress, nameof(emailAddress));
             ArgumentNullException.ThrowIfNull(address, nameof(address));
 
-            var client = new Client(id, name, nationalId, phoneNumber, clientTypes, userId, emailAddress, address, organization, medicalServiceProvider);
+            var client = new Client(id, name, nationalId, phoneNumber, clientTypes, userId,
+                emailAddress, address, patients, organization, medicalServiceProvider , ServicePackages);
             var clientCreatedEvent = new ClientCreatedEvent(client);
             client.AddDomainEvent(clientCreatedEvent);
             return client;

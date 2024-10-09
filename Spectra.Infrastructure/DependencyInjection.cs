@@ -4,7 +4,7 @@ using Spectra.Application.ChatHub;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Clients;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.Contracts;
+using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Cities;
@@ -19,6 +19,8 @@ using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.InternalExaminations;
+using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
@@ -29,26 +31,34 @@ using Spectra.Application.MedicalStaff.Doctors.Services;
 using Spectra.Application.MedicalStaff.Specialists;
 using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Application.Patients;
+using Spectra.Application.ScheduleAppointments.Appointments;
+using Spectra.Application.ScheduleAppointments.Appointments.Services;
+using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Contracts;
+using Spectra.Infrastructure.Contracts.SubContracts;
 using Spectra.Infrastructure.Countries;
 using Spectra.Infrastructure.Countries.Cities;
 using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.Doctors;
+using Spectra.Infrastructure.DoctorSchedules.DoctorSchedules;
 using Spectra.Infrastructure.Documents;
 using Spectra.Infrastructure.MasterData.Diagnoses;
 using Spectra.Infrastructure.MasterData.Drug;
 using Spectra.Infrastructure.MasterData.ExcelFile;
 using Spectra.Infrastructure.MasterData.GeneralComplaint;
+using Spectra.Infrastructure.MasterData.InternalExaminations;
 using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
 using Spectra.Infrastructure.MasterData.Services;
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
 using Spectra.Infrastructure.Patients;
+using Spectra.Infrastructure.ScheduleAppointments.Appointments;
+using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Specialists;
 
@@ -106,6 +116,12 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISpecialistService, SpecialistService>();
             services.AddScoped<IContractService, ContractService>();
             services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IInternalExaminationService, InternalExaminationService>();
+
+         
+
             services.AddScoped<IHellper, Hellper>();
        
                     
@@ -131,8 +147,12 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISpecialistRepository, SpecialistRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
-          
+            services.AddScoped<ISubContractRepository, SubContractRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+            services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
             services.AddSignalR();
+
             return services;
         }
 

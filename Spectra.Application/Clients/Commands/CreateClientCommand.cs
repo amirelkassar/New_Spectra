@@ -3,6 +3,7 @@ using MediatR;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Clients;
+using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -23,6 +24,9 @@ namespace Spectra.Application.Clients.Commands
         public Address Address { get; set; }
         public Organization Organization { get; set; }
         public MedicalServiceProvider medicalServiceProvider { get; set; }
+        public List<ServicePackage>? ServicePackages { get; set; }
+        public List<Patient>? patients { get; set; }
+     
 
 
     }
@@ -47,9 +51,10 @@ namespace Spectra.Application.Clients.Commands
                  Ulid.NewUlid().ToString(),
                 request.EmailAddress,
                request.Address,
+               request.patients,
                 request.Organization,
-               request.medicalServiceProvider
-
+               request.medicalServiceProvider,
+               request.ServicePackages=null
             );
             await _clientRepository.AddAsync(client);
 

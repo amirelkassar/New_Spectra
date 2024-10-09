@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Contracts.Repository;
 using Spectra.Domain.Contracts;
 
 using Spectra.Domain.Shared.Wrappers;

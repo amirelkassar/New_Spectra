@@ -2,6 +2,7 @@
 using Spectra.Application.Clients;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Clients;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Clients
@@ -17,7 +18,12 @@ namespace Spectra.Infrastructure.Clients
         }
         public async Task<Client> GetByIdAsync(string id)
         {
-            return await _clients.Find(c => c.Id == id).FirstOrDefaultAsync();
+      var entity= await _clients.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Client", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(Client client)

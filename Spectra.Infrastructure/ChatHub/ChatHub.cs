@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Spectra.Infrastructure.ChatHub
 {
+    [Authorize]
     public class ChatHub : Hub
     {
         public static Dictionary<string, string> ConnectedUsers = new();

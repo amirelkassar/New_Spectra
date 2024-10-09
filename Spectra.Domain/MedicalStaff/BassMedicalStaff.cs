@@ -23,7 +23,9 @@ namespace Spectra.Domain.MedicalStaff
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public string AttachmentPath { get; set; }
+        public EmpelyeeRates? EmpelyeeRate { get; set; }
 
+        public EmploymentStatus Status { get; set; }
         protected BassMedicalStaff() { }
         public BassMedicalStaff(
                    string id,
@@ -37,7 +39,9 @@ namespace Spectra.Domain.MedicalStaff
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
-                   string attachmentPath
+                   string attachmentPath,
+                   EmpelyeeRates? empelyeeRate,
+                   EmploymentStatus status
                    ) : base(id)
         {
             Id = id;
@@ -52,6 +56,8 @@ namespace Spectra.Domain.MedicalStaff
             ApprovedBy = approvedBy;
             Academicdegree = academicdegree;
             AttachmentPath = attachmentPath;
+            EmpelyeeRate = empelyeeRate;
+            Status = status;
         }
 
     }

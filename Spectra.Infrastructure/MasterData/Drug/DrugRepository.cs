@@ -2,6 +2,8 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Drug;
 using Spectra.Domain.MasterData.Drug;
+using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,13 @@ namespace Spectra.Infrastructure.MasterData.Drug
         }
         public async Task<DrugMD> GetByIdAsync(string id)
         {
-            return await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
+            var entity = await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Drug", id);
+            }
+
+            return entity;
         }
 
         public async Task AddAsync(DrugMD Drug)

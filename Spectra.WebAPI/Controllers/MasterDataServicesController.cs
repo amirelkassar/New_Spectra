@@ -30,6 +30,7 @@ namespace Spectra.WebAPI.Controllers
         {
             var MasterDataServicesies = await _serviceMDService.GetAllNameAndTermsAndConditions();
             return Ok(MasterDataServicesies);
+
         }
 
         [HttpGet("id")]

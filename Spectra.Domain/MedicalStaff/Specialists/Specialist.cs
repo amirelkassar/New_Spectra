@@ -29,8 +29,10 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath)
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath) { }
+            string attachmentPath,
+            EmpelyeeRates? empelyeeRate,
+            EmploymentStatus status)
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate , status) { }
 
 
 
@@ -47,7 +49,9 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath
+            string attachmentPath,
+             EmpelyeeRates? empelyeeRate,
+             EmploymentStatus status
             )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -62,7 +66,8 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
 
             var specialist = new Specialist(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath);
+                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate,
+                EmploymentStatus.Wating);
 
             return specialist;
 

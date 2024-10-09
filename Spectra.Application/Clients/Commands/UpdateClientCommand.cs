@@ -2,6 +2,7 @@
 using MediatR;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
+using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -20,6 +21,8 @@ namespace Spectra.Application.Clients.Commands
         public Address Address { get; set; }
         public Organization Organization { get; set; }
         public MedicalServiceProvider MedicalServiceProvider { get; set; }
+        public List<ServicePackage>? ServicePackages { get; set; }
+        public List<Patient>? Patients { get; set; }
     }
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, OperationResult<Unit>>
@@ -46,6 +49,8 @@ namespace Spectra.Application.Clients.Commands
             client.Address = request.Address;
             client.Organization = request.Organization;
             client.MedicalServiceProvider = request.MedicalServiceProvider;
+            client.Patients = request.Patients;
+            client.ServicePackages = request.ServicePackages;
             
 
             await _clientRepository.UpdateAsync(client);

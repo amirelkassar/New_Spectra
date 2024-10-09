@@ -3,6 +3,7 @@ using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Contracts
@@ -18,7 +19,7 @@ namespace Spectra.Infrastructure.Contracts
 
         }
 
-        public async Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input, bool CheckSendContract)
+        public async Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input)
         {
             var command = new CreateContractCommand
             {
@@ -27,7 +28,10 @@ namespace Spectra.Infrastructure.Contracts
                 SpectraTeam = input.SpectraTeam,
                 DaysOfWork = input.DaysOfWork,
                 MinutesOfWork = input.MinutesOfWork,
-                SendContract = CheckSendContract
+                ContractCase = input.ContractCase,
+                EmployeeId = input.EmployeeId,
+                Titel=input.Titel
+
             };
 
             return await _mediator.Send(command);
@@ -39,9 +43,10 @@ namespace Spectra.Infrastructure.Contracts
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts()
+        public async Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId  )
         {
-            var query = new GetAllContactrQuery();
+
+            var query = new GetAllContactrQuery { EmployeeId = empelyeeId.EmployeeId };
             return await _mediator.Send(query);
         }
 
@@ -60,8 +65,10 @@ namespace Spectra.Infrastructure.Contracts
                 HoursOfWork = input.HoursOfWork,
                 SpectraTeam = input.SpectraTeam,
                 DaysOfWork = input.DaysOfWork,
-                MinutesOfWork = input.MinutesOfWork
-
+                MinutesOfWork = input.MinutesOfWork,
+                ContractCase = input.ContractCase,
+                EmployeeId = input.EmployeeId,
+                Titel= input.Titel
             };
 
 

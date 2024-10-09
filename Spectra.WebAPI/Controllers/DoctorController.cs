@@ -32,6 +32,13 @@ namespace Spectra.WebAPI.Controllers
             return Ok(Doctories);
         }
 
+        [HttpGet("SpecificService")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllDoctorSpecificService()
+        {
+            var Doctories = await _DoctorService.GetAllDoctorSpecificServices();
+            return Ok(Doctories);
+        }
 
 
         [HttpGet("id")]

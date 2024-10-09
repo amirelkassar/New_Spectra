@@ -22,8 +22,13 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath)
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath) { } 
+            string attachmentPath,
+             EmpelyeeRates? empelyeeRate,
+            EmploymentStatus status
+
+
+            )
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate , status) { } 
 
    
             public static Doctor Create(
@@ -38,7 +43,10 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath
+            string attachmentPath,
+            EmpelyeeRates? empelyeeRate,
+                 EmploymentStatus status
+
             )
 
         {
@@ -52,9 +60,11 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             ArgumentNullException.ThrowIfNull(diagnoses, nameof(diagnoses));
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
+            ArgumentNullException.ThrowIfNull(empelyeeRate, nameof(empelyeeRate));
 
             var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath);
+                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate, EmploymentStatus.Wating
+);
 
             return doctor;
 

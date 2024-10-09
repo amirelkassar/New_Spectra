@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.SignalR;
 using Spectra.Application.ChatHub.Commands;
 using Spectra.Application.ChatHub.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.ChatHub
 {
@@ -24,8 +19,8 @@ namespace Spectra.Infrastructure.ChatHub
         // Send a private message and save the chat
         public async Task SendMessageAsync(string fromUser, string toUser, string message)
         {
-            var connectionId = ChatHub.ConnectedUsers[toUser];
-            if (!string.IsNullOrEmpty(connectionId))
+            
+            if (ChatHub.ConnectedUsers.TryGetValue(toUser, out string connectionId))
             {
                 await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveMessage", fromUser, message);
             }
@@ -38,6 +33,7 @@ namespace Spectra.Infrastructure.ChatHub
         // Broadcast a message to all connected clients and save the chat
         public async Task BroadcastMessageAsync(string fromUser, string message)
         {
+
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", fromUser, message);
 
             // Save the broadcast message

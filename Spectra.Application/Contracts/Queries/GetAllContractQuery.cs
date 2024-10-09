@@ -1,13 +1,18 @@
 ﻿using MediatR;
+using MongoDB.Driver;
+using Spectra.Application.Contracts.Repository;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+using System.Linq.Expressions;
 
 namespace Spectra.Application.Contracts.Queries
 {
-    public class GetAllContactrQuery : QueryPaginationParam, IRequest<OperationResult<IEnumerable<EmploymentContract>>>
+    public class GetAllContactrQuery :  IRequest<OperationResult<IEnumerable<EmploymentContract>>>
     {
-
+        public string EmployeeId { get; set; }
+   
     }
 
     public class GGetAllContactrQueryHandler : IRequestHandler<GetAllContactrQuery, OperationResult<IEnumerable<EmploymentContract>>>
@@ -22,11 +27,12 @@ namespace Spectra.Application.Contracts.Queries
         public async Task<OperationResult<IEnumerable<EmploymentContract>>> Handle(GetAllContactrQuery request, CancellationToken cancellationToken)
         {
 
+            var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId, new FindOptions());
 
-            var contract = await _contractRepository.GetAllAsync();
+            var Filtercontracts=  contracts. Where(x => x.ContractCase != ContractCases.SAVE);
 
-            return OperationResult<IEnumerable<EmploymentContract>>.Success(contract);
-
+            return OperationResult<IEnumerable<EmploymentContract>>.Success(Filtercontracts);
+      
 
         }
     }

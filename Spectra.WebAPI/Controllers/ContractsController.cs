@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -20,11 +22,11 @@ namespace Spectra.WebAPI.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost("GetAllContracts")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllContracts()
+        public async Task<ActionResult> GetAllContractsSend(GetAllContactrQuery input  )
         {
-            var Contracties = await _contractService.GetAllContracts();
+            var Contracties = await _contractService.GetAllContracts(input);
             return Ok(Contracties);
         }
 
@@ -37,24 +39,22 @@ namespace Spectra.WebAPI.Controllers
             var Contracties = await _contractService.GetContractById(id);
             return Ok(Contracties);
         }
-        [HttpPost("SendContract")]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateContractAndSend(CreateContractCommand input)
+        public async Task<ActionResult> CreateContractAndSend(CreateContractCommand input  )
         {
-
-
-            var Contracties = await _contractService.CreateContractSendORSave(input, true);
+            var Contracties = await _contractService.CreateContractSendORSave(input);
             return Ok(Contracties);
         }
-        [HttpPost("SaveContract")]
-        [AllowAnonymous]
-        public async Task<ActionResult> CreateContractAndSave(CreateContractCommand input )
-        {
+        //[HttpPost("SaveContract")]
+        //[AllowAnonymous]
+        //public async Task<ActionResult> CreateContractAndSave(CreateContractCommand input )
+        //{
 
 
-            var Contracties = await _contractService.CreateContractSendORSave(input, false);
-            return Ok(Contracties);
-        }
+        //    var Contracties = await _contractService.CreateContractSendORSave(input);
+        //    return Ok(Contracties);
+        //}
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdateContract(string id, UpdateContractCommand input)

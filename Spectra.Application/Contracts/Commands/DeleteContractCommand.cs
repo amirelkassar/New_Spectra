@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Contracts.Commands

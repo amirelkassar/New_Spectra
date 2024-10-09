@@ -50,6 +50,9 @@ namespace Spectra.Infrastructure.Doctors
                 HumenGenders = input.HumenGenders,
                 LicenseNumber = input.LicenseNumber,
                 ScientificDegree = input.ScientificDegree
+                
+                 
+
 
             };
 
@@ -67,6 +70,12 @@ namespace Spectra.Infrastructure.Doctors
             var query = new GetAllDoctorQuery();
             return await _mediator.Send(query);
         }
+        public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
+        {
+            var query = new GetAllDoctorEarlyDetectionQuery();
+            return await _mediator.Send(query);
+        }
+
 
         public async Task<OperationResult<Doctor>> GetDoctorById(string id)
         {
@@ -110,7 +119,15 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(command);
         }
 
-
-    }
+        public async Task<OperationResult<Unit>> UpdateDoctorRate(string id, UpdateDoctorRatesCommand input)
+        {
+            var command = new UpdateDoctorRatesCommand
+            {
+                Id = id,
+                empelyeeRate = input.empelyeeRate
+            };
+            return await _mediator.Send(command);
+        }
+        }
 }
 

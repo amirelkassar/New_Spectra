@@ -2,6 +2,8 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.MasterData.InternalExaminations;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,13 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
         }
         public async Task<Domain.MasterData.GeneralComplaints.GeneralComplaint> GetByIdAsync(string id)
         {
-            return await _GeneralComplaints.Find(c => c.Id == id).FirstOrDefaultAsync();
+            var entity = await _GeneralComplaints.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("GeneralComplaint", id);
+            }
+
+            return entity;
         }
 
         public async Task AddAsync(Domain.MasterData.GeneralComplaints.GeneralComplaint GeneralComplaint)
