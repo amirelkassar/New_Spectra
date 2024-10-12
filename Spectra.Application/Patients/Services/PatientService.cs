@@ -18,8 +18,10 @@ namespace Spectra.Application.Patients.Services
 
 		public async Task<string> CreatePatient(CreatePatientCommand command)
 		{
-			return await _mediator.Send(command);
-		}
+			var res= await _mediator.Send(command);
+			return res.Data;
+
+        }
 
 		public async Task UpdatePatient(UpdatePatientCommand command)
 		{
@@ -33,12 +35,16 @@ namespace Spectra.Application.Patients.Services
 
 		public async Task<Patient> GetPatientById(string id)
 		{
-			return await _mediator.Send(new GetPatientByIdQuery { Id = id });
-		}
+			var res= await _mediator.Send(new GetPatientByIdQuery { Id = id });
+			return res.Data;
+
+        }
 
 		public async Task<IEnumerable<Patient>> GetAllPatients()
 		{
-			return await _mediator.Send(new GetAllPatientsQuery());
-		}
+			var res= await _mediator.Send(new GetAllPatientsQuery());
+			return res.Data;
+
+        }
 	}
 }

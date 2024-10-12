@@ -215,7 +215,7 @@ namespace Spectra.Infrastructure
                .AddEntityFrameworkStores<IdentityContext>()
                .AddDefaultTokenProviders();
 
-            // services.AddTransient<IAuthTokenProvider, AuthTokenProvider>();
+             services.AddTransient<IAuthenticationService, AuthenticationService>();
             // services.AddTransient<IIdentityService, IdentityService>();
             return services;
         }
