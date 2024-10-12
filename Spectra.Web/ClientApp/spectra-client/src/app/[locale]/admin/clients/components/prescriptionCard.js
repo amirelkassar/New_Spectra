@@ -5,7 +5,7 @@ import React from "react";
 function PrescriptionCard({ type = "all", data }) {
   return (
     <div
-      className={`px-1 py-3 rounded-[10px] ${
+      className={`px-1 duration-300 cursor-pointer hover:shadow-md py-3 rounded-[10px] ${
         data.state === "new" ? "bg-[#F1FCFF]" : "bg-grayLight"
       }  w-[330px]`}
     >

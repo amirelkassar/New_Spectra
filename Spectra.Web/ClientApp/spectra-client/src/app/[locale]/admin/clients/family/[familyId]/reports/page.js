@@ -3,6 +3,8 @@ import Card from "@/components/card";
 import Report from "../../../components/report";
 import imgDoctor from "@/assets/images/placeholder-person.png";
 import imgPatient from "@/assets/images/placeholder-person.png";
+import { Link } from "@/navigation";
+import ROUTES from "@/routes";
 const reports = [
   {
     id: 1,
@@ -55,7 +57,16 @@ function page({ params }) {
       <h2 className="text-base mb-7 lg:text-xl font-bold">التقارير </h2>
       <div className="flex gap-6 flex-wrap mt-9">
         {reports.map((report, i) => {
-          return <Report key={i} data={report} />;
+          return (
+            <Report
+              key={i}
+              data={report}
+              link={ROUTES.ADMIN.CLIENTS.FAMILY.REPORTSDETAILS(
+                params.familyId,
+                report.id
+              )}
+            />
+          );
         })}
       </div>
     </Card>

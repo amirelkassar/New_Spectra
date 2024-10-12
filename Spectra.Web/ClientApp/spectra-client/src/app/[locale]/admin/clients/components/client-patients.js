@@ -5,7 +5,6 @@ import MenuActions from "@/components/menu-actions";
 import { Link, useRouter } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
-import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { useParams } from "next/navigation";
 import ActionMenu from "./ActionMenuPatients";
 
@@ -19,6 +18,9 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age:'8 سنين - 3 اشهر',
+      height:'90 سنتيمتر',
+      Weight:'40 كيلوجرام'
     },
     {
       id: 1,
@@ -28,6 +30,9 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age:'8 سنين - 3 اشهر',
+      height:'90 سنتيمتر',
+      Weight:'40 كيلوجرام'
     },
     {
       id: 2,
@@ -37,6 +42,9 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age:'8 سنين - 3 اشهر',
+      height:'90 سنتيمتر',
+      Weight:'40 كيلوجرام'
     },
   ];
   const params = useParams();
@@ -93,7 +101,7 @@ const ClientPatients = () => {
           </li>
         </ul>
       </div>
-      <div className="flex  gap-5 max-w-[100px] overflow-auto min-w-[100%]">
+      <div className="flex  gap-5 max-w-[100px] overflow-auto hideScroll min-w-[100%]">
         {patients.map((patient) => (
           <div
             key={patient.id}
@@ -104,32 +112,44 @@ const ClientPatients = () => {
             </div>
             <Link
               href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)}
-              className=" p-5 flex flex-col gap-2 "
+              className=" p-5 flex flex-col gap-4 "
             >
               <div className="size-28 rounded-full flex items-center justify-center overflow-hidden self-center">
                 <Image priority src={patient.image} alt="child" />
               </div>
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الاسم/</p>
-                <strong>{patient.name}</strong>
+                <strong className="text-xs mdl:text-base">{patient.name}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الرقم القومي/</p>
-                <strong>{patient.nationalId}</strong>
+                <strong className="text-xs mdl:text-base">{patient.nationalId}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الجنس/</p>
-                <strong>{patient.gender}</strong>
+                <strong className="text-xs mdl:text-base">{patient.gender}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">تاريخ الميلاد/</p>
-                <strong>{patient.dateOfBirth}</strong>
+                <strong className="text-xs mdl:text-base">{patient.dateOfBirth}</strong>
+              </div>{" "}
+              <div className="flex items-center gap-3">
+                <p className="min-w-[94px] text-[12px]">السن</p>
+                <strong className="text-xs mdl:text-base">{patient.age}</strong>
+              </div>{" "}
+              <div className="flex items-center gap-3">
+                <p className="min-w-[94px] text-[12px]">الطول</p>
+                <strong className="text-xs mdl:text-base">{patient.height}</strong>
+              </div>{" "}
+              <div className="flex items-center gap-3">
+                <p className="min-w-[94px] text-[12px]">الوزن</p>
+                <strong className="text-xs mdl:text-base">{patient.Weight}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">
                   علاقة العملاء بالمريض/
                 </p>
-                <strong>{patient.relation}</strong>
+                <strong className="text-xs mdl:text-base">{patient.relation}</strong>
               </div>
             </Link>
           </div>

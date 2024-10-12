@@ -34,6 +34,7 @@ const ROUTES = {
   ADMIN: {
     MAIN: "/admin/main",
     APPOINTMENTS: "/admin/appointments",
+    APPOINTMENTSDETAILS: (id) => `/admin/appointments/${id}`,
     REQUESTS: "/admin/requests",
     REQUESTSNEW: "/admin/requests/new",
     REQUESTSREJECTED: "/admin/requests/rejected",
@@ -62,22 +63,37 @@ const ROUTES = {
         DETAILSEDIT: (id) => `/admin/clients/family/${id}/details/edit`,
         APPOINTMENTS: (id) => `/admin/clients/family/${id}/appointments`,
         PRESCRIPTIONS: (id) => `/admin/clients/family/${id}/prescriptions`,
+        PRESCRIPTIONSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}`,
+        PRESCRIPTIONSEDIT: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}/edit`,
         REPORTS: (id) => `/admin/clients/family/${id}/reports`,
+        REPORTSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/reports/${id2}`,
         PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
         PATIENTSEDIT: (id) => `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
         DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
-        PRESCRIPTIONS: (id) => `/admin/clients/patientDetails/${id}/prescriptions`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/patientDetails/${id}/appointments`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/patientDetails/${id}/prescriptions`,
         REPORTS: (id) => `/admin/clients/patientDetails/${id}/reports`,
-        REPORTSID: (id,id2) => `/admin/clients/patientDetails/${id}/reports/${id2}`,
-        
+        REPORTSID: (id, id2) =>
+          `/admin/clients/patientDetails/${id}/reports/${id2}`,
       },
     },
     STAFF: {
       DASHBOARD: "/admin/staff",
       STAFFID: (id) => `/admin/staff/${id}`,
+      STAFFADD:  `/admin/staff/add`,
+      STAFFIDEDIT: (id) => `/admin/staff/${id}?edit=true`,
       STAFFIDINFORMATION: (id) => `/admin/staff/${id}/information`,
+      STAFFIDINFORMATIONEDIT: (id) =>
+        `/admin/staff/${id}/information?edit=true`,
+      STAFFIDCONTRACTS: (id) => `/admin/staff/${id}/contracts`,
+
       STAFFIDPRESCRIPTIONS: (id) => `/admin/staff/${id}/prescriptions`,
       STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
     },
@@ -89,18 +105,33 @@ const ROUTES = {
       HOME: "/admin/main-data",
       DRUGSADD: "/admin/main-data/add-drugs",
       DRUGSDETAILS: (id) => `/admin/main-data/${id}`,
+      DRUGSDETAILSEDIT: (id) => `/admin/main-data/${id}/edit`,
       SPECIALTIES: "/admin/main-data/doctors-specialties",
+      SPECIALTIESID: (id) => `/admin/main-data/doctors-specialties/${id}`,
+      SPECIALTIESIDEDIT: (id) =>
+        `/admin/main-data/doctors-specialties/${id}/edit`,
       SPECIALTIESADD: "/admin/main-data/doctors-specialties/add",
       ANALYSISRUMORS: "/admin/main-data/analysis-rumors",
+      ANALYSISRUMORSDETAILS: (id) => `/admin/main-data/analysis-rumors/${id}`,
+      ANALYSISRUMORSDETAILSEDIT: (id) =>
+        `/admin/main-data/analysis-rumors/${id}/edit`,
       ANALYSISRUMORSADD: "/admin/main-data/analysis-rumors/add",
       DIAGNOSTICS: "/admin/main-data/diagnostics",
       DIAGNOSTICSADD: "/admin/main-data/diagnostics/add",
       DIAGNOSTICSDETAILS: (id) => `/admin/main-data/diagnostics/${id}`,
+      DIAGNOSTICSDETAILSEDIT: (id) => `/admin/main-data/diagnostics/${id}/edit`,
       COMPLAINTS: "/admin/main-data/complaints",
+      COMPLAINTSDETAILS: (id) => `/admin/main-data/complaints/${id}`,
+      COMPLAINTSDETAILSEDIT: (id) => `/admin/main-data/complaints/${id}/edit`,
       COMPLAINTSADD: "/admin/main-data/complaints/add",
       SERVICES: "/admin/main-data/services",
       SERVICESADD: "/admin/main-data/services/add",
       SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
+      TESTSINTERIOR: "/admin/main-data/testsInterior",
+      TESTSINTERIORDETAILS: (id) => `/admin/main-data/testsInterior/${id}`,
+      TESTSINTERIORDETAILSEDIT: (id) =>
+        `/admin/main-data/testsInterior/${id}/edit`,
+      TESTSINTERIORADD: "/admin/main-data/testsInterior/add",
     },
 
     CONTRACTS: {
@@ -136,8 +167,9 @@ const ROUTES = {
         STORIESID: (id) => `/admin/settings/content/stories/${id}`,
         STORIESADD: "/admin/settings/content/stories/add",
       },
-      PLANS: {
-        DASHBOARD: "/admin/settings/plans",
+      PACKAGES: {
+        DASHBOARD: "/admin/settings/packages",
+        PACKAGESADD: "/admin/settings/packages/add",
       },
     },
   },

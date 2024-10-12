@@ -7,6 +7,7 @@ import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
+import EditIcon from "@/assets/icons/edit";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
@@ -28,7 +29,12 @@ function ActionMenu({ id }) {
       link: ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(id),
       type: "link",
     },
-
+    {
+      label: "تعديل",
+      icon: <EditIcon />,
+      link: ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(id),
+      type: "link",
+    },
     {
       label: "تصدير",
       icon: <ExportIcon />,

@@ -48,7 +48,7 @@ function ContractInformation({ id }) {
             value={selectedServices}
             onChange={handleServiceChange}
             searchable
-            nothingFound="No services found"
+            nothingFoundMessage="No services found"
             className="lg:w-[500px] w-full lgl:min-w-fit "
             classNames={{
               input:

@@ -1,6 +1,5 @@
 "use client";
 import StarGoldIcon from "@/assets/icons/starGold";
-import MenuActions from "@/components/menu-actions";
 import Image from "next/image";
 import React from "react";
 import person from "@/assets/images/placeholder-person.png";
@@ -11,7 +10,6 @@ import SessionIcon from "@/assets/icons/session";
 import { Link } from "@/navigation";
 import BackIcon from "@/assets/icons/back";
 import ROUTES from "@/routes";
-import ActionMenu from "./ActionMenu";
 const data = {
   name: "احمد محمد كمال",
   spec: "طبيب نفسى",
@@ -57,9 +55,7 @@ function StaffDetails() {
           </Link>
           <h2 className="text-base lg:text-xl font-bold ">الموظفين</h2>
         </div>
-        <div className="md:block hidden">
-          <ActionMenu />
-        </div>
+   
       </div>
 
       <div className="flex justify-center md:justify-between gap-5 flex-wrap flex-1 flex-col md:flex-row">

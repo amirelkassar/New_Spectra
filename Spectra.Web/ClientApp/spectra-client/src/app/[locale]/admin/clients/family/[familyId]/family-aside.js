@@ -27,12 +27,15 @@ const FamilyAside = () => {
       name: "الوصفات الطبية",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId),
       isActive:
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId),
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId)||
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONSDETAILS(params.familyId,params.prescriptionsID)||
+        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONSEDIT(params.familyId,params.prescriptionsID),
     },
     {
       name: " التقارير",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId),
-      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId),
+      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId)||
+      path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTSDETAILS(params.familyId,params.reportID),
     },
     {
       name: "المرضى / الاطفال",

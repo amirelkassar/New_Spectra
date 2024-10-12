@@ -12,7 +12,6 @@ import Button from "@/components/button";
 import SaveIcon from "@/assets/icons/save";
 import { useRouter } from "@/navigation";
 
-
 const ClientPatientsEdit = () => {
   const [data, setData] = useState([
     {
@@ -23,6 +22,9 @@ const ClientPatientsEdit = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age: "8 سنين - 3 اشهر",
+      height: "90 سنتيمتر",
+      Weight: "40 كيلوجرام",
     },
     {
       id: 1,
@@ -32,6 +34,9 @@ const ClientPatientsEdit = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age: "8 سنين - 3 اشهر",
+      height: "90 سنتيمتر",
+      Weight: "40 كيلوجرام",
     },
     {
       id: 2,
@@ -41,6 +46,9 @@ const ClientPatientsEdit = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
+      age: "8 سنين - 3 اشهر",
+      height: "90 سنتيمتر",
+      Weight: "40 كيلوجرام",
     },
   ]);
   const handleDescChange = (e, item) => {
@@ -70,12 +78,12 @@ const ClientPatientsEdit = () => {
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4 lg:gap-9">
           <button
-           onClick={()=>{router.back()}}
+            onClick={() => {
+              router.back();
+            }}
             className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
           >
-            <BackIcon
-              className={"w-full h-full"}
-            />
+            <BackIcon className={"w-full h-full"} />
           </button>
           <h2>عبدالله الشيخ</h2>
         </div>
@@ -162,7 +170,46 @@ const ClientPatientsEdit = () => {
                   handleChangeMantine(patient.id, "dateBirth", e);
                 }}
               />
-            </div>{" "}
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="min-w-[90px] text-[12px]">السن</p>
+              <Input
+                handleOnChange={(e) => {
+                  handleChange(patient.id, "age", e);
+                }}
+                containerClassName={"max-w-[100%] flex-1"}
+                value={patient.age}
+                inputClassName={
+                  "!h-[38px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold min-w-[100%] w-[100%]"
+                }
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="min-w-[90px] text-[12px]">الطول</p>
+              <Input
+                handleOnChange={(e) => {
+                  handleChange(patient.id, "height", e);
+                }}
+                containerClassName={"max-w-[100%] flex-1"}
+                value={patient.height}
+                inputClassName={
+                  "!h-[38px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold min-w-[100%] w-[100%]"
+                }
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="min-w-[90px] text-[12px]">الوزن</p>
+              <Input
+                handleOnChange={(e) => {
+                  handleChange(patient.id, "Weight", e);
+                }}
+                containerClassName={"max-w-[100%] flex-1"}
+                value={patient.Weight}
+                inputClassName={
+                  "!h-[38px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold min-w-[100%] w-[100%]"
+                }
+              />
+            </div>
             <div className="flex items-center gap-3">
               <p className="min-w-[90px] text-[12px]">علاقة العملاء بالمريض/</p>
               <Select

@@ -2,6 +2,8 @@ import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
 import Image from "next/image";
 import ActionMenu from "./ActionMenu";
+import { Link } from "@/navigation";
+import ROUTES from "@/routes";
 
 export const columns = [
   {
@@ -11,10 +13,13 @@ export const columns = [
     cell: ({ getValue, row }) => {
       const name = getValue();
       const specialisation = row.original.specialisation;
-
+      const id = row.original.id;
       const avatar = row.original.image;
       return (
-        <div className={" items-center gap-5    flex"}>
+        <Link
+          href={ROUTES.ADMIN.APPOINTMENTSDETAILS(id)}
+          className={" items-center gap-5    flex"}
+        >
           <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
             <Image src={avatar} alt={name} />
           </div>
@@ -25,7 +30,7 @@ export const columns = [
               {specialisation}
             </p>
           </div>
-        </div>
+        </Link>
       );
     },
   },

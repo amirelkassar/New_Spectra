@@ -24,93 +24,97 @@ function ContractInformation({ id }) {
   const { modal, editModal } = useModal();
 
   const [selectedServices, setSelectedServices] = useState([]);
-  const [serviceData, setServiceData] = useState({});
-
+  const [freelancerServiceData, setFreelancerServiceData] = useState({});
+  const [memberServiceData, setMemberServiceData] = useState({});
   const handleServiceChange = (values) => {
     setSelectedServices(values);
-    const updatedData = { ...serviceData };
+
+    const updatedFreelancerData = { ...freelancerServiceData };
+    const updatedMemberData = { ...memberServiceData };
+    
     values.forEach((service) => {
-      if (!updatedData[service]) {
-        updatedData[service] = { price: "", duration: "", discount: "" };
+      if (!updatedFreelancerData[service]) {
+        updatedFreelancerData[service] = { price: "", duration: "", discount: "" };
+      }
+      if (!updatedMemberData[service]) {
+        updatedMemberData[service] = { price: "", duration: "", discount: "" };
       }
     });
-    setServiceData(updatedData);
-  };
 
-  const handleInputChange = (service, field, value) => {
-    setServiceData({
-      ...serviceData,
-      [service]: { ...serviceData[service], [field]: value },
+    // Clean up services that were unselected
+    Object.keys(updatedFreelancerData).forEach((service) => {
+      if (!values.includes(service)) {
+        delete updatedFreelancerData[service];
+      }
     });
+    Object.keys(updatedMemberData).forEach((service) => {
+      if (!values.includes(service)) {
+        delete updatedMemberData[service];
+      }
+    });
+
+    setFreelancerServiceData(updatedFreelancerData);
+    setMemberServiceData(updatedMemberData);
   };
+
+  const handleServiceDataChange = (service, field, value, type) => {
+    if (type === "freelancer") {
+      setFreelancerServiceData((prevData) => ({
+        ...prevData,
+        [service]: {
+          ...prevData[service],
+          [field]: value,
+        },
+      }));
+    } else if (type === "member") {
+      setMemberServiceData((prevData) => ({
+        ...prevData,
+        [service]: {
+          ...prevData[service],
+          [field]: value,
+        },
+      }));
+    }
+  };
+
+
+console.log(selectedServices);
+console.log(freelancerServiceData);
+console.log(memberServiceData);
+
+
   return (
-    <div>
-      <Card className={"mdl:!pe-12 "}>
-        <div className="mb-6 flex items-start justify-start" dir="ltr">
-          <MultiSelect
-            data={serviceOptions}
-            placeholder="Choose Services"
-            value={selectedServices}
-            onChange={handleServiceChange}
-            searchable
-            nothingFound="No services found"
-            className="lg:w-[500px] w-full lgl:min-w-fit "
-            classNames={{ input: "border-black min-h-[54px] flex items-center text-sm lgl:text-xl placeholder:text-xl rounded-xl placeholder:text-black",
-
-              pill:'text-sm lgl:text-lg py-1 h-auto'
-             }}
-          />
+    <Card>
+      
+        <div className="mb-6 flex items-start justify-start ps-3 lgl:ps-20" dir="ltr">
+        <MultiSelect
+          data={serviceOptions}
+          placeholder="Choose Services"
+          value={selectedServices}
+          onChange={handleServiceChange}
+          searchable
+          nothingFoundMessage="No services found"
+          className="lg:w-[500px] w-full lgl:min-w-fit"
+          classNames={{
+            input: "border-black min-h-[54px] flex items-center text-sm lgl:text-xl placeholder:text-xl rounded-xl placeholder:text-black",
+            pill: "text-sm lgl:text-lg py-1 h-auto",
+          }}
+        />
         </div>
-        <ServicesFreelancer selectedServices={selectedServices}   serviceOptions={serviceOptions}/>
-        <ServicesMember selectedServices={selectedServices}  serviceOptions={serviceOptions} />
-        <div dir="ltr" className="mt-3 md:mt-7 flex flex-col gap-4">
-          <div className="pb-7 border-t pt-6 border-grayLight">
-            <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
-              Introduction
-            </h3>
-            <p className={"text-[12px] md:text-[16px]"}>
-              My name is [Your Name], and I am a UX/UI designer based in
-              [Country Name]. I am passionate about creating user-centered
-              solutions that enhance the user experience and simplify complex
-              problems. My expertise lies in designing web and mobile
-              applications, and I possess a proven track record of delivering
-              high-quality, user-friendly products. This proposal outlines my
-              design approach for your project, which will ensure we achieve the
-              desired outcome. It details the project timeline, scope of work,
-              and associated costs.
-            </p>
-          </div>
+        <ServicesFreelancer
+        selectedServices={selectedServices}
+        serviceOptions={serviceOptions}
+        serviceData={freelancerServiceData}
+        handleServiceDataChange={handleServiceDataChange}
+      />
 
-          <div className="pb-7 border-t pt-6 border-grayLight">
-            <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
-              Context
-            </h3>
-            <p className={"text-[12px] md:text-[16px]"}>
-              [Replace the placeholder text with a concise and factual
-              description of the company. This could include their founding
-              year, core business activities, target audience, or any relevant
-              achievements.] Project Goals & Vision:The client aims to become a
-              leading player in the Indian e-grocery industry. They are
-              targeting a user base of [XX,XXX] active monthly users and
-              [XXX,XXX] registered users. This ambitious vision requires a
-              user-friendly and effective design that will attract and retain
-              customers.
-            </p>
-          </div>
-          <div className="pb-7 border-t pt-10 border-grayLight">
-            <h3 className="text-[16px] font-Bold md:text-[20px] mb-2 md:mb-5">
-              Notes *
-            </h3>
-            <div className="w-full border-b ">
-              <Textarea
-                classNames={{
-                  input:
-                    "border-none text-start py-0 text-[12px] md:text-[16px] ",
-                }}
-              />
-            </div>
-          </div>
-        </div>
+      <ServicesMember
+        selectedServices={selectedServices}
+        serviceOptions={serviceOptions}
+        serviceData={memberServiceData}
+        handleServiceDataChange={handleServiceDataChange}
+      />
+     
         {pathname !== ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERNEW(id) ? (
           <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
             <Button
@@ -170,8 +174,8 @@ function ContractInformation({ id }) {
             </Link>
           </div>
         )}
-      </Card>
-    </div>
+      
+    </Card>
   );
 }
 

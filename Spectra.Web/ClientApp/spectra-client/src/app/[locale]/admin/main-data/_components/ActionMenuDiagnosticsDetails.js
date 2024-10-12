@@ -5,6 +5,8 @@ import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
+import EditIcon from "@/assets/icons/edit";
+import ROUTES from "@/routes";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
@@ -20,7 +22,12 @@ function ActionMenu({ id }) {
       },
       color: "red",
     },
-
+    {
+      label: "تعديل",
+      icon: <EditIcon />,
+      link: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(id),
+      type: "link",
+    },
     {
       label: "تصدير",
       icon: <ExportIcon />,
