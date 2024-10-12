@@ -14,7 +14,7 @@ function ArrowWhite({className}) {
         d="M18 32L4 17.8919L18 3"
         stroke="white"
         stroke-width="5"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );

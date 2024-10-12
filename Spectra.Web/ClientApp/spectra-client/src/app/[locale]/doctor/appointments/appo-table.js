@@ -15,6 +15,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "لم يبدأ بعد",
+    now: true,
   },
   {
     id: 1,
@@ -28,6 +29,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "لم يبدأ بعد",
+    now: false,
   },
   {
     id: 2,
@@ -41,6 +43,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "تتم الان",
+    now: false,
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "تمت",
+    now: false,
   },
   {
     id: 5,
@@ -67,6 +71,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "تمت",
+    now: false,
   },
   {
     id: 6,
@@ -80,6 +85,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "تمت",
+    now: false,
   },
   {
     id: 7,
@@ -93,6 +99,7 @@ const data = [
     time: "10:00 pm",
     doctor: "عبدالله الشيخ",
     statu: "تمت",
+    now: false,
   },
 ];
 const FilterOptions = [
@@ -113,6 +120,7 @@ const AppoTable = () => {
         filterBy="patientDiagnosis"
         filterText="فلتر بالنوع"
         IsWidth
+        appointmentNow
       />
     </div>
   );

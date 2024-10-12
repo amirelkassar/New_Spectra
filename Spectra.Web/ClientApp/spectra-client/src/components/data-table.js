@@ -22,9 +22,6 @@ import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
 import { SortingState } from "@tanstack/react-table";
 import { useMediaQuery } from "@mantine/hooks";
 
-
-
-
 export function DataTable({
   columns,
   data,
@@ -39,6 +36,7 @@ export function DataTable({
   mdHide = null,
   haveComp = false,
   Component,
+  appointmentNow = false,
 }) {
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
@@ -88,6 +86,8 @@ export function DataTable({
     }
     setSelectedUsers(newSelectedUsers);
   };
+  console.log(table.getRowModel().rows);
+
   return (
     <div className="space-y-5">
       {/* Filter */}
@@ -105,9 +105,7 @@ export function DataTable({
                 data={selectData}
                 disabled={selectData?.length === 0}
                 placeholder="اختر التخصص"
-                value={
-                  (table.getColumn(filterBy)?.getFilterValue()) ?? ""
-                }
+                value={table.getColumn(filterBy)?.getFilterValue() ?? ""}
                 onChange={(value) =>
                   table.getColumn(filterBy)?.setFilterValue(value)
                 }
@@ -291,11 +289,29 @@ export function DataTable({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row, index) => (
               <Table.Tr
-                className={`text-black text-xs lg:text-base ${selectedUsers.has(index)?"bg-blueLight/40":""}`}
+                className={`text-black text-xs lg:text-base ${
+                  selectedUsers.has(index) ? "bg-blueLight/40" : ""
+                }
+                `}
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                style={
+                  row.original.now
+                    ? {
+                        marginBlock: "10px",
+                        background:
+                          "linear-gradient(263deg, rgba(172,221,249,1) 15%, rgba(172,221,249,1) 44%, rgba(233,247,255,1) 100%)",
+                      }
+                    : {}
+                }
               >
-                <Table.Td className="px-2 max-w-7 w-6  ps-2">
+                <Table.Td
+                  className={`px-2 max-w-7 w-6  ps-2  ${
+                    appointmentNow
+                      ? row.original.now && " rounded-s-2xl h-[100px]"
+                      : ""
+                  } `}
+                >
                   <Checkbox
                     color="#10B0C1"
                     classNames={{
@@ -314,6 +330,14 @@ export function DataTable({
                       mdHide === i + 1 ? " hidden mdl:block" : ""
                     }
                     ${i === 0 ? "font-Bold" : ""}
+                    ${
+                      appointmentNow
+                        ? row.original.now &&
+                          i === row.getVisibleCells().length - 1
+                          ? " rounded-e-2xl h-[100px]"
+                          : ""
+                        : null
+                    }
                     `}
                     key={cell.id}
                   >
