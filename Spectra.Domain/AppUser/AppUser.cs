@@ -8,6 +8,8 @@ namespace Spectra.Domain.AppUser
 {
     public class AppUser : IdentityUser, IBaseEntity<string>
     {
+        public string Name { get; set; }
+        public string SurName { get; set; }
         private readonly List<BaseEvent> _domainEvents = [];
 
         [NotMapped]
