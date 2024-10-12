@@ -13,7 +13,7 @@ namespace Spectra.Domain.AppUser
         [NotMapped]
         public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        public string Notes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Notes { get; set; }
 
         public void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
 
