@@ -1,15 +1,12 @@
 "use client";
+import BackIcon from "@/assets/icons/back";
 import { Link, usePathname } from "@/navigation";
-import AppoTable from "./appo-table";
+import React from "react";
+import LinkToCalender from "./LinkToCalender";
 import ROUTES from "@/routes";
-import AppointmentSummary from "./appointment-summary";
-import DateIcon2 from "@/assets/icons/date2";
-import LinkToCalender from "./_components/LinkToCalender";
-import OpeningDates from "./_components/openingDates";
 
-const AppointmentsPage = () => {
+function LinkAppointments() {
   const path = usePathname();
-
   const AppointmentsLinks = [
     {
       name: "المواعيد القادمة",
@@ -32,21 +29,27 @@ const AppointmentsPage = () => {
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSDEFERRED),
     },
   ];
-
   return (
-    <div className="bg-white mdl:bg-transparent">
-      <div className="  mb-4 md:mb-9 pt-3 px-5 md:px-2">
-        <div className=" flex  items-center justify-between gap-4 flex-wrap ">
-          <h2 className="md:hidden block mdl:text-[20px] text-[14px] ">
-            مرحبا بك , د. احمد كمال
-          </h2>
-          <h2 className="md:block hidden mdl:text-[20px] text-[14px] ">
-            المواعيد
-          </h2>
+    <div>
+      <div className="mb-2 md:mb-9 pt-3 px-5 md:px-2">
+        <div className="flex mb-8 items-center justify-between gap-4 flex-wrap ">
+          <div className="flex items-center gap-4 ">
+            <Link
+              href={ROUTES.DOCTOR.APPOINTMENTS}
+              className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+            >
+              <BackIcon className={"w-full h-full"} />
+            </Link>
+
+            <h2 className="  mdl:text-[20px] text-[14px] ">
+              {AppointmentsLinks.find((item) => item.isActive === true).name}
+            </h2>
+          </div>
+
           <LinkToCalender />
         </div>
       </div>
-      <div className=" mdl:hidden linksReqMob flex items-center mdl:max-w-[96%] mdl:w-[400px] justify-between mx-auto gap-2 mdl:gap-[20px] flex-wrap mdl:pt-8 mb-6">
+      <div className=" mdl:hidden linksReqMob flex items-center mdl:max-w-[96%] mdl:w-[400px] justify-between mx-auto gap-2 mdl:gap-[20px] flex-wrap ">
         <Link
           key={ROUTES.DOCTOR.APPOINTMENTS}
           href={ROUTES.DOCTOR.APPOINTMENTS}
@@ -72,13 +75,8 @@ const AppointmentsPage = () => {
           );
         })}
       </div>
-      <AppointmentSummary />
-      <OpeningDates/>
-      <div className="default-page">
-        <AppoTable />
-      </div>
     </div>
   );
-};
+}
 
-export default AppointmentsPage;
+export default LinkAppointments;

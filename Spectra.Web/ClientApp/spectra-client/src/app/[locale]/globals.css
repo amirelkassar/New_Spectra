@@ -505,3 +505,11 @@ form.clientEdit .mantine-Input-input {
     clippath: polygon(0 100%, 0 10%, 50% 0%, 100% 10%, 100% 100%);
   }
 }
+input[type="number"].timeInput::-webkit-outer-spin-button,
+input[type="number"].timeInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"].timeInput {
+  -moz-appearance: textfield;
+}

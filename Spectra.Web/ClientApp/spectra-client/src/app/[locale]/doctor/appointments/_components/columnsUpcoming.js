@@ -1,4 +1,4 @@
-import ActionDeferred from "./actionDeferred";
+import ActionUpcoming from "./actionUpcoming";
 
 export const columns = [
   {
@@ -32,7 +32,7 @@ export const columns = [
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-       <ActionDeferred/>
+       <ActionUpcoming/>
       );
     },
   },

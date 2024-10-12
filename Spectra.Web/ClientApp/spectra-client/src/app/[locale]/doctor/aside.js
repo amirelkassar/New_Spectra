@@ -105,8 +105,8 @@ const Aside = () => {
     },
     {
       name: "الخطط",
-      route: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD),
+      route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
     },
   ];
   const AppointmentsLinks = [

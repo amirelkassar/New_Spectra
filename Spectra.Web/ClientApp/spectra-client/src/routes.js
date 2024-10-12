@@ -181,6 +181,9 @@ const ROUTES = {
     APPOINTMENTSDEFERRED: "/doctor/appointments/deferred",
     APPOINTMENTSUPCOMING: "/doctor/appointments/upcoming",
     APPOINTMENTSPREVIOUS: "/doctor/appointments/previous",
+    APPOINTMENTSWORK: "/doctor/appointments/appointmentsWork",
+    APPOINTMENTSWORKID:(id)=> `/doctor/appointments/appointmentsWork/${id}`,
+    APPOINTMENTSWORKADD: "/doctor/appointments/appointmentsWork/add",
     RATINGS: {
       DASHBOARD: "/doctor/ratings",
     },
