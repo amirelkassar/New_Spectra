@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Application.Countries.DTOs
+﻿namespace Spectra.Application.Countries.DTOs
 {
     public class CountryData
     {
@@ -12,5 +6,5 @@ namespace Spectra.Application.Countries.DTOs
         public string Flag { get; set; }
         public string Iso2 { get; set; }
 
-   }
+    }
 }

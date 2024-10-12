@@ -1,50 +1,83 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Enumeration;
-using Spectra.Domain.Patients;
+using Spectra.Application.Validator;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients.Commands
 {
-    public class UpdatePatientCommand : ICommand<Unit>
-	{
-		public string Id { get; set; }
-		public Name Name { get; set; }
-		public string NationalId { get; set; }
-		public HumenGender Gender { get; set; }
-		public DateOnly DateOfBirth { get; set; }
-		public ClientPatientRelations RelationToClient { get; set; }
-	}
+    public class UpdatePatientCommand : ICommand<OperationResult<Unit>>
+    {
+        public string Id { get; set; }
+        public Name Name { get; set; }
+        public string NationalId { get; set; }
+        public HumenGender Gender { get; set; }
+        public DateOnly DateOfBirth { get; set; }
+        public ClientPatientRelations RelationToClient { get; set; }
+        public string ClientId { get; private set; }
+        public double ChildHeight { get; set; }
+        public double ChildWeightt { get; set; }
+        public string DateOfOnSetOfSymptoms { get; set; }
+        public TypeOfDisease InheritedOrAcquired { get; set; }
+    }
 
-	public class UpdatePatientCommandHandler : IRequestHandler<UpdatePatientCommand ,Unit>
-	{
-		private readonly IPatientRepository _patientRepository;
+    public class UpdatePatientCommandHandler : IRequestHandler<UpdatePatientCommand, OperationResult<Unit>>
+    {
+        private readonly IPatientRepository _patientRepository;
 
-		public UpdatePatientCommandHandler(IPatientRepository patientRepository)
-		{
-			_patientRepository = patientRepository;
-		}
+        public UpdatePatientCommandHandler(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
+        }
 
-		public async Task<Unit> Handle(UpdatePatientCommand request, CancellationToken cancellationToken)
-		{
-			var patient = await _patientRepository.GetByIdAsync(request.Id);
-			if (patient == null)
-			{
-				throw new Exception("Patient not found");
-			}
+        public async Task<OperationResult<Unit>> Handle(UpdatePatientCommand request, CancellationToken cancellationToken)
+        {
 
-			patient.Name = request.Name;
-			patient.NationalId = request.NationalId;
-			patient.Gender = request.Gender;
-			patient.DateOfBirth = request.DateOfBirth;
-			patient.RelationToClient = request.RelationToClient;
+            var patient = await _patientRepository.GetByIdAsync(request.Id);
 
-			await _patientRepository.UpdateAsync(patient);
-			return Unit.Value;
-		}
-	}
+            patient.Name = request.Name;
+            patient.NationalId = request.NationalId;
+            patient.Gender = request.Gender;
+            patient.DateOfBirth = request.DateOfBirth;
+            patient.RelationToClient = request.RelationToClient;
+            patient.ChildHeight = request.ChildHeight;
+            patient.DateOfOnSetOfSymptoms=request.DateOfOnSetOfSymptoms;
+            patient.ChildWeightt = request.ChildWeightt;
+            patient.InheritedOrAcquired= request.InheritedOrAcquired;
+
+
+            await _patientRepository.UpdateAsync(patient);
+            return OperationResult<Unit>.Success(Unit.Value);
+
+
+
+        }
+    }
+    public class UpdatePatientCommandValidator : AbstractValidator<UpdatePatientCommand>
+    {
+        public UpdatePatientCommandValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("Patient ID is required.");
+
+            RuleFor(x => x.Name)
+                .NotNull().WithMessage("Name is required.")
+                .SetValidator(new NameValidator());
+
+            RuleFor(x => x.NationalId)
+                .NotEmpty().WithMessage("National ID is required.")
+                .Matches(@"^\d{10,12}$").WithMessage("National ID must be between 10 and 12 digits.");
+
+            RuleFor(x => x.Gender)
+                .IsInEnum().WithMessage("Gender is required.");
+
+            RuleFor(x => x.DateOfBirth)
+                .LessThan(DateOnly.FromDateTime(DateTime.Now)).WithMessage("Date of birth must be in the past.");
+
+            RuleFor(x => x.RelationToClient)
+                .IsInEnum().WithMessage("Relation to client is required.");
+        }
+    }
 }

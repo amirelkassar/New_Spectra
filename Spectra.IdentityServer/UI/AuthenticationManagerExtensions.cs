@@ -1,5 +1,5 @@
-﻿using IdentityServer4.Configuration;
-using IdentityServer4;
+﻿using IdentityServer4;
+using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 

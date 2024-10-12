@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Countries.DTOs;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Shared.Helpers;
 
 namespace Spectra.Application.Countries.Queries
 {

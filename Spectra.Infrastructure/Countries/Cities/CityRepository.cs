@@ -10,7 +10,7 @@ namespace Spectra.Infrastructure.Countries.Cities
         IMongoCollection<City> _cities;
         public CityRepository(IMongoDbService mongoDbService)
         {
-            _cities=mongoDbService.DataBase.GetCollection<City>(Conses.CollectionName);
+            _cities = mongoDbService.DataBase.GetCollection<City>(Conses.CollectionName);
         }
         public async Task AddAsync(City city)
         {
@@ -19,7 +19,7 @@ namespace Spectra.Infrastructure.Countries.Cities
 
         public async Task AddManyAsync(params City[] states)
         {
-           await _cities.InsertManyAsync(states);
+            await _cities.InsertManyAsync(states);
         }
 
         public async Task<bool> ExistsAsync(string id)
@@ -35,7 +35,7 @@ namespace Spectra.Infrastructure.Countries.Cities
 
         public async Task<IEnumerable<City>> GetByStateIdAsync(string stateId)
         {
-            return await _cities.Find(c=>c.StateId == stateId).ToListAsync();
+            return await _cities.Find(c => c.StateId == stateId).ToListAsync();
         }
         public async Task<bool> AnyAsync()
         {

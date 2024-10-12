@@ -1,6 +1,4 @@
 ﻿using Spectra.Domain.Documents;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Documents
 {

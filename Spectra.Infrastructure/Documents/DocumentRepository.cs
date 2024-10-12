@@ -2,8 +2,6 @@
 using Spectra.Application.Documents;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Documents;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Documents
 {

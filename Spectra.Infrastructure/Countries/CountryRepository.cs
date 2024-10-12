@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Spectra.Application.Countries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Countries;

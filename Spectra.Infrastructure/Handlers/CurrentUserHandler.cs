@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Spectra.Infrastructure.Handlers
 {
@@ -12,28 +8,49 @@ namespace Spectra.Infrastructure.Handlers
     {
         private readonly HttpContext _context;
 
-        public CurrentUserHandler(IHttpContextAccessor httpContextAccessor)
+        public CurrentUserHandler(IHttpContextAccessor httpContextAccessor )
         {
-            _context = httpContextAccessor.HttpContext;
+            _context = httpContextAccessor.HttpContext ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
-        public string Id => throw new NotImplementedException();
-        public string Name => throw new NotImplementedException();
 
-        public string Username => throw new NotImplementedException();
+        public string Id => _context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        public string Email => throw new NotImplementedException();
+        public string Name => _context.User.Identity.Name;
 
-        public string Phone => throw new NotImplementedException();
+        public string Username => _context.User.FindFirst("username")?.Value;
 
-        public bool IsEmailConfirmed => throw new NotImplementedException();
+        public string Email => _context.User.FindFirst(ClaimTypes.Email)?.Value;
 
-        public bool IsPhoneConfirmed => throw new NotImplementedException();
+        public string Phone => _context.User.FindFirst(ClaimTypes.MobilePhone)?.Value;
 
-        public string CurrentToken => throw new NotImplementedException();
+        public bool IsEmailConfirmed => _context.User.FindFirst("email_verified")?.Value == "true";
+
+        public bool IsPhoneConfirmed => _context.User.FindFirst("phone_verified")?.Value == "true";
+
+        public string CurrentToken => _context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
         public bool IsInRole(string role)
         {
-            throw new NotImplementedException();
+            return _context.User.IsInRole(role);
         }
+        //public string Id => throw new NotImplementedException();
+        //public string Name => throw new NotImplementedException();
+
+        //public string Username => throw new NotImplementedException();
+
+        //public string Email => throw new NotImplementedException();
+
+        //public string Phone => throw new NotImplementedException();
+
+        //public bool IsEmailConfirmed => throw new NotImplementedException();
+
+        //public bool IsPhoneConfirmed => throw new NotImplementedException();
+
+        //public string CurrentToken => throw new NotImplementedException();
+
+        //public bool IsInRole(string role)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

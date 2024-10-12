@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Wrappers
 {
@@ -19,11 +15,11 @@ namespace Spectra.Domain.Shared.Wrappers
         }
         public SingleResponse(OperationResult<TData> operation)
         {
-            Data=operation.Data;
-            Code=(HttpStatusCode)operation.Code;
+            Data = operation.Data;
+            Code = (HttpStatusCode)operation.Code;
             Message = operation.Message;
-            Success=operation.Success;
-            Errors=operation.Errors;
+            Success = operation.SuccessOpration;
+            Errors = operation.Errors;
         }
         public bool Success { get; }
         public string Message { get; }
@@ -31,9 +27,9 @@ namespace Spectra.Domain.Shared.Wrappers
         public TData Data { get; }
         public IDictionary<string, string[]>? Errors { get; }
 
-        public static SingleResponse<TData> SuccessResponse(TData data, HttpStatusCode code=HttpStatusCode.OK, string message="Valid Operation!")=>new(data, code, message);
+        public static SingleResponse<TData> SuccessResponse(TData data, HttpStatusCode code = HttpStatusCode.OK, string message = "Valid Operation!") => new(data, code, message);
         public static SingleResponse<TData> SuccessResponse(OperationResult<TData> operation) => new(operation);
-        public static SingleResponse<object?> FaildResponse(IDictionary<string, string[]> erros,HttpStatusCode code = HttpStatusCode.BadRequest, string message = "Invalid Operation!") => new(null, code, message,erros);
+        public static SingleResponse<object?> FaildResponse(IDictionary<string, string[]> erros, HttpStatusCode code = HttpStatusCode.BadRequest, string message = "Invalid Operation!") => new(null, code, message, erros);
         public static SingleResponse<object?> FaildResponse(OperationResult<object?> operation) => new(operation);
 
 

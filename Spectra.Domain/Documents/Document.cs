@@ -1,81 +1,62 @@
-﻿using Spectra.Domain.Enumeration;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Documents
 {
     public class Document : BaseAuditableEntity<string>
     {
         public string Name { get; set; }
-        public Guid DocumentKey { get; set; }
-        public DocumentSources DocumentSource { get; set; }
-        public string DocumentSourceId { get; set; }
+        public DocumentSources DocumentSource { get; private set; }
+        public string? DocumentSourceId { get; private set; }
         public string Path { get; set; }
         public bool External { get; set; }
         public bool IsPublic { get; set; }
-        public Type DocumentType { get; set; }
-        public string OwnerId { get; set; }
-        public string DocumentId { get; set; }
+        public DocumentTypes DocumentType { get; private set; }
+        public string OwnerId { get; private set; }
 
         protected Document() { }
-        private Document(string name, Guid documentKey, DocumentSources documentSource,
-            string documentSourceId, string path, bool external, bool isPublic, Type documentTypes,
-            string ownerId, string documentId)
+        private Document(string id,
+            string name,
+            DocumentSources documentSource,
+            string path,
+            DocumentTypes documentType,
+            string ownerId,
+            bool external = false,
+            bool isPublic = false)
         {
             Name = name;
-            DocumentKey = documentKey;
             DocumentSource = documentSource;
-            DocumentSourceId = documentSourceId;
             Path = path;
             External = external;
             IsPublic = isPublic;
-            DocumentTypes = documentTypes;
+            DocumentType = documentType;
             OwnerId = ownerId;
-            DocumentId = documentId;
         }
 
-        public static Document Create(string name, Guid documentKey, DocumentSources documentSource,
-            string documentSourceId, string path, bool external, bool isPublic, Type documentTypes,
-            string ownerId, string documentId)
+        public static Document Create(string id, 
+            string name,
+            DocumentSources documentSource,
+            string path,
+            DocumentTypes documentType,
+            string ownerId,
+            bool external = false,
+            bool isPublic = false)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Name is required.", nameof(name));
-            }
+            ArgumentNullException.ThrowIfNull(id,nameof(id));
+            ArgumentNullException.ThrowIfNull(documentSource, nameof(documentSource));
+            ArgumentNullException.ThrowIfNull(path, nameof(path));
+            ArgumentNullException.ThrowIfNull(documentType, nameof(documentType));
+            ArgumentNullException.ThrowIfNull(ownerId, nameof(ownerId));
 
-            if (documentKey == Guid.Empty)
-            {
-                throw new ArgumentException("Document key is required.", nameof(documentKey));
-            }
-
-            if (string.IsNullOrWhiteSpace(documentSourceId))
-            {
-                throw new ArgumentException("Document source ID is required.", nameof(documentSourceId));
-            }
-
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                throw new ArgumentException("Path is required.", nameof(path));
-            }
-
-            if (string.IsNullOrWhiteSpace(ownerId))
-            {
-                throw new ArgumentException("Owner ID is required.", nameof(ownerId));
-            }
-
-            if (string.IsNullOrWhiteSpace(documentId))
-            {
-                throw new ArgumentException("Document ID is required.", nameof(documentId));
-            }
-
-            return new Document(name, documentKey,
-                documentSource, documentSourceId,
-                path, external, isPublic, documentTypes, ownerId, documentId);
+            return new Document(id,
+                name,
+                documentSource,
+                path,
+                documentType,
+                ownerId,
+                external,
+                isPublic);
         }
     }
 }

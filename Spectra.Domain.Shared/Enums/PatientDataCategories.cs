@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.Shared.Enums
+﻿namespace Spectra.Domain.Shared.Enums
 {
     public enum PatientDataCategories
     {
@@ -21,6 +15,7 @@ namespace Spectra.Domain.Shared.Enums
         Allergy = 5,
         Medication = 6,
         MedicalCondition = 7,
-        Vaccination = 8
+        Vaccination = 8,
+        PhysicalInfo = 9
     }
 }

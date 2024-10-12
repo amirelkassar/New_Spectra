@@ -1,6 +1,6 @@
-﻿using Serilog.Events;
+﻿using Serilog;
+using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using Serilog;
 
 namespace Spectra.IdentityServer
 {
