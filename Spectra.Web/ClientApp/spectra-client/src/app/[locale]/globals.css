@@ -513,3 +513,14 @@ input[type="number"].timeInput::-webkit-inner-spin-button {
 input[type="number"].timeInput {
   -moz-appearance: textfield;
 }
+.ql-editor li:not(.ql-direction-rtl)::before {
+  margin-left: 0px !important;
+  margin-right:0px !important;
+}
+.contractsDetails *{
+  @apply text-sm mdl:text-xl font-Regular
+}
+.contractsDetails h3,.contractsDetails h2,.contractsDetails h1,.contractsDetails strong{
+  font-weight: bold;
+  margin-block: 10px !important;
+}

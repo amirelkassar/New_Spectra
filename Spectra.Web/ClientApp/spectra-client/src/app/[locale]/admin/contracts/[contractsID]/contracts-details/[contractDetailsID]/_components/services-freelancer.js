@@ -1,5 +1,6 @@
 import ContractLine from "@/components/contractLine";
 import { TextInput } from "@mantine/core";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 function ServicesFreelancer({
@@ -8,6 +9,7 @@ function ServicesFreelancer({
   serviceData,
   handleServiceDataChange,
 }) {
+  const searchparams = useSearchParams();
   return (
     <div dir="ltr" className="pb-8 ps-3 lgl:ps-20">
       <h2 className="text-[16px] mdl:text-xl font-Bold mb-4">
@@ -17,7 +19,8 @@ function ServicesFreelancer({
         {selectedServices.map((service, i) => {
           return (
             <ContractLine
-              activeEdit={false}
+              activeEdit={ searchparams.get("editContracts") === "true"? true : false }
+              serviceData={serviceData}
               key={i}
               type={"freelancer"}
               title={serviceOptions.find((opt) => opt.value === service).label}
@@ -37,15 +40,23 @@ function ServicesFreelancer({
           </h4>
           <div className="flex items-center gap-3">
             <div
-              className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  border-grayDark/50 px-2 py-2`}
+              className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border ${
+                searchparams.get("editContracts") === "true"
+                  ? ""
+                  : " opacity-45"
+              }  border-grayDark/50 px-2 py-2`}
             >
               <TextInput
+                defaultValue={8}
                 type="number"
                 className="flex-1"
                 classNames={{
                   input:
                     "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
                 }}
+                readOnly={
+                  searchparams.get("editContracts") === "true" ? false : true
+                }
               />
               <span className="font-SemiBold text-sm">H</span>
             </div>
@@ -58,15 +69,23 @@ function ServicesFreelancer({
           </h4>
           <div className="flex items-center gap-3">
             <div
-              className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  border-grayDark/50 px-2 py-2`}
+              className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  ${
+                searchparams.get("editContracts") === "true"
+                  ? ""
+                  : " opacity-45"
+              } border-grayDark/50 px-2 py-2`}
             >
               <TextInput
+                defaultValue={5}
                 type="number"
                 className="flex-1"
                 classNames={{
                   input:
                     "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
                 }}
+                readOnly={
+                  searchparams.get("editContracts") === "true" ? false : true
+                }
               />
               <span className="font-SemiBold text-sm">D</span>
             </div>

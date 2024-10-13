@@ -9,6 +9,7 @@ function ContractLine({
   terms,
   activeEdit = true,
   handleServiceDataChange,
+  serviceData
 }) {
   return (
     <li>
@@ -20,7 +21,7 @@ function ContractLine({
           {/* Price Input */}
           <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'}  px-2 py-2`}>
             <TextInput
-              value={service.price}
+              value={serviceData[service]?.price}
               onChange={(e) => {
                 activeEdit
                   ? handleServiceDataChange(
@@ -45,7 +46,7 @@ function ContractLine({
           {/* Duration Input */}
           <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'}  px-2 py-2`}>
             <TextInput
-              value={service.duration}
+              value={serviceData[service]?.duration}
               onChange={(e) => {
                 activeEdit
                   ? handleServiceDataChange(
@@ -71,7 +72,7 @@ function ContractLine({
           {/* Discount Input */}
           <div className={`flex items-center w-[156px] mdl:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'} px-2 py-2`}>
             <TextInput
-              value={service.discount}
+              value={serviceData[service]?.discount}
               onChange={(e) => {
                 activeEdit
                   ? handleServiceDataChange(

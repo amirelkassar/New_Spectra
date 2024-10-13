@@ -21,12 +21,7 @@ function ActionMenu({ id,idUser }) {
       },
       color: "red",
     },
-    {
-      label: "تعديل",
-      icon: <EditIcon />,
-      link: ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(idUser,id),
-      type: "link",
-    },
+
     {
       label: "تصدير",
       icon: <ExportIcon />,

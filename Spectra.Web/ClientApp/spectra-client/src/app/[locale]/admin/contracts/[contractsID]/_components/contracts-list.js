@@ -1,12 +1,12 @@
 "use client";
 import { Card } from "@mantine/core";
-import React, { useState } from "react";
+import React from "react";
 import ContractsIcon from "@/assets/icons/contracts";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import ActionMenu from "./ActionMenu";
-import Drow from "../../components/drow";
+
 const dataContacts = [
   {
     id: 1,
@@ -31,21 +31,8 @@ const dataContacts = [
   },
 ];
 function ContractsList({ idUser }) {
-  const [signatureData, setSignatureData] = useState(null);
-
-  const handleSignatureSubmit = (signature) => {
-    setSignatureData(signature);
-    // هنا يمكنك إرسال البيانات إلى الخادم باستخدام fetch أو axios
-  };
   return (
     <Card className="flex-1 rounded-lg">
-      <Drow onSubmit={handleSignatureSubmit} />
-      {signatureData && (
-        <div>
-          <h2>التوقيع الذي تم إرساله:</h2>
-          <img src={signatureData} alt="التوقيع" />
-        </div>
-      )}
       <div className="flex flex-col gap-4 lg:pt-4 w-full lg:max-w-[94%] mx-auto">
         {dataContacts.map((item, index) => {
           return (

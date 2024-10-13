@@ -25,9 +25,7 @@ function ServicesMember({
 
           return (
             <ContractLine
-              activeEdit={
-                searchparams.get("editContracts") === "true" ? true : false
-              }
+            activeEdit={ searchparams.get("editContracts") === "true"? true : false }
               serviceData={serviceData}
               key={i}
               title={serviceOptions.find((opt) => opt.value === service).label}
