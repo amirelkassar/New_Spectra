@@ -76,7 +76,6 @@ export function DataTable({
       setSelectedUsers(new Set(data.map((_, i) => i)));
     }
   };
-
   const toggleUser = (index) => {
     const newSelectedUsers = new Set(selectedUsers);
     if (newSelectedUsers.has(index)) {
@@ -86,8 +85,6 @@ export function DataTable({
     }
     setSelectedUsers(newSelectedUsers);
   };
-  console.log(table.getRowModel().rows);
-
   return (
     <div className="space-y-5">
       {/* Filter */}

@@ -18,7 +18,7 @@ function ContractLine({
         </p>
         <div className="flex items-center gap-3 flex-wrap">
           {/* Price Input */}
-          <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50'}  px-2 py-2`}>
+          <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'}  px-2 py-2`}>
             <TextInput
               value={service.price}
               onChange={(e) => {
@@ -43,7 +43,7 @@ function ContractLine({
           </div>
 
           {/* Duration Input */}
-          <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50'}  px-2 py-2`}>
+          <div className={`flex items-center w-full md:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'}  px-2 py-2`}>
             <TextInput
               value={service.duration}
               onChange={(e) => {
@@ -69,7 +69,7 @@ function ContractLine({
           </div>
 
           {/* Discount Input */}
-          <div className={`flex items-center w-[156px] mdl:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50'} px-2 py-2`}>
+          <div className={`flex items-center w-[156px] mdl:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${activeEdit?'border-black':'border-grayDark/50 opacity-40'} px-2 py-2`}>
             <TextInput
               value={service.discount}
               onChange={(e) => {
