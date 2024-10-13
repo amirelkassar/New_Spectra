@@ -15,6 +15,7 @@ function Page({ params }) {
       <InformationEdit/>
       <SymptomsEdit/>
       <SurveyEdit />
+      
     </div>
   ) : (
     <div className="w-full flex-1 flex-col gap-6 flex">
