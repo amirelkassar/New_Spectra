@@ -9,7 +9,7 @@ function ContractLine({
   terms,
   activeEdit = true,
   handleServiceDataChange,
-  serviceData
+  serviceData={}
 }) {
   return (
     <li>

@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React from "react";
 import { DataTable } from "@/components/data-table";
 import imgDrugs from "@/assets/images/drugs.png";
-import  { DrugsColumns } from './_components/drugs-columns'
+import { DrugsColumns } from "./_components/drugs-columns";
 import AddMainData from "./_components/add-drugs";
 import ROUTES from "@/routes";
+import { GetDrugs } from "@/useAPI/admin/drugs/page";
 const dataDru = [
   {
     id: 0,
@@ -65,15 +66,20 @@ const dataDru = [
 ];
 
 function page() {
+  const { data } = GetDrugs();
+  console.log(data);
+  
   return (
     <div>
       <div className="flex mb-10 flex-col mt-6 lg:mt-0 flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6">
         <h2 className="headTitleDash">وصفات طبية</h2>
-        <AddMainData title={'أضافة عقار'} path={ROUTES.ADMIN.DATAMAIN.DRUGSADD} />
+        <AddMainData
+          title={"أضافة عقار"}
+          path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
+        />
       </div>
-    
-        <DataTable  data={dataDru} columns={DrugsColumns} />
-     
+
+      <DataTable data={dataDru} columns={DrugsColumns} />
     </div>
   );
 }

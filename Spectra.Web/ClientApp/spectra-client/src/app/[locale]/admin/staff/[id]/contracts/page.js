@@ -62,6 +62,7 @@ function page() {
           {services.map((service, i) => {
             return (
               <ContractLine
+                serviceData={[]}
                 activeEdit={false}
                 key={i}
                 title={service.serviceName}
@@ -150,7 +151,9 @@ function page() {
       </Button>
       <Button
         variant="secondary"
-        className={"text-sm font-Bold mdl:ms-8 lg:text-xl h-14 w-[230px] max-w-full "}
+        className={
+          "text-sm font-Bold mdl:ms-8 lg:text-xl h-14 w-[230px] max-w-full "
+        }
       >
         تجديد العقد
       </Button>
