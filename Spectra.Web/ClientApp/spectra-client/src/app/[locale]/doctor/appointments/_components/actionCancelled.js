@@ -29,7 +29,7 @@ function ActionCancelled() {
         <DeleteIcon />
         مسح
       </Button>
-      <MenuActions />
+    
     </div>
   );
 }

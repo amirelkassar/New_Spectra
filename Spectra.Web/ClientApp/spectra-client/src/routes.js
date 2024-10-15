@@ -87,7 +87,7 @@ const ROUTES = {
     STAFF: {
       DASHBOARD: "/admin/staff",
       STAFFID: (id) => `/admin/staff/${id}`,
-      STAFFADD:  `/admin/staff/add`,
+      STAFFADD: `/admin/staff/add`,
       STAFFIDEDIT: (id) => `/admin/staff/${id}?edit=true`,
       STAFFIDINFORMATION: (id) => `/admin/staff/${id}/information`,
       STAFFIDINFORMATIONEDIT: (id) =>
@@ -127,6 +127,7 @@ const ROUTES = {
       SERVICES: "/admin/main-data/services",
       SERVICESADD: "/admin/main-data/services/add",
       SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
+      SERVICESDETAILSEDIT: (id) => `/admin/main-data/services/${id}/edit`,
       TESTSINTERIOR: "/admin/main-data/testsInterior",
       TESTSINTERIORDETAILS: (id) => `/admin/main-data/testsInterior/${id}`,
       TESTSINTERIORDETAILSEDIT: (id) =>
@@ -139,9 +140,10 @@ const ROUTES = {
       REQUESTS: "/admin/contracts/requests",
       EXPIRED: "/admin/contracts/expired",
       CONTRACTSUSER: (id) => `/admin/contracts/${id}`,
-      CONTRACTSUSERNEW: (id) => `/admin/contracts/${id}/new-contacts`,
       CONTRACTSUSERDETAILS: (id, id2) =>
         `/admin/contracts/${id}/contracts-details/${id2}`,
+      CONTRACTSUSERDETAILSEDIT: (id, id2) =>
+        `/admin/contracts/${id}/contracts-details/${id2}?editContracts=true`,
     },
     SETTINGS: {
       DASHBOARD: "/admin/settings",
@@ -181,6 +183,9 @@ const ROUTES = {
     APPOINTMENTSDEFERRED: "/doctor/appointments/deferred",
     APPOINTMENTSUPCOMING: "/doctor/appointments/upcoming",
     APPOINTMENTSPREVIOUS: "/doctor/appointments/previous",
+    APPOINTMENTSWORK: "/doctor/appointments/appointmentsWork",
+    APPOINTMENTSWORKID: (id) => `/doctor/appointments/appointmentsWork/${id}`,
+    APPOINTMENTSWORKADD: "/doctor/appointments/appointmentsWork/add",
     RATINGS: {
       DASHBOARD: "/doctor/ratings",
     },
@@ -213,6 +218,7 @@ const ROUTES = {
       DASHBOARD: "/doctor/contracts",
       CONTRACTSNEW: "/doctor/contracts/new",
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
+      CONTRACTSIDEDIT: `/doctor/contracts?editContracts=true`,
     },
     CHATS: {
       DASHBOARD: "/doctor/chats",

@@ -1,4 +1,5 @@
-import MenuActions from "@/components/menu-actions";
+import ActionPrevious from "./actionPrevious";
+
 export const columns = [
   {
     accessorKey: "name",
@@ -29,7 +30,7 @@ export const columns = [
   {
     id: "actions",
     cell: () => {
-      return <MenuActions />;
+      return <ActionPrevious/>;
     },
   },
 ];

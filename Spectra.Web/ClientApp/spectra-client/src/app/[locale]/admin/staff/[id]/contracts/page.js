@@ -41,11 +41,16 @@ const services = [
 ];
 function page() {
   return (
-    <Card className={'max-w-full '}>
+    <Card className={"max-w-full "}>
       <div className="flex items-center justify-between gap-5 mdl:px-3 mdl:mb-16 mb-11 ">
         <h3 className="text-sm mdl:text-xl font-Bold ">العقد</h3>
         <d iv className="flex items-center gap-10">
-          <p className="text-xs mdl:text-base font-Bold">نشط</p>
+          <p className="text-xs mdl:text-base font-Bold px-3 py-1 rounded-xl bg-blueLight text-greenMain">
+            نشط
+          </p>
+          <p className="text-xs mdl:text-base font-Bold px-3 py-1 rounded-xl bg-red/10 text-red">
+            منتهى
+          </p>
           <ActionMenu />
         </d>
       </div>
@@ -57,6 +62,7 @@ function page() {
           {services.map((service, i) => {
             return (
               <ContractLine
+                serviceData={[]}
                 activeEdit={false}
                 key={i}
                 title={service.serviceName}
@@ -73,7 +79,7 @@ function page() {
             </h4>
             <div className="flex items-center gap-3">
               <div
-                className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  border-grayDark/50 px-2 py-2`}
+                className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border opacity-40  border-grayDark/50 px-2 py-2`}
               >
                 <TextInput
                   value={4}
@@ -96,7 +102,7 @@ function page() {
             </h4>
             <div className="flex items-center gap-3">
               <div
-                className={`flex items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  border-grayDark/50 px-2 py-2`}
+                className={`flex items-center w-[120px] justify-between h-11 overflow-hidden opacity-40 rounded-xl border  border-grayDark/50 px-2 py-2`}
               >
                 <TextInput
                   value={5}
@@ -138,10 +144,18 @@ function page() {
       </div>
       <Button
         className={
-          "text-[12px] mdl:ms-8 lg:text-[16px] h-14 mt-10 mb-14  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+          "text-sm mdl:ms-8 lg:text-xl h-14 mt-10 mb-14  mdl:max-w-[230px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
         }
       >
         الغاء العقد
+      </Button>
+      <Button
+        variant="secondary"
+        className={
+          "text-sm font-Bold mdl:ms-8 lg:text-xl h-14 w-[230px] max-w-full "
+        }
+      >
+        تجديد العقد
       </Button>
     </Card>
   );

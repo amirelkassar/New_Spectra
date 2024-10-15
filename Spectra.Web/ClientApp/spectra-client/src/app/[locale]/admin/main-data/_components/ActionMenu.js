@@ -6,21 +6,21 @@ import DataActions from "@/components/data-actions";
 import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
+import { DeleteDrugs } from "@/useAPI/admin/drugs/page";
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
+  const { mutate: deleteDrug, isLoading } = DeleteDrugs(id);
+  const handleDelete = () => {
+    deleteDrug();
+  };
 
   const options = [
     {
       label: "مسح",
       icon: <DeleteIcon />,
       type: "btn",
-      action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
-      },
+      action: handleDelete,
       color: "red",
     },
     {

@@ -16,7 +16,7 @@ const MainDataAside = () => {
       route: ROUTES.ADMIN.DATAMAIN.HOME,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.HOME ||
-        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(params.drugsID)||
+        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(params.drugsID) ||
         path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(params.drugsID),
     },
     {
@@ -24,18 +24,26 @@ const MainDataAside = () => {
       route: ROUTES.ADMIN.DATAMAIN.SPECIALTIES,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES ||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID)||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(params.doctorsSpecialtiesID),
+        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(params.doctorsSpecialtiesID),
     },
     {
       name: "التحاليل و الاشاعات",
       route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(params.analysisRumorsID)||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILSEDIT(params.analysisRumorsID),
+        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(
+            params.analysisRumorsID
+          ) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILSEDIT(
+            params.analysisRumorsID
+          ),
     },
     {
       name: "التشخيصات",
@@ -43,36 +51,45 @@ const MainDataAside = () => {
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS ||
         path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD ||
-        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID)||
-        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(params.diagnosticsID),
+        path ===
+          ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(params.diagnosticsID),
     },
     {
       name: "الشكاوى العامة",
       route: ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(params.complaintsID)||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(params.complaintsID),
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD ||
+        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(params.complaintsID) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(params.complaintsID),
     },
     {
       name: "الخدمات",
       route: ROUTES.ADMIN.DATAMAIN.SERVICES,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.SERVICES ||
-        path === ROUTES.ADMIN.DATAMAIN.SERVICESADD||
-        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID),
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESADD ||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID) ||
+        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(params.servicesID),
     },
     {
       name: "الفحوصات الداخلية",
       route: ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR,
       isActive:
         path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR ||
-        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORADD||
-        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(params.testsInteriorID)||
-        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(params.testsInteriorID),
+        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORADD ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(params.testsInteriorID) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(
+            params.testsInteriorID
+          ),
     },
   ];
+
   return (
     path !== ROUTES.ADMIN.DATAMAIN.DRUGSADD && (
       <div className="w-[100%]  lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-12 px-2 pe-6">

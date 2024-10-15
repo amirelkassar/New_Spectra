@@ -43,17 +43,16 @@ export const columns = [
     },
   },
   {
+    accessorKey: "price",
+    header: "  رسوم الخدمة ",
+    id: "price",
+  },
+  {
     id: "actions",
     cell: ({ getValue, row }) => {
       const id = row.original.id;
-      return (
-        <ActionMenu
-          type={2}
-          id={id}
-          path={ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)}
-          pathEdit={ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)}
-        />
-      );
+      const show = row.original.show;
+      return <ActionMenu id={id} show={show} />;
     },
   },
 ];

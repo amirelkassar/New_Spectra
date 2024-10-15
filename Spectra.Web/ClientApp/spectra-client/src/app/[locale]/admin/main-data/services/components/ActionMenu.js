@@ -8,7 +8,7 @@ import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
-function ActionMenu({ id }) {
+function ActionMenu({ id, show = true }) {
   const { modal, editModal } = useModal();
 
   const options = [
@@ -25,13 +25,15 @@ function ActionMenu({ id }) {
     {
       label: "عرض",
       icon: <ShowIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id),
+      link: show
+        ? ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)
+        : `${ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)}?show=false`,
       type: "link",
     },
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id),
+      link: show ? ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id) : ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id),
       type: "link",
     },
     {

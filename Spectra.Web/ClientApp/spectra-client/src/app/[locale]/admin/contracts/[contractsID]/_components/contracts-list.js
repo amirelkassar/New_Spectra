@@ -1,3 +1,4 @@
+"use client";
 import { Card } from "@mantine/core";
 import React from "react";
 import ContractsIcon from "@/assets/icons/contracts";
@@ -5,6 +6,7 @@ import ArrowLeft from "@/assets/icons/arrow-left";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import ActionMenu from "./ActionMenu";
+
 const dataContacts = [
   {
     id: 1,

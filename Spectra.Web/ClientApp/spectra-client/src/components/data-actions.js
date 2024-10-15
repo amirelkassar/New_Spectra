@@ -27,7 +27,7 @@ export default function DataActions({ options, className }) {
               </Link>
             ) : (
               <button
-                onClick={option.action}
+              onClick={option.action}
                 className={` ${
                   option.color
                     ? option.color === "red"
