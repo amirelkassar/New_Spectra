@@ -8,9 +8,8 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchInterval: 1000 * 60 * 60,
+      refetchInterval: 10000 ,
       refetchIntervalInBackground: true,
-      retry: 3,
     },
     mutations: {
       onError: (res) => console.log(res),

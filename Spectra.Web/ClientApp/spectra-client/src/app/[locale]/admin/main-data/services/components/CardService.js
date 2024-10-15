@@ -12,6 +12,7 @@ function CardService({ data }) {
           <div>
             <h3 className="text-[12px] font-bold">{data.title}</h3>
             <p className="text-[12px] font-Regular">{data.date}</p>
+            <p className="text-[12px] font-Regular">{data.price}</p>
           </div>
         </div>
         {data.show ? (

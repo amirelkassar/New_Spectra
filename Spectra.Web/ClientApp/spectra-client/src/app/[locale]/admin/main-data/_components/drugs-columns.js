@@ -1,6 +1,7 @@
-import ROUTES from "@/routes";
+
 import Image from "next/image";
 import ActionMenu from "./ActionMenu";
+import imgDrugs from "@/assets/images/drugs.png";
 
 export const DrugsColumns = [
   {
@@ -9,12 +10,12 @@ export const DrugsColumns = [
     id: "name",
     cell: ({ getValue, row }) => {
       const name = getValue();
-      const imageUrl = row.original.imageUrl;
+
       return (
         <div className={" items-center gap-2 lg:gap-5   flex"}>
           <div className=" size-7 lg:size-12  flex items-start justify-center ">
             <Image
-              src={imageUrl}
+              src={imgDrugs}
               alt={name}
               width={49}
               height={51}
@@ -27,19 +28,19 @@ export const DrugsColumns = [
     },
   },
   {
-    accessorKey: "manufacturer",
+    accessorKey: "activeIngredient",
     header: "المادة الفعالة",
-    id: "manufacturer",
+    id: "activeIngredient",
   },
   {
-    accessorKey: "type",
+    accessorKey: "contraindications",
     header: "النوع",
-    id: "type",
+    id: "contraindications",
   },
   {
-    accessorKey: "code",
+    accessorKey: "interactionsWithOtherdrugs",
     header: "الكود",
-    id: "code",
+    id: "interactionsWithOtherdrugs",
   },
   {
     id: "actions",

@@ -6,13 +6,14 @@ import Button from "@/components/button";
 import InputGreen from "@/components/Input-green";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
+import { useCreateDrug } from "@/useAPI/admin/drugs/page";
 import { Dropzone } from "@mantine/dropzone";
 import Image from "next/image";
 import React, { useState } from "react";
 
 function Page() {
   const [formData, setFormData] = useState({
-    propertyName: "",
+    Name: "",
     code: "",
     ActiveIngredient: "",
     ScientificName: "",
@@ -20,20 +21,28 @@ function Page() {
     RecommendedDosage: "",
     Doncentration: "",
     DrugInteractionsWithOtherdrugs: "",
-    contraindications: "",
+    Contraindications: "",
     notes: "",
+    photos: [], // Include photos directly in formData
   });
-  const [dataImg, setDataImg] = useState([]);
-  const [largeFile, setLargeFile] = useState("");
 
-  const handleHeaderInputChange = (e) => {
-    setLargeFile("");
-    const newImages = e.map((file) => URL.createObjectURL(file));
-    setDataImg((prev) => [...prev, ...newImages]);
+  const { mutate: createDrug } = useCreateDrug();
+
+  const handleHeaderInputChange = (files) => {
+    const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
+    setFormData((prev) => ({
+      ...prev,
+      photos: [...prev.photos, ...files], // Update photos array with uploaded files
+    }));
   };
+
   const handleDeleteImage = (index) => {
-    setDataImg((prev) => prev.filter((_, i) => i !== index));
+    setFormData((prev) => ({
+      ...prev,
+      photos: prev.photos.filter((_, i) => i !== index), // Remove from photos array
+    }));
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -41,32 +50,49 @@ function Page() {
       [name]: value,
     }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+    
+    // Append all form data, including images
+    for (const key in formData) {
+      if (Array.isArray(formData[key])) {
+        formData[key].forEach((file) => {
+          formDataToSend.append(key, file); // Append each file if it's an array
+        });
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    createDrug(formDataToSend); // Send the FormData object
+  };
+
   return (
     <div>
-      <div className="flex mb-10   items-center gap-4 ">
+      <div className="flex mb-10 items-center gap-4">
         <Link
           href={ROUTES.ADMIN.DATAMAIN.HOME}
-          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          className="w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%] flex items-center justify-center"
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
         <h2 className="headTitleDash">اضافة وصفة طبية</h2>
       </div>
       <div>
-        <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
+        <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14" onSubmit={handleSubmit}>
           <div className="flex-1 w-full h-auto relative">
-            <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">
-              صورة العقار
-            </h3>
-            {dataImg.length > 0 ? (
+            <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">صورة العقار</h3>
+            {formData.photos.length > 0 ? (
               <div className="flex w-full h-auto items-center flex-wrap gap-3">
-                {dataImg.map((img, index) => (
+                {formData.photos.map((img, index) => (
                   <div
                     key={index}
                     className="relative flex items-center justify-center max-w-[100px] mdl:max-w-[140px] h-[60px] mdl:h-[98px] w-auto"
                   >
                     <Image
-                      src={img}
+                      src={URL.createObjectURL(img)}
                       width={100}
                       height={100}
                       priority={true}
@@ -85,11 +111,6 @@ function Page() {
             ) : (
               <Dropzone
                 onDrop={handleHeaderInputChange}
-                onReject={() =>
-                  setLargeFile(
-                    "It was rejected because of the large size of the picture."
-                  )
-                }
                 maxSize={5 * 1024 ** 2}
                 className="mb-1 mdl:mb-5 rounded-xl"
               >
@@ -99,18 +120,15 @@ function Page() {
                     اضغط هنا لرفع صورة
                   </h2>
                 </div>
-                {largeFile && (
-                  <p className="text-rose-500 text-sm">{largeFile}</p>
-                )}
               </Dropzone>
             )}
           </div>
 
           <InputGreen
             label="اسم العقار"
-            name="propertyName"
+            name="Name"
             placeholder="اسم العقار او نوع التوصية"
-            value={formData.propertyName}
+            value={formData.Name}
             onChange={handleInputChange}
           />
           <InputGreen
@@ -157,8 +175,8 @@ function Page() {
           />
           <InputGreen
             label="موانع الاستخدام"
-            name="contraindications"
-            value={formData.contraindications}
+            name="Contraindications"
+            value={formData.Contraindications}
             onChange={handleInputChange}
           />
           <InputGreen
@@ -170,13 +188,10 @@ function Page() {
         </form>
         <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-            onClick={() => {
-              console.log(formData);
-            }}
+          onClick={handleSubmit}
+            type="submit"
             variant="secondary"
-            className={
-              "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
-            }
+            className="max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
           >
             حفظ
           </Button>

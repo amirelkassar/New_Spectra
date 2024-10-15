@@ -127,6 +127,7 @@ const ROUTES = {
       SERVICES: "/admin/main-data/services",
       SERVICESADD: "/admin/main-data/services/add",
       SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
+      SERVICESDETAILSEDIT: (id) => `/admin/main-data/services/${id}/edit`,
       TESTSINTERIOR: "/admin/main-data/testsInterior",
       TESTSINTERIORDETAILS: (id) => `/admin/main-data/testsInterior/${id}`,
       TESTSINTERIORDETAILSEDIT: (id) =>
