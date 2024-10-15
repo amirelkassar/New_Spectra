@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASx0p26clek+mpxTGBhPmqQAAAAACAAAAAAAQZgAAAAEAACAAAACUKRJbGwYlJ0kaCq9egPgO1xYtZ1casuwJU4jTpPUxAAAAAAAOgAAAAAIAACAAAACc3hd09ZKITzXJabticdT5/4KkAaRjiQqe7ZfWZJ6JNDAAAADS7kt+S3ekdfm8KHAzm1he9/Q/WDR+beP2t1OnAV25UyvZlB61ns81dzcZMhzZSDJAAAAAROQdM/qyUgtX2rAx4JXmkRtWnmV8reboLbDS693nmwyFxwpn4wI9HzljAYmkfqpkchyQLkQlsx+RQgQFN7VD/A==</EncryptedPassword>
+    <_PublishTargetUrl>ftp://spectra.profound-group.com/</_PublishTargetUrl>
+    <History>True|2024-10-15T09:40:10.6484411Z||;False|2024-10-15T12:39:29.5804128+03:00||;True|2024-10-15T11:40:08.1471844+03:00||;True|2024-10-13T23:43:00.5093500+03:00||;False|2024-10-13T23:42:34.4210617+03:00||;True|2024-10-13T23:32:49.6166735+03:00||;False|2024-10-13T23:32:09.2844805+03:00||;True|2024-10-13T23:28:13.8858615+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>10/15/2024 11:37:51</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>10/12/2024 17:20:32</publishTime>
+    </File>
+    <File Include="appsettings.Production.json">
+      <publishTime>10/15/2024 11:38:08</publishTime>
+    </File>
+    <File Include="AWSSDK.Core.dll">
+      <publishTime>11/09/2022 18:47:34</publishTime>
+    </File>
+    <File Include="AWSSDK.SecurityToken.dll">
+      <publishTime>11/09/2022 18:47:36</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/.eslintrc.json">
+      <publishTime>10/12/2024 17:20:32</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/jsconfig.json">
+      <publishTime>10/12/2024 17:20:32</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/messages/ar.json">
+      <publishTime>10/12/2024 17:20:33</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/messages/en.json">
+      <publishTime>10/12/2024 17:20:33</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/package-lock.json">
+      <publishTime>10/12/2024 17:21:21</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/package.json">
+      <publishTime>10/12/2024 17:21:21</publishTime>
+    </File>
+    <File Include="ClientApp/spectra-client/src/components/menuActions.json">
+      <publishTime>10/12/2024 16:51:30</publishTime>
+    </File>
+    <File Include="DnsClient.dll">
+      <publishTime>06/10/2022 22:37:22</publishTime>
+    </File>
+    <File Include="DocumentFormat.OpenXml.dll">
+      <publishTime>07/30/2024 23:26:40</publishTime>
+    </File>
+    <File Include="DocumentFormat.OpenXml.Framework.dll">
+      <publishTime>07/30/2024 23:26:40</publishTime>
+    </File>
+    <File Include="EPPlus.dll">
+      <publishTime>08/20/2024 13:45:00</publishTime>
+    </File>
+    <File Include="EPPlus.Interfaces.dll">
+      <publishTime>11/21/2022 14:51:04</publishTime>
+    </File>
+    <File Include="EPPlus.System.Drawing.dll">
+      <publishTime>11/21/2022 14:51:06</publishTime>
+    </File>
+    <File Include="FluentValidation.DependencyInjectionExtensions.dll">
+      <publishTime>04/23/2024 14:28:34</publishTime>
+    </File>
+    <File Include="FluentValidation.dll">
+      <publishTime>04/23/2024 14:28:34</publishTime>
+    </File>
+    <File Include="Flurl.dll">
+      <publishTime>12/14/2023 00:42:06</publishTime>
+    </File>
+    <File Include="Flurl.Http.dll">
+      <publishTime>01/17/2024 23:17:38</publishTime>
+    </File>
+    <File Include="IdentityModel.AspNetCore.OAuth2Introspection.dll">
+      <publishTime>09/25/2019 16:38:40</publishTime>
+    </File>
+    <File Include="IdentityModel.dll">
+      <publishTime>08/30/2019 09:05:36</publishTime>
+    </File>
+    <File Include="IdentityServer4.AccessTokenValidation.dll">
+      <publishTime>09/25/2019 16:52:28</publishTime>
+    </File>
+    <File Include="JsonConverter.Abstractions.dll">
+      <publishTime>12/21/2023 18:50:56</publishTime>
+    </File>
+    <File Include="JsonConverter.Newtonsoft.Json.dll">
+      <publishTime>12/21/2023 18:50:58</publishTime>
+    </File>
+    <File Include="MediatR.Contracts.dll">
+      <publishTime>02/22/2023 20:48:20</publishTime>
+    </File>
+    <File Include="MediatR.dll">
+      <publishTime>11/17/2023 18:23:20</publishTime>
+    </File>
+    <File Include="MediatR.Extensions.Microsoft.DependencyInjection.dll">
+      <publishTime>09/30/2022 11:42:50</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Authentication.JwtBearer.dll">
+      <publishTime>07/20/2024 01:51:56</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Cryptography.Internal.dll">
+      <publishTime>07/20/2024 01:50:08</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Cryptography.KeyDerivation.dll">
+      <publishTime>07/20/2024 01:50:12</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.DataProtection.Abstractions.dll">
+      <publishTime>07/20/2024 01:49:58</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.DataProtection.dll">
+      <publishTime>07/20/2024 01:50:24</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.dll">
+      <publishTime>07/20/2024 01:50:34</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll">
+      <publishTime>07/20/2024 01:51:18</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll">
+      <publishTime>07/20/2024 01:51:24</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.JsonPatch.dll">
+      <publishTime>05/20/2024 07:23:52</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll">
+      <publishTime>05/20/2024 07:26:28</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>07/18/2024 00:12:16</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>07/18/2024 00:12:52</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>07/18/2024 00:13:10</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>02/15/2024 01:51:40</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyModel.dll">
+      <publishTime>06/13/2024 22:36:04</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Identity.Core.dll">
+      <publishTime>07/20/2024 01:50:36</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Identity.Stores.dll">
+      <publishTime>07/20/2024 01:51:22</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>02/15/2024 01:51:52</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Options.dll">
+      <publishTime>01/18/2024 05:05:26</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Abstractions.dll">
+      <publishTime>11/21/2023 03:54:14</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>11/21/2023 03:11:54</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>11/21/2023 03:14:30</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>11/21/2023 03:17:02</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>11/21/2023 03:30:36</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>11/21/2023 03:23:16</publishTime>
+    </File>
+    <File Include="Microsoft.IO.RecyclableMemoryStream.dll">
+      <publishTime>12/11/2023 23:53:28</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>03/06/2024 18:00:56</publishTime>
+    </File>
+    <File Include="Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/18/2022 18:16:52</publishTime>
+    </File>
+    <File Include="MongoDB.Bson.dll">
+      <publishTime>07/23/2024 22:38:42</publishTime>
+    </File>
+    <File Include="MongoDB.Driver.Core.dll">
+      <publishTime>04/12/2024 23:25:32</publishTime>
+    </File>
+    <File Include="MongoDB.Driver.dll">
+      <publishTime>04/12/2024 23:25:42</publishTime>
+    </File>
+    <File Include="MongoDB.EntityFrameworkCore.dll">
+      <publishTime>05/13/2024 21:55:56</publishTime>
+    </File>
+    <File Include="MongoDB.Libmongocrypt.dll">
+      <publishTime>01/30/2024 18:12:16</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.Bson.dll">
+      <publishTime>11/28/2018 01:10:18</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 09:09:54</publishTime>
+    </File>
+    <File Include="Npgsql.dll">
+      <publishTime>09/10/2024 18:17:14</publishTime>
+    </File>
+    <File Include="Npgsql.EntityFrameworkCore.PostgreSQL.dll">
+      <publishTime>09/27/2024 10:25:58</publishTime>
+    </File>
+    <File Include="runtimes/linux/native/libmongocrypt.so">
+      <publishTime>01/03/2024 16:59:42</publishTime>
+    </File>
+    <File Include="runtimes/osx/native/libmongocrypt.dylib">
+      <publishTime>01/03/2024 17:00:02</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/18/2022 18:17:28</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net7.0/System.Drawing.Common.dll">
+      <publishTime>10/18/2022 18:17:44</publishTime>
+    </File>
+    <File Include="runtimes/win/native/mongocrypt.dll">
+      <publishTime>01/03/2024 16:58:30</publishTime>
+    </File>
+    <File Include="Serilog.AspNetCore.dll">
+      <publishTime>01/19/2024 05:32:34</publishTime>
+    </File>
+    <File Include="Serilog.dll">
+      <publishTime>11/10/2023 14:41:54</publishTime>
+    </File>
+    <File Include="Serilog.Extensions.Hosting.dll">
+      <publishTime>11/15/2023 04:04:28</publishTime>
+    </File>
+    <File Include="Serilog.Extensions.Logging.dll">
+      <publishTime>11/15/2023 00:47:46</publishTime>
+    </File>
+    <File Include="Serilog.Formatting.Compact.dll">
+      <publishTime>11/09/2023 08:54:56</publishTime>
+    </File>
+    <File Include="Serilog.Settings.Configuration.dll">
+      <publishTime>11/15/2023 03:17:44</publishTime>
+    </File>
+    <File Include="Serilog.Sinks.Console.dll">
+      <publishTime>11/09/2023 08:50:30</publishTime>
+    </File>
+    <File Include="Serilog.Sinks.Debug.dll">
+      <publishTime>02/14/2021 09:47:26</publishTime>
+    </File>
+    <File Include="Serilog.Sinks.File.dll">
+      <publishTime>06/25/2021 10:00:48</publishTime>
+    </File>
+    <File Include="SharpCompress.dll">
+      <publishTime>11/22/2021 11:21:32</publishTime>
+    </File>
+    <File Include="Snappier.dll">
+      <publishTime>01/23/2021 19:43:32</publishTime>
+    </File>
+    <File Include="Spectra.Application.dll">
+      <publishTime>10/13/2024 23:22:06</publishTime>
+    </File>
+    <File Include="Spectra.Application.pdb">
+      <publishTime>10/13/2024 23:22:06</publishTime>
+    </File>
+    <File Include="Spectra.Domain.dll">
+      <publishTime>10/13/2024 23:22:05</publishTime>
+    </File>
+    <File Include="Spectra.Domain.pdb">
+      <publishTime>10/13/2024 23:22:05</publishTime>
+    </File>
+    <File Include="Spectra.Domain.Shared.dll">
+      <publishTime>10/13/2024 23:22:04</publishTime>
+    </File>
+    <File Include="Spectra.Domain.Shared.pdb">
+      <publishTime>10/13/2024 23:22:04</publishTime>
+    </File>
+    <File Include="Spectra.Infrastructure.dll">
+      <publishTime>10/13/2024 23:22:07</publishTime>
+    </File>
+    <File Include="Spectra.Infrastructure.pdb">
+      <publishTime>10/13/2024 23:22:07</publishTime>
+    </File>
+    <File Include="Spectra.Web.deps.json">
+      <publishTime>10/15/2024 12:39:48</publishTime>
+    </File>
+    <File Include="Spectra.Web.dll">
+      <publishTime>10/15/2024 12:39:47</publishTime>
+    </File>
+    <File Include="Spectra.Web.exe">
+      <publishTime>10/15/2024 12:39:47</publishTime>
+    </File>
+    <File Include="Spectra.Web.pdb">
+      <publishTime>10/15/2024 12:39:47</publishTime>
+    </File>
+    <File Include="Spectra.Web.runtimeconfig.json">
+      <publishTime>10/13/2024 23:22:09</publishTime>
+    </File>
+    <File Include="Spectra.WebAPI.dll">
+      <publishTime>10/13/2024 23:22:07</publishTime>
+    </File>
+    <File Include="Spectra.WebAPI.pdb">
+      <publishTime>10/13/2024 23:22:07</publishTime>
+    </File>
+    <File Include="SpectraApiDocs.xml">
+      <publishTime>10/15/2024 12:39:47</publishTime>
+    </File>
+    <File Include="Stef.Validation.dll">
+      <publishTime>10/22/2022 11:15:30</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>05/21/2024 19:42:50</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>05/21/2024 19:42:58</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>05/21/2024 19:42:50</publishTime>
+    </File>
+    <File Include="System.Drawing.Common.dll">
+      <publishTime>10/18/2022 18:17:04</publishTime>
+    </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>11/21/2023 03:10:00</publishTime>
+    </File>
+    <File Include="System.IO.Packaging.dll">
+      <publishTime>10/31/2023 16:59:14</publishTime>
+    </File>
+    <File Include="System.Net.WebSockets.WebSocketProtocol.dll">
+      <publishTime>06/06/2018 15:29:04</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.Xml.dll">
+      <publishTime>04/17/2024 00:20:28</publishTime>
+    </File>
+    <File Include="Ulid.dll">
+      <publishTime>07/30/2024 13:50:02</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>10/15/2024 12:39:49</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/Image/Drugs/b436230a-1472-46ee-a200-7c643f5d4e3d_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/bf4829b1-f9aa-4c36-8d65-38e93221aea1_امتحان رقم 2 علي الحصة الاولي للمجتمع الفرنسي.pdf">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/d6090a68-776f-43cd-a791-4f245746a8a8_test2.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Doctors/3542b5a7-39af-4d3d-b556-80537dae9789_test2.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Doctors/60d0ea4b-adc8-4c79-b9f6-63b18c7272c8_test2.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/4c06c29d-1334-4b87-80be-7820d7ca6a7e_امتحان رقم 2 علي الحصة الاولي للمجتمع الفرنسي.pdf">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/0439b378-a9de-4ea5-a834-8218ec41f65b.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/35d6768e-1b47-4bcb-a67b-af0567ae3745_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/4e748b38-4bfa-4275-be6f-52b222ebaaaa_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/53ba8c89-9e71-4ee5-9502-328d6f7482fe_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/6b9cc073-372c-40f3-88b9-1186ef7ac3c8_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/77193acf-e3ef-4e97-b202-4223cf27e255_نموذج اجابة امتحان 2 علي الحصة الاولي للمجتمع الفرنسي.pdf">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/8030a3b5-c0eb-4630-9592-73df77b813c8_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/82ecd275-2b31-4819-a8d2-04789839d864_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/9801e344-5ae1-4180-aa48-953291733936.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/9b8f4082-0418-442e-89c7-580e1d2e75c4_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/a382bd4a-5a1e-429c-8ceb-18881618fa5e_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/a4c6e7c2-734a-443f-b76f-933536f8a79b_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/f1db93d1-355a-43ff-b22b-63373bbdca76_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/f2b189d8-692a-4cef-8ee6-4c36792b426a_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/f8b2c80c-5014-40ce-aad2-776c8847658c_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/feeb1472-4e3c-4364-9125-22d1869ec2e9_test.jpg">
+      <publishTime>10/12/2024 17:20:19</publishTime>
+    </File>
+    <File Include="ZstdSharp.dll">
+      <publishTime>10/18/2023 19:06:06</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
