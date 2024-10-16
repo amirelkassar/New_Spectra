@@ -77,6 +77,78 @@ export const MedicalTeamData = [
     avatar: '',
     cost: 120,
   },
+  {
+    id: '6',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 9.5,
+    avatar: '',
+    cost: 100,
+  },
+  {
+    id: '7',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 8.5,
+    avatar: '',
+    cost: 80,
+  },
+  {
+    id: '8',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 9.5,
+    avatar: '',
+    cost: 100,
+  },
+  {
+    id: '9',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 8.5,
+    avatar: '',
+    cost: 80,
+  },
+  {
+    id: '10',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 9.5,
+    avatar: '',
+    cost: 100,
+  },
+  {
+    id: '11',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 8.5,
+    avatar: '',
+    cost: 80,
+  },
+  {
+    id: '12',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 9.5,
+    avatar: '',
+    cost: 100,
+  },
+  {
+    id: '13',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 8.5,
+    avatar: '',
+    cost: 80,
+  },
+  {
+    id: '14',
+    doctor: 'احمد محمد كمال',
+    profession: 'اخصائى نفسي',
+    rate: 9.5,
+    avatar: '',
+    cost: 100,
+  },
 ];
 
 export const ClientsData = [
@@ -379,20 +451,17 @@ export const storiesData = [
         {
           id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
           id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
           id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -419,22 +488,19 @@ export const storiesData = [
       ],
       cureMethod: [
         {
-          id: '1',
+          id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
-          id: '2',
+          id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
-          id: '3',
+          id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -451,7 +517,6 @@ export const storiesData = [
     childName: 'حلا محمد العانزي',
     daignosis: 'اضطراب طيف التوحد',
     image: '/demo-baby-3.png',
-
     story: {
       description:
         'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
@@ -462,22 +527,19 @@ export const storiesData = [
       ],
       cureMethod: [
         {
-          id: '1',
+          id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
-          id: '2',
+          id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
-          id: '3',
+          id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -493,8 +555,7 @@ export const storiesData = [
     id: 'story-4',
     childName: 'حلا محمد العانزي',
     daignosis: 'اضطراب طيف التوحد',
-    image:
-      'https://s3-alpha-sig.figma.com/img/20cb/48fd/6de565a9eca735dac8000b04c6c22c0c?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YlycV9LxfCaK3Yvl6qs-CQ7FvImTCE7glC5jkubXDuCNTAPer3irSjBEmQb49X2mGA1oWChtdV5-vd3yYoBMN~88ySH6BDlzdsHaKAKby2Nt9CoM~T1TYgLH37LJzy1Hge2xERpatZ9XZfPuc6CIOFoxjyPFx3CjIQD654n5MZi4wSceHk7UUFTGsjWPtdap8DQTDmXTyMk7GUoo7ZGgcfy67C9dRpnIALhsDY4mzG8czhmpBcQUF2djRoRZiYTnirIiRTDktie-SY91HP9c2PMU~DPHLUzNP6~YOX6hxBHESm1S7ULgdVyHKSFJRqv47KQsjtQrrgFgLZRGf8rStg__',
+    image: '/demo-baby-1.png',
     story: {
       description:
         'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
@@ -505,22 +566,19 @@ export const storiesData = [
       ],
       cureMethod: [
         {
-          id: '1',
+          id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
-          id: '2',
+          id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
-          id: '3',
+          id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -536,8 +594,7 @@ export const storiesData = [
     id: 'story-5',
     childName: 'حلا محمد العانزي',
     daignosis: 'اضطراب طيف التوحد',
-    image:
-      'https://s3-alpha-sig.figma.com/img/6d9b/594e/00075896c0a7cba9c1ac0866293ec93b?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiT15ThXi7CPqNbpH0AgwgxFIFWATYthv8gRFYeL6Fhk17kDjV2qvtw4Q7bRfrIXDmfWkxYvLTdQhMrILH1230H5Ka9X105RSODSaTuuvQJyc3Fq-Elw4RAS9TXYIv6iu6BIYBUayXpu2MrKUxP~PkhC7MDKh3LzQaHTcSkTzLYBzsqO5HPMNAWX9fMWEwi9nqhh8BepKelNY0ehedToIH7c7KTAhB48HpTiUyi2Gb~UaK8XrrK6sya8yZl~wZhvObYWfEXquV9PgoKnYGVKisN06sbTC~AHqjd~N7~n~jL1nB0H5W6gsUodn9uZDA9ALSAY224enLcUAK-z-SA8vQ__',
+    image: '/demo-baby-2.png',
     story: {
       description:
         'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
@@ -548,22 +605,19 @@ export const storiesData = [
       ],
       cureMethod: [
         {
-          id: '1',
+          id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
-          id: '2',
+          id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
-          id: '3',
+          id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -579,8 +633,7 @@ export const storiesData = [
     id: 'story-6',
     childName: 'حلا محمد العانزي',
     daignosis: 'اضطراب طيف التوحد',
-    image:
-      'https://s3-alpha-sig.figma.com/img/b354/cc9d/8b891f91393d57cf404798b3b490d2bb?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CpKnRuKSHLd-e0EXbsT8dea29kwkMvY6Cmb-o3scVn9dLGp6Pr1-iAPeke~422CwnFex1IuBTv9s23PqQtFGlC2jY2jwLQOIv6JgAYXGv-KM5LCLB9q8Rx~SQCJnAaWYgoU1UgEhm58Zfkxf1v52zDy10DcudsE9ef8PTguylT7VEkL36wunRvgX0bv2P5Xhanur8NQjNufSFHco5gqtI0coWcH6fSkd03AOtHy~E~dE1DCah98hcwOqa0kRDzgAllr47VbvMyYRONDNBI7X44RTR~HHhBYCjs6TmB7PPDFbfZj4-EqBN1Tgi7wVrmTCFRfvixgDmIX7ll3XPbRkpA__',
+    image: '/demo-baby-3.png',
     story: {
       description:
         'اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب في حدوث مشكلات في التفاعل والتواصل الاجتماعي.',
@@ -591,22 +644,19 @@ export const storiesData = [
       ],
       cureMethod: [
         {
-          id: '1',
+          id: '01',
           text: 'العلاجات التربوية. غالبًا ما يستجيب الأطفال المصابون باضطراب طيف التوحد جيدًا للبرامج التربوية التي تتميز بدرجة عالية من التنظيم.',
-          image:
-            'https://s3-alpha-sig.figma.com/img/9535/4ac3/f4f7add68ba594ecf2c04fc438e0317b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ntt72hlgv711YSQvEoF~JWthX8q09tOjCKvboXHU91SzpwsPbXqZhhUvQS95PcmM73Ks8nijc~XVhvOZqdrniUecSHHfYByjb5m10TptwfqqKX50xs0aBOSuh~PTbyHxNLOVcH5cDWUJJSVd2HyIBl3ilLfI7GMsb~Ex1KjaBOdrfOPz0GNwspri05oAXNoft8PELbnGKfNpK2SyuCdvTgw6iNDra9-0lS7GuLBrJrkHwkNAl1ZoH25iqDGz9LN1yKTlu3CupvfgRxjDpwK3YoCK5fsP6yzvEfqLSRF1-58fQuX78xQogFmwEthHgN8T~k9kPbLN9jhxH68JTsXbxQ__',
+          image: '/demo-baby-6.png',
         },
         {
-          id: '2',
+          id: '02',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/93f4/2043/2ef5d95bcfb118176eef90016afd687b?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZbNRIoKCvOprB2TrPIyCDqZ988c81Ei3y7mCqEtdW9eR4SwqUmtCKcyBse9QXexoDB6ConHMx1~7jdFNxr5RpYMVXL1HIaO5p9bOjYug-qD7BGzDrADB4Se~z6UJlL~s0uWYH-C9~b1j0-Zb4NDZEmdM~NZFzYeDy4f9Obszn--L987phUfH5oQxgUE--3VguM0FYSARla0ll51dsHrwcyNAixXk5WdG71BYf9~nt-nWhfsY9qbcFWK3Um7a2UjHkYbeTJm9ILkD-IbBZ7Jg~ELkBU3hApEm8zf2JenKdAIN1Rp9s~7OYCxvmU-woJ298CsZgbLanoFz70WCpWeV0w__',
+          image: '/demo-baby-7.png',
         },
         {
-          id: '3',
+          id: '03',
           text: 'العلاج الأسري. يتعلم الآباء وأفراد الأسرة الآخرون كيفية اللعب والتفاعل مع أطفالهم المرضى بطرق تحفز المهارات الاجتماعية وتعالج المشكلات السلوكية',
-          image:
-            'https://s3-alpha-sig.figma.com/img/2f47/a613/6eaff050bcad70a55ae0471f745a9bd4?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QVyWvGQyUUHf3bFLjKlgZwZl4ZAYgKH5Vye77OCxDWu~xB1hpZ5-jUl71Ep69y80l~qLF3y7u2aDGWFYDzDlfTx2bzIBz4-34rzZZdI9gomXT8BlcZsouM9kMPMhHoKkm6AKTpiMlh6wOHFcTDQrQbNP5jTQffS8fFn6ZORob7WrF65QoJjg0ObMw5QtfUmJSD4JOK3Y~zqOpP~qVakO8q2FlyBSJ09YML75RQ1l5dYMuju6DztDQ9FuGWflgIvn9JhyHlYExNpoGxxstYUUic78CGBnXBpKrWWlmKir-KtVGu9sMwQm1pnMHKaP4GB-GmxspMiD8enDSqymmW3DHQ__',
+          image: '/demo-baby-8.png',
         },
       ],
       afterTreatment: [
@@ -626,8 +676,7 @@ export const ARTICLES = [
     type: ['general', 'psychology'],
     title:
       'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
-    poster:
-      'https://s3-alpha-sig.figma.com/img/a3bd/bb3a/4547df8e70f54ab7187d82409932f6f1?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=atRWt7WGhF7Jeie0jS9Xyr~pXpHUTSrPJuiuL7eq8B1nmC7m3eyJ29AW6n4IRngPeIZRcr-BPU3nxesGVW4iQy2ha9~t2EmXgNjkWX6lTr7V9FzRdj7Ib38aEJNkvw3Y420lhC9I7LWrBR18nLZ9zxV~S2hVDFBXOUc3ULNgoCc~BPurMaKRxHPIpzZvSUyYd838QrJXPjTyNZvSUvFgPSSKGv2YE7SFQBolwB2uEeRdyJE0VacEMttBsmAUe98prQCwrgDnpiGqgsaJ5PIzrSmktWNWm-XKDMuTA~gwzWe0kyY12VEAKL91zYuV3T0uVkvxCerGQtToaHErhQb41Q__',
+    poster: '/demo-blog-1.webp',
     writer: 'د/ايمان',
     date: '12/08/2024',
     mainContent:
@@ -639,8 +688,7 @@ export const ARTICLES = [
     content: [
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        image: '/demo-blog-1.webp',
         paragraphs: [
           'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
           'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
@@ -649,7 +697,7 @@ export const ARTICLES = [
       {
         title:
           'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
-        image: '',
+        image: '/demo-blog-1.webp',
         paragraphs: [
           'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
           'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
@@ -657,8 +705,7 @@ export const ARTICLES = [
       },
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        image: '/demo-blog-1.webp',
         paragraphs: [
           'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
         ],
@@ -670,8 +717,7 @@ export const ARTICLES = [
     type: ['general', 'meetings', 'counseling'],
     title:
       'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
-    poster:
-      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    poster: '/demo-blog-2.webp',
     writer: 'د/ايمان',
     date: '12/08/2024',
     mainContent:
@@ -683,8 +729,7 @@ export const ARTICLES = [
     content: [
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        image: '/demo-blog-2.webp',
         paragraphs: [
           'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
           'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
@@ -693,7 +738,7 @@ export const ARTICLES = [
       {
         title:
           'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
-        image: '',
+        image: '/demo-blog-2.webp',
         paragraphs: [
           'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
           'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
@@ -701,8 +746,7 @@ export const ARTICLES = [
       },
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        image: '/demo-blog-2.webp',
         paragraphs: [
           'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
         ],
@@ -714,8 +758,7 @@ export const ARTICLES = [
     type: ['general', 'autism'],
     title:
       'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
-    poster:
-      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    poster: '/demo-blog-3.webp',
     writer: 'د/ايمان',
     date: '12/08/2024',
     mainContent:
@@ -727,8 +770,7 @@ export const ARTICLES = [
     content: [
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        image: '/demo-blog-3.webp',
         paragraphs: [
           'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
           'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
@@ -737,7 +779,7 @@ export const ARTICLES = [
       {
         title:
           'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
-        image: '',
+        image: '/demo-blog-3.webp',
         paragraphs: [
           'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
           'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
@@ -745,8 +787,7 @@ export const ARTICLES = [
       },
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        image: '/demo-blog-3.webp',
         paragraphs: [
           'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
         ],
@@ -758,8 +799,7 @@ export const ARTICLES = [
     type: ['general', 'hyperactivity', 'awareness'],
     title:
       'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
-    poster:
-      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    poster: '/demo-blog-4.webp',
     writer: 'د/ايمان',
     date: '12/08/2024',
     mainContent:
@@ -771,8 +811,7 @@ export const ARTICLES = [
     content: [
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        image: '/demo-blog-4.webp',
         paragraphs: [
           'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
           'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
@@ -781,7 +820,7 @@ export const ARTICLES = [
       {
         title:
           'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
-        image: '',
+        image: '/demo-blog-4.webp',
         paragraphs: [
           'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
           'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
@@ -789,8 +828,7 @@ export const ARTICLES = [
       },
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        image: '/demo-blog-4.webp',
         paragraphs: [
           'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
         ],
@@ -802,8 +840,7 @@ export const ARTICLES = [
     type: ['general', 'family-relationships'],
     title:
       'المشاكل المجتمعية والأسرية التي تواجه مصابي (ADHD)',
-    poster:
-      'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+    poster: '/demo-blog-5.webp',
     writer: 'د/ايمان',
     date: '12/08/2024',
     mainContent:
@@ -815,8 +852,7 @@ export const ARTICLES = [
     content: [
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/9ab8/9d0e/752690a20812d6ba1adf8019fc223439?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fYmfk31iOKUkWADa6rL~~GOf8GC6RMW~p1ZHT-9oM7bA8MoDW77cYvr-SQJtk2pG0KO5ExwGsVOASuo-AIa8~WGGLRInS69ZwE44~L4pYBXL0zyK-6YDFFFsEgFmfRA37~4BIBueQ0P-uAtHZilB2-3sfKrl3fR25MeSCz-BpYSxvYDQIL6SEBJee5bYIEXvx3pLOWCqNuDPzIIoT1Z8TZqKHs7QGwOWxUlxRS3vTUcNQZVdiCV~B~YF4pCVkeAsYKw8~tPIA7wT4-p7Gt1JgjsSVZmwrzfEVvx1ZIMhaAstPIpQ2M8h2z~OjDe-diEewP1IXu90DE10x~yjtB8lig__',
+        image: '/demo-blog-5.webp',
         paragraphs: [
           'الإدمان ما هو الا وسيلة أخرى للمدمن للتكيف والتعامل مع معاناته الناتجة عن الأعراض والاضطرابات الأخرى المصاحبة لاضطراب فرط الحركة ونقص الانتباه (ADHD)، مثل ضعف التركيز، فرط الحركة، القلق، الاكتئاب، إضرابات التعلم والسلوك وغيرها الكثير،',
           'يعد اضطراب نقص الانتباه وفرط النشاط (ADHD) أحد أكثر اضطرابات النمو العصبي شيوعًا والأكثر دراسة لدى الأطفال: اكتشف العلماء أن هناك اختلافات في الأدمغة والشبكات العصبية والناقلات العصبية لدى المصابين بهذا الاضطراب. عد حالة دماغية طويلة الأمد (مزمنة) تسبب خللًا تنفيذيًا، مما يعني أنها تعطل قدرة الشخص على إدارة عواطفه وأفكاره وأفعاله. يجعل الاضطراب من الصعب على الأشخاص إدارة سلوكهم أو الانتباه أو السيطرة على النشاط الزائد أو تنظيم مزاجهم. أو اتباع التوجيهات. عادةً ما يتم تشخيص الأطفال أثناء مرحلة الطفولة، وغالبًا ما تستمر الحالة حتى مرحلة البلوغ. يعد العلاج الفعال متاح، وإذا تُرك اضطراب فرط الحركة ونقص الانتباه دون علاج، فيمكن أن يسبب مضاعفات خطيرة مدى الحياة.',
@@ -825,7 +861,7 @@ export const ARTICLES = [
       {
         title:
           'يتم تشخيص معظم الحالات عند الأطفال بعمر أقل من 12 عامًا، ولكن في بعض الأحيان يتم تشخيصها لاحقًا في مرحلة الطفولة.',
-        image: '',
+        image: '/demo-blog-5.webp',
         paragraphs: [
           'على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب.',
           'يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
@@ -833,8 +869,7 @@ export const ARTICLES = [
       },
       {
         title: '',
-        image:
-          'https://s3-alpha-sig.figma.com/img/5015/475f/a4b94faf6012d6cbed8ed793bcfb1060?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C62zGrx1qCkgGBbmYoG4ZV9JqDYtX5I3OEaDBI35BbQh1EAJLgReWf5PZ1RdSF0G3Zvv20hwWfWzvIp7-sY80bXwE4KyKwOR9lOazFXW54ccMJRAjnJzx5mIIvF1yqkEV3FSFfN85rAqrYZrgX9vm-ydhKoGV4ttlgUghQI7X7127iOytvBPy8bbj~N19c~HDc~eLcj440kHCM~ERDB-PZMxzq4-N3H-TZCDlJVUI0xjYNJWvKtDawTl7pI0YiU0ihHZ1yj1hO4mRmS63Wz2V1NsosXszTC-zMZZDun~GU1afMDD3u7cZ38jf3s6dIU56dnr0dt-wPf42dF5kbpJMQ__',
+        image: '/demo-blog-5.webp',
         paragraphs: [
           'لا يوجد اختبار محدد لتشخيص الاضطراب ولكن من المرجح أن يتضمن التشخيص ما يلي: الفحص الطبي: للمساعدة في استبعاد الأسباب المحتملة الأخرى للأعراض. جمع المعلومات: مثل أي مشاكل طبية حالية والتاريخ الطبي الشخصي والعائلي والسجلات المدرسية المقابلات أو الاستبيانات لأفراد الأسرة أو غيرهم من الأشخاص الذين يعرفون المريض جيدًا. المعايير: معايير اضطراب فرط الحركة ونقص الانتباه من الدليل التشخيصي والإحصائي للاضطرابات النفسية DSM-5. كيف يتم تشخيص الاضطراب عند الأطفال الصغار؟ على الرغم من أن علامات الاضطراب يمكن أن تظهر أحيانًا عند الأطفال في مرحلة ما قبل المدرسة أو حتى الأطفال الأصغر سنًا، إلا أن تشخيص الاضطراب عند الأطفال الصغار جدًا أمر صعب. يعزى ذلك إلى أن مشكلات النمو مثل تأخر اللغة يمكن الخلط بينها وبين اضطراب فرط الحركة ونقص الانتباه. لذا، فإن الأطفال في سن ما قبل المدرسة أو الأصغر سنًا الذين يشتبه في إصابتهم بالاضطراب هم أكثر عرضة للتقييم من قبل متخصص.',
         ],

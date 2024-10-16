@@ -52,14 +52,17 @@ export const Article = ({ data = [] }) => {
                 alt='image'
                 width={900}
                 height={500}
-                className='w-full object-cover object-center'
+                className='w-full h-[436px] object-cover object-center'
                 priority
               />
             )}
 
             {c?.paragraphs.length > 0 &&
               c?.paragraphs?.map((p, j) => (
-                <p className='text-sm mdl:text-medium' key={j}>
+                <p
+                  className='text-sm mdl:text-medium'
+                  key={j}
+                >
                   {p}
                 </p>
               ))}

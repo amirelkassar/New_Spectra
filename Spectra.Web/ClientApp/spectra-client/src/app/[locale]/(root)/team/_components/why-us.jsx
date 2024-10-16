@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Section } from '../../_components/section';
 import CheckHeartIcon from '@/assets/icons/check-heart';
+import { cn } from '@/lib/utils';
 
 const whyUsData = [
   'السلامة هي أولويتنا',
@@ -10,9 +11,15 @@ const whyUsData = [
   'طاقم عمل خبير',
 ];
 
-export const WhyUs = () => {
+export const WhyUs = ({ className = '' }) => {
   return (
-    <div className='bg-blueLight'>
+    <div
+      style={{
+        clipPath:
+          'polygon(50% 0%, 100% 7%, 100% 100%, 0 100%, 0 7%)',
+      }}
+      className={cn('bg-blueLight', className)}
+    >
       <Section
         aria-label='Why Us'
         aria-labelledby='why-us'
@@ -20,18 +27,16 @@ export const WhyUs = () => {
         type='basic'
         heading='لماذا نحن'
       >
-        <div className='flex items-center gap-5'>
-          <div className='w-1/2 overflow-hidden'>
-            <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none overflow-hidden w-5/6 h-full'>
-              <Image
-                src='https://s3-alpha-sig.figma.com/img/391b/edf5/36786b690ef4a5d764b071431d2c58dd?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IXlBpEQrZXBz-PUud4a17X0vNaVuUZ-WMrNnfFvR~OR2HxtaXc~6zIuFnjyEzE0HMM3R~gEZv5tfeyq0SAOUj-WpTBT5~nkoMhcs0XsxkTLHsG6gZjDxxUaREPezMAEIzuEnFrNxOhA49UEZATuTvXrQ3ZIfW-EZWbzEWFdcBD7inUZ2oeLI0CiELGyMuYKEUwFHQcI1BhIHtG64KAT462pU4NH-5L1iOF2IoE3KJCu4KPGXUumVZLmrPuATKSGUdXCj7fmARlpM29diNHyx5ZXytxsaa-0SHnqCF8RbKa9A9daVKIibXoVsnouEeDKqL-cC6f0~bznXFhDnz0PC6g__'
-                alt='happy child'
-                width={908}
-                height={908}
-                priority={false}
-                className='w-full h-full object-cover object-center'
-              />
-            </div>
+        <div className='flex items-center gap-10'>
+          <div className='w-1/2 overflow-hidden flex justify-end'>
+            <Image
+              src='/demo-why-us.webp'
+              alt='happy child'
+              width={452}
+              height={439}
+              priority={false}
+              className='object-contain max-w-full max-h-full object-center'
+            />
           </div>
 
           <div className='w-1/2'>

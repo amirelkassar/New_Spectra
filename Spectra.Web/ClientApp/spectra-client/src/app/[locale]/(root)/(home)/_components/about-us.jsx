@@ -18,6 +18,10 @@ export const AboutUs = ({
 }) => {
   return (
     <div
+      style={{
+        clipPath:
+          'polygon(50% 0%, 100% 7%, 100% 100%, 0 100%, 0 7%)',
+      }}
       className={cn(
         'relative bg-blueLight overflow-hidden custom-clipPath-triangle-up',
         className
@@ -31,24 +35,22 @@ export const AboutUs = ({
       >
         <div
           className={cn(
-            'flex flex-col items-center gap-5 mdl:flex-row',
+            'flex flex-col items-center mdl:items-start gap-5 mdl:flex-row',
             containerClassName
           )}
         >
           <div className='flex-[0.35] relative overflow-hidden'>
-            <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none'>
-              <Image
-                src={AboutUsImg}
-                alt='about-us-img'
-                priority={false}
-                className='w-full h-full object-cover object-center'
-                width={414}
-                height={442}
-              />
-            </div>
+            <Image
+              src={'/demo-about-us.webp'}
+              alt='about-us-img'
+              priority={false}
+              className='max-w-full max-h-full object-contain object-center'
+              width={414}
+              height={442}
+            />
           </div>
 
-          <ul className='flex-[0.65] space-y-10'>
+          <ul className='flex-[0.65] space-y-14 mdl:mt-24'>
             {data.map((item) => (
               <li
                 key={item}

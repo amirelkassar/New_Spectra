@@ -41,7 +41,7 @@ const New = ({ badge = '', text = '', image = '' }) => {
   return (
     <div
       className='h-40 mdl:h-72 w-full rounded-lg bg-cover bg-center bg-no-repeat p-5'
-      style={{ backgroundImage: `url(${image})` }}
+      style={{ backgroundImage: `url(/${image})` }}
     >
       <div className='w-full h-full flex flex-col justify-end items-start gap-3'>
         <span className='bg-greenMain text-white rounded-lg text-sm mdl:text-medium px-2 py-1'>

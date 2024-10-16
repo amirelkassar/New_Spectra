@@ -38,7 +38,7 @@ export const MobileApp = () => {
           <div className='flex items-center justify-between'>
             <div className='mdl:size-32 size-14 rounded-2xl bg-white flex items-center justify-center overflow-hidden'>
               <Image
-                src='https://s3-alpha-sig.figma.com/img/dac5/f531/c89cb95d4a9de011538498aa7e9c5156?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A3Xw7RGaB2dPygrW1F2pQcpTDq~tHHD~V0JXn2fGlD0Gda4h7Hh5tzwxkDldBFCZiNqp4bsilYeXJ6Yj4kQnOi2M1QuwGdT~1z2qklej-Fl-t9kLlZ56~bttpvDZgwk3XYg2PfKKSNSaF~gvFp3RH7NHkn4x3NKB-IepP1FhFzEWHX9VofASMYAu2KxwiGco8azOb-MUpKahvF0w46dW9aJgf6EcqatAUOmppzd5fOga8uIm~W7-HulQOsEx0Pmd-5--1sWOFg8cZvu60mtGphfWfyhKu3Yojg42d0Il645GGjonivNOUuCLMhFkz6ZwJD8qONmhkr93ikvNEvg9~Q__'
+                src='/demo-qr-code.png'
                 alt='mobile app barcode'
                 width={112}
                 height={112}
