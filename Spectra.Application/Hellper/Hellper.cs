@@ -23,11 +23,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             if (attachments != null && attachments.Any())
             {
-                if (string.IsNullOrEmpty(_webHostEnvironment.WebRootPath))
-                {
-                    _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-                }
-
+ 
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
 
 
@@ -61,7 +57,7 @@ namespace Spectra.Application.MasterData.HellperFunc
         {
             if (!string.IsNullOrEmpty(attachment))
             {
-                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, attachment);
+                var filePath = _webHostEnvironment.WebRootPath + attachment;
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
@@ -80,7 +76,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             foreach (var attachmentPath in attachmentPaths)
             {
-                var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, attachmentPath);
+                var fullPath =_webHostEnvironment.WebRootPath + attachmentPath;
 
                 // Check if the file exists before attempting to delete it
                 if (File.Exists(fullPath))
