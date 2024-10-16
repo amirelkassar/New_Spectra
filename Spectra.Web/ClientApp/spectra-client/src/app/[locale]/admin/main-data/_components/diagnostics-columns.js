@@ -6,7 +6,7 @@ export const DiagnosticsColumns = [
     header: "الاسم ",
   },
   {
-    accessorKey: "code",
+    accessorKey: "code1",
     header: "الكود 1  ",
   },
   {

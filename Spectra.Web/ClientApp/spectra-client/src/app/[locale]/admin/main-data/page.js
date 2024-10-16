@@ -5,7 +5,7 @@ import { DrugsColumns } from "./_components/drugs-columns";
 import AddMainData from "./_components/add-drugs";
 import ROUTES from "@/routes";
 import { GetDrugs } from "@/useAPI/admin/main-data/drugs";
-import NoDataYet from "@/components/noDataYet";
+import HandelShowData from "@/components/handelShowData";
 
 function page() {
   const { data, isLoading } = GetDrugs();
@@ -19,15 +19,9 @@ function page() {
           path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
         />
       </div>
-      {!isLoading ? (
-        data?.data.data.length > 0 ? (
-          <DataTable data={data.data.data} columns={DrugsColumns} />
-        ) : (
-         <NoDataYet/>
-        )
-      ) : (
-        <p>isLoading</p>
-      )}
+      <HandelShowData isLoading={isLoading} lengthData={data?.data.data.length}>
+        <DataTable data={data?.data.data} columns={DrugsColumns} />
+      </HandelShowData>
     </div>
   );
 }

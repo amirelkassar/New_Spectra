@@ -2,15 +2,15 @@ import ActionMenu from "./ActionMenuSpecialties";
 
 export const SpecialtiesColumns = [
   {
-    accessorKey: "specialty",
+    accessorKey: "name",
     header: "التخصص",
   },
   {
-    accessorKey: "code",
+    accessorKey: "id",
     header: "كود التخصص",
   },
   {
-    accessorKey: "doctorsCount",
+    accessorKey: "doctorCount",
     header: "عدد الاطباء في هذا التخصص",
   },
   {

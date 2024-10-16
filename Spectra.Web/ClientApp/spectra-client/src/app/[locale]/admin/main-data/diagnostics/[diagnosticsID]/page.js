@@ -1,8 +1,13 @@
+"use client";
 import React from "react";
 import AddMainData from "../../_components/add-drugs";
 import ROUTES from "@/routes";
 import ActionMenu from "../../_components/ActionMenuDiagnosticsDetails";
+import { GetDiagnosticsID } from "@/useAPI/admin/main-data/diagnostics";
+import NoDataYet from "@/components/noDataYet";
+import HandelShowDataID from "@/components/handelShowDataID";
 function page({ params }) {
+  const { data, isLoading } = GetDiagnosticsID(params.diagnosticsID);
   return (
     <div>
       <div className="flex items-center justify-between gap-5 mb-10">
@@ -13,47 +18,54 @@ function page({ params }) {
             path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD}
           />
         </div>
-        <ActionMenu id={params.diagnosticsID}/>
+        <ActionMenu id={params.diagnosticsID} />
       </div>
-      <div className="flex flex-col gap-5">
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            الكود 1{" "}
-          </h3>
-          <p className="text-[14px] lg:text-[20px]  font-Regular">#12358 </p>
-        </div>
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            الكود 2{" "}
-          </h3>
-          <p className="text-[14px] lg:text-[20px]  font-Regular">#12358 </p>
-        </div>
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            الكود 3{" "}
-          </h3>
-          <p className="text-[14px] lg:text-[20px]  font-Regular">#12358 </p>
-        </div>
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">وصف </h3>
-          <p className="text-[12px]  lg:text-[16px] font-Regular">
-            اضطراب طيف التوحد عبارة عن حالة ترتبط بنمو الدماغ وتؤثر على كيفية
-            تمييز الشخص للآخرين والتعامل معهم على المستوى الاجتماعي، مما يتسبب
-            في حدوث مشكلات في التفاعل والتواصل الاجتماعي. كما يتضمن الاضطراب
-            أنماط محدودة ومتكررة من السلوك. يُشير مصطلح الطي في عبارة اضطراب طيف
-            التوحد إلى مجموعة كبيرة من الأعراض ومستويات الشدة. يتضمن اضطراب طيف
-            التوحد حالات كانت تعتبر منفصلة في السابق — التوحد، ومتلازمة أسبرجر،
-            واضطراب التحطم الطفولي وأحد الأشكال غير المحددة للاضطراب النمائي
-            الشامل. لا زال بعض الأفراد يستخدمون مصطلح متلازمة أسبرجر، والتي
-            يعتقد بوجه عام أنها تقع على الطرف المعتدل من اضطراب طيف التوحد. يبدأ
-            اضطراب طيف التوحد في مرحلة الطفولة المبكرة ويتسبب في نهاية المطاف في
-            حدوث مشكلات على مستوى الأداء الاجتماعي — على الصعيد الاجتماعي، في
-            المدرسة والعمل، على سبيل المثال. غالبًا ما تظهر أعراض التوحد على
-            الأطفال في غضون السنة الأولى. يحدث النمو بصورة طبيعية على ما يبدو
-            بالنسبة لعدد قليل من الأطفال في السنة الأول
-          </p>
-        </div>
-      </div>
+      <HandelShowDataID isLoading={isLoading} statusCode={data?.data.code}>
+        {data?.data.code === 200 && (
+          <div className="flex flex-col gap-5">
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                الكود 1{" "}
+              </h3>
+              <p className="text-[14px] lg:text-[20px]  font-Regular">
+                {data.data.data.code1}{" "}
+              </p>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                الكود 2{" "}
+              </h3>
+              <p className="text-[14px] lg:text-[20px]  font-Regular">
+                {data.data.data.code2}{" "}
+              </p>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                الكود 3{" "}
+              </h3>
+              <p className="text-[14px] lg:text-[20px]  font-Regular">
+                {data.data.data.code3}{" "}
+              </p>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                اسم التشخيص
+              </h3>
+              <p className="text-[14px] lg:text-[20px]  font-Regular">
+                {data.data.data.name}{" "}
+              </p>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                وصف{" "}
+              </h3>
+              <p className="text-[12px]  lg:text-[16px] font-Regular">
+                {data.data.data.description}
+              </p>
+            </div>
+          </div>
+        )}
+      </HandelShowDataID>
     </div>
   );
 }

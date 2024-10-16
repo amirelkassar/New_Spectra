@@ -8,19 +8,20 @@ import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
+import { DeleteDiagnostics } from "@/useAPI/admin/main-data/diagnostics";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
-
+  const { mutate: deleteDiagnostics, isLoading } = DeleteDiagnostics(id);
+  const handleDelete = () => {
+    deleteDiagnostics();
+  };
   const options = [
     {
       label: "مسح",
       icon: <DeleteIcon />,
       type: "btn",
-      action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
-      },
+      action: handleDelete,
       color: "red",
     },
     {

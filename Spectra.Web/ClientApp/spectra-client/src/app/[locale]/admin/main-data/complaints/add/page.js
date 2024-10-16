@@ -8,7 +8,7 @@ import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
 import { useCreateComplaint } from "@/useAPI/admin/main-data/complaints";
 function Page() {
-  const { mutate: createDrug } = useCreateComplaint();
+  const { mutate: CreateComplaint } = useCreateComplaint();
 
   const [formData, setFormData] = useState({
     complaintName: "",
@@ -24,7 +24,7 @@ function Page() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createDrug(formData);
+    CreateComplaint(formData);
   };
   return (
     <div>

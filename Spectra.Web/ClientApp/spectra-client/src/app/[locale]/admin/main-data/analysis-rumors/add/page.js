@@ -8,14 +8,16 @@ import BackIcon from "@/assets/icons/back";
 import AnalysisIcon from "@/assets/icons/analysis";
 import RumorsIcon from "@/assets/icons/rumors";
 import InputGreen from "@/components/Input-green";
+import { useCreateMedicalTests } from "@/useAPI/admin/main-data/analysis";
 function Page() {
   const [formData, setFormData] = useState({
-    arabicName: "",
+    scientificName: "",
     englishName: "",
     code: "",
     notes: "",
     examinationTypes: "1",
   });
+  const { mutate: createMedicalTests } = useCreateMedicalTests();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -31,7 +33,7 @@ function Page() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    createMedicalTests(formData);
   };
   return (
     <div>
@@ -102,8 +104,8 @@ function Page() {
             <InputGreen
               label={"الاسم العلمى  باللغة العربية  "}
               className="flex-1"
-              name="arabicName"
-              value={formData.arabicName}
+              name="scientificName"
+              value={formData.scientificName}
               onChange={handleChange}
             />
             <InputGreen

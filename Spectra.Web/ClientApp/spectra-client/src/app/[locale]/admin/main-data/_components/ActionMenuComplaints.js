@@ -12,9 +12,9 @@ import { DeleteComplaint } from "@/useAPI/admin/main-data/complaints";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
-  const { mutate: deleteDrug, isLoading } = DeleteComplaint(id);
+  const { mutate: deleteComplaint, isLoading } = DeleteComplaint(id);
   const handleDelete = () => {
-    deleteDrug();
+    deleteComplaint();
   }
   const options = [
     {

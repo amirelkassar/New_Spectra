@@ -7,6 +7,7 @@ import { GetComplaintID } from "@/useAPI/admin/main-data/complaints";
 import { Link } from "@/navigation";
 import BackIcon from "@/assets/icons/back";
 import NoDataYet from "@/components/noDataYet";
+import HandelShowDataID from "@/components/handelShowDataID";
 function page({ params }) {
   const { data, isLoading } = GetComplaintID(params.complaintsID);
   console.log(data?.data.data);
@@ -31,8 +32,9 @@ function page({ params }) {
         </div>
         <ActionMenu id={params.complaintsID} />
       </div>
-      {!isLoading ? (
-        data?.data.code === 200 ? (
+
+      <HandelShowDataID isLoading={isLoading} statusCode={data?.data.code}>
+        {data?.data.code === 200 && (
           <div className="flex flex-col gap-5">
             <div className="pb-5 border-b last-of-type:border-none border-grayLight">
               <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
@@ -52,19 +54,15 @@ function page({ params }) {
             </div>
             <div className="pb-5 border-b last-of-type:border-none border-grayLight">
               <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-              وصف الشكوى
+                وصف الشكوى
               </h3>
               <p className="text-[14px] lg:text-[20px]  font-Regular">
                 {data.data.data.descriptionOfTheComplaint}
               </p>
             </div>
           </div>
-        ) : (
-          <NoDataYet/>
-        )
-      ) : (
-        <p>IS LOADING</p>
-      )}
+        )}
+      </HandelShowDataID>
     </div>
   );
 }

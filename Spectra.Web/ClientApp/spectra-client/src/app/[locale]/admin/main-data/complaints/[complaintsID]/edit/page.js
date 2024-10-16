@@ -10,6 +10,7 @@ import {
   GetComplaintID,
   useEditComplaint,
 } from "@/useAPI/admin/main-data/complaints";
+import HandelShowDataEdit from "@/components/handelShowDataEdit";
 function Page({ params }) {
   const [formData, setFormData] = useState({
     complaintName: "",
@@ -17,9 +18,9 @@ function Page({ params }) {
     descriptionOfTheComplaint: "",
   });
   const { data, isLoading } = GetComplaintID(params.complaintsID);
-  const { mutate: createDrug } = useEditComplaint(formData?.id);
+  const { mutate: eEditComplaint } = useEditComplaint(formData?.id);
   useEffect(() => {
-    setFormData(data?.data.data);
+    data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
 
   const handleChange = (e) => {
@@ -31,7 +32,7 @@ function Page({ params }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createDrug(formData);
+    eEditComplaint(formData);
   };
   return (
     <div>
@@ -44,51 +45,49 @@ function Page({ params }) {
         </Link>
         <h2 className="headTitleDash">اضافة شكوى</h2>
       </div>
-      {!isLoading ? (
-        formData?.id ? (
-          <div>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
+      <HandelShowDataEdit isLoading={isLoading} isID={formData?.id}>
+        <div>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
+          >
+            <InputGreen
+              label="اسم الشكوى"
+              name="complaintName"
+              value={formData.complaintName}
+              onChange={handleChange}
+            />
+            <InputGreen
+              label="الكود"
+              name="code1"
+              value={formData.code1}
+              onChange={handleChange}
+            />
+            <Textarea
+              classNames={{
+                input:
+                  "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",
+                label: "text-[12px] md:text-[16px]",
+              }}
+              label="وصف الشكوى"
+              name="descriptionOfTheComplaint"
+              value={formData.descriptionOfTheComplaint}
+              onChange={handleChange}
+            />
+          </form>
+          <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
+            <Button
+              onClick={handleSubmit}
+              variant="secondary"
+              className={
+                "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
+              }
             >
-              <InputGreen
-                label="اسم الشكوى"
-                name="complaintName"
-                value={formData.complaintName}
-                onChange={handleChange}
-              />
-              <InputGreen
-                label="الكود"
-                name="code1"
-                value={formData.code1}
-                onChange={handleChange}
-              />
-              <Textarea
-                classNames={{
-                  input:
-                    "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",
-                  label: "text-[12px] md:text-[16px]",
-                }}
-                label="وصف الشكوى"
-                name="descriptionOfTheComplaint"
-                value={formData.descriptionOfTheComplaint}
-                onChange={handleChange}
-              />
-            </form>
-            <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
-              <Button
-                onClick={handleSubmit}
-                variant="secondary"
-                className={
-                  "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
-                }
-              >
-                حفظ
-              </Button>
-            </div>
+              حفظ
+            </Button>
           </div>
-        ) : null
-      ) : null}
+        </div>
+      </HandelShowDataEdit>
     </div>
   );
 }
