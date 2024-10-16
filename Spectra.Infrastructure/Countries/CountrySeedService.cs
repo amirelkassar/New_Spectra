@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Spectra.Application.Countries;
+using Spectra.Application.Countries.Cities;
 using Spectra.Application.Countries.SeedService;
-using Spectra.Domain.Countries.States;
+using Spectra.Application.Countries.States;
 using Spectra.Domain.Countries;
+using Spectra.Domain.Countries.Cities;
+using Spectra.Domain.Countries.States;
 using Spectra.Domain.Shared.OptionDtos;
 using System.Net.Http.Json;
-using Spectra.Application.Countries.States;
-using Spectra.Application.Countries.Cities;
-using Spectra.Domain.Countries.Cities;
 
 
 namespace Spectra.Infrastructure.Countries

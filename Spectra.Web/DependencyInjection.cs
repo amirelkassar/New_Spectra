@@ -32,7 +32,7 @@ namespace Spectra.Web
 
             if (_identityServerSetting != null)
             {
-                var webClient = _identityServerSetting.Clients.FirstOrDefault(c=>c.ClientId.Equals("spectra_web"));
+                var webClient = _identityServerSetting.Clients.FirstOrDefault(c => c.ClientId.Equals("spectra_web"));
                 services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                    .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
                    {

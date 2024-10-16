@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>E:\Profound\Clients\Spectra\App\SpectraWorkspace\Spectra.WebAPI\SpectraApiDocs.xml</DocumentationFile>
+    <DocumentationFile>..\Spectra.WebAPI\SpectraApiDocs.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Spectra.WebAPI\Spectra.WebAPI.csproj" />
+    <Folder Include="ClientApp\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Spectra.WebAPI\Spectra.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

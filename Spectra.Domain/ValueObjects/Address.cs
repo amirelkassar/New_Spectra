@@ -1,20 +1,16 @@
 ﻿using Spectra.Domain.Shared.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.ValueObjects
 {
-    public class Address : ValueObject
+    public sealed class Address : ValueObject
     {
         public string Country { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
-        public string StreetName { get; set; }
-        public string Building { get; set; }
-        public string PostalCode { get; set; }
+        public string? State { get; set; }
+        public string? StreetName { get; set; }
+        public string? Building { get; set; }
+        public string? PostalCode { get; set; }
         public string? Floor { get; set; }
         public string? CommonMark { get; set; }
 

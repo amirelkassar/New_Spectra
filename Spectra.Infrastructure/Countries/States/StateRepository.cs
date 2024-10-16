@@ -41,7 +41,7 @@ namespace Spectra.Infrastructure.Countries.States
 
         public async Task<State> GetByIdAsync(string id)
         {
-            return await _states.Find(s=>s.Id == id).FirstOrDefaultAsync();
+            return await _states.Find(s => s.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<State>> GetListAsync()

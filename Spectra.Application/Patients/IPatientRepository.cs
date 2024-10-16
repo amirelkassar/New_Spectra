@@ -1,6 +1,4 @@
 ﻿using Spectra.Domain.Patients;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Patients
 {

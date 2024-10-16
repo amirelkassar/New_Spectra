@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Domain.Countries.Cities;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
+using System;
 
 namespace Spectra.Domain.Countries.States
 {
     public class State : BaseEntity<string>
     {
-        public State(string id, string? stateCode, string countryId,string country) : base(id)
+        public State(string id, string? stateCode, string countryId, string country) : base(id)
         {
             ArgumentNullException.ThrowIfNull(countryId);
             ArgumentNullException.ThrowIfNull(country);

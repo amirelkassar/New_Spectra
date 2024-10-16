@@ -1,27 +1,34 @@
 ﻿using MediatR;
+using Spectra.Application.Clients;
+using Spectra.Domain.Clients;
+using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Patients;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Patients.Queries
 {
-    public class GetAllPatientsQuery : IRequest<IEnumerable<Patient>>
-	{
-	}
+    public class GetAllPatientsQuery : IRequest<OperationResult<IEnumerable<Patient>>>
+    {
+    }
 
-	public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, IEnumerable<Patient>>
-	{
-		private readonly IPatientRepository _patientRepository;
+    public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, OperationResult<IEnumerable<Patient>>>
+    {
+        private readonly IPatientRepository _patientRepository;
 
-		public GetAllPatientsQueryHandler(IPatientRepository patientRepository)
-		{
-			_patientRepository = patientRepository;
-		}
+        public GetAllPatientsQueryHandler(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
+        }
 
-		public async Task<IEnumerable<Patient>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
-		{
-			return await _patientRepository.GetAllAsync();
-		}
-	}
+        public async Task<OperationResult<IEnumerable<Patient>>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
+        {
+             await _patientRepository.GetAllAsync();
+
+          
+                var patient = await _patientRepository.GetAllAsync(); ;
+
+                return OperationResult<IEnumerable<Patient>>.Success(patient);
+          
+        }
+    }
 }

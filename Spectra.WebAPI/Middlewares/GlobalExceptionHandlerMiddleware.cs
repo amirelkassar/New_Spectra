@@ -1,33 +1,36 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Spectra.WebAPI.Middlewares
 {
     public class GlobalExceptionHandlerMiddleware
-	{
-		private readonly RequestDelegate _next;
+    {
+        private readonly RequestDelegate _next;
 
-		public GlobalExceptionHandlerMiddleware(RequestDelegate next)
-		{
-			_next = next;
-		}
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
 
-		public async Task InvokeAsync(HttpContext context)
-		{
-			try
-			{
-				await _next(context);
-			}
-			catch (Exception ex)
-			{
-				await HandleExceptionAsync(context, ex);
-			}
-		}
+        public async Task InvokeAsync(HttpContext context)
+        {
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+        }
 
-		private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-		{
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        {
             var errorCode = "Unknown";
             var success = false;
             var errorCollection = new Dictionary<string, string[]>();
@@ -99,23 +102,23 @@ namespace Spectra.WebAPI.Middlewares
             }
 
             var errorResponse = new
-			{
-				error = new
-				{
-					errorType,
-					errorCode,
-					errorMessage,
-					success,
-					errorCollection
-				}
-			};
+            {
+                error = new
+                {
+                    errorType,
+                    errorCode,
+                    errorMessage,
+                    success,
+                    errorCollection
+                }
+            };
 
-			var jsonResponse = JsonConvert.SerializeObject(errorResponse);
+            var jsonResponse = JsonConvert.SerializeObject(errorResponse);
 
-			context.Response.ContentType = "application/json";
-			context.Response.StatusCode = (int)statusCode;
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
 
-			return context.Response.WriteAsync(jsonResponse);
-		}
-	}
+            return context.Response.WriteAsync(jsonResponse);
+        }
+    }
 }

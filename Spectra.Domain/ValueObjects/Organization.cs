@@ -1,16 +1,15 @@
-﻿using Spectra.Domain.Documents;
-using Spectra.Domain.Enumeration;
+﻿using MongoDB.Bson;
+using Spectra.Domain.Clients;
 using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.ValueObjects
 {
-    public class Organization : ValueObject
+    public sealed class Organization : ValueObject
     {
+
         public Name Name { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
         public string Industry { get; set; }
@@ -22,8 +21,8 @@ namespace Spectra.Domain.ValueObjects
         public string? LogoPath { get; set; }
         public PhoneNumber? LandLine { get; set; }
         public OrganizationTypes OrganizationType { get; set; }
-
-        protected override IEnumerable<object> GetEqualityComponents()
+       
+    protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Name;
             yield return PhoneNumber;

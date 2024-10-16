@@ -1,15 +1,9 @@
-﻿using Spectra.Domain.Enumeration;
-using Spectra.Domain.Shared.Common;
-using System;
+﻿using Spectra.Domain.Shared.Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.ValueObjects
 {
-    public class MedicalServiceProvider : ValueObject
+    public sealed class MedicalServiceProvider : ValueObject
     {
         public Name Name { get; set; }
         public PhoneNumber PhoneNumber { get; set; }

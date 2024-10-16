@@ -2,11 +2,8 @@
 using Spectra.Application.Clients;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Clients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Common.Exceptions;
+using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Clients
 {
@@ -21,12 +18,12 @@ namespace Spectra.Infrastructure.Clients
         }
         public async Task<Client> GetByIdAsync(string id)
         {
-            return await _clients.Find(c => c.Id == id).FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<Client>> GetAllAsync()
-        {
-            return await _clients.Find(_ => true).ToListAsync();
+      var entity= await _clients.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Client", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(Client client)
@@ -42,6 +39,12 @@ namespace Spectra.Infrastructure.Clients
         public async Task DeleteAsync(Client client)
         {
             await _clients.DeleteOneAsync(c => c.Id == client.Id);
+        }
+
+        public async Task<IEnumerable<Client>> GetAllAsync(Expression<Func<Client, bool>> filter, FindOptions options = null)
+        {
+            filter ??= _ => true;
+            return await _clients.Find(filter, options).ToListAsync();
         }
     }
 }
