@@ -25,7 +25,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public IFormFile ScientificDegree { get; set; }
+        public List<IFormFile> ScientificDegree { get; set; }
     }
 
     public class UpdateDoctorCommandHandler : IRequestHandler<UpdateDoctorCommand, OperationResult<Unit>>
@@ -55,7 +55,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
             doctor.ApprovedBy = request.ApprovedBy;
             if (request.ScientificDegree != null)
             {
-                doctor.AttachmentPath = await _addFile.Updateattachment(doctor.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+                doctor.AttachmentPath = await _addFile.UpdateAttachment(doctor.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeDoctors);
             }
             await _doctorRepository.UpdateAsync(doctor);
             return OperationResult<Unit>.Success(Unit.Value);

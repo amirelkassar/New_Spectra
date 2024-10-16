@@ -27,7 +27,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         {
 
             var specialist = await _specialistRepository.GetByIdAsync(request.Id);
-            await _addFile.Deleteattachment(specialist.AttachmentPath);
+            await _addFile.DeleteAttachments(specialist.AttachmentPath);
             await _specialistRepository.DeleteAsync(specialist);
             return OperationResult<Unit>.Success(Unit.Value);
 

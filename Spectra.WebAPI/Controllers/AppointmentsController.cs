@@ -20,17 +20,16 @@ namespace Spectra.WebAPI.Controllers
 
         }
 
-
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllAppointmentsDoctor(GetAllAppointmentsStatuDoctorQuery input)
+        public async Task<ActionResult> GetAllAppointmentsDoctor([FromQuery] GetAllAppointmentsStatuDoctorQuery input)
         {
             var appointmenties = await _appointmentService.GetAllAppointmentsStatuDoctor(input);
             return Ok(appointmenties);
         }
-        [HttpPost("AppointmentsStatusDoctor")]
+        [HttpGet("AppointmentsStatusDoctor")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllAppointmentsStatusDoctor(GetAllAppointmentsStatuDoctorQuery input)
+        public async Task<ActionResult> GetAllAppointmentsStatusDoctor([FromQuery] GetAllAppointmentsStatuDoctorQuery input)
         {
             var appointmenties = await _appointmentService.GetAllAppointmentsStatuDoctor(input);
             return Ok(appointmenties);
@@ -46,7 +45,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateAppointment(CreateAppointmentCommand input  )
+        public async Task<ActionResult> CreateAppointment([FromBody] CreateAppointmentCommand input  )
         {
             var appointmenties = await _appointmentService.CreateAppointment(input);
             return Ok(appointmenties);
@@ -57,9 +56,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> UpdateAppointment(string id, UpdateAppointmentCommand input)
         {
 
-
             var Appointment = await _appointmentService.UpdateAppointment(id, input);
-
             return Ok(Appointment);
         }
   

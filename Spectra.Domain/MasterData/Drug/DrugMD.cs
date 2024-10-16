@@ -1,5 +1,6 @@
 ﻿using Spectra.Domain.Shared.Common;
 using System;
+using System.Collections.Generic;
 
 namespace Spectra.Domain.MasterData.Drug
 {
@@ -13,14 +14,16 @@ namespace Spectra.Domain.MasterData.Drug
         public string Doncentration { get; set; }
         public string InteractionsWithOtherdrugs { get; set; }
         public string Contraindications { get; set; }
-        public string? AttachmentPath { get; set; }
+        public string Nots { get; set; }
+        public string Type { get; set; }
+        public List<string>? AttachmentPath { get; set; }
 
         protected DrugMD() { }
         private DrugMD(
             string id,
             string name, string activeIngredient, string scientificName,
           string recommendedDosage, string doncentration,
-          string drugInteractionsWithOtherdrugs, string contraindications, string? attachmentPath, string code
+          string drugInteractionsWithOtherdrugs, string contraindications, List<string>? attachmentPath, string? code, string nots, string type
             ) : base(id)
         {
             Id = id;
@@ -33,11 +36,17 @@ namespace Spectra.Domain.MasterData.Drug
             Contraindications = contraindications;
             AttachmentPath = attachmentPath;
             Code = code;
+            Nots = nots;
+            Type = type;
         }
         public static DrugMD Create(string id,
           string name, string activeIngredient, string scientificName,
           string recommendedDosage, string doncentration,
-          string drugInteractionsWithOtherdrugs, string contraindications, string? attachmentPath, string code)
+          string drugInteractionsWithOtherdrugs,
+          string contraindications,
+         List<string>? attachmentPath, string? code,
+            string nots, string type
+            )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
@@ -46,8 +55,12 @@ namespace Spectra.Domain.MasterData.Drug
             ArgumentNullException.ThrowIfNull(doncentration, nameof(doncentration));
             ArgumentNullException.ThrowIfNull(drugInteractionsWithOtherdrugs, nameof(drugInteractionsWithOtherdrugs));
             ArgumentNullException.ThrowIfNull(contraindications, nameof(contraindications));
+            ArgumentNullException.ThrowIfNull(nots, nameof(nots));
+            ArgumentNullException.ThrowIfNull(type, nameof(type));
 
-            return new DrugMD(id, name, activeIngredient, scientificName, recommendedDosage, doncentration, drugInteractionsWithOtherdrugs, contraindications, attachmentPath,code);
+
+            return new DrugMD(id, name, activeIngredient, scientificName, recommendedDosage, doncentration,
+                drugInteractionsWithOtherdrugs, contraindications, attachmentPath,code , nots, type);
 
 
         }

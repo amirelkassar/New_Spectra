@@ -1,4 +1,6 @@
-﻿using Spectra.Domain.MasterData.Diagnoses;
+﻿using MongoDB.Driver;
+using Spectra.Domain.MasterData.Diagnoses;
+using System.Linq.Expressions;
 
 namespace Spectra.Application.MasterData.DiagnoseCommend
 {
@@ -7,7 +9,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend
         Task AddAsync(Diagnose Diagnose);
 
         Task DeleteAsync(Diagnose Diagnose);
-        Task<IEnumerable<Diagnose>> GetAllAsync();
+        Task<IEnumerable<Diagnose>> GetAllAsync(Expression<Func<Diagnose, bool>> filter = null, FindOptions options = null);
         Task<Diagnose> GetByIdAsync(string id);
         Task UpdateAsync(Diagnose Diagnose);
     }

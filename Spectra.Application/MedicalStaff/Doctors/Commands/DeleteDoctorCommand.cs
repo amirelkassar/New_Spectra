@@ -27,7 +27,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         {
 
             var doctor = await _doctorRepository.GetByIdAsync(request.Id);
-            await _addFile.Deleteattachment(doctor.AttachmentPath);
+            await _addFile.DeleteAttachments(doctor.AttachmentPath);
             await _doctorRepository.DeleteAsync(doctor);
             return OperationResult<Unit>.Success(Unit.Value);
 

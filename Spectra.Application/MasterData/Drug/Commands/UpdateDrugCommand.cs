@@ -7,6 +7,7 @@ using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Application.Patients;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,14 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public string Name { get; set; }
         public string ActiveIngredient { get; set; }
         public string ScientificName { get; set; }
-        public IFormFile? Attachment { get; set; }
+        public List<IFormFile>? Attachment { get; set; }
         public string RecommendedDosage { get; set; }
         public string Doncentration { get; set; }
         public string DrugInteractionsWithOtherdrugs { get; set; }
         public string Contraindications { get; set; }
         public string Code { get; set; }
+        public string Nots { get; set; }
+        public string Type { get; set; }
     }
 
     public class UpdateDrugCommandHandler : IRequestHandler<UpdateDrugCommand, OperationResult<Unit>>
@@ -44,31 +47,32 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateDrugCommand request, CancellationToken cancellationToken)
         {
-          
             var drug = await _drugRepository.GetByIdAsync(request.Id);
-    
-
+            if (drug == null)
+            {
+                throw new NotFoundException("Drug",request.Id);
+            }
 
             drug.Name = request.Name;
             drug.ActiveIngredient = request.ActiveIngredient;
             drug.ScientificName = request.ScientificName;
             drug.RecommendedDosage = request.RecommendedDosage;
-            drug.Doncentration = request.Doncentration;
-            drug.InteractionsWithOtherdrugs = request.DrugInteractionsWithOtherdrugs;
+            drug.Doncentration = request.Doncentration; 
+            drug.InteractionsWithOtherdrugs = request.DrugInteractionsWithOtherdrugs; 
             drug.Contraindications = request.Contraindications;
+            drug.Type = request.Type;
+            drug.Nots = request.Nots;
 
             if (request.Attachment != null)
             {
-
-                drug.AttachmentPath = await _addPhoto.Updateattachment(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
-
+                drug.AttachmentPath = await _addPhoto.UpdateAttachment(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
+                // Assuming you want to store paths as a comma-separated string
             }
-            drug.Code=request.Code;
+            drug.Code = request.Code;
 
             await _drugRepository.UpdateAsync(drug);
             return OperationResult<Unit>.Success(Unit.Value);
-      
-        
+
         }
         }
     public class UpdateDrugCommandValidator : AbstractValidator<UpdateDrugCommand>
@@ -107,7 +111,8 @@ namespace Spectra.Application.MasterData.Drug.Commands
                 .MaximumLength(500).WithMessage("Contraindications must not exceed 500 characters.");
 
             RuleFor(x => x.Attachment)
-                .Must(FileValidationHelper.BeAValidImage).WithMessage("Invalid image file.");
+            .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
+            .WithMessage("Invalid image file(s). At least one file must be a valid image.");
         }
 
     }

@@ -1,12 +1,12 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
-using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,14 +24,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
         }
         public async Task<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray> GetByIdAsync(string id)
         {
-
-            var entity = await _medicalTestsAndXrays.Find(c => c.Id == id).FirstOrDefaultAsync();
-            if (entity == null)
-            {
-                throw new NotFoundException("Medical Tests And Xrays", id);
-            }
-
-            return entity;
+            return await _medicalTestsAndXrays.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task AddAsync(Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray medicalTestsAndXrays)
@@ -49,10 +42,10 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
             await _medicalTestsAndXrays.DeleteOneAsync(c => c.Id == medicalTestsAndXrays.Id);
         }
 
-        public async Task<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetAllAsync()
+        public async Task<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetAllAsync(Expression<Func<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray, bool>> filter = null, FindOptions options = null)
         {
-
-            return await _medicalTestsAndXrays.Find(p => true).ToListAsync();
+            filter ??= _ => true;
+            return await _medicalTestsAndXrays.Find(filter, options).ToListAsync();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             var drugs = await _drugRepository.GetByIdAsync(request.Id);
        
 
-            await _addPhoto.Deleteattachment(drugs.AttachmentPath);
+            await _addPhoto.DeleteAttachments(drugs.AttachmentPath);
 
             await _drugRepository.DeleteAsync(drugs);
             return OperationResult<Unit>.Success(Unit.Value);

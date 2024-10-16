@@ -22,14 +22,14 @@ namespace Spectra.Infrastructure.MasterData.Specialization
         private readonly IMediator _mediator;
         private readonly IExcelProcessingService _excelProcessingService;
 
-       
+
 
         public SpecializationService(IMediator mediator, IExcelProcessingService excelProcessingService)
         {
 
             _mediator = mediator;
             _excelProcessingService = excelProcessingService;
-         
+
         }
         public async Task<OperationResult<string>> CreateSpecialization(CreateSpecializationCommand input)
         {
@@ -55,12 +55,12 @@ namespace Spectra.Infrastructure.MasterData.Specialization
                 Description = cells[1],
                 ConsultationCost = double.TryParse(cells[2], out cost) ? cost : 0
             });
-                
+
 
             var command = new CreateBulkDataCommand<CreateSpecializationCommand> { Data = data };
 
             await _mediator.Send(command);
-            
+
 
         }
 
@@ -100,7 +100,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
         {
             var query = new GetAllSpecializationNamesQuery();
             return await _mediator.Send(query);
-   
+
 
 
         }

@@ -2,10 +2,12 @@
 using MediatR;
 using Spectra.Application.Clients;
 using Spectra.Application.Clients.Commands;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using System;
@@ -40,8 +42,13 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
         public async Task<OperationResult<string>> Handle(CreateGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
-         
-                var generalComplaint = GeneralComplaint.Create(
+            var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName);
+            if (names.Any())
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+
+            var generalComplaint = GeneralComplaint.Create(
 
                     Ulid.NewUlid().ToString(),
 

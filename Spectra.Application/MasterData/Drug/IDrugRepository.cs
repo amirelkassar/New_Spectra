@@ -8,7 +8,8 @@ namespace Spectra.Application.MasterData.Drug
     {
         Task AddAsync(DrugMD Drugs);
         Task DeleteAsync(DrugMD Drugs);
-        Task<IEnumerable<DrugMD>> GetAllAsync();
+   
+        Task<IEnumerable<DrugMD>> GetAllAsync(Expression<Func<DrugMD, bool>> filter = null, FindOptions options = null);
         Task<DrugMD> GetByIdAsync(string id);
         Task UpdateAsync(DrugMD Drugs);
     }

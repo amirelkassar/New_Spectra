@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
 using System.Linq.Expressions;
 
@@ -11,5 +12,6 @@ namespace Spectra.Application.Clients
         Task AddAsync(Client client);
         Task UpdateAsync(Client client);
         Task DeleteAsync(Client client);
+        Task<PaginatedResult<Client>> GetAllAsyncWithPaginated(Expression<Func<Client, bool>> filter = null, FindOptions options = null, int pageNumber = 1, int pageSize = 10);
     }
 }

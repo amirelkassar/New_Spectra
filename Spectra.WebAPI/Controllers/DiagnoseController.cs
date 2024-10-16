@@ -52,7 +52,7 @@ namespace Spectra.WebAPI.Controllers
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<ActionResult> CreateDiagnose (CreateDiagnoseCommand input)
+        public async Task<ActionResult> CreateDiagnose ([FromQuery] CreateDiagnoseCommand input)
         {
           
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);

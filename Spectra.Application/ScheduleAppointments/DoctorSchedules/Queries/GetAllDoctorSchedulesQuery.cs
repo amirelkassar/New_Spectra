@@ -43,7 +43,7 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
       
            
 
-            var appointments = await _appointmentRepository.GetAllAsync(c => c.DoctorId == request.DoctorId && c.Daysdate == request.Daysdate.Date);
+            var appointments = await _appointmentRepository.GetAllAsyncA(c => c.DoctorId == request.DoctorId && c.Daysdate == request.Daysdate.Date);
             //var appointmentId =  appointment.Select(c => c.DoctorScheduleId);
 
              var doctorSchedules = await _doctorScheduleRepository.GetAllAsync(ds =>
@@ -52,7 +52,7 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
                   );
 
 
-            var result = appointments.Select(c => new AppointmentDto
+            var result = appointments.Items.Select(c => new AppointmentDto
             {
                 From = c.From,
                 To = c.To,

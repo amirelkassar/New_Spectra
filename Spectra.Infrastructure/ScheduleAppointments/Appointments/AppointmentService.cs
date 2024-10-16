@@ -28,10 +28,12 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
                 AppointmentNotes = input.AppointmentNotes,
                 AppointmentType = input.AppointmentType,
                 ClientId = input.ClientId,
-                Daysdate = input.Daysdate,
+                DaysdDate = input.DaysdDate,
                 DoctorScheduleId = input.DoctorScheduleId,
-                TimeOfAppoinment = input.TimeOfAppoinment,
-                MoringOrNight=input.MoringOrNight
+                    From = input.From,
+                MoringOrNight=input.MoringOrNight,
+        
+                
 
             };
 
@@ -91,7 +93,8 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
                 ClientId = input.ClientId,
                 Daysdate = input.Daysdate,
                 DoctorScheduleId = input.DoctorScheduleId,
-              
+                AppointmentService = input.AppointmentService
+
             };
 
             return await _mediator.Send(command);

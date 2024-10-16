@@ -25,8 +25,13 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public IFormFile ScientificDegree { get; set; }
+        public EmploymentStatus Status { get; set; }
+
+
+
+        public List<IFormFile> ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
+
 
     }
 
@@ -44,8 +49,8 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateSpecialistCommand request, CancellationToken cancellationToken)
         {
-            string? filePath = null;
-            var uploadfile = await _addFile.Createattachment(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
+            List<string>? filePath = null;
+            var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             if (uploadfile != null)
             {
                 filePath = uploadfile;
@@ -67,9 +72,8 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
                 request.ApprovedBy,
                 request.Academicdegree,
                  filePath,
-
-                    request.empelyeeRate = 0,
-                      EmploymentStatus.Wating);
+                request.empelyeeRate = 0,
+               request.Status);
 
             await _specialistRepository.AddAsync(specialist);
             //await _specializationRepository.UpdateAsync(specialization);

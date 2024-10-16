@@ -1,8 +1,10 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.MasterData.ServicesMD;
+using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MasterData.ServicesM
 {
@@ -36,10 +38,10 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
             await _medicalTestsAndXrays.DeleteOneAsync(c => c.Id == masterDataServices.Id);
         }
 
-        public async Task<IEnumerable<MasterDataServices>> GetAllAsync()
+        public async Task<IEnumerable<MasterDataServices>> GetAllAsync(Expression<Func<MasterDataServices, bool>> filter = null, FindOptions options = null)
         {
-
-            return await _medicalTestsAndXrays.Find(p => true).ToListAsync();
+            filter ??= _ => true;
+            return await _medicalTestsAndXrays.Find(filter, options).ToListAsync();
         }
         public async Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions()
         {

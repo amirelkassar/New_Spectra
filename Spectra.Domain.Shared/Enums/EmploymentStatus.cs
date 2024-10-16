@@ -10,6 +10,7 @@ namespace Spectra.Domain.Shared.Enums
     {
         Wating,
         Available,
+        cancel,
         Bloked
     }
 }

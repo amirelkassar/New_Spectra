@@ -8,7 +8,7 @@ using Spectra.Application.Patients;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Infrastructure.MasterData.ServicesMD;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string? Content { get; set; }
 
         public List<Secation>? Secations { get; set; }
-        public IFormFile? Photo { get; set; }
+        public List<IFormFile>? Photo { get; set; }
 
 
 
@@ -65,7 +65,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 if (request.Photo != null)
                 {
 
-                    entity.AttachmentPath = await _addPhoto.Updateattachment(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
+                    entity.AttachmentPath = await _addPhoto.UpdateAttachment(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
 
                 }
 

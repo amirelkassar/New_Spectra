@@ -23,6 +23,7 @@ using Spectra.Application.MasterData.InternalExaminations;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
+using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Services;
@@ -35,6 +36,7 @@ using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Domain.Shared.OptionDtos;
+using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Contracts;
@@ -52,7 +54,7 @@ using Spectra.Infrastructure.MasterData.ExcelFile;
 using Spectra.Infrastructure.MasterData.GeneralComplaint;
 using Spectra.Infrastructure.MasterData.InternalExaminations;
 using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
-using Spectra.Infrastructure.MasterData.Services;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
@@ -61,6 +63,7 @@ using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Specialists;
+
 
 namespace Spectra.Infrastructure
 {
@@ -119,6 +122,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
+            services.AddScoped<IAdminService, AdminService>();
 
          
 

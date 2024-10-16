@@ -2,7 +2,11 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Domain.MasterData.Diagnoses;
+
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
+using System.Linq.Expressions;
+
 
 namespace Spectra.Infrastructure.MasterData.Diagnoses
 {
@@ -14,23 +18,17 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
         {
             var database = mongoDbService.DataBase;
             _diagnose = database.GetCollection<Diagnose>("Diagnose");
-           
+
         }
         public async Task<Diagnose> GetByIdAsync(string id)
         {
-            var entity = await _diagnose.Find(c => c.Id == id).FirstOrDefaultAsync();
-            if (entity == null)
-            {
-                throw new NotFoundException("Diagnose", id);
-            }
-
-            return entity;
+            return await _diagnose.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task AddAsync(Diagnose diagnose)
         {
 
-          
+
             await _diagnose.InsertOneAsync(diagnose);
         }
 
@@ -44,12 +42,16 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
             await _diagnose.DeleteOneAsync(c => c.Id == diagnose.Id);
         }
 
-        public async Task<IEnumerable<Diagnose>> GetAllAsync()
+        public async Task<IEnumerable<Diagnose>> GetAllAsync(Expression<Func<Diagnose, bool>> filter = null, FindOptions options = null)
         {
 
-            return await _diagnose.Find(p => true).ToListAsync();
+
+
+            filter ??= _ => true;
+            return await _diagnose.Find(filter, options).ToListAsync();
+
         }
 
-     
+
     }
 }

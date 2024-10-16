@@ -1,16 +1,10 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Commands;
-using Spectra.Application.MasterData.GeneralComplaintsM;
-using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
-using Spectra.Application.MasterData.SpecializationCommend;
-using Spectra.Application.MasterData.SpecializationCommend.Commands;
-using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Drug;
-using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Wrappers;
+
 
 namespace Spectra.Application.MasterData.UploadExcel.Command
 {
@@ -49,7 +43,10 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                item.DrugInteractionsWithOtherdrugs,
                item.Contraindications,
                null,
-               item.Code
+               item.Code,
+               item.Nots
+               ,
+               item.Type
                );
 
 

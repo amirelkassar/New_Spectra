@@ -38,7 +38,7 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
 
             var command = new CreateGeneralComplaintsCommand
             {
-                Code1= input.Code1,
+                Code1 = input.Code1,
                 ComplaintName = input.ComplaintName,
                 DescriptionOfTheComplaint = input.DescriptionOfTheComplaint
 
@@ -77,22 +77,22 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
 
             };
 
-          return  await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<Unit>> DeleteGeneralComplaints(string id)
         {
             var command = new DeleteGeneralComplaintsCommand { Id = id };
-       return     await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
-        public async  Task<OperationResult<Domain.MasterData.GeneralComplaints.GeneralComplaint>>  GetGeneralComplaintsById(string id)
+        public async Task<OperationResult<Domain.MasterData.GeneralComplaints.GeneralComplaint>> GetGeneralComplaintsById(string id)
         {
             var query = new GetGeneralComplaintsByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async  Task<OperationResult<IEnumerable<Domain.MasterData.GeneralComplaints.GeneralComplaint>>> GetAllGeneralComplaintss()
+        public async Task<OperationResult<IEnumerable<Domain.MasterData.GeneralComplaints.GeneralComplaint>>> GetAllGeneralComplaintss()
         {
             var query = new GetAllGeneralComplaintsQuery();
             return await _mediator.Send(query);

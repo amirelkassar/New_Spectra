@@ -11,8 +11,10 @@ namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
 {
     public class MedicalTestsAndXray : BaseAuditableEntity<string>
     {
-        public string ScientificName { get; set; }
+        public string ScientificNameByEng { get; set; }
+        public string ScientificNameByEngByArab { get; set; }
 
+        public string Code { get; set; }
         public string ScientificNote { get; set; }
         public ExaminationType ExaminationTypes { get; set; }
 
@@ -21,27 +23,33 @@ namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
         protected MedicalTestsAndXray() { }
         private MedicalTestsAndXray(
                string id,
-           string scientificName,
+           string scientificNameByEng,
+           string scientificNameByEngByArab,
            string scientificNote,
-           ExaminationType examinationType
+           ExaminationType examinationType,
+           string code
                ) : base(id)
         {
             Id = id;
-            ScientificName = scientificName;
+            ScientificNameByEng = scientificNameByEng;
+            ScientificNameByEngByArab = scientificNameByEngByArab;
+            Code= code;
             ScientificNote = scientificNote;
             ExaminationTypes = examinationType;
         }
-        public static MedicalTestsAndXray Create(string id, string scientificName,
-           string notes, ExaminationType examinationType
+        public static MedicalTestsAndXray Create(string id, string scientificNameByEng,
+           string notes, ExaminationType examinationType, string scientificNameByEngByArab, string code
        )
         {
 
             ArgumentNullException.ThrowIfNull(id, nameof(id));
-            ArgumentNullException.ThrowIfNull(scientificName, nameof(scientificName));
+            ArgumentNullException.ThrowIfNull(scientificNameByEng, nameof(scientificNameByEng));
+            ArgumentNullException.ThrowIfNull(scientificNameByEngByArab, nameof(scientificNameByEngByArab));
             ArgumentNullException.ThrowIfNull(notes, nameof(notes));
             ArgumentNullException.ThrowIfNull(examinationType, nameof(examinationType));
+            ArgumentNullException.ThrowIfNull(code, nameof(code));
 
-            return new MedicalTestsAndXray(id, scientificName, notes, examinationType);
+            return new MedicalTestsAndXray(id, scientificNameByEng, scientificNameByEngByArab, notes, examinationType, code);
 
         }
 

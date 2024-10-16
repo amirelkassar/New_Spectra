@@ -21,6 +21,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         public UpdateAppointmentStatusCommandHandler(IAppointmentRepository appointmentRepository)
         {
             _appointmentRepository = appointmentRepository;
+
         }
 
         public async Task<OperationResult<Unit>> Handle(UpdateAppointmentStatusCommand request, CancellationToken cancellationToken)

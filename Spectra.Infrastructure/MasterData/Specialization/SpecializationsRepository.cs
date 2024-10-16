@@ -3,6 +3,7 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.SpecializationCommend;
 
 using Spectra.Domain.MasterData.DoctorsSpecialization;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,23 +42,16 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             await _specializations.DeleteOneAsync(c => c.Id == Specializations.Id);
         }
 
-        public async Task<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specialization>> GetAllAsync()
+        public async Task<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specialization>> GetAllAsync(Expression<Func<Domain.MasterData.DoctorsSpecialization.Specialization, bool>> filter = null, FindOptions options = null)
         {
-            return await _specializations.Find(p => true).ToListAsync();
-           
+            filter ??= _ => true;
+            return await _specializations.Find(filter, options).ToListAsync();
         }
         public async Task<Domain.MasterData.DoctorsSpecialization.Specialization> GetByNameAsync(string name)
         {
             return await _specializations.Find(c => c.Name == name).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<string>> GetAllNamesAsync()
-        {
-            var projection = Builders<Domain.MasterData.DoctorsSpecialization.Specialization>.Projection.Expression(s => s.Name);
 
-            return await _specializations.Find(_ => true).Project(projection).ToListAsync();
-
-
-        }
     }
 }

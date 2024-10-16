@@ -1,10 +1,13 @@
-﻿using FluentValidation;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Drug;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Commands
@@ -14,12 +17,14 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public string Name { get; set; }
         public string ActiveIngredient { get; set; }
         public string ScientificName { get; set; }
-        public IFormFile? Photo { get; set; }
+        public List<IFormFile>? Photo { get; set; }
         public string RecommendedDosage { get; set; }
         public string Doncentration { get; set; }
         public string DrugInteractionsWithOtherdrugs { get; set; }
         public string Contraindications { get; set; }
         public string? Code { get; set; }
+        public string Nots { get; set; }
+        public string Type { get; set; }
     }
 
 
@@ -37,12 +42,18 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
         public async Task<OperationResult<string>> Handle(CreateDrugCommand request, CancellationToken cancellationToken)
         {
-          
-                string? photoPath = null;
-                var uploadPhoto = await _addPhoto.Createattachment(request.Photo, "Upload/Image/Drugs");
+
+            var names = await _drugRepository.GetAllAsync(b => b.Name == request.Name);
+            if (names.Any())
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+           List<string>? photoPath = null;
+                var uploadPhoto = await _addPhoto.CreateAttachments(request.Photo, "Upload/Image/Drugs");
                 if (uploadPhoto != null)
                 {
                     photoPath = uploadPhoto;
+
                 }
 
                 var drug = DrugMD.Create(
@@ -55,11 +66,12 @@ namespace Spectra.Application.MasterData.Drug.Commands
                     request.DrugInteractionsWithOtherdrugs,
                     request.Contraindications,
                     photoPath,
-                    request.Code
+                    request.Code,
+                    request.Nots,
+                    request.Type
                 );
                 await _drugRepository.AddAsync(drug);
 
-                // Return Success with the created Drug ID
                 return OperationResult<string>.Success(drug.Id);
            
            
@@ -99,9 +111,9 @@ namespace Spectra.Application.MasterData.Drug.Commands
             RuleFor(x => x.Contraindications)
                 .NotEmpty().WithMessage("Contraindications are required.")
                 .MaximumLength(500).WithMessage("Contraindications must not exceed 500 characters.");
-
             RuleFor(x => x.Photo)
-                .Must(FileValidationHelper.BeAValidImage).WithMessage("Invalid image file.");
+                       .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
+                       .WithMessage("Invalid image file(s). At least one file must be a valid image.");
         }
 
     }

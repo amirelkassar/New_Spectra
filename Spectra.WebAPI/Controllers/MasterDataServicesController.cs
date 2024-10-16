@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.ServicesMD.Commands;
-using Spectra.Infrastructure.MasterData.Services;
+using Spectra.Application.MasterData.ServicesMD.Services;
+
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -30,7 +31,6 @@ namespace Spectra.WebAPI.Controllers
         {
             var MasterDataServicesies = await _serviceMDService.GetAllNameAndTermsAndConditions();
             return Ok(MasterDataServicesies);
-
         }
 
         [HttpGet("id")]

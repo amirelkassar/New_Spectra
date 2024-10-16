@@ -25,6 +25,14 @@ namespace Spectra.Domain.Shared.Enums
         Checkup,
         Session
     }
+    public enum AppointmentServices
+    {
+        EarlyServiceRequest = 1,
+        MedicationFollowUpService=2,
+        SessionMultiServiceDiagnostics=3,
+        RequestForSpecializedConsultations=4
+
+    }
     public enum DaysOfWeeks
     {
         Sunday = 0,
