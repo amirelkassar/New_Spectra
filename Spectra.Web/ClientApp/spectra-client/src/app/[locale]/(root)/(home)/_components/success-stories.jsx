@@ -33,13 +33,13 @@ const Story = ({
   return (
     <Link href={`${ROUTES.ROOT.SUCCESS_STORIES}/${id}`}>
       <div className='space-y-2'>
-        <div className='h-40 mdl:h-72 w-full rounded-lg overflow-hidden'>
+        <div className='h-40 mdl:h-72 w-full rounded-lg overflow-hidden relative'>
           <Image
             src={image}
             alt={childName}
             priority={false}
-            height={288}
-            width={384}
+            sizes='width: 384px; height: 288px;'
+            fill
             className='w-full h-full object-cover object-center'
           />
         </div>

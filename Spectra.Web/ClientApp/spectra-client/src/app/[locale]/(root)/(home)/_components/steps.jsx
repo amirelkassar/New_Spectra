@@ -52,14 +52,14 @@ export const Steps = () => {
       aria-label='Steps'
       aria-labelledby='steps'
       id='steps'
-      className='!pt-0'
+      className='mb-20'
     >
-      <h2 className='text-base mb-5 font-bold mdl:text-2xl text-center'>
+      <h2 className='text-base mb-10 font-bold mdl:text-2xl text-center'>
         استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية
         الرقمية
       </h2>
 
-      <div className='mdl:space-y-36 space-y-16'>
+      <div className='mdl:space-y-44 space-y-16'>
         <div>
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold'>
             سنتين للطريق التقليدي
@@ -68,15 +68,20 @@ export const Steps = () => {
           <StepperMobile steps={traditionalSteps} />
         </div>
 
-        <div>
-          <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold'>
+        <div className='relative mdl:px-20'>
+          <div className='absolute -top-8 right-0 w-full h-64 bg-blueLight rounded-xl' />
+          <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold relative'>
             10 ايام لسبيكترا
           </h3>
-          <Stepper variant='green' steps={spectraSteps} />
-          <StepperMobile
+          <Stepper
+            className='block'
             variant='green'
             steps={spectraSteps}
           />
+          {/* <StepperMobile
+            variant='green'
+            steps={spectraSteps}
+          /> */}
         </div>
       </div>
     </Section>
@@ -89,15 +94,20 @@ function getPosition(array = [], index) {
   return `calc(${(index + 1) * stepSize}% - 40px)`;
 }
 
-const Stepper = ({ variant = '', steps = [] }) => {
+const Stepper = ({
+  variant = '',
+  steps = [],
+  className = '',
+}) => {
   return (
     <div
       dir='ltr'
       className={cn(
-        'w-full hidden mdl:block h-0.5 bg-black relative before:absolute before:size-6 before:rounded-full before:bg-gradient-to-b before:from-white before:to-[#DEDEDE] before:top-1/2 before:start-0 before:-translate-y-1/2 after:absolute after:size-6 after:rounded-full after:bg-gradient-to-b after:from-white after:to-[#DEDEDE] after:top-1/2 after:end-0 after:-translate-y-1/2',
+        'w-full my-20 mdl:my-0 hidden mdl:block h-0.5 bg-black relative before:absolute before:size-6 before:rounded-full before:bg-gradient-to-b before:from-white before:to-[#DEDEDE] before:top-1/2 before:start-0 before:-translate-y-1/2 after:absolute after:size-6 after:rounded-full after:bg-gradient-to-b after:from-white after:to-[#DEDEDE] after:top-1/2 after:end-0 after:-translate-y-1/2',
         {
           'bg-greenMain': variant === 'green',
-        }
+        },
+        className
       )}
     >
       {steps.map((step, index) => (
@@ -111,7 +121,7 @@ const Stepper = ({ variant = '', steps = [] }) => {
         >
           <span
             className={cn(
-              'bg-black/10 text-black rounded-xl py-1 w-20 block text-xs text-center ms-16',
+              'bg-black/10 text-black rounded-xl py-1 w-16 mdl:w-20 block text-xs text-center ms-8 mdl:ms-16',
               {
                 'bg-greenMain/10': variant === 'green',
               }
@@ -123,7 +133,7 @@ const Stepper = ({ variant = '', steps = [] }) => {
           <div className='flex flex-col w-fit items-start gap-5'>
             <div
               className={cn(
-                'rounded-full size-10 border-white border-4 bg-black flex !text-white font-bold text-medium items-center justify-center relative before:absolute before:border-[10px] before:border-black before:border-b-transparent before:border-l-transparent before:border-r-transparent before:-bottom-7 before:start-1/2 before:-translate-x-1/2 mx-auto',
+                'rounded-full mt-3 mdl:mt-0 size-6 mdl:size-10 border-white mdl:border-4 border-2 bg-black flex !text-white font-bold text-sm mdl:text-medium items-center justify-center relative before:absolute mdl:before:border-[10px] before:border-[7px] before:border-black before:border-b-transparent before:border-l-transparent before:border-r-transparent before:-bottom-5 mdl:before:-bottom-7 before:start-1/2 before:-translate-x-1/2 mx-auto',
                 {
                   'bg-greenMain before:border-greenMain  before:border-b-transparent before:border-l-transparent before:border-r-transparent':
                     variant === 'green',
@@ -132,7 +142,7 @@ const Stepper = ({ variant = '', steps = [] }) => {
             >
               {step.id}
             </div>
-            <span className='block text-center max-w-24'>
+            <span className='block text-center max-w-12 mdl:max-w-24 text-xs mdl:text-base'>
               {step.title}
             </span>
           </div>

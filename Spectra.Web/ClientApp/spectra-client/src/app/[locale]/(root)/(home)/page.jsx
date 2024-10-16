@@ -17,8 +17,8 @@ export default function Homepage() {
   return (
     <main>
       <Hero />
-      <WhatWeCure />
       <Services />
+      <WhatWeCure />
       <AboutUs />
       <OurMedicalTeam />
       <Testimonials />

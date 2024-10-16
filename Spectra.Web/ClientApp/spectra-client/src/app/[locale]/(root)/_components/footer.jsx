@@ -9,8 +9,7 @@ import TwitterXIcon from '@/assets/icons/twitter-x';
 import FacebookIcon from '@/assets/icons/facebook';
 import Logo from '@/assets/icons/logo';
 
-const bgImage =
-  'https://s3-alpha-sig.figma.com/img/ec12/0f42/c55a3cb0d850332e4a18da5e8692b5b2?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kMFQylW-HObuE97x26sn4msuvzpY5NW97JbMGi5AIjZKZzeIoliFXjQihYeDdoPA2anAvQimRYskSfNIHdardYxVPnmwEBY5blL4IJQ6-q~U81nebgc5gRDjrf8nk92BmyRNunw8vBsvF~YGy5ZQTcBkW1vSrDyMMQJ1BtR47Gf6paw9BXQ-1ZM7jjOEadFVROgM3LHLBIQ07TvV9~AC0lC9fIiD1lYbTWRTve2ysp6UmXAC41ndnBfZQT3S06P8dEbNUtHhO699Lt31qDXxBsQFupwuxhhqaQxikRpSXIs0L5UqbxVGEJ0ULeWVOG8r6fNa2~D6uVYOWbsqjw~jeg__';
+const bgImage = '/demo-footer-bg.png';
 
 const socialData = [
   {
