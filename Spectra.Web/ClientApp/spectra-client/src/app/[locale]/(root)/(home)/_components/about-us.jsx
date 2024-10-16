@@ -13,6 +13,7 @@ const data = [
 
 export const AboutUs = ({
   className = '',
+  containerClassName = '',
   heading = 'من نحن',
 }) => {
   return (
@@ -28,7 +29,12 @@ export const AboutUs = ({
         id='about-us'
         heading={heading}
       >
-        <div className='flex flex-col items-center gap-5 mdl:flex-row'>
+        <div
+          className={cn(
+            'flex flex-col items-center gap-5 mdl:flex-row',
+            containerClassName
+          )}
+        >
           <div className='flex-[0.35] relative overflow-hidden'>
             <div className='bg-greenLight rounded-full rtl:rounded-tl-none ltr:rounded-tr-none'>
               <Image
