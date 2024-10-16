@@ -24,7 +24,7 @@ export const Nav = ({
       )}
       aria-label='Main navigation'
     >
-      <div className='flex items-center flex-1 justify-center gap-x-6'>
+      <div className='flex items-center flex-1 justify-start gap-x-6'>
         {navLinks.map((link) => (
           <Link
             key={link.href}

@@ -67,17 +67,19 @@ export const Footer = () => {
       </div>
 
       {/* NAV & SOCIAL */}
-      <div className='py-3 px-16 lg:px-3 flex items-center justify-between container max-w-[1400px] mx-auto'>
-        <Nav
-          navLinks={NAVDATA}
-          className='hidden lg:block'
-        />
-        <Link
-          href={ROUTES.AUTH.SIGNUP_PROVIDER}
-          className='text-xs mdl:text-base text-black font-bold'
-        >
-          انضم كأخصائي
-        </Link>
+      <div className='py-3 px-16 lg:px-10 flex items-center justify-between mx-auto'>
+        <div className='flex gap-x-6'>
+          <Nav
+            navLinks={NAVDATA}
+            className='hidden lg:block flex-initial'
+          />
+          <Link
+            href={ROUTES.AUTH.SIGNUP_PROVIDER}
+            className='text-xs mdl:text-base text-black font-bold'
+          >
+            انضم كأخصائي
+          </Link>
+        </div>
         <div className='flex items-center gap-5'>
           {socialData.map(({ icon, href }) => (
             <Link
@@ -92,7 +94,7 @@ export const Footer = () => {
       </div>
 
       {/* LOGO & PARAGRAPH */}
-      <div className='flex gap-5 flex-col mdl:flex-row items-center mdl:justify-between container max-w-[1400px] mx-auto py-3'>
+      <div className='flex gap-5 flex-col mdl:flex-row items-center mdl:justify-between px-3 mdl:px-5 lg:px-10 mx-auto py-3'>
         <Link href={ROUTES.ROOT.HOME}>
           <Logo className='w-28 h-11' />
         </Link>
@@ -113,14 +115,18 @@ export const Footer = () => {
       </div>
 
       {/* COPYRIGHT */}
-      <div className='text-xs mdl:text-base text-black container max-w-[1400px] mx-auto py-5 border-t border-t-grayMedium flex gap-10 items-center justify-center flex-wrap'>
-        <Link href='#'>سياسة الخصوصية</Link>
+      <div className='text-xs px-3 mdl:px-5 lg:px-10 mdl:text-base text-black mx-auto py-5 border-t border-t-grayMedium flex gap-10 items-center justify-center mdl:justify-between flex-wrap'>
+        <div className='flex items-center gap-x-10 text-center'>
+          <Link href='#'>سياسة الخصوصية</Link>
 
-        <Link href='#'>سياسة ملفات تعريف الارتباط</Link>
+          <Link href='#'>سياسة ملفات تعريف الارتباط</Link>
 
-        <p>حقوق النشر @  مركز سبيكترا الطبي </p>
+          <p>حقوق النشر @  مركز سبيكترا الطبي </p>
+        </div>
 
-        <Link href='#'>صنع بوساطة شركة بروفاوند جروب</Link>
+        <Link className='text-center' href='#'>
+          صنع بوساطة شركة بروفاوند جروب
+        </Link>
       </div>
     </footer>
   );
