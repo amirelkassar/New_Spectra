@@ -7,22 +7,26 @@ import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
 import ROUTES from "@/routes";
+import { DeleteComplaint } from "@/useAPI/admin/main-data/complaints";
+import { useRouter } from "@/navigation";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
+  const { mutate: deleteDrug, isLoading } = DeleteComplaint(id);
+  const router = useRouter();
 
+  const handleDelete = () => {
+    deleteDrug();
+  };
   const options = [
     {
       label: "مسح",
       icon: <DeleteIcon />,
       type: "btn",
-      action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
-      },
+      action: handleDelete,
       color: "red",
     },
-   
+
     {
       label: "تعديل",
       icon: <EditIcon />,

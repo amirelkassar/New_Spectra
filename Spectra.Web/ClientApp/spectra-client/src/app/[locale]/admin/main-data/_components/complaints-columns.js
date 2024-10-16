@@ -3,11 +3,11 @@ import ActionMenu from "./ActionMenuComplaints";
 
 export const ComplaintsColumns = [
   {
-    accessorKey: "complaintTitle",
+    accessorKey: "complaintName",
     header: "الشكوى",
   },
   {
-    accessorKey: "code",
+    accessorKey: "code1",
     header: "الكود ",
   },
   {

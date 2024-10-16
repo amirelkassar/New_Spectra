@@ -13,7 +13,7 @@ function CalenderModalError({ className }) {
       <path
         d="M83.5 152C129.616 152 167 149.538 167 146.5C167 143.462 129.616 141 83.5 141C37.3842 141 0 143.462 0 146.5C0 149.538 37.3842 152 83.5 152Z"
         fill="#FF3D3D"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         fill-rule="evenodd"

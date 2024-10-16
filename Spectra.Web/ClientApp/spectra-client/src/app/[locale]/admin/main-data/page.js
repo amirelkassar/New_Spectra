@@ -4,8 +4,8 @@ import { DataTable } from "@/components/data-table";
 import { DrugsColumns } from "./_components/drugs-columns";
 import AddMainData from "./_components/add-drugs";
 import ROUTES from "@/routes";
-import { GetDrugs } from "@/useAPI/admin/drugs/page";
-
+import { GetDrugs } from "@/useAPI/admin/main-data/drugs";
+import NoDataYet from "@/components/noDataYet";
 
 function page() {
   const { data, isLoading } = GetDrugs();
@@ -23,7 +23,7 @@ function page() {
         data?.data.data.length > 0 ? (
           <DataTable data={data.data.data} columns={DrugsColumns} />
         ) : (
-          <p>No Data Yet</p>
+         <NoDataYet/>
         )
       ) : (
         <p>isLoading</p>

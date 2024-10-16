@@ -1,14 +1,12 @@
 "use client";
-import ArrowRight from "@/assets/icons/arrow-right";
 import BackIcon from "@/assets/icons/back";
 import CloseIcon from "@/assets/icons/close";
 import UploadImgIcon from "@/assets/icons/uploadImg";
 import Button from "@/components/button";
-import Input from "@/components/input";
 import InputGreen from "@/components/Input-green";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import { GetDrugsID, useEditDrug } from "@/useAPI/admin/drugs/page";
+import { GetDrugsID, useEditDrug } from "@/useAPI/admin/main-data/drugs";
 import { Dropzone } from "@mantine/dropzone";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

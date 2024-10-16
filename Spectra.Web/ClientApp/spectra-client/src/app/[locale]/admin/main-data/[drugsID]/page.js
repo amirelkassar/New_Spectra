@@ -6,7 +6,9 @@ import Image from "next/image";
 import React from "react";
 import imgDrugs from "@/assets/images/drugs.png";
 import ActionMenu from "../_components/ActionMenuDetails";
-import { GetDrugsID } from "@/useAPI/admin/drugs/page";
+import { GetDrugsID } from "@/useAPI/admin/main-data/drugs";
+import NoDataYet from "@/components/noDataYet";
+
 function page({ params }) {
   const { data, isLoading } = GetDrugsID(params.drugsID);
   console.log(data?.data.data);
@@ -140,7 +142,7 @@ function page({ params }) {
             </div>
           </div>
         ) : (
-          <p>not found</p>
+          <NoDataYet />
         )
       ) : (
         <p>IS LOADING</p>

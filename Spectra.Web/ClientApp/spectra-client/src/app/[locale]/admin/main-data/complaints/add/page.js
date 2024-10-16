@@ -6,7 +6,10 @@ import Button from "@/components/button";
 import ROUTES from "@/routes";
 import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
+import { useCreateComplaint } from "@/useAPI/admin/main-data/complaints";
 function Page() {
+  const { mutate: createDrug } = useCreateComplaint();
+
   const [formData, setFormData] = useState({
     complaintName: "",
     code1: "",
@@ -21,10 +24,8 @@ function Page() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("Form Data:", formData);
+    createDrug(formData);
   };
-
   return (
     <div>
       <div className="flex mb-10 lgl:mt-0 mt-6   items-center gap-4 ">
