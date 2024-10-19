@@ -19,9 +19,9 @@ namespace Spectra.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpPost("DoctorSchedules")]
+        [HttpGet("DoctorSchedules")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllDoctorSchedule(GetAllDoctorSchedulesQuery input)
+        public async Task<ActionResult> GetAllDoctorSchedule([FromQuery]GetAllDoctorSchedulesQuery input)
         {
             var DoctorScheduleies = await _service.GetAllDoctorSchedules(input);
 

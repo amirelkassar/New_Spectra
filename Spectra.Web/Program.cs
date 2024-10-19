@@ -27,26 +27,32 @@ using (var scope = app.Services.CreateScope())
 
 }
 
-var swaggerClientId = app.Configuration["IdentityServerSetting:Clients:0:ClientId"];
-var swaggerClientSecret = app.Configuration["IdentityServerSetting:Clients:0:Secret"];
-var swaggerClientName = app.Configuration["IdentityServerSetting:Clients:0:ClientName"];
-app.UseSwagger();
-app.UseCors("AllowSpecificOrigins");
-app.UseSwaggerUI(options =>
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
+    var swaggerClientId = app.Configuration["IdentityServerSetting:Clients:0:ClientId"];
+    var swaggerClientSecret = app.Configuration["IdentityServerSetting:Clients:0:Secret"];
+    var swaggerClientName = app.Configuration["IdentityServerSetting:Clients:0:ClientName"];
 
-    options.OAuthClientId(swaggerClientId);
-    options.OAuthClientSecret(swaggerClientSecret);
-    options.OAuthAppName(swaggerClientName);
-    options.OAuthUsePkce();
-});
+    app.UseSwagger();
+app.UseCors("AllowSpecificOrigins");
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
+
+        options.OAuthClientId(swaggerClientId);
+        options.OAuthClientSecret(swaggerClientSecret);
+        options.OAuthAppName(swaggerClientName);
+        options.OAuthUsePkce();
+    });
+}
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 app.UseAuthentication();
 
 

@@ -16,7 +16,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public string? Address { get; set; }
         public string? Content { get; set; }
         public List<Secation>? Secations { get; set; }
-        public string? AttachmentPath { get; set; }
+        public List<string>? AttachmentPath { get; set; }
 
         protected MasterDataServices() { }
         private MasterDataServices(
@@ -29,7 +29,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string? serviceAddress = null,
         string? content = null,
         List<Secation>? secations =null,
-        string? attachmentPath = null
+      List<string>?  attachmentPath = null
                ) : base(id)
         {
             Id = id;
@@ -52,7 +52,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string? serviceAddress = null,
         string? content = null,
         List<Secation>? secations=null ,
-        string? attachmentPath = null
+      List<string>?  attachmentPath = null
        )
 
         {

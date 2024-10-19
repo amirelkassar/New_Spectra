@@ -9,6 +9,7 @@ using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,10 +53,10 @@ namespace Spectra.Infrastructure.MasterData.InternalExaminations
             await _internalExamination.DeleteOneAsync(c => c.Id == internalExamination.Id);
         }
 
-        public async Task<IEnumerable<InternalExamination>> GetAllAsync()
+        public async Task<IEnumerable<InternalExamination>> GetAllAsync(Expression<Func<InternalExamination, bool>> filter = null, FindOptions options = null)
         {
-
-            return await _internalExamination.Find(p => true).ToListAsync();
+            filter ??= _ => true;
+            return await _internalExamination.Find(filter, options).ToListAsync();
         }
     }
 }

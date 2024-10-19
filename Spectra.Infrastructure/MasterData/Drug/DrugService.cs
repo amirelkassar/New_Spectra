@@ -36,7 +36,11 @@ namespace Spectra.Infrastructure.MasterData.Drug
                 DrugInteractionsWithOtherdrugs = input.DrugInteractionsWithOtherdrugs,
                 RecommendedDosage = input.RecommendedDosage,
                 ScientificName = input.ScientificName,
-                Photo = input.Photo
+                Photo = input.Photo,
+                Type = input.Type,
+                Nots = input.Nots,
+                Code = input.Code
+
             };
 
             return await _mediator.Send(command);
@@ -53,7 +57,10 @@ namespace Spectra.Infrastructure.MasterData.Drug
                 DrugInteractionsWithOtherdrugs = cells[4],
                 RecommendedDosage = cells[5],
                 ScientificName = cells[6],
-                Photo = null
+                Photo = null,
+                Type = cells[7],
+                Nots = cells[8],
+                Code = cells[9]
             });
 
 
@@ -78,18 +85,19 @@ namespace Spectra.Infrastructure.MasterData.Drug
                 DrugInteractionsWithOtherdrugs = input.DrugInteractionsWithOtherdrugs,
                 RecommendedDosage = input.RecommendedDosage,
                 ScientificName = input.ScientificName,
-                Attachment = input.Attachment
-
-
+                Attachment = input.Attachment,
+                Type = input.Type,
+                Nots = input.Nots,
+                Code = input.Code
             };
 
-        return    await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<Unit>> DeleteDrug(string id)
         {
             var command = new DeleteDrugCommand { Id = id };
-           return await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<DrugMD>> GetDrugById(string id)

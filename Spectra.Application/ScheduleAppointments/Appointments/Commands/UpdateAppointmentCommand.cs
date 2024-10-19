@@ -15,6 +15,10 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         public string DoctorScheduleId { get; set; }
         public string ClientId { get; set; }
         public string DoctorId { get; set; }
+<<<<<<< HEAD
+=======
+        public AppointmentServices AppointmentService { get; set; }
+>>>>>>> Admin-BackEnd
 
     }
 
@@ -39,8 +43,12 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
             appointment.Daysdate = request.Daysdate;
             appointment.DoctorScheduleId = request.DoctorScheduleId;
             appointment.ClientId = request.ClientId;
+<<<<<<< HEAD
       
 
+=======
+            //appointment.AppointmentService = request.AppointmentService;
+>>>>>>> Admin-BackEnd
 
             await _appointmentRepository.UpdateAsync(appointment);
             return OperationResult<Unit>.Success(Unit.Value);

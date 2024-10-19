@@ -29,7 +29,11 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                 foreach (var item in request.Data)
                 {
                     var entity = MedicalTestsAndXray.Create(
+<<<<<<< HEAD
                 Ulid.NewUlid().ToString(), item.ScientificName, item.Notes, item.ExaminationTypes
+=======
+                Ulid.NewUlid().ToString(), item.ScientificNameEng,   item.Notes, item.ExaminationTypes, item.ScientificNameByEngByArab,item.Code
+>>>>>>> Admin-BackEnd
               );
 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+=======
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+>>>>>>> Admin-BackEnd
 using Spectra.Application.ChatHub;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Clients;
@@ -28,6 +33,10 @@ using Spectra.Application.MasterData.InternalExaminations;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
+<<<<<<< HEAD
+=======
+using Spectra.Application.MasterData.ServicesMD.Services;
+>>>>>>> Admin-BackEnd
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Services;
@@ -39,9 +48,14 @@ using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
+<<<<<<< HEAD
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
+=======
+using Spectra.Domain.Shared.OptionDtos;
+using Spectra.Infrastructure.Admin;
+>>>>>>> Admin-BackEnd
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Contracts;
@@ -59,7 +73,11 @@ using Spectra.Infrastructure.MasterData.ExcelFile;
 using Spectra.Infrastructure.MasterData.GeneralComplaint;
 using Spectra.Infrastructure.MasterData.InternalExaminations;
 using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
+<<<<<<< HEAD
 using Spectra.Infrastructure.MasterData.Services;
+=======
+using Spectra.Application.MasterData.ServicesMD;
+>>>>>>> Admin-BackEnd
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
@@ -68,9 +86,13 @@ using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Specialists;
+<<<<<<< HEAD
 using Stef.Validation;
 using System.Reflection;
 using System.Text;
+=======
+
+>>>>>>> Admin-BackEnd
 
 namespace Spectra.Infrastructure
 {
@@ -91,8 +113,12 @@ namespace Spectra.Infrastructure
             
             services.AddHttpClient();
 
+<<<<<<< HEAD
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
+=======
+            services.AddScoped(typeof(IAuthorizer<>), typeof(Authorize<>));
+>>>>>>> Admin-BackEnd
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -130,6 +156,10 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
+<<<<<<< HEAD
+=======
+            services.AddScoped<IAdminService, AdminService>();
+>>>>>>> Admin-BackEnd
 
          
 
@@ -166,6 +196,7 @@ namespace Spectra.Infrastructure
 
             return services;
         }
+<<<<<<< HEAD
         private static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -233,6 +264,9 @@ namespace Spectra.Infrastructure
 
             return services;
         }
+=======
+
+>>>>>>> Admin-BackEnd
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();

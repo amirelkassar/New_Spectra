@@ -22,9 +22,9 @@ namespace Spectra.WebAPI.Controllers
 
         }
 
-        [HttpPost("GetAllContracts")]
+        [HttpGet("GetAllContracts")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllContractsSend(GetAllContactrQuery input  )
+        public async Task<ActionResult> GetAllContractsSend([FromQuery] GetAllContactrQuery input  )
         {
             var Contracties = await _contractService.GetAllContracts(input);
             return Ok(Contracties);

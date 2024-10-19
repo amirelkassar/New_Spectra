@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using FluentValidation;
 using Spectra.Domain.Shared.Wrappers;
+<<<<<<< HEAD
+=======
+using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Domain.Shared.Common.Exceptions;
+>>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.InternalExaminations.Commands
 {
@@ -39,7 +44,16 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
         {
            
             var internalExamination = await _InternalExaminationRepository.GetByIdAsync(request.Id);
+<<<<<<< HEAD
           
+=======
+       
+            var names = await _InternalExaminationRepository.GetAllAsync(b => b.Name == request.Name);
+            if (names != null)
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+>>>>>>> Admin-BackEnd
 
             internalExamination.Name = request.Name;
             internalExamination.Code = request.Code;

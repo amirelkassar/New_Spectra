@@ -24,13 +24,7 @@ namespace Spectra.Infrastructure.MasterData.Drug
         }
         public async Task<DrugMD> GetByIdAsync(string id)
         {
-            var entity = await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
-            if (entity == null)
-            {
-                throw new NotFoundException("Drug", id);
-            }
-
-            return entity;
+            return await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task AddAsync(DrugMD Drug)
@@ -48,10 +42,10 @@ namespace Spectra.Infrastructure.MasterData.Drug
             await _Drug.DeleteOneAsync(c => c.Id == Drug.Id);
         }
 
-        public async Task<IEnumerable<DrugMD>> GetAllAsync()
+        public async Task<IEnumerable<DrugMD>> GetAllAsync(Expression<Func<DrugMD, bool>> filter = null, FindOptions options = null)
         {
-
-            return await _Drug.Find(p => true).ToListAsync();
+            filter ??= _ => true;
+            return await _Drug.Find(filter, options).ToListAsync();
         }
     }
 }

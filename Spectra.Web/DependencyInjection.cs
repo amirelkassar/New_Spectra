@@ -20,8 +20,14 @@ namespace Spectra.Web
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
+<<<<<<< HEAD
             ConfigureSwagger(services, configuration);
             ConfigureCros(services,configuration);
+=======
+            ConfigureIdentityManagement(services, configuration);
+            ConfigureIdentityServerSettings(services, configuration);
+            ConfigureSwagger(services, configuration);
+>>>>>>> Admin-BackEnd
             return services;
         }
 
@@ -80,6 +86,7 @@ namespace Spectra.Web
             if (_identityServerSetting != null)
                 services.AddSingleton(_identityServerSetting);
         }
+<<<<<<< HEAD
 
         private static void ConfigureCros(IServiceCollection services, IConfiguration configuration)
         {
@@ -101,5 +108,7 @@ namespace Spectra.Web
 
 
         }
+=======
+>>>>>>> Admin-BackEnd
     }
 }

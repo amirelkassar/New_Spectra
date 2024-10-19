@@ -42,6 +42,10 @@ namespace Spectra.Domain.Patients
             ClientPatientRelations relationToClient,
             double childHeight,
             double childWeightt,
+            string dateOfOnSetOfSymptoms,
+            TypeOfDisease inheritedOrAcquired,
+      
+
             string clientId) : base(id)
         {
             Id = id;
@@ -52,6 +56,8 @@ namespace Spectra.Domain.Patients
             RelationToClient = relationToClient;
             ChildHeight = childHeight;
             ChildWeightt = childWeightt;
+            DateOfOnSetOfSymptoms = dateOfOnSetOfSymptoms;
+            InheritedOrAcquired = inheritedOrAcquired;
        
             ClientId = clientId;
         }
@@ -65,6 +71,11 @@ namespace Spectra.Domain.Patients
             ClientPatientRelations relationToClient,
             double childHeight,
             double childWeightt,
+            string dateOfOnSetOfSymptoms,
+            TypeOfDisease inheritedOrAcquired,
+         
+
+
             string clientId)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
@@ -75,6 +86,8 @@ namespace Spectra.Domain.Patients
             ArgumentNullException.ThrowIfNull(relationToClient, nameof(relationToClient));
             ArgumentNullException.ThrowIfNull(childHeight, nameof(childHeight));
             ArgumentNullException.ThrowIfNull(childWeightt, nameof(childWeightt));
+            ArgumentNullException.ThrowIfNull(dateOfOnSetOfSymptoms, nameof(dateOfOnSetOfSymptoms));
+            ArgumentNullException.ThrowIfNull(inheritedOrAcquired, nameof(inheritedOrAcquired));
             ArgumentNullException.ThrowIfNull(clientId, nameof(clientId));
 
 

@@ -34,10 +34,10 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
             }
 
 
-            var appointment = await _appointmentRepository.GetAllAsync(c => c.DoctorId == request.DoctorId);
+            var appointment = await _appointmentRepository.GetAllAsyncA(c => c.DoctorId == request.DoctorId);
 
 
-            return OperationResult<IEnumerable<Appointment>>.Success(appointment);
+            return OperationResult<IEnumerable<Appointment>>.Success(appointment.Items);
 
 
         }

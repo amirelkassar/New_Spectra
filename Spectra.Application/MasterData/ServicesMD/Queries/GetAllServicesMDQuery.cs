@@ -1,4 +1,5 @@
 ﻿using MediatR;
+<<<<<<< HEAD
 using Spectra.Application.Clients;
 using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.HellperFunc;
@@ -16,6 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+=======
+using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Wrappers;
+>>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {

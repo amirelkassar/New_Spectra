@@ -28,7 +28,9 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 
             var command = new CreateMedicalTestsAndXraysCommand
             {
-                ScientificName = input.ScientificName,
+                ScientificNameEng = input.ScientificNameEng,
+                ScientificNameByEngByArab = input.ScientificNameByEngByArab,
+                Code = input.Code,
                 Notes = input.Notes,
                 ExaminationTypes = input.ExaminationTypes
             };
@@ -41,9 +43,11 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
             List<CreateMedicalTestsAndXraysCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateMedicalTestsAndXraysCommand
             {
 
-                ScientificName = cells[0],
-                Notes = cells[1],
-                ExaminationTypes = Enum.TryParse<ExaminationType>(cells[2], true, out var examinationType) ? examinationType : throw new ArgumentException($"Invalid ExaminationType: {cells[2]}")
+                ScientificNameEng = cells[0],
+                ScientificNameByEngByArab = cells[1],
+                ExaminationTypes = Enum.TryParse<ExaminationType>(cells[2], true, out var examinationType) ? examinationType : throw new ArgumentException($"Invalid ExaminationType: {cells[2]}"),
+                Notes = cells[3],
+                Code = cells[4],
             });
 
 
@@ -60,19 +64,21 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
             {
 
                 Id = id,
-                ScientificName = input.ScientificName,
+                ScientificNameByEng = input.ScientificNameByEng,
+                Code = input.Code,
+                ScientificNameByEngByArab = input.ScientificNameByEngByArab,
                 Notes = input.Notes,
                 ExaminationTypes = input.ExaminationTypes
 
             };
 
-         return   await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id)
         {
             var command = new DeleteMedicalTestsAndXraysCommand { Id = id };
-         return   await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetMedicalTestsAndXrayById(string id)

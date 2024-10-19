@@ -21,7 +21,7 @@ namespace Spectra.Domain.AppRole
         {
             var domainEvent = _domainEvents.Find(e => e.Id == eventId);
             if (domainEvent != null)
-            {
+    {
                 _domainEvents.Remove(domainEvent);
             }
         }

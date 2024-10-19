@@ -3,6 +3,10 @@ using MediatR;
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Application.Messaging;
 using Spectra.Application.Patients;
+<<<<<<< HEAD
+=======
+using Spectra.Domain.Shared.Common.Exceptions;
+>>>>>>> Admin-BackEnd
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using System;
@@ -40,9 +44,22 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
         public async Task<OperationResult<Unit>> Handle(UpdateGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
         
+<<<<<<< HEAD
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
 
                 generalComplaint.Code1 = request.Code1;
+=======
+
+            var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
+            var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName);
+            if (names != null)
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+
+
+            generalComplaint.Code1 = request.Code1;
+>>>>>>> Admin-BackEnd
             generalComplaint.ComplaintName = request.ComplaintName;
             generalComplaint.DescriptionOfTheComplaint = request.DescriptionOfTheComplaint;
 

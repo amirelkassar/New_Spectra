@@ -21,10 +21,16 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
             public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> Handle(GetAllMedicalTestsAndXrayNamesQuery request, CancellationToken cancellationToken)
             {
 
+<<<<<<< HEAD
 
                 var entitiy = await _medicalTestsAndXrayRepository.GetAllAsync();
 
                 var entitiyName = entitiy.Select(x => new BassMasterDataDto { Name = x.ScientificName });
+=======
+                var entitiy = await _medicalTestsAndXrayRepository.GetAllAsync();
+
+                var entitiyName = entitiy.Select(x => new BassMasterDataDto { Name = x.ScientificNameByEng });
+>>>>>>> Admin-BackEnd
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(entitiyName);
 

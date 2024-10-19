@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Domain.Shared.Wrappers;
+<<<<<<< HEAD
+=======
+using Spectra.Domain.Shared.Common.Exceptions;
+>>>>>>> Admin-BackEnd
 
 
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
@@ -34,8 +38,17 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
         {
           
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
+<<<<<<< HEAD
         
 
+=======
+
+            var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == generalComplaint.ComplaintName);
+            if (names != null)
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+>>>>>>> Admin-BackEnd
             await _generalComplaintRepository.DeleteAsync(generalComplaint);
             return OperationResult<Unit>.Success(Unit.Value);
        

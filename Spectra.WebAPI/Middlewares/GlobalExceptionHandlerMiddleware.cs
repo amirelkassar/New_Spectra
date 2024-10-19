@@ -37,18 +37,30 @@ namespace Spectra.WebAPI.Middlewares
 
             string? errorMessage;
             HttpStatusCode statusCode;
-            string? errorType;
             switch (exception)
             {
+                case ValidationException validationException:
+                    errorType = "ValidationError";
+                    statusCode = HttpStatusCode.UnprocessableEntity;
+
+                    errorCollection = (Dictionary<string, string[]>)validationException.Errors;
+                    break;
+
                 case RequestErrorException _:
                     errorType = "RequestError";
-                    errorMessage = exception.Message;
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "General", new[] { exception.Message } } 
+            };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
 
                 case DbErrorException _:
                     errorType = "DbError";
-                    errorMessage = exception.Message;
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "General", new[] { exception.Message } } 
+            };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
 
@@ -60,7 +72,10 @@ namespace Spectra.WebAPI.Middlewares
                     break;
                 case NotFoundException notFoundException:
                     errorType = "NotFoundError";
-                    errorMessage = notFoundException.Message;
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "General", new[] { notFoundException.Message } }
+            };
                     statusCode = HttpStatusCode.NotFound;
                     break;
 
@@ -96,21 +111,20 @@ namespace Spectra.WebAPI.Middlewares
 
                 default:
                     errorType = "UnknownError";
-                    errorMessage = exception.Message;
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "General", new[] { exception.Message } } 
+            };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 
-            var errorResponse = new
+            var errorResponse = new 
             {
-                error = new
-                {
-                    errorType,
-                    errorCode,
-                    errorMessage,
-                    success,
-                    errorCollection
-                }
+                errors = errorCollection,
+                errorType,
+                errorCode,
+                success
             };
 
             var jsonResponse = JsonConvert.SerializeObject(errorResponse);

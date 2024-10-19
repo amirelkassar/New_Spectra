@@ -21,12 +21,14 @@ namespace Spectra.Domain.ScheduleAppointments
 
         public TimeOnly To { get; set; }
         public MoringOrNight ToMoringOrNight { get; set; }
+        //public AppointmentServices AppointmentService { get; set; }
+
 
         protected Appointment() { }
 
         private Appointment(string id, string doctorId, DateTime daysdate ,
             string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status, 
-            TimeOnly timeOfAppoinment, TimeOnly to, MoringOrNight toMoringOrNight) 
+            TimeOnly from, TimeOnly to, MoringOrNight toMoringOrNight ) 
             {
             Id = id;
             DoctorId = doctorId;
@@ -36,15 +38,17 @@ namespace Spectra.Domain.ScheduleAppointments
             DoctorScheduleId = doctorScheduleId;
             ClientId = clientId;
             Status = status;
-                From = timeOfAppoinment;
+             From = from;
             To = to;
             ToMoringOrNight = toMoringOrNight;
+      
 
         }
         public static Appointment Create(string id, string doctorId, DateTime daysdate, 
-            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status, TimeOnly timeOfAppoinment, TimeOnly to, MoringOrNight toMoringOrNight
-   )
+            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status, 
+            TimeOnly from, TimeOnly to, MoringOrNight toMoringOrNight)
         {
+
 
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(doctorId, nameof(doctorId));
@@ -53,16 +57,15 @@ namespace Spectra.Domain.ScheduleAppointments
             ArgumentNullException.ThrowIfNull(clientId, nameof(clientId));
             ArgumentNullException.ThrowIfNull(daysdate, nameof(daysdate));
             ArgumentNullException.ThrowIfNull(status, nameof(status));
-            ArgumentNullException.ThrowIfNull(timeOfAppoinment, nameof(timeOfAppoinment));
+            ArgumentNullException.ThrowIfNull(from, nameof(from));
             ArgumentNullException.ThrowIfNull(to, nameof(to));
             ArgumentNullException.ThrowIfNull(toMoringOrNight, nameof(toMoringOrNight));
-
-          
-          
+         
 
 
 
-            return new Appointment(id, doctorId, daysdate, appointmentNotes , appointmentType , doctorScheduleId , clientId , status , timeOfAppoinment, to, toMoringOrNight);
+            return new Appointment(id, doctorId, daysdate, appointmentNotes , appointmentType , doctorScheduleId , clientId 
+                , status , from, to, toMoringOrNight );
 
         }
 

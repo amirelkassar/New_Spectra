@@ -4,8 +4,10 @@ namespace Spectra.Application.MasterData.HellperFunc
 {
     public interface IHellper
     {
-        Task<string> Createattachment(IFormFile attachment, string fileName);
-        Task Deleteattachment(string? attachment);
-        Task<string> Updateattachment(string? attachment, IFormFile upload, string fileName);
+        Task<List<string>> CreateAttachments(IEnumerable<IFormFile> attachments, string folderName);
+        Task DeleteAttachment(string? attachment);
+   
+        Task DeleteAttachments(List<string> attachments);
+        Task<List<string>> UpdateAttachment(List<string>? existingAttachment, List<IFormFile> newAttachments, string folderName);
     }
 }

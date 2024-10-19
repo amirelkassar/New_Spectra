@@ -22,7 +22,7 @@ namespace Spectra.Domain.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public string AttachmentPath { get; set; }
+        public List<string> AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
 
         public EmploymentStatus Status { get; set; }
@@ -39,7 +39,7 @@ namespace Spectra.Domain.MedicalStaff
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
-                   string attachmentPath,
+                    List<string> attachmentPath,
                    EmpelyeeRates? empelyeeRate,
                    EmploymentStatus status
                    ) : base(id)

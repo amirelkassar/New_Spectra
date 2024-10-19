@@ -2,6 +2,7 @@
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Spectra.Domain.MedicalStaff.Doctor
 {
@@ -22,13 +23,17 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath,
-             EmpelyeeRates? empelyeeRate,
+         List<string> attachmentPath,
+            EmpelyeeRates? empelyeeRate,
             EmploymentStatus status
 
 
             )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate , status) { } 
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate ,
+                  status)
+        { 
+
+        } 
 
    
             public static Doctor Create(
@@ -43,9 +48,9 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            string attachmentPath,
-            EmpelyeeRates? empelyeeRate,
-                 EmploymentStatus status
+           List<string> attachmentPath,
+            EmploymentStatus status,
+            EmpelyeeRates? empelyeeRate
 
             )
 
@@ -61,10 +66,11 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
             ArgumentNullException.ThrowIfNull(empelyeeRate, nameof(empelyeeRate));
+            ArgumentNullException.ThrowIfNull(status, nameof(status));
+
 
             var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate, EmploymentStatus.Wating
-);
+                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate, status);
 
             return doctor;
 

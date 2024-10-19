@@ -11,6 +11,7 @@ namespace Spectra.Domain.Clients
 {
     public class Client : BaseAuditableEntity<string>
     {
+
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
@@ -22,6 +23,7 @@ namespace Spectra.Domain.Clients
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
         public Organization? Organization { get; set; }
+        public MedicalServiceProvider? MedicalServiceProvider { get; set; }
         public List<Patient>? Patients { get; set; }
         public List<ServicePackage>? ServicePackages { get; set; }
 
@@ -39,6 +41,8 @@ namespace Spectra.Domain.Clients
             Address address,
             List<Patient>? patients,
             Organization? organization = null,
+            MedicalServiceProvider? medicalServiceProvider = null
+            ,
             List<ServicePackage>? servicePackages = null
             ) : base(id)
         {
@@ -52,6 +56,7 @@ namespace Spectra.Domain.Clients
             Address = address;
             Patients = patients;
             Organization = organization;
+            MedicalServiceProvider = medicalServiceProvider;
             ServicePackages = servicePackages;
         }
 
@@ -66,6 +71,7 @@ namespace Spectra.Domain.Clients
             Address address,
             List<Patient>? patients,
             Organization organization,
+            MedicalServiceProvider? medicalServiceProvider,
             List<ServicePackage>? ServicePackages
             )
         {
@@ -78,7 +84,7 @@ namespace Spectra.Domain.Clients
             ArgumentNullException.ThrowIfNull(address, nameof(address));
 
             var client = new Client(id, name, nationalId, phoneNumber, clientTypes, userId,
-                emailAddress, address, patients, organization, ServicePackages);
+                emailAddress, address, patients, organization, medicalServiceProvider , ServicePackages);
             var clientCreatedEvent = new ClientCreatedEvent(client);
             client.AddDomainEvent(clientCreatedEvent);
             return client;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,16 @@ using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Wrappers;
 
+=======
+﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Spectra.Application.MasterData.Drug;
+using Spectra.Application.MasterData.Drug.Commands;
+using Spectra.Domain.MasterData.Drug;
+using Spectra.Domain.Shared.Wrappers;
+
+
+>>>>>>> Admin-BackEnd
 namespace Spectra.Application.MasterData.UploadExcel.Command
 {
     public class CreateDrugFormExcelCommand
@@ -49,7 +60,14 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                item.DrugInteractionsWithOtherdrugs,
                item.Contraindications,
                null,
+<<<<<<< HEAD
                item.Code
+=======
+               item.Code,
+               item.Nots
+               ,
+               item.Type
+>>>>>>> Admin-BackEnd
                );
 
 
