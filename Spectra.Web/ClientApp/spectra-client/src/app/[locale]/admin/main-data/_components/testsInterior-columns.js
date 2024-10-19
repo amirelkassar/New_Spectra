@@ -1,20 +1,20 @@
-import ActionMenu from "./ActionMenuTestsInterior";
+import ActionMenu from './ActionMenuTestsInterior';
 
 export const TestsInteriorColumns = [
   {
-    accessorKey: "name",
-    header: "الاسم",
+    accessorKey: 'name',
+    header: 'الاسم',
   },
   {
-    accessorKey: "code",
-    header: "الكود ",
+    accessorKey: 'code',
+    header: 'الكود ',
   },
   {
-    accessorKey: "examinationTypes",
-    header: "التخصص ",
+    accessorKey: 'examinationTypes',
+    header: 'التخصص ',
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
       return <ActionMenu id={id} />;
