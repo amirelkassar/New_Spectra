@@ -46,7 +46,7 @@ namespace Spectra.Infrastructure.Admin
         {
             var query = new UpdateDoctorEmploymentStatusCommand
             {
-                Id = id,
+                Ids = input.Ids,
                 Status = input.Status
             };
             return await _mediator.Send(query);
@@ -55,11 +55,12 @@ namespace Spectra.Infrastructure.Admin
         {
             var query = new UpdateDoctorEmploymentStatusCommand
             {
-                Id = input.Id,
+                Ids = input.Ids,
                 Status = input.Status
             };
             return await _mediator.Send(query);
         }
+
         public async Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input)
         {
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize, Status = input.Status };
