@@ -13,6 +13,7 @@ import AcceptIcon from "@/assets/icons/accept";
 import useModal from "@/store/modal-slice";
 import ContractsTextDetails from "@/components/contractsTextDetails";
 import { useSearchParams } from "next/navigation";
+import WorkNum from "./workNum";
 const serviceOptions = [
   { value: "examination", label: "Examination Service" },
   { value: "counseling", label: "Counseling Service" },
@@ -183,7 +184,7 @@ function ContractInformation({ id }) {
           serviceData={memberServiceData}
           handleServiceDataChange={handleServiceDataChange}
         />
-
+        <WorkNum />
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           <Button
             onClick={() => {}}

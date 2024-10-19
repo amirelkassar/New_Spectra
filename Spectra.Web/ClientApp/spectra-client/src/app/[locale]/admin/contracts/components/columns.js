@@ -1,10 +1,9 @@
-import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
-import RefuseIcon from "@/assets/icons/refuse";
 import Button from "@/components/button";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import Image from "next/image";
 import ActionMenu from "./ActionMenu";
+import LinkGreen from "@/components/linkGreen";
 
 export const columns = [
   {
@@ -54,7 +53,7 @@ export const columns = [
             {status === "ultimate" && (
               <div className="bg-red/20 py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
                 <p className="font-Bold text-[12px] md:text-[16px] text-red">
-                  غير نشط
+                  منتهى
                 </p>
               </div>
             )}
@@ -139,74 +138,40 @@ export const columns = [
             )}
             {status === "manger" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
-                <Button
-                  onClick={() => {}}
+                <LinkGreen
+                  href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(5, id)}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
                 >
-                  قبول
-                </Button>
-                <Button
-                  onClick={() => {
-                    editModal("type", "contractsReq");
-                    editModal("open", true);
-                  }}
-                  className={
-                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
-                  }
-                >
-                  رفض
-                </Button>
+                  عرض
+                </LinkGreen>
               </div>
             )}
             {status === "admin" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
-                <Button
-                  onClick={() => {}}
+                <LinkGreen
+                  href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(5, id)}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
                 >
-                  قبول
-                </Button>
-                <Button
-                  onClick={() => {
-                    editModal("type", "contractsReq");
-                    editModal("open", true);
-                  }}
-                  className={
-                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
-                  }
-                >
-                  رفض
-                </Button>
+                  عرض
+                </LinkGreen>
               </div>
             )}
             {status === "reviewed" && (
               <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap ">
-                <Button
-                  onClick={() => {}}
+                <LinkGreen
+                  href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(5, id)}
                   className={
                     "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                   }
                 >
-                  قبول
-                </Button>
-                <Button
-                  onClick={() => {
-                    editModal("type", "contractsReq");
-                    editModal("open", true);
-                  }}
-                  className={
-                    "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
-                  }
-                >
-                  رفض
-                </Button>
+                  عرض
+                </LinkGreen>
               </div>
             )}
-           
           </div>
 
           <ActionMenu id={id} />

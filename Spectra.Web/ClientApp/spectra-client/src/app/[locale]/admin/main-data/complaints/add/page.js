@@ -7,13 +7,15 @@ import ROUTES from "@/routes";
 import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
 import { useCreateComplaint } from "@/useAPI/admin/main-data/complaints";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page() {
-  const { mutate: CreateComplaint } = useCreateComplaint();
+  const { mutate: CreateComplaint, error } = useCreateComplaint();
+  console.log(error);
 
   const [formData, setFormData] = useState({
-    complaintName: "",
-    code1: "",
-    descriptionOfTheComplaint: "",
+    complaintName: null,
+    code1: null,
+    descriptionOfTheComplaint: null,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,14 +47,16 @@ function Page() {
           <InputGreen
             label="اسم الشكوى"
             name="complaintName"
-            value={formData.complaintName}
+            value={formData.complaintName||''}
             onChange={handleChange}
+            error={GetErrorMsg(error, "ComplaintName")}
           />
           <InputGreen
             label="الكود"
             name="code1"
-            value={formData.code1}
+            value={formData.code1||''}
             onChange={handleChange}
+            error={GetErrorMsg(error, "Code1")}
           />
           <Textarea
             classNames={{
@@ -60,9 +64,10 @@ function Page() {
                 "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",
               label: "text-[12px] md:text-[16px]",
             }}
+            error={GetErrorMsg(error, "DescriptionOfTheComplaint")}
             label="وصف الشكوى"
             name="descriptionOfTheComplaint"
-            value={formData.descriptionOfTheComplaint}
+            value={formData.descriptionOfTheComplaint||''}
             onChange={handleChange}
           />
         </form>

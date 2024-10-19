@@ -114,7 +114,7 @@ function ContractInformation({ id }) {
   console.log(searchparams.get("editContracts"));
 
   return (
-    <Card>
+    <Card className="mt-5 ">
       {searchparams.get("editContracts") === "true" ? (
         <div
           className="mb-6 flex items-start justify-start ps-3 lgl:ps-20"
