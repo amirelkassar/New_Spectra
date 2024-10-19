@@ -5,7 +5,7 @@ import ROUTES from '@/routes';
 
 export const Logo = ({ className = '' }) => {
   return (
-    <Link href={ROUTES.HOME}>
+    <Link className='w-fit block' href={ROUTES.HOME}>
       <LogoIcon className={className} />
     </Link>
   );

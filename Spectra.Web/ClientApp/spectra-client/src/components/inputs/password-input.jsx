@@ -12,10 +12,10 @@ const PasswordInput = ({
       size={size}
       classNames={{
         input:
-          'rounded-lg focus:border-greenMain focus-within:border-greenMain',
-        label: `text-xs lg:text-base mb-2 ps-1 ${labelClassName}`,
+          'rounded-lg focus:border-greenMain focus-within:border-greenMain  placeholder:font-normal',
+        label: `text-base mdl:text-xl mb-2 ps-1 ${labelClassName}`,
         innerInput:
-          'rounded-lg focus:border-greenMain focus-within:border-greenMain',
+          'rounded-lg focus:border-greenMain focus-within:border-greenMain  placeholder:font-normal',
       }}
     />
   );

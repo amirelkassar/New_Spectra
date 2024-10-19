@@ -6,6 +6,7 @@ import TextInput from '@/components/inputs/text-input';
 import PasswordInput from '@/components/inputs/password-input';
 import Button from '@/components/button';
 import ROUTES from '@/routes';
+import { FormErrorMessage } from '@/components/form-error-message';
 
 export const LoginForm = () => {
   const onSubmit = (e) => {
@@ -14,18 +15,18 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit} className='space-y-5 '>
+      <FormErrorMessage />
+
       <TextInput
         label={'اسم المستخدم'}
         placeholder={'ادخل اسمك بالكامل'}
         size='lg'
-        labelClassName='!text-base'
       />
 
       <PasswordInput
         label={'كلمة المرور'}
         placeholder={'ادخل كلمة المرور'}
         size='lg'
-        labelClassName='!text-base'
       />
 
       <Link

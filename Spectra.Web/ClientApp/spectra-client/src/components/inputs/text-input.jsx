@@ -11,8 +11,8 @@ const TextInput = ({
       {...props}
       size={size}
       classNames={{
-        input: `rounded-lg focus:border-greenMain ${inputClassName}`,
-        label: `text-xs lg:text-base mb-2 ps-1 ${labelClassName}`,
+        input: `rounded-lg placeholder:font-normal focus:border-greenMain ${inputClassName}`,
+        label: `text-base mdl:text-xl mb-2 ps-1 ${labelClassName}`,
       }}
     />
   );

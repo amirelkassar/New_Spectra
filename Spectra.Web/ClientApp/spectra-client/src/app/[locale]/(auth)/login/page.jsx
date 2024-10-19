@@ -14,7 +14,7 @@ const LoginPage = () => {
 
       <RegisterModal
         trigger={
-          <button className='block mx-auto text-xl transition-all hover:underline'>
+          <button className='block mx-auto mdl:mx-0 text-xl transition-all hover:underline'>
             ليس لديك حساب؟ اشترك الان
           </button>
         }

@@ -1,10 +1,6 @@
 {
   "extends": [
-    "next/core-web-vitals",   // Include Next.js core web vitals configuration
-    "plugin:react-hooks/recommended" // Extend recommended rules from react-hooks
-  ],
-  "plugins": [
-    "react-hooks"
+    "next/core-web-vitals"   // Next.js core web vitals configuration
   ],
   "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }],
