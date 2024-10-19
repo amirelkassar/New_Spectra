@@ -7,8 +7,8 @@ import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
 import ROUTES from "@/routes";
-import { DeleteDrugs } from "@/useAPI/admin/drugs/page";
 import { useRouter } from "@/navigation";
+import { DeleteDrugs } from "@/useAPI/admin/main-data/drugs";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();

@@ -8,19 +8,20 @@ import useModal from "@/store/modal-slice";
 import ShowIcon from "@/assets/icons/show";
 import EditIcon from "@/assets/icons/edit";
 import ROUTES from "@/routes";
+import { DeleteInternalExamination } from "@/useAPI/admin/main-data/testsInterior";
 
 function ActionMenu({ id }) {
   const { modal, editModal } = useModal();
-
+  const { mutate: deleteInternalExamination, isLoading } = DeleteInternalExamination(id);
+  const handleDelete = () => {
+    deleteInternalExamination();
+  };
   const options = [
     {
       label: "مسح",
       icon: <DeleteIcon />,
       type: "btn",
-      action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
-      },
+      action: handleDelete,
       color: "red",
     },
     {

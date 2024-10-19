@@ -6,7 +6,9 @@ import Button from "@/components/button";
 import ROUTES from "@/routes";
 import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
+import { useCreateSpecialization } from "@/useAPI/admin/main-data/specialties";
 function Page() {
+  const { mutate: CreateDiagnostics } = useCreateSpecialization();
   const [formData, setFormData] = useState({
     specializationName: "",
     description: "",
@@ -24,7 +26,7 @@ function Page() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    CreateDiagnostics(formData);
   };
   return (
     <div>

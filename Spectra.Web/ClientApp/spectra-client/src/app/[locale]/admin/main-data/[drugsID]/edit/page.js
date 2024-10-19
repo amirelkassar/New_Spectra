@@ -1,14 +1,13 @@
 "use client";
-import ArrowRight from "@/assets/icons/arrow-right";
 import BackIcon from "@/assets/icons/back";
 import CloseIcon from "@/assets/icons/close";
 import UploadImgIcon from "@/assets/icons/uploadImg";
 import Button from "@/components/button";
-import Input from "@/components/input";
+import HandelShowDataEdit from "@/components/handelShowDataEdit";
 import InputGreen from "@/components/Input-green";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import { GetDrugsID, useEditDrug } from "@/useAPI/admin/drugs/page";
+import { GetDrugsID, useEditDrug } from "@/useAPI/admin/main-data/drugs";
 import { Dropzone } from "@mantine/dropzone";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -28,9 +27,9 @@ function Page({ params }) {
     attachmentPath: [],
   });
   const { data, isLoading } = GetDrugsID(params.drugsID);
-  const { mutate: createDrug } = useEditDrug(formData?.id);
+  const { mutate: EditDrug } = useEditDrug(formData?.id);
   useEffect(() => {
-    setFormData(data?.data.data);
+    data?.data.data?setFormData(data.data.data):null
   }, [isLoading]);
 
   const handleHeaderInputChange = (files) => {
@@ -60,7 +59,7 @@ function Page({ params }) {
     e.preventDefault();
     const id = formData.id;
     console.log(id);
-    
+
     const formDataToSend = new FormData();
     for (const key in formData) {
       if (Array.isArray(formData[key])) {
@@ -72,7 +71,7 @@ function Page({ params }) {
       }
     }
 
-    createDrug(formDataToSend);
+    EditDrug(formDataToSend);
   };
   return (
     <div>
@@ -85,129 +84,127 @@ function Page({ params }) {
         </Link>
         <h2 className="headTitleDash">اضافة وصفة طبية</h2>
       </div>
-      {!isLoading ? (
-        formData?.id ? (
-          <div>
-            <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
-              <div className="flex-1 w-full h-auto relative">
-                <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">
-                  صورة العقار
-                </h3>
-                {formData?.attachmentPath?.length > 0 ? (
-                  <div className="flex w-full h-auto items-center flex-wrap gap-3">
-                    {formData.attachmentPath.map((img, index) => (
+      <HandelShowDataEdit isLoading={isLoading} isID={formData?.id}>
+        <div>
+          <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
+            <div className="flex-1 w-full h-auto relative">
+              <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">
+                صورة العقار
+              </h3>
+              {formData?.attachmentPath?.length > 0 ? (
+                <div className="flex w-full h-auto items-center flex-wrap gap-3">
+                  {formData.attachmentPath.map((img, index) => (
+                    <div
+                      key={index}
+                      className="relative flex items-center justify-center max-w-[100px] mdl:max-w-[140px] h-[60px] mdl:h-[98px] w-auto"
+                    >
+                      <Image
+                        src={URL.createObjectURL(img)}
+                        width={100}
+                        height={100}
+                        priority={true}
+                        alt={`img-${index}`}
+                        className="h-full place-content-center block w-auto object-contain object-center"
+                      />
                       <div
-                        key={index}
-                        className="relative flex items-center justify-center max-w-[100px] mdl:max-w-[140px] h-[60px] mdl:h-[98px] w-auto"
+                        onClick={() => handleDeleteImage(index)}
+                        className="absolute cursor-pointer bg-white duration-200 hover:shadow-md top-0 start-0 bg-red-500 text-white rounded-full"
                       >
-                        <Image
-                          src={URL.createObjectURL(img)}
-                          width={100}
-                          height={100}
-                          priority={true}
-                          alt={`img-${index}`}
-                          className="h-full place-content-center block w-auto object-contain object-center"
-                        />
-                        <div
-                          onClick={() => handleDeleteImage(index)}
-                          className="absolute cursor-pointer bg-white duration-200 hover:shadow-md top-0 start-0 bg-red-500 text-white rounded-full"
-                        >
-                          <CloseIcon className={"w-5 h-auto"} />
-                        </div>
+                        <CloseIcon className={"w-5 h-auto"} />
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <Dropzone
-                    onDrop={handleHeaderInputChange}
-                    maxSize={5 * 1024 ** 2}
-                    className="mb-1 mdl:mb-5 rounded-xl"
-                  >
-                    <div className="flex gap-1 p1-8 flex-col justify-center h-14 mdl:h-[80px] items-center">
-                      <UploadImgIcon className="w-6 mdl:w-8 h-auto" />
-                      <h2 className="text-xs mdl:text-base text-grayDark font-Light">
-                        اضغط هنا لرفع صورة
-                      </h2>
                     </div>
-                  </Dropzone>
-                )}
-              </div>
-
-              <InputGreen
-                label="اسم العقار"
-                name="name"
-                placeholder="اسم العقار او نوع التوصية"
-                value={getValue(formData.name)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="الكود"
-                name="code"
-                value={getValue(formData.code)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="المادة الفعالة"
-                name="activeIngredient"
-                value={getValue(formData.activeIngredient)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="الاسم العلمي"
-                name="scientificName"
-                value={getValue(formData.scientificName)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="النوع"
-                name="type"
-                value={getValue(formData.type)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="الجرعة الموصى به"
-                name="recommendedDosage"
-                value={getValue(formData.recommendedDosage)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="تركيز الدواء"
-                name="doncentration"
-                value={getValue(formData.doncentration)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="تفاعلات الدواء مع أدوية أخرى"
-                name="DrugInteractionsWithOtherdrugs"
-                value={getValue(formData.interactionsWithOtherdrugs)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="موانع الاستخدام"
-                name="contraindications"
-                value={getValue(formData.contraindications)}
-                onChange={handleInputChange}
-              />
-              <InputGreen
-                label="ملاحظات"
-                name="notes"
-                value={getValue(formData.notes)}
-                onChange={handleInputChange}
-              />
-            </form>
-            <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
-              <Button
-                onClick={handleSubmit}
-                type="submit"
-                variant="secondary"
-                className="max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
-              >
-                حفظ
-              </Button>
+                  ))}
+                </div>
+              ) : (
+                <Dropzone
+                  onDrop={handleHeaderInputChange}
+                  maxSize={5 * 1024 ** 2}
+                  className="mb-1 mdl:mb-5 rounded-xl"
+                >
+                  <div className="flex gap-1 p1-8 flex-col justify-center h-14 mdl:h-[80px] items-center">
+                    <UploadImgIcon className="w-6 mdl:w-8 h-auto" />
+                    <h2 className="text-xs mdl:text-base text-grayDark font-Light">
+                      اضغط هنا لرفع صورة
+                    </h2>
+                  </div>
+                </Dropzone>
+              )}
             </div>
+
+            <InputGreen
+              label="اسم العقار"
+              name="name"
+              placeholder="اسم العقار او نوع التوصية"
+              value={getValue(formData.name)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="الكود"
+              name="code"
+              value={getValue(formData.code)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="المادة الفعالة"
+              name="activeIngredient"
+              value={getValue(formData.activeIngredient)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="الاسم العلمي"
+              name="scientificName"
+              value={getValue(formData.scientificName)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="النوع"
+              name="type"
+              value={getValue(formData.type)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="الجرعة الموصى به"
+              name="recommendedDosage"
+              value={getValue(formData.recommendedDosage)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="تركيز الدواء"
+              name="doncentration"
+              value={getValue(formData.doncentration)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="تفاعلات الدواء مع أدوية أخرى"
+              name="DrugInteractionsWithOtherdrugs"
+              value={getValue(formData.interactionsWithOtherdrugs)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="موانع الاستخدام"
+              name="contraindications"
+              value={getValue(formData.contraindications)}
+              onChange={handleInputChange}
+            />
+            <InputGreen
+              label="ملاحظات"
+              name="notes"
+              value={getValue(formData.notes)}
+              onChange={handleInputChange}
+            />
+          </form>
+          <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
+            <Button
+              onClick={handleSubmit}
+              type="submit"
+              variant="secondary"
+              className="max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
+            >
+              حفظ
+            </Button>
           </div>
-        ) : null
-      ) : null}
+        </div>
+      </HandelShowDataEdit>
     </div>
   );
 }

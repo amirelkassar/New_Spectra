@@ -7,7 +7,8 @@ import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import EditIcon from "@/assets/icons/edit";
-import { DeleteDrugs } from "@/useAPI/admin/drugs/page";
+import { DeleteDrugs } from "@/useAPI/admin/main-data/drugs";
+
 
 function ActionMenu({ id }) {
   const { mutate: deleteDrug, isLoading } = DeleteDrugs(id);

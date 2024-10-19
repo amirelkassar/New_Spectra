@@ -6,7 +6,10 @@ import Image from "next/image";
 import React from "react";
 import imgDrugs from "@/assets/images/drugs.png";
 import ActionMenu from "../_components/ActionMenuDetails";
-import { GetDrugsID } from "@/useAPI/admin/drugs/page";
+import { GetDrugsID } from "@/useAPI/admin/main-data/drugs";
+import NoDataYet from "@/components/noDataYet";
+import HandelShowDataID from "@/components/handelShowDataID";
+
 function page({ params }) {
   const { data, isLoading } = GetDrugsID(params.drugsID);
   console.log(data?.data.data);
@@ -25,8 +28,8 @@ function page({ params }) {
         </div>
         <ActionMenu id={params.drugsID} />
       </div>
-      {!isLoading ? (
-        data?.data.code === 200 ? (
+      <HandelShowDataID isLoading={isLoading} statusCode={data?.data.code}>
+        {data?.data.code === 200 && (
           <div className="flex flex-col gap-5">
             <div className="pb-5 border-b last-of-type:border-none border-grayLight">
               <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
@@ -139,12 +142,8 @@ function page({ params }) {
               </p>
             </div>
           </div>
-        ) : (
-          <p>not found</p>
-        )
-      ) : (
-        <p>IS LOADING</p>
-      )}
+        )}
+      </HandelShowDataID>
     </div>
   );
 }

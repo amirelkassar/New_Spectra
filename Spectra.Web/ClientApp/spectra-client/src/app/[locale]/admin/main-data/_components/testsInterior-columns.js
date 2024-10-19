@@ -1,9 +1,8 @@
-import AllSpecializations from "@/assets/icons/all-specializations";
 import ActionMenu from "./ActionMenuTestsInterior";
 
 export const TestsInteriorColumns = [
   {
-    accessorKey: "title",
+    accessorKey: "name",
     header: "الاسم",
   },
   {
@@ -11,21 +10,8 @@ export const TestsInteriorColumns = [
     header: "الكود ",
   },
   {
-    accessorKey: "Specialization",
+    accessorKey: "examinationTypes",
     header: "التخصص ",
-    cell: ({ getValue, row }) => {
-      const Specialization = getValue();
-      console.log(Specialization);
-
-      return (
-        <p className="max-w-[150px] truncate text-base font-Regular">
-          {Specialization.map(
-            (item, index) =>
-              item + (index + 1 < Specialization.length ? " - " : "")
-          )}
-        </p>
-      );
-    },
   },
   {
     id: "actions",
@@ -35,3 +21,17 @@ export const TestsInteriorColumns = [
     },
   },
 ];
+
+// cell: ({ getValue, row }) => {
+//   const Specialization = getValue();
+//   console.log(Specialization);
+
+//   return (
+//     <p className="max-w-[150px] truncate text-base font-Regular">
+//       {Specialization.map(
+//         (item, index) =>
+//           item + (index + 1 < Specialization.length ? " - " : "")
+//       )}
+//     </p>
+//   );
+// }

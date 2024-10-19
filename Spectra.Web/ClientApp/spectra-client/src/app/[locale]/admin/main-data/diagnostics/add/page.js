@@ -6,11 +6,13 @@ import Button from "@/components/button";
 import ROUTES from "@/routes";
 import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
+import { useCreateDiagnostics } from "@/useAPI/admin/main-data/diagnostics";
 function Page() {
+  const { mutate: CreateDiagnostics } = useCreateDiagnostics();
   const [formData, setFormData] = useState({
-    code1: "",
-    code2: "",
-    code3: "",
+    code1: null,
+    code2: null,
+    code3: null,
     name: "",
     description: "",
   });
@@ -20,6 +22,10 @@ function Page() {
       ...prevData,
       [name]: value,
     }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    CreateDiagnostics(formData);
   };
   return (
     <div>
@@ -72,9 +78,7 @@ function Page() {
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-            onClick={() => {
-              console.log(formData);
-            }}
+            onClick={handleSubmit}
             variant="secondary"
             className={
               "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

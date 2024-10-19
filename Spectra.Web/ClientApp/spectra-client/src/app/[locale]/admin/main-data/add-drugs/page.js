@@ -6,7 +6,7 @@ import Button from "@/components/button";
 import InputGreen from "@/components/Input-green";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import { useCreateDrug } from "@/useAPI/admin/drugs/page";
+import { useCreateDrug } from "@/useAPI/admin/main-data/drugs";
 import { Dropzone } from "@mantine/dropzone";
 import Image from "next/image";
 import React, { useState } from "react";
