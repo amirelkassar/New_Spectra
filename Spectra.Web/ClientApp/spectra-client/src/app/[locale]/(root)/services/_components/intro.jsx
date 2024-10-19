@@ -7,7 +7,13 @@ import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-wh
 
 export const Intro = () => {
   return (
-    <div className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'>
+    <div
+      style={{
+        clipPath:
+          'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
+      }}
+      className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'
+    >
       <div className='absolute top-0 end-0 max-w-full max-h-full'>
         <BGSVG />
       </div>
@@ -19,9 +25,10 @@ export const Intro = () => {
       >
         <div className='w-1/2'>
           <Image
+            priority
             width={918}
             height={918}
-            src='https://s3-alpha-sig.figma.com/img/40f6/08a8/e791483c5cabc2e479a51dcb7a060fb0?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=P7pLXYDDoicUXEyHpQlrVDiModXOQ4ucLy5wGoNtiUneypyfCtnlZ6kH-trcD~vrEXQExipsjlPNZpflpx25Yp3M1Vsjpe5Ah4npLL1WD4lzroDFR-ztn~acap89bpNPuCMAywsPl4IMUsAgLbHd04ZQ6zbi7I-w~rvbrDFSyPWmBYo2eM6ZQfxn2MGxXGHQA2YtOU0uPR3opAoufUJabUvvI3V2tsxsT5OuAvMRtr~rUbST4XAziPlCZ0jnB2OIGdwghUwG830Iiu~Cn34-XtE8RE-RJ1Ty-UkzzQ48yWC3RktKv88LlcQtn1gs7hrnl2UVxy7nAf3AVso74qlV4w__'
+            src='/demo-baby-5.webp'
             alt='Smiling little girl'
             className='w-full h-full object-cover object-center'
           />
@@ -60,7 +67,7 @@ export const Intro = () => {
       </Section>
       <a
         href='#services'
-        className='absolute bottom-1 end-1/2 ltr:translate-x-1/2 rtl:-translate-x-1/2'
+        className='absolute bottom-5 end-1/2 ltr:translate-x-[80%] rtl:-translate-x-[80%]'
       >
         <ArrowGreenDownCircleWhite className='size-10 mdl:size-16' />
       </a>

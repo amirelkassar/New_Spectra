@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import { Section } from '../../_components/section';
-import Button from '@/components/button';
-import PlayIcon from '@/assets/icons/play';
-import NotificationIcon from '@/assets/icons/notification';
 import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
 
 export const Intro = () => {
   return (
-    <div className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'>
+    <div
+      style={{
+        clipPath:
+          'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
+      }}
+      className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'
+    >
       <div className='absolute top-0 start-0 max-w-full max-h-full'>
         <BGSVG />
       </div>
@@ -19,9 +22,10 @@ export const Intro = () => {
       >
         <div className='w-1/2'>
           <Image
+            priority
             width={918}
             height={918}
-            src='https://s3-alpha-sig.figma.com/img/fa00/3609/b6c019163ecbe09d406a8d8cef486bec?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Lnrn08zurVsCUQdA8N94vUpfciYp32fY8eibn6aaW6qyYDIx2GqwwJroJrWtA4-D7uXKYm-tTCu28HfH43YDS0iua4ff0C3h53athZB8Nb6jO3Ur7Xj7bqKlQ3DzaOGuIE6xqKVIcn7akeEcxwRP~WxkmqvESaV0bUiRHQynYECDmIJT5bjJasaOZxvd3kY8ntisuwZeboO0E05nZfp1wtwnspwym1NI~ivD-E3g5nIvXuzV-WmBI1BAxq8DXwjuD3Q7fuBL6pnqVwuzL8n59FEHm10Yc6rMUpU-42iqN8XzCoqacXT8o6TyfQbt0f5qSp69uCaSntFG2ZMF2nqhbQ__'
+            src='/demo-baby-6.webp'
             alt='Smiling little girl'
             className='w-full h-full object-cover object-center'
           />
@@ -41,7 +45,7 @@ export const Intro = () => {
       </Section>
       <a
         href='#services'
-        className='absolute bottom-1 end-1/2 ltr:translate-x-1/2 rtl:-translate-x-1/2'
+        className='absolute bottom-5 end-1/2 ltr:translate-x-[80%] rtl:-translate-x-[80%]'
       >
         <ArrowGreenDownCircleWhite className='size-10 mdl:size-16' />
       </a>

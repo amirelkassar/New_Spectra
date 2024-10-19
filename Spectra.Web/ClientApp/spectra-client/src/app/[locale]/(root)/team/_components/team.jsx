@@ -25,7 +25,7 @@ export const Team = () => {
     >
       <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
         {handlePagination(
-          4,
+          12,
           page,
           filterTeamMember(value)
         ).map((member) => (
@@ -35,7 +35,7 @@ export const Team = () => {
 
       <PaginationBtns
         data={filterTeamMember(value)}
-        noPerPage={4}
+        noPerPage={12}
         page={page}
         setPage={setPage}
       />

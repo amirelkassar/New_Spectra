@@ -5,10 +5,18 @@ import { WhyUs } from '../team/_components/why-us';
 const TreatmentPage = () => {
   return (
     <main>
-      <WhatWeCure className='mt-20 mdl:mt-28' />
+      <div
+        style={{
+          clipPath:
+            'polygon(50% 100%, 100% 90%, 100% 0, 0 0, 0 90%)',
+        }}
+        className='bg-blueLight'
+      >
+        <WhatWeCure className='pt-20 mdl:pt-32' />
+      </div>
       <OurMedicalTeam />
       <OurValues />
-      <WhyUs />
+      <WhyUs className='bg-white' />
     </main>
   );
 };

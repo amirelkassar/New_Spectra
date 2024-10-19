@@ -6,7 +6,10 @@ import RobotRedIcon from '@/assets/icons/robot-red';
 
 const Icons = [
   <SadFaceIcon className='size-4 mdl:size-6' key={3} />,
-  <SpeechBubbleIcon className='size-4 mdl:size-6'key={1} />,
+  <SpeechBubbleIcon
+    className='size-4 mdl:size-6'
+    key={1}
+  />,
   <RobotRedIcon className='size-4 mdl:size-6' key={2} />,
 ];
 
@@ -21,7 +24,7 @@ export const BeforeTreatment = ({ data = [] }) => {
       {/* IMAGE */}
       <div className='rounded-xl w-2/3 mdl:w-auto h-auto shrink overflow-hidden'>
         <Image
-          src='https://s3-alpha-sig.figma.com/img/53a8/451b/f2d838c760c0518b7caa390e56cae3e8?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XKj7T7qeWhk8J7sV~cnO~~G~LG5gH~EBKeeZXTgwhsVLqxfABOM26ezXTsh7L0qAvtMjiFW7kaRUgXZikaAQUb1DD3gOFnfGL~g4rXgEoBx6U~YtzwiW294ex-PNSkLzF2DYhQox0CiBZ0~I~zCT~gdqjzj1P5o9lgc4t80D-aOnQhnuDk1HQsOF3JpkJA2XCF7aH2jDq9z2MAedY7G0c8E40JHV0ilBtcurU2wvY2cgY2gYbCPofK2dSEJkT7xVxExni0R80jGMc3PknZ2QmNVutHuh7ChfmgXeYHjvk2BDjxuWGyzrGR5fLw5ppyEvFH9-Xg9PrFz1-9rG83flkg__'
+          src='/demo-baby-5.jpeg'
           width={400}
           height={350}
           alt='Child before treatment'

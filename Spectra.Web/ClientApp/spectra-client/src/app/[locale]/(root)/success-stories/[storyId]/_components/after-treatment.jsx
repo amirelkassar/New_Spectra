@@ -4,7 +4,10 @@ import TeamIcon from '@/assets/icons/team';
 import TallBreakArrowIcon from '@/assets/icons/tall-break-arrow';
 
 const icons = [
-  <TallBreakArrowIcon className='w-3 h-2 mdl:w-7 mdl:h-4' key={1} />,
+  <TallBreakArrowIcon
+    className='w-3 h-2 mdl:w-7 mdl:h-4'
+    key={1}
+  />,
   <TeamIcon className='size-4 mdl:size-8' key={2} />,
 ];
 
@@ -21,7 +24,7 @@ export const AfterTreatment = ({ data = [] }) => {
         {/* IMAGE */}
         <div className='rounded-xl overflow-hidden w-2/3 mdl:w-auto'>
           <Image
-            src='https://s3-alpha-sig.figma.com/img/1d5a/ae9b/f646756e75ca633dd0fe1001e9cf7c5d?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=m~isoqSdNc770oYFpN8UWEhXSH4z3jY2dxmE4ofcJzlObwaFH3qzYzonaHmnAPQ180RN0rhm4cZykMCCJJ4m2J57JN6HVigBu9wUMzxHABvZu922jdaBIExjbNvcCc~b02rsT02~jPG6URaAJdiV53a6B8~q~nzK23MMTX~RHjiBOy0vJckq3tUbgw00wgxsUj~gmJ2JN8SapwDUh8f2ZfGl1jpmy0HZ9r5d1PL8xliEvtMlLtmDod3E-IWJ8gdOqCqTU1Ctp8bNZDK01S5MGM9WhG~eMIeTitYULK5F2ErYtys-HIXL47V9On3IwVGwbhmqDdHR~iCRsPtLk4e1eQ__'
+            src='/demo-baby-4.png'
             alt='Child after treatment'
             width={500}
             height={260}
