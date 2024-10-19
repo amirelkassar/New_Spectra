@@ -38,7 +38,7 @@ export const RegisterModal = ({
   trigger = (
     <Button
       variant='secondary'
-      className='font-bold rounded-[10px] leading-6 !min-w-[140px] !py-1 min-h-[33px] !text-center mb-2'
+      className='font-bold rounded-[10px] leading-6 xl:!min-w-[140px] !py-1 xl:min-h-[33px] px-4 xl:px-7 !text-center xl:mb-2'
       aria-label='اشترك الان'
     >
       اشترك الان
