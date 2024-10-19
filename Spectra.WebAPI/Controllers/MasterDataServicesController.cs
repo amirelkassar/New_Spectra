@@ -8,7 +8,7 @@ namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MasterDataServicesController: ControllerBase
+    public class MasterDataServicesController : ControllerBase
     {
         private readonly IServiceMDService _serviceMDService;
 

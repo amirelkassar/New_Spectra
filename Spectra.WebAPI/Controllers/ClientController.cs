@@ -13,9 +13,9 @@ namespace Spectra.WebAPI.Controllers
     {
         private readonly IClientService _clientService;
 
-     
 
-        public ClientController(IClientService clientService )
+
+        public ClientController(IClientService clientService)
         {
 
             _clientService = clientService;
@@ -34,7 +34,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpGet("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetOneClient(string id )
+        public async Task<ActionResult> GetOneClient(string id)
         {
             var clienties = await _clientService.GetClientById(id);
             return Ok(clienties);
@@ -44,7 +44,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> CreateNormalClient(CreateNormalClientDto input)
         {
 
-            
+
             var clienties = await _clientService.CreateClient(input);
             return Ok(clienties);
         }
@@ -54,7 +54,7 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            var client = await _clientService.UpdateClient(id,input);
+            var client = await _clientService.UpdateClient(id, input);
 
             return Ok(client);
         }
@@ -62,7 +62,7 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> DeleteClient(string id)
         {
-          var client=  await _clientService.DeleteClient(id);
+            var client = await _clientService.DeleteClient(id);
             return Ok(client);
         }
 

@@ -3,10 +3,7 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules
 {
@@ -21,7 +18,7 @@ namespace Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules
         }
         public async Task<DoctorSchedule> GetByIdAsync(string id)
         {
-          
+
             var entity = await _DoctorSchedule.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

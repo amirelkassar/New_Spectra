@@ -1,19 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.Clients.Commands;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
@@ -45,7 +36,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
         public async Task<OperationResult<string>> Handle(CreateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
 
-            var names = await _medicalTestsAndXrayRepository.GetAllAsync(b =>b.ScientificNameByEng == request.ScientificNameEng);
+            var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.ScientificNameByEng == request.ScientificNameEng);
             if (names.Any())
             {
                 throw new DbErrorException(" this's Name is a ready exists");
@@ -53,13 +44,13 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
             var MedicalTestsAndXray = Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray.Create(
 
                     Ulid.NewUlid().ToString(),
-           request.ScientificNameEng, request.Notes, request.ExaminationTypes, request.ScientificNameByEngByArab,  request.Code
+           request.ScientificNameEng, request.Notes, request.ExaminationTypes, request.ScientificNameByEngByArab, request.Code
                     );
-                await _medicalTestsAndXrayRepository.AddAsync(MedicalTestsAndXray);
-                return OperationResult<string>.Success(MedicalTestsAndXray.Id);
+            await _medicalTestsAndXrayRepository.AddAsync(MedicalTestsAndXray);
+            return OperationResult<string>.Success(MedicalTestsAndXray.Id);
 
-         
-          
+
+
         }
     }
     public class CreateMedicalTestsAndXraysCommandValidator : AbstractValidator<CreateMedicalTestsAndXraysCommand>

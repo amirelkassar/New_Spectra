@@ -1,15 +1,7 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.SpecializationCommend;
-
-using Spectra.Domain.MasterData.DoctorsSpecialization;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.Specialization
 {

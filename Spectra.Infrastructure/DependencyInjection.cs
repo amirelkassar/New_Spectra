@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -13,6 +16,7 @@ using Spectra.Application.Countries.Cities;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Countries.States;
 using Spectra.Application.Documents;
+using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
@@ -25,6 +29,7 @@ using Spectra.Application.MasterData.InternalExaminations;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
@@ -58,8 +63,6 @@ using Spectra.Infrastructure.MasterData.ExcelFile;
 using Spectra.Infrastructure.MasterData.GeneralComplaint;
 using Spectra.Infrastructure.MasterData.InternalExaminations;
 using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
-
-using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
@@ -67,15 +70,10 @@ using Spectra.Infrastructure.Patients;
 using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
+using Spectra.Infrastructure.Services.IdentityServices;
 using Spectra.Infrastructure.Specialists;
 using System.Reflection;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-using Microsoft.EntityFrameworkCore;
-using Spectra.Application.Identities;
-using Spectra.Infrastructure.Services.IdentityServices;
 
 namespace Spectra.Infrastructure
 {

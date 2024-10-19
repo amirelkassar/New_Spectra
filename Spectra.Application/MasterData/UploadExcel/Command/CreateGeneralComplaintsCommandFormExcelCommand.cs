@@ -22,21 +22,21 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
             public async Task<OperationResult<Unit>> Handle(CreateBulkDataCommand<CreateGeneralComplaintsCommand> request, CancellationToken cancellationToken)
             {
-             
-                    foreach (var item in request.Data)
-                    {
-                        var entity = GeneralComplaint.Create(
-                    Ulid.NewUlid().ToString(), item.Code1, item.ComplaintName, item.DescriptionOfTheComplaint
-                  );
+
+                foreach (var item in request.Data)
+                {
+                    var entity = GeneralComplaint.Create(
+                Ulid.NewUlid().ToString(), item.Code1, item.ComplaintName, item.DescriptionOfTheComplaint
+              );
 
 
 
-                        await _generalComplaintRepository.AddAsync(entity);
-                    }
-                    return OperationResult<Unit>.Success(Unit.Value);
+                    await _generalComplaintRepository.AddAsync(entity);
+                }
+                return OperationResult<Unit>.Success(Unit.Value);
 
-                
-               
+
+
             }
         }
 

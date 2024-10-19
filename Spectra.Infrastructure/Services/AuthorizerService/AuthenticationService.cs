@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -8,16 +6,11 @@ using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Identities.Dtos;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
-using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Services.AuthorizerService
 {

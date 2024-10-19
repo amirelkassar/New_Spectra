@@ -38,7 +38,7 @@ namespace Spectra.Domain.Shared.Common
 
         public void ClearDomainEvents() => _domainEvents.Clear();
 
-        
+
     }
 
     public interface IBaseEntity<TKey>
@@ -52,6 +52,6 @@ namespace Spectra.Domain.Shared.Common
         void RemoveDomainEvent(Guid eventId);
         void ClearDomainEvents();
 
-        string Notes {get; set; }
+        string Notes { get; set; }
     }
 }

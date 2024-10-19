@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Dto;
 using Spectra.Application.Hellper;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -21,7 +18,7 @@ namespace Spectra.Application.Admin.Queries
     public class GetAllAppointmentsDoctorQueryHandler : IRequestHandler<GetAllAppointmentDoctorQuery, OperationResult<PaginatedResult<Appointment>>>
     {
         private readonly IAppointmentRepository _appointmentRepository;
-    
+
 
         public GetAllAppointmentsDoctorQueryHandler(IAppointmentRepository appointmentRepository)
         {
@@ -30,16 +27,16 @@ namespace Spectra.Application.Admin.Queries
 
         public async Task<OperationResult<PaginatedResult<Appointment>>> Handle(GetAllAppointmentDoctorQuery request, CancellationToken cancellationToken)
         {
-         
 
-            var paginatedAppointments = await _appointmentRepository.GetAllAsyncA(  pageNumber: request.PageNumber,
-              pageSize:request.PageSize
+
+            var paginatedAppointments = await _appointmentRepository.GetAllAsyncA(pageNumber: request.PageNumber,
+              pageSize: request.PageSize
               );
 
-      
 
 
-           return OperationResult<PaginatedResult<Appointment>>.Success(paginatedAppointments);
+
+            return OperationResult<PaginatedResult<Appointment>>.Success(paginatedAppointments);
         }
     }
 

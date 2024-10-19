@@ -22,38 +22,38 @@ namespace Spectra.Infrastructure.DoctorSchedules.DoctorSchedules
         public async Task<OperationResult<Unit>> CreateDoctorSchedule(CreateDoctorScheduleDto input)
         {
 
-        
-                var command = new CreateDoctorScheduleDto
-                {
-                    CreateDoctorScheduleCommands = input.CreateDoctorScheduleCommands
-                };
+
+            var command = new CreateDoctorScheduleDto
+            {
+                CreateDoctorScheduleCommands = input.CreateDoctorScheduleCommands
+            };
             foreach (var cmd in input.CreateDoctorScheduleCommands)
-    {
-        // Convert the DTO to the command
-        var commands = new CreateDoctorScheduleCommand
-        {
-            DoctorId = cmd.DoctorId,
-            From = cmd.From,
-            FromMoringOrNight = cmd.FromMoringOrNight,
-            To = cmd.To,
-            ToMoringOrNight = cmd.ToMoringOrNight,
-            Days = cmd.Days
-        };
+            {
+                // Convert the DTO to the command
+                var commands = new CreateDoctorScheduleCommand
+                {
+                    DoctorId = cmd.DoctorId,
+                    From = cmd.From,
+                    FromMoringOrNight = cmd.FromMoringOrNight,
+                    To = cmd.To,
+                    ToMoringOrNight = cmd.ToMoringOrNight,
+                    Days = cmd.Days
+                };
 
-        // Send each command through Mediator
-        var result = await _mediator.Send(commands);
+                // Send each command through Mediator
+                var result = await _mediator.Send(commands);
 
-        // If the operation fails for any command, return the failure result
-        if (!result.SuccessOpration)
-        {
-            return result;
+                // If the operation fails for any command, return the failure result
+                if (!result.SuccessOpration)
+                {
+                    return result;
+                }
+            }
+
+            // If all commands succeed, return success
+            return OperationResult<Unit>.Success(Unit.Value);
         }
-    }
 
-    // If all commands succeed, return success
-    return OperationResult<Unit>.Success(Unit.Value);
-}
-        
 
 
         public async Task<OperationResult<Unit>> DeleteDoctorSchedule(string id)

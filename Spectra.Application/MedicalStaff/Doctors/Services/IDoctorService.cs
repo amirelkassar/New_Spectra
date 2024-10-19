@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Queries;
-using Spectra.Application.Hellper;
 using Spectra.Application.MedicalStaff.Doctors.Dto;
 using Spectra.Domain.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Wrappers;
@@ -18,6 +16,6 @@ namespace Spectra.Application.MedicalStaff.Doctors.Services
 
 
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices();
-    
+
     }
 }

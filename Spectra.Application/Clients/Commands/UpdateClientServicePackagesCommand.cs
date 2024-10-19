@@ -1,11 +1,7 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.Validator;
 using Spectra.Domain.Patients;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Clients.Commands
 {
@@ -31,9 +27,9 @@ namespace Spectra.Application.Clients.Commands
             var client = await _clientRepository.GetByIdAsync(request.Id);
 
 
-         
+
             client.ServicePackages = request.ServicePackages;
-         
+
 
 
             await _clientRepository.UpdateAsync(client);
@@ -42,6 +38,6 @@ namespace Spectra.Application.Clients.Commands
 
         }
     }
-  
-       
+
+
 }

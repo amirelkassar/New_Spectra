@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
-using Spectra.Application.MasterData.DiagnoseCommend.DTO;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
-using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
 using Spectra.Domain.MasterData.Diagnoses;
@@ -19,7 +17,7 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
 
         private readonly IMediator _mediator;
         private readonly IExcelProcessingService _excelProcessingService;
-        
+
 
         public DiagnosesService(IMediator mediator, IExcelProcessingService excelProcessingService
             )
@@ -27,11 +25,11 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
             _mediator = mediator;
             _excelProcessingService = excelProcessingService;
         }
-    
+
 
         public async Task<OperationResult<string>> CreateDiagnoses(CreateDiagnoseCommand input)
         {
-        
+
             var command = new CreateDiagnoseCommand
             {
 
@@ -42,9 +40,9 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
                 Name = input.Name
 
             };
-           
-           
-            return  await _mediator.Send(command);
+
+
+            return await _mediator.Send(command);
         }
 
         public async Task CreateFromExcel(IFormFile input)
@@ -73,21 +71,21 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
 
                 Id = id,
                 Code1 = input.Code1,
-                Code2 = input.Code2, 
+                Code2 = input.Code2,
                 Code3 = input.Code3,
-            Description = input.Description,
-             Name = input.Name
+                Description = input.Description,
+                Name = input.Name
 
             };
 
-        return    await _mediator.Send(command);
+            return await _mediator.Send(command);
 
         }
 
         public async Task<OperationResult<Unit>> DeleteDiagnoses(string id)
         {
             var command = new DeleteDiagnoseCommand { Id = id };
-       return     await _mediator.Send(command);
+            return await _mediator.Send(command);
 
         }
 

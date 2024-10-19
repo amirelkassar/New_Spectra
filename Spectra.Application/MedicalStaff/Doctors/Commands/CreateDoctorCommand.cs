@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
@@ -31,7 +30,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public string Academicdegree { get; set; }
         public EmploymentStatus Stutes { get; set; }
 
- 
+
 
         public List<IFormFile> ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
@@ -52,7 +51,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
-           List<string>? filePath = null;
+            List<string>? filePath = null;
             var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
             if (uploadfile != null)
             {
@@ -77,12 +76,12 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
 
               filePath,
                   request.Stutes,
-                request.empelyeeRate=0
+                request.empelyeeRate = 0
                 );
 
 
             await _doctorRepository.AddAsync(doctor);
-      
+
 
 
             return OperationResult<string>.Success(doctor.Id);
@@ -129,16 +128,16 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
                 .NotEmpty()
                 .WithMessage("Diagnoses are required.");
 
-      
+
             RuleFor(x => x.LicenseNumber)
                 .MaximumLength(100)
                 .WithMessage("License number must not exceed 100 characters.");
 
-       
+
             RuleFor(x => x.ApprovedBy)
                 .MaximumLength(100)
                 .WithMessage("ApprovedBy field must not exceed 100 characters.");
-        
+
             RuleFor(x => x.Academicdegree)
                 .NotEmpty()
                 .WithMessage("Academic degree is required.");
@@ -148,10 +147,10 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
             //        .WithMessage("Invalid image file(s). At least one file must be a valid image.");
         }
 
-     
+
         private bool BeAValidFilePath(string filePath)
         {
-            
+
             return !string.IsNullOrEmpty(filePath);
         }
     }

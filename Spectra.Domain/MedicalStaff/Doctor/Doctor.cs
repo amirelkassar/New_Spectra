@@ -1,14 +1,16 @@
-﻿using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
+<<<<<<< HEAD
+=======
 using System.Collections.Generic;
+>>>>>>> Admin-BackEnd
 
 namespace Spectra.Domain.MedicalStaff.Doctor
 {
     public class Doctor : BassMedicalStaff
     {
-      
+
         protected Doctor() { }
 
         private Doctor(
@@ -23,36 +25,51 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
+<<<<<<< HEAD
+            string attachmentPath,
+             EmpelyeeRates? empelyeeRate,
+=======
          List<string> attachmentPath,
             EmpelyeeRates? empelyeeRate,
+>>>>>>> Admin-BackEnd
             EmploymentStatus status
 
 
             )
+<<<<<<< HEAD
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, status) { }
+
+=======
             : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate ,
                   status)
         { 
 
         } 
+>>>>>>> Admin-BackEnd
 
-   
-            public static Doctor Create(
-            string id,
-            Name name,
-            string nationalId,
-            PhoneNumber phoneNumber,
-            EmailAddress emailAddress,
-            HumenGender humenGenders,
-            Address address,
-            string diagnoses,
-            string? licenseNumber,
-            string? approvedBy,
-            string academicdegree,
+        public static Doctor Create(
+        string id,
+        Name name,
+        string nationalId,
+        PhoneNumber phoneNumber,
+        EmailAddress emailAddress,
+        HumenGender humenGenders,
+        Address address,
+        string diagnoses,
+        string? licenseNumber,
+        string? approvedBy,
+        string academicdegree,
+<<<<<<< HEAD
+        string attachmentPath,
+        EmpelyeeRates? empelyeeRate,
+             EmploymentStatus status
+
+=======
            List<string> attachmentPath,
             EmploymentStatus status,
             EmpelyeeRates? empelyeeRate
-
-            )
+>>>>>>> Admin-BackEnd
+        )
 
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -66,11 +83,18 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
             ArgumentNullException.ThrowIfNull(empelyeeRate, nameof(empelyeeRate));
+<<<<<<< HEAD
+
+            var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, EmploymentStatus.Wating
+);
+=======
             ArgumentNullException.ThrowIfNull(status, nameof(status));
 
 
             var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
                 licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate, status);
+>>>>>>> Admin-BackEnd
 
             return doctor;
 

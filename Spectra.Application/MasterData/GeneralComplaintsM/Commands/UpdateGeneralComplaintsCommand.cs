@@ -1,16 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Application.Messaging;
-using Spectra.Application.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 {
@@ -18,7 +10,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
     {
         public string Id { get; set; }
 
-        public string Code1  { get; set; }
+        public string Code1 { get; set; }
         public string ComplaintName { get; set; }
         public string DescriptionOfTheComplaint { get; set; }
 
@@ -40,7 +32,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
-        
+
 
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
             var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName);
@@ -57,9 +49,9 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
             await _generalComplaintRepository.UpdateAsync(generalComplaint);
             return OperationResult<Unit>.Success(Unit.Value);
-     
-          
-}
+
+
+        }
 
     }
     public class UpdateGeneralComplaintsCommandValidator : AbstractValidator<UpdateGeneralComplaintsCommand>

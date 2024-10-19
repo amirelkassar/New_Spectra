@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -29,33 +28,33 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Commands
         }
         public async Task<OperationResult<Unit>> Handle(CreateDoctorScheduleCommand request, CancellationToken cancellationToken)
         {
-          
-         var appointment = DoctorSchedule.Create(
-          Ulid.NewUlid().ToString(),
-          request.DoctorId,
-          request.From,
-          request.FromMoringOrNight,
-          request.To,
-          request.ToMoringOrNight,
-          request.Days
-             );
 
-                await _doctorScheduleRepository.AddAsync(appointment);
-            
+            var appointment = DoctorSchedule.Create(
+             Ulid.NewUlid().ToString(),
+             request.DoctorId,
+             request.From,
+             request.FromMoringOrNight,
+             request.To,
+             request.ToMoringOrNight,
+             request.Days
+                );
+
+            await _doctorScheduleRepository.AddAsync(appointment);
+
             return OperationResult<Unit>.Success(Unit.Value);
 
         }
 
-       
 
 
 
 
 
-          
 
 
-        }
+
+
     }
+}
 
 

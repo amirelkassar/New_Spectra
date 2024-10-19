@@ -30,18 +30,18 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
 
         public async Task<OperationResult<string>> Handle(CreateInternalExaminationCommand request, CancellationToken cancellationToken)
         {
-          
-                var internalExamination =InternalExamination.Create(
 
-                    Ulid.NewUlid().ToString(),
-                    request.Name, request.Code, request.ExaminationTypes
-                    );
-                await _InternalExaminationRepository.AddAsync(internalExamination);
-                return OperationResult<string>.Success(internalExamination.Id);
+            var internalExamination = InternalExamination.Create(
 
-         
-          
+                Ulid.NewUlid().ToString(),
+                request.Name, request.Code, request.ExaminationTypes
+                );
+            await _InternalExaminationRepository.AddAsync(internalExamination);
+            return OperationResult<string>.Success(internalExamination.Id);
+
+
+
         }
     }
-  
+
 }

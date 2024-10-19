@@ -2,23 +2,20 @@
 using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO;
-using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using System.Linq;
 
 namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
 {
     public class GetAllDoctorSchedulesQuery : IRequest<OperationResult<IEnumerable<AppointmentDto>>>
     {
         public string DoctorId { get; set; }
- 
+
         public DateTime Daysdate { get; set; }
 
 
         public DaysOfWeeks Days { get; set; }
-  
+
 
 
     }
@@ -29,7 +26,7 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
         private readonly IDoctorRepository _doctorRepository;
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public GetAllDoctorSchedulesQueryHandler(IDoctorScheduleRepository doctorScheduleRepository, IDoctorRepository doctorRepository , IAppointmentRepository appointmentRepository)
+        public GetAllDoctorSchedulesQueryHandler(IDoctorScheduleRepository doctorScheduleRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository)
         {
             _doctorScheduleRepository = doctorScheduleRepository;
             _doctorRepository = doctorRepository;
@@ -40,16 +37,16 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
         {
 
             var doctor = await _doctorRepository.GetByIdAsync(request.DoctorId);
-      
-           
+
+
 
             var appointments = await _appointmentRepository.GetAllAsyncA(c => c.DoctorId == request.DoctorId && c.Daysdate == request.Daysdate.Date);
             //var appointmentId =  appointment.Select(c => c.DoctorScheduleId);
 
-             var doctorSchedules = await _doctorScheduleRepository.GetAllAsync(ds =>
-                  ds.DoctorId == request.DoctorId &&
-                  ds.Days == request.Days
-                  );
+            var doctorSchedules = await _doctorScheduleRepository.GetAllAsync(ds =>
+                 ds.DoctorId == request.DoctorId &&
+                 ds.Days == request.Days
+                 );
 
 
             var result = appointments.Items.Select(c => new AppointmentDto
@@ -65,8 +62,8 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
                     To = ds.To,
                     FormMoringOrNight = ds.FromMoringOrNight,
                     ToMoringOrNight = ds.ToMoringOrNight,
-                }).ToList() 
-            }).ToList(); 
+                }).ToList()
+            }).ToList();
 
 
 

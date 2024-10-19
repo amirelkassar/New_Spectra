@@ -19,7 +19,7 @@ namespace Spectra.Infrastructure.ChatHub
         // Send a private message and save the chat
         public async Task SendMessageAsync(string fromUser, string toUser, string message)
         {
-            
+
             if (ChatHub.ConnectedUsers.TryGetValue(toUser, out string connectionId))
             {
                 await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveMessage", fromUser, message);
@@ -37,7 +37,7 @@ namespace Spectra.Infrastructure.ChatHub
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", fromUser, message);
 
             // Save the broadcast message
-            var saveChatCommand = new SaveChatMessageCommand { FromUser = fromUser,  ToUser=null, Message= message }; // null for public/broadcast messages
+            var saveChatCommand = new SaveChatMessageCommand { FromUser = fromUser, ToUser = null, Message = message }; // null for public/broadcast messages
             await _mediator.Send(saveChatCommand);
         }
     }

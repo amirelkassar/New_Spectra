@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Commands;
 using Spectra.Application.Admin.Queries;
-using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
 using Spectra.Domain.MedicalStaff.Doctor;

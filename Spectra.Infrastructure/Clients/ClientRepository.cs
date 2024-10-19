@@ -5,9 +5,6 @@ using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Clients;
 
-using Spectra.Domain.MedicalStaff.Doctor;
-using Spectra.Domain.Shared.Common.Exceptions;
-
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Clients

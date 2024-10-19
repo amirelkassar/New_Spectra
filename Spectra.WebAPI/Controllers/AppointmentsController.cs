@@ -45,12 +45,12 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateAppointment([FromBody] CreateAppointmentCommand input  )
+        public async Task<ActionResult> CreateAppointment([FromBody] CreateAppointmentCommand input)
         {
             var appointmenties = await _appointmentService.CreateAppointment(input);
             return Ok(appointmenties);
         }
-    
+
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdateAppointment(string id, UpdateAppointmentCommand input)
@@ -59,7 +59,7 @@ namespace Spectra.WebAPI.Controllers
             var Appointment = await _appointmentService.UpdateAppointment(id, input);
             return Ok(Appointment);
         }
-  
+
 
         [HttpDelete("id")]
         [AllowAnonymous]

@@ -24,22 +24,22 @@ namespace Spectra.Application.Contracts.Commands
     public class UpdateContractCommandHandler : IRequestHandler<UpdateContractCommand, OperationResult<Unit>>
     {
         private readonly IContractRepository _contractRepository;
-        
+
         public UpdateContractCommandHandler(IContractRepository contractRepository)
         {
             _contractRepository = contractRepository;
-         
+
         }
 
-        public async Task<OperationResult<Unit> > Handle(UpdateContractCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
-          
+
 
             var contract = await _contractRepository.GetByIdAsync(request.id);
 
 
-            contract.Freelancer =request.Freelancer;
-            contract.SpectraTeam= request.SpectraTeam;
+            contract.Freelancer = request.Freelancer;
+            contract.SpectraTeam = request.SpectraTeam;
             contract.HoursOfWork = request.HoursOfWork;
             contract.DaysOfWork = request.DaysOfWork;
             contract.MinutesOfWork = request.MinutesOfWork;
@@ -53,7 +53,7 @@ namespace Spectra.Application.Contracts.Commands
                 return OperationResult<Unit>.Success(Unit.Value);
             }
 
-            var contracts= EmploymentContract.Create(
+            var contracts = EmploymentContract.Create(
              Ulid.NewUlid().ToString(),
              request.Freelancer,
              request.SpectraTeam,

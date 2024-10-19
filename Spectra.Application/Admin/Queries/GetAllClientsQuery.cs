@@ -4,7 +4,6 @@ using Spectra.Application.Clients;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Shared.Wrappers;
-using System.Net.Sockets;
 
 namespace Spectra.Application.Admin.Queries
 {
@@ -27,22 +26,22 @@ namespace Spectra.Application.Admin.Queries
         }
 
         public async Task<OperationResult<PaginatedResult<Client>>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
-    {
+        {
 
 
-        var paginatedClient = await _clientRepository.GetAllAsyncWithPaginated(pageNumber: request.PageNumber,
-          pageSize: request.PageSize
-            );
-
-
-          
-            var employeeData = paginatedClient.Items.Select(c => new GetAllClientsDto { Name = $"{c.Name.FirstName} + {c.Name.LastName}" , NumberOfKids= c.Patients.Count(), ClientType = c.ClientType  });
-
-     
+            var paginatedClient = await _clientRepository.GetAllAsyncWithPaginated(pageNumber: request.PageNumber,
+              pageSize: request.PageSize
+                );
 
 
 
-        return OperationResult<PaginatedResult<Client>>.Success(paginatedClient);
+            var employeeData = paginatedClient.Items.Select(c => new GetAllClientsDto { Name = $"{c.Name.FirstName} + {c.Name.LastName}", NumberOfKids = c.Patients.Count(), ClientType = c.ClientType });
+
+
+
+
+
+            return OperationResult<PaginatedResult<Client>>.Success(paginatedClient);
+        }
     }
-}
 }

@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.HellperFunc;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MedicalStaff.Doctors.Commands

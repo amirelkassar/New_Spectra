@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
-using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ContractsController: ControllerBase
+    public class ContractsController : ControllerBase
     {
         private readonly IContractService _contractService;
 
@@ -24,7 +22,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpGet("GetAllContracts")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllContractsSend([FromQuery] GetAllContactrQuery input  )
+        public async Task<ActionResult> GetAllContractsSend([FromQuery] GetAllContactrQuery input)
         {
             var Contracties = await _contractService.GetAllContracts(input);
             return Ok(Contracties);
@@ -41,7 +39,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateContractAndSend(CreateContractCommand input  )
+        public async Task<ActionResult> CreateContractAndSend(CreateContractCommand input)
         {
             var Contracties = await _contractService.CreateContractSendORSave(input);
             return Ok(Contracties);

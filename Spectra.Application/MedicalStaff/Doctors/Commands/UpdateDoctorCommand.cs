@@ -1,10 +1,7 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;

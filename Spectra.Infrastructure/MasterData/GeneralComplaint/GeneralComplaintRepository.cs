@@ -1,17 +1,7 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.GeneralComplaintsM;
-using Spectra.Domain.MasterData.GeneralComplaints;
-using Spectra.Domain.MasterData.InternalExaminations;
-using Spectra.Domain.MedicalStaff.Doctor;
-using Spectra.Domain.Shared.Common.Exceptions;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.GeneralComplaint
 {

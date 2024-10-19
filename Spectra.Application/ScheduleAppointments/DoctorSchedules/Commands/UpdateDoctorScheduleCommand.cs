@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 

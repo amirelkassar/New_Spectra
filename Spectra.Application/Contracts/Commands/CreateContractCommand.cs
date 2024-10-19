@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
@@ -25,7 +24,7 @@ namespace Spectra.Application.Contracts.Commands
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateContractCommand, OperationResult<string>>
     {
-         
+
         private readonly IContractRepository _contractRepository;
         //private readonly ISubContractRepository _subContractRepository;
 
@@ -56,6 +55,6 @@ namespace Spectra.Application.Contracts.Commands
 
         }
     }
-   
+
 
 }

@@ -17,8 +17,8 @@ namespace Spectra.WebAPI.Controllers
             _chatService = chatService;
         }
 
-     
-         [AllowAnonymous]
+
+        [AllowAnonymous]
         [HttpPost("send-private-message")]
         public async Task<IActionResult> SendPrivateMessage(SaveChatMessageCommand request)
         {

@@ -1,14 +1,6 @@
 ﻿using MediatR;
-using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
-using Spectra.Application.Patients;
-using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 {
@@ -30,7 +22,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeleteSpecializationCommand request, CancellationToken cancellationToken)
         {
-            
+
             var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
             if (Specialization == null)
             {
@@ -39,9 +31,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
             await _specializationRepository.DeleteAsync(Specialization);
             return OperationResult<Unit>.Success(Unit.Value);
-        
 
-   
-}
+
+
+        }
     }
 }

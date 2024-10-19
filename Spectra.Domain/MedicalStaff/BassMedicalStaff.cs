@@ -1,12 +1,6 @@
-﻿using FluentValidation;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MedicalStaff
 {
@@ -22,9 +16,14 @@ namespace Spectra.Domain.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<string> AttachmentPath { get; set; }
+<<<<<<< HEAD
+        public string AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
 
+=======
+        public List<string> AttachmentPath { get; set; }
+        public EmpelyeeRates? EmpelyeeRate { get; set; }
+>>>>>>> Admin-BackEnd
         public EmploymentStatus Status { get; set; }
         protected BassMedicalStaff() { }
         public BassMedicalStaff(
@@ -39,7 +38,11 @@ namespace Spectra.Domain.MedicalStaff
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
+<<<<<<< HEAD
+                   string attachmentPath,
+=======
                     List<string> attachmentPath,
+>>>>>>> Admin-BackEnd
                    EmpelyeeRates? empelyeeRate,
                    EmploymentStatus status
                    ) : base(id)
@@ -61,5 +64,5 @@ namespace Spectra.Domain.MedicalStaff
         }
 
     }
-   
+
 }

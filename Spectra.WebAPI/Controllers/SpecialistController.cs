@@ -7,7 +7,7 @@ namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SpecialistController:ControllerBase
+    public class SpecialistController : ControllerBase
     {
         private readonly ISpecialistService _SpecialistService;
 

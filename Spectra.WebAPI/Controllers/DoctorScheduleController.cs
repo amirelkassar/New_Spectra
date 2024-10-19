@@ -9,7 +9,7 @@ namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-  
+
     public class DoctorScheduleController : ControllerBase
     {
         private readonly IDoctorScheduleService _service;
@@ -21,7 +21,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpGet("DoctorSchedules")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllDoctorSchedule([FromQuery]GetAllDoctorSchedulesQuery input)
+        public async Task<ActionResult> GetAllDoctorSchedule([FromQuery] GetAllDoctorSchedulesQuery input)
         {
             var DoctorScheduleies = await _service.GetAllDoctorSchedules(input);
 
@@ -37,7 +37,7 @@ namespace Spectra.WebAPI.Controllers
             var DoctorScheduleies = await _service.GetDoctorScheduleById(id);
             return Ok(DoctorScheduleies);
         }
-     
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -45,7 +45,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> CreateDoctorSchedule(CreateDoctorScheduleDto input)
         {
 
-             var DoctorScheduleies = await _service.CreateDoctorSchedule(input);
+            var DoctorScheduleies = await _service.CreateDoctorSchedule(input);
 
             return Ok(DoctorScheduleies);
         }
@@ -64,7 +64,7 @@ namespace Spectra.WebAPI.Controllers
             var delete = await _service.DeleteDoctorSchedule(id);
             return Ok(delete);
         }
-      
+
 
     }
 

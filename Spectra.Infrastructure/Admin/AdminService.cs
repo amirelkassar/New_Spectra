@@ -51,7 +51,7 @@ namespace Spectra.Infrastructure.Admin
             };
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus( UpdateDoctorEmploymentStatusCommand input)
+        public async Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input)
         {
             var query = new UpdateDoctorEmploymentStatusCommand
             {

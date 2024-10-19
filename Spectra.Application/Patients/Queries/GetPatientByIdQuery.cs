@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Domain.Clients;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -23,19 +21,19 @@ namespace Spectra.Application.Patients.Queries
 
         public async Task<OperationResult<Patient>> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
         {
-        
-
-                var patient = await _patientRepository.GetByIdAsync(request.Id);
 
 
-                if (patient == null)
-                {
-                    throw new NotFoundException("patient", request.Id);
-                }
+            var patient = await _patientRepository.GetByIdAsync(request.Id);
 
-                return OperationResult<Patient>.Success(patient);
-            
-         
+
+            if (patient == null)
+            {
+                throw new NotFoundException("patient", request.Id);
+            }
+
+            return OperationResult<Patient>.Success(patient);
+
+
         }
     }
 }

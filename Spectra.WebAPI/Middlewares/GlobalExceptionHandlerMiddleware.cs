@@ -1,10 +1,8 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Spectra.WebAPI.Middlewares
 {
@@ -51,7 +49,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "RequestError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "General", new[] { exception.Message } }
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
@@ -60,7 +58,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "DbError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "General", new[] { exception.Message } }
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
@@ -78,13 +76,13 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "General", new[] { exception.Message } }
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 
-            var errorResponse = new 
+            var errorResponse = new
             {
                 errors = errorCollection,
                 errorType,

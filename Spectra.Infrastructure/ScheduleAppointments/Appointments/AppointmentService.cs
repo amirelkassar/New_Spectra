@@ -30,10 +30,10 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
                 ClientId = input.ClientId,
                 DaysdDate = input.DaysdDate,
                 DoctorScheduleId = input.DoctorScheduleId,
-                    From = input.From,
-                MoringOrNight=input.MoringOrNight,
-        
-                
+                From = input.From,
+                MoringOrNight = input.MoringOrNight,
+
+
 
             };
 

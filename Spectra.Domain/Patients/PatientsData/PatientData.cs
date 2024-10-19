@@ -1,17 +1,12 @@
-﻿using Spectra.Domain.Clients;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Patients.PatientsData
 {
     public class PatientData : BaseAuditableEntity<string>
     {
-        public string PatientId { get;private set; }
+        public string PatientId { get; private set; }
         public string Name { get; set; }
         public PatientDataCategories Category { get; private set; }
         public string? Description { get; set; }

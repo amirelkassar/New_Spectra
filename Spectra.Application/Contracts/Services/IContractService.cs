@@ -9,7 +9,7 @@ namespace Spectra.Application.Contracts.Services
     public interface IContractService
     {
         Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input);
-   
+
         Task<OperationResult<Unit>> DeleteContract(string id);
         Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
         Task<OperationResult<EmploymentContract>> GetContractById(string id);

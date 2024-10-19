@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Spectra.Domain.MasterData.Drug;
-using System;
-using System.IO;
 
 namespace Spectra.Application.MasterData.HellperFunc
 {
@@ -23,7 +20,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             if (attachments != null && attachments.Any())
             {
- 
+
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
 
 
@@ -76,7 +73,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             foreach (var attachmentPath in attachmentPaths)
             {
-                var fullPath =_webHostEnvironment.WebRootPath + attachmentPath;
+                var fullPath = _webHostEnvironment.WebRootPath + attachmentPath;
 
                 // Check if the file exists before attempting to delete it
                 if (File.Exists(fullPath))
@@ -102,13 +99,13 @@ namespace Spectra.Application.MasterData.HellperFunc
 
         public async Task<List<string>> UpdateAttachment(List<string>? existingAttachments, List<IFormFile> newAttachments, string folderName)
         {
-          
+
             if (existingAttachments != null && existingAttachments.Any())
             {
                 await DeleteAttachments(existingAttachments);
             }
 
-          
+
             if (string.IsNullOrEmpty(_webHostEnvironment.WebRootPath))
             {
                 _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
@@ -117,37 +114,37 @@ namespace Spectra.Application.MasterData.HellperFunc
             var uploadedFilePaths = new List<string>();
             var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
 
-                      if (!Directory.Exists(uploadsFolder))
+            if (!Directory.Exists(uploadsFolder))
             {
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-          
+
             foreach (var file in newAttachments)
             {
-            
+
                 if (file != null && file.Length > 0)
                 {
-                   
+
                     var newFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
 
-                   var filePath = Path.Combine(uploadsFolder, newFileName);
+                    var filePath = Path.Combine(uploadsFolder, newFileName);
 
-                  using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
 
-                   
+
                     uploadedFilePaths.Add(Path.Combine(folderName, newFileName).Replace("\\", "/"));
                 }
             }
 
-          
+
             return uploadedFilePaths;
         }
     }
-    }
+}
 
 
 

@@ -13,7 +13,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
         public AppointmentStatus Status { get; set; }
         public string DoctorId { get; set; }
         //public TimeOnly TimeOfAppoinment { get; set; }
-        
+
     }
 
     public class GetAllAppointmentsStatuDoctorQueryHandler : IRequestHandler<GetAllAppointmentsStatuDoctorQuery, OperationResult<IEnumerable<AppointmentWithClientDto>>>
@@ -44,7 +44,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
 
             var appointments = await _appointmentRepository.GetAllAsyncA(c => c.Status == request.Status && c.DoctorId == request.DoctorId && c.ClientId != null);
 
-            var clientIds = appointments.Items. Select(c => c.ClientId).ToList();
+            var clientIds = appointments.Items.Select(c => c.ClientId).ToList();
 
             var clients = await _clientRepository.GetAllAsync(d => clientIds.Contains(d.Id));
 
@@ -53,10 +53,10 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
                 ClientName = $"{c.Name.FirstName} {c.Name.LastName}",
                 PatientNames = c.Patients?.Select(p => p.Name.FirstName).ToList() ?? new List<string>(),
                 PatientCount = c.Patients?.Count() ?? 0,
-                Appointments = appointments.Items. Where(d => d.ClientId == c.Id).Select(X => new AppointmentDetailDto
+                Appointments = appointments.Items.Where(d => d.ClientId == c.Id).Select(X => new AppointmentDetailDto
                 {
-                    DateOfAppointment=X.Daysdate,
-                    TimeOfAppoinment= X.From                    
+                    DateOfAppointment = X.Daysdate,
+                    TimeOfAppoinment = X.From
                 }).ToList()
             });
 

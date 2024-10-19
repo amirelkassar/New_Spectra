@@ -20,13 +20,13 @@ namespace Spectra.Application.Clients.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
-            
+
             var client = await _clientRepository.GetByIdAsync(request.Id);
-       
+
             await _clientRepository.DeleteAsync(client);
             return OperationResult<Unit>.Success(Unit.Value);
-      
-}
+
+        }
 
 
     }

@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -17,7 +16,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
         public string SpecializationName { get; set; }
         public string Description { get; set; }
         public string Code { get; set; }
-       
+
 
         public double ConsultationCost { get; set; }
     }
@@ -25,11 +24,11 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     public class CreateSpecializationCommandHandler : IRequestHandler<CreateSpecializationCommand, OperationResult<string>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
-     
+
         public CreateSpecializationCommandHandler(ISpecializationsRepository specializationRepository)
         {
             _specializationRepository = specializationRepository;
-          
+
         }
 
         public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
@@ -40,14 +39,14 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
                 throw new DbErrorException("A specialization with the same Name already exists.");
             }
 
-            var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(Ulid.NewUlid().ToString(),  
-                request.SpecializationName.ToLower() , 0, request.Code ,request.Description, request.ConsultationCost);
+            var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(Ulid.NewUlid().ToString(),
+                request.SpecializationName.ToLower(), 0, request.Code, request.Description, request.ConsultationCost);
 
             await _specializationRepository.AddAsync(Specialization);
             return OperationResult<string>.Success(Specialization.Id);
 
         }
-         
+
 
     }
     public class CreateSpecializationCommandValidator : AbstractValidator<CreateSpecializationCommand>

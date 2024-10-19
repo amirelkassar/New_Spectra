@@ -8,7 +8,7 @@ namespace Spectra.Infrastructure.Handlers
     {
         private readonly HttpContext _context;
 
-        public CurrentUserHandler(IHttpContextAccessor httpContextAccessor )
+        public CurrentUserHandler(IHttpContextAccessor httpContextAccessor)
         {
             _context = httpContextAccessor.HttpContext ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }

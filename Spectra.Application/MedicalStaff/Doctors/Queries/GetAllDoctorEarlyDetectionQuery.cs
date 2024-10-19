@@ -1,13 +1,10 @@
 ﻿using MediatR;
 using MongoDB.Driver;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.MedicalStaff.Doctors;
-using Spectra.Domain.Contracts;
 using Spectra.Domain.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using System.Diagnostics.Contracts;
 
 namespace Spectra.Application.MedicalStaff.Doctors.Queries
 {
@@ -31,14 +28,14 @@ namespace Spectra.Application.MedicalStaff.Doctors.Queries
         {
             //here we will need to the Doctors From supContract that  but we put the contract untile make the admin to accpet the Doctor
 
-                    var doctorsWithContract =
-            await _contractRepository.GetAllAsync(c =>
-            c.Titel == "Doctor" &&
-            c.ContractCase == ContractCases.ACTIVE &&
-            (c.Freelancer.Any(f => f.Service == "EarlyExamination") ||
-             c.SpectraTeam.Any(s => s.Service == "EarlyExamination")),
-               new FindOptions()
-           );
+            var doctorsWithContract =
+    await _contractRepository.GetAllAsync(c =>
+    c.Titel == "Doctor" &&
+    c.ContractCase == ContractCases.ACTIVE &&
+    (c.Freelancer.Any(f => f.Service == "EarlyExamination") ||
+     c.SpectraTeam.Any(s => s.Service == "EarlyExamination")),
+       new FindOptions()
+   );
 
             var doctorIds = doctorsWithContract.Select(c => c.EmployeeId).ToList();
 

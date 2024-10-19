@@ -1,12 +1,9 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Queries;
-using Spectra.Application.Hellper;
 using Spectra.Application.MedicalStaff.Doctors.Commands;
 using Spectra.Application.MedicalStaff.Doctors.Dto;
 using Spectra.Application.MedicalStaff.Doctors.Queries;
 using Spectra.Application.MedicalStaff.Doctors.Services;
 using Spectra.Domain.MedicalStaff.Doctor;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
@@ -70,7 +67,7 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(query);
         }
 
-   
+
         public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
         {
             var query = new GetAllDoctorEarlyDetectionQuery();

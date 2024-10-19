@@ -1,7 +1,4 @@
-﻿using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData.DiagnoseCommend.Commands;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Spectra.Application.MasterData.UploadExcel.Services
 {

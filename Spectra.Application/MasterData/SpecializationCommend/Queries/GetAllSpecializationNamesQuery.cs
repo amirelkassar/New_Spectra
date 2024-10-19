@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.SpecializationCommend.DTO;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Queries

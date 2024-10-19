@@ -1,7 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Domain.Clients;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -22,13 +19,13 @@ namespace Spectra.Application.Patients.Queries
 
         public async Task<OperationResult<IEnumerable<Patient>>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
         {
-             await _patientRepository.GetAllAsync();
+            await _patientRepository.GetAllAsync();
 
-          
-                var patient = await _patientRepository.GetAllAsync(); ;
 
-                return OperationResult<IEnumerable<Patient>>.Success(patient);
-          
+            var patient = await _patientRepository.GetAllAsync(); ;
+
+            return OperationResult<IEnumerable<Patient>>.Success(patient);
+
         }
     }
 }

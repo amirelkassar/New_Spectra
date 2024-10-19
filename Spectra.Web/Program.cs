@@ -1,8 +1,6 @@
 using Serilog;
 using Spectra.Application.Countries.SeedService;
-using Spectra.Application.Interfaces;
 using Spectra.Infrastructure.ChatHub;
-using Spectra.Infrastructure.Handlers;
 using Spectra.Web;
 using Spectra.WebAPI.Middlewares;
 

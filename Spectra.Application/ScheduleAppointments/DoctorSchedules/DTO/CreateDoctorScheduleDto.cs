@@ -1,10 +1,4 @@
-﻿using Spectra.Application.ScheduleAppointments.Appointments.Commands;
-using Spectra.Application.ScheduleAppointments.DoctorSchedules.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Spectra.Application.ScheduleAppointments.DoctorSchedules.Commands;
 
 namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO
 {

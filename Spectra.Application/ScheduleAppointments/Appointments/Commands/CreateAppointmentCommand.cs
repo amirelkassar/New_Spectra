@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Spectra.Application.Clients;
 using Spectra.Application.Messaging;
-using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
@@ -23,7 +21,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         public MoringOrNight MoringOrNight { get; set; }
         public TimeOnly From { get; set; }
 
-  
+
 
     }
 
@@ -31,16 +29,16 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
     {
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IClientRepository _clientRepository;
-        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository , IClientRepository clientRepository )
+        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository, IClientRepository clientRepository)
         {
             _appointmentRepository = appointmentRepository;
-            _clientRepository= clientRepository;
-    }
+            _clientRepository = clientRepository;
+        }
         public async Task<OperationResult<string>> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
         {
-       //var client=await _clientRepository.GetByIdAsync(request.ClientId);
+            //var client=await _clientRepository.GetByIdAsync(request.ClientId);
 
-       var bookedappointment=await _appointmentRepository.GetAllAsyncA(c=>c.Daysdate== request.DaysdDate);
+            var bookedappointment = await _appointmentRepository.GetAllAsyncA(c => c.Daysdate == request.DaysdDate);
 
 
             if (bookedappointment.Items != null)
@@ -50,7 +48,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
                     // Check if the requested appointment time falls within an already booked time slot
                     if (request.From >= book.From && request.From < book.To)
                     {
-                      
+
                         throw new RequestErrorException("The requested time slot is already booked.");
                     }
 
@@ -74,7 +72,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
                 AppointmentStatus.Booked,
                 request.From,
                 appointmentFinish
-                ,request.MoringOrNight
+                , request.MoringOrNight
                 );
 
 

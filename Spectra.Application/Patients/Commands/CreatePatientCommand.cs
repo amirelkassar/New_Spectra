@@ -2,7 +2,6 @@
 using MediatR;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
-using Spectra.Domain.Clients;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -42,11 +41,11 @@ namespace Spectra.Application.Patients.Commands
                 request.NationalId,
                 request.Gender,
                 request.DateOfBirth,
-                request.RelationToClient,       
+                request.RelationToClient,
                 request.ChildHeight,
                 request.ChildWeightt,
                 request.DateOfOnSetOfSymptoms,
-                request.InheritedOrAcquired,request.ClientId
+                request.InheritedOrAcquired, request.ClientId
 
                 );
             await _patientRepository.AddAsync(patient);

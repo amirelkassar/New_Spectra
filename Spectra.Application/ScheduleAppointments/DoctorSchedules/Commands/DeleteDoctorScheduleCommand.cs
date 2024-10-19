@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Commands

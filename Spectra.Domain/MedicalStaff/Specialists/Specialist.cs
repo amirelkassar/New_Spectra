@@ -1,16 +1,10 @@
-﻿using Spectra.Domain.Clients;
-using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MedicalStaff.Specialists
 {
-    public class Specialist :BassMedicalStaff
+    public class Specialist : BassMedicalStaff
     {
 
         protected Specialist() { }
@@ -29,11 +23,18 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
+<<<<<<< HEAD
+            string attachmentPath,
+            EmpelyeeRates? empelyeeRate,
+            EmploymentStatus status)
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, status) { }
+=======
              List<string> attachmentPath,
             EmpelyeeRates? empelyeeRate,
             EmploymentStatus status)
             : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, 
                   diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate , status) { }
+>>>>>>> Admin-BackEnd
 
 
 
@@ -50,7 +51,11 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
+<<<<<<< HEAD
+            string attachmentPath,
+=======
              List<string> attachmentPath,
+>>>>>>> Admin-BackEnd
              EmpelyeeRates? empelyeeRate,
              EmploymentStatus status
             )
@@ -67,7 +72,7 @@ namespace Spectra.Domain.MedicalStaff.Specialists
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
 
             var specialist = new Specialist(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate,
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate,
                 EmploymentStatus.Wating);
 
             return specialist;

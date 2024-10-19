@@ -35,9 +35,9 @@ namespace Spectra.Application.Clients.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
-      
+
             var client = await _clientRepository.GetByIdAsync(request.Id);
-         
+
 
             client.Name = request.Name;
             client.NationalId = request.NationalId;
@@ -49,12 +49,12 @@ namespace Spectra.Application.Clients.Commands
             client.Organization = request.Organization;
             client.Patients = request.Patients;
             client.ServicePackages = request.ServicePackages;
-            
+
 
             await _clientRepository.UpdateAsync(client);
             return OperationResult<Unit>.Success(Unit.Value);
-        
-           
+
+
         }
     }
     public class UpdateClientCommandValidator : AbstractValidator<CreateClientCommand>

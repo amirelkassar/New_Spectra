@@ -1,15 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Spectra.Application.Patients.Commands;
-
-using Spectra.Application.Patients.Queries;
-
 using Spectra.Application.Interfaces;
+using Spectra.Application.Patients.Commands;
+using Spectra.Application.Patients.Queries;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using Spectra.Domain.Clients;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Domain.ValueObjects;
 
 
 namespace Spectra.Infrastructure.Patients
@@ -58,16 +54,16 @@ namespace Spectra.Infrastructure.Patients
                 DateOfBirth = dateOfBirth
             };
 
-          return  await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<Unit>> DeletePatient(string id)
         {
             var command = new DeletePatientCommand { Id = id };
-          return  await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
-        public async  Task<OperationResult<Patient>> GetPatientById(string id)
+        public async Task<OperationResult<Patient>> GetPatientById(string id)
         {
             var query = new GetPatientByIdQuery { Id = id };
             return await _mediator.Send(query);
@@ -79,6 +75,6 @@ namespace Spectra.Infrastructure.Patients
             return await _mediator.Send(query);
         }
 
-      
+
     }
 }

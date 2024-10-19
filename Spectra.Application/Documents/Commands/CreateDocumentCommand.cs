@@ -38,9 +38,9 @@ namespace Spectra.Application.Documents.Commands
                 request.OwnerId,
                 request.External,
                 request.IsPublic
-                //,request.DocumentKey,
-                //request.DocumentSourceId,
-                //request.DocumentId
+            //,request.DocumentKey,
+            //request.DocumentSourceId,
+            //request.DocumentId
 
             );
 

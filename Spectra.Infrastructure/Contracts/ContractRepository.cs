@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Clients;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
@@ -20,7 +19,7 @@ namespace Spectra.Infrastructure.Contracts
         }
         public async Task<EmploymentContract> GetByIdAsync(string id)
         {
-          
+
             var entity = await _EmploymentContracts.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

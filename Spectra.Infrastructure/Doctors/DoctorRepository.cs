@@ -5,9 +5,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Domain.MedicalStaff.Doctor;
 
-using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
-
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Doctors
@@ -39,16 +36,16 @@ namespace Spectra.Infrastructure.Doctors
             }
 
             //Order by 'Created' field
-           //query = query.OrderByDescending(x => x.Created.Date);
+            //query = query.OrderByDescending(x => x.Created.Date);
 
             // Get total count of the filtered query
             var totalCount = await query.CountAsync();  // Use CountAsync() from MongoDB.Driver.Linq
 
             // Paginate the results
-            var doctors =  query
+            var doctors = query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();  
+                .ToList();
             // Return paginated result
             return new PaginatedResult<Doctor>
             {

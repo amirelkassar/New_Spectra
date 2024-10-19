@@ -43,9 +43,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             await _specializationRepository.UpdateAsync(Specializations);
             return OperationResult<Unit>.Success(Unit.Value);
         }
-      
-}
-    
+
+    }
+
     public class UpdateSpecializationCommandValidator : AbstractValidator<UpdateSpecializationCommand>
     {
         public UpdateSpecializationCommandValidator()

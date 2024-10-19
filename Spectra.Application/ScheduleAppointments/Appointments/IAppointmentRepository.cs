@@ -11,13 +11,13 @@ namespace Spectra.Application.ScheduleAppointments.Appointments
         Task DeleteAsync(Appointment appointment);
         //Task<PaginatedResult<Appointment>> GetAllAsync(
         //Expression<Func<Appointment, bool>> filter = null, FindOptions options = null);
-      Task<PaginatedResult<Appointment>> GetAllAsyncA(
-          Expression<Func<Appointment, bool>> filter = null,
-          FindOptions options = null,
-          int pageNumber = 1,
-          int pageSize = 10);
+        Task<PaginatedResult<Appointment>> GetAllAsyncA(
+            Expression<Func<Appointment, bool>> filter = null,
+            FindOptions options = null,
+            int pageNumber = 1,
+            int pageSize = 10);
         Task<Appointment> GetByIdAsync(string id);
         Task UpdateAsync(Appointment appointment);
     }
-  
+
 }

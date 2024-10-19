@@ -20,7 +20,7 @@ namespace Spectra.Application.Patients.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
         {
-           
+
             var patient = await _patientRepository.GetByIdAsync(request.Id);
             if (patient == null)
             {
@@ -29,9 +29,9 @@ namespace Spectra.Application.Patients.Commands
 
             await _patientRepository.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);
-        
 
-         
-}
+
+
+        }
     }
 }

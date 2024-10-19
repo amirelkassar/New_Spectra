@@ -1,10 +1,4 @@
-﻿using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO
 {
@@ -15,7 +9,7 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO
         public MoringOrNight FormMoringOrNight { get; set; }
         public MoringOrNight ToMoringOrNight { get; set; }
         public DateTime Daysdate { get; set; }
-     public List<DoctorScheduleDto> DoctorSchedules { get; set; }
+        public List<DoctorScheduleDto> DoctorSchedules { get; set; }
     }
 
     public class DoctorScheduleDto
@@ -25,5 +19,5 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO
         public MoringOrNight FormMoringOrNight { get; set; }
         public MoringOrNight ToMoringOrNight { get; set; }
     }
- 
+
 }

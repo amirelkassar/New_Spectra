@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;

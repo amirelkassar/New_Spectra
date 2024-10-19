@@ -12,16 +12,16 @@ namespace Spectra.WebAPI.Controllers
     public class DiagnoseController : ControllerBase
     {
         private readonly IDiagnosesService _diagnosetService;
-       
-    
-     
-        public DiagnoseController(IDiagnosesService diagnosetService )
+
+
+
+        public DiagnoseController(IDiagnosesService diagnosetService)
         {
             _diagnosetService = diagnosetService;
-      
+
         }
-   
-     
+
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllDiagnose()
@@ -52,9 +52,9 @@ namespace Spectra.WebAPI.Controllers
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<ActionResult> CreateDiagnose ([FromQuery] CreateDiagnoseCommand input)
+        public async Task<ActionResult> CreateDiagnose([FromQuery] CreateDiagnoseCommand input)
         {
-          
+
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);
 
             return Ok(Diagnoseies);
@@ -71,7 +71,7 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> DeleteDiagnose(string id)
         {
-           var delete= await _diagnosetService.DeleteDiagnoses(id);
+            var delete = await _diagnosetService.DeleteDiagnoses(id);
             return Ok(delete);
         }
         [HttpPost("upload")]
@@ -81,7 +81,7 @@ namespace Spectra.WebAPI.Controllers
 
             var data = _diagnosetService.CreateFromExcel(file);
 
-          
+
 
             return Ok(data);
         }

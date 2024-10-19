@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +27,7 @@ namespace Spectra.Domain.Clients
                 UserName = client.EmailAddress.Emailaddress,
                 Email = client.EmailAddress.Emailaddress,
                 Id = client.UserId
-                
+
             };
 
             // Set the password using Identity Framework

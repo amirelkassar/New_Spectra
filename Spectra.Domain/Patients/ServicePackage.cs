@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.Patients
+﻿namespace Spectra.Domain.Patients
 {
     public class ServicePackage
     {
@@ -12,6 +6,6 @@ namespace Spectra.Domain.Patients
 
         public decimal Price { get; set; }
 
-       
+
     }
 }

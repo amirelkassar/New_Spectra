@@ -1,8 +1,6 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Clients;
 using Spectra.Application.Messaging;
-using Spectra.Application.Validator;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -14,7 +12,7 @@ namespace Spectra.Application.Admin.Commands
 {
     public class CreateClientCommand : ICommand<OperationResult<string>>
     {
-      
+
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
@@ -39,7 +37,7 @@ namespace Spectra.Application.Admin.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateClientCommand request, CancellationToken cancellationToken)
         {
-   var checkEmail =  await _clientRepository.GetAllAsync(c=>c.EmailAddress == request.EmailAddress);
+            var checkEmail = await _clientRepository.GetAllAsync(c => c.EmailAddress == request.EmailAddress);
             if (checkEmail != null)
             {
                 throw new DbErrorException("this Email Address is already exist ");
@@ -56,15 +54,15 @@ namespace Spectra.Application.Admin.Commands
                 request.Address,
                 request.patients,
                 request.Organization,
-                request.ServicePackages=null
+                request.ServicePackages = null
             );
             await _clientRepository.AddAsync(client);
 
             return OperationResult<string>.Success(client.Id);
-       
-         
+
+
         }
     }
-   
-  
+
+
 }

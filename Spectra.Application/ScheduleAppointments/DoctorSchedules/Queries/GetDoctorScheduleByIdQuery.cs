@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
@@ -25,7 +24,7 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
 
             var doctorSchedule = await _doctorScheduleRepository.GetByIdAsync(request.Id);
 
-        
+
 
             return OperationResult<DoctorSchedule>.Success(doctorSchedule);
         }

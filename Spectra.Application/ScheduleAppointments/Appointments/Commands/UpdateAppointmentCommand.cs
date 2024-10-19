@@ -32,7 +32,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 
             var appointment = await _appointmentRepository.GetByIdAsync(request.Id);
 
-           
+
             appointment.Status = request.Status;
             appointment.DoctorId = request.DoctorId;
             appointment.AppointmentType = request.AppointmentType;

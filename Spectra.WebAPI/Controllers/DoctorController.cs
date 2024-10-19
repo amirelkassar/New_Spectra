@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.MedicalStaff.Doctors.Dto;
 using Spectra.Application.MedicalStaff.Doctors.Services;
-using Spectra.Infrastructure.ChatHub;
 
 namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DoctorController:ControllerBase
+    public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _DoctorService;
         private readonly IChatService _chatService;

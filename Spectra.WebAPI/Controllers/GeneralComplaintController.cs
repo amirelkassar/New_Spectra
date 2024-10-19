@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -22,7 +17,7 @@ namespace Spectra.WebAPI.Controllers
             _generalComplaintService = generalComplaintService;
         }
 
-        
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -50,7 +45,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateGeneralComplaintss( CreateGeneralComplaintsCommand input)
+        public async Task<ActionResult> CreateGeneralComplaintss(CreateGeneralComplaintsCommand input)
         {
 
 

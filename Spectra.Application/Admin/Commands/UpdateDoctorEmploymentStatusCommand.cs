@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
@@ -19,19 +17,19 @@ namespace Spectra.Application.Admin.Commands
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly ISpecializationsRepository _specializationRepository;
-    
-        public UpdateDoctorEmploymentStatusCommandHandler(IDoctorRepository doctorRepository,  ISpecializationsRepository specializationRepository)
+
+        public UpdateDoctorEmploymentStatusCommandHandler(IDoctorRepository doctorRepository, ISpecializationsRepository specializationRepository)
         {
             _doctorRepository = doctorRepository;
             _specializationRepository = specializationRepository;
-   
+
         }
 
         public async Task<OperationResult<Unit>> Handle(UpdateDoctorEmploymentStatusCommand request, CancellationToken cancellationToken)
         {
-          
+
             var doctors = await _doctorRepository.GetAllAsync(d => request.Ids.Contains(d.Id));
-          
+
             foreach (var doctor in doctors)
             {
 
@@ -47,7 +45,7 @@ namespace Spectra.Application.Admin.Commands
                 await _doctorRepository.UpdateAsync(doctor);
 
             }
-          
+
             return OperationResult<Unit>.Success(Unit.Value);
         }
     }

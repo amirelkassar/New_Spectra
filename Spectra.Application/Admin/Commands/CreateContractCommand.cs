@@ -25,19 +25,19 @@
 //    {
 
 //        private readonly IContractRepository _contractRepository;
-      
+
 
 //        public CreateDoctorCommandHandler(IContractRepository contractRepository)
 //        {
 //            _contractRepository = contractRepository;
-          
+
 //        }
 //        public async Task<OperationResult<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
 //        {
-       
 
-      
-       
+
+
+
 
 //            var contract = EmploymentContract.Create(
 //                Ulid.NewUlid().ToString(),
@@ -50,7 +50,7 @@
 //              );
 
 //            await _contractRepository.AddAsync(contract);
-     
+
 
 
 //            return OperationResult<string>.Success(contract.Id);

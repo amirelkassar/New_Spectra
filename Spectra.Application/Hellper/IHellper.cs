@@ -6,7 +6,7 @@ namespace Spectra.Application.MasterData.HellperFunc
     {
         Task<List<string>> CreateAttachments(IEnumerable<IFormFile> attachments, string folderName);
         Task DeleteAttachment(string? attachment);
-   
+
         Task DeleteAttachments(List<string> attachments);
         Task<List<string>> UpdateAttachment(List<string>? existingAttachment, List<IFormFile> newAttachments, string folderName);
     }

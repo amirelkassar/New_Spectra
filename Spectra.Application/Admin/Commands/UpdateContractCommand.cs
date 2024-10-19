@@ -20,11 +20,11 @@
 //    public class UpdateContractCommandHandler : IRequestHandler<UpdateContractCommand, OperationResult<Unit>>
 //    {
 //        private readonly IContractRepository _contractRepository;
-        
+
 //        public UpdateContractCommandHandler(IContractRepository contractRepository)
 //        {
 //            _contractRepository = contractRepository;
-         
+
 //        }
 
 //        public async Task<OperationResult<Unit>> Handle(UpdateContractCommand request, CancellationToken cancellationToken)

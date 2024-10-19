@@ -10,26 +10,26 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 {
     public class CreateDrugFormExcelCommand
     {
-      
+
 
         public class CreateBulkDataCommandHandler : IRequestHandler<CreateBulkDataCommand<CreateDrugCommand>, OperationResult<Unit>>
         {
             private readonly IDrugRepository _drugRepository;
-        
+
 
 
 
             public CreateBulkDataCommandHandler(IDrugRepository drugRepository, IWebHostEnvironment webHostEnvironment)
             {
                 _drugRepository = drugRepository;
-          
+
             }
 
 
 
             public async Task<OperationResult<Unit>> Handle(CreateBulkDataCommand<CreateDrugCommand> request, CancellationToken cancellationToken)
             {
-             
+
                 foreach (var item in request.Data)
                 {
                     var entity = DrugMD.Create(
@@ -55,9 +55,9 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                 }
                 return OperationResult<Unit>.Success(Unit.Value);
 
-            
-        
-    }
+
+
+            }
         }
 
     }

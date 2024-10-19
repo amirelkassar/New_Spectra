@@ -5,7 +5,7 @@ using Spectra.Application.Messaging;
 
 namespace Spectra.Application.Common
 {
-  
+
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
       where TRequest : ICommandBase
     {

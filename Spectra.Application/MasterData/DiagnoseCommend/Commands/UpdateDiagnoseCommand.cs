@@ -1,16 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.Messaging;
-using Spectra.Application.Patients;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
 {
@@ -29,17 +22,17 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
     {
 
         private readonly IDiagnoseRepository _diagnoseRepository;
-        
+
         public UpdateDiagnoseCommandHandler(IDiagnoseRepository diagnoseRepository)
         {
             _diagnoseRepository = diagnoseRepository;
-            
+
         }
 
-        public async Task <OperationResult<Unit>> Handle(UpdateDiagnoseCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(UpdateDiagnoseCommand request, CancellationToken cancellationToken)
         {
-          
-                var Diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
+
+            var Diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
             if (Diagnose == null)
             {
                 throw new NotFoundException("Diagnos", request.Id);
@@ -52,11 +45,11 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
             Diagnose.Description = request.Description;
             Diagnose.Name = request.Name;
 
-           
-                await _diagnoseRepository.UpdateAsync(Diagnose);
-                return OperationResult<Unit>.Success(Unit.Value);
-            
-          
+
+            await _diagnoseRepository.UpdateAsync(Diagnose);
+            return OperationResult<Unit>.Success(Unit.Value);
+
+
 
         }
 

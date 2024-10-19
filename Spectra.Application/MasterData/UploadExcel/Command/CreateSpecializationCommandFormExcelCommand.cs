@@ -1,11 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.GeneralComplaintsM;
-using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
-using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.UploadExcel.Command
@@ -18,7 +15,7 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
         {
 
 
-             private readonly ISpecializationsRepository _specializationRepository;
+            private readonly ISpecializationsRepository _specializationRepository;
 
             public CreateBulkDataCommandHandler(IValidator<CreateSpecializationCommand> createValidator, ISpecializationsRepository specializationRepository)
             {
@@ -31,21 +28,21 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
             public async Task<OperationResult<Unit>> Handle(CreateBulkDataCommand<CreateSpecializationCommand> request, CancellationToken cancellationToken)
             {
 
-              
-                    foreach (var item in request.Data)
-                    {
 
-                        var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.SpecializationName,0 , item.Code, item.Description , item.ConsultationCost
+                foreach (var item in request.Data)
+                {
 
-                   );
-                      
-                        await _specializationRepository.AddAsync(entity);
+                    var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.SpecializationName, 0, item.Code, item.Description, item.ConsultationCost
 
-                    }
-                    return OperationResult<Unit>.Success(Unit.Value);
+               );
 
-                
-               
+                    await _specializationRepository.AddAsync(entity);
+
+                }
+                return OperationResult<Unit>.Success(Unit.Value);
+
+
+
             }
         }
 

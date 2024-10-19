@@ -2,7 +2,6 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.Patients;
 using Spectra.Domain.Patients;
-using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 
 namespace Spectra.Infrastructure.Patients
@@ -34,7 +33,7 @@ namespace Spectra.Infrastructure.Patients
 
         public async Task<Patient> GetByIdAsync(string id)
         {
-            
+
             var entity = await _patients.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

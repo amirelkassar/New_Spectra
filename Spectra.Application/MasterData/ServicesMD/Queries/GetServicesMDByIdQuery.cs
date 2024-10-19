@@ -26,15 +26,15 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
 
         public async Task<OperationResult<MasterDataServices>> Handle(GetServicesMDByIdQuery request, CancellationToken cancellationToken)
         {
-        
-                var entitiy = await _serviceMRepository.GetByIdAsync(request.Id) ;
-                if (entitiy == null)
-                {
-                    throw new NotFoundException("Service", request.Id);
-                }
 
-                return OperationResult<MasterDataServices>.Success(entitiy);
-            
+            var entitiy = await _serviceMRepository.GetByIdAsync(request.Id);
+            if (entitiy == null)
+            {
+                throw new NotFoundException("Service", request.Id);
+            }
+
+            return OperationResult<MasterDataServices>.Success(entitiy);
+
 
         }
     }

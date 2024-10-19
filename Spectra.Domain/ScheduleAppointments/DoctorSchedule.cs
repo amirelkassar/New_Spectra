@@ -1,11 +1,5 @@
-﻿using Spectra.Domain.Clients;
-using Spectra.Domain.MedicalStaff.Doctor;
-using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.ScheduleAppointments
 {
@@ -14,7 +8,7 @@ namespace Spectra.Domain.ScheduleAppointments
         public DaysOfWeeks Days { get; set; }
         protected DoctorSchedule() { }
 
-        private DoctorSchedule(string id, string doctorId, TimeOnly from, MoringOrNight fromMoringOrNight, TimeOnly to, MoringOrNight toMoringOrNight , DaysOfWeeks days) 
+        private DoctorSchedule(string id, string doctorId, TimeOnly from, MoringOrNight fromMoringOrNight, TimeOnly to, MoringOrNight toMoringOrNight, DaysOfWeeks days)
             : base(id, doctorId, from, fromMoringOrNight, to, toMoringOrNight)
         {
             Id = id;
@@ -40,5 +34,5 @@ namespace Spectra.Domain.ScheduleAppointments
         }
 
     }
-  
+
 }

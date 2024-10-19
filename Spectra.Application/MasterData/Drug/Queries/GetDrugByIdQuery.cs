@@ -24,18 +24,18 @@ namespace Spectra.Application.MasterData.Drug.Queries
 
         public async Task<OperationResult<DrugMD>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
         {
-           
-          
-           
-                var entitiy =  await _drugRepository.GetByIdAsync(request.Id);
-                if (entitiy == null)
-                {
-                    throw new NotFoundException("Drugs", request.Id);
-                }
 
-                return OperationResult<DrugMD>.Success(entitiy);
-            
-            
+
+
+            var entitiy = await _drugRepository.GetByIdAsync(request.Id);
+            if (entitiy == null)
+            {
+                throw new NotFoundException("Drugs", request.Id);
+            }
+
+            return OperationResult<DrugMD>.Success(entitiy);
+
+
         }
     }
 }

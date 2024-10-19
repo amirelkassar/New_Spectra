@@ -11,7 +11,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         public string Id { get; set; }
 
         public AppointmentStatus Status { get; set; }
-    
+
 
     }
 
@@ -31,7 +31,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 
 
             appointment.Status = AppointmentStatus.Canceled;
-        
+
 
 
 

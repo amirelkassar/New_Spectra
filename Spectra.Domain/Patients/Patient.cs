@@ -3,7 +3,6 @@ using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
-using System.Collections.Generic;
 using static Spectra.Domain.Common.Conses.Units;
 
 
@@ -34,7 +33,7 @@ namespace Spectra.Domain.Patients
         public VerbalCommunication? VerbalCommunication { get; set; }
         public LastImpression LastImpression { get; set; }
 
-        private Patient(string id, 
+        private Patient(string id,
             Name name,
             string nationalId,
             HumenGender gender,
@@ -52,7 +51,7 @@ namespace Spectra.Domain.Patients
             RelationToClient = relationToClient;
             ChildHeight = childHeight;
             ChildWeightt = childWeightt;
-       
+
             ClientId = clientId;
         }
 
@@ -67,7 +66,7 @@ namespace Spectra.Domain.Patients
             double childWeightt,
             string dateOfOnSetOfSymptoms,
             TypeOfDisease inheritedOrAcquired,
-         
+
 
 
             string clientId)
@@ -86,7 +85,7 @@ namespace Spectra.Domain.Patients
 
 
 
-            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, childHeight, childWeightt,clientId);
+            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, childHeight, childWeightt, clientId);
         }
     }
 }

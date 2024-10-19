@@ -9,15 +9,15 @@ namespace Spectra.WebAPI.Controllers
     [Route("api/[controller]")]
     public class PatientController : ControllerBase
     {
-        
-            private readonly IPatientService _patientService;
-          
-            public PatientController(IPatientService patientService)
-            {
 
-              _patientService = patientService;
+        private readonly IPatientService _patientService;
 
-            }
+        public PatientController(IPatientService patientService)
+        {
+
+            _patientService = patientService;
+
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -48,7 +48,7 @@ namespace Spectra.WebAPI.Controllers
 
 
             var Patienties = await _patientService.UpdatePatient(id, input.Name,
-                    input.Gender,  input.RelationToClient,input.DateOfBirth, input.NationalId);
+                    input.Gender, input.RelationToClient, input.DateOfBirth, input.NationalId);
             return Ok(Patienties);
         }
         [HttpDelete("id")]

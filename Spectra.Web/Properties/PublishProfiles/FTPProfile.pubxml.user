@@ -7,18 +7,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASx0p26clek+mpxTGBhPmqQAAAAACAAAAAAAQZgAAAAEAACAAAACUKRJbGwYlJ0kaCq9egPgO1xYtZ1casuwJU4jTpPUxAAAAAAAOgAAAAAIAACAAAACc3hd09ZKITzXJabticdT5/4KkAaRjiQqe7ZfWZJ6JNDAAAADS7kt+S3ekdfm8KHAzm1he9/Q/WDR+beP2t1OnAV25UyvZlB61ns81dzcZMhzZSDJAAAAAROQdM/qyUgtX2rAx4JXmkRtWnmV8reboLbDS693nmwyFxwpn4wI9HzljAYmkfqpkchyQLkQlsx+RQgQFN7VD/A==</EncryptedPassword>
     <_PublishTargetUrl>ftp://spectra.profound-group.com/</_PublishTargetUrl>
-    <History>True|2024-10-15T09:40:10.6484411Z||;False|2024-10-15T12:39:29.5804128+03:00||;True|2024-10-15T11:40:08.1471844+03:00||;True|2024-10-13T23:43:00.5093500+03:00||;False|2024-10-13T23:42:34.4210617+03:00||;True|2024-10-13T23:32:49.6166735+03:00||;False|2024-10-13T23:32:09.2844805+03:00||;True|2024-10-13T23:28:13.8858615+03:00||;</History>
+    <History>False|2024-10-19T18:57:49.8611809Z||;False|2024-10-19T21:57:17.7101803+03:00||;False|2024-10-19T21:57:00.7192077+03:00||;True|2024-10-15T12:40:10.6484411+03:00||;False|2024-10-15T12:39:29.5804128+03:00||;True|2024-10-15T11:40:08.1471844+03:00||;True|2024-10-13T23:43:00.5093500+03:00||;False|2024-10-13T23:42:34.4210617+03:00||;True|2024-10-13T23:32:49.6166735+03:00||;False|2024-10-13T23:32:09.2844805+03:00||;True|2024-10-13T23:28:13.8858615+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>10/15/2024 11:37:51</publishTime>
+      <publishTime>10/19/2024 16:24:42</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>10/12/2024 17:20:32</publishTime>
+      <publishTime>10/19/2024 16:24:42</publishTime>
     </File>
     <File Include="appsettings.Production.json">
-      <publishTime>10/15/2024 11:38:08</publishTime>
+      <publishTime>10/19/2024 16:08:29</publishTime>
     </File>
     <File Include="AWSSDK.Core.dll">
       <publishTime>11/09/2022 18:47:34</publishTime>
@@ -51,13 +51,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/10/2022 22:37:22</publishTime>
     </File>
     <File Include="DocumentFormat.OpenXml.dll">
-      <publishTime>07/30/2024 23:26:40</publishTime>
+      <publishTime>10/15/2024 22:18:56</publishTime>
     </File>
     <File Include="DocumentFormat.OpenXml.Framework.dll">
-      <publishTime>07/30/2024 23:26:40</publishTime>
+      <publishTime>10/15/2024 22:18:56</publishTime>
     </File>
     <File Include="EPPlus.dll">
-      <publishTime>08/20/2024 13:45:00</publishTime>
+      <publishTime>10/11/2024 14:07:58</publishTime>
     </File>
     <File Include="EPPlus.Interfaces.dll">
       <publishTime>11/21/2022 14:51:04</publishTime>
@@ -66,10 +66,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2022 14:51:06</publishTime>
     </File>
     <File Include="FluentValidation.DependencyInjectionExtensions.dll">
-      <publishTime>04/23/2024 14:28:34</publishTime>
+      <publishTime>09/15/2024 14:39:32</publishTime>
     </File>
     <File Include="FluentValidation.dll">
-      <publishTime>04/23/2024 14:28:34</publishTime>
+      <publishTime>09/15/2024 14:39:32</publishTime>
     </File>
     <File Include="Flurl.dll">
       <publishTime>12/14/2023 00:42:06</publishTime>
@@ -87,16 +87,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2019 16:52:28</publishTime>
     </File>
     <File Include="JsonConverter.Abstractions.dll">
-      <publishTime>12/21/2023 18:50:56</publishTime>
+      <publishTime>10/10/2024 14:16:18</publishTime>
     </File>
     <File Include="JsonConverter.Newtonsoft.Json.dll">
-      <publishTime>12/21/2023 18:50:58</publishTime>
+      <publishTime>10/10/2024 14:16:38</publishTime>
     </File>
     <File Include="MediatR.Contracts.dll">
       <publishTime>02/22/2023 20:48:20</publishTime>
     </File>
     <File Include="MediatR.dll">
-      <publishTime>11/17/2023 18:23:20</publishTime>
+      <publishTime>09/09/2024 17:08:14</publishTime>
     </File>
     <File Include="MediatR.Extensions.Microsoft.DependencyInjection.dll">
       <publishTime>09/30/2022 11:42:50</publishTime>

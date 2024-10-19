@@ -1,14 +1,5 @@
 ﻿using MediatR;
-using Spectra.Application.Clients.Commands;
-using Spectra.Application.Clients;
 using Spectra.Application.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Domain.Shared.Wrappers;
 
 

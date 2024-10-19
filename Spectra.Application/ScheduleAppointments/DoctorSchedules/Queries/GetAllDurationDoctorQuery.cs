@@ -38,8 +38,8 @@
 //        {
 
 //            var doctor = await _doctorRepository.GetByIdAsync(request.DoctorId);
-      
-           
+
+
 
 //            var appointments = await _appointmentRepository.GetAllAsync(c => c.DoctorId == request.DoctorId && c.Daysdate == request.Daysdate.Date);
 //            //var appointmentId =  appointment.Select(c => c.DoctorScheduleId);

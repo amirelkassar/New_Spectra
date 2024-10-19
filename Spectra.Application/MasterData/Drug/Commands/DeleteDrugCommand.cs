@@ -1,16 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.Clients.Commands;
-using Spectra.Application.Clients;
-using Spectra.Application.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Spectra.Application.MasterData.Drug;
-using Spectra.Domain.Shared.Wrappers;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Commands
 {
@@ -33,17 +24,17 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeleteDrugCommand request, CancellationToken cancellationToken)
         {
-          
+
             var drugs = await _drugRepository.GetByIdAsync(request.Id);
-       
+
 
             await _addPhoto.DeleteAttachments(drugs.AttachmentPath);
 
             await _drugRepository.DeleteAsync(drugs);
             return OperationResult<Unit>.Success(Unit.Value);
-      
 
-   
+
+
         }
     }
 
