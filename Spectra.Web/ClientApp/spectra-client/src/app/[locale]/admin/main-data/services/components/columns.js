@@ -1,37 +1,42 @@
-import ROUTES from "@/routes";
 import ActionMenu from "./ActionMenu";
+import SessionIcon from "@/assets/icons/session";
 
 export const columns = [
   {
-    accessorKey: "title",
+    accessorKey: "name",
     header: "الاسم",
-    id: "title",
+    id: "name",
     cell: ({ getValue, row }) => {
-      const title = getValue();
+      const name = getValue();
       const icon = row.original.icon;
       const id = row.original.id;
       return (
         <div className="flex items-center gap-5">
           <div className=" size-[40px] rounded-[50%] items-center flex justify-center bg-greenMain/20 p-2  relative">
-            {icon}
+            {icon || <SessionIcon className={"w-full h-auto"} />}
           </div>
-          <h3 className="text-base font-Bold">{title}</h3>
+          <h3 className="text-base font-Bold">{name}</h3>
         </div>
       );
     },
   },
   {
-    accessorKey: "date",
+    accessorKey: "created",
     header: "  تاريخ الاضافة ",
-    id: "date",
+    id: "created",
+    cell: ({ getValue }) => {
+      const created = getValue();
+      const date = new Date(created);
+      return <p>{date.toLocaleDateString("en-GB")}</p>;
+    },
   },
   {
-    accessorKey: "show",
+    accessorKey: "availableSrvices",
     header: " الحالة ",
-    id: "show",
+    id: "availableSrvices",
     cell: ({ getValue }) => {
-      const show = getValue();
-      return show ? (
+      const availableSrvices = getValue();
+      return availableSrvices === 1 ? (
         <span className="bg-blueLight font-Bold text-greenMain flex items-center justify-center px-4 w-fit rounded-lg text-center h-8 text-base">
           تعرض
         </span>
@@ -49,10 +54,10 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ getValue, row }) => {
+    cell: ({  row }) => {
       const id = row.original.id;
-      const show = row.original.show;
-      return <ActionMenu id={id} show={show} />;
+      const availableSrvices = row.original.availableSrvices;
+      return <ActionMenu id={id} show={availableSrvices === 1} />;
     },
   },
 ];

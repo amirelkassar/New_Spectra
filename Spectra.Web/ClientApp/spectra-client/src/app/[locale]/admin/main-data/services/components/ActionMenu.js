@@ -8,18 +8,19 @@ import ROUTES from "@/routes";
 import DeleteIcon from "@/assets/icons/delete";
 import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
+import { DeleteMasterDataServices } from "@/useAPI/admin/main-data/services";
 function ActionMenu({ id, show = true }) {
   const { modal, editModal } = useModal();
-
+  const { mutate: deleteMasterDataServices, isLoading } = DeleteMasterDataServices(id);
+  const handleDelete = () => {
+    deleteMasterDataServices();
+  };
   const options = [
     {
       label: "مسح",
       icon: <DeleteIcon />,
       type: "btn",
-      action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
-      },
+      action: handleDelete,
       color: "red",
     },
     {
@@ -33,7 +34,9 @@ function ActionMenu({ id, show = true }) {
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: show ? ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id) : ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id),
+      link: show
+        ? ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id)
+        : ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id),
       type: "link",
     },
     {

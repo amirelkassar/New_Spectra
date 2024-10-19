@@ -1,5 +1,5 @@
 "use client";
-import { Textarea, TextInput } from "@mantine/core";
+import { Textarea } from "@mantine/core";
 import React, { useState } from "react";
 import { Link } from "@/navigation";
 import Button from "@/components/button";

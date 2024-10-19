@@ -7,12 +7,16 @@ import ROUTES from "@/routes";
 import { MultiSelect, Textarea } from "@mantine/core";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
 import InputGreen from "@/components/Input-green";
+import { useCreateInternalExamination } from "@/useAPI/admin/main-data/testsInterior";
 function Page() {
   const [formData, setFormData] = useState({
     Name: "",
     Code: "",
     ExaminationTypes: ["علاجى"], // default value
   });
+
+  const { mutate: createInternalExamination } = useCreateInternalExamination();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -27,6 +31,23 @@ function Page() {
       ExaminationTypes: selected,
     }));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+
+    for (const key in formData) {
+      if (Array.isArray(formData[key])) {
+        formData[key].forEach((file) => {
+          formDataToSend.append(key, file);
+        });
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    createInternalExamination(formDataToSend);
+  };
+
   return (
     <div>
       <div className="flex mb-10 lgl:mt-0 mt-6   items-center gap-4 ">
@@ -68,8 +89,9 @@ function Page() {
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-          onClick={()=>{console.log(formData);
-          }}
+            onClick={() => {
+              console.log(formData);
+            }}
             variant="secondary"
             className={
               "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
