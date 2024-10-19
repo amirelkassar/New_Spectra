@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackIcon from "@/assets/icons/back";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
@@ -7,14 +7,21 @@ import ROUTES from "@/routes";
 import { Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
 import { useCreateDiagnostics } from "@/useAPI/admin/main-data/diagnostics";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page() {
-  const { mutate: CreateDiagnostics } = useCreateDiagnostics();
+  const {
+    mutate: CreateDiagnostics,
+    error,
+    isSuccess,
+    isError,
+    reset,
+  } = useCreateDiagnostics();
   const [formData, setFormData] = useState({
     code1: null,
     code2: null,
     code3: null,
-    name: "",
-    description: "",
+    name: null,
+    description: null,
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +29,20 @@ function Page() {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
+  useEffect(() => {
+    isSuccess &&
+      setFormData({
+        code1: "",
+        code2: "",
+        code3: "",
+        name: "",
+        description: "",
+      });
+  }, [isSuccess]);
   const handleSubmit = (e) => {
     e.preventDefault();
     CreateDiagnostics(formData);
@@ -43,32 +63,37 @@ function Page() {
           <InputGreen
             label="كود 1"
             name="code1"
-            value={formData.code1}
+            value={formData.code1 || ""}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Code1")}
           />
           <InputGreen
             label="كود 2"
             name="code2"
-            value={formData.code2}
+            value={formData.code2 || ""}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Code2")}
           />
           <InputGreen
             label="كود 3"
             name="code3"
-            value={formData.code3}
+            value={formData.code3 || ""}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Code3")}
           />
           <InputGreen
             label="اسم التشخيص"
             name="name"
-            value={formData.name}
+            value={formData.name || ""}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Name")}
           />
           <Textarea
             label="وصف التشخيص"
             name="description"
-            value={formData.description}
+            value={formData.description || ""}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Description")}
             classNames={{
               input:
                 "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",
