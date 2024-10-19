@@ -5,8 +5,8 @@ import MenuActions from "@/components/menu-actions";
 import { Link, useRouter } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
+import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import { useParams } from "next/navigation";
-import ActionMenu from "./ActionMenuPatients";
 
 const ClientPatients = () => {
   const patients = [
@@ -18,9 +18,6 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
-      age:'8 سنين - 3 اشهر',
-      height:'90 سنتيمتر',
-      Weight:'40 كيلوجرام'
     },
     {
       id: 1,
@@ -30,9 +27,6 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
-      age:'8 سنين - 3 اشهر',
-      height:'90 سنتيمتر',
-      Weight:'40 كيلوجرام'
     },
     {
       id: 2,
@@ -42,14 +36,11 @@ const ClientPatients = () => {
       gender: "ذكر",
       dateOfBirth: "10/10/2024",
       relation: "الابن",
-      age:'8 سنين - 3 اشهر',
-      height:'90 سنتيمتر',
-      Weight:'40 كيلوجرام'
     },
   ];
   const params = useParams();
   const router = useRouter();
-
+  console.log(params);
 
   return (
     <section className="default-page grow">
@@ -64,12 +55,13 @@ const ClientPatients = () => {
             <BackIcon className={"w-full h-full"} />
           </button>
           <h2>عبدالله الشيخ</h2>
-        
+          <button className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF] lg:h-[48px] h-[40px]">
+            <PlusInsideCircleIcon />
+            <p className="text-[12px] md:text-[16px] font-bold"> أضافة طفل</p>
+          </button>
         </div>
-        <ActionMenu
-          type={params.orgId ? "organization" : "family"}
-          id={params.orgId?params.orgId:params.familyId}
-          id2={params.clientID}
+        <MenuActions
+          type={2}
           pathEdit={
             params.orgId
               ? ROUTES.ADMIN.CLIENTS.ORGANIZATION.PATIENTSEDIT(params.orgId,params.clientID)
@@ -101,55 +93,43 @@ const ClientPatients = () => {
           </li>
         </ul>
       </div>
-      <div className="flex  gap-5 max-w-[100px] overflow-auto hideScroll min-w-[100%]">
+      <div className="flex  gap-5 max-w-[100px] overflow-auto min-w-[100%]">
         {patients.map((patient) => (
           <div
             key={patient.id}
             className=" border-2 border-blueLight rounded-xl  relative"
           >
             <div className=" absolute left-4 top-[18px]">
-              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)+'/edit'} />
+              <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)} pathEdit={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(patient.id)} />
             </div>
             <Link
-              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(patient.id)}
-              className=" p-5 flex flex-col gap-4 "
+              href={ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(patient.id)}
+              className=" p-5 flex flex-col gap-2 "
             >
               <div className="size-28 rounded-full flex items-center justify-center overflow-hidden self-center">
                 <Image priority src={patient.image} alt="child" />
               </div>
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الاسم/</p>
-                <strong className="text-xs mdl:text-base">{patient.name}</strong>
+                <strong>{patient.name}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الرقم القومي/</p>
-                <strong className="text-xs mdl:text-base">{patient.nationalId}</strong>
+                <strong>{patient.nationalId}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">الجنس/</p>
-                <strong className="text-xs mdl:text-base">{patient.gender}</strong>
+                <strong>{patient.gender}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">تاريخ الميلاد/</p>
-                <strong className="text-xs mdl:text-base">{patient.dateOfBirth}</strong>
-              </div>{" "}
-              <div className="flex items-center gap-3">
-                <p className="min-w-[94px] text-[12px]">السن</p>
-                <strong className="text-xs mdl:text-base">{patient.age}</strong>
-              </div>{" "}
-              <div className="flex items-center gap-3">
-                <p className="min-w-[94px] text-[12px]">الطول</p>
-                <strong className="text-xs mdl:text-base">{patient.height}</strong>
-              </div>{" "}
-              <div className="flex items-center gap-3">
-                <p className="min-w-[94px] text-[12px]">الوزن</p>
-                <strong className="text-xs mdl:text-base">{patient.Weight}</strong>
+                <strong>{patient.dateOfBirth}</strong>
               </div>{" "}
               <div className="flex items-center gap-3">
                 <p className="min-w-[94px] text-[12px]">
                   علاقة العملاء بالمريض/
                 </p>
-                <strong className="text-xs mdl:text-base">{patient.relation}</strong>
+                <strong>{patient.relation}</strong>
               </div>
             </Link>
           </div>

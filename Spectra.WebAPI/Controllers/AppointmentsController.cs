@@ -20,7 +20,6 @@ namespace Spectra.WebAPI.Controllers
 
         }
 
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllAppointmentsDoctor([FromQuery] GetAllAppointmentsStatuDoctorQuery input)
@@ -57,9 +56,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> UpdateAppointment(string id, UpdateAppointmentCommand input)
         {
 
-
             var Appointment = await _appointmentService.UpdateAppointment(id, input);
-
             return Ok(Appointment);
         }
   

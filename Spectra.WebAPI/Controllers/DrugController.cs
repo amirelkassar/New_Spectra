@@ -54,7 +54,6 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> CreateDrugs([FromForm] CreateDrugCommand input)
         {
 
-
             var Drugies = await _drugtService.CreateDrug(input);
             return Ok(Drugies);
         }

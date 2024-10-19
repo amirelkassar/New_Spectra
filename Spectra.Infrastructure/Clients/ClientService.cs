@@ -101,8 +101,7 @@ namespace Spectra.Infrastructure.Clients
                 //UserId = userId,
                 EmailAddress = emailAddress,
                 Address = address,
-                Organization = organization,
-                medicalServiceProvider = medicalServiceProvider
+                Organization = organization
 
             };
 
@@ -204,8 +203,7 @@ namespace Spectra.Infrastructure.Clients
                 UserId = userId,
                 EmailAddress = emailAddress,
                 Address = address,
-                Organization = organization,
-                MedicalServiceProvider = medicalServiceProvider
+                Organization = organization
 
             };
             return await _mediator.Send(command);

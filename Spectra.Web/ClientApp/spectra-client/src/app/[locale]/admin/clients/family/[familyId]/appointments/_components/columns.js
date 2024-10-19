@@ -1,5 +1,6 @@
+import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
-import ActionMenu from "./ActionMenuFamilyAppo";
+import Image from "next/image";
 
 export const columns = [
   {
@@ -76,7 +77,7 @@ export const columns = [
         >
           <Statue statue={status} />
 
-          <ActionMenu />
+          <MenuActions />
         </div>
       );
     },

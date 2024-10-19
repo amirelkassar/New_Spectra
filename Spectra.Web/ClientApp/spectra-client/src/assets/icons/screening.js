@@ -1,7 +1,6 @@
-const ScreeningIcon = ({ className = '' }) => {
+const ScreeningIcon = () => {
   return (
     <svg
-      className={className}
       width='52'
       height='49'
       viewBox='0 0 52 49'

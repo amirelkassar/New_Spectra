@@ -1,38 +1,9 @@
 "use client";
-import AcceptIcon from "@/assets/icons/accept";
-import ArrowDownIcon from "@/assets/icons/arrow-down";
-import EditIcon from "@/assets/icons/edit";
-import EditImgIcon from "@/assets/icons/editImg";
-import ImagePlaceholderIcon from "@/assets/icons/image-placeholder";
-import RefuseIcon from "@/assets/icons/refuse";
+import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import SaveIcon from "@/assets/icons/save";
 import Button from "@/components/button";
-import Input from "@/components/input";
-import { Link } from "@/navigation";
-import { MultiSelect, Select } from "@mantine/core";
-import Image from "next/image";
 import React, { useState } from "react";
-import certificates from "@/assets/images/certificates.png";
-const ListCertificates = [
-  {
-    id: 0,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-  {
-    id: 1,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-  {
-    id: 2,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
 
-];
 const EditPage = ({ params: { requestId } }) => {
   const sala7eya = ["طبيب", "متخصص", "محاسب", "سكرتير"];
   const [Data, setData] = useState({
@@ -72,297 +43,104 @@ const EditPage = ({ params: { requestId } }) => {
       }, 0);
     }
   };
- 
-  const data = {
-    name: "عبدالله الشيخ",
-    lastEntry: "25/4/2024",
-    customerType: "عائلة طفل",
-    nationalID: "623-456-782",
-    address: "السعودية",
-    city: "دمام",
-    phone: "9874563+",
-    email: "safwa@gmail.com",
-    website: "safwa@gmail.com",
-    gender: "ذكر",
-    jop: "مدير مؤسسة حكومية",
-    numChildren: "1 طفل",
-    dateBirth: "2/8/1990",
-  };
+  const [addMore, setAddMore] = useState(false);
+  const [valueDaqeqa, setValueDaqeqa] = useState('');
   return (
-    <div className="w-full">
-      <h2 className="text-sm lg:text-xl font-bold mb-5 lg:mb-8">
-        طلبات الاشتراك
-      </h2>
-      <div className="default-page w-full max-w-[100%] mb-11  text-xl  !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
-        <h2>البيانات الشخصية </h2>
-        <form className="w-[100%] clientEdit">
-          <div className="flex flex-col flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
-            <div className=" relative">
-              <div className=" w-[100%] lg:w-auto lg:size-24 rounded-full overflow-hidden flex items-center justify-center">
-                <label htmlFor="file" className="cursor-pointer">
-                  <ImagePlaceholderIcon />
-                </label>
-                <input id="file" type="file" className="hidden" />
-              </div>
-              <div className="bg-greenMain flex items-center justify-center p-[7px] rounded-[50%] size-[32px] absolute left-[50%] bottom-[-12px] border-[2px] border-white translate-x-[-50%]">
-                <EditImgIcon />
-              </div>
-            </div>
-
-            <Input
-              label={"الاسم"}
-              value={data.name}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"اخر دخول"}
-              value={data.lastEntry}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-              readOnly={true}
-            />
-            <Select
-              className=" min-w-[calc(50%-10px)]  !border-[#CFD0D7] !outline-none"
-              label={"نوع العميل"}
-              defaultValue={data.customerType}
-              data={["عائلة طفل", "منظمه"]}
-              searchable
-              nothingFoundMessage="Nothing found..."
-            />
-            <Input
-              label={"رقم الهوية"}
-              value={data.nationalID}
-              containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"البلد"}
-              value={data.address}
-              containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"المدينة"}
-              value={data.city}
-              containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"رقم الهاتف"}
-              value={data.phone}
-              containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"البريد الالكترونى "}
-              type={"email"}
-              value={data.email}
-              containerClassName={"!gap-1 min-w-[calc(50%-10px)]"}
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-          </div>
-        </form>
-      </div>
-      <h2 className="text-sm lg:text-xl font-bold mb-5 lg:mb-8">
-        الوصف الوظيقى
-      </h2>
-      <div className="default-page w-full max-w-[100%] mb-5  text-xl  !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
-        <form className="w-[100%] clientEdit">
-          <div className="flex flex-col  flex-wrap md:flex-row gap-x-4 gap-y-4 md:gap-y-12">
-            <Select
-              className=" min-w-[calc(50%-10px)]  !border-[#CFD0D7] !outline-none"
-              label={"التخصص"}
-              defaultValue={"اخصائى نفسى"}
-              data={["اخصائى نفسى2", "اخصائى نفسى"]}
-              searchable
-              nothingFoundMessage="Nothing found..."
-            />
-            <Input
-              label={"رقم الترخيص / الاعتماد"}
-              defaultValue={"235846"}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"مرخص / معتمد من"}
-              defaultValue={" مرخص معتمد من الهيئة السعودية للتخصصات الصحية"}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"رقم الهوية"}
-              defaultValue={"623-456-782"}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-            <Input
-              label={"الدرجة العلمية "}
-              defaultValue={"623-456-782"}
-              containerClassName={
-                "!gap-1 min-w-[calc(50%-10px)] xl:min-w-[calc(42%-10px)]"
-              }
-              labelClassName={"!text-[16px] !mb-0 px-4"}
-              inputClassName={
-                "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
-              }
-            />
-          </div>
-        </form>
+    <div className="default-page text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 ">
+      <div className="max-w-[700px] w-[100%] flex flex-col gap-2 px-1 md:px-0">
+        <input
+          value={Data.name}
+          onChange={(e) => {
+            setData({ ...Data, name: e.target.value });
+          }}
+          className={
+            "mb-0 outline-none py-2 px-4 h-[38px] md:h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
+          }
+        />
+        <input
+          value={Data.spec}
+          onChange={(e) => {
+            setData({ ...Data, spec: e.target.value });
+          }}
+          className={
+            "mb-0 outline-none py-2 px-4 h-[38px] md:h-[46px]  md:mb-3 text-start text-[14px] md:text-[18px] font-bold ring-1 !ring-[#CFD0D7] rounded-[2px]"
+          }
+        />
+        <textarea
+          className=" outline-none py-2 px-4 h-auto min-h-[100px] md:mb-3 text-start text-[14px] md:text-[18px] font-bold w-[100%] max-w-[700px] ring-1 !ring-[#CFD0D7]"
+          name="desc"
+          value={Data.desc}
+          onChange={handleDescChange}
+          onKeyDown={handleKeyDown}
+          rows="4"
+          cols="50"
+        />
       </div>
 
-      <div className="col-span-1 lg:col-span-2 bg-white py-4 px-6 lg:px-10 lg:py-8 !mb-4 lg:rounded-xl relative">
-        <div className="flex gap-4 items-center mb-10">
-          <h2 className="text-[14px] md:text-[20px] font-bold">
-            التخصصات الدقيقة
-          </h2>
-
-          <MultiSelect
-            data={["نفسى", "اجتماعى", "طيف توحد"]}
-            placeholder="اختر تخصص"
-            rightSection={<ArrowDownIcon />}
-            className="MultiSelect flex-1"
-          />
-        </div>
-        <div className="max-w-[850px] flex flex-wrap gap-x-5 gap-y-2">
-          {Data.daqeqa.map((item, index) => (
-            <div
-              key={index}
-              className="bg-blueLight px-3 md:px-5 py-1 rounded-lg text-[14px] md:text-[20px] "
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+      <div className="flex items-center gap-5">
+        <h2 className="text-[14px] md:text-[20px] font-bold">
+          التخصصات الدقيقة
+        </h2>
+        <button
+          onClick={() => {
+            setAddMore(true);
+          }}
+          className="flex font-bold items-center justify-center gap-[8px] py-1 md:py-2 px-[18px] rounded-[12px] bg-[#E9F7FF]"
+        >
+          <PlusInsideCircleIcon />
+          <p className="text-[12px] md:text-[16px] font-bold">أضافة تخصص</p>
+        </button>
       </div>
-      <div className="col-span-1 lg:col-span-2 bg-white py-4 px-6 lg:px-10 lg:py-8 !mb-4 lg:rounded-xl relative">
-        <div className=" w-full mb-14 lg:mb-20">
-          <h2 className="headTitleDash mb-6"> الشهادات </h2>
-          <div className="flex gap-2 mdl:gap-4 flex-wrap ">
-            {ListCertificates.map((item, i) => {
-              return (
-                <div
-                  key={item.id}
-                  className="py-3 mdl:py-5 px-3 mdl:px-4 bg border-gray border shadow-sm rounded-lg max-w-[260px] min-w-[calc(50%-4px)] md:min-w-[260px] flex-1"
-                >
-                  <Image
-                    src={item.image}
-                    width={228}
-                    height={178}
-                    className="w-full h-auto object-contain rounded-[10px]"
-                    alt="items"
-                  />
-                  <div className="flex md:items-center flex-col md:flex-row md:justify-between gap-1 md:gap-3 mt-3 mdl:mt-5 flex-wrap">
-                    <h2 className="text-[12px] mdl:text-[16px] font-Bold ">
-                      {item.title}
-                    </h2>
-                    <p className="text-[12px] mdl:text-[16px] text-grayDark">
-                      {item.date}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <h2 className="text-[14px] md:text-xl mb-6 font-bold">
-            إضافة صلاحية
-          </h2>
-          <div className="flex gap-3 md:gap-5 flex-wrap px-1">
-            {sala7eya.map((item, index) => (
-              <Button
-                className={`!rounded-lg md:!rounded-xl !py-1 text-[14px] ${
-                  Data.spec.includes(item)
-                    ? ""
-                    : " ring-1 !text-[#010036] !ring-[#010036]"
-                } border-none md:text-[20px] px-[17px] lg:px-[26px]`}
-                variant={Data.spec.includes(item) ? "secondary" : "ternary"}
-                key={index}
-              >
-                {item}
-              </Button>
-            ))}
-          </div>
-        </div>
 
-        <div className="flex px-1 gap-5 md:gap-8 max-w-[950px] w-[100%] flex-wrap !mt-5 md:!mt-14">
+      <div className="max-w-[850px] flex flex-wrap gap-x-5 gap-y-2">
+        {Data.daqeqa.map((item, index) => (
+          <div
+            key={index}
+            className="bg-grayLight px-2 md:px-3 py-1 rounded-md text-[14px] md:text-[20px] "
+          >
+            {item}
+          </div>
+        ))}
+        {addMore ? (
+          <form onSubmit={(e)=>{e.preventDefault(); console.log(valueDaqeqa);setValueDaqeqa('');setAddMore(false) }}>
+            <input
+            className="h-[34px] text-[14px] md:text-[16px] font-bold md:h-[46px] rounded-[10px] px-2 py-1 w-[150px] md:w-[200px] border border-[#CFD0D7] outline-none"
+             value={valueDaqeqa}
+              onChange={(e) => {
+                setValueDaqeqa(e.target.value)
+              }}
+            />
+          </form>
+        ) : null}
+      </div>
+      <h2 className="text-[14px] md:text-[20px] font-bold">إضافة صلاحية</h2>
+      <div className="flex gap-3 md:gap-5 flex-wrap px-1">
+        {sala7eya.map((item, index) => (
           <Button
-            onClick={() => {
-              editModal("type", "accept");
-              editModal("open", true);
-            }}
-            className={
-              "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+            className={`!rounded-lg md:!rounded-xl !py-1 text-[14px] ${
+              Data.spec.split(" ").includes(item)
+                ? ""
+                : " ring-1 !text-[#010036] !ring-[#010036]"
+            } border-none md:text-[20px] px-[17px] lg:px-[26px]`}
+            variant={
+              Data.spec.split(" ").includes(item) ? "secondary" : "ternary"
             }
+            key={index}
           >
-            <AcceptIcon />
-            قبول
+            {item}
           </Button>
-          <Button
-            onClick={() => {
-              editModal("type", "req");
-              editModal("open", true);
-            }}
-            className={
-              "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex font-bold items-center justify-center h-11 ring-1 !ring-red text-red border-none "
-            }
-          >
-            <RefuseIcon />
-            رفض
-          </Button>
-          <Link
-            href={`${requestId}/edit`}
-            className={
-              "!py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5  flex gap-[15px] font-bold items-center justify-center h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
-            }
-          >
-            <EditIcon />
-            تعديل
-          </Link>
-        </div>
+        ))}
       </div>
-  
+      <div className="flex px-1 gap-5 md:gap-8 max-w-[950px] w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
+        <Button
+          className={
+            "!py-0 text-[14px] md:text-[20px]  min-w-[200px] max-w-[100%] md:max-w-[260px] flex-1 !px-5 font-bold items-center  flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+          }
+        >
+          <SaveIcon />
+          حفظ التعديلات
+        </Button>
+      </div>
     </div>
   );
 };

@@ -9,40 +9,31 @@ import { useParams } from "next/navigation";
 const FamilyAside = () => {
   const params = useParams();
   const path = usePathname();
+console.log(params);
+
   const pages = [
     {
       name: "بيانات عائلة الطفل",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId),
       isActive:
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId) ||
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(params.familyId)||path ===ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId),
     },
     {
       name: "المواعيد",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
       isActive:
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.APPOINTMENTS(params.familyId),
     },
     {
       name: "الوصفات الطبية",
-      route: ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId),
-      isActive:
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONS(params.familyId)||
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONSDETAILS(params.familyId,params.prescriptionsID)||
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PRESCRIPTIONSEDIT(params.familyId,params.prescriptionsID),
-    },
-    {
-      name: " التقارير",
-      route: ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId),
-      isActive: path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTS(params.familyId)||
-      path === ROUTES.ADMIN.CLIENTS.FAMILY.REPORTSDETAILS(params.familyId,params.reportID),
+      route: "",
+      isActive: false,
     },
     {
       name: "المرضى / الاطفال",
       route: ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId),
       isActive:
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId) ||
-        path === ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId),
+        path ===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTS(params.familyId)||path===ROUTES.ADMIN.CLIENTS.FAMILY.PATIENTSEDIT(params.familyId),
     },
   ];
 

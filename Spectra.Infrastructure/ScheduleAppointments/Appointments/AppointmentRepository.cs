@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;

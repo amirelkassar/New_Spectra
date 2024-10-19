@@ -1,35 +1,26 @@
 import React from "react";
-import MenuActions from "@/components/menu-actions";
-import ROUTES from "@/routes";
-function CardService({ data }) {
+import DeleteIcon from "@/assets/icons/delete";
+import SessionIcon from "@/assets/icons/session";
+import EditImgIcon from "@/assets/icons/editImg";
+function CardService({data}) {
   return (
-    <div className="flex items-center justify-between gap-3">
-      <div className="flex items-center gap-2 justify-between flex-1">
-        <div className="flex items-center gap-3">
-          <div className=" size-[40px] rounded-[50%] items-center flex justify-center bg-greenMain/20 p-2  relative">
-            {data.icon}
-          </div>
-          <div>
-            <h3 className="text-[12px] font-bold">{data.title}</h3>
-            <p className="text-[12px] font-Regular">{data.date}</p>
-          </div>
+    <div className="py-3 mdl:py-3 px-3 mdl:px-4 rounded-[10px] bg-grayLight border-dashed border-2 border-green">
+      <button className="size-[30px] mdl:size-[48px] rounded-[10px] border-red border flex items-center justify-center p-[6px] mdl:p-3 ">
+        <DeleteIcon className={"w-full h-auto"} />
+      </button>
+      <div className="flex items-center justify-center flex-col gap-2 mdl:gap-5 px-2 -mt-3 mdl:-mt-6">
+        <div className=" size-[54px] mdl:size-[90px] rounded-[50%] items-center flex justify-center bg-greenMain/20 p-3 mdl:p-5 relative">
+          {data.icon}
+          <button className=" mdl:size-[32px] size-[20px] absolute -bottom-2 start-0 p-1 flex items-center justify-center mdl:p-2 bg-greenMain rounded-[50%]">
+            <EditImgIcon className={"h-full"} pathColor="white" />
+          </button>
         </div>
-        {data.show ? (
-          <span className="bg-blueLight font-bold text-greenMain flex items-center justify-center px-4 w-fit rounded-lg text-center h-7 text-[12px]">
-            تعرض
-          </span>
-        ) : (
-          <span className="bg-[#F5E4F9] font-bold text-[#8A22A0] flex items-center justify-center px-4 w-fit rounded-lg text-center h-7 text-[12px]">
-            داخلية
-          </span>
-        )}
-      </div>
-      <div>
-        <MenuActions
-          type={2}
-          path={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESDETAILS(data.id)}
-          pathEdit={ROUTES.ADMIN.SETTINGS.CONTENT.SERVICESDETAILS(data.id)}
-        />
+        <h2 className="min-h-[38px] mdl:min-h-[60px]  text-center text-[12px] mdl:text-[20px] font-Bold">
+        {data.title}
+        </h2>
+        <p className="text-center text-[12px] mdl:text-[20px] font-Regular">
+        {data.dec}
+        </p>
       </div>
     </div>
   );

@@ -1,11 +1,14 @@
 "use client";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
+
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
 
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { Collapse } from "@mantine/core";
+import { Collapse, Box } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import Appointments from "@/assets/icons/appointments";
 import Subscription from "@/assets/icons/subscription";
 import Customer from "@/assets/icons/customer";
@@ -14,14 +17,15 @@ import SettingsIcon from "@/assets/icons/settings";
 import StaffIcon from "@/assets/icons/staff";
 import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
+import MenuDash from "@/assets/icons/menuDash";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
-import { Link, usePathname } from "@/navigation";
+import { Link } from "@/navigation";
 import ContractsIcon from "@/assets/icons/contracts";
-import DatabaseIcon from "@/assets/icons/database";
 
-const Aside = () => {
-
+const Aside = ({ close }) => {
+  const [opened, { toggle }] = useDisclosure(false);
+  const [openMenuMob, setopenMenuMob] = useState(close);
   const menu = useMenu();
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
@@ -30,7 +34,7 @@ const Aside = () => {
     {
       name: "الرئيسية",
       route: ROUTES.ADMIN.MAIN,
-      isActive: path=== ROUTES.ADMIN.MAIN,
+      isActive: path.includes(ROUTES.ADMIN.MAIN),
       icon: <MainIcon />,
     },
     {
@@ -65,12 +69,6 @@ const Aside = () => {
       icon: <ReportsIcon />,
     },
     {
-      name: "البيانات الرئيسية",
-      route: ROUTES.ADMIN.DATAMAIN.HOME,
-      isActive: path.includes(ROUTES.ADMIN.DATAMAIN.HOME),
-      icon: <DatabaseIcon />,
-    },
-    {
       name: "العقود",
       route: ROUTES.ADMIN.CONTRACTS.DASHBOARD,
       isActive: path.includes(ROUTES.ADMIN.CONTRACTS.DASHBOARD),
@@ -96,9 +94,9 @@ const Aside = () => {
       isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD),
     },
     {
-      name: "الباقات",
-      route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
+      name: "الخطط",
+      route: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD),
     },
   ];
   const SubscriptionLinks = [

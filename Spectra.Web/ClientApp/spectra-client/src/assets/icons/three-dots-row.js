@@ -1,7 +1,8 @@
-const ThreeDotsRowIcon = ({ className = '' }) => {
+import React from 'react';
+
+const ThreeDotsRowIcon = () => {
   return (
     <svg
-      className={className}
       width='45'
       height='9'
       viewBox='0 0 45 9'

@@ -28,7 +28,6 @@ namespace Spectra.Infrastructure.Doctors
 
             var name = new Name { FirstName = input.FirstName, LastName = input.LastName, Prefix = input.Prefix };
 
-
             var phoneNumber = new PhoneNumber { PhoneNumbers = input.PhoneNumbers, CountryCode = input.CountryCode };
 
             var emailAddress = new EmailAddress { Emailaddress = input.Emailaddress };
@@ -53,9 +52,6 @@ namespace Spectra.Infrastructure.Doctors
                 HumenGenders = input.HumenGenders,
                 LicenseNumber = input.LicenseNumber,
                 ScientificDegree = input.ScientificDegree
-
-                 
-
 
             };
 
@@ -125,15 +121,6 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<Unit>> UpdateDoctorRate(string id, UpdateDoctorRatesCommand input)
-        {
-            var command = new UpdateDoctorRatesCommand
-            {
-                Id = id,
-                empelyeeRate = input.empelyeeRate
-            };
-            return await _mediator.Send(command);
-        }
 
     }
 }

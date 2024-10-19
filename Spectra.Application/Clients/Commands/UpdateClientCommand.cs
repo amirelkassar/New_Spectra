@@ -20,7 +20,6 @@ namespace Spectra.Application.Clients.Commands
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
         public Organization Organization { get; set; }
-        public MedicalServiceProvider MedicalServiceProvider { get; set; }
         public List<ServicePackage>? ServicePackages { get; set; }
         public List<Patient>? Patients { get; set; }
     }
@@ -48,7 +47,6 @@ namespace Spectra.Application.Clients.Commands
             client.EmailAddress = request.EmailAddress;
             client.Address = request.Address;
             client.Organization = request.Organization;
-            client.MedicalServiceProvider = request.MedicalServiceProvider;
             client.Patients = request.Patients;
             client.ServicePackages = request.ServicePackages;
             
@@ -92,10 +90,6 @@ namespace Spectra.Application.Clients.Commands
             RuleFor(x => x.Organization)
                 .NotNull().WithMessage("Organization is required.")
                 .SetValidator(new OrganizationValidator());
-
-            RuleFor(x => x.medicalServiceProvider)
-                .NotNull().WithMessage("Medical service provider is required.")
-                .SetValidator(new MedicalServiceProviderValidator());
         }
     }
 }

@@ -52,13 +52,6 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             return await _specializations.Find(c => c.Name == name).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<string>> GetAllNamesAsync()
-        {
-            var projection = Builders<Domain.MasterData.DoctorsSpecialization.Specialization>.Projection.Expression(s => s.Name);
 
-            return await _specializations.Find(_ => true).Project(projection).ToListAsync();
-
-
-        }
     }
 }

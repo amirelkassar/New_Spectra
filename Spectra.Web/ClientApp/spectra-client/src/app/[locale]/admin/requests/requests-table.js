@@ -14,75 +14,7 @@ import useModal from "@/store/modal-slice";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { columns, columnsOld } from "./_components/columns";
-import ActionMenu from "./_components/ActionMenuPage";
-const data = [
-  {
-    id: 0,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 1,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 2,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 3,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 4,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 5,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 6,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 7,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 8,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 9,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-  {
-    id: 10,
-    name: "احمد محمد كمال",
-    job: "طبيب",
-    date: "22/5/2024",
-  },
-];
+
 const RequestsTable = ({ type }) => {
   const path = usePathname();
   const [selected, setSelected] = useState([]);
@@ -93,6 +25,75 @@ const RequestsTable = ({ type }) => {
         : [...prev, id]
     );
   };
+
+  const data = [
+    {
+      id: 0,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 1,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 2,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 3,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 4,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 5,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 6,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 7,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 8,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 9,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+    {
+      id: 10,
+      name: "احمد محمد كمال",
+      job: "طبيب",
+      date: "22/5/2024",
+    },
+  ];
 
   const reset = () => {
     setSelected([]);
@@ -173,7 +174,7 @@ const RequestsTable = ({ type }) => {
             )}
 
             <div className="w-3">
-              <ActionMenu type={2} />
+              <MenuActions type={2} />
             </div>
           </div>
         </div>
@@ -215,7 +216,7 @@ const RequestsTable = ({ type }) => {
                   editModal("open", true);
                 }}
                 className={
-                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex  bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  "text-[12px] lg:text-[16px] !py-0 !px-3 md:!px-5 font-bold items-center flex items-center bg-greenMain justify-center w-[80px] md:w-[120px] h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
                 }
               >
                 <AcceptIcon />
@@ -262,11 +263,10 @@ const RequestsTable = ({ type }) => {
           })}
         </div>
       </div>
-      {type === "rejected" ? (
-        <DataTable IsWidth={true} data={data} columns={columnsOld} />
-      ) : (
-        <DataTable IsWidth={true} data={data} columns={columns} />
-      )}
+    {
+      type==='rejected'?  <DataTable data={data} columns={columnsOld} /> :  <DataTable data={data} columns={columns} />
+    }
+    
     </>
   );
 };

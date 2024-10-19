@@ -1,5 +1,7 @@
 import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
+import { Badge } from "@mantine/core";
+import Image from "next/image";
 
 export const columns = [
   {
@@ -35,15 +37,19 @@ export const columns = [
     accessorKey: "type",
     header: "الحالة",
     id: "type",
-    cell: ({ row }) => {
+
+    cell: ({ getValue, row }) => {
       const status = row.original.statu;
-      return <Statue statue={status} />;
-    },
-  },
-  {
-    id: "Actions",
-    cell: () => {
-      return <MenuActions />;
+
+      return (
+        <div
+          className={"flex gap-[10px] md:gap-[40px] justify-end items-start "}
+        >
+          <Statue statue={status} />
+
+          <MenuActions />
+        </div>
+      );
     },
   },
 ];

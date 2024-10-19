@@ -298,8 +298,7 @@ html[dir='ltr'] .lineAfterLinks {
   top: 50% !important;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1020px;
-  max-width: 100%;
+  max-width: 1020px;
 }
 .modelReq .mantine-Modal-body {
   padding: 66px 72px 58px;
@@ -349,10 +348,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -365,8 +361,7 @@ form.clientEdit .mantine-Input-input {
   order: 1;
 }
 
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
 .staffDetils .mantine-DatePicker-day[data-selected='true'] {
@@ -377,22 +372,13 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    3,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    4,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    5,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
 @layer components {
   .custom-grid {
@@ -402,10 +388,7 @@ form.clientEdit .mantine-Input-input {
     ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(
-      var(--colNumSmall),
-      minmax(max-content, 1fr)
-    );
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
 .boxDate .mantine-DatePicker-calendarHeader {
@@ -427,10 +410,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -438,13 +418,11 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
   order: 1;
 }
 
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
   order: 2;
 }
 .boxDate .mantine-DatePicker-day[data-selected='true'] {
@@ -462,101 +440,4 @@ form.clientEdit .mantine-Input-input {
   border: 1px solid var(--main-color);
   display: flex;
   align-items: center;
-}
-.fc-toolbar-chunk div {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: fit-content;
-  margin-top: -20px;
-}
-.fc-toolbar-chunk div .fc-button {
-  background-color: #f5f5f5;
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  padding: 0;
-  transition: 0.5s;
-}
-.fc-toolbar-chunk div .fc-button span::before {
-  color: #010036;
-  width: 6px;
-}
-.fc-toolbar-chunk div .fc-button:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 5px rgb(162, 162, 162);
-}
-.fc-daygrid-day {
-  width: 120px;
-  height: 120px;
-}
-.fc-day .fc-col-header-cell-cushion {
-  color: #939393;
-  font-weight: 400;
-  text-align: end;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-
-@media (max-width: 768px) {
-  .hideScroll {
-    scrollbar-width: none;
-    padding-bottom: 10px;
-  }
-
-  .custom-clipPath-triangle {
-    clippath: polygon(
-      0% 0%,
-      0 80%,
-      50% 100%,
-      100% 80%,
-      100% 100%,
-      100% 100%,
-      100% 0%
-    );
-  }
-
-  .custom-clipPath-triangle-up {
-    clippath: polygon(
-      0 100%,
-      0 10%,
-      50% 0%,
-      100% 10%,
-      100% 100%
-    );
-  }
-}
-input[type='number'].timeInput::-webkit-outer-spin-button,
-input[type='number'].timeInput::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type='number'].timeInput {
-  -moz-appearance: textfield;
-}
-.ql-editor li:not(.ql-direction-rtl)::before {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-}
-.contractsDetails * {
-  @apply text-sm mdl:text-xl font-Regular;
-}
-.contractsDetails h3,
-.contractsDetails h2,
-.contractsDetails h1,
-.contractsDetails strong {
-  font-weight: bold;
-  margin-block: 10px !important;
-}
-
-/* REMOVE SHADOW AND BOARDER FROM CAROUSEL SWIPER NEXT AND PREV BUTTONS */
-.m_64f58e10 {
-  box-shadow: none !important;
-  border: none !important;
 }

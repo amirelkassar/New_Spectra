@@ -2,12 +2,11 @@
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./components/columns";
-import CardContacts from "./components/CardContacts";
 const data = [
   {
     id: 0,
     name: "عبدالله الشيخ",
-    status: "active",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
@@ -15,7 +14,7 @@ const data = [
   {
     id: 1,
     name: "عبدالله الشيخ",
-    status: "ultimate",
+    active: false,
     image: placeholderImage,
     date: "20/4/2024",
     job: "secretary",
@@ -23,7 +22,7 @@ const data = [
   {
     id: 2,
     name: "عبدالله الشيخ",
-    status: "rejected",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
@@ -31,7 +30,7 @@ const data = [
   {
     id: 3,
     name: "عبدالله الشيخ",
-    status: "manger",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "accountant",
@@ -39,7 +38,7 @@ const data = [
   {
     id: 4,
     name: "عبدالله الشيخ",
-    status: "admin",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "secretary",
@@ -47,7 +46,7 @@ const data = [
   {
     id: 5,
     name: "عبدالله الشيخ",
-    status: "reviewed",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: " accountant",
@@ -55,7 +54,7 @@ const data = [
   {
     id: 6,
     name: "عبدالله الشيخ",
-    status: "ultimate",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
@@ -63,7 +62,7 @@ const data = [
   {
     id: 7,
     name: "عبدالله الشيخ",
-    status: "rejected",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
@@ -71,7 +70,7 @@ const data = [
   {
     id: 8,
     name: "عبدالله الشيخ",
-    status: "reviewed",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
@@ -79,7 +78,7 @@ const data = [
   {
     id: 10,
     name: "عبدالله الشيخ",
-    status: "manger",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
@@ -87,7 +86,7 @@ const data = [
   {
     id: 11,
     name: "عبدالله الشيخ",
-    status: "reviewed",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
@@ -95,7 +94,7 @@ const data = [
   {
     id: 12,
     name: "عبدالله الشيخ",
-    status: "rejected",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "doctor ",
@@ -103,7 +102,7 @@ const data = [
   {
     id: 13,
     name: "عبدالله الشيخ",
-    status: "admin",
+    active: true,
     image: placeholderImage,
     date: "20/4/2024",
     job: "specialist ",
@@ -111,44 +110,36 @@ const data = [
 ];
 const FilterOptions = [
   {
-    label: "نشط",
+    label: "طبيب",
     icon: null,
-    key: "active",
+    key: "doctor",
   },
   {
-    label: "منتهى",
+    label: "مختص",
     icon: null,
-    key: "ultimate",
+    key: "specialist",
   },
   {
-    label: "مرفوض",
+    label: "محاسب",
     icon: null,
-    key: "rejected",
+    key: "accountant",
   },
   {
-    label: "قيد المراجعة من رئيس القسم ",
+    label: "سكرتير",
     icon: null,
-    key: "manger",
-  },
-  {
-    label: "قيد المراجعة من  الإدارة",
-    icon: null,
-    key: "admin",
+    key: "secretary",
   },
 ];
 const ContractsTable = () => {
   return (
-    <div>
+    <div className="grow">
       <DataTable
-        IsWidth={true}
         data={data}
         columns={columns}
         filterData={FilterOptions}
         filter="buttons"
         filterText="فلتر بالنوع"
-        filterBy="status"
-        haveComp
-        Component={CardContacts}
+        filterBy="job"
       />
     </div>
   );

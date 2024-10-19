@@ -30,7 +30,7 @@ function PatientsEdit() {
   const handleDescChangeMantine = (e,item) => {
     setData({ ...data, [item]: e });
   };
-
+  console.log(new Date());
   return (
     <div className="py-4 md:py-8 px-2 md:px-6 bg-white lg:rounded-[10px] staffDetils">
       <div className=" mb-5 md:mb-16 flex items-start justify-between gap-4">

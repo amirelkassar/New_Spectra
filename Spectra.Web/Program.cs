@@ -35,7 +35,6 @@ if (app.Environment.IsDevelopment())
     var swaggerClientName = app.Configuration["IdentityServerSetting:Clients:0:ClientName"];
 
     app.UseSwagger();
-app.UseCors("AllowSpecificOrigins");
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");

@@ -20,7 +20,7 @@ namespace Spectra.WebAPI.Controllers
         private readonly IDoctorService _DoctorService;
 
 
-        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService DoctorService)
+        public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService)
         {
             _adminService = adminService;
             _clientService = clientService;
@@ -32,7 +32,7 @@ namespace Spectra.WebAPI.Controllers
         {
             var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
             return Ok(appointmenties);
-        }
+        }  
         [HttpGet("GetAllClient")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllClients([FromQuery] GetAllClientsQuery input)
@@ -47,7 +47,7 @@ namespace Spectra.WebAPI.Controllers
         {
 
             var appointmenties = await _adminService.GetAllAppointmentsDoctorAsync(input);
-            return Ok(appointmenties);
+            return Ok(appointmenties); 
         }
         [HttpGet("Client/id")]
         [AllowAnonymous]
@@ -66,7 +66,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost("CreateClient")]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalClient(CreateNormalClientDto input)
+        public async Task<ActionResult> CreateNormalClient( CreateNormalClientDto input)
         {
 
             var clienties = await _clientService.CreateClient(input);
@@ -88,10 +88,10 @@ namespace Spectra.WebAPI.Controllers
         [HttpPut(("ChangeStutue"))]
         [AllowAnonymous]
         // Admin change Stutues doctors From waiting to be cancel or avilibel
-        public async Task<ActionResult> UpdateDoctors(UpdateDoctorEmploymentStatusCommand input)
+        public async Task<ActionResult> UpdateDoctors( UpdateDoctorEmploymentStatusCommand input)
         {
 
-            var Appointment = await _adminService.UpdateDoctorsEmploymentStatus(input);
+            var Appointment = await _adminService.UpdateDoctorsEmploymentStatus( input);
 
             return Ok(Appointment);
         }

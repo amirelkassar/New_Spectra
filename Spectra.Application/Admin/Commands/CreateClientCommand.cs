@@ -25,7 +25,6 @@ namespace Spectra.Application.Admin.Commands
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
         public Organization Organization { get; set; }
-        public MedicalServiceProvider medicalServiceProvider { get; set; }
         public List<ServicePackage>? ServicePackages { get; set; }
         public List<Patient>? patients { get; set; }
     }
@@ -57,7 +56,6 @@ namespace Spectra.Application.Admin.Commands
                 request.Address,
                 request.patients,
                 request.Organization,
-                request.medicalServiceProvider,
                 request.ServicePackages=null
             );
             await _clientRepository.AddAsync(client);

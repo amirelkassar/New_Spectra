@@ -105,23 +105,12 @@ const Aside = () => {
     },
     {
       name: "الخطط",
-      route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
+      route: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD),
     },
   ];
   const AppointmentsLinks = [
     {
-      name: "المواعيد القادمة",
-      route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
-      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSUPCOMING),
-    },
-    {
-      name: "المواعيد السابقة",
-      route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
-      isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSPREVIOUS),
-    },
-    {
-      
       name: "المواعيد الملغاة",
       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSCANCELD),

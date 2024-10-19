@@ -19,8 +19,6 @@ namespace Spectra.Application.Patients.Commands
         public string ClientId { get; private set; }
         public double ChildHeight { get; set; }
         public double ChildWeightt { get; set; }
-        public string DateOfOnSetOfSymptoms { get; set; }
-        public TypeOfDisease InheritedOrAcquired { get; set; }
     }
 
     public class UpdatePatientCommandHandler : IRequestHandler<UpdatePatientCommand, OperationResult<Unit>>
@@ -43,10 +41,7 @@ namespace Spectra.Application.Patients.Commands
             patient.DateOfBirth = request.DateOfBirth;
             patient.RelationToClient = request.RelationToClient;
             patient.ChildHeight = request.ChildHeight;
-            patient.DateOfOnSetOfSymptoms=request.DateOfOnSetOfSymptoms;
             patient.ChildWeightt = request.ChildWeightt;
-            patient.InheritedOrAcquired= request.InheritedOrAcquired;
-
 
             await _patientRepository.UpdateAsync(patient);
             return OperationResult<Unit>.Success(Unit.Value);

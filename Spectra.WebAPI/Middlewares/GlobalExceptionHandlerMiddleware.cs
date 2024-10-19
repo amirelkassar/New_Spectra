@@ -35,8 +35,9 @@ namespace Spectra.WebAPI.Middlewares
             var success = false;
             var errorCollection = new Dictionary<string, string[]>();
 
-            string? errorMessage;
             HttpStatusCode statusCode;
+            string errorType;
+
             switch (exception)
             {
                 case ValidationException validationException:
@@ -64,12 +65,6 @@ namespace Spectra.WebAPI.Middlewares
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
 
-                case ValidationException validationException:
-                    errorType = "ValidationError";
-                    errorMessage = "One or more validation errors occurred.";
-                    statusCode = HttpStatusCode.UnprocessableEntity;
-                    errorCollection = (Dictionary<string, string[]>)validationException.Errors;
-                    break;
                 case NotFoundException notFoundException:
                     errorType = "NotFoundError";
                     errorCollection = new Dictionary<string, string[]>
@@ -77,36 +72,6 @@ namespace Spectra.WebAPI.Middlewares
                 { "General", new[] { notFoundException.Message } }
             };
                     statusCode = HttpStatusCode.NotFound;
-                    break;
-
-                case ForbiddenAccessException forbiddenAccessException:
-                    errorType = "ForbiddenAccessError";
-                    errorMessage = forbiddenAccessException.Message;
-                    statusCode = HttpStatusCode.Forbidden;
-                    break;
-
-                case NoDefaultValueException noDefaultValueException:
-                    errorType = "NoDefaultValueError";
-                    errorMessage = noDefaultValueException.Message;
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
-
-                case InvalidValueException invalidValueException:
-                    errorType = "InvalidValueError";
-                    errorMessage = invalidValueException.Message;
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
-
-                case InvalidRequestException invalidRequestException:
-                    errorType = "InvalidRequestError";
-                    errorMessage = invalidRequestException.Message;
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
-
-                case NotImplementedFeatureException notImplementedFeatureException:
-                    errorType = "NotImplementedFeatureError";
-                    errorMessage = notImplementedFeatureException.Message;
-                    statusCode = HttpStatusCode.NotImplemented;
                     break;
 
                 default:

@@ -18,19 +18,19 @@ const ContentPage = () => {
     {
       id: 2,
       title: "المقالات",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.ARTICLES
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
 
     },
     {
       id: 3,
       title: "التخصصات الطبية",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.MEDICAL
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
 
     },
     {
       id: 4,
       title: "قصص النجاح",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.STORIES
+      link:ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
 
     },
   ];

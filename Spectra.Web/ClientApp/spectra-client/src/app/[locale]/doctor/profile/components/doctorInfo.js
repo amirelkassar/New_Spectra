@@ -79,7 +79,7 @@ function DoctorInfo({ data }) {
           <div className="flex items-center justify-between gap-3 flex-wrap ">
             <h3 className="text-[12px] mdl:text-[16px] mdl:block hidden">التوقيع</h3>
             <div className=" size-[38px] rounded-[10px] bg-blueLight flex items-center justify-center">
-             
+              <EditIcon pathColor="#10B0C1" />
             </div>
           </div>
           <Image

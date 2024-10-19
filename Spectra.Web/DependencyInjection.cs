@@ -20,14 +20,9 @@ namespace Spectra.Web
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
-<<<<<<< HEAD
-            ConfigureSwagger(services, configuration);
-            ConfigureCros(services,configuration);
-=======
             ConfigureIdentityManagement(services, configuration);
             ConfigureIdentityServerSettings(services, configuration);
             ConfigureSwagger(services, configuration);
->>>>>>> Admin-BackEnd
             return services;
         }
 
@@ -86,29 +81,5 @@ namespace Spectra.Web
             if (_identityServerSetting != null)
                 services.AddSingleton(_identityServerSetting);
         }
-<<<<<<< HEAD
-
-        private static void ConfigureCros(IServiceCollection services, IConfiguration configuration)
-        {
-            var allowedOrigins = configuration.GetSection("AllowedCorsOrigins").Get<string[]>();
-            if (allowedOrigins is not null)
-            {
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowSpecificOrigins",
-                        builder =>
-                        {
-                            builder.WithOrigins(allowedOrigins)
-                                   .AllowAnyHeader()
-                                   .AllowAnyMethod()
-                                   .AllowCredentials();
-                        });
-                });
-            }
-
-
-        }
-=======
->>>>>>> Admin-BackEnd
     }
 }

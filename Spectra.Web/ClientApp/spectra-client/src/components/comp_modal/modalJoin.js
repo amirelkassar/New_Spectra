@@ -59,7 +59,8 @@ function ModalJoin() {
       alert("Please select an image or a PDF file.");
     }
   };
-
+  console.log(allImg);
+  console.log(files);
   return (
     <div>
       <h2 className="text-center mb-4 mdl:mb-11 text-[14px] mdl:text-[20px]">

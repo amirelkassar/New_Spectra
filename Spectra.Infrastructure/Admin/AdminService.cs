@@ -140,8 +140,7 @@ namespace Spectra.Infrastructure.Admin
                 //UserId = userId,
                 EmailAddress = emailAddress,
                 Address = address,
-                Organization = organization,
-                medicalServiceProvider = medicalServiceProvider
+                Organization = organization
 
             };
 

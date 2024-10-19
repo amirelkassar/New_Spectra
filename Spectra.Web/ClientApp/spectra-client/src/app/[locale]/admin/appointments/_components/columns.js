@@ -1,9 +1,6 @@
 import MenuActions from "@/components/menu-actions";
 import Statue from "@/components/status";
 import Image from "next/image";
-import ActionMenu from "./ActionMenu";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
 
 export const columns = [
   {
@@ -13,13 +10,10 @@ export const columns = [
     cell: ({ getValue, row }) => {
       const name = getValue();
       const specialisation = row.original.specialisation;
-      const id = row.original.id;
+
       const avatar = row.original.image;
       return (
-        <Link
-          href={ROUTES.ADMIN.APPOINTMENTSDETAILS(id)}
-          className={" items-center gap-5    flex"}
-        >
+        <div className={" items-center gap-5    flex"}>
           <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
             <Image src={avatar} alt={name} />
           </div>
@@ -30,7 +24,7 @@ export const columns = [
               {specialisation}
             </p>
           </div>
-        </Link>
+        </div>
       );
     },
   },
@@ -79,15 +73,21 @@ export const columns = [
     accessorKey: "type",
     header: "الحالة",
     id: "type",
-    cell: ({ row }) => {
+
+    cell: ({ getValue, row }) => {
       const status = row.original.statu;
-      return <Statue statue={status} />;
-    },
-  },
-  {
-    id: "actions",
-    cell: () => {
-      return <ActionMenu />;
+
+      return (
+        <div
+          className={
+            "flex gap-[10px] md:gap-[40px]   content-center items-start "
+          }
+        >
+          <Statue statue={status} />
+
+          <MenuActions />
+        </div>
+      );
     },
   },
 ];

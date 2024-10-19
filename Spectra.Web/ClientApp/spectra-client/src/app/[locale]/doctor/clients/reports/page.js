@@ -1,11 +1,10 @@
 import React from "react";
 import LayoutHome from "../components/layoutHome";
+import ReportsNumber from "../components/reports-number";
 import Report from "../components/report";
 import imgDoctor from "@/assets/images/placeholder-person.png";
 import imgPatient from "@/assets/images/placeholder-person.png";
 import ReportsFiltration from "../components/reports-filtration";
-import Card from "@/components/card";
-import MenuActions from "@/components/menu-actions";
 
 function page() {
   const reports = [
@@ -69,20 +68,15 @@ function page() {
   return (
     <LayoutHome>
       <div className="flex-1">
-        <Card className="default-page w-full !h-auto">
-          <div className="flex items-center justify-between mb-16">
-            <div className="flex  mb-1 flex-wrap items-center gap-4 md:gap-6">
-              <h2 className="headTitleDash">التقارير</h2>
-            </div>
-            <MenuActions />
-          </div>
+        <ReportsNumber title={"التقارير"}  />
+        <div className="default-page w-full !h-auto">
           <ReportsFiltration />
           <div className="flex gap-6 flex-wrap mt-9 justify-center">
             {reports.map((report, i) => {
               return <Report key={i} data={report} />;
             })}
           </div>
-        </Card>
+        </div>
       </div>
     </LayoutHome>
   );

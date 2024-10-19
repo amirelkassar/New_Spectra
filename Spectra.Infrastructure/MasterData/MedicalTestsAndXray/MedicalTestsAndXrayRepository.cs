@@ -3,8 +3,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
-using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -25,8 +25,6 @@ namespace Spectra.Infrastructure.Clients
         {
             return await _clients.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
-            return entity;
-        }
 
         public async Task AddAsync(Client client)
         {
@@ -61,7 +59,7 @@ namespace Spectra.Infrastructure.Clients
             // Apply the filter if provided
             if (filter != null)
             {
-                query = (IMongoQueryable<Client>)query.Where(filter); ;
+                query = query.Where(filter); ;
             }
 
             //Order by 'Created' field

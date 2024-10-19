@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.InternalExaminations.Services;
-
-using Spectra.Infrastructure.MasterData.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
 
 namespace Spectra.WebAPI.Controllers  

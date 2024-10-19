@@ -28,8 +28,8 @@ export const Steps = () => {
     <section className='space-y-5'>
       <ChildPopover data={childPopupData} />
       <Card>
-        {stepsData.map((step,i) => (
-          <Step key={i}  {...step} />
+        {stepsData.map((step) => (
+          <Step {...step} />
         ))}
       </Card>
     </section>

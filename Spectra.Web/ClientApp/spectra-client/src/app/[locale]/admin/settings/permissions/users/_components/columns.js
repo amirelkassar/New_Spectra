@@ -1,6 +1,5 @@
 import MenuActions from "@/components/menu-actions";
 import ROUTES from "@/routes";
-import ActionMenu from "./ActionMenu";
 export const columns = [
   {
     accessorKey: "name",
@@ -27,8 +26,8 @@ export const columns = [
     accessorKey: "active",
     header: "حالة العقد",
     id: "active",
-    cell: ({ getValue, row }) => {
-      const id = row.original.id;
+    cell: ({ getValue ,row}) => {
+      const id = row.original.id
       return (
         <div className="mx-1 flex items-center justify-end gap-4">
           {getValue() ? (
@@ -47,7 +46,7 @@ export const columns = [
             </div>
           )}
 
-          <ActionMenu id={id} />
+          <MenuActions type={2} path={ROUTES.ADMIN.SETTINGS.PERMISSIONS.PERMISSIONSUSEREDIT(id)} />
         </div>
       );
     },

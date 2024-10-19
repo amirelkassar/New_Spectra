@@ -1,5 +1,14 @@
 "use client";
+import ArrowLeft from "@/assets/icons/arrow-left";
 import placeholderImage from "@/assets/images/placeholder-person.png";
+import MenuActions from "@/components/menu-actions";
+import Statue from "@/components/status";
+import TableComponents from "@/components/table-comp";
+import ROUTES from "@/routes";
+import { Group, Pagination } from "@mantine/core";
+import clsx from "clsx";
+import Image from "next/image";
+import { useState } from "react";
 import { columns } from "./_components/columns";
 import { DataTable } from "@/components/data-table";
 const data = [
@@ -179,10 +188,10 @@ const FilterOptions = [
 ];
 
 const AppoTable = () => {
+
   return (
     <div className="rounded-xl bg-white  grow">
       <DataTable
-       
         data={data}
         columns={columns}
         filterData={FilterOptions}

@@ -1,10 +1,10 @@
 import BackIcon from "@/assets/icons/back";
 import ImagePlaceholderIcon from "@/assets/icons/image-placeholder";
-import { Link } from "@/navigation";
+import MenuActions from "@/components/menu-actions";
+import { Link, useRouter } from "@/navigation";
 import ROUTES from "@/routes";
-import ActionMenu from "./ActionMenuFamily";
 
-const Card = ({ title, values  }) => {
+const Card = ({ title, values }) => {
   return (
     <div className="bg-white py-4 lg:py-7 px-6 lg:px-12 lg:rounded-xl flex flex-row lg:flex-col gap-2">
       <p className="text-nowrap w-[130px] md:w-auto text-[12px] md:text-[16px] flex items-center gap-1">
@@ -20,13 +20,12 @@ const Card = ({ title, values  }) => {
     </div>
   );
 };
-const ClientDetails = ({ title, id }) => {
+const ClientDetails = ({ title }) => {
+
   return (
     <section className="grow grid grid-cols-1 lg:grid-cols-2 lg:gap-y-2.5 lg:gap-x-5 ">
       <div className="col-span-1 lg:col-span-2 bg-white py-4 px-6 lg:p-12 lg:rounded-xl relative">
-        <div className={"absolute top-5 end-5"}>
-          <ActionMenu type={"family"} id={id} />
-        </div>
+        <MenuActions className={"absolute top-5 end-5"} />
         <div className="flex items-center gap-4 mb-6">
           <Link
             href={ROUTES.ADMIN.CLIENTS.DASHBOARD}

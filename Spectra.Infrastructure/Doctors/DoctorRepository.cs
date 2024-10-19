@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MedicalStaff.Doctors;
-using Spectra.Domain.Contracts;
 using Spectra.Domain.MedicalStaff.Doctor;
 
 using Spectra.Domain.ScheduleAppointments;
@@ -37,7 +35,7 @@ namespace Spectra.Infrastructure.Doctors
             // Apply the filter if provided
             if (filter != null)
             {
-                query = (IMongoQueryable<Doctor>)query.Where(filter); ;
+                query = query.Where(filter); ;
             }
 
             //Order by 'Created' field
