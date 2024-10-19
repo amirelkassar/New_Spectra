@@ -3,10 +3,18 @@ import { Link } from "@/navigation";
 import Button from "@/components/button";
 import BackIcon from "@/assets/icons/back";
 import ROUTES from "@/routes";
-import { Textarea } from "@mantine/core";
+import { MultiSelect, Textarea } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
 import { useCreateMasterDataServices } from "@/useAPI/admin/main-data/services";
 import GetErrorMsg from "@/components/getErrorMsg";
+import ArrowDownIcon from "@/assets/icons/arrow-down";
+const dataSelect = [
+  "SPEECH Pediatrics LANGUAGE ASSESSMENT",
+  "Psychological Initial Assessment",
+  " recommendation OT VR",
+  "Common question",
+  "Doctors follow up",
+];
 function ServicesNotShow() {
   const [formData, setFormData] = useState({
     AvailableSrvices: "2",
@@ -20,7 +28,7 @@ function ServicesNotShow() {
     error,
     isSuccess,
     isError,
-    reset
+    reset,
   } = useCreateMasterDataServices();
 
   const handleInputChange = (e) => {
@@ -29,8 +37,8 @@ function ServicesNotShow() {
       ...prevData,
       [name]: value,
     }));
-    if(isError){
-      reset()
+    if (isError) {
+      reset();
     }
   };
   useEffect(() => {
@@ -108,6 +116,18 @@ function ServicesNotShow() {
             input:
               "min-h-[160px] h-auto  w-full rounded-lg border-greenMain text-[24px]",
             label: "text-base mb-2",
+          }}
+        />
+        <MultiSelect
+          data={dataSelect}
+        
+          label="اختر تخصصات الفحص"
+          placeholder="اختر تخصص"
+          rightSection={<ArrowDownIcon />}
+          className="MultiSelect h-auto flex-1"
+          classNames={{
+            input: " !h-auto py-1 min-h-[60px]",
+            label: "text-[12px] md:text-[16px] mb-2",
           }}
         />
         <div className="flex flex-col mt-16 items-center gap-3">
