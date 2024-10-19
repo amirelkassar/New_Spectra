@@ -64,31 +64,27 @@
   --main-color-text: #010036;
   --blue-light: #e9f7ff;
 }
-
-/* SCROLLBAR */
-/* Custom scrollbar for WebKit browsers (Chrome, Safari) */
+/* تخصيص الـ scrollbar */
 *::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-  height: 8px; /* Height of the scrollbar for horizontal scrollbars */
+  width: 6px;
+  /* عرض الـ scrollbar */
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
-  border-radius: 4px; /* Roundness of the scrollbar thumb */
+  background-color: #10b0c1;
+  /* لون الـ scrollbar */
+  border-radius: 10px;
+  /* جعل الحواف مستديرة */
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color when hovering over the scrollbar thumb */
+  background-color: #737c74;
+  /* لون الـ scrollbar عند التحويم */
 }
 
 *::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the scrollbar track */
-}
-
-/* Custom scrollbar for Firefox */
-* {
-  scrollbar-width: thin; /* Width of the scrollbar */
-  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+  background-color: transparent;
+  /* جعل المسار شفاف */
 }
 
 h1 {

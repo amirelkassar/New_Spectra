@@ -21,7 +21,7 @@ export const SearchBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    console.log(search);
+    // console.log(search);
   };
 
   return (
