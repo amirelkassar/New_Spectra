@@ -20,8 +20,6 @@ namespace Spectra.Web
             services.ConfigureApplication(configuration);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
-            ConfigureIdentityManagement(services, configuration);
-            ConfigureIdentityServerSettings(services, configuration);
             ConfigureSwagger(services, configuration);
             return services;
         }

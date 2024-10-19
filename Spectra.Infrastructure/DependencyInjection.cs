@@ -93,7 +93,7 @@ namespace Spectra.Infrastructure
             services.ConfigureSeedServices();
 
             services.ConfigureApplicationServices();
-            
+
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
@@ -137,14 +137,14 @@ namespace Spectra.Infrastructure
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
             services.AddScoped<IAdminService, AdminService>();
 
-         
+
 
             services.AddScoped<IHellper, Hellper>();
-       
-                    
+
+
             return services;
         }
-        
+
 
         private static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
@@ -222,7 +222,7 @@ namespace Spectra.Infrastructure
                .AddDefaultTokenProviders();
 
             services.AddTransient<IAuthenticationService, AuthenticationService>();
-             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IIdentityService, IdentityService>();
             return services;
         }
         private static IServiceCollection ConfigureDataAccess(this IServiceCollection services, IConfiguration configuration)
