@@ -11,7 +11,7 @@ function ServicesMember({
   const searchparams = useSearchParams();
 
   return (
-    <div dir="ltr" className="pb-8 ps-3 lgl:ps-20">
+    <div dir="ltr" className="pb-8 ps-3 lgl:ps-14 border-b mt-8 border-grayDark">
       <h2 className="text-[16px] mdl:text-xl font-Bold mb-4">
         The price of your services as a member of the Spectra team
       </h2>
