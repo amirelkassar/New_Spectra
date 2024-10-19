@@ -1,5 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Spectra.Application.ChatHub;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Clients;
@@ -34,6 +39,8 @@ using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
+using Spectra.Domain.AppRole;
+using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
@@ -61,6 +68,9 @@ using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Specialists;
+using Stef.Validation;
+using System.Reflection;
+using System.Text;
 
 namespace Spectra.Infrastructure
 {
@@ -81,7 +91,8 @@ namespace Spectra.Infrastructure
             
             services.AddHttpClient();
 
-            services.AddScoped(typeof(IAuthorizer<>), typeof(Authorize<>));
+            services.ConfigureAuth(configuration);
+            services.ConfigureDataAccess(configuration);
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -155,7 +166,73 @@ namespace Spectra.Infrastructure
 
             return services;
         }
+        private static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(opts =>
+               {
 
+                   opts.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidIssuer = configuration["Jwt:Issuer"],
+                       ValidAudience = configuration["Jwt:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? "")),
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = false,
+                       ValidateIssuerSigningKey = true
+                   };
+
+                   opts.Events = new JwtBearerEvents
+                   {
+                       OnMessageReceived = async ctx =>
+                       {
+                           // Check if the token is in the query string
+                           var token = ctx.Request.Query["token"].FirstOrDefault();
+                           if (!string.IsNullOrEmpty(token))
+                               ctx.Token = token;
+
+                           await Task.CompletedTask;
+                       },
+                       OnAuthenticationFailed = async ctx =>
+                       {
+                           Log.Error("Authentication failed: {Exception}", ctx.Exception.ToString());
+                           await Task.CompletedTask;
+                       },
+
+                   };
+               });
+
+            services.AddIdentityCore<AppUser>(config =>
+            {
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireLowercase = true;
+                config.Password.RequireUppercase = true;
+                config.Password.RequireDigit = true;
+            })
+               .AddRoles<AppRole>()
+               .AddEntityFrameworkStores<IdentityContext>()
+               .AddDefaultTokenProviders();
+
+             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            // services.AddTransient<IIdentityService, IdentityService>();
+            return services;
+        }
+        private static IServiceCollection ConfigureDataAccess(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("IdentityConnection");
+
+            services.AddDbContext<IdentityContext>((sp, options) =>
+            {
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+                options.EnableServiceProviderCaching();
+                options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
+            });
+
+            return services;
+        }
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();

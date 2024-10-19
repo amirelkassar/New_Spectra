@@ -1,8 +1,10 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Patients.PatientsData;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using static Spectra.Domain.Common.Conses.Units;
 
 
 
@@ -16,25 +18,30 @@ namespace Spectra.Domain.Patients
         public DateOnly DateOfBirth { get; set; }
         public ClientPatientRelations RelationToClient { get; set; }
         public string ClientId { get; private set; }
-        public double ChildHeight { get; set; }
-        public double ChildWeightt { get; set; }
-        public string DateOfOnSetOfSymptoms { get; set; }
-        public TypeOfDisease InheritedOrAcquired { get; set; }
+        public double? ChildHeight { get; set; }
+        public double? ChildWeightt { get; set; }
+        public string? MedicalSymptoms { get; set; }
+        public DateOnly? MedicalSymptomsDate { get; set; }
+        public FamilySocialHistory? FamilySocialhistory { get; set; }
+        public SchoolTypes? SchoolType { get; set; }
+        public SocialAdaptive? SocialAdaptive { get; set; }
+        public BehavioralDifficulty? BehavioralDifficulty { get; set; }
+        public PatientMedicalHistory? PatientMedicalHistory { get; set; }
+        public BirthHistory? BirthHistory { get; set; }
+        public OralMotorExamination? OralMotorExamination { get; set; }
+        public PreCommunicationSkill? PreCommunicationSkill { get; set; }
+        public NonVerbalCommunication? NonVerbalCommunication { get; set; }
+        public VerbalCommunication? VerbalCommunication { get; set; }
+        public LastImpression LastImpression { get; set; }
 
-
-
-
-        private Patient(string id, Name name,
+        private Patient(string id, 
+            Name name,
             string nationalId,
             HumenGender gender,
             DateOnly dateOfBirth,
             ClientPatientRelations relationToClient,
             double childHeight,
             double childWeightt,
-            string dateOfOnSetOfSymptoms,
-            TypeOfDisease inheritedOrAcquired,
-      
-
             string clientId) : base(id)
         {
             Id = id;
@@ -45,8 +52,6 @@ namespace Spectra.Domain.Patients
             RelationToClient = relationToClient;
             ChildHeight = childHeight;
             ChildWeightt = childWeightt;
-            DateOfOnSetOfSymptoms = dateOfOnSetOfSymptoms;
-            InheritedOrAcquired = inheritedOrAcquired;
        
             ClientId = clientId;
         }
@@ -60,11 +65,6 @@ namespace Spectra.Domain.Patients
             ClientPatientRelations relationToClient,
             double childHeight,
             double childWeightt,
-            string dateOfOnSetOfSymptoms,
-            TypeOfDisease inheritedOrAcquired,
-         
-
-
             string clientId)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
@@ -75,13 +75,11 @@ namespace Spectra.Domain.Patients
             ArgumentNullException.ThrowIfNull(relationToClient, nameof(relationToClient));
             ArgumentNullException.ThrowIfNull(childHeight, nameof(childHeight));
             ArgumentNullException.ThrowIfNull(childWeightt, nameof(childWeightt));
-            ArgumentNullException.ThrowIfNull(dateOfOnSetOfSymptoms, nameof(dateOfOnSetOfSymptoms));
-            ArgumentNullException.ThrowIfNull(inheritedOrAcquired, nameof(inheritedOrAcquired));
             ArgumentNullException.ThrowIfNull(clientId, nameof(clientId));
 
 
 
-            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, childHeight, childWeightt, dateOfOnSetOfSymptoms, inheritedOrAcquired, clientId);
+            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, childHeight, childWeightt,clientId);
         }
     }
 }

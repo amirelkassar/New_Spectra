@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Spectra.Domain.Shared.Wrappers
 {
-    public class OperationResult<TData>
+
+    public class OperationResult
     {
-        protected OperationResult()
+        private OperationResult()
         {
             OperationId = Guid.NewGuid();
             Errors = new Dictionary<string, string[]>();
         }
-        protected OperationResult(TData data, int code, string message, IDictionary<string, string[]>? errors = null) : this()
+        protected OperationResult(int code, string message, IDictionary<string, string[]>? errors = null)
         {
-            Data = data;
             Code = code;
             Message = message;
             Errors = errors;
             SuccessOpration = Errors is null || Errors.Count == 0;
         }
         public Guid OperationId { get; }
-
         public bool SuccessOpration { get; }
-        public int Code { get; set; }
-        public string? Message { get; set; }
-        public IDictionary<string, string[]>? Errors { get; set; }
-        public TData Data { get; set; }
+        public int Code { get; }
+        public string? Message { get; }
+        public IDictionary<string, string[]>? Errors { get; }
+        public static OperationResult Success(int code = 200, string message = "Valid Operation!") => new OperationResult(code, message);
+        public static OperationResult Failure(IDictionary<string, string[]> errors, int code = 400, string message = "Invalid Operation!")
+             => new OperationResult(code, message, errors);
+    }
+    public class OperationResult<TData> : OperationResult
+    {
+        private OperationResult(TData data, int code, string message, IDictionary<string, string[]>? errors = null) : base(code,message,errors)
+        {
+            Data = data;
+        }
+        public TData Data { get;}
 
         public static OperationResult<TData> Success(TData data, int code = 200, string message = "Valid Operation!") => new OperationResult<TData>(data, code, message);
         public static OperationResult<object?> Failure(IDictionary<string, string[]> errors, int code = 400, string message = "Invalid Operation!")
