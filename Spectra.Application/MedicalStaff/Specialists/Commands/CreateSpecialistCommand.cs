@@ -25,11 +25,6 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-<<<<<<< HEAD
-        public IFormFile ScientificDegree { get; set; }
-        public EmpelyeeRates? empelyeeRate { get; set; }
-
-=======
         public EmploymentStatus Status { get; set; }
 
 
@@ -38,7 +33,6 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         public EmpelyeeRates? empelyeeRate { get; set; }
 
 
->>>>>>> Admin-BackEnd
     }
 
     public class CreateSpecialistCommandHandler : IRequestHandler<CreateSpecialistCommand, OperationResult<string>>
@@ -55,13 +49,8 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateSpecialistCommand request, CancellationToken cancellationToken)
         {
-<<<<<<< HEAD
-            string? filePath = null;
-            var uploadfile = await _addFile.Createattachment(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
-=======
             List<string>? filePath = null;
             var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
->>>>>>> Admin-BackEnd
             if (uploadfile != null)
             {
                 filePath = uploadfile;
@@ -83,14 +72,8 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
                 request.ApprovedBy,
                 request.Academicdegree,
                  filePath,
-<<<<<<< HEAD
-
-                    request.empelyeeRate = 0,
-                      EmploymentStatus.Wating);
-=======
                 request.empelyeeRate = 0,
                request.Status);
->>>>>>> Admin-BackEnd
 
             await _specialistRepository.AddAsync(specialist);
             //await _specializationRepository.UpdateAsync(specialization);

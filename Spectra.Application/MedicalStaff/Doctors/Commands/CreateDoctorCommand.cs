@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-<<<<<<< HEAD
-=======
 using Spectra.Application.MasterData.Drug.Validator;
->>>>>>> Admin-BackEnd
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
@@ -32,11 +29,6 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-<<<<<<< HEAD
-        public IFormFile ScientificDegree { get; set; }
-        public EmpelyeeRates? empelyeeRate { get; set; }
-
-=======
         public EmploymentStatus Stutes { get; set; }
 
  
@@ -45,7 +37,6 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public EmpelyeeRates? empelyeeRate { get; set; }
 
 
->>>>>>> Admin-BackEnd
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateDoctorCommand, OperationResult<string>>
@@ -61,13 +52,8 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
-<<<<<<< HEAD
-            string? filePath = null;
-            var uploadfile = await _addFile.Createattachment(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
-=======
            List<string>? filePath = null;
             var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
->>>>>>> Admin-BackEnd
             if (uploadfile != null)
             {
                 filePath = uploadfile;
@@ -88,15 +74,6 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-<<<<<<< HEAD
-                 filePath,
-                request.empelyeeRate=0,
-                  EmploymentStatus.Wating
-                );
-
-            await _doctorRepository.AddAsync(doctor);
-            await _specializationRepository.UpdateAsync(specialization);
-=======
 
               filePath,
                   request.Stutes,
@@ -106,7 +83,6 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
 
             await _doctorRepository.AddAsync(doctor);
       
->>>>>>> Admin-BackEnd
 
 
             return OperationResult<string>.Success(doctor.Id);
@@ -167,18 +143,9 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
                 .NotEmpty()
                 .WithMessage("Academic degree is required.");
 
-<<<<<<< HEAD
-        
-            RuleFor(x => x.AttachmentPath)
-                .NotEmpty()
-                .WithMessage("Attachment path is required.")
-                .Must(BeAValidFilePath)
-                .WithMessage("Invalid file path.");
-=======
             //RuleFor(x => x.ScientificDegree)
             //        .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
             //        .WithMessage("Invalid image file(s). At least one file must be a valid image.");
->>>>>>> Admin-BackEnd
         }
 
      

@@ -1,21 +1,6 @@
 ﻿using MediatR;
-<<<<<<< HEAD
-using Spectra.Application.MasterData.SpecializationCommend;
-using Spectra.Application.Patients;
-using Spectra.Domain.MasterData.ServicesMD;
-using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Infrastructure.MasterData.ServicesMD;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-=======
-using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Wrappers;
->>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 {

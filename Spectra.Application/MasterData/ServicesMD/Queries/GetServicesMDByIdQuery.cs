@@ -1,18 +1,7 @@
 ﻿using MediatR;
-<<<<<<< HEAD
-using Spectra.Application.MasterData.Drug;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
-using Spectra.Domain.MasterData.Drug;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Infrastructure.MasterData.ServicesMD;
-=======
-using Spectra.Domain.MasterData.ServicesMD;
-using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Wrappers;
->>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {

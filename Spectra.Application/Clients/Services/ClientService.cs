@@ -2,7 +2,7 @@
 using Spectra.Application.Clients.Commands;
 using Spectra.Application.Clients.Queries;
 using Spectra.Domain.Clients;
-using Spectra.Domain.Enumeration;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Clients.Services
@@ -29,7 +29,8 @@ namespace Spectra.Application.Clients.Services
                 Address = address
             };
 
-            return await _mediator.Send(command);
+            var res = await _mediator.Send(command);
+            return res.Data;
         }
 
         public async Task UpdateClient(string id, Name name, string nationalId, PhoneNumber phoneNumber, ClientTypes clientType, string userId, EmailAddress emailAddress, Address address)
@@ -58,13 +59,15 @@ namespace Spectra.Application.Clients.Services
         public async Task<Client> GetClientById(string id)
         {
             var query = new GetClientByIdQuery { Id = id };
-            return await _mediator.Send(query);
+            var res= await _mediator.Send(query);
+            return res.Data;
         }
 
         public async Task<IEnumerable<Client>> GetAllClients()
         {
             var query = new GetAllClientsQuery();
-            return await _mediator.Send(query);
+            var res = await _mediator.Send(query);
+            return res.Data;
         }
     }
 }

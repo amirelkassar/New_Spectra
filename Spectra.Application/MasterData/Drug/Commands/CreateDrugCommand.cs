@@ -72,7 +72,6 @@ namespace Spectra.Application.MasterData.Drug.Commands
                 );
                 await _drugRepository.AddAsync(drug);
 
-                // Return Success with the created Drug ID
                 return OperationResult<string>.Success(drug.Id);
            
            
@@ -112,7 +111,6 @@ namespace Spectra.Application.MasterData.Drug.Commands
             RuleFor(x => x.Contraindications)
                 .NotEmpty().WithMessage("Contraindications are required.")
                 .MaximumLength(500).WithMessage("Contraindications must not exceed 500 characters.");
-
             RuleFor(x => x.Photo)
                        .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
                        .WithMessage("Invalid image file(s). At least one file must be a valid image.");

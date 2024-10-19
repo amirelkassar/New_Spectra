@@ -7,11 +7,7 @@ using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-<<<<<<< HEAD
-using Spectra.Infrastructure.MasterData.ServicesMD;
-=======
 
->>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
@@ -28,11 +24,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string? Content { get; set; }
 
         public List<Secation>? Secations { get; set; }
-<<<<<<< HEAD
-        public IFormFile? Photo { get; set; }
-=======
         public List<IFormFile>? Photo { get; set; }
->>>>>>> Admin-BackEnd
 
     }
 
@@ -54,15 +46,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public async Task<OperationResult<string>> Handle(CreateServicesMCommand request, CancellationToken cancellationToken)
         {
             
-<<<<<<< HEAD
-            string? photoPath = null;
-
-            var uploadPhoto =await _addPhoto.Createattachment(request.Photo,"Upload/Image/Services");
-=======
            List<string>? photoPath = null;
 
             var uploadPhoto =await _addPhoto.CreateAttachments(request.Photo,"Upload/Image/Services");
->>>>>>> Admin-BackEnd
             if (uploadPhoto != null)
             {
               photoPath = uploadPhoto;

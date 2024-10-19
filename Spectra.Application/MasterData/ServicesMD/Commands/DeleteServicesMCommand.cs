@@ -2,11 +2,7 @@
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
-<<<<<<< HEAD
-using Spectra.Infrastructure.MasterData.ServicesMD;
-=======
 
->>>>>>> Admin-BackEnd
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
@@ -32,11 +28,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
             var entity = await _serviceMRepository.GetByIdAsync(request.Id);
 
-<<<<<<< HEAD
-            await _addPhoto.Deleteattachment(entity.AttachmentPath);
-=======
             await _addPhoto.DeleteAttachments(entity.AttachmentPath);
->>>>>>> Admin-BackEnd
 
             await _serviceMRepository.DeleteAsync(entity);
             return OperationResult<Unit>.Success(Unit.Value);

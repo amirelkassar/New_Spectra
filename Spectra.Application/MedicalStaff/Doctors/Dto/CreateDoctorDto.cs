@@ -26,11 +26,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Dto
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-<<<<<<< HEAD
-        public IFormFile ScientificDegree { get; set; }
-=======
         public List<IFormFile> ScientificDegree { get; set; }
->>>>>>> Admin-BackEnd
 
 
     }

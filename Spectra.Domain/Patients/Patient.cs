@@ -42,10 +42,6 @@ namespace Spectra.Domain.Patients
             ClientPatientRelations relationToClient,
             double childHeight,
             double childWeightt,
-            string dateOfOnSetOfSymptoms,
-            TypeOfDisease inheritedOrAcquired,
-      
-
             string clientId) : base(id)
         {
             Id = id;
@@ -56,8 +52,6 @@ namespace Spectra.Domain.Patients
             RelationToClient = relationToClient;
             ChildHeight = childHeight;
             ChildWeightt = childWeightt;
-            DateOfOnSetOfSymptoms = dateOfOnSetOfSymptoms;
-            InheritedOrAcquired = inheritedOrAcquired;
        
             ClientId = clientId;
         }

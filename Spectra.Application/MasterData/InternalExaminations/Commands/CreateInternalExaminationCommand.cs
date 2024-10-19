@@ -18,10 +18,6 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
     }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Admin-BackEnd
     public class CreateInternalExaminationsCommandHandler : IRequestHandler<CreateInternalExaminationCommand, OperationResult<string>>
     {
         private readonly IInternalExaminationRepository _InternalExaminationRepository;
