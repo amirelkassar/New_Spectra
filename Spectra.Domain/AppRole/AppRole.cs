@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-<<<<<<< HEAD
 using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
@@ -28,13 +27,5 @@ namespace Spectra.Domain.AppRole
         }
 
         public void ClearDomainEvents() => _domainEvents.Clear();
-=======
-
-namespace Spectra.Domain.AppRole
-{
-    public class AppRole : IdentityRole
-    {
-
->>>>>>> Admin-BackEnd
     }
 }

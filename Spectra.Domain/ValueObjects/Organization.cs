@@ -1,5 +1,8 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using MongoDB.Bson;
+using Spectra.Domain.Clients;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Spectra.Domain.ValueObjects
@@ -18,8 +21,8 @@ namespace Spectra.Domain.ValueObjects
         public string? LogoPath { get; set; }
         public PhoneNumber? LandLine { get; set; }
         public OrganizationTypes OrganizationType { get; set; }
-
-        protected override IEnumerable<object> GetEqualityComponents()
+       
+    protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Name;
             yield return PhoneNumber;

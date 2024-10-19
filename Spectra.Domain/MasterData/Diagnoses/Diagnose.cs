@@ -10,10 +10,6 @@ namespace Spectra.Domain.MasterData.Diagnoses
         public string Code2 { get; set; }
         public string Code3 { get; set; }
         public string Name { get; set; }
-<<<<<<< HEAD
-
-=======
->>>>>>> Admin-BackEnd
         public string Description { get; set; }
 
 
@@ -37,7 +33,7 @@ namespace Spectra.Domain.MasterData.Diagnoses
         }
         public static Diagnose Create(string id, string code1,
                string code2,
-               string code3,
+               string code3 , 
                string name,
                string description
        )
@@ -53,7 +49,7 @@ namespace Spectra.Domain.MasterData.Diagnoses
             ArgumentNullException.ThrowIfNull(code3, nameof(code3));
 
             return new Diagnose(id, code1, code2, code3, name, description);
-
+             
         }
     }
 }

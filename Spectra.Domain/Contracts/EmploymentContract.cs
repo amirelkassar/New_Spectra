@@ -2,6 +2,7 @@
 using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Spectra.Domain.Contracts
 {

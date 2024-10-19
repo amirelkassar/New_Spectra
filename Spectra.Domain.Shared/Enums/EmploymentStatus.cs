@@ -1,13 +1,16 @@
-﻿namespace Spectra.Domain.Shared.Enums
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.Domain.Shared.Enums
 {
     public enum EmploymentStatus
     {
         Wating,
         Available,
-<<<<<<< HEAD
-=======
         cancel,
->>>>>>> Admin-BackEnd
         Bloked
     }
 }
