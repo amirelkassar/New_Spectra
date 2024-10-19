@@ -26,23 +26,11 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    var swaggerClientId = app.Configuration["IdentityServerSetting:Clients:0:ClientId"];
-    var swaggerClientSecret = app.Configuration["IdentityServerSetting:Clients:0:Secret"];
-    var swaggerClientName = app.Configuration["IdentityServerSetting:Clients:0:ClientName"];
-
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
-
-        options.OAuthClientId(swaggerClientId);
-        options.OAuthClientSecret(swaggerClientSecret);
-        options.OAuthAppName(swaggerClientName);
-        options.OAuthUsePkce();
-    });
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
+});
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseSerilogRequestLogging();
