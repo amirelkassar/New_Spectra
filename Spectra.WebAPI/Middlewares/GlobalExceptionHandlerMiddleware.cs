@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Spectra.WebAPI.Middlewares
 {
@@ -40,11 +40,14 @@ namespace Spectra.WebAPI.Middlewares
 
             switch (exception)
             {
-                case ValidationException validationException:
+                case FluentValidation.ValidationException validationException:
                     errorType = "ValidationError";
                     statusCode = HttpStatusCode.UnprocessableEntity;
 
-                    errorCollection = (Dictionary<string, string[]>)validationException.Errors;
+
+                     errorCollection = validationException.Errors
+                        .GroupBy(e => e.PropertyName)
+                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()); 
                     break;
 
                 case RequestErrorException _:
@@ -78,7 +81,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "General", new[] { exception.Message.Trim() } } 
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
