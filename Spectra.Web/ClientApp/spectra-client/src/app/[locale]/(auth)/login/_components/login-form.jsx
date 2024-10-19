@@ -1,14 +1,13 @@
 'use client';
 
-import Button from '@/components/button';
+import { Link } from '@/navigation';
+
 import TextInput from '@/components/inputs/text-input';
 import PasswordInput from '@/components/inputs/password-input';
-import { Link } from '@/navigation';
+import Button from '@/components/button';
 import ROUTES from '@/routes';
 
-import { useState } from 'react';
-
-const LoginForm = () => {
+export const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
   };
@@ -19,26 +18,30 @@ const LoginForm = () => {
         label={'اسم المستخدم'}
         placeholder={'ادخل اسمك بالكامل'}
         size='lg'
+        labelClassName='!text-base'
       />
+
       <PasswordInput
         label={'كلمة المرور'}
         placeholder={'ادخل كلمة المرور'}
         size='lg'
+        labelClassName='!text-base'
       />
-      <div className='me-auto  w-fit'>
-        <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>
-          نسيت كلمة السر؟
-        </Link>
-      </div>
+
+      <Link
+        className='block w-fit text-xl transition-all hover:underline'
+        href={ROUTES.AUTH.FORGOT_PASSWORD}
+      >
+        نسيت كلمة السر؟
+      </Link>
+
       <Button
         variant='secondary'
-        className={'w-full '}
+        className={'w-full font-bold'}
         type='submit'
       >
-        التالي
+        تسجيل الدخول
       </Button>
     </form>
   );
 };
-
-export default LoginForm;

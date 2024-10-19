@@ -1,10 +1,7 @@
-import React from 'react';
-import Button from '@/components/button';
-import GoogleIcon from '@/assets/icons/google';
-import AppleIcon from '@/assets/icons/apple';
-import SignupModal from './signup-modal';
+import { LoginForm } from './_components/login-form';
+import { OAuthLogin } from './_components/o-auth-login';
 import { FormTitle } from '../_components/form-title';
-import LoginForm from './_components/login-form';
+import { RegisterModal } from '../../(root)/_components/register-modal';
 
 const LoginPage = () => {
   return (
@@ -13,28 +10,15 @@ const LoginPage = () => {
 
       <LoginForm />
 
-      <div className='space-y-5'>
-        <Button
-          dir='ltr'
-          className={
-            'w-full border-greenMain whitespace-nowrap'
-          }
-        >
-          <GoogleIcon />
-          Sign in with Google
-        </Button>
-        <Button
-          dir='ltr'
-          className={
-            'w-full border-greenMain whitespace-nowrap'
-          }
-        >
-          <AppleIcon />
-          Sign in with Apple
-        </Button>
-      </div>
+      <OAuthLogin />
 
-      <SignupModal />
+      <RegisterModal
+        trigger={
+          <button className='block mx-auto text-xl transition-all hover:underline'>
+            ليس لديك حساب؟ اشترك الان
+          </button>
+        }
+      />
     </div>
   );
 };

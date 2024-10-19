@@ -34,7 +34,17 @@ const OPTIONS = [
   },
 ];
 
-export const RegisterModal = () => {
+export const RegisterModal = ({
+  trigger = (
+    <Button
+      variant='secondary'
+      className='font-bold rounded-[10px] leading-6 !min-w-[140px] !py-1 min-h-[33px] !text-center mb-2'
+      aria-label='اشترك الان'
+    >
+      اشترك الان
+    </Button>
+  ),
+}) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedClient, setSelectedClient] = useState(
     OPTIONS[0]
@@ -42,14 +52,8 @@ export const RegisterModal = () => {
 
   return (
     <>
-      <div className='w-fit' role='dialog' onClick={open}>
-        <Button
-          variant='secondary'
-          className='font-bold rounded-[10px] leading-6 !min-w-[140px] !py-1 min-h-[33px] !text-center mb-2'
-          aria-label='اشترك الان'
-        >
-          اشترك الان
-        </Button>
+      <div role='dialog' onClick={open}>
+        {trigger}
       </div>
 
       {/* MODAL */}
