@@ -24,6 +24,7 @@ namespace Spectra.WebAPI.Controllers
         {
             _adminService = adminService;
             _clientService = clientService;
+
             _DoctorService = DoctorService;
         }
         [HttpGet("GetAllDoctors")]
