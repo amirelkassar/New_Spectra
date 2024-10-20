@@ -1,5 +1,6 @@
 'use client';
 
+import { useMediaQuery } from '@mantine/hooks';
 import { usePathname, useRouter } from '@/navigation';
 import { Drawer as MantineDrawer } from '@mantine/core';
 
@@ -19,10 +20,12 @@ export const Drawer = ({
 }) => {
   const pathName = usePathname();
   const router = useRouter();
+  const matches = useMediaQuery('(min-width: 768px)');
+
   return (
     <MantineDrawer
       withCloseButton={false}
-      size={'xs'}
+      size={matches ? 'md' : 'xs'}
       dir='ltr'
       classNames={{
         body: 'p-0',
@@ -30,7 +33,7 @@ export const Drawer = ({
       position={currentLocale === 'ar' ? 'right' : 'left'}
       opened={isOpen}
       onClose={onClose}
-      overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+      overlayProps={{ backgroundOpacity: 0.5, blur: 2 }}
       transitionProps={{
         transition:
           currentLocale === 'ar'
@@ -42,7 +45,7 @@ export const Drawer = ({
     >
       <div dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
         {/* HEADER */}
-        <div className='flex p-5 items-center justify-between'>
+        <div className='flex py-5 px-7 items-center justify-between'>
           <Logo />
 
           <Button
@@ -71,7 +74,7 @@ export const Drawer = ({
                     onClose();
                   }}
                   className={cn(
-                    'p-4 flex font-bold text-sm items-center gap-x-2 transition hover:bg-blueLight',
+                    'py-4 px-7 flex font-bold text-sm items-center gap-x-2 transition hover:bg-blueLight',
                     {
                       'bg-blueLight':
                         pathName === link.href,
@@ -96,13 +99,13 @@ export const Drawer = ({
 
           {/* LOCALE */}
           <LangDropdown
-            className='p-4'
+            className='py-4 px-7'
             currentLocale={currentLocale}
           />
 
           {/* AUTH */}
 
-          <div className='p-4 mt-12'>
+          <div className='px-7 py-4 mt-12'>
             <Button
               onClick={() => {
                 router.push(ROUTES.AUTH.LOGIN);
