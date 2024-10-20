@@ -533,3 +533,121 @@ input[type="number"].timeInput {
   box-shadow: none !important;
   border: none !important;
 }
+
+/*================================================
+Preloader Area CSS
+=================================================*/
+
+.loader {
+  transition: 0.5s;
+  @apply absolute w-20 h-20 rounded-full inline-block left-0 right-0 mx-auto my-0  top-[45%] translate-y-[-45%];
+}
+
+.loader .loader-outter {
+  border: 4px solid black;
+  border-left-color: transparent;
+  border-bottom: 0;
+  -webkit-animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  @apply absolute w-full h-full rounded-full;
+}
+
+.loader .loader-inner {
+  border: 4px solid #10b0c1;
+  left: calc(40% - 21px);
+  top: calc(40% - 21px);
+  border-right: 0;
+  border-top-color: transparent;
+  -webkit-animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  @apply absolute w-[60px] h-[60px] rounded-full;
+}
+
+.loader .indicator {
+  -webkit-transform: translateY(-50%) translateX(-50%) scale(1.5);
+  transform: translateY(-50%) translateX(-50%) scale(1.5);
+  @apply absolute right-auto left-1/2 top-1/2 flex items-center justify-center;
+}
+
+.loader .indicator svg polyline {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loader .indicator svg polyline#back {
+  stroke: black;
+}
+
+.loader .indicator svg polyline#front {
+  stroke: #10b0c1;
+  stroke-dasharray: 12, 36;
+  stroke-dashoffset: 48;
+  -webkit-animation: dash 1s linear infinite;
+  animation: dash 1s linear infinite;
+}
+
+@-webkit-keyframes loader-outter {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-outter {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes loader-inner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes dash {
+  62.5% {
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  62.5% {
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
