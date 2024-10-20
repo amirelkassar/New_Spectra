@@ -1,9 +1,10 @@
 'use client';
 
-import { FileInput as MantineFileInput, FileInputProps } from '@mantine/core';
+import { FileInput as MantineFileInput } from '@mantine/core';
 import { useRef } from 'react';
 import Button from '../button';
 import ArrowRight from '@/assets/icons/arrow-right';
+import { cn } from '@/lib/utils';
 
 /**
  * @typedef {Object} FileInputProps
@@ -14,7 +15,7 @@ import ArrowRight from '@/assets/icons/arrow-right';
  * @param {FileInputProps} props
  */
 
-const FileInput = ({ ...props }) => {
+const FileInput = ({ size = 'md', ...props }) => {
   const ref = useRef(null);
 
   return (
@@ -22,19 +23,22 @@ const FileInput = ({ ...props }) => {
       <MantineFileInput
         ref={ref}
         {...props}
-        size='md'
+        size={size}
         classNames={{
-          root: 'flex-1 max-w-[70%]',
+          root: 'flex-1',
           input:
-            'rounded-lg focus:border-greenMain text-overflow-ellipsis overflow-hidden text-ellipsis white-space-nowrap',
-          label: 'text-xs lg:text-base mb-2 ps-1',
+            'rounded-lg focus:border-greenMain text-overflow-ellipsis overflow-hidden text-ellipsis white-space-nowrap *:text-base *:font-normal',
+          label: 'text-base mdl:text-xl mb-2 ps-1',
         }}
         clearable
       />
       <Button
         onClick={() => ref.current?.click()}
         variant='secondary'
-        className='p-0 gap-3 font-bold px-2 lg:px-4 h-[42px] text-xs lg:text-sm rounded-lg'
+        className={cn(
+          'p-0 gap-3 font-bold px-2 lg:px-4 h-[42px] text-xs lg:text-sm rounded-lg shrink-0',
+          size === 'lg' && 'h-[50px]'
+        )}
       >
         <ArrowRight />
         رفع ملف
