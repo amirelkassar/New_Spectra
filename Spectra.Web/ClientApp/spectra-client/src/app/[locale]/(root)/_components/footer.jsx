@@ -70,7 +70,7 @@ export const Footer = () => {
         <div className='flex gap-x-6'>
           <Nav
             navLinks={NAVDATA}
-            className='hidden lg:block flex-initial'
+            className='hidden lg:flex'
           />
           <Link
             href={ROUTES.AUTH.SIGNUP_PROVIDER}
