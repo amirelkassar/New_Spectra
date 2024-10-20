@@ -1,6 +1,8 @@
 import DeleteIcon from "@/assets/icons/delete";
 import EditImgIcon from "@/assets/icons/editImg";
 import True2Icon from "@/assets/icons/true2";
+import { Link } from "@/navigation";
+import ROUTES from "@/routes";
 import React from "react";
 
 function CardPackages({item}) {
@@ -14,8 +16,9 @@ function CardPackages({item}) {
           <EditImgIcon fill="#10B0C1" />
         </button>
       </div>
-      <div
-        className={`w-full pt-5 border-2 border-x-grayLight border-b-grayLight  border-t-[6px] rounded-xl px-4 md:px-6 pb-7`}
+      <Link 
+      href={ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESDETAILS(item.id)}
+        className={`w-full duration-300 hover:shadow-sm pt-5 border-2 border-x-grayLight border-b-grayLight  border-t-[6px] rounded-xl px-4 md:px-6 pb-7`}
         style={{ borderTopColor: item.color }}
       >
         <h4 className={` text-sm md:text-xl mb-3 font-Bold text-[${item.color}]`}>
@@ -36,7 +39,7 @@ function CardPackages({item}) {
             );
           })}
         </ul>
-      </div>
+      </Link>
     </div>
   );
 }
