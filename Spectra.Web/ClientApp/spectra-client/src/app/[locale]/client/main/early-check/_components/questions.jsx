@@ -1,7 +1,26 @@
+'use client';
+
+import { useState } from 'react';
+
+import { cn } from '@/lib/utils';
+
 export const Questions = ({
   discription = '',
   questions = [],
+  onSelect = () => {},
 }) => {
+  const [answers, setAnswers] = useState({});
+
+  // Handle selection of an answer
+  const handleSelect = (questionId, value) => {
+    const updatedAnswers = {
+      ...answers,
+      [questionId]: value,
+    };
+    setAnswers(updatedAnswers);
+    onSelect?.(Object.values(updatedAnswers));
+  };
+
   return (
     <div className='border-[3px] border-blueLight rounded-lg'>
       {/* DISCRIPTION */}
@@ -13,29 +32,59 @@ export const Questions = ({
       <div className='h-0.5 bg-grayLight w-full' />
 
       {/* QUESTIONS */}
-      <div className='p-3'>
+      <ul>
         {questions.map((question, index) => (
-          <ul className='py-2' key={index}>
-            <li className='inline-flex items-center *:shrink-0 gap-3 flex-wrap'>
-              <span>{question?.ques}</span>
-              <span>
-                {question?.chooices.map((choice, index) => (
-                  <span key={index}>
-                    <input
-                      type='radio'
-                      id={`${question?.id}${index}`}
-                      name={`question-${question?.id}`}
-                      value={choice?.value}
-                      className='mr-2'
-                    />
-                    {choice?.label}
-                  </span>
-                ))}
-              </span>
-            </li>
-          </ul>
+          <li
+            className={cn(
+              'relative pt-5 w-full ps-7 before:absolute before:top-7 before:start-3 before:size-[10px] before:bg-greenMain before:rounded-full',
+              {
+                'after:absolute after:top-[38px] after:start-[16px] after:w-[2px] after:h-[calc(100%-8px)] after:bg-greenMain':
+                  index !== questions.length - 1,
+              }
+            )}
+            key={question?.id}
+          >
+            <div className='border-b-2 pb-5 border-grayLight w-full flex gap-3 flex-wrap'>
+              <div className='font-Medium'>
+                {question?.ques}
+              </div>
+              <div className='flex flex-wrap gap-y-5 gap-x-3'>
+                {question?.chooices?.map(
+                  (choice, index) => (
+                    <label
+                      htmlFor={`${question?.id}${index}`}
+                      key={choice?.value}
+                    >
+                      <input
+                        type='radio'
+                        id={`${question?.id}${index}`}
+                        name={`question-${question?.id}`}
+                        value={choice?.value}
+                        className='peer hidden'
+                        onChange={() =>
+                          handleSelect(
+                            question?.id,
+                            choice?.value
+                          )
+                        }
+                      />
+
+                      <div
+                        role='button'
+                        className={cn(
+                          'border-2 -mt-2 block border-blueLight rounded-xl pe-8 ps-3 py-1 text-base font-normal relative before:absolute before:size-3 before:text-[10px] before:font-extrabold before:bg-grayDark before:end-3 before:top-1/2 before:-translate-y-1/2 before:rounded-full before:content-[""] peer-checked:bg-greenMain peer-checked:text-white peer-checked:before:bg-white peer-checked:font-bold peer-checked:before:bg-[url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwcHgiIHdpZHRoPSIxMHB4IiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyINCgl4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCgk8Zz4NCgkJPGcgaWQ9ImNoZWNrIj4NCgkJCTxnPg0KCQkJCTxwb2x5Z29uIHN0eWxlPSJmaWxsOiMxMEIwQzE7Ig0KCQkJCQlwb2ludHM9IjExLjk0MSwyOC44NzcgMCwxNi45MzUgNS42OTUsMTEuMjQgMTEuOTQxLDE3LjQ4NiAyNi4zMDUsMy4xMjMgMzIsOC44MTgiIC8+DQoJCQk8L2c+DQoJCTwvZz4NCgk8L2c+DQo8L3N2Zz4=")] before:bg-center before:bg-no-repeat before:flex before:items-center before:justify-center before:text-greenMain'
+                        )}
+                      >
+                        {choice?.label}
+                      </div>
+                    </label>
+                  )
+                )}
+              </div>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

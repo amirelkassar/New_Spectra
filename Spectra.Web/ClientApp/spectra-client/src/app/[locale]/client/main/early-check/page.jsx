@@ -2,7 +2,7 @@ import Container from '../../_components/container';
 import Card from '@/components/card';
 import { Heading } from '../../_components/heading';
 import { BackButton } from '../../_components/back-button';
-import { Questions } from './_components/questions';
+import { MSQ } from './_components/msq';
 
 const CHOOICES_1 = [
   {
@@ -50,7 +50,52 @@ const CHOOICES_2 = [
   },
 ];
 
-const DATA = [
+const CHOOICES_3 = [
+  {
+    value: '1',
+    label: 'يقول كلمة يعبر بها عما يريد',
+  },
+  {
+    value: '2',
+    label: 'يشير اليه بإصبعه',
+  },
+  {
+    value: '3',
+    label: 'يصل اليه',
+  },
+  {
+    value: '4',
+    label: 'يجذبك اليه',
+  },
+  {
+    value: '5',
+    label: 'يهمهم، أو يبكي، أو يصرخ',
+  },
+];
+const CHOOICES_4 = [
+  {
+    value: '1',
+    label: 'اللعب بالعرائس أو دمى الحيوانات المحشوة',
+  },
+  {
+    value: '2',
+    label: 'قرائة الكتب معك',
+  },
+  {
+    value: '3',
+    label: 'التسلق والجري والنشاط',
+  },
+  {
+    value: '4',
+    label: 'وضع الألعاب أو الأشياء الاخرى على شكل صف',
+  },
+  {
+    value: '5',
+    label: 'مشاهدة الأشياء تدور مثل المراوح والعجلات',
+  },
+];
+
+const Q1 = [
   {
     id: 1,
     ques: 'هل يحضر طفلك الأشياء ليريها لك؟',
@@ -78,6 +123,19 @@ const DATA = [
   },
 ];
 
+const Q2 = [
+  {
+    id: 6,
+    ques: 'كيف يريك طفلك عادة الشيء الذي يريده؟',
+    chooices: CHOOICES_3,
+  },
+  {
+    id: 7,
+    ques: 'ما أنشطة اللعب المفضلة عند طفلك؟',
+    chooices: CHOOICES_4,
+  },
+];
+
 const EarlyCheckPage = () => {
   return (
     <Container>
@@ -86,7 +144,7 @@ const EarlyCheckPage = () => {
           <Heading
             label='خدمة الكشف المبكر'
             icon={<BackButton />}
-            className='flex-row-reverse justify-end gap-5'
+            className='flex-row-reverse justify-end gap-2'
           />
 
           <p>
@@ -98,10 +156,7 @@ const EarlyCheckPage = () => {
           </p>
         </div>
 
-        <Questions
-          discription='ملاحظات الاباء حول التفاعل الاجتماعي'
-          questions={DATA}
-        />
+        <MSQ data={{ 1: Q1, 2: Q2 }} />
       </Card>
     </Container>
   );
