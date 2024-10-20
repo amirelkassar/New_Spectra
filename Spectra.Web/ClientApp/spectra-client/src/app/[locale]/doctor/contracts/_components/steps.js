@@ -33,7 +33,7 @@ function Steps({ active, pathname, searchparams }) {
           active={active}
           allowNextStepsSelect={false}
           completedIcon={<CorrectICon />}
-          clicka
+          
           classNames={{
             stepLabel: "text-[12px] lg:text-[16px] text-nowrap",
             root: "max-w-[850px] mx-auto",
@@ -45,7 +45,7 @@ function Steps({ active, pathname, searchparams }) {
               "bg-grayDark text-white border-none size-5 lg:size-8 min-w-5 min-h-5 lg:min-h-8 text-[14px] lg:text-xl data-[completed]:bg-greenMain lg:min-w-8",
           }}
         >
-          <Stepper.Step cl label="طلب عقد" />
+          <Stepper.Step  label="طلب عقد" />
           <Stepper.Step label="ملء العقد" />
           <Stepper.Step label="قيد المراجعة" />
           <Stepper.Step label="إتمام العملية" />

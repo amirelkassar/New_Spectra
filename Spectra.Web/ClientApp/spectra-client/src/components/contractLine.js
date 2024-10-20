@@ -54,7 +54,8 @@ function ContractLine({
             Net Earnings
           </h4>
           <p className="bg-blueLight text-xs mdl:text-base text-center px-7 min-h-9 mdl:min-h-11 border min-w-[130px] md:min-w-[140px] border-greenMain rounded-xl flex items-center justify-center">
-            75.00 $
+            {((serviceData[service]?.price * 70)/100)} $
+            
           </p>
         </div>
       </div>

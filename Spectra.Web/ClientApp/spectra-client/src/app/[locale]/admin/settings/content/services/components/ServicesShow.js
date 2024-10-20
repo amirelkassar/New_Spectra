@@ -1,5 +1,5 @@
 "use client";
-import { Textarea, TextInput } from "@mantine/core";
+import { MultiSelect, Textarea, TextInput } from "@mantine/core";
 import React, { useState } from "react";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
@@ -11,6 +11,14 @@ import UploadImgIcon from "@/assets/icons/uploadImg";
 import EditImgIcon from "@/assets/icons/editImg";
 import CheckHeartIcon from "@/assets/icons/check-heart";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import ArrowDownIcon from "@/assets/icons/arrow-down";
+const dataSelect = [
+  "SPEECH Pediatrics LANGUAGE ASSESSMENT",
+  "Psychological Initial Assessment",
+  " recommendation OT VR",
+  "Common question",
+  "Doctors follow up",
+];
 function ServicesShow() {
   const [sections, setSections] = useState([{ title: "", content: "" }]);
   const [largeFile, setLargeFile] = useState("");
@@ -29,7 +37,6 @@ function ServicesShow() {
     );
     setSections(newSections);
   };
-
 
   return (
     <div>
@@ -103,10 +110,10 @@ function ServicesShow() {
                 }
                 maxSize={5 * 1024 ** 2}
                 className="mb-10 rounded-xl"
-                classNames={{root:' !mb-0'}}
+                classNames={{ root: " !mb-0" }}
               >
                 <div className="flex gap-4 py-8 flex-col justify-center h-[186px] lgl:h-[300px] items-center">
-                  <UploadImgIcon className={'w-8 lgl:w-[50px] h-auto '} />
+                  <UploadImgIcon className={"w-8 lgl:w-[50px] h-auto "} />
                   <h2 className="text-sm lgl:text-base text-grayDark font-Light">
                     اضغط هنا لرفع صورة
                   </h2>
@@ -145,7 +152,8 @@ function ServicesShow() {
                 autosize
                 minRows={4}
                 classNames={{
-                  input: "min-h-[170px] bg-[#FCFCFD]  border border-[#CFD0D7] text-sm lgl:text-[20px]",
+                  input:
+                    "min-h-[170px] bg-[#FCFCFD]  border border-[#CFD0D7] text-sm lgl:text-[20px]",
                 }}
               />
             </div>
@@ -158,7 +166,10 @@ function ServicesShow() {
             className="flex flex-col gap-2 lgl:gap-4 duration-200 hover:shadow-md py-8 items-center justify-center w-full px-4 min-h-[90px] lgl:min-h-[150px]  bg-blueLight border border-greenMain rounded-xl font-bold"
           >
             <PlusInsideCircleIcon className={"w-6 lgl:w-11 h-auto"} />
-            <p className="text-sm lgl:text-xl font-Bold text-center"> إضافة قسم</p>
+            <p className="text-sm lgl:text-xl font-Bold text-center">
+              {" "}
+              إضافة قسم
+            </p>
           </button>
         </div>
         <div className="px-8 lgl:px-0 lgl:max-w-[80%] mx-auto">
@@ -187,6 +198,19 @@ function ServicesShow() {
               }}
             />
           </div>
+        </div>
+        <div className="lgl:max-w-[80%] mx-auto mt-4 md:mt-10">
+          <MultiSelect
+            data={dataSelect}
+            label="اضافة التقارير الخاصة بالخدمة"
+            placeholder="اختر  التقارير الخاصة بالخدمة"
+            rightSection={<ArrowDownIcon />}
+            className="MultiSelect h-auto flex-1"
+            classNames={{
+              input: " !h-auto py-1 min-h-[60px]",
+              label: "text-[12px] md:text-[16px] mb-2",
+            }}
+          />
         </div>
         <div className="flex flex-col mt-16 items-center gap-3 lgl:max-w-[80%] mx-auto">
           <Button

@@ -32,9 +32,7 @@ function ServicesMember({
               handleServiceDataChange={handleServiceDataChange}
               type={"member"}
               service={service}
-              terms={
-                "Lorem Absim Lorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem Absim "
-              }
+            
             />
           );
         })}
