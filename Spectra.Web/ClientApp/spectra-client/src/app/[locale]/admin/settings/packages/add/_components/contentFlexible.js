@@ -13,7 +13,8 @@ const availableOptions = [
 function ContentFlexible({ list, setList }) {
   const [OpenOther, setOpenOther] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
+  const [searchTerm, setSearchTerm] = useState(""); // State to track search input
+  const [filteredOptions, setFilteredOptions] = useState(availableOptions); // Filtered data
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -51,6 +52,15 @@ function ContentFlexible({ list, setList }) {
   };
 
   const occurrences = countOccurrences();
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    // Filter options based on search term
+    const filtered = availableOptions.filter((item) =>
+      item.label.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+  };
   return (
     <Card className={"mdl:!ps-14 !py-8"}>
       <h3 className=" mb-5 text-xs mdl:text-base  font-Regular">محتوى الباقة</h3>
@@ -81,8 +91,19 @@ function ContentFlexible({ list, setList }) {
               children: "p-0 pb-4 mdl:pb-10 bg-white",
             }}
           >
-            <div>
-              {availableOptions.map((item, i) => {
+             <div className="-mt-16">
+              <div className="mb-4">
+                <TextInput
+                  value={searchTerm}
+                  onChange={handleSearch}
+                  placeholder="ابحث عن خدمة..."
+                  className=" p-2 w-full rounded-lg mb-4 max-w-[calc(100%-100px)] "
+                  classNames={{
+                    input:'!border-none h-12 w-full text-sm mdl:text-xl font-Bold'
+                  }}
+                />
+              </div>
+              {filteredOptions.map((item, i) => {
                 return (
                   <div
                     key={i}

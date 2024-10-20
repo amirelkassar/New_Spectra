@@ -5,8 +5,6 @@ import InfoPackage from "./_components/infoPackage";
 import Card from "@/components/card";
 import { BannerUploader } from "./_components/BannerUploader";
 import Button from "@/components/button";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
 import GoalPackages from "./_components/goalPackages";
 import ContentFlexible from "./_components/contentFlexible";
 import ContentSpectra from "./_components/contentSpectra";
