@@ -8,6 +8,8 @@ import Button from "@/components/button";
 import GoalPackages from "./_components/goalPackages";
 import ContentFlexible from "./_components/contentFlexible";
 import ContentSpectra from "./_components/contentSpectra";
+import { Link } from "@/navigation";
+import ROUTES from "@/routes";
 
 function Page() {
   const [switchPackages, setSwitchPackages] = useState("spectra");
@@ -57,12 +59,12 @@ function Page() {
           >
             حفظ
           </Button>
-          <Button
-           
+          <Link
+           href={ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD}
             className="w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[48px] lgl:h-[60px] text-[14px] lgl:text-[20px] font-Bold"
           >
-            عرض
-          </Button>
+            الغاء
+          </Link>
         </div>
       </Card>
     </div>

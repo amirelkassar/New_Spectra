@@ -7,6 +7,7 @@ import ROUTES from "@/routes";
 const packages = [
   {
     title: "الباقة المتميزة",
+    id:0,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",
@@ -17,6 +18,7 @@ const packages = [
   },
   {
     title: "الباقة المتميزة",
+    id:1,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",
@@ -27,6 +29,7 @@ const packages = [
   },
   {
     title: "الباقة المتميزة",
+    id:2,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",

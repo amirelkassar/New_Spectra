@@ -168,6 +168,7 @@ const ROUTES = {
       },
       PACKAGES: {
         DASHBOARD: "/admin/settings/packages",
+        PACKAGESDETAILS:(id)=> `/admin/settings/packages/${id}`,
         PACKAGESADD: "/admin/settings/packages/add",
       },
     },
