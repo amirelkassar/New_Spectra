@@ -26,23 +26,28 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
-});
+
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
+app.UseCors("DefaultCors");
+
+app.UseRouting();
+
 app.UseStaticFiles();
 app.UseAuthentication();
-
-
 app.UseAuthorization();
-app.MapControllers().RequireAuthorization();  // Map API controllers
+app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra Web Apis");
+});
+
 app.MapHub<ChatHub>("/chathub");
 
 

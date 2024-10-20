@@ -21,9 +21,24 @@ namespace Spectra.Web
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
             ConfigureSwagger(services, configuration);
+            ConfigureCors(services, configuration);
             return services;
         }
 
+        private static void ConfigureCors(IServiceCollection services, IConfiguration configuration)
+        {
+            var allowedOrigins = configuration.GetSection("AllowedCorsOrigins").Get<string[]>();
+            services.AddCors(opts =>
+            {
+                opts.AddPolicy("DefaultCors", p =>
+                {
+                    p.WithOrigins(allowedOrigins)
+                               .AllowAnyHeader()
+                               .AllowAnyMethod()
+                               .AllowCredentials();
+                });
+            });
+        }
         private static void ConfigureIdentityManagement(IServiceCollection services, IConfiguration configuration)
         {
             var _identityServerSetting = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
