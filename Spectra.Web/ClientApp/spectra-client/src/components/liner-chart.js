@@ -15,7 +15,7 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
       const ctx = chartRef.current.getContext('2d');
       const newChart = new Chart(ctx, {
         type: 'line',
-
+        
         data: {
           labels: chartData.map((d) => d.x),
           datasets: [
@@ -88,15 +88,11 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
 
       chartRef.current.chart = newChart;
     }
-  }, [chartData]);
+  }, []);
 
   return (
     <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-      }}
+      style={{ position: 'relative', width: '100%', height: '100%' }}
       className='space-y-5'
     >
       <canvas ref={chartRef} />

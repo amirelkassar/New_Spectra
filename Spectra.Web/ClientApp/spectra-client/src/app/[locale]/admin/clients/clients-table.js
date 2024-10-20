@@ -146,7 +146,7 @@ const ClientsTable = () => {
   return (
     <div className="grow  overflow-auto ">
      
-      <DataTable mdHide={3} data={data} columns={columns} filterData={FilterOptions} filter="buttons" filterBy="type" filterText="فلتر بالنوع"/>
+      <DataTable IsWidth={true} mdHide={3} data={data} columns={columns} filterData={FilterOptions} filter="buttons" filterBy="type" filterText="فلتر بالنوع"/>
     </div>
   );
 };

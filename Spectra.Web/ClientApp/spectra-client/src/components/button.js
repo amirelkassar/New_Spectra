@@ -19,7 +19,7 @@ const Button = ({
       break;
     case 'secondary':
       variantClasses =
-        'bg-greenMain hover:bg-greenMain/90 text-white rounded-xl py-3';
+        'bg-greenMain text-white rounded-xl py-3';
       break;
     case 'ternary':
       variantClasses =

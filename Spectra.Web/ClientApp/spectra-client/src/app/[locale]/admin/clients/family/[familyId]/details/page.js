@@ -9,7 +9,7 @@ const FamilyDetailsPage = () => {
   const params = useParams();
   return (
     <div className=" grow">
-      <ClientDetails title={"عائلة الطفل"} />
+      <ClientDetails title={"عائلة الطفل"} id={params.familyId} />
       <div className=" bg-white lg:bg-transparent px-2 lg:px-0 pt-6 pb-14 lg:pb-0 ">
       <Link href={ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(params.familyId)} className=" bg-white h-12  w-[100%] flex justify-center items-center py-[9px] rounded-[10px] gap-4 md:w-[260px] ring-2 !ring-[#010036]">
       <EditIcon/>

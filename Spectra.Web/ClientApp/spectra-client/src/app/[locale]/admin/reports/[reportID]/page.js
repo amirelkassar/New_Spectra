@@ -1,16 +1,17 @@
-import React from "react";
-import ReportsTable from "../report-table";
+"use client";
+import React, { useState } from "react";
 import MenuActions from "@/components/menu-actions";
-import ReportAside from "../report-aside";
+import LinerChart from "@/components/liner-chart";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import BackIcon from "@/assets/icons/back";
 import Image from "next/image";
 import man from "@/assets/images/placeholder-person.png";
 import ReportDecIcon from "@/assets/icons/reportDec";
-import { AreaChart, LineChart } from "@mantine/charts";
+import ArrowNav from "@/assets/icons/arrow-nav";
+import ArrowLeftMainGreen from "@/assets/icons/arrow-left-mainGreen";
 
-function page() {
+function Page() {
   const data = [
     {
       id: 0,
@@ -32,19 +33,20 @@ function page() {
     },
   ];
   const charts = [
-    { date: "يناير", temperature: 55 },
-    { date: "فبراير", temperature: 45 },
-    { date: "مارس ", temperature: 50 },
-    { date: "ابريل", temperature: 60 },
-    { date: "مايو", temperature: 40 },
-    { date: "يونيو", temperature: 15 },
-    { date: "يوليو", temperature: 30 },
-    { date: "اغسطس", temperature: 33 },
-    { date: "سبتمبر", temperature: 20 },
-    { date: "اكتوبر", temperature: 17 },
-    { date: "نوفمر", temperature: 25 },
-    { date: "ديسمبر", temperature: 10 },
+    { x: "يناير", y: 55 },
+    { x: "فبراير", y: 45 },
+    { x: "مارس ", y: 50 },
+    { x: "ابريل", y: 60 },
+    { x: "مايو", y: 40 },
+    { x: "يونيو", y: 15 },
+    { x: "يوليو", y: 30 },
+    { x: "اغسطس", y: 33 },
+    { x: "سبتمبر", y: 20 },
+    { x: "اكتوبر", y: 17 },
+    { x: "نوفمر", y: 25 },
+    { x: "ديسمبر", y: 10 },
   ];
+  const [year, setYear] = useState(new Date().getFullYear());
   return (
     <div className=" flex-1">
       <div className=" md:mb-5 bg-white px-0 md:px-4 lg:px-6 xl:px-12 py-6 md:rounded-xl">
@@ -54,9 +56,7 @@ function page() {
               href={ROUTES.ADMIN.REPORT.DASHBOARD}
               className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
             >
-              <BackIcon
-                className={"w-full h-full"}
-              />
+              <BackIcon className={"w-full h-full"} />
             </Link>
             <h2 className="headTitleDash">التقارير</h2>
           </div>
@@ -111,32 +111,35 @@ function page() {
         </p>
       </div>
       <div className=" bg-white px-0 md:px-4 lg:px-6 xl:px-12 py-9 md:rounded-xl md:mb-7 border-y md:border-t-0 border-[#F5F5F5] rtl">
-        <LineChart
-          w={560}
-          h={240}
-          data={charts}
-          dataKey="date"
-          dotProps={{
-            r: 5,
-            fill: "#010036",
-            stroke: "#010036",
-            strokeWidth: 18,
-          }}
-          series={[
-            { name: "temperature", color: "#010036"},
-          ]}
-          activeDotProps={{ r: 10, strokeWidth: 18, fill: "#fff",spacing:10}}
-          curveType="linear"
-          tickLine="none"
-          withGradient={false}
-          yAxisProps={{ domain: [0, 100] }}
-          withYAxis={false}
-          strokeWidth={5}
-          
-        />
+        <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
+          <h2>ملخص الاداء شهريا</h2>
+          <div className="flex items-center gap-8">
+            <button
+              className="flex items-center size-[28px] justify-center bg-grayLight rounded-s-[6px]"
+              onClick={() => {
+                setYear(year + 1);
+              }}
+            >
+              <ArrowNav fill="#010036" className={"w-[7px]"} />
+            </button>
+            <p className="text-center font-extrabold  text-[14px] mdl:text-[20px]">
+              {" "}
+              {year}
+            </p>
+            <button
+              className="flex items-center size-[28px] justify-center bg-grayLight rounded-e-[6px]"
+              onClick={() => {
+                setYear(year - 1);
+              }}
+            >
+              <ArrowLeftMainGreen fill="#010036" className={"w-[7px]"} />
+            </button>
+          </div>
+        </div>
+        <LinerChart chartData={charts} />
       </div>
     </div>
   );
 }
 
-export default page;
+export default Page;

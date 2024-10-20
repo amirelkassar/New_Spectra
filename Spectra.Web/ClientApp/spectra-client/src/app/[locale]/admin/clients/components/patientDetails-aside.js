@@ -11,24 +11,36 @@ const PatientsDetilsAside = () => {
   const path = usePathname();
 
   const pages = [
-   
     {
-      name: "الـمواعيد",
-      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID),
+      name: "بيانات الطفل",
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(params.patientsID),
       isActive:
         path ===
-          ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DETAILS(params.patientsID) ||
-        path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.EDIT(params.patientsID),
+        ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.DASHBOARD(params.patientsID),
+    },
+    {
+      name: "الـمواعيد",
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.APPOINTMENTS(params.patientsID),
+      isActive:
+        path ===
+        ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.APPOINTMENTS(params.patientsID),
     },
     {
       name: "الوصفات الطبية ",
-      route: "",
-      isActive: path === "",
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(
+        params.patientsID
+      ),
+      isActive:
+        path ===
+        ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.PRESCRIPTIONS(params.patientsID),
     },
     {
       name: "تقارير ",
-      route: "",
-      isActive: path === "",
+      route: ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTS(params.patientsID),
+      isActive:
+        path ===
+          ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTS(params.patientsID) ||
+        path === ROUTES.ADMIN.CLIENTS.PATIENTSDETAILS.REPORTSID(params.patientsID, params.reportID),
     },
   ];
   return (

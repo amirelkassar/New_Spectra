@@ -1,7 +1,6 @@
-import MenuActions from "@/components/menu-actions";
 import StarGoldIcon from "@/assets/icons/starGold";
-import ROUTES from "@/routes";
-import { useParams } from "next/navigation";
+import ActionMenu from "./ActionMenu";
+import Image from "next/image";
 
 const getStar = (num) => {
   const stars = [];
@@ -12,15 +11,22 @@ const getStar = (num) => {
   }
   return stars;
 };
-const GetParams = ()=>{
-  const params = useParams()
-  return params.orgId
-}
+
 export const columns = [
   {
     accessorKey: "doctor",
     header: " الاسم",
     id: "doctor",
+    cell: ({ getValue, row }) => {
+      const name = getValue();
+      const image = row.original.image
+      return (
+        <div className="flex gap-[6px] items-center justify-start w-[116px]">
+          <Image src={image} alt="doctor" width={54} height={54} className=" size-[52px] hidden object-cover object-top mdl:block rounded-full"/>
+          <h3 className="text-[12px] mdl:text-base font-bold mdl:min-w-[96px]">{name}</h3>
+        </div>
+      )
+    }
   },
   {
     accessorKey: "specialisationDoctor",
@@ -60,7 +66,7 @@ export const columns = [
             "flex gap-[10px] md:gap-[40px] justify-end items-start me-5 "
           }
         >
-          <MenuActions type={2} path={ROUTES.ADMIN.CLIENTS.ORGANIZATION.DOCTORSDETAILS(GetParams(),id)}/>
+          <ActionMenu id={id}/>
         </div>
       );
     },

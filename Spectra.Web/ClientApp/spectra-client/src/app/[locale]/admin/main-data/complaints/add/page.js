@@ -1,16 +1,15 @@
-'use client';
-import React, { useState } from 'react';
-import BackIcon from '@/assets/icons/back';
-import { Link } from '@/navigation';
-import Button from '@/components/button';
-import ROUTES from '@/routes';
-import { Textarea } from '@mantine/core';
-import InputGreen from '@/components/Input-green';
-import { useCreateComplaint } from '@/useAPI/admin/main-data/complaints';
-import GetErrorMsg from '@/components/getErrorMsg';
+"use client";
+import React, { useState } from "react";
+import BackIcon from "@/assets/icons/back";
+import { Link } from "@/navigation";
+import Button from "@/components/button";
+import ROUTES from "@/routes";
+import { Textarea } from "@mantine/core";
+import InputGreen from "@/components/Input-green";
+import { useCreateComplaint } from "@/useAPI/admin/main-data/complaints";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page() {
-  const { mutate: CreateComplaint, error } =
-    useCreateComplaint();
+  const { mutate: CreateComplaint, error } = useCreateComplaint();
   console.log(error);
 
   const [formData, setFormData] = useState({
@@ -31,56 +30,53 @@ function Page() {
   };
   return (
     <div>
-      <div className='flex mb-10 lgl:mt-0 mt-6   items-center gap-4 '>
+      <div className="flex mb-10 lgl:mt-0 mt-6   items-center gap-4 ">
         <Link
           href={ROUTES.ADMIN.DATAMAIN.COMPLAINTS}
-          className=' w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center'
+          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
         >
-          <BackIcon className={'w-full h-full'} />
+          <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className='headTitleDash'>اضافة شكوى</h2>
+        <h2 className="headTitleDash">اضافة شكوى</h2>
       </div>
       <div>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col gap-4 lg:gap-8 px-3 mb-14'
+          className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
         >
           <InputGreen
-            label='اسم الشكوى'
-            name='complaintName'
-            value={formData.complaintName || ''}
+            label="اسم الشكوى"
+            name="complaintName"
+            value={formData.complaintName||''}
             onChange={handleChange}
-            error={GetErrorMsg(error, 'ComplaintName')}
+            error={GetErrorMsg(error, "ComplaintName")}
           />
           <InputGreen
-            label='الكود'
-            name='code1'
-            value={formData.code1 || ''}
+            label="الكود"
+            name="code1"
+            value={formData.code1||''}
             onChange={handleChange}
-            error={GetErrorMsg(error, 'Code1')}
+            error={GetErrorMsg(error, "Code1")}
           />
           <Textarea
             classNames={{
               input:
-                'min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl',
-              label: 'text-[12px] md:text-[16px]',
+                "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",
+              label: "text-[12px] md:text-[16px]",
             }}
-            error={GetErrorMsg(
-              error,
-              'DescriptionOfTheComplaint'
-            )}
-            label='وصف الشكوى'
-            name='descriptionOfTheComplaint'
-            value={formData.descriptionOfTheComplaint || ''}
+            error={GetErrorMsg(error, "DescriptionOfTheComplaint")}
+            label="وصف الشكوى"
+            name="descriptionOfTheComplaint"
+            value={formData.descriptionOfTheComplaint||''}
             onChange={handleChange}
           />
         </form>
-        <div className='flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row'>
+        <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
             onClick={handleSubmit}
-            variant='secondary'
+            variant="secondary"
             className={
-              'max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]'
+              "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
             }
           >
             حفظ

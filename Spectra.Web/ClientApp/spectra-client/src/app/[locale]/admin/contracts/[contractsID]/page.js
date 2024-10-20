@@ -1,9 +1,7 @@
 import React from "react";
-import ContractDetails from "./contractDetails";
-
-function page({params}) {
-
-  return <ContractDetails id={params.contractsID} />;
+import ContractsList from "./_components/contracts-list";
+function Page({params}) {
+  return <ContractsList idUser={params.contractsID} />;
 }
 
-export default page;
+export default Page;

@@ -13,12 +13,7 @@ import { SelectProps } from '@mantine/core';
  * @param {SelectProps} props
  */
 
-const SelectInput = ({
-  label = '',
-  size = 'md',
-  data = [],
-  ...props
-}) => {
+const SelectInput = ({ label = '', data = [], ...props }) => {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -26,7 +21,7 @@ const SelectInput = ({
       {...props}
       checkIconPosition='right'
       allowDeselect={false}
-      size={size}
+      size='md'
       label={label}
       data={data}
       onDropdownOpen={() => setOpened(true)}
@@ -37,9 +32,8 @@ const SelectInput = ({
         </span>
       }
       classNames={{
-        input:
-          'rounded-lg group focus:border-greenMain placeholder:font-normal',
-        label: 'text-base mdl:text-xl mb-2 ps-1',
+        input: 'rounded-lg group focus:border-greenMain',
+        label: 'text-xs lg:text-base mb-2 ps-1',
       }}
     />
   );

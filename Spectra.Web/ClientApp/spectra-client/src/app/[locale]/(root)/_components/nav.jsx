@@ -1,6 +1,7 @@
 'use client';
 
 import ArrowDownIcon from '@/assets/icons/arrow-down';
+import Button from '@/components/button';
 import { cn } from '@/lib/utils';
 import { Link, usePathname } from '@/navigation';
 import ROUTES from '@/routes';

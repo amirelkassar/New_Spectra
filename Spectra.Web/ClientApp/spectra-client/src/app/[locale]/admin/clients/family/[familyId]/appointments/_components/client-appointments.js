@@ -1,6 +1,7 @@
 "use client";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./columns";
+import ActionMenu from "./ActionMenuPage";
 const data = [
   {
     id: 0,
@@ -83,12 +84,14 @@ const data = [
   },
 ];
 const ClientAppointments = () => {
-
   return (
-    <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%]">
+    <div className="rounded-xl relative bg-white pt-5  lg:p-8 grow w-[100%]">
+      <div className=" absolute top-5 end-4">
+        <ActionMenu />
+      </div>
       <h1 className="ms-5 mb-5 lg:block hidden ">الـمواعيد</h1>
-     
-     <DataTable data={data} columns={columns}/>
+
+      <DataTable IsWidth={true} data={data} columns={columns} />
     </div>
   );
 };

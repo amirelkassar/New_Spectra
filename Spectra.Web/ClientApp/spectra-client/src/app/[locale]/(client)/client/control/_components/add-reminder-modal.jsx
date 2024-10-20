@@ -22,7 +22,7 @@ export const AddReminderModal = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // console.log(form);
+    console.log(form);
   };
 
   return (
@@ -58,20 +58,13 @@ export const AddReminderModal = () => {
           <form className='space-y-3' onSubmit={onSubmit}>
             <TextInput
               value={form.title}
-              onChange={(e) =>
-                setForm({ ...form, title: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
               label='العنوان'
               placeholder='كشف....'
             />
             <TextInput
               value={form.subtitle}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  subtitle: e.target.value,
-                })
-              }
+              onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
               label='المحتوي'
               placeholder='كشف ابني ....'
             />
@@ -82,13 +75,10 @@ export const AddReminderModal = () => {
               placeholder='Pick date and time'
               size='md'
               classNames={{
-                label:
-                  'font-bold text-xs lg:text-base mb-2 ps-1',
+                label: 'font-bold text-xs lg:text-base mb-2 ps-1',
                 input: 'rounded-xl focus:border-greenMain',
               }}
-              onChange={(val) =>
-                setForm({ ...form, date: val })
-              }
+              onChange={(val) => setForm({ ...form, date: val })}
               value={form.date}
             />
 

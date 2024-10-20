@@ -1,14 +1,14 @@
-'use client';
-import { useRouter } from '@/navigation';
-import ROUTES from '@/routes';
+"use client";
+import { useRouter } from "@/navigation";
+import ROUTES from "@/routes";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const FamilyPage = () => {
   const router = useRouter();
   useEffect(() => {
     router.push(ROUTES.ADMIN.CLIENTS.DASHBOARD);
-  }, [router]);
+  }, []);
   return null;
 };
 

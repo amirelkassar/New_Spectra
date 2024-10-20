@@ -47,7 +47,7 @@ const data = [
 const StaffAppointments = () => {
   return (
     <div className="rounded-xl bg-white pt-5  lg:p-8 grow w-[100%] lg:max-w-[calc(100%-250px)]">
-      <DataTable data={data} columns={columns} />
+      <DataTable  data={data} columns={columns} />
     </div>
   );
 };

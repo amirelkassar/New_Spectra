@@ -137,6 +137,7 @@ function UserPage() {
      
       <div className="grow min-h-[600px]">
         <DataTable
+        IsWidth={true}
           data={data}
           columns={columns}
           filterData={FilterOptions}

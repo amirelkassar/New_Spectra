@@ -1,9 +1,6 @@
 import FamilyAside from "./family-aside";
 
-export default function FamilyLayout({ children,params }) {
-  console.log('****************');
-  console.log( params);
-  console.log('****************');
+export default function FamilyLayout({ children }) {
 
   return (
     <section className="sec-page">

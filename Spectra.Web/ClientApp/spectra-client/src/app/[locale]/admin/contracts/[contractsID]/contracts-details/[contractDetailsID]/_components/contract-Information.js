@@ -1,24 +1,24 @@
-'use client';
-import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
-import EditIcon from '@/assets/icons/edit';
-import Card from '@/components/card';
-import { Link, usePathname } from '@/navigation';
-import ROUTES from '@/routes';
-import React, { useState } from 'react';
-import ServicesFreelancer from './services-freelancer';
-import ServicesMember from './services-member';
-import Button from '@/components/button';
-import RefuseIcon from '@/assets/icons/refuse';
-import AcceptIcon from '@/assets/icons/accept';
-import useModal from '@/store/modal-slice';
-import ContractsTextDetails from '@/components/contractsTextDetails';
-import { useSearchParams } from 'next/navigation';
-import WorkNum from './workNum';
+"use client";
+import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
+import EditIcon from "@/assets/icons/edit";
+import Card from "@/components/card";
+import { Link, usePathname } from "@/navigation";
+import ROUTES from "@/routes";
+import React, { useState } from "react";
+import ServicesFreelancer from "./services-freelancer";
+import ServicesMember from "./services-member";
+import Button from "@/components/button";
+import RefuseIcon from "@/assets/icons/refuse";
+import AcceptIcon from "@/assets/icons/accept";
+import useModal from "@/store/modal-slice";
+import ContractsTextDetails from "@/components/contractsTextDetails";
+import { useSearchParams } from "next/navigation";
+import WorkNum from "./workNum";
 const serviceOptions = [
-  { value: 'examination', label: 'Examination Service' },
-  { value: 'counseling', label: 'Counseling Service' },
-  { value: 'diagnostic', label: 'Diagnostic Service' },
-  { value: 'followup', label: 'Follow-up Service' },
+  { value: "examination", label: "Examination Service" },
+  { value: "counseling", label: "Counseling Service" },
+  { value: "diagnostic", label: "Diagnostic Service" },
+  { value: "followup", label: "Follow-up Service" },
 ];
 
 function ContractInformation({ id }) {
@@ -26,79 +26,69 @@ function ContractInformation({ id }) {
   const { modal, editModal } = useModal();
   const searchparams = useSearchParams();
   const [selectedServices, setSelectedServices] = useState([
-    'examination',
-    'counseling',
-    'diagnostic',
+    "examination",
+    "counseling",
+    "diagnostic",
   ]);
-  const [freelancerServiceData, setFreelancerServiceData] =
-    useState({
-      examination: {
-        price: '54',
-        duration: '54',
-        discount: '5',
-      },
-      counseling: {
-        price: '1',
-        duration: '40',
-        discount: '20',
-      },
-      diagnostic: {
-        price: '80',
-        duration: '77',
-        discount: '70',
-      },
-    });
-  const [memberServiceData, setMemberServiceData] =
-    useState({
-      examination: {
-        price: '54',
-        duration: '54',
-        discount: '5',
-      },
-      counseling: {
-        price: '1',
-        duration: '40',
-        discount: '20',
-      },
-      diagnostic: {
-        price: '80',
-        duration: '77',
-        discount: '700',
-      },
-    });
+  const [freelancerServiceData, setFreelancerServiceData] = useState({
+    examination: {
+      price: "54",
+      duration: "54",
+      discount: "5",
+    },
+    counseling: {
+      price: "1",
+      duration: "40",
+      discount: "20",
+    },
+    diagnostic: {
+      price: "80",
+      duration: "77",
+      discount: "70",
+    },
+  });
+  const [memberServiceData, setMemberServiceData] = useState({
+    examination: {
+      price: "54",
+      duration: "54",
+      discount: "5",
+    },
+    counseling: {
+      price: "1",
+      duration: "40",
+      discount: "20",
+    },
+    diagnostic: {
+      price: "80",
+      duration: "77",
+      discount: "700",
+    },
+  });
   const handleServiceChange = (values) => {
     setSelectedServices(values);
 
-    const updatedFreelancerData = {
-      ...freelancerServiceData,
-    };
+    const updatedFreelancerData = { ...freelancerServiceData };
     const updatedMemberData = { ...memberServiceData };
 
     values.forEach((service) => {
       if (!updatedFreelancerData[service]) {
         updatedFreelancerData[service] = {
-          price: '',
-          duration: '',
-          discount: '',
+          price: "",
+          duration: "",
+          discount: "",
         };
       }
       if (!updatedMemberData[service]) {
-        updatedMemberData[service] = {
-          price: '',
-          duration: '',
-          discount: '',
-        };
+        updatedMemberData[service] = { price: "", duration: "", discount: "" };
       }
     });
 
     // Clean up services that were unselected
-    Object.keys(updatedFreelancerData).forEach(
-      (service) => {
-        if (!values.includes(service)) {
-          delete updatedFreelancerData[service];
-        }
+    Object.keys(updatedFreelancerData).forEach((service) => {
+      if (!values.includes(service)) {
+        delete updatedFreelancerData[service];
       }
-    );
+    });
     Object.keys(updatedMemberData).forEach((service) => {
       if (!values.includes(service)) {
         delete updatedMemberData[service];
@@ -109,13 +99,8 @@ function ContractInformation({ id }) {
     setMemberServiceData(updatedMemberData);
   };
 
-  const handleServiceDataChange = (
-    service,
-    field,
-    value,
-    type
-  ) => {
-    if (type === 'freelancer') {
+  const handleServiceDataChange = (service, field, value, type) => {
+    if (type === "freelancer") {
       setFreelancerServiceData((prevData) => ({
         ...prevData,
         [service]: {
@@ -123,7 +108,7 @@ function ContractInformation({ id }) {
           [field]: value,
         },
       }));
-    } else if (type === 'member') {
+    } else if (type === "member") {
       setMemberServiceData((prevData) => ({
         ...prevData,
         [service]: {
@@ -133,8 +118,8 @@ function ContractInformation({ id }) {
       }));
     }
   };
-  // console.log(selectedServices);
-  // console.log(freelancerServiceData);
+  console.log(selectedServices);
+  console.log(freelancerServiceData);
   const [EditText, setEditText] = useState(false);
 
   const [contractText, setContractText] = useState(`
@@ -184,8 +169,8 @@ function ContractInformation({ id }) {
   
   `);
   return (
-    <div className='flex flex-col gap-7 w-full'>
-      <Card className={'flex-1 w-full'}>
+    <div className="flex flex-col gap-7 w-full">
+      <Card className={"flex-1 w-full"}>
         <ServicesFreelancer
           selectedServices={selectedServices}
           serviceOptions={serviceOptions}
@@ -200,11 +185,11 @@ function ContractInformation({ id }) {
           handleServiceDataChange={handleServiceDataChange}
         />
         <WorkNum />
-        <div className='flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]'>
+        <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           <Button
             onClick={() => {}}
             className={
-              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
             }
           >
             <AcceptIcon />
@@ -212,11 +197,11 @@ function ContractInformation({ id }) {
           </Button>
           <Button
             onClick={() => {
-              editModal('type', 'contractsReq');
-              editModal('open', true);
+              editModal("type", "contractsReq");
+              editModal("open", true);
             }}
             className={
-              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
             }
           >
             <RefuseIcon />
@@ -224,12 +209,9 @@ function ContractInformation({ id }) {
           </Button>
 
           <Link
-            href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILSEDIT(
-              5,
-              2
-            )}
+            href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILSEDIT(5, 2)}
             className={
-              '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
+              "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
             }
           >
             <EditIcon />
@@ -245,19 +227,15 @@ function ContractInformation({ id }) {
             setEditText={setEditText}
           />
         ) : (
-          <div className='contractsDetails'>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: contractText,
-              }}
-            />
+          <div className="contractsDetails">
+            <div dangerouslySetInnerHTML={{ __html: contractText }} />
           </div>
         )}
-        <div className='flex items-center flex-wrap my-14 gap-7'>
+        <div className="flex items-center flex-wrap my-14 gap-7">
           <Button
             onClick={() => {}}
             className={
-              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
             }
           >
             تجديد العقد
@@ -265,40 +243,37 @@ function ContractInformation({ id }) {
           <Button
             onClick={() => {}}
             className={
-              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
             }
           >
             قبول
           </Button>
           <Button
             onClick={() => {
-              editModal('type', 'contractsReq');
-              editModal('open', true);
+              editModal("type", "contractsReq");
+              editModal("open", true);
             }}
             className={
-              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
             }
           >
             رفض
           </Button>
           <Button
             onClick={() => {
-              editModal('type', 'contractsReq');
-              editModal('open', true);
+              editModal("type", "contractsReq");
+              editModal("open", true);
             }}
             className={
-              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
             }
           >
             الغاء العقد
           </Button>
           <Link
-            href={
-              ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) +
-              `?chat=true`
-            }
+            href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`}
             className={
-              ' mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0'
+              " mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
             }
           >
             <ContractsWhiteIcon />
@@ -309,7 +284,7 @@ function ContractInformation({ id }) {
               setEditText(true);
             }}
             className={
-              '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
+              "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
             }
           >
             <EditIcon />

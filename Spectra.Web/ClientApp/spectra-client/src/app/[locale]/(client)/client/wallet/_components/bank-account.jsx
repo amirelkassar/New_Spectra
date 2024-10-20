@@ -14,7 +14,7 @@ export const BankAccount = ({
   const handleDelete = () => {
     open({
       onConfirm: async () => {
-        // console.log('confirm clicked');
+        console.log('confirm clicked');
       },
     });
   };

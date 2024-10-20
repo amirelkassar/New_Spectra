@@ -23,8 +23,8 @@ function SettingPage() {
     {
       id: 3,
       icon: <PlansIcon className={" w-[30px] md:w-[77px] h-auto"} />,
-      title: "الخطط",
-      link: ROUTES.ADMIN.SETTINGS.PLANS.DASHBOARD,
+      title: "الباقات",
+      link: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
     },
   ];
   return (
