@@ -36,7 +36,7 @@ export const Drawer = ({
           currentLocale === 'ar'
             ? 'slide-left'
             : 'slide-right',
-        duration: 300,
+        duration: 200,
         timingFunction: 'ease-in-out',
       }}
     >
