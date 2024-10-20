@@ -21,7 +21,7 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
         public string Name { get; set; }
 
         public string Code { get; set; }
-        public MentalillnessAndTreatment ExaminationTypes { get; set; }
+        public List<string> ExaminationTypes { get; set; }
 
 
     }

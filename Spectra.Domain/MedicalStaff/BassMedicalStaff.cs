@@ -24,7 +24,8 @@ namespace Spectra.Domain.MedicalStaff
         public string Academicdegree { get; set; }
         public List<string> AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
-        public EmploymentStatus Status { get; set; }
+   
+
         protected BassMedicalStaff() { }
         public BassMedicalStaff(
                    string id,
@@ -39,8 +40,8 @@ namespace Spectra.Domain.MedicalStaff
                    string? approvedBy,
                    string academicdegree,
                     List<string> attachmentPath,
-                   EmpelyeeRates? empelyeeRate,
-                   EmploymentStatus status
+                   EmpelyeeRates? empelyeeRate
+          
                    ) : base(id)
         {
             Id = id;
@@ -56,7 +57,7 @@ namespace Spectra.Domain.MedicalStaff
             Academicdegree = academicdegree;
             AttachmentPath = attachmentPath;
             EmpelyeeRate = empelyeeRate;
-            Status = status;
+          
         }
 
     }

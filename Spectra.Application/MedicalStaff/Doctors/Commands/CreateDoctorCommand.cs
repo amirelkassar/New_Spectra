@@ -29,7 +29,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public EmploymentStatus Stutes { get; set; }
+        //public EmploymentStatus Stutes { get; set; }
 
  
 
@@ -76,7 +76,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
                 request.Academicdegree,
 
               filePath,
-                  request.Stutes,
+             
                 request.empelyeeRate=0
                 );
 

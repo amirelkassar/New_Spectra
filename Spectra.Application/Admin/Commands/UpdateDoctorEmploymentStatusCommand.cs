@@ -12,7 +12,7 @@ namespace Spectra.Application.Admin.Commands
     public class UpdateDoctorEmploymentStatusCommand : ICommand<OperationResult<Unit>>
     {
         public List<string> Ids { get; set; }
-        public EmploymentStatus Status { get; set; }
+        //public EmploymentStatus Status { get; set; }
     }
 
     public class UpdateDoctorEmploymentStatusCommandHandler : IRequestHandler<UpdateDoctorEmploymentStatusCommand, OperationResult<Unit>>
@@ -40,7 +40,7 @@ namespace Spectra.Application.Admin.Commands
 
                 specialization.DoctorCount += 1;
 
-                doctor.Status = request.Status;
+                //doctor.Status = request.Status;
 
                 await _specializationRepository.UpdateAsync(specialization);
 

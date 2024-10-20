@@ -20,6 +20,7 @@ namespace Spectra.WebAPI.Controllers
         private readonly IDoctorService _DoctorService;
 
 
+
         public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService)
         {
             _adminService = adminService;
@@ -34,11 +35,12 @@ namespace Spectra.WebAPI.Controllers
             var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
             return Ok(appointmenties);
         }  
-        [HttpGet("GetAllClient")]
+
+        [HttpGet("GetAllEmployees")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllClients([FromQuery] GetAllClientsQuery input)
+        public async Task<ActionResult> GetAllClients()
         {
-            var appointmenties = await _adminService.GetAllClientsAsyncWithPagination(input);
+            var appointmenties = await _adminService.GetAllEmplyees();
             return Ok(appointmenties);
         }
 
@@ -86,16 +88,24 @@ namespace Spectra.WebAPI.Controllers
 
 
 
-        [HttpPut(("ChangeStutue"))]
-        [AllowAnonymous]
-        // Admin change Stutues doctors From waiting to be cancel or avilibel
-        public async Task<ActionResult> UpdateDoctors( UpdateDoctorEmploymentStatusCommand input)
-        {
 
-            var Appointment = await _adminService.UpdateDoctorsEmploymentStatus( input);
 
-            return Ok(Appointment);
-        }
+
+
+        //[HttpPut(("ChangeStutue"))]
+        //[AllowAnonymous]
+        //// Admin change Stutues doctors From waiting to be cancel or avilibel
+        //public async Task<ActionResult> UpdateDoctors( UpdateDoctorEmploymentStatusCommand input)
+        //{
+
+        //    var Appointment = await _adminService.UpdateDoctorsEmploymentStatus( input);
+
+        //    return Ok(Appointment);
+        //}
+
+
+
+
 
 
     }

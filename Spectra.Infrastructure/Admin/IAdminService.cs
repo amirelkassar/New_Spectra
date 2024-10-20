@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Commands;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Hellper;
@@ -16,7 +17,9 @@ namespace Spectra.Infrastructure.Admin
         Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input);
         Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input);
         Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input);
+        Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees();
+
         //Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input);
-        Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);
+        //Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);
     }
 }

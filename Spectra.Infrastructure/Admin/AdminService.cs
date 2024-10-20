@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Commands;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Hellper;
@@ -42,28 +43,28 @@ namespace Spectra.Infrastructure.Admin
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input)
-        {
-            var query = new UpdateDoctorEmploymentStatusCommand
-            {
-                Ids = input.Ids,
-                Status = input.Status
-            };
-            return await _mediator.Send(query);
-        }
-        public async Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus( UpdateDoctorEmploymentStatusCommand input)
-        {
-            var query = new UpdateDoctorEmploymentStatusCommand
-            {
-                Ids = input.Ids,
-                Status = input.Status
-            };
-            return await _mediator.Send(query);
-        }
+        //public async Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input)
+        //{
+        //    var query = new UpdateDoctorEmploymentStatusCommand
+        //    {
+        //        Ids = input.Ids,
+        //        Status = input.Status
+        //    };
+        //    return await _mediator.Send(query);
+        //}
+        //public async Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus( UpdateDoctorEmploymentStatusCommand input)
+        //{
+        //    var query = new UpdateDoctorEmploymentStatusCommand
+        //    {
+        //        Ids = input.Ids,
+        //        Status = input.Status
+        //    };
+        //    return await _mediator.Send(query);
+        //}
 
         public async Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input)
         {
-            var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize, Status = input.Status };
+            var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
         public async Task<OperationResult<string>> CreateClientByAdmin(CreateNormalClientDto input)
@@ -148,7 +149,15 @@ namespace Spectra.Infrastructure.Admin
             return await _mediator.Send(command);
         }
 
+        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees()
+        {
+            var query = new GetAllEmployeesQuery();
+            return await _mediator.Send(query);
+        }
 
-
+        public Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

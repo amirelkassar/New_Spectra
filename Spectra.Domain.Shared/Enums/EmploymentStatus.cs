@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Enums
 {
-    public enum EmploymentStatus
+    public enum JobTypes
     {
         Wating,
         Available,

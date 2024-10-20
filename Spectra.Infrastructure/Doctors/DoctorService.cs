@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Application.MedicalStaff.Doctors.Commands;
@@ -70,7 +71,7 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(query);
         }
 
-   
+
         public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
         {
             var query = new GetAllDoctorEarlyDetectionQuery();
@@ -78,7 +79,8 @@ namespace Spectra.Infrastructure.Doctors
         }
 
 
-
+       
+    
         public async Task<OperationResult<Doctor>> GetDoctorById(string id)
         {
             var query = new GetDoctorByIdQuery { Id = id };

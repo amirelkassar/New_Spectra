@@ -25,10 +25,6 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public EmploymentStatus Status { get; set; }
-
-
-
         public List<IFormFile> ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
 
@@ -72,8 +68,8 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
                 request.ApprovedBy,
                 request.Academicdegree,
                  filePath,
-                request.empelyeeRate = 0,
-               request.Status);
+                request.empelyeeRate = 0
+               );
 
             await _specialistRepository.AddAsync(specialist);
             //await _specializationRepository.UpdateAsync(specialization);
