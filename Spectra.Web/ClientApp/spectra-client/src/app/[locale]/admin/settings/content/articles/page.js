@@ -61,7 +61,7 @@ function page() {
         </Link>
         <h2 className="headTitleDash ">الاعدادات - المحتوى</h2>
       </div>
-      <div className="flex flex-col  flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6 mb-8 lg:mb-10">
+      <div className="flex flex-col  flex-wrap md:flex-row items-start md:items-center gap-4 md:gap-6 mb-8 lg:mb-10">
         <h2 className="headTitleDash">المقالات</h2>
         <Link
           href={ROUTES.ADMIN.SETTINGS.CONTENT.ADDARTICLES}
