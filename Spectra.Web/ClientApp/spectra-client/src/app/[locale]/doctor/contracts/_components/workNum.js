@@ -1,11 +1,13 @@
-'use client'
+"use client";
 import { TextInput } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
-function WorkNum() {
+function WorkNum({ addNew }) {
   const searchparams = useSearchParams();
-
+  const activeEdit = addNew
+    ? addNew
+    : searchparams.get("editContracts") === "true";
   return (
     <div className="flex flex-col gap-5 my-9 ps-3 lgl:ps-14 " dir="ltr">
       <div className="flex md:items-center gap-x-8 gap-y-3 flex-col md:flex-row flex-wrap">
@@ -15,7 +17,7 @@ function WorkNum() {
         <div className="flex items-center gap-3 flex-1">
           <div
             className={`flex flex-1 items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border ${
-              searchparams.get("editContracts") === "true" ? "" : " opacity-45"
+              activeEdit ? "" : " opacity-45"
             }  border-grayDark/50 px-2 py-2`}
           >
             <TextInput
@@ -26,9 +28,7 @@ function WorkNum() {
                 input:
                   "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
               }}
-              readOnly={
-                searchparams.get("editContracts") === "true" ? false : true
-              }
+              readOnly={activeEdit ? false : true}
             />
             <span className="font-SemiBold text-sm">H</span>
           </div>
@@ -42,7 +42,7 @@ function WorkNum() {
         <div className="flex items-center gap-3 flex-1">
           <div
             className={`flex flex-1 items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  ${
-              searchparams.get("editContracts") === "true" ? "" : " opacity-45"
+              activeEdit ? "" : " opacity-45"
             } border-grayDark/50 px-2 py-2`}
           >
             <TextInput
@@ -53,9 +53,7 @@ function WorkNum() {
                 input:
                   "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
               }}
-              readOnly={
-                searchparams.get("editContracts") === "true" ? false : true
-              }
+              readOnly={activeEdit ? false : true}
             />
             <span className="font-SemiBold text-sm">D</span>
           </div>

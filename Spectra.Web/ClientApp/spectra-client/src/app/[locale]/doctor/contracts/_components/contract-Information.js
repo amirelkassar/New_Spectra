@@ -6,7 +6,7 @@ import ROUTES from "@/routes";
 import React, { useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect, Textarea } from "@mantine/core";
+import { MultiSelect } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
@@ -14,7 +14,6 @@ import useModal from "@/store/modal-slice";
 import { useSearchParams } from "next/navigation";
 import LinkGreen from "@/components/linkGreen";
 import WorkNum from "./workNum";
-import DraftIcon from "@/assets/icons/draft";
 const serviceOptions = [
   { value: "examination", label: "Examination Service" },
   { value: "counseling", label: "Counseling Service" },
@@ -34,25 +33,17 @@ function ContractInformation({ id }) {
   const [freelancerServiceData, setFreelancerServiceData] = useState({
     examination: {
       price: "54",
-      duration: "54",
-      discount: "5",
     },
     counseling: {
       price: "1",
-      duration: "40",
-      discount: "20",
     },
   });
   const [memberServiceData, setMemberServiceData] = useState({
     examination: {
       price: "54",
-      duration: "54",
-      discount: "5",
     },
     counseling: {
       price: "1",
-      duration: "40",
-      discount: "20",
     },
   });
   const handleServiceChange = (values) => {
@@ -167,13 +158,13 @@ function ContractInformation({ id }) {
         </div>
       ) : (
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
-           <Button
+          <Button
             onClick={() => {
-              editModal('type', 'contractsAccept');
-              editModal('open', true);
+              editModal("type", "contractsAccept");
+              editModal("open", true);
             }}
             className={
-              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
             }
           >
             <AcceptIcon />
@@ -181,21 +172,20 @@ function ContractInformation({ id }) {
           </Button>
           <Button
             onClick={() => {
-              editModal('type', 'contractsReq');
-              editModal('open', true);
+              editModal("type", "contractsReq");
+              editModal("open", true);
             }}
             className={
-              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
             }
           >
             <RefuseIcon />
             رفض
           </Button>
-
           <Link
-            href={ROUTES.DOCTOR.CONTRACTS.CONTRACTSIDEDIT}
+            href={ROUTES.DOCTOR.CONTRACTS.CONTRACTSIDEDIT(id)}
             className={
-              '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
+              "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
             }
           >
             <EditIcon />

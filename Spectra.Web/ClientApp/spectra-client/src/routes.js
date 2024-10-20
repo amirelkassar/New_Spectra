@@ -216,9 +216,9 @@ const ROUTES = {
     },
     CONTRACTS: {
       DASHBOARD: "/doctor/contracts",
-      CONTRACTSNEW: "/doctor/contracts/new",
+      CONTRACTSNEW: "/doctor/contracts/addNew",
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
-      CONTRACTSIDEDIT: `/doctor/contracts?editContracts=true`,
+      CONTRACTSIDEDIT:(id)=> `/doctor/contracts/${id}?editContracts=true`,
     },
     CHATS: {
       DASHBOARD: "/doctor/chats",

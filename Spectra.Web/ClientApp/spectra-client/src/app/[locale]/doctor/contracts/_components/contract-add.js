@@ -4,7 +4,7 @@ import { usePathname } from "@/navigation";
 import React, { useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect, Textarea } from "@mantine/core";
+import { MultiSelect } from "@mantine/core";
 import Button from "@/components/button";
 import { useSearchParams } from "next/navigation";
 import WorkNum from "./workNum";
@@ -21,22 +21,8 @@ function ContractAdd({ id }) {
   const searchparams = useSearchParams();
 
   const [selectedServices, setSelectedServices] = useState([]);
-  const [freelancerServiceData, setFreelancerServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-  });
-  const [memberServiceData, setMemberServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-  });
+  const [freelancerServiceData, setFreelancerServiceData] = useState();
+  const [memberServiceData, setMemberServiceData] = useState();
   const handleServiceChange = (values) => {
     setSelectedServices(values);
 
@@ -125,6 +111,7 @@ function ContractAdd({ id }) {
         serviceOptions={serviceOptions}
         serviceData={freelancerServiceData}
         handleServiceDataChange={handleServiceDataChange}
+        addNew={true}
       />
 
       <ServicesMember
@@ -132,8 +119,9 @@ function ContractAdd({ id }) {
         serviceOptions={serviceOptions}
         serviceData={memberServiceData}
         handleServiceDataChange={handleServiceDataChange}
+        addNew={true}
       />
-      <WorkNum />
+      <WorkNum addNew={true} />
 
       <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center md:justify-start  w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
         <Button
