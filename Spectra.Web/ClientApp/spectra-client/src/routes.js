@@ -194,29 +194,21 @@ const ROUTES = {
           `/admin/settings/permissions/users/${id}/edit`,
       },
       CONTENT: {
-        DASHBOARD: '/admin/settings/content',
-        SERVICES: '/admin/settings/content/services',
-        SERVICESADD: '/admin/settings/content/services/add',
-        SERVICESDETAILS: (id) =>
-          `/admin/settings/content/services/${id}`,
-        BANNERSAD: '/admin/settings/content/bannersAD',
-        MEDICAL:
-          '/admin/settings/content/medicalSpecialties',
-        MEDICALID: (id) =>
-          `/admin/settings/content/medicalSpecialties/${id}`,
-        ARTICLES: '/admin/settings/content/articles',
-        ADDARTICLES:
-          '/admin/settings/content/articles/add-articles',
-        EDITARTICLES: (id) =>
-          `/admin/settings/content/articles/${id}`,
-        STORIES: '/admin/settings/content/stories',
-        STORIESID: (id) =>
-          `/admin/settings/content/stories/${id}`,
-        STORIESADD: '/admin/settings/content/stories/add',
+        DASHBOARD: "/admin/settings/content",
+        BANNERSAD: "/admin/settings/content/bannersAD",
+        MEDICAL: "/admin/settings/content/medicalSpecialties",
+        MEDICALID: (id) => `/admin/settings/content/medicalSpecialties/${id}`,
+        ARTICLES: "/admin/settings/content/articles",
+        ADDARTICLES: "/admin/settings/content/articles/add-articles",
+        EDITARTICLES: (id) => `/admin/settings/content/articles/${id}`,
+        STORIES: "/admin/settings/content/stories",
+        STORIESID: (id) => `/admin/settings/content/stories/${id}`,
+        STORIESADD: "/admin/settings/content/stories/add",
       },
       PACKAGES: {
-        DASHBOARD: '/admin/settings/packages',
-        PACKAGESADD: '/admin/settings/packages/add',
+        DASHBOARD: "/admin/settings/packages",
+        PACKAGESDETAILS:(id)=> `/admin/settings/packages/${id}`,
+        PACKAGESADD: "/admin/settings/packages/add",
       },
     },
   },
@@ -269,10 +261,10 @@ const ROUTES = {
       MYPRESCRIPTIONS: '/doctor/profile/my_prescriptions',
     },
     CONTRACTS: {
-      DASHBOARD: '/doctor/contracts',
-      CONTRACTSNEW: '/doctor/contracts/new',
+      DASHBOARD: "/doctor/contracts",
+      CONTRACTSNEW: "/doctor/contracts/addNew",
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
-      CONTRACTSIDEDIT: `/doctor/contracts?editContracts=true`,
+      CONTRACTSIDEDIT:(id)=> `/doctor/contracts/${id}?editContracts=true`,
     },
     CHATS: {
       DASHBOARD: '/doctor/chats',

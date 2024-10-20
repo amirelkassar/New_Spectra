@@ -16,7 +16,7 @@ function HeaderMain({setActive}) {
         </div>
       </div>
       <div className="mt-9 w-full flex items-center justify-center flex-col gap-4">
-        <Link href={ROUTES.DOCTOR.CONTRACTS.DASHBOARD} onClick={()=>{setActive(true)}} className="mdl:min-h-[48px] min-h-[40px] rounded-[10px] bg-greenMain flex items-center justify-center gap-3 mdl:gap-5 px-10 w-[80%] md:w-fit">
+        <Link href={ROUTES.DOCTOR.CONTRACTS.CONTRACTSNEW} onClick={()=>{setActive(true)}} className="mdl:min-h-[48px] min-h-[40px] rounded-[10px] bg-greenMain flex items-center justify-center gap-3 mdl:gap-5 px-10 w-[80%] md:w-fit">
           <ContractsIcon
             fill={"white"}
             className={"w-[17px] h-auto mdl:w-[22px]"}

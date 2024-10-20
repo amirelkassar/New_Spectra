@@ -8,56 +8,56 @@
   }
 }
 * {
-  font-family: 'IBMPlexSansArabicRegular';
+  font-family: "IBMPlexSansArabicRegular";
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicThin';
+  font-family: "IBMPlexSansArabicThin";
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicThin.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicThin.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicExtraLight';
+  font-family: "IBMPlexSansArabicExtraLight";
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicExtraLight.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicExtraLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicLight';
+  font-family: "IBMPlexSansArabicLight";
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicLight.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicRegular';
+  font-family: "IBMPlexSansArabicRegular";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicRegular.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicRegular.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicMedium';
+  font-family: "IBMPlexSansArabicMedium";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicMedium.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicMedium.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicSemiBold';
+  font-family: "IBMPlexSansArabicSemiBold";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicSemiBold.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicSemiBold.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabicBold';
+  font-family: "IBMPlexSansArabicBold";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../../assets/fonts/IBMPlexSansArabicBold.ttf');
+  src: url("../../assets/fonts/IBMPlexSansArabicBold.ttf");
 }
 :root {
   --main-color: #10b0c1;
@@ -68,17 +68,21 @@
 *::-webkit-scrollbar {
   width: 6px;
   /* عرض الـ scrollbar */
+  padding-top: 20px;
+  @apply md:h-1 h-0;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #10b0c1;
+  background-color: #737c74;
+
   /* لون الـ scrollbar */
   border-radius: 10px;
   /* جعل الحواف مستديرة */
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #737c74;
+  background-color: #10b0c1;
+
   /* لون الـ scrollbar عند التحويم */
 }
 
@@ -149,13 +153,13 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir='ltr'] header .hideShowLinks svg {
+html[dir="ltr"] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir='ltr'] header .hideShowLinks.closeArrow svg {
+html[dir="ltr"] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
 /* aside .topMobNav {
@@ -192,13 +196,13 @@ header .hideShowLinks2 svg {
 .numNotfication {
   border-radius: 50% !important;
 }
-html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
+html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir='ltr'] .lineAfterLinks {
+html[dir="ltr"] .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
@@ -345,10 +349,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -357,15 +358,14 @@ form.clientEdit .mantine-Input-input {
   height: 20px !important;
 }
 .staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected='true'] {
+.staffDetils .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -373,22 +373,13 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    3,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    4,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    5,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
 @layer components {
   .custom-grid {
@@ -398,10 +389,7 @@ form.clientEdit .mantine-Input-input {
     ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(
-      var(--colNumSmall),
-      minmax(max-content, 1fr)
-    );
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
 .boxDate .mantine-DatePicker-calendarHeader {
@@ -423,10 +411,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -434,16 +419,14 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.boxDate .mantine-DatePicker-day[data-selected='true'] {
+.boxDate .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -519,21 +502,15 @@ form.clientEdit .mantine-Input-input {
   }
 
   .custom-clipPath-triangle-up {
-    clippath: polygon(
-      0 100%,
-      0 10%,
-      50% 0%,
-      100% 10%,
-      100% 100%
-    );
+    clippath: polygon(0 100%, 0 10%, 50% 0%, 100% 10%, 100% 100%);
   }
 }
-input[type='number'].timeInput::-webkit-outer-spin-button,
-input[type='number'].timeInput::-webkit-inner-spin-button {
+input[type="number"].timeInput::-webkit-outer-spin-button,
+input[type="number"].timeInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type='number'].timeInput {
+input[type="number"].timeInput {
   -moz-appearance: textfield;
 }
 .ql-editor li:not(.ql-direction-rtl)::before {
@@ -555,4 +532,122 @@ input[type='number'].timeInput {
 .m_64f58e10 {
   box-shadow: none !important;
   border: none !important;
+}
+
+/*================================================
+Preloader Area CSS
+=================================================*/
+
+.loader {
+  transition: 0.5s;
+  @apply absolute w-20 h-20 rounded-full inline-block left-0 right-0 mx-auto my-0  top-[45%] translate-y-[-45%];
+}
+
+.loader .loader-outter {
+  border: 4px solid black;
+  border-left-color: transparent;
+  border-bottom: 0;
+  -webkit-animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  @apply absolute w-full h-full rounded-full;
+}
+
+.loader .loader-inner {
+  border: 4px solid #10b0c1;
+  left: calc(40% - 21px);
+  top: calc(40% - 21px);
+  border-right: 0;
+  border-top-color: transparent;
+  -webkit-animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  @apply absolute w-[60px] h-[60px] rounded-full;
+}
+
+.loader .indicator {
+  -webkit-transform: translateY(-50%) translateX(-50%) scale(1.5);
+  transform: translateY(-50%) translateX(-50%) scale(1.5);
+  @apply absolute right-auto left-1/2 top-1/2 flex items-center justify-center;
+}
+
+.loader .indicator svg polyline {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loader .indicator svg polyline#back {
+  stroke: black;
+}
+
+.loader .indicator svg polyline#front {
+  stroke: #10b0c1;
+  stroke-dasharray: 12, 36;
+  stroke-dashoffset: 48;
+  -webkit-animation: dash 1s linear infinite;
+  animation: dash 1s linear infinite;
+}
+
+@-webkit-keyframes loader-outter {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-outter {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes loader-inner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes dash {
+  62.5% {
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  62.5% {
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }

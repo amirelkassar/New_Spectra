@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 import ContractInformation from "../_components/contract-Information";
-function page({params}) {
+import ContractsDetails from "../_components/contractsDetails";
+function page({ params }) {
   return (
-    
-    <ContractInformation id={params.contractsID}/>
-  
-  )
+    <div className="w-full flex flex-col gap-6 flex-1"> 
+      <ContractInformation id={params.contractsID} />
+      <ContractsDetails />
+    </div>
+  );
 }
 
-export default page
+export default page;

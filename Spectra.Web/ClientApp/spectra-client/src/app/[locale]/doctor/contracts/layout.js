@@ -34,10 +34,10 @@ function Layout({ children }) {
   const searchparams = useSearchParams();
   const [active, setActive] = useState(2);
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col h-full">
       <Steps active={active} pathname={pathname} searchparams={searchparams}/>
 
-      <div className="flex ">
+      <div className="flex h-full flex-1">
         {active > 1 && (
           <>
             <Link

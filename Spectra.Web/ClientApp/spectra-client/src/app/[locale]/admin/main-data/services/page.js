@@ -82,7 +82,7 @@ function page() {
   return (
     <Card>
       <div className="flex items-center mb-8 lg:mb-10 gap-4 justify-between">
-        <div className="flex flex-col  flex-wrap md:flex-row items-start md:items-start gap-4 md:gap-6 ">
+        <div className="flex flex-col  flex-wrap md:flex-row items-start md:items-center gap-4 md:gap-6 ">
           <h2 className="headTitleDash">الخدمات</h2>
           <Link
             href={ROUTES.ADMIN.DATAMAIN.SERVICESADD}
