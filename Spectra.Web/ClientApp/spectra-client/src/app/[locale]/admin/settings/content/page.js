@@ -4,11 +4,7 @@ import ROUTES from "@/routes";
 
 const ContentPage = () => {
   const sections = [
-    {
-      id: 0,
-      title: "الخدمات",
-      link:ROUTES.ADMIN.SETTINGS.CONTENT.SERVICES
-    },
+   
     {
       id: 1,
       title: "البانرات الدعائية",
