@@ -15,7 +15,7 @@ export const OurTeam = () => {
   return (
     <Section
       onClick={() =>
-        router.push(`${ROUTES.CLIENT.MAIN}/team`)
+        router.push(`${ROUTES.CLIENT.MAIN.HOME}/team`)
       }
       type='both'
       heading='تعرف علي فريقنا'

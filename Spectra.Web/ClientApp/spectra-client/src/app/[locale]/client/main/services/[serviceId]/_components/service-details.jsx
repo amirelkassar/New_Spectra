@@ -36,7 +36,9 @@ const HeroSection = ({
             className='flex-row-reverse items-start justify-end gap-5 lg:text-4xl text-2xl lg:max-w-[70%] leading-relaxed'
             label={label}
             icon={
-              <Link href={`${ROUTES.CLIENT.MAIN}/services`}>
+              <Link
+                href={`${ROUTES.CLIENT.MAIN.HOME}/services`}
+              >
                 <BackIcon className='ltr:rotate-180 lg:size-11' />
               </Link>
             }

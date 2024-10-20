@@ -9,7 +9,7 @@ import HelloHandIcon from '@/assets/icons/hello-hand';
 
 const MainPage = () => {
   return (
-    <Container className='bg-white rounded-[10px] h-full p-1 mdl:p-4 xl:p-6'>
+    <Container className='lg:bg-white rounded-[10px] h-full p-1 mdl:p-4 xl:p-6'>
       <Heading
         label={'مرحبا احمد'}
         icon={

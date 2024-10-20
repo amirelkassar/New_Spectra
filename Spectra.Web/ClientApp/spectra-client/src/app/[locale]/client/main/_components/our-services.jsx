@@ -1,4 +1,5 @@
 'use client';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -15,7 +16,7 @@ export const OurServices = () => {
   return (
     <Section
       onClick={() =>
-        router.push(`${ROUTES.CLIENT.MAIN}/services`)
+        router.push(ROUTES.CLIENT.MAIN.SERVICES)
       }
       className='hidden mdl:block'
       type='both'
@@ -44,7 +45,7 @@ export const OurServices = () => {
         modules={[Pagination]}
       >
         {servicesData.map((service, index) => (
-          <SwiperSlide key={index + 1321056}>
+          <SwiperSlide key={index}>
             <div
               className={`rounded-[10px] h-[120px] w-full mdl:max-w-full mdl:h-full items-center flex flex-col mdl:flex-row justify-center min-h-24 text-center gap-3 text-xs font-Regular mdl:text-medium px-3 cursor-grabbing`}
               style={{ backgroundColor: service.color }}

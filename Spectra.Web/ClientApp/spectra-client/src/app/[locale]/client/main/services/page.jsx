@@ -13,7 +13,7 @@ const ServicesPage = () => {
         <Heading
           label='جميع الخدمات'
           icon={
-            <Link href={ROUTES.CLIENT.MAIN}>
+            <Link href={ROUTES.CLIENT.MAIN.HOME}>
               <BackIcon className='ltr:rotate-180' />
             </Link>
           }
@@ -40,7 +40,9 @@ const Service = ({
   id = '',
 }) => {
   return (
-    <Link href={`${ROUTES.CLIENT.MAIN}/services/${id}`}>
+    <Link
+      href={`${ROUTES.CLIENT.MAIN.HOME}/services/${id}`}
+    >
       <div className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'>
         <div
           className={`lg:size-9 size-8 rounded-full flex items-center justify-center`}

@@ -1,10 +1,11 @@
 import { cn } from '@/lib/utils';
 
 export const Heading = ({
-  label,
+  label = '',
   icon = null,
   className,
 }) => {
+  if (!label) return null;
   return (
     <h1
       className={cn(

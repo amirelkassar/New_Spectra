@@ -15,7 +15,7 @@ const TeamPage = () => {
           <Heading
             label='التخصصات الطبية'
             icon={
-              <Link href={ROUTES.CLIENT.MAIN}>
+              <Link href={ROUTES.CLIENT.MAIN.HOME}>
                 <BackIcon className='ltr:rotate-180' />
               </Link>
             }
