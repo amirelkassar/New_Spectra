@@ -13,7 +13,6 @@ builder.Host.UseSerilog((context, loggerConfig)
 
 builder.Services.ConfigureWebHost(builder.Configuration);
 
-
 var app = builder.Build();
 // Seed data before handling requests
 using (var scope = app.Services.CreateScope())
@@ -22,7 +21,6 @@ using (var scope = app.Services.CreateScope())
     await seedService.SeedCountriesAsync();
     await seedService.SeedStatesAsync();
     await seedService.SeedCitiesAsync();
-
 }
 
 // Configure the HTTP request pipeline.
