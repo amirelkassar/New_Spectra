@@ -1,8 +1,8 @@
-import React from 'react';
 import Container from '../_components/container';
-import { ProfileInfo } from './_components/profile-info';
 import { ChildCards } from './_components/child-card';
 import { ClientsTable } from './_components/clients-table';
+import { FamProfile } from './_components/fam-profile';
+import { FirmProfile } from './_components/firm-profile';
 
 const personData = {
   // Cspell: disable
@@ -37,10 +37,13 @@ const ProfilePage = () => {
   const isPerson = true;
   return (
     <Container className='space-y-5'>
-      <ProfileInfo
+      <FamProfile info={personData} />
+
+      <FirmProfile info={firmData} />
+      {/* <ProfileInfo
         info={isPerson ? personData : firmData}
         type={isPerson ? 'person' : 'firm'}
-      />
+      /> */}
 
       {isPerson && <ChildCards />}
 

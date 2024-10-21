@@ -1,9 +1,10 @@
 'use client';
-import { Avatar, Popover } from '@mantine/core';
+import { Popover } from '@mantine/core';
 import { useState } from 'react';
 
 import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
 import { cn } from '@/lib/utils';
+import Avatar from '@/components/avatar';
 
 const ChildPopover = ({
   data = [],
@@ -18,7 +19,10 @@ const ChildPopover = ({
     <Popover
       position='bottom'
       classNames={{
-        dropdown: cn('min-w-[80%] !max-w-[1400px]', className),
+        dropdown: cn(
+          'min-w-[80%] !max-w-[1400px]',
+          className
+        ),
       }}
       opened={open}
       onChange={setOpen}
@@ -33,7 +37,10 @@ const ChildPopover = ({
             disabled && '!cursor-default opacity-70'
           )}
         >
-          <Child className='hover:bg-white' {...data[selectedChild]} />
+          <Child
+            className='hover:bg-white'
+            {...data[selectedChild]}
+          />
 
           {!disabled && (
             <span
@@ -93,17 +100,15 @@ const Child = ({
       )}
     >
       <Avatar
-        variant='filled'
-        src={avatar || ''}
         className='size-[25px] mdl:size-[58px] min-w-max rounded-full inline-flex'
-        color='cyan'
-        radius='xl'
-      >
-        {fullname?.slice(0, 2)?.toUpperCase()}
-      </Avatar>
+        src={avatar || ''}
+        name={fullname}
+      />
 
       <div className='text-black flex items-center text-xs mdl:text-base w-fit gap-3'>
-        <h4 className='font-bold w-fit'>الطفل / {fullname}</h4>
+        <h4 className='font-bold w-fit'>
+          الطفل / {fullname}
+        </h4>
         <p className='w-fit'>{diagnosis}</p>
       </div>
     </div>

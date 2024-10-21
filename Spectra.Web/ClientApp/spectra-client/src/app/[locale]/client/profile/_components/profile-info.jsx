@@ -11,6 +11,8 @@ import Card from '@/components/card';
 import Avatar from '@/components/avatar';
 import EditIcon from '@/assets/icons/edit';
 import SaveIcon from '@/assets/icons/save';
+import EditImgIcon from '@/assets/icons/editImg';
+import TextInput from '@/components/inputs/text-input';
 
 export const ProfileInfo = ({ info = {}, type = '' }) => {
   const isPerson = type === 'person';
@@ -47,14 +49,51 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
         {/* CUSTOMER AVATAR, NAME AND EMAIL */}
         <div className='flex flex-col gap-5 justify-center items-center text-black text-sm lg:text-base'>
           {/* AVATAR */}
-          <Avatar
-            name={data.fullname}
-            src={data.avatar}
-            className='size-20 lg:size-28 rounded-full inline-flex'
-          />
+          <div className='relative'>
+            <Avatar
+              name={data.fullname}
+              src={data.avatar}
+              className='size-20 lg:size-28 rounded-full inline-flex'
+            />
+
+            <label htmlFor='avatar'>
+              <input
+                className='hidden'
+                type='file'
+                accept='image/*'
+                id='avatar'
+                onChange={(e) => {
+                  setData((prev) => ({
+                    ...prev,
+                    avatar: e.target.files[0]
+                      ? URL.createObjectURL(
+                          e.target.files[0]
+                        )
+                      : '',
+                  }));
+                }}
+              />
+
+              {/* EDIT ICON */}
+              {isEdit && (
+                <div
+                  role='button'
+                  className='absolute bottom-0 start-1/2 translate-x-1/2 ltr:-translate-x-1/2 translate-y-1/2 bg-greenMain rounded-full size-8 flex items-center justify-center'
+                >
+                  <EditImgIcon className='size-4' />
+                </div>
+              )}
+            </label>
+          </div>
           <div className='text-center space-y-1'>
             {/* NAME */}
             <h3 className='font-bold'>
+              <TextInput
+                value={data?.fullname}
+                readOnly={true}
+                size='sm'
+                inputClassName='w-fit max-w-52 text-center'
+              />
               <EditInput
                 className='text-center'
                 value={data?.fullname}
@@ -103,7 +142,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
             <>
               <li>
                 <span>رقم الهوية</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.id}
                     isEdit={isEdit}
@@ -118,7 +157,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>البلد</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.country}
                     isEdit={isEdit}
@@ -133,7 +172,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>المدينة</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.city}
                     isEdit={isEdit}
@@ -148,7 +187,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>الوظيفة</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.profession}
                     isEdit={isEdit}
@@ -163,7 +202,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد الاطفال</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.childNo}
                     isEdit={isEdit}
@@ -178,7 +217,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد الجلسات</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.sessionsNo}
                     isEdit={isEdit}
@@ -193,7 +232,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد الكشوفات</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.reportsNo}
                     isEdit={isEdit}
@@ -213,7 +252,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
             <>
               <li>
                 <span>البلد</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.country}
                     isEdit={isEdit}
@@ -228,7 +267,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>المدينة</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.city}
                     isEdit={isEdit}
@@ -243,7 +282,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>التخصص</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.specialization}
                     isEdit={isEdit}
@@ -258,7 +297,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>النوع</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.type}
                     isEdit={isEdit}
@@ -273,7 +312,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد العملاء</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.clientsNo}
                     isEdit={isEdit}
@@ -288,7 +327,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد الجلسات</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.sessionsNo}
                     isEdit={isEdit}
@@ -303,7 +342,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد الكشوفات</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.reportsNo}
                     isEdit={isEdit}
@@ -318,7 +357,7 @@ export const ProfileInfo = ({ info = {}, type = '' }) => {
               </li>
               <li>
                 <span>عدد المتابعات</span>
-                <span className='font-bold block mt-5'>
+                <span className='font-bold block mt-1'>
                   <EditInput
                     value={data?.followingsNo}
                     isEdit={isEdit}
@@ -352,8 +391,8 @@ const EditInput = ({
     value={value}
     readOnly={!isEdit}
     className={cn(
-      'w-fit max-w-52 border border-transparent outline-none py-1 px-2 text-start rounded-lg',
-      isEdit && 'border-greenMain',
+      'w-fit max-w-52 border border-transparent outline-none py-1 text-start rounded-lg',
+      isEdit && 'border-greenMain px-2',
       className
     )}
   />

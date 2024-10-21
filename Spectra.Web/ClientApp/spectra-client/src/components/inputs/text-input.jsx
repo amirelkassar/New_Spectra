@@ -13,7 +13,7 @@ const TextInput = ({
       size={size}
       classNames={{
         input: cn(
-          'rounded-lg placeholder:font-normal focus:border-greenMain',
+          'rounded-lg font-Regular placeholder:font-normal focus:border-greenMain read-only:border-transparent read-only:p-0 read-only:focus:border-transparent read-only:focus-within:border-transparent read-only:font-bold',
           inputClassName
         ),
         label: cn(
