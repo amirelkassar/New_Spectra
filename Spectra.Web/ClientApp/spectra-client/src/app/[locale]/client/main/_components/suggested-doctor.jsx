@@ -11,7 +11,7 @@ export const SuggestedDoctor = ({
   },
 }) => {
   return (
-    <GradientCard className='flex flex-col mdl:flex-row items-center gap-x-10 gap-y-5 justify-center'>
+    <GradientCard className='flex flex-col mdl:flex-row items-center gap-x-20 gap-y-5 justify-center'>
       <div className='space-y-5'>
         <h3 className='font-bold text-sm mdl:text-xl text-center mdl:text-start mdl:ps-5'>
           الطبيب المرشح لك
