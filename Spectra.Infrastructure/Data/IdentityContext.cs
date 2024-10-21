@@ -6,13 +6,8 @@ using Spectra.Domain.AppUser;
 
 namespace Spectra.Infrastructure.Data
 {
-    internal class IdentityContext : IdentityDbContext<AppUser, AppRole, string>, IDataProtectionKeyContext
+    internal class IdentityContext(DbContextOptions<IdentityContext> options) : IdentityDbContext<AppUser, AppRole, string>(options), IDataProtectionKeyContext
     {
-        public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
-        {
-
-        }
-
         public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
     }
 }

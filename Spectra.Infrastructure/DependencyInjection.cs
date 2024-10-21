@@ -96,6 +96,7 @@ namespace Spectra.Infrastructure
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
             services.AddScoped(typeof(IAuthorizer<>), typeof(Authorize<>));
+            services.AddSerilog();
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
