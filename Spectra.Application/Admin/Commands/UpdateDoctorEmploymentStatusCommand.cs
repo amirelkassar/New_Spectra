@@ -34,15 +34,19 @@ namespace Spectra.Application.Admin.Commands
           
             foreach (var doctor in doctors)
             {
+                foreach (var item in doctor.Diagnoses)
+                {
+                    var specialization = await _specializationRepository.GetByNameAsync(item);
 
-                var specialization = await _specializationRepository.GetByNameAsync(doctor.Diagnoses);
 
-
-                specialization.DoctorCount += 1;
+                    specialization.DoctorCount += 1;
+                    await _specializationRepository.UpdateAsync(specialization);
+                }
+            
 
                 //doctor.Status = request.Status;
 
-                await _specializationRepository.UpdateAsync(specialization);
+             
 
                 await _doctorRepository.UpdateAsync(doctor);
 

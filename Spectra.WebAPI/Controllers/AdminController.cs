@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Admin.Commands;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
@@ -67,6 +68,7 @@ namespace Spectra.WebAPI.Controllers
             return Ok(Doctories);
         }
 
+
         [HttpPost("CreateClient")]
         [AllowAnonymous]
         public async Task<ActionResult> CreateNormalClient( CreateNormalClientDto input)
@@ -74,6 +76,15 @@ namespace Spectra.WebAPI.Controllers
 
             var clienties = await _clientService.CreateClient(input);
             return Ok(clienties);
+        }
+
+        [HttpPost("CreateEmployee")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateEmployees([FromForm] CreateEmployeesDto input)
+        {
+
+            var employees = await _adminService.CreateEmplyee(input);
+            return Ok(employees);
         }
         [HttpPut("id")]
         [AllowAnonymous]

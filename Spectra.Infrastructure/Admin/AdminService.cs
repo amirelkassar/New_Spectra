@@ -1,23 +1,37 @@
-﻿using MediatR;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Wordprocessing;
+using MediatR;
 using Spectra.Application.Admin.Commands;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
+using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Hellper;
+using Spectra.Application.MedicalStaff.Doctors.Commands;
+using Spectra.Application.MedicalStaff.Doctors.Dto;
+using Spectra.Application.MedicalStaff.Doctors.Services;
+using Spectra.Application.MedicalStaff.Specialists.Dto;
+using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Domain.Clients;
 using Spectra.Domain.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
+using Spectra.Infrastructure.Doctors;
 
 namespace Spectra.Infrastructure.Admin
 {
     public class AdminService : IAdminService
     {
         private readonly IMediator _mediator;
-        public AdminService(IMediator mediator)
+        private readonly IDoctorService _doctorService;
+        private readonly ISpecialistService _specialistService;
+        public AdminService(IMediator mediator, IDoctorService doctorService, ISpecialistService specialistService)
         {
             _mediator = mediator;
+            _doctorService = doctorService;
+            _specialistService = specialistService;
 
         }
         public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
@@ -67,87 +81,7 @@ namespace Spectra.Infrastructure.Admin
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<string>> CreateClientByAdmin(CreateNormalClientDto input)
-        {
-            //var  userId = _currentUser.Id;
-
-
-
-            var name = new Name { FirstName = input.FirstName, LastName = input.LastName, Prefix = input.Prefix };
-
-
-            var phoneNumber = new PhoneNumber { PhoneNumbers = input.PhoneNumbers, CountryCode = input.CountryCode };
-
-            var emailAddress = new EmailAddress { Emailaddress = input.Emailaddress };
-
-            var address = new Address
-            {
-                Country = input.Country,
-                City = input.City,
-                State = input.State,
-                StreetName = input.StreetName,
-                Building = input.Building,
-                PostalCode = input.PostalCode,
-                Floor = input.Floor,
-                CommonMark = input.CommonMark
-            };
-            // Organization and MedicalServiceProvider can be null, so they are optional
-            Organization organization = null;
-
-            if (input.Organization != null)
-            {
-                organization = new Organization
-                {
-                    Name = input.Organization.Name,
-                    PhoneNumber = input.Organization.PhoneNumber,
-                    Industry = input.Organization.Industry,
-                    TaxNumber = input.Organization.TaxNumber,
-                    EmailAddress = input.Organization.EmailAddress,
-                    Website = input.Organization.Website,
-                    RegistrationNumber = input.Organization.RegistrationNumber,
-                    Address = input.Organization.Address,
-                    LogoPath = input.Organization.LogoPath,
-                    LandLine = input.Organization.LandLine,
-                    OrganizationType = input.Organization.OrganizationType
-                };
-            }
-
-            MedicalServiceProvider medicalServiceProvider = null;
-            if (input.MedicalServiceProvider != null)
-            {
-                medicalServiceProvider = new MedicalServiceProvider
-                {
-
-                    Name = input.MedicalServiceProvider.Name,
-                    PhoneNumber = input.MedicalServiceProvider.PhoneNumber,
-                    Industry = input.MedicalServiceProvider.Industry,
-                    TaxNumber = input.MedicalServiceProvider.TaxNumber,
-                    EmailAddress = input.MedicalServiceProvider.EmailAddress,
-                    Website = input.MedicalServiceProvider.Website,
-                    RegistrationNumber = input.MedicalServiceProvider.RegistrationNumber,
-                    Address = input.MedicalServiceProvider.Address,
-                    LogoPath = input.MedicalServiceProvider.LogoPath,
-                    LandLine = input.MedicalServiceProvider.LandLine,
-                    LegalPermissionNumber = input.MedicalServiceProvider.LegalPermissionNumber
-                };
-            }
-            var command = new CreateClientCommand
-            {
-
-                Name = name,
-                NationalId = input.NationalId,
-                PhoneNumber = phoneNumber,
-                ClientType = input.ClientType,
-                //UserId = userId,
-                EmailAddress = emailAddress,
-                Address = address,
-                Organization = organization,
-                medicalServiceProvider = medicalServiceProvider
-
-            };
-
-            return await _mediator.Send(command);
-        }
+    
 
         public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees()
         {
@@ -155,9 +89,54 @@ namespace Spectra.Infrastructure.Admin
             return await _mediator.Send(query);
         }
 
-        public Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input)
+        public async Task<OperationResult<string>> CreateEmplyee(CreateEmployeesDto input)
         {
-            throw new NotImplementedException();
+            OperationResult<string> query;
+            if (JobTypes.Doctor == input.JobTypes)
+            {
+                query = await _doctorService.CreateDoctor(input.FirstName,
+                    input.LastName,
+                    input.Prefix,
+                    input.PhoneNumbers,
+                    input.CountryCode,
+                    input.Emailaddress,
+                    input.Country,
+                    input.City,
+                    input.NationalId,
+                    input.Academicdegree,
+                    input.ApprovedBy,
+                    input.Diagnoses,
+                    input.HumenGenders,
+                    input.LicenseNumber,
+                    input.ScientificDegree);
+
+                return query;
+            }
+
+            if (JobTypes.Specialist == input.JobTypes)
+            {
+                query = await _specialistService.CreateSpecialist(
+                 input.FirstName,
+                    input.LastName,
+                    input.Prefix,
+                    input.PhoneNumbers,
+                    input.CountryCode,
+                    input.Emailaddress,
+                    input.Country,
+                    input.City,
+                    input.NationalId,
+                    input.Academicdegree,
+                    input.ApprovedBy,
+                    input.Diagnoses,
+                    input.HumenGenders,
+                    input.LicenseNumber,
+                    input.ScientificDegree);
+                return query;
+            }
+
+            return null;
+
         }
+
     }
 }

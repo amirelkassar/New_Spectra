@@ -21,7 +21,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
-        public string Diagnoses { get; set; }
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
@@ -37,10 +37,10 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
         //private readonly ISpecializationsRepository _specializationRepository;
         private readonly IHellper _addFile;
 
-        public CreateSpecialistCommandHandler(ISpecialistRepository specialistRepository, IHellper addFile /*, ISpecializationsRepository specializationRepository*/)
+        public CreateSpecialistCommandHandler(ISpecialistRepository specialistRepository, IHellper addFile  )
         {
             _specialistRepository = specialistRepository;
-            //_specializationRepository = specializationRepository;
+            
             _addFile = addFile;
         }
         public async Task<OperationResult<string>> Handle(CreateSpecialistCommand request, CancellationToken cancellationToken)
@@ -51,9 +51,6 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
             {
                 filePath = uploadfile;
             }
-
-            //var specialization = await _specializationRepository.GetByNameAsync(request.Diagnoses);
-            //specialization.DoctorCount += 1;
 
             var specialist = Specialist.Create(
                 Ulid.NewUlid().ToString(),
@@ -72,7 +69,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Commands
                );
 
             await _specialistRepository.AddAsync(specialist);
-            //await _specializationRepository.UpdateAsync(specialization);
+           
 
 
             return OperationResult<string>.Success(specialist.Id);

@@ -17,7 +17,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Dto
         public string City { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
-        public string Diagnoses { get; set; }
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }

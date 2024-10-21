@@ -25,7 +25,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
-        public string Diagnoses { get; set; }
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
@@ -58,9 +58,13 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
             {
                 filePath = uploadfile;
             }
+            foreach (var item in request.Diagnoses)
+            {
+                var specialization = await _specializationRepository.GetByNameAsync(item);
+                specialization.DoctorCount += 1;
 
-            var specialization = await _specializationRepository.GetByNameAsync(request.Diagnoses);
-            specialization.DoctorCount += 1;
+            }
+           
 
             var doctor = Doctor.Create(
                 Ulid.NewUlid().ToString(),
@@ -74,10 +78,9 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-
-              filePath,
-             
+                filePath,
                 request.empelyeeRate=0
+                
                 );
 
 

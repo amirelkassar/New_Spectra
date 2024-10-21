@@ -13,6 +13,8 @@ namespace Spectra.Infrastructure.Admin
 {
     public interface IAdminService
     {
+        Task<OperationResult<string>> CreateEmplyee(CreateEmployeesDto input);
+
         //Task<OperationResult<string>> CreateClientByAdmin(CreateNormalClientDto input);
         Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input);
         Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input);

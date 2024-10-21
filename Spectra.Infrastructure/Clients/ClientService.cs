@@ -6,6 +6,7 @@ using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Queries;
 using Spectra.Application.Clients.Services;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MedicalStaff.Doctors.Dto;
 using Spectra.Domain.Clients;
 using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Enums;
@@ -27,7 +28,7 @@ namespace Spectra.Infrastructure.Clients
             _currentUser = currentUser;
         }
 
-        public async Task<OperationResult<string>> CreateClient(CreateNormalClientDto input)
+        public async Task<OperationResult<string>> CreateClient(CreateDoctorDto input)
         {
             //var  userId = _currentUser.Id;
 

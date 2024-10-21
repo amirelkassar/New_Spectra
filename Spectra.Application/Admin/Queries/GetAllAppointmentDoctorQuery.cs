@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Dto;
 using Spectra.Application.Hellper;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 

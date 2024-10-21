@@ -8,9 +8,9 @@ namespace Spectra.Domain.Shared.Enums
 {
     public enum JobTypes
     {
-        Wating,
-        Available,
-        cancel,
-        Bloked
+    Doctor=1,
+    Specialist=2,
+    Accountant=3,
+    secretary=4
     }
 }
