@@ -24,6 +24,7 @@ function Page() {
     { id: "1", text: "جلسة" },
     { id: "2", text: "كشف" },
   ]);
+console.log(list);
 
   return (
     <div className="flex flex-col w-full gap-6">
