@@ -41,11 +41,11 @@ export const StepsProgress = () => {
 
   return (
     <section className='flex items-center flex-col xl:flex-row '>
-      <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[162px]'>
+      <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[262px] xl:px-10'>
         اكمل الخطوات وسنرشح لك أفضل حل لطفلك
       </p>
 
-      <div className='flex-1 xl:mt-0 mt-5 space-y-3 max-w-[887px]'>
+      <div className='flex-1 xl:mt-0 mt-5 space-y-3'>
         <span className='text-black mdl:text-medium text-base'>
           {progressValue}% من ملفك تم اكماله
         </span>
@@ -56,7 +56,7 @@ export const StepsProgress = () => {
           size='xl'
           value={progressValue}
         />
-        <div className='h-fit bg-grayLight rounded-[10px] p-4 flex items-start justify-between gap-2 w-full lgl:flex-row flex-col'>
+        <div className='h-fit bg-grayLight rounded-[10px] p-4 lgl:p-7 flex items-start justify-between gap-2 w-full lgl:flex-row flex-col'>
           {steps.map((step, index) => (
             <div className='w-full' key={index}>
               <Step
