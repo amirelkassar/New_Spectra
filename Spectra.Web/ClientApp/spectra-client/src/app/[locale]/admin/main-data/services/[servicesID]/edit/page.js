@@ -66,7 +66,7 @@ function Page({ params }) {
       <div className='flex items-center gap-4 lg:gap-7 mb-12'>
         <Link
           href={
-            ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(1) +
+            ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS( data?.data.data.id) +
             '?show=false'
           }
           className=' w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%] flex items-center justify-center'
