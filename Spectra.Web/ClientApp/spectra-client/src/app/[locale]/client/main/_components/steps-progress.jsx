@@ -4,6 +4,7 @@ import CheckIcon from '@/assets/icons/check';
 import { cn } from '@/lib/utils';
 import ROUTES from '@/routes';
 import { Link } from '@/navigation';
+import { AddChild } from './add-child';
 
 const steps = [
   {
@@ -11,7 +12,7 @@ const steps = [
     label: 'اضف طفل',
     description:
       'اول خطوة اضافة طفل عن طريق ملئ بيانات خاصة بطفلك',
-    href: '#',
+    href: '?add-child=true',
   },
   {
     isDone: false,
@@ -22,7 +23,7 @@ const steps = [
   },
   {
     isDone: false,
-    label: 'حجز الاستشارة المجانية',
+    label: 'حجز الاستشارة',
     description:
       'حجز استشارة مع طبيب حتى يتم تحديد الخطة العلاجية الخاصة بطفلك',
     href: '#',
@@ -68,6 +69,8 @@ export const StepsProgress = () => {
           ))}
         </div>
       </div>
+
+      <AddChild />
     </section>
   );
 };
@@ -83,19 +86,19 @@ const Step = ({ step, isDone = false, length, index }) => {
       {/* ICON */}
 
       <div className='flex items-center'>
-        <div
-          role='button'
-          className={cn(
-            'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10 transition group-hover:bg-greenMain',
-            isDone
-              ? 'bg-greenMain'
-              : 'bg-grayDark text-white text-[20px]'
-          )}
-        >
-          <Link href={step.href}>
+        <Link href={step.href}>
+          <div
+            role='button'
+            className={cn(
+              'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10 transition group-hover:bg-greenMain',
+              isDone
+                ? 'bg-greenMain'
+                : 'bg-grayDark text-white text-[20px]'
+            )}
+          >
             {isDone ? <CheckIcon /> : index + 1}
-          </Link>
-        </div>
+          </div>
+        </Link>
         <p
           role='button'
           className='text-black min-w-40 lgl:min-w-fit font-semibold hidden lgl:block relative z-10 px-2 bg-grayLight'
@@ -129,7 +132,7 @@ const Step = ({ step, isDone = false, length, index }) => {
           />
           <div
             className={cn(
-              'absolute w-[1px] h-[calc(100%-16px)] lgl:hidden start-4 top-5 bg-grayDark group-hover:bg-greenMain',
+              'absolute w-[1px] h-[calc(100%-20px)] lgl:hidden start-4 top-5 bg-grayDark group-hover:bg-greenMain',
               isDone && 'bg-greenMain'
             )}
           />

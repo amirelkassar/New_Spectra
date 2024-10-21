@@ -34,7 +34,7 @@ const firmData = {
 };
 
 const ProfilePage = () => {
-  const isPerson = false;
+  const isPerson = true;
   return (
     <Container className='space-y-5'>
       <ProfileInfo

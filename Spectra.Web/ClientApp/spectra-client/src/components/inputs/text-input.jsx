@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { TextInput as MantineTextInput } from '@mantine/core';
 
 const TextInput = ({
@@ -11,8 +12,14 @@ const TextInput = ({
       {...props}
       size={size}
       classNames={{
-        input: `rounded-lg placeholder:font-normal focus:border-greenMain ${inputClassName}`,
-        label: `text-base mdl:text-xl mb-2 ps-1 ${labelClassName}`,
+        input: cn(
+          'rounded-lg placeholder:font-normal focus:border-greenMain',
+          inputClassName
+        ),
+        label: cn(
+          `text-base mdl:text-xl mb-2 ps-1`,
+          labelClassName
+        ),
       }}
     />
   );

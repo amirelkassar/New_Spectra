@@ -1,17 +1,15 @@
 'use client';
-import Card from '@/components/card';
+
+import { useCallback, useState } from 'react';
+
+import { cn } from '@/lib/utils';
 import { Heading } from '../../_components/heading';
 import { AddChildModal } from './add-child-modal';
 import { AddClientModal } from './add-client-modal';
-import EditIcon from '@/assets/icons/edit';
+
+import Card from '@/components/card';
 import Avatar from '@/components/avatar';
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { cn } from '@/lib/utils';
+import EditIcon from '@/assets/icons/edit';
 import SaveIcon from '@/assets/icons/save';
 
 export const ProfileInfo = ({ info = {}, type = '' }) => {
