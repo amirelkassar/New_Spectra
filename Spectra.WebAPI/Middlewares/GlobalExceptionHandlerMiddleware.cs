@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Net;
+
 
 namespace Spectra.WebAPI.Middlewares
 {
@@ -38,18 +40,21 @@ namespace Spectra.WebAPI.Middlewares
 
             switch (exception)
             {
-                case ValidationException validationException:
+                case FluentValidation.ValidationException validationException:
                     errorType = "ValidationError";
                     statusCode = HttpStatusCode.UnprocessableEntity;
 
-                    errorCollection = (Dictionary<string, string[]>)validationException.Errors;
+
+                     errorCollection = validationException.Errors
+                        .GroupBy(e => e.PropertyName)
+                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()); 
                     break;
 
                 case RequestErrorException _:
                     errorType = "RequestError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } }
+                { "General", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
@@ -58,7 +63,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "DbError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } }
+                { "General", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
@@ -76,13 +81,13 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } }
+                { "General", new[] { exception.Message.Trim() } } 
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 
-            var errorResponse = new
+            var errorResponse = new 
             {
                 errors = errorCollection,
                 errorType,
