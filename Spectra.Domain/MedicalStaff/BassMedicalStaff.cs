@@ -18,13 +18,15 @@ namespace Spectra.Domain.MedicalStaff
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
-        public string Diagnoses { get; set; }
+    
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public List<string> AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
-        public EmploymentStatus Status { get; set; }
+   
+
         protected BassMedicalStaff() { }
         public BassMedicalStaff(
                    string id,
@@ -34,13 +36,13 @@ namespace Spectra.Domain.MedicalStaff
                    HumenGender humenGenders,
                    EmailAddress emailAddress,
                    Address address,
-                   string diagnoses,
+                  List<string> diagnoses,
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
                     List<string> attachmentPath,
-                   EmpelyeeRates? empelyeeRate,
-                   EmploymentStatus status
+                   EmpelyeeRates? empelyeeRate
+               
                    ) : base(id)
         {
             Id = id;
@@ -56,7 +58,8 @@ namespace Spectra.Domain.MedicalStaff
             Academicdegree = academicdegree;
             AttachmentPath = attachmentPath;
             EmpelyeeRate = empelyeeRate;
-            Status = status;
+      
+          
         }
 
     }

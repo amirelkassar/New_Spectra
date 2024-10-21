@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.MedicalStaff.Specialists.Commands;
 using Spectra.Application.MedicalStaff.Specialists.Dto;
 using Spectra.Application.MedicalStaff.Specialists.Queries;
 using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Domain.MedicalStaff.Specialists;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
@@ -20,38 +22,65 @@ namespace Spectra.Infrastructure.Specialists
 
         }
 
-        public async Task<OperationResult<string>> CreateSpecialist(CreateSpecialistDto input)
+        public async Task<OperationResult<string>> CreateSpecialist(
+         string firstName,
+         string lastName,
+         string? prefix,
+         string phoneNumbers,
+         string countryCode,
+         string emailAddress,
+         string country,
+         string city,
+         string nationalId,
+         string academicDegree,
+         string approvedBy,
+         List<string> diagnoses,
+         HumenGender humenGenders,
+         string licenseNumber,
+         List<IFormFile> scientificDegree)
         {
+            // Create value objects
+            var name = new Name
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Prefix = prefix
+            };
 
-            var name = new Name { FirstName = input.FirstName, LastName = input.LastName, Prefix = input.Prefix };
+            var phoneNumber = new PhoneNumber
+            {
+                PhoneNumbers = phoneNumbers,
+                CountryCode = countryCode
+            };
 
-
-            var phoneNumber = new PhoneNumber { PhoneNumbers = input.PhoneNumbers, CountryCode = input.CountryCode };
-
-            var emailAddress = new EmailAddress { Emailaddress = input.Emailaddress };
+            var email = new EmailAddress
+            {
+                Emailaddress = emailAddress
+            };
 
             var address = new Address
             {
-                Country = input.Country,
-                City = input.City,
+                Country = country,
+                City = city
             };
 
+            // Create the command
             var command = new CreateSpecialistCommand
             {
                 Name = name,
-                NationalId = input.NationalId,
+                NationalId = nationalId,
                 MobileNumber = phoneNumber,
-                EmailAddress = emailAddress,
+                EmailAddress = email,
                 Address = address,
-                Academicdegree = input.Academicdegree,
-                ApprovedBy = input.ApprovedBy,
-                Diagnoses = input.Diagnoses,
-                HumenGenders = input.HumenGenders,
-                LicenseNumber = input.LicenseNumber,
-                ScientificDegree = input.ScientificDegree
-
+                Academicdegree = academicDegree,
+                ApprovedBy = approvedBy,
+                Diagnoses = diagnoses,
+                HumenGenders = humenGenders,
+                LicenseNumber = licenseNumber,
+                ScientificDegree = scientificDegree
             };
 
+            // Send the command via mediator
             return await _mediator.Send(command);
         }
 

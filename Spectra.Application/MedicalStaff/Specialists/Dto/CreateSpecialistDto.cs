@@ -7,7 +7,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Dto
     {
 
         public string FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
         public string? Prefix { get; set; }
         public string NationalId { get; set; }
         public HumenGender HumenGenders { get; set; }
@@ -16,7 +16,7 @@ namespace Spectra.Application.MedicalStaff.Specialists.Dto
         public string City { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
-        public string Diagnoses { get; set; }
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }

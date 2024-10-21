@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+﻿using Spectra.Domain.MasterData.Diagnoses;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
@@ -14,7 +15,7 @@ namespace Spectra.Domain.MasterData.InternalExaminations
         public string Name { get; set; }
 
         public string Code { get; set; }
-        public MentalillnessAndTreatment ExaminationTypes { get; set; }
+        public List<string> ExaminationTypes { get; set; }
 
 
 
@@ -23,7 +24,7 @@ namespace Spectra.Domain.MasterData.InternalExaminations
                string id,
            string name,
            string code,
-           MentalillnessAndTreatment examinationType
+           List<string> examinationType
                ) : base(id)
         {
             Id = id;
@@ -32,7 +33,7 @@ namespace Spectra.Domain.MasterData.InternalExaminations
             ExaminationTypes = examinationType;
         }
         public static InternalExamination Create(string id, string name,
-           string code, MentalillnessAndTreatment examinationType
+           string code, List<string> examinationType
        )
         {
 

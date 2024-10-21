@@ -44,9 +44,25 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> CreateNormalSpecialist([FromForm] CreateSpecialistDto input)
         {
 
+            var specialistResult = await _SpecialistService.CreateSpecialist(
+                    input.FirstName,
+                    input.LastName,
+                    input.Prefix,
+                    input.PhoneNumbers,
+                    input.CountryCode,
+                    input.Emailaddress,
+                    input.Country,
+                    input.City,
+                    input.NationalId,
+                    input.Academicdegree,
+                    input.ApprovedBy,
+                    input.Diagnoses,
+                    input.HumenGenders,
+                    input.LicenseNumber,
+                    input.ScientificDegree
+                );
 
-            var Specialisties = await _SpecialistService.CreateSpecialist(input);
-            return Ok(Specialisties);
+            return Ok(specialistResult);
         }
         [HttpPut("id")]
         [AllowAnonymous]

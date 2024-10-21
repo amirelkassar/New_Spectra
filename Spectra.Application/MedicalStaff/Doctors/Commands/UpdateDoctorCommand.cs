@@ -18,7 +18,7 @@ namespace Spectra.Application.MedicalStaff.Doctors.Commands
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddresse { get; set; }
         public Address Address { get; set; }
-        public string Diagnoses { get; set; }
+        public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }

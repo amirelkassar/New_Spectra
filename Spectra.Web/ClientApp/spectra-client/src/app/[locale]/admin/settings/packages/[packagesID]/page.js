@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import HeadPackage from "./_components/HeadPackage";
 import InfoPackage from "./_components/infoPackage";
@@ -5,13 +6,17 @@ import EditIcon from "@/assets/icons/edit";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import ImgPackage from "./_components/imgPackage";
-function page({ params }) {
-  console.log(params.packagesID);
+import GoalPackagesDetails from "./_components/GoalPackagesDetails";
+import ContentSpectraView from "./_components/ContentSpectraView";
+function Page({ params }) {
+
 
   return (
     <div className="flex flex-col w-full gap-6">
       <HeadPackage />
       <InfoPackage />
+      <ContentSpectraView />
+      <GoalPackagesDetails/>
       <ImgPackage />
       <Link
         href={ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD}
@@ -26,4 +31,4 @@ function page({ params }) {
   );
 }
 
-export default page;
+export default Page;

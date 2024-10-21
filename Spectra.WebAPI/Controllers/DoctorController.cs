@@ -53,7 +53,22 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            var Doctories = await _DoctorService.CreateDoctor(input);
+            var Doctories = await _DoctorService.CreateDoctor(
+                    input.FirstName,
+                    input.LastName,
+                    input.Prefix,
+                    input.PhoneNumbers,
+                    input.CountryCode,
+                    input.Emailaddress,
+                    input.Country,
+                    input.City,
+                    input.NationalId,
+                    input.Academicdegree,
+                    input.ApprovedBy,
+                    input.Diagnoses,
+                    input.HumenGenders,
+                    input.LicenseNumber,
+                    input.ScientificDegree);
             return Ok(Doctories);
         }
         [HttpPut("id")]

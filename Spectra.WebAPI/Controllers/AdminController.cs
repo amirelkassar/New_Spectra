@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Admin.Commands;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
@@ -20,10 +21,12 @@ namespace Spectra.WebAPI.Controllers
         private readonly IDoctorService _DoctorService;
 
 
-        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService DoctorService)
+
+        public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService)
         {
             _adminService = adminService;
             _clientService = clientService;
+
             _DoctorService = DoctorService;
         }
         [HttpGet("GetAllDoctors")]
@@ -32,12 +35,13 @@ namespace Spectra.WebAPI.Controllers
         {
             var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
             return Ok(appointmenties);
-        }
-        [HttpGet("GetAllClient")]
+        }  
+
+        [HttpGet("GetAllEmployees")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllClients([FromQuery] GetAllClientsQuery input)
+        public async Task<ActionResult> GetAllClients()
         {
-            var appointmenties = await _adminService.GetAllClientsAsyncWithPagination(input);
+            var appointmenties = await _adminService.GetAllEmplyees();
             return Ok(appointmenties);
         }
 
@@ -47,7 +51,7 @@ namespace Spectra.WebAPI.Controllers
         {
 
             var appointmenties = await _adminService.GetAllAppointmentsDoctorAsync(input);
-            return Ok(appointmenties);
+            return Ok(appointmenties); 
         }
         [HttpGet("Client/id")]
         [AllowAnonymous]
@@ -64,13 +68,23 @@ namespace Spectra.WebAPI.Controllers
             return Ok(Doctories);
         }
 
+
         [HttpPost("CreateClient")]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalClient(CreateNormalClientDto input)
+        public async Task<ActionResult> CreateNormalClient( CreateNormalClientDto input)
         {
 
             var clienties = await _clientService.CreateClient(input);
             return Ok(clienties);
+        }
+
+        [HttpPost("CreateEmployee")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateEmployees([FromForm] CreateEmployeesDto input)
+        {
+
+            var employees = await _adminService.CreateEmplyee(input);
+            return Ok(employees);
         }
         [HttpPut("id")]
         [AllowAnonymous]
@@ -85,16 +99,24 @@ namespace Spectra.WebAPI.Controllers
 
 
 
-        [HttpPut(("ChangeStutue"))]
-        [AllowAnonymous]
-        // Admin change Stutues doctors From waiting to be cancel or avilibel
-        public async Task<ActionResult> UpdateDoctors(UpdateDoctorEmploymentStatusCommand input)
-        {
 
-            var Appointment = await _adminService.UpdateDoctorsEmploymentStatus(input);
 
-            return Ok(Appointment);
-        }
+
+
+        //[HttpPut(("ChangeStutue"))]
+        //[AllowAnonymous]
+        //// Admin change Stutues doctors From waiting to be cancel or avilibel
+        //public async Task<ActionResult> UpdateDoctors( UpdateDoctorEmploymentStatusCommand input)
+        //{
+
+        //    var Appointment = await _adminService.UpdateDoctorsEmploymentStatus( input);
+
+        //    return Ok(Appointment);
+        //}
+
+
+
+
 
 
     }
