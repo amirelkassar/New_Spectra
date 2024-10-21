@@ -147,7 +147,7 @@ const EarlyCheckPage = () => {
             className='flex-row-reverse justify-end gap-2'
           />
 
-          <p>
+          <p className='text-xs mdl:text-base'>
             تدور هذه الأسئلة حول مراحل تطور طفلك. يُرجى
             إخبارنا بمعدل قيام طفلك بهذه الأشياء. إذا توقف
             طفلك عن فعل شيء ما، فاختر الإجابة التي تصف معدل

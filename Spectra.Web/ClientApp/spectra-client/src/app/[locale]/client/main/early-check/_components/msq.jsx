@@ -14,7 +14,7 @@ export const MSQ = ({ data = {} }) => {
         questions={data['2']}
       />
 
-      <div className='flex gap-5 font-bold *:flex-1 max-w-lg'>
+      <div className='flex gap-5 font-bold flex-col mdl:flex-row text-sm mdl:text-base *:flex-1 max-w-lg'>
         <Button variant='secondary'>التالي</Button>
 
         <Button>السابق</Button>
