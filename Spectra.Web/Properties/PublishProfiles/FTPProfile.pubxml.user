@@ -7,18 +7,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASx0p26clek+mpxTGBhPmqQAAAAACAAAAAAAQZgAAAAEAACAAAACUKRJbGwYlJ0kaCq9egPgO1xYtZ1casuwJU4jTpPUxAAAAAAAOgAAAAAIAACAAAACc3hd09ZKITzXJabticdT5/4KkAaRjiQqe7ZfWZJ6JNDAAAADS7kt+S3ekdfm8KHAzm1he9/Q/WDR+beP2t1OnAV25UyvZlB61ns81dzcZMhzZSDJAAAAAROQdM/qyUgtX2rAx4JXmkRtWnmV8reboLbDS693nmwyFxwpn4wI9HzljAYmkfqpkchyQLkQlsx+RQgQFN7VD/A==</EncryptedPassword>
     <_PublishTargetUrl>ftp://spectra.profound-group.com/</_PublishTargetUrl>
-    <History>True|2024-10-20T11:55:31.9484397Z||;True|2024-10-20T14:49:52.2245483+03:00||;False|2024-10-20T14:46:39.6919073+03:00||;True|2024-10-20T14:42:59.1017118+03:00||;True|2024-10-19T22:31:19.8362029+03:00||;False|2024-10-19T22:30:47.6716805+03:00||;True|2024-10-19T22:29:15.2687993+03:00||;True|2024-10-19T22:24:00.1660332+03:00||;True|2024-10-19T22:09:03.3725403+03:00||;False|2024-10-19T21:57:49.8611809+03:00||;False|2024-10-19T21:57:17.7101803+03:00||;False|2024-10-19T21:57:00.7192077+03:00||;True|2024-10-15T12:40:10.6484411+03:00||;False|2024-10-15T12:39:29.5804128+03:00||;True|2024-10-15T11:40:08.1471844+03:00||;True|2024-10-13T23:43:00.5093500+03:00||;False|2024-10-13T23:42:34.4210617+03:00||;True|2024-10-13T23:32:49.6166735+03:00||;False|2024-10-13T23:32:09.2844805+03:00||;True|2024-10-13T23:28:13.8858615+03:00||;</History>
+    <History>True|2024-10-21T10:18:53.0870913Z||;False|2024-10-21T13:15:50.0874542+03:00||;True|2024-10-20T14:55:31.9484397+03:00||;True|2024-10-20T14:49:52.2245483+03:00||;False|2024-10-20T14:46:39.6919073+03:00||;True|2024-10-20T14:42:59.1017118+03:00||;True|2024-10-19T22:31:19.8362029+03:00||;False|2024-10-19T22:30:47.6716805+03:00||;True|2024-10-19T22:29:15.2687993+03:00||;True|2024-10-19T22:24:00.1660332+03:00||;True|2024-10-19T22:09:03.3725403+03:00||;False|2024-10-19T21:57:49.8611809+03:00||;False|2024-10-19T21:57:17.7101803+03:00||;False|2024-10-19T21:57:00.7192077+03:00||;True|2024-10-15T12:40:10.6484411+03:00||;False|2024-10-15T12:39:29.5804128+03:00||;True|2024-10-15T11:40:08.1471844+03:00||;True|2024-10-13T23:43:00.5093500+03:00||;False|2024-10-13T23:42:34.4210617+03:00||;True|2024-10-13T23:32:49.6166735+03:00||;False|2024-10-13T23:32:09.2844805+03:00||;True|2024-10-13T23:28:13.8858615+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>10/19/2024 22:14:50</publishTime>
+      <publishTime>10/21/2024 13:12:35</publishTime>
     </File>
     <File Include="appsettings.json">
       <publishTime>10/19/2024 22:15:12</publishTime>
     </File>
     <File Include="appsettings.Production.json">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="AWSSDK.Core.dll">
       <publishTime>11/09/2022 18:47:34</publishTime>
@@ -399,7 +399,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:58:26</publishTime>
     </File>
     <File Include="Serilog.dll">
-      <publishTime>11/10/2023 14:41:54</publishTime>
+      <publishTime>09/29/2024 00:23:16</publishTime>
     </File>
     <File Include="Serilog.Extensions.Hosting.dll">
       <publishTime>11/15/2023 04:04:28</publishTime>
@@ -414,13 +414,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/10/2024 03:05:30</publishTime>
     </File>
     <File Include="Serilog.Sinks.Console.dll">
-      <publishTime>11/09/2023 08:50:30</publishTime>
+      <publishTime>06/10/2024 01:13:26</publishTime>
     </File>
     <File Include="Serilog.Sinks.Debug.dll">
       <publishTime>02/14/2021 09:47:26</publishTime>
     </File>
     <File Include="Serilog.Sinks.File.dll">
       <publishTime>06/25/2021 10:00:48</publishTime>
+    </File>
+    <File Include="Serilog.Sinks.PeriodicBatching.dll">
+      <publishTime>02/28/2020 02:13:46</publishTime>
+    </File>
+    <File Include="Serilog.Sinks.PostgreSQL.dll">
+      <publishTime>05/20/2021 22:58:14</publishTime>
     </File>
     <File Include="SharpCompress.dll">
       <publishTime>11/22/2021 11:21:32</publishTime>
@@ -429,52 +435,52 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/23/2021 19:43:32</publishTime>
     </File>
     <File Include="Spectra.Application.dll">
-      <publishTime>10/19/2024 22:06:19</publishTime>
+      <publishTime>10/21/2024 13:17:53</publishTime>
     </File>
     <File Include="Spectra.Application.pdb">
-      <publishTime>10/19/2024 22:06:19</publishTime>
+      <publishTime>10/21/2024 13:17:53</publishTime>
     </File>
     <File Include="Spectra.Domain.dll">
-      <publishTime>10/19/2024 22:06:18</publishTime>
+      <publishTime>10/21/2024 13:15:46</publishTime>
     </File>
     <File Include="Spectra.Domain.pdb">
-      <publishTime>10/19/2024 22:06:18</publishTime>
+      <publishTime>10/21/2024 13:15:46</publishTime>
     </File>
     <File Include="Spectra.Domain.Shared.dll">
-      <publishTime>10/19/2024 22:06:18</publishTime>
+      <publishTime>10/21/2024 13:15:46</publishTime>
     </File>
     <File Include="Spectra.Domain.Shared.pdb">
-      <publishTime>10/19/2024 22:06:18</publishTime>
+      <publishTime>10/21/2024 13:15:46</publishTime>
     </File>
     <File Include="Spectra.Infrastructure.dll">
-      <publishTime>10/19/2024 22:06:20</publishTime>
+      <publishTime>10/21/2024 13:17:53</publishTime>
     </File>
     <File Include="Spectra.Infrastructure.pdb">
-      <publishTime>10/19/2024 22:06:20</publishTime>
+      <publishTime>10/21/2024 13:17:53</publishTime>
     </File>
     <File Include="Spectra.Web.deps.json">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="Spectra.Web.dll">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="Spectra.Web.exe">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="Spectra.Web.pdb">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="Spectra.Web.runtimeconfig.json">
-      <publishTime>10/19/2024 22:20:51</publishTime>
+      <publishTime>10/21/2024 13:17:55</publishTime>
     </File>
     <File Include="Spectra.WebAPI.dll">
-      <publishTime>10/19/2024 22:06:20</publishTime>
+      <publishTime>10/21/2024 13:17:54</publishTime>
     </File>
     <File Include="Spectra.WebAPI.pdb">
-      <publishTime>10/19/2024 22:06:20</publishTime>
+      <publishTime>10/21/2024 13:17:54</publishTime>
     </File>
     <File Include="SpectraApiDocs.xml">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="Stef.Validation.dll">
       <publishTime>10/22/2022 11:15:30</publishTime>
@@ -540,7 +546,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/30/2024 13:50:02</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>10/20/2024 14:55:04</publishTime>
+      <publishTime>10/21/2024 13:17:58</publishTime>
     </File>
     <File Include="wwwroot/Upload/Image/Drugs/201d9c7c-4632-46fa-aa5d-7b436879f5bb_test2.jpg">
       <publishTime>10/19/2024 16:24:42</publishTime>
@@ -563,8 +569,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="wwwroot/Upload/ScientificDegree/Doctors/60d0ea4b-adc8-4c79-b9f6-63b18c7272c8_test2.jpg">
       <publishTime>10/19/2024 16:24:42</publishTime>
     </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/35eb6b2a-6a6f-4e4d-83da-2c4a9036d75d_درس 2.jpg">
+      <publishTime>10/21/2024 13:12:35</publishTime>
+    </File>
     <File Include="wwwroot/Upload/ScientificDegree/Specialist/4c06c29d-1334-4b87-80be-7820d7ca6a7e_امتحان رقم 2 علي الحصة الاولي للمجتمع الفرنسي.pdf">
       <publishTime>10/19/2024 16:24:42</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/a9ada0c7-58dd-4bba-bd59-6d5748e51985_test.jpg">
+      <publishTime>10/21/2024 13:12:35</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/cf64b8e7-2a76-480d-9138-a351ea297f45_درس 2.jpg">
+      <publishTime>10/21/2024 13:12:35</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/ddd09a4c-73e6-41ed-8daf-9dc0d28566fb_درس 2.jpg">
+      <publishTime>10/21/2024 13:12:35</publishTime>
+    </File>
+    <File Include="wwwroot/Upload/ScientificDegree/Specialist/eb462d87-9936-458a-9b12-b4725c81e2c2_test.jpg">
+      <publishTime>10/21/2024 13:12:35</publishTime>
     </File>
     <File Include="wwwroot/uploads/0439b378-a9de-4ea5-a834-8218ec41f65b.jpg">
       <publishTime>10/19/2024 16:24:42</publishTime>

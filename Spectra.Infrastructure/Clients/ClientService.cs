@@ -24,7 +24,7 @@ namespace Spectra.Infrastructure.Clients
             _currentUser = currentUser;
         }
 
-        public async Task<OperationResult<string>> CreateClient(CreateDoctorDto input)
+        public async Task<OperationResult<string>> CreateClient(CreateNormalClientDto input)
         {
             //var  userId = _currentUser.Id;
 
@@ -66,26 +66,6 @@ namespace Spectra.Infrastructure.Clients
                     LogoPath = input.Organization.LogoPath,
                     LandLine = input.Organization.LandLine,
                     OrganizationType = input.Organization.OrganizationType
-                };
-            }
-
-            MedicalServiceProvider medicalServiceProvider = null;
-            if (input.MedicalServiceProvider != null)
-            {
-                medicalServiceProvider = new MedicalServiceProvider
-                {
-
-                    Name = input.MedicalServiceProvider.Name,
-                    PhoneNumber = input.MedicalServiceProvider.PhoneNumber,
-                    Industry = input.MedicalServiceProvider.Industry,
-                    TaxNumber = input.MedicalServiceProvider.TaxNumber,
-                    EmailAddress = input.MedicalServiceProvider.EmailAddress,
-                    Website = input.MedicalServiceProvider.Website,
-                    RegistrationNumber = input.MedicalServiceProvider.RegistrationNumber,
-                    Address = input.MedicalServiceProvider.Address,
-                    LogoPath = input.MedicalServiceProvider.LogoPath,
-                    LandLine = input.MedicalServiceProvider.LandLine,
-                    LegalPermissionNumber = input.MedicalServiceProvider.LegalPermissionNumber
                 };
             }
             var command = new CreateClientCommand
