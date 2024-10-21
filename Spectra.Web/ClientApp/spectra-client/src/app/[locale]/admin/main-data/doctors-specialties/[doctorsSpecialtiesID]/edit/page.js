@@ -11,7 +11,7 @@ import {
   useEditSpecialization,
 } from "@/useAPI/admin/main-data/specialties";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
-function Page({params}) {
+function Page({ params }) {
   const [formData, setFormData] = useState({
     specializationName: "",
     description: "",
@@ -20,7 +20,13 @@ function Page({params}) {
   });
   const { data, isLoading } = GetSpecializationID(params.doctorsSpecialtiesID);
 
-  const { mutate: EditSpecialization } = useEditSpecialization(formData?.id);
+  const {
+    mutate: EditSpecialization,
+    error,
+    isSuccess,
+    isError,
+    reset,
+  } = useEditSpecialization(formData?.id);
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
@@ -31,7 +37,11 @@ function Page({params}) {
       ...prev,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
+  console.log(data);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +58,11 @@ function Page({params}) {
         </Link>
         <h2 className="headTitleDash">اضافة تخصص</h2>
       </div>
-      <HandelShowDataEdit isLoading={isLoading} isID={formData?.id}>
+      <HandelShowDataEdit
+        isLoading={isLoading}
+        isID={formData?.id}
+        isSuccess={isSuccess}
+      >
         <div>
           <form
             className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
@@ -56,8 +70,8 @@ function Page({params}) {
           >
             <InputGreen
               label={"اسم التخصص"}
-              name="specializationName"
-              value={formData.specializationName}
+              name="name"
+              value={formData.name || ""}
               onChange={handleChange}
             />
             <Textarea
@@ -68,7 +82,7 @@ function Page({params}) {
               }}
               label={"وصف التخصص"}
               name="description"
-              value={formData.description}
+              value={formData.description || ""}
               onChange={handleChange}
             />
 
@@ -76,7 +90,7 @@ function Page({params}) {
               label={"تكلفة الاستشارة"}
               type="number"
               name="consultationCost"
-              value={formData.consultationCost}
+              value={formData.consultationCost || ""}
               onChange={handleChange}
             />
 
@@ -84,7 +98,7 @@ function Page({params}) {
               label={"الكود"}
               type="number"
               name="code"
-              value={formData.code}
+              value={formData.code || ""}
               onChange={handleChange}
             />
           </form>

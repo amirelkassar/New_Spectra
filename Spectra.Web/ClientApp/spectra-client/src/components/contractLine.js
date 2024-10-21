@@ -1,12 +1,13 @@
 "use client";
 import { TextInput } from "@mantine/core";
 import React from "react";
+import ShowTerms from "./ShowTerms";
 
 function ContractLine({
   service,
   title,
   type,
-
+  terms,
   activeEdit = true,
   handleServiceDataChange,
   serviceData = {},
@@ -58,6 +59,15 @@ function ContractLine({
           </p>
         </div>
       </div>
+      {terms && (
+        <div className="max-w-[730px] flex gap-1 mt-2 ">
+          <span className="!text-greenMain text-xs text-nowrap">
+            {" "}
+            Terms & Conditions{" "}
+          </span>
+          <ShowTerms>{terms}</ShowTerms>
+        </div>
+      )}
     </li>
   );
 }

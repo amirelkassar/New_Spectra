@@ -3,17 +3,18 @@ import BackIcon from "@/assets/icons/back";
 import CloseIcon from "@/assets/icons/close";
 import UploadImgIcon from "@/assets/icons/uploadImg";
 import Button from "@/components/button";
+import GetErrorMsg from "@/components/getErrorMsg";
 import InputGreen from "@/components/Input-green";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import { useCreateDrug } from "@/useAPI/admin/main-data/drugs";
 import { Dropzone } from "@mantine/dropzone";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Page() {
   const [formData, setFormData] = useState({
-    Name: "",
+    name: "",
     code: "",
     ActiveIngredient: "",
     ScientificName: "",
@@ -22,18 +23,44 @@ function Page() {
     Doncentration: "",
     DrugInteractionsWithOtherdrugs: "",
     Contraindications: "",
-    notes: "",
+    Nots: "",
     photos: [], // Include photos directly in formData
   });
 
-  const { mutate: createDrug } = useCreateDrug();
-
+  const {
+    mutate: createDrug,
+    error,
+    isSuccess,
+    isError,
+    reset,
+  } = useCreateDrug();
+  useEffect(() => {
+    isSuccess &&
+      setFormData({
+        name: "",
+        code: "",
+        ActiveIngredient: "",
+        ScientificName: "",
+        type: "",
+        RecommendedDosage: "",
+        Doncentration: "",
+        DrugInteractionsWithOtherdrugs: "",
+        Contraindications: "",
+        Nots: "",
+        photos: [], // Include photos directly in formData
+      });
+  }, [isSuccess]);
   const handleHeaderInputChange = (files) => {
-    const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
+    const newImages = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
     setFormData((prev) => ({
       ...prev,
       photos: [...prev.photos, ...files], // Update photos array with uploaded files
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleDeleteImage = (index) => {
@@ -49,12 +76,15 @@ function Page() {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    
+
     // Append all form data, including images
     for (const key in formData) {
       if (Array.isArray(formData[key])) {
@@ -81,9 +111,14 @@ function Page() {
         <h2 className="headTitleDash">اضافة وصفة طبية</h2>
       </div>
       <div>
-        <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
+          onSubmit={handleSubmit}
+        >
           <div className="flex-1 w-full h-auto relative">
-            <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">صورة العقار</h3>
+            <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">
+              صورة العقار
+            </h3>
             {formData.photos.length > 0 ? (
               <div className="flex w-full h-auto items-center flex-wrap gap-3">
                 {formData.photos.map((img, index) => (
@@ -126,10 +161,11 @@ function Page() {
 
           <InputGreen
             label="اسم العقار"
-            name="Name"
+            name="name"
             placeholder="اسم العقار او نوع التوصية"
-            value={formData.Name}
+            value={formData.name}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'Name')}
           />
           <InputGreen
             label="الكود"
@@ -142,53 +178,66 @@ function Page() {
             name="ActiveIngredient"
             value={formData.ActiveIngredient}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'ActiveIngredient')}
           />
           <InputGreen
             label="الاسم العلمي"
             name="ScientificName"
             value={formData.ScientificName}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'ScientificName')}
           />
           <InputGreen
             label="النوع"
             name="type"
             value={formData.type}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'Type')}
+
           />
           <InputGreen
             label="الجرعة الموصى به"
             name="RecommendedDosage"
             value={formData.RecommendedDosage}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'RecommendedDosage')}
+
           />
           <InputGreen
             label="تركيز الدواء"
             name="Doncentration"
             value={formData.Doncentration}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'Doncentration')}
           />
           <InputGreen
             label="تفاعلات الدواء مع أدوية أخرى"
             name="DrugInteractionsWithOtherdrugs"
             value={formData.DrugInteractionsWithOtherdrugs}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'DrugInteractionsWithOtherdrugs')}
+
           />
           <InputGreen
             label="موانع الاستخدام"
             name="Contraindications"
             value={formData.Contraindications}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'Contraindications')}
+
           />
           <InputGreen
             label="ملاحظات"
-            name="notes"
-            value={formData.notes}
+            name="Nots"
+            value={formData.Nots}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, 'Nots')}
+
           />
         </form>
         <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-          onClick={handleSubmit}
+            onClick={handleSubmit}
             type="submit"
             variant="secondary"
             className="max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

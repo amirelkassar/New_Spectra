@@ -6,7 +6,7 @@ export const SpecialtiesColumns = [
     header: "التخصص",
   },
   {
-    accessorKey: "id",
+    accessorKey: "code",
     header: "كود التخصص",
   },
   {

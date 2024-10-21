@@ -17,11 +17,11 @@ function Page() {
     reset,
   } = useCreateDiagnostics();
   const [formData, setFormData] = useState({
-    code1: null,
-    code2: null,
-    code3: null,
-    name: null,
-    description: null,
+    code1: '',
+    code2: '',
+    code3: '',
+    Name: '',
+    description: '',
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,35 +63,35 @@ function Page() {
           <InputGreen
             label='كود 1'
             name='code1'
-            value={formData.code1 || ''}
+            value={formData.code1}
             onChange={handleInputChange}
             error={GetErrorMsg(error, 'Code1')}
           />
           <InputGreen
             label='كود 2'
             name='code2'
-            value={formData.code2 || ''}
+            value={formData.code2}
             onChange={handleInputChange}
             error={GetErrorMsg(error, 'Code2')}
           />
           <InputGreen
             label='كود 3'
             name='code3'
-            value={formData.code3 || ''}
+            value={formData.code3}
             onChange={handleInputChange}
             error={GetErrorMsg(error, 'Code3')}
           />
           <InputGreen
             label='اسم التشخيص'
-            name='name'
-            value={formData.name || ''}
+            name='Name'
+            value={formData.Name}
             onChange={handleInputChange}
             error={GetErrorMsg(error, 'Name')}
           />
           <Textarea
             label='وصف التشخيص'
             name='description'
-            value={formData.description || ''}
+            value={formData.description}
             onChange={handleInputChange}
             error={GetErrorMsg(error, 'Description')}
             classNames={{

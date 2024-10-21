@@ -19,7 +19,7 @@ function Page({ params }) {
       <GoalPackagesDetails/>
       <ImgPackage />
       <Link
-        href={ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD}
+        href={ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESEDIT(params.packagesID)}
         className={
           "!py-0 text-[14px] md:text-[20px] min-w-[200px] w-full max-w-[340px] flex-1 bg-white !px-5  flex gap-[15px] font-bold items-center justify-center min-h-12 ring-2 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
         }
