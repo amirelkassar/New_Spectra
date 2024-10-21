@@ -10,7 +10,7 @@ namespace Spectra.Application.Admin.Commands
     public class UpdateDoctorEmploymentStatusCommand : ICommand<OperationResult<Unit>>
     {
         public List<string> Ids { get; set; }
-        public EmploymentStatus Status { get; set; }
+        //public EmploymentStatus Status { get; set; }
     }
 
     public class UpdateDoctorEmploymentStatusCommandHandler : IRequestHandler<UpdateDoctorEmploymentStatusCommand, OperationResult<Unit>>
@@ -32,15 +32,19 @@ namespace Spectra.Application.Admin.Commands
 
             foreach (var doctor in doctors)
             {
+                foreach (var item in doctor.Diagnoses)
+                {
+                    var specialization = await _specializationRepository.GetByNameAsync(item);
 
-                var specialization = await _specializationRepository.GetByNameAsync(doctor.Diagnoses);
 
+                    specialization.DoctorCount += 1;
+                    await _specializationRepository.UpdateAsync(specialization);
+                }
+            
 
-                specialization.DoctorCount += 1;
+                //doctor.Status = request.Status;
 
-                doctor.Status = request.Status;
-
-                await _specializationRepository.UpdateAsync(specialization);
+             
 
                 await _doctorRepository.UpdateAsync(doctor);
 
