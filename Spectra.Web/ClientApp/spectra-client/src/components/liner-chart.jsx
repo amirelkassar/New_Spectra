@@ -56,8 +56,8 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
                   return '#10B0C1'; // أخضر
                 }
               },
-              pointRadius: 14,
-              borderWidth: 10,
+              pointRadius: 8,
+              borderWidth: 4,
               tension: 0,
             },
           ],
@@ -100,20 +100,6 @@ const LinerChart = ({ chartData = [{ x: '', y: '' }] }) => {
       className='space-y-5'
     >
       <canvas ref={chartRef} />
-      <div className='w-full text-xs lg:text-base text-black flex items-center gap-5 justify-center'>
-        <span className='flex items-center gap-3'>
-          <span className='size-4 rounded-full bg-purple' />
-          معدل معتدل
-        </span>
-        <span className='flex items-center gap-3'>
-          <span className='size-4 rounded-full bg-red' />
-          معدل متأخر
-        </span>
-        <span className='flex items-center gap-3'>
-          <span className='size-4 rounded-full bg-greenMain' />
-          معدل متقدم
-        </span>
-      </div>
     </div>
   );
 };

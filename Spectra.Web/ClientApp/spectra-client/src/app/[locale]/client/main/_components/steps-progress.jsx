@@ -4,6 +4,7 @@ import CheckIcon from '@/assets/icons/check';
 import { cn } from '@/lib/utils';
 import ROUTES from '@/routes';
 import { Link } from '@/navigation';
+import { AddChild } from './add-child';
 
 const steps = [
   {
@@ -11,7 +12,7 @@ const steps = [
     label: 'اضف طفل',
     description:
       'اول خطوة اضافة طفل عن طريق ملئ بيانات خاصة بطفلك',
-    href: '#',
+    href: '?add-child=true',
   },
   {
     isDone: false,
@@ -22,7 +23,7 @@ const steps = [
   },
   {
     isDone: false,
-    label: 'حجز الاستشارة المجانية',
+    label: 'حجز الاستشارة',
     description:
       'حجز استشارة مع طبيب حتى يتم تحديد الخطة العلاجية الخاصة بطفلك',
     href: '#',
@@ -40,11 +41,11 @@ export const StepsProgress = () => {
 
   return (
     <section className='flex items-center flex-col xl:flex-row '>
-      <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[162px]'>
+      <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[262px] xl:px-10'>
         اكمل الخطوات وسنرشح لك أفضل حل لطفلك
       </p>
 
-      <div className='flex-1 xl:mt-0 mt-5 space-y-3 max-w-[887px]'>
+      <div className='flex-1 xl:mt-0 mt-5 space-y-3'>
         <span className='text-black mdl:text-medium text-base'>
           {progressValue}% من ملفك تم اكماله
         </span>
@@ -55,7 +56,7 @@ export const StepsProgress = () => {
           size='xl'
           value={progressValue}
         />
-        <div className='h-fit bg-grayLight rounded-[10px] p-4 flex items-start justify-between gap-2 w-full lgl:flex-row flex-col'>
+        <div className='h-fit bg-grayLight rounded-[10px] p-4 lgl:p-7 flex items-start justify-between gap-2 w-full lgl:flex-row flex-col'>
           {steps.map((step, index) => (
             <div className='w-full' key={index}>
               <Step
@@ -68,6 +69,8 @@ export const StepsProgress = () => {
           ))}
         </div>
       </div>
+
+      <AddChild />
     </section>
   );
 };
@@ -83,19 +86,19 @@ const Step = ({ step, isDone = false, length, index }) => {
       {/* ICON */}
 
       <div className='flex items-center'>
-        <div
-          role='button'
-          className={cn(
-            'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10 transition group-hover:bg-greenMain',
-            isDone
-              ? 'bg-greenMain'
-              : 'bg-grayDark text-white text-[20px]'
-          )}
-        >
-          <Link href={step.href}>
+        <Link href={step.href}>
+          <div
+            role='button'
+            className={cn(
+              'w-8 h-8 shrink-0 rounded-full flex items-center justify-center relative z-10 transition group-hover:bg-greenMain',
+              isDone
+                ? 'bg-greenMain'
+                : 'bg-grayDark text-white text-[20px]'
+            )}
+          >
             {isDone ? <CheckIcon /> : index + 1}
-          </Link>
-        </div>
+          </div>
+        </Link>
         <p
           role='button'
           className='text-black min-w-40 lgl:min-w-fit font-semibold hidden lgl:block relative z-10 px-2 bg-grayLight'
@@ -129,7 +132,7 @@ const Step = ({ step, isDone = false, length, index }) => {
           />
           <div
             className={cn(
-              'absolute w-[1px] h-[calc(100%-16px)] lgl:hidden start-4 top-5 bg-grayDark group-hover:bg-greenMain',
+              'absolute w-[1px] h-[calc(100%-20px)] lgl:hidden start-4 top-5 bg-grayDark group-hover:bg-greenMain',
               isDone && 'bg-greenMain'
             )}
           />
