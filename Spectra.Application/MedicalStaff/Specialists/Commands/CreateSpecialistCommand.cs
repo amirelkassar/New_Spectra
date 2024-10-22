@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MedicalStaff.Specialists;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MedicalStaff.Specialists;
+using Spectra.Domain.Employees.MedicalStaff.Specialists;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;

@@ -12,5 +12,6 @@ namespace Spectra.Application.Admin.Dto
         public string Email { get; set; }
         //public string JobType { get; set; }
         public DateTimeOffset  TimeToJoin { get; set; }
+        public string JopType { get; set; }
     }
 }

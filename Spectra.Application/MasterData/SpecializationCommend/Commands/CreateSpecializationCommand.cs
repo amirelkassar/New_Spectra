@@ -14,7 +14,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     public class CreateSpecializationCommand : ICommand<OperationResult<string>>
     {
 
-        public string SpecializationName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string Code { get; set; }
        
@@ -35,13 +35,18 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
         public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
         {
             var specialization = await _specializationRepository.GetAllAsync();
-            if (specialization.Any(x => x.Name == request.SpecializationName))
+            if (specialization.Any(x => x.Name == request.Name))
             {
                 throw new DbErrorException("A specialization with the same Name already exists.");
             }
 
-            var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(Ulid.NewUlid().ToString(),  
-                request.SpecializationName.ToLower() , 0, request.Code ,request.Description, request.ConsultationCost);
+            var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(
+                Ulid.NewUlid().ToString(),  
+                request.Name.ToLower() , 
+                0,
+                request.Code ,
+                request.Description,
+                request.ConsultationCost);
 
             await _specializationRepository.AddAsync(Specialization);
             return OperationResult<string>.Success(Specialization.Id);
@@ -54,12 +59,16 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     {
         public CreateSpecializationCommandValidator()
         {
-            RuleFor(x => x.SpecializationName)
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Specialization Name is required.")
                 .MaximumLength(100).WithMessage("Specialization Name must not exceed 100 characters.");
+            RuleFor(x => x.Code)
+            .NotEmpty().WithMessage("Code is required.")
+            .MaximumLength(100).WithMessage("Code must not exceed 100 characters.");
 
             RuleFor(x => x.Description).NotEmpty()
                 .MaximumLength(1000).WithMessage("Description must not exceed 500 characters.");
+
 
             RuleFor(x => x.ConsultationCost)
      .GreaterThan(0).WithMessage("Consultation Cost must be greater than 0.")

@@ -35,7 +35,7 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                     foreach (var item in request.Data)
                     {
 
-                        var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.SpecializationName,0 , item.Code, item.Description , item.ConsultationCost
+                        var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.Name,0 , item.Code, item.Description , item.ConsultationCost
 
                    );
                       

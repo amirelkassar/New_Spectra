@@ -5,7 +5,7 @@ using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -19,7 +19,7 @@ namespace Spectra.Infrastructure.Admin
         Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input);
         Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input);
         Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input);
-        Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees();
+        Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input);
 
         //Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input);
         //Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);

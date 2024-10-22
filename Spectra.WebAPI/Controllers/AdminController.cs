@@ -39,9 +39,9 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpGet("GetAllEmployees")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllClients()
+        public async Task<ActionResult> GetAllEmployees([FromQuery] GetAllEmployeesQuery input )
         {
-            var appointmenties = await _adminService.GetAllEmplyees();
+            var appointmenties = await _adminService.GetAllEmplyees(input);
             return Ok(appointmenties);
         }
 

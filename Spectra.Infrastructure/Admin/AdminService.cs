@@ -13,7 +13,7 @@ using Spectra.Application.MedicalStaff.Doctors.Services;
 using Spectra.Application.MedicalStaff.Specialists.Dto;
 using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Domain.Clients;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -83,9 +83,9 @@ namespace Spectra.Infrastructure.Admin
         }
     
 
-        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees()
+        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input)
         {
-            var query = new GetAllEmployeesQuery();
+            var query = new GetAllEmployeesQuery() { PageNumber= input.PageNumber , PageSize=input.PageSize };
             return await _mediator.Send(query);
         }
 

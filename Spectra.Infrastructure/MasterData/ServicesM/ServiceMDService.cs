@@ -30,13 +30,13 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
 
             var command = new CreateServicesMCommand
             {
-                ServicesName = input.ServicesName,
+                Name = input.Name,
                 DefinitionServices = input.DefinitionServices,
                 AvailableSrvices = input.AvailableSrvices,
                 Price = input.Price,
                 TermsAndConditions = input.TermsAndConditions,
-                ServiceAddress = input.ServiceAddress,
-                Content = input.Content,
+                //ServiceAddress = input.ServiceAddress,
+                //Content = input.Content,
                 Secations = input.Secations,
                 Photo = input.Photo
 
@@ -70,13 +70,13 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
             {
 
                 Id = id,
-                ServicesName = input.ServicesName,
+                Name = input.Name,
                 DefinitionServices = input.DefinitionServices,
                 AvailableSrvices = input.AvailableSrvices,
                 Price = input.Price,
                 TermsAndConditions = input.TermsAndConditions,
-                Address = input.Address,
-                Content = input.Content,
+                //Address = input.Address,
+                //Content = input.Content,
                 Secations = input.Secations,
                 Photo = input.Photo
 

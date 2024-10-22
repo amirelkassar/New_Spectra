@@ -13,8 +13,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public string DefinitionServices { get; set; }
         public double Price { get; set; }
         public string TermsAndConditions { get; set; }
-        public string? Address { get; set; }
-        public string? Content { get; set; }
+        //public string? Address { get; set; }
+        //public string? Content { get; set; }
         public List<Secation>? Secations { get; set; }
         public List<string>? AttachmentPath { get; set; }
 
@@ -26,8 +26,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
         AvailableSrvice availableServices,
         double servicePrice,
         string termsAndConditions,
-        string? serviceAddress = null,
-        string? content = null,
+        //string? serviceAddress = null,
+        //string? content = null,
         List<Secation>? secations =null,
       List<string>?  attachmentPath = null
                ) : base(id)
@@ -38,8 +38,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
             AvailableSrvices = availableServices;
             Price = servicePrice;
             TermsAndConditions = termsAndConditions;
-            Address = serviceAddress;
-            Content = content;
+            //Address = serviceAddress;
+            //Content = content;
             Secations = secations;
             AttachmentPath = attachmentPath;
         }
@@ -49,8 +49,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
         AvailableSrvice availableServices,
         double servicePrice,
         string termsAndConditions,
-        string? serviceAddress = null,
-        string? content = null,
+        //string? serviceAddress = null,
+        //string? content = null,
         List<Secation>? secations=null ,
       List<string>?  attachmentPath = null
        )
@@ -78,7 +78,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
                 servicesName, definitionServices, 
                 availableServices, servicePrice,
                 termsAndConditions, 
-                serviceAddress, content, secationList, attachmentPath);
+              /*  serviceAddress, content,*/ secationList, attachmentPath);
 
         }
     

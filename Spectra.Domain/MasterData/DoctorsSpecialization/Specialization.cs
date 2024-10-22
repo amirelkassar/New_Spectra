@@ -17,8 +17,8 @@ namespace Spectra.Domain.MasterData.DoctorsSpecialization
         {
             Id = id;
             Name = specializationName;
-            //Code = code;
-            //DoctorCount= doctorCount;
+            Code = code;
+            DoctorCount = doctorCount;
             Description = description;
             ConsultationCost = consultationCost;
         }

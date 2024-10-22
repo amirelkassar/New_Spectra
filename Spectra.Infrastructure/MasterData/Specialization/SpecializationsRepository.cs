@@ -4,6 +4,7 @@ using Spectra.Application.MasterData.SpecializationCommend;
 
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,13 @@ namespace Spectra.Infrastructure.MasterData.Specialization
         }
         public async Task<Domain.MasterData.DoctorsSpecialization.Specialization> GetByIdAsync(string id)
         {
-            return await _specializations.Find(c => c.Id == id).FirstOrDefaultAsync();
+         
+            var entity = await _specializations.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Specialization", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(Domain.MasterData.DoctorsSpecialization.Specialization Specializations)

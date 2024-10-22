@@ -10,9 +10,11 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     public class UpdateSpecializationCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
-        public string SpecializationName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public string Code { get; set; }
         public double ConsultationCost { get; set; }
+
     }
 
     public class UpdateSpecializationCommandHandler : IRequestHandler<UpdateSpecializationCommand, OperationResult<Unit>>
@@ -35,7 +37,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             {
                 throw new FluentValidation.ValidationException(validationResult.Errors);
             }
-            Specializations.Name = request.SpecializationName;
+            Specializations.Name = request.Name;
             Specializations.Description = request.Description;
             Specializations.ConsultationCost = request.ConsultationCost;
 
@@ -53,9 +55,12 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("Id is required.");
 
-            RuleFor(x => x.SpecializationName)
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Specialization Name is required.")
                 .MaximumLength(100).WithMessage("Specialization Name must not exceed 100 characters.");
+            RuleFor(x => x.Code)
+              .NotEmpty().WithMessage("Code is required.")
+              .MaximumLength(100).WithMessage("Specialization Code must not exceed 100 characters.");
 
             RuleFor(x => x.Description)
                 .MaximumLength(500).WithMessage("Description must not exceed 500 characters.");

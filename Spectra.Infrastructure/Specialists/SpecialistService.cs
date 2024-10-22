@@ -4,7 +4,7 @@ using Spectra.Application.MedicalStaff.Specialists.Commands;
 using Spectra.Application.MedicalStaff.Specialists.Dto;
 using Spectra.Application.MedicalStaff.Specialists.Queries;
 using Spectra.Application.MedicalStaff.Specialists.Services;
-using Spectra.Domain.MedicalStaff.Specialists;
+using Spectra.Domain.Employees.MedicalStaff.Specialists;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;

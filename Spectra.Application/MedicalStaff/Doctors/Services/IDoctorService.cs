@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Application.MedicalStaff.Doctors.Dto;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MedicalStaff.Specialists.Dto;
-using Spectra.Domain.MedicalStaff.Specialists;
+using Spectra.Domain.Employees.MedicalStaff.Specialists;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 

@@ -3,13 +3,13 @@ using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MedicalStaff.Doctor;
+
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 using Microsoft.AspNetCore.Http;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using Spectra.Domain.MedicalStaff.Specialists;
+
 using Spectra.Application.MedicalStaff.Specialists;
 
 namespace Spectra.Application.Admin.Commands

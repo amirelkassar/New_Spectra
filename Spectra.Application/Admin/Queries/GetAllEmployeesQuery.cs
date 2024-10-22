@@ -9,7 +9,8 @@ namespace Spectra.Application.Admin.Queries
 {
     public class GetAllEmployeesQuery : IRequest<OperationResult<CollectAllEmployeeDto>>
     {
-
+        public int PageNumber { get; set; } 
+        public int PageSize { get; set; } 
     }
 
     public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, OperationResult<CollectAllEmployeeDto>>
@@ -26,20 +27,48 @@ namespace Spectra.Application.Admin.Queries
         {
 
 
-            var Doctors = await _doctorRepositor.GetAllAsync();
-            var Specialists = await _specialistRepository.GetAllAsync();
+         
+            var doctors = await _doctorRepositor.GetAllAsync();
+            var specialists = await _specialistRepository.GetAllAsync();
 
-            var DoctorsData = Doctors.Select(c => new GetAllEmployeesDto { Name = $"{c.Name.FirstName} + {c.Name.LastName}",
-                Email = c.EmailAddress.Emailaddress,TimeToJoin=c.Created.Date });
+        
+            var allEmployees = doctors.Select(c => new GetAllEmployeesDto
+            {
+                Name = $"{c.Name.FirstName} {c.Name.LastName}",
+                Email = c.EmailAddress.Emailaddress,
+                TimeToJoin = c.Created.Date,
+                JopType="Doctor"
 
-            var SpecialistsDatas = Specialists.Select(c => new GetAllEmployeesDto { Name = $"{c.Name.FirstName} + {c.Name.LastName}", 
-                Email = c.EmailAddress.Emailaddress,TimeToJoin=c.Created.Date });
+            }).ToList();
 
-            var CollectEmpleyees = new CollectAllEmployeeDto { Doctors = DoctorsData, Specialists = SpecialistsDatas };
+            allEmployees.AddRange(specialists.Select(c => new GetAllEmployeesDto
+            {
+                Name = $"{c.Name.FirstName} {c.Name.LastName}",
+                Email = c.EmailAddress.Emailaddress,
+                TimeToJoin = c.Created.Date,
+                JopType= "Specialist"
+            }));
 
+            
+            var totalItems = allEmployees.Count;
+            var totalPages = (int)Math.Ceiling(totalItems / (double)request.PageSize);
 
+            var paginatedEmployees = allEmployees
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
 
-            return OperationResult<CollectAllEmployeeDto>.Success(CollectEmpleyees);
+           
+            var collectEmployees = new CollectAllEmployeeDto
+            {
+                Employees = paginatedEmployees, 
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                TotalPages = totalPages,
+                TotalItems = totalItems
+            };
+
+            return OperationResult<CollectAllEmployeeDto>.Success(collectEmployees);
         }
     }
 }

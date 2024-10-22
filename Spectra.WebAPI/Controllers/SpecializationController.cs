@@ -29,7 +29,7 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> GetAllSpecializationsNames()
         {
-            var Specializationsies = await _specializationsServices.GetAllSpecializationsNames( );
+            var Specializationsies = await _specializationsServices.GetAllSpecializationsNames();
           
             return Ok(Specializationsies);
         }

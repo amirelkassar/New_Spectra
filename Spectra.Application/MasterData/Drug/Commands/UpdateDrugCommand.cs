@@ -48,10 +48,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<Unit>> Handle(UpdateDrugCommand request, CancellationToken cancellationToken)
         {
             var drug = await _drugRepository.GetByIdAsync(request.Id);
-            if (drug == null)
-            {
-                throw new NotFoundException("Drug",request.Id);
-            }
+          
 
             drug.Name = request.Name;
             drug.ActiveIngredient = request.ActiveIngredient;

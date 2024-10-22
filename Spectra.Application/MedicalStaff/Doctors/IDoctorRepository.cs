@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Hellper;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using System.Linq.Expressions;
 
 namespace Spectra.Application.MedicalStaff.Doctors

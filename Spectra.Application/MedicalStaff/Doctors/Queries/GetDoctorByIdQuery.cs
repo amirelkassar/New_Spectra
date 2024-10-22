@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.MedicalStaff.Doctors;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MedicalStaff.Doctors.Queries

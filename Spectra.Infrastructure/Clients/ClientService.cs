@@ -28,7 +28,7 @@ namespace Spectra.Infrastructure.Clients
             _currentUser = currentUser;
         }
 
-        public async Task<OperationResult<string>> CreateClient(CreateDoctorDto input)
+        public async Task<OperationResult<string>> CreateClient(CreateNormalClientDto input)
         {
             //var  userId = _currentUser.Id;
 

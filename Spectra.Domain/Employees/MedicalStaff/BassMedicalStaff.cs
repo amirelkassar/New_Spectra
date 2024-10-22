@@ -8,24 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.MedicalStaff
+namespace Spectra.Domain.Employees.MedicalStaff
 {
-    public abstract class BassMedicalStaff : BaseAuditableEntity<string>
+    public abstract class BassMedicalStaff : BassEmployees
     {
-        public Name Name { get; set; }
-        public string NationalId { get; set; }
-        public PhoneNumber? MobileNumber { get; set; }
-        public HumenGender HumenGenders { get; set; }
-        public EmailAddress EmailAddress { get; set; }
-        public Address Address { get; set; }
-    
+ 
+
         public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public List<string> AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
-   
+
 
         protected BassMedicalStaff() { }
         public BassMedicalStaff(
@@ -42,8 +37,8 @@ namespace Spectra.Domain.MedicalStaff
                    string academicdegree,
                     List<string> attachmentPath,
                    EmpelyeeRates? empelyeeRate
-               
-                   ) : base(id)
+
+                   ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)
         {
             Id = id;
             Name = name;
@@ -58,10 +53,10 @@ namespace Spectra.Domain.MedicalStaff
             Academicdegree = academicdegree;
             AttachmentPath = attachmentPath;
             EmpelyeeRate = empelyeeRate;
-      
-          
+
+
         }
 
     }
-   
+
 }

@@ -4,7 +4,7 @@ using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.ScheduleAppointments.Appointments;
-using Spectra.Domain.MedicalStaff.Doctor;
+
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;

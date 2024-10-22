@@ -1,17 +1,24 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Clients;
+using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Spectra.Domain.MedicalStaff.Doctor
+namespace Spectra.Domain.Employees.MedicalStaff.Specialists
 {
-    public class Doctor : BassMedicalStaff
+    public class Specialist : BassMedicalStaff
     {
-      
-        protected Doctor() { }
 
-        private Doctor(
+        protected Specialist() { }
+
+
+
+        private Specialist(
             string id,
             Name name,
             string nationalId,
@@ -19,25 +26,21 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             HumenGender humenGenders,
             EmailAddress emailAddress,
             Address address,
-           List<string> diagnoses,
+            List<string> diagnoses,
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            List<string> attachmentPath,
+             List<string> attachmentPath,
             EmpelyeeRates? empelyeeRate
-         
+           )
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address,
+                  diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate)
+        { }
 
 
 
-            )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate 
-                  )
-        { 
 
-        } 
-
-   
-            public static Doctor Create(
+        public static Specialist Create(
             string id,
             Name name,
             string nationalId,
@@ -49,12 +52,10 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-           List<string> attachmentPath,
-            
-            EmpelyeeRates? empelyeeRate
+             List<string> attachmentPath,
+             EmpelyeeRates? empelyeeRate
 
             )
-
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
@@ -66,17 +67,15 @@ namespace Spectra.Domain.MedicalStaff.Doctor
             ArgumentNullException.ThrowIfNull(diagnoses, nameof(diagnoses));
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
-            ArgumentNullException.ThrowIfNull(empelyeeRate, nameof(empelyeeRate));
-           
 
-            var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath , empelyeeRate);
+            var specialist = new Specialist(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate
+               );
 
-            return doctor;
+            return specialist;
 
 
         }
 
     }
-
 }

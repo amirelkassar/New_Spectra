@@ -21,12 +21,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
     {
         public string Id { get; set; }
         public AvailableSrvice AvailableSrvices { get; set; }
-        public string ServicesName { get; set; }
+        public string Name { get; set; }
         public string DefinitionServices { get; set; }
         public double Price { get; set; }
         public string TermsAndConditions { get; set; }
-        public string? Address { get; set; }
-        public string? Content { get; set; }
+        //public string? Address { get; set; }
+        //public string? Content { get; set; }
 
         public List<Secation>? Secations { get; set; }
         public List<IFormFile>? Photo { get; set; }
@@ -53,13 +53,13 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 var entity = await _serviceMRepository.GetByIdAsync(request.Id);
           
 
-                entity.Name = request.ServicesName;
+                entity.Name = request.Name;
                 entity.DefinitionServices = request.DefinitionServices;
                 entity.AvailableSrvices = request.AvailableSrvices;
                 entity.Price = request.Price;
                 entity.TermsAndConditions = request.TermsAndConditions;
-                entity.Address = request.Address;
-                entity.Content = request.Content;
+                //entity.Address = request.Address;
+                //entity.Content = request.Content;
                 entity.Secations = request.Secations;
 
                 if (request.Photo != null)

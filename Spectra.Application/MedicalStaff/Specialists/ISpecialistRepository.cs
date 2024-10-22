@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using Spectra.Domain.MedicalStaff.Specialists;
+using Spectra.Domain.Employees.MedicalStaff.Specialists;
 using System.Linq.Expressions;
 
 namespace Spectra.Application.MedicalStaff.Specialists
