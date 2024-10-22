@@ -30,8 +30,8 @@ const HeroSection = ({
 }) => {
   return (
     <section>
-      <Card className='bg-blueLight overflow-hidden flex !p-0'>
-        <div className='w-[50%] p-5 h-fit md:my-auto'>
+      <Card className='bg-blueLight overflow-hidden flex justify-between w-full !p-0 *:flex-1'>
+        <div className='xl:p-10 p-5 space-y-7'>
           <Heading
             className='flex-row-reverse items-start justify-end gap-5 lg:text-4xl text-2xl lg:max-w-[70%] leading-relaxed'
             label={label}
@@ -49,14 +49,16 @@ const HeroSection = ({
           </p>
         </div>
 
-        <Image
-          src={PackagesImage}
-          width={1536}
-          height={1661}
-          alt='Packages Details Image'
-          priority
-          className='w-full max-w-[50%] h-full object-contain'
-        />
+        <div className='flex justify-end ltr:justify-start -me-2 ltr:rotate-180'>
+          <Image
+            src={PackagesImage}
+            width={1536}
+            height={1661}
+            alt='Packages Details Image'
+            priority
+            className='w-auto h-full max-h-[650px] object-contain'
+          />
+        </div>
       </Card>
     </section>
   );

@@ -3,6 +3,7 @@ import ArrowDownIcon from '@/assets/icons/arrow-down';
 import { Select } from '@mantine/core';
 import { useState } from 'react';
 import { SelectProps } from '@mantine/core';
+import { cn } from '@/lib/utils';
 
 /**
  * @typedef {Object} SelectProps
@@ -17,6 +18,8 @@ const SelectInput = ({
   label = '',
   size = 'md',
   data = [],
+  labelClassName = '',
+  inputClassName = '',
   ...props
 }) => {
   const [opened, setOpened] = useState(false);
@@ -37,9 +40,14 @@ const SelectInput = ({
         </span>
       }
       classNames={{
-        input:
+        input: cn(
           'rounded-lg group focus:border-greenMain placeholder:font-normal',
-        label: 'text-base mdl:text-xl mb-2 ps-1',
+          inputClassName
+        ),
+        label: cn(
+          'text-base mdl:text-xl mb-2 ps-1',
+          labelClassName
+        ),
       }}
     />
   );

@@ -6,53 +6,11 @@ import AddMainData from "../_components/add-drugs";
 import ROUTES from "@/routes";
 import { GetSpecialization } from "@/useAPI/admin/main-data/specialties";
 import HandelShowData from "@/components/handelShowData";
-const specialtiesData = [
-  {
-    id: 0,
-    specialty: "نفسية",
-    code: 132,
-    doctorsCount: 12,
-  },
-  {
-    id: 1,
-    specialty: "عصبية",
-    code: 132,
-    doctorsCount: 31,
-  },
-  {
-    id: 2,
-    specialty: "علاجية",
-    code: 132,
-    doctorsCount: 22,
-  },
-  {
-    id: 3,
-    specialty: "تغذية",
-    code: 132,
-    doctorsCount: 31,
-  },
-  {
-    id: 4,
-    specialty: "وظيفية",
-    code: 132,
-    doctorsCount: 4,
-  },
-  {
-    id: 5,
-    specialty: "نفسية",
-    code: 132,
-    doctorsCount: 5,
-  },
-  {
-    id: 6,
-    specialty: "عصبية",
-    code: 132,
-    doctorsCount: 8,
-  },
-];
+
 
 function page() {
   const { data, isLoading } = GetSpecialization();
+console.log(data);
 
   return (
     <div>

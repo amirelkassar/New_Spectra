@@ -14,7 +14,7 @@ function StaffInformation() {
   const params = useParams();
 
   return searchParams.get("edit") === "true" ? (
-    <PageEditStaff id={params.id}/>
+    <PageEditStaff id={params.id} />
   ) : (
     <div className="flex flex-col gap-5 w-full">
       <Card>
@@ -86,19 +86,19 @@ function StaffInformation() {
             <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
               المسمى الوظيفي{" "}
             </h4>
-            <p className="text-xs lg:text-base font-bold    ">سكرتيره</p>
+            <p className="text-xs lg:text-base font-bold">سكرتيره</p>
           </li>
           <li className="flex items-center gap-4 lg:gap-8">
             <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
               القسم
             </h4>
-            <p className="text-xs lg:text-base font-bold    ">الطب النفسى</p>
+            <p className="text-xs lg:text-base font-bold">الطب النفسى</p>
           </li>
           <li className="flex items-center gap-4 lg:gap-8">
             <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
               المؤهلات
             </h4>
-            <p className="text-xs lg:text-base font-bold    ">
+            <p className="text-xs lg:text-base font-bold">
               بكالوريوس اداب بجامعة السعودية
             </p>
           </li>
@@ -106,19 +106,20 @@ function StaffInformation() {
             <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
               تاريخ الانضمام
             </h4>
-            <p className="text-xs lg:text-base font-bold    ">5/5/2020</p>
+            <p className="text-xs lg:text-base font-bold">5/5/2020</p>
           </li>
-          <li className="flex items-center gap-4 lg:gap-8">
-            <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
-              الحالة الوظيفية
-            </h4>
-            <p className="text-xs lg:text-base font-bold    ">نشط</p>
-          </li>
+
           <li className="flex items-center gap-4 lg:gap-8">
             <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
               ساعات العمل
             </h4>
-            <p className="text-xs lg:text-base font-bold    ">8 ساعات</p>
+            <p className="text-xs lg:text-base font-bold">8 ساعات</p>
+          </li>
+          <li className="flex items-center gap-4 lg:gap-8">
+            <h4 className="text-xs lg:text-base font-Regular min-w-[130px] max-w-[130px]">
+              البريد الالكترونى الوظيفى / اسم المستخدم
+            </h4>
+            <p className="text-xs lg:text-base font-bold">FatmaAli!1235</p>
           </li>
         </ul>
       </Card>

@@ -11,6 +11,7 @@ import LicenseIcon from "@/assets/icons/License";
 import ActionMenu from "../_components/ActionMenu";
 import { useSearchParams } from "next/navigation";
 import PageEdit from "./_components/pageEdit";
+import HourglassIcon from "@/assets/icons/Hourglass";
 const data = {
   name: "احمد محمد كمال",
   spec: " اخصائى نفسى",
@@ -192,6 +193,19 @@ function Page({ params }) {
                 </h3>
                 <p className=" text-[14px] lg:text-[20px] font-normal ">
                   {data.licenseNumber}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 lg:gap-5">
+              <HourglassIcon
+                className={"min-w-[22px] w-[22px] lg:min-w-[25px] h-auto mt-3"}
+              />
+              <div>
+                <h3 className=" text-[14px] lg:text-[16px] font-bold lg:mb-2">
+                  سنوات الخبرة
+                </h3>
+                <p className=" text-[14px] lg:text-[20px] font-normal ">
+                  5 سنوات
                 </p>
               </div>
             </div>

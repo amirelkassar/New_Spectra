@@ -2,12 +2,11 @@
 import { useState } from 'react';
 
 import Card from '@/components/card';
-import StarGoldIcon from '@/assets/icons/starGold';
 import Button from '@/components/button';
 import ChildPopover from '../../_components/child-popover';
-import Avatar from '@/components/avatar';
 import { useRouter } from '@/navigation';
 import ROUTES from '@/routes';
+import { DoctorBadge } from '../../_components/doctor-badge';
 
 const data = [
   {
@@ -173,27 +172,7 @@ const ChildDetails = ({
           {/* TEAM */}
           <div className='flex gap-7 max-w-full overflow-x-auto pb-5'>
             {treatmentTeam?.map((doc, index) => (
-              <div
-                key={'child-treatment-team' + index}
-                className={
-                  'flex items-center flex-col lg:flex-row gap-4 p-4 border-2 border-blueLight rounded-xl shrink-0'
-                }
-              >
-                <Avatar
-                  src={doc?.avatar || ''}
-                  name={doc?.name}
-                  className='size-16 rounded-full lg:rounded lg:size-20 min-w-max inline-flex shrink-0'
-                  radius='lg'
-                />
-                <div className='text-black text-center lg:text-start !text-xs lg:!text-base'>
-                  <h5 className='font-bold'>{doc?.name}</h5>
-                  <p>{doc?.profession}</p>
-                  <p className='text-grayDark rounded-full border border-grayDark font-bold flex items-center justify-center gap-x-1 px-2 w-full mt-2'>
-                    {doc?.rate}
-                    <StarGoldIcon className='size-3' />
-                  </p>
-                </div>
-              </div>
+              <DoctorBadge key={index} {...doc} />
             ))}
           </div>
 

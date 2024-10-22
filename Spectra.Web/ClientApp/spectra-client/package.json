@@ -38,6 +38,7 @@
     "react-dom": "^18",
     "react-phone-input-2": "^2.15.1",
     "react-quill": "^2.0.0",
+    "react-show-more-text": "^1.7.1",
     "react-signature-canvas": "^1.0.6",
     "react-sortablejs": "^6.1.4",
     "sortablejs": "^1.15.3",

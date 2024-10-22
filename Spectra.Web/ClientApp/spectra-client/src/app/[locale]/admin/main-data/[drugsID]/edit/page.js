@@ -26,7 +26,7 @@ function Page({ params }) {
     doncentration: '',
     interactionsWithOtherdrugs: '',
     interactionsWithOtherdrugs: '',
-    notes: '',
+    nots: '',
     attachmentPath: [],
   });
   const { data, isLoading } = GetDrugsID(params.drugsID);
@@ -204,8 +204,8 @@ function Page({ params }) {
             />
             <InputGreen
               label='ملاحظات'
-              name='notes'
-              value={getValue(formData.notes)}
+              name='nots'
+              value={getValue(formData.nots)}
               onChange={handleInputChange}
             />
           </form>

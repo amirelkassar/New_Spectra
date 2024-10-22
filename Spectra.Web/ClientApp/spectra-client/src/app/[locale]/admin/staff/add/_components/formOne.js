@@ -2,7 +2,7 @@ import Button from "@/components/button";
 import { Select, TextInput } from "@mantine/core";
 import React from "react";
 
-function FormOne({ setFirstData, firstData, setNextForm }) {
+function FormOne({ setFirstData, firstData, setPageForm }) {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFirstData({
@@ -112,7 +112,7 @@ function FormOne({ setFirstData, firstData, setNextForm }) {
           }}
         />
         <Button
-          onClick={() => setNextForm(true)}
+          onClick={() => setPageForm(2)}
           variant="secondary"
           className="font-Bold text-base md:text-xl w-[316px] h-14 max-w-full"
         >

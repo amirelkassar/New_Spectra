@@ -174,25 +174,26 @@ function PageEditStaff({ id }) {
                 }}
               />
             </li>
-            <li className="flex items-center gap-4 lg:gap-8">
-              <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
-                الحالة الوظيفية
-              </h4>
 
-              <Select
-                className=" w-full  !border-[#CFD0D7] !outline-none"
-                defaultValue={"نشط"}
-                data={["غير نشط", "نشط"]}
-                searchable
-                nothingFoundMessage="Nothing found..."
-              />
-            </li>
             <li className="flex items-center gap-4 lg:gap-8">
               <h4 className="text-xs lg:text-base font-Regular min-w-[130px]">
                 ساعات العمل
               </h4>
               <Input
                 value={"8 ساعات"}
+                containerClassName={"!gap-1 flex-1  max-w-full"}
+                labelClassName={"!text-[16px] !mb-0 px-4"}
+                inputClassName={
+                  "!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold"
+                }
+              />
+            </li>
+            <li className="flex items-center gap-4 lg:gap-8">
+              <h4 className="text-xs lg:text-base font-Regular min-w-[130px] max-w-[130px]">
+                البريد الالكترونى الوظيفى / اسم المستخدم
+              </h4>
+              <Input
+                value={"FatmaAli!1235"}
                 containerClassName={"!gap-1 flex-1  max-w-full"}
                 labelClassName={"!text-[16px] !mb-0 px-4"}
                 inputClassName={

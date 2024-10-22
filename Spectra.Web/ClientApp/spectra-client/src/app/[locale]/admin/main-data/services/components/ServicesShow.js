@@ -1,6 +1,6 @@
 "use client";
 import { MultiSelect, Textarea } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
 import BackIcon from "@/assets/icons/back";
@@ -13,6 +13,8 @@ import CheckHeartIcon from "@/assets/icons/check-heart";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import InputGreen from "@/components/Input-green";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
+import { useCreateMasterDataServices } from "@/useAPI/admin/main-data/services";
+import GetErrorMsg from "@/components/getErrorMsg";
 const dataSelect = [
   "SPEECH Pediatrics LANGUAGE ASSESSMENT",
   "Psychological Initial Assessment",
@@ -22,19 +24,40 @@ const dataSelect = [
 ];
 function ServicesShow() {
   const [formData, setFormData] = useState({
-    serviceTitle: "",
-    shortDescription: "",
-    dataImg: "",
-    largeFile: "",
-    price: "",
-    terms: "",
-    sections: [{ title: "", content: "" }],
+    AvailableSrvices: "1",
+    ServicesName: "",
+    DefinitionServices: "",
+    Photo: "",
+    Price: "",
+    TermsAndConditions: "",
+    Secations: [{ sectiontitle: "", sectiondescription: "" }],
   });
+  const {
+    mutate: createDrug,
+    error,
+    isSuccess,
+    isError,
+    reset,
+  } = useCreateMasterDataServices();
+  useEffect(() => {
+    isSuccess &&
+      setFormData({
+        ServicesName: "",
+        DefinitionServices: "",
+        Photo: "",
+        Price: "",
+        TermsAndConditions: "",
+        Secations: [{ sectiontitle: "", sectiondescription: "" }],
+      });
+  }, [isSuccess]);
   const handleReportsChange = (selected) => {
     setFormData((prevData) => ({
       ...prevData,
       Reports: selected,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,33 +65,71 @@ function ServicesShow() {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleHeaderInputChange = (files) => {
     setFormData((prevData) => ({
       ...prevData,
-      largeFile: "",
-      dataImg: URL.createObjectURL(files[0]),
+      Photo: URL.createObjectURL(files[0]),
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleInputContentChange = (index, e) => {
     const { name, value } = e.target;
-    const newSections = formData.sections.map((section, i) =>
+    const newSections = formData.Secations.map((section, i) =>
       i === index ? { ...section, [name]: value } : section
     );
     setFormData((prevData) => ({
       ...prevData,
-      sections: newSections,
+      Secations: newSections,
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleAddSection = () => {
     setFormData((prevData) => ({
       ...prevData,
-      sections: [...prevData.sections, { title: "", content: "" }],
+      Secations: [
+        ...prevData.Secations,
+        { sectiontitle: "", sectiondescription: "" },
+      ],
     }));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+
+    // Append the simple fields to FormData
+    for (const key in formData) {
+      if (key !== "Secations") {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    // Append Secations array to FormData with correct key structure
+    formData.Secations.forEach((section, index) => {
+      formDataToSend.append(
+        `Secations[${index}].sectiontitle`,
+        section.sectiontitle
+      );
+      formDataToSend.append(
+        `Secations[${index}].sectiondescription`,
+        section.sectiondescription
+      );
+    });
+
+    // Call the API with the form data
+    createDrug(formDataToSend);
+  };
+  console.log(formData);
 
   return (
     <div>
@@ -86,15 +147,17 @@ function ServicesShow() {
           <div className="flex flex-1 pt-14 flex-col gap-5 relative">
             <InputGreen
               label="عنوان الخدمة"
-              name="serviceTitle"
-              value={formData.serviceTitle}
+              name="ServicesName"
+              value={formData.ServicesName}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "ServicesName")}
             />
 
             <Textarea
               label="تعريف مختصر للخدمة"
-              name="shortDescription"
-              value={formData.shortDescription}
+              name="DefinitionServices"
+              error={GetErrorMsg(error, "DefinitionServices")}
+              value={formData.DefinitionServices}
               onChange={handleInputChange}
               radius="md"
               size="xl"
@@ -109,10 +172,10 @@ function ServicesShow() {
           </div>
 
           <div className="flex-1 w-full h-auto relative">
-            {formData.dataImg ? (
+            {formData.Photo ? (
               <div className="relative w-full h-auto">
                 <Image
-                  src={formData.dataImg}
+                  src={formData.Photo}
                   width={890}
                   height={300}
                   priority={true}
@@ -122,13 +185,6 @@ function ServicesShow() {
                 <Dropzone
                   maxFiles={1}
                   onDrop={handleHeaderInputChange}
-                  onReject={() =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      largeFile:
-                        "It was rejected because of the large size of the picture.",
-                    }))
-                  }
                   maxSize={5 * 1024 ** 2}
                   className="size-11 p-[2px] duration-200 hover:shadow-md hover:bg-greenMain rounded-full bg-greenMain flex items-center justify-center absolute left-1/2 -translate-x-1/2 -bottom-5"
                 >
@@ -139,13 +195,6 @@ function ServicesShow() {
               <Dropzone
                 maxFiles={1}
                 onDrop={handleHeaderInputChange}
-                onReject={() =>
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    largeFile:
-                      "It was rejected because of the large size of the picture.",
-                  }))
-                }
                 maxSize={5 * 1024 ** 2}
                 className="mb-10 rounded-xl"
               >
@@ -155,15 +204,17 @@ function ServicesShow() {
                     اضغط هنا لرفع صورة
                   </h2>
                 </div>
-                {formData.largeFile && (
-                  <p className="text-rose-500 text-sm">{formData.largeFile}</p>
-                )}
               </Dropzone>
             )}
+            {GetErrorMsg(error, "Photo") ? (
+              <p className="text-red font-Regular text-sm">
+                {GetErrorMsg(error, "Photo")}
+              </p>
+            ) : null}
           </div>
         </div>
         <div className="lgl:max-w-[80%] mx-auto mb-10">
-          {formData.sections.map((section, index) => (
+          {formData.Secations.map((section, index) => (
             <div key={index} className="mb-5 flex flex-col gap-7 relative">
               <div className="content-[''] -right-8 w-5 h-5 absolute top-5 bg-no-repeat bg-[20px]">
                 <CheckHeartIcon className=" w-full h-auto " />
@@ -171,15 +222,15 @@ function ServicesShow() {
               <InputGreen
                 placeholder="اكتب العنوان هنا .."
                 onChange={(e) => handleInputContentChange(index, e)}
-                name="title"
-                value={section.title}
+                name="sectiontitle"
+                value={section.sectiontitle}
               />
               <Textarea
                 placeholder="اكتب المحتوى هنا .."
                 onChange={(e) => handleInputContentChange(index, e)}
-                value={section.content}
+                value={section.sectiondescription}
                 size="lg"
-                name="content"
+                name="sectiondescription"
                 radius="md"
                 autosize
                 minRows={4}
@@ -208,10 +259,11 @@ function ServicesShow() {
               </div>
               <InputGreen
                 label="سعر الخدمة "
-                value={formData.price}
+                value={formData.Price}
                 onChange={handleInputChange}
-                name="price"
+                name="Price"
                 type="number"
+                error={GetErrorMsg(error, "Price")}
               />
             </div>
             <Textarea
@@ -219,9 +271,10 @@ function ServicesShow() {
               radius="md"
               autosize
               minRows={4}
-              value={formData.terms}
+              value={formData.TermsAndConditions}
               onChange={handleInputChange}
-              name="terms"
+              name="TermsAndConditions"
+              error={GetErrorMsg(error, "TermsAndConditions")}
               classNames={{
                 input: "min-h-[170px] bg-[#FCFCFD]  border border-[#CFD0D7] ",
               }}
@@ -245,9 +298,7 @@ function ServicesShow() {
 
         <div className="flex flex-col mt-16 items-center gap-3 lgl:max-w-[80%] mx-auto">
           <Button
-            onClick={() => {
-              // console.log(formData);
-            }}
+            onClick={handleSubmit}
             className="w-full h-[60px] text-[20px] font-Bold duration-300 hover:shadow-md"
             variant="secondary"
           >

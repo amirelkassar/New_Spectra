@@ -130,10 +130,14 @@ export const AddReminderModal = () => {
               </div>
             </div> */}
 
+            <span className='text-xs mdl:text-base block'>
+              جميع الأوقات بتوقيت السعودية
+            </span>
+
             <Button
               type='submit'
               variant='secondary'
-              className='text-sm lg:text-base font-bold block mx-auto w-full max-w-56'
+              className='text-sm lg:text-base font-bold block mx-auto w-full max-w-56 !mt-10'
             >
               تأكيد الميعاد
             </Button>

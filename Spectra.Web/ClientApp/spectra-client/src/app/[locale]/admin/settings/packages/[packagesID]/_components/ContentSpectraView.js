@@ -53,12 +53,18 @@ function ContentSpectraView() {
           {listSpectra.map(({ id, text }, index) => (
             <li
               key={id}
-              className="flex items-center relative  mb-2 gap-4 pb-8 border-s border-dashed last-of-type:border-none"
+              className="flex items-center relative   gap-4 pb-8 "
             >
-              <span className=" flex items-center justify-center size-5 mdl:size-6 text-xs mdl:text-base  aspect-square bg-black text-white font-bold  rounded-full z-10 px-1  ">
+              <span className=" flex items-center justify-center size-6 mdl:size-6 text-xs mdl:text-base  aspect-square bg-black text-white font-bold  rounded-full z-10 px-1  ">
                 {index + 1}
               </span>
-              <p className="font-Bold  text-sm mdl:text-xl">{text}</p>
+
+              <div className="flex-grow ">
+                <p className="font-Bold  text-sm mdl:text-xl ">{text}</p>
+                {index < listSpectra.length - 1 && (
+                  <div className="absolute top-1 start-3 h-full border-l-2 border-dashed border-gray-400"></div>
+                )}
+              </div>
             </li>
           ))}
         </ul>

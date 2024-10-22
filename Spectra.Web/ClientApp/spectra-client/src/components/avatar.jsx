@@ -15,7 +15,10 @@ const Avatar = ({
       variant='filled'
       src={src}
       className={cn('size-12', className)}
-      color='cyan'
+      classNames={{
+        placeholder: 'text-black',
+      }}
+      color='#E9F7FF'
       radius={radius}
       size={size}
       name={name}
