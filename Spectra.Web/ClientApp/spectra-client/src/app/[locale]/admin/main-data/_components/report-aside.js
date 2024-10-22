@@ -31,6 +31,17 @@ const MainDataAside = () => {
           ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(params.doctorsSpecialtiesID),
     },
     {
+      name: "الاقسام",
+      route: ROUTES.ADMIN.DATAMAIN.DEPARTMENTS,
+      isActive:
+        path === ROUTES.ADMIN.DATAMAIN.DEPARTMENTS ||
+        path === ROUTES.ADMIN.DATAMAIN.DEPARTMENTSADD ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILS(params.departmentsID) ||
+        path ===
+          ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILSEDIT(params.departmentsID),
+    },
+    {
       name: "التحاليل و الاشاعات",
       route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
       isActive:

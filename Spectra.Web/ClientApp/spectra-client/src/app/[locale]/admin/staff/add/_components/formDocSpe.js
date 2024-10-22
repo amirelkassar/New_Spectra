@@ -4,7 +4,7 @@ import Input from "@/components/input";
 import { Select, TextInput } from "@mantine/core";
 import React from "react";
 
-function FormDocSpe({ setNextForm, DocSpeData, setDocSpeData }) {
+function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setDocSpeData({
@@ -77,14 +77,14 @@ function FormDocSpe({ setNextForm, DocSpeData, setDocSpeData }) {
         </div>
         <div className="flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20  justify-center flex-1 w-full">
           <Button
-            onClick={() => setNextForm(true)}
+            onClick={() => setPageForm(3)}
             variant="secondary"
             className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
           >
-            تأكيد
+            التالى
           </Button>
           <Button
-            onClick={() => setNextForm(false)}
+            onClick={() => setPageForm(1)}
             className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
           >
             السابق

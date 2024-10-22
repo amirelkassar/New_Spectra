@@ -7,12 +7,11 @@ import React from 'react';
 import imgDrugs from '@/assets/images/drugs.png';
 import ActionMenu from '../_components/ActionMenuDetails';
 import { GetDrugsID } from '@/useAPI/admin/main-data/drugs';
-import NoDataYet from '@/components/noDataYet';
 import HandelShowDataID from '@/components/handelShowDataID';
 
 function page({ params }) {
   const { data, isLoading } = GetDrugsID(params.drugsID);
-  // console.log(data?.data.data);
+  console.log(data?.data.data);
 
   return (
     <div>
@@ -141,7 +140,7 @@ function page({ params }) {
                 ملاحظات
               </h3>
               <p className=' text-[14px] lg:text-[20px] font-Regular pb-3 '>
-                {data?.data.data.notes}
+                {data?.data.data.nots}
               </p>
             </div>
           </div>

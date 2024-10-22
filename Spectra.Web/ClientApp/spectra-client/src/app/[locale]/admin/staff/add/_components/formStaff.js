@@ -19,7 +19,7 @@ const months = [
   "ديسمبر",
 ];
 const years = Array.from({ length: 100 }, (_, i) => (2024 - i).toString());
-function FormStaff({ setNextForm, StaffData, setStaffData }) {
+function FormStaff({ setPageForm, StaffData, setStaffData }) {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setStaffData({
@@ -91,15 +91,6 @@ function FormStaff({ setNextForm, StaffData, setStaffData }) {
             />
           </div>
         </div>
-        <Select
-          data={["غير نشط", "نشط"]}
-          label={"الحالة الوظيفية"}
-          className="MultiSelect"
-          classNames={{
-            input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
-            label: "text-base lg:text-xl mb-2",
-          }}
-        />
         <TextInput
           label={"ساعات العمل "}
           classNames={{
@@ -109,14 +100,14 @@ function FormStaff({ setNextForm, StaffData, setStaffData }) {
         />
         <div className="flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20 justify-center flex-1 w-full">
           <Button
-            onClick={() => setNextForm(true)}
+            onClick={() => setPageForm(3)}
             variant="secondary"
             className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
           >
-            تأكيد
+            التالى
           </Button>
           <Button
-            onClick={() => setNextForm(false)}
+            onClick={() => setPageForm(1)}
             className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
           >
             السابق

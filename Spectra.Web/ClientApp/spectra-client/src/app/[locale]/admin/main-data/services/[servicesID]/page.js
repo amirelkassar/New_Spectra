@@ -108,7 +108,7 @@ function Page({ params }) {
         </div>
       ) : (
         <HandelShowDataID isLoading={isLoading} statusCode={data?.data.code}>
-          {data?.data.code === 200 && <ServicesDetails DataServices={data?.data.data} />}
+          {data?.data.code === 200 && <ServicesDetails isLoading={isLoading} DataServices={data?.data.data} />}
         </HandelShowDataID>
       )}
     </Card>
