@@ -1,7 +1,7 @@
 'use client';
 import FilterIcon from '@/assets/icons/filter';
 import Card from '@/components/card';
-import { TabsFilter } from '../../_components/tabs-filter';
+import { TabsFilter } from '../../../_components/tabs-filter';
 import { useState } from 'react';
 import { DataTable } from '@/components/data-table';
 import { columns as doctorsColumns } from './doctors-table-columns';

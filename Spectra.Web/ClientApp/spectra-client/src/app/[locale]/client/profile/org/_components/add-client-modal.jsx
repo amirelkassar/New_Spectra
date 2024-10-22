@@ -3,7 +3,6 @@
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { AddButton } from './add-button';
 import TextInput from '@/components/inputs/text-input';
 import SelectInput from '@/components/inputs/select-input';
 import MobileInput from '@/components/inputs/mobile-input';
@@ -15,6 +14,7 @@ import OrgIcon from '@/assets/icons/org';
 import ProviderIcon from '@/assets/icons/provider';
 import CheckIcon from '@/assets/icons/check';
 import { cn } from '@/lib/utils';
+import { AddButton } from '../../_components/add-button';
 
 const clientsOptions = [
   {
@@ -37,7 +37,8 @@ const clientsOptions = [
 export const AddClientModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [step, setStep] = useState(1);
-  const [selectedClient, setSelectedClient] = useState(null);
+  const [selectedClient, setSelectedClient] =
+    useState(null);
 
   return (
     <>
@@ -61,29 +62,35 @@ export const AddClientModal = () => {
         <div className='space-y-5'>
           {/* HEADER */}
           <h3 className='font-bold text-sm py-3 lg:text-medium text-black'>
-            اضافة عميل {selectedClient && `- ${selectedClient?.name}`}
+            اضافة عميل{' '}
+            {selectedClient && `- ${selectedClient?.name}`}
           </h3>
 
           {/* STEP 1 - نوع العميل */}
           {step === 1 && (
             <div className='space-y-7'>
               <div className=' min-h-[350px] flex flex-col gap-6 justify-center'>
-                <h4 className='text-xs lg:text-base'>نوع العميل</h4>
+                <h4 className='text-xs lg:text-base'>
+                  نوع العميل
+                </h4>
                 <div className='flex gap-3'>
                   {clientsOptions.map((option) => (
                     <div
                       role='button'
-                      onClick={() => setSelectedClient(option)}
+                      onClick={() =>
+                        setSelectedClient(option)
+                      }
                       key={option?.type}
                       className={cn(
                         'shadow relative flex flex-col items-center gap-5 p-5 rounded-lg border border-transparent w-full max-w-44 text-center',
-                        selectedClient?.type === option?.type &&
-                          'border-greenMain'
+                        selectedClient?.type ===
+                          option?.type && 'border-greenMain'
                       )}
                     >
                       {option.icon}
                       <span>{option.name}</span>
-                      {selectedClient?.type === option?.type && (
+                      {selectedClient?.type ===
+                        option?.type && (
                         <div className='rounded-full absolute -top-4 right-1/2 translate-x-1/2 size-8 bg-greenMain flex items-center justify-center'>
                           <CheckIcon />
                         </div>
@@ -116,29 +123,32 @@ export const AddClientModal = () => {
           )}
 
           {/* STEP 2 - FORM */}
-          {step === 2 && selectedClient?.type === 'family' && (
-            <FamilyForm
-              onClose={close}
-              setStep={setStep}
-              setSelectedClient={setSelectedClient}
-            />
-          )}
+          {step === 2 &&
+            selectedClient?.type === 'family' && (
+              <FamilyForm
+                onClose={close}
+                setStep={setStep}
+                setSelectedClient={setSelectedClient}
+              />
+            )}
 
-          {step === 2 && selectedClient?.type === 'organization' && (
-            <OrgForm
-              onClose={close}
-              setStep={setStep}
-              setSelectedClient={setSelectedClient}
-            />
-          )}
+          {step === 2 &&
+            selectedClient?.type === 'organization' && (
+              <OrgForm
+                onClose={close}
+                setStep={setStep}
+                setSelectedClient={setSelectedClient}
+              />
+            )}
 
-          {step === 2 && selectedClient?.type === 'provider' && (
-            <ProviderForm
-              onClose={close}
-              setStep={setStep}
-              setSelectedClient={setSelectedClient}
-            />
-          )}
+          {step === 2 &&
+            selectedClient?.type === 'provider' && (
+              <ProviderForm
+                onClose={close}
+                setStep={setStep}
+                setSelectedClient={setSelectedClient}
+              />
+            )}
         </div>
       </Modal>
     </>
@@ -153,8 +163,14 @@ const FamilyForm = ({
   return (
     <form className='space-y-3'>
       <TextInput label='اسم ولي الامر بالكامل' />
-      <SelectInput data={['البلد1', 'البلد2', 'البلد']} label='البلد' />
-      <SelectInput label='المدينة' data={['المدينة1', 'المدينة2', 'المدينة']} />
+      <SelectInput
+        data={['البلد1', 'البلد2', 'البلد']}
+        label='البلد'
+      />
+      <SelectInput
+        label='المدينة'
+        data={['المدينة1', 'المدينة2', 'المدينة']}
+      />
 
       <TextInput label='الوظيفة' />
       <TextInput label='رقم الهوية' />
@@ -194,7 +210,10 @@ const OrgForm = ({
     <form className='space-y-3'>
       <TextInput label='اسم المنظمة' />
       <TextInput label='عنوان المنظمة' />
-      <SelectInput data={['البلد1', 'البلد2', 'البلد']} label='بلد المنظمة' />
+      <SelectInput
+        data={['البلد1', 'البلد2', 'البلد']}
+        label='بلد المنظمة'
+      />
       <SelectInput
         label='مدينة المنظمة'
         data={['المدينة1', 'المدينة2', 'المدينة']}
@@ -242,7 +261,10 @@ const ProviderForm = ({
       {providerStep === 1 && (
         <>
           <TextInput label='الاسم كامل' />
-          <SelectInput label='النوع' data={['ذكر', 'انثى']} />
+          <SelectInput
+            label='النوع'
+            data={['ذكر', 'انثى']}
+          />
           <SelectInput
             label='اختر البلد'
             data={['البلد1', 'البلد2', 'البلد']}
@@ -263,7 +285,12 @@ const ProviderForm = ({
         <>
           <SelectInput
             label='التخصص'
-            data={['طب نفسي عصبي', 'طب نفسي', 'طب استشاري', 'طبيب اطفال']}
+            data={[
+              'طب نفسي عصبي',
+              'طب نفسي',
+              'طب استشاري',
+              'طبيب اطفال',
+            ]}
           />
 
           <TextInput label='رقم الترخيص /الاعتماد' />

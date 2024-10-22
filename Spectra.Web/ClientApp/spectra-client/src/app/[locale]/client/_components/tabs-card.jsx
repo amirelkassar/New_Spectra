@@ -9,30 +9,33 @@ export const TabsCard = ({
   tab = '',
   className = '',
 }) => {
+  if (!tabs?.length) return null;
   return (
     <Card
       className={cn(
-        'h-auto basis-1/4 flex flex-row lg:flex-col *:flex-1 gap-3',
+        'col-span-2 overflow-x-auto lg:overflow-x-hidden',
         className
       )}
     >
-      <div className='space-y-3'>
+      <ul className='flex lg:flex-col gap-3 mdl:gap-5 *:shrink-0 lg:*:shrink'>
         {tabs?.map((t) => (
-          <button
-            type='button'
-            key={t}
-            onClick={() => setTab(t)}
+          <li
+            role='button'
+            key={t?.label}
+            onClick={() => setTab(t?.label)}
             className={cn(
-              'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs lg:text-base w-full px-3 py-1',
+              'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs mdl:text-base lg:w-full px-3 py-1 flex items-center gap-2 w-fit',
               {
-                'bg-greenMain text-white hover:bg-greenMain': tab === t,
+                'bg-greenMain text-white hover:bg-greenMain':
+                  tab === t?.label,
               }
             )}
           >
-            {t}
-          </button>
+            {t?.icon}
+            {t?.label}
+          </li>
         ))}
-      </div>
+      </ul>
     </Card>
   );
 };

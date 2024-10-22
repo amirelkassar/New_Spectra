@@ -27,7 +27,10 @@ const ROUTES = {
       TEAM: '/client/main/team',
     },
     CONTROL_MENU: '/client/control',
-    PROFILE: '/client/profile',
+    PROFILE: {
+      FAMILY: '/client/profile/family',
+      ORG: '/client/profile/org',
+    },
     PACKAGES: '/client/packages',
     SCHEDULES: '/client/schedules',
     STEPS: '/client/steps',
@@ -194,21 +197,27 @@ const ROUTES = {
           `/admin/settings/permissions/users/${id}/edit`,
       },
       CONTENT: {
-        DASHBOARD: "/admin/settings/content",
-        BANNERSAD: "/admin/settings/content/bannersAD",
-        MEDICAL: "/admin/settings/content/medicalSpecialties",
-        MEDICALID: (id) => `/admin/settings/content/medicalSpecialties/${id}`,
-        ARTICLES: "/admin/settings/content/articles",
-        ADDARTICLES: "/admin/settings/content/articles/add-articles",
-        EDITARTICLES: (id) => `/admin/settings/content/articles/${id}`,
-        STORIES: "/admin/settings/content/stories",
-        STORIESID: (id) => `/admin/settings/content/stories/${id}`,
-        STORIESADD: "/admin/settings/content/stories/add",
+        DASHBOARD: '/admin/settings/content',
+        BANNERSAD: '/admin/settings/content/bannersAD',
+        MEDICAL:
+          '/admin/settings/content/medicalSpecialties',
+        MEDICALID: (id) =>
+          `/admin/settings/content/medicalSpecialties/${id}`,
+        ARTICLES: '/admin/settings/content/articles',
+        ADDARTICLES:
+          '/admin/settings/content/articles/add-articles',
+        EDITARTICLES: (id) =>
+          `/admin/settings/content/articles/${id}`,
+        STORIES: '/admin/settings/content/stories',
+        STORIESID: (id) =>
+          `/admin/settings/content/stories/${id}`,
+        STORIESADD: '/admin/settings/content/stories/add',
       },
       PACKAGES: {
-        DASHBOARD: "/admin/settings/packages",
-        PACKAGESDETAILS:(id)=> `/admin/settings/packages/${id}`,
-        PACKAGESADD: "/admin/settings/packages/add",
+        DASHBOARD: '/admin/settings/packages',
+        PACKAGESDETAILS: (id) =>
+          `/admin/settings/packages/${id}`,
+        PACKAGESADD: '/admin/settings/packages/add',
       },
     },
   },
@@ -261,10 +270,11 @@ const ROUTES = {
       MYPRESCRIPTIONS: '/doctor/profile/my_prescriptions',
     },
     CONTRACTS: {
-      DASHBOARD: "/doctor/contracts",
-      CONTRACTSNEW: "/doctor/contracts/addNew",
+      DASHBOARD: '/doctor/contracts',
+      CONTRACTSNEW: '/doctor/contracts/addNew',
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
-      CONTRACTSIDEDIT:(id)=> `/doctor/contracts/${id}?editContracts=true`,
+      CONTRACTSIDEDIT: (id) =>
+        `/doctor/contracts/${id}?editContracts=true`,
     },
     CHATS: {
       DASHBOARD: '/doctor/chats',

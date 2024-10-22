@@ -16,7 +16,7 @@ const Avatar = ({
       src={src}
       className={cn('size-12', className)}
       classNames={{
-        placeholder: 'text-black',
+        placeholder: 'text-black text-[9px] mdl:text-base',
       }}
       color='#E9F7FF'
       radius={radius}

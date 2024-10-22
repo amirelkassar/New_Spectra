@@ -5,15 +5,15 @@ import { Heading } from '../_components/heading';
 // import { PerformanceChart } from './_components/performance-chart';
 import { ReminderMessages } from './_components/reminder-messages';
 import { ActivityCards } from './_components/activity-cards';
-import ChildPopover from '../_components/child-popover';
-import { childPopupData } from '@/lib/demoData';
+import { CHILDSDATA } from '@/lib/demoData';
 import { Wallet } from './_components/wallet';
+import { ChildSelect } from '../_components/child-select';
 
 const ControlPage = () => {
   return (
     <Container className='space-y-5'>
       <Heading label='ملخص النشاطات' />
-      <ChildPopover data={childPopupData} />
+      <ChildSelect data={CHILDSDATA} />
       <MedicalCards />
       {/* <PerformanceChart /> */}
       <ReminderMessages />
