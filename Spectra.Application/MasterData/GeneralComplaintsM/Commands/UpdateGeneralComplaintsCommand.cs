@@ -36,7 +36,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
             var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName);
-            if (names != null)
+            if (names.Any())
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }

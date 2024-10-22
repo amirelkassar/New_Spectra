@@ -1,5 +1,5 @@
 ﻿using Spectra.Domain.Clients;
-using Spectra.Domain.MedicalStaff.Doctor;
+
 using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;

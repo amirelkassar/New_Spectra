@@ -1,11 +1,19 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
+using Spectra.Application.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.Drug.Commands
 {
@@ -40,17 +48,14 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<Unit>> Handle(UpdateDrugCommand request, CancellationToken cancellationToken)
         {
             var drug = await _drugRepository.GetByIdAsync(request.Id);
-            if (drug == null)
-            {
-                throw new NotFoundException("Drug", request.Id);
-            }
+          
 
             drug.Name = request.Name;
             drug.ActiveIngredient = request.ActiveIngredient;
             drug.ScientificName = request.ScientificName;
             drug.RecommendedDosage = request.RecommendedDosage;
-            drug.Doncentration = request.Doncentration;
-            drug.InteractionsWithOtherdrugs = request.DrugInteractionsWithOtherdrugs;
+            drug.Doncentration = request.Doncentration; 
+            drug.InteractionsWithOtherdrugs = request.DrugInteractionsWithOtherdrugs; 
             drug.Contraindications = request.Contraindications;
             drug.Type = request.Type;
             drug.Nots = request.Nots;
@@ -66,7 +71,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             return OperationResult<Unit>.Success(Unit.Value);
 
         }
-    }
+        }
     public class UpdateDrugCommandValidator : AbstractValidator<UpdateDrugCommand>
     {
         public UpdateDrugCommandValidator()

@@ -34,10 +34,6 @@ using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Services;
-using Spectra.Application.MedicalStaff.Doctors;
-using Spectra.Application.MedicalStaff.Doctors.Services;
-using Spectra.Application.MedicalStaff.Specialists;
-using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
@@ -134,6 +130,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
+            services.AddScoped<IManagementStaffService, ManagementStaffService>();
             services.AddScoped<IAdminService, AdminService>();
 
 
@@ -167,6 +164,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
+            services.AddScoped<IManagementStaffRepository, ManagementStaffRepository>();
             services.AddSignalR();
 
             return services;

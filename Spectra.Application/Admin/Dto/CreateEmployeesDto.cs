@@ -28,6 +28,11 @@ namespace Spectra.Application.Admin.Dto
         public string? ApprovedBy { get; set; }
         public string? Academicdegree { get; set; }
         public List<IFormFile>? ScientificDegree { get; set; }
+        //MangementStaff
+        public string? JobName { get; set; }
+        public string? Qualifications { get; set; }
+        public DateOnly? TimeToJoin { get; set; }
+        public double? WorkingHours { get; set; }
 
 
     }

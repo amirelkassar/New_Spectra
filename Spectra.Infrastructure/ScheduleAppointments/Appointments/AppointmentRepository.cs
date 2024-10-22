@@ -1,15 +1,17 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.ScheduleAppointments.Appointments;
+
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository: IAppointmentRepository
     {
         private readonly IMongoCollection<Appointment> _appointments;
 
@@ -20,7 +22,7 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
         }
         public async Task<Appointment> GetByIdAsync(string id)
         {
-
+          
             var entity = await _appointments.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {
@@ -56,7 +58,7 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
        int pageNumber = 1,
        int pageSize = 10)
         {
-            var query = _appointments.AsQueryable();
+     var query =  _appointments.AsQueryable();
 
             // Apply the filter if provided
             if (filter != null)
@@ -65,16 +67,16 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
             }
 
             // Sort by Date in descending order
-            query = query.OrderByDescending(x => x.Daysdate);
+            query =  query.OrderByDescending(x => x.Daysdate);
 
             // Get the total count for pagination
             var totalCount = await query.CountAsync();
 
             // Apply pagination using MongoDB's async methods
-            var appointments = query
+            var appointments =  query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize).ToList();
-            // Ensure you're using MongoDB.Driver's ToListAsync
+              // Ensure you're using MongoDB.Driver's ToListAsync
 
             return new PaginatedResult<Appointment>
             {
@@ -86,7 +88,7 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
         }
     }
 
-
-}
+        
+    }
 
 

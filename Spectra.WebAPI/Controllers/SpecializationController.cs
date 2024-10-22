@@ -30,7 +30,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> GetAllSpecializationsNames()
         {
             var Specializationsies = await _specializationsServices.GetAllSpecializationsNames();
-
+          
             return Ok(Specializationsies);
         }
 

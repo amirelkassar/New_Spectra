@@ -35,7 +35,8 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             {
 
                 ConsultationCost = input.ConsultationCost,
-                SpecializationName = input.SpecializationName,
+                Code= input.Code,
+                Name = input.Name,
                 Description = input.Description
 
             };
@@ -47,7 +48,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             double cost;
             List<CreateSpecializationCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateSpecializationCommand
             {
-                SpecializationName = cells[0],
+                Name = cells[0],
                 Description = cells[1],
                 ConsultationCost = double.TryParse(cells[2], out cost) ? cost : 0
             });
@@ -67,7 +68,8 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             {
                 Id = id,
                 ConsultationCost = input.ConsultationCost,
-                SpecializationName = input.SpecializationName,
+              Code   = input.Code,
+                Name = input.Name,
                 Description = input.Description
             };
 

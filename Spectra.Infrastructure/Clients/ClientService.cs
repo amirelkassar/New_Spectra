@@ -5,7 +5,6 @@ using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Queries;
 using Spectra.Application.Clients.Services;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MedicalStaff.Doctors.Dto;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;

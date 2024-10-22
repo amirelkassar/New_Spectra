@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Clients;
-using Spectra.Application.MedicalStaff.Doctors;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments.DTO;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;

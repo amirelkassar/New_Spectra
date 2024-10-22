@@ -1,24 +1,15 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using MediatR;
-using Spectra.Application.Admin.Commands;
+﻿using MediatR;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
-using Spectra.Application.Clients.DTO;
-using Spectra.Application.Clients.DTOs;
+using Spectra.Application.Employees.ManagementStaff.Service;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalStaff.Specialists.Services;
 using Spectra.Application.Hellper;
-using Spectra.Application.MedicalStaff.Doctors.Commands;
-using Spectra.Application.MedicalStaff.Doctors.Dto;
-using Spectra.Application.MedicalStaff.Doctors.Services;
-using Spectra.Application.MedicalStaff.Specialists.Dto;
-using Spectra.Application.MedicalStaff.Specialists.Services;
 using Spectra.Domain.Clients;
-using Spectra.Domain.MedicalStaff.Doctor;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
-using Spectra.Infrastructure.Doctors;
 
 namespace Spectra.Infrastructure.Admin
 {
@@ -27,11 +18,15 @@ namespace Spectra.Infrastructure.Admin
         private readonly IMediator _mediator;
         private readonly IDoctorService _doctorService;
         private readonly ISpecialistService _specialistService;
-        public AdminService(IMediator mediator, IDoctorService doctorService, ISpecialistService specialistService)
+        private readonly IManagementStaffService _managementStaffService;
+
+        public AdminService(IMediator mediator, IDoctorService doctorService, ISpecialistService specialistService, IManagementStaffService managementStaffService)
         {
+            
             _mediator = mediator;
             _doctorService = doctorService;
             _specialistService = specialistService;
+            _managementStaffService=managementStaffService;
 
         }
         public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
@@ -83,9 +78,9 @@ namespace Spectra.Infrastructure.Admin
         }
     
 
-        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees()
+        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input)
         {
-            var query = new GetAllEmployeesQuery();
+            var query = new GetAllEmployeesQuery() { PageNumber= input.PageNumber , PageSize=input.PageSize };
             return await _mediator.Send(query);
         }
 
@@ -133,7 +128,27 @@ namespace Spectra.Infrastructure.Admin
                     input.ScientificDegree);
                 return query;
             }
-
+            if (JobTypes.Accountant == input.JobTypes || JobTypes.secretary == input.JobTypes)
+            {
+                query = await _managementStaffService.CreateStaff(
+                 input.FirstName,
+                    input.LastName,
+                    input.Prefix,
+                    input.PhoneNumbers,
+                    input.CountryCode,
+                    input.Emailaddress,
+                    input.Country,
+                    input.City,
+                    input.NationalId,
+                    input.HumenGenders,
+                    input.JobName,
+                    input.Qualifications,
+                    input.TimeToJoin,
+                    input.WorkingHours
+                    ,input.JobTypes
+                );
+                return query;
+            }
             return null;
 
         }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Spectra.Application.MedicalStaff.Doctors;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO;
 using Spectra.Domain.Shared.Enums;

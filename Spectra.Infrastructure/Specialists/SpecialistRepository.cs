@@ -1,8 +1,8 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MedicalStaff.Specialists;
-using Spectra.Domain.MedicalStaff.Specialists;
 using System.Linq.Expressions;
+using Spectra.Domain.Employees.MedicalStaff.Specialists;
+using Spectra.Application.Employees.MedicalStaff.Specialists;
 
 namespace Spectra.Infrastructure.Specialists
 {

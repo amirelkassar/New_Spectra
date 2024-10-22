@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MasterData.GeneralComplaint
@@ -16,7 +17,13 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
         }
         public async Task<Domain.MasterData.GeneralComplaints.GeneralComplaint> GetByIdAsync(string id)
         {
-            return await _GeneralComplaints.Find(c => c.Id == id).FirstOrDefaultAsync();
+          
+            var entity = await _GeneralComplaints.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("GeneralComplaint", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(Domain.MasterData.GeneralComplaints.GeneralComplaint GeneralComplaint)

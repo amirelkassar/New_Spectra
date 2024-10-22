@@ -1,10 +1,12 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MedicalStaff.Doctors;
-using Spectra.Domain.MedicalStaff.Doctor;
-
+using Spectra.Domain.Contracts;
+using Spectra.Domain.Employees.MedicalStaff.Doctor;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Doctors
@@ -32,20 +34,20 @@ namespace Spectra.Infrastructure.Doctors
             // Apply the filter if provided
             if (filter != null)
             {
-                query = query.Where(filter); ;
+                query = (IMongoQueryable<Doctor>)query.Where(filter); ;
             }
 
             //Order by 'Created' field
-            //query = query.OrderByDescending(x => x.Created.Date);
+           //query = query.OrderByDescending(x => x.Created.Date);
 
             // Get total count of the filtered query
             var totalCount = await query.CountAsync();  // Use CountAsync() from MongoDB.Driver.Linq
 
             // Paginate the results
-            var doctors = query
+            var doctors =  query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .ToList();  
             // Return paginated result
             return new PaginatedResult<Doctor>
             {
@@ -57,7 +59,13 @@ namespace Spectra.Infrastructure.Doctors
         }
         public async Task<Doctor> GetByIdAsync(string id)
         {
-            return await _doctors.Find(c => c.Id == id).FirstOrDefaultAsync();
+          
+            var entity = await _doctors.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("Doctor", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(Doctor doctor)

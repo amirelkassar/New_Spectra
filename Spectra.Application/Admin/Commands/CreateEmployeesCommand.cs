@@ -1,16 +1,13 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MedicalStaff.Doctor;
+
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 using Microsoft.AspNetCore.Http;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using Spectra.Domain.MedicalStaff.Specialists;
-using Spectra.Application.MedicalStaff.Specialists;
 
 namespace Spectra.Application.Admin.Commands
 {
@@ -27,11 +24,15 @@ namespace Spectra.Application.Admin.Commands
         public string City { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
-        public List<string> Diagnoses { get; set; }
+        public List<string>? Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<IFormFile> ScientificDegree { get; set; }
+        public List<IFormFile>? ScientificDegree { get; set; }
+        public string? JobName { get; set; }
+        public string? Qualifications { get; set; }
+        public DateOnly? TimeToJoin { get; set; }
+        public double? WorkingHours { get; set; }
 
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
-using Spectra.Application.MedicalStaff.Doctors.Dto;
-using Spectra.Application.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Infrastructure.ChatHub;
 
 namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DoctorController : ControllerBase
+    public class DoctorController:ControllerBase
     {
         private readonly IDoctorService _DoctorService;
         private readonly IChatService _chatService;
@@ -49,7 +50,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateDoctorDto input)
+        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
         {
 
 
@@ -73,7 +74,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPut("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
+        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateManagementStaffDto input)
         {
 
 

@@ -1,5 +1,4 @@
-﻿using Spectra.Domain.MedicalStaff.Doctor;
-using Spectra.Domain.MedicalStaff.Specialists;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,11 @@ namespace Spectra.Application.Admin.Dto
 {
     public class CollectAllEmployeeDto
     {
-        public IEnumerable<GetAllEmployeesDto> Doctors {get; set;} 
-        public IEnumerable<GetAllEmployeesDto> Specialists { get; set;} 
-        
+        public IEnumerable<GetAllEmployeesDto> Employees { get; set;} 
+       
+        public int TotalItems { get; set; }
+        public int TotalPages { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
     }
 }

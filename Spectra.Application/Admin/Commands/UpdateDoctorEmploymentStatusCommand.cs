@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Spectra.Application.Clients;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
+using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
