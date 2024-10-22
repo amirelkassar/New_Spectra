@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.MedicalStaff.Specialists.Dto;
-using Spectra.Application.MedicalStaff.Specialists.Services;
+using Spectra.Application.Employees.MedicalStaff.Specialists.Dto;
+using Spectra.Application.Employees.MedicalStaff.Specialists.Services;
 
 namespace Spectra.WebAPI.Controllers
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Common.Exceptions;

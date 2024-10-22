@@ -1,8 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using MediatR;
 using Spectra.Application.Admin.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Hellper;
-using Spectra.Application.MedicalStaff.Doctors;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;

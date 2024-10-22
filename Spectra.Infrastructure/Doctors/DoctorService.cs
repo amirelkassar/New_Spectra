@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MedicalStaff.Doctors.Commands;
-using Spectra.Application.MedicalStaff.Doctors.Dto;
-using Spectra.Application.MedicalStaff.Doctors.Queries;
-using Spectra.Application.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Commands;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -113,7 +113,7 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateDoctorDto input)
+        public async Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateManagementStaffDto input)
         {
             var name = new Name { FirstName = input.FirstName, LastName = input.LastName, Prefix = input.Prefix };
 

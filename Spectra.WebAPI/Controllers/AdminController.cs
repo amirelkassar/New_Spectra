@@ -6,7 +6,8 @@ using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.ManagementStaff.Service;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Controllers
@@ -19,7 +20,7 @@ namespace Spectra.WebAPI.Controllers
         private readonly IAdminService _adminService;
         private readonly IClientService _clientService;
         private readonly IDoctorService _DoctorService;
-
+      
 
 
         public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService)
