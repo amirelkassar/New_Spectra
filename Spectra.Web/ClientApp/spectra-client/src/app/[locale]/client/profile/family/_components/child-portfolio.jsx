@@ -84,7 +84,7 @@ export const ChildPortfolio = () => {
   const [tab, setTab] = useState(TABS[0].key);
 
   return (
-    <section className='lg:grid lg:grid-cols-7 lg:gap-5 space-y-10 lg:space-y-0'>
+    <section className='lg:grid lg:grid-cols-7 lg:gap-5 space-y-5 lg:space-y-0'>
       <TabsCard tabs={TABS} tab={tab} setTab={setTab} />
 
       <div className='col-span-5'>
