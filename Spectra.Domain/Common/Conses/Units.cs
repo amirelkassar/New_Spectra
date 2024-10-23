@@ -40,12 +40,6 @@
             Limited,
             NoFormOfInteraction
         }
-        public enum AssessmentTypes : byte
-        {
-            SpeechLanguageAssessment = 1,
-            PsychologicalInitialAssessment = 2,
-            Other = 0
-        }
         public enum DiseaseDegrees : byte
         {
             Poor,
@@ -204,12 +198,101 @@
 
         public enum RiskLevels : byte
         {
-            High=1,
+            High = 1,
             Low,
             SelfReport,
             CarerReport,
             ClinicalEvidence,
             CarerIsAlerted
+        }
+        public enum VerbalLevel : byte
+        {
+            Sentences = 1,
+            OneWord,
+            Stuttering,
+            Other
+        }
+
+        public enum NonVerbalLevel : byte
+        {
+            Pointing = 1,
+            HandLeading,
+            Crying,
+            Screaming,
+            Other
+        }
+
+        public enum SittingTolerance : byte
+        {
+            ZeroToFiveMinutes = 1,
+            FiveToFifteenMinutes,
+            MoreThanFifteenMinutes
+        }
+
+        public enum SkillLevel : byte
+        {
+            Poor = 1,
+            PoorToFair,
+            Fair,
+            FairToGood,
+            Good
+        }
+
+        public enum AttentionType : byte
+        {
+            Focused = 1,
+            Sustained,
+            Selective,
+            Alternative,
+            Divided,
+            Joint
+        }
+
+        public enum BodyParts : byte
+        {
+            Head = 1,
+            Hair,
+            Eyes,
+            Nose,
+            Mouth,
+            Ears,
+            Hands,
+            Feet
+        }
+
+        public enum BasicColors : byte
+        {
+            Red = 1,
+            Blue,
+            Yellow,
+            Green
+        }
+
+        public enum BasicShapes : byte
+        {
+            Circle = 1,
+            Square,
+            Triangle,
+            Cross,
+            VerticalLine,
+            HorizontalLine,
+            Rectangle
+        }
+
+        public enum PenHoldingGrasp : byte
+        {
+            PalmerSupinateGrasp = 1,
+            DigitalPronateGrasp,
+            DigitalGrasp,
+            QuadrupedGrasp,
+            DynamicTripodGrip
+        }
+
+        public enum AcademicSkillType : byte
+        {
+            Alphabet = 1,
+            Numbers,
+            Words
         }
     }
 }

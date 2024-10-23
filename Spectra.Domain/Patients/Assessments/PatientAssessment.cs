@@ -33,6 +33,13 @@ namespace Spectra.Domain.Patients.Assessments
         public RecommendationsAndGoal RecommendationsAndGoals { get; set; }
 
     }
+    public enum AssessmentTypes : byte
+    {
+        SpeechLanguage = 1,
+        PsychologicalInitial = 2,
+        MDT = 3,
+        Other = 0
+    }
 
     public class RecommendationsAndGoal
     {

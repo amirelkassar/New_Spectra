@@ -10,7 +10,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments
 {
-    public class SpeechLanguageAssessment(string id, string patientId, string clientId, Name patientName) : PatientAssessment(id, patientId, clientId, patientName, AssessmentTypes.SpeechLanguageAssessment)
+    public class SpeechLanguageAssessment(string id, string patientId, string clientId, Name patientName) : PatientAssessment(id, patientId, clientId, patientName, AssessmentTypes.SpeechLanguage)
     {
         public OralMotorExamination? OralMotorExamination { get; set; }
         public PreCommunicationSkill? PreCommunicationSkill { get; set; }
