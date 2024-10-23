@@ -41,5 +41,11 @@
             Moderate,
             Severe
         }
+
+        public enum TypeOfDelivery : byte
+        {
+            Normal=1,
+            CS=2
+        }
     }
 }

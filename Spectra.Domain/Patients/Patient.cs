@@ -18,15 +18,15 @@ namespace Spectra.Domain.Patients
         public ClientPatientRelations RelationToClient { get; set; }
         public string ClientId { get; private set; }
         public double? ChildHeight { get; set; }
-        public double? ChildWeightt { get; set; }
+        public double? ChildWeight { get; set; }
         public string? MedicalSymptoms { get; set; }
         public DateOnly? MedicalSymptomsDate { get; set; }
-        public FamilySocialHistory? FamilySocialhistory { get; set; }
-        public SchoolTypes? SchoolType { get; set; }
-        public SocialAdaptive? SocialAdaptive { get; set; }
-        public BehavioralDifficulty? BehavioralDifficulty { get; set; }
-        public PatientMedicalHistory? PatientMedicalHistory { get; set; }
         public BirthHistory? BirthHistory { get; set; }
+        public PatientMedicalHistory? PatientMedicalHistory { get; set; }
+        public BehavioralDifficulty? BehavioralDifficulty { get; set; }
+        public SocialAdaptive? SocialAdaptive { get; set; }
+        public SchoolTypes? SchoolType { get; set; }
+        public FamilySocialHistory? FamilySocialhistory { get; set; }
         public OralMotorExamination? OralMotorExamination { get; set; }
         public PreCommunicationSkill? PreCommunicationSkill { get; set; }
         public NonVerbalCommunication? NonVerbalCommunication { get; set; }
@@ -39,8 +39,6 @@ namespace Spectra.Domain.Patients
             HumenGender gender,
             DateOnly dateOfBirth,
             ClientPatientRelations relationToClient,
-            double childHeight,
-            double childWeightt,
             string clientId) : base(id)
         {
             Id = id;
@@ -49,8 +47,6 @@ namespace Spectra.Domain.Patients
             Gender = gender;
             DateOfBirth = dateOfBirth;
             RelationToClient = relationToClient;
-            ChildHeight = childHeight;
-            ChildWeightt = childWeightt;
 
             ClientId = clientId;
         }
@@ -62,10 +58,7 @@ namespace Spectra.Domain.Patients
             HumenGender gender,
             DateOnly dateOfBirth,
             ClientPatientRelations relationToClient,
-            double childHeight,
-            double childWeightt,
             string dateOfOnSetOfSymptoms,
-            TypeOfDisease inheritedOrAcquired,
 
 
 
@@ -77,15 +70,12 @@ namespace Spectra.Domain.Patients
             ArgumentNullException.ThrowIfNull(gender, nameof(gender));
             ArgumentNullException.ThrowIfNull(dateOfBirth, nameof(dateOfBirth));
             ArgumentNullException.ThrowIfNull(relationToClient, nameof(relationToClient));
-            ArgumentNullException.ThrowIfNull(childHeight, nameof(childHeight));
-            ArgumentNullException.ThrowIfNull(childWeightt, nameof(childWeightt));
             ArgumentNullException.ThrowIfNull(dateOfOnSetOfSymptoms, nameof(dateOfOnSetOfSymptoms));
-            ArgumentNullException.ThrowIfNull(inheritedOrAcquired, nameof(inheritedOrAcquired));
             ArgumentNullException.ThrowIfNull(clientId, nameof(clientId));
 
 
 
-            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, childHeight, childWeightt, clientId);
+            return new Patient(id, name, nationalId, gender, dateOfBirth, relationToClient, clientId);
         }
     }
 }
