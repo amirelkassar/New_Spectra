@@ -8,6 +8,7 @@ import BackIcon from "@/assets/icons/back";
 import { useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
 import Card from "@/components/card";
+import ReportChart from "@/components/reportChart";
 const data = {
   name: "محمد عبدالله",
   nationalID: "25814739658",
@@ -16,6 +17,14 @@ const data = {
   relationship: "الابن",
   diagnosis: "اضطراب طيف التوحد",
 };
+const apiData = [
+  { title: "جلسة 6", num: 8 },
+  { title: "جلسة 5", num: 4 },
+  { title: "جلسة 4", num: 1 },
+  { title: "جلسة 3", num: 10 },
+  { title: "جلسة 2", num: 7 },
+  { title: "جلسة 1", num: 4 },
+];
 function PatientsDetails() {
   const [value, setValue] = useState(new Date());
   const [ShowDate, setShowDate] = useState(true);
@@ -101,7 +110,7 @@ function PatientsDetails() {
 
       <Card>
         <div className="w-full">
-          <div className=" flex md:hidden items-center justify-between gap-4 flex-wrap">
+          <div className=" flex  items-center justify-between gap-4 flex-wrap">
             <h2>تقرير اسبوعى</h2>
             <button
               className={`${
@@ -115,6 +124,7 @@ function PatientsDetails() {
               {ShowDate ? <DateIcon /> : <DateIcon2 />}
             </button>
           </div>
+          <ReportChart ReportDataChart={apiData}/>
         </div>
       </Card>
     </div>
