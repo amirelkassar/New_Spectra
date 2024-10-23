@@ -1,7 +1,12 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-const Card = ({ title = '', children, className, size = 'lg' }) => {
+const Card = ({
+  title = '',
+  children,
+  className,
+  size = 'lg',
+}) => {
   return (
     <>
       {size === 'lg' && (
@@ -12,7 +17,9 @@ const Card = ({ title = '', children, className, size = 'lg' }) => {
           )}
         >
           {title && (
-            <h3 className='lg:text-medium text-black text-sm mb-3'>{title}</h3>
+            <h3 className='text-base font-bold mdl:text-2xl mb-3'>
+              {title}
+            </h3>
           )}
           {children}
         </div>

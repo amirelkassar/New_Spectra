@@ -1,14 +1,13 @@
-import fs from 'fs';
+'use server';
+
+import fs from 'fs/promises';
 import path from 'path';
 
-
-
-export function getIcons() {
+export async function getIcons() {
   const iconDir = path.resolve('src/assets/icons');
-  const files = fs.readdirSync(iconDir);
+  const files = await fs.readdir(iconDir);
 
-  return files.map((file) => ({
-    name: path.basename(file, path.extname(file)),
-    path: path.join(iconDir, file),
-  }));
+  return files.map((file) =>
+    path.basename(file, path.extname(file))
+  );
 }

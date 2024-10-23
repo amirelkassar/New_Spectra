@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
-import { AddChildModal } from '../../profile/_components/add-child-modal';
 import { useSearchParams } from 'next/navigation';
+import { AddChildModal } from '../../profile/family/_components/add-child-modal';
 
 export const AddChild = () => {
   const triggerRef = useRef(null);

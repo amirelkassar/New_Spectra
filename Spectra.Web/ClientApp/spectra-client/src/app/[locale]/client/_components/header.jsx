@@ -9,18 +9,22 @@ import { usePathname, Link } from '@/navigation';
 import { useSidebar } from '@/store/client/sidebar/menu-slice';
 
 // ICONS
-import Logo from '@/assets/icons/logo';
 import ArrowNav from '@/assets/icons/arrow-nav';
 import MenuDash from '@/assets/icons/menuDash';
 import NotificationIcon from '@/assets/icons/notification';
 import SearchIcon from '@/assets/icons/search';
 import Button from '@/components/button';
+import { useMediaQuery } from '@mantine/hooks';
+import { cn } from '@/lib/utils';
+import { Logo } from '@/components/logo';
+import ROUTES from '@/routes';
 
 // COMPONENT
 export const Header = () => {
   const { isOpen, setIsOpen } = useSidebar();
   const locale = useLocale();
   const pathname = usePathname();
+  const match = useMediaQuery('(min-width: 768px)');
 
   //  HANDLE OPEN & CLOSE SIDEBAR BUTTON ON BOTH LANGUAGES
   const handleOpenNavButton = useCallback(() => {
@@ -40,7 +44,7 @@ export const Header = () => {
   }, [isOpen, locale]);
 
   return (
-    <header className='h-9 lg:h-16 flex items-center gap-[10px] lg:gap-[28px]'>
+    <header className='h-9 lg:h-16 flex items-center gap-3 lg:gap-5'>
       {/* OPEN & CLOSE SIDEBAR */}
 
       {/* MOBILE */}
@@ -61,49 +65,49 @@ export const Header = () => {
       </button>
 
       {/* LOGO */}
-      <Link href={'#'} className='block w-fit '>
-        <Logo className={'w-[91px] h-9'} />
-      </Link>
+      <Logo
+        className='h-8 mdl:h-9'
+        href={ROUTES.CLIENT.MAIN.HOME}
+      />
 
       {/* SEARCH INPUT  */}
-      <div className='flex items-center justify-end grow'>
-        <button className='p-[9px] md:p-0 size-[34px] md:size-[45px] bg-greenMain mx-[10p] md:mx-[20px] rounded-full flex items-center justify-center shrink-0'>
-          <SearchIcon />
-        </button>
+      <div className='flex items-center justify-end grow gap-3 lg:gap-5'>
+        <Button
+          variant={match ? 'secondary' : 'blueLight'}
+          className={cn(
+            'shrink-0 p-0 size-9 mdl:size-11 rounded-full text-greenMain rotate-90 transition-none',
+            match && 'text-white rotate-0'
+          )}
+        >
+          <SearchIcon className='size-4 mdl:size-5' />
+        </Button>
 
         <input
+          name='search'
           type='text'
-          className='grow hidden md:block h-10 bg-gray rounded-full px-5 focus:outline-greenMain'
-          placeholder='بحث...'
+          className='grow hidden mdl:block h-10 bg-grayLight rounded-full px-5 focus:outline-greenMain caret-greenMain'
         />
       </div>
 
       {/* LANGUAGE BUTTON */}
-      <Button
-        variant='blueLight'
-        className='!rounded-full shrink-0 text-xs lg:text-base p-0 size-12'
+      <Link
+        href={pathname}
+        locale={locale === 'en' ? 'ar' : 'en'}
       >
-        <Link
-          href={pathname}
-          locale={locale === 'en' ? 'ar' : 'en'}
+        <Button
+          variant='blueLight'
+          className='rounded-full shrink-0 text-xs mdl:text-base p-0 size-9 mdl:size-11 text-greenMain'
         >
           {locale === 'en' ? 'عربي' : 'En'}
-        </Link>
-      </Button>
+        </Button>
+      </Link>
 
       {/* NOTIFICATION BUTTON */}
       <Button
         variant='blueLight'
-        className='relative shrink-0 p-0 size-12 !rounded-full'
+        className='shrink-0 p-0 size-9 mdl:size-11 rounded-full'
       >
-        <span
-          className={
-            'size-5 text-sm p-1 rounded-full bg-red absolute bottom-0 -start-1 text-white flex items-center justify-center font-bold'
-          }
-        >
-          1
-        </span>
-        <NotificationIcon />
+        <NotificationIcon className='size-4 mdl:size-5' />
       </Button>
     </header>
   );

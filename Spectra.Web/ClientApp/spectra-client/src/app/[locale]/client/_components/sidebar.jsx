@@ -40,8 +40,10 @@ const Sidebar = () => {
       },
       {
         name: 'ملفي',
-        route: ROUTES.CLIENT.PROFILE,
-        isActive: path.includes(ROUTES.CLIENT.PROFILE),
+        route: ROUTES.CLIENT.PROFILE.FAMILY,
+        isActive:
+          path.includes(ROUTES.CLIENT.PROFILE.FAMILY) ||
+          path.includes(ROUTES.CLIENT.PROFILE.ORG),
         icon: <ProfileIcon />,
       },
       {

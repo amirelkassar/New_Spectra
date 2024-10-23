@@ -9,30 +9,35 @@ export const TabsCard = ({
   tab = '',
   className = '',
 }) => {
+  if (!tabs?.length) return null;
   return (
     <Card
       className={cn(
-        'h-auto basis-1/4 flex flex-row lg:flex-col *:flex-1 gap-3',
+        'lg:col-span-2 pb-4 lg:pb-0 overflow-x-auto lg:overflow-x-hidden',
         className
       )}
     >
-      <div className='space-y-3'>
+      <ul className='flex lg:flex-col gap-3 mdl:gap-5 *:shrink-0 lg:*:shrink'>
         {tabs?.map((t) => (
-          <button
-            type='button'
-            key={t}
-            onClick={() => setTab(t)}
+          <li
+            role='button'
+            key={t?.key}
+            onClick={() => setTab(t?.key)}
             className={cn(
-              'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs lg:text-base w-full px-3 py-1',
+              'lg:rounded-lg transition lg:hover:bg-blueLight lg:text-black lg:font-bold font-normal text-xs mdl:text-base lg:w-full p-3 lg:py-1 flex items-center *:shrink-0 gap-2 w-fit border-b border-transparent lg:border-0 hover:text-greenMain hover:lg:text-black',
               {
-                'bg-greenMain text-white hover:bg-greenMain': tab === t,
+                'lg:bg-greenMain lg:text-white lg:hover:bg-greenMain hover:lg:text-white border-b-2 border-b-greenMain text-greenMain':
+                  tab === t?.key,
               }
             )}
           >
-            {t}
-          </button>
+            {t?.icon}
+            <span className='text-black lg:text-inherit'>
+              {t?.label}
+            </span>
+          </li>
         ))}
-      </div>
+      </ul>
     </Card>
   );
 };

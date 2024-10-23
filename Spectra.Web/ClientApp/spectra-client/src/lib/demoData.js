@@ -877,3 +877,102 @@ export const ARTICLES = [
     ],
   },
 ];
+
+// export const CHILDSDATA = [
+//   {
+//     id: 0,
+//     avatar: '',
+//     fullname: 'محمد عبدالله الشيخ',
+//     diagnosis: 'طيف التوحد',
+//     gender: 'ذكر',
+//     age: 10,
+//     reports: 3,
+//     sessions: 3,
+//     followUps: 5,
+//     treatmentTeam: [
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.5',
+//         avatar: '',
+//       },
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.5',
+//         avatar: '',
+//       },
+//     ],
+//   },
+//   {
+//     id: 1,
+//     avatar: '',
+//     fullname: 'احمد عبدالله الشيخ',
+//     diagnosis: 'طيف التوحد',
+//     gender: 'ذكر',
+//     age: 8,
+//     reports: 5,
+//     sessions: 13,
+//     followUps: 6,
+//     treatmentTeam: [
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.4',
+//         avatar: '',
+//       },
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.2',
+//         avatar: '',
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     avatar: '',
+//     fullname: 'علي محمد علي',
+//     diagnosis: 'فرط حركة',
+//     gender: 'ذكر',
+//     age: 10,
+//     reports: 2,
+//     sessions: 8,
+//     followUps: 8,
+//     treatmentTeam: [
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.4',
+//         avatar: '',
+//       },
+//       {
+//         name: 'احمد محمد كمال',
+//         profession: 'اخصائى نفسي',
+//         rate: '9.2',
+//         avatar: '',
+//       },
+//     ],
+//   },
+// ];
+
+export const CHILDSDATA = [
+  {
+    id: '1',
+    avatar: '',
+    name: 'محمد عبدالله الشيخ',
+    diagnosis: 'طيف التوحد',
+  },
+  {
+    id: '2',
+    avatar: '',
+    name: 'احمد عبدالله الشيخ',
+    diagnosis: 'فرط الحركة',
+  },
+  {
+    id: '3',
+    avatar: '',
+    name: 'علي محمد علي',
+    diagnosis: 'فرط الحركة',
+  },
+];

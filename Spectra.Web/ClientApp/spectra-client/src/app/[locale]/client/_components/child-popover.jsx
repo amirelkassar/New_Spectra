@@ -5,16 +5,22 @@ import { useState } from 'react';
 import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
 import { cn } from '@/lib/utils';
 import Avatar from '@/components/avatar';
+import { useLocale } from 'next-intl';
 
 const ChildPopover = ({
   data = [],
   disabled = false,
-  selectedChild = 0,
-  setSelectedChild = () => {},
   className = '',
+  defaultSelected = '',
+  onChange = () => {},
 }) => {
+  const initialValue =
+    data?.find((item) => item?.id === defaultSelected) ||
+    data[0];
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(initialValue);
 
+  if (data.length === 0) return null;
   return (
     <Popover
       position='bottom'
@@ -37,10 +43,7 @@ const ChildPopover = ({
             disabled && '!cursor-default opacity-70'
           )}
         >
-          <Child
-            className='hover:bg-white'
-            {...data[selectedChild]}
-          />
+          <Child className='hover:bg-white' {...selected} />
 
           {!disabled && (
             <span
@@ -61,20 +64,17 @@ const ChildPopover = ({
         <Popover.Dropdown className='shadow-md border-none space-y-5 px-0'>
           {data.map(
             (child) =>
-              child.id !== selectedChild && (
+              child?.id !== selected?.id && (
                 <div
                   key={child.id}
                   role='button'
                   onClick={() => {
-                    setSelectedChild(child.id);
+                    setSelected(child);
+                    onChange(child?.id);
                     setOpen(false);
                   }}
                 >
-                  <Child
-                    avatar={child.avatar}
-                    fullname={child.fullname}
-                    diagnosis={child.diagnosis}
-                  />
+                  <Child {...child} />
                 </div>
               )
           )}
@@ -87,13 +87,16 @@ const ChildPopover = ({
 export default ChildPopover;
 
 const Child = ({
+  id = '',
   avatar = '',
-  fullname = '',
+  name = '',
   diagnosis = '',
   className = '',
 }) => {
+  const locale = useLocale();
   return (
     <div
+      data-id={id}
       className={cn(
         'flex items-center p-2 gap-3 rounded-lg transition hover:bg-blueLight',
         className
@@ -102,12 +105,12 @@ const Child = ({
       <Avatar
         className='size-[25px] mdl:size-[58px] min-w-max rounded-full inline-flex'
         src={avatar || ''}
-        name={fullname}
+        name={name}
       />
 
       <div className='text-black flex items-center text-xs mdl:text-base w-fit gap-3'>
         <h4 className='font-bold w-fit'>
-          الطفل / {fullname}
+          {locale === 'ar' ? 'الطفل' : 'Child'} / {name}
         </h4>
         <p className='w-fit'>{diagnosis}</p>
       </div>

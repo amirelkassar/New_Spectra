@@ -1,7 +1,7 @@
 'use client';
 
 import Card from '@/components/card';
-import { Prescription } from '../../family/_components/child/prescrtiption';
+import { Prescription } from './prescrtiption';
 
 const prescriptionsData = [
   {
@@ -38,7 +38,7 @@ const prescriptionsData = [
 export const Prescriptions = () => {
   return (
     <Card>
-      <div className='grid grid-cols-fill-250 gap-5'>
+      <div className='flex flex-wrap justify-center gap-5'>
         {prescriptionsData?.map((prescription, i) => (
           <Prescription key={i} {...prescription} />
         ))}
