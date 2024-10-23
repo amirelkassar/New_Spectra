@@ -38,7 +38,7 @@ export const FamProfile = ({ initialData = {} }) => {
 
             {/* EDIT BUTTON */}
             <EditFamProfileModal initialData={initialData}>
-              <EditButton className='absolute lg:relative bottom-0 right-1/2 translate-x-1/2 ltr:-translate-x-1/2 translate-y-full lg:translate-y-0 lg:translate-x-0 lg:bottom-auto lg:right-auto w-full max-w-44 mdl:max-w-60 lg:max-w-44'>
+              <EditButton className='absolute lg:static bottom-0 right-1/2 translate-x-1/2 ltr:-translate-x-1/2 translate-y-full lg:ltr:translate-x-0 lg:translate-y-0 lg:translate-x-0 lg:bottom-auto lg:right-auto w-full max-w-44 mdl:max-w-60 lg:max-w-44'>
                 تعديل
               </EditButton>
             </EditFamProfileModal>

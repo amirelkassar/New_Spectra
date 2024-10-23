@@ -1,9 +1,7 @@
 'use client';
 
-import { TabsFilter } from '@/app/[locale]/client/_components/tabs-filter';
 import Card from '@/components/card';
-import { useState } from 'react';
-import { Prescription } from './prescrtiption';
+import { Prescription } from '../../family/_components/child/prescrtiption';
 
 const prescriptionsData = [
   {
@@ -37,42 +35,11 @@ const prescriptionsData = [
   },
 ];
 
-const tabsFilterData = [
-  {
-    label: 'الكل',
-    icon: null,
-  },
-  {
-    label: 'عقاقير',
-    icon: null,
-  },
-  {
-    label: 'توصيات',
-    icon: null,
-  },
-];
 export const Prescriptions = () => {
-  const [filterTab, setFilterTab] = useState('الكل');
-
-  const filteredData = () => {
-    if (filterTab === 'الكل') return prescriptionsData;
-
-    return prescriptionsData.filter(
-      (item) => item?.type === filterTab
-    );
-  };
   return (
-    <Card className='space-y-5'>
-      <div className='w-1/2'>
-        <TabsFilter
-          setTab={setFilterTab}
-          data={tabsFilterData}
-          tab={filterTab}
-        />
-      </div>
-
+    <Card>
       <div className='grid grid-cols-fill-250 gap-5'>
-        {filteredData()?.map((prescription, i) => (
+        {prescriptionsData?.map((prescription, i) => (
           <Prescription key={i} {...prescription} />
         ))}
       </div>
