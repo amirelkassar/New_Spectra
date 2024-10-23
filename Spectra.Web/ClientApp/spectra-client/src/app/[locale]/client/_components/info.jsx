@@ -21,7 +21,8 @@ export const Info = ({
         </h4>
       )}
 
-      {typeof value === 'string' && (
+      {(typeof value === 'string' ||
+        typeof value === 'number') && (
         <p
           className={cn(
             'text-xs mdl:text-base font-bold',

@@ -45,7 +45,7 @@ export const FamProfile = ({ initialData = {} }) => {
           </div>
 
           {/* CUSTOMER INFO */}
-          <div className='text-black gap-3 mdl:gap-10 flex-1 mdl:ps-5 lg:border-s-2 lg:border-grayLight grid grid-cols-2 mdl:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4'>
+          <div className='text-black gap-3 mdl:gap-10 flex-1 mdl:ps-5 lg:border-s-2 lg:border-grayLight grid grid-cols-2 mdl:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 w-fit mdl:w-auto gap-x-20 mdl:gap-x-3 mx-auto mdl:mx-0'>
             <Info
               title='رقم الهوية'
               value={initialData?.id}
