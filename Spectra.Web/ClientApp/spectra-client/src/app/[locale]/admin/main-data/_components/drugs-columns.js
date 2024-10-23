@@ -38,9 +38,9 @@ export const DrugsColumns = [
     id: "contraindications",
   },
   {
-    accessorKey: "interactionsWithOtherdrugs",
+    accessorKey: "code",
     header: "الكود",
-    id: "interactionsWithOtherdrugs",
+    id: "code",
   },
   {
     id: "actions",

@@ -3,7 +3,7 @@ import RumorsIcon from "@/assets/icons/rumors";
 import ActionMenu from "./ActionMenuAnalysis";
 export const ProceduresColumns = [
   {
-    accessorKey: "scientificName",
+    accessorKey: "scientificNameByEngByArab",
     header: "الاسم",
     cell: ({ getValue, row }) => {
       const name = getValue();
@@ -19,12 +19,13 @@ export const ProceduresColumns = [
     },
   },
   {
-    accessorKey: "id",
+    accessorKey: "code",
     header: "الكود ",
   },
   {
-    accessorKey: "notes",
+    accessorKey: "scientificNote",
     header: "ملاحظة",
+    id:'scientificNameByEng'
   },
   
   {

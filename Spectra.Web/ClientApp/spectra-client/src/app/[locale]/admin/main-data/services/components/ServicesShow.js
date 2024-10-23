@@ -25,7 +25,7 @@ const dataSelect = [
 function ServicesShow() {
   const [formData, setFormData] = useState({
     AvailableSrvices: "1",
-    ServicesName: "",
+    name: "",
     DefinitionServices: "",
     Photo: "",
     Price: "",
@@ -42,7 +42,7 @@ function ServicesShow() {
   useEffect(() => {
     isSuccess &&
       setFormData({
-        ServicesName: "",
+        name: "",
         DefinitionServices: "",
         Photo: "",
         Price: "",
@@ -147,10 +147,10 @@ function ServicesShow() {
           <div className="flex flex-1 pt-14 flex-col gap-5 relative">
             <InputGreen
               label="عنوان الخدمة"
-              name="ServicesName"
-              value={formData.ServicesName}
+              name="Name"
+              value={formData.name}
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "ServicesName")}
+              error={GetErrorMsg(error, "Name")}
             />
 
             <Textarea

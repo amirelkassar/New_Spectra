@@ -43,9 +43,19 @@ function page({ params }) {
               <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
                 التخصص
               </h3>
-              <p className="text-[14px] lg:text-[20px]  font-Regular">
-                {data?.data.data.examinationTypes}
-              </p>
+              <div className="flex gap-1 flex-wrap">
+                {data?.data.data.examinationTypes.map((item, i) => (
+                  <p
+                    key={i}
+                    className="text-[14px] lg:text-[20px]  font-Regular"
+                  >
+                    {item}{" "}
+                    {data?.data.data.examinationTypes.length > (+i+1 )
+                      ? ","
+                      : ""}{" "}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         )}

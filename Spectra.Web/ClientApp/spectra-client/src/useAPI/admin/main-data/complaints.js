@@ -31,6 +31,8 @@ export const GetComplaintID = (id) => {
 //delete
 export const DeleteComplaint = (id) => {
   const router = useRouter();
+  const { refetch } = GetComplaint();
+
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["Complaint"],
@@ -40,19 +42,22 @@ export const DeleteComplaint = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["Complaint"]);
       router.replace(ROUTES.ADMIN.DATAMAIN.COMPLAINTS);
+      refetch();
+      queryClient.invalidateQueries(["Complaint"]);
     },
   });
 };
 //post
 export const useCreateComplaint = () => {
+  const { refetch } = GetComplaint();
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Admin.Complaint.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
+      refetch();
       console.log("تم الإرسال بنجاح:", data);
     },
     onError: (error) => {
@@ -62,6 +67,8 @@ export const useCreateComplaint = () => {
 };
 //put
 export const useEditComplaint = (id) => {
+  const { refetch } = GetComplaint();
+  const { refetch: refetch2 } = GetComplaintID(id);
   return useMutation({
     mutationKey: ["EditComplaint"],
     mutationFn: async (data) => {
@@ -71,7 +78,8 @@ export const useEditComplaint = (id) => {
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditComplaint"]);
+      refetch2();
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);

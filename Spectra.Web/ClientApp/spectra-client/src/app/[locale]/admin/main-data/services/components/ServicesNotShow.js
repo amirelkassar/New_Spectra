@@ -11,7 +11,7 @@ import GetErrorMsg from "@/components/getErrorMsg";
 function ServicesNotShow() {
   const [formData, setFormData] = useState({
     AvailableSrvices: "2",
-    ServicesName: "",
+    Name: "",
     DefinitionServices: "",
     Price: "",
     termsAndConditions: "",
@@ -38,7 +38,7 @@ function ServicesNotShow() {
     isSuccess &&
       setFormData({
         AvailableSrvices: "2",
-        ServicesName: "",
+        Name: "",
         DefinitionServices: "",
         Price: "",
         termsAndConditions: "",
@@ -75,10 +75,10 @@ function ServicesNotShow() {
       <form className="lgl:max-w-[80%] flex flex-col gap-6 lg:gap-10 w-full mx-auto lgl:mt-20">
         <InputGreen
           label="اسم الخدمة"
-          name="ServicesName"
-          value={formData.ServicesName}
+          name="Name"
+          value={formData.Name}
           onChange={handleInputChange}
-          error={GetErrorMsg(error, "ServicesName")}
+          error={GetErrorMsg(error, "Name")}
         />
         <InputGreen
           label="تعريف للخدمة"

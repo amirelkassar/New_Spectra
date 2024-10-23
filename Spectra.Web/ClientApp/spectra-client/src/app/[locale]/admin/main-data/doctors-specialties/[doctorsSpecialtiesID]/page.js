@@ -67,7 +67,7 @@ function page({ params }) {
               </h3>
               <p className='text-[14px] lg:text-[20px]  font-Regular'>
                 {' '}
-                {data.data.data.id}
+                {data.data.data.code}
               </p>
             </div>
           </div>

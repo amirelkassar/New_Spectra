@@ -15,9 +15,9 @@ import {
 } from "@/useAPI/admin/main-data/testsInterior";
 function Page({ params }) {
   const [formData, setFormData] = useState({
-    Name: "",
-    Code: "",
-    ExaminationTypes: ["علاجى"], // default value
+    name: "",
+    code: "",
+    examinationTypes: [], // default value
   });
   const { data, isLoading } = GetInternalExaminationID(params.testsInteriorID);
   const { mutate: EditInternalExamination } = useEditInternalExamination(
@@ -40,7 +40,7 @@ function Page({ params }) {
   const handleSpecialtiesChange = (selected) => {
     setFormData((prevData) => ({
       ...prevData,
-      ExaminationTypes: selected,
+      examinationTypes: selected,
     }));
   };
   const handleSubmit = (e) => {
@@ -74,19 +74,19 @@ function Page({ params }) {
           <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
             <InputGreen
               label="اسم الفحص"
-              name="Name"
+              name="name"
               value={formData.name}
               onChange={handleInputChange}
             />
             <InputGreen
               label="كود الفحص"
-              name="Code"
+              name="code"
               value={formData.code}
               onChange={handleInputChange}
             />
             <MultiSelect
               data={["نفسى", "علاجى"]}
-              value={formData.ExaminationTypes}
+              value={formData.examinationTypes}
               onChange={handleSpecialtiesChange}
               label="اختر تخصصات الفحص"
               placeholder="اختر تخصص"
@@ -100,9 +100,7 @@ function Page({ params }) {
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
             <Button
-              onClick={() => {
-                console.log(formData);
-              }}
+              onClick={handleSubmit}
               variant="secondary"
               className={
                 "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

@@ -74,7 +74,7 @@ function page({ params }) {
                 الكود
               </h3>
               <p className=' text-[14px] lg:text-[20px] font-Regular'>
-                {data?.data.data.id}{' '}
+                {data?.data.data.code}{' '}
               </p>
             </div>
             <div className='pb-5 border-b last-of-type:border-none border-grayLight'>

@@ -21,7 +21,7 @@ function ServicesDetails({ DataServices, isLoading }) {
   //api
   const [formData, setFormData] = useState({
     availableSrvices: "1",
-    servicesName: "",
+    name: "",
     definitionServices: "",
     photo: "",
     price: "",
@@ -121,10 +121,10 @@ function ServicesDetails({ DataServices, isLoading }) {
           <div className="flex flex-1 pt-14 flex-col gap-5 relative">
             <TextInput
               label="عنوان الخدمة "
-              defaultValue={formData.servicesName}
-              name="servicesName"
+              defaultValue={formData.name}
+              name="name"
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "servicesName")}
+              error={GetErrorMsg(error, "n")}
               classNames={{
                 input:
                   "min-h-[60px] h-auto  w-full rounded-lg bg-grayBlueLight   border-grayMedium text-[24px] ",
@@ -251,7 +251,7 @@ function ServicesDetails({ DataServices, isLoading }) {
               <TextInput
                 label="سعر الخدمة "
                 defaultValue={formData.price}
-                name="Pprice"
+                name="price"
                 onChange={handleInputChange}
                 error={GetErrorMsg(error, "Price")}
                 type="number"

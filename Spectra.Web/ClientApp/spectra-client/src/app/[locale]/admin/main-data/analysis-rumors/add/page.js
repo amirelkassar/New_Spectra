@@ -11,8 +11,8 @@ import InputGreen from '@/components/Input-green';
 import { useCreateMedicalTests } from '@/useAPI/admin/main-data/analysis';
 function Page() {
   const [formData, setFormData] = useState({
-    scientificName: '',
-    englishName: '',
+    ScientificNameByEngByArab: '',
+    ScientificNameEng: '',
     code: '',
     notes: '',
     examinationTypes: '1',
@@ -115,15 +115,15 @@ function Page() {
             <InputGreen
               label={'الاسم العلمى  باللغة العربية  '}
               className='flex-1'
-              name='scientificName'
-              value={formData.scientificName}
+              name='ScientificNameByEngByArab'
+              value={formData.ScientificNameByEngByArab}
               onChange={handleChange}
             />
             <InputGreen
               label={'الاسم العلمى  باللغة الانجليزية  '}
               className='flex-1'
-              name='englishName'
-              value={formData.englishName}
+              name='ScientificNameEng'
+              value={formData.ScientificNameEng}
               onChange={handleChange}
             />
           </div>

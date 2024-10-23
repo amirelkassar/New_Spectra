@@ -17,7 +17,7 @@ function Page() {
     reset,
   } = useCreateSpecialization();
   const [formData, setFormData] = useState({
-    specializationName: "",
+    Name: "",
     description: "",
     consultationCost: 0,
     code: "",
@@ -25,7 +25,7 @@ function Page() {
   useEffect(() => {
     isSuccess &&
       setFormData({
-        specializationName: "",
+        Name: "",
         description: "",
         consultationCost: 0,
         code: "",
@@ -66,10 +66,10 @@ function Page() {
         >
           <InputGreen
             label={"اسم التخصص"}
-            name="specializationName"
-            value={formData.specializationName}
+            name="Name"
+            value={formData.Name}
             onChange={handleChange}
-            error={GetErrorMsg(error, "SpecializationName")}
+            error={GetErrorMsg(error, "Name")}
           />
           <Textarea
             classNames={{
