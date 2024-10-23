@@ -21,18 +21,20 @@ export const TabsCard = ({
         {tabs?.map((t) => (
           <li
             role='button'
-            key={t?.label}
-            onClick={() => setTab(t?.label)}
+            key={t?.key}
+            onClick={() => setTab(t?.key)}
             className={cn(
-              'rounded-lg transition hover:bg-blueLight text-black font-bold text-xs mdl:text-base lg:w-full px-3 py-1 flex items-center gap-2 w-fit',
+              'lg:rounded-lg transition lg:hover:bg-blueLight lg:text-black lg:font-bold font-normal text-xs mdl:text-base lg:w-full p-3 lg:py-1 flex items-center gap-2 w-fit border-b border-transparent lg:border-0 hover:text-greenMain hover:lg:text-black',
               {
-                'bg-greenMain text-white hover:bg-greenMain':
-                  tab === t?.label,
+                'lg:bg-greenMain lg:text-white lg:hover:bg-greenMain hover:lg:text-white border-b-2 border-b-greenMain text-greenMain':
+                  tab === t?.key,
               }
             )}
           >
             {t?.icon}
-            {t?.label}
+            <span className='text-black lg:text-inherit'>
+              {t?.label}
+            </span>
           </li>
         ))}
       </ul>

@@ -1,79 +1,24 @@
-const FileOutline = ({ className = '' }) => {
+const FileOutline = ({ ...props }) => {
   return (
     <svg
-      className={className}
-      width={22}
-      height={26}
-      viewBox='0 0 22 26'
+      width={15}
+      height={18}
+      viewBox='0 0 15 18'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <path
-        d='M1 4.54102V20.8215'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-      />
-      <path
-        d='M20.5459 9.42773V20.8295'
-        stroke='#10B0C1'
-        strokeWidth={2}
+        d='M5.18979 9.55504H9.9691M5.18979 12.7412H7.57944M1.20703 2.38607V15.1309C1.20703 15.5534 1.37488 15.9586 1.67364 16.2574C1.97241 16.5562 2.37762 16.724 2.80013 16.724H12.3588C12.7813 16.724 13.1865 16.5562 13.4852 16.2574C13.784 15.9586 13.9519 15.5534 13.9519 15.1309V5.8447C13.9518 5.63247 13.9094 5.42238 13.8271 5.22677C13.7447 5.03116 13.6241 4.85398 13.4723 4.70563L9.93564 1.247C9.63802 0.955989 9.23832 0.793021 8.82207 0.792969H2.80013C2.37762 0.792969 1.97241 0.960813 1.67364 1.25958C1.37488 1.55834 1.20703 1.96355 1.20703 2.38607Z'
+        stroke='currentColor'
+        strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
-        d='M4.25781 1.2832H12.4019'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M4.25781 24.0879H17.2884'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-      />
-      <path
-        d='M20.5487 20.8301C20.5576 22.457 18.9198 24.0877 17.291 24.0877'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M1.00017 20.8301C1.00017 22.4589 2.62899 24.0877 4.25781 24.0877'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M1.00017 4.53906C1.00017 2.9126 2.62899 1.32006 4.25781 1.28378'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M20.5366 9.43462L12.4014 1.2832'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M12.4015 6.16992C12.4065 7.78988 14.0369 9.42756 15.6592 9.42756'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <path
-        d='M12.4014 6.16967V1.2832'
-        stroke='#10B0C1'
-        strokeWidth={2}
-        strokeLinecap='round'
+        d='M9.17188 0.792969V3.97918C9.17188 4.40169 9.33972 4.80691 9.63848 5.10567C9.93725 5.40443 10.3425 5.57228 10.765 5.57228H13.9512'
+        stroke='currentColor'
+        strokeWidth='1.5'
         strokeLinejoin='round'
       />
     </svg>

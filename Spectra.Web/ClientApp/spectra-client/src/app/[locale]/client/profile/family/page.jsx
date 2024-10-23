@@ -1,8 +1,5 @@
-import Container from '../../_components/container';
 import { CHILDSDATA } from '@/lib/demoData';
-import { FamProfile } from './_components/fam-profile';
-import { ChildSelect } from '../../_components/child-select';
-import { ChildPortfolio } from './_components/child-portfolio';
+import { Family } from './family';
 
 const DATA = {
   fullname: 'محمد محمد علي',
@@ -16,13 +13,7 @@ const DATA = {
 
 const FamilyProfilePage = () => {
   return (
-    <Container className='space-y-5'>
-      <FamProfile initialData={DATA} />
-
-      <ChildSelect data={CHILDSDATA} />
-
-      <ChildPortfolio />
-    </Container>
+    <Family parentData={DATA} childData={CHILDSDATA} />
   );
 };
 

@@ -5,10 +5,11 @@ export const Info = ({
   value = '',
   valueClassName = '',
   titleClassName = '',
+  containerClassName = '',
 }) => {
   if (!title && !value) return null;
   return (
-    <div>
+    <div className={containerClassName}>
       {title && (
         <h4
           className={cn(
@@ -19,14 +20,30 @@ export const Info = ({
           {title}
         </h4>
       )}
-      <p
-        className={cn(
-          'text-xs mdl:text-base font-bold',
-          valueClassName
-        )}
-      >
-        {value}
-      </p>
+
+      {typeof value === 'string' && (
+        <p
+          className={cn(
+            'text-xs mdl:text-base font-bold',
+            valueClassName
+          )}
+        >
+          {value}
+        </p>
+      )}
+
+      {Array.isArray(value) &&
+        value?.map((item, index) => (
+          <p
+            key={index}
+            className={cn(
+              'text-xs mdl:text-base font-bold',
+              valueClassName
+            )}
+          >
+            {item}
+          </p>
+        ))}
     </div>
   );
 };
