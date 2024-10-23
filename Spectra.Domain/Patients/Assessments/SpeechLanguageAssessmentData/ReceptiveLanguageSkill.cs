@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Spectra.Domain.Common.Conses.Units;
 
-namespace Spectra.Domain.Patients.PatientsData
+namespace Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData
 {
     public class ReceptiveLanguageSkill
     {

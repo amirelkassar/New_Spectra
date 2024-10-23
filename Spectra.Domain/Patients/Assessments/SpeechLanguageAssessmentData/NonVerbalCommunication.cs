@@ -1,9 +1,9 @@
 ﻿using Spectra.Domain.Shared.Common;
 using static Spectra.Domain.Common.Conses.Units;
 
-namespace Spectra.Domain.Patients.PatientsData
+namespace Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData
 {
-    public class NonVerbalCommunication 
+    public class NonVerbalCommunication
     {
         public Rating FacialExpressionsRating { get; set; }
         public string FacialExpressionsComment { get; set; }

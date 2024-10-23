@@ -1,9 +1,9 @@
 ﻿using Spectra.Domain.Shared.Common;
 using static Spectra.Domain.Common.Conses.Units;
 
-namespace Spectra.Domain.Patients.PatientsData
+namespace Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData
 {
-    public class PreCommunicationSkill 
+    public class PreCommunicationSkill
     {
         public Rating CooperationRating { get; set; }
         public string CooperationComment { get; set; }

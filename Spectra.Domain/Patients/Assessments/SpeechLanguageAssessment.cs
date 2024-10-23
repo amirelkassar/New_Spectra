@@ -1,5 +1,6 @@
-﻿using Spectra.Domain.Patients.PatientsData;
+﻿using Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData;
 using Spectra.Domain.Shared.Common;
+using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using static Spectra.Domain.Common.Conses.Units;
 
-namespace Spectra.Domain.Patients
+namespace Spectra.Domain.Patients.Assessments
 {
-    public class SpeechLanguageAssessment : BaseAuditableEntity<string>
+    public class SpeechLanguageAssessment(string id, string patientId, string clientId, Name patientName) : PatientAssessment(id, patientId, clientId, patientName, AssessmentTypes.SpeechLanguageAssessment)
     {
-        public string PatientId { get; private set; }
         public OralMotorExamination? OralMotorExamination { get; set; }
         public PreCommunicationSkill? PreCommunicationSkill { get; set; }
         public NonVerbalCommunication? NonVerbalCommunication { get; set; }
