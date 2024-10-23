@@ -1,3 +1,5 @@
+'use client';
+
 import { DoctorBadge } from '@/app/[locale]/client/_components/doctor-badge';
 import { Info } from '@/app/[locale]/client/_components/info';
 import { EditButton } from '@/components/buttons/edit-button';
