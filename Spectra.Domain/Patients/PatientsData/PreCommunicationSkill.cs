@@ -3,7 +3,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.PatientsData
 {
-    public class PreCommunicationSkill : BaseAuditableEntity<string>
+    public class PreCommunicationSkill 
     {
         public Rating CooperationRating { get; set; }
         public string CooperationComment { get; set; }

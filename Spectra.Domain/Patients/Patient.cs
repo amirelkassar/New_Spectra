@@ -27,11 +27,6 @@ namespace Spectra.Domain.Patients
         public SocialAdaptive? SocialAdaptive { get; set; }
         public SchoolTypes? SchoolType { get; set; }
         public FamilySocialHistory? FamilySocialhistory { get; set; }
-        public OralMotorExamination? OralMotorExamination { get; set; }
-        public PreCommunicationSkill? PreCommunicationSkill { get; set; }
-        public NonVerbalCommunication? NonVerbalCommunication { get; set; }
-        public VerbalCommunication? VerbalCommunication { get; set; }
-        public LastImpression LastImpression { get; set; }
 
         private Patient(string id,
             Name name,

@@ -3,7 +3,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.PatientsData
 {
-    public class NonVerbalCommunication : BaseAuditableEntity<string>
+    public class NonVerbalCommunication 
     {
         public Rating FacialExpressionsRating { get; set; }
         public string FacialExpressionsComment { get; set; }

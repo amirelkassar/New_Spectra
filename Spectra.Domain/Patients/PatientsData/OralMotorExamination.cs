@@ -3,7 +3,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.PatientsData
 {
-    public class OralMotorExamination : BaseAuditableEntity<string>
+    public class OralMotorExamination
     {
         public Rating FacialSymmetryRating { get; set; }
         public string FacialSymmetryComment { get; set; }

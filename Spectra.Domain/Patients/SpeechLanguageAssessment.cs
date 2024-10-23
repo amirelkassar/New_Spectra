@@ -1,10 +1,22 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Patients.PatientsData;
+using Spectra.Domain.Shared.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static Spectra.Domain.Common.Conses.Units;
 
-namespace Spectra.Domain.Patients.PatientsData
+namespace Spectra.Domain.Patients
 {
-    public class LastImpression : BaseAuditableEntity<string>
+    public class SpeechLanguageAssessment : BaseAuditableEntity<string>
     {
+        public string PatientId { get; private set; }
+        public OralMotorExamination? OralMotorExamination { get; set; }
+        public PreCommunicationSkill? PreCommunicationSkill { get; set; }
+        public NonVerbalCommunication? NonVerbalCommunication { get; set; }
+        public ReceptiveLanguageSkill? ReceptiveLanguageSkill { get; set; }
+        public ExpressiveLanguageSkill? ExpressiveLanguageSkill { get; set; }
         public int ArticulationIssuesScore { get; set; }
         public Severity ArticulationIssuesSeverity { get; set; }
 

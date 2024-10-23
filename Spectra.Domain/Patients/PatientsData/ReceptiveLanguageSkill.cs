@@ -1,9 +1,13 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.PatientsData
 {
-    public class VerbalCommunication : BaseAuditableEntity<string>
+    public class ReceptiveLanguageSkill
     {
         public Rating RecognizingNameRating { get; set; }
         public string RecognizingNameComment { get; set; }
@@ -25,8 +29,6 @@ namespace Spectra.Domain.Patients.PatientsData
         public string AdjectivesComment { get; set; }
         public Rating PrepositionsRating { get; set; }
         public string PrepositionsComment { get; set; }
-        public Rating PronounsRating { get; set; }
-        public string PronounsComment { get; set; }
         public Rating UnderstandingYesNoQuestionsRating { get; set; }
         public string UnderstandingYesNoQuestionsComment { get; set; }
         public Rating UnderstandingWhQuestionsRating { get; set; }
