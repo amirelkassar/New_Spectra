@@ -9,7 +9,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments
 {
-    public class MDTAssessment(string id, string patientId, string clientId, Name patientName) : PatientAssessment(id, patientId, clientId, patientName, AssessmentTypes.MDT)
+    public class MDTAssessment(string id, string patientId, string clientId, string sessionId, Name patientName) : PatientAssessmentBase(id, patientId, clientId, sessionId, patientName, AssessmentTypes.MDT)
     {
         public SchoolCenterSituation SchoolCenterSituation { get; set; }
         public Communication Communication { get; set; }

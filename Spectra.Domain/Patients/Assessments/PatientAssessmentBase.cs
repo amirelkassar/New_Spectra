@@ -9,17 +9,19 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments
 {
-    public abstract class PatientAssessment : BaseAuditableEntity<string>
+    public abstract class PatientAssessmentBase : BaseAuditableEntity<string>
     {
-        protected PatientAssessment(string id,
+        protected PatientAssessmentBase(string id,
             string patientId,
             string clientId,
+            string sessionId,
             Name patientName,
             AssessmentTypes type)
         {
             Id = id;
             PatientId = patientId;
             ClientId = clientId;
+            SessionId = sessionId;
             PatientName = patientName;
             Type = type;
         }
@@ -27,9 +29,9 @@ namespace Spectra.Domain.Patients.Assessments
         public string ClientId { get; protected set; }
         public Name PatientName { get; protected set; }
         public AssessmentTypes Type { get; protected set; }
-
-        public string Notes { get; set; }
-        public string Impression { get; set; }
+        public string SessionId { get; protected set; }
+        public string? Notes { get; set; }
+        public string? Impression { get; set; }
         public RecommendationsAndGoal RecommendationsAndGoals { get; set; }
 
     }
