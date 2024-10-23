@@ -16,8 +16,8 @@ function Page({ params }) {
   const [formData, setFormData] = useState({
     AvailableSrvices: '1',
     name: '',
-    definitionServices: '',
-    price: '',
+    DefinitionServices: '',
+    Price: '',
     termsAndConditions: '',
   });
   const { data, isLoading } = GetMasterDataServicesID(
@@ -84,14 +84,14 @@ function Page({ params }) {
           name='name'
           value={formData?.name || ''}
           onChange={handleInputChange}
-          error={GetErrorMsg(error, 'ServicesName')}
+          error={GetErrorMsg(error, 'Name')}
         />
         <InputGreen
           label='تعريف للخدمة'
           name='definitionServices'
           value={formData?.definitionServices || ''}
           onChange={handleInputChange}
-          error={GetErrorMsg(error, 'definitionServices')}
+          error={GetErrorMsg(error, 'DefinitionServices')}
         />
         <InputGreen
           label='سعر الخدمة'

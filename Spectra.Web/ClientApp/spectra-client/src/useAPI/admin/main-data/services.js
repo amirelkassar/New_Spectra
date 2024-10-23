@@ -44,12 +44,14 @@ export const DeleteMasterDataServices = (id) => {
 };
 //post
 export const useCreateMasterDataServices = () => {
+  const { refetch } = GetMasterDataServices();
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Admin.MasterDataServices.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
+      refetch();
       console.log("تم الإرسال بنجاح:", data);
     },
     onError: (error) => {
@@ -59,6 +61,8 @@ export const useCreateMasterDataServices = () => {
 };
 //put
 export const useEditMasterDataServices = (id) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["EditMasterDataServices"],
     mutationFn: async (data) => {

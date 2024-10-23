@@ -39,7 +39,7 @@ function Page() {
         code1: '',
         code2: '',
         code3: '',
-        name: '',
+        Name: '',
         description: '',
       });
   }, [isSuccess]);

@@ -15,14 +15,15 @@ import InputGreen from "@/components/Input-green";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
 function Page({ params }) {
   const [formData, setFormData] = useState({
-    scientificName: "",
-    englishName: "",
+    scientificNameByEngByArab: "",
+    scientificNameByEng: "",
     code: "",
     id:'22',
-    notes: "",
+    scientificNote: "",
     examinationTypes: 1,
   });
   const { data, isLoading } = GetMedicalTestsID(params.analysisRumorsID);
+  console.log(data);
   
   const { mutate: EditMedicalTests } = useEditMedicalTests(formData?.id);
   useEffect(() => {
@@ -69,7 +70,7 @@ function Page({ params }) {
               <div className="flex items-center justify-center gap-8">
                 <div
                   className={`flex-1 md:max-w-[380px] duration-200 cursor-pointer hover:shadow-md px-4 mdl:px-7 py-4 mdl:py-6 rounded-[10px] flex flex-col mdl:flex-row items-center gap-5 mdl:gap-8 ${
-                    formData.scientificName===1
+                    formData.examinationTypes === 1
                       ? "bg-greenMain"
                       : "bg-blueLight"
                   }`}
@@ -117,15 +118,15 @@ function Page({ params }) {
               <InputGreen
                 label={"الاسم العلمى  باللغة العربية  "}
                 className="flex-1"
-                name="scientificName"
-                value={formData.scientificName}
+                name="scientificNameByEngByArab"
+                value={formData.scientificNameByEngByArab}
                 onChange={handleChange}
               />
               <InputGreen
                 label={"الاسم العلمى  باللغة الانجليزية  "}
                 className="flex-1"
-                name="englishName"
-                value={formData.englishName}
+                name="scientificNameByEng"
+                value={formData.scientificNameByEng}
                 onChange={handleChange}
               />
             </div>
@@ -144,8 +145,8 @@ function Page({ params }) {
                 label: "text-[12px]  md:text-[16px]",
               }}
               label={"ملاحظة "}
-              name="notes"
-              value={formData.notes}
+              name="scientificNote"
+              value={formData.scientificNote}
               onChange={handleChange}
             />
           </form>
