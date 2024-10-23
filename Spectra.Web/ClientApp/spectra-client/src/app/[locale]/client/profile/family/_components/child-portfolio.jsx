@@ -3,14 +3,16 @@
 import { useState } from 'react';
 
 import { TabsCard } from '../../../_components/tabs-card';
+import { RenderChild } from './child';
 
+// ICONS
 import Child from '@/assets/icons/child';
 import NominationsIcon from '@/assets/icons/Nominations';
 import HandHeartIcon from '@/assets/icons/hand-heart';
 import RumorsIcon from '@/assets/icons/rumors';
 import ReportsIcon from '@/assets/icons/reportsIcon';
 import FileOutline from '@/assets/icons/file-outline';
-import { RenderChild } from './child';
+import Stethoscope from '@/assets/icons/stethoscope';
 
 const TABS = [
   {
@@ -27,13 +29,22 @@ const TABS = [
     label: 'الجلسات',
     icon: (
       <IconWrapper>
+        <Stethoscope className='size-3 mdl:size-4' />
+      </IconWrapper>
+    ),
+  },
+  {
+    key: 'tests',
+    label: 'التحاليل الخارجية',
+    icon: (
+      <IconWrapper>
         <NominationsIcon className='size-3 mdl:size-4' />
       </IconWrapper>
     ),
   },
   {
-    key: 'external-reports',
-    label: 'التحاليل والاشعات الخارجية',
+    key: 'x-ray',
+    label: 'الاشعات الخارجية',
     icon: (
       <IconWrapper>
         <RumorsIcon className='size-3 mdl:size-4' />

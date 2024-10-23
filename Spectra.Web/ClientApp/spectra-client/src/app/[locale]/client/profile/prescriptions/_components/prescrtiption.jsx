@@ -4,8 +4,6 @@ import PillsIcon from '@/assets/icons/pills';
 import TherapyIcon from '@/assets/icons/therapy';
 import { cn } from '@/lib/utils';
 import Button from '@/components/button';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
 import Card from '@/components/card';
 
 export const Prescription = ({
@@ -22,6 +20,7 @@ export const Prescription = ({
 }) => {
   return (
     <Card
+      key={id}
       className={cn(
         'w-full bg-gray/70 space-y-3 text-xs lg:text-base px-5 py-3 lg:py-5',
         isNew && 'bg-greenLight',
@@ -77,11 +76,9 @@ export const Prescription = ({
 
       {/* footer */}
       {!isDetailed && (
-        <Link href={`${ROUTES.CLIENT.PROFILE}/prescriptions/${id}`}>
-          <Button className='w-full' variant='secondary'>
-            عرض
-          </Button>
-        </Link>
+        <Button className='w-full' variant='secondary'>
+          عرض
+        </Button>
       )}
     </Card>
   );

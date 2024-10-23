@@ -1,12 +1,7 @@
-import ChildPopover from '@/app/[locale]/client/_components/child-popover';
 import Container from '@/app/[locale]/client/_components/container';
-import { Heading } from '@/app/[locale]/client/_components/heading';
+
 import { PrescriptionDetails } from './_components/prescription-details';
 import { ActionButton } from './_components/action-button';
-import BackIcon from '@/assets/icons/back-black';
-import { childPopupData } from '@/lib/demoData';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
 
 const prescriptionsData = [
   {
@@ -56,19 +51,7 @@ const Page = ({ params }) => {
 
   return (
     <Container className='space-y-5'>
-      <Heading
-        label='ملفي - الوصفات الطبية'
-        icon={
-          <Link
-            href={`${ROUTES.CLIENT.PROFILE}/prescriptions`}
-          >
-            <BackIcon className='ltr:rotate-180' />
-          </Link>
-        }
-        className='flex-row-reverse justify-end gap-5'
-      />
       <ActionButton className='absolute top-0 end-5' />
-      <ChildPopover disabled data={childPopupData} />
 
       <PrescriptionDetails
         prescription={currentPrescription()}
