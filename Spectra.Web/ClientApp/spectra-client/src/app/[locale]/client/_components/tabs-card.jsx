@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import Card from '@/components/card';
+import { useRouter } from '@/navigation';
 
 export const TabsCard = ({
   tabs = [],
@@ -9,6 +10,8 @@ export const TabsCard = ({
   tab = '',
   className = '',
 }) => {
+  const router = useRouter();
+
   if (!tabs?.length) return null;
   return (
     <Card
@@ -22,7 +25,12 @@ export const TabsCard = ({
           <li
             role='button'
             key={t?.key}
-            onClick={() => setTab(t?.key)}
+            onClick={() => {
+              setTab(t?.key);
+              router.replace(`?tab=${t?.key}`, {
+                scroll: false,
+              });
+            }}
             className={cn(
               'lg:rounded-lg transition lg:hover:bg-blueLight lg:text-black lg:font-bold font-normal text-xs mdl:text-base lg:w-full p-3 lg:py-1 flex items-center *:shrink-0 gap-2 w-fit border-b border-transparent lg:border-0 hover:text-greenMain hover:lg:text-black',
               {

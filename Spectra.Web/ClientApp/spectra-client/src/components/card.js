@@ -6,6 +6,7 @@ const Card = ({
   children,
   className,
   size = 'lg',
+  ...props
 }) => {
   return (
     <>
@@ -15,6 +16,7 @@ const Card = ({
             'rounded-lg bg-white p-1 lg:p-5 relative w-full max-w-full',
             className
           )}
+          {...props}
         >
           {title && (
             <h3 className='text-base font-bold mdl:text-2xl mb-3'>
@@ -33,6 +35,7 @@ const Card = ({
             'bg-white flex-1 w-fit max-w-full py-3 px-8 rounded-lg min-w-[213px] lg:min-w-max relative',
             className
           )}
+          {...props}
         >
           {children}
         </div>

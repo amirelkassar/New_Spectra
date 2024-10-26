@@ -6,10 +6,17 @@ export const Info = ({
   valueClassName = '',
   titleClassName = '',
   containerClassName = '',
+  withBorder = false,
 }) => {
   if (!title && !value) return null;
   return (
-    <div className={containerClassName}>
+    <div
+      className={cn(
+        withBorder &&
+          'border-b-2 p-5 border-grayLight last:border-transparent',
+        containerClassName
+      )}
+    >
       {title && (
         <h4
           className={cn(
