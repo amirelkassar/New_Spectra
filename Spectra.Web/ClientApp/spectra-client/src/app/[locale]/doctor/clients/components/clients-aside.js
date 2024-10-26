@@ -28,7 +28,7 @@ function ClientsAside() {
         isActive: path === ROUTES.DOCTOR.CLIENTS.REPORT,
       },
       {
-        name: "جلسات كود الدعوة",
+        name: " عملاء  كود الدعوة",
         route: ROUTES.DOCTOR.CLIENTS.INVITATIONCODE,
         isActive: path === ROUTES.DOCTOR.CLIENTS.INVITATIONCODE,
       },

@@ -23,9 +23,9 @@ export const ProceduresColumns = [
     header: "الكود ",
   },
   {
-    accessorKey: "scientificNote",
+    accessorKey: "notes",
     header: "ملاحظة",
-    id:'scientificNameByEng'
+    id:'notes'
   },
   
   {

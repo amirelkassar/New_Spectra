@@ -84,11 +84,11 @@ function Page() {
     <LayoutHome>
       <div className="default-page flex-1w-[100%] lg:max-w-[calc(100%-250px)] w-full">
         <div className="flex items-center justify-between">
-          <h2 className="headTitleDash">جلسات كود الدعوة</h2>
+          <h2 className="headTitleDash">عملاء كود الدعوة</h2>
           <MenuActions />
         </div>
         <div className="grow  overflow-auto ">
-          <DataTable data={data} columns={columns} />
+          <DataTable data={data} columns={columns}  />
         </div>
       </div>
     </LayoutHome>

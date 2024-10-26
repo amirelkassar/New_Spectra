@@ -9,7 +9,6 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import InputGreen from "@/components/Input-green";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
 import {
-
   GetInternalExaminationID,
   useEditInternalExamination,
 } from "@/useAPI/admin/main-data/testsInterior";
@@ -24,7 +23,7 @@ function Page({ params }) {
     formData?.id
   );
   console.log(formData);
-  
+
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
@@ -45,18 +44,7 @@ function Page({ params }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = formData.id;
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        formData[key].forEach((file) => {
-          formDataToSend.append(key, file);
-        });
-      } else {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-    EditInternalExamination(formDataToSend);
+    EditInternalExamination(formData);
   };
   return (
     <div>

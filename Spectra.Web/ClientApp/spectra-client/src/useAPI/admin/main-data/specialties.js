@@ -37,7 +37,6 @@ export const DeleteSpecialization = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["Specialization"]);
-     
     },
   });
 };
@@ -58,17 +57,21 @@ export const useCreateSpecialization = () => {
 };
 //put
 export const useEditSpecialization = (id) => {
-  const queryClient = useQueryClient();
+  const { refetch } = GetSpecialization();
+  const { refetch: refetch2 } = GetSpecializationID(id);
   return useMutation({
     mutationKey: ["EditSpecialization"],
     mutationFn: async (data) => {
-      console.log(id);
-
-      const response = await api.put(Admin.Specialization.getByID(id), data, {});
+      const response = await api.put(
+        Admin.Specialization.getByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditSpecialization"]);
+      refetch();
+      refetch2();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);

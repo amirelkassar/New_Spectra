@@ -11,9 +11,10 @@ import {
   useEditSpecialization,
 } from "@/useAPI/admin/main-data/specialties";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page({ params }) {
   const [formData, setFormData] = useState({
-    specializationName: "",
+    name: "",
     description: "",
     consultationCost: "",
     code: "",
@@ -71,8 +72,9 @@ function Page({ params }) {
             <InputGreen
               label={"اسم التخصص"}
               name="name"
-              value={formData.name || ""}
+              value={formData.name}
               onChange={handleChange}
+              error={GetErrorMsg(error,"Name")}
             />
             <Textarea
               classNames={{
@@ -82,24 +84,27 @@ function Page({ params }) {
               }}
               label={"وصف التخصص"}
               name="description"
-              value={formData.description || ""}
+              value={formData.description}
               onChange={handleChange}
+              error={GetErrorMsg(error, "description")}
             />
 
             <InputGreen
               label={"تكلفة الاستشارة"}
               type="number"
               name="consultationCost"
-              value={formData.consultationCost || ""}
+              value={formData.consultationCost}
               onChange={handleChange}
+              error={GetErrorMsg(error, "consultationCost")}
             />
 
             <InputGreen
               label={"الكود"}
               type="number"
               name="code"
-              value={formData.code || ""}
+              value={formData.code}
               onChange={handleChange}
+              error={GetErrorMsg(error, "code")}
             />
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">

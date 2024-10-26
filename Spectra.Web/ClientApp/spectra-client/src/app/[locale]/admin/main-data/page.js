@@ -19,7 +19,6 @@ function page() {
           path={ROUTES.ADMIN.DATAMAIN.DRUGSADD}
         />
       </div>
-
       <HandelShowData isLoading={isLoading} lengthData={data?.data.data.length}>
         <DataTable data={data?.data.data} columns={DrugsColumns} />
       </HandelShowData>

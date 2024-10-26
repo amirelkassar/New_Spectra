@@ -33,9 +33,9 @@ export const DrugsColumns = [
     id: "activeIngredient",
   },
   {
-    accessorKey: "contraindications",
+    accessorKey: "type",
     header: "النوع",
-    id: "contraindications",
+    id: "type",
   },
   {
     accessorKey: "code",

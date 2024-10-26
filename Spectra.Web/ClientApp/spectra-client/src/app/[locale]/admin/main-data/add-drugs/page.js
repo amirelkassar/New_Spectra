@@ -21,7 +21,7 @@ function Page() {
     type: "",
     RecommendedDosage: "",
     Doncentration: "",
-    DrugInteractionsWithOtherdrugs: "",
+    InteractionsWithOtherdrugs: "",
     Contraindications: "",
     Nots: "",
     photos: [], // Include photos directly in formData
@@ -34,7 +34,9 @@ function Page() {
     isError,
     reset,
   } = useCreateDrug();
+
   useEffect(() => {
+   
     isSuccess &&
       setFormData({
         name: "",
@@ -44,16 +46,13 @@ function Page() {
         type: "",
         RecommendedDosage: "",
         Doncentration: "",
-        DrugInteractionsWithOtherdrugs: "",
+        InteractionsWithOtherdrugs: "",
         Contraindications: "",
         Nots: "",
         photos: [], // Include photos directly in formData
       });
   }, [isSuccess]);
   const handleHeaderInputChange = (files) => {
-    const newImages = Array.from(files).map((file) =>
-      URL.createObjectURL(file)
-    );
     setFormData((prev) => ({
       ...prev,
       photos: [...prev.photos, ...files], // Update photos array with uploaded files
@@ -82,6 +81,8 @@ function Page() {
   };
 
   const handleSubmit = (e) => {
+    console.log('dfdsdf');
+    
     e.preventDefault();
     const formDataToSend = new FormData();
 
@@ -115,6 +116,7 @@ function Page() {
           className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
           onSubmit={handleSubmit}
         >
+         
           <div className="flex-1 w-full h-auto relative">
             <h3 className="text-[12px] md:text-[16px] mb-2 mdl:mb-4">
               صورة العقار
@@ -165,7 +167,7 @@ function Page() {
             placeholder="اسم العقار او نوع التوصية"
             value={formData.name}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'Name')}
+            error={GetErrorMsg(error, "Name")}
           />
           <InputGreen
             label="الكود"
@@ -178,61 +180,56 @@ function Page() {
             name="ActiveIngredient"
             value={formData.ActiveIngredient}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'ActiveIngredient')}
+            error={GetErrorMsg(error, "ActiveIngredient")}
           />
           <InputGreen
             label="الاسم العلمي"
             name="ScientificName"
             value={formData.ScientificName}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'ScientificName')}
+            error={GetErrorMsg(error, "ScientificName")}
           />
           <InputGreen
             label="النوع"
             name="type"
             value={formData.type}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'Type')}
-
+            error={GetErrorMsg(error, "Type")}
           />
           <InputGreen
             label="الجرعة الموصى به"
             name="RecommendedDosage"
             value={formData.RecommendedDosage}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'RecommendedDosage')}
-
+            error={GetErrorMsg(error, "RecommendedDosage")}
           />
           <InputGreen
             label="تركيز الدواء"
             name="Doncentration"
             value={formData.Doncentration}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'Doncentration')}
+            error={GetErrorMsg(error, "Doncentration")}
           />
           <InputGreen
             label="تفاعلات الدواء مع أدوية أخرى"
-            name="DrugInteractionsWithOtherdrugs"
-            value={formData.DrugInteractionsWithOtherdrugs}
+            name="InteractionsWithOtherdrugs"
+            value={formData.InteractionsWithOtherdrugs}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'DrugInteractionsWithOtherdrugs')}
-
+            error={GetErrorMsg(error, "InteractionsWithOtherdrugs")}
           />
           <InputGreen
             label="موانع الاستخدام"
             name="Contraindications"
             value={formData.Contraindications}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'Contraindications')}
-
+            error={GetErrorMsg(error, "Contraindications")}
           />
           <InputGreen
             label="ملاحظات"
             name="Nots"
             value={formData.Nots}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, 'Nots')}
-
+            error={GetErrorMsg(error, "Nots")}
           />
         </form>
         <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">

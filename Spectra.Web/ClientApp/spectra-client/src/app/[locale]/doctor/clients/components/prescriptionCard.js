@@ -5,11 +5,7 @@ import React from "react";
 
 function PrescriptionCard({ type = "all", data }) {
   return (
-    <div
-      className={`px-1 py-3 rounded-[10px] ${
-        data.state === "new" ? "bg-[#F1FCFF]" : "bg-grayLight"
-      }  w-[330px]`}
-    >
+    <div className={`px-1 py-3 rounded-[10px]  bg-[#F1FCFF] w-[330px]`}>
       {data.state === "new" && (
         <span className="text-[12px]  font-Bold text-greenMain mb-2">
           جديدة
@@ -24,9 +20,7 @@ function PrescriptionCard({ type = "all", data }) {
               : `  الاخصائى ${data.specialist}   `}
           </h2>
           <h3 className="text-[14px] text-center sml:text-[16px] ">
-            {type == "all"
-              ? data.patient
-              : `   ${data.specialistDoctor}   `}
+            {type == "all" ? data.patient : `   ${data.specialistDoctor}   `}
           </h3>
         </div>
         <div>
@@ -44,8 +38,6 @@ function PrescriptionCard({ type = "all", data }) {
                 </p>
               );
             })}
-
-           
           </div>
           <p className="text-[14px] text-center sml:text-[16px] mb-2">
             اخذه طوال الشهر يوميا مع الاكل

@@ -61,7 +61,7 @@ export const useCreateMasterDataServices = () => {
 };
 //put
 export const useEditMasterDataServices = (id) => {
-  const queryClient = useQueryClient();
+  const { refetch } = GetMasterDataServices();
 
   return useMutation({
     mutationKey: ["EditMasterDataServices"],
@@ -76,7 +76,7 @@ export const useEditMasterDataServices = (id) => {
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditMasterDataServices"]);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);
