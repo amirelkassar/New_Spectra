@@ -11,7 +11,7 @@ using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments
 {
-    public class PsychologicalInitialAssessment(string id, string patientId, string clientId, Name patientName) : PatientAssessment(id, patientId, clientId, patientName, AssessmentTypes.PsychologicalInitialAssessment)
+    public class PsychologicalInitialAssessment(string id, string patientId, string clientId, string sessionId, Name patientName) : PatientAssessmentBase(id, patientId, clientId, sessionId, patientName, AssessmentTypes.PsychologicalInitial)
     {
         public ReferralReason ReferralReason { get; set; }
         public InterpersonalDynamic InterpersonalDynamic { get; set; }
