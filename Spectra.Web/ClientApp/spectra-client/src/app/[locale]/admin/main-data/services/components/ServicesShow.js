@@ -25,7 +25,7 @@ const dataSelect = [
 function ServicesShow() {
   const [formData, setFormData] = useState({
     AvailableSrvices: "1",
-    name: "",
+    Name: "",
     DefinitionServices: "",
     Photo: "",
     Price: "",
@@ -42,7 +42,7 @@ function ServicesShow() {
   useEffect(() => {
     isSuccess &&
       setFormData({
-        name: "",
+        Name: "",
         DefinitionServices: "",
         Photo: "",
         Price: "",
@@ -148,7 +148,7 @@ function ServicesShow() {
             <InputGreen
               label="عنوان الخدمة"
               name="Name"
-              value={formData.name}
+              value={formData.Name}
               onChange={handleInputChange}
               error={GetErrorMsg(error, "Name")}
             />

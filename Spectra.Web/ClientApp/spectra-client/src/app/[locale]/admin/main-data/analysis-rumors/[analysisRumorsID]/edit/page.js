@@ -19,7 +19,7 @@ function Page({ params }) {
     scientificNameByEng: "",
     code: "",
     id:'22',
-    scientificNote: "",
+    notes: "",
     examinationTypes: 1,
   });
   const { data, isLoading } = GetMedicalTestsID(params.analysisRumorsID);
@@ -145,8 +145,8 @@ function Page({ params }) {
                 label: "text-[12px]  md:text-[16px]",
               }}
               label={"ملاحظة "}
-              name="scientificNote"
-              value={formData.scientificNote}
+              name="notes"
+              value={formData.notes}
               onChange={handleChange}
             />
           </form>

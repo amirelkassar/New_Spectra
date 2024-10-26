@@ -1,8 +1,5 @@
 "use client";
-import FamilyIcon from "@/assets/icons/family";
 import FilterIcon from "@/assets/icons/filter";
-import OrgIcon from "@/assets/icons/org";
-import ProviderIcon from "@/assets/icons/provider";
 import Separetor from "@/components/separator";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { Fragment, useState } from "react";
@@ -16,21 +13,14 @@ const ReportsFiltration = () => {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير التشخيصية",
+      name: "Common question",
     },
     {
       icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
     },
     {
-      name: "التقارير العلاجية",
+      name: "post assessment ",
     },
-    {
-      icon: <Separetor vertical className={"shrink-0  h-[20px] lg:h-[20px]"} />,
-    },
-    {
-      name: "التقارير السلوكية",
-    },
-   
   ];
 
   const [selected, setSelected] = useState(options[0]);

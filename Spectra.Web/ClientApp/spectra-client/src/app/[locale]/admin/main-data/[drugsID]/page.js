@@ -99,7 +99,7 @@ function page({ params }) {
               </h3>
               <p className=' text-[14px] lg:text-[20px] font-Regular'>
                 {' '}
-                {data?.data.data.contraindications}{' '}
+                {data?.data.data.type}{' '}
               </p>
             </div>
 

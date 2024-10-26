@@ -33,7 +33,7 @@ function Report({ data }) {
         <MenuActions />
       </div>
       <h4 className="  text-[16px] border-b border-grayDark/50 pb-4 md:text-[20px] font-Bold mb-6">
-        تقرير تحليل صحي شامل
+      {data.typeReport||'dffg'}
       </h4>
       <div className="flex gap-2 items-center pb-2">
         <Image

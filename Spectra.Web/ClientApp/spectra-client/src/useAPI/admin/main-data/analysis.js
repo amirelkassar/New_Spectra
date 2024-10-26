@@ -46,13 +46,15 @@ export const DeleteMedicalTests = (id) => {
 };
 //post
 export const useCreateMedicalTests = () => {
+  const { refetch } = GetMedicalTests();
+
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Admin.MedicalTests.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
-      console.log("تم الإرسال بنجاح:", data);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);
@@ -61,7 +63,9 @@ export const useCreateMedicalTests = () => {
 };
 //put
 export const useEditMedicalTests = (id) => {
-  const queryClient = useQueryClient();
+  const { refetch } = GetMedicalTests();
+  const { refetch: refetch2 } = GetMedicalTestsID(id);
+
   return useMutation({
     mutationKey: ["EditMedicalTests"],
     mutationFn: async (data) => {
@@ -71,7 +75,8 @@ export const useEditMedicalTests = (id) => {
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditMedicalTests"]);
+      refetch();
+      refetch2();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);

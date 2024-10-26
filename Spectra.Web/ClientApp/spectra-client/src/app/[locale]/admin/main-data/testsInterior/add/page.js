@@ -4,16 +4,16 @@ import BackIcon from "@/assets/icons/back";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
 import ROUTES from "@/routes";
-import { MultiSelect, Textarea } from "@mantine/core";
+import { MultiSelect } from "@mantine/core";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
 import InputGreen from "@/components/Input-green";
 import { useCreateInternalExamination } from "@/useAPI/admin/main-data/testsInterior";
 import GetErrorMsg from "@/components/getErrorMsg";
 function Page() {
   const [formData, setFormData] = useState({
-    Name: "",
-    Code: "",
-    ExaminationTypes: [],
+    name: "",
+    code: "",
+    examinationTypes: [],
   });
 
   const {
@@ -37,9 +37,9 @@ function Page() {
   useEffect(() => {
     isSuccess &&
       setFormData({
-        Name: "",
-        Code: "",
-        ExaminationTypes: [],
+        name: "",
+        code: "",
+        examinationTypes: [],
       });
   }, [isSuccess]);
   const handleSpecialtiesChange = (selected) => {
@@ -50,19 +50,8 @@ function Page() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
 
-    for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        formData[key].forEach((file) => {
-          formDataToSend.append(key, file);
-        });
-      } else {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-
-    createInternalExamination(formDataToSend);
+    createInternalExamination(formData);
   };
 
   return (
@@ -80,17 +69,17 @@ function Page() {
         <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
           <InputGreen
             label="اسم الفحص"
-            name="Name"
-            value={formData.Name}
+            name="name"
+            value={formData.name}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, "Name")}
+            error={GetErrorMsg(error, "name")}
           />
           <InputGreen
             label="كود الفحص"
-            name="Code"
-            value={formData.Code}
+            name="code"
+            value={formData.code}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, "Code")}
+            error={GetErrorMsg(error, "code")}
           />
           <MultiSelect
             data={["نفسى", "علاجى"]}

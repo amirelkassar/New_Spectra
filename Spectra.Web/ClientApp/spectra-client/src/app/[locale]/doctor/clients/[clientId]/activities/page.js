@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from "react";
-import ReportsNumber from "../../components/reports-number";
 import LayoutClientID from "../components/layoutClientID";
 import ArrowNav from "@/assets/icons/arrow-nav";
 import ArrowLeftMainGreen from "@/assets/icons/arrow-left-mainGreen";
@@ -25,7 +24,7 @@ const [year, setYear] = useState(new Date().getFullYear());
   return (
     <LayoutClientID>
       <div className="flex-1">
-        <ReportsNumber title={"التقارير"} haveBack={true} />
+  
         <div className="default-page w-full !h-auto">
         <div className=" bg-white px-0 md:px-4 lg:px-6 xl:px-12 py-9 md:rounded-xl md:mb-7 border-y md:border-t-0 border-[#F5F5F5] rtl">
         <div className="flex items-center justify-between gap-6 flex-wrap mb-10">

@@ -1,12 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React  from "react";
 import LayoutHome from "../components/layoutHome";
-import PrescriptionCard from "../components/prescriptionCard";
 import Card from "@/components/card";
-import FilterIcon from "@/assets/icons/filter";
-
-import { Radio, RadioGroup } from "@headlessui/react";
 import MenuActions from "@/components/menu-actions";
+import { DataTable } from "@/components/data-table";
+import { columns } from "../components/columns-prescriptions";
+import PrescriptionsView from "../components/prescriptions-view";
 const reports = [
   {
     id: 1,
@@ -16,42 +15,64 @@ const reports = [
     specialistDoctor: "اخصائى نفسى",
     nameFamily: "عبدالله الشيخ",
     patient: "الطفل / احمد عبدالله",
-    therapy: ["سيترالين", "100 جم"],
+    therapy: "سيترالين5",
     treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
     pills: true,
   },
   {
     id: 2,
-    state: "old",
     date: "20/2/2024",
     specialist: "احمد محمد كمال",
     specialistDoctor: "اخصائى نفسى",
     nameFamily: "عبدالله الشيخ",
     patient: "الطفل / احمد عبدالله",
-    therapy: ["علاج تربوى"],
-    pills: false,
+    therapy: "سيترالين",
+    treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+    pills: true,
   },
   {
     id: 3,
-    state: "old",
     date: "20/2/2024",
     specialist: "احمد محمد كمال",
     specialistDoctor: "اخصائى نفسى",
     nameFamily: "عبدالله الشيخ",
     patient: "الطفل / احمد عبدالله",
-    therapy: ["علاج تربوى"],
-    pills: false,
+    therapy: "سيترالين",
+    treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+    pills: true,
   },
   {
     id: 4,
-    state: "old",
     date: "20/2/2024",
     specialist: "احمد محمد كمال",
     specialistDoctor: "اخصائى نفسى",
     nameFamily: "عبدالله الشيخ",
     patient: "الطفل / احمد عبدالله",
-    therapy: ["علاج تربوى"],
-    pills: false,
+    therapy: "سيترالين",
+    treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+    pills: true,
+  },
+  {
+    id: 5,
+    date: "20/2/2024",
+    specialist: "احمد محمد كمال",
+    specialistDoctor: "اخصائى نفسى",
+    nameFamily: "عبدالله الشيخ",
+    patient: "الطفل / احمد عبدالله",
+    therapy: "سيترالين",
+    treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+    pills: true,
+  },
+  {
+    id: 6,
+    date: "20/2/2024",
+    specialist: "احمد محمد كمال",
+    specialistDoctor: "اخصائى نفسى",
+    nameFamily: "عبدالله الشيخ",
+    patient: "الطفل / احمد عبدالله",
+    therapy: "سيترالين",
+    treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
+    pills: true,
   },
 ];
 const options = [
@@ -61,45 +82,18 @@ const options = [
 ];
 
 function Page() {
-  const [selected, setSelected] = useState(options[0].value);
   return (
     <LayoutHome>
       <div className="flex-1">
-        <Card className="w-full ">
+        <Card className="h-full ">
           <div className="flex items-center justify-between mb-16">
             <div className="flex  mb-1 flex-wrap items-center gap-4 md:gap-6">
               <h2 className="headTitleDash">الوصفات الطبية</h2>
             </div>
             <MenuActions />
           </div>
-          <div className="flex items-center gap-4 lg:gap-10 flex-wrap">
-            <div className="flex items-center gap-3">
-              <FilterIcon />
-              <p className="font-bold">فلتر بالنوع</p>
-            </div>
-            <RadioGroup
-              value={selected}
-              onChange={setSelected}
-              className="flex items-center gap-3 lg:gap-7 h-auto flex-wrap gap-y-3"
-            >
-              {options.map((option) => (
-                <Radio
-                  key={option.value}
-                  value={option.value}
-                  className="px-5 h-10 cursor-pointer bg-transparent data-[checked]:bg-greenLight transition  min-w-fit xl:min-w-40 flex items-center justify-center font-bold rounded-xl gap-3 text-[12px] md:text-[16px] "
-                >
-                  {option.name}
-                </Radio>
-              ))}
-            </RadioGroup>
-          </div>
-          <div className="flex gap-6 flex-wrap mt-9 justify-center">
-            {reports.map((report) => {
-              return (
-                <PrescriptionCard key={report.id} data={report} type="all" />
-              );
-            })}
-          </div>
+
+          <DataTable haveComp Component={PrescriptionsView} data={reports} columns={columns} />
         </Card>
       </div>
     </LayoutHome>

@@ -5,7 +5,6 @@ import { Link } from "@/navigation";
 import Button from "@/components/button";
 import ROUTES from "@/routes";
 import InputGreen from "@/components/Input-green";
-import { useCreateSpecialization } from "@/useAPI/admin/main-data/specialties";
 import { MultiSelect } from "@mantine/core";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
 import AddManger from "../_components/addManger";
@@ -129,28 +128,14 @@ const doctors = [
 function Page() {
   const [DocID, setDocID] = useState(null);
 
-  const {
-    mutate: CreateSpecialization,
-    error,
-    isSuccess,
-    isError,
-    reset,
-  } = useCreateSpecialization();
+
   const [formData, setFormData] = useState({
     specializationName: "",
     description: "",
     consultationCost: 0,
     code: "",
   });
-  useEffect(() => {
-    isSuccess &&
-      setFormData({
-        specializationName: "",
-        description: "",
-        consultationCost: 0,
-        code: "",
-      });
-  }, [isSuccess]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -166,7 +151,7 @@ function Page() {
     e.preventDefault();
     CreateSpecialization(formData);
   };
-  console.log(formData);
+
 
   return (
     <div>
@@ -180,10 +165,7 @@ function Page() {
         <h2 className="headTitleDash">اضافة قسم</h2>
       </div>
       <div>
-        <form
-          className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
           <InputGreen label={"اسم القسم"} name="specializationName" />
           <MultiSelect
             data={["العلاج السلوكي المعرفي", "تحليل السلوك التطبيقي"]}
@@ -208,7 +190,7 @@ function Page() {
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-            //onClick={handleSubmit}
+      
             variant="secondary"
             className={
               "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

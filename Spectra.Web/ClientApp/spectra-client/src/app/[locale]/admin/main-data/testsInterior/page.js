@@ -6,15 +6,7 @@ import { DataTable } from "@/components/data-table";
 import { TestsInteriorColumns } from "../_components/testsInterior-columns";
 import { GetInternalExamination } from "@/useAPI/admin/main-data/testsInterior";
 import HandelShowData from "@/components/handelShowData";
-const ComplaintsData = [
-  {
-    id: 1,
-    title: "Cars",
-    code: "#12358",
-    Specialization: ["نفسى", "علاجى", "نفسى", "علاجى", "نفسى", "علاجى"],
-  },
-  { id: 2, title: "Cat", code: "#12358", Specialization: ["نفسى", "علاجى"] },
-];
+
 function page() {
   const { data, isLoading } = GetInternalExamination();
 console.log(data);

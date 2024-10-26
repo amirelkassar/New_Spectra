@@ -1,19 +1,18 @@
-import ReportDecIcon from "@/assets/icons/reportDec";
+import PillsIcon from "@/assets/icons/pills";
 import MenuActions from "@/components/menu-actions";
-import Image from "next/image";
 
 export const columns = [
   {
-    accessorKey: "doctor",
+    accessorKey: "therapy",
     header: "الاسم ",
-    id: "doctor",
+    id: "therapy",
     cell: ({ row, getValue }) => {
       const name = getValue();
       const img = row.original.image;
       return (
         <div className="flex items-center gap-6">
-          <div className=" size-14 rounded-full bg-red md:flex hidden items-start justify-center overflow-hidden">
-            <Image src={img} alt="Doctor image" />
+          <div className="flex bg-blueLight p-2 size-[38px] rounded-full items-center justify-center p-1">
+          <PillsIcon />
           </div>
           <h2 className="text-[12px] lg:text-base">{name}</h2>
         </div>
@@ -21,15 +20,20 @@ export const columns = [
     },
   },
   {
-    accessorKey: "typeCustomer",
-    header: "نوع العميل ",
-    id: "typeCustomer",
-  },
-  {
     accessorKey: "date",
-    header: "تاريخ الانضمام",
+    header: "التاريخ",
     id: "date",
   },
+  {
+    accessorKey: "nameFamily",
+    header: "المريض",
+    id: "nameFamily",
+  },
 
-
+  {
+    id: "actions",
+    cell: () => {
+      return <MenuActions />;
+    },
+  },
 ];

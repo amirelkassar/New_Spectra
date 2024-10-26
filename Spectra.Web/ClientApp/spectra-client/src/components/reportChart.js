@@ -34,7 +34,7 @@ function ReportChart({ max = 10, ReportDataChart = [] }) {
   }
   return (
     <div>
-      <div className="flex flex-wrap  gap-4 pt-4 justify-center md:px-0 px-10 md:justify-around mb-12">
+      <div className="flex flex-wrap  gap-4 pt-4 justify-center md:px-0 px-5 md:justify-around mb-12">
         {stateReport.map((item, i) => {
           return (
             <div key={i} className="flex flex-1 md:flex-none max-w-[calc(50%-20px)] min-w-[calc(50%-20px)] md:min-w-4 items-center gap-2">

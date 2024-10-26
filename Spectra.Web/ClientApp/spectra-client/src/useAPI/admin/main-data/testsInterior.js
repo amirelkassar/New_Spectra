@@ -60,6 +60,7 @@ export const useCreateInternalExamination = () => {
 };
 //put
 export const useEditInternalExamination = (id) => {
+  const { refetch } = GetInternalExamination();
   return useMutation({
     mutationKey: ["EditInternalExamination"],
     mutationFn: async (data) => {
@@ -73,7 +74,7 @@ export const useEditInternalExamination = (id) => {
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditInternalExamination"]);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);
