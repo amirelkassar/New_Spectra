@@ -5,6 +5,7 @@ import Card from "@/components/card";
 import MenuActions from "@/components/menu-actions";
 import { DataTable } from "@/components/data-table";
 import { columns } from "../components/columns-reports";
+import ReportsView from "../components/reports-view copy";
 const reports = [
   {
     id: 1,
@@ -54,6 +55,8 @@ function page() {
           </div>
           <DataTable
             data={reports}
+            haveComp
+            Component={ReportsView}
             columns={columns}
             filterData={FilterOptions}
             filter="buttons"

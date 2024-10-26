@@ -37,19 +37,20 @@ export const DeleteDiagnostics = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["Diagnostics"]);
-     
     },
   });
 };
 //post
 export const useCreateDiagnostics = () => {
+  const { refetch } = GetDiagnostics();
+
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Admin.Diagnose.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
-      console.log("تم الإرسال بنجاح:", data);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);
@@ -58,7 +59,7 @@ export const useCreateDiagnostics = () => {
 };
 //put
 export const useEditDiagnostics = (id) => {
-  const queryClient = useQueryClient();
+  const { refetch } = GetDiagnostics();
   return useMutation({
     mutationKey: ["EditDiagnostics"],
     mutationFn: async (data) => {
@@ -68,7 +69,7 @@ export const useEditDiagnostics = (id) => {
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["EditDiagnostics"]);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);

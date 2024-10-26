@@ -5,6 +5,7 @@ import Card from "@/components/card";
 import MenuActions from "@/components/menu-actions";
 import { DataTable } from "@/components/data-table";
 import { columns } from "../components/columns-prescriptions";
+import PrescriptionsView from "../components/prescriptions-view";
 const reports = [
   {
     id: 1,
@@ -14,7 +15,7 @@ const reports = [
     specialistDoctor: "اخصائى نفسى",
     nameFamily: "عبدالله الشيخ",
     patient: "الطفل / احمد عبدالله",
-    therapy: "سيترالين",
+    therapy: "سيترالين5",
     treatment_dates: "اخذه طوال الشهر  يوميا مع الاكل",
     pills: true,
   },
@@ -92,7 +93,7 @@ function Page() {
             <MenuActions />
           </div>
 
-          <DataTable data={reports} columns={columns} />
+          <DataTable haveComp Component={PrescriptionsView} data={reports} columns={columns} />
         </Card>
       </div>
     </LayoutHome>

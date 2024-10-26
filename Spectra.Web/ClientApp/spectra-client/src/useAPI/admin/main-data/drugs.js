@@ -41,6 +41,7 @@ export const DeleteDrugs = (id) => {
 };
 
 export const useCreateDrug = () => {
+  const { refetch } = GetDrugs();
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Admin.Drugs.url, data, {
@@ -51,7 +52,7 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: (data) => {
-      // console.log("تم الإرسال بنجاح:", data);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);
