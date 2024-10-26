@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import { TabsCard } from '../../../_components/tabs-card';
@@ -81,7 +82,10 @@ const TABS = [
 ];
 
 export const ChildPortfolio = () => {
-  const [tab, setTab] = useState(TABS[0].key);
+  const searchParamsTab = useSearchParams()?.get('tab');
+  const [tab, setTab] = useState(
+    searchParamsTab || TABS[0].key
+  );
 
   return (
     <section className='lg:grid lg:grid-cols-7 lg:gap-5 space-y-5 lg:space-y-0'>
