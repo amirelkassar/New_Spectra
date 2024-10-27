@@ -2,21 +2,25 @@ import {
   packagesDataFlex,
   packagesDataSpectra,
 } from '@/lib/demoData';
-import { BackButton } from '../../_components/back-button';
-import Container from '../../_components/container';
 import { H1 } from '../../_components/h1';
+import { BackButton } from '../../_components/back-button';
+import { Package } from '../_components/package';
+
+import Card from '@/components/card';
+import Container from '../../_components/container';
 
 const PackagePage = ({ params: { packageId } }) => {
   const packageData = findPackageById(packageId);
   return (
     <Container>
-      <H1>
-        <BackButton />
-        الباقات{' '}
-        {packageData?.label
-          ? `- ${packageData?.label}`
-          : ''}
-      </H1>
+      <Card className={'p-0'}>
+        <H1>
+          <BackButton />
+          الباقات - {packageData.label}
+        </H1>
+
+        <Package data={packageData} />
+      </Card>
     </Container>
   );
 };

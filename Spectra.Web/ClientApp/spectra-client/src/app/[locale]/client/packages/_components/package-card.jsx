@@ -1,6 +1,11 @@
+'use client';
+
+import { useRouter } from '@/navigation';
+
+import { cn } from '@/lib/utils';
 import Button from '@/components/button';
 import CircleCheck from '@/assets/icons/circle-check';
-import { cn } from '@/lib/utils';
+import ROUTES from '@/routes';
 
 export const PackageCard = ({
   showPackageList = false,
@@ -10,11 +15,16 @@ export const PackageCard = ({
   price = 0,
   features = [],
 }) => {
+  const router = useRouter();
   return (
     <div
+      role='button'
+      onClick={() =>
+        router.push(`${ROUTES.CLIENT.PACKAGES}/${id}`)
+      }
       data-id={id}
       className={cn(
-        `rounded-lg mdl:min-w-[300px] border-2 border-grayLight p-5 border-t-[6px] w-fit border-t-greenMain`,
+        `rounded-lg mdl:min-w-[300px] border-2 border-grayLight p-5 border-t-[6px] w-fit border-t-greenMain transition-all hover:border-greenMain hover:shadow-md`,
         className
       )}
     >
@@ -40,6 +50,9 @@ export const PackageCard = ({
         )}
 
         <Button
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
           variant='secondary'
           className='font-bold w-full block py-2 text-sm mdl:text-base'
         >
