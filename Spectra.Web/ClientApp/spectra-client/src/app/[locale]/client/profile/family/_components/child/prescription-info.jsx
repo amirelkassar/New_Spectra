@@ -3,18 +3,19 @@
 import { useState } from 'react';
 
 import { Info } from '@/app/[locale]/client/_components/info';
-import { BackButton } from '@/components/buttons/back-button';
 import { PrescriptionCard } from './prescrtiption-card';
 
 export const PrescriptionInfo = ({
   data = {},
-  onBack = () => {},
+  showCard = false,
 }) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
     <div className='relative'>
-      <PrescriptionCard data={data} isDetailed />
+      {showCard && (
+        <PrescriptionCard data={data} isDetailed />
+      )}
 
       <div className='grid grid-cols-1 sml:grid-cols-3'>
         <Info
@@ -128,10 +129,6 @@ export const PrescriptionInfo = ({
       >
         {showMore ? 'قراءة اقل' : 'قراءة المزيد....'}
       </button>
-
-      <BackButton className='ms-auto' onClick={onBack}>
-        السابق
-      </BackButton>
     </div>
   );
 };

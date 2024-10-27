@@ -5,8 +5,9 @@ import { useState } from 'react';
 import { PrescriptionCard } from './prescrtiption-card';
 import { PrescriptionInfo } from './prescription-info';
 import Card from '@/components/card';
+import { BackButton } from '@/components/buttons/back-button';
 
-const prescriptionsData = [
+export const prescriptionsData = [
   {
     id: 1,
     isNew: true,
@@ -14,6 +15,7 @@ const prescriptionsData = [
     doctor: 'احمد محمد كمال',
     proffession: 'اخصائى نفسي',
     drugName: 'سيترالين',
+    image: '/drug.png',
     dose: '100mg',
     description: 'اخذه طوال الشهر يوميا مع الاكل',
     takingNo: 'مرتين',
@@ -43,7 +45,8 @@ const prescriptionsData = [
     date: '20/04/2024',
     doctor: 'احمد محمد كمال',
     proffession: 'اخصائى نفسي',
-    drug: 'سيترالين',
+    drugName: 'بروفين',
+    image: '/drug.png',
     dose: '100mg',
     description: 'اخذه طوال الشهر يوميا مع الاكل',
     takingNo: 'مرتين',
@@ -73,7 +76,8 @@ const prescriptionsData = [
     date: '20/04/2024',
     doctor: 'احمد محمد كمال',
     proffession: 'اخصائى نفسي',
-    drug: 'سيترالين',
+    drugName: 'بنادول',
+    image: '/drug.png',
     dose: '100mg',
     description: 'اخذه طوال الشهر يوميا مع الاكل',
     takingNo: 'مرتين',
@@ -116,11 +120,15 @@ export const Prescriptions = () => {
         </div>
       )}
 
+      {view && <PrescriptionInfo showCard data={view} />}
+
       {view && (
-        <PrescriptionInfo
-          data={view}
-          onBack={() => setView(null)}
-        />
+        <BackButton
+          className='ms-auto'
+          onClick={() => setView(null)}
+        >
+          السابق
+        </BackButton>
       )}
     </Card>
   );

@@ -20,6 +20,9 @@ import { packagesDataSpectra } from '@/lib/demoData';
 import Button from '@/components/button';
 import FileOutline from '@/assets/icons/file-outline';
 import { PackageCard } from '@/app/[locale]/client/packages/_components/package-card';
+import { ReportAccordion } from './report-accordion';
+import { PrescriptionsAccordion } from './prescriptions-accordion';
+import { prescriptionsData } from './prescriptions';
 
 const SESSIONS = [
   {
@@ -217,8 +220,39 @@ const SessionInfo = ({
         title='التحاليل والاشعات الخارجية'
       />
 
-      <PrescriptionsFiles
-        title='الوصفات الطبية'
+      <Card title='الوصفات الطبية'>
+        <PrescriptionsAccordion
+          prescriptions={prescriptionsData}
+        />
+      </Card>
+
+      <SessionReport
+        reportDetails={[
+          {
+            label: 'Presenting compliant',
+            content: [
+              'Term : 9 months',
+              'normal delivery',
+              'Ventilation',
+              'Birth weight : normal',
+            ],
+          },
+          {
+            label: 'Past medical history',
+            content: [
+              'Seizure',
+              'surgery',
+              'allergies',
+              'medication',
+              'hearing test',
+            ],
+          },
+        ]}
+        reportTitle='الاسئلة العامة'
+      />
+
+      <Attachments
+        title='الملفات المرفقة'
         data={[
           {
             fileName: 'Prescription.pdf',
@@ -233,7 +267,9 @@ const SessionInfo = ({
         ]}
       />
 
-      <BackButton onClick={onBack}>السابق</BackButton>
+      <BackButton className='ms-auto' onClick={onBack}>
+        السابق
+      </BackButton>
     </div>
   );
 };
@@ -299,7 +335,7 @@ const TestsAndScansList = ({ data = [], title = '' }) => {
   );
 };
 
-const PrescriptionsFiles = ({ title = '', data = [] }) => {
+const Attachments = ({ title = '', data = [] }) => {
   if (!data.length) return null;
   return (
     <Card
@@ -328,6 +364,21 @@ const PrescriptionsFiles = ({ title = '', data = [] }) => {
           </div>
         ))}
       </div>
+    </Card>
+  );
+};
+
+const SessionReport = ({
+  reportTitle = '',
+  reportDetails = [],
+}) => {
+  return (
+    <Card title='التقارير' className='space-y-5'>
+      <h3 className='text-base mdl:text-xl font-bold'>
+        {reportTitle}
+      </h3>
+
+      <ReportAccordion reports={reportDetails} />
     </Card>
   );
 };
