@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
 {
-    public class AppointmentRepository: IAppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private readonly IMongoCollection<Appointment> _appointments;
 
@@ -22,7 +22,7 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
         }
         public async Task<Appointment> GetByIdAsync(string id)
         {
-          
+
             var entity = await _appointments.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {
@@ -58,37 +58,32 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
        int pageNumber = 1,
        int pageSize = 10)
         {
-     var query =  _appointments.AsQueryable();
+            var filterDefinition = filter ?? (x => true);
 
-            // Apply the filter if provided
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
+            // Use MongoDB's sorting and pagination
+            var query = await _appointments
+                .Find(filterDefinition, options)
+                //.SortByDescending(x => x.) // Sort by Daysdate in descending order
+                .Skip((pageNumber - 1) * pageSize) // Skip to the correct page
+                .Limit(pageSize).ToListAsync();                  // Limit results to pageSize
 
-            // Sort by Date in descending order
-            query =  query.OrderByDescending(x => x.Daysdate);
+            //// Retrieve the paginated and sorted list of appointments
+            //var appointments = await query.ToListAsync();
 
-            // Get the total count for pagination
-            var totalCount = await query.CountAsync();
-
-            // Apply pagination using MongoDB's async methods
-            var appointments =  query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize).ToList();
-              // Ensure you're using MongoDB.Driver's ToListAsync
+            // Get the total count of matching documents for pagination
+            var totalCount = await _appointments.CountDocumentsAsync(filterDefinition);
 
             return new PaginatedResult<Appointment>
             {
-                Items = appointments,
-                TotalCount = totalCount,
+                Items = query,
+                TotalCount = (int)totalCount,
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };
         }
     }
 
-        
-    }
+
+}
 
 

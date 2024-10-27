@@ -22,20 +22,21 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
     {
 
         private readonly IDiagnoseRepository _diagnoseRepository;
-
+        
         public UpdateDiagnoseCommandHandler(IDiagnoseRepository diagnoseRepository)
         {
             _diagnoseRepository = diagnoseRepository;
-
+            
         }
 
-        public async Task<OperationResult<Unit>> Handle(UpdateDiagnoseCommand request, CancellationToken cancellationToken)
+        public async Task <OperationResult<Unit>> Handle(UpdateDiagnoseCommand request, CancellationToken cancellationToken)
         {
-
-            var Diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
-            if (Diagnose == null)
+          
+                var Diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
+            var names = await _diagnoseRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
+            if (names.Any())
             {
-                throw new NotFoundException("Diagnos", request.Id);
+                throw new DbErrorException(" this's Name is a ready exists");
             }
 
 
@@ -45,11 +46,11 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
             Diagnose.Description = request.Description;
             Diagnose.Name = request.Name;
 
-
-            await _diagnoseRepository.UpdateAsync(Diagnose);
-            return OperationResult<Unit>.Success(Unit.Value);
-
-
+           
+                await _diagnoseRepository.UpdateAsync(Diagnose);
+                return OperationResult<Unit>.Success(Unit.Value);
+            
+          
 
         }
 

@@ -35,7 +35,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateinternalExamination([FromForm] CreateInternalExaminationCommand input)
+        public async Task<ActionResult> CreateinternalExamination( CreateInternalExaminationCommand input)
         {
 
             var internalExamination = await _internalExamination.CreateInternalExamination(input);
@@ -44,7 +44,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPut("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateInternalExamination(string id, [FromForm] UpdateInternalExaminationCommand input)
+        public async Task<ActionResult> UpdateInternalExamination(string id, UpdateInternalExaminationCommand input)
         {
 
 

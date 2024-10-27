@@ -19,7 +19,7 @@ namespace Spectra.Domain.Shared.Wrappers
             Code = (HttpStatusCode)operation.Code;
             Message = operation.Message;
             Success = operation.SuccessOpration;
-            Errors = operation.Errors;
+            Errors = operation.errors;
         }
         public bool Success { get; }
         public string Message { get; }

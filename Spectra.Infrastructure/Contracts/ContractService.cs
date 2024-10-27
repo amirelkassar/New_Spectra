@@ -20,18 +20,22 @@ namespace Spectra.Infrastructure.Contracts
 
         public async Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input)
         {
-            var command = new CreateContractCommand
-            {
-                Freelancer = input.Freelancer,
-                HoursOfWork = input.HoursOfWork,
-                SpectraTeam = input.SpectraTeam,
-                DaysOfWork = input.DaysOfWork,
-                MinutesOfWork = input.MinutesOfWork,
-                ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel
+      
+                var command = new CreateContractCommand
+                {
 
-            };
+                    
+                      HoursOfWork = input.HoursOfWork,
+                      DaysOfWork = input.DaysOfWork,
+                      ContractCase = input.ContractCase,
+                       EmployeeId = input.EmployeeId,
+                       Titel = input.Titel,
+                       Freelance = input.Freelance,
+                       SpectraTeam = input.SpectraTeam,
+                };
+            
+
+           
 
             return await _mediator.Send(command);
         }
@@ -60,14 +64,15 @@ namespace Spectra.Infrastructure.Contracts
             var command = new UpdateContractCommand
             {
                 id = id,
-                Freelancer = input.Freelancer,
+                Discount = input.Discount,
                 HoursOfWork = input.HoursOfWork,
-                SpectraTeam = input.SpectraTeam,
                 DaysOfWork = input.DaysOfWork,
-                MinutesOfWork = input.MinutesOfWork,
                 ContractCase = input.ContractCase,
                 EmployeeId = input.EmployeeId,
-                Titel = input.Titel
+                Titel = input.Titel,
+                Duration = input.Duration,
+           
+                
             };
 
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
 using System.Net;
 
 
@@ -54,7 +55,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "RequestError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "RequestError", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
@@ -63,16 +64,16 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "DbError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message } } 
+                { "DbError", new[] { exception.Message } } 
             };
-                    statusCode = HttpStatusCode.InternalServerError;
+                    statusCode = HttpStatusCode.BadRequest;
                     break;
 
                 case NotFoundException notFoundException:
                     errorType = "NotFoundError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { notFoundException.Message } }
+                { "NotFoundError", new[] { notFoundException.Message } }
             };
                     statusCode = HttpStatusCode.NotFound;
                     break;
@@ -81,26 +82,27 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "General", new[] { exception.Message.Trim() } } 
+                { "UnknownError", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
+            //var errorResponse = new 
+            //{
+            //    errors = errorCollection,
+            //    errorType,
+            //    errorCode,
+            //    success
+            //};
 
-            var errorResponse = new 
-            {
-                errors = errorCollection,
-                errorType,
-                errorCode,
-                success
-            };
+             var errorrs= OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
+                var jsonResponsee = JsonConvert.SerializeObject(errorrs);
 
-            var jsonResponse = JsonConvert.SerializeObject(errorResponse);
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = (int)statusCode;
 
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)statusCode;
-
-            return context.Response.WriteAsync(jsonResponse);
+                return context.Response.WriteAsync(jsonResponsee);
+            
         }
     }
 }

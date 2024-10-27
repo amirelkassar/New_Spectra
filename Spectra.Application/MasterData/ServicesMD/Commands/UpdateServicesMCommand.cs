@@ -1,10 +1,21 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.Messaging;
+using Spectra.Application.Patients;
 using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
@@ -40,10 +51,13 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
             public async Task<OperationResult<Unit>> Handle(UpdateServicesMCommand request, CancellationToken cancellationToken)
             {
-
                 var entity = await _serviceMRepository.GetByIdAsync(request.Id);
 
-
+                var names = await _serviceMRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
+                if (names.Any())
+                {
+                    throw new DbErrorException(" this's Name is a ready exists");
+                }
                 entity.Name = request.Name;
                 entity.DefinitionServices = request.DefinitionServices;
                 entity.AvailableSrvices = request.AvailableSrvices;
@@ -62,9 +76,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
                 await _serviceMRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
+            
 
-
-            }
+    }
 
         }
     }

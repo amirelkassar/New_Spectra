@@ -10,14 +10,17 @@ namespace Spectra.Application.Contracts.Commands
     public class UpdateContractCommand : ICommand<OperationResult<Unit>>
     {
         public string id { get; set; }
-        public List<OperationContrct>? Freelancer { get; set; }
-        public List<OperationContrct>? SpectraTeam { get; set; }
+        public List<OperationContract>? Freelance { get; set; }
+        public List<OperationContract>? SpectraTeam { get; set; }
+        public double Discount { get; set; }
+        public double Duration { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public int MinutesOfWork { get; set; }
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
+
         public ContractCases ContractCase { get; set; }
+
 
     }
 
@@ -37,15 +40,18 @@ namespace Spectra.Application.Contracts.Commands
 
             var contract = await _contractRepository.GetByIdAsync(request.id);
 
-
-            contract.Freelancer = request.Freelancer;
-            contract.SpectraTeam = request.SpectraTeam;
+            contract.ContractCase = request.ContractCase;
+            contract.PlatformFee = request.Discount;
             contract.HoursOfWork = request.HoursOfWork;
             contract.DaysOfWork = request.DaysOfWork;
-            contract.MinutesOfWork = request.MinutesOfWork;
             contract.EmployeeId = request.EmployeeId;
             contract.Titel = request.Titel;
             contract.ContractCase = request.ContractCase;
+
+            contract.Freelance = request.Freelance;
+
+
+
 
             if (request.ContractCase == ContractCases.SAVE)
             {
@@ -54,15 +60,17 @@ namespace Spectra.Application.Contracts.Commands
             }
 
             var contracts = EmploymentContract.Create(
-             Ulid.NewUlid().ToString(),
-             request.Freelancer,
-             request.SpectraTeam,
-             request.HoursOfWork,
-             request.DaysOfWork,
-             request.MinutesOfWork,
-             request.ContractCase,
-             request.EmployeeId,
-             request.Titel
+       
+              Ulid.NewUlid().ToString(),
+              request.Freelance,
+              request.SpectraTeam,
+              request.HoursOfWork,
+              request.DaysOfWork,
+           
+              request.EmployeeId,
+              request.Titel,
+              request.ContractCase
+         
              );
 
             await _contractRepository.AddAsync(contracts);

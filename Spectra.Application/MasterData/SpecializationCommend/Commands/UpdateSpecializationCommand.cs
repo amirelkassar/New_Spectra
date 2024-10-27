@@ -1,6 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.MasterData.InternalExaminations;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Commands
@@ -32,22 +35,24 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
             var Specializations = await _specializationRepository.GetByIdAsync(request.Id);
 
-            var validationResult = await updateValidator.ValidateAsync(request, cancellationToken);
-            if (!validationResult.IsValid)
+
+            var names = await _specializationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
+            if (names.Any())
             {
-                throw new FluentValidation.ValidationException(validationResult.Errors);
+                throw new DbErrorException(" this's Name is a ready exists");
             }
             Specializations.Name = request.Name;
             Specializations.Description = request.Description;
+            Specializations.Code = request.Code;
             Specializations.ConsultationCost = request.ConsultationCost;
 
 
             await _specializationRepository.UpdateAsync(Specializations);
             return OperationResult<Unit>.Success(Unit.Value);
         }
-
-    }
-
+      
+}
+    
     public class UpdateSpecializationCommandValidator : AbstractValidator<UpdateSpecializationCommand>
     {
         public UpdateSpecializationCommandValidator()

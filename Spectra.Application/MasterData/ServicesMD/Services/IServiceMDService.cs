@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Wrappers;

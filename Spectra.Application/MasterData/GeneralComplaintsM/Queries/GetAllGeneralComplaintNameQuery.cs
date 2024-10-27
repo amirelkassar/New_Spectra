@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.DiagnoseCommend.DTO;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
 

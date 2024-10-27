@@ -11,15 +11,15 @@ namespace Spectra.Application.Contracts.Commands
 
     public class CreateContractCommand : ICommand<OperationResult<string>>
     {
-        public List<OperationContrct>? Freelancer { get; set; }
-        public List<OperationContrct>? SpectraTeam { get; set; }
+        public List<OperationContract>? Freelance { get; set; }
+        public List<OperationContract>? SpectraTeam { get; set; }
+      
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public int MinutesOfWork { get; set; }
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
-
         public ContractCases ContractCase { get; set; }
+
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateContractCommand, OperationResult<string>>
@@ -38,15 +38,14 @@ namespace Spectra.Application.Contracts.Commands
         {
             var contract = EmploymentContract.Create(
               Ulid.NewUlid().ToString(),
-              request.Freelancer,
-              request.SpectraTeam,
-              request.HoursOfWork,
-              request.DaysOfWork,
-              request.MinutesOfWork,
-              request.ContractCase,
-              request.EmployeeId,
-              request.Titel
-              );
+            request.Freelance,
+            request.SpectraTeam,
+            request.HoursOfWork,
+            request.DaysOfWork,
+            request.EmployeeId,
+            request.Titel,
+            request.ContractCase 
+                );
 
             await _contractRepository.AddAsync(contract);
 

@@ -60,10 +60,10 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
 
 
 
-        public async Task<OperationResult<IEnumerable<AppointmentWithClientDto>>> GetAllAppointmentsDoctor(GetAllAppointmentsStatuDoctorQuery input)
+        public async Task<OperationResult<IEnumerable<Appointment>>> GetAllAppointmentsDoctorandDatas(GetAllAppointmentsDoctorAndDateQuery input)
         {
 
-            var query = new GetAllAppointmentsStatuDoctorQuery() { DoctorId = input.DoctorId, Status = input.Status };
+            var query = new GetAllAppointmentsDoctorAndDateQuery() { DoctorId = input.DoctorId, Daysdate = input.Daysdate };
             return await _mediator.Send(query);
         }
 

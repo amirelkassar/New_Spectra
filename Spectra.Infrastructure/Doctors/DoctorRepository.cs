@@ -5,7 +5,9 @@ using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
+using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
@@ -29,30 +31,22 @@ namespace Spectra.Infrastructure.Doctors
      int pageSize = 10)
         {
             // Use AsQueryable to get an IMongoQueryable<Doctor>
-            var query = _doctors.AsQueryable();
+            var filterDefinition = filter ?? (x => true);
 
-            // Apply the filter if provided
-            if (filter != null)
-            {
-                query = (IMongoQueryable<Doctor>)query.Where(filter); ;
-            }
+            // Use MongoDB's sorting and pagination
+            var query = await _doctors
+                .Find(filterDefinition, options)
+                //.SortByDescending(x => x.) // Sort by Daysdate in descending order
+                .Skip((pageNumber - 1) * pageSize) // Skip to the correct page
+                .Limit(pageSize).ToListAsync();                  // Limit results to pageSize
 
-            //Order by 'Created' field
-           //query = query.OrderByDescending(x => x.Created.Date);
+        
+            var totalCount = await _doctors.CountDocumentsAsync(filterDefinition);
 
-            // Get total count of the filtered query
-            var totalCount = await query.CountAsync();  // Use CountAsync() from MongoDB.Driver.Linq
-
-            // Paginate the results
-            var doctors =  query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();  
-            // Return paginated result
             return new PaginatedResult<Doctor>
             {
-                Items = doctors,
-                TotalCount = totalCount,
+                Items = query,
+                TotalCount = (int)totalCount,
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };

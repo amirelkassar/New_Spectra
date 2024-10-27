@@ -27,12 +27,11 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
     public class UpdateDoctorRatesCommandHandler : IRequestHandler<UpdateDoctorRatesCommand, OperationResult<Unit>>
     {
         private readonly IDoctorRepository _doctorRepository;
-        private readonly IHellper _addFile;
-        public UpdateDoctorRatesCommandHandler(IDoctorRepository doctorRepository, IHellper addFile)
+  
+        public UpdateDoctorRatesCommandHandler(IDoctorRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
-            _addFile = addFile;
-        }
+    }
 
         public async Task<OperationResult<Unit>> Handle(UpdateDoctorRatesCommand request, CancellationToken cancellationToken)
         {

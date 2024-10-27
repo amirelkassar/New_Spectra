@@ -33,9 +33,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Queries
             var doctorsWithContract =
     await _contractRepository.GetAllAsync(c =>
     c.Titel == "Doctor" &&
-    c.ContractCase == ContractCases.ACTIVE &&
-    (c.Freelancer.Any(f => f.Service == "EarlyExamination") ||
-     c.SpectraTeam.Any(s => s.Service == "EarlyExamination")),
+    c.ContractCase == ContractCases.ACTIVE ,
        new FindOptions()
    );
 

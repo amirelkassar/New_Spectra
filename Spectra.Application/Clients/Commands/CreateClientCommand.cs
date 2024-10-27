@@ -61,37 +61,37 @@ namespace Spectra.Application.Clients.Commands
          
         }
     }
-    public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>
-    {
-        public CreateClientCommandValidator()
-        {
-            RuleFor(x => x.Name)
-                .NotNull().WithMessage("Name is required.")
-                .SetValidator(new NameValidator());
+    //public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>
+    //{
+    //    public CreateClientCommandValidator()
+    //    {
+    //        RuleFor(x => x.Name)
+    //            .NotNull().WithMessage("Name is required.")
+    //            .SetValidator(new NameValidator());
 
-            RuleFor(x => x.NationalId)
-                .NotEmpty().WithMessage("National ID is required.")
-                .Matches(@"^\d{10,12}$").WithMessage("National ID must be between 10 and 12 digits.");
+    //        RuleFor(x => x.NationalId)
+    //            .NotEmpty().WithMessage("National ID is required.")
+    //            .Matches(@"^\d{10,12}$").WithMessage("National ID must be between 10 and 12 digits.");
 
-            RuleFor(x => x.PhoneNumber)
-                .NotNull().WithMessage("Phone number is required.")
-                .SetValidator(new PhoneNumberValidator());
+    //        RuleFor(x => x.PhoneNumber)
+    //            .NotNull().WithMessage("Phone number is required.")
+    //            .SetValidator(new PhoneNumberValidator());
 
-            RuleFor(x => x.ClientType)
-                .IsInEnum().WithMessage("Invalid client type.");
+    //        RuleFor(x => x.ClientType)
+    //            .IsInEnum().WithMessage("Invalid client type.");
 
-            RuleFor(x => x.EmailAddress)
-                .NotNull().WithMessage("Email address is required.")
-                .SetValidator(new EmailAddressValidator());
+    //        RuleFor(x => x.EmailAddress)
+    //            .NotNull().WithMessage("Email address is required.")
+    //            .SetValidator(new EmailAddressValidator());
 
-            RuleFor(x => x.Address)
-                .NotNull().WithMessage("Address is required.")
-                .SetValidator(new AddressValidator());
+    //        RuleFor(x => x.Address)
+    //            .NotNull().WithMessage("Address is required.")
+    //            .SetValidator(new AddressValidator());
 
-            RuleFor(x => x.Organization)
-                .NotNull().WithMessage("Organization is required.")
-                .SetValidator(new OrganizationValidator());
-        }
-    }
+    //        RuleFor(x => x.Organization)
+    //            .NotNull().WithMessage("Organization is required.")
+    //            .SetValidator(new OrganizationValidator());
+    //    }
+    //}
   
 }
