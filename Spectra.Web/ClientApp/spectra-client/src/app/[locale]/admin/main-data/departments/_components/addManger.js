@@ -43,7 +43,7 @@ function AddManger({ doctors, DocID }) {
             />
           </button>
           <div className="flex flex-col w-full lg:flex-row lg:items-center gap-6 mb-4 mdl:mb-11">
-            <div className="mdl:h-[54px] h-[38px] max-w-[530px] w-[100%] relative outline-greenMain flex border-greenMain border rounded-[10px] items-center px-5">
+            <div className="mdl:h-[54px] h-[38px]  w-[100%] relative outline-greenMain flex border-greenMain border rounded-[10px] items-center px-5">
               <div className=" ">
                 <SearchIcon fill="#10B0C1" />
               </div>

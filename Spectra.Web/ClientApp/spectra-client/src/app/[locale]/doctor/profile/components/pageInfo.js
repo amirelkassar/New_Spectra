@@ -1,18 +1,15 @@
-"use client";
-import Card from "@/components/card";
-import React from "react";
-import QualificationsIcon from "@/assets/icons/qualifications";
-import DaqeqaIcon from "@/assets/icons/daqeqa";
 import BriefIcon from "@/assets/icons/brief";
-import Image from "next/image";
-import certificates from "@/assets/images/certificates.png";
+import DaqeqaIcon from "@/assets/icons/daqeqa";
 import DateIcon from "@/assets/icons/date";
-import LicenseIcon from "@/assets/icons/License";
-import ActionMenu from "../_components/ActionMenu";
-import { useSearchParams } from "next/navigation";
-import PageEdit from "./_components/pageEdit";
+import EditIcon from "@/assets/icons/edit";
 import HourglassIcon from "@/assets/icons/Hourglass";
+import LicenseIcon from "@/assets/icons/License";
+import QualificationsIcon from "@/assets/icons/qualifications";
+import Button from "@/components/button";
+import Card from "@/components/card";
 import CardInfo from "@/components/card-info";
+import React from "react";
+
 const data = {
   name: "احمد محمد كمال",
   spec: " اخصائى نفسى",
@@ -74,47 +71,14 @@ const data = {
     },
   ],
 };
-const ListCertificates = [
-  {
-    id: 0,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-  {
-    id: 1,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-  {
-    id: 2,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-  {
-    id: 3,
-    image: certificates,
-    date: "20/8/2022",
-    title: "دكتوراه العلوم الطبية",
-  },
-];
 
-function Page({ params }) {
-  const searchParams = useSearchParams();
-
-  return searchParams.get("edit") === "true" ? (
-    <PageEdit id={params.id} />
-  ) : (
+function PageInfo({ setEdit }) {
+  return (
     <div className="w-full flex flex-col gap-6 flex-1">
       <div>
         <div className="flex items-center justify-between gap-5 mb-4 lgl:mb-6">
           <h2 className="text-sm lgl:text-xl ">البيانات الشخصية </h2>
-
-          <ActionMenu id={params.id} />
         </div>
-
         <div className="grow grid w-full grid-cols-1 lg:grid-cols-2 lg:gap-y-2.5 lg:!mb-10 !mb-5 lg:gap-x-5">
           <CardInfo title={"الاسم كامل"} values={["احمد محمد كمال"]} />
           <CardInfo title={"النوع"} values={["ذكر"]} />
@@ -221,39 +185,19 @@ function Page({ params }) {
           </div>
         </div>
       </Card>
-      <Card>
-        <div className=" flex-1  w-full">
-          <h2 className="headTitleDash mb-6"> الشهادات </h2>
-          <div className="flex gap-2 mdl:gap-4 flex-wrap ">
-            {ListCertificates.map((item, i) => {
-              return (
-                <div
-                  key={item.id}
-                  className="py-3 bg-white mdl:py-5 px-3 mdl:px-4 shadow-sm border-gray border rounded-lg max-w-[260px] min-w-[calc(50%-4px)] md:min-w-[260px] flex-1"
-                >
-                  <Image
-                    src={item.image}
-                    width={228}
-                    height={178}
-                    className="w-full h-auto object-contain rounded-[10px]"
-                    alt="items"
-                  />
-                  <div className="flex md:items-center flex-col md:flex-row md:justify-between gap-1 md:gap-3 mt-3 mdl:mt-5 flex-wrap">
-                    <h2 className="text-[12px] mdl:text-[16px] font-Bold ">
-                      {item.title}
-                    </h2>
-                    <p className="text-[12px] mdl:text-[16px] text-grayDark">
-                      {item.date}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </Card>
+      <Button
+        onClick={() => {
+          setEdit(true);
+        }}
+        className={
+          "  mdl:max-w-[260px] max-w-[80%] mb-4 mx-auto mdl:mx-0 bg-white/80 w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+        }
+      >
+        <EditIcon />
+        تعديل
+      </Button>
     </div>
   );
 }
 
-export default Page;
+export default PageInfo;

@@ -3,7 +3,6 @@ import Image from "next/image";
 import React from "react";
 import signature from "@/assets/images/signature.png";
 import SessionIcon from "@/assets/icons/session";
-import EditIcon from "@/assets/icons/edit";
 function DoctorInfo({ data }) {
   return (
     <div className=" mdl:divide-x-[2px] divide-solid mdl:divide-x-reverse flex min-h-[244px] gap-y-3 divide-grayLight flex-wrap flex-col mdl:flex-row">
@@ -48,7 +47,7 @@ function DoctorInfo({ data }) {
           </div>
         </div>
       </div>
-      <div className="mdl:px-8 w-full mt-4 mdl:mt-0  md:min-w-[300px] flex-1  mdl:divide-y-[2px] divide-solid  divide-grayLight ">
+      <div className="mdl:px-8 w-full flex items-center justify-center mt-4 mdl:mt-0  md:min-w-[300px] flex-1   ">
         <div className=" flex-col flex gap-4 w-full  justify-center pb-6 max-w-[300px] mdl:max-w-full mx-auto">
           <div className="flex items-center justify-center gap-5 lg:gap-12">
             <h3 className=" flex-1 text-[12px] mdl:text-[16px]">
@@ -74,21 +73,6 @@ function DoctorInfo({ data }) {
               {data.service.early2}
             </p>
           </div>
-        </div>
-        <div className="pt-2 mdl:pt-5 flex flex-row-reverse mdl:flex-col justify-between gap-2  border-t-2 mdl:border-t-0 border-grayLight">
-          <div className="flex items-center justify-between gap-3 flex-wrap ">
-            <h3 className="text-[12px] mdl:text-[16px] mdl:block hidden">التوقيع</h3>
-            <div className=" size-[38px] rounded-[10px] bg-blueLight flex items-center justify-center">
-             
-            </div>
-          </div>
-          <Image
-            alt="signatureF"
-            src={signature}
-            width={132}
-            height={61}
-            className="w-[132px] h-[61px] object-contain max-w-full mdl:mt-4"
-          />
         </div>
       </div>
 

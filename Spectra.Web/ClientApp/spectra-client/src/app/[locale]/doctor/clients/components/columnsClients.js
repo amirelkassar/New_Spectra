@@ -1,8 +1,8 @@
 import ReportDecIcon from "@/assets/icons/reportDec";
-import MenuActions from "@/components/menu-actions";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import Image from "next/image";
+import ActionMenu from "./ActionMenu";
 
 export const columns = [
   {
@@ -39,14 +39,15 @@ export const columns = [
 
   {
     id: "type",
-    cell: () => {
+    cell: ({row}) => {
+      const id = row.original.id
       return (
         <div className="flex items-center justify-end gap-5 lg:gap-10">
           <div className="flex w-8 aspect-square h-8 lg:h-[50px] lg:w-[50px] items-center justify-center p-[6px] lg:p-3 rounded-[50%] bg-blueLight">
             <ReportDecIcon />
           </div>
 
-          <MenuActions />
+          <ActionMenu id={id}  />
         </div>
       );
     },

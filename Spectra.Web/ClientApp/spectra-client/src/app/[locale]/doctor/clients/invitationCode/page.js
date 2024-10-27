@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import LayoutHome from "../components/layoutHome";
-import MenuActions from "@/components/menu-actions";
 import placeholderImage from "@/assets/images/placeholder-person.png";
 import { DataTable } from "@/components/data-table";
 import { columns } from "../components/columnsInvitationCode";
+import ActionMenu from "../components/ActionMenuPage";
 const data = [
   {
     id: 0,
@@ -85,7 +85,7 @@ function Page() {
       <div className="default-page flex-1w-[100%] lg:max-w-[calc(100%-250px)] w-full">
         <div className="flex items-center justify-between">
           <h2 className="headTitleDash">عملاء كود الدعوة</h2>
-          <MenuActions />
+          <ActionMenu />
         </div>
         <div className="grow  overflow-auto ">
           <DataTable data={data} columns={columns}  />

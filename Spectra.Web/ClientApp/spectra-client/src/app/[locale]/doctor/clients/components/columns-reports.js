@@ -1,4 +1,5 @@
 import MenuActions from "@/components/menu-actions";
+import ActionMenu from "./ActionMenu-reports";
 
 export const columns = [
   {
@@ -19,8 +20,9 @@ export const columns = [
 
   {
     id: "actions",
-    cell: () => {
-      return <MenuActions />;
+    cell: ({ row }) => {
+      const id = row.original.id;
+      return <ActionMenu id={id} />;
     },
   },
 ];
