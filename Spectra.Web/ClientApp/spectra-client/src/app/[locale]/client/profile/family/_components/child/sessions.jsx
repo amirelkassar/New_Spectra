@@ -15,10 +15,11 @@ import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 import SessionIcon from '@/assets/icons/session';
 import { BackButton } from '@/components/buttons/back-button';
-import { Package } from '@/app/[locale]/client/packages/_components/package';
+
 import { packagesDataSpectra } from '@/lib/demoData';
 import Button from '@/components/button';
 import FileOutline from '@/assets/icons/file-outline';
+import { PackageCard } from '@/app/[locale]/client/packages/_components/package-card';
 
 const SESSIONS = [
   {
@@ -183,7 +184,7 @@ const SessionInfo = ({
             {packagesDataSpectra
               ?.slice(0, 2)
               ?.map((p, i) => (
-                <Package
+                <PackageCard
                   className='lg:min-w-max w-auto'
                   key={i}
                   {...p}
