@@ -1,10 +1,7 @@
 "use client";
-import ArrowDownIcon from "@/assets/icons/arrow-down";
-
 import MainIcon from "@/assets/icons/main";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
 import React, { useMemo, useState } from "react";
 import { Collapse, Box } from "@mantine/core";
 import Appointments from "@/assets/icons/appointments";
@@ -14,16 +11,16 @@ import ArrowNav from "@/assets/icons/arrow-nav";
 import Logo from "@/assets/icons/logo";
 import useMenu from "@/store/auth/signup/menu-store";
 import LogoutIcon from "@/assets/icons/logOut";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import ContractsIcon from "@/assets/icons/contracts";
 import RatingsIcon from "@/assets/icons/ratings";
 import WalletIcon from "@/assets/icons/wallet";
 import ProfileIcon from "@/assets/icons/profile";
 import ChatsIcon from "@/assets/icons/chats";
+import ArrowDownIcon from "@/assets/icons/arrow-down";
 
 const Aside = () => {
   const menu = useMenu();
-  const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenAppointments, setIsOpenAppointments] = useState(false);
   const path = usePathname();
   const mainLinks = useMemo(
@@ -81,34 +78,18 @@ const Aside = () => {
 
       {
         name: "الإعدادات",
-        route: ROUTES.DOCTOR.PERMISSIONS,
+        route: ROUTES.DOCTOR.SETTINGS.DASHBOARD,
         isActive:
-          path.includes(ROUTES.DOCTOR.PERMISSIONS) ||
-          path.includes(ROUTES.DOCTOR.CONTENT) ||
-          path.includes(ROUTES.DOCTOR.PLANS),
+          path === ROUTES.DOCTOR.SETTINGS.DASHBOARD ||
+          path === ROUTES.DOCTOR.CONTENT ||
+          path === ROUTES.DOCTOR.PLANS,
         icon: <SettingsIcon />,
-        type: "settings",
+      
       },
     ],
     [path]
   );
-  const settingsLinks = [
-    {
-      name: "الأذونات",
-      route: ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD),
-    },
-    {
-      name: "المحتوى",
-      route: ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD),
-    },
-    {
-      name: "الخطط",
-      route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
-      isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
-    },
-  ];
+
   const AppointmentsLinks = [
     {
       name: "المواعيد القادمة",
@@ -121,7 +102,6 @@ const Aside = () => {
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSPREVIOUS),
     },
     {
-      
       name: "المواعيد الملغاة",
       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
       isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTSCANCELD),
@@ -227,38 +207,6 @@ const Aside = () => {
                   className=" dropMenuDash   flex flex-col gap-3 mt-4 px-4"
                 >
                   {AppointmentsLinks.map((link) => (
-                    <AsideLink2 key={link.route} link={link} />
-                  ))}
-                </Collapse>
-              </div>
-            </div>
-          ) : link.type === "settings" ? (
-            <div key={link.route}>
-              <div className="flex ">
-                <button
-                  className={` flex gap-[10px] items-center ${
-                    link.isActive ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    setIsOpenSettings(!isOpenSettings);
-                  }}
-                >
-                  <AsideLink key={link.route} link={link} />
-                  <span
-                    className={` arrowLinkNav  hidden lg:block  ${
-                      isOpenSettings ? " rotate-180" : "rotate-0"
-                    }`}
-                  >
-                    <ArrowDownIcon />
-                  </span>
-                </button>
-              </div>
-              <div className="  lg:!block hidden">
-                <Collapse
-                  in={isOpenSettings}
-                  className=" dropMenuDash  flex flex-col gap-3 mt-4 px-4"
-                >
-                  {settingsLinks.map((link) => (
                     <AsideLink2 key={link.route} link={link} />
                   ))}
                 </Collapse>

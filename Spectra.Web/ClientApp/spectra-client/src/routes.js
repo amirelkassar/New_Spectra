@@ -237,9 +237,11 @@ const ROUTES = {
     CHATS: {
       DASHBOARD: "/doctor/chats",
     },
-    PERMISSIONS: "/doctor/permissions",
-    CONTENT: "/doctor/content",
-    PLANS: "/doctor/plans",
+    SETTINGS: {
+      DASHBOARD: "/doctor/settings",
+      CHANGEPASSWORD: "/doctor/settings/change-password",
+      NOTIFICATIONS: "/doctor/settings/notifications",
+    },
   },
 };
 
