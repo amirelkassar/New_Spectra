@@ -1,8 +1,8 @@
 import React from "react";
-import DetailsAside from "../details-aside";
-import HeaderInfoClient from "./headerInfoClient";
+import HeaderInfoClient from "./components/headerInfoClient";
+import DetailsAside from "./details-aside";
 
-function LayoutClientID({ children }) {
+function layout({children}) {
   return (
     <section className="grow flex flex-col  lg:gap-6">
       <HeaderInfoClient />
@@ -14,4 +14,4 @@ function LayoutClientID({ children }) {
   );
 }
 
-export default LayoutClientID;
+export default layout;

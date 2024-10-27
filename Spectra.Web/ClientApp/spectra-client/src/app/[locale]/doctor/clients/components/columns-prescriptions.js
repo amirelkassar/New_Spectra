@@ -12,7 +12,7 @@ export const columns = [
       return (
         <div className="flex items-center gap-6">
           <div className="flex bg-blueLight p-2 size-[38px] rounded-full items-center justify-center p-1">
-          <PillsIcon />
+          <PillsIcon className='text-greenMain' />
           </div>
           <h2 className="text-[12px] lg:text-base">{name}</h2>
         </div>
