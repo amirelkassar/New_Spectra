@@ -2,8 +2,8 @@
 
 import BarsIcon from '@/assets/icons/bars';
 import CalenderIcon from '@/assets/icons/calender';
-import PhoneIcon from '@/assets/icons/phone';
-import clsx from 'clsx';
+import VideoOutline from '@/assets/icons/video-outline';
+import { cn } from '@/lib/utils';
 
 const data = [
   {
@@ -14,10 +14,12 @@ const data = [
     color: 'bg-red/10',
   },
   {
-    label: 'الاستشارات',
+    label: 'الجلسات',
     number: 1002,
     percentage: 40,
-    icon: <PhoneIcon className='w-5 lg:w-auto' />,
+    icon: (
+      <VideoOutline className='w-5 lg:w-auto text-purple' />
+    ),
     color: 'bg-purple/10',
   },
   {
@@ -80,9 +82,12 @@ const Card = ({
             percentage > 0 ? 'text-[#0A9D4C]' : 'text-red'
           }`}
         >
-          <span className='text-grayDark'>الاسبوع السابق </span>%{percentage}
+          <span className='text-grayDark'>
+            الاسبوع السابق{' '}
+          </span>
+          %{percentage}
           <span
-            className={clsx('inline-block size-[12.68px]', {
+            className={cn('inline-block size-[12.68px]', {
               'rotate-[135deg]': percentage < 0,
               'rotate-[35deg]': percentage > 0,
             })}

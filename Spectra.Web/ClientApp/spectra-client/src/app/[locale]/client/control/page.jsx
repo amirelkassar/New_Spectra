@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../_components/container';
 import { MedicalCards } from './_components/medical-card.jsx';
 import { Heading } from '../_components/heading';
-// import { PerformanceChart } from './_components/performance-chart';
+import { PerformanceChart } from './_components/performance-chart';
 import { ReminderMessages } from './_components/reminder-messages';
 import { ActivityCards } from './_components/activity-cards';
 import { CHILDSDATA } from '@/lib/demoData';
@@ -15,8 +15,10 @@ const ControlPage = () => {
       <Heading label='ملخص النشاطات' />
       <ChildSelect data={CHILDSDATA} />
       <MedicalCards />
-      {/* <PerformanceChart /> */}
-      <ReminderMessages />
+      <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
+        <PerformanceChart />
+        <ReminderMessages />
+      </div>
       <ActivityCards />
       <Wallet />
     </Container>
