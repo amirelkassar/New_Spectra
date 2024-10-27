@@ -29,7 +29,7 @@ function PrescriptionCard({ type = "all", data }) {
         </div>
         <div>
           <div className=" size-[64px] rounded-[10px] bg-white flex items-center justify-center mx-auto mt-4 mb-3">
-            {data.pills ? <PillsIcon /> : <TherapyIcon />}
+            {data.pills ? <PillsIcon className='text-greenMain' /> : <TherapyIcon />}
           </div>
           <div className="flex items-center justify-center gap-10 mb-2">
             {data.therapy.map((item, i) => {

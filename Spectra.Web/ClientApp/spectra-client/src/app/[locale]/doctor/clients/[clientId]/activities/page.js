@@ -1,62 +1,35 @@
-'use client';
+"use client";
 import React, { useState } from "react";
-import LayoutClientID from "../components/layoutClientID";
-import ArrowNav from "@/assets/icons/arrow-nav";
+
+import ReportChart from "@/components/reportChart";
 import ArrowLeftMainGreen from "@/assets/icons/arrow-left-mainGreen";
-import LinerChart from "@/components/liner-chart";
-const charts = [
-  { x: "يناير", y: 55 },
-  { x: "فبراير", y: 45 },
-  { x: "مارس ", y: 50 },
-  { x: "ابريل", y: 60 },
-  { x: "مايو", y: 40 },
-  { x: "يونيو", y: 15 },
-  { x: "يوليو", y: 30 },
-  { x: "اغسطس", y: 33 },
-  { x: "سبتمبر", y: 20 },
-  { x: "اكتوبر", y: 17 },
-  { x: "نوفمر", y: 25 },
-  { x: "ديسمبر", y: 10 },
+const apiData = [
+  { title: "جلسة 10   ", num: 8 },
+  { title: "جلسة 9", num: 4 },
+  { title: "جلسة 8", num: 1 },
+  { title: "جلسة 7", num: 10 },
+  { title: "جلسة 6", num: 8 },
+  { title: "جلسة 5", num: 4 },
+  { title: "جلسة 4", num: 1 },
+  { title: "جلسة 3", num: 10 },
+  { title: "جلسة 2", num: 7 },
+  { title: "جلسة 1", num: 4 },
 ];
 function Page() {
-const [year, setYear] = useState(new Date().getFullYear());
-
   return (
-    <LayoutClientID>
-      <div className="flex-1">
-  
-        <div className="default-page w-full !h-auto">
-        <div className=" bg-white px-0 md:px-4 lg:px-6 xl:px-12 py-9 md:rounded-xl md:mb-7 border-y md:border-t-0 border-[#F5F5F5] rtl">
+    <div className="flex-1">
+      <div className=" bg-white px-0 md:px-4 lg:px-6 xl:px-12 py-9 md:rounded-xl md:mb-7 border-y md:border-t-0 border-[#F5F5F5] rtl">
         <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
-          <h2>ملخص الاداء شهريا</h2>
-          <div className="flex items-center gap-8">
-            <button
-              className="flex items-center size-[28px] justify-center bg-grayLight rounded-s-[6px]"
-              onClick={() => {
-                setYear(year + 1);
-              }}
-            >
-              <ArrowNav fill="#010036" className={"w-[7px]"} />
-            </button>
-            <p className="text-center font-extrabold  text-[14px] mdl:text-[20px]">
-              {" "}
-              {year}
-            </p>
-            <button
-              className="flex items-center size-[28px] justify-center bg-grayLight rounded-e-[6px]"
-              onClick={() => {
-                setYear(year - 1);
-              }}
-            >
-              <ArrowLeftMainGreen fill="#010036" className={"w-[7px]"} />
-            </button>
-          </div>
+          <h2>ملخص الاداء</h2>
+          <button className="flex bg-blueLight duration-200 hover:shadow-md min-w-[178px] items-center justify-center gap-4 px-5 h-[52px] rounded-xl text-greenMain">
+            <p className="font-Bold text-sm md:text-base">عرض الكل</p>
+            <ArrowLeftMainGreen className="w-2 h-auto" />
+          </button>
         </div>
-        <LinerChart chartData={charts} />
+
+        <ReportChart ReportDataChart={apiData} />
       </div>
-        </div>
-      </div>
-    </LayoutClientID>
+    </div>
   );
 }
 

@@ -5,11 +5,10 @@ import man from "@/assets/images/placeholder-person.png";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 
-function Report({ data }) {
-
+function Report({ data, idClient }) {
   return (
     <Link
-      href={ROUTES.ADMIN.REPORT.REPORTID(data.id)}
+      href={ROUTES.DOCTOR.CLIENTS.REPORTPATIENTSDETAILS(idClient, data.id)}
       className={` rounded-[10px] ${
         data.state === "new" ? "bg-[#F1FCFF]" : "bg-grayLight"
       } min-w-[100%]  md:min-w-[calc(50%-20px)] w-full max-w-[350px] p-3 ps-6 border-s-4 flex-1  border-greenMain`}
@@ -33,7 +32,7 @@ function Report({ data }) {
         <MenuActions />
       </div>
       <h4 className="  text-[16px] border-b border-grayDark/50 pb-4 md:text-[20px] font-Bold mb-6">
-      {data.typeReport||'dffg'}
+        {data.typeReport || "dffg"}
       </h4>
       <div className="flex gap-2 items-center pb-2">
         <Image

@@ -1,10 +1,8 @@
 import React from "react";
-
 import imgDoctor from "@/assets/images/placeholder-person.png";
 import imgPatient from "@/assets/images/placeholder-person.png";
 import ReportsFiltration from "../../components/reports-filtration";
 import Report from "../../components/report";
-import LayoutClientID from "../components/layoutClientID";
 const reports = [
   {
     id: 1,
@@ -63,20 +61,18 @@ const reports = [
     imgPatient: imgPatient,
   },
 ];
-function page() {
+function page({params}) {
   return (
-    <LayoutClientID>
-      <div className="flex-1">
-        <div className="default-page w-full !h-auto">
-          <ReportsFiltration />
-          <div className="flex gap-7 lg:gap-10 flex-wrap mt-9 justify-center">
-            {reports.map((report, i) => {
-              return <Report key={i} data={report} />;
-            })}
-          </div>
+    <div className="flex-1">
+      <div className="default-page w-full !h-auto">
+        <ReportsFiltration />
+        <div className="flex gap-7 lg:gap-10 flex-wrap mt-9 justify-center">
+          {reports.map((report, i) => {
+            return <Report idClient={params.clientId} key={i} data={report} />;
+          })}
         </div>
       </div>
-    </LayoutClientID>
+    </div>
   );
 }
 

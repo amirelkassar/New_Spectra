@@ -5,7 +5,7 @@ function PrescriptionsView({ dataCard }) {
   return (
     <div className="flex gap-4 pb-5 border-b-2 border-grayLight">
       <div className="flex bg-blueLight p-2 size-[38px] rounded-full items-center mt-1 justify-center ">
-        <PillsIcon />
+        <PillsIcon className='text-greenMain' />
       </div>
       <ul className="flex flex-col gap-2">
         <li className="flex items-center gap-4">

@@ -92,7 +92,7 @@ function Page() {
     {
       label: "عقاقير",
       icon: (
-        <PillsIcon className={"w-[10px] lg:w-[20px] h-[12px] lg:h-[20px]"} />
+        <PillsIcon className={"w-[10px] text-greenMain lg:w-[20px] h-[12px] lg:h-[20px]"} />
       ),
       key: "ستيرال",
     },

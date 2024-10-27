@@ -1,9 +1,9 @@
 import PillsIcon from "@/assets/icons/pills";
-import TherapyIcon from "@/assets/icons/therapy";
 import { Link } from "@/navigation";
+import ROUTES from "@/routes";
 import React from "react";
 
-function PrescriptionCard({ type = "all", data }) {
+function PrescriptionCard({ type = "all", data, idClient }) {
   return (
     <div className={`px-1 py-3 rounded-[10px]  bg-[#F1FCFF] w-[330px]`}>
       {data.state === "new" && (
@@ -24,8 +24,8 @@ function PrescriptionCard({ type = "all", data }) {
           </h3>
         </div>
         <div>
-          <div className=" size-[64px] rounded-[10px] bg-white flex items-center justify-center mx-auto mt-4 mb-3">
-            {data.pills ? <PillsIcon /> : <TherapyIcon />}
+          <div className=" size-10 p-3 mdl:size-14 rounded-[10px] bg-white flex items-center justify-center mx-auto mt-4 mb-3">
+            <PillsIcon className="w-full h-auto text-greenMain" />
           </div>
           <div className="flex items-center justify-center gap-10 mb-2">
             {data.therapy.map((item, i) => {
@@ -44,7 +44,10 @@ function PrescriptionCard({ type = "all", data }) {
           </p>
           <p className="text-[14px] text-center sml:text-[16px]">20/4/2024</p>
           <Link
-            href={"#"}
+            href={ROUTES.DOCTOR.CLIENTS.PRESCRIPTIONSPATIENTSDETAILS(
+              idClient,
+              data.id
+            )}
             className="w-full h-[48px] rounded-[10px] text-white font-Bold bg-greenMain flex items-center justify-center mt-4"
           >
             عرض

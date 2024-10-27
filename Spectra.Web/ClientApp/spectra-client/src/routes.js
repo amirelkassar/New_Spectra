@@ -207,7 +207,9 @@ const ROUTES = {
       INVITATIONCODE: "/doctor/clients/invitationCode",
       DETAILS: (id) => `/doctor/clients/${id}/details`,
       REPORTPATIENTS: (id) => `/doctor/clients/${id}/reports`,
+      REPORTPATIENTSDETAILS: (id,id2) => `/doctor/clients/${id}/reports/${id2}`,
       PRESCRIPTIONSPATIENTS: (id) => `/doctor/clients/${id}/prescriptions`,
+      PRESCRIPTIONSPATIENTSDETAILS: (id,id2) => `/doctor/clients/${id}/prescriptions/${id2}`,
       ACTIVITIESSPATIENTS: (id) => `/doctor/clients/${id}/activities`,
       ADDREPORTPATIENTS: (id) => `/doctor/clients/${id}/addReport`,
       ADDPRESCRIPTIONSPATIENTS: (id) =>

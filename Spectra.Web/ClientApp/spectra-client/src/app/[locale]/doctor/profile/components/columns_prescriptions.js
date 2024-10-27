@@ -30,7 +30,7 @@ export const columns = [
             <div className="bg-blueLight w-11 h-11 rounded-full flex items-center justify-center p-2">
            
               <PillsIcon
-                className={"w-[10px] lg:w-[20px] h-[12px] lg:h-[20px]"}
+                className={"w-[10px] text-greenMain lg:w-[20px] h-[12px] lg:h-[20px]"}
               />
             </div>
           ) : (
