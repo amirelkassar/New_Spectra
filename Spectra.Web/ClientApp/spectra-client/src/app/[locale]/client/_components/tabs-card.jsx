@@ -16,7 +16,7 @@ export const TabsCard = ({
   return (
     <Card
       className={cn(
-        'lg:col-span-2 pb-4 lg:pb-0 overflow-x-auto lg:overflow-x-hidden',
+        'lg:col-span-2 pb-4 overflow-x-auto lg:overflow-x-hidden',
         className
       )}
     >

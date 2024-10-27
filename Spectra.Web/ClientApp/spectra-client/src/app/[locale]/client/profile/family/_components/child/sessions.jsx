@@ -18,6 +18,7 @@ import { BackButton } from '@/components/buttons/back-button';
 import { Package } from '@/app/[locale]/client/packages/_components/package';
 import { packagesDataSpectra } from '@/lib/demoData';
 import Button from '@/components/button';
+import FileOutline from '@/assets/icons/file-outline';
 
 const SESSIONS = [
   {
@@ -206,25 +207,30 @@ const SessionInfo = ({
         </div>
       </Card>
 
-      <Card
-        className='border-2 border-grayLight lg:border-transparent p-3 mdl:p-5'
+      <TestsAndScansList
+        data={[
+          'الأشعة السينية x-ray',
+          'الموجات فوق الصوتية (Ultrasonic)',
+          'الأشعة المقطعية بالكمبيوتر (CT SCAN).',
+        ]}
         title='التحاليل والاشعات الخارجية'
-      >
-        <ul>
-          {[
-            'الأشعة السينية x-ray',
-            'الموجات فوق الصوتية (Ultrasonic)',
-            'الأشعة المقطعية بالكمبيوتر (CT SCAN).',
-          ].map((item, i) => (
-            <li
-              className='text-xs py-2 mdl:py-4 mdl:text-base font-bold relative ps-6 mdl:ps-8 before:absolute before:size-4 mdl:before:size-5 before:bg-greenMain before:start-0 before:top-1/2 before:-translate-y-1/2 before:text-white before:flex before:items-center before:justify-center before:!content-["✔"]'
-              key={i}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </Card>
+      />
+
+      <PrescriptionsFiles
+        title='الوصفات الطبية'
+        data={[
+          {
+            fileName: 'Prescription.pdf',
+            size: '1.2 MB',
+            date: '2024-10-26T10:23:37.249Z',
+          },
+          {
+            fileName: 'Prescription.pdf',
+            size: '1.2 MB',
+            date: '2024-10-26T10:23:37.249Z',
+          },
+        ]}
+      />
 
       <BackButton onClick={onBack}>السابق</BackButton>
     </div>
@@ -232,13 +238,25 @@ const SessionInfo = ({
 };
 
 const Service = ({
+  className = '',
+  iconClassName = '',
   icon = <></>,
   label = '',
   status = 'open',
 }) => {
   return (
-    <div className='flex flex-col gap-5 items-center'>
-      <div className='mdl:size-20 size-16 rounded-full flex items-center justify-center bg-blueLight'>
+    <div
+      className={cn(
+        'flex flex-col gap-5 items-center',
+        className
+      )}
+    >
+      <div
+        className={cn(
+          'mdl:size-20 size-16 rounded-full flex items-center justify-center bg-blueLight',
+          iconClassName
+        )}
+      >
         {icon}
       </div>
 
@@ -255,5 +273,60 @@ const Service = ({
         {status === 'reserved' ? 'تم الحجز' : 'احجز الان'}
       </Button>
     </div>
+  );
+};
+
+const TestsAndScansList = ({ data = [], title = '' }) => {
+  if (!data.length) return null;
+
+  return (
+    <Card
+      className='border-2 border-grayLight lg:border-transparent p-3 mdl:p-5'
+      title={title}
+    >
+      <ul>
+        {data?.map((item, i) => (
+          <li
+            className='text-xs py-2 mdl:py-4 mdl:text-base font-bold relative ps-6 mdl:ps-8 before:absolute before:size-4 mdl:before:size-5 before:bg-greenMain before:start-0 before:top-1/2 before:-translate-y-1/2 before:text-white before:flex before:items-center before:justify-center before:!content-["✔"]'
+            key={i}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+};
+
+const PrescriptionsFiles = ({ title = '', data = [] }) => {
+  if (!data.length) return null;
+  return (
+    <Card
+      className='border-2 border-grayLight lg:border-transparent p-3 mdl:p-5 space-y-5'
+      title={title}
+    >
+      <div className='grid grid-cols-2 xl:grid-cols-3 gap-5'>
+        {data?.map((item, i) => (
+          <div key={i} className='flex items-center gap-3'>
+            <FileOutline className='size-6 mdl:size-8 text-greenMain' />
+            <div>
+              <p className='font-Medium text-sm mdl:text-xl truncate'>
+                {item?.fileName}
+              </p>
+
+              <span
+                dir='ltr'
+                className='text-xs mdl:text-base text-grayDark'
+              >
+                {item?.size} .{' '}
+                {dayjs(item?.date)
+                  .locale('en')
+                  .format('DD MMM, YYYY')}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Card>
   );
 };

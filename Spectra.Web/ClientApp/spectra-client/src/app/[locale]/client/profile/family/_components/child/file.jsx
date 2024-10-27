@@ -1,11 +1,15 @@
+'use client';
+
+import Image from 'next/image';
+import dayjs from 'dayjs';
+import { useDisclosure } from '@mantine/hooks';
+import { Button, Modal } from '@mantine/core';
+
+import { convertBytesToKB } from '@/lib/utils';
 import PdfIcon from '@/assets/icons/pdf';
 import PlayIcon from '@/assets/icons/play';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
 import Avatar from '@/components/avatar';
-import { convertBytesToKB, formatDate } from '@/lib/utils';
-import { Button, Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Image from 'next/image';
 
 export const File = ({ file = null }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -60,15 +64,20 @@ export const File = ({ file = null }) => {
       </div>
 
       <div className='flex-1'>
-        <p className='max-w-[70%] text-ellipsis whitespace-nowrap overflow-hidden'>
+        <p className='max-w-48 mdl:max-w-64 truncate overflow-hidden font-Medium text-sm mdl:text-xl'>
           {file?.name}
         </p>
 
-        <span>{convertBytesToKB(file?.size)} . </span>
-        <span>{formatDate(new Date())}</span>
+        <span
+          dir='ltr'
+          className='text-xs mdl:text-base text-grayDark'
+        >
+          {convertBytesToKB(file?.size)} .{' '}
+          {dayjs(new Date()).format('DD MMM, YYYY')}
+        </span>
       </div>
 
-      <div>
+      <div className='shrink-0'>
         <Button variant='transparent'>
           <ThreeDotsIcon />
         </Button>
@@ -77,7 +86,12 @@ export const File = ({ file = null }) => {
   );
 };
 
-const ViewModal = ({ opened = false, close = () => {}, contentType, src }) => {
+const ViewModal = ({
+  opened = false,
+  close = () => {},
+  contentType,
+  src,
+}) => {
   return (
     <Modal
       opened={opened}
