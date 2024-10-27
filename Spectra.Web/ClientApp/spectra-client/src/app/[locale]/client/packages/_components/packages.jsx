@@ -12,21 +12,17 @@ export const Packages = () => {
       <Card className='space-y-10'>
         {/* Spectra Packages */}
         <PackageContainer title='باقات سبيكترا'>
-          {packagesDataSpectra.map((p) => (
-            <PackageCard
-              showPackageList
-              key={p.label}
-              {...p}
-            />
+          {packagesDataSpectra.map((p, i) => (
+            <PackageCard showPackageList key={i} {...p} />
           ))}
         </PackageContainer>
 
         {/* Flex Packages */}
         <PackageContainer title='الباقات المرنة'>
-          {packagesDataFlex.map((p) => (
+          {packagesDataFlex.map((p, i) => (
             <PackageCard
               showPackageList
-              key={p.label}
+              key={i + 100}
               {...p}
             />
           ))}
