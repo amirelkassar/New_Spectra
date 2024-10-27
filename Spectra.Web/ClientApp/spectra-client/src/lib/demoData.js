@@ -196,7 +196,7 @@ export const servicesData = [
     icon: React.createElement(HeartIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(255 61 61 / 0.18)',
+    color: 'rgba(248, 193, 189, 0.2)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية',
     fullDescription:
@@ -235,7 +235,7 @@ export const servicesData = [
     icon: React.createElement(TeamIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية كالتوحد و فرط الحركة وغيرها',
   },
@@ -245,7 +245,7 @@ export const servicesData = [
     icon: React.createElement(FollowUpIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(138 34 160 / 0.18)',
+    color: 'rgba(217, 182, 224, 0.2)',
     description:
       'نقوم بتشخيص الحالات التي تعاني من الاضطرابات النمائية والسلوكية عبر فريق محترف متعدد التخصصات',
   },
@@ -255,7 +255,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -265,7 +265,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -275,7 +275,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -285,7 +285,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -295,7 +295,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-4 lg:size-5',
     }),
-    color: 'rgb(16 176 193 / 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },

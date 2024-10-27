@@ -4,7 +4,7 @@ import { useState } from 'react';
 import BarsOutline from '@/assets/icons/bars-outline';
 import FileOutline from '@/assets/icons/file-outline';
 import PlayOutline from '@/assets/icons/play-outline';
-import { File } from './file';
+import { File } from '../../family/_components/child/file';
 import { TabsCard } from '@/app/[locale]/client/_components/tabs-card';
 import { TabsFilter } from '@/app/[locale]/client/_components/tabs-filter';
 import UploadButton from '@/components/buttons/upload-button';
@@ -62,23 +62,6 @@ export const Atthachments = () => {
           data={tabsFilterData}
           tab={filterTab}
         />
-
-        {/* FILES */}
-        <div className='min-h-80 space-y-5'>
-          {files?.length === 0 && (
-            <div className='text-center text-black text-xs lg:text-base h-80 flex items-center justify-center'>
-              لا يوجد ملفات
-            </div>
-          )}
-
-          {files?.length > 0 &&
-            filterFiles()?.map((f) => (
-              <File key={f?.name} file={f} />
-            ))}
-        </div>
-
-        {/* UPLOAD BUTTON */}
-        <UploadButton onUpload={onUpload} />
       </Card>
     </div>
   );
