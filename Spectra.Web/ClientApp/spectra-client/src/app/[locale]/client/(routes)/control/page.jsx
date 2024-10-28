@@ -4,7 +4,7 @@ import { MedicalCards } from './_components/medical-card.jsx';
 import { Heading } from '../../_components/ui/heading';
 import { PerformanceChart } from './_components/performance-chart';
 import { ReminderMessages } from './_components/reminder-messages';
-import { ActivityCards } from './_components/activity-cards';
+import { Activities } from '@/client/_components/services';
 import { CHILDSDATA } from '@/lib/demoData';
 import { Wallet } from './_components/wallet';
 import { ChildSelect } from '@/client/_components/child';
@@ -19,7 +19,7 @@ const ControlPage = () => {
         <PerformanceChart />
         <ReminderMessages />
       </div>
-      <ActivityCards />
+      <Activities title='طلب الخدمة' />
       <Wallet />
     </Container>
   );

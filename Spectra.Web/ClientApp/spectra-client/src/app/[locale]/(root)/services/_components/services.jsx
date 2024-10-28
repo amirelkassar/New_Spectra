@@ -40,9 +40,12 @@ const Service = ({
   id = '',
 }) => {
   return (
-    <div className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'>
+    <div
+      data-id={id}
+      className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'
+    >
       <div
-        className={`lg:size-9 size-8 rounded-full flex items-center justify-center`}
+        className={`lg:size-20 size-16 rounded-full flex items-center justify-center`}
         style={{ backgroundColor: color }}
       >
         {icon}

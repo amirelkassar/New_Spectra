@@ -1,12 +1,13 @@
-import {  clsx } from 'clsx';
-import { DateTimeFormatOptions } from 'next-intl';
+import { clsx } from 'clsx';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ar';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount, currency= '$') {
+export function formatCurrency(amount, currency = '$') {
   const formattedAmount = amount.toLocaleString();
 
   return `${formattedAmount}${currency.toUpperCase()}`;
@@ -22,5 +23,26 @@ export function formatDate(date) {
     month: 'short',
     day: 'numeric',
   };
-  return new Date(date).toLocaleDateString('en-US', options);
+  return new Date(date).toLocaleDateString(
+    'en-US',
+    options
+  );
+}
+
+export function getDate(date = '', locale = 'en') {
+  if (!date || typeof date !== 'string') return;
+
+  const fullYear = dayjs(date)
+    .locale(locale)
+    .format('YYYY/MM/DD');
+  const time = dayjs(date).locale(locale).format('hh:mm A');
+  const fullYearWithMonthName = dayjs(date)
+    .locale(locale)
+    .format('DD MMM, YYYY');
+
+  return {
+    fullYear,
+    time,
+    fullYearWithMonthName,
+  };
 }

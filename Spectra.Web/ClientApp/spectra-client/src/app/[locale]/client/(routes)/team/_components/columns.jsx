@@ -1,7 +1,5 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
-
 import { MakeAppointment } from './make-appointment';
 import { formatCurrency } from '@/lib/utils';
 import Avatar from '@/components/avatar';
@@ -11,8 +9,7 @@ import StarGoldIcon from '@/assets/icons/starGold';
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-
-export const columns= [
+export const columns = [
   {
     accessorKey: 'doctor',
     header: 'الطبيب',
@@ -26,7 +23,9 @@ export const columns= [
             src={avatar}
             className='hidden lg:block size-14'
           />
-          <span className='text-black font-bold text-xs'>{doctor}</span>
+          <span className='text-black font-bold text-xs'>
+            {doctor}
+          </span>
         </div>
       );
     },
@@ -56,7 +55,7 @@ export const columns= [
   },
   {
     id: 'message',
-    cell: ({ column }) => {
+    cell: () => {
       return (
         <span className='lg:size-14 size-8 rounded-full bg-blueLight flex items-center justify-center'>
           <MessageIconGreenMain className='size-4 lg:size-7' />
@@ -66,6 +65,8 @@ export const columns= [
   },
   {
     id: 'action',
-    cell: ({ row }) => <MakeAppointment doctorId={row.original.id} />,
+    cell: ({ row }) => (
+      <MakeAppointment doctorId={row.original.id} />
+    ),
   },
 ];

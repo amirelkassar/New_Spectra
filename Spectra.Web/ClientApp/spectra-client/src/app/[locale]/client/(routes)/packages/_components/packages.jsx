@@ -1,10 +1,7 @@
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import Card from '@/components/card';
-import {
-  packagesDataFlex,
-  packagesDataSpectra,
-} from '@/lib/demoData';
-import { PackageCard } from './package-card';
+import { packagesDataSpectra } from '@/lib/demoData';
+import { PackageCard } from '@/client/_components/packages';
 
 export const Packages = () => {
   return (
@@ -14,17 +11,6 @@ export const Packages = () => {
         <PackageContainer title='باقات سبيكترا'>
           {packagesDataSpectra.map((p, i) => (
             <PackageCard showPackageList key={i} {...p} />
-          ))}
-        </PackageContainer>
-
-        {/* Flex Packages */}
-        <PackageContainer title='الباقات المرنة'>
-          {packagesDataFlex.map((p, i) => (
-            <PackageCard
-              showPackageList
-              key={i + 100}
-              {...p}
-            />
           ))}
         </PackageContainer>
       </Card>

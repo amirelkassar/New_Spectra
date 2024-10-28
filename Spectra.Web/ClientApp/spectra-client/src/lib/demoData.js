@@ -194,11 +194,12 @@ export const servicesData = [
     id: '1',
     label: 'خدمة الكشف المبكر الالكتروني',
     icon: React.createElement(HeartIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(248, 193, 189, 0.2)',
+    color: 'rgba(235, 67, 53, 0.18)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية',
+    subscribed: true,
     fullDescription:
       'الكشف المبكر للاضطرابات النمائية والسلوكية هو عبارة عن إخضاع قدرات الطفل المهارية و السلوكية والنفسية للتقييم للكشف عن وجود إحدى الاضطرابات النمائية والسلوكية للبدء بوضع خطط علاجية تدخلية وتنفيذها قبل تطور الأعراض ويتم تنفيذ التقييم في مركزنا من خلال توفير مقاييس عالمية معتمدة يتم الإجابة عنها من قبل ولي أمر الطفل إلكترونياً عبر الموقع بكل سهولة دون الحاجة لمغادرة المنزل أو إضاعة المزيد من الوقت وبعد ذلك يتم استعراض النتائج وتقديم المشورة والتوجيه المناسب .',
 
@@ -233,9 +234,9 @@ export const servicesData = [
     id: '2',
     label: 'خدمات التشخيص الطبي عبر فرق متعددة التخصصات',
     icon: React.createElement(TeamIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(16, 176, 193, 0.18)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية كالتوحد و فرط الحركة وغيرها',
   },
@@ -243,9 +244,9 @@ export const servicesData = [
     id: '3',
     label: 'خدمات المتابعة الدوائية',
     icon: React.createElement(FollowUpIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(217, 182, 224, 0.2)',
+    color: 'rgba(138, 34, 160, 0.18)',
     description:
       'نقوم بتشخيص الحالات التي تعاني من الاضطرابات النمائية والسلوكية عبر فريق محترف متعدد التخصصات',
   },
@@ -253,9 +254,9 @@ export const servicesData = [
     id: '4',
     label: 'خدمات الاستشارات التخصصية',
     icon: React.createElement(HandshakeIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(111, 193, 191, 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -263,9 +264,9 @@ export const servicesData = [
     id: '5',
     label: 'خدمات التأهيل العلاجي في مختلف التخصصات',
     icon: React.createElement(HandshakeIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(111, 193, 191, 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -273,9 +274,9 @@ export const servicesData = [
     id: '6',
     label: 'خدمات التقارير الطبية والتخصصية',
     icon: React.createElement(HandshakeIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(111, 193, 191, 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -283,9 +284,9 @@ export const servicesData = [
     id: '7',
     label: 'خدمات دعم المراكز والجهات',
     icon: React.createElement(HandshakeIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(111, 193, 191, 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -293,9 +294,9 @@ export const servicesData = [
     id: '8',
     label: 'خدمات التدريب',
     icon: React.createElement(HandshakeIcon, {
-      className: 'size-4 lg:size-5',
+      className: 'size-8',
     }),
-    color: 'rgba(208, 235, 234, 0.2)',
+    color: 'rgba(111, 193, 191, 0.18)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },

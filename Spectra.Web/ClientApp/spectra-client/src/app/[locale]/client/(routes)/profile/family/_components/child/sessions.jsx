@@ -19,7 +19,7 @@ import { BackButton } from '@/components/buttons/back-button';
 import { packagesDataSpectra } from '@/lib/demoData';
 import Button from '@/components/button';
 import FileOutline from '@/assets/icons/file-outline';
-import { PackageCard } from '@/app/[locale]/client/(routes)/packages/_components/package-card';
+import { PackageCard } from '@/app/[locale]/client/_components/packages/package-card';
 import { ReportAccordion } from './report-accordion';
 import { PrescriptionsAccordion } from './prescriptions-accordion';
 import { prescriptionsData } from './prescriptions';
