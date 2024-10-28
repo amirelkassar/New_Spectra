@@ -14,6 +14,7 @@ import useModal from "@/store/modal-slice";
 import { useSearchParams } from "next/navigation";
 import LinkGreen from "@/components/linkGreen";
 import WorkNum from "./workNum";
+import SwitchContracts from "./switchContracts";
 const serviceOptions = [
   { value: "examination", label: "Examination Service" },
   { value: "counseling", label: "Counseling Service" },
@@ -145,6 +146,8 @@ function ContractInformation({ id }) {
         handleServiceDataChange={handleServiceDataChange}
       />
       <WorkNum />
+
+      <SwitchContracts/>
       {searchparams.get("editContracts") === "true" ? (
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           <LinkGreen
