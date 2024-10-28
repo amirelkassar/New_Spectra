@@ -51,6 +51,14 @@ const StaffAside = () => {
         searchParams.get("type"),
       isActive: path === ROUTES.ADMIN.STAFF.STAFFIDCONTRACTS(params.id),
     },
+    {
+      name: "الفريق الطبى ",
+      route:
+        ROUTES.ADMIN.STAFF.STAFFIDTEAM(params.id) +
+        "?type=" +
+        searchParams.get("type"),
+      isActive: path === ROUTES.ADMIN.STAFF.STAFFIDTEAM(params.id),
+    },
   ];
   const pageSpecialist = [
     {
@@ -113,7 +121,6 @@ const StaffAside = () => {
                 </Link>
               </li>
             ))}
-        {}
       </ul>
     </div>
   );

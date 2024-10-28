@@ -19,7 +19,7 @@ const DashboardHeader = () => {
       </Link>
       <div className="flex items-center gap-2.5 grow">
         <button className="size-[45px] bg-greenMain rounded-full flex items-center justify-center">
-          <SearchIcon />
+          <SearchIcon className="text-white"/>
         </button>
         <input
           type="text"

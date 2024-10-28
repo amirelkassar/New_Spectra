@@ -5,7 +5,6 @@ import CircleCheck from "@/assets/icons/circle-check";
 import ContractsSendIcon from "@/assets/icons/contracts-send";
 import FileSendIcon from "@/assets/icons/fileSend";
 import MessageIconGreenMain from "@/assets/icons/message-green";
-import NotificationIcon2 from "@/assets/icons/notification2";
 import PeopleIcon from "@/assets/icons/people";
 import TransfersIcon from "@/assets/icons/transfers";
 import True2Icon from "@/assets/icons/true2";

@@ -1,5 +1,4 @@
 import ContractLine from "@/components/contractLine";
-import { useSearchParams } from "next/navigation";
 import React from "react";
 
 function ServicesMember({
@@ -8,7 +7,7 @@ function ServicesMember({
   serviceData,
   handleServiceDataChange,
 }) {
-  const searchparams = useSearchParams();
+
 
   return (
     <div
@@ -32,17 +31,9 @@ function ServicesMember({
       </div>
       <ul className="flex flex-col gap-3 lgl:ps-7">
         {selectedServices.map((service, i) => {
-          const serviceInfo = serviceData[service] || {
-            price: "",
-            duration: "",
-            discount: "",
-          };
-
           return (
             <ContractLine
-              activeEdit={
-                searchparams.get("editContracts") === "true" ? true : false
-              }
+              activeEdit={ false}
               serviceData={serviceData}
               key={i}
               title={serviceOptions.find((opt) => opt.value === service).label}

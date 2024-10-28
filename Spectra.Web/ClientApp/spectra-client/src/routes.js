@@ -105,6 +105,7 @@ const ROUTES = {
 
       STAFFIDPRESCRIPTIONS: (id) => `/admin/staff/${id}/prescriptions`,
       STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
+      STAFFIDTEAM: (id) => `/admin/staff/${id}/team`,
     },
     REPORT: {
       DASHBOARD: "/admin/reports",

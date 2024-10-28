@@ -39,7 +39,7 @@ function HeaderTop() {
       </Link>
       <div className="flex items-center justify-end  grow">
         <button className="  p-[9px] md:p-0 size-[34px] md:size-[45px] bg-greenMain mx-[10p] md:mx-[20px]  rounded-full flex items-center justify-center">
-          <SearchIcon />
+          <SearchIcon className="text-white" />
         </button>
         <input
           type="text"
