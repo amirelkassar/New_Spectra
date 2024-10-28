@@ -46,14 +46,14 @@ module.exports = {
         xl: '1280px',
         xxl: '1536px',
       },
-      fontFamily: {
-        Thin: 'IBMPlexSansArabicThin', // 100
-        ExtraLight: 'IBMPlexSansArabicExtraLight', // 200
-        Light: 'IBMPlexSansArabicLight', // 300
-        Regular: 'IBMPlexSansArabicRegular', // 400
-        Medium: 'IBMPlexSansArabicMedium', // 500
-        SemiBold: 'IBMPlexSansArabicSemiBold', // 600
-        Bold: 'IBMPlexSansArabicBold', // 700
+      fontWeight: {
+        Thin: 100,
+        ExtraLight: 200,
+        Light: 300,
+        Regular: 400,
+        Medium: 500,
+        SemiBold: 600,
+        Bold: 700,
       },
       gridTemplateColumns: {
         'fill-200': 'repeat(auto-fill, minmax(200px, 1fr))',

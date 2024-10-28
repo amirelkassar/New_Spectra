@@ -21,11 +21,11 @@ export const Service = ({
         {icon}
       </div>
 
-      <div className='flex-1 sapce-y-2'>
-        <h4 className='font-bold text-center min-h-14 text-sm mdl:text-xl'>
+      <div className='flex-1 space-y-3'>
+        <h4 className='font-bold text-center min-h-14 text-sm mdl:text-xl px-4'>
           {label}
         </h4>
-        <p className='text-xs mdl:text-xl text-center'>
+        <p className='text-xs mdl:text-lg text-center'>
           {description}
         </p>
       </div>
