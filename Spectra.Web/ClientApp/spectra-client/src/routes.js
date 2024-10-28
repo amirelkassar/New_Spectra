@@ -127,6 +127,7 @@ const ROUTES = {
       STAFFIDPRESCRIPTIONS: (id) =>
         `/admin/staff/${id}/prescriptions`,
       STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
+      STAFFIDTEAM: (id) => `/admin/staff/${id}/team`,
     },
     REPORT: {
       DASHBOARD: '/admin/reports',
@@ -281,7 +282,7 @@ const ROUTES = {
     PROFILE: {
       DASHBOARD: '/doctor/profile',
       CERTIFICATES: '/doctor/profile/certificates',
-      MYPRESCRIPTIONS: '/doctor/profile/my_prescriptions',
+      TEAM: '/doctor/profile/team',
     },
     CONTRACTS: {
       DASHBOARD: '/doctor/contracts',
@@ -293,9 +294,11 @@ const ROUTES = {
     CHATS: {
       DASHBOARD: '/doctor/chats',
     },
-    PERMISSIONS: '/doctor/permissions',
-    CONTENT: '/doctor/content',
-    PLANS: '/doctor/plans',
+    SETTINGS: {
+      DASHBOARD: '/doctor/settings',
+      CHANGEPASSWORD: '/doctor/settings/change-password',
+      NOTIFICATIONS: '/doctor/settings/notifications',
+    },
   },
 };
 

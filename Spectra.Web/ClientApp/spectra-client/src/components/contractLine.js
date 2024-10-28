@@ -22,30 +22,35 @@ function ContractLine({
 
           {/* Price Input */}
           <div
-            className={`flex items-center w-[130px] lg:w-[200px] justify-between h-9 overflow-hidden mdl:h-11 rounded-xl border ${
-              activeEdit ? "border-black" : "border-grayDark/50 opacity-40"
+            className={`flex items-center w-[130px] lg:w-[200px] gap-4  h-9 overflow-hidden mdl:h-11 rounded-xl border ${
+              activeEdit ? "border-greenMain justify-between" : "border-none "
             }  px-2 py-2`}
           >
-            <TextInput
-              value={serviceData[service]?.price}
-              onChange={(e) => {
-                activeEdit
-                  ? handleServiceDataChange(
-                      service,
-                      "price",
-                      e.target.value,
-                      type
-                    )
-                  : null;
-              }}
-              type="number"
-              className="flex-1"
-              classNames={{
-                input:
-                  "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-2",
-              }}
-              readOnly={activeEdit ? false : true}
-            />
+            {activeEdit ? (
+              <TextInput
+                value={serviceData[service]?.price}
+                onChange={(e) => {
+                  activeEdit
+                    ? handleServiceDataChange(
+                        service,
+                        "price",
+                        e.target.value,
+                        type
+                      )
+                    : null;
+                }}
+                type="number"
+                className="flex-1"
+                classNames={{
+                  input:
+                    "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-2",
+                }}
+              />
+            ) :
+            (
+              <p className="font-Bold text-xs mdl:text-base">{serviceData[service]?.price}</p>
+            ) }
+
             <span className="font-SemiBold text-[12px] mdl:text-[16px]">$</span>
           </div>
         </div>

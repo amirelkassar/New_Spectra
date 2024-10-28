@@ -2,20 +2,17 @@
 import { Link, usePathname } from "@/navigation";
 import ROUTES from "@/routes";
 import clsx from "clsx";
-import { useParams } from "next/navigation";
 import React, { useMemo } from "react";
 
 function ProfileAside() {
-  const params = useParams();
-
   const path = usePathname();
 
   const pages = useMemo(
     () => [
       {
-        name: "الوصف الوظيفي",
-        route:ROUTES.DOCTOR.PROFILE.DASHBOARD,
-        isActive: path ===ROUTES.DOCTOR.PROFILE.DASHBOARD,
+        name: "البيانات الشخصية",
+        route: ROUTES.DOCTOR.PROFILE.DASHBOARD,
+        isActive: path === ROUTES.DOCTOR.PROFILE.DASHBOARD,
       },
       {
         name: "الشهادات",
@@ -23,9 +20,9 @@ function ProfileAside() {
         isActive: path === ROUTES.DOCTOR.PROFILE.CERTIFICATES,
       },
       {
-        name: "وصفاتى الطبية",
-        route:ROUTES.DOCTOR.PROFILE.MYPRESCRIPTIONS,
-        isActive: path ===ROUTES.DOCTOR.PROFILE.MYPRESCRIPTIONS,
+        name: "الفريق الطبى",
+        route: ROUTES.DOCTOR.PROFILE.TEAM,
+        isActive: path === ROUTES.DOCTOR.PROFILE.TEAM,
       },
     ],
     [path]

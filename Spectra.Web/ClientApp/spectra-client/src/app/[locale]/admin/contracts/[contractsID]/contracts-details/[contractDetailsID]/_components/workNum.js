@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { TextInput } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -7,31 +7,30 @@ function WorkNum() {
   const searchparams = useSearchParams();
 
   return (
-    <div className="flex flex-col gap-5 my-9 ps-3 lgl:ps-14 " dir="ltr">
+    <div className="flex flex-col gap-5 my-9 ps-3 lgl:ps-14 pb-8 border-b  border-grayDark " dir="ltr">
       <div className="flex md:items-center gap-x-8 gap-y-3 flex-col md:flex-row flex-wrap">
         <h4 className=" text-base mdl:text-xl font-Bold mdl:min-w-[430px] max-w-[430px]">
           Limit the number of hours worked per day{" "}
         </h4>
-        <div className="flex items-center gap-3 flex-1">
-          <div
-            className={`flex flex-1 items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border ${
-              searchparams.get("editContracts") === "true" ? "" : " opacity-45"
-            }  border-grayDark/50 px-2 py-2`}
-          >
+        <div className="flex items-center gap-8 flex-1">
+          {searchparams.get("editContracts") === "true" ? (
             <TextInput
-              defaultValue={8}
+              defaultValue={5}
               type="number"
-              className="flex-1"
+              className=" w-fit"
               classNames={{
                 input:
-                  "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
+                  "border-greenMain rounded-xl max-w-[90px] mdl:max-w-[120px] min-w-[80px] mdl:min-w-[110px] w-fit  h-11 text-center  text-[12px] mdl:text-[16px] font-Bold px-1",
               }}
               readOnly={
                 searchparams.get("editContracts") === "true" ? false : true
               }
             />
-            <span className="font-SemiBold text-sm">H</span>
-          </div>
+          ) : (
+            <p className="text-xl font-Bold">5 </p>
+          )}
+
+          <span className="font-SemiBold text-sm">H</span>
           <p className="text-base font-Regular">Daily</p>
         </div>
       </div>
@@ -39,26 +38,26 @@ function WorkNum() {
         <h4 className=" text-base mdl:text-xl font-Bold min-w-[430px]">
           Limit the number of days per week
         </h4>
-        <div className="flex items-center gap-3 flex-1">
-          <div
-            className={`flex flex-1 items-center w-[120px] justify-between h-11 overflow-hidden  rounded-xl border  ${
-              searchparams.get("editContracts") === "true" ? "" : " opacity-45"
-            } border-grayDark/50 px-2 py-2`}
-          >
+        <div className="flex items-center gap-8  flex-1">
+          {searchparams.get("editContracts") === "true" ? (
             <TextInput
               defaultValue={5}
               type="number"
-              className="flex-1"
+              className=" w-fit"
               classNames={{
                 input:
-                  "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-3",
+                  "border-greenMain rounded-xl max-w-[90px] mdl:max-w-[120px] min-w-[80px] mdl:min-w-[110px] w-fit  h-11 text-center  text-[12px] mdl:text-[16px] font-Bold px-1",
               }}
               readOnly={
                 searchparams.get("editContracts") === "true" ? false : true
               }
             />
-            <span className="font-SemiBold text-sm">D</span>
-          </div>
+          ) : (
+            <p className="text-xl font-Bold">5 </p>
+          )}
+
+          <span className="font-SemiBold text-sm">D</span>
+
           <p className="text-base font-Regular">Weekly </p>
         </div>
       </div>

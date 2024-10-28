@@ -2,6 +2,8 @@ import PhoneIcon from "@/assets/icons/phone";
 import PersonIcon from "@/assets/icons/person";
 import BarsIcon from "@/assets/icons/bars";
 import CalenderIcon from "@/assets/icons/calender";
+import VideoSessionIcon from "@/assets/icons/videoSession";
+import PillsIcon from "@/assets/icons/pills";
 
 const Cards = () => {
   const data = [
@@ -10,18 +12,18 @@ const Cards = () => {
       number: 0,
       text: "الوصفات الطبية",
       icon: (
-        <div className="size-[32px] p-[7px] md:p-2 md:size-12 rounded-full bg-red/10 flex items-center justify-center ">
-          <BarsIcon />
+        <div className="size-[32px] p-2 md:p-3 md:size-12 rounded-full bg-red/10 flex items-center justify-center ">
+          <PillsIcon className={"text-red w-full h-auto"} />
         </div>
       ),
     },
     {
       id: 1,
       number: 0,
-      text: "الاستشارات",
+      text: "الجلسات",
       icon: (
-        <div className="size-[32px] p-[7px] md:p-2 md:size-12 rounded-full bg-[#F5E4F9]  flex items-center justify-center ">
-          <PhoneIcon className={'h-full w-auto'} />{" "}
+        <div className="size-[32px] p-2 md:p-3 md:size-12 rounded-full bg-[#F5E4F9]  flex items-center justify-center ">
+          <VideoSessionIcon fill="#8A22A0" className={"w-full h-auto"} />{" "}
         </div>
       ),
     },
@@ -30,7 +32,7 @@ const Cards = () => {
       number: 0,
       text: "المواعيد",
       icon: (
-        <div className="size-[32px] p-[7px] md:p-2 md:size-12 rounded-full bg-[#E9F7FF] flex items-center justify-center ">
+        <div className="size-[32px] p-2 md:p-3 md:size-12 rounded-full bg-[#E9F7FF] flex items-center justify-center ">
           <CalenderIcon />
         </div>
       ),
@@ -41,7 +43,7 @@ const Cards = () => {
       number: 0,
       text: "اجمالى المرضى",
       icon: (
-        <div className="size-[32px] p-[7px] md:p-3 md:size-12 rounded-full bg-greenMain flex items-center justify-center ">
+        <div className="size-[32px] p-2 md:p-3 md:size-12 rounded-full bg-greenMain flex items-center justify-center ">
           <PersonIcon />
         </div>
       ),

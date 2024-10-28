@@ -180,6 +180,16 @@ function ContractInformation({ id }) {
           handleServiceDataChange={handleServiceDataChange}
         />
         <WorkNum />
+        <div dir="ltr" className="pb-8 ps-3 lgl:ps-14 ">
+          <div className="flex flex-col gap-6">
+            <p className=" font-Bold text-sm mdl:text-xl">
+              Work as a freelance{" "}
+            </p>
+            <p className=" font-Bold text-sm mdl:text-xl">
+              Work as a member of the Spectra team
+            </p>
+          </div>
+        </div>
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           {searchparams.get("editContracts") === "true" ? (
             <LinkGreen

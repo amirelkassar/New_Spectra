@@ -2,10 +2,10 @@
 import React from "react";
 import LayoutHome from "../components/layoutHome";
 import Card from "@/components/card";
-import MenuActions from "@/components/menu-actions";
 import { DataTable } from "@/components/data-table";
 import { columns } from "../components/columns-reports";
 import ReportsView from "../components/reports-view copy";
+import ActionMenu from "../components/ActionMenuPage";
 const reports = [
   {
     id: 1,
@@ -51,7 +51,7 @@ function page() {
             <div className="flex  mb-1 flex-wrap items-center gap-4 md:gap-6">
               <h2 className="headTitleDash">التقارير</h2>
             </div>
-            <MenuActions />
+            <ActionMenu />
           </div>
           <DataTable
             data={reports}

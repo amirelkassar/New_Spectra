@@ -2,10 +2,10 @@
 import React  from "react";
 import LayoutHome from "../components/layoutHome";
 import Card from "@/components/card";
-import MenuActions from "@/components/menu-actions";
 import { DataTable } from "@/components/data-table";
 import { columns } from "../components/columns-prescriptions";
 import PrescriptionsView from "../components/prescriptions-view";
+import ActionMenu from "../components/ActionMenuPage";
 const reports = [
   {
     id: 1,
@@ -75,11 +75,7 @@ const reports = [
     pills: true,
   },
 ];
-const options = [
-  { name: "الكل", value: "1" },
-  { name: "عقاقير", value: "2" },
-  { name: "توصيات", value: "3" },
-];
+
 
 function Page() {
   return (
@@ -90,7 +86,7 @@ function Page() {
             <div className="flex  mb-1 flex-wrap items-center gap-4 md:gap-6">
               <h2 className="headTitleDash">الوصفات الطبية</h2>
             </div>
-            <MenuActions />
+            <ActionMenu />
           </div>
 
           <DataTable haveComp Component={PrescriptionsView} data={reports} columns={columns} />

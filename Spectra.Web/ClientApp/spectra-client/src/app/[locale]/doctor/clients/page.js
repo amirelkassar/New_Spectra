@@ -2,7 +2,7 @@ import React from "react";
 import LayoutHome from "./components/layoutHome";
 import AddClient from "./components/add-client";
 import ClientsTable from "./components/clients-table";
-import MenuActions from "@/components/menu-actions";
+import ActionMenu from "./components/ActionMenuPage";
 
 function page() {
   return (
@@ -13,7 +13,7 @@ function page() {
             <h2 className="headTitleDash">العملاء</h2>
             <AddClient />
           </div>
-          <MenuActions />
+          <ActionMenu />
         </div>
         <ClientsTable />
       </div>

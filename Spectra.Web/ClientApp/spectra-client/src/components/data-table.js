@@ -59,6 +59,9 @@ export function DataTable({
       pagination: {
         pageSize: 10,
       },
+      columnVisibility: {
+        hideCol: false, 
+      }
     },
   });
 

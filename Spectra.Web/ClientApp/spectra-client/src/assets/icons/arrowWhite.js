@@ -13,7 +13,7 @@ function ArrowWhite({className}) {
       <path
         d="M18 32L4 17.8919L18 3"
         stroke="white"
-        stroke-width="5"
+        strokeWidth="5"
         strokeLinecap="round"
       />
     </svg>

@@ -8,9 +8,9 @@ const LanguageIcon = ({ ...props }) => {
       version='1.1'
       id='XMLID_275_'
       xmlns='http://www.w3.org/2000/svg'
-      xmlnsxlink='http://www.w3.org/1999/xlink'
+      xmlnsXlink='http://www.w3.org/1999/xlink'
       viewBox='0 0 24 24'
-      xmlspace='preserve'
+      xmlSpace='preserve'
       {...props}
     >
       <g id='language'>

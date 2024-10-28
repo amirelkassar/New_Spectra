@@ -1,5 +1,5 @@
 import PillsIcon from "@/assets/icons/pills";
-import MenuActions from "@/components/menu-actions";
+import ActionMenu from "./ActionMenu-prescriptions";
 
 export const columns = [
   {
@@ -12,7 +12,7 @@ export const columns = [
       return (
         <div className="flex items-center gap-6">
           <div className="flex bg-blueLight p-2 size-[38px] rounded-full items-center justify-center p-1">
-          <PillsIcon className='text-greenMain' />
+            <PillsIcon className="text-greenMain" />
           </div>
           <h2 className="text-[12px] lg:text-base">{name}</h2>
         </div>
@@ -32,8 +32,9 @@ export const columns = [
 
   {
     id: "actions",
-    cell: () => {
-      return <MenuActions />;
+    cell: ({ row }) => {
+      const id = row.original.id;
+      return <ActionMenu id={id} />;
     },
   },
 ];

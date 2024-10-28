@@ -1,6 +1,5 @@
 "use client";
 import BackIcon from "@/assets/icons/back";
-import MenuActions from "@/components/menu-actions";
 import { Link, usePathname } from "@/navigation";
 import ROUTES from "@/routes";
 import Image from "next/image";
@@ -12,7 +11,6 @@ import { useParams } from "next/navigation";
 function HeaderInfoClient() {
   const params = useParams();
   const path = usePathname();
-
   const TitlesLinks = [
     {
       name: "الوصفات الطبية ",
@@ -53,7 +51,7 @@ function HeaderInfoClient() {
               "العملاء"}{" "}
           </h1>
         </div>
-        <MenuActions />
+      
       </div>
 
       <div className="flex w-full flex-wrap border-2 md:border-none rounded-xl px-4 py-3 border-grayLight ">
