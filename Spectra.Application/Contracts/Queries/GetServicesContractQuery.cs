@@ -1,60 +1,56 @@
 ﻿using MediatR;
 using MongoDB.Driver;
 using Spectra.Application.Contracts.DTO;
-using Spectra.Application.Contracts.Repository;
 using Spectra.Application.MasterData.ServicesMD;
-using Spectra.Application.MasterData.ServicesMD.Services;
-using Spectra.Domain.Contracts;
-using Spectra.Domain.MasterData.ServicesMD;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Contracts.Queries
 {
-    public class GetServicesContractQuery : IRequest<OperationResult<GetServicesAndDurationOFContractDto>>
+
+    public class GetServicesContractQuery : IRequest<OperationResult<GetServicesContractQuery>>
     {
-      
+        public List<ServiesFromMasterDataDto> Services { get; set; }
+
+        public double DurationFreelance { get; set; }
+        public double DurationTeamSpectra { get; set; }
+        public double PlatformFeeToFreelance { get; set; }
+        public double PlatformFeeTeamSpectr { get; set; }
 
     }
 
-    public class GetServicesContractQueryHandler : IRequestHandler<GetServicesContractQuery, OperationResult<GetServicesAndDurationOFContractDto>>
+    public class GetServicesContractQueryHandler : IRequestHandler<GetServicesContractQuery, OperationResult<GetServicesContractQuery>>
     {
-        private readonly IContractRepository _contractRepository;
         private readonly IServiceMDRepository _serviceMDRepository;
 
-        public GetServicesContractQueryHandler(IContractRepository contractRepository, IServiceMDRepository serviceMDRepository)
+        public GetServicesContractQueryHandler(IServiceMDRepository serviceMDRepository)
         {
-            _contractRepository = contractRepository;
             _serviceMDRepository = serviceMDRepository;
         }
 
-        public async Task<OperationResult<GetServicesAndDurationOFContractDto>> Handle(GetServicesContractQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<GetServicesContractQuery>> Handle(GetServicesContractQuery request, CancellationToken cancellationToken)
         {
+   
+            var services = await _serviceMDRepository.GetAllAsync();
 
-            var contracts = await _serviceMDRepository.GetAllAsync();
-        var servisedata=    contracts.Select(x => new ServiesFromMasterDataDto
+          
+            var serviceData = services.Select(x => new ServiesFromMasterDataDto
             {
-                name = x.Name,
-                price = x.Price
-
+                Name = x.Name,
+                Price = x.Price
             }).ToList();
 
-            var contractData = new GetServicesAndDurationOFContractDto
+          
+            var contractData = new GetServicesContractQuery
             {
-                DurationFreelance = 15,
+                DurationFreelance = 15,   
                 DurationTeamSpectra = 30,
-                Servises = servisedata
+                PlatformFeeToFreelance=50,
+                PlatformFeeTeamSpectr=50,
+                Services = serviceData     
             };
-            //var Filtercontracts = contracts.Where(x => x.ContractCase != ContractCases.SAVE);
 
-            return OperationResult<GetServicesAndDurationOFContractDto>.Success(contractData);
-
-
+          
+            return OperationResult<GetServicesContractQuery>.Success(contractData);
         }
     }
   

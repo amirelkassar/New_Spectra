@@ -28,6 +28,13 @@ namespace Spectra.WebAPI.Controllers
             return Ok(Contracties);
         }
 
+        [HttpGet("test")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllServicesOFMastrData()
+        {
+            var Contracties = await _contractService.GetAllContractData();
+            return Ok(Contracties);
+        }
 
 
         [HttpGet("id")]

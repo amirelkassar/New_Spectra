@@ -4,6 +4,7 @@ using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Contracts.Commands
 {
@@ -18,7 +19,11 @@ namespace Spectra.Application.Contracts.Commands
         public int DaysOfWork { get; set; }
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
-
+        public string FirstName { get; set; }
+        public string LastName
+        {
+            get; set;
+        }
         public ContractCases ContractCase { get; set; }
 
 
@@ -36,6 +41,11 @@ namespace Spectra.Application.Contracts.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
+            var fullName = new Name()
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
 
             var contract = await _contractRepository.GetByIdAsync(request.id);
@@ -49,7 +59,7 @@ namespace Spectra.Application.Contracts.Commands
             contract.ContractCase = request.ContractCase;
 
             contract.Freelance = request.Freelance;
-
+          
 
 
 
@@ -69,8 +79,8 @@ namespace Spectra.Application.Contracts.Commands
            
               request.EmployeeId,
               request.Titel,
-              request.ContractCase
-         
+              request.ContractCase,
+             fullName
              );
 
             await _contractRepository.AddAsync(contracts);

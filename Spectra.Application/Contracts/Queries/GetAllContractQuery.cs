@@ -25,7 +25,7 @@ namespace Spectra.Application.Contracts.Queries
         public async Task<OperationResult<IEnumerable<EmploymentContract>>> Handle(GetAllContactrQuery request, CancellationToken cancellationToken)
         {
 
-            var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId, new FindOptions());
+            var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId , new FindOptions());
 
             var Filtercontracts = contracts.Where(x => x.ContractCase != ContractCases.SAVE);
 
