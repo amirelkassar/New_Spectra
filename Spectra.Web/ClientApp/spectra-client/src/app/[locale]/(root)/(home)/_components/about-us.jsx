@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Section } from '../../_components/section';
 import CheckHeartIcon from '@/assets/icons/check-heart';
-import AboutUsImg from '@/assets/images/about-us-section.png';
 
 const data = [
   'سبيكترا هو أول مركز طب إتصالي و رعاية عن بعد، يقوم بتشخيص و علاج و رعاية إضطرابات تطور و سلوك الاطفال، عن طريق فرقنا المتعددة التخصصات المختارة بعناية، وفق جودة و معايير فنية و مهنية عالمية .',

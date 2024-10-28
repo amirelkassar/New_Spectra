@@ -4,7 +4,7 @@ import React from 'react';
 const Card = ({
   title = '',
   children,
-  className,
+  className = '',
   size = 'lg',
   ...props
 }) => {
