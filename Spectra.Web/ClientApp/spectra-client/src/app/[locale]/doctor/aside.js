@@ -81,8 +81,8 @@ const Aside = () => {
         route: ROUTES.DOCTOR.SETTINGS.DASHBOARD,
         isActive:
           path === ROUTES.DOCTOR.SETTINGS.DASHBOARD ||
-          path === ROUTES.DOCTOR.CONTENT ||
-          path === ROUTES.DOCTOR.PLANS,
+          path === ROUTES.DOCTOR.SETTINGS.CHANGEPASSWORD ||
+          path === ROUTES.DOCTOR.SETTINGS.NOTIFICATIONS,
         icon: <SettingsIcon />,
       
       },

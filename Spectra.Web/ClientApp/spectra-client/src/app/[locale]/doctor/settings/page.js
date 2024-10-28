@@ -1,4 +1,5 @@
 "use client";
+import ArrowLeft from "@/assets/icons/arrow-left";
 import ArrowLeftMainGreen from "@/assets/icons/arrow-left-mainGreen";
 import LanguageIcon from "@/assets/icons/language";
 import LockIcon from "@/assets/icons/lock";
@@ -37,7 +38,7 @@ function Page() {
   ];
   return (
     <div>
-      <h2 className="font-Bold text-base mdl:text-xl mb-9 mdl:p-7">
+      <h2 className="font-Bold px-2 text-base mdl:text-xl mb-9 mdl:p-7">
         الاعدادات
       </h2>
       <div className="flex w-full flex-col gap-7 mdl:px-7">
@@ -49,7 +50,7 @@ function Page() {
               className="bg-white duration-300 hover:shadow-md cursor-pointer rounded-xl px-8 gap-3 py-4 flex items-center justify-between"
             >
               <div className="flex items-center gap-4">
-                <div className=" size-10 rounded-full bg-blueLight flex items-center justify-center p-[9px]">
+                <div className=" size-8 mdl:size-10 rounded-full bg-blueLight flex items-center justify-center p-2 mdl:p-[9px]">
                   {item.icon}
                 </div>
                 <h3 className="text-base mdl:text-xl font-Bold">
@@ -66,7 +67,7 @@ function Page() {
           className="bg-white duration-300 hover:shadow-md cursor-pointer rounded-xl px-8 gap-3 py-4 flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
-            <div className=" size-10 rounded-full bg-blueLight flex items-center justify-center p-[9px]">
+            <div className=" size-8 mdl:size-10 rounded-full bg-blueLight flex items-center justify-center p-2 mdl:p-[9px]">
               <LanguageIcon fill="#10B0C1" className={"w-full h-auto"} />
             </div>
             <div className="flex items-center gap-6">
@@ -74,7 +75,7 @@ function Page() {
                 {" "}
                 {locale === "ar" ? "عربي" : "En"}
               </h3>
-              -----
+              <ArrowLeft className={` duration-200 ${locale==='en'?'rotate-180':''}`}/>
               <h3 className="text-base mdl:text-xl font-Bold">
                 {" "}
                 {locale === "en" ? "عربي" : "En"}
