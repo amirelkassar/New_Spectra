@@ -2,6 +2,7 @@
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -33,13 +34,22 @@ namespace Spectra.Application.Contracts.Commands
 
         public CreateDoctorCommandHandler(IContractRepository contractRepository/*/* ISubContractRepository subContractRepository*/)
         {
+
             _contractRepository = contractRepository;
             //_subContractRepository = subContractRepository;
+
         }
+
         // here we Create Contract and have Two options First Send to Admin second Save it So 
         // here we get the Name From token but we Stell did not make it 
         public async Task<OperationResult<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
         {
+            var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId , null);
+            if (CheckEmployee.Any())
+            {
+                throw new RequestErrorException(" Your Request Under review ");
+            }
+          
             var fullName = new Name()
             {
                 FirstName = request.FirstName,
@@ -56,7 +66,6 @@ namespace Spectra.Application.Contracts.Commands
             request.Titel,
             request.ContractCase ,
               fullName
-
                 );
 
             await _contractRepository.AddAsync(contract);

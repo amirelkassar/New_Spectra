@@ -36,7 +36,9 @@ namespace Spectra.Application.Contracts.Queries
             var serviceData = services.Select(x => new ServiesFromMasterDataDto
             {
                 Name = x.Name,
-                Price = x.Price
+                Price = x.Price,
+                TermsAndConditions= x.TermsAndConditions
+                
             }).ToList();
 
           

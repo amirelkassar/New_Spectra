@@ -2,6 +2,7 @@
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -41,6 +42,14 @@ namespace Spectra.Application.Contracts.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
+
+            var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId && x.ContractCase == ContractCases.REFUSE, null);
+            if (CheckEmployee.Any())
+            {
+                throw new RequestErrorException(" the Admin Refuse Your Requst ");
+            }
+
+
             var fullName = new Name()
             {
                 FirstName = request.FirstName,

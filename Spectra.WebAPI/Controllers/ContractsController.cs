@@ -20,20 +20,22 @@ namespace Spectra.WebAPI.Controllers
 
         }
 
-        [HttpGet("GetAllContracts")]
+        [HttpGet("GetAllCopiesOFContract")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllContractsSend([FromQuery] GetAllContactrQuery input)
+        public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
         {
-            var Contracties = await _contractService.GetAllContracts(input);
-            return Ok(Contracties);
+            var contract = await _contractService.GetAllCopiesOfContract(input);
+            return Ok(contract);
         }
 
-        [HttpGet("test")]
+        // this is Contract that User Can Choces this is Come From Services Master data and another 
+        [HttpGet("ServicesFromMastrData")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllServicesOFMastrData()
         {
             var Contracties = await _contractService.GetAllContractData();
             return Ok(Contracties);
+
         }
 
 

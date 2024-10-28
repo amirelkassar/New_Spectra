@@ -1,11 +1,14 @@
 ﻿using MediatR;
+using Spectra.Application.Admin.Commands;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
+using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Application.Employees.MedicalStaff.Specialists.Services;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
+using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Enums;
@@ -40,6 +43,27 @@ namespace Spectra.Infrastructure.Admin
             return await _mediator.Send(query);
         }
 
+        // Contract Qury
+        public async Task<OperationResult<PaginatedResult<EmploymentContract>>> GetAllContractsOfEployees(GetAllContractWithStatusQuery input)
+        {
+            // Create the query and pass pagination parameters
+
+            var query = new GetAllContractWithStatusQuery
+            {
+                PageNumber = input.PageNumber,
+                PageSize = input.PageSize,
+            };
+            return await _mediator.Send(query);
+        }
+        public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
+        {
+            // Create the query and pass pagination parameters
+            var query = new GetAllCopiesOFContractQuery
+            {
+              EmployeeId=input.EmployeeId
+            };
+            return await _mediator.Send(query);
+        }
         //
         public async Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input)
         {
@@ -76,7 +100,15 @@ namespace Spectra.Infrastructure.Admin
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
-    
+        public async Task<OperationResult<Unit>> UpdateContractStatus(string id)
+        {
+            var query = new UpdateContractStatusCommand
+            {
+                Id = id
+                
+            };
+            return await _mediator.Send(query);
+        }
 
         public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input)
         {

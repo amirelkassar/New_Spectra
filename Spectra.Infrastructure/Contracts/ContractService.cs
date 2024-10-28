@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Queries;
@@ -53,13 +54,16 @@ namespace Spectra.Infrastructure.Contracts
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId)
+        public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
         {
-
-            var query = new GetAllContactrQuery { EmployeeId = empelyeeId.EmployeeId };
+            // Create the query and pass pagination parameters
+            var query = new GetAllCopiesOFContractQuery
+            {
+                EmployeeId = input.EmployeeId
+            };
             return await _mediator.Send(query);
         }
-        
+
         public async Task<OperationResult<GetServicesContractQuery>> GetAllContractData()
         {
 
@@ -75,6 +79,7 @@ namespace Spectra.Infrastructure.Contracts
             return await _mediator.Send(query);
         }
 
+
         public async Task<OperationResult<Unit>> UpdateContract(string id, UpdateContractCommand input)
         {
             var command = new UpdateContractCommand
@@ -87,8 +92,7 @@ namespace Spectra.Infrastructure.Contracts
                 EmployeeId = input.EmployeeId,
                 Titel = input.Titel,
                 Duration = input.Duration,
-           
-                
+
             };
 
 

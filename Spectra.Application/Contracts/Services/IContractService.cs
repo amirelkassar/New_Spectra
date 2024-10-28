@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Domain.Contracts;
@@ -12,7 +13,8 @@ namespace Spectra.Application.Contracts.Services
 
         Task<OperationResult<Unit>> DeleteContract(string id);
         Task<OperationResult<GetServicesContractQuery>> GetAllContractData();
-        Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
+        //Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
+        Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
         Task<OperationResult<EmploymentContract>> GetContractById(string id);
 
         Task<OperationResult<Unit>> UpdateContract(string id, UpdateContractCommand input);

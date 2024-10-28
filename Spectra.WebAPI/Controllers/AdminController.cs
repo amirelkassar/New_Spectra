@@ -6,9 +6,14 @@ using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Services;
+using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.Queries;
+using Spectra.Application.Contracts.Services;
 using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
+using Spectra.Infrastructure.Contracts;
 
 namespace Spectra.WebAPI.Controllers
 {
@@ -20,16 +25,16 @@ namespace Spectra.WebAPI.Controllers
         private readonly IAdminService _adminService;
         private readonly IClientService _clientService;
         private readonly IDoctorService _DoctorService;
-      
+        private readonly IContractService _contractService;
 
-
-        public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService)
+        public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService, IContractService contractService)
         {
             _adminService = adminService;
             _clientService = clientService;
-
+            _contractService = contractService;
             _DoctorService = DoctorService;
         }
+
         [HttpGet("GetAllDoctors")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllDoctors([FromQuery] GetAllDoctorEmpQuery input)
@@ -38,12 +43,29 @@ namespace Spectra.WebAPI.Controllers
             return Ok(appointmenties);
         }  
 
+
         [HttpGet("GetAllEmployees")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllEmployees([FromQuery] GetAllEmployeesQuery input )
         {
             var appointmenties = await _adminService.GetAllEmplyees(input);
             return Ok(appointmenties);
+        }
+
+        [HttpGet("GetAllContracts")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllContracts([FromQuery] GetAllContractWithStatusQuery input)
+        {
+            var contract = await _adminService.GetAllContractsOfEployees(input);
+            return Ok(contract);
+        }
+
+        [HttpGet("GetAllCopiesOFContract")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
+        {
+            var contract = await _contractService.GetAllCopiesOfContract(input);
+            return Ok(contract);
         }
 
         [HttpGet("AppointmentsDoctor")]
@@ -87,15 +109,32 @@ namespace Spectra.WebAPI.Controllers
             var employees = await _adminService.CreateEmplyee(input);
             return Ok(employees);
         }
+        [HttpPut("RefuesContract/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UpdateRefuesContract(string id)
+        {
+
+            var employees = await _adminService.UpdateContractStatus(id);
+            return Ok(employees);
+        }
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdateClient(string id, UpdateClientDto input)
         {
 
-
             var client = await _clientService.UpdateClient(id, input);
 
             return Ok(client);
+        }
+
+        [HttpPut("ContractOperations/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UpdateContractChangeOrAccpet(string id, UpdateContractCommand input)
+        {
+          
+            input.ContractCase= ContractCases.BACkTOEMPlOYEE;
+            var contract = await _contractService.UpdateContract(id, input);
+            return Ok(contract);
         }
 
 
