@@ -54,7 +54,7 @@ function Page() {
     {
       title: "الشكاوى",
       icon: <QuestionMarkIcon className={"w-full h-auto max-h-5"} />,
-      url: ROUTES.DOCTOR.SETTINGS.NOTIFICATIONS,
+      url: ROUTES.DOCTOR.SETTINGS.COMPLAINTS,
       type: "link",
     },
   ];

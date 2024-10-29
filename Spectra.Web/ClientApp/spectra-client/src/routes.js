@@ -298,6 +298,7 @@ const ROUTES = {
       DASHBOARD: '/doctor/settings',
       CHANGEPASSWORD: '/doctor/settings/change-password',
       NOTIFICATIONS: '/doctor/settings/notifications',
+      COMPLAINTS: '/doctor/settings/complaints',
     },
   },
 };
