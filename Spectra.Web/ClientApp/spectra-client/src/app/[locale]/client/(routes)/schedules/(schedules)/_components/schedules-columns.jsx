@@ -39,8 +39,10 @@ export const schedulesColumns = [
         id={getValue()}
         status={getValue()}
         className={cn(
-          'min-w-fit mdl:min-w-fit max-w-28 w-full mx-auto mdl:ms-auto',
-          getValue() === 'done' && 'group-hover:bg-white'
+          'min-w-fit mdl:min-w-fit mdl:text-sm lg:text-base mdl:max-w-28 w-full mx-auto mdl:ms-auto',
+          getValue() === 'done' && 'group-hover:bg-white',
+          getValue() === 'available' &&
+            'lg:text-xl mdl:text-sm'
         )}
       >
         {getStatus(getValue())}
@@ -58,7 +60,8 @@ const Date = ({ date }) => {
   const { fullYear, time } = getDate(date, locale);
   return (
     <>
-      {fullYear} <br /> {time}
+      <span className='block'>{fullYear}</span>
+      <span>{time}</span>
     </>
   );
 };

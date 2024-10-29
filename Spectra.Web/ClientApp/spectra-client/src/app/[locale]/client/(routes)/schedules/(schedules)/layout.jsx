@@ -13,7 +13,9 @@ const schedulesPage = ({ children }) => {
 
       <section className='lg:grid lg:grid-cols-12 lg:gap-5 space-y-5 lg:space-y-0'>
         <ScheduleNav />
-        <div className='lg:col-span-10'>{children}</div>
+        <div className='lg:col-span-9 xl:col-span-10'>
+          {children}
+        </div>
       </section>
     </Container>
   );

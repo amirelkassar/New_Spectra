@@ -29,7 +29,7 @@ export const ScheduleNav = () => {
   return (
     <TabsCard
       classNames={{
-        container: 'lg:col-span-2',
+        container: 'lg:col-span-3 xl:col-span-2',
         item: 'flex-1 lg:flex-none justify-center',
       }}
       tab={tab}

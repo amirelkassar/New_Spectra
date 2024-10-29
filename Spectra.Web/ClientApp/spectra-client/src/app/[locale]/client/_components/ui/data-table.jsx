@@ -15,6 +15,8 @@ import {
   TableTd,
 } from '@mantine/core';
 import { cn } from '@/lib/utils';
+import { Fragment } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
 
 export function DataTable({ columns, data }) {
   const table = useReactTable({
@@ -23,6 +25,18 @@ export function DataTable({ columns, data }) {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const match = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <Fragment>
+      {match && <TableUi table={table} />}
+
+      {!match && <MobileCards table={table} />}
+    </Fragment>
+  );
+}
+
+const TableUi = ({ table }) => {
   return (
     <Table
       className='border-separate border-spacing-y-5 -mt-5'
@@ -34,7 +48,7 @@ export function DataTable({ columns, data }) {
             {headerGroup.headers.map((header) => {
               return (
                 <TableTh
-                  className='bg-blueLight first:rounded-s-2xl last:rounded-e-2xl text-xs mdl:text-base font-normal p-3 text-center'
+                  className='bg-blueLight first:rounded-s-2xl last:rounded-e-2xl text-xs lg:text-base font-normal p-3 text-center'
                   key={header.id}
                 >
                   {header.isPlaceholder
@@ -54,13 +68,23 @@ export function DataTable({ columns, data }) {
           table.getRowModel().rows.map((row) => (
             <TableTr
               key={row.id}
-              className='group relative after:absolute after:w-full after:h-full after:bg-transparent after:rounded-2xl after:start-0 after:top-0 w-full'
+              className={cn(
+                'relative after:absolute after:w-full after:h-full after:bg-transparent after:rounded-2xl after:start-0 after:top-0 w-full',
+                {
+                  'after:bg-blueLinerGradient after:shadow-md':
+                    row?.original?.status === 'available',
+                },
+                {
+                  group:
+                    row?.original?.status !== 'available',
+                }
+              )}
               data-state={row.getIsSelected() && 'selected'}
             >
               {row.getVisibleCells().map((cell) => (
                 <TableTd
                   className={cn(
-                    'first:rounded-s-2xl last:rounded-e-2xl transition group-hover:bg-blueLight text-xs mdl:text-base first:font-bold first:mdl:text-xl first:ps-5 py-7 px-3 relative z-10'
+                    'first:rounded-s-2xl last:rounded-e-2xl transition group-hover:bg-blueLight text-xs lg:text-base first:font-bold first:lg:text-xl first:ps-5 py-7 px-3 relative z-10'
                   )}
                   key={cell.id}
                 >
@@ -85,4 +109,112 @@ export function DataTable({ columns, data }) {
       </TableTbody>
     </Table>
   );
-}
+};
+
+const MobileCards = ({ table }) => {
+  const tableHeaders = table.getHeaderGroups()[0].headers;
+
+  return (
+    <div className='flex flex-col space-y-5'>
+      {table.getRowModel().rows.map((row) => (
+        <Card
+          key={row.id}
+          row={row}
+          headers={tableHeaders}
+        />
+      ))}
+    </div>
+  );
+};
+
+const Card = ({ row, headers }) => {
+  const dateCell = row
+    .getVisibleCells()
+    .find((cell) => cell.column.id === 'date');
+
+  const statusCell = row
+    .getVisibleCells()
+    .find((cell) => cell.column.id === 'status');
+
+  const actionsCell = row
+    .getVisibleCells()
+    .find((cell) => cell.column.id === 'actions');
+
+  return (
+    <div
+      style={{
+        boxShadow: '3px 4px 16.9px 0px #0000000D',
+      }}
+      className={cn(
+        'p-5 relative rounded-xl transition hover:bg-blueLight',
+        {
+          'bg-blueLinerGradient shadow-md':
+            row?.original?.status === 'available',
+        }
+      )}
+    >
+      <div
+        className={cn(
+          'space-y-5 pb-5 border-b-2 border-grayMedium/50',
+          {
+            'border-white/30':
+              row?.original?.status === 'available',
+          }
+        )}
+      >
+        {row.getVisibleCells().map(
+          (cell) =>
+            cell.column.id !== 'actions' &&
+            cell.column.id !== 'status' &&
+            cell.column.id !== 'date' && (
+              <div
+                key={cell.id}
+                className='grid grid-cols-12 gap-5'
+              >
+                <span className='text-xs col-span-4'>
+                  {flexRender(
+                    cell.column.columnDef.header,
+                    headers
+                      .find(
+                        (header) =>
+                          header.column.id ===
+                          cell.column.id
+                      )
+                      .getContext()
+                  )}
+                </span>
+                <span className='text-xs font-bold col-span-5'>
+                  {flexRender(
+                    cell.column.columnDef.cell,
+                    cell.getContext()
+                  )}
+                </span>
+                <span className='col-span-3' />
+              </div>
+            )
+        )}
+      </div>
+
+      <div className='grid grid-cols-3 place-items-center font-bold pt-5'>
+        {flexRender(
+          dateCell.column.columnDef.cell,
+          dateCell.getContext()
+        )}
+
+        <div className='font-normal w-full'>
+          {flexRender(
+            statusCell.column.columnDef.cell,
+            statusCell.getContext()
+          )}
+        </div>
+      </div>
+
+      <div className='absolute top-2 end-3'>
+        {flexRender(
+          actionsCell.column.columnDef.cell,
+          actionsCell.getContext()
+        )}
+      </div>
+    </div>
+  );
+};
