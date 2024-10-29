@@ -8,17 +8,19 @@ export const useHighlightAvailableSchedule = ({
 }) => {
   useEffect(() => {
     function highlightAvailableSchedule() {
-      const tbody = document.querySelector('tbody');
-      if (!tbody) return;
+      const highlightedEle =
+        document.getElementById('highlighted');
 
-      const secondTr = tbody.querySelector(
-        'tr:nth-child(2)'
-      );
-      if (!secondTr) return;
-
-      secondTr.classList.remove('bg-blueLinerGradient');
-      secondTr.style.boxShadow = 'none';
-      secondTr.classList.add('group');
+      if (highlightedEle) {
+        highlightedEle.classList.remove(
+          'after:bg-blueLinerGradient',
+          'after:shadow-md'
+        );
+        highlightedEle.classList.add(
+          'after:bg-transparent',
+          'group'
+        );
+      }
 
       if (currentTab !== 'new') return;
       const button = document.getElementById('available');
@@ -30,10 +32,12 @@ export const useHighlightAvailableSchedule = ({
       const tr = td?.parentElement;
       if (!tr) return;
 
-      tr.classList.add('bg-blueLinerGradient');
-      tr.style.boxShadow =
-        '0px 14px 114px -27px rgba(232, 247, 255, 1)';
-      tr.classList.remove('group');
+      tr.id = 'highlighted';
+      tr.classList.remove('after:bg-transparent', 'group');
+      tr.classList.add(
+        'after:bg-blueLinerGradient',
+        'after:shadow-md'
+      );
     }
 
     highlightAvailableSchedule();

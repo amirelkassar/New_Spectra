@@ -4,7 +4,7 @@ import IncomingMeet from '@/assets/icons/incoming-meet';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
 import Button from '@/components/button';
 import { StatusBadge } from '@/client/_components/schedules';
-import { getDate } from '@/lib/utils';
+import { cn, getDate } from '@/lib/utils';
 import { useLocale } from 'next-intl';
 
 export const schedulesColumns = [
@@ -38,7 +38,10 @@ export const schedulesColumns = [
       <StatusBadge
         id={getValue()}
         status={getValue()}
-        className='min-w-fit mdl:min-w-fit max-w-28 w-full mx-auto mdl:ms-auto'
+        className={cn(
+          'min-w-fit mdl:min-w-fit max-w-28 w-full mx-auto mdl:ms-auto',
+          getValue() === 'done' && 'group-hover:bg-white'
+        )}
       >
         {getStatus(getValue())}
       </StatusBadge>
