@@ -39,7 +39,7 @@ const HeroSection = ({
 }) => {
   return (
     <section>
-      <Card className='bg-blueLight overflow-hidden flex justify-between items-start w-full !p-0 *:flex-1'>
+      <Card className='bg-blueLight overflow-hidden flex justify-between items-start ltr:items-end w-full !p-0 *:flex-1 rounded-2xl'>
         <div className='xl:p-10 p-5 space-y-7'>
           <H1 className='mdl:text-4xl text-base sm:text-2xl lg:max-w-[70%] leading-relaxed gap-5 flex-col mdl:flex-row items-start mdl:items-center'>
             <BackButton />
@@ -51,7 +51,7 @@ const HeroSection = ({
           </p>
         </div>
 
-        <div className='justify-end flex items-start ltr:justify-start -me-2 ltr:rotate-180'>
+        <div className='justify-end flex ltr:justify-start -me-2 ltr:rotate-180'>
           <Image
             src={'/packages-details-page-bg.webp'}
             width={1536}
