@@ -20,6 +20,11 @@ export const SchedulesTable = ({ data = [] }) => {
   return (
     <Card>
       <DataTable
+        fallback={
+          currentTab === 'new'
+            ? 'لا يوجد مواعيد جديدة'
+            : 'لا يوجد مواعيد سابقة'
+        }
         columns={schedulesColumns}
         data={filteredData}
       />

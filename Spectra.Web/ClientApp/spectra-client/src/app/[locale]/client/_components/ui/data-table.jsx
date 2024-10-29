@@ -17,7 +17,11 @@ import {
 import { cn } from '@/lib/utils';
 import { Fragment } from 'react';
 
-export function DataTable({ columns, data }) {
+export function DataTable({
+  columns = [],
+  data = [],
+  fallback = 'لا يوجد بيانات',
+}) {
   const table = useReactTable({
     data,
     columns,
@@ -26,14 +30,18 @@ export function DataTable({ columns, data }) {
 
   return (
     <Fragment>
-      <TableUi table={table} />
+      <TableUi
+        fallback={fallback}
+        table={table}
+        columns={columns}
+      />
 
-      <MobileCards table={table} />
+      <MobileCards fallback={fallback} table={table} />
     </Fragment>
   );
 }
 
-const TableUi = ({ table }) => {
+const TableUi = ({ table, columns, fallback }) => {
   return (
     <Table
       className='border-separate border-spacing-y-5 -mt-5 hidden mdl:table'
@@ -96,10 +104,10 @@ const TableUi = ({ table }) => {
         ) : (
           <TableTr>
             <TableTd
-              colSpan={columns.length}
+              colSpan={columns?.length}
               className='h-24 text-center'
             >
-              No results.
+              {fallback}
             </TableTd>
           </TableTr>
         )}
@@ -108,18 +116,26 @@ const TableUi = ({ table }) => {
   );
 };
 
-const MobileCards = ({ table }) => {
+const MobileCards = ({ table, fallback }) => {
   const tableHeaders = table.getHeaderGroups()[0].headers;
 
   return (
     <div className='flex flex-col space-y-5 mdl:hidden'>
-      {table.getRowModel().rows.map((row) => (
-        <Card
-          key={row.id}
-          row={row}
-          headers={tableHeaders}
-        />
-      ))}
+      {table.getRowModel().rows?.length ? (
+        table
+          .getRowModel()
+          .rows.map((row) => (
+            <Card
+              key={row.id}
+              row={row}
+              headers={tableHeaders}
+            />
+          ))
+      ) : (
+        <div className='p-5 rounded-xl flex items-center justify-center h-40 text-center text-xs border-4 border-blueLight'>
+          {fallback}
+        </div>
+      )}
     </div>
   );
 };
