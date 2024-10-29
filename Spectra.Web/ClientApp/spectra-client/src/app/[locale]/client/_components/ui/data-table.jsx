@@ -16,7 +16,6 @@ import {
 } from '@mantine/core';
 import { cn } from '@/lib/utils';
 import { Fragment } from 'react';
-import { useMediaQuery } from '@mantine/hooks';
 
 export function DataTable({ columns, data }) {
   const table = useReactTable({
@@ -25,13 +24,11 @@ export function DataTable({ columns, data }) {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const match = useMediaQuery('(min-width: 768px)');
-
   return (
     <Fragment>
-      {match && <TableUi table={table} />}
+      <TableUi table={table} />
 
-      {!match && <MobileCards table={table} />}
+      <MobileCards table={table} />
     </Fragment>
   );
 }
@@ -39,7 +36,7 @@ export function DataTable({ columns, data }) {
 const TableUi = ({ table }) => {
   return (
     <Table
-      className='border-separate border-spacing-y-5 -mt-5'
+      className='border-separate border-spacing-y-5 -mt-5 hidden mdl:table'
       withRowBorders={false}
     >
       <TableThead>
@@ -115,7 +112,7 @@ const MobileCards = ({ table }) => {
   const tableHeaders = table.getHeaderGroups()[0].headers;
 
   return (
-    <div className='flex flex-col space-y-5'>
+    <div className='flex flex-col space-y-5 mdl:hidden'>
       {table.getRowModel().rows.map((row) => (
         <Card
           key={row.id}
