@@ -232,6 +232,12 @@ const ROUTES = {
           `/admin/settings/packages/${id}/edit`,
         PACKAGESADD: '/admin/settings/packages/add',
       },
+      COMPLAINTS: {
+        DASHBOARD: '/admin/settings/complaints',
+        COMPLAINTSDETAILS: (id) =>
+          `/admin/settings/complaints/${id}`,
+      
+      },
     },
   },
   DOCTOR: {

@@ -4,6 +4,7 @@ import ContentIcon from "@/assets/icons/content";
 import PermissionsIcon from "@/assets/icons/permissions";
 import PlansIcon from "@/assets/icons/plans";
 import ROUTES from "@/routes";
+import ComplaintsIcon from "@/assets/icons/complaints";
 
 
 function SettingPage() {
@@ -26,12 +27,18 @@ function SettingPage() {
       title: "الباقات",
       link: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
     },
+    {
+      id: 3,
+      icon: <ComplaintsIcon className={" w-[30px] md:w-[77px] h-auto"} />,
+      title: "الشكاوى",
+      link: ROUTES.ADMIN.SETTINGS.COMPLAINTS.DASHBOARD,
+    },
   ];
   return (
     <>
       <div className="default-page flex-1  w-full">
         <h1 className="headTitleDash "> الاعدادات </h1>
-        <div className="w-full flex gap-7 mdl:justify-center mdl:items-center flex-1 flex-col md:flex-row">
+        <div className="w-full flex flex-wrap gap-7 mdl:gap-12 md:justify-center mdl:justify-start  mdl:items-center flex-1 flex-col md:flex-row">
           {settings.map((setting) => {
             return (
               <CardSetting
