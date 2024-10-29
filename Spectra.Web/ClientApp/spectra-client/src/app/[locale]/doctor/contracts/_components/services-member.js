@@ -1,13 +1,12 @@
-import ContractLine from "@/components/contractLine";
+import DeleteIcon from "@/assets/icons/delete";
+import ContractLineDoctor from "@/components/contractLineDoctor";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
 function ServicesMember({
-  selectedServices,
-  serviceOptions,
-  serviceData,
+  data,
   handleServiceDataChange,
-  addNew,
+  handleDeleteItem,
 }) {
   const searchparams = useSearchParams();
 
@@ -16,8 +15,8 @@ function ServicesMember({
       dir="ltr"
       className="pb-8 ps-3 lgl:ps-14 border-b mt-8 border-grayDark"
     >
-      <div className="flex items-center gap-6 flex-wrap mb-8 mdl:mb-12">
-        <h2 className="text-[16px] mdl:text-xl font-Bold mb-4">
+      <div className="flex items-center gap-3 mdl:gap-6 flex-wrap mb-8 mdl:mb-12">
+        <h2 className="text-[16px] mdl:text-xl font-Bold ">
           The price of your services as a member of the Spectra team
         </h2>
         <div className="flex items-center gap-2 mdl:gap-4 flex-1">
@@ -32,26 +31,29 @@ function ServicesMember({
         </div>
       </div>
       <ul className="flex flex-col gap-3 lgl:ps-7">
-        {selectedServices.map((service, i) => {
+        {data.map((service, i) => {
           return (
-            <ContractLine
-              activeEdit={
-                addNew
-                  ? addNew
-                  : searchparams.get("editContracts") === "true"
-                  ? true
-                  : false
-              }
-              serviceData={serviceData}
-              key={i}
-              title={serviceOptions.find((opt) => opt.value === service).label}
-              handleServiceDataChange={handleServiceDataChange}
-              type={"member"}
-              service={service}
-              terms={
-                "Lorem Absim Lorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem Absim "
-              }
-            />
+            <div key={i} className="flex items-center gap-4">
+              <button
+                onClick={() => {
+                  handleDeleteItem("member", service.id);
+                }}
+                className=" size-8 p-2 flex items-center justify-center duration-200 hover:shadow-md rounded-lg border border-red"
+              >
+                <DeleteIcon />
+              </button>
+              <ContractLineDoctor
+                activeEdit={
+                  searchparams.get("editContracts") === "true" ? true : false
+                }
+                serviceData={service}
+                type={"member"}
+                handleServiceDataChange={handleServiceDataChange}
+                terms={
+                  "Lorem Absim Lorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem AbsimLorem Absim "
+                }
+              />
+            </div>
           );
         })}
       </ul>

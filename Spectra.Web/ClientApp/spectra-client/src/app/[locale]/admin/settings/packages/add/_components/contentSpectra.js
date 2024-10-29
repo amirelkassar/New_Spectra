@@ -83,6 +83,7 @@ function ContentSpectra({ list, setList }) {
           ))}
         </ul>
       </div>
+      
       <div className=" relative h-14 mdl:h-16 max-h-14 mdl:max-h-16 mb-5">
         <div className="border absolute top-0 overflow-hidden w-full left-0 z-50 border-solid !border-greenMain rounded-xl min-h-16">
           <NavLink
