@@ -1,34 +1,20 @@
-import Container from '../../../_components/ui/container';
-import { Heading } from '../../../_components/ui/heading';
-import { AddAppointment } from './_components/add-appointment';
-import CalendarWithBg from '@/assets/icons/calendar-with-bg';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
+import { Container } from '@/client/_components/ui';
 import { ChildSelect } from '@/client/_components/child';
 import { CHILDSDATA } from '@/lib/demoData';
+import { ScheduleHeader } from './_components/schedule-header';
+import { ScheduleNav } from './_components/schedule-nav';
 
 const schedulesPage = ({ children }) => {
   return (
-    <Container>
-      <section className='lg:grid lg:grid-cols-5 space-y-5 w-full lg:space-y-0 gap-5'>
-        <Heading
-          className='lg:gap-x-9 shrink-0 flex-col lg:flex-row gap-3 items-start lg:items-center lg:col-span-4'
-          label='المواعيد'
-          icon={<AddAppointment />}
-        />
+    <Container className='space-y-5'>
+      <ScheduleHeader />
 
-        <div className='lg:col-span-4 lg:order-2'>
-          <ChildSelect data={CHILDSDATA} />
-        </div>
+      <ChildSelect data={CHILDSDATA} />
 
-        {children}
+      <section className='lg:grid lg:grid-cols-12 lg:gap-5 space-y-5 lg:space-y-0'>
+        <ScheduleNav />
+        <div className='lg:col-span-10'>{children}</div>
       </section>
-      <Link
-        href={`${ROUTES.CLIENT.SCHEDULES}/calendar`}
-        className='absolute top-5 end-5 lg:top-3'
-      >
-        <CalendarWithBg />
-      </Link>
     </Container>
   );
 };

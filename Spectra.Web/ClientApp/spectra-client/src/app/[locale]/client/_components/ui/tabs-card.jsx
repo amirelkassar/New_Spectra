@@ -8,7 +8,12 @@ export const TabsCard = ({
   tabs = [],
   setTab = () => {},
   tab = '',
-  className = '',
+  classNames = {
+    container: '',
+    list: '',
+    item: '',
+    label: '',
+  },
 }) => {
   const router = useRouter();
 
@@ -16,11 +21,16 @@ export const TabsCard = ({
   return (
     <Card
       className={cn(
-        'lg:col-span-2 pb-4 overflow-x-auto lg:overflow-x-hidden',
-        className
+        'lg:col-span-3 pb-4 overflow-x-auto lg:overflow-x-hidden',
+        classNames.container
       )}
     >
-      <ul className='flex lg:flex-col gap-3 mdl:gap-5 *:shrink-0 lg:*:shrink'>
+      <ul
+        className={cn(
+          'flex lg:flex-col mdl:gap-5 *:shrink-0 lg:*:shrink',
+          classNames.list
+        )}
+      >
         {tabs?.map((t) => (
           <li
             role='button'
@@ -32,15 +42,21 @@ export const TabsCard = ({
               });
             }}
             className={cn(
-              'lg:rounded-lg transition lg:hover:bg-blueLight lg:text-black lg:font-bold font-normal text-xs mdl:text-base lg:w-full p-3 lg:py-1 flex items-center *:shrink-0 gap-2 w-fit border-b border-transparent lg:border-0 hover:text-greenMain hover:lg:text-black',
+              'lg:rounded-lg transition lg:hover:bg-greenLight lg:text-black lg:font-bold font-normal text-sm mdl:text-base lg:w-full px-5 py-3 flex items-center *:shrink-0 gap-2 w-fit border-b border-grayDark/20 lg:border-0 hover:text-greenMain hover:lg:text-black',
               {
-                'lg:bg-greenMain lg:text-white lg:hover:bg-greenMain hover:lg:text-white border-b-2 border-b-greenMain text-greenMain':
+                'lg:bg-greenMain lg:text-white lg:hover:bg-greenMain hover:lg:text-white border-b-2 border-b-greenMain text-greenMain font-semibold':
                   tab === t?.key,
-              }
+              },
+              classNames.item
             )}
           >
-            {t?.icon}
-            <span className='text-black lg:text-inherit'>
+            <span className='shrink-0'>{t?.icon}</span>
+            <span
+              className={cn(
+                'text-black lg:text-inherit',
+                classNames.label
+              )}
+            >
               {t?.label}
             </span>
           </li>

@@ -1,6 +1,7 @@
 import { cn, getDate } from '@/lib/utils';
 import Card from '@/components/card';
 import CheckIcon from '@/assets/icons/check';
+import { StatusBadge } from '@/client/_components/schedules';
 
 export const PackageTimeSchedule = ({
   title = '',
@@ -73,20 +74,10 @@ const Schedule = ({
           <span>{time}</span>
         </time>
       </div>
-      <div
-        role='button'
-        className={cn(
-          'rounded-xl text-sm mdl:text-base py-2 px-5 min-w-24 mdl:min-w-28 text-center cursor-default',
-          {
-            'bg-greenMain text-white mdl:text-xl font-bold py-3 mdl:px-10 mdl:-ms-5 cursor-pointer transition hover:bg-greenMain/90':
-              status === 'available',
-            'bg-blueLight': status === 'done',
-            'bg-grayLight': status === 'pending',
-          }
-        )}
-      >
+
+      <StatusBadge status={status}>
         {getStatus(status)}
-      </div>
+      </StatusBadge>
     </li>
   );
 };

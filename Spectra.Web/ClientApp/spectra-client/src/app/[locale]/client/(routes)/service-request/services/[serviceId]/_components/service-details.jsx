@@ -1,11 +1,9 @@
-import { Heading } from '@/app/[locale]/client/_components/ui/heading';
-import BackIcon from '@/assets/icons/back-black';
-import Card from '@/components/card';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
-import PackagesImage from '@/assets/images/packages-details-page-bg.png';
 import Image from 'next/image';
+
+import { BackButton, H1 } from '@/client/_components/ui';
+import Card from '@/components/card';
 import HeartCheckedIcon from '@/assets/icons/heart-checked';
+import Button from '@/components/button';
 
 export const ServiceDetails = ({ data = {} }) => {
   return (
@@ -20,6 +18,17 @@ export const ServiceDetails = ({ data = {} }) => {
         label={data.label}
         fullDescription={data.fullDescription}
       />
+
+      <ServicePrice price={100} />
+
+      <div className='p-5'>
+        <Button
+          className='w-full mdl:max-w-xs'
+          variant='secondary'
+        >
+          احجز الان
+        </Button>
+      </div>
     </div>
   );
 };
@@ -30,33 +39,26 @@ const HeroSection = ({
 }) => {
   return (
     <section>
-      <Card className='bg-blueLight overflow-hidden flex justify-between w-full !p-0 *:flex-1'>
+      <Card className='bg-blueLight overflow-hidden flex justify-between items-start w-full !p-0 *:flex-1'>
         <div className='xl:p-10 p-5 space-y-7'>
-          <Heading
-            className='flex-row-reverse items-start justify-end gap-5 lg:text-4xl text-2xl lg:max-w-[70%] leading-relaxed'
-            label={label}
-            icon={
-              <Link
-                href={`${ROUTES.CLIENT.MAIN.HOME}/services`}
-              >
-                <BackIcon className='ltr:rotate-180 lg:size-11' />
-              </Link>
-            }
-          />
+          <H1 className='mdl:text-4xl text-base sm:text-2xl lg:max-w-[70%] leading-relaxed gap-5 flex-col mdl:flex-row items-start mdl:items-center'>
+            <BackButton />
+            {label}
+          </H1>
 
-          <p className='text-sm lg:text-medium hidden md:block'>
+          <p className='text-sm mdl:text-medium hidden mdl:block'>
             {fullDescription}
           </p>
         </div>
 
-        <div className='flex justify-end ltr:justify-start -me-2 ltr:rotate-180'>
+        <div className='justify-end flex items-start ltr:justify-start -me-2 ltr:rotate-180'>
           <Image
-            src={PackagesImage}
+            src={'/packages-details-page-bg.webp'}
             width={1536}
             height={1661}
             alt='Packages Details Image'
             priority
-            className='w-auto h-full max-h-[650px] object-contain'
+            className='w-auto h-auto max-w-[85%] mdl:max-w-full max-h-[650px] object-contain'
           />
         </div>
       </Card>
@@ -99,5 +101,29 @@ const ServiceList = ({
         ))}
       </ul>
     </section>
+  );
+};
+
+const ServicePrice = ({ price = 0 }) => {
+  return (
+    <Card>
+      <div className='rounded-xl border-[3px] border-blueLight flex gap-2 items-start p-5'>
+        <div className='mt-1'>
+          <HeartCheckedIcon className='fill-greenMain' />
+        </div>
+
+        <div>
+          <h3 className='font-bold lg:text-medium text-sm'>
+            سعر الخدمة:
+          </h3>
+          <p
+            dir='ltr'
+            className='text-black text-xs lg:text-base rtl:text-end'
+          >
+            $ {price}
+          </p>
+        </div>
+      </div>
+    </Card>
   );
 };

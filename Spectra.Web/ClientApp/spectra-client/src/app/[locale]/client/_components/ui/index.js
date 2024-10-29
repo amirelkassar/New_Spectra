@@ -4,6 +4,7 @@ import { BackButton } from './back-button';
 import { TabsCard } from './tabs-card';
 import { TabsFilter } from './tabs-filter';
 import Container from './container';
+import { DataTable } from './data-table';
 
 export {
   Info,
@@ -12,4 +13,5 @@ export {
   BackButton,
   TabsCard,
   TabsFilter,
+  DataTable,
 };

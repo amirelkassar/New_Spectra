@@ -35,6 +35,10 @@ module.exports = {
         red: '#FF3D3D',
         black: '#010036',
       },
+      backgroundImage: {
+        blueLinerGradient:
+          'linear-gradient(91.44deg, #EFFAFC 0.15%, #E9F7FF 43.42%, #ACDDF9 98.36%)',
+      },
       screens: {
         xs: '320px',
         sm: '375px',

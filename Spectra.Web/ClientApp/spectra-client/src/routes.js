@@ -22,8 +22,6 @@ const ROUTES = {
     MAIN: {
       HOME: '/client/main',
       EARLY_CHECK: '/client/main/early-check',
-      SERVICES: '/client/main/services',
-      VIEW_SERVICE: '/client/main/services/:id',
       TEAM: '/client/main/team',
     },
     CONTROL_MENU: '/client/control',
@@ -34,6 +32,8 @@ const ROUTES = {
     PACKAGES: '/client/packages',
     SERVICE_REQUEST: {
       HOME: '/client/service-request',
+      SERVICES: '/client/service-request/#services',
+      VIEW_SERVICE: '/client/service-request/services/:id',
     },
     SCHEDULES: '/client/schedules',
     STEPS: '/client/steps',

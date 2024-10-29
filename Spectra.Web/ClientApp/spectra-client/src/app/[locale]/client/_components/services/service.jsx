@@ -1,5 +1,10 @@
-import Button from '@/components/button';
+'use client';
+
+import { useRouter } from '@/navigation';
+
 import { cn } from '@/lib/utils';
+import Button from '@/components/button';
+import ROUTES from '@/routes';
 
 export const Service = ({
   label = '',
@@ -9,10 +14,21 @@ export const Service = ({
   id = '',
   subscribed = false,
 }) => {
+  const router = useRouter();
+
   return (
     <div
+      role='button'
       data-id={id}
-      className='p-5 flex flex-col gap-5 rounded-2xl'
+      className='p-5 flex flex-col gap-5 rounded-2xl border-2 border-transparent transition hover:border-greenMain'
+      onClick={() =>
+        router.push(
+          ROUTES.CLIENT.SERVICE_REQUEST.VIEW_SERVICE.replace(
+            ':id',
+            id
+          )
+        )
+      }
     >
       <div
         className={`mdl:size-20 size-16 mx-auto rounded-full flex items-center justify-center`}

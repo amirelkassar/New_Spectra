@@ -19,7 +19,7 @@ const Button = ({
       break;
     case 'secondary':
       variantClasses =
-        'bg-greenMain hover:bg-greenMain/90 text-white rounded-[10px] py-3';
+        'bg-greenMain hover:bg-greenMain/90 text-white rounded-[10px] py-3 font-bold';
       break;
     case 'ternary':
       variantClasses =
@@ -29,6 +29,11 @@ const Button = ({
       variantClasses =
         'rounded-lg py-2 text-black bg-blueLight font-bold lg:text-base text-xs';
       break;
+    case 'ghost':
+      variantClasses =
+        'bg-transparent rounded-lg p-3 text-xs font-bold lg:text-base transition hover:bg-grayMedium/50';
+      break;
+
     default:
       variantClasses = '';
   }

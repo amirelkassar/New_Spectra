@@ -16,7 +16,7 @@ export const OurServices = () => {
   return (
     <Section
       onClick={() =>
-        router.push(ROUTES.CLIENT.MAIN.SERVICES)
+        router.push(ROUTES.CLIENT.SERVICE_REQUEST.SERVICES)
       }
       className='hidden mdl:block'
       type='both'
