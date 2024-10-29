@@ -72,6 +72,8 @@ const ROUTES = {
           `/admin/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
           `/admin/clients/organization/${id}/prescriptions`,
+        CONTRACTS: (id) =>
+          `/admin/clients/organization/${id}/contracts`,
         PATIENTS: (id, id2) =>
           `/admin/clients/organization/${id}/clients/${id2}/patients`,
         PATIENTSEDIT: (id, id2) =>
