@@ -16,7 +16,7 @@ import LinkGreen from "@/components/linkGreen";
 import WorkNum from "./workNum";
 import SwitchContracts from "./switchContracts";
 const serviceOptions = [
-  { value: "examination", label: "Examination Service" },
+  { value: "examination", label: "Examination Service" },  
   { value: "counseling", label: "Counseling Service" },
   { value: "diagnostic", label: "Diagnostic Service" },
   { value: "followup", label: "Follow-up Service" },
