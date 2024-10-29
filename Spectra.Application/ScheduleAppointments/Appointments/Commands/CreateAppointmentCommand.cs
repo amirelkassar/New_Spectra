@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Spectra.Application.Clients;
+using Spectra.Application.MedicalPatientProfiles;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MedicalPatientProfiles;
+using Spectra.Domain.Patients;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
@@ -18,9 +21,9 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         public string DoctorScheduleId { get; set; }
         public string ClientId { get; set; }
         public string DoctorId { get; set; }
+        public string PatientId { get; set; }
         public MoringOrNight MoringOrNight { get; set; }
         public TimeOnly From { get; set; }
-
 
 
     }
@@ -28,10 +31,12 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
     public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, OperationResult<string>>
     {
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IMedicalPatientProfileRepository _medicalPatientProfileRepository;
         private readonly IClientRepository _clientRepository;
-        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository, IClientRepository clientRepository)
+        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository , IMedicalPatientProfileRepository medicalPatientProfileRepository , IClientRepository clientRepository)
         {
             _appointmentRepository = appointmentRepository;
+            _medicalPatientProfileRepository = medicalPatientProfileRepository;
             _clientRepository = clientRepository;
         }
         public async Task<OperationResult<string>> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
@@ -54,9 +59,9 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 
                 }
             }
+
             //logic to get the Client duration
             //var clientduration = client
-
 
             TimeSpan duration = TimeSpan.FromMinutes(30);
             var appointmentFinish = request.From.Add(duration);
@@ -72,15 +77,27 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
                 AppointmentStatus.Booked,
                 request.From,
                 appointmentFinish
-                , request.MoringOrNight
+            , request.MoringOrNight
                 );
 
+            if (appointment != null)
+            {
+
+                var clientData = await _clientRepository.GetByIdAsync(request.ClientId);
+                var patientData = clientData.Patients!.FirstOrDefault(x => x.Id == request.PatientId);
+               
+                var medicalPatientProfiles = MedicalPatientProfile.Create(Ulid.NewUlid().ToString(), request.DoctorId, request.PatientId, request.ClientId,
+                    $"{clientData.Name.FirstName} {clientData.Name.LastName}", $"{patientData.Name.FirstName} {patientData.Name.LastName}"
+                    );
+                await _medicalPatientProfileRepository.AddAsync(medicalPatientProfiles);
+            }
 
             await _appointmentRepository.AddAsync(appointment);
+
+          
+
+
             return OperationResult<string>.Success(appointment.Id);
-
-
-
         }
         public MoringOrNight GetTimeOfDay(TimeOnly time)
         {

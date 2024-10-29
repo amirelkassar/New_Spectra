@@ -21,10 +21,7 @@ namespace Spectra.Application.Contracts.Commands
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
         public string FirstName { get; set; }
-        public string LastName
-        {
-            get; set;
-        }
+        public string LastName{ get; set; }
         public ContractCases ContractCase { get; set; }
 
 
@@ -85,7 +82,6 @@ namespace Spectra.Application.Contracts.Commands
               request.SpectraTeam,
               request.HoursOfWork,
               request.DaysOfWork,
-           
               request.EmployeeId,
               request.Titel,
               request.ContractCase,

@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DrugController : ControllerBase
+  
+    public class DrugController : BassAdminController
     {
         private readonly IDrugService _drugtService;
 

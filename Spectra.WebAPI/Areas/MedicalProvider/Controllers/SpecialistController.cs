@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Employees.MedicalStaff.Specialists.Dto;
 using Spectra.Application.Employees.MedicalStaff.Specialists.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.MedicalProvider.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
+    [Area("MedicalProvider")]
     public class SpecialistController : ControllerBase
     {
         private readonly ISpecialistService _SpecialistService;

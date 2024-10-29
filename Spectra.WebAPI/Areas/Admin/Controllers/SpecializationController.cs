@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class SpecializationController : ControllerBase
+
+    public class SpecializationController : BassAdminController
     {
 
         private readonly ISpecializationService _specializationsServices;
@@ -30,7 +29,7 @@ namespace Spectra.WebAPI.Controllers
         public async Task<ActionResult> GetAllSpecializationsNames()
         {
             var Specializationsies = await _specializationsServices.GetAllSpecializationsNames();
-          
+
             return Ok(Specializationsies);
         }
 

@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Patients.Commands;
 using Spectra.Infrastructure.Patients;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Client.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
+    [Area("Patient")]
     public class PatientController : ControllerBase
     {
 

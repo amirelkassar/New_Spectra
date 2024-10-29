@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Admin.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
+using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -20,6 +22,6 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Services
 
 
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices();
-
+        Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(GetAllClientsInDoctorProfileQuery input);
     }
 }

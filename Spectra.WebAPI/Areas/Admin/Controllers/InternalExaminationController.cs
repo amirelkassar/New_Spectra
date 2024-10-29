@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class InternalExaminationController : ControllerBase
+  
+    public class InternalExaminationController : BassAdminController
     {
         private readonly IInternalExaminationService _internalExamination;
 
@@ -35,7 +34,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateinternalExamination( CreateInternalExaminationCommand input)
+        public async Task<ActionResult> CreateinternalExamination(CreateInternalExaminationCommand input)
         {
 
             var internalExamination = await _internalExamination.CreateInternalExamination(input);

@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class MedicalTestsAndXrayController : ControllerBase
+  
+    public class MedicalTestsAndXrayController : BassAdminController
     {
         private readonly IMedicalTestsAndXrayService _medicalTestsAndXrayService;
 

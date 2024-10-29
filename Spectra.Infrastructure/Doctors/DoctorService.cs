@@ -4,7 +4,9 @@ using Spectra.Application.Employees.MedicalStaff.Doctors.Commands;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
+using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -96,9 +98,19 @@ namespace Spectra.Infrastructure.Doctors
             var query = new GetAllDoctorQuery();
             return await _mediator.Send(query);
         }
+        public async Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(GetAllClientsInDoctorProfileQuery input)
+        {
+            var query = new GetAllClientsInDoctorProfileQuery
+            {
+                DoctorId = input.DoctorId,
+                PageSize = input.PageSize,
+                PageNumber = input.PageNumber
+            };
 
+            return await _mediator.Send(query);
+        }
 
-        public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
+            public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
         {
             var query = new GetAllDoctorEarlyDetectionQuery();
             return await _mediator.Send(query);

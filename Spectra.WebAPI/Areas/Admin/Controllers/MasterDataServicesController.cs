@@ -4,11 +4,10 @@ using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Services;
 
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class MasterDataServicesController : ControllerBase
+   
+    public class MasterDataServicesController : BassAdminController
     {
         private readonly IServiceMDService _serviceMDService;
 

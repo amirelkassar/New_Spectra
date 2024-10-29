@@ -5,23 +5,22 @@ using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
 
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DiagnoseController : ControllerBase
+  
+    public class DiagnoseController : BassAdminController
     {
         private readonly IDiagnosesService _diagnosetService;
-       
-    
-     
-        public DiagnoseController(IDiagnosesService diagnosetService )
+
+
+
+        public DiagnoseController(IDiagnosesService diagnosetService)
         {
             _diagnosetService = diagnosetService;
-      
+
         }
-   
-     
+
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllDiagnose()
@@ -52,9 +51,9 @@ namespace Spectra.WebAPI.Controllers
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<ActionResult> CreateDiagnose ( CreateDiagnoseCommand input)
+        public async Task<ActionResult> CreateDiagnose(CreateDiagnoseCommand input)
         {
-          
+
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);
 
             return Ok(Diagnoseies);
@@ -71,7 +70,7 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> DeleteDiagnose(string id)
         {
-           var delete= await _diagnosetService.DeleteDiagnoses(id);
+            var delete = await _diagnosetService.DeleteDiagnoses(id);
             return Ok(delete);
         }
         [HttpPost("upload")]

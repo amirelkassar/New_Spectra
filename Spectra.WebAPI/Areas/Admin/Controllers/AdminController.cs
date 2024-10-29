@@ -15,19 +15,18 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.Contracts;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AdminController : ControllerBase
+
+    public class AdminController : BassAdminController
     {
         private readonly IAdminService _adminService;
         private readonly IClientService _clientService;
         private readonly IDoctorService _DoctorService;
         private readonly IContractService _contractService;
 
-        public AdminController(IAdminService adminService , IClientService clientService, IDoctorService DoctorService, IContractService contractService)
+        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService DoctorService, IContractService contractService)
         {
             _adminService = adminService;
             _clientService = clientService;
@@ -41,12 +40,12 @@ namespace Spectra.WebAPI.Controllers
         {
             var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
             return Ok(appointmenties);
-        }  
+        }
 
 
         [HttpGet("GetAllEmployees")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllEmployees([FromQuery] GetAllEmployeesQuery input )
+        public async Task<ActionResult> GetAllEmployees([FromQuery] GetAllEmployeesQuery input)
         {
             var appointmenties = await _adminService.GetAllEmplyees(input);
             return Ok(appointmenties);
@@ -74,7 +73,7 @@ namespace Spectra.WebAPI.Controllers
         {
 
             var appointmenties = await _adminService.GetAllAppointmentsDoctorAsync(input);
-            return Ok(appointmenties); 
+            return Ok(appointmenties);
         }
         [HttpGet("Client/id")]
         [AllowAnonymous]
@@ -94,7 +93,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPost("CreateClient")]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalClient( CreateNormalClientDto input)
+        public async Task<ActionResult> CreateNormalClient(CreateNormalClientDto input)
         {
 
             var clienties = await _clientService.CreateClient(input);
@@ -131,8 +130,8 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> UpdateContractChangeOrAccpet(string id, UpdateContractCommand input)
         {
-          
-            input.ContractCase= ContractCases.BACkTOEMPlOYEE;
+
+            input.ContractCase = ContractCases.BACkTOEMPlOYEE;
             var contract = await _contractService.UpdateContract(id, input);
             return Ok(contract);
         }

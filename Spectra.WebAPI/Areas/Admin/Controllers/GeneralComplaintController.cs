@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class GeneralComplaintController : ControllerBase
+  
+    public class GeneralComplaintController : BassAdminController
     {
         private readonly IGeneralComplaintService _generalComplaintService;
 

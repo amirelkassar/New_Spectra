@@ -14,6 +14,7 @@ namespace Spectra.Domain.ScheduleAppointments
         public AppointmentType AppointmentType { get; set; }
         public string DoctorScheduleId { get; set; }
         public string ClientId { get; set; }
+        public string PatientId { get; set; }
         public string DoctorId { get; set; }
         //the time Client Will Appointment  With  Doctor 
         public TimeOnly From { get; set; }
@@ -21,6 +22,8 @@ namespace Spectra.Domain.ScheduleAppointments
 
         public TimeOnly To { get; set; }
         public MoringOrNight ToMoringOrNight { get; set; }
+
+
         //public AppointmentServices AppointmentService { get; set; }
 
 

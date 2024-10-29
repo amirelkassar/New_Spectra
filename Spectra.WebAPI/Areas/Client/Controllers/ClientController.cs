@@ -5,10 +5,11 @@ using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Services;
 
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.Client.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
+    [Area("Client")]
     public class ClientController : ControllerBase
     {
         private readonly IClientService _clientService;

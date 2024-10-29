@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Infrastructure.ChatHub;
 
-namespace Spectra.WebAPI.Controllers
+namespace Spectra.WebAPI.Areas.MedicalProvider.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class DoctorController:ControllerBase
+    [Route("api/[area]/[controller]")]
+    [Area("MedicalProvider")]
+    public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _DoctorService;
         private readonly IChatService _chatService;
@@ -24,20 +26,20 @@ namespace Spectra.WebAPI.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("AllClients")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllDoctors()
+        public async Task<ActionResult> GetAllClintsDoctorCare([FromQuery] GetAllClientsInDoctorProfileQuery input)
         {
-            var Doctories = await _DoctorService.GetAllDoctors();
-            return Ok(Doctories);
+            var doctor = await _DoctorService.GetAllClintsDoctorCare(input);
+            return Ok(doctor);
         }
 
         [HttpGet("SpecificService")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllDoctorSpecificService()
         {
-            var Doctories = await _DoctorService.GetAllDoctorSpecificServices();
-            return Ok(Doctories);
+            var doctor = await _DoctorService.GetAllDoctorSpecificServices();
+            return Ok(doctor);
         }
 
 
@@ -45,8 +47,8 @@ namespace Spectra.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> GetOneDoctor(string id)
         {
-            var Doctories = await _DoctorService.GetDoctorById(id);
-            return Ok(Doctories);
+            var doctor = await _DoctorService.GetDoctorById(id);
+            return Ok(doctor);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -54,7 +56,7 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            var Doctories = await _DoctorService.CreateDoctor(
+            var doctor = await _DoctorService.CreateDoctor(
                     input.FirstName,
                     input.LastName,
                     input.Prefix,
@@ -70,7 +72,7 @@ namespace Spectra.WebAPI.Controllers
                     input.HumenGenders,
                     input.LicenseNumber,
                     input.ScientificDegree);
-            return Ok(Doctories);
+            return Ok(doctor);
         }
         [HttpPut("id")]
         [AllowAnonymous]
@@ -78,16 +80,16 @@ namespace Spectra.WebAPI.Controllers
         {
 
 
-            var Doctor = await _DoctorService.UpdateDoctor(id, input);
+            var doctor = await _DoctorService.UpdateDoctor(id, input);
 
-            return Ok(Doctor);
+            return Ok(doctor);
         }
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteDoctor(string id)
         {
-            var Doctor = await _DoctorService.DeleteDoctor(id);
-            return Ok(Doctor);
+            var doctor = await _DoctorService.DeleteDoctor(id);
+            return Ok(doctor);
         }
 
 
