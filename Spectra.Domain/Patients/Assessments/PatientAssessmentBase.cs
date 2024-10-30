@@ -27,9 +27,9 @@ namespace Spectra.Domain.Patients.Assessments
         }
         public string PatientId { get; protected set; }
         public string ClientId { get; protected set; }
+        public string SessionId { get; protected set; }
         public Name PatientName { get; protected set; }
         public AssessmentTypes Type { get; protected set; }
-        public string SessionId { get; protected set; }
         public string? Notes { get; set; }
         public string? Impression { get; set; }
         public RecommendationsAndGoal RecommendationsAndGoals { get; set; }

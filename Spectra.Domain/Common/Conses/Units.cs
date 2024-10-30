@@ -294,5 +294,23 @@
             Numbers,
             Words
         }
+
+        public enum FrequencyTypes : byte
+        {
+            Hour = 1,
+            ThreeHours,
+            SixHours,
+            EightHours,
+            TwelveHours,
+            Day,
+            Week,
+            TenDays,
+            TwoWeeks,
+            Month,
+            ThreeMonths,
+            SixMonths,
+            EightMonths,
+            Year
+        }
     }
 }
