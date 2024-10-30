@@ -4,25 +4,23 @@ import Input from "@/components/input";
 import { Select, TextInput } from "@mantine/core";
 import React from "react";
 
-function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setDocSpeData({
-      ...DocSpeData,
-      [name]: value,
-    });
-  };
+function FormDocSpe({
+  handleOnChange,
+  setPageForm,
+  DocSpeData,
+  setDocSpeData,
+}) {
   return (
     <div>
       <form className="flex flex-col gap-3 lg:gap-6 px-3 mb-14 focus:">
         <Select
-          data={["سكرتير", "دكتور"]}
+          data={["دكتور 2", "1دكتور"]}
           label={"التخصص"}
           placeholder="اختر المهنة"
-          name="profession"
-          value={DocSpeData.profession || ""}
+          name="Diagnoses"
+          value={DocSpeData.Diagnoses || ""}
           onChange={(value) =>
-            setDocSpeData({ ...DocSpeData, profession: value })
+            setDocSpeData({ ...DocSpeData, Diagnoses: value })
           }
           className="MultiSelect"
           classNames={{
@@ -34,8 +32,8 @@ function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
           label={"رقم الترخيص/الاعتماد "}
           type={"number"}
           placeholder={"ادخل رقم الترخيص او الاعتماد"}
-          name="idNumber"
-          value={DocSpeData.idNumber || ""}
+          name="LicenseNumber"
+          value={DocSpeData.LicenseNumber || ""}
           onChange={handleOnChange}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
@@ -45,8 +43,8 @@ function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
         <TextInput
           label={"مرخص / معتمد من "}
           placeholder={"ادخل جهة الترخيص او الاعتماد"}
-          name="idNumber"
-          value={DocSpeData.idNumber || ""}
+          name="ApprovedBy"
+          value={DocSpeData.ApprovedBy || ""}
           onChange={handleOnChange}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
@@ -56,8 +54,8 @@ function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
         <TextInput
           label={"الدرجة العلمية "}
           placeholder={"ادخل الدرجة العلمية"}
-          name="idNumber"
-          value={DocSpeData.idNumber || ""}
+          name="Academicdegree"
+          value={DocSpeData.Academicdegree || ""}
           onChange={handleOnChange}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
@@ -72,7 +70,9 @@ function FormDocSpe({ setPageForm, DocSpeData, setDocSpeData }) {
           />
           <div className="h-[56px] flex items-center justify-center gap-4 px-5 py-3 rounded-[10px] bg-greenMain max-w-full w-[132px]">
             <ArrowRight />
-            <p className="text-white text-xs md:text-[16px] font-Bold">رفع ملف</p>
+            <p className="text-white text-xs md:text-[16px] font-Bold">
+              رفع ملف
+            </p>
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20  justify-center flex-1 w-full">

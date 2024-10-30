@@ -1,6 +1,5 @@
-import { cn } from '@/lib/utils';
-import PhoneInput from 'react-phone-input-2';
-import { PhoneInputProps } from 'react-phone-input-2';
+import { cn } from "@/lib/utils";
+import PhoneInput from "react-phone-input-2";
 
 /**
  * @typedef {Object} PhoneInputProps
@@ -12,44 +11,46 @@ import { PhoneInputProps } from 'react-phone-input-2';
  */
 
 const MobileInput = ({
-  size = 'md',
-  label = 'رقم الهاتف',
-  inputClassName = '',
+  size = "md",
+  label = "رقم الهاتف",
+  inputClassName = "",
+  error = "",
   ...props
 }) => {
   return (
-    <div className='space-y-2'>
+    <div className="space-y-2">
       {label && (
         <label
-          htmlFor='phone2'
-          className='text-base mdl:text-xl mb-2 ps-1 font-normal'
+          htmlFor="phone2"
+          className="text-base mdl:text-xl mb-2 ps-1 font-normal"
         >
           {label}
         </label>
       )}
-      <div dir='ltr'>
+      <div dir="ltr">
         <PhoneInput
-          specialLabel=''
+          specialLabel=""
           enableSearch={true}
-          country={'eg'}
+          country={"eg"}
           enableAreaCodes={true}
           autoFormat={false}
           inputProps={{
-            type: 'text',
+            type: "text",
             required: true,
             className: cn(
-              '!ps-14 pe-[14px] w-full rounded-lg outline-none focus:border-greenMain border border-[#ced4da]  h-[42px]',
+              "!ps-14 pe-[14px] w-full rounded-lg outline-none focus:border-greenMain border border-[#ced4da]  h-[42px]",
               {
-                'h-[50px]': size === 'lg',
+                "h-[50px]": size === "lg",
               },
               inputClassName
             ),
-            placeholder: '',
-            id: 'phone2',
+            placeholder: "",
+            id: "phone2",
           }}
           {...props}
         />
       </div>
+      {error && <p className="text-[#fa5252] font-Regular text-xs">{error}</p>}
     </div>
   );
 };

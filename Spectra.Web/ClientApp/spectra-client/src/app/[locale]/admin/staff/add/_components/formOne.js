@@ -1,27 +1,65 @@
 import Button from "@/components/button";
+import GetErrorMsg from "@/components/getErrorMsg";
+import MobileInput from "@/components/inputs/mobile-input";
+import { GetCountry } from "@/useAPI/general/generalApi";
 import { Select, TextInput } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
+const jobType = [
+  {
+    value: "1",
+    label: "دكتور",
+  },
+  {
+    value: "2",
+    label: "متخصص",
+  },
+  {
+    value: "3",
+    label: "محاسب",
+  },
+  {
+    value: "4",
+    label: "سكرتير",
+  },
+];
+const Gender = [
+  {
+    value: "1",
+    label: "ذكر",
+  },
+  {
+    value: "2",
+    label: "انثى",
+  },
+];
+function FormOne({
+  handleOnChange,
+  handleOnChangePHone,
+  setFirstData,
+  firstData,
+  setPageForm,
+  error,
+}) {
+  const { data: dataCountry, isLoading } = GetCountry();
+  const [selectCountry, setSelectCountry] = useState("");
 
-function FormOne({ setFirstData, firstData, setPageForm }) {
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setFirstData({
-      ...firstData,
-      [name]: value,
-    });
-  };
+  useEffect(() => {
+    if (selectCountry) {
+      console.log("hhh");
+    }
+  }, [selectCountry]);
+
   return (
     <div>
       <form className="flex flex-col gap-3 lg:gap-6 md:px-3 mb-14 focus:">
         <Select
-          data={["متخصص", "دكتور",'سكرتير ']}
+          data={jobType}
           label={"المهنة"}
           placeholder="اختر المهنة"
-          name="profession"
-          value={firstData.profession || ""}
-          onChange={(value) =>
-            setFirstData({ ...firstData, profession: value })
-          }
+          name="JobTypes"
+          value={firstData.JobTypes || ""}
+          error={GetErrorMsg(error, "JobTypes")}
+          onChange={(value) => setFirstData({ ...firstData, JobTypes: value })}
           className="MultiSelect"
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
@@ -31,33 +69,46 @@ function FormOne({ setFirstData, firstData, setPageForm }) {
         <TextInput
           label={"الاسم كامل"}
           placeholder={"ادخل الاسم كامل"}
-          name="fullName"
-          value={firstData.fullName || ""}
+          name="FirstName"
+          value={firstData.FirstName || ""}
           onChange={handleOnChange}
+          error={GetErrorMsg(error, "FirstName")}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
           }}
         />
         <Select
-          data={["انثى", "ذكر"]}
+          data={Gender}
           label={"اختر النوع"}
           placeholder="اختر النوع"
-          name="gender"
-          value={firstData.gender || ""}
-          onChange={(value) => setFirstData({ ...firstData, gender: value })}
+          name="HumenGenders"
+          value={firstData.HumenGenders || ""}
+          onChange={(value) => {
+            setFirstData({ ...firstData, HumenGenders: value });
+          }}
+          error={GetErrorMsg(error, "HumenGenders")}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
           }}
         />
         <Select
-          data={["سعوديه", "مصر"]}
+          data={dataCountry?.data?.map((country) => ({
+            value: country.name,
+            label: country.name,
+          }))}
           label={"اختر البلد"}
           placeholder="اختر البلد"
-          name="country"
-          value={firstData.country || ""}
-          onChange={(value) => setFirstData({ ...firstData, country: value })}
+          error={GetErrorMsg(error, "Country")}
+          searchable
+          clearable
+          name="Country"
+          value={firstData.Country || ""}
+          onChange={(value) => {
+            setSelectCountry(value);
+            setFirstData({ ...firstData, Country: value });
+          }}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
@@ -67,49 +118,49 @@ function FormOne({ setFirstData, firstData, setPageForm }) {
           data={["القاهره", "اسكندريه"]}
           label={"اختر المدينة"}
           placeholder="اختر المدينة"
-          name="city"
-          value={firstData.city || ""}
-          onChange={(value) => setFirstData({ ...firstData, city: value })}
+          error={GetErrorMsg(error, "City")}
+          name="City"
+          value={firstData.City || ""}
+          onChange={(value) => setFirstData({ ...firstData, City: value })}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
           }}
         />
-        <TextInput
+        <MobileInput
+          name="PhoneNumbers"
+          onChange={handleOnChangePHone}
+          size="lg"
           label={"رقم الهاتف "}
-          type={"number"}
           placeholder={"ادخل رقم الهاتف"}
-          name="phone"
-          value={firstData.phone || ""}
-          onChange={handleOnChange}
-          classNames={{
-            input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
-            label: "text-base lg:text-xl mb-2",
-          }}
+          error={GetErrorMsg(error, "PhoneNumbers")}
+          inputClassName="rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]"
         />
         <TextInput
           label={"البريد الالكترونى "}
           type={"email"}
           placeholder={"ادخل بريدك الالكترونى"}
-          name="email"
-          value={firstData.email || ""}
+          name="Emailaddress"
+          value={firstData.Emailaddress || ""}
           onChange={handleOnChange}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
           }}
+          error={GetErrorMsg(error, "Emailaddress")}
         />
         <TextInput
           label={"رقم الهوية "}
           type={"number"}
           placeholder={"ادخل رقم الهوية"}
-          name="idNumber"
-          value={firstData.idNumber || ""}
+          name="NationalId"
+          value={firstData.NationalId || ""}
           onChange={handleOnChange}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",
           }}
+          error={GetErrorMsg(error, "NationalId")}
         />
         <Button
           onClick={() => setPageForm(2)}

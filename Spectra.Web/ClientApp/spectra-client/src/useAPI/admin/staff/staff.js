@@ -45,16 +45,18 @@ export const DeleteMedicalTests = (id) => {
   });
 };
 //post
-export const useCreateMedicalTests = () => {
-  const { refetch } = GetMedicalTests();
-
+export const useCreateStaff = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.MedicalTests.url, data, {});
+      const response = await apiAdmin.post(Admin.Staff.post, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onSuccess: (data) => {
-      refetch();
+      console.log("wsdasdasd");
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);
@@ -71,7 +73,11 @@ export const useEditMedicalTests = (id) => {
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await apiAdmin.put(Admin.MedicalTests.getByID(id), data, {});
+      const response = await apiAdmin.put(
+        Admin.MedicalTests.getByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
     onSuccess: (data) => {
