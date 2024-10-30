@@ -51,12 +51,14 @@ export const OurServices = () => {
               style={{ backgroundColor: service.color }}
             >
               <div
-                className={`lg:size-9 size-8 rounded-full flex items-center justify-center shrink-0`}
+                className={`size-12 rounded-full flex items-center justify-center shrink-0`}
                 style={{ backgroundColor: service.color }}
               >
                 {service.icon}
               </div>
-              <span>{service.label}</span>
+              <span className='min-h-10'>
+                {service.label}
+              </span>
             </div>
           </SwiperSlide>
         ))}
