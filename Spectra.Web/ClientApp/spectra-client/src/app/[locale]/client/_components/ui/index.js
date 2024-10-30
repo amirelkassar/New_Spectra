@@ -5,6 +5,8 @@ import { TabsCard } from './tabs-card';
 import { TabsFilter } from './tabs-filter';
 import Container from './container';
 import { DataTable } from './data-table';
+import { Table } from './table';
+import { TableCard } from './table-card';
 
 export {
   Info,
@@ -14,4 +16,6 @@ export {
   TabsCard,
   TabsFilter,
   DataTable,
+  Table,
+  TableCard,
 };

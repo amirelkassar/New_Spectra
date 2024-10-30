@@ -1,11 +1,8 @@
 'use client';
 
-import IncomingMeet from '@/assets/icons/incoming-meet';
-import ThreeDotsIcon from '@/assets/icons/three-dots';
-import Button from '@/components/button';
-import { StatusBadge } from '@/client/_components/schedules';
-import { cn, getDate } from '@/lib/utils';
-import { useLocale } from 'next-intl';
+import { CellDate } from './cell-date';
+import { CellActions } from './cell-actions';
+import { CellStatus } from './cell-status';
 
 export const schedulesColumns = [
   {
@@ -29,24 +26,15 @@ export const schedulesColumns = [
   {
     accessorKey: 'date',
     header: 'الميعاد',
-    cell: ({ getValue }) => <Date date={getValue()} />,
+    cell: ({ getValue }) => <CellDate date={getValue()} />,
   },
   {
     accessorKey: 'status',
-    header: 'الحالة',
+    header: () => (
+      <span className='block text-center'>الحالة</span>
+    ),
     cell: ({ getValue }) => (
-      <StatusBadge
-        id={getValue()}
-        status={getValue()}
-        className={cn(
-          'min-w-fit mdl:min-w-fit mdl:text-sm lg:text-base mdl:max-w-28 w-full mx-auto mdl:ms-auto',
-          getValue() === 'done' && 'group-hover:bg-white',
-          getValue() === 'available' &&
-            'lg:text-xl mdl:text-sm'
-        )}
-      >
-        {getStatus(getValue())}
-      </StatusBadge>
+      <CellStatus status={getValue()} />
     ),
   },
   {
@@ -54,21 +42,6 @@ export const schedulesColumns = [
     cell: ({ row }) => <CellActions data={row.original} />,
   },
 ];
-
-const Date = ({ date }) => {
-  const locale = useLocale();
-  const { fullYear, time } = getDate(date, locale);
-  return (
-    <>
-      <span className='mdl:block bg-blueLight px-3 py-1 rounded-xl mdl:bg-transparent mdl:px-0 mdl:py-0 mdl:rounded-none'>
-        {fullYear}
-      </span>
-      <span className='mdl:block bg-blueLight px-3 py-1 rounded-xl mdl:bg-transparent mdl:px-0 mdl:py-0 mdl:rounded-none'>
-        {time}
-      </span>
-    </>
-  );
-};
 
 const Header = () => {
   return (
@@ -87,25 +60,3 @@ const Doctor = ({ name, proffession }) => {
     </>
   );
 };
-
-const CellActions = ({ data }) => {
-  if (data.status === 'available') return <IncomingMeet />;
-  return (
-    <div className='flex justify-center items-center'>
-      <Button variant='ghost'>
-        <ThreeDotsIcon />
-      </Button>
-    </div>
-  );
-};
-
-function getStatus(status) {
-  switch (status) {
-    case 'available':
-      return 'انضمام';
-    case 'pending':
-      return 'لم يتم بعد';
-    case 'done':
-      return 'تمت';
-  }
-}

@@ -9,7 +9,6 @@ import { useState } from 'react';
 
 import TimeInput from '@/components/inputs/time-input';
 import UploadInput from '@/components/inputs/upload-input';
-import { useBook } from '../_context/useBook';
 import { Link, useRouter } from '@/navigation';
 import { Heading } from '../../../_components/ui/heading';
 import ROUTES from '@/routes';
@@ -27,23 +26,8 @@ import Button from '@/components/button';
 import TextInput from '@/components/inputs/text-input';
 
 const BookAppointmentPage = () => {
-  const router = useRouter();
   const [value, setValue] = useState(null);
 
-  const { selected } = useBook();
-
-  if (!selected.specializationId || !selected.doctorId) {
-    router.push(ROUTES.CLIENT.TEAM);
-    return null;
-  }
-
-  const selectedSpecialization = SpecialNeedsData.find(
-    (item) => item.id === selected.specializationId
-  );
-
-  const selectedDoctor = MedicalTeamData.find(
-    (item) => item.id === selected.doctorId
-  );
   return (
     <Container>
       <section>

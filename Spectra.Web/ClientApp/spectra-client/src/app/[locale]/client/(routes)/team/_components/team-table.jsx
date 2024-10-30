@@ -1,6 +1,7 @@
-import { DataTable } from '@/components/data-table';
+// import { DataTable } from '@/components/data-table';
 import { MedicalTeamData } from '@/lib/demoData';
 import { columns } from './columns';
+import { DataTable } from '@/client/_components/ui';
 
 const sortingData = [
   {
@@ -15,16 +16,17 @@ const sortingData = [
 
 export const TeamTable = () => {
   return (
-    <div>
-      <DataTable
-        data={MedicalTeamData}
-        columns={columns}
-        filter='select'
-        filterBy='profession'
-        sort
-        sortingData={sortingData}
-        selectData={['اخصائى نفسي', 'توحد', 'فرط حركة', 'ثنائي القطب']}
-      />
-    </div>
+    <DataTable data={MedicalTeamData} columns={columns} />
+    // <div>
+    //   <DataTable
+    //     data={MedicalTeamData}
+    //     columns={columns}
+    //     filter='select'
+    //     filterBy='profession'
+    //     sort
+    //     sortingData={sortingData}
+    //     selectData={['اخصائى نفسي', 'توحد', 'فرط حركة', 'ثنائي القطب']}
+    //   />
+    // </div>
   );
 };

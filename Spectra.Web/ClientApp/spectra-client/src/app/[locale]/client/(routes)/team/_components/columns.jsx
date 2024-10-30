@@ -64,7 +64,7 @@ export const columns = [
     },
   },
   {
-    id: 'action',
+    id: 'actions',
     cell: ({ row }) => (
       <MakeAppointment doctorId={row.original.id} />
     ),
