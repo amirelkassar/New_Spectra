@@ -32,13 +32,11 @@ function ServicesDetails({ DataServices, isLoading }) {
   const {
     mutate: EditMasterDataServices,
     error,
-    isSuccess,
     isError,
     reset,
   } = useEditMasterDataServices(DataServices.id);
   useEffect(() => {
     if (DataServices) {
-      console.log("trueeeeeeeeeeeee");
       setFormData({
         ...DataServices,
         secations: DataServices.secations || [
@@ -47,8 +45,7 @@ function ServicesDetails({ DataServices, isLoading }) {
       });
     }
   }, [isLoading]);
-  console.log(DataServices);
-  console.log(formData);
+
 
   const handleHeaderInputChange = (e) => {
     setLargeFile("");
@@ -71,6 +68,9 @@ function ServicesDetails({ DataServices, isLoading }) {
       );
       return { ...prevFormData, secations: updatedSections };
     });
+    if (isError) {
+      reset();
+    }
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,6 +78,9 @@ function ServicesDetails({ DataServices, isLoading }) {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleSubmit = (e) => {
@@ -124,7 +127,7 @@ function ServicesDetails({ DataServices, isLoading }) {
               defaultValue={formData.name}
               name="name"
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "n")}
+              error={GetErrorMsg(error, "Name")}
               classNames={{
                 input:
                   "min-h-[60px] h-auto  w-full rounded-lg bg-grayBlueLight   border-grayMedium text-[24px] ",
@@ -134,7 +137,7 @@ function ServicesDetails({ DataServices, isLoading }) {
             <Textarea
               label="تعريف مختصر للخدمة "
               name="definitionServices"
-              error={GetErrorMsg(error, "definitionServices")}
+              error={GetErrorMsg(error, "DefinitionServices")}
               value={formData.definitionServices}
               onChange={handleInputChange}
               radius="md"
@@ -268,7 +271,7 @@ function ServicesDetails({ DataServices, isLoading }) {
               defaultValue={formData.termsAndConditions}
               name="termsAndConditions"
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "termsAndConditions")}
+              error={GetErrorMsg(error, "TermsAndConditions")}
               radius="md"
               autosize
               minRows={4}

@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/api/api";
+import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //getAll
@@ -7,7 +7,7 @@ export const GetSpecialization = () => {
   return useQuery({
     queryKey: [Admin.Specialization.url],
     queryFn: async () => {
-      const response = await api.get(Admin.Specialization.url, {
+      const response = await apiAdmin.get(Admin.Specialization.url, {
         headers: {},
       });
       return response;
@@ -19,7 +19,7 @@ export const GetSpecializationID = (id) => {
   return useQuery({
     queryKey: [Admin.Specialization.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Admin.Specialization.getByID(id), {
+      const response = await apiAdmin.get(Admin.Specialization.getByID(id), {
         headers: {},
       });
       return response;
@@ -32,7 +32,7 @@ export const DeleteSpecialization = (id) => {
   return useMutation({
     mutationKey: ["Specialization"],
     mutationFn: async () => {
-      const response = await api.delete(Admin.Specialization.DeleteByID(id));
+      const response = await apiAdmin.delete(Admin.Specialization.DeleteByID(id));
       return response.data;
     },
     onSuccess: () => {
@@ -44,7 +44,7 @@ export const DeleteSpecialization = (id) => {
 export const useCreateSpecialization = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Admin.Specialization.url, data, {});
+      const response = await apiAdmin.post(Admin.Specialization.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
@@ -62,7 +62,7 @@ export const useEditSpecialization = (id) => {
   return useMutation({
     mutationKey: ["EditSpecialization"],
     mutationFn: async (data) => {
-      const response = await api.put(
+      const response = await apiAdmin.put(
         Admin.Specialization.getByID(id),
         data,
         {}

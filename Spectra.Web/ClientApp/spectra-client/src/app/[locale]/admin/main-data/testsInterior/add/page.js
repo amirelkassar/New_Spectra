@@ -13,7 +13,7 @@ function Page() {
   const [formData, setFormData] = useState({
     name: "",
     code: "",
-    examinationTypes: [],
+    ExaminationTypes: [],
   });
 
   const {
@@ -39,7 +39,7 @@ function Page() {
       setFormData({
         name: "",
         code: "",
-        examinationTypes: [],
+        ExaminationTypes: [],
       });
   }, [isSuccess]);
   const handleSpecialtiesChange = (selected) => {
@@ -72,14 +72,14 @@ function Page() {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, "name")}
+            error={GetErrorMsg(error, "Name")}
           />
           <InputGreen
             label="كود الفحص"
             name="code"
             value={formData.code}
             onChange={handleInputChange}
-            error={GetErrorMsg(error, "code")}
+            error={GetErrorMsg(error, "Code")}
           />
           <MultiSelect
             data={["نفسى", "علاجى"]}

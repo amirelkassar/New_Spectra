@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/api/api";
+import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //getAll
@@ -7,7 +7,7 @@ export const GetMasterDataServices = () => {
   return useQuery({
     queryKey: [Admin.MasterDataServices.url],
     queryFn: async () => {
-      const response = await api.get(Admin.MasterDataServices.url, {
+      const response = await apiAdmin.get(Admin.MasterDataServices.url, {
         headers: {},
       });
       return response;
@@ -19,7 +19,7 @@ export const GetMasterDataServicesID = (id) => {
   return useQuery({
     queryKey: [Admin.MasterDataServices.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Admin.MasterDataServices.getByID(id), {
+      const response = await apiAdmin.get(Admin.MasterDataServices.getByID(id), {
         headers: {},
       });
       return response;
@@ -32,7 +32,7 @@ export const DeleteMasterDataServices = (id) => {
   return useMutation({
     mutationKey: ["MasterDataServices"],
     mutationFn: async () => {
-      const response = await api.delete(
+      const response = await apiAdmin.delete(
         Admin.MasterDataServices.DeleteByID(id)
       );
       return response.data;
@@ -47,7 +47,7 @@ export const useCreateMasterDataServices = () => {
   const { refetch } = GetMasterDataServices();
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Admin.MasterDataServices.url, data, {});
+      const response = await apiAdmin.post(Admin.MasterDataServices.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
@@ -68,7 +68,7 @@ export const useEditMasterDataServices = (id) => {
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await api.put(
+      const response = await apiAdmin.put(
         Admin.MasterDataServices.getByID(id),
         data,
         {}

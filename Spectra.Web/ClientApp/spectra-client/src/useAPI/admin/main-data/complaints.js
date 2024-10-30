@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/api/api";
+import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
 import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
@@ -9,7 +9,7 @@ export const GetComplaint = () => {
   return useQuery({
     queryKey: [Admin.Complaint.url],
     queryFn: async () => {
-      const response = await api.get(Admin.Complaint.url, {
+      const response = await apiAdmin.get(Admin.Complaint.url, {
         headers: {},
       });
       return response;
@@ -21,7 +21,7 @@ export const GetComplaintID = (id) => {
   return useQuery({
     queryKey: [Admin.Complaint.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Admin.Complaint.getByID(id), {
+      const response = await apiAdmin.get(Admin.Complaint.getByID(id), {
         headers: {},
       });
       return response;
@@ -37,7 +37,7 @@ export const DeleteComplaint = (id) => {
   return useMutation({
     mutationKey: ["Complaint"],
     mutationFn: async () => {
-      const response = await api.delete(Admin.Complaint.DeleteByID(id));
+      const response = await apiAdmin.delete(Admin.Complaint.DeleteByID(id));
       return response.data;
     },
 
@@ -53,7 +53,7 @@ export const useCreateComplaint = () => {
   const { refetch } = GetComplaint();
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Admin.Complaint.url, data, {});
+      const response = await apiAdmin.post(Admin.Complaint.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
@@ -74,7 +74,7 @@ export const useEditComplaint = (id) => {
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await api.put(Admin.Complaint.getByID(id), data, {});
+      const response = await apiAdmin.put(Admin.Complaint.getByID(id), data, {});
       return response.data;
     },
     onSuccess: (data) => {

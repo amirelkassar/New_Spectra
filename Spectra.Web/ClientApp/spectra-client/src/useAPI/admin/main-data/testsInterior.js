@@ -1,5 +1,6 @@
 "use client";
-import { api } from "@/api/api";
+
+import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //getAll
@@ -7,7 +8,7 @@ export const GetInternalExamination = () => {
   return useQuery({
     queryKey: [Admin.InternalExamination.url],
     queryFn: async () => {
-      const response = await api.get(Admin.InternalExamination.url, {
+      const response = await apiAdmin.get(Admin.InternalExamination.url, {
         headers: {},
       });
       return response;
@@ -19,7 +20,7 @@ export const GetInternalExaminationID = (id) => {
   return useQuery({
     queryKey: [Admin.InternalExamination.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Admin.InternalExamination.getByID(id), {
+      const response = await apiAdmin.get(Admin.InternalExamination.getByID(id), {
         headers: {},
       });
       return response;
@@ -32,7 +33,7 @@ export const DeleteInternalExamination = (id) => {
   return useMutation({
     mutationKey: ["InternalExamination"],
     mutationFn: async () => {
-      const response = await api.delete(
+      const response = await apiAdmin.delete(
         Admin.InternalExamination.DeleteByID(id)
       );
       return response.data;
@@ -47,7 +48,7 @@ export const DeleteInternalExamination = (id) => {
 export const useCreateInternalExamination = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Admin.InternalExamination.url, data, {});
+      const response = await apiAdmin.post(Admin.InternalExamination.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
@@ -66,7 +67,7 @@ export const useEditInternalExamination = (id) => {
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await api.put(
+      const response = await apiAdmin.put(
         Admin.InternalExamination.getByID(id),
         data,
         {}

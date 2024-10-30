@@ -11,6 +11,7 @@ import {
   useEditComplaint,
 } from "@/useAPI/admin/main-data/complaints";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page({ params }) {
   const [formData, setFormData] = useState({
     complaintName: "",
@@ -18,7 +19,12 @@ function Page({ params }) {
     descriptionOfTheComplaint: "",
   });
   const { data, isLoading } = GetComplaintID(params.complaintsID);
-  const { mutate: eEditComplaint } = useEditComplaint(formData?.id);
+  const {
+    mutate: eEditComplaint,
+    error,
+    isError,
+    reset,
+  } = useEditComplaint(formData?.id);
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
@@ -29,6 +35,9 @@ function Page({ params }) {
       ...prev,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,12 +65,16 @@ function Page({ params }) {
               name="complaintName"
               value={formData.complaintName}
               onChange={handleChange}
+              error={GetErrorMsg(error, "ComplaintName")}
+
             />
             <InputGreen
               label="الكود"
               name="code1"
               value={formData.code1}
               onChange={handleChange}
+              error={GetErrorMsg(error, "Code1")}
+
             />
             <Textarea
               classNames={{
@@ -73,6 +86,8 @@ function Page({ params }) {
               name="descriptionOfTheComplaint"
               value={formData.descriptionOfTheComplaint}
               onChange={handleChange}
+              error={GetErrorMsg(error, "DescriptionOfTheComplaint")}
+
             />
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
