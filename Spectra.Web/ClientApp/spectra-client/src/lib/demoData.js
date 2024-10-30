@@ -43,7 +43,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
   {
     id: '2',
@@ -51,7 +51,7 @@ export const MedicalTeamData = [
     profession: 'توحد',
     rate: 9.1,
     avatar: '',
-    cost: 90,
+    exp: '3 سنوات',
   },
   {
     id: '3',
@@ -59,7 +59,7 @@ export const MedicalTeamData = [
     profession: 'فرط حركة',
     rate: 8.5,
     avatar: '',
-    cost: 80,
+    exp: '3 سنوات',
   },
   {
     id: '4',
@@ -67,7 +67,7 @@ export const MedicalTeamData = [
     profession: 'ثنائي القطب',
     rate: 9.8,
     avatar: '',
-    cost: 150,
+    exp: '3 سنوات',
   },
   {
     id: '5',
@@ -75,7 +75,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 8.6,
     avatar: '',
-    cost: 120,
+    exp: '3 سنوات',
   },
   {
     id: '6',
@@ -83,7 +83,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
   {
     id: '7',
@@ -91,7 +91,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 8.5,
     avatar: '',
-    cost: 80,
+    exp: '3 سنوات',
   },
   {
     id: '8',
@@ -99,7 +99,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
   {
     id: '9',
@@ -107,7 +107,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 8.5,
     avatar: '',
-    cost: 80,
+    exp: '3 سنوات',
   },
   {
     id: '10',
@@ -115,7 +115,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
   {
     id: '11',
@@ -123,7 +123,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 8.5,
     avatar: '',
-    cost: 80,
+    exp: '3 سنوات',
   },
   {
     id: '12',
@@ -131,7 +131,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
   {
     id: '13',
@@ -139,7 +139,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 8.5,
     avatar: '',
-    cost: 80,
+    exp: '3 سنوات',
   },
   {
     id: '14',
@@ -147,7 +147,7 @@ export const MedicalTeamData = [
     profession: 'اخصائى نفسي',
     rate: 9.5,
     avatar: '',
-    cost: 100,
+    exp: '3 سنوات',
   },
 ];
 

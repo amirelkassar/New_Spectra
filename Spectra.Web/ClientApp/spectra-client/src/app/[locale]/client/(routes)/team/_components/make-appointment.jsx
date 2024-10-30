@@ -10,7 +10,7 @@ import ROUTES from '@/routes';
 import Button from '@/components/button';
 import CloseIcon from '@/assets/icons/close';
 
-export const MakeAppointment = ({ doctorId }) => {
+export const MakeAppointment = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
 
@@ -20,12 +20,9 @@ export const MakeAppointment = ({ doctorId }) => {
       <Button
         variant='secondary'
         onClick={open}
-        className='px-2 py-1 rounded-lg'
+        className=''
       >
-        <span>
-          حجز{' '}
-          <span className='hidden lg:inline'>ميعاد</span>
-        </span>
+        حجز ميعاد
       </Button>
 
       {/* MODAL */}

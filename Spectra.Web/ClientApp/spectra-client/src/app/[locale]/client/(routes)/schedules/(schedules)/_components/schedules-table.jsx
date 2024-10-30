@@ -31,21 +31,21 @@ export const SchedulesTable = ({ data = [] }) => {
         data={filteredData}
       >
         <TableItem currentTab={currentTab} />
-
-        <div className='flex flex-col space-y-5 mdl:hidden'>
-          {filteredData.length ? (
-            filteredData?.map((item, index) => (
-              <CardItem key={index} item={item} />
-            ))
-          ) : (
-            <TableCard.Fallback>
-              {currentTab === 'new'
-                ? 'لا يوجد مواعيد جديدة'
-                : 'لا يوجد مواعيد سابقة'}
-            </TableCard.Fallback>
-          )}
-        </div>
       </DataTable>
+
+      <div className='flex flex-col space-y-5 mdl:hidden'>
+        {filteredData.length ? (
+          filteredData?.map((item, index) => (
+            <CardItem key={index} item={item} />
+          ))
+        ) : (
+          <TableCard.Fallback>
+            {currentTab === 'new'
+              ? 'لا يوجد مواعيد جديدة'
+              : 'لا يوجد مواعيد سابقة'}
+          </TableCard.Fallback>
+        )}
+      </div>
     </Card>
   );
 };

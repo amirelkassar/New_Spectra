@@ -28,7 +28,7 @@ const SelectInput = ({
     <Select
       {...props}
       checkIconPosition='right'
-      allowDeselect={false}
+      allowDeselect={props.allowDeselect || false}
       size={size}
       label={label}
       data={data}
