@@ -53,7 +53,7 @@ const TableUi = ({ table, columns, fallback }) => {
             {headerGroup.headers.map((header) => {
               return (
                 <TableTh
-                  className='bg-blueLight first:rounded-s-2xl last:rounded-e-2xl text-xs lg:text-base font-normal p-3 text-center'
+                  className='bg-blueLight font-medium first:rounded-s-2xl last:rounded-e-2xl text-xs lg:text-base p-3 text-center'
                   key={header.id}
                 >
                   {header.isPlaceholder
@@ -141,6 +141,8 @@ const MobileCards = ({ table, fallback }) => {
 };
 
 const Card = ({ row, headers }) => {
+  const options = ['date', 'status', 'actions'];
+
   const dateCell = row
     .getVisibleCells()
     .find((cell) => cell.column.id === 'date');
@@ -177,9 +179,7 @@ const Card = ({ row, headers }) => {
       >
         {row.getVisibleCells().map(
           (cell) =>
-            cell.column.id !== 'actions' &&
-            cell.column.id !== 'status' &&
-            cell.column.id !== 'date' && (
+            !options.includes(cell.column.id) && (
               <div
                 key={cell.id}
                 className='grid grid-cols-12 gap-5'
@@ -208,13 +208,13 @@ const Card = ({ row, headers }) => {
         )}
       </div>
 
-      <div className='grid grid-cols-3 place-items-center font-bold pt-5'>
+      <div className='grid grid-cols-3 place-items-center font-medium pt-5'>
         {flexRender(
           dateCell.column.columnDef.cell,
           dateCell.getContext()
         )}
 
-        <div className='font-normal w-full'>
+        <div className='w-full'>
           {flexRender(
             statusCell.column.columnDef.cell,
             statusCell.getContext()
