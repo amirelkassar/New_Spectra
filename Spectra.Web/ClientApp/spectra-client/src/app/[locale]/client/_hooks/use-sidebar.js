@@ -63,8 +63,8 @@ export const useNav = () => {
 
       {
         name: 'الفريق',
-        route: ROUTES.CLIENT.TEAM,
-        isActive: path.includes(ROUTES.CLIENT.TEAM),
+        route: ROUTES.CLIENT.TEAM.HOME,
+        isActive: path.includes(ROUTES.CLIENT.TEAM.HOME),
         icon: <StaffIcon />,
       },
       // {

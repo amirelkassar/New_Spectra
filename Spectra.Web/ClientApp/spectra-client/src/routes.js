@@ -37,7 +37,11 @@ const ROUTES = {
     },
     SCHEDULES: '/client/schedules',
     STEPS: '/client/steps',
-    TEAM: '/client/team',
+    TEAM: {
+      HOME: '/client/team',
+      VIEW_DOCTOR: '/client/team/:id',
+      BOOK_APPOINTMENT: '/client/team/:id/book',
+    },
     REPORTS: '/client/reports',
     CHATS: '/client/chats',
     WALLET: '/client/wallet',

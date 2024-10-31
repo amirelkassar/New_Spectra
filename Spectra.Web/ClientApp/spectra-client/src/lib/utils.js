@@ -30,7 +30,12 @@ export function formatDate(date) {
 }
 
 export function getDate(date = '', locale = 'en') {
-  if (!date || typeof date !== 'string') return;
+  if (!date || typeof date !== 'string')
+    return {
+      fullYear: '',
+      time: '',
+      fullYearWithMonthName: '',
+    };
 
   const fullYear = dayjs(date)
     .locale(locale)

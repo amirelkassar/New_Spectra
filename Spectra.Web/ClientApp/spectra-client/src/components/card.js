@@ -19,7 +19,7 @@ const Card = ({
           {...props}
         >
           {title && (
-            <h3 className='text-base font-bold mdl:text-2xl mb-3'>
+            <h3 className='text-base font-bold mdl:text-xl mb-3'>
               {title}
             </h3>
           )}
