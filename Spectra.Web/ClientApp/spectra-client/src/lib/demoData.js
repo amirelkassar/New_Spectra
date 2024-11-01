@@ -1,5 +1,4 @@
 import React from 'react';
-import HeartIcon from '@/assets/icons/heart';
 import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
@@ -8,6 +7,7 @@ import LanguageIssues from '@/assets/icons/language-issues';
 import ADHD from '@/assets/icons/adhd';
 import Disability from '@/assets/icons/disability';
 import BehavioralIssues from '@/assets/icons/behavioral-issues';
+import Watching from '@/assets/icons/watching';
 import LearningDifficulties from '@/assets/icons/learning-difficulties';
 import DevelopmentalDelay from '@/assets/icons/developmental-delay';
 import AllSpecializations from '@/assets/icons/all-specializations';
@@ -1107,10 +1107,11 @@ export const servicesData = [
   {
     id: '1',
     label: 'خدمة الكشف المبكر الالكتروني',
-    icon: React.createElement(HeartIcon, {
+    icon: React.createElement(Watching, {
       className: 'size-8',
     }),
-    color: 'rgba(235, 67, 53, 0.18)',
+
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية',
     subscribed: true,
@@ -1150,19 +1151,9 @@ export const servicesData = [
     icon: React.createElement(TeamIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(16, 176, 193, 0.18)',
+    color: 'rgba(248, 193, 189, 0.2)',
     description:
       'نقدم خدمات الاكتشاف المبكر للاضطرابات النمائية و السلوكية كالتوحد و فرط الحركة وغيرها',
-  },
-  {
-    id: '3',
-    label: 'خدمات المتابعة الدوائية',
-    icon: React.createElement(FollowUpIcon, {
-      className: 'size-8',
-    }),
-    color: 'rgba(138, 34, 160, 0.18)',
-    description:
-      'نقوم بتشخيص الحالات التي تعاني من الاضطرابات النمائية والسلوكية عبر فريق محترف متعدد التخصصات',
   },
   {
     id: '4',
@@ -1170,9 +1161,19 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(111, 193, 191, 0.18)',
+    color: 'rgba(217, 182, 224, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
+  },
+  {
+    id: '3',
+    label: 'خدمات المتابعة الدوائية',
+    icon: React.createElement(FollowUpIcon, {
+      className: 'size-8',
+    }),
+    color: 'rgba(208, 235, 234, 0.2)',
+    description:
+      'نقوم بتشخيص الحالات التي تعاني من الاضطرابات النمائية والسلوكية عبر فريق محترف متعدد التخصصات',
   },
   {
     id: '5',
@@ -1180,7 +1181,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(111, 193, 191, 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -1190,7 +1191,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(111, 193, 191, 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -1200,7 +1201,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(111, 193, 191, 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
@@ -1210,7 +1211,7 @@ export const servicesData = [
     icon: React.createElement(HandshakeIcon, {
       className: 'size-8',
     }),
-    color: 'rgba(111, 193, 191, 0.18)',
+    color: 'rgba(208, 235, 234, 0.2)',
     description:
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
