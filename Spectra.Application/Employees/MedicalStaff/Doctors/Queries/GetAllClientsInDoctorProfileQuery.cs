@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Spectra.Application.Hellper;
-using Spectra.Application.MedicalPatientProfiles;
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Infrastructure.MedicalPatientProfiles;
 
 namespace Spectra.Application.Employees.MedicalStaff.Doctors.Queries
 {

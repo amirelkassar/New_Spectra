@@ -30,7 +30,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<IFormFile> ScientificDegree { get; set; }
+        public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
 
 
@@ -149,11 +149,11 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
         }
 
 
-        private bool BeAValidFilePath(string filePath)
-        {
+        //private bool BeAValidFilePath(string filePath)
+        //{
 
-            return !string.IsNullOrEmpty(filePath);
-        }
+        //    return !string.IsNullOrEmpty(filePath);
+        //}
     }
 
 }

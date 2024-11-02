@@ -10,7 +10,6 @@ namespace Spectra.Application.Contracts.Queries
     public class GetAllCopiesOFContractQuery : IRequest<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>>
     {
 
-
         public string EmployeeId { get; set; }
 
     }

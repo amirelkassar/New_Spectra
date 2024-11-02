@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Dto;
+using Spectra.Application.Employees.ManagementStaff;
 using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Employees.MedicalStaff.Specialists;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -10,46 +12,60 @@ namespace Spectra.Application.Admin.Queries
     public class GetAllEmployeesQuery : IRequest<OperationResult<CollectAllEmployeeDto>>
     {
         public int PageNumber { get; set; } 
-        public int PageSize { get; set; } 
+        public int PageSize { get; set; }
+        public JobTypes? JobType { get; set; }
     }
 
     public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, OperationResult<CollectAllEmployeeDto>>
     {
         private readonly IDoctorRepository _doctorRepositor;
         private readonly ISpecialistRepository _specialistRepository;
-        public GetAllEmployeesQueryHandler(IDoctorRepository doctorRepositor , ISpecialistRepository specialistRepository)
+        private readonly IManagementStaffRepository _staffRepository;
+        public GetAllEmployeesQueryHandler(IDoctorRepository doctorRepositor , ISpecialistRepository specialistRepository , IManagementStaffRepository managementStaffRepository )
         {
             _doctorRepositor = doctorRepositor;
             _specialistRepository = specialistRepository;
-        }
+            _staffRepository = managementStaffRepository;
+    }
 
         public async Task<OperationResult<CollectAllEmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
 
 
-         
+
             var doctors = await _doctorRepositor.GetAllAsync();
             var specialists = await _specialistRepository.GetAllAsync();
+            var managementStaff = await _staffRepository.GetAllAsync();
 
-        
+
             var allEmployees = doctors.Select(c => new GetAllEmployeesDto
             {
+                Id = c.Id,
                 Name = $"{c.Name.FirstName} {c.Name.LastName}",
                 Email = c.EmailAddress.Emailaddress,
                 TimeToJoin = c.Created.Date,
-                JopType="Doctor"
+                JopType = Enum.GetName(typeof(JobTypes), JobTypes.Doctor)
 
             }).ToList();
 
             allEmployees.AddRange(specialists.Select(c => new GetAllEmployeesDto
             {
+                Id = c.Id,
                 Name = $"{c.Name.FirstName} {c.Name.LastName}",
                 Email = c.EmailAddress.Emailaddress,
                 TimeToJoin = c.Created.Date,
-                JopType= "Specialist"
-            }));
+                JopType = Enum.GetName(typeof(JobTypes), JobTypes.Specialist)
+            })
+ .Concat(managementStaff.Select(c => new GetAllEmployeesDto
+ {
+     Id = c.Id,
+     Name = $"{c.Name.FirstName} {c.Name.LastName}",
+     Email = c.EmailAddress.Emailaddress,
+     TimeToJoin = c.Created.Date,
+     JopType = Enum.GetName(typeof(JobTypes), c.JobType)
+ })));
 
-            
+
             var totalItems = allEmployees.Count;
             var totalPages = (int)Math.Ceiling(totalItems / (double)request.PageSize);
 

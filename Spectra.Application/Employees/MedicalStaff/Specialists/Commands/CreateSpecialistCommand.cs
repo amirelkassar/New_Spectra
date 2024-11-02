@@ -25,7 +25,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Specialists.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<IFormFile> ScientificDegree { get; set; }
+        public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
 
 

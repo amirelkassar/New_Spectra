@@ -3,7 +3,7 @@ using Spectra.Application.Hellper;
 using Spectra.Domain.MedicalPatientProfiles;
 using System.Linq.Expressions;
 
-namespace Spectra.Application.MedicalPatientProfiles
+namespace Spectra.Infrastructure.MedicalPatientProfiles
 {
     public interface IMedicalPatientProfileRepository
     {

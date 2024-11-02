@@ -18,7 +18,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<string> AttachmentPath { get; set; }
+        public List<string>? AttachmentPath { get; set; }
         public EmpelyeeRates? EmpelyeeRate { get; set; }
 
 
@@ -35,7 +35,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
-                    List<string> attachmentPath,
+                    List<string>? attachmentPath,
                    EmpelyeeRates? empelyeeRate
 
                    ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)

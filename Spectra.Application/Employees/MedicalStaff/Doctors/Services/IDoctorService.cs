@@ -22,6 +22,6 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Services
 
 
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices();
-        Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(GetAllClientsInDoctorProfileQuery input);
+        Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInDoctorProfileQuery input);
     }
 }

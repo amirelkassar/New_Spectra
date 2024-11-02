@@ -23,7 +23,8 @@ namespace Spectra.Application.Contracts.Commands
         public string FirstName { get; set; }
         public string LastName{ get; set; }
         public ContractCases ContractCase { get; set; }
-
+        public bool IsFreelance { get; set; }
+        public bool IsSpectraTeam { get; set; }
 
     }
 
@@ -63,10 +64,9 @@ namespace Spectra.Application.Contracts.Commands
             contract.EmployeeId = request.EmployeeId;
             contract.Titel = request.Titel;
             contract.ContractCase = request.ContractCase;
-
             contract.Freelance = request.Freelance;
-          
-
+            contract.IsFreelance= request.IsFreelance;
+            contract.IsSpectraTeam= request.IsSpectraTeam;
 
 
             if (request.ContractCase == ContractCases.SAVE)
@@ -85,7 +85,9 @@ namespace Spectra.Application.Contracts.Commands
               request.EmployeeId,
               request.Titel,
               request.ContractCase,
-             fullName
+              fullName,
+              request.IsFreelance,
+              request.IsSpectraTeam
              );
 
             await _contractRepository.AddAsync(contracts);

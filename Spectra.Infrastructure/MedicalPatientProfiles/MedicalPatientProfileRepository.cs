@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MedicalPatientProfiles;
+
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;

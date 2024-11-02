@@ -10,10 +10,13 @@ using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Employees.ManagementStaff.Service;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
+using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.Contracts;
+using Spectra.Infrastructure.Doctors;
 
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
@@ -23,15 +26,15 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IClientService _clientService;
-        private readonly IDoctorService _DoctorService;
+        private readonly IDoctorService _doctorService;
         private readonly IContractService _contractService;
 
-        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService DoctorService, IContractService contractService)
+        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService doctorService, IContractService contractService)
         {
             _adminService = adminService;
             _clientService = clientService;
             _contractService = contractService;
-            _DoctorService = DoctorService;
+            _doctorService = doctorService;
         }
 
         [HttpGet("GetAllDoctors")]
@@ -82,11 +85,11 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
             var clienties = await _clientService.GetClientById(id);
             return Ok(clienties);
         }
-        [HttpGet("doctor/id")]
+        [HttpGet("GetDoctor/id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetOneDoctor(string id)
         {
-            var Doctories = await _DoctorService.GetDoctorById(id);
+            var Doctories = await _doctorService.GetDoctorById(id);
             return Ok(Doctories);
         }
 
@@ -136,6 +139,26 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
             return Ok(contract);
         }
 
+
+        [HttpPut("EditDocotor/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UpdateDocotor(string id, UpdateManagementStaffDto input)
+        {
+
+
+            var contract = await _doctorService.UpdateDoctor(id, input);
+            return Ok(contract);
+        }
+        [HttpPut("ClientsFellowDoctor/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInDoctorProfileQuery input)
+        {
+
+         
+            var clients = await _doctorService.GetAllClintsDoctorCare(id, input);
+            return Ok(clients);
+        }  
+      
 
 
 

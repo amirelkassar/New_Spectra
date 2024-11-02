@@ -98,11 +98,11 @@ namespace Spectra.Infrastructure.Doctors
             var query = new GetAllDoctorQuery();
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(GetAllClientsInDoctorProfileQuery input)
+        public async Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInDoctorProfileQuery input)
         {
             var query = new GetAllClientsInDoctorProfileQuery
             {
-                DoctorId = input.DoctorId,
+                DoctorId = id,
                 PageSize = input.PageSize,
                 PageNumber = input.PageNumber
             };
@@ -122,6 +122,9 @@ namespace Spectra.Infrastructure.Doctors
         public async Task<OperationResult<Doctor>> GetDoctorById(string id)
         {
             var query = new GetDoctorByIdQuery { Id = id };
+
+
+
             return await _mediator.Send(query);
         }
 

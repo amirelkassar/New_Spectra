@@ -38,6 +38,8 @@ namespace Spectra.Infrastructure.Contracts
                     Titel = input.Titel,
                     Freelance = input.Freelance,
                     SpectraTeam = input.SpectraTeam,
+                    IsSpectraTeam = input.IsSpectraTeam,
+                    IsFreelance= input.IsFreelance,
                 };
 
 
@@ -71,7 +73,13 @@ namespace Spectra.Infrastructure.Contracts
 
             return await _mediator.Send(query);
         }
+    public  async  Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId )
+        {
+            var query = new GetServicesFromContractQuery() { Id = EmployeeId };
 
+
+            return await _mediator.Send(query);
+        }
 
         public async Task<OperationResult<EmploymentContract>> GetContractById(string id)
         {
@@ -85,13 +93,15 @@ namespace Spectra.Infrastructure.Contracts
             var command = new UpdateContractCommand
             {
                 id = id,
-                Discount = input.Discount,
                 HoursOfWork = input.HoursOfWork,
                 DaysOfWork = input.DaysOfWork,
                 ContractCase = input.ContractCase,
                 EmployeeId = input.EmployeeId,
                 Titel = input.Titel,
-                Duration = input.Duration,
+                Freelance = input.Freelance,
+                SpectraTeam = input.SpectraTeam,
+                IsSpectraTeam = input.IsSpectraTeam,
+                IsFreelance = input.IsFreelance,
 
             };
 

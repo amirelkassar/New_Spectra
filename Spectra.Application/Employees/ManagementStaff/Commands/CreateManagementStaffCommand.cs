@@ -4,6 +4,7 @@ using Spectra.Application.Countries.States;
 using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
+using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -40,7 +41,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
         public async Task<OperationResult<string>> Handle(CreateManagementStaffCommand request, CancellationToken cancellationToken)
         {
       
-            var staff = Spectra.Domain.Employees.ManagementStaff.Staff.Create(
+            var staff = Staff.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
                 request.NationalId,
@@ -124,11 +125,11 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
         }
 
 
-        private bool BeAValidFilePath(string filePath)
-        {
+        //private bool BeAValidFilePath(string filePath)
+        //{
 
-            return !string.IsNullOrEmpty(filePath);
-        }
+        //    return !string.IsNullOrEmpty(filePath);
+        //}
     }
 
 }

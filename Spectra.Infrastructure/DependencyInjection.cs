@@ -35,12 +35,14 @@ using Spectra.Application.MasterData.InternalExaminations;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
+using Spectra.Application.MasterData.Sections;
+using Spectra.Application.MasterData.Sections.Service;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Services;
-using Spectra.Application.MedicalPatientProfiles;
+
 using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
@@ -67,6 +69,8 @@ using Spectra.Infrastructure.MasterData.ExcelFile;
 using Spectra.Infrastructure.MasterData.GeneralComplaint;
 using Spectra.Infrastructure.MasterData.InternalExaminations;
 using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
+using Spectra.Infrastructure.MasterData.sections;
+using Spectra.Infrastructure.MasterData.Sections;
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
@@ -140,6 +144,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
             services.AddScoped<IManagementStaffService, ManagementStaffService>();
+            services.AddScoped<ISectionsServices, SectionsServices>();
             services.AddScoped<IAdminService, AdminService>();
 
 
@@ -175,6 +180,8 @@ namespace Spectra.Infrastructure
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
             services.AddScoped<IManagementStaffRepository, ManagementStaffRepository>();
             services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
+            services.AddScoped<ISectionsRepository, SectionsRepository>();
+
             services.AddSignalR();
 
             return services;

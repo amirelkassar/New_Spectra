@@ -66,11 +66,17 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
                 .NotEmpty().WithMessage("Diagnosis name is required.")
                 .MaximumLength(100).WithMessage("Diagnosis name must not exceed 100 characters.");
             RuleFor(x => x.Code1)
-              .MaximumLength(10).WithMessage("Code1 name must not exceed 10 characters.");
+                    .NotEmpty().WithMessage("Code1 is required.")
+                    .MaximumLength(10).WithMessage("Code1 must not exceed 10 characters.");
+
             RuleFor(x => x.Code2)
-         .MaximumLength(10).WithMessage("Code1 name must not exceed 10 characters.");
+                .NotEmpty().WithMessage("Code2 is required.")
+                .MaximumLength(10).WithMessage("Code2 must not exceed 10 characters.");
+
             RuleFor(x => x.Code3)
-             .MaximumLength(10).WithMessage("Code1 name must not exceed 10 characters.");
+                .NotEmpty().WithMessage("Code3 is required.")
+                .MaximumLength(10).WithMessage("Code3 must not exceed 10 characters.");
+
             RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Diagnosis description is required.")
             .MaximumLength(500).WithMessage("Diagnosis description must not exceed 500 characters.");

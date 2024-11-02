@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Clients;
-using Spectra.Application.MedicalPatientProfiles;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Patients;
@@ -8,6 +7,7 @@ using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Infrastructure.MedicalPatientProfiles;
 
 namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 {

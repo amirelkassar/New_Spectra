@@ -24,14 +24,15 @@ namespace Spectra.Domain.Employees.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            List<string> attachmentPath,
+            List<string>? attachmentPath,
             EmpelyeeRates? empelyeeRate
 
 
 
 
             )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree,
+                  attachmentPath, empelyeeRate
                   )
         {
 
@@ -50,7 +51,7 @@ namespace Spectra.Domain.Employees.MedicalStaff.Doctor
         string? licenseNumber,
         string? approvedBy,
         string academicdegree,
-       List<string> attachmentPath,
+       List<string>? attachmentPath,
 
         EmpelyeeRates? empelyeeRate
 
