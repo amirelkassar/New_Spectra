@@ -7,26 +7,54 @@ import interactionPlugin from "@fullcalendar/interaction";
 import man from "@/assets/images/hero-section-img.png";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useMediaQuery } from "@mantine/hooks";
+const events = [
+  {
+    title: "عبدالله الشيخ",
+    start: "2024-11-01T18:00:00",
+    color: "#10B0C1",
+    textColor: "#fff",
+    src: man,
+    display: "#10B0C1",
+  },
+  {
+    title: "عبدالله الشيخ",
+    start: "2024-11-04T18:00:00",
+    color: "#939393",
+    textColor: "#fff",
+    src: man,
+    display: "#939393",
+  },
+];
 function CalendarComp() {
   const params = useParams();
- 
+  const isMobile = useMediaQuery("(max-width: 992px)");
+
   const renderEventContent = (eventInfo) => {
+    const dayOfMonth = eventInfo.event.start.getDate();
     return (
-      <div className="flex flex-col py-4 px-2 gap-1">
-        <Image
-          src={eventInfo.event.extendedProps.src.src}
-          alt="Avatar"
-          width={28}
-          height={28}
-          className=" size-[28px] rounded-full object-cover object-top"
-        />
-        <h3 className="text-[14px] font-Bold">{eventInfo.event.title}</h3>
-        <b>{eventInfo.timeText}</b>
+      <div className="mdl:p-3 p-1 pb-0 h-full w-full">
+        <p className="text-xs mdl:text-lg text-end text-white">{dayOfMonth}</p>
+        <div className="flex flex-col  gap-1 -mt-1 mdl:-mt-4">
+          <Image
+            src={eventInfo.event.extendedProps.src.src}
+            alt="Avatar"
+            width={28}
+            height={28}
+            className=" size-4 mdl:size-[28px] rounded-full object-cover object-top"
+          />
+          <h3 className=" text-xs truncate max-w-full mdl:text-[14px] font-Bold">
+            {eventInfo.event.title}
+          </h3>
+          <b className="text-xs   mdl:text-[14px] font-Regular">
+            {eventInfo.timeText}
+          </b>
+        </div>
       </div>
     );
   };
   const dayCellClassNames = (arg) => {
-    return "size-[110px]";
+    return "size-[40px]";
   };
 
   return (
@@ -34,26 +62,12 @@ function CalendarComp() {
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
       eventStartEditable={false}
-      eventShortHeight={110}
-      viewHeight={110}
-      events={[
-        {
-          title: "عبدالله الشيخ",
-          start: "2024-11-01T18:00:00",
-          color: "#00A3E0",
-          textColor: "#fff",
-          src: man,
-          display: "#00A3E0",
-        },
-        {
-          title: "عبدالله الشيخ",
-          start: "2024-11-02T18:00:00",
-          color: "#7A7A7A",
-          textColor: "#fff",
-          src: man,
-          display: "#00A3E0",
-        },
-      ]}
+      resourceAreaHeaderClassNames="bg-greenMain/10 !border-none rounded-t-3xl"
+      eventOverlap={false}
+      slotMinWidth={isMobile ? 40 : 74}
+      eventShortHeight={40}
+      contentHeight={600}
+      events={events}
       editable={true}
       droppable={true}
       locale={params.locale}
@@ -64,7 +78,6 @@ function CalendarComp() {
       direction={params.locale === "en" ? "ltr" : "rtl"}
       eventContent={renderEventContent}
       dayCellClassNames={dayCellClassNames}
-      
     />
   );
 }

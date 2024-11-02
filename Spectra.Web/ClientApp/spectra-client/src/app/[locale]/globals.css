@@ -395,6 +395,7 @@ form.clientEdit .mantine-Input-input {
     grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
+/*calender*/
 .boxDate .mantine-DatePicker-calendarHeader {
   gap: 16px;
 }
@@ -476,16 +477,51 @@ form.clientEdit .mantine-Input-input {
 .fc-daygrid-day {
   width: 120px;
   height: 120px;
+  @apply mdl:w-[120px] mdl:h-[120px] w-[72px] h-[72px];
 }
 .fc-day .fc-col-header-cell-cushion {
   color: #939393;
   font-weight: 400;
-  text-align: end;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  @apply text-xs mdl:text-base p-1 mdl:p-[10px] text-center mdl:text-end;
 }
-
+.fc .fc-daygrid-day-number {
+  @apply text-xs mdl:text-base;
+}
+.fc .fc-scroller {
+  overflow: hidden !important;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+}
+.fc .fc-daygrid-day-frame {
+  position: relative;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  min-height: 0px;
+  height: auto;
+  position: absolute;
+  inset: 1px;
+  width: 100%;
+  height: 100%;
+}
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  margin-right: 0px;
+  margin: 0px !important;
+  border-radius: 0px;
+  height: 100%;
+  border: none;
+}
+.fc .fc-view-harness {
+  @apply max-w-full overflow-x-auto;  
+}
+.fc .fc-dayGridMonth-view{
+  @apply min-w-[550px];
+}
+.fc .fc-daygrid-event-harness{
+  height: 98%;
+}
+/*end calender*/
 @media (max-width: 768px) {
   .hideScroll {
     scrollbar-width: none;
@@ -543,7 +579,7 @@ Preloader Area CSS
 
 .loader {
   transition: 0.5s;
-  @apply  w-20 h-20 rounded-full inline-block mx-auto my-0   translate-y-[-45%];
+  @apply w-20 h-20 rounded-full inline-block mx-auto my-0   translate-y-[-45%];
 }
 
 .loader .loader-outter {
