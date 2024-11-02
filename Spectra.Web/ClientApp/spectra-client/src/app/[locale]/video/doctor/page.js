@@ -17,7 +17,7 @@ function Page() {
             : "lgl:w-[400px] lgl:min-w-[400px]"
         }  bg-white px-5 `}
       >
-        <div className=" max-h-screen absolute z-50 -end-1 cursor-pointer flex items-center justify-center h-full">
+        <div className=" max-h-screen absolute z-50 -end-1 cursor-pointer hidden lgl:flex items-center justify-center h-full">
           <div className=" absolute  " onClick={() => setOpen(!open)}>
             {open ? <ArrowVideoCloseIcon /> : <ArrowVideoIcon />}
           </div>
