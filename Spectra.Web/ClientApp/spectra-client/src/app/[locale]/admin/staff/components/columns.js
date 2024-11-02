@@ -1,5 +1,3 @@
-import MenuActions from "@/components/menu-actions";
-import ROUTES from "@/routes";
 import ActionMenu from "./ActionMenu";
 export const columns = [
   {
@@ -13,34 +11,43 @@ export const columns = [
     id: "email",
   },
   {
-    accessorKey: "type",
+    accessorKey: "jopType",
     header: "الوظيفة",
-    id: "typeClient",
+    id: "jopType",
   },
 
   {
-    accessorKey: "lastLogin",
+    accessorKey: "timeToJoin",
     header: " تاريخ الانضمام",
-    id: "lastLogin",
+    id: "timeToJoin",
+    cell: ({ getValue }) => {
+      const value = getValue();
+      return (
+        <p className="text-[12px] md:text-[16px]">
+          {new Date(value).toISOString().split("T")[0]}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "numberOfChildren",
     header: " عدد المرضى ",
     id: "numberOfChildren",
+    cell: ({ getValue }) => {
+      const value = getValue();
+      return <p className="text-[12px] md:text-[16px]">0</p>;
+    },
   },
   {
-    accessorKey: "type",
-    header: "",
-    id: "type",
-
-    cell: ({row }) => {
-      const type = row.original.type;
+    id: "actions",
+    cell: ({ row }) => {
+      const type = row.original.jopType;
       const id = row.original.id;
       return (
         <div
           className={"flex gap-[10px] md:gap-[40px] items-center justify-end "}
         >
-          <ActionMenu id={id} type={type}  />
+          <ActionMenu id={id} type={type} />
         </div>
       );
     },

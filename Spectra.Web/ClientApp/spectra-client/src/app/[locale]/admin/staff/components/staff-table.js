@@ -1,6 +1,8 @@
 "use client";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./columns";
+import { GetStaff } from "@/useAPI/admin/staff/staff";
+import HandelShowData from "@/components/handelShowData";
 const data = [
   {
     id: 0,
@@ -129,7 +131,7 @@ const FilterOptions = [
   {
     label: "مختص",
     icon: null,
-    key: "specialist",
+    key: "Specialist",
   },
   {
     label: "طبيب",
@@ -144,19 +146,23 @@ const FilterOptions = [
 ];
 
 const StaffTable = () => {
-
+  const { data: dataStaff,isLoading } = GetStaff();
+  console.log(dataStaff?.data?.data);
   return (
-    <div className="grow">
-      <DataTable
-        data={data}
-        columns={columns}
-        filterData={FilterOptions}
-        filterBy="type"
-        filterText="فلتر بالنوع"
-        filter="buttons"
-        mdHide={2}
-      />
-    </div>
+   
+      <HandelShowData isLoading={isLoading} lengthData={dataStaff?.data.data.employees.length}>
+        <DataTable
+          data={dataStaff?.data.data.employees}
+          columns={columns}
+          filterData={FilterOptions}
+          filterBy="jopType"
+          filterText="فلتر بالنوع"
+          filter="buttons"
+          mdHide={2}
+          totalPages={dataStaff?.data.data.totalPages}
+        />
+      </HandelShowData>
+   
   );
 };
 

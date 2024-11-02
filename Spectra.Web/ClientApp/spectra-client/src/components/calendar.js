@@ -39,7 +39,7 @@ function CalendarComp() {
       events={[
         {
           title: "عبدالله الشيخ",
-          start: "2024-08-01T18:00:00",
+          start: "2024-11-01T18:00:00",
           color: "#00A3E0",
           textColor: "#fff",
           src: man,
@@ -47,7 +47,7 @@ function CalendarComp() {
         },
         {
           title: "عبدالله الشيخ",
-          start: "2024-08-02T18:00:00",
+          start: "2024-11-02T18:00:00",
           color: "#7A7A7A",
           textColor: "#fff",
           src: man,

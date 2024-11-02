@@ -21,6 +21,8 @@ import ArrowLeft from "@/assets/icons/arrow-left";
 import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
 import { SortingState } from "@tanstack/react-table";
 import { useMediaQuery } from "@mantine/hooks";
+import { useRouter } from "@/navigation";
+import { useSearchParams } from "next/navigation";
 
 export function DataTable({
   columns,
@@ -37,9 +39,21 @@ export function DataTable({
   haveComp = false,
   Component,
   appointmentNow = false,
+  totalPages = 0,
 }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
+  const [paginationPage, setPaginationPage] = useState(
+    Number(searchParams.get("page") ?? 1)
+  );
+  const updatePaginationPage = (page) => {
+    setPaginationPage(page);
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", page);
+    router.replace(`?${params.toString()}`);
+  };
 
   const table = useReactTable({
     data,
@@ -60,8 +74,8 @@ export function DataTable({
         pageSize: 10,
       },
       columnVisibility: {
-        hideCol: false, 
-      }
+        hideCol: false,
+      },
     },
   });
 
@@ -355,7 +369,40 @@ export function DataTable({
           )}
         </Table.Tbody>
       </Table>
+      {totalPages > 1 && (
+        <div className="font-bold flex items-center justify-between">
+          <Button
+            className="py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg"
+            onClick={() => updatePaginationPage(paginationPage + 1)}
+            disabled={paginationPage >= totalPages}
+          >
+            <ArrowLeft className="rotate-180" />
+            التالي
+          </Button>
 
+          <Pagination
+            total={totalPages}
+            dir="ltr"
+            classNames={{
+              control: "!bg-white hover:!bg-black/5 !transition",
+            }}
+            size="sm"
+            radius="xl"
+            withControls={false}
+            value={paginationPage}
+            onChange={(e) => updatePaginationPage(e)}
+          />
+
+          <Button
+            className="py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg"
+            onClick={() => updatePaginationPage(paginationPage - 1)}
+            disabled={paginationPage === 1}
+          >
+            <ArrowLeft />
+            السابق
+          </Button>
+        </div>
+      )}
       {/* Pagination */}
       {data.length > 10 && (
         <div className="font-bold flex items-center justify-between">
