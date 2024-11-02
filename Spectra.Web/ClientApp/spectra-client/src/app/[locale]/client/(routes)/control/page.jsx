@@ -6,7 +6,7 @@ import { PerformanceChart } from './_components/performance-chart';
 import { ReminderMessages } from './_components/reminder-messages';
 import { Activities } from '@/client/_components/services';
 import { CHILDSDATA } from '@/lib/demoData';
-import { Wallet } from './_components/wallet';
+import { Wallet } from '@/client/_components/payments';
 import { ChildSelect } from '@/client/_components/child';
 
 const ControlPage = () => {
@@ -20,7 +20,7 @@ const ControlPage = () => {
         <ReminderMessages />
       </div>
       <Activities title='طلب الخدمة' />
-      <Wallet />
+      <Wallet title='رصيدي' />
     </Container>
   );
 };

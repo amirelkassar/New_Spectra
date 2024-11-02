@@ -1,12 +1,12 @@
-const ATMCardBG = ({ className = '' }) => {
+const ATMCardBG = ({ ...props }) => {
   return (
     <svg
-      className={className}
       width={121}
       height={96}
       viewBox='0 0 121 96'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <path
         opacity='0.5'

@@ -25,14 +25,14 @@ export const BankAccount = ({
         <Avatar
           name={bankName}
           src={bankLogo}
-          className='size-11 lg:size-14 rounded-full'
+          className='size-11 mdl:size-14 rounded-full'
         />
 
         <div>
-          <h3 className='font-bold text-xs lg:text-base text-[#1D3A70]'>
+          <h3 className='font-bold text-xs mdl:text-base text-[#1D3A70]'>
             {bankName}
           </h3>
-          <p className='text-xs lg:text-base text-[#6B7280]'>
+          <p className='text-xs mdl:text-base text-[#6B7280]'>
             {accountHolder}
           </p>
         </div>

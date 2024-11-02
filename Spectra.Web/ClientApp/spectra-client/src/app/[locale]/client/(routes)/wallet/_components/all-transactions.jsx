@@ -5,10 +5,10 @@ import { cn } from '@/lib/utils';
 export const AllTransactions = ({ className = '' }) => {
   return (
     <section className={cn('text-black', className)}>
-      <Card className='space-y-5 h-full'>
-        <h2 className='font-bold text-sm lg:text-medium'>
-          جميع التحويلات
-        </h2>
+      <Card
+        title='جميع التحويلات'
+        className='space-y-5 h-full'
+      >
         <span className='bg-greenMain rounded-lg py-1 px-3 text-sm lg:text-medium font-bold text-white w-full max-w-24 flex items-center justify-center'>
           اليوم
         </span>
@@ -37,7 +37,7 @@ const Transaction = ({
   type = 'تحويل',
 }) => {
   return (
-    <div className='flex gap-5 p-3 border-b-2 border-grayLight last:border-transparent !text-xs lg:!text-base'>
+    <div className='flex gap-5 p-3 border-b-2 border-grayLight last:border-transparent !text-xs mdl:!text-base'>
       <div className='w-fit my-auto'>
         <PaymentReceived />
       </div>

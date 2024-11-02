@@ -19,11 +19,7 @@ const myAcconutData = [
 export const MyAccounts = () => {
   return (
     <section className='text-black'>
-      <Card className='space-y-5'>
-        <h2 className='font-bold text-sm lg:text-medium'>
-          حساباتي البنكية
-        </h2>
-
+      <Card title='حساباتي البنكية' className='space-y-5'>
         <div className='space-y-3'>
           {myAcconutData.map((a) => (
             <BankAccount key={a.accountHolder} {...a} />

@@ -21,12 +21,14 @@ const DATA = [
   },
 ];
 
-export const Wallet = () => {
+export const Wallet = ({ title = '' }) => {
   return (
     <section>
-      <h3 className='font-bold text-sm mdl:text-2xl'>
-        رصيدي
-      </h3>
+      {title && (
+        <h3 className='font-bold text-sm mdl:text-2xl'>
+          {title}
+        </h3>
+      )}
 
       <GradientCard className='space-y-7'>
         <div className='flex items-center flex-col mdl:flex-row mdl:flex-nowrap mdl:justify-between gap-5'>
