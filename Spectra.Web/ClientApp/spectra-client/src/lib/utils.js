@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ar';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs) {
@@ -35,6 +36,7 @@ export function getDate(date = '', locale = 'en') {
       fullYear: '',
       time: '',
       fullYearWithMonthName: '',
+      timeFromNow: '',
     };
 
   const fullYear = dayjs(date)
@@ -45,9 +47,13 @@ export function getDate(date = '', locale = 'en') {
     .locale(locale)
     .format('DD MMM, YYYY');
 
+  dayjs.extend(relativeTime);
+  const timeFromNow = dayjs(date).locale(locale).fromNow();
+
   return {
     fullYear,
     time,
     fullYearWithMonthName,
+    timeFromNow,
   };
 }

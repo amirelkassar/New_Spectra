@@ -10,7 +10,6 @@ import { useLocale } from 'next-intl';
 export const ChildPopover = ({
   data = [],
   disabled = false,
-  className = '',
   defaultSelected = '',
   onChange = () => {},
 }) => {
@@ -24,12 +23,7 @@ export const ChildPopover = ({
   return (
     <Popover
       position='bottom'
-      classNames={{
-        dropdown: cn(
-          'min-w-[80%] !max-w-[1400px]',
-          className
-        ),
-      }}
+      width={'target'}
       opened={open}
       onChange={setOpen}
       disabled={disabled}

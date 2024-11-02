@@ -53,6 +53,7 @@ const ROUTES = {
       PRIVACY_POLICY: '/client/settings/privacy-policy',
       COMPLAINTS: '/client/settings/complaints',
     },
+    NOTIFICATIONS: '/client/notifications',
   },
   ADMIN: {
     MAIN: '/admin/main',
