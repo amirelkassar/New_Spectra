@@ -10,19 +10,20 @@ import { useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/navigation";
 import ChatsIcon from "@/assets/icons/chats";
 import AddReportIcon from "@/assets/icons/addReport";
-import ReportsIcon from "@/assets/icons/reportsIcon";
 import PatientHistoryIcon from "@/assets/icons/PatientHistoryIcon";
 import InternalExamsIcon from "@/assets/icons/InternalExamsIcon";
 import DocumentIcon from "@/assets/icons/document";
 import TransfersVideoIcon from "@/assets/icons/TransfersIcon";
 import ReportsGreenIcon from "@/assets/icons/reportsGreen";
+import { useMediaQuery } from "@mantine/hooks";
 
-function CategoriesVideo() {
+function CategoriesVideo({open}) {
   const searchParams = useSearchParams();
   const pathName = usePathname();
+  const isShowMore = useMediaQuery("(max-width: 1600px)");
   const CategoriesData = [
     {
-      icon: <ReportsGreenIcon  className={"w-auto h-8 text-greenMain"} />, // Replace with actual icon component
+      icon: <ReportsGreenIcon className={"w-auto h-8 text-greenMain"} />, // Replace with actual icon component
       label: "عرض التقارير",
       name: "view_reports",
       active: searchParams.get("category") === "view_reports",
@@ -51,7 +52,7 @@ function CategoriesVideo() {
       label: "ملفات",
       name: "files",
       active: searchParams.get("category") === "files",
-    },  
+    },
     {
       icon: <ComplaintsIcon className={"w-auto h-8 text-greenMain"} />,
       label: "الشكاوى العامة",
@@ -113,7 +114,7 @@ function CategoriesVideo() {
             اضافة تقرير
           </h2>
         </Link>
-        {CategoriesData.map((category, index) => {
+        {CategoriesData.slice(0, open&&isShowMore?4:CategoriesData.length).map((category, index) => {
           return (
             <Link
               scroll={false}
@@ -135,6 +136,9 @@ function CategoriesVideo() {
             </Link>
           );
         })}
+        <div
+          className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
+        ></div>
       </div>
     </>
   );

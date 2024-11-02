@@ -13,7 +13,7 @@ function Page() {
       <div
         className={`w-full relative flex-1 duration-300 lgl:flex-none ${
           open
-            ? "lgl:w-[900px] lgl:min-w-[900px]"
+            ?  " xll:w-[900px] lgl:w-[700px] xll:min-w-[900px] lgl:min-w-[700px]"
             : "lgl:w-[400px] lgl:min-w-[400px]"
         }  bg-white px-5 `}
       >
@@ -28,7 +28,7 @@ function Page() {
       <div className="bg-white  h-fit max-h-fit lgl:bg-grayLight max-w-full lgl:rounded-s-3xl overflow-hidden lgl:flex-1 lgl:py-6 lgl:pe-10 lgl:ps-6">
         <HeadInfoClient />
         <VideoCall />
-        <CategoriesVideo />
+        <CategoriesVideo open={open} />
       </div>
     </div>
   );
