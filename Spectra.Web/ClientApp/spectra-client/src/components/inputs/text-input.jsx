@@ -1,5 +1,17 @@
 import { cn } from '@/lib/utils';
-import { TextInput as MantineTextInput } from '@mantine/core';
+import {
+  TextInput as MantineTextInput,
+  TextInputProps,
+} from '@mantine/core';
+
+/**
+ * @typedef {Object} TextInputProps
+
+ */
+
+/**
+ * @param {TextInputProps} props
+ */
 
 const TextInput = ({
   size = 'md',

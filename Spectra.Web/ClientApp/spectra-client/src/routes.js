@@ -45,7 +45,14 @@ const ROUTES = {
     REPORTS: '/client/reports',
     CHATS: '/client/chats',
     WALLET: '/client/wallet',
-    SETTINGS: '/client/settings',
+    SETTINGS: {
+      HOME: '/client/settings',
+      CHANGE_PASSWORD: '/client/settings/change-password',
+      TERMS_AND_CONDITIONS:
+        '/client/settings/terms-and-conditions',
+      PRIVACY_POLICY: '/client/settings/privacy-policy',
+      COMPLAINTS: '/client/settings/complaints',
+    },
   },
   ADMIN: {
     MAIN: '/admin/main',
@@ -240,7 +247,6 @@ const ROUTES = {
         DASHBOARD: '/admin/settings/complaints',
         COMPLAINTSDETAILS: (id) =>
           `/admin/settings/complaints/${id}`,
-      
       },
     },
   },

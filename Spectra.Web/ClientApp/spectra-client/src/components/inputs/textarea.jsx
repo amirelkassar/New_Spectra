@@ -1,5 +1,17 @@
 import { cn } from '@/lib/utils';
-import { Textarea as MantineTextarea } from '@mantine/core';
+import {
+  Textarea as MantineTextarea,
+  TextareaProps,
+} from '@mantine/core';
+
+/**
+ * @typedef {Object} TextareaProps
+
+ */
+
+/**
+ * @param {TextareaProps} props
+ */
 
 export const Textarea = ({ ...props }) => {
   return (
@@ -13,7 +25,7 @@ export const Textarea = ({ ...props }) => {
           props.classNames?.input
         ),
         label: cn(
-          'text-xs lg:text-base mb-2 ps-1',
+          'text-base mdl:text-xl mb-2 ps-1',
           props.classNames?.label
         ),
       }}

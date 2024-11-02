@@ -87,8 +87,10 @@ export const useNav = () => {
       },
       {
         name: 'الإعدادات',
-        route: ROUTES.CLIENT.SETTINGS,
-        isActive: path.includes(ROUTES.CLIENT.SETTINGS),
+        route: ROUTES.CLIENT.SETTINGS.HOME,
+        isActive: path.includes(
+          ROUTES.CLIENT.SETTINGS.HOME
+        ),
         icon: <SettingsIcon />,
       },
     ],
