@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Section } from '../../../_components/section';
+import Separator from '@/assets/icons/separator';
 
 export const Description = ({
   childName = '',
@@ -22,7 +23,7 @@ export const Description = ({
         <h1 className='text-2xl mdl:text-3xl font-bold'>
           {childName}
         </h1>
-        <Separator className='mx-auto mdl:mx-0' />
+        <Separator className='mx-auto mdl:mx-0 text-greenMain' />
         <span className='text-sm mdl:text-medium block'>
           {daignosis}
         </span>
@@ -47,20 +48,3 @@ export const Description = ({
     </Section>
   );
 };
-
-const Separator = ({ className = '' }) => (
-  <svg
-    width={149}
-    height={15}
-    viewBox='0 0 149 15'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-    className={className}
-  >
-    <path
-      d='M148 4.25708C140 7.75708 28 -7.74293 1.5 13.2571'
-      stroke='#10B0C1'
-      strokeWidth={3}
-    />
-  </svg>
-);

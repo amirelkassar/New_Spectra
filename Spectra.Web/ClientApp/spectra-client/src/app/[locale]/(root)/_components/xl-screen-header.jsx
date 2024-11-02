@@ -15,9 +15,9 @@ export const XlScreenHeader = ({
   return (
     <div
       aria-label='Main navigation'
-      className='xl:flex hidden flex-1 justify-between items-center gap-x-6'
+      className='xl:flex hidden flex-1 justify-between items-center gap-x-5'
     >
-      <div className='flex items-center gap-x-10'>
+      <div className='flex items-center gap-x-5 2xl:gap-x-10'>
         {/* LOGO */}
         <Logo className='h-10' />
 
@@ -25,7 +25,7 @@ export const XlScreenHeader = ({
         <Nav navLinks={links} />
       </div>
       {/* AUTH && LOCALE */}
-      <div className='flex items-center gap-x-6'>
+      <div className='flex items-center gap-x-5'>
         <RegisterModal />
 
         <Link

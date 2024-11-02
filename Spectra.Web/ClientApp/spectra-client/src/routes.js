@@ -5,6 +5,7 @@ const ROUTES = {
     ABOUT: '/about',
     TEAM: '/team',
     SERVICES: '/services',
+    PACKAGES: '/packages',
     TREATMENT: '/treatment',
     SUCCESS_STORIES: '/success-stories',
     BLOG: '/blog',

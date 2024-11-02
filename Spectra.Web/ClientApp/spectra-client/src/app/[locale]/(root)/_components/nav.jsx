@@ -10,7 +10,7 @@ export const Nav = ({ navLinks = [], className = '' }) => {
   return (
     <nav
       className={cn(
-        'flex items-center flex-1 justify-start gap-x-6',
+        'flex items-center flex-1 justify-start gap-x-4 2xl:gap-x-8',
         className
       )}
     >
