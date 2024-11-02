@@ -606,9 +606,9 @@ Preloader Area CSS
 
 .loader .indicator svg polyline {
   fill: none;
-  strokeWidth: 2;
-  strokeLinecap: round;
-  strokeLinejoin: round;
+  strokewidth: 2;
+  strokelinecap: round;
+  strokelinejoin: round;
 }
 
 .loader .indicator svg polyline#back {

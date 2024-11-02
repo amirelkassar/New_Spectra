@@ -14,7 +14,7 @@ import OrgIcon from '@/assets/icons/org';
 import ProviderIcon from '@/assets/icons/provider';
 import CheckIcon from '@/assets/icons/check';
 import { cn } from '@/lib/utils';
-import { AddButton } from '../../_components/add-button';
+import { AddButton } from '../../../../../../../components/buttons/add-button';
 
 const clientsOptions = [
   {
@@ -43,7 +43,7 @@ export const AddClientModal = () => {
   return (
     <>
       <div className='w-fit' role='dialog' onClick={open}>
-        <AddButton label='اضافة عميل' />
+        <AddButton>اضافة عميل</AddButton>
       </div>
 
       {/* MODAL */}

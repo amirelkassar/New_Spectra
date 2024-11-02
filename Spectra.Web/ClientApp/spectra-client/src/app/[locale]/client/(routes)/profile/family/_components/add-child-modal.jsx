@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { usePathname, useRouter } from '@/navigation';
 import { useDisclosure } from '@mantine/hooks';
 
-import { AddButton } from '../../_components/add-button';
+import { AddButton } from '../../../../../../../components/buttons/add-button';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 import SelectInput from '@/components/inputs/select-input';
@@ -24,7 +24,7 @@ export const AddChildModal = ({ trigger = null }) => {
       {/* TRIGGER */}
 
       <div className='w-fit' role='dialog' onClick={open}>
-        {trigger || <AddButton label='اضافة طفل' />}
+        {trigger || <AddButton>اضافة طفل</AddButton>}
       </div>
 
       {/* MODAL */}

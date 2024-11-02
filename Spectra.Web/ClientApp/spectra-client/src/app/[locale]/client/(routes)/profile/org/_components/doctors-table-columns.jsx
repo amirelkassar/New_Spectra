@@ -1,6 +1,5 @@
 'use client';
 
-import { formatCurrency } from '@/lib/utils';
 import Avatar from '@/components/avatar';
 import StarGoldIcon from '@/assets/icons/starGold';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
@@ -46,11 +45,6 @@ export const columns = [
         </span>
       );
     },
-  },
-  {
-    accessorKey: 'cost',
-    header: 'السعر',
-    cell: ({ getValue }) => formatCurrency(getValue()),
   },
 
   {

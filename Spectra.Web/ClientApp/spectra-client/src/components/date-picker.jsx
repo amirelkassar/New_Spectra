@@ -3,6 +3,7 @@ import {
   DatePickerProps,
 } from '@mantine/dates';
 import { Indicator } from '@mantine/core';
+import { cn } from '@/lib/utils';
 
 /**
  * @typedef {Object} DatePickerProps
@@ -15,7 +16,9 @@ import { Indicator } from '@mantine/core';
 
 export const DatePicker = ({ locale = 'en', ...props }) => {
   return (
-    <div className='w-full max-w-2xl'>
+    <div
+      className={cn('w-full max-w-2xl', props.className)}
+    >
       <MantineDatePicker
         size='xl'
         minDate={new Date()}

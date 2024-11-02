@@ -7,7 +7,7 @@ import CalendarWithBg from '@/assets/icons/calendar-with-bg';
 export const ScheduleHeader = () => {
   return (
     <div className='flex gap-5 justify-between'>
-      <div className='flex gap-5'>
+      <div className='flex items-center gap-5'>
         <H1>المواعيد</H1>
         <AddAppointment />
       </div>
