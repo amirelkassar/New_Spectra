@@ -11,6 +11,7 @@ import {
   useEditDiagnostics,
 } from "@/useAPI/admin/main-data/diagnostics";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page({ params }) {
   const [formData, setFormData] = useState({
     code1: null,
@@ -20,7 +21,12 @@ function Page({ params }) {
     description: "",
   });
   const { data, isLoading } = GetDiagnosticsID(params.diagnosticsID);
-  const { mutate: EditDiagnostic } = useEditDiagnostics(formData?.id);
+  const {
+    mutate: EditDiagnostic,
+    error,
+    isError,
+    reset,
+  } = useEditDiagnostics(formData?.id);
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
@@ -31,6 +37,9 @@ function Page({ params }) {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,30 +64,40 @@ function Page({ params }) {
               name="code1"
               value={formData.code1}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Code1")}
+
             />
             <InputGreen
               label="كود 2"
               name="code2"
               value={formData.code2}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Code2")}
+
             />
             <InputGreen
               label="كود 3"
               name="code3"
               value={formData.code3}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Code3")}
+
             />
             <InputGreen
               label="اسم التشخيص"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Name")}
+
             />
             <Textarea
               label="وصف التشخيص"
               name="description"
               value={formData.description}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Description")}
+
               classNames={{
                 input:
                   "min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px] border-greenMain rounded-2xl",

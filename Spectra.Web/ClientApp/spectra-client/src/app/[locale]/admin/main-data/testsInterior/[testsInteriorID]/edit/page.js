@@ -12,6 +12,7 @@ import {
   GetInternalExaminationID,
   useEditInternalExamination,
 } from "@/useAPI/admin/main-data/testsInterior";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page({ params }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,10 +20,12 @@ function Page({ params }) {
     examinationTypes: [], // default value
   });
   const { data, isLoading } = GetInternalExaminationID(params.testsInteriorID);
-  const { mutate: EditInternalExamination } = useEditInternalExamination(
-    formData?.id
-  );
-  console.log(formData);
+  const {
+    mutate: EditInternalExamination,
+    error,
+    isError,
+    reset,
+  } = useEditInternalExamination(formData?.id);
 
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
@@ -34,6 +37,9 @@ function Page({ params }) {
       ...prevData,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
 
   const handleSpecialtiesChange = (selected) => {
@@ -41,6 +47,9 @@ function Page({ params }) {
       ...prevData,
       examinationTypes: selected,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,12 +74,14 @@ function Page({ params }) {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Name")}
             />
             <InputGreen
               label="كود الفحص"
               name="code"
               value={formData.code}
               onChange={handleInputChange}
+              error={GetErrorMsg(error, "Code")}
             />
             <MultiSelect
               data={["نفسى", "علاجى"]}
@@ -84,6 +95,7 @@ function Page({ params }) {
                 input: " !h-auto py-1 min-h-[60px]",
                 label: "text-[12px] md:text-[16px] mb-2",
               }}
+              error={GetErrorMsg(error, "ExaminationTypes")}
             />
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">

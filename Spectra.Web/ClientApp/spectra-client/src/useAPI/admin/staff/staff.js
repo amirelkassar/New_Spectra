@@ -1,13 +1,15 @@
 "use client";
 import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
+import { useRouter } from "@/navigation";
+import ROUTES from "@/routes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //getAll
-export const GetMasterDataServices = () => {
+export const GetMedicalTests = () => {
   return useQuery({
-    queryKey: [Admin.MasterDataServices.url],
+    queryKey: [Admin.MedicalTests.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MasterDataServices.url, {
+      const response = await apiAdmin.get(Admin.MedicalTests.url, {
         headers: {},
       });
       return response;
@@ -15,11 +17,11 @@ export const GetMasterDataServices = () => {
   });
 };
 //getID
-export const GetMasterDataServicesID = (id) => {
+export const GetMedicalTestsID = (id) => {
   return useQuery({
-    queryKey: [Admin.MasterDataServices.getByID(id)],
+    queryKey: [Admin.MedicalTests.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MasterDataServices.getByID(id), {
+      const response = await apiAdmin.get(Admin.MedicalTests.getByID(id), {
         headers: {},
       });
       return response;
@@ -27,32 +29,34 @@ export const GetMasterDataServicesID = (id) => {
   });
 };
 //delete
-export const DeleteMasterDataServices = (id) => {
+export const DeleteMedicalTests = (id) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["MasterDataServices"],
+    mutationKey: ["MedicalTests"],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(
-        Admin.MasterDataServices.DeleteByID(id)
-      );
+      const response = await apiAdmin.delete(Admin.MedicalTests.DeleteByID(id));
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["MasterDataServices"]);
+      queryClient.invalidateQueries(["MedicalTests"]);
+      router.replace(ROUTES.ADMIN.DATAMAIN.MedicalTestsS);
     },
   });
 };
 //post
-export const useCreateMasterDataServices = () => {
-  const { refetch } = GetMasterDataServices();
+export const useCreateStaff = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.MasterDataServices.url, data, {});
+      const response = await apiAdmin.post(Admin.Staff.post, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onSuccess: (data) => {
-      refetch();
-      console.log("تم الإرسال بنجاح:", data);
+      console.log("wsdasdasd");
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);
@@ -60,16 +64,17 @@ export const useCreateMasterDataServices = () => {
   });
 };
 //put
-export const useEditMasterDataServices = (id) => {
-  const { refetch } = GetMasterDataServices();
+export const useEditMedicalTests = (id) => {
+  const { refetch } = GetMedicalTests();
+  const { refetch: refetch2 } = GetMedicalTestsID(id);
 
   return useMutation({
-    mutationKey: ["EditMasterDataServices"],
+    mutationKey: ["EditMedicalTests"],
     mutationFn: async (data) => {
       console.log(id);
 
       const response = await apiAdmin.put(
-        Admin.MasterDataServices.getByID(id),
+        Admin.MedicalTests.getByID(id),
         data,
         {}
       );
@@ -77,6 +82,7 @@ export const useEditMasterDataServices = (id) => {
     },
     onSuccess: (data) => {
       refetch();
+      refetch2();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);

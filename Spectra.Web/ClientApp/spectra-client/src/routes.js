@@ -76,6 +76,8 @@ const ROUTES = {
           `/admin/clients/organization/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
           `/admin/clients/organization/${id}/prescriptions`,
+        CONTRACTS: (id) =>
+          `/admin/clients/organization/${id}/contracts`,
         PATIENTS: (id, id2) =>
           `/admin/clients/organization/${id}/clients/${id2}/patients`,
         PATIENTSEDIT: (id, id2) =>
@@ -234,6 +236,12 @@ const ROUTES = {
           `/admin/settings/packages/${id}/edit`,
         PACKAGESADD: '/admin/settings/packages/add',
       },
+      COMPLAINTS: {
+        DASHBOARD: '/admin/settings/complaints',
+        COMPLAINTSDETAILS: (id) =>
+          `/admin/settings/complaints/${id}`,
+      
+      },
     },
   },
   DOCTOR: {
@@ -302,6 +310,7 @@ const ROUTES = {
       DASHBOARD: '/doctor/settings',
       CHANGEPASSWORD: '/doctor/settings/change-password',
       NOTIFICATIONS: '/doctor/settings/notifications',
+      COMPLAINTS: '/doctor/settings/complaints',
     },
   },
 };

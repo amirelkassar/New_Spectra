@@ -13,36 +13,47 @@ import {
 } from "@/useAPI/admin/main-data/analysis";
 import InputGreen from "@/components/Input-green";
 import HandelShowDataEdit from "@/components/handelShowDataEdit";
+import GetErrorMsg from "@/components/getErrorMsg";
 function Page({ params }) {
   const [formData, setFormData] = useState({
     scientificNameByEngByArab: "",
     scientificNameByEng: "",
     code: "",
-    id:'22',
+    id: "22",
     notes: "",
     examinationTypes: 1,
   });
   const { data, isLoading } = GetMedicalTestsID(params.analysisRumorsID);
   console.log(data);
-  
-  const { mutate: EditMedicalTests } = useEditMedicalTests(formData?.id);
+
+  const {
+    mutate: EditMedicalTests,
+    error,
+    isError,
+    reset,
+  } = useEditMedicalTests(formData?.id);
   useEffect(() => {
-    data?.data.data?setFormData(data.data.data):null
+    data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
- 
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleChangeType = (type) => {
     setFormData((prev) => ({
       ...prev,
       examinationTypes: type,
     }));
+    if (isError) {
+      reset();
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,7 +94,7 @@ function Page({ params }) {
                   </div>
                   <h3
                     className={`text-[14px] mdl:text-[20px] font-Bold ${
-                      formData.examinationTypes=== 1 ? "text-white" : ""
+                      formData.examinationTypes === 1 ? "text-white" : ""
                     } `}
                   >
                     تحاليل
@@ -121,6 +132,7 @@ function Page({ params }) {
                 name="scientificNameByEngByArab"
                 value={formData.scientificNameByEngByArab}
                 onChange={handleChange}
+                error={GetErrorMsg(error, "ScientificNameByEngByArab")}
               />
               <InputGreen
                 label={"الاسم العلمى  باللغة الانجليزية  "}
@@ -128,6 +140,7 @@ function Page({ params }) {
                 name="scientificNameByEng"
                 value={formData.scientificNameByEng}
                 onChange={handleChange}
+                error={GetErrorMsg(error, "ScientificNameByEng")}
               />
             </div>
 
@@ -136,6 +149,7 @@ function Page({ params }) {
               name="code"
               value={formData.code}
               onChange={handleChange}
+              error={GetErrorMsg(error, "Code")}
             />
 
             <Textarea
@@ -148,6 +162,8 @@ function Page({ params }) {
               name="notes"
               value={formData.notes}
               onChange={handleChange}
+              error={GetErrorMsg(error, "Notes")}
+
             />
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">

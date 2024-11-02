@@ -42,4 +42,13 @@ export const Admin = {
     getByID: (id) => `/MasterDataServices/id?id=${id}`,
     DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
   },
+  Staff:{
+    post: "/Admin/CreateEmployee",
+  },
+
 };
+export const General = {
+  Country:{
+    url:'/Country'
+  }
+}

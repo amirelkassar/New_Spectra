@@ -1,12 +1,12 @@
 "use client";
 import EditIcon from "@/assets/icons/edit";
 import Card from "@/components/card";
-import { Link, usePathname } from "@/navigation";
+import { Link } from "@/navigation";
 import ROUTES from "@/routes";
 import React, { useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect } from "@mantine/core";
+import { MultiSelect, NavLink, TextInput } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
@@ -15,139 +15,146 @@ import { useSearchParams } from "next/navigation";
 import LinkGreen from "@/components/linkGreen";
 import WorkNum from "./workNum";
 import SwitchContracts from "./switchContracts";
+import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
+import ArrowDownIcon from "@/assets/icons/arrow-down";
 const serviceOptions = [
-  { value: "examination", label: "Examination Service" },
-  { value: "counseling", label: "Counseling Service" },
-  { value: "diagnostic", label: "Diagnostic Service" },
-  { value: "followup", label: "Follow-up Service" },
+  { id: 1, value: "examination", label: "Examination Service" },
+  { id: 2, value: "counseling", label: "Counseling Service" },
+  { id: 3, value: "diagnostic", label: "Diagnostic Service" },
+  { id: 4, value: "followup", label: "Follow-up Service" },
 ];
 
 function ContractInformation({ id }) {
-  const pathname = usePathname();
   const { modal, editModal } = useModal();
   const searchparams = useSearchParams();
 
-  const [selectedServices, setSelectedServices] = useState([
-    "examination",
-    "counseling",
-  ]);
-  const [freelancerServiceData, setFreelancerServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-  });
-  const [memberServiceData, setMemberServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-  });
-  const handleServiceChange = (values) => {
-    setSelectedServices(values);
-
-    const updatedFreelancerData = {
-      ...freelancerServiceData,
-    };
-    const updatedMemberData = { ...memberServiceData };
-
-    values.forEach((service) => {
-      if (!updatedFreelancerData[service]) {
-        updatedFreelancerData[service] = {
-          price: "",
-        };
-      }
-      if (!updatedMemberData[service]) {
-        updatedMemberData[service] = {
-          price: "",
-        };
-      }
-    });
-
-    // Clean up services that were unselected
-    Object.keys(updatedFreelancerData).forEach((service) => {
-      if (!values.includes(service)) {
-        delete updatedFreelancerData[service];
-      }
-    });
-    Object.keys(updatedMemberData).forEach((service) => {
-      if (!values.includes(service)) {
-        delete updatedMemberData[service];
-      }
-    });
-
-    setFreelancerServiceData(updatedFreelancerData);
-    setMemberServiceData(updatedMemberData);
+  const [listFreelancer, setListFreelancer] = useState([]);
+  const [listMember, setListMember] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State to track search input
+  const [filteredOptions, setFilteredOptions] = useState(serviceOptions);
+  const handleAddToList = (value) => {
+    if (!listFreelancer.find((item) => item.id === value.id)) {
+      const newItem = { id: value.id, label: value.label, price: 0 };
+      setListFreelancer([...listFreelancer, newItem]);
+    }
+    if (!listMember.find((item) => item.id === value.id)) {
+      const newItem = { id: value.id, label: value.label, price: 0 };
+      setListMember([...listMember, newItem]);
+    }
   };
-
-  const handleServiceDataChange = (service, field, value, type) => {
+  // Handle deleting an item from the list
+  const handleDeleteItem = (type, id) => {
     if (type === "freelancer") {
-      setFreelancerServiceData((prevData) => ({
-        ...prevData,
-        [service]: {
-          ...prevData[service],
-          [field]: value,
-        },
-      }));
-    } else if (type === "member") {
-      setMemberServiceData((prevData) => ({
-        ...prevData,
-        [service]: {
-          ...prevData[service],
-          [field]: value,
-        },
-      }));
+      const updatedList = listFreelancer.filter((item) => item.id !== id);
+      setListFreelancer(updatedList);
+    }
+    if (type === "member") {
+      const updatedList = listMember.filter((item) => item.id !== id);
+      setListMember(updatedList);
     }
   };
 
-  // console.log(selectedServices);
-  // console.log(freelancerServiceData);
-  // console.log(searchparams.get("editContracts"));
+  console.log(listFreelancer);
+  console.log(listMember);
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    // Filter options based on search term
+    const filtered = serviceOptions.filter((item) =>
+      item.label.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredOptions(filtered);
+  };
+  const handleServiceDataChange = (serviceId, value, type) => {
+    if (type === "freelancer") {
+      setListFreelancer((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
+    } else if (type === "member") {
+      setListMember((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
+    }
+  };
 
   return (
     <Card className="mt-5 ">
       {searchparams.get("editContracts") === "true" ? (
-        <div
-          className="mb-6 flex items-start justify-start ps-3 lgl:ps-20"
-          dir="ltr"
-        >
-          <MultiSelect
-            data={serviceOptions}
-            placeholder="Choose Services"
-            value={selectedServices}
-            onChange={handleServiceChange}
-            searchable
-            nothingFoundMessage="No services found"
-            className="lg:w-[500px] w-full lgl:min-w-fit"
-            classNames={{
-              input:
-                "border-black min-h-[54px] flex items-center text-sm lgl:text-xl placeholder:text-xl rounded-xl placeholder:text-black",
-              pill: "text-sm lgl:text-lg py-1 h-auto",
-            }}
-          />
+        <div className=" relative h-11 mdl:h-14 max-h-14 mdl:max-h-16 mb-5">
+          <div className="border absolute top-0 overflow-hidden w-full left-0 z-50 border-solid  rounded-xl min-h-11 mdl:min-h-14">
+            <NavLink
+              label="Choose Services"
+              component="button"
+              className="min-h-11 mdl:min-h-14 rounded-xl bg-white hover:bg-white"
+              rightSection={<ArrowDownIcon />}
+              dir="ltr"
+              classNames={{
+                body: "text-start",
+                children: "p-0 pb-4 mdl:pb-6 bg-white",
+              }}
+            >
+              <div className=" -mt-11 mdl:-mt-14">
+                <div className=" mb-1 mdl:mb-4">
+                  <TextInput
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    placeholder="ابحث عن خدمة..."
+                    className=" p-1 mdl:p-2 w-full rounded-lg mb-1 mdl:mb-4 max-w-[calc(100%-50px)] mdl:max-w-[calc(100%-100px)] "
+                    classNames={{
+                      input:
+                        "!border-none h-10 w-full text-sm mdl:text-base font-Bold",
+                    }}
+                  />
+                </div>
+                {filteredOptions.map((item, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="flex bg-white items-center px-2 mdl:px-6 justify-between gap-6 py-2 mdl:py-3 border-b-2 border-grayLight last-of-type:border-none"
+                    >
+                      <h4 className=" text-sm mdl:text-xl font-Bold">
+                        {item.label}
+                      </h4>
+                      <button
+                        onClick={() => {
+                          handleAddToList(item);
+                        }}
+                        className={` size-5 mdl:size-7  duration-300 hover:shadow-md hover:scale-[1.02]  text-white rounded-full`}
+                      >
+                        <PlusInsideCircleIcon
+                          className={" w-full h-full rounded-full"}
+                        />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </NavLink>
+          </div>
         </div>
       ) : null}
 
       <ServicesFreelancer
-        selectedServices={selectedServices}
-        serviceOptions={serviceOptions}
-        serviceData={freelancerServiceData}
+        data={listFreelancer}
+        setData={setListFreelancer}
         handleServiceDataChange={handleServiceDataChange}
+        handleDeleteItem={handleDeleteItem}
       />
 
       <ServicesMember
-        selectedServices={selectedServices}
-        serviceOptions={serviceOptions}
-        serviceData={memberServiceData}
+        data={listMember}
+        setData={setListMember}
         handleServiceDataChange={handleServiceDataChange}
+        handleDeleteItem={handleDeleteItem}
       />
       <WorkNum />
 
-      <SwitchContracts/>
+      <SwitchContracts />
       {searchparams.get("editContracts") === "true" ? (
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           <LinkGreen

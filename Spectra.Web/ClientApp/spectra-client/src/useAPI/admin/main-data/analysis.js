@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/api/api";
+import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
 import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
@@ -9,7 +9,7 @@ export const GetMedicalTests = () => {
   return useQuery({
     queryKey: [Admin.MedicalTests.url],
     queryFn: async () => {
-      const response = await api.get(Admin.MedicalTests.url, {
+      const response = await apiAdmin.get(Admin.MedicalTests.url, {
         headers: {},
       });
       return response;
@@ -21,7 +21,7 @@ export const GetMedicalTestsID = (id) => {
   return useQuery({
     queryKey: [Admin.MedicalTests.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Admin.MedicalTests.getByID(id), {
+      const response = await apiAdmin.get(Admin.MedicalTests.getByID(id), {
         headers: {},
       });
       return response;
@@ -35,7 +35,7 @@ export const DeleteMedicalTests = (id) => {
   return useMutation({
     mutationKey: ["MedicalTests"],
     mutationFn: async () => {
-      const response = await api.delete(Admin.MedicalTests.DeleteByID(id));
+      const response = await apiAdmin.delete(Admin.MedicalTests.DeleteByID(id));
       return response.data;
     },
     onSuccess: () => {
@@ -50,7 +50,7 @@ export const useCreateMedicalTests = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Admin.MedicalTests.url, data, {});
+      const response = await apiAdmin.post(Admin.MedicalTests.url, data, {});
       return response.data;
     },
     onSuccess: (data) => {
@@ -71,7 +71,7 @@ export const useEditMedicalTests = (id) => {
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await api.put(Admin.MedicalTests.getByID(id), data, {});
+      const response = await apiAdmin.put(Admin.MedicalTests.getByID(id), data, {});
       return response.data;
     },
     onSuccess: (data) => {

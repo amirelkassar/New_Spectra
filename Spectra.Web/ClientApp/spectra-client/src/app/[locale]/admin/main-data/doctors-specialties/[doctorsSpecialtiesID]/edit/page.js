@@ -86,7 +86,7 @@ function Page({ params }) {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              error={GetErrorMsg(error, "description")}
+              error={GetErrorMsg(error, "Description")}
             />
 
             <InputGreen
@@ -95,7 +95,7 @@ function Page({ params }) {
               name="consultationCost"
               value={formData.consultationCost}
               onChange={handleChange}
-              error={GetErrorMsg(error, "consultationCost")}
+              error={GetErrorMsg(error, "ConsultationCost")||GetErrorMsg(error, "consultationCost")}
             />
 
             <InputGreen
@@ -104,7 +104,7 @@ function Page({ params }) {
               name="code"
               value={formData.code}
               onChange={handleChange}
-              error={GetErrorMsg(error, "code")}
+              error={GetErrorMsg(error, "Code")}
             />
           </form>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">

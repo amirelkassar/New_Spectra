@@ -100,6 +100,11 @@ const Aside = () => {
       route: ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD,
       isActive: path.includes(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD),
     },
+    {
+      name: "الشكاوى",
+      route: ROUTES.ADMIN.SETTINGS.COMPLAINTS.DASHBOARD,
+      isActive: path.includes(ROUTES.ADMIN.SETTINGS.COMPLAINTS.DASHBOARD),
+    },
   ];
   const SubscriptionLinks = [
     {

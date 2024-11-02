@@ -47,6 +47,12 @@ const OrgAside = () => {
       isActive:
         path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.PRESCRIPTIONS(params.orgId),
     },
+    {
+      name: "العقد",
+      route: ROUTES.ADMIN.CLIENTS.ORGANIZATION.CONTRACTS(params.orgId),
+      isActive:
+        path === ROUTES.ADMIN.CLIENTS.ORGANIZATION.CONTRACTS(params.orgId),
+    },
   ];
   const pages2 = [
     {
