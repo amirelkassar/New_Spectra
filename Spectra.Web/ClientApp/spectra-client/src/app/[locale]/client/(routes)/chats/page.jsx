@@ -1,12 +1,11 @@
-import Container from '../../_components/ui/container';
-import { Heading } from '../../_components/ui/heading';
+import { H1, Container } from '@/client/_components/ui';
 import { Chats } from './_components/chats';
 
 const ChatsPage = () => {
   return (
     <Container className='h-full'>
       <section className='flex flex-col gap-5 h-full'>
-        <Heading label='المحادثات' />
+        <H1>المحادثات</H1>
         <Chats />
       </section>
     </Container>

@@ -35,8 +35,7 @@ export const Notifications = () => {
       clickOutsideEvents={['mouseup', 'touchend']}
       offset={10}
       classNames={{
-        dropdown:
-          'mdl:rounded-xl border-transparent mdl:border-grayLight mdl:shadow-md',
+        dropdown: 'rounded-xl border-grayLight shadow-md',
       }}
     >
       <Popover.Target>
@@ -46,8 +45,8 @@ export const Notifications = () => {
       </Popover.Target>
 
       <Popover.Dropdown>
-        <div className='min-w-[calc(100vw-42px)] h-[calc(100vh-90px)] mdl:h-auto mdl:min-w-[650px]'>
-          <div>
+        <div className='min-w-[calc(100vw-67px)] h-96 overflow-y-auto mdl:min-w-[650px] flex flex-col'>
+          <div className='flex-1'>
             {NOTIFICATIONS.map((notification) => (
               <NotificationItem
                 onClick={() => {

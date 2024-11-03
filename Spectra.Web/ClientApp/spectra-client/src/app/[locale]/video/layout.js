@@ -1,14 +1,16 @@
-import ModalReq from "@/components/modalReq";
-import React from "react";
-import LayoutVideo from "./_components/LayoutVideo";
-
+import ModalReq from '@/components/modalReq';
+import HeaderVideo from './_components/headerVideo';
 
 function layout({ children }) {
   return (
-    <main className="relative flex flex-col gap-4    lgl:py-5 gap-x-5 min-h-screen ">
-      <LayoutVideo Children={children} />
+    <div className='relative flex flex-col min-h-screen'>
+      <HeaderVideo />
+
+      <main className='flex-1 flex flex-col justify-end h-full'>
+        {children}
+      </main>
       <ModalReq />
-    </main>
+    </div>
   );
 }
 
