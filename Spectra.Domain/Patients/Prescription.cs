@@ -11,15 +11,39 @@ namespace Spectra.Domain.Patients
 {
     public class Prescription : BaseAuditableEntity<string>
     {
+        public Prescription(string id,
+            string doctorName,
+            string doctorMedicalNumber,
+            string sessionId,
+            string sessionNumber,
+            string patientId,
+            string patientName,
+            HumenGender patientGender,
+            string clientId,
+            string clientName,
+            string rx)
+        {
+            Id = id;
+            DoctorName = doctorName;
+            DoctorMedicalNumber = doctorMedicalNumber;
+            SessionId = sessionId;
+            SessionNumber = sessionNumber;
+            PatientId = patientId;
+            PatientName = patientName;
+            Gender = patientGender;
+            ClientId = clientId;
+            ClientId = clientName;
+            RX = rx;
+        }
         public string DoctorName { get; private set; }
         public string DoctorMedicalNumber { get; private set; }
         public string SessionId { get;private set; }
+        public string SessionNumber { get; private set; }
         public string PatientId { get; private set; }
         public string PatientName { get; private set; }
         public HumenGender Gender { get; set; }
         public string ClientId { get; private set; }
         public string ClientName { get; private set; }
-        public string SessionNumber { get; private set; }
         public string RX { get; private set; }
         public ICollection<PrescriptionDetail> Details { get;private set; }
         public string Notes { get; set; }
