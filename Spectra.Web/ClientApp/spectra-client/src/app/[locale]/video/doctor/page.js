@@ -1,11 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import CategoriesVideo from "./_components/CategoriesVideo";
 import VideoCall from "./_components/videoCall";
 import LayCategories from "./_components/LayCategories";
 import HeadInfoClient from "./_components/headInfoClient";
 import ArrowVideoIcon from "@/assets/icons/arrowVideo";
 import ArrowVideoCloseIcon from "@/assets/icons/arrowVideoClose";
+const MemoizedVideoCall = memo(VideoCall);
+const MemoizedHeadInfoClient = memo(HeadInfoClient);
+const MemoizedLayCategories = memo(LayCategories);
 function Page() {
   const [open, setOpen] = useState(true);
   return (
@@ -22,12 +25,12 @@ function Page() {
             {open ? <ArrowVideoCloseIcon /> : <ArrowVideoIcon />}
           </div>
         </div>
-        <LayCategories />
+        <MemoizedLayCategories />
       </div>
 
       <div className="bg-white  h-fit max-h-fit lgl:bg-grayLight max-w-full lgl:rounded-s-3xl overflow-hidden lgl:flex-1 lgl:py-6 lgl:pe-10 lgl:ps-6">
-        <HeadInfoClient />
-        <VideoCall />
+        <MemoizedHeadInfoClient />
+        <MemoizedVideoCall />
         <CategoriesVideo open={open} />
       </div>
     </div>
