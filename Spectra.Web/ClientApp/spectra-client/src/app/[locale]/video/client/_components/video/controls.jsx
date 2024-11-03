@@ -23,7 +23,7 @@ const LeaveBtn = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'bg-red rounded-lg text-white flex items-center gap-3 p-3 lgl:p-4 text-sm lgl:text-xl font-bold transition hover:bg-[#D93636]',
+        'bg-red rounded-lg text-white flex items-center gap-3 p-3 lgl:p-4 lgl:px-7 text-sm lgl:text-xl font-bold transition hover:bg-[#D93636]',
         props?.className
       )}
       type='button'

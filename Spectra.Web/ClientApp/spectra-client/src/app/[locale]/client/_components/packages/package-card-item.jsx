@@ -7,7 +7,7 @@ export const PackageCardItem = ({ children, ...props }) => {
     <div
       {...props}
       className={cn(
-        `rounded-lg mdl:min-w-[300px] border-2 border-grayLight p-5 border-t-[6px] w-fit border-t-greenMain transition-all hover:border-greenMain hover:shadow-md flex flex-col gap-5`,
+        `rounded-lg mdl:w-full mdl:max-w-[300px] border-2 border-grayLight p-5 border-t-[6px] w-fit border-t-greenMain transition-all hover:border-greenMain hover:shadow-md flex flex-col gap-5`,
         props?.className
       )}
     >
