@@ -9,57 +9,57 @@
 }
 
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicThin.ttf');
+  src: url("/fonts/IBMPlexSansArabicThin.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicExtraLight.ttf');
+  src: url("/fonts/IBMPlexSansArabicExtraLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicLight.ttf');
+  src: url("/fonts/IBMPlexSansArabicLight.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicRegular.ttf');
+  src: url("/fonts/IBMPlexSansArabicRegular.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicMedium.ttf');
+  src: url("/fonts/IBMPlexSansArabicMedium.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicSemiBold.ttf');
+  src: url("/fonts/IBMPlexSansArabicSemiBold.ttf");
 }
 @font-face {
-  font-family: 'IBMPlexSansArabic';
+  font-family: "IBMPlexSansArabic";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/IBMPlexSansArabicBold.ttf');
+  src: url("/fonts/IBMPlexSansArabicBold.ttf");
 }
 
 body {
-  font-family: 'IBMPlexSansArabic', sans-serif;
+  font-family: "IBMPlexSansArabic", sans-serif;
 }
 
 :root {
@@ -156,13 +156,13 @@ header .hideShowLinks svg {
   width: 9px;
   transition: 0.5s;
 }
-html[dir='ltr'] header .hideShowLinks svg {
+html[dir="ltr"] header .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 header .hideShowLinks.closeArrow svg {
   transform: rotateY(180deg);
 }
-html[dir='ltr'] header .hideShowLinks.closeArrow svg {
+html[dir="ltr"] header .hideShowLinks.closeArrow svg {
   transform: rotateY(0deg);
 }
 /* aside .topMobNav {
@@ -199,13 +199,13 @@ header .hideShowLinks2 svg {
 .numNotfication {
   border-radius: 50% !important;
 }
-html[dir='ltr'] aside .topMobNav .hideShowLinks svg {
+html[dir="ltr"] aside .topMobNav .hideShowLinks svg {
   transform: rotateY(180deg);
 }
 .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute right-[-16px] xl:right-[-32px] transition;
 }
-html[dir='ltr'] .lineAfterLinks {
+html[dir="ltr"] .lineAfterLinks {
   @apply h-8 w-1.5 rounded-e-md bg-greenMain absolute left-[-16px] xl:left-[-32px] right-auto transition;
 }
 .mantine-Pagination-control {
@@ -352,10 +352,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -364,15 +361,14 @@ form.clientEdit .mantine-Input-input {
   height: 20px !important;
 }
 .staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+  .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.staffDetils .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.staffDetils .mantine-DatePicker-day[data-selected='true'] {
+.staffDetils .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -380,22 +376,13 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    3,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    4,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    5,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
 @layer components {
   .custom-grid {
@@ -405,12 +392,10 @@ form.clientEdit .mantine-Input-input {
     ) !important;
   }
   .custom-grid2 {
-    grid-template-columns: repeat(
-      var(--colNumSmall),
-      minmax(max-content, 1fr)
-    );
+    grid-template-columns: repeat(var(--colNumSmall), minmax(max-content, 1fr));
   }
 }
+/*calender*/
 .boxDate .mantine-DatePicker-calendarHeader {
   gap: 16px;
 }
@@ -430,10 +415,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -441,16 +423,14 @@ form.clientEdit .mantine-Input-input {
   width: 20px !important;
   height: 20px !important;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='previous'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
   order: 1;
 }
 
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl[data-direction='next'] {
+.boxDate .mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
   order: 2;
 }
-.boxDate .mantine-DatePicker-day[data-selected='true'] {
+.boxDate .mantine-DatePicker-day[data-selected="true"] {
   background-color: var(--main-color);
   border-radius: 50%;
 }
@@ -471,24 +451,24 @@ form.clientEdit .mantine-Input-input {
   align-items: center;
   gap: 20px;
   width: fit-content;
-  margin-top: -20px;
+  @apply mdl:-mt-5 mt-0 justify-center mdl:justify-start;
+}
+.fc-toolbar-chunk .fc-toolbar-title {
+  @apply text-sm md:text-xl font-Bold;
 }
 .fc-toolbar-chunk div .fc-button {
   background-color: #f5f5f5;
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   padding: 0;
   transition: 0.5s;
+  @apply mdl:w-7 mdl:h-7 mdl:min-w-7 mdl:min-h-7 w-6 h-6 min-w-6 min-h-6;
 }
 .fc-toolbar-chunk div .fc-button span::before {
   color: #010036;
-  width: 6px;
+  @apply w-1 mdl:w-[6px];
 }
 .fc-toolbar-chunk div .fc-button:hover {
   background-color: #f5f5f5;
@@ -497,16 +477,51 @@ form.clientEdit .mantine-Input-input {
 .fc-daygrid-day {
   width: 120px;
   height: 120px;
+  @apply mdl:w-[120px] mdl:h-[120px] w-[72px] h-[72px];
 }
 .fc-day .fc-col-header-cell-cushion {
   color: #939393;
   font-weight: 400;
-  text-align: end;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  @apply text-xs mdl:text-base p-1 mdl:p-[10px] text-center mdl:text-end;
 }
-
+.fc .fc-daygrid-day-number {
+  @apply text-xs mdl:text-base;
+}
+.fc .fc-scroller {
+  overflow: hidden !important;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+}
+.fc .fc-daygrid-day-frame {
+  position: relative;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  min-height: 0px;
+  height: auto;
+  position: absolute;
+  inset: 1px;
+  width: 100%;
+  height: 100%;
+}
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  margin-right: 0px;
+  margin: 0px !important;
+  border-radius: 0px;
+  height: 100%;
+  border: none;
+}
+.fc .fc-view-harness {
+  @apply max-w-full overflow-x-auto;  
+}
+.fc .fc-dayGridMonth-view{
+  @apply min-w-[550px];
+}
+.fc .fc-daygrid-event-harness{
+  height: 98%;
+}
+/*end calender*/
 @media (max-width: 768px) {
   .hideScroll {
     scrollbar-width: none;
@@ -526,21 +541,15 @@ form.clientEdit .mantine-Input-input {
   }
 
   .custom-clipPath-triangle-up {
-    clippath: polygon(
-      0 100%,
-      0 10%,
-      50% 0%,
-      100% 10%,
-      100% 100%
-    );
+    clippath: polygon(0 100%, 0 10%, 50% 0%, 100% 10%, 100% 100%);
   }
 }
-input[type='number'].timeInput::-webkit-outer-spin-button,
-input[type='number'].timeInput::-webkit-inner-spin-button {
+input[type="number"].timeInput::-webkit-outer-spin-button,
+input[type="number"].timeInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type='number'].timeInput {
+input[type="number"].timeInput {
   -moz-appearance: textfield;
 }
 .ql-editor li:not(.ql-direction-rtl)::before {
@@ -570,17 +579,16 @@ Preloader Area CSS
 
 .loader {
   transition: 0.5s;
-  @apply absolute w-20 h-20 rounded-full inline-block left-0 right-0 mx-auto my-0  top-[45%] translate-y-[-45%];
+  @apply w-20 h-20 rounded-full inline-block mx-auto my-0   translate-y-[-45%];
 }
 
 .loader .loader-outter {
   border: 4px solid black;
   border-left-color: transparent;
   border-bottom: 0;
-  -webkit-animation: loader-outter 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
-  animation: loader-outter 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  -webkit-animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
   @apply absolute w-full h-full rounded-full;
 }
 
@@ -590,16 +598,14 @@ Preloader Area CSS
   top: calc(40% - 21px);
   border-right: 0;
   border-top-color: transparent;
-  -webkit-animation: loader-inner 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
-  animation: loader-inner 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  -webkit-animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
+  animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
   @apply absolute w-[60px] h-[60px] rounded-full;
 }
 
 .loader .indicator {
-  -webkit-transform: translateY(-50%) translateX(-50%)
-    scale(1.5);
+  -webkit-transform: translateY(-50%) translateX(-50%) scale(1.5);
   transform: translateY(-50%) translateX(-50%) scale(1.5);
   @apply absolute right-auto left-1/2 top-1/2 flex items-center justify-center;
 }

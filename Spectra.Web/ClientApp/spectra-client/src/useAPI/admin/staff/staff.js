@@ -1,27 +1,35 @@
 "use client";
 import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
+import NumPage from "@/components/numPage";
 import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 //getAll
-export const GetMedicalTests = () => {
+export const GetStaff = () => {
+  const page = NumPage();
+
   return useQuery({
-    queryKey: [Admin.MedicalTests.url],
+    queryKey: ["todos", { page }],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MedicalTests.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Staff.url + `PageNumber=${page}`,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
+    placeholderData: (previousData) => previousData,
   });
 };
 //getID
-export const GetMedicalTestsID = (id) => {
+export const GetStaffID = (id) => {
   return useQuery({
-    queryKey: [Admin.MedicalTests.getByID(id)],
+    queryKey: [Admin.Staff.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MedicalTests.getByID(id), {
+      const response = await apiAdmin.get(Admin.Staff.getByID(id), {
         headers: {},
       });
       return response;
@@ -29,18 +37,18 @@ export const GetMedicalTestsID = (id) => {
   });
 };
 //delete
-export const DeleteMedicalTests = (id) => {
+export const DeleteStaff = (id) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["MedicalTests"],
+    mutationKey: ["Staff"],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(Admin.MedicalTests.DeleteByID(id));
+      const response = await apiAdmin.delete(Admin.Staff.DeleteByID(id));
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["MedicalTests"]);
-      router.replace(ROUTES.ADMIN.DATAMAIN.MedicalTestsS);
+      queryClient.invalidateQueries(["Staff"]);
+      router.replace(ROUTES.ADMIN.DATAMAIN.StaffS);
     },
   });
 };
@@ -64,20 +72,16 @@ export const useCreateStaff = () => {
   });
 };
 //put
-export const useEditMedicalTests = (id) => {
-  const { refetch } = GetMedicalTests();
-  const { refetch: refetch2 } = GetMedicalTestsID(id);
+export const useEditStaff = (id) => {
+  const { refetch } = GetStaff();
+  const { refetch: refetch2 } = GetStaffID(id);
 
   return useMutation({
-    mutationKey: ["EditMedicalTests"],
+    mutationKey: ["EditStaff"],
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await apiAdmin.put(
-        Admin.MedicalTests.getByID(id),
-        data,
-        {}
-      );
+      const response = await apiAdmin.put(Admin.Staff.getByID(id), data, {});
       return response.data;
     },
     onSuccess: (data) => {

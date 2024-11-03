@@ -43,6 +43,7 @@ export const Admin = {
     DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
   },
   Staff:{
+    url:'/Admin/GetAllEmployees?PageSize=5&',
     post: "/Admin/CreateEmployee",
   },
 
