@@ -14,6 +14,7 @@ namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
         public string ScientificNameByEng { get; set; }
         public string ScientificNameByEngByArab { get; set; }
 
+
         public string Code { get; set; }
         public string ScientificNote { get; set; }
         public ExaminationType ExaminationTypes { get; set; }
