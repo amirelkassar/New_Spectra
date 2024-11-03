@@ -27,15 +27,15 @@ function VideoCall() {
         />
       </div>
       <div className=" absolute bottom-7 z-10 flex gap-3 items-center left-1/2 -translate-x-1/2">
-        <div className="bg-grayLight py-3 h-11 lgl:h-[58px] w-[62px] px-4 rounded-lg flex items-center justify-center duration-300 hover:shadow-md cursor-pointer">
+        <div className="bg-grayLight py-3 h-11 lgl:h-[58px] w-12 mdl:w-[62px] px-3 mdl:px-4 rounded-lg flex items-center justify-center duration-300 hover:shadow-md cursor-pointer">
           <VideoIcon className={"h-full w-auto"} />
         </div>
-        <div className="bg-grayLight py-3 h-11 lgl:h-[58px] w-[62px] px-4 rounded-lg flex items-center justify-center duration-300 hover:shadow-md cursor-pointer">
+        <div className="bg-grayLight py-3 h-11 lgl:h-[58px] w-12 mdl:w-[62px] px-3 mdl:px-4 rounded-lg flex items-center justify-center duration-300 hover:shadow-md cursor-pointer">
           <MicrophoneIcon className={"h-full w-auto"} />
         </div>
-        <div className="bg-red cursor-pointer h-11 lgl:h-[58px] p-3 rounded-lg flex items-center justify-center gap-4 w-fit duration-300 hover:shadow-md hover:shadow-red/40  ">
-          <p className="text-sm text-white font-Bold lg:text-xl">مغادرة</p>
-          <LeaveCallIcon className={"h-4 w-6"} />
+        <div className="bg-red cursor-pointer h-11 lgl:h-[58px] min-w-[110px] mdl:min-w-[140px] p-3 rounded-lg flex items-center justify-center gap-4 w-fit duration-300 hover:shadow-md hover:shadow-red/40  ">
+          <p className="text-sm text-white font-Bold lg:text-xl">انهاء</p>
+          <LeaveCallIcon className={"h-auto w-5 mdl:w-7"} />
         </div>
       </div>
     </div>

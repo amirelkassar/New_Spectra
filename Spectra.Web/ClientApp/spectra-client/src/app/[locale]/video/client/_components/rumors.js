@@ -30,16 +30,16 @@ function Rumors() {
       <Tabs color="#10B0C1" defaultValue="analyses">
         <Tabs.List justify="center" classNames={{ list: "mt-3" }}>
           <Tabs.Tab
-            classNames={{
-              tab: "text-sm lgl:text-xl font-Regular data-[active]:font-bold",
+           classNames={{
+              tab: "text-sm lgl:text-base font-Regular data-[active]:font-bold",
             }}
             value="analyses"
           >
             التحاليل
           </Tabs.Tab>
           <Tabs.Tab
-            classNames={{
-              tab: "text-sm lgl:text-xl font-Regular data-[active]:font-bold",
+           classNames={{
+              tab: "text-sm lgl:text-base font-Regular data-[active]:font-bold",
             }}
             value="rumors"
           >

@@ -16,11 +16,13 @@ import DocumentIcon from "@/assets/icons/document";
 import TransfersVideoIcon from "@/assets/icons/TransfersIcon";
 import ReportsGreenIcon from "@/assets/icons/reportsGreen";
 import { useMediaQuery } from "@mantine/hooks";
+import Other from "./othor";
 
-function CategoriesVideo({open}) {
+function CategoriesVideo({ open }) {
   const searchParams = useSearchParams();
   const pathName = usePathname();
-  const isShowMore = useMediaQuery("(max-width: 1600px)");
+  const isShowMore = useMediaQuery("(max-width: 1700px)");
+  const isShowAll = useMediaQuery("(max-width: 1024px)");
   const CategoriesData = [
     {
       icon: <ReportsGreenIcon className={"w-auto h-8 text-greenMain"} />, // Replace with actual icon component
@@ -107,14 +109,17 @@ function CategoriesVideo({open}) {
           className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
         >
           <div className=" size-9 lgl:size-[58px]  mb-1 lgl:mb-2 mx-auto flex items-center justify-center ">
-            <AddReportIcon />
+            <AddReportIcon className={"w-auto h-7 mdl:h-8 "}/>
           </div>
 
           <h2 className="font-Bold text-white lgl:text-nowrap leading-5 text-xs lgl:text-base text-center">
             اضافة تقرير
           </h2>
         </Link>
-        {CategoriesData.slice(0, open&&isShowMore?4:CategoriesData.length).map((category, index) => {
+        {CategoriesData.slice(
+          0,
+          open && isShowMore && !isShowAll ? 4 : CategoriesData.length
+        ).map((category, index) => {
           return (
             <Link
               scroll={false}
@@ -124,21 +129,21 @@ function CategoriesVideo({open}) {
                 category.active
                   ? "border-greenMain"
                   : "border-grayLight lgl:border-white"
-              } min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px]  aspect-square flex flex-col justify-center items-center rounded-xl`}
+              } min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 pb-0 py-2 lgl:py-8 w-[96px] lgl:w-[154px]  aspect-square flex flex-col justify-center items-center rounded-xl`}
             >
               <div className=" size-9 lgl:size-[58px] rounded-lg p-2 lgl:p-[14px] mb-1 lgl:mb-2 mx-auto bg-greenLight flex items-center justify-center ">
                 {category.icon}
               </div>
 
-              <h2 className="font-Bold lgl:text-nowrap leading-5 text-xs lgl:text-base text-center">
+              <h2 className="font-Bold min-h-8 place-content-center lgl:text-nowrap mdl:leading-5 text-xs lgl:text-base text-center">
                 {category.label}
               </h2>
             </Link>
           );
         })}
-        <div
-          className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
-        ></div>
+        {open && isShowMore && !isShowAll && (
+          <Other data={CategoriesData.slice(4, CategoriesData.length)} />
+        )}
       </div>
     </>
   );

@@ -2,8 +2,8 @@ import React from "react";
 
 function HeadInfoClient() {
   return (
-    <div className="max-w-full overflow-x-auto mb-4">
-      <div className=" hidden lgl:grid grid-cols-3 min-w-[860px] gap-2 xl:gap-4 divide-x border-x-grayLight divide-x-reverse  items-center min-h-[100px]  justify-center px-6 xl:px-14 py-4 bg-white flex-1 w-full max-w-full rounded-xl">
+    <div className="max-w-full hidden lgl:block overflow-x-auto mb-4">
+      <div className="  grid grid-cols-3 min-w-[860px] gap-2 xl:gap-4 divide-x border-x-grayLight divide-x-reverse  items-center min-h-[100px]  justify-center px-6 xl:px-14 py-4 bg-white flex-1 w-full max-w-full rounded-xl">
         <div className="">
           <h2 className="text-xs xl:text-xl mb-3 font-Bold">
             عبدالله الشيخ{" "}
