@@ -8,10 +8,7 @@ export const Controls = ({ children, ...props }) => {
   return (
     <div
       {...props}
-      className={cn(
-        'flex gap-4 z-10 absolute bottom-5 start-1/2 ltr:-translate-x-1/2 translate-x-1/2',
-        props?.className
-      )}
+      className={cn('flex gap-4', props?.className)}
     >
       {children}
     </div>

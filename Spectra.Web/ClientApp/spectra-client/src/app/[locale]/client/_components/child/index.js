@@ -4,6 +4,8 @@ import { PrescriptionsAccordion } from './prescriptions-accordion';
 import { ReportAccordion } from './report-accordion';
 import { Attachment } from './attachment';
 import { ReportCard } from './report-card';
+import { PrescriptionInfo } from './prescription-info';
+import { PrescriptionCard } from './prescrtiption-card';
 
 export {
   ChildSelect,
@@ -12,4 +14,6 @@ export {
   ReportAccordion,
   Attachment,
   ReportCard,
+  PrescriptionInfo,
+  PrescriptionCard,
 };

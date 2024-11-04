@@ -20,7 +20,7 @@ export const Recomendations = () => {
       classNames={{
         tab: 'border-b-[3px] text-sm lgl:text-xl aria-selected:font-bold', // Styles for the tabs
         panel:
-          'flex flex-wrap justify-start gap-5 *:shrink-0 mt-10 lgl:justify-center', // Styles for the tab panels
+          'flex flex-wrap justify-center sml:justify-start gap-5 *:shrink-0 mt-10 lgl:justify-center', // Styles for the tab panels
       }}
     >
       <Tabs.List grow>
@@ -51,7 +51,7 @@ export const Recomendations = () => {
 // Component to display a package
 const Package = () => {
   return (
-    <PackageCardItem className='lgl:max-w-56 mdl:w-fit mdl:max-w-full lgl:w-full'>
+    <PackageCardItem className='2xl:max-w-48 mdl:w-fit mdl:max-w-full lgl:w-full'>
       <PackageCardItem.Title className='mdl:text-sm lgl:text-base'>
         الباقة المتميزة {/* Title of the package */}
       </PackageCardItem.Title>
@@ -70,7 +70,10 @@ const Package = () => {
 // Component to display a service
 const Service = ({ data }) => {
   return (
-    <ServiceCard className='max-w-56' data={data}>
+    <ServiceCard
+      className='max-w-44 lgl:max-w-56 2xl:max-w-48'
+      data={data}
+    >
       <ServiceCard.Icon /> {/* Icon for the service */}
       <ServiceCard.Body>
         <ServiceCard.Label className='mdl:text-sm lgl:text-xl' />{' '}

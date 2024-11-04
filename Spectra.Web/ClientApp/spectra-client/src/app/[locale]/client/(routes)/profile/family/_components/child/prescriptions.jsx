@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 
-import { PrescriptionCard } from './prescrtiption-card';
-import { PrescriptionInfo } from './prescription-info';
 import Card from '@/components/card';
 import { BackButton } from '@/components/buttons/back-button';
 import { prescriptionsData } from '@/lib/demoData';
+import {
+  PrescriptionCard,
+  PrescriptionInfo,
+} from '@/client/_components/child';
 
 export const Prescriptions = () => {
   const [view, setView] = useState(null);

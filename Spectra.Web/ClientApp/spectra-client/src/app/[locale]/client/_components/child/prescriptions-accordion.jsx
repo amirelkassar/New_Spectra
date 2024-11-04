@@ -1,6 +1,6 @@
 import { Accordion } from '@/components/accordion';
 import Image from 'next/image';
-import { PrescriptionInfo } from '../../(routes)/profile/family/_components/child/prescription-info';
+import { PrescriptionInfo } from './prescription-info';
 
 export const PrescriptionsAccordion = ({
   prescriptions = [],

@@ -15,14 +15,16 @@ import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 import SessionIcon from '@/assets/icons/session';
 import { BackButton } from '@/components/buttons/back-button';
-import { packagesDataSpectra } from '@/lib/demoData';
+import {
+  packagesDataSpectra,
+  prescriptionsData,
+} from '@/lib/demoData';
 import { PackageCard } from '@/client/_components/packages';
 import {
   Attachment,
   PrescriptionsAccordion,
   ReportAccordion,
 } from '@/client/_components/child';
-import { prescriptionsData } from './prescriptions';
 import Button from '@/components/button';
 import { ListCheckMark } from '@/app/[locale]/client/_components/ui';
 
