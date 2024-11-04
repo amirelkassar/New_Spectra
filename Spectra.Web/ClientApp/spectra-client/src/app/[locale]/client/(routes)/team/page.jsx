@@ -5,7 +5,7 @@ import { TableActions } from './_components/table-actions';
 const TeamPage = () => {
   return (
     <Container className='lg:bg-white'>
-      <H1>فريقنا الطبي</H1>
+      <H1 className='mb-5'>فريقنا الطبي</H1>
 
       <TableActions />
 
