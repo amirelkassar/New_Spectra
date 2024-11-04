@@ -20,6 +20,9 @@ export const Chat = () => {
       guest={{ name: 'احمد محمد', title: 'طبيب' }}
       host={{ name: 'احمد محمد', title: 'طبيب' }}
     >
+      <h3 className='font-bold text-sm lgl:text-xl border-b border-grayLight pb-3'>
+        المحادثة
+      </h3>
       <Conversation.Body>
         {MESSAGES.map((message) => (
           <Conversation.Message

@@ -1940,3 +1940,143 @@ export const CHILDSDATA = [
     diagnosis: 'فرط الحركة',
   },
 ];
+
+export const REPORTSDATA = [
+  {
+    reportTitle: 'الاسئلة العامة',
+    reportNo: '2325',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [
+      {
+        label: 'Presenting compliant',
+        content: [
+          'Term : 9 months',
+          'normal delivery',
+          'Ventilation',
+          'Birth weight : normal',
+        ],
+      },
+      {
+        label: 'Past medical history',
+        content: [
+          'Seizure',
+          'surgery',
+          'allergies',
+          'medication',
+          'hearing test',
+        ],
+      },
+    ],
+  },
+  {
+    reportTitle: 'التخاطب',
+    reportNo: '2326',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [],
+  },
+  {
+    reportTitle: 'المتابعة',
+    reportNo: '2327',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [],
+  },
+];
+
+export const prescriptionsData = [
+  {
+    id: 1,
+    isNew: true,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'سيترالين',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+  {
+    id: 2,
+    isNew: false,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'بروفين',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+  {
+    id: 3,
+    isNew: false,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'بنادول',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+];
