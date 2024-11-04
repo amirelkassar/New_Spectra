@@ -39,7 +39,7 @@ export const Chat = () => {
           e.preventDefault();
         }}
       >
-        <Conversation.AttachButton />
+        {/* <Conversation.AttachButton /> */}
         <Conversation.InputField />
         <Conversation.SendButton />
       </Conversation.Footer>
