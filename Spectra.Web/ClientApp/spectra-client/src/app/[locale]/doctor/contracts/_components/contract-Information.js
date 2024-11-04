@@ -3,10 +3,10 @@ import EditIcon from "@/assets/icons/edit";
 import Card from "@/components/card";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect, NavLink, TextInput } from "@mantine/core";
+import { NavLink, TextInput } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
@@ -17,6 +17,12 @@ import WorkNum from "./workNum";
 import SwitchContracts from "./switchContracts";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
+import {
+  GetContracts,
+  GetContractsID,
+  GetContractsServices,
+} from "@/useAPI/doctor/contracts-api";
+
 const serviceOptions = [
   { id: 1, value: "examination", label: "Examination Service" },
   { id: 2, value: "counseling", label: "Counseling Service" },
@@ -25,13 +31,49 @@ const serviceOptions = [
 ];
 
 function ContractInformation({ id }) {
+  const { data: dataServices } = GetContractsServices();
+  const { data: dataContracts } = GetContracts("string1112");
+  const { data: dataContractsDetails } = GetContractsID("01JBVYJKG7ZX0E1RVT56N11AX9");
   const { modal, editModal } = useModal();
   const searchparams = useSearchParams();
+  console.log(dataContracts);
+
+  const [workLimits, setWorkLimits] = useState({
+    hoursOfWork: 0,
+    daysOfWork: 0,
+  });
 
   const [listFreelancer, setListFreelancer] = useState([]);
   const [listMember, setListMember] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // State to track search input
-  const [filteredOptions, setFilteredOptions] = useState(serviceOptions);
+  const [filteredOptions, setFilteredOptions] = useState(
+    dataServices?.data?.data?.services ? dataServices?.data?.data?.services : []
+  );
+  // useEffect(() => {
+  //   if (dataServices?.data) {
+  //     // Update work limits
+  //     setWorkLimits({
+  //       hoursOfWork: dataServices.data.data.hoursOfWork || 0,
+  //       daysOfWork: dataServices.data.data.daysOfWork || 0,
+  //     });
+
+  //     // Transform freelance data
+  //     const freelancers = dataServices.data.data.freelance.map((item) => ({
+  //       id: item.service,
+  //       label: item.service,
+  //       price: item.selary,
+  //     }));
+  //     setListFreelancer(freelancers);
+
+  //     // Transform spectraTeam data
+  //     const members = dataServices.data.data.spectraTeam.map((item) => ({
+  //       id: item.service,
+  //       label: item.service,
+  //       price: item.selary,
+  //     }));
+  //     setListMember(members);
+  //   }
+  // }, [dataServices?.data]);
   const handleAddToList = (value) => {
     if (!listFreelancer.find((item) => item.id === value.id)) {
       const newItem = { id: value.id, label: value.label, price: 0 };
@@ -61,8 +103,8 @@ function ContractInformation({ id }) {
     const value = e.target.value;
     setSearchTerm(value);
     // Filter options based on search term
-    const filtered = serviceOptions.filter((item) =>
-      item.label.toLowerCase().includes(value.toLowerCase())
+    const filtered = filteredOptions.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredOptions(filtered);
   };
@@ -81,7 +123,29 @@ function ContractInformation({ id }) {
       );
     }
   };
+  const handleSubmit = () => {
+    // Transform data to match API requirements
+    const formattedData = {
+      freelance: listFreelancer.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      spectraTeam: listMember.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      hoursOfWork: workLimits.hoursOfWork, // Set as needed
+      daysOfWork: workLimits.daysOfWork, // Set as needed
+      employeeId: "string112", // Replace with actual employee ID
+      titel: "string", // Replace with actual title
+      firstName: "string", // Replace with actual first name
+      lastName: "string", // Replace with actual last name
+      contractCase: 1, // Set as needed
+    };
 
+    // Send formatted data with useCreateContracts
+    createContract(formattedData);
+  };
   return (
     <Card className="mt-5 ">
       {searchparams.get("editContracts") === "true" ? (
@@ -152,7 +216,12 @@ function ContractInformation({ id }) {
         handleServiceDataChange={handleServiceDataChange}
         handleDeleteItem={handleDeleteItem}
       />
-      <WorkNum />
+
+      <WorkNum
+        addNew={true}
+        workLimits={workLimits}
+        setWorkLimits={setWorkLimits}
+      />
 
       <SwitchContracts />
       {searchparams.get("editContracts") === "true" ? (

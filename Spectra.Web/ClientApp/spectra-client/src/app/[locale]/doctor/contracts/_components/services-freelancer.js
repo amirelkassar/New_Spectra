@@ -7,6 +7,7 @@ function ServicesFreelancer({
   data,
   handleServiceDataChange,
   handleDeleteItem,
+  addNew = false,
 }) {
   const searchparams = useSearchParams();
 
@@ -41,7 +42,9 @@ function ServicesFreelancer({
               </button>
               <ContractLineDoctor
                 activeEdit={
-                  searchparams.get("editContracts") === "true" ? true : false
+                  searchparams.get("editContracts") === "true" || addNew
+                    ? true
+                    : false
                 }
                 serviceData={service}
                 type={"freelancer"}

@@ -1,14 +1,14 @@
 import DeleteIcon from "@/assets/icons/delete";
 import ContractLineDoctor from "@/components/contractLineDoctor";
-import { useSearchParams } from "next/navigation";
 import React from "react";
 
 function ServicesMember({
   data,
   handleServiceDataChange,
   handleDeleteItem,
+
 }) {
-  const searchparams = useSearchParams();
+
 
   return (
     <div
@@ -43,9 +43,7 @@ function ServicesMember({
                 <DeleteIcon />
               </button>
               <ContractLineDoctor
-                activeEdit={
-                  searchparams.get("editContracts") === "true" ? true : false
-                }
+                activeEdit={false}
                 serviceData={service}
                 type={"member"}
                 handleServiceDataChange={handleServiceDataChange}

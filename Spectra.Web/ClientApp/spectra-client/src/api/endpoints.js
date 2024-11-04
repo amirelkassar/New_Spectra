@@ -1,3 +1,8 @@
+export const General = {
+  Country: {
+    url: "/Country",
+  },
+};
 export const Admin = {
   Drugs: {
     url: "/Drug",
@@ -42,14 +47,17 @@ export const Admin = {
     getByID: (id) => `/MasterDataServices/id?id=${id}`,
     DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
   },
-  Staff:{
-    url:'/Admin/GetAllEmployees?PageSize=5&',
+  Staff: {
+    url: "/Admin/GetAllEmployees?PageSize=5&",
     post: "/Admin/CreateEmployee",
   },
-
 };
-export const General = {
-  Country:{
-    url:'/Country'
-  }
-}
+export const Doctor = {
+  Contracts: {
+    url: (id) => `/Contracts/GetAllCopiesOFContract?EmployeeId=${id}`,
+    getByID: (id) => `/Contracts/id?id=${id}`,
+    DeleteByID: (id) => `/Doctor/Contract/id?id=${id}`,
+    post: "/Contracts",
+    getServices:'/Contracts/ServicesFromMastrData'
+  },
+};
