@@ -9,18 +9,19 @@ using Spectra.Application.Clients.Services;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
+using Spectra.Application.Employees.ManagementStaff.Commands.Dto;
 using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalTeams.Commands;
+using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
-using Spectra.Infrastructure.Contracts;
-using Spectra.Infrastructure.Doctors;
+using Spectra.Infrastructure.MedicalTeams;
 
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-
 
     public class AdminController : BassAdminController
     {
@@ -28,13 +29,18 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         private readonly IClientService _clientService;
         private readonly IDoctorService _doctorService;
         private readonly IContractService _contractService;
+        private readonly IManagementStaffService _managementStaffService;
+        private readonly IMedicalTeamService _medicalTeamService;
 
-        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService doctorService, IContractService contractService)
+        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService doctorService, IContractService contractService,
+            IManagementStaffService managementStaffService, IMedicalTeamService medicalTeamService )
         {
             _adminService = adminService;
             _clientService = clientService;
             _contractService = contractService;
-            _doctorService = doctorService;
+            _doctorService = doctorService; 
+            _managementStaffService = managementStaffService;
+            _medicalTeamService=medicalTeamService;
         }
 
         [HttpGet("GetAllDoctors")]
@@ -113,10 +119,10 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         }
         [HttpPut("RefuesContract/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateRefuesContract(string id)
+        public async Task<ActionResult> UpdateRefuesContract(string id, UpdateContractStatusCommand input)
         {
 
-            var employees = await _adminService.UpdateContractStatus(id);
+            var employees = await _adminService.UpdateContractStatus(id, input);
             return Ok(employees);
         }
         [HttpPut("id")]
@@ -128,6 +134,7 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
 
             return Ok(client);
         }
+
 
         [HttpPut("ContractOperations/id")]
         [AllowAnonymous]
@@ -142,9 +149,8 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
 
         [HttpPut("EditDocotor/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateDocotor(string id, UpdateManagementStaffDto input)
+        public async Task<ActionResult> UpdateDocotor(string id, UpdateDoctorDto input)
         {
-
 
             var contract = await _doctorService.UpdateDoctor(id, input);
             return Ok(contract);
@@ -153,13 +159,61 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInDoctorProfileQuery input)
         {
-
-         
             var clients = await _doctorService.GetAllClintsDoctorCare(id, input);
             return Ok(clients);
-        }  
-      
+        }
 
+     
+        [HttpGet("GetOneOfNormalStaff/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetOneOfNormalStaff(string id, JobTypes input)
+        {
+            var clients = await _adminService.GetEmployeeByid(id, input);
+            return Ok(clients);
+        }
+        [HttpPut("EditEmployee/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UpdateNormalStaff(string id, UpdateManagementStaffDto input)
+        {
+      var employee = await _managementStaffService.UpdateEmployees(id, 
+        input.FirstName,
+        input.LastName,
+        input.Prefix,
+        input.PhoneNumbers,
+        input.CountryCode,
+        input.Emailaddress,
+        input.Country,
+        input.City,
+        input.NationalId,
+        input.HumenGenders,
+        input.JobName,
+        input.Qualifications,
+        input.TimeToJoin,
+        input.WorkingHours,
+        input.JobType );
+            return Ok(employee);
+        }
+
+        //Add Medical Teams 
+
+
+        [HttpPost("CreateMedicalTeam")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateMedicalTeam( CreateMedicalTeamCommand input)
+        {
+
+            var employees = await _medicalTeamService.CreateMedicalTeam(input);
+            return Ok(employees);
+        }
+     
+        [HttpPut("EditMedicalTeam/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> UpdateMedicalTeam(string id ,UpdateMedicalTeamCommand input)
+        {
+
+            var employees = await _medicalTeamService.UpdateMedicalTeam( id,input);
+            return Ok(employees);
+        }
 
 
 

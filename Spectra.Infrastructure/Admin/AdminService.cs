@@ -109,11 +109,13 @@ namespace Spectra.Infrastructure.Admin
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<Unit>> UpdateContractStatus(string id)
+        public async Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input )
         {
             var query = new UpdateContractStatusCommand
             {
                 Id = id
+                ,
+                ContractCases=input.ContractCases
 
             };
             return await _mediator.Send(query);

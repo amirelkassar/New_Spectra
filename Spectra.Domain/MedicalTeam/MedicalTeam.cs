@@ -8,7 +8,7 @@ namespace Spectra.Domain.MedicalTeam
     {
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
-        public List<string> SpecialistIds  { get; set; }
+        public List<string> SpecialistIds { get; set; }
 
         protected MedicalTeam() { }
         private MedicalTeam(
@@ -23,9 +23,9 @@ namespace Spectra.Domain.MedicalTeam
             DoctorId = doctorId;
             SpecialistIds = specialistIds;
             DoctorName = doctorName;
-         
+
         }
-        public static MedicalTeam Create(string id, string doctorId, List<string> specialistIds , string doctorName
+        public static MedicalTeam Create(string id, string doctorId, List<string> specialistIds, string doctorName
        )
         {
 
@@ -37,4 +37,6 @@ namespace Spectra.Domain.MedicalTeam
             return new MedicalTeam(id, doctorId, doctorName, specialistIds);
 
         }
+
+    }
 }

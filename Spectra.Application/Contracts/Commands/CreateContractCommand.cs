@@ -57,6 +57,7 @@ namespace Spectra.Application.Contracts.Commands
                 FirstName = request.FirstName,
                 LastName = request.LastName
             };
+
              
             var contract = EmploymentContract.Create(
               Ulid.NewUlid().ToString(),

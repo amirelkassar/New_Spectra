@@ -37,7 +37,7 @@ namespace Spectra.WebAPI.Areas.Client.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreatePatient(CreatePatientCommand input)
+        public async Task<ActionResult> CreatePatient(CreateStaticStringDataCommand input)
         {
             var Patienties = await _patientService.CreatePatient(input);
             return Ok(Patienties);

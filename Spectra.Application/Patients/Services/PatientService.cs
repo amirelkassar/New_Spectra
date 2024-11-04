@@ -14,7 +14,7 @@ namespace Spectra.Application.Patients.Services
             _mediator = mediator;
         }
 
-        public async Task<string> CreatePatient(CreatePatientCommand command)
+        public async Task<string> CreatePatient(CreateStaticStringDataCommand command)
         {
             var res = await _mediator.Send(command);
             return res.Data;

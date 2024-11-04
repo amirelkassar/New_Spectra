@@ -11,8 +11,10 @@ namespace Spectra.Domain.Shared.Enums
         SAVE=1,
         SENDTOADMIN=2,
         BACkTOEMPlOYEE  =3,
-        ACTIVE=4,
-        REFUSE=5
+        SendContarctToSignature=4,
+        ACTIVE=5,
+        REFUSE =6,
+
 
 
 

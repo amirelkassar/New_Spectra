@@ -8,6 +8,7 @@ using Spectra.Domain.Clients;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Admin
@@ -23,7 +24,8 @@ namespace Spectra.Infrastructure.Admin
         Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
         Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input);
         Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input);
-        Task<OperationResult<Unit>> UpdateContractStatus(string id);
+        Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input);
+        Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input );
 
         //Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input);
         //Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);

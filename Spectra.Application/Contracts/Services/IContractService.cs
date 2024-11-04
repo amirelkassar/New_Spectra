@@ -17,6 +17,7 @@ namespace Spectra.Application.Contracts.Services
    
         //Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
         Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
+
         Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId);
         Task<OperationResult<EmploymentContract>> GetContractById(string id);
 

@@ -4,7 +4,7 @@ using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
-using Spectra.Infrastructure.ChatHub;
+
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Controllers
 {
@@ -26,11 +26,11 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Controllers
         }
 
 
-        [HttpGet("AllClients")]
+        [HttpGet("AllClients/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllClintsDoctorCare([FromQuery] GetAllClientsInDoctorProfileQuery input)
+        public async Task<ActionResult> GetAllClintsDoctorCare(string id ,[ FromQuery] GetAllClientsInDoctorProfileQuery input)
         {
-            var doctor = await _doctorService.GetAllClintsDoctorCare(input);
+            var doctor = await _doctorService.GetAllClintsDoctorCare  ( id, input);
             return Ok(doctor);
         }
 
@@ -77,7 +77,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Controllers
         }
         [HttpPut("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateManagementStaffDto input)
+        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
         {
 
 

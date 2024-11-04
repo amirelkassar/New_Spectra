@@ -1,12 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.Countries.States;
-using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Employees.MedicalStaff;
-using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;

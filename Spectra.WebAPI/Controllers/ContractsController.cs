@@ -19,15 +19,15 @@ namespace Spectra.WebAPI.Controllers
 
 
         }
-
-        [HttpGet("GetAllCopiesOFContract")]
+        //here we get all Contracts if it saved or made new copies from it
+        [HttpGet("GetAllContractsCORS")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
         {
             var contract = await _contractService.GetAllCopiesOfContract(input);
             return Ok(contract);
         }
-
+  
         // this is Contract that User Can Choces this is Come From Services Master data and another 
         [HttpGet("ServicesFromMastrData")]
         [AllowAnonymous]
@@ -53,6 +53,7 @@ namespace Spectra.WebAPI.Controllers
             var Contracties = await _contractService.CreateContractSendORSave(input);
             return Ok(Contracties);
         }
+
         //[HttpPost("SaveContract")]
         //[AllowAnonymous]
         //public async Task<ActionResult> CreateContractAndSave(CreateContractCommand input )
@@ -62,6 +63,7 @@ namespace Spectra.WebAPI.Controllers
         //    var Contracties = await _contractService.CreateContractSendORSave(input);
         //    return Ok(Contracties);
         //}
+
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdateContract(string id, UpdateContractCommand input)
@@ -72,6 +74,7 @@ namespace Spectra.WebAPI.Controllers
 
             return Ok(Contract);
         }
+
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteContract(string id)
@@ -79,6 +82,7 @@ namespace Spectra.WebAPI.Controllers
             var Contract = await _contractService.DeleteContract(id);
             return Ok(Contract);
         }
+
 
     }
 }

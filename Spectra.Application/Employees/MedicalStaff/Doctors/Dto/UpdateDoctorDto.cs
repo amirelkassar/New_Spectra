@@ -3,7 +3,7 @@ using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.Employees.MedicalStaff.Doctors.Dto
 {
-    public class UpdateManagementStaffDto
+    public class UpdateDoctorDto
     {
         public string Id { get; set; }
         public string FirstName { get; set; }

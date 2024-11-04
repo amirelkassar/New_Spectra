@@ -16,8 +16,7 @@ namespace Spectra.Application.Admin.Commands
 
     {
         public string Id { get; set; }
-      
-
+        public ContractCases ContractCases { get; set; }
     }
     public class UpdateContractCommandHandler : IRequestHandler<UpdateContractStatusCommand, OperationResult<Unit>>
     {
@@ -36,7 +35,7 @@ namespace Spectra.Application.Admin.Commands
 
             var contract = await _contractRepository.GetByIdAsync(request.Id);
 
-            contract.ContractCase = ContractCases.REFUSE;
+            contract.ContractCase = request.ContractCases;
 
             await _contractRepository.UpdateAsync(contract);
             return OperationResult<Unit>.Success(Unit.Value);

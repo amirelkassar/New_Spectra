@@ -18,7 +18,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Services
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctors();
         Task<OperationResult<Doctor>> GetDoctorById(string id);
 
-        Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateManagementStaffDto input);
+        Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateDoctorDto input);
 
 
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices();

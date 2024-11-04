@@ -9,7 +9,7 @@ using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Patients.Commands
 {
-    public class CreatePatientCommand : ICommand<OperationResult<string>>
+    public class CreateStaticStringDataCommand : ICommand<OperationResult<string>>
     {
         public Name Name { get; set; }
         public string NationalId { get; set; }
@@ -23,7 +23,7 @@ namespace Spectra.Application.Patients.Commands
         public TypeOfDisease InheritedOrAcquired { get; set; }
     }
 
-    public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, OperationResult<string>>
+    public class CreatePatientCommandHandler : IRequestHandler<CreateStaticStringDataCommand, OperationResult<string>>
     {
         private readonly IPatientRepository _patientRepository;
 
@@ -32,7 +32,7 @@ namespace Spectra.Application.Patients.Commands
             _patientRepository = patientRepository;
         }
 
-        public async Task<OperationResult<string>> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(CreateStaticStringDataCommand request, CancellationToken cancellationToken)
         {
 
             var patient = Patient.Create(
@@ -54,7 +54,7 @@ namespace Spectra.Application.Patients.Commands
         }
     }
 
-    public class CreatePatientCommandValidator : AbstractValidator<CreatePatientCommand>
+    public class CreatePatientCommandValidator : AbstractValidator<CreateStaticStringDataCommand>
     {
         public CreatePatientCommandValidator()
         {

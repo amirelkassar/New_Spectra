@@ -128,7 +128,7 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateManagementStaffDto input)
+        public async Task<OperationResult<Unit>> UpdateDoctor(string id, UpdateDoctorDto input)
         {
             var name = new Name { FirstName = input.FirstName, LastName = input.LastName, Prefix = input.Prefix };
 

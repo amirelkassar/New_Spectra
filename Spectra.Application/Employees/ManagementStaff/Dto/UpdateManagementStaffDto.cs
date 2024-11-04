@@ -6,7 +6,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands.Dto
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
         public string? Prefix { get; set; }
         public string NationalId { get; set; }
         public HumenGender HumenGenders { get; set; }

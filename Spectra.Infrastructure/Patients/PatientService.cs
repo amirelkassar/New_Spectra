@@ -22,10 +22,10 @@ namespace Spectra.Infrastructure.Patients
 
         }
 
-        public async Task<OperationResult<string>> CreatePatient(CreatePatientCommand input)
+        public async Task<OperationResult<string>> CreatePatient(CreateStaticStringDataCommand input)
         {
 
-            var command = new CreatePatientCommand
+            var command = new CreateStaticStringDataCommand
             {
 
                 Name = input.Name,
