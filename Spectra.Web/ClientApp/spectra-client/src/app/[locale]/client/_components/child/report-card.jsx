@@ -37,13 +37,14 @@ export const ReportCard = ({
         </div>
 
         {showActionMenu && (
-          <Button
+          <div
+            role='button'
             onClick={(e) => e.stopPropagation()}
             className='!p-1 rounded-sm'
             variant='ghost'
           >
             <MenuActions />
-          </Button>
+          </div>
         )}
       </div>
 
