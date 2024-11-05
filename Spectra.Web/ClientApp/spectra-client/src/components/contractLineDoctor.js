@@ -9,6 +9,7 @@ function ContractLineDoctor({
   activeEdit = true,
   handleServiceDataChange,
   serviceData = {},
+  platformFee=0
 }) {
   return (
     <li className="pb-3 border-b border-grayLight">
@@ -58,7 +59,7 @@ function ContractLineDoctor({
             Net Earnings
           </h4>
           <p className="bg-blueLight text-xs mdl:text-base text-center px-7 min-h-9 mdl:min-h-11 border min-w-[130px] md:min-w-[140px] border-greenMain rounded-xl flex items-center justify-center">
-            {Math.round((serviceData.price * 70) / 100)} $
+            {Math.round((serviceData.price * platformFee) / 100)} $
           </p>
         </div>
       </div>

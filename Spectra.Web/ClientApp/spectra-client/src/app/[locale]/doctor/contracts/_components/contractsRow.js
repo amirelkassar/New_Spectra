@@ -8,16 +8,15 @@ import React from "react";
 import { getDate } from "@/lib/utils";
 import ActionMenu from "./ActionMenuContractsRow";
 
-function ContractsRow({data}) {
+function ContractsRow({ data }) {
   return (
     <div
-     
       className={`${
         data.done ? "bg-[#D0F0FB]" : "bg-[#F1FCFF]"
       } relative pe-6 lg:pe-9 flex items-center gap-4 justify-between rounded-xl px-3 py-5`}
     >
       <div className=" absolute top-4 end-3">
-      <ActionMenu  id={data.contractId} />
+        <ActionMenu id={data.contractId} employeeId={data.employeeId} />
       </div>
       <div className="flex items-center gap-5 lg:gap-8">
         <div className="bg-white py-2 lg:py-4 px-2 lg:px-5 w-10 h-9 lg:w-[64px] lg:h-[61px] rounded-xl flex items-center justify-center">
@@ -29,7 +28,9 @@ function ContractsRow({data}) {
         </div>
         <div className="lg:min-w-[172px] flex flex-col gap-2 lg:gap-4">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm lg:text-xl font-Bold">{data.title||'النسخه الجديده'}</h3>
+            <h3 className="text-sm lg:text-xl font-Bold">
+              {data.title || "النسخه الجديده"}
+            </h3>
             {data.done && <SuccessIcon className={"w-4 lg:w-6 h-auto"} />}
           </div>
           <div className="flex items-center gap-1">
@@ -45,7 +46,9 @@ function ContractsRow({data}) {
           </div>
         </div>
         <div className=" flex flex-col gap-2 lg:gap-4">
-          <p className=" text-sm lg:font-Regular">{getDate(data.date).fullYear}</p>
+          <p className=" text-sm lg:font-Regular">
+            {getDate(data.date).fullYear}
+          </p>
           <p className=" text-sm lg:font-Regular">{getDate(data.date).time}</p>
         </div>
       </div>

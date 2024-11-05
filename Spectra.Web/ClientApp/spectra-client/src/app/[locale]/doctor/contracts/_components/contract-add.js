@@ -6,7 +6,6 @@ import ServicesMember from "./services-member";
 import { NavLink, TextInput } from "@mantine/core";
 import Button from "@/components/button";
 import WorkNum from "./workNum";
-import SwitchContracts from "./switchContracts";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
 import DraftIcon from "@/assets/icons/draft";
@@ -34,9 +33,25 @@ function ContractAdd({ id }) {
   });
   const [searchTerm, setSearchTerm] = useState(""); // State to track search input
   const [filteredOptions, setFilteredOptions] = useState([]);
+  const [FreelanceNum, setFreelanceNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
+  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
   useEffect(() => {
     if (!isLoading) {
       setFilteredOptions(dataServices?.data?.data?.services);
+      setTeamSpectraNum({
+        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+        platformFee: dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+      });
+      setFreelanceNum({
+        duration: dataServices?.data?.data?.durationFreelance || 0,
+        platformFee: dataServices?.data?.data?.platformFeeToFreelance || 0,
+      });
     }
   }, [isLoading]);
   const handleAddToList = (value) => {
@@ -101,7 +116,7 @@ function ContractAdd({ id }) {
       })),
       hoursOfWork: workLimits.hoursOfWork, // Set as needed
       daysOfWork: workLimits.daysOfWork, // Set as needed
-      employeeId: "string1112", // Replace with actual employee ID
+      employeeId: "hema", // Replace with actual employee ID
       titel: "string", // Replace with actual title
       firstName: "string", // Replace with actual first name
       lastName: "string", // Replace with actual last name
@@ -167,6 +182,7 @@ function ContractAdd({ id }) {
       </div>
 
       <ServicesFreelancer
+        numHeader={FreelanceNum}
         data={listFreelancer}
         setData={setListFreelancer}
         handleServiceDataChange={handleServiceDataChange}
@@ -175,6 +191,7 @@ function ContractAdd({ id }) {
       />
 
       <ServicesMember
+        numHeader={TeamSpectraNum}
         data={listMember}
         setData={setListMember}
         handleServiceDataChange={handleServiceDataChange}
@@ -185,8 +202,6 @@ function ContractAdd({ id }) {
         workLimits={workLimits}
         setWorkLimits={setWorkLimits}
       />
-
-      <SwitchContracts />
 
       <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center md:justify-start  w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
         <Button

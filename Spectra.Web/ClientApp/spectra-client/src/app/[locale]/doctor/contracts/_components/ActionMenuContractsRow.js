@@ -6,11 +6,13 @@ import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
 import { DeleteContracts } from "@/useAPI/doctor/contracts-api";
 
-function ActionMenu({ id, activeNow = false }) {
-  const { mutate: deleteContracts, isLoading } = DeleteContracts(id);
-  const handleDelete = () => {
-    console.log("deteted");
+function ActionMenu({ id, activeNow = false, employeeId }) {
+  const { mutate: deleteContracts, isSuccess } = DeleteContracts(
+    id,
+    employeeId
+  );
 
+  const handleDelete = () => {
     deleteContracts();
   };
 

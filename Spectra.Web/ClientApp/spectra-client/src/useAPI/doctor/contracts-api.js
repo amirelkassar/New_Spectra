@@ -1,7 +1,7 @@
 "use client";
 import { api } from "@/api/api";
 import { Doctor } from "@/api/endpoints";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //getAll
 export const GetContracts = (id) => {
@@ -11,8 +11,11 @@ export const GetContracts = (id) => {
       const response = await api.get(Doctor.Contracts.url(id), {
         headers: {},
       });
+      console.log("dfd");
       return response;
     },
+    staleTime: Infinity,
+    refetchInterval: false,
   });
 };
 //getID
@@ -23,8 +26,12 @@ export const GetContractsID = (id) => {
       const response = await api.get(Doctor.Contracts.getByID(id), {
         headers: {},
       });
+      console.log("response");
+
       return response;
     },
+    staleTime: Infinity,
+    refetchInterval: false,
   });
 };
 //getAllServices
@@ -37,6 +44,7 @@ export const GetContractsServices = () => {
       });
       return response;
     },
+
     staleTime: Infinity,
     refetchInterval: false,
   });
@@ -60,15 +68,37 @@ export const useCreateContracts = () => {
   });
 };
 //delete
-export const DeleteContracts = (id) => {
+export const DeleteContracts = (id, employeeId) => {
+  const { refetch } = GetContracts(employeeId);
+  const queryClient = useQueryClient();
+
   return useMutation({
+    mutationKey: ["Contracts"],
     mutationFn: async () => {
       const response = await api.delete(Doctor.Contracts.getByID(id));
       return response.data;
     },
-
     onSuccess: (res) => {
+      refetch();
+      queryClient.invalidateQueries(["Contracts"]);
       console.log(res);
+    },
+  });
+};
+//Edit
+export const useEditContracts = (id) => {
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await api.put(Doctor.Contracts.getByID(id), data, {
+        headers: {},
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error("حدث خطأ أثناء الإرسال:", error);
     },
   });
 };

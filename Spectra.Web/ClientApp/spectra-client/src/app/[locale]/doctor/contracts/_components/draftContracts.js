@@ -12,13 +12,6 @@ const dataContacts = [
     date: "20/4/2024",
     time: "10:30 م",
   },
-  {
-    id: 2,
-    name: "user",
-    title: "النسخة الثانية",
-    date: "20/4/2024",
-    time: "10:30 م",
-  },
 ];
 function DraftContracts() {
   return (

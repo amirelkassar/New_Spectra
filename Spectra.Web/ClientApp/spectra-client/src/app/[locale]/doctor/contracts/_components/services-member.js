@@ -6,10 +6,8 @@ function ServicesMember({
   data,
   handleServiceDataChange,
   handleDeleteItem,
-
+  numHeader,
 }) {
-
-
   return (
     <div
       dir="ltr"
@@ -22,11 +20,15 @@ function ServicesMember({
         <div className="flex items-center gap-2 mdl:gap-4 flex-1">
           <div className="bg-blueLight flex-1 flex items-center gap-1 mdl:gap-2 max-w-[290px] justify-center rounded-xl border border-greenMain text-greenMain font-Bold  mdl:px-4 min-h-9 mdl:min-h-11">
             <h3 className="text-sm mdl:text-xl font-Bold">Duration :</h3>
-            <p className="text-sm mdl:text-xl font-Bold">15 min</p>
+            <p className="text-sm mdl:text-xl font-Bold">
+              {numHeader.duration} min
+            </p>
           </div>
           <div className="bg-blueLight flex-1 flex items-center gap-1 mdl:gap-2 max-w-[290px] justify-center rounded-xl border border-greenMain text-greenMain font-Bold  mdl:px-4 min-h-9 mdl:min-h-11">
             <h3 className="text-sm mdl:text-xl font-Bold">Platform Fee :</h3>
-            <p className="text-sm mdl:text-xl font-Bold">30%</p>
+            <p className="text-sm mdl:text-xl font-Bold">
+              {numHeader.platformFee}%
+            </p>
           </div>
         </div>
       </div>
@@ -43,6 +45,7 @@ function ServicesMember({
                 <DeleteIcon />
               </button>
               <ContractLineDoctor
+                platformFee={numHeader.platformFee}
                 activeEdit={false}
                 serviceData={service}
                 type={"member"}
