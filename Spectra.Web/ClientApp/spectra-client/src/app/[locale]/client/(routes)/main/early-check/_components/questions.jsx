@@ -24,23 +24,16 @@ export const Questions = ({
   return (
     <div className='border-[3px] border-greenMain/20 rounded-lg'>
       {/* DISCRIPTION */}
-      <h2 className='text-sm mdl:text-xl font-bold p-3'>
+      <h2 className='text-sm mdl:text-xl font-bold p-3 border-b-2 border-greenMain/20'>
         {discription}
       </h2>
 
-      {/* SEPARATOR */}
-      <div className='h-0.5 bg-greenMain/20 w-full' />
-
       {/* QUESTIONS */}
       <ul>
-        {questions.map((question, index) => (
+        {questions.map((question) => (
           <li
             className={cn(
-              'relative pt-6 w-full ps-7 before:absolute before:top-7 mdl:before:top-8 before:start-3 before:size-[10px] before:bg-greenMain before:rounded-full',
-              {
-                'after:absolute after:hidden mdl:after:block after:top-[38px] after:start-[16px] after:w-[2px] after:h-[calc(100%-6px)] after:bg-greenMain':
-                  index !== questions.length - 1,
-              }
+              'relative pt-6 w-full ps-7 before:absolute before:top-7 mdl:before:top-8 before:start-3 before:size-[10px] before:bg-greenMain before:rounded-full after:absolute after:hidden mdl:after:block after:top-[38px] after:start-[16px] after:w-[2px] after:h-[calc(100%-6px)] after:bg-greenMain last:after:hidden'
             )}
             key={question?.id}
           >
