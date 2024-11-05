@@ -240,7 +240,7 @@ function ContractInformation({ id }) {
       />
 
       <WorkNum
-        addNew={true}
+        addNew={searchparams.get("editContracts") === "true"}
         workLimits={workLimits}
         setWorkLimits={setWorkLimits}
       />

@@ -22,7 +22,7 @@ const serviceOptions = [
 
 function ContractAdd({ id }) {
   const { data: dataServices, isLoading } = GetContractsServices();
-  const { mutate: createContract, error: errorSend } = useCreateContracts();
+  const { mutate: createContract, error: errorSend } = useCreateContracts("hema");
   console.log(dataServices?.data?.data?.services);
 
   const [listFreelancer, setListFreelancer] = useState([]);
@@ -114,6 +114,8 @@ function ContractAdd({ id }) {
         service: item.label,
         selary: item.price,
       })),
+      discount: FreelanceNum.platformFee,
+      duration: FreelanceNum.duration,
       hoursOfWork: workLimits.hoursOfWork, // Set as needed
       daysOfWork: workLimits.daysOfWork, // Set as needed
       employeeId: "hema", // Replace with actual employee ID

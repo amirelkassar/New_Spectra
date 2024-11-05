@@ -51,7 +51,8 @@ export const GetContractsServices = () => {
 };
 //sendContracts
 
-export const useCreateContracts = () => {
+export const useCreateContracts = (employeeId) => {
+  const { refetch } = GetContracts(employeeId);
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.post(Doctor.Contracts.post, data, {
@@ -60,6 +61,7 @@ export const useCreateContracts = () => {
       return response.data;
     },
     onSuccess: (data) => {
+      refetch();
       console.log(data);
     },
     onError: (error) => {

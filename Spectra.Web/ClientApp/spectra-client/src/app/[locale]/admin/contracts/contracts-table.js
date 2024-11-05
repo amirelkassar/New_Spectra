@@ -3,7 +3,10 @@ import placeholderImage from "@/assets/images/placeholder-person.png";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./components/columns";
 import CardContacts from "./components/CardContacts";
-const data = [
+import { GetContractsInAdmin } from "@/useAPI/admin/contracts-admin-api";
+import HandelShowData from "@/components/handelShowData";
+import { columnsTest } from "./components/columnsTest";
+const dataContracts = [
   {
     id: 0,
     name: "عبدالله الشيخ",
@@ -137,11 +140,25 @@ const FilterOptions = [
   },
 ];
 const ContractsTable = () => {
+  const { data, isLoading } = GetContractsInAdmin();
+  console.log(data);
+
   return (
     <div>
+      <HandelShowData
+        isLoading={isLoading}
+        lengthData={data?.data?.data.items.length}
+      >
+        <DataTable
+          IsWidth={true}
+          data={data?.data.data.items}
+          columns={columnsTest}
+          totalPages={data?.data?.data?.totalPages || 2}
+        />
+      </HandelShowData>
       <DataTable
         IsWidth={true}
-        data={data}
+        data={dataContracts}
         columns={columns}
         filterData={FilterOptions}
         filter="buttons"
