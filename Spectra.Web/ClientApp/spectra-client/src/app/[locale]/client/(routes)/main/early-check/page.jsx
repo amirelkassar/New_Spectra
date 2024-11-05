@@ -3,7 +3,7 @@ import {
   BackButton,
   Container,
 } from '@/client/_components/ui';
-import { Survey } from './_components/survey';
+import { SurveyForms } from './_components/survey-forms';
 import { MILESTONES } from '@/lib/demoData';
 
 const EarlyCheckPage = () => {
@@ -14,7 +14,7 @@ const EarlyCheckPage = () => {
         <H1>خدمة الكشف المبكر</H1>
       </div>
 
-      <Survey data={MILESTONES} />
+      <SurveyForms forms={MILESTONES} />
     </Container>
   );
 };

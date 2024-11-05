@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { SurveyForm } from '@/components/swyc/survey-form';
 
-export const Survey = ({ data = {} }) => {
+export const Survey = ({ data = [] }) => {
   const [answers, setAnswers] = useState({});
 
   const handleSelect = (questionId, value) => {
@@ -15,6 +15,7 @@ export const Survey = ({ data = {} }) => {
     setAnswers(updatedAnswers);
   };
 
+  if (!data.length) return null;
   return (
     <SurveyForm>
       <SurveyForm.Description>
@@ -30,7 +31,7 @@ export const Survey = ({ data = {} }) => {
         </SurveyForm.Title>
 
         <ul>
-          {data?.twoMonths?.map((question) => (
+          {data?.map((question) => (
             <SurveyForm.QuestionLi key={question?.id}>
               <SurveyForm.Question>
                 <SurveyForm.QuestionLabel>

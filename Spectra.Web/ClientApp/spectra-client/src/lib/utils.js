@@ -66,7 +66,7 @@ export function calculateAgeInMonths(birthDate) {
     todayTimestamp - birthDateTimestamp;
 
   if (differenceInMilliseconds < 0) {
-    return 0;
+    return null;
   }
 
   // تحويل الفرق إلى أشهر (تقريبي)
