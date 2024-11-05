@@ -12,6 +12,7 @@ export const FeaturesArticles = ({ data = [] }) => {
         aria-labelledby='features-articles'
         aria-label='Features Articles'
         className='max-w-[1600px]'
+        heading='اهم المقالات'
       >
         <div className='grid grid-cols-3 gap-5 mdl:gap-10'>
           {data?.map((article, index) => (

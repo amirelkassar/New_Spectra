@@ -1,11 +1,13 @@
 import ArrowLeft from '@/assets/icons/arrow-left';
 import Button from '@/components/button';
 import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 
 export const Section = ({
   heading = '',
   type = 'basic',
   btnLabel = '',
+  btnHref = '#',
   customBtn = <></>,
   children,
   id,
@@ -34,10 +36,12 @@ export const Section = ({
           <h2 id={id} className='text-base mdl:text-2xl'>
             {heading}
           </h2>
-          <Button className='text-sm mdl:text-medium gap-3 font-bold min-w-52 mdl:min-w-72'>
-            <span>{btnLabel}</span>
-            <ArrowLeft className='ltr:rotate-180' />
-          </Button>
+          <Link href={btnHref}>
+            <Button className='text-sm mdl:text-medium gap-3 font-bold min-w-52 mdl:min-w-72'>
+              <span>{btnLabel}</span>
+              <ArrowLeft className='ltr:rotate-180' />
+            </Button>
+          </Link>
         </div>
       )}
       {type === 'custombtn' && (

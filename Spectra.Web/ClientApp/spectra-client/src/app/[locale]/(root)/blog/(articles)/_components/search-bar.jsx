@@ -1,22 +1,10 @@
 'use client';
 
 import SearchIcon from '@/assets/icons/search';
-import { useMemo, useState } from 'react';
-
-const articalsTab = [''];
+import { useState } from 'react';
 
 export const SearchBar = () => {
   const [search, setSearch] = useState('');
-
-  const articalsTab = useMemo(
-    () => [
-      {
-        key: 'general',
-        value: 'عام',
-      },
-    ],
-    []
-  );
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -28,7 +16,7 @@ export const SearchBar = () => {
     <div className='container mx-auto w-full max-w-[1600px] mdl:mb-10 mb-5'>
       <form
         onSubmit={handleSearch}
-        className='flex items-center mdl:gap-5 gap-2 w-full'
+        className='flex flex-row-reverse items-center mdl:gap-5 gap-2 w-full'
       >
         <input
           className='w-full text-sm mdl:text-medium text-black h-7 mdl:h-16 mdl:px-10 px-5 py-1 bg-[#F5F5F5] rounded-full outline-none flex-1'
@@ -41,7 +29,7 @@ export const SearchBar = () => {
           type='submit'
           className='rounded-full mdl:size-16 size-7 bg-greenMain flex items-center justify-center shrink-0'
         >
-          <SearchIcon className='size-3 mdl:size-7' />
+          <SearchIcon className='size-3 mdl:size-7 text-white' />
         </button>
       </form>
     </div>

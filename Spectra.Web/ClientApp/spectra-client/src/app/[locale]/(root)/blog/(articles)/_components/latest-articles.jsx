@@ -37,7 +37,7 @@ const Article = ({
         <h3 className='text-sm mdl:text-base'>{title}</h3>
         <div
           dir='ltr'
-          className='text-greenMain gap-1 text-xs flex items-center ltr:flex-row-reverse'
+          className='text-greenMain gap-1 text-xs flex items-center ltr:flex-row-reverse justify-end'
         >
           <LikeHeartIcon />
           {likes}

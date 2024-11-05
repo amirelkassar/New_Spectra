@@ -84,9 +84,9 @@ const Article = ({
           <span>{writer}</span>
           <Link
             href={`${ROUTES.ROOT.BLOG}/article/${id}`}
-            className='flex border transition hover:border-greenMain items-center py-1 mdl:py-2 px-2 mdl:px-5 text-sm mdl:text-medium rounded-lg'
+            className='flex border transition border-greenMain items-center hover:border-black py-1 mdl:py-2 px-2 mdl:px-5 text-sm mdl:text-medium rounded-lg'
           >
-            <span className='flex-1 block'>اقرأ اكثر</span>
+            <span className='flex-1 block'>قراءة</span>
             <ArrowIcon
               lineWidth='25'
               className='w-14'

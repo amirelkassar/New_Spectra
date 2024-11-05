@@ -3,6 +3,7 @@ import { Section } from '../../_components/section';
 import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
+import ROUTES from '@/routes';
 
 const data = [
   {
@@ -12,18 +13,24 @@ const data = [
   },
   {
     color: 'bg-[#10B0C1]/[0.18]',
-    icon: <TeamIcon className='size-6 mdl:size-11' />,
+    icon: (
+      <TeamIcon className='size-6 mdl:size-11 text-greenMain' />
+    ),
     label: `خدمات التشخيص الطبي 
     عبر فرق متعددة التخصصات`,
   },
   {
     color: 'bg-[#8A22A0]/[0.18]',
-    icon: <FollowUpIcon className='size-6 mdl:size-11' />,
+    icon: (
+      <FollowUpIcon className='size-6 mdl:size-11 text-purple' />
+    ),
     label: 'خدمات المتابعة الدوائية',
   },
   {
     color: 'bg-[#6FC1BF]/[0.18]',
-    icon: <HandshakeIcon className='size-6 mdl:size-11' />,
+    icon: (
+      <HandshakeIcon className='size-6 mdl:size-11 text-greenMain' />
+    ),
     label: 'خدمات الاستشارات التخصصية',
   },
 ];
@@ -37,6 +44,7 @@ export const Services = () => {
       heading='الخدمات المقدمة'
       type='more'
       btnLabel='تصفح جميع الخدمات'
+      btnHref={`${ROUTES.ROOT.SERVICES}/#services`}
     >
       <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
         {data.map((item) => (

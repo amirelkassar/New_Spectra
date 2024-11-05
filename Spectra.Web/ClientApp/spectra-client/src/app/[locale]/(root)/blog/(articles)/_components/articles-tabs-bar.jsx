@@ -76,7 +76,7 @@ export const ArticlesTabsBar = () => {
   };
 
   return (
-    <div className='my-10 h-16 w-full border-t border-b border-black/10 py-1'>
+    <div className='my-10 w-full border-t border-b border-black/10'>
       <div className='container mx-auto max-w-[1600px] gap-5 mdl:gap-10 flex ltr:flex-row-reverse items-center h-full'>
         <button
           onClick={scrollRight}
@@ -90,30 +90,26 @@ export const ArticlesTabsBar = () => {
           style={{
             scrollbarWidth: 'none',
           }}
-          className='flex-1 flex items-center gap-7 justify-start overflow-x-auto h-full'
+          className='flex-1 flex items-center gap-7 *:shrink-0 overflow-x-auto h-full'
         >
           {TABS.map((tab) => (
             <li
+              role='button'
               key={tab.key}
               className={cn(
-                'h-full min-w-max text-sm mdl:text-medium transition border-b hover:font-bold hover:border-greenMain border-transparent',
+                'py-3 text-sm mdl:text-xl border-b-2 transition hover:font-bold hover:border-greenMain border-transparent',
                 {
                   'border-greenMain font-bold':
                     tab.isActive,
                 }
               )}
+              onClick={() =>
+                router.push(
+                  `${ROUTES.ROOT.BLOG}/${tab.key}`
+                )
+              }
             >
-              <button
-                type='button'
-                className='w-full h-full'
-                onClick={() =>
-                  router.push(
-                    `${ROUTES.ROOT.BLOG}/${tab.key}`
-                  )
-                }
-              >
-                {tab.value}
-              </button>
+              {tab.value}
             </li>
           ))}
         </ul>

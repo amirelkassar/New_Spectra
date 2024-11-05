@@ -1,4 +1,7 @@
-import { servicesData } from '@/lib/demoData';
+import {
+  servicesData,
+  SERVICESICONS,
+} from '@/lib/demoData';
 import { Section } from '../../_components/section';
 import Button from '@/components/button';
 
@@ -34,8 +37,6 @@ export const Services = () => {
 
 const Service = ({
   label = '',
-  icon = '',
-  color = '',
   description = '',
   id = '',
 }) => {
@@ -45,10 +46,16 @@ const Service = ({
       className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'
     >
       <div
-        className={`lg:size-20 size-16 rounded-full flex items-center justify-center`}
-        style={{ backgroundColor: color }}
+        className={`lg:size-20 size-16 rounded-full flex items-center justify-center *:size-8 mdl:*:size-10`}
+        style={{
+          color:
+            SERVICESICONS[id]?.color ||
+            SERVICESICONS[1]?.color,
+          backgroundColor:
+            SERVICESICONS[id]?.bg || SERVICESICONS[1]?.bg,
+        }}
       >
-        {icon}
+        {SERVICESICONS[id]?.icon || SERVICESICONS[1]?.icon}
       </div>
       <h3 className='font-bold text-center min-h-14'>
         {label}
