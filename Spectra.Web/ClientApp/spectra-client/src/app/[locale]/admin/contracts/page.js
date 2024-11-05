@@ -3,7 +3,7 @@ import LayContracts from "./layContracts";
 import ContractsTable from "./contracts-table";
 
 
-function page({ children }) {
+function page() {
   return (
     <LayContracts>
       <ContractsTable />

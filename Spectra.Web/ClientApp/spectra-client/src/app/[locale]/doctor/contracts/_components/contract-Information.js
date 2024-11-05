@@ -3,42 +3,102 @@ import EditIcon from "@/assets/icons/edit";
 import Card from "@/components/card";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
-import { MultiSelect, NavLink, TextInput } from "@mantine/core";
+import { NavLink, TextInput } from "@mantine/core";
 import Button from "@/components/button";
 import RefuseIcon from "@/assets/icons/refuse";
 import AcceptIcon from "@/assets/icons/accept";
 import useModal from "@/store/modal-slice";
 import { useSearchParams } from "next/navigation";
-import LinkGreen from "@/components/linkGreen";
 import WorkNum from "./workNum";
-import SwitchContracts from "./switchContracts";
 import PlusInsideCircleIcon from "@/assets/icons/plus-inside-circle";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
-const serviceOptions = [
-  { id: 1, value: "examination", label: "Examination Service" },
-  { id: 2, value: "counseling", label: "Counseling Service" },
-  { id: 3, value: "diagnostic", label: "Diagnostic Service" },
-  { id: 4, value: "followup", label: "Follow-up Service" },
-];
+import {
+  GetContractsID,
+  GetContractsServices,
+  useEditContracts,
+} from "@/useAPI/doctor/contracts-api";
 
 function ContractInformation({ id }) {
+  const { data: dataServices, isLoading } = GetContractsServices();
+  const { mutate: createContract, error: errorSend } = useEditContracts(id);
+  console.log(dataServices);
+
+  const { data: dataContractsDetails, isLoading: isLoadingDetails } =
+    GetContractsID(id);
   const { modal, editModal } = useModal();
   const searchparams = useSearchParams();
+  const [workLimits, setWorkLimits] = useState({
+    hoursOfWork: 0,
+    daysOfWork: 0,
+  });
+  console.log(errorSend);
 
   const [listFreelancer, setListFreelancer] = useState([]);
   const [listMember, setListMember] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // State to track search input
-  const [filteredOptions, setFilteredOptions] = useState(serviceOptions);
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [FreelanceNum, setFreelanceNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
+  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
+  useEffect(() => {
+    if (!isLoading) {
+      setFilteredOptions(dataServices?.data?.data?.services);
+      setTeamSpectraNum({
+        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+        platformFee: dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+      });
+      setFreelanceNum({
+        duration: dataServices?.data?.data?.durationFreelance || 0,
+        platformFee: dataServices?.data?.data?.platformFeeToFreelance || 0,
+      });
+    }
+  }, [isLoading]);
+  console.log(dataContractsDetails);
+
+  useEffect(() => {
+    if (dataContractsDetails?.data?.data) {
+      // Update work limits
+      setWorkLimits({
+        hoursOfWork: dataContractsDetails.data.data.hoursOfWork || 0,
+        daysOfWork: dataContractsDetails.data.data.daysOfWork || 0,
+      });
+
+      // Transform freelance data
+      const freelancers = dataContractsDetails.data.data.freelance
+        ? dataContractsDetails.data.data.freelance.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListFreelancer(freelancers);
+
+      // Transform spectraTeam data
+      const members = dataContractsDetails.data.data.spectraTeam
+        ? dataContractsDetails.data.data.spectraTeam.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListMember(members);
+    }
+  }, [dataContractsDetails?.data?.data, isLoadingDetails]);
   const handleAddToList = (value) => {
-    if (!listFreelancer.find((item) => item.id === value.id)) {
-      const newItem = { id: value.id, label: value.label, price: 0 };
+    if (!listFreelancer.find((item) => item.id === value.name)) {
+      const newItem = { id: value.name, label: value.name, price: 0 };
       setListFreelancer([...listFreelancer, newItem]);
     }
-    if (!listMember.find((item) => item.id === value.id)) {
-      const newItem = { id: value.id, label: value.label, price: 0 };
+    if (!listMember.find((item) => item.id === value.name)) {
+      const newItem = { id: value.name, label: value.name, price: value.price };
       setListMember([...listMember, newItem]);
     }
   };
@@ -61,8 +121,8 @@ function ContractInformation({ id }) {
     const value = e.target.value;
     setSearchTerm(value);
     // Filter options based on search term
-    const filtered = serviceOptions.filter((item) =>
-      item.label.toLowerCase().includes(value.toLowerCase())
+    const filtered = filteredOptions.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredOptions(filtered);
   };
@@ -81,7 +141,31 @@ function ContractInformation({ id }) {
       );
     }
   };
+  const handleSubmit = () => {
+    // Transform data to match API requirements
 
+    const formattedData = {
+      freelance: listFreelancer.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      spectraTeam: listMember.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      id: id,
+      hoursOfWork: workLimits.hoursOfWork, // Set as needed
+      daysOfWork: workLimits.daysOfWork, // Set as needed
+      employeeId: "hema", // Replace with actual employee ID
+      titel: "string", // Replace with actual title
+      firstName: "string", // Replace with actual first name
+      lastName: "string", // Replace with actual last name
+      contractCase: 2, // Set as needed
+    };
+
+    // Send formatted data with useCreateContracts
+    createContract(formattedData);
+  };
   return (
     <Card className="mt-5 ">
       {searchparams.get("editContracts") === "true" ? (
@@ -118,7 +202,7 @@ function ContractInformation({ id }) {
                       className="flex bg-white items-center px-2 mdl:px-6 justify-between gap-6 py-2 mdl:py-3 border-b-2 border-grayLight last-of-type:border-none"
                     >
                       <h4 className=" text-sm mdl:text-xl font-Bold">
-                        {item.label}
+                        {item.name}
                       </h4>
                       <button
                         onClick={() => {
@@ -140,6 +224,7 @@ function ContractInformation({ id }) {
       ) : null}
 
       <ServicesFreelancer
+        numHeader={FreelanceNum}
         data={listFreelancer}
         setData={setListFreelancer}
         handleServiceDataChange={handleServiceDataChange}
@@ -147,24 +232,29 @@ function ContractInformation({ id }) {
       />
 
       <ServicesMember
+        numHeader={TeamSpectraNum}
         data={listMember}
         setData={setListMember}
         handleServiceDataChange={handleServiceDataChange}
         handleDeleteItem={handleDeleteItem}
       />
-      <WorkNum />
 
-      <SwitchContracts />
+      <WorkNum
+        addNew={searchparams.get("editContracts") === "true"}
+        workLimits={workLimits}
+        setWorkLimits={setWorkLimits}
+      />
+
       {searchparams.get("editContracts") === "true" ? (
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
-          <LinkGreen
-            href={ROUTES.DOCTOR.CONTRACTS.DASHBOARD}
+          <Button
+            onClick={() => [handleSubmit()]}
             className={
               "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11  rounded-[10px]"
             }
           >
             حفظ التعديلات
-          </LinkGreen>
+          </Button>
         </div>
       ) : (
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
