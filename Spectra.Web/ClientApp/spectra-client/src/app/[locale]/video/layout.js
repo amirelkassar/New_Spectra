@@ -4,7 +4,7 @@ import HeaderVideo from './_components/headerVideo';
 function layout({ children }) {
   return (
     <div className='relative flex flex-col min-h-screen'>
-      <HeaderVideo />
+      {/* <HeaderVideo /> */}
 
       <main className='flex-1 flex flex-col justify-end h-full'>
         {children}

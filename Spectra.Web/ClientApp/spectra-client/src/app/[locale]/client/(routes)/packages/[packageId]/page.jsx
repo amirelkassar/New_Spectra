@@ -13,7 +13,7 @@ const PackagePage = ({ params: { packageId } }) => {
   const packageData = findPackageById(packageId);
   return (
     <Container>
-      <Card className={'p-0'}>
+      <Card className={'p-0 space-y-5'}>
         <H1>
           <BackButton />
           الباقات - {packageData.label}

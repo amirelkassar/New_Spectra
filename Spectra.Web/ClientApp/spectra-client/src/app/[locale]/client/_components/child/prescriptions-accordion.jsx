@@ -4,6 +4,7 @@ import { PrescriptionInfo } from './prescription-info';
 
 export const PrescriptionsAccordion = ({
   prescriptions = [],
+  showDescription = false,
 }) => {
   if (!prescriptions?.length) return null;
   return (
@@ -26,9 +27,11 @@ export const PrescriptionsAccordion = ({
                 <span className='block'>
                   {prescription?.drugName}
                 </span>
-                <span className='text-xs mdl:text-base font-normal'>
-                  {prescription?.description}
-                </span>
+                {showDescription && (
+                  <span className='text-xs mdl:text-base font-normal'>
+                    {prescription?.description}
+                  </span>
+                )}
               </div>
             </div>
           </Accordion.Label>

@@ -4,11 +4,21 @@ import MenuActions from '@/components/menu-actions';
 import man from '@/assets/images/placeholder-person.png';
 import Avatar from '@/components/avatar';
 
-export const ReportCard = ({ data, onView = () => {} }) => {
+export const ReportCard = ({
+  data,
+  onClick = () => {},
+  showActionMenu = false,
+  clickable = false,
+}) => {
   return (
     <div
-      onClick={() => onView(data)}
-      role='button'
+      onClick={(e) => {
+        if (!clickable) return;
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
+      role={clickable ? 'button' : ''}
       style={{
         boxShadow: '0px 4px 10.4px 0px #D7F0F680',
       }}
@@ -25,7 +35,16 @@ export const ReportCard = ({ data, onView = () => {} }) => {
           </p>
         </div>
 
-        <MenuActions />
+        {showActionMenu && (
+          <div
+            role='button'
+            onClick={(e) => e.stopPropagation()}
+            className='!p-1 rounded-sm'
+            variant='ghost'
+          >
+            <MenuActions />
+          </div>
+        )}
       </div>
 
       {/* REPORT TITLE */}

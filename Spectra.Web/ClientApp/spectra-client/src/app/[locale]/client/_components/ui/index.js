@@ -11,6 +11,7 @@ import { SidebarToggle } from './sidebar-toggle';
 import { SearchBar } from './search-bar';
 import { LocaleButton } from './locale-button';
 import { Notifications } from './notifications';
+import { ListCheckMark } from './list-check-mark';
 
 export {
   Info,
@@ -26,4 +27,5 @@ export {
   SearchBar,
   LocaleButton,
   Notifications,
+  ListCheckMark,
 };

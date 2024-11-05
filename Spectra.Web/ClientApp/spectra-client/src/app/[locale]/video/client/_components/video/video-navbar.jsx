@@ -55,7 +55,7 @@ export const VideoNavbar = () => {
   );
 
   return (
-    <div className='flex lgl:flex-wrap lgl:justify-center gap-5 p-5 bg-white lgl:bg-transparent *:shrink-0 overflow-x-auto lgl:overflow-hidden shrink-0'>
+    <div className='flex lgl:flex-wrap mdl:justify-center gap-5 p-5 bg-white lgl:bg-transparent *:shrink-0 overflow-x-auto lgl:overflow-hidden shrink-0'>
       {DATA.map((item) => (
         <div
           role='button'

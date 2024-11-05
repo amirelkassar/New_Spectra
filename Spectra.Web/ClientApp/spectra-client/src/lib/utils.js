@@ -57,3 +57,22 @@ export function getDate(date = '', locale = 'en') {
     timeFromNow,
   };
 }
+
+export function calculateAgeInMonths(birthDate) {
+  const birthDateTimestamp = new Date(birthDate).getTime();
+  const todayTimestamp = new Date().getTime();
+
+  const differenceInMilliseconds =
+    todayTimestamp - birthDateTimestamp;
+
+  if (differenceInMilliseconds < 0) {
+    return null;
+  }
+
+  // تحويل الفرق إلى أشهر (تقريبي)
+  const months = Math.floor(
+    differenceInMilliseconds / (1000 * 60 * 60 * 24 * 30.44)
+  );
+
+  return months;
+}

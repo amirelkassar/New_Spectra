@@ -15,14 +15,18 @@ import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 import SessionIcon from '@/assets/icons/session';
 import { BackButton } from '@/components/buttons/back-button';
-
-import { packagesDataSpectra } from '@/lib/demoData';
+import {
+  packagesDataSpectra,
+  prescriptionsData,
+} from '@/lib/demoData';
+import { PackageCard } from '@/client/_components/packages';
+import {
+  Attachment,
+  PrescriptionsAccordion,
+  ReportAccordion,
+} from '@/client/_components/child';
 import Button from '@/components/button';
-import FileOutline from '@/assets/icons/file-outline';
-import { PackageCard } from '@/app/[locale]/client/_components/packages/package-card';
-import { ReportAccordion } from './report-accordion';
-import { PrescriptionsAccordion } from './prescriptions-accordion';
-import { prescriptionsData } from './prescriptions';
+import { ListCheckMark } from '@/app/[locale]/client/_components/ui';
 
 const SESSIONS = [
   {
@@ -223,6 +227,7 @@ const SessionInfo = ({
       <Card title='الوصفات الطبية'>
         <PrescriptionsAccordion
           prescriptions={prescriptionsData}
+          showDescription
         />
       </Card>
 
@@ -323,12 +328,7 @@ const TestsAndScansList = ({ data = [], title = '' }) => {
     >
       <ul>
         {data?.map((item, i) => (
-          <li
-            className='text-xs py-2 mdl:py-4 mdl:text-base font-bold relative ps-6 mdl:ps-8 before:absolute before:size-4 mdl:before:size-5 before:bg-greenMain before:start-0 before:top-1/2 before:-translate-y-1/2 before:text-white before:flex before:items-center before:justify-center before:!content-["✔"]'
-            key={i}
-          >
-            {item}
-          </li>
+          <ListCheckMark key={i}>{item}</ListCheckMark>
         ))}
       </ul>
     </Card>
@@ -344,24 +344,20 @@ const Attachments = ({ title = '', data = [] }) => {
     >
       <div className='grid grid-cols-2 xl:grid-cols-3 gap-5'>
         {data?.map((item, i) => (
-          <div key={i} className='flex items-center gap-3'>
-            <FileOutline className='size-6 mdl:size-8 text-greenMain' />
+          <Attachment key={i}>
+            <Attachment.Icon />
             <div>
-              <p className='font-Medium text-sm mdl:text-xl truncate'>
+              <Attachment.Name>
                 {item?.fileName}
-              </p>
-
-              <span
-                dir='ltr'
-                className='text-xs mdl:text-base text-grayDark'
-              >
+              </Attachment.Name>
+              <Attachment.SizeAndDate>
                 {item?.size} .{' '}
                 {dayjs(item?.date)
                   .locale('en')
                   .format('DD MMM, YYYY')}
-              </span>
+              </Attachment.SizeAndDate>
             </div>
-          </div>
+          </Attachment>
         ))}
       </div>
     </Card>

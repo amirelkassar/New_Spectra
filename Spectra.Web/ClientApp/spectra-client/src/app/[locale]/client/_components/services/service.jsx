@@ -2,9 +2,8 @@
 
 import { useRouter } from '@/navigation';
 
-import { cn } from '@/lib/utils';
-import Button from '@/components/button';
 import ROUTES from '@/routes';
+import { ServiceCard } from './service-card';
 
 export const Service = ({
   label = '',
@@ -17,10 +16,15 @@ export const Service = ({
   const router = useRouter();
 
   return (
-    <div
-      role='button'
-      data-id={id}
-      className='p-5 flex flex-col gap-5 rounded-2xl border-2 border-transparent transition hover:border-greenMain'
+    <ServiceCard
+      data={{
+        id,
+        icon,
+        color,
+        label,
+        description,
+        subscribed,
+      }}
       onClick={() =>
         router.push(
           ROUTES.CLIENT.SERVICE_REQUEST.VIEW_SERVICE.replace(
@@ -29,35 +33,18 @@ export const Service = ({
           )
         )
       }
+      role='button'
     >
-      <div
-        className={`mdl:size-20 size-16 mx-auto rounded-full flex items-center justify-center`}
-        style={{ backgroundColor: color }}
-      >
-        {icon}
-      </div>
+      <ServiceCard.Icon />
 
-      <div className='flex-1 space-y-3'>
-        <h4 className='font-bold text-center min-h-14 text-sm mdl:text-xl px-4'>
-          {label}
-        </h4>
-        <p className='text-xs mdl:text-lg text-center'>
-          {description}
-        </p>
-      </div>
+      <ServiceCard.Body>
+        <ServiceCard.Label />
+        <ServiceCard.Description />
+      </ServiceCard.Body>
 
-      <Button
-        variant='secondary'
-        className={cn(
-          'font-bold text-sm mdl:text-xl py-2 w-full',
-          {
-            'text-greenMain bg-blueLight hover:bg-blueLight cursor-default':
-              subscribed,
-          }
-        )}
-      >
+      <ServiceCard.Button>
         {subscribed ? 'تم الحجز' : 'احجز الان'}
-      </Button>
-    </div>
+      </ServiceCard.Button>
+    </ServiceCard>
   );
 };

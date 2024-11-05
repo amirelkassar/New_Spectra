@@ -1217,6 +1217,29 @@ export const servicesData = [
   },
 ];
 
+export const SERVICESICONS = {
+  1: {
+    icon: <Watching className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  2: {
+    icon: <TeamIcon className='size-4 mdl:size-5' />,
+    color: '#FF3D3D',
+    bg: 'rgba(235, 67, 53, 0.18)',
+  },
+  3: {
+    icon: <FollowUpIcon className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  4: {
+    icon: <HandshakeIcon className='size-4 mdl:size-5' />,
+    color: '#8A22A0',
+    bg: 'rgba(138, 34, 160, 0.18)',
+  },
+};
+
 export const packagesDataSpectra = [
   {
     id: '1',
@@ -1940,3 +1963,407 @@ export const CHILDSDATA = [
     diagnosis: 'فرط الحركة',
   },
 ];
+
+export const REPORTSDATA = [
+  {
+    reportTitle: 'الاسئلة العامة',
+    reportNo: '2325',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [
+      {
+        label: 'Presenting compliant',
+        content: [
+          'Term : 9 months',
+          'normal delivery',
+          'Ventilation',
+          'Birth weight : normal',
+        ],
+      },
+      {
+        label: 'Past medical history',
+        content: [
+          'Seizure',
+          'surgery',
+          'allergies',
+          'medication',
+          'hearing test',
+        ],
+      },
+    ],
+  },
+  {
+    reportTitle: 'التخاطب',
+    reportNo: '2326',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [],
+  },
+  {
+    reportTitle: 'المتابعة',
+    reportNo: '2327',
+    date: '2022-01-01',
+    doctorName: 'احمد محمد كمال',
+    reportDetails: [],
+  },
+];
+
+export const prescriptionsData = [
+  {
+    id: 1,
+    isNew: true,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'سيترالين',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+  {
+    id: 2,
+    isNew: false,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'بروفين',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+  {
+    id: 3,
+    isNew: false,
+    date: '20/04/2024',
+    doctor: 'احمد محمد كمال',
+    proffession: 'اخصائى نفسي',
+    drugName: 'بنادول',
+    image: '/drug.png',
+    dose: '100mg',
+    description: 'اخذه طوال الشهر يوميا مع الاكل',
+    takingNo: 'مرتين',
+    takingPeriod: 'اسبوعين',
+    doctorNotes:
+      'يتم اخذ الجرعة بشكل منتظم الا اذا ظهر اعراض جانبية',
+    ingredient: 'الريتنول',
+    scientificName: 'setraline',
+    drugClass: 'مسكن',
+    recommendedDose: [
+      'الجرعة الأولية: 50 ملغ مرة واحدة يوميًا من الأقراص. لا تستخدم الكبسولات لبدء العلاج.',
+      'جرعة الاستمرارية: يمكن زيادة الجرعة بمقدار 25 ملغ أسبوعيًا.',
+      'الجرعة القصوى: 200 ملغ/اليوم.',
+    ],
+    drugConcentration: '50 %',
+    drugInteractions: 'لوريم ابسيم - لوريم ابسم',
+    warnings: [
+      'فرط الحساسية تجاه العلاج أو لأي مكون آخر من مكوناته.',
+      'الاستخدام المتزامن مع مثبطات أكسيداز أحادي الأمين (بالإنجليزية: Monoamine Oxidase Inhibitor or MAOI) وحتى 14 يوم بعد التوقف عن استخدامها.',
+    ],
+    drugNotes:
+      'يحفظ العلاج في درجة حرارة الغرفة (15-25 درجة مئوية)، بعيدًا عن الرطوبة والحرارة، وبعيدًا عن متناول الأطفال.',
+  },
+];
+
+export const MILESTONES = {
+  twoMonths: [
+    {
+      id: 1,
+      ar: 'يصدر صوتًا يجعلك تعلم إذا ما كان سعيدًا أو منزعجًا',
+      en: 'Makes sounds that let you know he or she is happy or upset',
+    },
+
+    {
+      id: 2,
+      ar: 'يبدو سعيدًا عند رؤيتك',
+      en: 'Seems happy to see you',
+    },
+    {
+      id: 3,
+      ar: 'يتبع لعبة متحركة بعينيه',
+      en: 'Follows a moving toy with his or her eyes',
+    },
+    {
+      id: 4,
+      ar: 'يدير رأسه ليرى من الشخص المتحدث',
+      en: 'Turns head to find the person who is talking',
+    },
+    {
+      id: 5,
+      ar: 'يثبت رأسه عندما يتم سحبه إلى وضع الجلوس',
+      en: 'Holds head steady when being pulled up to a sitting position',
+    },
+    {
+      id: 6,
+      ar: 'يشابك اليدين معًا ',
+      en: 'Brings hands together',
+    },
+    {
+      id: 7,
+      ar: 'يضحك',
+      en: 'Laughs',
+    },
+    {
+      id: 8,
+      ar: 'يبقي رأسه ثابتة عند وضع الجلوس',
+      en: 'Keeps head steady when held in a sitting position',
+    },
+    {
+      id: 9,
+      ar: 'يُصدر أصواتًا مثل " با"و" ما،"و" غا،"',
+      en: 'Makes sounds like "ga," "ma," and "ba"',
+    },
+    {
+      id: 10,
+      ar: 'ينظر إليك عند مناداته باسمه',
+      en: 'Looks when you call his or her name',
+    },
+  ],
+  fourMonths: [
+    {
+      id: 1,
+      ar: 'يثبت رأسه عندما يتم سحبه إلى وضع الجلوس',
+      en: 'Holds head steady when being pulled up to a sitting position',
+    },
+    {
+      id: 2,
+      ar: 'يشابك اليدين معًا',
+      en: 'Brings hands together',
+    },
+    {
+      id: 3,
+      ar: 'يضحك',
+      en: 'Laughs',
+    },
+    {
+      id: 4,
+      ar: 'يبقي رأسه ثابتًا عند إجلاسه',
+      en: 'Keeps head steady when held in a sitting position',
+    },
+    {
+      id: 5,
+      ar: 'يصدر أصواتًا مثل "غا" أو "ما" أو "با"',
+      en: 'Makes sounds like "ga," "ma," or "ba"',
+    },
+    {
+      id: 6,
+      ar: 'ينظر إليك عند مناداته باسمه',
+      en: 'Looks when you call his or her name',
+    },
+    {
+      id: 7,
+      ar: 'يتقلب على فراشه',
+      en: 'Rolls over',
+    },
+    {
+      id: 8,
+      ar: 'يمرر اللعبة من يد إلى أخرى',
+      en: 'Passes a toy from one hand to the other',
+    },
+    {
+      id: 9,
+      ar: 'يبحث عنك أو عن أي مقدم رعاية آخر عندما يشعر بالانزعاج',
+      en: 'Looks for you or another caregiver when upset',
+    },
+    {
+      id: 10,
+      ar: 'يحمل شيئين ويصدمهما معًا',
+      en: 'Holds two objects and bangs them together',
+    },
+  ],
+  sixMonths: [
+    {
+      id: 1,
+      ar: 'يصدر أصواتًا مثل "غا" أو "ما" أو "با"',
+      en: 'Makes sounds like "ga," "ma," or "ba"',
+    },
+    {
+      id: 2,
+      ar: 'ينظر إليك عند مناداته باسمه',
+      en: 'Looks when you call his or her name',
+    },
+    {
+      id: 3,
+      ar: 'يتقلب على فراشه',
+      en: 'Rolls over',
+    },
+    {
+      id: 4,
+      ar: 'يمرر اللعبة من يد إلى أخرى',
+      en: 'Passes a toy from one hand to the other',
+    },
+    {
+      id: 5,
+      ar: 'يبحث عنك أو عن أي مقدم رعاية آخر عندما يشعر بالانزعاج',
+      en: 'Looks for you or another caregiver when upset',
+    },
+    {
+      id: 6,
+      ar: 'يحمل شيئين ويصدمهما معًا',
+      en: 'Holds two objects and bangs them together',
+    },
+    {
+      id: 7,
+      ar: 'يرفع يديه لتحمليه',
+      en: 'Holds up arms to be picked up',
+    },
+    {
+      id: 8,
+      ar: 'يستطيع الجلوس بنفسه',
+      en: 'Gets into a sitting position by him or herself',
+    },
+    {
+      id: 9,
+      ar: 'يلتقط الطعام ويتناوله',
+      en: 'Picks up food and eats it',
+    },
+    {
+      id: 10,
+      ar: 'ينهض للوقوف بنفسه',
+      en: 'Pulls up to standing',
+    },
+  ],
+  nineMonths: [
+    {
+      id: 1,
+      ar: 'يرفع يديه لتحمليه',
+      en: 'Holds up arms to be picked up',
+    },
+    {
+      id: 2,
+      ar: 'يستطيع الجلوس بنفسه ',
+      en: 'Gets into a sitting position by him or herself',
+    },
+    {
+      id: 3,
+      ar: 'يلتقط الطعام ويتناوله',
+      en: 'Picks up food and eats it',
+    },
+    {
+      id: 4,
+      ar: 'يدفع نفسه للوقوف',
+      en: 'Pulls up to standing',
+    },
+    {
+      id: 5,
+      ar: 'يلعب ألعابًا مثل لعبة " صانع الكعك"أو " الغميضة"',
+      en: 'Plays games like "peek-a-boo" or "pat-a-cake"',
+    },
+    {
+      id: 6,
+      ar: 'ينادي "ماما" أو "بابا" أو أي اسم مشابه',
+      en: 'Calls you "mama" or "dada" or similar name',
+    },
+    {
+      id: 7,
+      ar: 'ينظر حوله عندما تسأله عن أشياء مثل "أين مرضعتك؟" أو "أين بطانيتك؟"',
+      en: 'Looks around when you say things like "Where\'s your bottle?" or "Where\'s your blanket?"',
+    },
+    {
+      id: 8,
+      ar: 'يقلد الصوت الذي تصدره',
+      en: 'Copies sounds that you make',
+    },
+    {
+      id: 9,
+      ar: 'يسير في الغرفة بدون مساعدة',
+      en: 'Walks across a room without help',
+    },
+    {
+      id: 10,
+      ar: 'يستجيب للتوجيهات أعطني الكرة"أو " تعال هنا"مثل - "',
+      en: 'Follows directions - like "Come here" or "Give me the ball"',
+    },
+  ],
+  twelveMonths: [
+    {
+      id: 1,
+      ar: 'يلتقط الطعام ويتناوله',
+      en: 'Picks up food and eats it',
+    },
+    {
+      id: 2,
+      ar: 'يدفع نفسه للوقوف',
+      en: 'Pulls up to standing',
+    },
+    {
+      id: 3,
+      ar: 'يلعب ألعابا مثل لعبة " صانع الكعك"أو " الغميضة"',
+      en: 'Plays games like "peek-a-boo" or "pat-a-cake"',
+    },
+    {
+      id: 4,
+      ar: 'ينادي "ماما" أو "بابا" أو أي اسم مشابه',
+      en: 'Calls you "mama" or "dada" or similar name',
+    },
+    {
+      id: 5,
+      ar: 'ينظر حوله عندما تسأله عن أشياء مثل "أين مرضعتك؟" أو "أين بطانيتك؟"',
+      en: 'Looks around when you say things like "Where\'s your bottle?" or "Where\'s your blanket?"',
+    },
+    {
+      id: 6,
+      ar: 'يقلد الصوت الذي تصدره ',
+      en: 'Copies sounds that you make',
+    },
+    {
+      id: 7,
+      ar: 'يسير في الغرفة بدون مساعدة',
+      en: 'Walks across a room without help',
+    },
+    {
+      id: 8,
+      ar: 'يستجيب للتوجيهات أعطني الكرة"أو " تعال هنا"مثل - "',
+      en: 'Follows directions - like "Come here" or "Give me the ball"',
+    },
+    {
+      id: 9,
+      ar: 'يجري',
+      en: 'Runs',
+    },
+    {
+      id: 10,
+      ar: 'يصعد الساللم بمساعدة شخص آخر',
+      en: 'Walks up stairs with help',
+    },
+  ],
+};

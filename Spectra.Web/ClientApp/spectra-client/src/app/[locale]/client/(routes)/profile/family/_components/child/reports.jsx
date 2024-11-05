@@ -3,53 +3,12 @@
 import { useState } from 'react';
 
 import Card from '@/components/card';
-import { ReportCard } from './report-card';
 import { BackButton } from '@/components/buttons/back-button';
-import { ReportAccordion } from './report-accordion';
-
-const REPORTSDATA = [
-  {
-    reportTitle: 'الاسئلة العامة',
-    reportNo: '2325',
-    date: '2022-01-01',
-    doctorName: 'احمد محمد كمال',
-    reportDetails: [
-      {
-        label: 'Presenting compliant',
-        content: [
-          'Term : 9 months',
-          'normal delivery',
-          'Ventilation',
-          'Birth weight : normal',
-        ],
-      },
-      {
-        label: 'Past medical history',
-        content: [
-          'Seizure',
-          'surgery',
-          'allergies',
-          'medication',
-          'hearing test',
-        ],
-      },
-    ],
-  },
-  {
-    reportTitle: 'التخاطب',
-    reportNo: '2326',
-    date: '2022-01-01',
-    doctorName: 'احمد محمد كمال',
-    reportDetails: [],
-  },
-  {
-    reportTitle: 'المتابعة',
-    reportNo: '2327',
-    date: '2022-01-01',
-    doctorName: 'احمد محمد كمال',
-    reportDetails: [],
-  },
-];
+import {
+  ReportAccordion,
+  ReportCard,
+} from '@/client/_components/child';
+import { REPORTSDATA } from '@/lib/demoData';
 
 export const Reports = () => {
   const [view, setView] = useState(null);
@@ -60,9 +19,11 @@ export const Reports = () => {
         <div className='grid grid-cols-1 mdl:grid-cols-2 2xl:grid-cols-3 gap-5'>
           {REPORTSDATA.map((data, index) => (
             <ReportCard
-              onView={setView}
+              onClick={() => setView(data)}
               key={index}
               data={data}
+              clickable
+              showActionMenu
             />
           ))}
         </div>

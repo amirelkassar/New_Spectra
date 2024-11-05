@@ -1,5 +1,5 @@
 import Card from '@/components/card';
-import { Prescription } from '../../../family/_components/child/prescrtiption-card';
+import { Prescription } from '../../../../../_components/child/prescrtiption-card';
 
 export const PrescriptionDetails = ({
   prescription = {},
