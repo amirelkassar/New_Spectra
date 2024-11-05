@@ -4,6 +4,7 @@ import { createContext, useContext } from 'react';
 
 import { cn } from '@/lib/utils';
 import Button from '@/components/button';
+import { SERVICESICONS } from '@/lib/demoData';
 
 const ServiceCardContext = createContext(null);
 
@@ -41,17 +42,23 @@ const useServiceCard = () => {
 };
 
 const Icon = ({ ...props }) => {
-  const { icon, color } = useServiceCard();
+  const { id } = useServiceCard();
   return (
     <div
       {...props}
       className={cn(
-        'mdl:size-20 size-16 mx-auto rounded-full flex items-center justify-center',
+        'mdl:size-20 size-16 mx-auto rounded-full flex items-center justify-center *:size-8 mdl:*:size-10',
         props?.className
       )}
-      style={{ backgroundColor: color, ...props?.style }}
+      style={{
+        color:
+          SERVICESICONS[id]?.color ||
+          SERVICESICONS[1]?.color,
+        backgroundColor:
+          SERVICESICONS[id]?.bg || SERVICESICONS[1]?.bg,
+      }}
     >
-      {icon}
+      {SERVICESICONS[id]?.icon || SERVICESICONS[1]?.icon}
     </div>
   );
 };
@@ -62,7 +69,10 @@ const Body = ({ children, ...props }) => {
   return (
     <div
       {...props}
-      className={cn('flex-1 space-y-3', props?.className)}
+      className={cn(
+        'flex-1 grid grid-rows-3 gap-2',
+        props?.className
+      )}
     >
       {children}
     </div>
@@ -77,7 +87,7 @@ const Label = ({ ...props }) => {
     <h4
       {...props}
       className={cn(
-        'font-bold text-center min-h-14 text-sm mdl:text-xl px-4',
+        'font-bold text-center mdl:min-h-14 text-sm mdl:text-xl',
         props?.className
       )}
     >
@@ -94,7 +104,7 @@ const Description = ({ ...props }) => {
     <p
       {...props}
       className={cn(
-        'text-xs mdl:text-lg text-center',
+        'text-xs mdl:text-lg text-center row-span-2',
         props?.className
       )}
     >

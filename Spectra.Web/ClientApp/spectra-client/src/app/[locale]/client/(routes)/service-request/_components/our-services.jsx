@@ -6,7 +6,7 @@ export const OurServices = () => {
   return (
     <section>
       <Card id='services' title='خدمتنا'>
-        <div className='grid grid-cols-2 mdl:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5'>
+        <div className='grid grid-cols-2 mdl:grid-cols-3 2xl:grid-cols-5 gap-3 mdl:gap-5'>
           {servicesData.map((service, index) => (
             <Service key={index} {...service} />
           ))}
