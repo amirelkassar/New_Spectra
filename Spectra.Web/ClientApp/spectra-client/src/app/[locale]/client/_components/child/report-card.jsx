@@ -3,7 +3,6 @@
 import MenuActions from '@/components/menu-actions';
 import man from '@/assets/images/placeholder-person.png';
 import Avatar from '@/components/avatar';
-import Button from '@/components/button';
 
 export const ReportCard = ({
   data,
