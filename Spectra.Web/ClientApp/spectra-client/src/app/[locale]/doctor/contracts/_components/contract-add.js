@@ -198,6 +198,8 @@ function ContractAdd({ id }) {
         setData={setListMember}
         handleServiceDataChange={handleServiceDataChange}
         handleDeleteItem={handleDeleteItem}
+        addNew={true}
+
       />
       <WorkNum
         addNew={true}

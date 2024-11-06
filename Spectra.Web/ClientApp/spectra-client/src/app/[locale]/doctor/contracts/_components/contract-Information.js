@@ -164,7 +164,7 @@ function ContractInformation({ id }) {
     };
 
     // Send formatted data with useCreateContracts
-    createContract(formattedData);
+    createContract(formattedData, "hema");
   };
   return (
     <Card className="mt-5 ">
@@ -226,7 +226,6 @@ function ContractInformation({ id }) {
       <ServicesFreelancer
         numHeader={FreelanceNum}
         data={listFreelancer}
-        setData={setListFreelancer}
         handleServiceDataChange={handleServiceDataChange}
         handleDeleteItem={handleDeleteItem}
       />
@@ -234,7 +233,6 @@ function ContractInformation({ id }) {
       <ServicesMember
         numHeader={TeamSpectraNum}
         data={listMember}
-        setData={setListMember}
         handleServiceDataChange={handleServiceDataChange}
         handleDeleteItem={handleDeleteItem}
       />

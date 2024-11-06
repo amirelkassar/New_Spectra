@@ -4,20 +4,19 @@ import React from "react";
 import ShowTerms from "./ShowTerms";
 
 function ContractLine({
-  service,
-  title,
   type,
   terms,
   activeEdit = true,
   handleServiceDataChange,
   serviceData = {},
+  platformFee = 0,
 }) {
   return (
     <li className="pb-3 border-b border-grayLight">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
         <div className="flex items-center justify-between md:justify-start gap-3">
           <p className="font-Regular text-[12px] mdl:text-[15px] min-w-[120px] mdl:min-w-[150px]">
-            {title}
+            {serviceData.label}
           </p>
 
           {/* Price Input */}
@@ -28,12 +27,11 @@ function ContractLine({
           >
             {activeEdit ? (
               <TextInput
-                value={serviceData[service]?.price}
+                value={serviceData.price}
                 onChange={(e) => {
                   activeEdit
                     ? handleServiceDataChange(
-                        service,
-                        "price",
+                        serviceData.id,
                         e.target.value,
                         type
                       )
@@ -46,10 +44,11 @@ function ContractLine({
                     "border-none h-full flex-1 text-[12px] mdl:text-[16px] text-start px-2",
                 }}
               />
-            ) :
-            (
-              <p className="font-Bold text-xs mdl:text-base">{serviceData[service]?.price}</p>
-            ) }
+            ) : (
+              <p className="font-Bold text-xs mdl:text-base">
+                 {serviceData.price}
+              </p>
+            )}
 
             <span className="font-SemiBold text-[12px] mdl:text-[16px]">$</span>
           </div>
@@ -60,7 +59,7 @@ function ContractLine({
             Net Earnings
           </h4>
           <p className="bg-blueLight text-xs mdl:text-base text-center px-7 min-h-9 mdl:min-h-11 border min-w-[130px] md:min-w-[140px] border-greenMain rounded-xl flex items-center justify-center">
-            {Math.round((serviceData[service]?.price * 70) / 100)} $
+            {Math.round((serviceData.price * platformFee) / 100)} $
           </p>
         </div>
       </div>

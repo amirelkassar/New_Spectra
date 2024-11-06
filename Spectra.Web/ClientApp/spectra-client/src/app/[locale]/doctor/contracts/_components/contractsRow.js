@@ -8,7 +8,9 @@ import React from "react";
 import { getDate } from "@/lib/utils";
 import ActionMenu from "./ActionMenuContractsRow";
 
-function ContractsRow({ data }) {
+function ContractsRow({ data, newContracts = false }) {
+  console.log(data);
+  
   return (
     <div
       className={`${
@@ -29,19 +31,21 @@ function ContractsRow({ data }) {
         <div className="lg:min-w-[172px] flex flex-col gap-2 lg:gap-4">
           <div className="flex items-center gap-2">
             <h3 className="text-sm lg:text-xl font-Bold">
-              {data.title || "النسخه الجديده"}
+              {newContracts ? "النسخة محدثة" : "النسخة سابقة"}
             </h3>
-            {data.done && <SuccessIcon className={"w-4 lg:w-6 h-auto"} />}
+            {data.contractCase === 6 && (
+              <SuccessIcon className={"w-4 lg:w-6 h-auto"} />
+            )}
           </div>
           <div className="flex items-center gap-1">
             <ArrowLeft
               fill="#10B0C1"
               className={` w-3 lg:w-auto   ${
-                data.name === "admin" ? "-rotate-45" : "-rotate-[225deg]"
+                data.adminOrEmployee === 1 ? "-rotate-45" : "-rotate-[225deg]"
               }  `}
             />
             <p className="text-[12px] lg:text-[16px] ">
-              المرسل : {data.name === "admin" ? "المشرف" : "انا"}
+              المرسل : {data.adminOrEmployee === 1 ? "المشرف" : "انا"}
             </p>
           </div>
         </div>

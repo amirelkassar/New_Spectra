@@ -5,34 +5,10 @@ import ContractsIcon from "@/assets/icons/contracts";
 import ArrowLeft from "@/assets/icons/arrow-left";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import ActionMenu from "./ActionMenu";
 import { GetContractsIDInAdmin } from "@/useAPI/admin/contracts-admin-api";
 import { getDate } from "@/lib/utils";
 import HandelShowData from "@/components/handelShowData";
 
-const dataContacts = [
-  {
-    id: 1,
-    name: "admin",
-    title: "النسخة الاولى",
-    date: "20/4/2024",
-    time: "10:30 م",
-  },
-  {
-    id: 2,
-    name: "user",
-    title: "النسخة الثانية",
-    date: "20/4/2024",
-    time: "10:30 م",
-  },
-  {
-    id: 3,
-    name: "user",
-    title: "النسخة الثانية",
-    date: "20/4/2024",
-    time: "10:30 م",
-  },
-];
 function ContractsList({ idUser }) {
   const { data, isLoading } = GetContractsIDInAdmin(idUser);
   console.log(data);
@@ -61,19 +37,19 @@ function ContractsList({ idUser }) {
                   </div>
                   <div className="lg:min-w-[172px] flex flex-col gap-2 lg:gap-4">
                     <h3 className="text-sm lg:text-xl font-Bold">
-                      {item.title}
+                      {index === 0 ? "النسخة محدثة" : "النسخة سابقة"}
                     </h3>
                     <div className="flex items-center gap-1">
                       <ArrowLeft
                         fill="#10B0C1"
                         className={` w-3 lg:w-auto   ${
-                          item.name === "admin"
+                          item.adminOrEmployee === 1
                             ? "-rotate-45"
                             : "-rotate-[225deg]"
                         }  `}
                       />
                       <p className="text-[12px] lg:text-[16px] ">
-                        {item.name === "admin" ? "من" : "الى"} المشرف
+                        {item.adminOrEmployee === 1 ? "من" : "الى"} المشرف
                       </p>
                     </div>
                   </div>

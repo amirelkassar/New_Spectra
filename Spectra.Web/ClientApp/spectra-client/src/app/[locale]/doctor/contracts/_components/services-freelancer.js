@@ -37,14 +37,17 @@ function ServicesFreelancer({
         {data.map((service, i) => {
           return (
             <div key={i} className="flex items-center gap-4">
-              <button
-                onClick={() => {
-                  handleDeleteItem("freelancer", service.id);
-                }}
-                className=" size-8 p-2 flex items-center justify-center duration-200 hover:shadow-md rounded-lg border border-red"
-              >
-                <DeleteIcon />
-              </button>
+              {searchparams.get("editContracts") === "true" || addNew ? (
+                <button
+                  onClick={() => {
+                    handleDeleteItem("freelancer", service.id);
+                  }}
+                  className=" size-8 p-2 flex items-center justify-center duration-200 hover:shadow-md rounded-lg border border-red"
+                >
+                  <DeleteIcon />
+                </button>
+              ) : null}
+
               <ContractLineDoctor
                 platformFee={numHeader.platformFee}
                 activeEdit={

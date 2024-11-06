@@ -1,5 +1,7 @@
+'use client'
 import DeleteIcon from "@/assets/icons/delete";
 import ContractLineDoctor from "@/components/contractLineDoctor";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 function ServicesMember({
@@ -7,7 +9,10 @@ function ServicesMember({
   handleServiceDataChange,
   handleDeleteItem,
   numHeader,
+  addNew = false,
 }) {
+  const searchparams = useSearchParams();
+
   return (
     <div
       dir="ltr"
@@ -36,14 +41,17 @@ function ServicesMember({
         {data.map((service, i) => {
           return (
             <div key={i} className="flex items-center gap-4">
-              <button
-                onClick={() => {
-                  handleDeleteItem("member", service.id);
-                }}
-                className=" size-8 p-2 flex items-center justify-center duration-200 hover:shadow-md rounded-lg border border-red"
-              >
-                <DeleteIcon />
-              </button>
+              {searchparams.get("editContracts") === "true" || addNew ? (
+                <button
+                  onClick={() => {
+                    handleDeleteItem("member", service.id);
+                  }}
+                  className=" size-8 p-2 flex items-center justify-center duration-200 hover:shadow-md rounded-lg border border-red"
+                >
+                  <DeleteIcon />
+                </button>
+              ) : null}
+
               <ContractLineDoctor
                 platformFee={numHeader.platformFee}
                 activeEdit={false}

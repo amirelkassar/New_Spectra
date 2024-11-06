@@ -88,7 +88,8 @@ export const DeleteContracts = (id, employeeId) => {
   });
 };
 //Edit
-export const useEditContracts = (id) => {
+export const useEditContracts = (id,employeeId) => {
+  const { refetch } = GetContracts(employeeId);
   return useMutation({
     mutationFn: async (data) => {
       const response = await api.put(Doctor.Contracts.getByID(id), data, {
@@ -98,6 +99,7 @@ export const useEditContracts = (id) => {
     },
     onSuccess: (data) => {
       console.log(data);
+      refetch();
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء الإرسال:", error);

@@ -4,7 +4,7 @@ import EditIcon from "@/assets/icons/edit";
 import Card from "@/components/card";
 import { Link } from "@/navigation";
 import ROUTES from "@/routes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ServicesFreelancer from "./services-freelancer";
 import ServicesMember from "./services-member";
 import Button from "@/components/button";
@@ -14,102 +14,95 @@ import useModal from "@/store/modal-slice";
 import ContractsTextDetails from "@/components/contractsTextDetails";
 import { useSearchParams } from "next/navigation";
 import WorkNum from "./workNum";
-import LinkGreen from "@/components/linkGreen";
-const serviceOptions = [
-  { value: "examination", label: "Examination Service" },
-  { value: "counseling", label: "Counseling Service" },
-  { value: "diagnostic", label: "Diagnostic Service" },
-  { value: "followup", label: "Follow-up Service" },
-];
+import {
+  GetContractsID,
+  GetContractsServices,
+} from "@/useAPI/doctor/contracts-api";
+import { useEditContractsInAdmin } from "@/useAPI/admin/contracts-admin-api";
 
-function ContractInformation({ id }) {
+function ContractInformation({ employeeID, id }) {
+  const { data: dataServices, isLoading } = GetContractsServices();
+  const { mutate: EditContract, error: errorSend } =
+    useEditContractsInAdmin(id);
+  console.log(dataServices);
+  const { data: dataContractsDetails, isLoading: isLoadingDetails } =
+    GetContractsID(id);
+  console.log(dataContractsDetails);
+
   const { modal, editModal } = useModal();
   const searchparams = useSearchParams();
-  const [selectedServices, setSelectedServices] = useState([
-    "examination",
-    "counseling",
-    "diagnostic",
-  ]);
-  const [freelancerServiceData, setFreelancerServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-    diagnostic: {
-      price: "80",
-    },
+
+  const [listFreelancer, setListFreelancer] = useState([]);
+  const [listMember, setListMember] = useState([]);
+  const [workLimits, setWorkLimits] = useState({
+    hoursOfWork: 0,
+    daysOfWork: 0,
   });
-  console.log(freelancerServiceData);
-
-  const [memberServiceData, setMemberServiceData] = useState({
-    examination: {
-      price: "54",
-    },
-    counseling: {
-      price: "1",
-    },
-    diagnostic: {
-      price: "80",
-    },
+  const [FreelanceNum, setFreelanceNum] = useState({
+    duration: 0,
+    platformFee: 0,
   });
-  console.log(memberServiceData);
+  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
 
-  const handleServiceChange = (values) => {
-    setSelectedServices(values);
+  useEffect(() => {
+    if (!isLoading) {
+      setTeamSpectraNum({
+        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+        platformFee: dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+      });
+      setFreelanceNum({
+        duration: dataServices?.data?.data?.durationFreelance || 0,
+        platformFee: dataServices?.data?.data?.platformFeeToFreelance || 0,
+      });
+    }
+  }, [isLoading]);
 
-    const updatedFreelancerData = {
-      ...freelancerServiceData,
-    };
-    const updatedMemberData = { ...memberServiceData };
+  useEffect(() => {
+    if (dataContractsDetails?.data?.data) {
+      // Update work limits
+      setWorkLimits({
+        hoursOfWork: dataContractsDetails.data.data.hoursOfWork || 0,
+        daysOfWork: dataContractsDetails.data.data.daysOfWork || 0,
+      });
 
-    values.forEach((service) => {
-      if (!updatedFreelancerData[service]) {
-        updatedFreelancerData[service] = {
-          price: "",
-        };
-      }
-      if (!updatedMemberData[service]) {
-        updatedMemberData[service] = {
-          price: "",
-        };
-      }
-    });
+      // Transform freelance data
+      const freelancers = dataContractsDetails.data.data.freelance
+        ? dataContractsDetails.data.data.freelance.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListFreelancer(freelancers);
 
-    // Clean up services that were unselected
-    Object.keys(updatedFreelancerData).forEach((service) => {
-      if (!values.includes(service)) {
-        delete updatedFreelancerData[service];
-      }
-    });
-    Object.keys(updatedMemberData).forEach((service) => {
-      if (!values.includes(service)) {
-        delete updatedMemberData[service];
-      }
-    });
+      // Transform spectraTeam data
+      const members = dataContractsDetails.data.data.spectraTeam
+        ? dataContractsDetails.data.data.spectraTeam.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListMember(members);
+    }
+  }, [dataContractsDetails?.data?.data, isLoadingDetails]);
 
-    setFreelancerServiceData(updatedFreelancerData);
-    setMemberServiceData(updatedMemberData);
-  };
-
-  const handleServiceDataChange = (service, field, value, type) => {
+  const handleServiceDataChange = (serviceId, value, type) => {
     if (type === "freelancer") {
-      setFreelancerServiceData((prevData) => ({
-        ...prevData,
-        [service]: {
-          ...prevData[service],
-          [field]: value,
-        },
-      }));
+      setListFreelancer((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
     } else if (type === "member") {
-      setMemberServiceData((prevData) => ({
-        ...prevData,
-        [service]: {
-          ...prevData[service],
-          [field]: value,
-        },
-      }));
+      setListMember((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
     }
   };
   // console.log(selectedServices);
@@ -162,32 +155,55 @@ function ContractInformation({ id }) {
     </div>
   
   `);
+  const handleSubmit = () => {
+    // Transform data to match API requirements
+
+    const formattedData = {
+      freelance: listFreelancer.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      spectraTeam: listMember.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      id: id,
+      hoursOfWork: workLimits.hoursOfWork, // Set as needed
+      daysOfWork: workLimits.daysOfWork, // Set as needed
+      employeeId: employeeID, // Replace with actual employee ID
+      titel: "string", // Replace with actual title
+      firstName: "string", // Replace with actual first name
+      lastName: "string", // Replace with actual last name
+      contractCase: 3, // Set as needed
+    };
+
+    // Send formatted data with useCreateContracts
+    EditContract(formattedData);
+  };
   return (
     <div className="flex flex-col gap-7 w-full">
       <Card className={"flex-1 w-full"}>
         <ServicesFreelancer
-          selectedServices={selectedServices}
-          serviceOptions={serviceOptions}
-          serviceData={freelancerServiceData}
+          numHeader={FreelanceNum}
+          data={listFreelancer}
           handleServiceDataChange={handleServiceDataChange}
         />
 
         <ServicesMember
-          selectedServices={selectedServices}
-          serviceOptions={serviceOptions}
-          serviceData={memberServiceData}
+          numHeader={TeamSpectraNum}
+          data={listMember}
           handleServiceDataChange={handleServiceDataChange}
         />
-        <WorkNum />
-      
+        <WorkNum workLimits={workLimits} setWorkLimits={setWorkLimits} />
+
         <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
           {searchparams.get("editContracts") === "true" ? (
-            <LinkGreen
-              href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILS(5, 2)}
+            <Button
+              onClick={() => [handleSubmit()]}
               className={" w-full max-w-[260px]  md:min-w-[260px] "}
             >
-              حفظ
-            </LinkGreen>
+              حفظ التعديلات
+            </Button>
           ) : (
             <>
               <Button
@@ -213,7 +229,10 @@ function ContractInformation({ id }) {
               </Button>
 
               <Link
-                href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILSEDIT(5, 2)}
+                href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILSEDIT(
+                  employeeID,
+                  id
+                )}
                 className={
                   "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
                 }

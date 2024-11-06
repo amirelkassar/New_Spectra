@@ -54,7 +54,7 @@ export const Admin = {
   Contracts: {
     url: "/Admin/GetAllContracts?PageSize=5&",
     getByID: (id) => `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
-    edit: (id) => `/Admin/ContractOperations/id?id=${id}`,
+    edit: (id) => `/Admin/MakeContractToEmployee/id?id=${id}`,
   },
   Section:{
     url: "/Section",
@@ -64,7 +64,7 @@ export const Admin = {
 };
 export const Doctor = {
   Contracts: {
-    url: (id) => `/Contracts/GetAllCopiesOFContract?EmployeeId=${id}`,
+    url: (id) => `/Contracts/GetAllContractsCORS?EmployeeId=${id}`,
     getByID: (id) => `/Contracts/id?id=${id}`,
     DeleteByID: (id) => `/Doctor/Contract/id?id=${id}`,
     post: "/Contracts",
