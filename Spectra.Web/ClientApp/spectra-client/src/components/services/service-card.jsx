@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import Button from '@/components/button';
+import { Btn } from './Btn';
 
 export const ServiceCard = ({ children, ...props }) => {
   return (
@@ -78,28 +78,5 @@ const Description = ({ children, ...props }) => {
 };
 
 ServiceCard.Description = Description;
-
-const Btn = ({
-  subscribed = false,
-  children,
-  ...props
-}) => {
-  return (
-    <Button
-      {...props}
-      variant='secondary'
-      className={cn(
-        'font-bold text-sm mdl:text-xl py-2 w-full',
-        {
-          'text-greenMain bg-blueLight hover:bg-blueLight cursor-default':
-            subscribed,
-        },
-        props?.className
-      )}
-    >
-      {children}
-    </Button>
-  );
-};
 
 ServiceCard.Button = Btn;
