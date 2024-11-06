@@ -1,9 +1,12 @@
+import { Link } from '@/navigation';
+
 import {
   servicesData,
   SERVICESICONS,
 } from '@/lib/demoData';
 import { Section } from '../../_components/section';
 import Button from '@/components/button';
+import ROUTES from '@/routes';
 
 export const Services = () => {
   return (
@@ -27,7 +30,7 @@ export const Services = () => {
             variant='secondary'
             className='w-full px-2 py-3 font-bold'
           >
-            حجز استشارة مجانية
+            حجز استشارة مدفوعة لمدة 30د
           </Button>
         </div>
       </div>
@@ -41,7 +44,11 @@ const Service = ({
   id = '',
 }) => {
   return (
-    <div
+    <Link
+      href={ROUTES.ROOT.SERVICES.VIEW_SERVICE.replace(
+        ':id',
+        id
+      )}
       data-id={id}
       className='p-5 flex flex-col gap-3 items-center justify-start !text-sm lg:!text-base !text-center text-black border-2 border-transparent transition hover:border-blueLight'
     >
@@ -61,6 +68,6 @@ const Service = ({
         {label}
       </h3>
       <p className=''>{description}</p>
-    </div>
+    </Link>
   );
 };

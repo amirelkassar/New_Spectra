@@ -5,7 +5,9 @@ import ToolsWhite from '@/assets/icons/tools-white';
 
 const data = [
   {
-    icon: <ClockWhite className='size-7 mdl:size-12' />,
+    icon: (
+      <ClockWhite className='size-7 mdl:size-12 text-white' />
+    ),
     text: 'فرقنا المتخصصة تصلك أينما كنت و في أسرع وقت ممكن',
   },
   {
@@ -27,7 +29,7 @@ export const Testimonials = () => {
         id='testimonials'
       >
         <div className='flex justify-between text-center items-center flex-col mdl:flex-row gap-5'>
-          {data.map((item ,i) => (
+          {data.map((item, i) => (
             <div className='space-y-3' key={i}>
               <span className='bg-greenMain rounded-full size-10 mdl:size-20 flex items-center justify-center mx-auto'>
                 {item.icon}

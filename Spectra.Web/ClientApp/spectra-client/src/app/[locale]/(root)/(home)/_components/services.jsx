@@ -44,7 +44,7 @@ export const Services = () => {
       heading='الخدمات المقدمة'
       type='more'
       btnLabel='تصفح جميع الخدمات'
-      btnHref={`${ROUTES.ROOT.SERVICES}/#services`}
+      btnHref={`${ROUTES.ROOT.SERVICES.HOME}/#services`}
     >
       <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
         {data.map((item) => (

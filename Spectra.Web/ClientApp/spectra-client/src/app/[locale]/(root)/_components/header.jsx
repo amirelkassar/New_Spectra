@@ -11,7 +11,7 @@ import Med from '@/assets/icons/med';
 import Star from '@/assets/icons/star';
 import Blog from '@/assets/icons/blog';
 import Email2 from '@/assets/icons/email2';
-import HeartIcon from '@/assets/icons/heart';
+import CheckHeartIcon from '@/assets/icons/check-heart';
 
 export const NAVDATA = [
   {
@@ -31,13 +31,15 @@ export const NAVDATA = [
   },
   {
     label: 'خدمتنا',
-    href: ROUTES.ROOT.SERVICES,
+    href: ROUTES.ROOT.SERVICES.HOME,
     icon: <Hand className='w-4' />,
   },
   {
     label: 'الباقات',
     href: ROUTES.ROOT.PACKAGES,
-    icon: <HeartIcon fill='black' className='w-4' />,
+    icon: (
+      <CheckHeartIcon fill='#010036' className='size-4' />
+    ),
   },
   {
     label: 'ماذا نعالج',

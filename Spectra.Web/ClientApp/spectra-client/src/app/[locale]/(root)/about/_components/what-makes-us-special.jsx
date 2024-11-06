@@ -14,10 +14,7 @@ const data = [
     content:
       'نلتزم بتقديم حلول طبية سريعة وفعالة لتوفير الوقت وتحسين النتائج.',
     icon: (
-      <ClockWhite
-        fill='black'
-        className='mdl:size-12 size-8'
-      />
+      <ClockWhite className='mdl:size-12 size-8 text-black' />
     ),
   },
   {

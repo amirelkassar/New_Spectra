@@ -1,11 +1,10 @@
-import Button from '@/components/button';
 import { BackButton } from '@/client/_components/ui';
 import { ViewService } from '@/components/services';
 
-export const ServiceDetails = ({ data = {} }) => {
+export const Service = ({ data = {} }) => {
   return (
     <ViewService>
-      <ViewService.Intro>
+      <ViewService.Intro className='pt-24 mdl:pt-28 rounded-none'>
         <ViewService.Image
           src={'/packages-details-page-bg.webp'}
           width={1536}
@@ -14,12 +13,14 @@ export const ServiceDetails = ({ data = {} }) => {
         />
 
         <BackButton className='ps-5 pt-5' />
-        <ViewService.Title>{data?.label}</ViewService.Title>
-        <ViewService.Description>
+        <ViewService.Title className='max-w-[1600px] mx-auto px-5 xl:px-14'>
+          {data?.label}
+        </ViewService.Title>
+        <ViewService.Description className='max-w-[1600px] mx-auto px-5 xl:px-14'>
           {data?.fullDescription}
         </ViewService.Description>
       </ViewService.Intro>
-      <ViewService.Body>
+      <ViewService.Body className='max-w-[1600px] mx-auto px-5 xl:px-14'>
         {data?.info?.map((feature) => (
           <ViewService.Feature key={feature?.id}>
             <ViewService.FeatureTitle>
@@ -36,19 +37,10 @@ export const ServiceDetails = ({ data = {} }) => {
             سعر الخدمة:
           </ViewService.FeatureTitle>
           <ViewService.FeatureDescription>
-            100 $
+            نقدم خدمة الكشف المبكر مجاناً لفترة محدودة.
           </ViewService.FeatureDescription>
         </ViewService.Feature>
       </ViewService.Body>
-
-      <div className='p-5'>
-        <Button
-          className='w-full mdl:max-w-xs'
-          variant='secondary'
-        >
-          احجز الان
-        </Button>
-      </div>
     </ViewService>
   );
 };

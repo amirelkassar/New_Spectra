@@ -12,7 +12,7 @@ export const Intro = () => {
         clipPath:
           'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
       }}
-      className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'
+      className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden relative'
     >
       <div className='absolute top-0 end-0 max-w-full max-h-full'>
         <BGSVG />

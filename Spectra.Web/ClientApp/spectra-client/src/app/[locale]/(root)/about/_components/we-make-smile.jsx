@@ -11,10 +11,7 @@ const data = [
     label:
       'فرقنا المتخصصة تصلك أينما كنت و في أسرع وقت ممكن',
     icon: (
-      <ClockWhite
-        fill='#10B0C1'
-        className='size-9 shrink-0'
-      />
+      <ClockWhite className='size-9 shrink-0 text-greenMain' />
     ),
   },
   {

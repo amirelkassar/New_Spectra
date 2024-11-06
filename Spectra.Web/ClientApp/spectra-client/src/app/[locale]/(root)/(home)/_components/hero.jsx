@@ -51,14 +51,14 @@ export const Hero = () => {
       <div className='mdl:-mt-32 space-y-3 mt-5'>
         <Button
           variant='secondary'
-          className='block w-full mdl:max-w-72 text-sm mdl:text-medium font-bold h-12 py-1 rounded-lg'
+          className='block w-full mdl:max-w-80 text-sm mdl:text-medium font-bold h-12 py-1 rounded-lg'
           aria-label='احجز استشارة مجانية'
         >
-          احجز استشارة مجانية
+          احجز استشارة مدفوعة لمدة 30د
         </Button>
         <Button
           variant='primary'
-          className='w-full mdl:max-w-72 text-sm mdl:text-medium font-bold text-greenMain h-12 py-1 rounded-lg'
+          className='w-full mdl:max-w-80 text-sm mdl:text-medium font-bold text-greenMain h-12 py-1 rounded-lg'
           aria-label='تعرف علينا'
         >
           <PlayIcon className='size-6 xl:size-7' />

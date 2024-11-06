@@ -77,14 +77,18 @@ export const Drawer = ({
                     'py-4 px-7 flex font-bold text-sm items-center gap-x-2 transition hover:bg-blueLight',
                     {
                       'bg-blueLight':
-                        pathName === link.href,
+                        pathName === link.href ||
+                        (link.href !== ROUTES.ROOT.HOME &&
+                          pathName.includes(link.href)),
                     }
                   )}
                   key={link.href}
                 >
                   <span
                     className={
-                      pathName === link.href
+                      pathName === link.href ||
+                      (link.href !== ROUTES.ROOT.HOME &&
+                        pathName.includes(link.href))
                         ? '!fill-greenMain !text-greenMain'
                         : '!fill-black !text-black'
                     }
@@ -104,7 +108,6 @@ export const Drawer = ({
           />
 
           {/* AUTH */}
-
           <div className='px-7 py-4 mt-12'>
             <Button
               onClick={() => {

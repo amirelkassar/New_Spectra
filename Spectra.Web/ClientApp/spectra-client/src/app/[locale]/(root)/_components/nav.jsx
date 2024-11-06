@@ -26,7 +26,6 @@ export const Nav = ({ navLinks = [], className = '' }) => {
               'border-black'
           )}
           aria-label={link.label}
-          title={link.label}
         >
           {link.label}
         </Link>

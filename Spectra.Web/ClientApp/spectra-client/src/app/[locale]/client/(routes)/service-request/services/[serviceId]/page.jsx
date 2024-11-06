@@ -1,19 +1,17 @@
-import Container from '@/app/[locale]/client/_components/ui/container';
+import { Container } from '@/client/_components/ui';
 import { servicesData } from '@/lib/demoData';
 import { ServiceDetails } from './_components/service-details';
 
 const ServicePage = ({ params }) => {
-  const { serviceId } = params;
+  const serviceId = params?.serviceId;
 
-  const getServiceById = () => {
-    return servicesData.find(
-      (service) => service.id === serviceId
-    );
-  };
+  const service = servicesData.find(
+    (service) => service.id === serviceId
+  );
 
   return (
     <Container>
-      <ServiceDetails data={getServiceById()} />
+      <ServiceDetails data={service} />
     </Container>
   );
 };

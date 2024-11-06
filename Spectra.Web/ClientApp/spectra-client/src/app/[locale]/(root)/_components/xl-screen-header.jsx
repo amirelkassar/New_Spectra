@@ -1,12 +1,10 @@
-'use client';
-
 import { Link } from '@/navigation';
 
 import { RegisterModal } from './register-modal';
-import ROUTES from '@/routes';
 import { Nav } from './nav';
 import { Logo } from '@/components/logo';
 import { LangDropdown } from './lang-dropdown';
+import ROUTES from '@/routes';
 
 export const XlScreenHeader = ({
   links = [],
