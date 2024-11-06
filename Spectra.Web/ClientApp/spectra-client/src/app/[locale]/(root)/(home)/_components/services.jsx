@@ -4,6 +4,7 @@ import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 import ROUTES from '@/routes';
+import { ServiceCard } from '@/components/services';
 
 const data = [
   {
@@ -48,21 +49,20 @@ export const Services = () => {
     >
       <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
         {data.map((item) => (
-          <div
-            key={item.label}
-            className='flex flex-col items-center gap-y-4 text-center relative'
-          >
-            <div
-              className={`size-16 mdl:size-20 flex items-center justify-center rounded-full ${item.color}`}
-            >
-              {item.icon}
-            </div>
-            <h3 className='text-sm mdl:text-medium text-black font-bold'>
-              {item.label}
-            </h3>
-          </div>
+          <Service key={item.label} {...item} />
         ))}
       </div>
     </Section>
+  );
+};
+
+const Service = ({ icon, label, color }) => {
+  return (
+    <ServiceCard className='border-none'>
+      <ServiceCard.Icon className={color}>
+        {icon}
+      </ServiceCard.Icon>
+      <ServiceCard.Label>{label}</ServiceCard.Label>
+    </ServiceCard>
   );
 };

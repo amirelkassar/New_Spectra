@@ -4,8 +4,11 @@
 import { useState } from 'react';
 import { Tabs } from '@mantine/core';
 import { PackageCardItem } from '@/client/_components/packages';
-import { servicesData } from '@/lib/demoData';
-import { ServiceCard } from '@/client/_components/services';
+import {
+  servicesData,
+  SERVICESICONS,
+} from '@/lib/demoData';
+import { ServiceCard } from '@/components/services';
 
 // Main component for displaying recommendations
 export const Recomendations = () => {
@@ -40,8 +43,8 @@ export const Recomendations = () => {
       {/* Panel for services tab */}
       <Tabs.Panel value='services'>
         {/* Map through servicesData to display selected services */}
-        {servicesData.slice(1, 3).map((service, index) => (
-          <Service key={index} data={service} /> // Render service component for each service
+        {servicesData.slice(1, 3).map((service) => (
+          <Service key={service?.label} {...service} /> // Render service component for each service
         ))}
       </Tabs.Panel>
     </Tabs>
@@ -68,19 +71,28 @@ const Package = () => {
 };
 
 // Component to display a service
-const Service = ({ data }) => {
+const Service = ({ label, id }) => {
   return (
-    <ServiceCard
-      className='max-w-44 lgl:max-w-56 2xl:max-w-48'
-      data={data}
-    >
-      <ServiceCard.Icon /> {/* Icon for the service */}
-      <ServiceCard.Body>
-        <ServiceCard.Label className='mdl:text-sm lgl:text-xl' />{' '}
-        {/* Label for the service */}
+    <ServiceCard className='max-w-44 lgl:max-w-56 2xl:max-w-48'>
+      <ServiceCard.Icon
+        style={{
+          backgroundColor:
+            SERVICESICONS[id]?.bg || SERVICESICONS[1]?.bg,
+          color:
+            SERVICESICONS[id]?.color ||
+            SERVICESICONS[1]?.color,
+        }}
+      >
+        {SERVICESICONS[id]?.icon || SERVICESICONS[1]?.icon}
+      </ServiceCard.Icon>
+
+      <ServiceCard.Body className='block'>
+        <ServiceCard.Label className='mdl:text-sm lgl:text-xl'>
+          {label}
+        </ServiceCard.Label>
       </ServiceCard.Body>
       <ServiceCard.Button className='mdl:text-sm lgl:text-xl'>
-        احجز الان {/* Button to book the service */}
+        احجز الان
       </ServiceCard.Button>
     </ServiceCard>
   );
