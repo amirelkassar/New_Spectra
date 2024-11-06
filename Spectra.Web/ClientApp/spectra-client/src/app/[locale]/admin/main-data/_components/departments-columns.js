@@ -2,21 +2,21 @@ import ActionMenu from "./ActionMenuDepartments";
 
 export const DepartmentColumns = [
   {
-    accessorKey: "departmentName",
+    accessorKey: "name",
     header: "القسم",
   },
   {
-    accessorKey: "specializationsCount",
+    accessorKey: "countDiagnoses",
     header: "عدد التخصصات ",
   },
   {
-    accessorKey: "headOfDepartment",
+    accessorKey: "doctorName",
     header: "رئيس القسم",
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const id = row.original.id;
+      const id = row.original.name;
       return <ActionMenu id={id} />;
     },
   },

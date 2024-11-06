@@ -56,6 +56,11 @@ export const Admin = {
     getByID: (id) => `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
     edit: (id) => `/Admin/ContractOperations/id?id=${id}`,
   },
+  Section:{
+    url: "/Section",
+    getByID: (id) => `/Section/id?id=${id}`,
+    getAllDoctors: `/Section/GetAllNames`,
+  }
 };
 export const Doctor = {
   Contracts: {

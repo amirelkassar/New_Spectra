@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BackIcon from "@/assets/icons/back";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
@@ -10,6 +10,8 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import AddManger from "../_components/addManger";
 import CardDocManger from "../_components/cardDocManger";
 import DeleteIcon from "@/assets/icons/delete";
+import { GetSpecialization } from "@/useAPI/admin/main-data/specialties";
+import { useCreateSection } from "@/useAPI/admin/main-data/section";
 const doctors = [
   {
     id: 1,
@@ -126,20 +128,36 @@ const doctors = [
 ];
 
 function Page() {
+  const { data, isLoading } = GetSpecialization();
+  const {
+    mutate: CreateSection,
+    error,
+    isSuccess,
+    isError,
+    reset,
+  } = useCreateSection();
+
   const [DocID, setDocID] = useState(null);
-
-
   const [formData, setFormData] = useState({
-    specializationName: "",
-    description: "",
-    consultationCost: 0,
-    code: "",
+    name: "",
+    diagnoses: [],
+    doctorId: "string",
+    doctorName: "احمد علي",
   });
+  useEffect(() => {
+    isSuccess &&
+      setFormData({
+        name: "",
+        diagnoses: [],
+        doctorId: "string",
+        doctorName: "احمد علي",
+      });
+  }, [isSuccess]);
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
     if (isError) {
@@ -147,12 +165,19 @@ function Page() {
     }
   };
 
+  const handleMultiSelectChange = (selectedItems) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      diagnoses: selectedItems,
+    }));
+    if (isError) {
+      reset();
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    CreateSpecialization(formData);
+    CreateSection(formData);
   };
-
-
   return (
     <div>
       <div className="flex mb-10 lgl:mt-0 mt-6   items-center gap-4 ">
@@ -166,15 +191,22 @@ function Page() {
       </div>
       <div>
         <form className="flex flex-col gap-4 lg:gap-8 px-3 mb-14">
-          <InputGreen label={"اسم القسم"} name="specializationName" />
+          <InputGreen
+            label="اسم القسم"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
           <MultiSelect
-            data={["العلاج السلوكي المعرفي", "تحليل السلوك التطبيقي"]}
-            label="التخصصات "
+            data={data?.data?.data.map((item) => item.name) || []}
+            label="التخصصات"
             placeholder="اختر التخصصات"
             rightSection={<ArrowDownIcon />}
+            value={formData.diagnoses}
+            onChange={handleMultiSelectChange}
             className="MultiSelect h-auto flex-1"
             classNames={{
-              input: " !h-auto py-1 min-h-[60px]",
+              input: "!h-auto py-1 min-h-[60px]",
               label: "text-[12px] md:text-[16px] mb-2",
             }}
           />
@@ -190,7 +222,7 @@ function Page() {
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-      
+            onClick={handleSubmit}
             variant="secondary"
             className={
               "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

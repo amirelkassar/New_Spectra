@@ -3,11 +3,12 @@ import React from "react";
 import { DataTable } from "@/components/data-table";
 import AddMainData from "../_components/add-drugs";
 import ROUTES from "@/routes";
-import { GetSpecialization } from "@/useAPI/admin/main-data/specialties";
 import { DepartmentColumns } from "../_components/departments-columns";
+import { GetSection } from "@/useAPI/admin/main-data/section";
+import HandelShowData from "@/components/handelShowData";
 const departments = [
   {
-    id:0,
+    id: 0,
     departmentName: "الطب النفسي",
     specializationsCount: 3,
     headOfDepartment: "أحمد عبد كامل",
@@ -18,21 +19,21 @@ const departments = [
     ], // Example
   },
   {
-    id:1,
+    id: 1,
     departmentName: "العلاج الوظيفي",
     specializationsCount: 2,
     headOfDepartment: "نجلاء سعيد",
     specializations: ["Specialization 1", "Specialization 2"], // Example
   },
   {
-    id:2,
+    id: 2,
     departmentName: "العلاج النفسي السلوكي",
     specializationsCount: 2,
     headOfDepartment: "عبد الله الشيخ",
     specializations: ["تحليل السلوك التطبيقي", "العلاج السلوكي العرفي"],
   },
   {
-    id:3,
+    id: 3,
     departmentName: "العلاج بالكلام والنطق",
     specializationsCount: 3,
     headOfDepartment: "حسين حميد",
@@ -43,10 +44,9 @@ const departments = [
     ], // Example
   },
 ];
-;
-
 function page() {
-  const { data, isLoading } = GetSpecialization();
+  const { data, isLoading } = GetSection();
+
   console.log(data);
 
   return (
@@ -58,9 +58,10 @@ function page() {
           path={ROUTES.ADMIN.DATAMAIN.DEPARTMENTSADD}
         />
       </div>
-   
-        <DataTable data={departments} columns={DepartmentColumns} />
-    
+      <HandelShowData isLoading={isLoading} lengthData={data?.data.data.length}>
+      <DataTable data={data?.data.data} columns={DepartmentColumns} />
+
+      </HandelShowData>
     </div>
   );
 }
