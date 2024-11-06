@@ -161,7 +161,12 @@ function Drugs() {
                 );
               })}
             </div>
-
+            <Button
+              variant="secondary"
+              className="max-w-[294px] w-full mx-auto mb-3 mt-10"
+            >
+              حفظ
+            </Button>
             <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
               <BtnAddInVideo />
               <InputVideo

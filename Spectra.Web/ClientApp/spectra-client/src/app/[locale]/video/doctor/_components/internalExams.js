@@ -1,30 +1,23 @@
-import CloseIcon from "@/assets/icons/close";
-import BtnAddInVideo from "@/components/btnAddInVideo";
-import InputVideo from "@/components/inputVideo";
+import SearchInputVideo from "@/components/searchInputVideo";
 import { Checkbox, Tabs } from "@mantine/core";
 import React, { useState } from "react";
 import BoxSelected from "./boxSelected";
-import SearchInputVideo from "@/components/searchInputVideo";
+import BtnAddInVideo from "@/components/btnAddInVideo";
+import InputVideo from "@/components/inputVideo";
 import Button from "@/components/button";
-const ComplaintsData = [
-  { label: "الم العظام", value: "الم العظام" },
-  {
-    label: "تلف نتائج اختبار غير صحيحة.",
-    value: "تلف نتائج اختبار غير صحيحة.",
-  },
-  { label: "طفح جلدي", value: "طفح جلدي" },
-  { label: "غثيان مع الم بالراس", value: "غثيان مع الم بالراس" },
-  { label: "فرط حركة", value: "فرط حركة" },
+const internalExamsData = [
+  { label: "Cars", value: "Cars" },
+  { label: " Cats", value: " Cats" },
 ];
-function ComplaintsVideo() {
-  const [selectedComplaints, setSelectedComplaints] = useState([]);
+function InternalExams() {
+  const [selectedInternalExams, setSelectedInternalExams] = useState([]);
   const handleCheckboxChange = (values) => {
-    setSelectedComplaints(values);
+    setSelectedInternalExams(values);
   };
 
   const handleDeleteComplaint = (complaint) => {
-    setSelectedComplaints((prevComplaints) =>
-      prevComplaints.filter((item) => item !== complaint)
+    setSelectedInternalExams((prevInternalExams) =>
+      prevInternalExams.filter((item) => item !== complaint)
     );
   };
   return (
@@ -36,7 +29,7 @@ function ComplaintsVideo() {
           }}
           value="one"
         >
-          الشكاوى العامة
+          الفحوصات الداخلية
         </Tabs.Tab>
         <Tabs.Tab
           classNames={{
@@ -44,25 +37,25 @@ function ComplaintsVideo() {
           }}
           value="two"
         >
-          الشكاوى العامة السابقة
+          الفحوصات الداخلية السابقة
         </Tabs.Tab>
       </Tabs.List>
 
       <Tabs.Panel value="one">
         <div className=" mt-4 mdl:mt-10">
-          <SearchInputVideo placeholder="بحث فى الشكاوى العامة ..." />
+          <SearchInputVideo placeholder="بحث فى الفحوصات الداخلية ..." />
           <BoxSelected
-            data={selectedComplaints}
+            data={selectedInternalExams}
             handleDelete={handleDeleteComplaint}
           />
         </div>
         <div className="h-full max-h-screen flex flex-col  justify-between w-full">
           <Checkbox.Group
-            value={selectedComplaints}
+            value={selectedInternalExams}
             onChange={handleCheckboxChange}
           >
             <div className="flex flex-col gap-4 lgl:gap-8 mt-4 mdl:mt-5 ps-4">
-              {ComplaintsData.map((item, i) => {
+              {internalExamsData.map((item, i) => {
                 return (
                   <Checkbox
                     classNames={{
@@ -80,22 +73,20 @@ function ComplaintsVideo() {
               })}
             </div>
           </Checkbox.Group>
-          <Button
-            variant="secondary"
-            className="max-w-[294px] w-full mx-auto mb-3 mt-10"
-          >
-            حفظ
-          </Button>
+          <Button variant="secondary" className="max-w-[294px] w-full mx-auto mb-3 mt-10">حفظ</Button>
           <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
             <BtnAddInVideo />
-            <InputVideo placeholder="اضافة شكوى" className="flex-1 mdl:me-6" />
+            <InputVideo
+              placeholder="اضافة نوع فحص داخلى "
+              className="flex-1 mdl:me-6"
+            />
           </div>
         </div>
       </Tabs.Panel>
 
       <Tabs.Panel value="two">
         <div className=" flex flex-col gap-3 mdl:gap-4 my-10 p-2">
-          {ComplaintsData.map((item, i) => {
+          {internalExamsData.map((item, i) => {
             return (
               <p key={i} className=" text-xs mdl:text-base font-Bold ">
                 {item.label}
@@ -108,4 +99,4 @@ function ComplaintsVideo() {
   );
 }
 
-export default ComplaintsVideo;
+export default InternalExams;

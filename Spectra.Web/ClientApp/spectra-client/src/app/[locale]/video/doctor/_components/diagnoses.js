@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import BoxSelected from "./boxSelected";
 import BtnAddInVideo from "@/components/btnAddInVideo";
 import InputVideo from "@/components/inputVideo";
+import Button from "@/components/button";
 const DiagnosticsData = [
   { value: "طيف التوحد", label: "طيف التوحد" },
   { value: "فرط حركة", label: "فرط حركة" },
@@ -81,6 +82,7 @@ function DiagnosesVideo() {
                 })}
               </div>
             </Checkbox.Group>
+            <Button variant="secondary" className="max-w-[294px] w-full mx-auto mb-3 mt-10">حفظ</Button>
             <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
               <BtnAddInVideo />
               <InputVideo

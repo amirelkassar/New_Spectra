@@ -10,10 +10,30 @@ import Rumors from "./rumors";
 import Drugs from "./drugs";
 import { useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/navigation";
+import { Files } from "./files";
+import { Reports } from "./reports";
+import Referrals from "./referrals";
+import InternalExams from "./internalExams";
 function LayCategories() {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const CategoriesData = [
+    {
+      label: "عرض جميع التقارير",
+      active: searchParams.get("category") === "view_reports",
+    },
+    {
+      label: "الفحوصات الداخلية",
+      active: searchParams.get("category") === "internal_exams",
+    },
+    {
+      label: "الإحالات",
+      active: searchParams.get("category") === "referrals",
+    },
+    {
+      label: "الملفات",
+      active: searchParams.get("category") === "files",
+    },
     {
       label: "الشكاوى العامة",
       active: searchParams.get("category") === "complaints",
@@ -42,6 +62,14 @@ function LayCategories() {
 
   const ViewComp = () => {
     switch (searchParams.get("category")) {
+      case "view_reports":
+        return <Reports />;
+      case "internal_exams":
+        return <InternalExams />;
+      case "referrals":
+        return <Referrals />;
+      case "files":
+        return <Files />;
       case "complaints":
         return <ComplaintsVideo />;
       case "diagnoses":

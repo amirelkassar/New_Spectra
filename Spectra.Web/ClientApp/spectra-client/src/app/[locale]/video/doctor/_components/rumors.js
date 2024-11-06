@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import BoxSelected from "./boxSelected";
 import BtnAddInVideo from "@/components/btnAddInVideo";
 import InputVideo from "@/components/inputVideo";
+import Button from "@/components/button";
 const dataRumors = [
   {
     label: "الأشعة السينية x-ray",
@@ -127,6 +128,12 @@ function Rumors() {
                 })}
               </div>
             </Checkbox.Group>
+            <Button
+              variant="secondary"
+              className="max-w-[294px] w-full mx-auto mb-3 mt-10"
+            >
+              حفظ
+            </Button>
             <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
               <BtnAddInVideo />
               <InputVideo
@@ -168,6 +175,12 @@ function Rumors() {
                 })}
               </div>
             </Checkbox.Group>
+            <Button
+              variant="secondary"
+              className="max-w-[294px] w-full mx-auto mb-3 mt-10"
+            >
+              حفظ
+            </Button>
             <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
               <BtnAddInVideo />
               <InputVideo
@@ -178,15 +191,15 @@ function Rumors() {
           </div>
         </Tabs.Panel>
         <Tabs.Panel value="three">
-        <div className=" flex flex-col gap-3 mdl:gap-4 my-10 p-2">
-          {dataRumors.concat(dataAnalyses).map((item, i) => {
-            return (
-              <p key={i} className=" text-xs mdl:text-base font-Bold ">
-                {item.label}
-              </p>
-            );
-          })}
-        </div>
+          <div className=" flex flex-col gap-3 mdl:gap-4 my-10 p-2">
+            {dataRumors.concat(dataAnalyses).map((item, i) => {
+              return (
+                <p key={i} className=" text-xs mdl:text-base font-Bold ">
+                  {item.label}
+                </p>
+              );
+            })}
+          </div>
         </Tabs.Panel>
       </Tabs>
     </div>

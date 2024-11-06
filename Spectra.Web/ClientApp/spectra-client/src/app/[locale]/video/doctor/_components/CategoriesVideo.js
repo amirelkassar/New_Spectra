@@ -45,9 +45,9 @@ function CategoriesVideo({ open }) {
     },
     {
       icon: <TransfersVideoIcon className={"w-auto h-8 text-greenMain"} />, // Replace with actual icon component
-      label: "التحويلات",
-      name: "transfers",
-      active: searchParams.get("category") === "transfers",
+      label: "الإحالات",
+      name: "referrals",
+      active: searchParams.get("category") === "referrals",
     },
     {
       icon: <DocumentIcon className={"w-auto h-8 text-greenMain"} />, // Replace with actual icon component

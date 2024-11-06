@@ -12,7 +12,7 @@ const MemoizedLayCategories = memo(LayCategories);
 function Page() {
   const [open, setOpen] = useState(true);
   return (
-    <div className="flex h-full flex-1  flex-col-reverse lgl:flex-row">
+    <div className="flex h-full flex-1 pt-5  flex-col-reverse lgl:flex-row">
       <div
         className={`w-full relative flex-1 duration-300 lgl:flex-none ${
           open
