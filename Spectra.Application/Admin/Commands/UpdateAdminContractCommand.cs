@@ -1,4 +1,5 @@
 ﻿using MediatR;
+
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
@@ -7,9 +8,9 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
-namespace Spectra.Application.Contracts.Commands
+namespace Spectra.Application.Admin.Commands
 {
-    public class UpdateAdminContractCommand : ICommand<OperationResult<Unit>>
+    public class UpdateContractToSendToEmployeeCommand : ICommand<OperationResult<Unit>>
     {
         public string id { get; set; }
         public List<OperationContract>? Freelance { get; set; }
@@ -21,22 +22,22 @@ namespace Spectra.Application.Contracts.Commands
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
         public string FirstName { get; set; }
-        public string LastName{ get; set; }
-        public ContractCases ContractCase { get; set; }    
+        public string LastName { get; set; }
+        public ContractCases ContractCase { get; set; }
 
     }
 
-    public class UpdateContractCommandHandler : IRequestHandler<UpdateAdminContractCommand, OperationResult<Unit>>
+    public class UpdateContractToSendToEmployeeCommandHandler : IRequestHandler<UpdateContractToSendToEmployeeCommand, OperationResult<Unit>>
     {
         private readonly IContractRepository _contractRepository;
 
-        public UpdateContractCommandHandler(IContractRepository contractRepository)
+        public UpdateContractToSendToEmployeeCommandHandler(IContractRepository contractRepository)
         {
             _contractRepository = contractRepository;
 
         }
 
-        public async Task<OperationResult<Unit>> Handle(UpdateAdminContractCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Unit>> Handle(UpdateContractToSendToEmployeeCommand request, CancellationToken cancellationToken)
         {
 
             //var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId , null);
@@ -69,28 +70,14 @@ namespace Spectra.Application.Contracts.Commands
             //    return OperationResult<Unit>.Success(Unit.Value);
 
             //}
-            if (request.ContractCase== ContractCases.BACkTOEMPlOYEE)
+            if (request.ContractCase == ContractCases.BACkTOEMPlOYEE)
             {
-                contract.ContractCase = ContractCases.BACkTOEMPlOYEE;
+                contract.ContractCase = ContractCases.SENDTOADMIN;
             }
             switch (contract.ContractCase)
             {
-
-                case ContractCases.SAVE:
-                    contract.ContractCase = request.ContractCase;
-                    contract.PlatformFee = request.Discount;
-                    contract.HoursOfWork = request.HoursOfWork;
-                    contract.DaysOfWork = request.DaysOfWork;
-                    contract.EmployeeId = request.EmployeeId;
-                    contract.Titel = request.Titel;
-                    contract.ContractCase = request.ContractCase;
-                    contract.Freelance = request.Freelance;
-                    contract.ContractCase = ContractCases.SENDTOADMIN;
-                    contract.AdminOrEmployee = AdminOrEmployee.Employee;
-                    await _contractRepository.UpdateAsync(contract);
-
-                    return OperationResult<Unit>.Success(Unit.Value);
-                case ContractCases.SENDTOADMIN:
+                
+                case ContractCases.BACkTOEMPlOYEE:
                     throw new RequestErrorException(" Your Request Under review ");
                 case ContractCases.SendContarctToSignature:
                     throw new RequestErrorException("Admin Accpet the Offer cannot modify ");
@@ -102,7 +89,11 @@ namespace Spectra.Application.Contracts.Commands
 
                 // Add any additional cases here if needed
                 default:
-                    var contracts = EmploymentContract.Create(
+
+                    break;
+            }
+
+            var Newcontract = EmploymentContract.Create(
 
               Ulid.NewUlid().ToString(),
               request.Freelance,
@@ -111,22 +102,19 @@ namespace Spectra.Application.Contracts.Commands
               request.DaysOfWork,
               request.EmployeeId,
               request.Titel,
-              ContractCases.SENDTOADMIN,
+              request.ContractCase,
               fullName,
-              AdminOrEmployee.Employee
+              AdminOrEmployee.Admin
              );
-                 
-                    await _contractRepository.AddAsync(contracts);
-                    contract.ContractCase = ContractCases.REFUSE;
-                    await _contractRepository.UpdateAsync(contract);
 
-                    return OperationResult<Unit>.Success(Unit.Value);
-                    
-            }
+            await _contractRepository.AddAsync(Newcontract);
+            contract.ContractCase = ContractCases.REFUSE;
+            await _contractRepository.UpdateAsync(contract);
 
-           
+            return OperationResult<Unit>.Success(Unit.Value);
 
         }
     }
-
 }
+
+

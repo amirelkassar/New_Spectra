@@ -11,8 +11,7 @@ namespace Spectra.Application.Contracts.Queries
     {
 
         public string EmployeeId { get; set; }
-        public ContractCases ContractCases { get; set; }
-
+        //public ContractCases ContractCases { get; set; }
     }
 
     public class GetAllCopiesOFContractQueryHandler : IRequestHandler<GetAllCopiesOFContractQuery, OperationResult<IEnumerable<GetAllCopiesWithDataDto>>>
@@ -26,19 +25,21 @@ namespace Spectra.Application.Contracts.Queries
 
         public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> Handle(GetAllCopiesOFContractQuery request, CancellationToken cancellationToken)
         {
-            if (ContractCases.SAVE == request .ContractCases)
-            {
-                var Savecontracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId && c.ContractCase == ContractCases.SAVE, new FindOptions());
+            //if (ContractCases.SAVE == request .ContractCases)
+            //{
+            //    var Savecontracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId && c.ContractCase == ContractCases.SAVE, null);
 
-                var datae = Savecontracts.Select(x => new GetAllCopiesWithDataDto
-                { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId })
-                   .OrderByDescending(x => x.Date);
-                return OperationResult<IEnumerable<GetAllCopiesWithDataDto>>.Success(datae);
-            }
-            var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId && c.ContractCase != ContractCases.SAVE, new FindOptions());
+            //    var datae = Savecontracts.Select(x => new GetAllCopiesWithDataDto
+            //    { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId })
+            //       .OrderByDescending(x => x.Date);
+            //    return OperationResult<IEnumerable<GetAllCopiesWithDataDto>>.Success(datae);
+            //}
+            var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId /*&& c.ContractCase != ContractCases.SAVE*/, null);
+
+            
 
             var data = contracts.Select(x => new GetAllCopiesWithDataDto
-            { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId })
+            { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId ,  AdminOrEmployee =x.AdminOrEmployee})
              .OrderByDescending(x => x.Date);
 
             return OperationResult<IEnumerable<GetAllCopiesWithDataDto>>.Success(data);

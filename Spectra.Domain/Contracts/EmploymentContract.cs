@@ -19,8 +19,9 @@ namespace Spectra.Domain.Contracts
         public Name EmployeeName{ get; set; }
         public string Titel { get; set; }
         public ContractCases ContractCase { get; set; }
-        public bool IsFreelance { get; set; }
-        public bool IsSpectraTeam { get; set; }
+        public AdminOrEmployee? AdminOrEmployee { get; set; }
+
+      
         //public DateTime StartDate { get; set; }
         //public DateTime EndDate { get; set; }
         protected EmploymentContract() { }
@@ -36,8 +37,7 @@ namespace Spectra.Domain.Contracts
             string titel,
             ContractCases contractCase,
              Name employeeName,
-          bool isFreelance,
-          bool isSpectraTeam
+         AdminOrEmployee adminOrEmployee 
             ) : base(id)
         {
             Id = id;
@@ -49,8 +49,7 @@ namespace Spectra.Domain.Contracts
             EmployeeId = employeeId;
             Titel = titel;
             EmployeeName = employeeName;
-            IsFreelance = isFreelance;
-            IsSpectraTeam = isSpectraTeam;
+            AdminOrEmployee= adminOrEmployee;
         }
         public static EmploymentContract Create(
            string id,
@@ -61,10 +60,9 @@ namespace Spectra.Domain.Contracts
            string employeeId,
            string titel,
            ContractCases contractCase,
-           Name employeeName
-            ,
-              bool isFreelance,
-          bool isSpectraTeam
+           Name employeeName,
+            AdminOrEmployee adminOrEmployee
+
         )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
@@ -74,7 +72,7 @@ namespace Spectra.Domain.Contracts
             ArgumentNullException.ThrowIfNull(employeeId, nameof(employeeId));
             ArgumentNullException.ThrowIfNull(employeeName, nameof(employeeName));
 
-            return new EmploymentContract(id, freelance , spectraTeam, hoursOfWork, daysOfWork ,employeeId, titel, contractCase , employeeName, isFreelance , isSpectraTeam);
+            return new EmploymentContract(id, freelance , spectraTeam, hoursOfWork, daysOfWork ,employeeId, titel, contractCase , employeeName, adminOrEmployee);
         }
 
     }

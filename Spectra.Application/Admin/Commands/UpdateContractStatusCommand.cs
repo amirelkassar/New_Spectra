@@ -16,7 +16,7 @@ namespace Spectra.Application.Admin.Commands
 
     {
         public string Id { get; set; }
-        public ContractCases ContractCases { get; set; }
+        public ContractCases ContractCases { get; set; }  
     }
     public class UpdateContractCommandHandler : IRequestHandler<UpdateContractStatusCommand, OperationResult<Unit>>
     {

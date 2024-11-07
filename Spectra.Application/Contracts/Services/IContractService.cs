@@ -13,6 +13,7 @@ namespace Spectra.Application.Contracts.Services
         Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input);
 
         Task<OperationResult<Unit>> DeleteContract(string id);
+        Task<OperationResult<Unit>> EmployeeAccpetContract(string id);
         Task<OperationResult<GetServicesContractQuery>> GetAllContractData();
    
         //Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
@@ -21,6 +22,6 @@ namespace Spectra.Application.Contracts.Services
         Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId);
         Task<OperationResult<EmploymentContract>> GetContractById(string id);
 
-        Task<OperationResult<Unit>> UpdateContract(string id, UpdateContractCommand input);
+        Task<OperationResult<Unit>> UpdateContract(string id, UpdateAdminContractCommand input);
     }
 }

@@ -66,7 +66,7 @@ namespace Spectra.WebAPI.Controllers
 
         [HttpPut("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateContract(string id, UpdateContractCommand input)
+        public async Task<ActionResult> UpdateContract(string id, UpdateAdminContractCommand input)
         {
 
 
@@ -82,7 +82,13 @@ namespace Spectra.WebAPI.Controllers
             var Contract = await _contractService.DeleteContract(id);
             return Ok(Contract);
         }
-
+        [HttpPut("EmployeeAccpetContract/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> EmployeeAccpetContract(string id)
+        {
+            var Contract = await _contractService.EmployeeAccpetContract(id);
+            return Ok(Contract);
+        }
 
     }
 }

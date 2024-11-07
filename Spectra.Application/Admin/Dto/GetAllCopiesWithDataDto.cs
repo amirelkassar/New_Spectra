@@ -14,6 +14,7 @@ namespace Spectra.Application.Admin.Dto
 
         public DateTimeOffset Date { get; set; }
         public ContractCases ContractCase { get; set; }
+        public AdminOrEmployee? AdminOrEmployee { get; set; }
 
     }
 }

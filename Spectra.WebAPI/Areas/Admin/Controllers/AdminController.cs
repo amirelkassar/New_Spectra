@@ -20,6 +20,7 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.MedicalTeams;
 
+
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
 
@@ -136,13 +137,13 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         }
 
 
-        [HttpPut("ContractOperations/id")]
+        [HttpPut("MakeContractToEmployee/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateContractChangeOrAccpet(string id, UpdateContractCommand input)
+        public async Task<ActionResult> UpdateContractChangeOrAccpets(string id, UpdateContractToSendToEmployeeCommand input)
         {
 
             input.ContractCase = ContractCases.BACkTOEMPlOYEE;
-            var contract = await _contractService.UpdateContract(id, input);
+            var contract = await _adminService.UpdateContractFromAdmin(id, input);
             return Ok(contract);
         }
 

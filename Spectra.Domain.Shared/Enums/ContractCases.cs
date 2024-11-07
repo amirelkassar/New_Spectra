@@ -12,13 +12,15 @@ namespace Spectra.Domain.Shared.Enums
         SENDTOADMIN=2,
         BACkTOEMPlOYEE  =3,
         SendContarctToSignature=4,
-        ACTIVE=5,
-        REFUSE =6,
+        EMLOYEEACCPETOFFER=5,
+        ACTIVE=6,
+        REFUSE =7,
 
 
-
-
-
-
+    }
+    public enum AdminOrEmployee
+    {
+        Admin=1,
+        Employee=2
     }
 }

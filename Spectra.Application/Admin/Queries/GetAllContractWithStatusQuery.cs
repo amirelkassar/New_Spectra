@@ -9,14 +9,14 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.Admin.Queries
 {
 
-    public class GetAllContractWithStatusQuery : IRequest<OperationResult<PaginatedResult<EmploymentContract>>>
+    public class GetAllContractWithStatusQuery : IRequest<OperationResult<PaginatedResult<GetAllemployeeDto>>>
     {
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
-        //public EmploymentStatus Status { get; set; }
+        //public ContractCases? Status { get; set; }
     }
 
-    public class GetAllContractWithStatusQueryHandler : IRequestHandler<GetAllContractWithStatusQuery, OperationResult<PaginatedResult<EmploymentContract>>>
+    public class GetAllContractWithStatusQueryHandler : IRequestHandler<GetAllContractWithStatusQuery, OperationResult<PaginatedResult<GetAllemployeeDto>>>
     {
         private readonly IContractRepository _contractRepository;
 
@@ -25,22 +25,39 @@ namespace Spectra.Application.Admin.Queries
             _contractRepository = contractRepository;
         }
 
-        public async Task<OperationResult<PaginatedResult<EmploymentContract>>> Handle(GetAllContractWithStatusQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> Handle(GetAllContractWithStatusQuery request, CancellationToken cancellationToken)
         {
-            var paginatedDoctors = await _contractRepository.GetAllAsyncP(c => c.ContractCase != ContractCases.SAVE, null, request.PageNumber, request.PageSize);
+          
+                var paginatedContracte = await _contractRepository.GetAllAsyncP(c=> c.AdminOrEmployee== AdminOrEmployee.Employee && c.ContractCase != ContractCases.REFUSE,
+               null,
+               request.PageNumber,
+               request.PageSize);
 
-            
-                paginatedDoctors.Items.Select(c => new GetAllemployeeDto
+                var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
                 {
-                    Name = $"{c.EmployeeName.FirstName} {c.EmployeeName.LastName}",
-                    DateOfRequest = c.Created.Date,ContractCase=c.ContractCase
-                });
+                    Name = $"{c.EmployeeName.FirstName} +{c.EmployeeName.LastName}",
+                    DateOfRequest = c.Created.Date,
+                    ContractCase = c.ContractCase, WhoSend= c.AdminOrEmployee, Id=c.Id,EmployeeId=c.EmployeeId
+                })
+                .OrderByDescending(y => y.DateOfRequest)
+                .ToList();
+
+
+                var results = new PaginatedResult<GetAllemployeeDto>
+                {
+                    Items = contractDataLists,
+
+                    PageNumber = request.PageNumber,
+                    PageSize = request.PageSize
+                };
+
+                return OperationResult<PaginatedResult<GetAllemployeeDto>>.Success(results);
             
 
-            return OperationResult<PaginatedResult<EmploymentContract>>.Success(paginatedDoctors);
-        }
 
+        }
     }
 }
+
 
 

@@ -12,6 +12,8 @@ namespace Spectra.Application.MasterData.Sections.Service
         Task<OperationResult<string>> CreateSection(CreateSectionsCommand input);
         Task<OperationResult<Unit>> DeleteSection(string id);
         Task<OperationResult<IEnumerable<SectionDto>>> GetAllSection();
+        Task<OperationResult<IEnumerable<GetAllDoctorsDto>>> GetAllDoctors();
+
         Task<OperationResult<List<BassMasterDataDto>>> GetAllSectionNames();
         Task<OperationResult<Section>> GetSectionById(string id);
         Task<OperationResult<Unit>> UpdateSection(string id, UpdateSectionsCommand input);

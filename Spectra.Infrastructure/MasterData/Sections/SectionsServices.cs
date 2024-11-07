@@ -84,6 +84,13 @@ namespace Spectra.Infrastructure.MasterData.Sections
 
         }
 
+        public async Task<OperationResult<IEnumerable<GetAllDoctorsDto>>> GetAllDoctors()
+        {
+
+            var query = new GetAllDoctorsInSectionQuery();
+
+            return await _mediator.Send(query);
+        }
     }
 }
 

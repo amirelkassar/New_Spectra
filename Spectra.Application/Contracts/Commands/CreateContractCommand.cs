@@ -21,10 +21,10 @@ namespace Spectra.Application.Contracts.Commands
         public string Titel { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool IsFreelance { get; set; }
-        public bool IsSpectraTeam { get; set; }
+
         public ContractCases ContractCase { get; set; }
-  
+ 
+
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateContractCommand, OperationResult<string>>
@@ -60,7 +60,7 @@ namespace Spectra.Application.Contracts.Commands
 
              
             var contract = EmploymentContract.Create(
-              Ulid.NewUlid().ToString(),
+            Ulid.NewUlid().ToString(),
             request.Freelance,
             request.SpectraTeam,
             request.HoursOfWork,
@@ -69,9 +69,7 @@ namespace Spectra.Application.Contracts.Commands
             request.Titel,
             request.ContractCase ,
               fullName,
-
-              request.IsFreelance,
-              request.IsSpectraTeam
+     AdminOrEmployee.Employee
                 );
 
             await _contractRepository.AddAsync(contract);

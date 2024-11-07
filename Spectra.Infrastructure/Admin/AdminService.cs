@@ -2,6 +2,7 @@
 using Spectra.Application.Admin.Commands;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
+using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
@@ -51,7 +52,7 @@ namespace Spectra.Infrastructure.Admin
         }
 
         // Contract Qury
-        public async Task<OperationResult<PaginatedResult<EmploymentContract>>> GetAllContractsOfEployees(GetAllContractWithStatusQuery input)
+        public async Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> GetAllContractsOfEployees(GetAllContractWithStatusQuery input)
         {
             // Create the query and pass pagination parameters
 
@@ -103,6 +104,25 @@ namespace Spectra.Infrastructure.Admin
         //    };
         //    return await _mediator.Send(query);
         //}
+        public async Task<OperationResult<Unit>> UpdateContractFromAdmin(string id, UpdateContractToSendToEmployeeCommand input)
+        {
+            var command = new UpdateContractToSendToEmployeeCommand
+            {
+                id = id,
+                HoursOfWork = input.HoursOfWork,
+                DaysOfWork = input.DaysOfWork,
+                ContractCase = input.ContractCase,
+                EmployeeId = input.EmployeeId,
+                Titel = input.Titel,
+                Freelance = input.Freelance,
+                SpectraTeam = input.SpectraTeam,
+
+
+            };
+
+
+            return await _mediator.Send(command);
+        }
 
         public async Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input)
         {
