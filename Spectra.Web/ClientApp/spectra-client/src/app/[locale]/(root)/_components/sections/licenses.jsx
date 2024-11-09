@@ -1,16 +1,28 @@
 import Image from 'next/image';
-import { Carousel } from '../ui/carousel';
-import { Section } from '../ui/section';
 
-export const Licenses = () => {
+import {
+  Container,
+  Carousel,
+  SectionHeading,
+} from '@/guest/_components/ui';
+
+export const Licenses = ({
+  data = [],
+  title = 'تراخيص',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Licenses'
       aria-labelledby='licenses'
       id='licenses'
-      type='basic'
-      heading='تراخيص'
     >
+      <SectionHeading
+        id='licenses'
+        className='text-center mb-10'
+      >
+        {title}
+      </SectionHeading>
       <Carousel
         withControls={false}
         withIndicators={false}
@@ -20,19 +32,19 @@ export const Licenses = () => {
           root: 'px-0',
         }}
         slideSize={{ base: '50%', sm: '33.33%' }}
-        data={[
-          ...Array.from({ length: 5 }).map((_, i) => (
+      >
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Carousel.Slide key={i}>
             <Image
-              key={i}
               src={'/demo-sponsor.png'}
               alt='sponsor'
               width={450}
               height={350}
               className='object-contian object-center w-56 h-20'
             />
-          )),
-        ]}
-      />
-    </Section>
+          </Carousel.Slide>
+        ))}
+      </Carousel>
+    </Container>
   );
 };

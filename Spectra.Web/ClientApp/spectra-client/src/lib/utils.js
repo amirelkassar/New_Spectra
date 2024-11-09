@@ -76,3 +76,13 @@ export function calculateAgeInMonths(birthDate) {
 
   return months;
 }
+
+export function handlePagination(
+  noPerPage = 4,
+  page = 1,
+  data = []
+) {
+  const startIndex = (page - 1) * noPerPage;
+  const endIndex = page * noPerPage;
+  return data.slice(startIndex, endIndex);
+}

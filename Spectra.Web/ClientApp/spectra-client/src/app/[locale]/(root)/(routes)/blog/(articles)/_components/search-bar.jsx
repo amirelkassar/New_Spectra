@@ -1,7 +1,9 @@
 'use client';
 
-import SearchIcon from '@/assets/icons/search';
 import { useState } from 'react';
+
+import { Container } from '@/guest/_components/ui';
+import SearchIcon from '@/assets/icons/search';
 
 export const SearchBar = () => {
   const [search, setSearch] = useState('');
@@ -13,7 +15,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className='container mx-auto w-full max-w-[1600px] mdl:mb-10 mb-5'>
+    <Container className='!py-0 mb-5 mdl:mb-10'>
       <form
         onSubmit={handleSearch}
         className='flex flex-row-reverse items-center mdl:gap-5 gap-2 w-full'
@@ -32,6 +34,6 @@ export const SearchBar = () => {
           <SearchIcon className='size-3 mdl:size-7 text-white' />
         </button>
       </form>
-    </div>
+    </Container>
   );
 };

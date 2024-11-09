@@ -1,8 +1,8 @@
-import { Section } from '../../../../_components/ui/section';
+import { Container } from '@/guest/_components/ui';
 
 export const Intro = () => {
   return (
-    <Section
+    <Container
       id='blogs-intro'
       aria-label='Blog intro'
       aria-labelledby='blogs-intro'
@@ -18,6 +18,6 @@ export const Intro = () => {
         نقدم لكم سلسلة من المقالات التي تخص الاضطرابات
         ومشاكلها
       </p>
-    </Section>
+    </Container>
   );
 };

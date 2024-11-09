@@ -1,19 +1,30 @@
-import { Link } from '@/navigation';
-import { Section } from '../../../../_components/ui/section';
 import Image from 'next/image';
+import { Link } from '@/navigation';
+
 import { cn } from '@/lib/utils';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 import ROUTES from '@/routes';
 
-export const FeaturesArticles = ({ data = [] }) => {
+export const FeaturesArticles = ({
+  data = [],
+  title = 'اهم المقالات',
+}) => {
   return (
     <div className='bg-blueLight'>
-      <Section
+      <Container
         id='features-articles'
         aria-labelledby='features-articles'
         aria-label='Features Articles'
-        className='max-w-[1600px]'
-        heading='اهم المقالات'
       >
+        <SectionHeading
+          className='mb-10 text-center'
+          id='features-articles'
+        >
+          {title}
+        </SectionHeading>
         <div className='grid grid-cols-3 gap-5 mdl:gap-10'>
           {data?.map((article, index) => (
             <Article
@@ -24,7 +35,7 @@ export const FeaturesArticles = ({ data = [] }) => {
             />
           ))}
         </div>
-      </Section>
+      </Container>
     </div>
   );
 };

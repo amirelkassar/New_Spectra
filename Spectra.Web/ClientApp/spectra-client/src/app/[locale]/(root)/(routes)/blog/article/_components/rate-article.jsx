@@ -1,9 +1,11 @@
-import { Section } from '../../../../_components/ui/section';
-import { Rating, Textarea } from '@mantine/core';
+import { Rating } from '@mantine/core';
+
+import { Container } from '@/guest/_components/ui';
+import { Textarea } from '@/components/inputs/textarea';
 
 export const RateArticle = () => {
   return (
-    <Section
+    <Container
       id='rate-article'
       aria-label='Rate Article'
       aria-labelledby='rate-article'
@@ -20,15 +22,8 @@ export const RateArticle = () => {
       </div>
 
       <div>
-        <Textarea
-          classNames={{
-            input: 'rounded-lg focus:border-greenMain',
-            label: 'text-xs lg:text-base mb-2 ps-1',
-          }}
-          size='md'
-          placeholder='اكتب تعليق...'
-        />
+        <Textarea size='lg' placeholder='اكتب تعليق...' />
       </div>
-    </Section>
+    </Container>
   );
 };

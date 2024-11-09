@@ -1,15 +1,19 @@
 import Image from 'next/image';
-import { Section } from '../../../_components/ui/section';
 import { Link } from '@/navigation';
-import PhoneGreenIcon from '@/assets/icons/phone-green';
+
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+import { Textarea } from '@/components/inputs/textarea';
 import TextInput from '@/components/inputs/text-input';
-import { Textarea } from '@mantine/core';
 import Button from '@/components/button';
+import PhoneGreenIcon from '@/assets/icons/phone-green';
 import WhatsappCircleIcon from '@/assets/icons/whatsapp-circle';
 
 export const ContactForm = () => {
   return (
-    <Section
+    <Container
       id='contact-form'
       aria-labelledby='contact-form'
       aria-label='Contact Form'
@@ -28,12 +32,12 @@ export const ContactForm = () => {
         </div>
 
         <div className='mdl:w1/2 w-full space-y-10'>
-          <h2
+          <SectionHeading
             id='contact-form'
-            className='text-base mdl:text-2xl mb-10'
+            className='mb-10'
           >
             اهلا بك
-          </h2>
+          </SectionHeading>
 
           <div className='flex items-center w-fit mx-auto gap-10 text-center'>
             <span className='flex flex-col gap-3'>
@@ -81,10 +85,6 @@ export const ContactForm = () => {
               <Textarea
                 placeholder='رسالة'
                 className='col-span-2'
-                classNames={{
-                  input:
-                    'rounded-lg focus:border-greenMain',
-                }}
               />
 
               <Button
@@ -98,6 +98,6 @@ export const ContactForm = () => {
           </div>
         </div>
       </div>
-    </Section>
+    </Container>
   );
 };

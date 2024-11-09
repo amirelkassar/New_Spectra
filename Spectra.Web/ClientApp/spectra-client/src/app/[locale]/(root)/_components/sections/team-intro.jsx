@@ -1,16 +1,18 @@
 import Image from 'next/image';
-import { Section } from '../../../_components/ui/section';
 
-export const Intro = () => {
+export const TeamIntro = () => {
   return (
     <section
-      aria-label='Intro'
-      aria-labelledby='intro'
-      id='intro'
-      className='h-auto flex mdl:items-center !p-0 max-h-screen'
+      aria-label='Team Intro'
+      aria-labelledby='team-intro'
+      id='team-intro'
+      className='h-auto flex mdl:items-center !p-0 max-h-screen mb-10'
     >
-      <div className='px-5 mt-28 mdl:mt-40 mdl:px-20 space-y-5 w-1/2 relative'>
-        <h1 className='text-base mdl:text-4xl font-bold'>
+      <div className='px-5 2xl:ps-40 mt-28 mdl:mt-40 mdl:px-20 space-y-5 w-1/2 relative'>
+        <h1
+          id='team-intro'
+          className='text-base mdl:text-4xl font-bold'
+        >
           العناية بطفلك اهم من كل شىء
         </h1>
         <p className='text-sm mdl:text-medium'>

@@ -11,7 +11,7 @@ const ArticleDetailsPage = ({ params: { articleId } }) => {
   return (
     <main>
       <Article data={ARTICLE} />
-      <RelatedArticles />
+      <RelatedArticles data={ARTICLES} />
       <RateArticle />
     </main>
   );

@@ -1,5 +1,9 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
+
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 import QuoteIcon from '@/assets/icons/quote';
 
 export const FamilyReview = ({
@@ -8,13 +12,17 @@ export const FamilyReview = ({
   childName,
 }) => {
   return (
-    <Section
+    <Container
       id='family-review'
       aria-label='Family Review'
       aria-labelledby='family-review'
-      heading={`رأي عائلة ${childName}`}
-      type='basic'
     >
+      <SectionHeading
+        id='family-review'
+        className='mb-10 text-center'
+      >
+        رأي عائلة {childName}
+      </SectionHeading>
       {/* FAMILY REVIEW */}
       <div className='w-full pe-5 mdl:pe-28'>
         <div className='bg-[#F5F5F5] w-full flex items-center justify-center rounded-3xl px-5 mdl:px-10 py-10 mdl:py-20 relative'>
@@ -38,7 +46,10 @@ export const FamilyReview = ({
       </div>
 
       {/* Video */}
-      <div>{/* TODO: ADD THE VIDEO */}</div>
-    </Section>
+      <div>
+        {/* TODO: ADD THE VIDEO */}
+        {video}
+      </div>
+    </Container>
   );
 };

@@ -1,5 +1,9 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+
 import SadFaceIcon from '@/assets/icons/sad-face';
 import SpeechBubbleIcon from '@/assets/icons/speech-bubble';
 import RobotRedIcon from '@/assets/icons/robot-red';
@@ -13,9 +17,12 @@ const Icons = [
   <RobotRedIcon className='size-4 mdl:size-6' key={2} />,
 ];
 
-export const BeforeTreatment = ({ data = [] }) => {
+export const BeforeTreatment = ({
+  data = [],
+  title = 'قبل العلاج',
+}) => {
   return (
-    <Section
+    <Container
       id='before-treatment'
       aria-label='Before Treatment'
       aria-labelledby='before-treatment'
@@ -35,9 +42,7 @@ export const BeforeTreatment = ({ data = [] }) => {
 
       {/* LIST */}
       <div className='space-y-5'>
-        <h2 className='text-base mdl:text-2xl font-bold'>
-          قبل العلاج
-        </h2>
+        <SectionHeading>{title}</SectionHeading>
 
         <ul className='space-y-5'>
           {data.map((item, index) => (
@@ -55,6 +60,6 @@ export const BeforeTreatment = ({ data = [] }) => {
           ))}
         </ul>
       </div>
-    </Section>
+    </Container>
   );
 };

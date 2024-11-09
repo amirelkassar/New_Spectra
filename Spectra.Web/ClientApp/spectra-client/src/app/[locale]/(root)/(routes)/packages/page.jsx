@@ -1,13 +1,13 @@
-import { FAQ } from '../../_components/sections/FAQ';
-import { Steps } from '../../_components/sections/steps';
+import { FAQDATA, STEPS } from '@/data';
+import { FAQ, Steps } from '@/guest/_components/sections';
 import { Intro } from './_components/intro';
 
 const PackagesPage = () => {
   return (
     <main>
       <Intro />
-      <Steps />
-      <FAQ />
+      <Steps data={STEPS} />
+      <FAQ data={FAQDATA} />
     </main>
   );
 };

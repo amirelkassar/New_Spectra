@@ -1,65 +1,57 @@
 'use client';
-import { MedicalTeamData } from '@/lib/demoData';
-import { Section } from '../../../_components/ui/section';
-import { TeamMember } from '../../../_components/sections/team-member';
-import { PaginationBtns } from './team-pagination';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
 import { Select } from '@mantine/core';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
+import { Pagination } from '@/components/pagination';
+import {
+  Container,
+  SectionHeading,
+  TeamMember,
+} from '@/guest/_components/ui';
+import { handlePagination } from '@/lib/utils';
 
-export const Team = () => {
+export const Team = ({
+  data = [],
+  title = 'فريق صحي معتمد متكامل',
+}) => {
   const [page, setPage] = useState(1);
   const [value, setValue] = useState('جميع التخصصات');
 
+  const filterTeamMember = useMemo(() => {
+    if (value === 'جميع التخصصات') return data;
+    return data.filter((item) => item.profession === value);
+  }, [value, data]);
+
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Team'
       aria-labelledby='team'
       id='team'
-      type='custombtn'
-      heading='فريق صحي معتمد متكامل'
-      className='space-y-5'
-      customBtn={
-        <SelectFilter value={value} setValue={setValue} />
-      }
     >
-      <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
-        {handlePagination(
-          12,
-          page,
-          filterTeamMember(value)
-        ).map((member) => (
-          <TeamMember key={member.id} {...member} />
-        ))}
+      <div className='flex justify-between items-center mdl:mb-10'>
+        <SectionHeading>{title}</SectionHeading>
+
+        <SelectFilter value={value} setValue={setValue} />
+      </div>
+      <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5 mb-10'>
+        {handlePagination(12, page, filterTeamMember).map(
+          (member) => (
+            <TeamMember key={member.id} {...member} />
+          )
+        )}
       </div>
 
-      <PaginationBtns
-        data={filterTeamMember(value)}
+      <Pagination
+        data={filterTeamMember}
         noPerPage={12}
         page={page}
         setPage={setPage}
       />
-    </Section>
+    </Container>
   );
 };
-
-function filterTeamMember(profession) {
-  if (!profession || profession === 'جميع التخصصات')
-    return MedicalTeamData;
-  return MedicalTeamData.filter(
-    (member) => member.profession === profession
-  );
-}
-
-export function handlePagination(
-  noPerPage = 4,
-  page = 1,
-  data = []
-) {
-  const startIndex = (page - 1) * noPerPage;
-  const endIndex = page * noPerPage;
-  return data.slice(startIndex, endIndex);
-}
 
 const filterData = [
   'جميع التخصصات',

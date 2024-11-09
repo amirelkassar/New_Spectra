@@ -11,8 +11,9 @@ export const Service = ({ data = {} }) => {
           height={1661}
           alt='Packages Details Image'
         />
-
-        <BackButton className='ps-5 pt-5' />
+        <div className='max-w-[1600px] mx-auto px-5 xl:px-14'>
+          <BackButton className='ps-5 pt-5' />
+        </div>
         <ViewService.Title className='max-w-[1600px] mx-auto px-5 xl:px-14'>
           {data?.label}
         </ViewService.Title>

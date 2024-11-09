@@ -17,7 +17,7 @@ const bgImage = '/demo-footer-bg.png';
 
 export const Footer = () => {
   return (
-    <footer className='footer-cn'>
+    <footer className='mt-20'>
       {/* Footer IMG AND SUBSCRIBE */}
       <EmailSubscription />
 
@@ -61,8 +61,8 @@ const EmailSubscription = () => {
         </div>
 
         <Link
-          href={ROUTES.AUTH.SIGNUP_FAMILY}
-          className='bg-white text-sm mdl:text-medium text-black font-bold px-3 py-2 relative rounded-full mdl:rounded-lg text-center mdl:min-w-72 w-fit block mx-auto'
+          href={'#'}
+          className='bg-white transition hover:bg-grayLight text-sm mdl:text-xl font-bold px-7 py-2 mdl:py-4 relative rounded-full mdl:rounded-lg text-center mdl:min-w-64 w-fit block mx-auto'
         >
           {t('subscribe_now')}
         </Link>

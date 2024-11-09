@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { Section } from '../../../_components/ui/section';
+
+import { Container } from '@/guest/_components/ui';
 import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
 
 export const Intro = () => {
@@ -14,11 +15,11 @@ export const Intro = () => {
       <div className='absolute top-0 start-0 max-w-full max-h-full'>
         <BGSVG />
       </div>
-      <Section
+      <Container
         aria-label='Services Intro'
         id='Services-intro'
         aria-labelledby='Services-intro'
-        className='flex items-center gap-5 !py-0 relative'
+        className='flex items-center gap-5 !py-0'
       >
         <div className='w-1/2'>
           <Image
@@ -42,10 +43,11 @@ export const Intro = () => {
             عالمية معتبرة
           </p>
         </div>
-      </Section>
+      </Container>
       <a
-        href='#services'
-        className='absolute bottom-5 end-1/2 ltr:translate-x-[80%] rtl:-translate-x-[80%]'
+        href='#success-stories'
+        className='absolute bottom-5 start-[calc(50%-16px)]
+        mdl:start-[calc(50%-24px)] ltr:mdl:start-[calc(50%-40px)] ltr:start-[calc(50%-24px)] animate-bounce'
       >
         <ArrowGreenDownCircleWhite className='size-10 mdl:size-16' />
       </a>

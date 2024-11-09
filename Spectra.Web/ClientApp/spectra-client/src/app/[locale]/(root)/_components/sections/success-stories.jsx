@@ -1,26 +1,36 @@
 import Image from 'next/image';
-
-import ArrowLeft from '@/assets/icons/arrow-left';
-import { Section } from '../ui/section';
 import { Link } from '@/navigation';
+
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+import ArrowLeft from '@/assets/icons/arrow-left';
 import ROUTES from '@/routes';
 
-export const SuccessStories = ({ data = [], ...props }) => {
+export const SuccessStories = ({
+  data = [],
+  title = 'قصص النجاح',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Success Stories'
       aria-labelledby='success-stories'
       id='success-stories'
-      type='basic'
-      heading='قصص النجاح'
-      {...props}
     >
+      <SectionHeading
+        id='success-stories'
+        className='mb-10 text-center'
+      >
+        {title}
+      </SectionHeading>
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
         {data.map((item) => (
           <Story key={item.childName} {...item} />
         ))}
       </div>
-    </Section>
+    </Container>
   );
 };
 
@@ -31,8 +41,8 @@ const Story = ({
   id = '',
 }) => {
   return (
-    <Link href={`${ROUTES.ROOT.SUCCESS_STORIES}/${id}`}>
-      <div className='space-y-2'>
+    <div className='space-y-2'>
+      <Link href={`${ROUTES.ROOT.SUCCESS_STORIES}/${id}`}>
         <div className='h-40 mdl:h-72 w-full rounded-lg overflow-hidden relative'>
           <Image
             src={image}
@@ -43,19 +53,19 @@ const Story = ({
             className='w-full h-full object-cover object-center'
           />
         </div>
+      </Link>
 
-        <div className='flex items-center justify-between px-5'>
-          <div>
-            <p className='text-black text-sm mdl:text-medium font-bold'>
-              {childName}
-            </p>
-            <p className='text-black text-sm mdl:text-medium'>
-              {daignosis}
-            </p>
-          </div>
-          <ArrowLeft className='ltr:rotate-180' />
+      <div className='flex items-center justify-between px-5'>
+        <div>
+          <p className='text-black text-sm mdl:text-medium font-bold'>
+            {childName}
+          </p>
+          <p className='text-black text-sm mdl:text-medium'>
+            {daignosis}
+          </p>
         </div>
+        <ArrowLeft className='ltr:rotate-180' />
       </div>
-    </Link>
+    </div>
   );
 };

@@ -1,62 +1,36 @@
 import Image from 'next/image';
 
-import { cn } from '@/lib/utils';
-import { Section } from '@/guest/_components/ui';
-import ClockWhite from '@/assets/icons/clock-white';
-import MonitorWhite from '@/assets/icons/monitor-white';
-import ToolsWhite from '@/assets/icons/tools-white';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
-const data = [
-  {
-    label:
-      'فرقنا المتخصصة تصلك أينما كنت و في أسرع وقت ممكن',
-    icon: (
-      <ClockWhite className='size-9 shrink-0 text-greenMain' />
-    ),
+export const WeMakeSmile = ({
+  data = {
+    image: '',
+    list: [],
   },
-  {
-    label: 'نستخدم أحدث الحلول التقنية بالطب الاتصالي',
-    icon: (
-      <MonitorWhite
-        className='size-8 me-1 shrink-0'
-        fill='#10B0C1'
-      />
-    ),
-  },
-  {
-    label:
-      'نعمل وفق أحدث الادوات العلمية و الممارسات المتبعة',
-    icon: (
-      <ToolsWhite
-        className='size-8 me-1 shrink-0'
-        fill='#10B0C1'
-      />
-    ),
-  },
-];
-
-export const WeMakeSmile = () => {
+  title = 'سبيكترا .تصنع الابتسامة لطفلك',
+}) => {
+  if (!data?.list.length && !data?.image) return null;
   return (
-    <Section
+    <Container
       aria-label='We Make Smile'
       aria-labelledby='we-make-smile'
       id='we-make-smile'
+      className='flex items-center justify-center gap-5 mdl:px-20'
     >
-      <div
-        className={cn(
-          'flex flex-col items-center justify-center gap-5 mdl:flex-row mdl:px-20'
-        )}
-      >
-        <div className='flex-[0.65]'>
-          <h2
+      <div className='flex-[0.65]'>
+        <div className='w-fit mx-auto'>
+          <SectionHeading
             id='we-make-smile'
-            className='text-base mdl:text-2xl mb-10 text-center'
+            className='mb-10'
           >
-            سبيكترا .تصنع الابتسامة لطفلك
-          </h2>
+            {title}
+          </SectionHeading>
 
-          <ul className='space-y-5 w-fit mx-auto'>
-            {data.map((item) => (
+          <ul className='space-y-5'>
+            {data?.list?.map((item) => (
               <li
                 key={item.label}
                 className='text-sm mdl:text-medium'
@@ -69,18 +43,18 @@ export const WeMakeSmile = () => {
             ))}
           </ul>
         </div>
-
-        <div className='flex-[0.35] relative overflow-hidden'>
-          <Image
-            src={'/demo-baby-4.svg'}
-            alt='about-us-img'
-            priority={true}
-            className='w-full h-full object-cover object-center'
-            width={500}
-            height={900}
-          />
-        </div>
       </div>
-    </Section>
+
+      <div className='flex-[0.35] relative overflow-hidden'>
+        <Image
+          src={data?.image}
+          alt='about-us-img'
+          priority={true}
+          className='w-full h-full object-cover object-center'
+          width={500}
+          height={900}
+        />
+      </div>
+    </Container>
   );
 };

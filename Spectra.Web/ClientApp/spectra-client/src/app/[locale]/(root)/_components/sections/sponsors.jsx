@@ -1,38 +1,52 @@
 import Image from 'next/image';
-import { Carousel } from '../ui/carousel';
-import { Section } from '../ui/section';
 
-export const Sponsors = () => {
+import {
+  Container,
+  Carousel,
+  SectionHeading,
+} from '@/guest/_components/ui';
+
+export const Sponsors = ({
+  data = [],
+  title = 'شركاء النجاح',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Sponsors'
       aria-labelledby='sponsors'
       id='sponsors'
-      heading='شركاء النجاح'
-      type='basic'
     >
+      <SectionHeading
+        className='mb-10 text-center'
+        id='sponsors'
+      >
+        {title}
+      </SectionHeading>
       <Carousel
         withControls={false}
         withIndicators={false}
         loop
+        dragFree
         slideGap='md'
         classNames={{
           root: 'px-0',
         }}
-        slideSize={{ base: '50%', sm: '25%' }}
-        data={[
-          ...Array.from({ length: 5 }).map((_, i) => (
+        slideSize={{ base: '50%', sm: '20%' }}
+        align='center'
+      >
+        {data?.map((image, i) => (
+          <Carousel.Slide key={i}>
             <Image
-              key={i}
-              src={'/demo-sponsor.png'}
+              src={image}
               alt='sponsor'
               width={450}
               height={350}
               className='object-contain object-center w-56 h-20'
             />
-          )),
-        ]}
-      />
-    </Section>
+          </Carousel.Slide>
+        ))}
+      </Carousel>
+    </Container>
   );
 };

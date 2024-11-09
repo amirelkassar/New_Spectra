@@ -1,10 +1,10 @@
 'use client';
 
-import { Pagination } from '@mantine/core';
+import { Pagination as MantinePagination } from '@mantine/core';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import Button from '@/components/button';
 
-export const PaginationBtns = ({
+export const Pagination = ({
   page = 1,
   setPage = () => {},
   data = [],
@@ -26,7 +26,7 @@ export const PaginationBtns = ({
           التالي
         </Button>
 
-        <Pagination
+        <MantinePagination
           total={totalPages}
           dir='ltr'
           classNames={{

@@ -1,17 +1,16 @@
-import { storiesData } from '@/lib/demoData';
-import { SuccessStories } from '../../_components/sections/success-stories';
-import { MobileApp } from '../team/_components/mobile-app';
+import {
+  MobileApp,
+  SuccessStories,
+} from '@/guest/_components/sections';
 import { Intro } from './_components/intro';
+import { MOBILE_APP, STORIES } from '@/data';
 
 const StoriesPage = () => {
   return (
     <main>
       <Intro />
-      <SuccessStories type={null} data={storiesData} />
-
-      <div className='mb-14'>
-        <MobileApp />
-      </div>
+      <SuccessStories data={STORIES} />
+      <MobileApp data={MOBILE_APP} />
     </main>
   );
 };

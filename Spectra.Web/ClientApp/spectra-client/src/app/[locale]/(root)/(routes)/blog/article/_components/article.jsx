@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
+
 import { Rating } from '@mantine/core';
+import { Container } from '@/guest/_components/ui';
 
 export const Article = ({ data = [] }) => {
   return (
-    <Section
+    <Container
       id='article'
       aria-label='Article'
       aria-labelledby='article'
@@ -71,6 +72,6 @@ export const Article = ({ data = [] }) => {
       </div>
 
       {/* TODO:SHARE-ARTICLE & WRITER */}
-    </Section>
+    </Container>
   );
 };

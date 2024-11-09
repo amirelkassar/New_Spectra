@@ -1,34 +1,19 @@
-import { Section } from '../ui/section';
+import { Container } from '@/guest/_components/ui';
 
-const statisticsData = [
-  {
-    label: 'دقيقة من الاستشارات والإرشاد',
-    value: `+${(2_000_000).toLocaleString('en-US')}`,
-  },
-  {
-    label: 'مستفيد ومستفيدة',
-    value: `+${(500_000).toLocaleString('en-US')}`,
-  },
-  {
-    label: 'رضا المستفيدين عن جودة الاستشارة',
-    value: 4.9,
-  },
-];
-
-export const Statistics = () => {
+export const Statistics = ({ data = [] }) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Statistics'
       aria-labelledby='statistics'
       id='statistics'
-      className='!pt-0 -mt-36'
     >
       <div className='grid grid-cols-1 mdl:grid-cols-3 bg-white shadow-md rounded-3xl p-10 h-full'>
-        {statisticsData.map((s) => (
+        {data?.map((s) => (
           <StatisticCard key={s.label} {...s} />
         ))}
       </div>
-    </Section>
+    </Container>
   );
 };
 

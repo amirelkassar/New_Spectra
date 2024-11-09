@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import { Section } from '../../../_components/ui/section';
+
 import Button from '@/components/button';
 import PlayIcon from '@/assets/icons/play';
 import NotificationIcon from '@/assets/icons/notification';
 import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
+import { Container } from '@/guest/_components/ui';
 
 export const Intro = () => {
   return (
@@ -12,16 +13,16 @@ export const Intro = () => {
         clipPath:
           'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
       }}
-      className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden relative'
+      className='bg-blueLight pt-24 mdl:pt-28 overflow-hidden relative'
     >
       <div className='absolute top-0 end-0 max-w-full max-h-full'>
         <BGSVG />
       </div>
-      <Section
+      <Container
         aria-label='Services Intro'
         id='Services-intro'
         aria-labelledby='Services-intro'
-        className='flex items-center gap-5 !py-0 relative'
+        className='flex items-center gap-5 !py-0'
       >
         <div className='w-1/2'>
           <Image
@@ -30,10 +31,10 @@ export const Intro = () => {
             height={918}
             src='/demo-baby-5.webp'
             alt='Smiling little girl'
-            className='w-full h-full object-cover object-center'
+            className='w-full h-full -mb-2 mdl:mb-0 object-cover object-center'
           />
         </div>
-        <div className='w-1/2 mdl:space-y-5 space-y-2 pb-16 mdl:pb-0'>
+        <div className='w-1/2 mdl:space-y-5 space-y-2 pb-16 mdl:pb-5'>
           <div>
             <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold'>
               نصنع ابتسامة طفلك
@@ -43,9 +44,9 @@ export const Intro = () => {
               حب
             </p>
           </div>
-          <div className='flex flex-col mdl:flex-row *:flex-1 gap-1 mdl:gap-3 font-bold text-sm mdl:text-base'>
+          <div className='flex flex-col lg:flex-row lg:*:flex-1 gap-2 mdl:gap-3 font-bold text-sm mdl:text-base'>
             <Button
-              className='mdl:py-3 py-2 gap-3 px-1'
+              className='mdl:py-3 py-2 gap-3 px-5 text-xs mdl:text-xl w-fit lg:w-full mx-auto rounded-lg'
               variant='secondary'
             >
               <span className='shrink-0 size-5 mdl:size-7 rounded-full bg-white flex items-center justify-center'>
@@ -53,7 +54,7 @@ export const Intro = () => {
               </span>
               خدمة الكشف المبكر
             </Button>
-            <Button className='mdl:py-3 py-2 gap-3 px-1'>
+            <Button className='mdl:py-3 py-2 gap-3 px-5 text-xs mdl:text-xl w-fit lg:w-full mx-auto rounded-lg'>
               <span className='shrink-0'>
                 <PlayIcon
                   fill='black'
@@ -64,10 +65,11 @@ export const Intro = () => {
             </Button>
           </div>
         </div>
-      </Section>
+      </Container>
       <a
         href='#services'
-        className='absolute bottom-5 end-1/2 ltr:translate-x-[80%] rtl:-translate-x-[80%]'
+        className='absolute bottom-5 start-[calc(50%-16px)]
+        mdl:start-[calc(50%-24px)] ltr:mdl:start-[calc(50%-40px)] ltr:start-[calc(50%-24px)] animate-bounce'
       >
         <ArrowGreenDownCircleWhite className='size-10 mdl:size-16' />
       </a>

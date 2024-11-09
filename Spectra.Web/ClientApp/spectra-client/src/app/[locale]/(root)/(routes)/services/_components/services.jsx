@@ -1,25 +1,32 @@
 import { Link } from '@/navigation';
 
-import {
-  servicesData,
-  SERVICESICONS,
-} from '@/lib/demoData';
-import { Section } from '../../../_components/ui/section';
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
+import { SERVICESICONS } from '@/lib/demoData';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
-export const Services = () => {
+export const Services = ({
+  title = 'خدمتنا',
+  data = [],
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       id='services'
       aria-labelledby='services'
       aria-label='Services'
-      type='basic'
-      heading='خدمتنا'
-      className=''
     >
+      <SectionHeading
+        id='services'
+        className='mb-10 text-center'
+      >
+        {title}
+      </SectionHeading>
       <div className='grid grid-cols-2 mdl:grid-cols-3 mdl:gap-10 gap-3'>
-        {servicesData.map((item) => (
+        {data?.map((item) => (
           <Link
             key={item.label}
             href={ROUTES.ROOT.SERVICES.VIEW_SERVICE.replace(
@@ -30,7 +37,7 @@ export const Services = () => {
             <Service {...item} />
           </Link>
         ))}
-        <ServiceCard className='bg-blueLight border-none flex flex-col items-center justify-center py-10'>
+        <ServiceCard className='bg-blueLighter border-none flex flex-col items-center justify-center py-10'>
           <ServiceCard.Label>
             لا تعرف مالذي يحتاجه طفلك؟
           </ServiceCard.Label>
@@ -39,7 +46,7 @@ export const Services = () => {
           </ServiceCard.Button>
         </ServiceCard>
       </div>
-    </Section>
+    </Container>
   );
 };
 

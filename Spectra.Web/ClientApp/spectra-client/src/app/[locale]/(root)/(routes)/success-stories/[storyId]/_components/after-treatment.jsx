@@ -1,5 +1,9 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
+
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 import TeamIcon from '@/assets/icons/team';
 import TallBreakArrowIcon from '@/assets/icons/tall-break-arrow';
 
@@ -8,18 +12,28 @@ const icons = [
     className='w-3 h-2 mdl:w-7 mdl:h-4'
     key={1}
   />,
-  <TeamIcon className='size-4 mdl:size-8' key={2} />,
+  <TeamIcon
+    className='size-4 mdl:size-8 text-greenMain'
+    key={2}
+  />,
 ];
 
-export const AfterTreatment = ({ data = [] }) => {
+export const AfterTreatment = ({
+  data = [],
+  title = 'بعد العلاج',
+}) => {
   return (
-    <Section
+    <Container
       id='after-treatment'
       aria-label='After Treatment'
       aria-labelledby='after-treatment'
-      heading='بعد العلاج'
-      type='basic'
     >
+      <SectionHeading
+        className='mb-10 text-center'
+        id='after-treatment'
+      >
+        {title}
+      </SectionHeading>
       <div className='flex items-center gap-5 mdl:gap-10'>
         {/* IMAGE */}
         <div className='rounded-xl overflow-hidden w-2/3 mdl:w-auto'>
@@ -49,6 +63,6 @@ export const AfterTreatment = ({ data = [] }) => {
           ))}
         </ul>
       </div>
-    </Section>
+    </Container>
   );
 };

@@ -4,7 +4,11 @@ import { packagesDataSpectra } from '@/lib/demoData';
 
 export const Intro = () => {
   return (
-    <>
+    <section
+      aria-label='All Packages'
+      id='all-packages'
+      aria-labelledby='all-packages'
+    >
       <div
         style={{
           clipPath:
@@ -21,17 +25,12 @@ export const Intro = () => {
         <Separator className='mx-auto text-greenMain' />
       </div>
 
-      <section
-        aria-label='All Packages'
-        id='all-packages'
-        aria-labelledby='all-packages'
-        className='flex flex-col lg:flex-row items-center lg:items-start justify-center gap-5 p-5 mdl:-mt-72 -mt-96 relative'
-      >
+      <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center gap-5 p-5 mdl:-mt-72 -mt-96 relative'>
         {packagesDataSpectra.map((item) => (
           <PackageCard key={item.id} {...item} />
         ))}
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

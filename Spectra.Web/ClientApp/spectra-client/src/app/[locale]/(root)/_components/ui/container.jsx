@@ -2,13 +2,14 @@ import { cn } from '@/lib/utils';
 
 export const Container = ({ children, ...props }) => {
   return (
-    <div
+    <section
+      {...props}
       className={cn(
-        'px-5 xl:px-14 max-w-[1600px] mx-auto',
+        'py-10 mdl:py-20 px-5 xl:px-14 max-w-[1600px] mx-auto relative',
         props?.className
       )}
     >
       {children}
-    </div>
+    </section>
   );
 };

@@ -1,63 +1,36 @@
 import { cn } from '@/lib/utils';
-import { Section } from '../ui/section';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
-const traditionalSteps = [
-  { id: 1, title: 'التشخيص', duration: 'اسبوعين' },
-  {
-    id: 2,
-    title: 'موعد مع المختص الخاص بك',
-    duration: '9-6 أسابيع',
+export const Steps = ({
+  data = {
+    traditionalSteps: [],
+    spectraSteps: [],
   },
-  {
-    id: 3,
-    title: 'لقاء مع المختص الخاص بك',
-    duration: '14-5 أسابيع',
-  },
-  {
-    id: 4,
-    title: 'موعد مع طبيب أطفال/سلوك تنموي',
-    duration: '14-5 أسابيع',
-  },
-  {
-    id: 5,
-    title: 'إجراء الفحص التنموي',
-    duration: '14-5 أسابيع',
-  },
-  {
-    id: 6,
-    title: 'التعين مع أخصائي فريق تنموي',
-    duration: 'اسبوعين',
-  },
-  { id: 7, title: 'خطة الرعاية', duration: 'اسبوعين' },
-];
+  title = 'استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية الرقمية',
+}) => {
+  if (
+    !data.traditionalSteps.length &&
+    !data.spectraSteps.length
+  )
+    return null;
 
-const spectraSteps = [
-  { id: 1, title: 'اضف بيانات طفلك', duration: '0-1 ايام' },
-  { id: 2, title: 'الكشف المبكر', duration: '1-4 ايام' },
-  {
-    id: 3,
-    title: 'حجز الاستشارة المجانية',
-    duration: '3-7 ايام',
-  },
-  {
-    id: 4,
-    title: 'خطة الاحتفاظ والرعاية',
-    duration: 'تحدد',
-  },
-];
-
-export const Steps = () => {
+  const { spectraSteps, traditionalSteps } = data;
   return (
-    <Section
+    <Container
       aria-label='Steps'
       aria-labelledby='steps'
       id='steps'
-      className='mb-20'
+      className='mb-10'
     >
-      <h2 className='text-base mb-10 font-bold mdl:text-2xl text-center'>
-        استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية
-        الرقمية
-      </h2>
+      <SectionHeading
+        id='steps'
+        className='mb-10 text-center'
+      >
+        {title}
+      </SectionHeading>
 
       <div className='mdl:space-y-44 space-y-16'>
         <div>
@@ -69,7 +42,7 @@ export const Steps = () => {
         </div>
 
         <div className='relative mdl:px-20'>
-          <div className='absolute -top-8 right-0 w-full h-64 bg-blueLight rounded-xl' />
+          <div className='absolute -top-8 right-0 w-full h-64 bg-blueLighter rounded-xl' />
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold relative'>
             10 ايام لسبيكترا
           </h3>
@@ -78,13 +51,9 @@ export const Steps = () => {
             variant='green'
             steps={spectraSteps}
           />
-          {/* <StepperMobile
-            variant='green'
-            steps={spectraSteps}
-          /> */}
         </div>
       </div>
-    </Section>
+    </Container>
   );
 };
 
@@ -99,6 +68,7 @@ const Stepper = ({
   steps = [],
   className = '',
 }) => {
+  if (!steps.length) return null;
   return (
     <div
       dir='ltr'
@@ -110,7 +80,7 @@ const Stepper = ({
         className
       )}
     >
-      {steps.map((step, index) => (
+      {steps?.map((step, index) => (
         <div
           key={step.id}
           className={`absolute top-0 -translate-y-1/4 h-48`}
@@ -153,6 +123,7 @@ const Stepper = ({
 };
 
 const StepperMobile = ({ variant = '', steps = [] }) => {
+  if (!steps.length) return null;
   return (
     <div className='w-full ps-52'>
       <div
@@ -165,7 +136,7 @@ const StepperMobile = ({ variant = '', steps = [] }) => {
           }
         )}
       >
-        {steps.map((step, index) => (
+        {steps?.map((step, index) => (
           <div
             key={step.id}
             className={`absolute left-0 -translate-x-1/2 h-48`}

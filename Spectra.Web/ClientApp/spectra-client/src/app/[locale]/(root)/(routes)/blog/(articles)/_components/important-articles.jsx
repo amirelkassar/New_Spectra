@@ -1,37 +1,48 @@
 'use client';
 
-import Image from 'next/image';
-import { Link } from '@/navigation';
-
-import { Section } from '../../../../_components/ui/section';
-import { ArrowIcon } from './features-articles';
-import { PaginationBtns } from '../../../team/_components/team-pagination';
-import ROUTES from '@/routes';
-import { handlePagination } from '../../../team/_components/team';
 import { useState } from 'react';
+import { Link } from '@/navigation';
+import Image from 'next/image';
 
-export const ImportantArticles = ({ data = [] }) => {
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+import { ArrowIcon } from './features-articles';
+import { handlePagination } from '@/lib/utils';
+import { Pagination } from '@/components/pagination';
+import ROUTES from '@/routes';
+
+export const ImportantArticles = ({
+  data = [],
+  title = 'المقالات',
+}) => {
   const [page, setPage] = useState(1);
   return (
-    <Section
+    <Container
       id='important-articles'
       aria-labelledby='important-articles'
       aria-label='Important Articles'
-      className='!py-0 max-w-full mx-0 !px-0 mdl:col-span-3 space-y-10'
-      heading='المقالات'
+      className='mdl:col-span-3 space-y-10 !p-0'
     >
+      <SectionHeading
+        id='important-articles'
+        className='text-center'
+      >
+        {title}
+      </SectionHeading>
       <div className='space-y-5'>
         {handlePagination(3, page, data).map((article) => (
           <Article key={article.id} {...article} />
         ))}
       </div>
-      <PaginationBtns
+      <Pagination
         data={data}
         noPerPage={3}
         page={page}
         setPage={setPage}
       />
-    </Section>
+    </Container>
   );
 };
 

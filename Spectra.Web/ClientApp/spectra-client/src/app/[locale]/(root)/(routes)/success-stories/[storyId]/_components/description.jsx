@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
 import Separator from '@/assets/icons/separator';
+import { Container } from '@/guest/_components/ui';
 
 export const Description = ({
   childName = '',
@@ -9,7 +9,7 @@ export const Description = ({
   description = '',
 }) => {
   return (
-    <Section
+    <Container
       id='description'
       aria-label='Description'
       aria-labelledby='description'
@@ -20,7 +20,10 @@ export const Description = ({
         <span className='text-sm mdl:text-medium block'>
           قصة نجاح
         </span>
-        <h1 className='text-2xl mdl:text-3xl font-bold'>
+        <h1
+          id='description'
+          className='text-2xl mdl:text-3xl font-bold'
+        >
           {childName}
         </h1>
         <Separator className='mx-auto mdl:mx-0 text-greenMain' />
@@ -45,6 +48,6 @@ export const Description = ({
           className='w-full h-full max-h-64 object-cover object-center'
         />
       </div>
-    </Section>
+    </Container>
   );
 };

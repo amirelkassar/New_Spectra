@@ -1,19 +1,38 @@
-import { Intro } from './_components/intro';
-import { Team } from './_components/team';
-import { WhyUs } from './_components/why-us';
-import { MobileApp } from './_components/mobile-app';
-import { Licenses } from './_components/licenses';
+import { MOBILE_APP, TEAM, WHY_US } from '@/data';
+import {
+  MobileApp,
+  SpectraLicenses,
+  Team,
+  TeamIntro,
+  WhyUs,
+} from '@/guest/_components/sections';
 
 const TeamPage = () => {
   return (
     <main>
-      <Intro />
-      <Team />
-      <WhyUs />
-      <MobileApp />
-      <Licenses />
+      <TeamIntro />
+      <Team data={TEAM} />
+      <Wrapper>
+        <WhyUs data={WHY_US} />
+      </Wrapper>
+      <MobileApp data={MOBILE_APP} />
+      <SpectraLicenses />
     </main>
   );
 };
 
 export default TeamPage;
+
+const Wrapper = ({ children }) => {
+  return (
+    <div
+      style={{
+        clipPath:
+          'polygon(50% 5%, 100% 10%, 100% 100%, 0 100%, 0 10%)',
+      }}
+      className='bg-blueLighter overflow-hidden pt-10 mb-10'
+    >
+      {children}
+    </div>
+  );
+};

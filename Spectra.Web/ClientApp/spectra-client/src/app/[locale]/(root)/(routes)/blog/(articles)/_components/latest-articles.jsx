@@ -1,23 +1,35 @@
 import { Link } from '@/navigation';
-import { Section } from '../../../../_components/ui/section';
-import LikeHeartIcon from '@/assets/icons/like-heart';
-import ROUTES from '@/routes';
 
-export const LatestArticles = ({ data = [] }) => {
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+import ROUTES from '@/routes';
+import LikeHeartIcon from '@/assets/icons/like-heart';
+
+export const LatestArticles = ({
+  data = [],
+  title = 'احدث المقالات',
+}) => {
   return (
-    <Section
+    <Container
       id='latest-articles'
       aria-labelledby='latest-articles'
       aria-label='Latest Articles'
-      className='mdl:!py-0 max-w-full mx-0 !px-0'
-      heading='احدث المقالات'
+      className='mdl:!p-0 space-y-10'
     >
+      <SectionHeading
+        className='text-center'
+        id='latest-articles'
+      >
+        {title}
+      </SectionHeading>
       <div className='mdl:space-y-5 grid grid-cols-2 gap-3 mdl:block'>
         {data?.map((article) => (
           <Article key={article.id} {...article} />
         ))}
       </div>
-    </Section>
+    </Container>
   );
 };
 

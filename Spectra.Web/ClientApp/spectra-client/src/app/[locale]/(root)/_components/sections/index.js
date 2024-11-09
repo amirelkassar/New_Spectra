@@ -1,5 +1,4 @@
 import { RegisterModal } from './register-modal';
-import { TeamMember } from './team-member';
 import { AboutUs } from './about-us';
 import { FAQ } from './FAQ';
 import { HomeIntro } from './home-intro';
@@ -16,10 +15,14 @@ import { Testimonials } from './testimonials';
 import { WeMakeSmile } from './we-make-smile';
 import { WhatMakesUsSpecial } from './what-makes-us-special';
 import { WhatWeCure } from './what-we-cure';
+import { TeamIntro } from './team-intro';
+import { Team } from './team';
+import { WhyUs } from './why-us';
+import { MobileApp } from './mobile-app';
+import { SpectraLicenses } from './spectra-licenses';
 
 export {
   RegisterModal,
-  TeamMember,
   AboutUs,
   FAQ,
   HomeIntro,
@@ -36,4 +39,9 @@ export {
   WeMakeSmile,
   WhatMakesUsSpecial,
   WhatWeCure,
+  TeamIntro,
+  Team,
+  WhyUs,
+  MobileApp,
+  SpectraLicenses,
 };

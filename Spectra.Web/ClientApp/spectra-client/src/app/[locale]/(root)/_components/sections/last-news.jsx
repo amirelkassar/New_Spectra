@@ -1,39 +1,35 @@
-import { Section } from '../ui/section';
+import { ShowMoreButton } from '@/components/buttons/show-more-button';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
+import ROUTES from '@/routes';
 
-const data = [
-  {
-    badge: 'الكشف المبكر',
-    text: 'أنكايديديونتيوت لابوري ات',
-    image: 'demo-baby-1.png',
-  },
-  {
-    badge: 'الحالات الخاصة',
-    text: 'أنكايديديونتيوت لابوري ات',
-    image: 'demo-baby-2.png',
-  },
-  {
-    badge: 'التوحد',
-    text: 'أنكايديديونتيوت لابوري ات',
-    image: 'demo-baby-3.png',
-  },
-];
-
-export const LastNews = () => {
+export const LastNews = ({
+  data = [],
+  title = 'اخر الاخبار',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Last News'
       aria-labelledby='last-news'
       id='last-news'
-      type='more'
-      heading='اخر الاخبار'
-      btnLabel='تصفح المزيد'
     >
+      <div className='flex items-center justify-between mb-10'>
+        <SectionHeading id='last-news'>
+          {title}
+        </SectionHeading>
+        <ShowMoreButton href={ROUTES.ROOT.BLOG}>
+          تصفح المزيد
+        </ShowMoreButton>
+      </div>
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
-        {data.map((item) => (
+        {data?.map((item) => (
           <New key={item.text} {...item} />
         ))}
       </div>
-    </Section>
+    </Container>
   );
 };
 

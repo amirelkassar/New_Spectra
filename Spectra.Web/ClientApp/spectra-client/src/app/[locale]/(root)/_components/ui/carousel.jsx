@@ -3,10 +3,9 @@ import {
   CarouselSlide,
 } from '@mantine/carousel';
 import ArrowLeftMainGreen from '@/assets/icons/arrow-left-mainGreen';
-import { useId } from 'react';
 
 export const Carousel = ({
-  data = [],
+  children,
   withIndicators = true,
   height = '100%',
   slideSize = { base: '50%', sm: '33.3333%' },
@@ -14,12 +13,12 @@ export const Carousel = ({
   align = 'start',
   slidesToScroll = 1,
   dragFree = true,
+  loop = false,
   classNames = {
     root: 'mdl:px-24 px-16',
   },
   ...props
 }) => {
-  const id = useId();
   return (
     <MantineCarousel
       {...props}
@@ -31,6 +30,7 @@ export const Carousel = ({
       slidesToScroll={slidesToScroll}
       controlsOffset='lg'
       dragFree={dragFree}
+      loop={loop}
       nextControlIcon={
         <span className='rotate-180 h-32 mdl:h-52 -mt-14 mdl:-mt-20 mdl:w-16 w-10 rounded-full flex justify-center bg-[#f5f5f5] items-center'>
           <ArrowLeftMainGreen
@@ -50,11 +50,9 @@ export const Carousel = ({
       classNames={classNames}
       dir='ltr'
     >
-      {data.map((slide, index) => (
-        <CarouselSlide key={index + id}>
-          {slide}
-        </CarouselSlide>
-      ))}
+      {children}
     </MantineCarousel>
   );
 };
+
+Carousel.Slide = CarouselSlide;

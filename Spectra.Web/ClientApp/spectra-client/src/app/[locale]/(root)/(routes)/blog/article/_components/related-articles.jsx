@@ -1,19 +1,32 @@
-import { ARTICLES } from '@/lib/demoData';
-import { Section } from '../../../../_components/ui/section';
 import Image from 'next/image';
+
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 import { Link } from '@/navigation';
 import ROUTES from '@/routes';
 
-export const RelatedArticles = () => {
+export const RelatedArticles = ({
+  data = [],
+  title = 'مقالات ذات صلة',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       id='related-article'
       aria-label='Related Article'
       aria-labelledby='related-article'
       heading='مقالات ذات صلة'
     >
+      <SectionHeading
+        className='mb-10 text-center'
+        id='related-article'
+      >
+        {title}
+      </SectionHeading>
       <div className='flex flex-wrap gap-5 justify-center'>
-        {ARTICLES?.slice(0, 3)?.map((article, i) => (
+        {data?.slice(0, 3)?.map((article, i) => (
           <Link
             href={`${ROUTES.ROOT.BLOG}/article/${article?.id}`}
             className='w-72 block space-y-3'
@@ -32,6 +45,6 @@ export const RelatedArticles = () => {
           </Link>
         ))}
       </div>
-    </Section>
+    </Container>
   );
 };

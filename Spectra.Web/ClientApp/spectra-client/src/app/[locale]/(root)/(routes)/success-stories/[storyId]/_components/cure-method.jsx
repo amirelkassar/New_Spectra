@@ -1,16 +1,22 @@
 import Image from 'next/image';
-import { Section } from '../../../../_components/ui/section';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
-export const CureMethod = ({ data = [] }) => {
+export const CureMethod = ({
+  data = [],
+  title = 'طريقة العلاج',
+}) => {
   return (
-    <Section
+    <Container
       id='cure-method'
       aria-label='Cure Method'
       aria-labelledby='cure-method'
     >
-      <h2 className='text-base mb-3 mdl:text-2xl font-bold'>
-        طريقة العلاج
-      </h2>
+      <SectionHeading className='mb-2'>
+        {title}
+      </SectionHeading>
 
       <ul className='space-y-5 mdl:space-y-10'>
         {data.map((item) => (
@@ -42,6 +48,6 @@ export const CureMethod = ({ data = [] }) => {
           </li>
         ))}
       </ul>
-    </Section>
+    </Container>
   );
 };

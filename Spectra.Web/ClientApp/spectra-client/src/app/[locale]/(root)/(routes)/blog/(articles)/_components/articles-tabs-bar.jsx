@@ -1,9 +1,12 @@
 'use client';
-import ArrowNav from '@/assets/icons/arrow-nav';
-import { cn } from '@/lib/utils';
-import { usePathname, useRouter } from '@/navigation';
-import ROUTES from '@/routes';
+
 import { useMemo, useRef } from 'react';
+import { usePathname, useRouter } from '@/navigation';
+
+import { cn } from '@/lib/utils';
+import { Container } from '@/guest/_components/ui';
+import ArrowNav from '@/assets/icons/arrow-nav';
+import ROUTES from '@/routes';
 
 export const ArticlesTabsBar = () => {
   const pathName = usePathname();
@@ -77,10 +80,10 @@ export const ArticlesTabsBar = () => {
 
   return (
     <div className='my-10 w-full border-t border-b border-black/10'>
-      <div className='container mx-auto max-w-[1600px] gap-5 mdl:gap-10 flex ltr:flex-row-reverse items-center h-full'>
+      <Container className='gap-5 !p-0 mdl:gap-10 flex ltr:flex-row-reverse items-center h-full'>
         <button
           onClick={scrollRight}
-          className='h-full px-2 rounded-lg transition hover:bg-[#F5F5F5]'
+          className='h-full p-2 rounded-lg transition hover:bg-[#F5F5F5] shrink-0'
         >
           <ArrowNav fill='#010036' />
         </button>
@@ -97,7 +100,7 @@ export const ArticlesTabsBar = () => {
               role='button'
               key={tab.key}
               className={cn(
-                'py-3 text-sm mdl:text-xl border-b-2 transition hover:font-bold hover:border-greenMain border-transparent',
+                'py-3 text-sm mdl:text-xl border-b-2 transition hover:border-greenMain border-transparent',
                 {
                   'border-greenMain font-bold':
                     tab.isActive,
@@ -116,11 +119,11 @@ export const ArticlesTabsBar = () => {
 
         <button
           onClick={scrollLeft}
-          className='h-full px-2 rounded-lg transition hover:bg-[#F5F5F5]'
+          className='h-full p-2 rounded-lg transition hover:bg-[#F5F5F5] shrink-0'
         >
           <ArrowNav className='rotate-180' fill='#010036' />
         </button>
-      </div>
+      </Container>
     </div>
   );
 };

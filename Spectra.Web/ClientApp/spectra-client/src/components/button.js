@@ -8,18 +8,18 @@ const Button = ({
   ...rest
 }) => {
   const baseClasses =
-    'flex items-center disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none justify-center gap-5 transition-all px-7';
+    'flex items-center disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none justify-center gap-3 transition-all px-7';
 
   let variantClasses = '';
 
   switch (variant) {
     case 'primary':
       variantClasses =
-        'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain rounded-xl py-3';
+        'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain font-bold rounded-xl py-3';
       break;
     case 'secondary':
       variantClasses =
-        'bg-greenMain hover:bg-greenMain/90 text-white rounded-[10px] py-3 font-bold';
+        'bg-greenMain hover:bg-greenMain/90 text-white rounded-xl py-3 font-bold text-sm mdl:text-base';
       break;
     case 'ternary':
       variantClasses =

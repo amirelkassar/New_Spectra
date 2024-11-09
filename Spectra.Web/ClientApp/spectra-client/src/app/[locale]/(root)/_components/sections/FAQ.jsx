@@ -5,49 +5,29 @@ import {
   AccordionPanel,
 } from '@mantine/core';
 
-import { Section } from '../ui/section';
 import PlusCircleOutlineIcon from '@/assets/icons/plus-circle-outline';
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
-const FAQData = [
-  {
-    id: 1,
-    label: 'طرق الدفع',
-    content:
-      'سبيكترا هو أول مركز طب إتصالي و رعاية عن بعد، يقوم بتشخيص و علاج و رعاية إضطرابات تطور و سلوك الاطفال، عن طريق فرقنا المتعددة التخصصات المختارة بعناية، وفق جودة و معايير فنية و مهنية عالمية .',
-  },
-  {
-    id: 2,
-    label: 'كيف استطيع عمل جلسة الكشف المبكر؟',
-    content: '',
-  },
-  {
-    id: 3,
-    label:
-      'ماهو فريق التشخيص متعدد التخصصات، Multidisciplinary team (MDT) ؟',
-    content: '',
-  },
-  {
-    id: 4,
-    label:
-      'هل علي الحضور في مكان معين للحصول على الخدمة؟ و ماهي التجهيزات المطلوبة مني ؟',
-    content: '',
-  },
-  {
-    id: 5,
-    label: 'ما مدى السرية التي سأحظى بها؟',
-    content: '',
-  },
-];
-
-export const FAQ = () => {
+export const FAQ = ({
+  data = [],
+  title = 'أسئلة شائعة',
+}) => {
+  if (!data.length) return null;
   return (
-    <Section
+    <Container
       aria-label='Frequently Asked Questions'
       aria-labelledby='frequently-asked-questions'
       id='frequently-asked-questions'
-      heading='أسئلة شائعة'
-      type='basic'
     >
+      <SectionHeading
+        id='frequently-asked-questions'
+        className='mb-10 text-center'
+      >
+        {title}
+      </SectionHeading>
       <Accordion
         classNames={{
           root: 'space-y-5',
@@ -55,14 +35,14 @@ export const FAQ = () => {
           chevron:
             'w-fit data-[rotate=true]:rotate-[135deg]',
           control:
-            'text-black bg-blueLight hover:bg-blueLight/80 text-base mdl:text-2xl',
+            'text-black bg-blueLighter hover:bg-blueLight/80 text-base mdl:text-2xl',
         }}
         radius='xl'
         chevron={
           <PlusCircleOutlineIcon className='size-5 mdl:size-7' />
         }
       >
-        {FAQData.map((item) => (
+        {data?.map((item) => (
           <AccordionItem key={item.id} value={item.label}>
             <AccordionControl>
               {item.label}
@@ -71,6 +51,6 @@ export const FAQ = () => {
           </AccordionItem>
         ))}
       </Accordion>
-    </Section>
+    </Container>
   );
 };

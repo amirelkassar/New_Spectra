@@ -1,67 +1,51 @@
 import Image from 'next/image';
 
-import { cn } from '@/lib/utils';
-import { Section } from '../ui/section';
 import CheckHeartIcon from '@/assets/icons/check-heart';
-
-const data = [
-  'سبيكترا هو أول مركز طب إتصالي و رعاية عن بعد، يقوم بتشخيص و علاج و رعاية إضطرابات تطور و سلوك الاطفال، عن طريق فرقنا المتعددة التخصصات المختارة بعناية، وفق جودة و معايير فنية و مهنية عالمية .',
-  'نهدف للقيام بواجب وطني من خلال تفعيل خدمات الكشف المبكر عن الاضطرابات النمائية والسلوكية وتقديم جلسات تشخيصية وعلاجية من خلال الخدمات النوعية التخصصية .',
-  'تعمل كوادرنا تحت اشراف اطباء استشاريين متخصيين في اضطرابات النمو والسلوك والطب النفسي والاعصاب لدى الاطفال والمراهقين باستخدام معايير عالمية معتبرة',
-];
+import {
+  Container,
+  SectionHeading,
+} from '@/guest/_components/ui';
 
 export const AboutUs = ({
-  className = '',
-  containerClassName = '',
-  heading = 'من نحن',
+  data = {
+    image: '',
+    list: [],
+  },
+  title = 'من نحن',
 }) => {
+  if (!data.list.length) return null;
   return (
-    <div
-      style={{
-        clipPath:
-          'polygon(50% 0%, 100% 7%, 100% 100%, 0 100%, 0 7%)',
-      }}
-      className={cn(
-        'relative bg-blueLight overflow-hidden custom-clipPath-triangle-up',
-        className
-      )}
+    <Container
+      aria-label='About Us'
+      aria-labelledby='about-us'
+      id='about-us'
     >
-      <Section
-        aria-label='About Us'
-        aria-labelledby='about-us'
-        id='about-us'
-        heading={heading}
-      >
-        <div
-          className={cn(
-            'flex flex-col items-center mdl:items-start gap-5 mdl:flex-row',
-            containerClassName
-          )}
-        >
-          <div className='flex-[0.35] relative overflow-hidden'>
-            <Image
-              src={'/demo-about-us.webp'}
-              alt='about-us-img'
-              priority={false}
-              className='max-w-full max-h-full object-contain object-center'
-              width={414}
-              height={442}
-            />
-          </div>
+      <SectionHeading className='mb-10 text-center'>
+        {title}
+      </SectionHeading>
 
-          <ul className='flex-[0.65] space-y-14 mdl:mt-24'>
-            {data.map((item) => (
-              <li
-                key={item}
-                className='flex items-center gap-3 text-sm mdl:text-medium'
-              >
-                <CheckHeartIcon className='size-6 shrink-0' />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-    </div>
+      <div className='mdl:flex mdl:items-center mdl:gap-10 space-y-10 mdl:space-y-0'>
+        <Image
+          src={data?.image}
+          alt='about-us-img'
+          priority
+          className='object-contain w-auto h-full object-center col-span-1 max-w-56 mdl:max-w-[414px] mx-auto min-w-56 lgl:min-w-[414px]'
+          width={414}
+          height={442}
+        />
+
+        <ul className='space-y-10 mdl:space-y-14 col-span-2'>
+          {data?.list?.map((item) => (
+            <li
+              key={item}
+              className='flex items-center gap-3 text-sm mdl:text-xl'
+            >
+              <CheckHeartIcon className='size-6 shrink-0' />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Container>
   );
 };
