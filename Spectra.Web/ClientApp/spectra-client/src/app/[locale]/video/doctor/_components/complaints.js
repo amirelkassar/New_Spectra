@@ -28,7 +28,7 @@ function ComplaintsVideo() {
     );
   };
   return (
-    <Tabs color="#10B0C1" defaultValue="one">
+    <Tabs color="#10B0C1" defaultValue="one" className=" max-h-screen">
       <Tabs.List justify="center" classNames={{ list: "mt-3" }}>
         <Tabs.Tab
           classNames={{
@@ -48,7 +48,7 @@ function ComplaintsVideo() {
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="one">
+      <Tabs.Panel value="one" className="h-full">
         <div className=" mt-4 mdl:mt-10">
           <SearchInputVideo placeholder="بحث فى الشكاوى العامة ..." />
           <BoxSelected
@@ -80,15 +80,20 @@ function ComplaintsVideo() {
               })}
             </div>
           </Checkbox.Group>
-          <Button
-            variant="secondary"
-            className="max-w-[294px] w-full mx-auto mb-3 mt-10"
-          >
-            حفظ
-          </Button>
-          <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
-            <BtnAddInVideo />
-            <InputVideo placeholder="اضافة شكوى" className="flex-1 mdl:me-6" />
+          <div>
+            <Button
+              variant="secondary"
+              className="max-w-[294px] w-full mx-auto mb-3 mt-10"
+            >
+              حفظ
+            </Button>
+            <div className="flex items-center gap-4 mb-4 pt-4 border-t border-t-grayLight ">
+              <BtnAddInVideo />
+              <InputVideo
+                placeholder="اضافة شكوى"
+                className="flex-1 mdl:me-6"
+              />
+            </div>
           </div>
         </div>
       </Tabs.Panel>

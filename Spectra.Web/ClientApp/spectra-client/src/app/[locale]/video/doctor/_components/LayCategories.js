@@ -87,7 +87,7 @@ function LayCategories() {
     }
   };
   return (
-    <div className="h-full lgl:pb-12">
+    <div className="h-full lgl:pb-7 ">
       <div className=" lgl:flex hidden items-center  justify-between gap-4 pb-5 border-b-2 border-grayLight">
         <h2 className="text-base font-Bold ">
           {CategoriesData.find((item) => item.active === true)?.label ||

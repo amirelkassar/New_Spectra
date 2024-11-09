@@ -83,7 +83,7 @@ function DiagnosesVideo() {
               </div>
             </Checkbox.Group>
             <Button variant="secondary" className="max-w-[294px] w-full mx-auto mb-3 mt-10">حفظ</Button>
-            <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
+            <div className="flex items-center gap-4 mb-4 pt-4 border-t border-t-grayLight ">
               <BtnAddInVideo />
               <InputVideo
                 placeholder="اضافة تشخيص"

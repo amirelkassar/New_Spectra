@@ -134,7 +134,7 @@ function Rumors() {
             >
               حفظ
             </Button>
-            <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
+            <div className="flex items-center gap-4 mb-4 pt-4 border-t border-t-grayLight ">
               <BtnAddInVideo />
               <InputVideo
                 placeholder="اضافة أشعة"
@@ -181,7 +181,7 @@ function Rumors() {
             >
               حفظ
             </Button>
-            <div className="flex items-center gap-4 mt-6 py-7 border-t border-t-grayLight mdl:mt-20">
+            <div className="flex items-center gap-4 mb-4 pt-4 border-t border-t-grayLight ">
               <BtnAddInVideo />
               <InputVideo
                 placeholder="اضافة تحليل"

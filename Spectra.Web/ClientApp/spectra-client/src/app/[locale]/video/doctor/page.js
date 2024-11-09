@@ -17,7 +17,7 @@ function Page() {
         className={`w-full relative flex-1 duration-300 lgl:flex-none ${
           open
             ?  " xll:w-[900px] lgl:w-[700px] xll:min-w-[900px] lgl:min-w-[700px]"
-            : "lgl:w-[400px] lgl:min-w-[400px]"
+            : "lgl:w-[400px] lgl:min-w-[400px] w-full"
         }  bg-white px-5 `}
       >
         <div className=" max-h-screen absolute z-50 -end-1 cursor-pointer hidden lgl:flex items-center justify-center h-full">
