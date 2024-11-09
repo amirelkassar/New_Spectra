@@ -4,15 +4,14 @@ import ExportIcon from "@/assets/icons/export";
 import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
 import EditIcon from "@/assets/icons/edit";
 import ROUTES from "@/routes";
 import { DeleteMedicalTests } from "@/useAPI/admin/main-data/analysis";
 import { useRouter } from "@/navigation";
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
-  const { mutate: deleteComplaint, isLoading } = DeleteMedicalTests(id);
+
+  const { mutate: deleteComplaint } = DeleteMedicalTests(id);
   const router = useRouter();
 
   const handleDelete = () => {

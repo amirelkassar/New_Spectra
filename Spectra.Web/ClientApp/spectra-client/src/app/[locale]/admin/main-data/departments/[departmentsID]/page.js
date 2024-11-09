@@ -6,13 +6,13 @@ import ActionMenu from "../../_components/ActionMenuDepartmentsDetails";
 import { Link } from "@/navigation";
 import BackIcon from "@/assets/icons/back";
 import CardDocManger from "../_components/cardDocManger";
-const department = {
-  departmentName: "الطب النفسي",
-  specializationsCount: 3,
-  headOfDepartment: "أحمد عبد كامل",
-  specializations: ["تحليل السلوك التطبيقي", "العلاج السلوكي المعرفي"], // Example
-};
+import { GetSectionID } from "@/useAPI/admin/main-data/section";
+import HandelShowDataID from "@/components/handelShowDataID";
+
 function page({ params }) {
+  const { data, isLoading } = GetSectionID(params.departmentsID);
+  console.log(data);
+
   return (
     <div>
       <div className="flex items-center justify-between gap-5 mb-10">
@@ -31,38 +31,50 @@ function page({ params }) {
         </div>
         <ActionMenu id={params.departmentsID} />
       </div>
-
-      <div className="flex flex-col gap-5">
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            اسم القسم
-          </h3>
-          <p className="text-[14px] lg:text-[20px]  font-Regular">
-            العلاج النفسى السلوكى
-          </p>
-        </div>
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            التخصصات
-          </h3>
-          <p className="text-[14px] lg:text-[20px]  font-Regular">
-            {department.specializations.map((specialization, index) => (
-              <span key={index} className=" block mb-1">
-                {specialization}
-                {index !== department.specializations.length - 1 ? <br /> : ""}
-              </span>
-            ))}
-          </p>
-        </div>
-        <div className="pb-5 border-b last-of-type:border-none border-grayLight">
-          <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
-            رئيس القسم
-          </h3>
-          <div className="flex-1 w-[170px] md:w-[232px] min-w-full md:min-w-[232px]">
-            <CardDocManger />
+      <HandelShowDataID isLoading={isLoading} statusCode={data?.data.code}>
+        {data?.data.code === 200 && (
+          <div className="flex flex-col gap-5">
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                اسم القسم
+              </h3>
+              <p className="text-[14px] lg:text-[20px]  font-Regular">
+                {data.data.data.name}
+              </p>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                التخصصات
+              </h3>
+              <div className=" flex flex-col gap-1">
+                {data.data.data.diagnoses.map((specialization, index) => (
+                  <p
+                    key={index}
+                    className=" block text-[14px] lg:text-[20px]  font-Regular"
+                  >
+                    {specialization}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className="pb-5 border-b last-of-type:border-none border-grayLight">
+              <h3 className="font-bold mb-2 text-[12px] lg:text-[16px]">
+                رئيس القسم
+              </h3>
+              <div className="flex-1 w-[170px] md:w-[232px] min-w-full md:min-w-[232px]">
+                <CardDocManger
+                  data={{
+                    name: data.data.data.doctorName,
+                    rate: 5,
+                    experience: "5 سنوات خبرة",
+                    diagnoses: ["طبيب نفسي"],
+                  }}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </HandelShowDataID>
     </div>
   );
 }

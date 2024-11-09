@@ -48,7 +48,7 @@ export const Admin = {
     DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
   },
   Staff: {
-    url: "/Admin/GetAllEmployees?PageSize=5&",
+    url: "/Admin/GetAllEmployees?PageSize=10&",
     post: "/Admin/CreateEmployee",
   },
   Contracts: {
@@ -59,7 +59,7 @@ export const Admin = {
   Section:{
     url: "/Section",
     getByID: (id) => `/Section/id?id=${id}`,
-    getAllDoctors: `/Section/GetAllNames`,
+    getAllDoctors: `/Section/GetAllDoctors`,
   }
 };
 export const Doctor = {

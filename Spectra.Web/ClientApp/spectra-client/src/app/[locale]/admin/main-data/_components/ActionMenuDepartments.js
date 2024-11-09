@@ -4,15 +4,17 @@ import ExportIcon from "@/assets/icons/export";
 import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
 import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
 import ShowIcon from "@/assets/icons/show";
 import ROUTES from "@/routes";
 import EditIcon from "@/assets/icons/edit";
-import { DeleteSpecialization } from "@/useAPI/admin/main-data/specialties";
+import { DeleteSection } from "@/useAPI/admin/main-data/section";
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
-  const handleDelete = () => {};
+  const { mutate: deleteSection } = DeleteSection(id);
+  const handleDelete = () => {
+    deleteSection();
+  };
+
   const options = [
     {
       label: "مسح",

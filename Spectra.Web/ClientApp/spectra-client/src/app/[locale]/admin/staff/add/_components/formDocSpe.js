@@ -10,6 +10,8 @@ function FormDocSpe({
   DocSpeData,
   setDocSpeData,
 }) {
+  console.log(DocSpeData);
+  
   return (
     <div>
       <form className="flex flex-col gap-3 lg:gap-6 px-3 mb-14 focus:">

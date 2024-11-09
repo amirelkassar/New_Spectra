@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackIcon from "@/assets/icons/back";
 import { Link } from "@/navigation";
 import Button from "@/components/button";
@@ -11,124 +11,14 @@ import AddManger from "../_components/addManger";
 import CardDocManger from "../_components/cardDocManger";
 import DeleteIcon from "@/assets/icons/delete";
 import { GetSpecialization } from "@/useAPI/admin/main-data/specialties";
-import { useCreateSection } from "@/useAPI/admin/main-data/section";
-const doctors = [
-  {
-    id: 1,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 2,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 3,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 4,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 5,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 6,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 7,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 8,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 9,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 10,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 11,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 12,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 13,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 14,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 15,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 16,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-];
+import {
+  GetSectionDoctors,
+  useCreateSection,
+} from "@/useAPI/admin/main-data/section";
 
 function Page() {
   const { data, isLoading } = GetSpecialization();
+  const { data: DoctorsData } = GetSectionDoctors();
   const {
     mutate: CreateSection,
     error,
@@ -136,20 +26,22 @@ function Page() {
     isError,
     reset,
   } = useCreateSection();
+  console.log(DoctorsData);
 
-  const [DocID, setDocID] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     diagnoses: [],
-    doctorId: "string",
-    doctorName: "احمد علي",
+    doctorId: "",
+    doctorName: "",
   });
+  console.log(formData);
+
   useEffect(() => {
     isSuccess &&
       setFormData({
         name: "",
         diagnoses: [],
-        doctorId: "string",
+        doctorId: "",
         doctorName: "احمد علي",
       });
   }, [isSuccess]);
@@ -210,15 +102,36 @@ function Page() {
               label: "text-[12px] md:text-[16px] mb-2",
             }}
           />
-          <AddManger doctors={doctors} DocID={DocID} setDocID={setDocID} />
-          <div className="flex items-start gap-3">
-            <div className="md:max-w-[240px] w-full">
-              <CardDocManger />
+          {!formData.doctorId && (
+            <AddManger
+              doctors={DoctorsData?.data?.data || []}
+              DocInfo={formData}
+              setDocInfo={setFormData}
+            />
+          )}
+
+          {formData.doctorId && (
+            <div className="flex items-start gap-3">
+              <div className="md:max-w-[240px] w-full">
+                <CardDocManger
+                  data={{
+                    name: formData.doctorName,
+                    rate: 5,
+                    experience: "5 سنوات خبرة",
+                    diagnoses: ["طبيب نفسي"],
+                  }}
+                />
+              </div>
+              <button
+                onClick={() =>
+                  setFormData({ ...formData, doctorId: "", doctorName: "" })
+                }
+                className="border-red duration-200 hover:shadow-md border rounded-md w-9 md:w-12 h-9 md:h-12 flex items-center justify-center"
+              >
+                <DeleteIcon className={" w-4 md:w-5 h-auto"} />
+              </button>
             </div>
-            <button className="border-red duration-200 hover:shadow-md border rounded-md w-9 md:w-12 h-9 md:h-12 flex items-center justify-center">
-              <DeleteIcon className={" w-4 md:w-5 h-auto"} />
-            </button>
-          </div>
+          )}
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button

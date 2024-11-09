@@ -6,166 +6,58 @@ import Button from "@/components/button";
 import ROUTES from "@/routes";
 import { MultiSelect } from "@mantine/core";
 import InputGreen from "@/components/Input-green";
-import {
-  GetSpecializationID,
-  useEditSpecialization,
-} from "@/useAPI/admin/main-data/specialties";
+import { GetSpecialization } from "@/useAPI/admin/main-data/specialties";
 import ArrowDownIcon from "@/assets/icons/arrow-down";
 import AddManger from "../../_components/addManger";
 import CardDocManger from "../../_components/cardDocManger";
 import DeleteIcon from "@/assets/icons/delete";
-const doctors = [
-  {
-    id: 1,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 2,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 3,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 4,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 5,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 6,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 7,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 8,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 9,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 10,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 11,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 12,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 13,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 14,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 15,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-  {
-    id: 16,
-    name: "أحمد عبد كامل",
-    jobTitle: "طبيب نفسي",
-    experience: "5 سنوات خبرة",
-    rating: 9.5,
-  },
-];
+import { GetSectionDoctors, GetSectionID, useEditSection } from "@/useAPI/admin/main-data/section";
 
 function Page({ params }) {
-  const [DocID, setDocID] = useState(null);
-
-  const [formData, setFormData] = useState({
-    specializationName: "",
-    description: "",
-    consultationCost: "",
-    code: "",
-  });
-  const { data, isLoading } = GetSpecializationID(params.doctorsSpecialtiesID);
+  const { data: dataSpecialization } = GetSpecialization();
+  const { data, isLoading } = GetSectionID(params.departmentsID);
+  const { data: DoctorsData } = GetSectionDoctors();
 
   const {
-    mutate: EditSpecialization,
+    mutate: CreateSection,
     error,
-    isSuccess,
     isError,
     reset,
-  } = useEditSpecialization(formData?.id);
+  } = useEditSection(params.departmentsID);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    diagnoses: [],
+    doctorId: "",
+    doctorName: "",
+  });
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
   }, [isLoading]);
-
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
     if (isError) {
       reset();
     }
   };
-  console.log(data);
+
+  const handleMultiSelectChange = (selectedItems) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      diagnoses: selectedItems,
+    }));
+    if (isError) {
+      reset();
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    EditSpecialization(formData);
+    CreateSection(formData);
   };
   return (
     <div>
@@ -176,38 +68,66 @@ function Page({ params }) {
         >
           <BackIcon className={"w-full h-full"} />
         </Link>
-        <h2 className="headTitleDash">اضافة قسم</h2>
+        <h2 className="headTitleDash">تعديل قسم</h2>
       </div>
       <div>
         <form
           className="flex flex-col gap-4 lg:gap-8 px-3 mb-14"
           onSubmit={handleSubmit}
         >
-          <InputGreen label={"اسم القسم"} name="specializationName" />
+          <InputGreen
+            label="اسم القسم"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
           <MultiSelect
-            data={["العلاج السلوكي المعرفي", "تحليل السلوك التطبيقي"]}
-            label="التخصصات "
+            data={dataSpecialization?.data?.data.map((item) => item.name) || []}
+            label="التخصصات"
             placeholder="اختر التخصصات"
             rightSection={<ArrowDownIcon />}
+            value={formData.diagnoses}
+            onChange={handleMultiSelectChange}
             className="MultiSelect h-auto flex-1"
             classNames={{
-              input: " !h-auto py-1 min-h-[60px]",
+              input: "!h-auto py-1 min-h-[60px]",
               label: "text-[12px] md:text-[16px] mb-2",
             }}
           />
-          <AddManger doctors={doctors} DocID={DocID} setDocID={setDocID} />
-          <div className="flex items-start gap-3">
-            <div className="md:max-w-[240px] w-full">
-              <CardDocManger />
+          {!formData.doctorId && (
+            <AddManger
+              doctors={DoctorsData?.data?.data || []}
+              DocInfo={formData}
+              setDocInfo={setFormData}
+            />
+          )}
+
+          {formData.doctorId && (
+            <div className="flex items-start gap-3">
+              <div className="md:max-w-[240px] w-full">
+                <CardDocManger
+                  data={{
+                    name: formData.doctorName,
+                    rate: 5,
+                    experience: "5 سنوات خبرة",
+                    diagnoses: ["طبيب نفسي"],
+                  }}
+                />
+              </div>
+              <button
+                onClick={() =>
+                  setFormData({ ...formData, doctorId: "", doctorName: "" })
+                }
+                className="border-red duration-200 hover:shadow-md border rounded-md w-9 md:w-12 h-9 md:h-12 flex items-center justify-center"
+              >
+                <DeleteIcon className={" w-4 md:w-5 h-auto"} />
+              </button>
             </div>
-            <button className="border-red duration-200 hover:shadow-md border rounded-md w-9 md:w-12 h-9 md:h-12 flex items-center justify-center">
-              <DeleteIcon className={" w-4 md:w-5 h-auto"} />
-            </button>
-          </div>
+          )}
         </form>
         <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
           <Button
-            //onClick={handleSubmit}
+            onClick={handleSubmit}
             variant="secondary"
             className={
               "max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]"

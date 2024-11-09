@@ -1,28 +1,31 @@
 "use client";
 import DocMangerIcon from "@/assets/icons/docManger";
 import { useDisclosure } from "@mantine/hooks";
-import React, { useState } from "react";
+import React from "react";
 import { Modal, ScrollArea } from "@mantine/core";
 import CloseIcon from "@/assets/icons/close";
 import CardDocManger from "./cardDocManger";
 import Button from "@/components/button";
 import SearchIcon from "@/assets/icons/search";
 
-function AddManger({ doctors, DocID }) {
+function AddManger({ doctors, DocInfo, setDocInfo }) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <div>
       <h3 className="text-[12px] md:text-[16px] mb-2">رئيس القسم</h3>
-      <div
-        onClick={() => {
-          open();
-        }}
-        className="flex items-center justify-center flex-col gap-2 h-[170px] bg-blueLight rounded-xl p-4 w-fit min-w-[180px] duration-300 hover:shadow-md cursor-pointer"
-      >
-        <DocMangerIcon />
-        <h4 className="text-xs mdl:text-base font-Bold">اضافة رئيس قسم</h4>
-      </div>
+      {!DocInfo.doctorId && (
+        <div
+          onClick={() => {
+            open();
+          }}
+          className="flex items-center justify-center flex-col gap-2 h-[170px] bg-blueLight rounded-xl p-4 w-fit min-w-[180px] duration-300 hover:shadow-md cursor-pointer"
+        >
+          <DocMangerIcon />
+          <h4 className="text-xs mdl:text-base font-Bold">اضافة رئيس قسم</h4>
+        </div>
+      )}
+
       <Modal
         opened={opened}
         size={"xl"}
@@ -62,14 +65,28 @@ function AddManger({ doctors, DocID }) {
               <div
                 className="flex-1 w-[170px] md:w-[232px] min-w-[48%] md:min-w-[232px]"
                 key={i}
+                onClick={() =>
+                  setDocInfo((prev) => ({
+                    ...prev,
+                    doctorId: item.id,
+                    doctorName: item.name,
+                  }))
+                }
               >
-                <CardDocManger hover={true} active={item.id === DocID} />
+                <CardDocManger
+                  data={item}
+                  hover={true}
+                  active={item.id === DocInfo.doctorId}
+                />
               </div>
             ))}
           </div>
           <div className="flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row">
             <Button
               variant="secondary"
+              onClick={() => {
+                DocInfo.doctorId ? close() : null;
+              }}
               className={
                 "max-w-[500px] w-full mx-auto font-bold disabled:cursor-not-allowed md:h-[60px]"
               }

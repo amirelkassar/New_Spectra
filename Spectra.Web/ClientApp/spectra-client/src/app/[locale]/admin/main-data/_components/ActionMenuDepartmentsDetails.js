@@ -4,13 +4,18 @@ import EditIcon from "@/assets/icons/edit";
 import ExportIcon from "@/assets/icons/export";
 import PrintIcon from "@/assets/icons/print";
 import DataActions from "@/components/data-actions";
+import { useRouter } from "@/navigation";
 import ROUTES from "@/routes";
-import useModal from "@/store/modal-slice";
+import { DeleteSection } from "@/useAPI/admin/main-data/section";
 import React from "react";
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
-  const handleDelete = () => {};
+  const { mutate: deleteSection } = DeleteSection(id);
+  const router = useRouter();
+  const handleDelete = () => {
+    deleteSection();
+    router.replace(ROUTES.ADMIN.DATAMAIN.DEPARTMENTS);
+  };
   const options = [
     {
       label: "مسح",
@@ -19,7 +24,6 @@ function ActionMenu({ id }) {
       action: handleDelete,
       color: "red",
     },
-
     {
       label: "تعديل",
       icon: <EditIcon />,

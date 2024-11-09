@@ -1,8 +1,6 @@
 "use client";
 import { apiAdmin } from "@/api/api";
 import { Admin } from "@/api/endpoints";
-import { useRouter } from "@/navigation";
-import ROUTES from "@/routes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //getAll
@@ -31,9 +29,7 @@ export const GetSectionID = (id) => {
 };
 //delete
 export const DeleteSection = (id) => {
-  const router = useRouter();
   const { refetch } = GetSection();
-
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["Section"],
@@ -42,8 +38,8 @@ export const DeleteSection = (id) => {
       return response.data;
     },
 
-    onSuccess: () => {
-      router.replace(ROUTES.ADMIN.DATAMAIN.SectionS);
+    onSuccess: (res) => {
+      console.log(res);
       refetch();
       queryClient.invalidateQueries(["Section"]);
     },
@@ -84,6 +80,18 @@ export const useEditSection = (id) => {
     },
     onError: (error) => {
       console.error("حدث خطأ أثناء التعديل:", error);
+    },
+  });
+};
+//getAllDoctors
+export const GetSectionDoctors = () => {
+  return useQuery({
+    queryKey: [Admin.Section.getAllDoctors],
+    queryFn: async () => {
+      const response = await apiAdmin.get(Admin.Section.getAllDoctors, {
+        headers: {},
+      });
+      return response;
     },
   });
 };

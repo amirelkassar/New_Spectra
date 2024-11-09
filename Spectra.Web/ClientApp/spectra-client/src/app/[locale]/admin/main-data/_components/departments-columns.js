@@ -16,7 +16,7 @@ export const DepartmentColumns = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const id = row.original.name;
+      const id = row.original.id;
       return <ActionMenu id={id} />;
     },
   },

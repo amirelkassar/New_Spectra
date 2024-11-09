@@ -14,6 +14,8 @@ import { useCreateStaff } from "@/useAPI/admin/staff/staff";
 function Page() {
   const [firstData, setFirstData] = useState("");
   const [DocSpeData, setDocSpeData] = useState("");
+  console.log(DocSpeData);
+  
   const [StaffData, setStaffData] = useState("");
   const [PageForm, setPageForm] = useState(1);
   const {
@@ -35,7 +37,7 @@ function Page() {
   }, [isSuccess]);
   const handleSubmit = (e) => {
     let formData =
-      firstData.jobType === "1" || firstData.jobType === "2"
+      firstData.JobTypes === "1" || firstData.JobTypes === "2"
         ? { ...firstData, ...DocSpeData }
         : { ...firstData, ...StaffData };
 

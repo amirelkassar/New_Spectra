@@ -6,7 +6,6 @@ import ActionMenu from "../../_components/ActionMenuComplaintsDetails";
 import { GetComplaintID } from "@/useAPI/admin/main-data/complaints";
 import { Link } from "@/navigation";
 import BackIcon from "@/assets/icons/back";
-import NoDataYet from "@/components/noDataYet";
 import HandelShowDataID from "@/components/handelShowDataID";
 function page({ params }) {
   const { data, isLoading } = GetComplaintID(params.complaintsID);
