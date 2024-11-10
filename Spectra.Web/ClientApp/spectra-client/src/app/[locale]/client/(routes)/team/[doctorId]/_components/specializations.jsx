@@ -14,9 +14,9 @@ export const Specializations = ({ data }) => {
       }
     >
       <div className='flex flex-wrap gap-3'>
-        {data.map((item, index) => (
+        {data.map((item) => (
           <Button
-            key={index}
+            key={item}
             variant='blueLight'
             className='font-medium cursor-default px-4'
           >

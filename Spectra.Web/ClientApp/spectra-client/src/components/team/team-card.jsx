@@ -5,7 +5,7 @@ export const TeamCard = ({ children, ...props }) => {
   return (
     <div
       className={cn(
-        'rounded-2xl mt-14 mdl:mt-20 bg-gradient-to-b from-[#f5f5f5] to-white p-5 lg:p-8 shadow mb-3',
+        'rounded-2xl bg-gradient-to-b from-[#f5f5f5] to-white p-5 lg:p-8 shadow mb-3',
         props?.className
       )}
     >
