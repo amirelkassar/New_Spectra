@@ -85,7 +85,7 @@ const Article = ({
       </Link>
 
       {/* TITLE & MAINCONTENT */}
-      <div>
+      <div className='grow'>
         <h3 className='text-sm mdl:text-2xl font-bold'>
           {title}
         </h3>

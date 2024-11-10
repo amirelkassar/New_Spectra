@@ -1,82 +1,71 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
-import { usePathname, useRouter } from '@/navigation';
+import { useRouter } from '@/navigation';
+import { useCallback, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { Container } from '@/guest/_components/ui';
 import ArrowNav from '@/assets/icons/arrow-nav';
-import ROUTES from '@/routes';
+
+const TABS = [
+  {
+    key: 'general',
+    value: 'عام',
+  },
+  {
+    key: 'psychology',
+    value: 'علم نفس',
+  },
+  {
+    key: 'meetings',
+    value: 'لقاءات',
+  },
+  {
+    key: 'autism',
+    value: 'التوحد',
+  },
+  {
+    key: 'hyperactivity',
+    value: 'فرط الحركة',
+  },
+  {
+    key: 'family-relationships',
+    value: 'العلاقات الأسرية',
+  },
+
+  {
+    key: 'counseling',
+    value: 'ساعة مع المستشار',
+  },
+  {
+    key: 'awareness',
+    value: 'وعي',
+  },
+];
 
 export const ArticlesTabsBar = () => {
-  const pathName = usePathname();
+  const currentTab = useSearchParams()?.get('tab') || '';
   const router = useRouter();
   const ref = useRef(null);
 
-  const TABS = useMemo(
-    () => [
-      {
-        key: 'general',
-        value: 'عام',
-        isActive: pathName === '/blog/general',
-      },
-      {
-        key: 'psychology',
-        value: 'علم نفس',
-        isActive: pathName === '/blog/psychology',
-      },
-      {
-        key: 'meetings',
-        value: 'لقاءات',
-        isActive: pathName === '/blog/meetings',
-      },
-      {
-        key: 'autism',
-        value: 'التوحد',
-        isActive: pathName === '/blog/autism',
-      },
-      {
-        key: 'hyperactivity',
-        value: 'فرط الحركة',
-        isActive: pathName === '/blog/hyperactivity',
-      },
-      {
-        key: 'family-relationships',
-        value: 'العلاقات الأسرية',
-        isActive: pathName === '/blog/family-relationships',
-      },
-
-      {
-        key: 'counseling',
-        value: 'ساعة مع المستشار',
-        isActive: pathName === '/blog/counseling',
-      },
-      {
-        key: 'awareness',
-        value: 'وعي',
-        isActive: pathName === '/blog/awareness',
-      },
-    ],
-    [pathName]
-  );
-
-  const scrollLeft = () => {
+  const scrollLeft = useCallback(() => {
     if (ref.current) {
       ref.current.scrollBy({
         left: -200,
         behavior: 'smooth',
       });
     }
-  };
+  }, [ref]);
 
-  const scrollRight = () => {
+  const scrollRight = useCallback(() => {
     if (ref.current) {
       ref.current.scrollBy({
         left: 200,
         behavior: 'smooth',
       });
     }
-  };
+  }, [ref]);
 
   return (
     <div className='my-10 w-full border-t border-b border-black/10'>
@@ -103,13 +92,13 @@ export const ArticlesTabsBar = () => {
                 'py-3 text-sm mdl:text-xl border-b-2 transition hover:border-greenMain border-transparent',
                 {
                   'border-greenMain font-bold':
-                    tab.isActive,
+                    tab.key === currentTab,
                 }
               )}
               onClick={() =>
-                router.push(
-                  `${ROUTES.ROOT.BLOG}/${tab.key}`
-                )
+                router.push(`?tab=${tab.key}`, {
+                  scroll: false,
+                })
               }
             >
               {tab.value}
