@@ -13,16 +13,11 @@ import {
   GetContractsServices,
   useCreateContracts,
 } from "@/useAPI/doctor/contracts-api";
-const serviceOptions = [
-  { id: 1, value: "examination", label: "Examination Service" },
-  { id: 2, value: "counseling", label: "Counseling Service" },
-  { id: 3, value: "diagnostic", label: "Diagnostic Service" },
-  { id: 4, value: "followup", label: "Follow-up Service" },
-];
+
 
 function ContractAdd({ id }) {
   const { data: dataServices, isLoading } = GetContractsServices();
-  const { mutate: createContract, error: errorSend } = useCreateContracts("hema");
+  const { mutate: createContract, error: errorSend } = useCreateContracts("01JC8C207X83TANTKBYHY2W67F");
   console.log(dataServices?.data?.data?.services);
 
   const [listFreelancer, setListFreelancer] = useState([]);
@@ -118,7 +113,7 @@ function ContractAdd({ id }) {
       duration: FreelanceNum.duration,
       hoursOfWork: workLimits.hoursOfWork, // Set as needed
       daysOfWork: workLimits.daysOfWork, // Set as needed
-      employeeId: "hema", // Replace with actual employee ID
+      employeeId: "01JC8C207X83TANTKBYHY2W67F", // Replace with actual employee ID
       titel: "string", // Replace with actual title
       firstName: "string", // Replace with actual first name
       lastName: "string", // Replace with actual last name

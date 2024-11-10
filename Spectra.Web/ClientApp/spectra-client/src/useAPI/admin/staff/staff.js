@@ -9,7 +9,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //getAll
 export const GetStaff = () => {
   const page = NumPage();
-
   return useQuery({
     queryKey: ["todos", { page }],
     queryFn: async () => {
@@ -25,11 +24,11 @@ export const GetStaff = () => {
   });
 };
 //getID
-export const GetStaffID = (id) => {
+export const GetStaffID = (id, id2) => {
   return useQuery({
-    queryKey: [Admin.Staff.getByID(id)],
+    queryKey: [Admin.Staff.getByID(id, id2)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Staff.getByID(id), {
+      const response = await apiAdmin.get(Admin.Staff.getByID(id, id2), {
         headers: {},
       });
       return response;
@@ -72,19 +71,25 @@ export const useCreateStaff = () => {
   });
 };
 //put
-export const useEditStaff = (id) => {
+export const useEditStaff = (id, id2) => {
   const { refetch } = GetStaff();
-  const { refetch: refetch2 } = GetStaffID(id);
+  const { refetch: refetch2 } = GetStaffID(id, id2);
 
   return useMutation({
     mutationKey: ["EditStaff"],
     mutationFn: async (data) => {
       console.log(id);
 
-      const response = await apiAdmin.put(Admin.Staff.getByID(id), data, {});
+      const response = await apiAdmin.put(
+        Admin.Staff.editEmployeeByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
     onSuccess: (data) => {
+      console.log(data);
+
       refetch();
       refetch2();
     },

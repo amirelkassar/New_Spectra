@@ -31,7 +31,7 @@ function ActionMenu({ id,type }) {
     {
       label: "تعديل",
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.REQUESTSIDEdit(id),
+      link: ROUTES.ADMIN.STAFF.STAFFIDEDIT(id)+'&type='+type,
       type: "link",
     },
     {

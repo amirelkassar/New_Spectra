@@ -90,7 +90,7 @@ const StaffAside = () => {
   return (
     <div className="w-[100%]  lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-12 px-2 pe-6 mb-8 md:mb-0">
       <ul className="flex lg:flex-col  items-start  gap-5">
-        {searchParams.get("type") === "specialist"
+        {searchParams.get("type") === "Specialist"
           ? pageSpecialist.map((page) => (
               <li key={page.name} className="lg:w-[100%] ">
                 <Link

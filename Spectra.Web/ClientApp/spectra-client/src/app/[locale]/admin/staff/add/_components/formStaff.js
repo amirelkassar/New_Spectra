@@ -48,7 +48,9 @@ function FormStaff({ handleOnChange,setPageForm, StaffData, setStaffData }) {
         <Select
           data={["الماركيت", "الحسابات"]}
           label={"القسم"}
+          name="Diagnoses"
           className="MultiSelect"
+          onChange={(value) => setStaffData({ ...StaffData, Diagnoses: value })}
           classNames={{
             input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
             label: "text-base lg:text-xl mb-2",

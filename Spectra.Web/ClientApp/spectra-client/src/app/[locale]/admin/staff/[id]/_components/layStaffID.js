@@ -7,8 +7,8 @@ import StaffInformation from "./StaffInformation";
 
 function LayStaffID({ children }) {
   const searchParams = useSearchParams();
-  return searchParams.get("type") === "doctor" ||
-    searchParams.get("type") === "specialist" ? (
+  return searchParams.get("type") === "Doctor" ||
+    searchParams.get("type") === "Specialist" ? (
     <div className="flex flex-col lg:gap-7 h-[100%]">
       <StaffDetails />
       <div className=" flex-1 flex lg:gap-5 flex-col lg:flex-row">

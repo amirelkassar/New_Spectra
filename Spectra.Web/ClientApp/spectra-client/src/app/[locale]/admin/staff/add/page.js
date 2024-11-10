@@ -14,10 +14,10 @@ import { useCreateStaff } from "@/useAPI/admin/staff/staff";
 function Page() {
   const [firstData, setFirstData] = useState("");
   const [DocSpeData, setDocSpeData] = useState("");
-  console.log(DocSpeData);
-  
   const [StaffData, setStaffData] = useState("");
   const [PageForm, setPageForm] = useState(1);
+  console.log(StaffData);
+
   const {
     mutate: CreateStaff,
     error,

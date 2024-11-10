@@ -50,6 +50,8 @@ export const Admin = {
   Staff: {
     url: "/Admin/GetAllEmployees?PageSize=10&",
     post: "/Admin/CreateEmployee",
+    getByID: (id,id2) => `/Admin/GetOneOfNormalStaff/id?id=${id}&input=${id2}`,
+    editEmployeeByID: (id) => `/Admin/EditEmployee/id?id=${id}`,
   },
   Contracts: {
     url: "/Admin/GetAllContracts?PageSize=5&",

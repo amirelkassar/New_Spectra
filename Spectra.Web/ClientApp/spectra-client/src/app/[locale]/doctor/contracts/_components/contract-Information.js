@@ -156,7 +156,7 @@ function ContractInformation({ id }) {
       id: id,
       hoursOfWork: workLimits.hoursOfWork, // Set as needed
       daysOfWork: workLimits.daysOfWork, // Set as needed
-      employeeId: "hema", // Replace with actual employee ID
+      employeeId: "01JC8C207X83TANTKBYHY2W67F", // Replace with actual employee ID
       titel: "string", // Replace with actual title
       firstName: "string", // Replace with actual first name
       lastName: "string", // Replace with actual last name
@@ -164,7 +164,7 @@ function ContractInformation({ id }) {
     };
 
     // Send formatted data with useCreateContracts
-    createContract(formattedData, "hema");
+    createContract(formattedData, "01JC8C207X83TANTKBYHY2W67F");
   };
   return (
     <Card className="mt-5 ">
