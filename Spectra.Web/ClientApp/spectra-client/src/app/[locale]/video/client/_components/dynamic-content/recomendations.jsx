@@ -3,7 +3,7 @@
 // Import necessary hooks and components from React and Mantine
 import { useState } from 'react';
 import { Tabs } from '@mantine/core';
-import { PackageCardItem } from '@/client/_components/packages';
+import { PackageCardItem } from '@/components/packages';
 import {
   servicesData,
   SERVICESICONS,

@@ -4,6 +4,7 @@ import { PackageContent } from './package-content';
 import { PackageCard } from './package-card';
 import { PackageTimeSchedule } from './package-time-schedule';
 import { PackageCardItem } from './package-card-item';
+import { PackageTerms } from './package-terms';
 
 export {
   PackageBadge,
@@ -12,4 +13,5 @@ export {
   PackageCard,
   PackageCardItem,
   PackageTimeSchedule,
+  PackageTerms,
 };

@@ -1,7 +1,7 @@
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import Card from '@/components/card';
 import { packagesDataSpectra } from '@/lib/demoData';
-import { PackageCard } from '@/client/_components/packages';
+import { PackageCard } from '@/components/packages';
 
 export const Packages = () => {
   return (

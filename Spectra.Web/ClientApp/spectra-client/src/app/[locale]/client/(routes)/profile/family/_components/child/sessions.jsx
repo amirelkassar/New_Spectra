@@ -19,7 +19,7 @@ import {
   packagesDataSpectra,
   prescriptionsData,
 } from '@/lib/demoData';
-import { PackageCard } from '@/client/_components/packages';
+import { PackageCard } from '@/components/packages';
 import {
   Attachment,
   PrescriptionsAccordion,

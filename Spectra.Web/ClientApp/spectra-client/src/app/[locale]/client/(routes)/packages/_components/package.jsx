@@ -3,7 +3,8 @@ import {
   PackageBadge,
   PackageGoals,
   PackageContent,
-} from '@/client/_components/packages';
+  PackageTerms,
+} from '@/components/packages';
 
 export const Package = ({ data = {} }) => {
   return (
@@ -19,6 +20,8 @@ export const Package = ({ data = {} }) => {
       <PackageContent content={data.content} />
 
       <PackageGoals goals={data.goalsOfPackage} />
+
+      <PackageTerms />
 
       <Button
         className='mt-5 font-bold w-full'
