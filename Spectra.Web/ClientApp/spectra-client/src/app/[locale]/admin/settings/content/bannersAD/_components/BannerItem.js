@@ -1,18 +1,14 @@
 "use client";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import Image from "next/image";
-import ReplaceImgIcon from "@/assets/icons/replaceImg";
 import Button from "@/components/button";
 import DeleteIcon from "@/assets/icons/delete";
-import { useState } from "react";
-export function BannerItem({ imageSrc, onDelete, setDataImg, dataImg, id }) {
-  const handleHeaderInputChange = (e) => {
-    setLargeFile("");
-    const updatedImages = [...dataImg];
-    updatedImages[id] = URL.createObjectURL(e[0]);
-    setDataImg(updatedImages);
-  };
-  const [largeFile, setLargeFile] = useState("");
+import AddReportIcon from "@/assets/icons/addReport";
+export function BannerItem({
+  imageSrc,
+  onDelete,
+  setSelectedDataImg,
+  SelectedDataImg,
+}) {
   return (
     <div>
       <div className="flex items-start gap-2 lgl:gap-6">
@@ -26,25 +22,17 @@ export function BannerItem({ imageSrc, onDelete, setDataImg, dataImg, id }) {
         >
           <DeleteIcon /> مسح
         </Button>
-        <div className="flex flex-col gap-1 justify-start">
-          <Dropzone
-            onDrop={handleHeaderInputChange}
-            onReject={() =>
-              setLargeFile(
-                "It was rejected because of the large size of the picture "
-              )
-            }
-            maxSize={5 * 1024 ** 2}
-            accept={IMAGE_MIME_TYPE}
-            className=" rounded-xl w-fit h-8 lgl:h-11 p-0 flex items-center justify-center px-4 border-solid border-black"
-          >
-            <div className="flex items-center gap-3">
-              <ReplaceImgIcon />
-              <h2 className="text-[12px] lgl:text-base font-Light">تبديل</h2>
-            </div>
-          </Dropzone>
-          {largeFile && <p className="text-rose-500 text-sm">{largeFile}</p>}
-        </div>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setSelectedDataImg((prev) => [...prev, imageSrc]);
+          }}
+          className={
+            "text-[12px] w-[160px] lg:text-xl  !py-0 px-4 flex font-bold items-center justify-center h-9 lgl:h-12   border-none  !gap-3"
+          }
+        >
+          <AddReportIcon className={"w-6 h-auto"} /> اضافة
+        </Button>
       </div>
       <Image
         src={imageSrc}

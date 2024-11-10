@@ -145,7 +145,6 @@ function StaffDetails() {
                   </p>
                 </div>
               </div>
-
               <div className="mdl:ps-5 pt-3 mdl:pt-0  flex border-t-2 mdl:border-t-0 border-grayLight  justify-between mdl:justify-end flex-row mdl:flex-col flex-1 divide-x-[2px] mdl:divide-x-[0px]  divide-x-reverse mdl:divide-y-[2px] divide-solid  divide-grayLight w-full mdl:max-w-[200px]">
                 <div className="flex flex-col justify-center items-center gap-3  pt-4 mdl:pt-0 flex-1">
                   <h3 className=" text-[12px] mdl:text-[16px]">رقم الاعتماد</h3>
