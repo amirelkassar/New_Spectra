@@ -1,4 +1,3 @@
-import { BackButton } from '@/client/_components/ui';
 import { ViewService } from '@/components/services';
 
 export const Service = ({ data = {} }) => {
@@ -11,10 +10,7 @@ export const Service = ({ data = {} }) => {
           height={1661}
           alt='Packages Details Image'
         />
-        <div className='max-w-[1600px] mx-auto px-5 xl:px-14'>
-          <BackButton className='ps-5 pt-5' />
-        </div>
-        <ViewService.Title className='max-w-[1600px] mx-auto px-5 xl:px-14'>
+        <ViewService.Title className='max-w-[1600px] mx-auto  p-5 xl:p-14 pb-0 xl:pb-0'>
           {data?.label}
         </ViewService.Title>
         <ViewService.Description className='max-w-[1600px] mx-auto px-5 xl:px-14'>
