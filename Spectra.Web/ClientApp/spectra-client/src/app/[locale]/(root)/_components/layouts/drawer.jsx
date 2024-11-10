@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useMediaQuery } from '@mantine/hooks';
-import { usePathname, useRouter } from '@/navigation';
+import { useRouter } from '@/navigation';
 import { Drawer as MantineDrawer } from '@mantine/core';
 
 import { Logo } from '@/components/logo';
@@ -12,17 +12,20 @@ import { cn } from '@/lib/utils';
 import { LangDropdown } from '../ui/lang-dropdown';
 import LogIn from '@/assets/icons/log-in';
 import ROUTES from '@/routes';
+import { useNav } from '@/guest/_hooks/use-nav';
 
 export const Drawer = ({
   onClose = () => {},
   isOpen = false,
-  links = [],
   currentLocale = 'ar',
 }) => {
   const t = useTranslations();
-  const pathName = usePathname();
+
   const router = useRouter();
+
   const matches = useMediaQuery('(min-width: 768px)');
+
+  const { NAVDATA } = useNav();
 
   return (
     <MantineDrawer
@@ -68,7 +71,7 @@ export const Drawer = ({
           {/* NAV */}
           <nav>
             <ul className='space-y-1'>
-              {links.map((link) => (
+              {NAVDATA.map((link) => (
                 <li
                   role='button'
                   onClick={() => {
@@ -78,19 +81,14 @@ export const Drawer = ({
                   className={cn(
                     'py-4 px-7 flex font-bold text-sm items-center gap-x-2 transition hover:bg-blueLight',
                     {
-                      'bg-blueLight':
-                        pathName === link.href ||
-                        (link.href !== ROUTES.ROOT.HOME &&
-                          pathName.includes(link.href)),
+                      'bg-blueLight': link.isActive,
                     }
                   )}
                   key={link.href}
                 >
                   <span
                     className={
-                      pathName === link.href ||
-                      (link.href !== ROUTES.ROOT.HOME &&
-                        pathName.includes(link.href))
+                      link.isActive
                         ? '!fill-greenMain !text-greenMain'
                         : '!fill-black !text-black'
                     }

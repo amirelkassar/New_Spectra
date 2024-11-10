@@ -1,4 +1,3 @@
-import { NAVDATA } from './nav';
 import { WHAT_WE_CURE } from './what-we-cure';
 import { SERVICES, SERVICES_1 } from './services';
 import { ABOUT_US } from './about-us';
@@ -19,7 +18,6 @@ import { MOBILE_APP } from './mobile-app';
 import { SOCIAL } from './contact';
 
 export {
-  NAVDATA,
   WHAT_WE_CURE,
   SERVICES,
   SERVICES_1,

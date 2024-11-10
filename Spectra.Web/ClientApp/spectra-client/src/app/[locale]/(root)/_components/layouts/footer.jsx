@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 
 import { Nav } from '@/guest/_components/layouts';
 import { Logo } from '@/components/logo';
-import { NAVDATA } from '@/data';
 import { RegisterModal } from '@/guest/_components/sections';
 
 import TamaraIcon from '@/assets/icons/tamara';
@@ -88,7 +87,7 @@ const NavLinks = () => {
   const t = useTranslations();
   return (
     <div className='flex gap-x-6'>
-      <Nav navLinks={NAVDATA} className='hidden lg:flex' />
+      <Nav className='hidden lg:flex' />
       <Link
         href={ROUTES.AUTH.SIGNUP_PROVIDER}
         className='text-xs mdl:text-base text-black font-bold'

@@ -5,7 +5,7 @@ export const Container = ({ children, ...props }) => {
     <section
       {...props}
       className={cn(
-        'py-10 mdl:py-20 px-5 xl:px-14 max-w-[1600px] mx-auto relative',
+        'py-10 mdl:py-20 px-5 lg:px-10 xl:px-14 max-w-[1600px] mx-auto relative',
         props?.className
       )}
     >

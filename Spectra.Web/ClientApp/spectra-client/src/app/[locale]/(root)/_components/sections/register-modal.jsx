@@ -47,7 +47,7 @@ export const RegisterModal = ({ children, ...props }) => {
         onClick={open}
         {...props}
         className={cn(
-          'text-xs mdl:text-base block text-white font-bold bg-greenMain px-3 py-2 text-center rounded-lg lg:w-full lg:max-w-40 cursor-pointer transition hover:bg-greenMain/90',
+          'text-xs mdl:text-base block text-white font-bold bg-greenMain px-3 py-2 text-center rounded-lg lg:w-full lg:max-w-28 2xl:max-w-40 cursor-pointer transition hover:bg-greenMain/90 whitespace-nowrap',
           props?.className
         )}
       >

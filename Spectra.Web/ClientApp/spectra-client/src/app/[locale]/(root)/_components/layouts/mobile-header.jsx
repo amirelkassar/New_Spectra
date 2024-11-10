@@ -9,20 +9,16 @@ import { Drawer } from '@/guest/_components/layouts';
 import { RegisterModal } from '@/guest/_components/sections';
 import MenuDash from '@/assets/icons/menuDash';
 
-export const MobileHeader = ({
-  locale = 'ar',
-  links = [],
-}) => {
+export const MobileHeader = ({ locale = 'ar' }) => {
   const t = useTranslations();
 
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <div className='xl:hidden flex items-center gap-5 justify-between flex-1 relative'>
+    <div className='lgl:hidden flex items-center gap-5 justify-between flex-1 relative'>
       <Drawer
         isOpen={opened}
         onClose={close}
-        links={links}
         currentLocale={locale}
       />
 

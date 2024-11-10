@@ -18,16 +18,16 @@ export const LangDropdown = ({
       <Menu.Target>
         <button
           className={cn(
-            'font-bold flex items-center',
+            'font-bold flex items-center group',
             className
           )}
           aria-haspopup='true'
         >
           <Globe />
-          <span className='inline-block ms-2'>
-            {currentLocale === 'en' ? 'English' : 'عربي'}
+          <span className='inline-block me-1 ms-2'>
+            {currentLocale === 'en' ? 'EN' : 'عربي'}
           </span>
-          <ArrowDownIcon />
+          <ArrowDownIcon className='group-aria-expanded:rotate-180 transition' />
         </button>
       </Menu.Target>
       <Menu.Dropdown>
@@ -38,7 +38,7 @@ export const LangDropdown = ({
           title={
             currentLocale === 'ar'
               ? 'Switch to English'
-              : 'التبديل إلى العربي'
+              : 'تغيير الي اللغة العربية'
           }
         >
           <Menu.Item className='w-fit h-10 font-bold leading-6 text-base'>
