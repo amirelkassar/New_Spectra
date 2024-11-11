@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import HeadPackage from "./_components/HeadPackage";
 import InfoPackage from "./_components/infoPackage";
 import EditIcon from "@/assets/icons/edit";
 import { Link } from "@/navigation";
@@ -13,8 +12,8 @@ function Page({ params }) {
 
   return (
     <div className="flex flex-col w-full gap-6">
-      <HeadPackage />
-      <InfoPackage />
+      
+      <InfoPackage id={params.packagesID} />
       <ContentSpectraView />
       <GoalPackagesDetails/>
       <ImgPackage />
