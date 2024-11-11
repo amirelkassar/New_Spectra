@@ -26,7 +26,7 @@ import { WHY_US } from './why-us';
 import { MOBILE_APP } from './mobile-app';
 import { SOCIAL } from './contact';
 import { REMINDER_MESSAGES } from './reminder-messages';
-import { CHILDS } from './child';
+import { CHILDS, CHILD_TABS } from './child';
 
 export {
   WHAT_WE_CURE,
@@ -54,4 +54,5 @@ export {
   SOCIAL,
   REMINDER_MESSAGES,
   CHILDS,
+  CHILD_TABS,
 };

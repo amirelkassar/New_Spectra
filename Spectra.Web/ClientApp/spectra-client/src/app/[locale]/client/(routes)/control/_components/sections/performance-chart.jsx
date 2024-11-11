@@ -42,7 +42,7 @@ export const PerformanceChart = () => {
             ملخص الاداء
           </SectionTitle>
 
-          <button className='bg-blueLighter rounded-xl font-bold text-greenMain text-xs mdl:text-base py-2 px-5 flex items-center gap-4'>
+          <button className='bg-blueLighter rounded-xl font-bold text-greenMain text-xs mdl:text-base py-2 px-5 flex items-center gap-4 transition'>
             عرض الكل
             <ArrowLeftMainGreen className='size-3 mdl:size-4 ltr:rotate-180' />
           </button>

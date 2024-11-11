@@ -1,4 +1,4 @@
-import { CHILDSDATA } from '@/lib/demoData';
+import { CHILDS } from '@/data';
 import { Family } from './family';
 
 const DATA = {
@@ -12,9 +12,7 @@ const DATA = {
 };
 
 const FamilyProfilePage = () => {
-  return (
-    <Family parentData={DATA} childData={CHILDSDATA} />
-  );
+  return <Family parentData={DATA} childData={CHILDS} />;
 };
 
 export default FamilyProfilePage;

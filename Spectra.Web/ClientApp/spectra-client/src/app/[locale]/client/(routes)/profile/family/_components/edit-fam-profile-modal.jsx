@@ -8,9 +8,11 @@ import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 import Avatar from '@/components/avatar';
 import EditImgIcon from '@/assets/icons/editImg';
+import { cn } from '@/lib/utils';
 
 export const EditFamProfileModal = ({
   children,
+  className = '',
   initialData = {},
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -30,7 +32,11 @@ export const EditFamProfileModal = ({
     <>
       {/* TRIGGER */}
 
-      <div className='w-fit' role='dialog' onClick={open}>
+      <div
+        className={cn('w-fit', className)}
+        role='dialog'
+        onClick={open}
+      >
         {children}
       </div>
 

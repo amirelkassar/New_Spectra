@@ -27,7 +27,7 @@ const Button = ({
       break;
     case 'blueLight':
       variantClasses =
-        'rounded-xl py-2 text-black bg-blueLight font-bold mdl:text-base text-xs';
+        'rounded-xl py-3 text-black bg-blueLight font-bold mdl:text-base text-xs';
       break;
     case 'ghost':
       variantClasses =

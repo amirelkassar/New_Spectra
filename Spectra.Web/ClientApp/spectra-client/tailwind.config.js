@@ -61,6 +61,9 @@ module.exports = {
         SemiBold: 600,
         Bold: 700,
       },
+      borderRadius: {
+        xl: '10px',
+      },
       gridTemplateColumns: {
         'fill-200': 'repeat(auto-fill, minmax(200px, 1fr))',
         'fill-250': 'repeat(auto-fill, minmax(250px, 1fr))',
