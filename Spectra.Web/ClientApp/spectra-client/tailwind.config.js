@@ -66,6 +66,25 @@ module.exports = {
         'fill-250': 'repeat(auto-fill, minmax(250px, 1fr))',
         'fill-300': 'repeat(auto-fill, minmax(300px, 1fr))',
       },
+      keyframes: {
+        wiggle: {
+          '5%': {
+            transform: 'rotate(-5deg)',
+          },
+          '20%': {
+            transform: 'rotate(5deg)',
+          },
+          '40%': {
+            transform: 'rotate(-5deg)',
+          },
+          '80%': {
+            transform: 'rotate(5deg)',
+          },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 0.8s ease 0.25s 2',
+      },
     },
   },
   plugins: [],

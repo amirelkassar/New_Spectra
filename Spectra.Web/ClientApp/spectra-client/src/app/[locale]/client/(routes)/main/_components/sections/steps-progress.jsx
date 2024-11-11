@@ -1,10 +1,12 @@
 import { Progress } from '@mantine/core';
 
-import CheckIcon from '@/assets/icons/check';
 import { cn } from '@/lib/utils';
-import ROUTES from '@/routes';
 import { Link } from '@/navigation';
-import { AddChild } from './add-child';
+import { Section } from '@/client/_components/ui';
+import { AddChild } from '../add-child';
+
+import ROUTES from '@/routes';
+import CheckIcon from '@/assets/icons/check';
 
 const steps = [
   {
@@ -36,11 +38,12 @@ const steps = [
     href: '#',
   },
 ];
+
 export const StepsProgress = () => {
   const progressValue = 10;
 
   return (
-    <section className='flex items-center flex-col xl:flex-row '>
+    <Section className='flex items-center flex-col xl:flex-row '>
       <p className='mdl:text-medium text-base text-center xl:text-start font-bold xl:max-w-[262px] xl:px-10'>
         اكمل الخطوات وسنرشح لك أفضل حل لطفلك
       </p>
@@ -71,7 +74,7 @@ export const StepsProgress = () => {
       </div>
 
       <AddChild />
-    </section>
+    </Section>
   );
 };
 

@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 const Card = ({
   title = '',
@@ -13,15 +12,15 @@ const Card = ({
       {size === 'lg' && (
         <div
           className={cn(
-            'rounded-lg bg-white p-1 lg:p-5 relative w-full max-w-full',
+            'rounded-xl bg-white p-1 mdl:p-5 relative h-full',
             className
           )}
           {...props}
         >
           {title && (
-            <h3 className='text-base font-bold mdl:text-xl mb-3'>
+            <h2 className='text-base font-bold mdl:text-xl mb-3'>
               {title}
-            </h3>
+            </h2>
           )}
           {children}
         </div>
@@ -32,7 +31,7 @@ const Card = ({
             boxShadow: '0px 4px 12px 0px #0000000A',
           }}
           className={cn(
-            'bg-white flex-1 w-fit max-w-full py-3 px-8 rounded-xl relative',
+            'bg-white py-3 px-8 rounded-xl relative h-full',
             className
           )}
           {...props}

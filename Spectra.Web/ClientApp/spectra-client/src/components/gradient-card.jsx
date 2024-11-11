@@ -10,7 +10,7 @@ export const GradientCard = ({ children, ...props }) => {
         boxShadow: '0px 14px 114px -27px #E8F7FF',
       }}
       className={cn(
-        'rounded-2xl p-5 my-5 mx-auto',
+        'rounded-2xl p-5 mx-auto',
         props.className
       )}
     >

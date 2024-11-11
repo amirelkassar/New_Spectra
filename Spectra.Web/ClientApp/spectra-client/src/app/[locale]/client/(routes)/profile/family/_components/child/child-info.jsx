@@ -1,10 +1,10 @@
 'use client';
 
-import { DoctorBadge } from '@/client/_components/team/doctor-badge';
 import { Info } from '@/client/_components/ui';
 import { EditButton } from '@/components/buttons/edit-button';
-import Card from '@/components/card';
+import { DoctorBadge } from '@/components/team';
 import { EditChildInfoModal } from './edit-child-info-modal';
+import Card from '@/components/card';
 
 export const ChildInfo = () => {
   return (

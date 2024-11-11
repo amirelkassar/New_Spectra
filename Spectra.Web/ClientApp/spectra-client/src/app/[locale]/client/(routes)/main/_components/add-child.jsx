@@ -1,28 +1,31 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-
+import { useCallback, useEffect } from 'react';
+import { usePathname, useRouter } from '@/navigation';
 import { useSearchParams } from 'next/navigation';
-import { AddChildModal } from '../../profile/family/_components/add-child-modal';
+import { useDisclosure } from '@mantine/hooks';
+
+import { AddChildModal } from '@/client/_components/child';
 
 export const AddChild = () => {
-  const triggerRef = useRef(null);
+  const [opened, { open, close }] = useDisclosure(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
   const openAddChildModal =
     !!useSearchParams()?.get('add-child') || false;
 
   useEffect(() => {
     if (openAddChildModal) {
-      triggerRef.current.click();
+      open();
     }
-  }, [openAddChildModal]);
+  }, [openAddChildModal, open]);
 
-  return (
-    <div>
-      <AddChildModal
-        trigger={
-          <button ref={triggerRef} className='hidden' />
-        }
-      />
-    </div>
-  );
+  const onClose = useCallback(() => {
+    // remove query param
+    router.replace(pathname);
+    close();
+  }, [close, pathname, router]);
+
+  return <AddChildModal opened={opened} close={onClose} />;
 };

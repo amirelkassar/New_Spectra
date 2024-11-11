@@ -1,40 +1,28 @@
 'use client';
 
 import { Modal } from '@mantine/core';
-import { useCallback } from 'react';
-import { usePathname, useRouter } from '@/navigation';
-import { useDisclosure } from '@mantine/hooks';
 
-import { AddButton } from '../../../../../../../components/buttons/add-button';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 import SelectInput from '@/components/inputs/select-input';
 
-export const AddChildModal = ({ trigger = null }) => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const removeSearchParams = useCallback(() => {
-    router.replace(pathname);
-  }, [pathname, router]);
-
+export const AddChildModal = ({
+  opened = false,
+  close = () => {},
+  children,
+}) => {
   return (
     <>
       {/* TRIGGER */}
-
-      <div className='w-fit' role='dialog' onClick={open}>
-        {trigger || <AddButton>اضافة طفل</AddButton>}
+      <div className='w-fit' role='dialog'>
+        {children}
       </div>
 
       {/* MODAL */}
       <Modal
         opened={opened}
         withCloseButton={false}
-        onClose={() => {
-          close();
-          removeSearchParams();
-        }}
+        onClose={close}
         size={'lg'}
       >
         <div className='space-y-5'>
@@ -187,10 +175,7 @@ export const AddChildModal = ({ trigger = null }) => {
               </Button>
               <Button
                 type='button'
-                onClick={() => {
-                  close();
-                  removeSearchParams();
-                }}
+                onClick={close}
                 className='text-sm mdl:text-base font-bold'
               >
                 الغاء

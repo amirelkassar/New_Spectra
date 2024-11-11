@@ -29,7 +29,7 @@ export const AddReminderModal = () => {
     <>
       {/* Modal button trigger */}
       <button onClick={open}>
-        <PlusInsideCircleIcon className='lg:size-8 size-5' />
+        <PlusInsideCircleIcon className='mdl:size-8 size-6' />
       </button>
 
       {/* MODAL */}

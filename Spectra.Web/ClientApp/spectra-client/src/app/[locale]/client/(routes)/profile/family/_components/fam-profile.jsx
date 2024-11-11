@@ -1,10 +1,10 @@
-import { AddChildModal } from './add-child-modal';
 import Card from '@/components/card';
 import Avatar from '@/components/avatar';
 import { H1 } from '../../../../_components/ui/h1';
 import { Info } from '../../../../_components/ui/info';
 import { EditButton } from '@/components/buttons/edit-button';
 import { EditFamProfileModal } from './edit-fam-profile-modal';
+import { AddChild } from './add-child';
 
 export const FamProfile = ({ initialData = {} }) => {
   return (
@@ -12,7 +12,7 @@ export const FamProfile = ({ initialData = {} }) => {
       <Card>
         <H1 className='lg:gap-x-9 gap-x-5'>
           ملفي
-          <AddChildModal />
+          <AddChild />
         </H1>
 
         <div className='my-8 flex flex-col lg:flex-row lg:items-center gap-5'>

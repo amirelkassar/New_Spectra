@@ -1,6 +1,7 @@
 'use client';
 
 import { useChildStore } from '../../_hooks/use-child-store';
+import { Section } from '../ui';
 import { ChildPopover } from './child-popover';
 
 export const ChildSelect = ({ data = [] }) => {
@@ -11,10 +12,12 @@ export const ChildSelect = ({ data = [] }) => {
   );
 
   return (
-    <ChildPopover
-      onChange={(childId) => setChildId(childId)}
-      data={data}
-      defaultSelected={childId}
-    />
+    <Section>
+      <ChildPopover
+        onChange={(childId) => setChildId(childId)}
+        data={data}
+        defaultSelected={childId}
+      />
+    </Section>
   );
 };

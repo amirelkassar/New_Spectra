@@ -1,8 +1,17 @@
 import { WHAT_WE_CURE } from './what-we-cure';
-import { SERVICES, SERVICES_1 } from './services';
+import {
+  SERVICES,
+  SERVICES_1,
+  SERVICESICONS,
+  PROGRESS,
+} from './services';
 import { ABOUT_US } from './about-us';
 import { TESTIMONIALS } from './testimonials';
-import { STATISTICS } from './statistics';
+import {
+  STATISTICS,
+  USAGE_STATISTICS,
+  USAGE_STATISTICS_ICONS,
+} from './statistics';
 import { FAQDATA } from './faq';
 import { SPONSORS } from './sponsors';
 import { STEPS } from './steps';
@@ -16,14 +25,20 @@ import { TEAM } from './team';
 import { WHY_US } from './why-us';
 import { MOBILE_APP } from './mobile-app';
 import { SOCIAL } from './contact';
+import { REMINDER_MESSAGES } from './reminder-messages';
+import { CHILDS } from './child';
 
 export {
   WHAT_WE_CURE,
   SERVICES,
   SERVICES_1,
+  SERVICESICONS,
+  PROGRESS,
   ABOUT_US,
   TESTIMONIALS,
   STATISTICS,
+  USAGE_STATISTICS,
+  USAGE_STATISTICS_ICONS,
   FAQDATA,
   SPONSORS,
   STEPS,
@@ -37,4 +52,6 @@ export {
   WHY_US,
   MOBILE_APP,
   SOCIAL,
+  REMINDER_MESSAGES,
+  CHILDS,
 };
