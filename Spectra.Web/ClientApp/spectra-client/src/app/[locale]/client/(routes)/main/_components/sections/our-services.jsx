@@ -35,7 +35,13 @@ export const OurServices = () => {
             slidesPerView: 2.2,
           },
           1100: {
-            slidesPerView: 3.1,
+            slidesPerView: 3.2,
+          },
+          1500: {
+            slidesPerView: 4.2,
+          },
+          1600: {
+            slidesPerView: 4.5,
           },
         }}
         modules={[Pagination]}
