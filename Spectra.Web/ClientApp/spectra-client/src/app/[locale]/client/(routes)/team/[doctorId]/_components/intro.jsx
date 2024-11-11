@@ -25,7 +25,7 @@ export const Intro = ({ data }) => {
         />
 
         <Link
-          className='mdl:max-w-xs mdl:ms-auto w-full'
+          className='mdl:max-w-xs mdl:ms-auto block w-full'
           href={ROUTES.CLIENT.TEAM.BOOK_APPOINTMENT.replace(
             ':id',
             data?.id

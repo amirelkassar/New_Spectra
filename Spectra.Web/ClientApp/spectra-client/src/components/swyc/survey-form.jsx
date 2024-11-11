@@ -67,7 +67,7 @@ const QuestionLi = ({ children, ...props }) => {
     <li
       {...props}
       className={cn(
-        'relative pt-6 w-full pe-3 ps-7 before:absolute before:top-7 mdl:before:top-8 before:start-3 before:size-[10px] before:bg-greenMain before:rounded-full after:absolute after:hidden mdl:after:block after:top-[38px] after:start-[16px] after:w-[2px] after:h-[calc(100%-6px)] after:bg-greenMain last:after:hidden',
+        'relative pt-6 w-full pe-3 ps-8 before:absolute before:top-7 mdl:before:top-8 before:start-3 before:size-[10px] before:bg-greenMain before:rounded-full after:absolute after:hidden mdl:after:block after:top-[38px] after:start-[16px] after:w-[2px] after:h-[calc(100%-6px)] after:bg-greenMain last:after:hidden',
         props?.className
       )}
     >

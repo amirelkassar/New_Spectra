@@ -1,12 +1,12 @@
-const LogoOnlyIcon = ({ className = '' }) => {
+const LogoOnlyIcon = ({ ...props }) => {
   return (
     <svg
-      className={className}
       width={32}
       height={41}
       viewBox='0 0 32 41'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <path
         d='M19.8632 8.50821C22.2325 8.50821 24.1541 6.60303 24.1541 4.25411C24.1541 1.90518 22.2325 0 19.8632 0C17.4939 0 15.5723 1.90518 15.5723 4.25411C15.5723 6.60303 17.4939 8.50821 19.8632 8.50821Z'

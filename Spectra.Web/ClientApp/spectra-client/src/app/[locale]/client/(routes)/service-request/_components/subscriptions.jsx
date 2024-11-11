@@ -1,7 +1,7 @@
 import {
   PackageBadge,
   PackageTimeSchedule,
-} from '@/client/_components/packages';
+} from '@/components/packages';
 
 export const Subscriptions = () => {
   return (
