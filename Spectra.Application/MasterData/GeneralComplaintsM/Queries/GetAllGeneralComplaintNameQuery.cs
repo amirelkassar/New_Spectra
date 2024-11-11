@@ -26,7 +26,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
 
                 var entity = await _generalComplaintRepository.GetAllAsync();
 
-                var entitiesNames = entity.Select(x => new BassMasterDataDto { Name = x.ComplaintName });
+                var entitiesNames = entity.Select(x => new BassMasterDataDto { Name = x.ComplaintName , Id= x.Id});
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(entitiesNames);
 

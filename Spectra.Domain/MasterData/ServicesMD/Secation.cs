@@ -3,8 +3,8 @@
     public class Secation
     {
 
-        public string? Sectiontitle { get; set; }
-        public string? Sectiondescription { get; set; }
+        public string Sectiontitle { get; set; }
+        public string Sectiondescription { get; set; }
 
         
     }

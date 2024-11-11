@@ -70,7 +70,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 if (request.Photo != null)
                 {
 
-                    entity.AttachmentPath = await _addPhoto.UpdateAttachment(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
+                    entity.AttachmentPath = await _addPhoto.UpdateAttachments(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
 
                 }
 

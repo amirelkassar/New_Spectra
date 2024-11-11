@@ -31,6 +31,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
         .Where(x => x.AvailableSrvices == AvailableSrvice.ServicesView)
         .Select(x => new ServicesDto
     {
+            Id = x.Id,
         Name = x.Name,
         TermsAndConditions = x.TermsAndConditions,
 

@@ -43,11 +43,16 @@ using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
-using Spectra.Application.MasterData.UploadExcel.Services; 
+using Spectra.Application.MasterData.UploadExcel.Services;
 using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
+using Spectra.Application.Settings.Articles;
+using Spectra.Application.Settings.MedicalSpecialties;
+using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Application.Settings.Packages;
+using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
@@ -82,6 +87,10 @@ using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Services.IdentityServices;
+using Spectra.Infrastructure.Settings.Articles;
+using Spectra.Infrastructure.Settings.MedicalSpecialties;
+using Spectra.Infrastructure.Settings.Packages;
+using Spectra.Infrastructure.Settings.SuccessStorIes;
 using Spectra.Infrastructure.Specialists;
 using System.Reflection;
 using System.Text;
@@ -148,8 +157,8 @@ namespace Spectra.Infrastructure
             services.AddScoped<IManagementStaffService, ManagementStaffService>();
             services.AddScoped<ISectionsServices, SectionsServices>();
             services.AddScoped<IAdminService, AdminService>();
-            services.AddScoped<IMedicalTeamService, MedicalTeamService>();  
-
+            services.AddScoped<IMedicalTeamService, MedicalTeamService>();
+            services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
 
             services.AddScoped<IHellper, Hellper>();
 
@@ -166,12 +175,15 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            //MastarData Start
             services.AddScoped<IDrugRepository, DrugRepository>();
             services.AddScoped<ISpecializationsRepository, SpecializationsRepository>();
             services.AddScoped<IDiagnoseRepository, DiagnoseRepository>();
             services.AddScoped<IMedicalTestsAndXrayRepository, MedicalTestsAndXrayRepository>();
             services.AddScoped<IGeneralComplaintRepository, GeneralComplaintRepository>();
             services.AddScoped<IServiceMDRepository, ServiceMDRepository>();
+            services.AddScoped<ISectionsRepository, SectionsRepository>();
+            //End
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<ISpecialistRepository, SpecialistRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
@@ -183,7 +195,11 @@ namespace Spectra.Infrastructure
             services.AddScoped<IManagementStaffRepository, ManagementStaffRepository>();
             services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
             services.AddScoped<IMedicalTeamRepository, MedicalTeamRepository>();
-            services.AddScoped<ISectionsRepository, SectionsRepository>();
+            //AdminSettings Start
+            services.AddScoped<IArticlesRepository, ArticlesRepository>();
+            services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
+            services.AddScoped<ISuccessStorIesRepository, SuccessStorIesRepository>();
+            services.AddScoped<IPackagesRepository, PackagesRepository>();
 
 
             services.AddSignalR();

@@ -59,7 +59,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
             if (request.Attachment != null)
             {
-                drug.AttachmentPath = await _addPhoto.UpdateAttachment(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
+                drug.AttachmentPath = await _addPhoto.UpdateAttachments(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
                 // Assuming you want to store paths as a comma-separated string
             }
             drug.Code = request.Code;

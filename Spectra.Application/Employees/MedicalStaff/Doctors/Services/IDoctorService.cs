@@ -13,7 +13,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Services
 {
     public interface IDoctorService
     {
-        Task<OperationResult<string>> CreateDoctor(string firstName, string lastName, string? prefix, string phoneNumbers, string countryCode, string emailAddress, string country, string city, string nationalId, string academicDegree, string approvedBy, List<string> diagnoses, HumenGender humenGenders, string licenseNumber, List<IFormFile> scientificDegree);
+        Task<OperationResult<string>> CreateDoctor(string firstName, string lastName, string? prefix, string phoneNumbers, string countryCode, string emailAddress, string country, string city, string nationalId, string academicDegree, string approvedBy, List<string> diagnoses, HumenGender humenGenders, string licenseNumber/*, List<IFormFile> scientificDegree*/);
         Task<OperationResult<Unit>> DeleteDoctor(string id);
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctors();
         Task<OperationResult<Doctor>> GetDoctorById(string id);

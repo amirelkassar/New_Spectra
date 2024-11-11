@@ -57,7 +57,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Specialists.Commands
             specialist.ApprovedBy = request.ApprovedBy;
             if (request.ScientificDegree != null)
             {
-                specialist.AttachmentPath = await _addFile.UpdateAttachment(specialist.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
+                specialist.AttachmentPath = await _addFile.UpdateAttachments(specialist.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             }
             await _specialistRepository.UpdateAsync(specialist);
             return OperationResult<Unit>.Success(Unit.Value);

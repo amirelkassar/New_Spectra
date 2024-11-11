@@ -38,8 +38,8 @@ namespace Spectra.Infrastructure.Doctors
        string approvedBy,
        List<string> diagnoses,
        HumenGender humenGenders,
-       string licenseNumber,
-       List<IFormFile> scientificDegree)
+       string licenseNumber
+      /* List<IFormFile>? scientificDegree*/)
         {
             // Create value objects
             var name = new Name
@@ -79,7 +79,7 @@ namespace Spectra.Infrastructure.Doctors
                 Diagnoses = diagnoses,
                 HumenGenders = humenGenders,
                 LicenseNumber = licenseNumber,
-                ScientificDegree = scientificDegree
+                //ScientificDegree = scientificDegree
             };
 
             // Send the command via mediator

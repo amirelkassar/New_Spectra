@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Sections;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -34,7 +37,11 @@ namespace Spectra.Application.MasterData.Sections.Commands
         {
 
 
-
+            var names = await _sectionsRepository.GetAllAsync(b => b.Name == request.Name);
+            if (names.Any())
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
             var entity = Section.Create(
 
              Ulid.NewUlid().ToString(), request.Name,
@@ -50,34 +57,26 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
         }
     }
-    //public class CreateServicesMCommandValidator : AbstractValidator<CreateMedicalPatientProfileCommand>
-    //{
-    //    public CreateServicesMCommandValidator()
-    //    {
-    //        RuleFor(x => x.Name)
-    //            .NotEmpty().WithMessage("Service name is required.")
-    //            .MaximumLength(100).WithMessage("Service name cannot exceed 100 characters.");
+    public class CreateSectionsCommandValidator : AbstractValidator<CreateSectionsCommand>
+    {
+        public CreateSectionsCommandValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Name is required.")
+                .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
 
-    //        RuleFor(x => x.DefinitionServices)
-    //            .NotEmpty().WithMessage("Service definition is required.")
-    //            .MaximumLength(500).WithMessage("Service definition cannot exceed 500 characters.");
+            RuleFor(x => x.Diagnoses)
+                .NotNull().WithMessage("Diagnoses list is required.")
+                .Must(d => d.Count > 0).WithMessage("At least one diagnosis is required.")
+                .ForEach(d => d.NotEmpty().WithMessage("Diagnosis cannot be empty."));
 
-    //        RuleFor(x => x.Price)
-    //            .GreaterThan(0).WithMessage("Price must be greater than zero.");
+            RuleFor(x => x.DoctorId)
+                .NotEmpty().WithMessage("Doctor ID is required.")
+                .MaximumLength(50).WithMessage("Doctor ID must not exceed 50 characters.");
 
-    //        RuleFor(x => x.TermsAndConditions)
-    //            .NotEmpty().WithMessage("Terms and conditions are required.");
-
-    //        RuleFor(x => x.AvailableSrvices)
-    //            .IsInEnum().WithMessage("Invalid value for available services.");
-
-    //        RuleFor(x => x.Secations)
-    //            .Must(sections => sections == null || sections.Count > 0)
-    //            .WithMessage("If provided, sections must contain at least one item.");
-
-    //        RuleFor(x => x.Photo)
-    //            .Must(photos => photos == null || photos.All(file => file.Length > 0))
-    //            .WithMessage("If provided, each photo must be a valid file.");
-    //    }
-    //}
+            RuleFor(x => x.DoctorName)
+                .NotEmpty().WithMessage("Doctor name is required.")
+                .MaximumLength(100).WithMessage("Doctor name must not exceed 100 characters.");
+        }
+    }
 }

@@ -53,7 +53,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
             doctor.ApprovedBy = request.ApprovedBy;
             if (request.ScientificDegree != null)
             {
-                doctor.AttachmentPath = await _addFile.UpdateAttachment(doctor.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+                doctor.AttachmentPath = await _addFile.UpdateAttachments(doctor.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeDoctors);
             }
             await _doctorRepository.UpdateAsync(doctor);
             return OperationResult<Unit>.Success(Unit.Value);

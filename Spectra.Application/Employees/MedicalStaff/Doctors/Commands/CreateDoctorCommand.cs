@@ -30,7 +30,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<IFormFile>? ScientificDegree { get; set; }
+        //public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
 
 
@@ -49,19 +49,19 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
-            List<string>? filePath = null;
-            var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
-            if (uploadfile != null)
-            {
-                filePath = uploadfile;
-            }
-            foreach (var item in request.Diagnoses)
-            {
-                var specialization = await _specializationRepository.GetByNameAsync(item);
-                specialization.DoctorCount += 1;
+            //List<string>? filePath = null;
+            //var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+            //if (uploadfile != null)
+            //{
+            //    filePath = uploadfile;
+            //}
+            //foreach (var item in request.Diagnoses)
+            //{
+            //    var specialization = await _specializationRepository.GetByNameAsync(item);
+            //    specialization.DoctorCount += 1;
 
-            }
-
+            //}
+            // here we make Photo = null to test the Server 
 
             var doctor = Doctor.Create(
                 Ulid.NewUlid().ToString(),
@@ -75,7 +75,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-                filePath,
+          
                 request.empelyeeRate = 0
 
                 );

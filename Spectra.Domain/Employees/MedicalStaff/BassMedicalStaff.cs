@@ -18,7 +18,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<string>? AttachmentPath { get; set; }
+        public List<string>? AttachmentPath { get; set; }=new List<string>();
         public EmpelyeeRates? EmpelyeeRate { get; set; }
 
 

@@ -166,8 +166,9 @@ namespace Spectra.Infrastructure.Admin
                     input.ApprovedBy,
                     input.Diagnoses,
                     input.HumenGenders,
-                    input.LicenseNumber,
-                    input.ScientificDegree);
+                    input.LicenseNumber
+                
+                   /* input.ScientificDegree*/);
 
                 return query;
             }

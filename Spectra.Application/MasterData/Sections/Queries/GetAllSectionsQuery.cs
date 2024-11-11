@@ -31,7 +31,7 @@ namespace Spectra.Application.MasterData.Sections.Queries
         {
 
             var entity = await _sectionsRepository.GetAllAsync();
-            var sections= entity.Select(x => new SectionDto { CountDiagnoses = x.Diagnoses.Count(), Name = x.Name, DoctorName = x.DoctorName });
+            var sections= entity.Select(x => new SectionDto { CountDiagnoses = x.Diagnoses.Count(), Name = x.Name, DoctorName = x.DoctorName, Id= x.Id });
 
             return OperationResult<IEnumerable<SectionDto>>.Success(sections);
 

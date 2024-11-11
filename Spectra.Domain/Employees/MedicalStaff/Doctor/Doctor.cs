@@ -24,15 +24,15 @@ namespace Spectra.Domain.Employees.MedicalStaff.Doctor
             string? licenseNumber,
             string? approvedBy,
             string academicdegree,
-            List<string>? attachmentPath,
+            //List<string>? attachmentPath,
             EmpelyeeRates? empelyeeRate
 
 
 
 
             )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree,
-                  attachmentPath, empelyeeRate
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses, licenseNumber, approvedBy, academicdegree,null,
+                 /* attachmentPath,*/ empelyeeRate
                   )
         {
 
@@ -51,7 +51,7 @@ namespace Spectra.Domain.Employees.MedicalStaff.Doctor
         string? licenseNumber,
         string? approvedBy,
         string academicdegree,
-       List<string>? attachmentPath,
+       //List<string>? attachmentPath,
 
         EmpelyeeRates? empelyeeRate
 
@@ -67,12 +67,12 @@ namespace Spectra.Domain.Employees.MedicalStaff.Doctor
             ArgumentNullException.ThrowIfNull(emailAddress, nameof(emailAddress));
             ArgumentNullException.ThrowIfNull(diagnoses, nameof(diagnoses));
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
-            ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
+            //ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
             ArgumentNullException.ThrowIfNull(empelyeeRate, nameof(empelyeeRate));
 
 
             var doctor = new Doctor(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate);
+                licenseNumber, approvedBy, academicdegree, /*attachmentPath,*/ empelyeeRate);
 
             return doctor;
 
