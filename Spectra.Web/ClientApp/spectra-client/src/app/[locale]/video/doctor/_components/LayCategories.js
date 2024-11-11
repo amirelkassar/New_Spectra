@@ -14,6 +14,7 @@ import { Files } from "./files";
 import { Reports } from "./reports";
 import Referrals from "./referrals";
 import InternalExams from "./internalExams";
+import AddReport from "./addReport";
 function LayCategories() {
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -62,6 +63,8 @@ function LayCategories() {
 
   const ViewComp = () => {
     switch (searchParams.get("category")) {
+      case "addReport":
+        return <AddReport />;
       case "view_reports":
         return <Reports />;
       case "internal_exams":

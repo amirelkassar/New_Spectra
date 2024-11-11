@@ -7,15 +7,18 @@ import {
   AccordionPanel,
 } from '@mantine/core';
 
-export function Accordion({ children }) {
+export function Accordion({ children , ...props }) {
   return (
     <MantineAccordion
+    {...props}
       chevronSize={24}
       multiple
       chevronPosition='right'
       variant='separated'
       classNames={{
         item: '!border-[3px] !border-blueLight bg-white rounded-lg',
+        
+        ...props?.classNames
       }}
     >
       {children}
@@ -39,9 +42,9 @@ Accordion.Label = React.memo(
   })
 );
 Accordion.Content = React.memo(
-  React.forwardRef(function Content({ children }, ref) {
+  React.forwardRef(function Content({ children, ...props }, ref) {
     return (
-      <AccordionPanel ref={ref}>{children}</AccordionPanel>
+      <AccordionPanel {...props} ref={ref}>{children}</AccordionPanel>
     );
   })
 );
