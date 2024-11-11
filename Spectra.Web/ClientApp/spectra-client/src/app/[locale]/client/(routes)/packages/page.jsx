@@ -1,16 +1,14 @@
-import Container from '../../_components/ui/container';
-
-import { H1 } from '../../_components/ui/h1';
+import { H1, Container } from '@/client/_components/ui';
 import { ChildSelect } from '@/client/_components/child';
-import { CHILDSDATA } from '@/lib/demoData';
+import { CHILDS } from '@/data';
 import { Packages } from './_components/packages';
 
 const PackagesPage = () => {
   return (
-    <Container className='space-y-5'>
+    <Container>
       <H1>الباقات</H1>
 
-      <ChildSelect data={CHILDSDATA} />
+      <ChildSelect data={CHILDS} />
 
       <Packages />
     </Container>
