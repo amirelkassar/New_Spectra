@@ -39,7 +39,7 @@ namespace Spectra.Infrastructure.Services.AuthorizerService
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
         }
-        public async Task<LoginModel> LoginAsync(LoginAPIParam input)
+        public async Task<OperationResult> LoginAsync(LoginAPIParam input)
         {
             var model = new LoginModel();
             var validationRes = await ValidateUserAsync(input);
@@ -55,11 +55,12 @@ namespace Spectra.Infrastructure.Services.AuthorizerService
                 //preparing the model
                 model.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
                 model.ExpirationTime = lifetime;
+                return  OperationResult<LoginModel>.Success(model);
             }
-            return model;
+            return OperationResult.Failure(new Dictionary<string, string[]> { { "credentials", ["Invalid credentials provided"] } });
         }
 
-        public Task<LoginModel> RefreshTokenAsync(string token)
+        public Task<OperationResult> RefreshTokenAsync(string token)
         {
             throw new NotImplementedException();
         }

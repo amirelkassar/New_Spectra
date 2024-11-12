@@ -1,5 +1,4 @@
-﻿using Spectra.Domain.Employees.MedicalStaff.Doctor;
-using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
