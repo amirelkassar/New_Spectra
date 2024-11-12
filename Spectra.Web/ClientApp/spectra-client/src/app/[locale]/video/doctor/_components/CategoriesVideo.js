@@ -17,6 +17,7 @@ import TransfersVideoIcon from "@/assets/icons/TransfersIcon";
 import ReportsGreenIcon from "@/assets/icons/reportsGreen";
 import { useMediaQuery } from "@mantine/hooks";
 import Other from "./othor";
+import MultiReports from "./multiReports";
 
 function CategoriesVideo({ open }) {
   const searchParams = useSearchParams();
@@ -92,6 +93,23 @@ function CategoriesVideo({ open }) {
       active: searchParams.get("category") === "notes",
     },
   ];
+  const data = [
+    {
+      label: "تقرير تشخيصى",
+      name: "report1",
+      active: searchParams.get("reportNum") === "report1",
+    },
+    {
+      label: "Fillow up",
+      name: "report2",
+      active: searchParams.get("reportNum") === "report2",
+    },
+    {
+      label: "التاريخ المرضى",
+      name: "report3",
+      active: searchParams.get("reportNum") === "report2",
+    },
+  ];
   return (
     <>
       {searchParams.get("category") && (
@@ -104,18 +122,23 @@ function CategoriesVideo({ open }) {
         </Link>
       )}
       <div className="flex lgl:flex-wrap gap-3 overflow-x-auto snap-none hideScroll	 max-w-[calc(100%-0px)] px-5 lgl:px-0 ">
-        <Link
-          href={pathName + "?category=addReport"}
-          className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-2 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
-        >
-          <div className=" size-9 lgl:size-[58px]  mb-1 lgl:mb-2 mx-auto flex items-center justify-center ">
-            <AddReportIcon className={"w-auto h-7 mdl:h-8 "}/>
-          </div>
+        {data.length > 1 ? (
+          <MultiReports data={data} />
+        ) : (
+          <Link
+            href={pathName + "?category=addReport"}
+            className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-3 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
+          >
+            <div className=" size-9 lgl:size-[58px]  mb-1 lgl:mb-2 mx-auto flex items-center justify-center ">
+              <AddReportIcon className={"w-auto h-7 mdl:h-8 "} />
+            </div>
 
-          <h2 className="font-Bold text-white lgl:text-nowrap leading-5 text-xs lgl:text-base text-center">
-            اضافة تقرير
-          </h2>
-        </Link>
+            <h2 className="font-Bold text-white lgl:text-nowrap leading-5 text-xs lgl:text-base text-center">
+              اضافة تقرير
+            </h2>
+          </Link>
+        )}
+
         {CategoriesData.slice(
           0,
           open && isShowMore && !isShowAll ? 4 : CategoriesData.length

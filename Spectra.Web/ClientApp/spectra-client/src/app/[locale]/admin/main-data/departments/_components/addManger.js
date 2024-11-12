@@ -8,7 +8,7 @@ import CardDocManger from "./cardDocManger";
 import Button from "@/components/button";
 import SearchIcon from "@/assets/icons/search";
 
-function AddManger({ doctors, DocInfo, setDocInfo }) {
+function AddManger({ doctors, DocInfo, setDocInfo, error = "" }) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -25,7 +25,7 @@ function AddManger({ doctors, DocInfo, setDocInfo }) {
           <h4 className="text-xs mdl:text-base font-Bold">اضافة رئيس قسم</h4>
         </div>
       )}
-
+      {error && <p className="text-red font-Regular text-xs mt-1">{error}</p>}
       <Modal
         opened={opened}
         size={"xl"}

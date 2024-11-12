@@ -11,7 +11,12 @@ import ArrowDownIcon from "@/assets/icons/arrow-down";
 import AddManger from "../../_components/addManger";
 import CardDocManger from "../../_components/cardDocManger";
 import DeleteIcon from "@/assets/icons/delete";
-import { GetSectionDoctors, GetSectionID, useEditSection } from "@/useAPI/admin/main-data/section";
+import {
+  GetSectionDoctors,
+  GetSectionID,
+  useEditSection,
+} from "@/useAPI/admin/main-data/section";
+import GetErrorMsg from "@/components/getErrorMsg";
 
 function Page({ params }) {
   const { data: dataSpecialization } = GetSpecialization();
@@ -79,12 +84,14 @@ function Page({ params }) {
             label="اسم القسم"
             name="name"
             value={formData.name}
+            error={GetErrorMsg(error, "Name")}
             onChange={handleInputChange}
           />
           <MultiSelect
             data={dataSpecialization?.data?.data.map((item) => item.name) || []}
             label="التخصصات"
             placeholder="اختر التخصصات"
+            error={GetErrorMsg(error, "Diagnoses")}
             rightSection={<ArrowDownIcon />}
             value={formData.diagnoses}
             onChange={handleMultiSelectChange}
@@ -96,6 +103,7 @@ function Page({ params }) {
           />
           {!formData.doctorId && (
             <AddManger
+              error={GetErrorMsg(error, "DoctorName")}
               doctors={DoctorsData?.data?.data || []}
               DocInfo={formData}
               setDocInfo={setFormData}

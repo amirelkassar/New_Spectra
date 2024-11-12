@@ -7,7 +7,7 @@ import ROUTES from "@/routes";
 const packages = [
   {
     title: "الباقة المتميزة",
-    id:0,
+    id: 0,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",
@@ -18,7 +18,7 @@ const packages = [
   },
   {
     title: "الباقة المتميزة",
-    id:1,
+    id: 1,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",
@@ -29,7 +29,7 @@ const packages = [
   },
   {
     title: "الباقة المتميزة",
-    id:2,
+    id: 2,
     price: "$100.00",
     features: [
       "4 جلسات من تخصص الخطاب",
@@ -41,7 +41,7 @@ const packages = [
 ];
 const PlansPage = () => {
   return (
-    <Card>
+    <Card className="h-full">
       <div className="flex items-center mb-12 gap-4 lg:gap-5 md:px-3">
         <h2 className="text-base mdl:text-lg font-Bold">الاعدادات - الباقات</h2>
         <Link
@@ -56,17 +56,6 @@ const PlansPage = () => {
         <div className="flex items-center gap-3 md:gap-5 mb-8">
           <LogoOnlyIcon className="w-[22px] md:w-8 h-auto" />
           <h3 className=" text-sm md:text-lg font-Bold">باقات سبيكترا</h3>
-        </div>
-        <div className="flex gap-4 mdl:gap-8 flex-wrap">
-          {packages.map((item, index) => {
-            return <CardPackages item={item} key={index} />;
-          })}
-        </div>
-      </div>
-      <div className="mb-9">
-        <div className="flex items-center gap-3 md:gap-5 mb-8">
-          <LogoOnlyIcon className="w-[22px] md:w-8 h-auto" />
-          <h3 className=" text-sm md:text-lg font-Bold">باقات مرنة </h3>
         </div>
         <div className="flex gap-4 mdl:gap-8 flex-wrap">
           {packages.map((item, index) => {

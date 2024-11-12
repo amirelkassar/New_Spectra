@@ -15,6 +15,7 @@ import {
   GetSectionDoctors,
   useCreateSection,
 } from "@/useAPI/admin/main-data/section";
+import GetErrorMsg from "@/components/getErrorMsg";
 
 function Page() {
   const { data, isLoading } = GetSpecialization();
@@ -88,10 +89,12 @@ function Page() {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
+            error={GetErrorMsg(error, "Name")}
           />
           <MultiSelect
             data={data?.data?.data.map((item) => item.name) || []}
             label="التخصصات"
+            error={GetErrorMsg(error, "Diagnoses")}
             placeholder="اختر التخصصات"
             rightSection={<ArrowDownIcon />}
             value={formData.diagnoses}
@@ -104,6 +107,7 @@ function Page() {
           />
           {!formData.doctorId && (
             <AddManger
+              error={GetErrorMsg(error, "DoctorName")}
               doctors={DoctorsData?.data?.data || []}
               DocInfo={formData}
               setDocInfo={setFormData}
