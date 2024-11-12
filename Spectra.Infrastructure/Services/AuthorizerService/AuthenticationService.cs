@@ -99,6 +99,9 @@ namespace Spectra.Infrastructure.Services.AuthorizerService
                 new(CustomClaims.Surname,_user.SurName),
                 new(CustomClaims.Aud,_audience),
                 new(CustomClaims.Iss,_issuer),
+                new(CustomClaims.PhoneConfirmed,_user.PhoneNumberConfirmed.ToString()),
+                new(CustomClaims.EmailConfirmed,_user.EmailConfirmed.ToString()),
+
             };
             //user roles
             var roles = await _userManager.GetRolesAsync(_user);
