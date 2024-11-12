@@ -14,6 +14,7 @@ import { Notifications } from './notifications';
 import { ListCheckMark } from './list-check-mark';
 import { Section } from './section';
 import { SectionTitle } from './section-title';
+import { NoDataYet } from './no-data-yet';
 
 export {
   Info,
@@ -32,4 +33,5 @@ export {
   LocaleButton,
   Notifications,
   ListCheckMark,
+  NoDataYet,
 };

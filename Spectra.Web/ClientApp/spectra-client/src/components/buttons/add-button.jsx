@@ -4,7 +4,7 @@ import Button from '@/components/button';
 export const AddButton = ({ children, ...props }) => {
   return (
     <Button variant='blueLight' {...props}>
-      <PlusInsideCircleIcon />
+      <PlusInsideCircleIcon className='text-greenMain' />
       {children}
     </Button>
   );

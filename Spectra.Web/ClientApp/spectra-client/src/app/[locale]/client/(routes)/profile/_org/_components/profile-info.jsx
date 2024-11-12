@@ -6,7 +6,7 @@ import { EditOrgProfileModal } from './edit-org-profile-modal';
 import { H1 } from '../../../../_components/ui/h1';
 import { Info } from '../../../../_components/ui/info';
 
-export const OrgProfile = ({ initialData = {} }) => {
+export const ProfileInfo = ({ initialData = {} }) => {
   return (
     <section className='!mb-14 lg:!mb-0 relative'>
       <Card>

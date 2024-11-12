@@ -2,6 +2,7 @@ import { cn, getDate } from '@/lib/utils';
 import Card from '@/components/card';
 import CheckIcon from '@/assets/icons/check';
 import { StatusBadge } from '@/client/_components/schedules';
+import { SectionTitle } from '@/client/_components/ui';
 
 export const PackageTimeSchedule = ({
   title = '',
@@ -11,11 +12,7 @@ export const PackageTimeSchedule = ({
 
   return (
     <div className='space-y-5'>
-      {title && (
-        <h2 className='text-base mdl:text-xl font-bold ps-7'>
-          {title}
-        </h2>
-      )}
+      {title && <SectionTitle>{title}</SectionTitle>}
 
       <Card className='!p-0 max-h-[400px] mdl:max-h-[460px] overflow-y-auto border-2 border-greenMain/20 mdl:border-transparent'>
         <ul className='max-h-full'>

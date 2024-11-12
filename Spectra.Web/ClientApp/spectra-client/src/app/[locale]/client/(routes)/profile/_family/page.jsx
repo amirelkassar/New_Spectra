@@ -1,8 +1,8 @@
 import { CHILDS } from '@/data';
-import { Family } from './family';
+import { Family } from '.';
 
 const DATA = {
-  fullname: 'محمد محمد علي',
+  fullname: 'عبدالله الشيخ',
   email: 'mohamed@gmail.com',
   avatar: '',
   id: 12345678902,

@@ -1,6 +1,9 @@
 'use client';
 
-import { Info } from '@/client/_components/ui';
+import {
+  Info,
+  SectionTitle,
+} from '@/client/_components/ui';
 import { EditButton } from '@/components/buttons/edit-button';
 import { DoctorBadge } from '@/components/team';
 import { EditChildInfoModal } from './edit-child-info-modal';
@@ -65,7 +68,16 @@ function arKey(key) {
 
 const InfoData = ({ data = CHILD_INFO_DATA }) => {
   return (
-    <Card title='بيانات الطفل'>
+    <Card>
+      <div className='flex items-center justify-between mb-5'>
+        <SectionTitle>بيانات الطفل</SectionTitle>
+        <EditChildInfoModal initialData={data}>
+          <EditButton className='bg-greenMain hover:bg-greenMain/90 text-white'>
+            تعديل
+          </EditButton>
+        </EditChildInfoModal>
+      </div>
+
       <div className='mdl:grid mdl:grid-cols-3'>
         {Object.entries(data.main).map(([key, value]) => (
           <Info
@@ -92,14 +104,6 @@ const InfoData = ({ data = CHILD_INFO_DATA }) => {
             />
           )
         )}
-      </div>
-
-      <div className='mt-10 w-full'>
-        <EditChildInfoModal initialData={data}>
-          <EditButton className='bg-greenMain hover:bg-greenMain/90 text-white w-full max-w-64 mx-auto lg:mx-0 flex'>
-            تعديل
-          </EditButton>
-        </EditChildInfoModal>
       </div>
     </Card>
   );

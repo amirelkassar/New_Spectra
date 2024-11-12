@@ -33,7 +33,7 @@ export const ChildPopover = ({
           role='button'
           onClick={() => setOpen(!open)}
           className={cn(
-            'bg-white w-full flex items-center justify-between mdl:rounded-xl cursor-pointer px-2 p-1 lg:p-3 max-w-full border border-greenLight lg:border-none',
+            'bg-white w-full flex items-center justify-between rounded-xl cursor-pointer px-4 py-1 lg:px-5 lg:py-3 max-w-full border-2 border-greenLight lg:border-none',
             disabled && '!cursor-default opacity-70'
           )}
         >
@@ -42,7 +42,7 @@ export const ChildPopover = ({
           {!disabled && (
             <span
               className={cn(
-                'bg-blueLight rounded-full size-7 lg:size-10 items-center justify-center flex transition',
+                'bg-blueLight rounded-full size-7 lg:size-12 items-center justify-center flex transition',
                 {
                   'rotate-180': open,
                 }

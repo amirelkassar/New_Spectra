@@ -6,10 +6,11 @@ import {
 } from '@/lib/demoData';
 import { Link } from '@/navigation';
 import ROUTES from '@/routes';
+import { Section } from '@/client/_components/ui';
 
 export const OurServices = () => {
   return (
-    <section>
+    <Section>
       <Card id='services' title='خدمتنا'>
         <div className='grid grid-cols-2 mdl:grid-cols-3 2xl:grid-cols-5 gap-3 mdl:gap-5'>
           {servicesData.map((service, index) => (
@@ -25,7 +26,7 @@ export const OurServices = () => {
           ))}
         </div>
       </Card>
-    </section>
+    </Section>
   );
 };
 

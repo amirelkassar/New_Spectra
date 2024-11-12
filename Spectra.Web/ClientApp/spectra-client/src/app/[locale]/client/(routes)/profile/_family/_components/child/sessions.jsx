@@ -58,7 +58,7 @@ const SESSIONS = [
     doctor: 'احمد محمد كمال',
     icon: (
       <div className='bg-purple/10 size-8 rounded flex justify-center items-center'>
-        <FollowUpIcon className='size-5' />
+        <FollowUpIcon className='size-5 text-purple' />
       </div>
     ),
   },
@@ -69,7 +69,7 @@ const SESSIONS = [
     doctor: 'احمد محمد كمال',
     icon: (
       <div className='bg-blueLight size-8 rounded flex justify-center items-center'>
-        <HandshakeIcon className='size-5' />
+        <HandshakeIcon className='size-5 text-greenMain' />
       </div>
     ),
   },

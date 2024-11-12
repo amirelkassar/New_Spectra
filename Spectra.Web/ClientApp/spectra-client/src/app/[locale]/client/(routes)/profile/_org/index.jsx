@@ -1,6 +1,6 @@
-import Container from '../../../_components/ui/container';
 import { ClientsTable } from './_components/clients-table';
-import { OrgProfile } from './_components/org-profile';
+import { ProfileInfo } from './_components/profile-info';
+import { Container } from '@/client/_components/ui';
 
 const DATA = {
   fullname: 'منظمة الامل',
@@ -17,14 +17,14 @@ const DATA = {
   followingsNo: '100',
 };
 
-const OrgProfilePage = () => {
+const OrgProfile = () => {
   return (
     <Container className='space-y-5'>
-      <OrgProfile initialData={DATA} />
+      <ProfileInfo initialData={DATA} />
 
       <ClientsTable />
     </Container>
   );
 };
 
-export default OrgProfilePage;
+export default OrgProfile;

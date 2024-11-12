@@ -10,7 +10,7 @@ import ROUTES from '@/routes';
 // COMPONENT
 export const Header = () => {
   return (
-    <header className='h-9 lg:h-16 flex items-center gap-3 lg:gap-5'>
+    <header className='h-9 mdl:h-16 flex items-center gap-3 mdl:gap-5'>
       {/* OPEN & CLOSE SIDEBAR */}
       <SidebarToggle />
 

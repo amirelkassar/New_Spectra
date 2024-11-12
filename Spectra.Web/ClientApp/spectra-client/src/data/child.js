@@ -34,7 +34,7 @@ export const CHILD_TABS = [
     label: 'بيانات الطفل',
     icon: (
       <IconWrapper>
-        <Child className='size-3 mdl:size-4' />
+        <Child className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },
@@ -43,7 +43,7 @@ export const CHILD_TABS = [
     label: 'الجلسات',
     icon: (
       <IconWrapper>
-        <Stethoscope className='size-3 mdl:size-4' />
+        <Stethoscope className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },
@@ -52,7 +52,7 @@ export const CHILD_TABS = [
     label: 'التحاليل الخارجية',
     icon: (
       <IconWrapper>
-        <NominationsIcon className='size-3 mdl:size-4' />
+        <NominationsIcon className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },
@@ -61,7 +61,7 @@ export const CHILD_TABS = [
     label: 'الاشعات الخارجية',
     icon: (
       <IconWrapper>
-        <RumorsIcon className='size-3 mdl:size-4' />
+        <RumorsIcon className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },
@@ -70,7 +70,7 @@ export const CHILD_TABS = [
     label: 'الوصفات الطبية',
     icon: (
       <IconWrapper>
-        <HandHeartIcon className='size-3 mdl:size-4' />
+        <HandHeartIcon className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },
@@ -79,7 +79,7 @@ export const CHILD_TABS = [
     label: 'التقارير',
     icon: (
       <IconWrapper>
-        <ReportsIcon className='size-3 mdl:size-4 lg:fill-greenMain' />
+        <ReportsIcon className='size-4 mdl:size-5 lg:fill-greenMain' />
       </IconWrapper>
     ),
   },
@@ -88,7 +88,7 @@ export const CHILD_TABS = [
     label: 'الملفات المرفقة',
     icon: (
       <IconWrapper>
-        <FileOutline className='size-3 mdl:size-4' />
+        <FileOutline className='size-4 mdl:size-5' />
       </IconWrapper>
     ),
   },

@@ -2,10 +2,11 @@ import {
   PackageBadge,
   PackageTimeSchedule,
 } from '@/components/packages';
+import { Section } from '@/client/_components/ui';
 
 export const Subscriptions = () => {
   return (
-    <section className='space-y-5'>
+    <Section className='space-y-5'>
       <PackageBadge
         name='الباقة المميزة'
         price={100}
@@ -49,6 +50,6 @@ export const Subscriptions = () => {
           },
         ]}
       />
-    </section>
+    </Section>
   );
 };
