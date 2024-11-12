@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 const levelsData = [
   { id: 1, title: "normal :  8-10/10", color: "#10B0C1" },
@@ -5,9 +6,9 @@ const levelsData = [
   { id: 3, title: "moderate : 3-5/10", color: "#8A22A0" },
   { id: 4, title: "severe :  0-3/10", color: "#FF3D3D" },
 ];
-function Levels() {
+function Levels({className}) {
   return (
-    <div dir="ltr" className="flex w-fit items-center gap-3 lg:gap-6 flex-wrap my-2 mdl:my-3 mx-auto">
+    <div dir="ltr" className={cn("flex w-fit items-center gap-3 lg:gap-6 flex-wrap my-2 mdl:my-3 mx-auto",className)}>
       {levelsData.map((level) => (
         <div
           key={level.id}

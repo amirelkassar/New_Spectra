@@ -1,7 +1,9 @@
-'use client'
+"use client";
 import React from "react";
-import PostAssessment from "./post_assessment";
 import { useSearchParams } from "next/navigation";
+import PostAssessment from "./reports/post_assessment";
+import FollowUp from "./reports/follow_up";
+import History from "./reports/history";
 
 function AddReport() {
   const searchParams = useSearchParams();
@@ -10,6 +12,10 @@ function AddReport() {
     switch (searchParams.get("reportNum")) {
       case "report1":
         return <PostAssessment />;
+      case "report2":
+        return <FollowUp />;
+        case "report3":
+          return <History />;
     }
   };
   return <ViewCompReports />;

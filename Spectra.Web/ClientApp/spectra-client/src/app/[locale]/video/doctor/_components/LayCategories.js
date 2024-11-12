@@ -15,13 +15,22 @@ import { Reports } from "./reports";
 import Referrals from "./referrals";
 import InternalExams from "./internalExams";
 import AddReport from "./addReport";
+import PatientHistory from "./patient_history";
 function LayCategories() {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const CategoriesData = [
     {
+      label: "اضافة تقرير",
+      active: searchParams.get("category") === "addReport",
+    },
+    {
       label: "عرض جميع التقارير",
       active: searchParams.get("category") === "view_reports",
+    },
+    {
+      label: " التاريخ المرضى ",
+      active: searchParams.get("category") === "patient_history",
     },
     {
       label: "الفحوصات الداخلية",
@@ -67,6 +76,8 @@ function LayCategories() {
         return <AddReport />;
       case "view_reports":
         return <Reports />;
+      case "patient_history":
+        return <PatientHistory />;
       case "internal_exams":
         return <InternalExams />;
       case "referrals":
