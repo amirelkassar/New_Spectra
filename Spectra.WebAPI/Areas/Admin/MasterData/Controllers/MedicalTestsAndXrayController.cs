@@ -7,7 +7,7 @@ using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class MedicalTestsAndXrayController : BassAdminController
+    public class MedicalTestsAndXrayController : MasterDataController
     {
         private readonly IMedicalTestsAndXrayService _medicalTestsAndXrayService;
 

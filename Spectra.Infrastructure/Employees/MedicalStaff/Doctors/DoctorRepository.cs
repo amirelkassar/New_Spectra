@@ -11,13 +11,13 @@ using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
-namespace Spectra.Infrastructure.Doctors
+namespace Spectra.Infrastructure.Employees.MedicalStaff.Doctors
 {
-    public class DoctorRepository : IDoctorRepository
+    public class MedicalProviderRepository : IDoctorRepository
     {
         private readonly IMongoCollection<Doctor> _doctors;
 
-        public DoctorRepository(IMongoDbService mongoDbService)
+        public MedicalProviderRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
 
@@ -40,7 +40,7 @@ namespace Spectra.Infrastructure.Doctors
                 .Skip((pageNumber - 1) * pageSize) // Skip to the correct page
                 .Limit(pageSize).ToListAsync();                  // Limit results to pageSize
 
-        
+
             var totalCount = await _doctors.CountDocumentsAsync(filterDefinition);
 
             return new PaginatedResult<Doctor>
@@ -53,7 +53,7 @@ namespace Spectra.Infrastructure.Doctors
         }
         public async Task<Doctor> GetByIdAsync(string id)
         {
-          
+
             var entity = await _doctors.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

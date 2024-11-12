@@ -11,9 +11,9 @@ using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Employees.ManagementStaff.Commands.Dto;
 using Spectra.Application.Employees.ManagementStaff.Service;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalTeams.Commands;
 using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Domain.Shared.Enums;
@@ -23,7 +23,7 @@ using Spectra.Infrastructure.MedicalTeams;
 
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
-
+    [Area("Admin")]
     public class AdminController : BassAdminController
     {
         private readonly IAdminService _adminService;
@@ -158,7 +158,7 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         }
         [HttpPut("ClientsFellowDoctor/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInDoctorProfileQuery input)
+        public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
         {
             var clients = await _doctorService.GetAllClintsDoctorCare(id, input);
             return Ok(clients);

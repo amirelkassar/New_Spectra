@@ -1,19 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.Articles.Commands;
-using Spectra.Application.Settings.Articles.Dto;
-using Spectra.Application.Settings.SuccessStorIes.Commands;
 using Spectra.Infrastructure.Settings.Articles;
-using Spectra.Infrastructure.Settings.SuccessStorIes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
-    public class ArticlesController : BassAdminController
+    public class ArticlesController : SettingsController
     {
         private readonly IArticlesService _entityServices;
 

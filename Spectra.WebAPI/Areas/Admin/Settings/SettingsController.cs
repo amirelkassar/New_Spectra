@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.WebAPI.Areas.Admin
+namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [ApiController]
-    [Route("api/[area]/[controller]")]
-    public abstract class BassAdminController : ControllerBase
+    [Area("Settings")]
+    public class SettingsController : BassAdminController
     {
-
     }
 }

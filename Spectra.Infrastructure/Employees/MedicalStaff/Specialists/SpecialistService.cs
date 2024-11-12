@@ -9,7 +9,7 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
-namespace Spectra.Infrastructure.Specialists
+namespace Spectra.Infrastructure.Employees.MedicalStaff.Specialists
 {
     public class SpecialistService : ISpecialistService
     {

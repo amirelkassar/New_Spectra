@@ -7,7 +7,7 @@ using Spectra.Application.MasterData.SpecializationCommend.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class SpecializationController : BassAdminController
+    public class SpecializationController : MasterDataController
     {
 
         private readonly ISpecializationService _specializationsServices;

@@ -8,7 +8,7 @@ using Spectra.Application.MasterData.DiagnoseCommend.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class DiagnoseController : BassAdminController
+    public class DiagnoseController : MasterDataController
     {
         private readonly IDiagnosesService _diagnosetService;
 

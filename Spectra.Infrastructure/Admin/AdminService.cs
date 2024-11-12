@@ -2,7 +2,6 @@
 using Spectra.Application.Admin.Commands;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Admin.Queries;
-using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
@@ -11,13 +10,12 @@ using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Application.Employees.MedicalStaff.Specialists.Services;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
-using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Infrastructure.Doctors;
+
 
 namespace Spectra.Infrastructure.Admin
 {
@@ -74,7 +72,7 @@ namespace Spectra.Infrastructure.Admin
         }
 
 
-        //
+      
         public async Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input)
         {
             // Create the query and pass pagination parameters

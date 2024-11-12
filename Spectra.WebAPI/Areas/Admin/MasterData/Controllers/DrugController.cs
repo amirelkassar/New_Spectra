@@ -7,7 +7,7 @@ using Spectra.Application.MasterData.Drug.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class DrugController : BassAdminController
+    public class DrugController : MasterDataController
     {
         private readonly IDrugService _drugtService;
 

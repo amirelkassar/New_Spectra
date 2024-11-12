@@ -7,7 +7,7 @@ using Spectra.Application.MasterData.Sections.Service;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
-    public class SectionController : BassAdminController
+    public class SectionController : MasterDataController
     {
         private readonly ISectionsServices _sectionsServices;
 

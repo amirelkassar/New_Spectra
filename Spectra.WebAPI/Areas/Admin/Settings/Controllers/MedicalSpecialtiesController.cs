@@ -5,7 +5,7 @@ using Spectra.Application.Settings.MedicalSpecialties.Services;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
-    public class MedicalSpecialtiesController : BassAdminController
+    public class MedicalSpecialtiesController : SettingsController
     {
         private readonly IMedicalSpecialtiesService _entityServices;
 

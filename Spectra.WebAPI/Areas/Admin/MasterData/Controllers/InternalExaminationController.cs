@@ -6,7 +6,7 @@ using Spectra.Application.MasterData.InternalExaminations.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class InternalExaminationController : BassAdminController
+    public class InternalExaminationController : MasterDataController
     {
         private readonly IInternalExaminationService _internalExamination;
 

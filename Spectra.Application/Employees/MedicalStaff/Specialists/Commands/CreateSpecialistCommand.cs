@@ -27,6 +27,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Specialists.Commands
         public string Academicdegree { get; set; }
         public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
+        public JobTypes jobTypes { get; set; }
 
 
     }
@@ -45,6 +46,9 @@ namespace Spectra.Application.Employees.MedicalStaff.Specialists.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateSpecialistCommand request, CancellationToken cancellationToken)
         {
+
+
+
             List<string>? filePath = null;
             var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             if (uploadfile != null)

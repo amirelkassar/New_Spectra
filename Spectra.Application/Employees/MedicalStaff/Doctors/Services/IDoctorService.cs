@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Admin.Queries;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.MedicalPatientProfiles;
@@ -22,6 +22,6 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Services
 
 
         Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices();
-        Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInDoctorProfileQuery input);
+        Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInMedicalProviderProfileQuery input);
     }
 }

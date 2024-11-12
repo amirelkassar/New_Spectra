@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Commands;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Dto;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Queries;
 using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
+using Spectra.Application.Employees.MedicalStaff.MedicalProvider.Queries;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.MedicalPatientProfiles;
@@ -11,7 +13,7 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
-namespace Spectra.Infrastructure.Doctors
+namespace Spectra.Infrastructure.Employees.MedicalStaff.Doctors
 {
     public class DoctorService : IDoctorService
     {
@@ -67,7 +69,7 @@ namespace Spectra.Infrastructure.Doctors
             };
 
             // Create the command
-            var command = new CreateDoctorCommand
+            var command = new CreateMedicalProviderCommand
             {
                 Name = name,
                 NationalId = nationalId,
@@ -89,18 +91,18 @@ namespace Spectra.Infrastructure.Doctors
 
         public async Task<OperationResult<Unit>> DeleteDoctor(string id)
         {
-            var command = new DeleteDoctorCommand { Id = id };
+            var command = new DeleteMedicalProviderCommand { Id = id };
             return await _mediator.Send(command);
         }
 
         public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctors()
         {
-            var query = new GetAllDoctorQuery();
+            var query = new GetAllMedicalProviderQuery();
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInDoctorProfileQuery input)
+        public async Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsDoctorCare(string id, GetAllClientsInMedicalProviderProfileQuery input)
         {
-            var query = new GetAllClientsInDoctorProfileQuery
+            var query = new GetAllClientsInMedicalProviderProfileQuery
             {
                 DoctorId = id,
                 PageSize = input.PageSize,
@@ -110,18 +112,15 @@ namespace Spectra.Infrastructure.Doctors
             return await _mediator.Send(query);
         }
 
-            public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
+        public async Task<OperationResult<IEnumerable<Doctor>>> GetAllDoctorSpecificServices()
         {
-            var query = new GetAllDoctorEarlyDetectionQuery();
+            var query = new GetAllMedicalProviderEarlyDetectionQuery();
             return await _mediator.Send(query);
         }
 
-
-       
-    
         public async Task<OperationResult<Doctor>> GetDoctorById(string id)
         {
-            var query = new GetDoctorByIdQuery { Id = id };
+            var query = new GetMedicalProviderByIdQuery { Id = id };
 
 
 
@@ -144,7 +143,7 @@ namespace Spectra.Infrastructure.Doctors
                 City = input.City,
 
             };
-            var command = new UpdateDoctorCommand
+            var command = new UpdateMedicalProviderCommand
             {
 
                 Name = name,

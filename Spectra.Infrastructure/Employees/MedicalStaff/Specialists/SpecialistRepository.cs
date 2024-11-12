@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Spectra.Domain.Employees.MedicalStaff.Specialists;
 using Spectra.Application.Employees.MedicalStaff.Specialists;
 
-namespace Spectra.Infrastructure.Specialists
+namespace Spectra.Infrastructure.Employees.MedicalStaff.Specialists
 {
     public class SpecialistRepository : ISpecialistRepository
     {

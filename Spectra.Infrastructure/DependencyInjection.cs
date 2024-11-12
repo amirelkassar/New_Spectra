@@ -65,10 +65,11 @@ using Spectra.Infrastructure.Countries;
 using Spectra.Infrastructure.Countries.Cities;
 using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
-using Spectra.Infrastructure.Doctors;
 using Spectra.Infrastructure.DoctorSchedules.DoctorSchedules;
 using Spectra.Infrastructure.Documents;
 using Spectra.Infrastructure.Employees.ManagementStaff;
+using Spectra.Infrastructure.Employees.MedicalStaff.Doctors;
+using Spectra.Infrastructure.Employees.MedicalStaff.Specialists;
 using Spectra.Infrastructure.MasterData.Diagnoses;
 using Spectra.Infrastructure.MasterData.Drug;
 using Spectra.Infrastructure.MasterData.ExcelFile;
@@ -91,7 +92,6 @@ using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
 using Spectra.Infrastructure.Settings.Packages;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
-using Spectra.Infrastructure.Specialists;
 using System.Reflection;
 using System.Text;
 
@@ -184,7 +184,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IServiceMDRepository, ServiceMDRepository>();
             services.AddScoped<ISectionsRepository, SectionsRepository>();
             //End
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IDoctorRepository, MedicalProviderRepository>();
             services.AddScoped<ISpecialistRepository, SpecialistRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();

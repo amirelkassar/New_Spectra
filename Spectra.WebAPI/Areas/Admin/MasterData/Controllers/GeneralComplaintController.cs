@@ -7,7 +7,7 @@ using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class GeneralComplaintController : BassAdminController
+    public class GeneralComplaintController : MasterDataController
     {
         private readonly IGeneralComplaintService _generalComplaintService;
 

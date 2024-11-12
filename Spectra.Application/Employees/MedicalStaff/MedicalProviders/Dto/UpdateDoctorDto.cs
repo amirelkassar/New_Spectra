@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Spectra.Domain.Shared.Enums;
 
-namespace Spectra.Application.Employees.MedicalStaff.Doctors.Dto
+namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
 {
     public class UpdateDoctorDto
     {
@@ -21,6 +21,7 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Dto
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public List<IFormFile> ScientificDegree { get; set; }
+        public JobTypes JobType { get; set; }
 
     }
 }

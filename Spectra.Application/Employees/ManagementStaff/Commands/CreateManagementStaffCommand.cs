@@ -63,7 +63,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 
         }
     }
-    public class BassMedicalStaffValidator : AbstractValidator<BassMedicalStaff>
+    public class BassMedicalStaffValidator : AbstractValidator<MedicalProvider>
     {
         public BassMedicalStaffValidator()
         {

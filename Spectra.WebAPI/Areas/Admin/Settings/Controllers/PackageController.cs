@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
-    public class PackageController : BassAdminController
+    public class PackageController : SettingsController
     {
         private readonly IPackagesService _entityServices;
 
@@ -36,6 +36,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var Packages = await _entityServices.GetPackagesMById(id);
             return Ok(Packages);
         }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> CreatePackage(CreatePackagesCommand input)
@@ -43,6 +44,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var Packages = await _entityServices.CreatePackages(input);
             return Ok(Packages);
         }
+
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdatePackage(string id, UpdatePackagesCommand input)

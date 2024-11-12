@@ -1,24 +1,24 @@
-﻿using FluentValidation;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.MedicalStaff.Doctors;
-using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.MedicalStaff;
-using Spectra.Domain.Employees.MedicalStaff.Doctor;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
-namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
+namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
 
 
-    public class CreateDoctorCommand : ICommand<OperationResult<string>>
+    public class CreateMedicalProviderCommand : ICommand<OperationResult<string>>
     {
         public Name Name { get; set; }
         public string NationalId { get; set; }
@@ -30,40 +30,62 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        //public List<IFormFile>? ScientificDegree { get; set; }
+        public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
-
+        public JobTypes JobType { get; set; }
 
     }
 
-    public class CreateDoctorCommandHandler : IRequestHandler<CreateDoctorCommand, OperationResult<string>>
+    public class CreateDoctorCommandHandler : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IMedicalProviderRepository _medicalProvider;
         private readonly ISpecializationsRepository _specializationRepository;
         private readonly IHellper _addFile;
-        public CreateDoctorCommandHandler(IDoctorRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository)
+        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository)
         {
-            _doctorRepository = doctorRepository;
+            _medicalProvider = doctorRepository;
             _specializationRepository = specializationRepository;
             _addFile = addFile;
         }
-        public async Task<OperationResult<string>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
-            //List<string>? filePath = null;
-            //var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
-            //if (uploadfile != null)
-            //{
-            //    filePath = uploadfile;
-            //}
-            //foreach (var item in request.Diagnoses)
-            //{
-            //    var specialization = await _specializationRepository.GetByNameAsync(item);
-            //    specialization.DoctorCount += 1;
+            List<string>? filePath = null;
+            if (JobTypes.Doctor == request.JobType)
+            {
 
-            //}
-            // here we make Photo = null to test the Server 
+                var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+                if (uploadfile != null)
+                {
+                    filePath = uploadfile;
 
-            var doctor = Doctor.Create(
+                }
+                
+                foreach (var item in request.Diagnoses)
+                {
+                    var specialization = await _specializationRepository.GetByNameAsync(item);
+                    specialization.DoctorCount += 1;
+
+                }
+            }
+            if (JobTypes.Specialist == request.JobType)
+            {
+
+                var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
+                if (uploadfile != null)
+                {
+                    filePath = uploadfile;
+
+                }
+              
+            }
+            if (filePath == null)
+            {
+
+                throw new RequestErrorException(" you must to Uplode  your ScientificDegrees ");
+            }
+            //here we make Photo = null to test the Server
+
+            var medicalProvider = MedicalProvider.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
                 request.NationalId,
@@ -75,22 +97,20 @@ namespace Spectra.Application.Employees.MedicalStaff.Doctors.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-          
-                request.empelyeeRate = 0
-
+                   filePath,
+                request.empelyeeRate = 0,
+                request.JobType
                 );
 
 
-            await _doctorRepository.AddAsync(doctor);
+            await _medicalProvider.AddAsync(medicalProvider);
 
-
-
-            return OperationResult<string>.Success(doctor.Id);
+            return OperationResult<string>.Success(medicalProvider.Id);
 
 
         }
     }
-    public class BassMedicalStaffValidator : AbstractValidator<BassMedicalStaff>
+    public class BassMedicalStaffValidator : AbstractValidator<MedicalProvider>
     {
         public BassMedicalStaffValidator()
         {

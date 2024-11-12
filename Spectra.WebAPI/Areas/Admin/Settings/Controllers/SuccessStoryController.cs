@@ -5,7 +5,7 @@ using Spectra.Infrastructure.Settings.SuccessStorIes;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
-    public class SuccessStoryController : BassAdminController
+    public class SuccessStoryController : SettingsController
     {
         private readonly ISuccessStoryService _entityServices;
 
