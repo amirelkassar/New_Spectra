@@ -1,27 +1,24 @@
-import React from 'react';
-import { StepsProgress } from './_components/steps-progress';
-import { OurServices } from './_components/our-services';
-import { Packages } from './_components/packages';
-import { OurTeam } from './_components/our-team';
-import HelloHandIcon from '@/assets/icons/hello-hand';
-import { SuggestedDoctor } from './_components/suggested-doctor';
-import { H1, Container } from '@/client/_components/ui';
+import { Container } from '@/client/_components/ui';
+import { TEAM } from '@/data';
+import {
+  Advertisements,
+  OurServices,
+  OurTeam,
+  StepsProgress,
+  SuggestedDoctor,
+  WelcomeText,
+} from './_components/sections';
 
 const MainPage = () => {
-  const isDoctorSuggested = true;
+  const alert = true;
   return (
     <Container className='lg:bg-white'>
-      <H1>
-        مرحبا احمد
-        <HelloHandIcon className='mdl:size-7 size-5' />
-      </H1>
-
-      {isDoctorSuggested && <SuggestedDoctor />}
-
+      <WelcomeText name='بروفاوند' />
+      {alert && <SuggestedDoctor />}
       <StepsProgress />
       <OurServices />
-      <Packages />
-      <OurTeam />
+      <Advertisements />
+      <OurTeam data={TEAM.slice(0, 8)} />
     </Container>
   );
 };

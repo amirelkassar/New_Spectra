@@ -1,26 +1,32 @@
-import React from 'react';
-import Container from '../../_components/ui/container';
-import { MedicalCards } from './_components/medical-card.jsx';
-import { Heading } from '../../_components/ui/heading';
-import { PerformanceChart } from './_components/performance-chart';
-import { ReminderMessages } from './_components/reminder-messages';
-import { Activities } from '@/client/_components/services';
-import { CHILDSDATA } from '@/lib/demoData';
-import { Wallet } from '@/client/_components/payments';
+import { Container, H1 } from '@/client/_components/ui';
+
 import { ChildSelect } from '@/client/_components/child';
+import {
+  MyWallet,
+  PerformanceChart,
+  Progress,
+  ReminderMessages,
+  StatisticsCards,
+} from './_components/sections';
+import {
+  CHILDS,
+  PROGRESS,
+  REMINDER_MESSAGES,
+  USAGE_STATISTICS,
+} from '@/data';
 
 const ControlPage = () => {
   return (
-    <Container className='space-y-5'>
-      <Heading label='ملخص النشاطات' />
-      <ChildSelect data={CHILDSDATA} />
-      <MedicalCards />
-      <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
+    <Container>
+      <H1>ملخص النشاطات</H1>
+      <ChildSelect data={CHILDS} />
+      <StatisticsCards data={USAGE_STATISTICS} />
+      <div className='lg:grid lg:grid-cols-2 lg:gap-4'>
         <PerformanceChart />
-        <ReminderMessages />
+        <ReminderMessages data={REMINDER_MESSAGES} />
       </div>
-      <Activities title='طلب الخدمة' />
-      <Wallet title='رصيدي' />
+      <Progress data={PROGRESS} />
+      <MyWallet />
     </Container>
   );
 };

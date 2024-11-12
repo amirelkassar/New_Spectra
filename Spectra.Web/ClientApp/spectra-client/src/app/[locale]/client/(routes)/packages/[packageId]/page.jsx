@@ -2,25 +2,14 @@ import {
   packagesDataFlex,
   packagesDataSpectra,
 } from '@/lib/demoData';
-import { H1 } from '../../../_components/ui/h1';
-import { BackButton } from '../../../_components/ui/back-button';
+import { Container } from '@/client/_components/ui';
 import { Package } from '../_components/package';
-
-import Card from '@/components/card';
-import Container from '../../../_components/ui/container';
 
 const PackagePage = ({ params: { packageId } }) => {
   const packageData = findPackageById(packageId);
   return (
     <Container>
-      <Card className={'p-0 space-y-5'}>
-        <H1>
-          <BackButton />
-          الباقات - {packageData.label}
-        </H1>
-
-        <Package data={packageData} />
-      </Card>
+      <Package data={packageData} />
     </Container>
   );
 };

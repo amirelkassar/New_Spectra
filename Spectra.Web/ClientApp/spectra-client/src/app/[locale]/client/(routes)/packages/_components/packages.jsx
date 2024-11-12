@@ -1,41 +1,56 @@
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import Card from '@/components/card';
+import { Link } from '@/navigation';
 import { packagesDataSpectra } from '@/lib/demoData';
-import { PackageCard } from '@/components/packages';
+import { PackageCardItem } from '@/components/packages';
+import {
+  Section,
+  SectionTitle,
+} from '@/client/_components/ui';
+import ROUTES from '@/routes';
 
 export const Packages = () => {
   return (
-    <section>
-      <Card className='space-y-10'>
+    <Section>
+      <Card className='space-y-5'>
+        <div className='flex items-center gap-3'>
+          <LogoOnlyIcon className='w-5 mdl:w-8 shrink-0' />
+          <SectionTitle>باقات سبيكترا</SectionTitle>
+        </div>
         {/* Spectra Packages */}
-        <PackageContainer title='باقات سبيكترا'>
-          {packagesDataSpectra.map((p, i) => (
-            <PackageCard showPackageList key={i} {...p} />
+        <div className='flex flex-wrap justify-center sml:justify-start gap-5'>
+          {packagesDataSpectra.map((p) => (
+            <PackageCard key={p.id} {...p} />
           ))}
-        </PackageContainer>
+        </div>
       </Card>
-    </section>
+    </Section>
   );
 };
 
-const PackageHeader = ({ text = '' }) => {
+const PackageCard = ({
+  id = 0,
+  label = '',
+  price = 0,
+  features = [],
+}) => {
   return (
-    <div className='flex items-center gap-3'>
-      <LogoOnlyIcon className='w-5 mdl:w-8' />
-      <h3 className='text-sm mdl:text-xl font-bold'>
-        {text}
-      </h3>
-    </div>
-  );
-};
+    <PackageCardItem data-id={id}>
+      <Link href={`${ROUTES.CLIENT.PACKAGES}/${id}`}>
+        <PackageCardItem.Title className='group-hover:mdl:text-xl transition'>
+          {label}
+        </PackageCardItem.Title>
+      </Link>
 
-const PackageContainer = ({ title = '', children }) => {
-  return (
-    <div className='w-full space-y-5'>
-      <PackageHeader text={title} />
-      <div className='flex gap-5 overflow-x-auto pb-5 *:shrink-0'>
-        {children}
-      </div>
-    </div>
+      <PackageCardItem.Price>
+        {`${price}.00 $`}
+      </PackageCardItem.Price>
+
+      <PackageCardItem.List features={features} />
+
+      <PackageCardItem.Button>
+        احجز الان
+      </PackageCardItem.Button>
+    </PackageCardItem>
   );
 };

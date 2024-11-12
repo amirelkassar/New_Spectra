@@ -149,3 +149,49 @@ export const SERVICES = [
       'نقدم خدمات استشارية مع أطباء إستشاريين في طب تطور سلوك الأطفال و الطب النفسي وغيره',
   },
 ];
+
+export const SERVICESICONS = {
+  1: {
+    icon: <Watching className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  2: {
+    icon: <TeamIcon className='size-4 mdl:size-5' />,
+    color: '#FF3D3D',
+    bg: 'rgba(235, 67, 53, 0.18)',
+  },
+  3: {
+    icon: <FollowUpIcon className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  4: {
+    icon: <HandshakeIcon className='size-4 mdl:size-5' />,
+    color: '#8A22A0',
+    bg: 'rgba(138, 34, 160, 0.18)',
+  },
+};
+
+export const PROGRESS = [
+  {
+    title: 'الكشوفات',
+    current: 20,
+    total: 30,
+  },
+  {
+    title: 'الجلسات التقيمية',
+    current: 10,
+    total: 30,
+  },
+  {
+    title: 'الجلسات العلاجية',
+    current: 25,
+    total: 30,
+  },
+  {
+    title: 'المتابعات',
+    current: 25,
+    total: 30,
+  },
+];

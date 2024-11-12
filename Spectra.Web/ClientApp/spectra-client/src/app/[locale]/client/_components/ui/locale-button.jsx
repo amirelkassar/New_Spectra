@@ -15,7 +15,7 @@ export const LocaleButton = () => {
     >
       <Button
         variant='blueLight'
-        className='rounded-full shrink-0 text-xs mdl:text-base p-0 size-9 mdl:size-11 text-greenMain'
+        className='rounded-full shrink-0 text-xs mdl:text-base !p-0 size-9 mdl:size-11 text-greenMain'
       >
         {locale === 'en' ? 'عربي' : 'En'}
       </Button>

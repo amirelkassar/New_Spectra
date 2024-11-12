@@ -6,10 +6,12 @@ import { Attachment } from './attachment';
 import { ReportCard } from './report-card';
 import { PrescriptionInfo } from './prescription-info';
 import { PrescriptionCard } from './prescrtiption-card';
+import { AddChildModal } from './add-child-modal';
 
 export {
   ChildSelect,
   ChildPopover,
+  AddChildModal,
   PrescriptionsAccordion,
   ReportAccordion,
   Attachment,

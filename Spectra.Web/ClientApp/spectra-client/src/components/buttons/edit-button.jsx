@@ -7,11 +7,11 @@ export const EditButton = ({ children, ...props }) => {
       {...props}
       type='button'
       className={cn(
-        'inline-flex gap-3 px-4 min-w-28 justify-center items-center bg-blueLight transition rounded-lg py-2 text-black font-bold mdl:text-base text-xs',
+        'inline-flex gap-3 px-4 mdl:px-10 py-2 mdl:py-3 justify-center items-center bg-blueLight transition rounded-lg text-black font-bold mdl:text-base text-xs',
         props.className
       )}
     >
-      <EditIcon />
+      <EditIcon className='mdl:size-5 size-4' />
       {children}
     </button>
   );
