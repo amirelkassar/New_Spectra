@@ -68,6 +68,7 @@ using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
 using Spectra.Infrastructure.DoctorSchedules.DoctorSchedules;
 using Spectra.Infrastructure.Documents;
+using Spectra.Infrastructure.EmailSenders;
 using Spectra.Infrastructure.Employees.ManagementStaff;
 using Spectra.Infrastructure.Employees.MedicalStaff.Doctors;
 using Spectra.Infrastructure.Employees.MedicalStaff.Specialists;
@@ -119,6 +120,8 @@ namespace Spectra.Infrastructure
             services.AddSerilog();
 
             services.AddDataProtection();
+            services.AddFluentEmail("tech@profound-group.com")
+                .AddRazorRenderer();
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -164,6 +167,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
 
             services.AddScoped<IHellper, Hellper>();
+            services.AddScoped<IEmailSender, FluentEmailSender>();
 
 
             return services;
