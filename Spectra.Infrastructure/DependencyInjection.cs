@@ -48,6 +48,7 @@ using Spectra.Application.Patients;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
+using Spectra.Application.Settings.AppSettings;
 using Spectra.Application.Settings.Articles;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
@@ -86,8 +87,8 @@ using Spectra.Infrastructure.MedicalTeams;
 using Spectra.Infrastructure.Patients;
 using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
-using Spectra.Infrastructure.Services.AuthorizerService;
 using Spectra.Infrastructure.Services.IdentityServices;
+using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
 using Spectra.Infrastructure.Settings.Packages;
@@ -115,8 +116,9 @@ namespace Spectra.Infrastructure
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
-            services.AddScoped(typeof(IAuthorizer<>), typeof(Authorize<>));
             services.AddSerilog();
+
+            services.AddDataProtection();
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -137,7 +139,8 @@ namespace Spectra.Infrastructure
         }
 
         private static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
-        { 
+        {
+            services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IDrugService, DrugService>();
@@ -200,6 +203,8 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
             services.AddScoped<ISuccessStorIesRepository, SuccessStorIesRepository>();
             services.AddScoped<IPackagesRepository, PackagesRepository>();
+
+            services.AddScoped<ISettingRepository, SettingRepository>();
 
 
             services.AddSignalR();
