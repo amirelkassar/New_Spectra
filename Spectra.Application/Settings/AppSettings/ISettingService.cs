@@ -16,5 +16,6 @@ namespace Spectra.Application.Settings.AppSettings
         Task<ICollection<ApplicationSetting>> GetListAsync(string? group = default);
         Task DeleteAsync(string name);
         Task DeleteGroupAsync(string? group = default);
+        Task<bool> AnyAsync(string name);
     }
 }

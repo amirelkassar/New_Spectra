@@ -18,7 +18,7 @@ namespace Spectra.Domain.Settings.AppSettings
         {
             Id = id;
             DisplayName = name;
-            LogicalName = $"spec_{DisplayName.ToLower().Trim()}";
+            LogicalName = name;
             Encrypted = encrypted;
         }
         public string DisplayName { get; set; }

@@ -21,6 +21,9 @@ namespace Spectra.Infrastructure.Settings.AppSettings
             _settingRepository = settingRepository;
             _dataProtector = dataProtectionProvider.CreateProtector(nameof(SettingService));
         }
+
+        public async Task<bool> AnyAsync(string name)=>await _settingRepository.AnyAsync(s=>s.LogicalName== name);
+
         public async Task<ApplicationSetting?> CreateSettingAsync(string name, string value, bool encrypted, string? description = null, string? group = null)
         {
             var setting = ApplicationSetting.Create(Ulid.NewUlid().ToString(), name, encrypted);

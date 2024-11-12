@@ -58,5 +58,11 @@ namespace Spectra.Infrastructure.Settings.AppSettings
             var entity = await _applicationSettings.Find(c => c.LogicalName == name).FirstOrDefaultAsync();
             return entity == null ? throw new NotFoundException("ApplicationSettings", name) : entity;
         }
+
+        public async Task<bool> AnyAsync(Expression<Func<ApplicationSetting, bool>> filter = null)
+        {
+            filter ??= _ => true;
+            return await _applicationSettings.Find(filter).AnyAsync();
+        }
     }
 }

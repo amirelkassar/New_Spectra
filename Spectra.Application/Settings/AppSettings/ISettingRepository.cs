@@ -18,7 +18,7 @@ namespace Spectra.Application.Settings.AppSettings
         Task<IEnumerable<ApplicationSetting>> GetAllAsync(Expression<Func<ApplicationSetting, bool>> filter = null, FindOptions options = null);
         Task<ApplicationSetting> GetByIdAsync(string id);
         Task<ApplicationSetting> GetByNameAsync(string name);
-
+        Task<bool> AnyAsync(Expression<Func<ApplicationSetting, bool>> filter = null);
         Task UpdateAsync(ApplicationSetting input);
     }
 }
