@@ -1,5 +1,6 @@
 using Serilog;
 using Spectra.Application.Countries.SeedService;
+using Spectra.Application.Settings.AppSettings;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Web;
 using Spectra.WebAPI.Middlewares;
@@ -17,10 +18,13 @@ var app = builder.Build();
 // Seed data before handling requests
 using (var scope = app.Services.CreateScope())
 {
-    var seedService = scope.ServiceProvider.GetRequiredService<ICountrySeedService>();
-    await seedService.SeedCountriesAsync();
-    await seedService.SeedStatesAsync();
-    await seedService.SeedCitiesAsync();
+    var countrySeedService = scope.ServiceProvider.GetRequiredService<ICountrySeedService>();
+    await countrySeedService.SeedCountriesAsync();
+    await countrySeedService.SeedStatesAsync();
+    await countrySeedService.SeedCitiesAsync();
+
+    var settingsSeedService = scope.ServiceProvider.GetRequiredService<ApplicationSettingSeeder>();
+    await settingsSeedService.Initialize();
 }
 
 // Configure the HTTP request pipeline.

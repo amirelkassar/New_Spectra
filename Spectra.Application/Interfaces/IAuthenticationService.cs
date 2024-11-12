@@ -6,8 +6,8 @@ namespace Spectra.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task<LoginModel> LoginAsync(LoginAPIParam input);
-        Task<LoginModel> RefreshTokenAsync(string token);
+        Task<OperationResult> LoginAsync(LoginAPIParam input);
+        Task<OperationResult> RefreshTokenAsync(string token);
         Task<OperationResult> ValidateUserAsync(LoginAPIParam input);
     }
 }

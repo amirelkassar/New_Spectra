@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Services;
+using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System.Reflection;
@@ -22,14 +23,14 @@ namespace Spectra.Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ICountryService, CountryService>();
+
+            services.AddSingleton<ApplicationSettingSeeder>();
             //Register the Mediator
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
-
-                //cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
