@@ -15,8 +15,8 @@ namespace Spectra.Domain.Employees.ManagementStaff
         protected Staff() { }
         public string JobName { get; set; }
         public string Qualifications { get; set; }
-        public DateOnly? TimeToJoin { get; set; }  
-        public double? WorkingHours { get; set; }  
+        public DateOnly? TimeToJoin { get; set; }
+        public double? WorkingHours { get; set; }
         public JobTypes JobType { get; set; }
 
         private Staff(
@@ -36,9 +36,15 @@ namespace Spectra.Domain.Employees.ManagementStaff
             )
             : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address
                   )
-        {
 
+    {
+            JobName = jobName;
+            Qualifications = qualifications;
+            TimeToJoin = timeToJoin;
+            WorkingHours = workingHours;
+            JobType = jobType;
         }
+        
 
 
         public static Staff Create(
@@ -57,7 +63,7 @@ namespace Spectra.Domain.Employees.ManagementStaff
         )
 
         {
-            ArgumentNullException.ThrowIfNull(id, nameof(Id));
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
             ArgumentNullException.ThrowIfNull(nationalId, nameof(nationalId));
             ArgumentNullException.ThrowIfNull(phoneNumber, nameof(phoneNumber));
@@ -65,9 +71,7 @@ namespace Spectra.Domain.Employees.ManagementStaff
             ArgumentNullException.ThrowIfNull(humenGenders, nameof(humenGenders));
             ArgumentNullException.ThrowIfNull(jobName, nameof(jobName));
             ArgumentNullException.ThrowIfNull(qualifications, nameof(qualifications));
-            //ArgumentNullException.ThrowIfNull(timeToJoin, nameof(timeToJoin));
-            //ArgumentNullException.ThrowIfNull(workingHours, nameof(workingHours));
-            ArgumentNullException.ThrowIfNull(jobType, nameof(jobType));
+
 
             var staff = new Staff(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, jobName, qualifications, timeToJoin, workingHours,
                 jobType);

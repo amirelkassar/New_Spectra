@@ -10,20 +10,20 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
 {
     public class ManagementStaffRepository : IManagementStaffRepository
     {
-        private readonly IMongoCollection<Staff> _Staff;
+        private readonly IMongoCollection<Staff> _staff;
 
         public ManagementStaffRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
 
-            _Staff = database.GetCollection<Staff>("ManagementStaff");
+            _staff = database.GetCollection<Staff>("ManagementStaff");
 
         }
 
         public async Task<Staff> GetByIdAsync(string id)
         {
 
-            var entity = await _Staff.Find(c => c.Id == id).FirstOrDefaultAsync();
+            var entity = await _staff.Find(c => c.Id == id).FirstOrDefaultAsync();
 
             if (entity == null)
             {
@@ -34,26 +34,25 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
 
         public async Task AddAsync(Staff staff)
         {
-            await _Staff.InsertOneAsync(staff);
+            await _staff.InsertOneAsync(staff);
         }
-
         public async Task UpdateAsync(Staff staff)
         {
-            await _Staff.ReplaceOneAsync(c => c.Id == staff.Id, staff);
+            await _staff.ReplaceOneAsync(c => c.Id == staff.Id, staff);
         }
 
         public async Task DeleteAsync(Staff staff)
         {
-            await _Staff.DeleteOneAsync(c => c.Id == staff.Id);
+            await _staff.DeleteOneAsync(c => c.Id == staff.Id);
         }
         public async Task<UpdateResult> UpdateManyAsync(FilterDefinition<Staff> filter, UpdateDefinition<Staff> update)
         {
-            return await _Staff.UpdateManyAsync(filter, update);
+            return await _staff.UpdateManyAsync(filter, update);
         }
         public async Task<IEnumerable<Staff>> GetAllAsync(Expression<Func<Staff, bool>> filter, FindOptions options = null)
         {
             filter ??= _ => true;
-            return await _Staff.Find(filter, options).ToListAsync();
+            return await _staff.Find(filter, options).ToListAsync();
         }
 
     }

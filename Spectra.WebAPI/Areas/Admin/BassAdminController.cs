@@ -1,0 +1,16 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.WebAPI.Areas.Admin
+{
+    [ApiController]
+    [Route("api/[area]/[controller]")]
+    public abstract class BassAdminController : ControllerBase
+    {
+
+    }
+}

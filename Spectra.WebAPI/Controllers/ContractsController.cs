@@ -19,15 +19,24 @@ namespace Spectra.WebAPI.Controllers
 
 
         }
-
-        [HttpGet("GetAllContracts")]
+        //here we get all Contracts if it saved or made new copies from it
+        [HttpGet("GetAllContractsCORS")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllContractsSend([FromQuery] GetAllContactrQuery input)
+        public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
         {
-            var Contracties = await _contractService.GetAllContracts(input);
-            return Ok(Contracties);
+            var contract = await _contractService.GetAllCopiesOfContract(input);
+            return Ok(contract);
         }
+  
+        // this is Contract that User Can Choces this is Come From Services Master data and another 
+        [HttpGet("ServicesFromMastrData")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllServicesOFMastrData()
+        {
+            var Contracties = await _contractService.GetAllContractData();
+            return Ok(Contracties);
 
+        }
 
 
         [HttpGet("id")]
@@ -44,6 +53,7 @@ namespace Spectra.WebAPI.Controllers
             var Contracties = await _contractService.CreateContractSendORSave(input);
             return Ok(Contracties);
         }
+
         //[HttpPost("SaveContract")]
         //[AllowAnonymous]
         //public async Task<ActionResult> CreateContractAndSave(CreateContractCommand input )
@@ -53,9 +63,10 @@ namespace Spectra.WebAPI.Controllers
         //    var Contracties = await _contractService.CreateContractSendORSave(input);
         //    return Ok(Contracties);
         //}
+
         [HttpPut("id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateContract(string id, UpdateContractCommand input)
+        public async Task<ActionResult> UpdateContract(string id, UpdateAdminContractCommand input)
         {
 
 
@@ -63,11 +74,19 @@ namespace Spectra.WebAPI.Controllers
 
             return Ok(Contract);
         }
+
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteContract(string id)
         {
             var Contract = await _contractService.DeleteContract(id);
+            return Ok(Contract);
+        }
+        [HttpPut("EmployeeAccpetContract/id")]
+        [AllowAnonymous]
+        public async Task<ActionResult> EmployeeAccpetContract(string id)
+        {
+            var Contract = await _contractService.EmployeeAccpetContract(id);
             return Ok(Contract);
         }
 

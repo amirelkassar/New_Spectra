@@ -9,20 +9,20 @@ namespace Spectra.Domain.Shared.Wrappers
         private OperationResult()
         {
             OperationId = Guid.NewGuid();
-            Errors = new Dictionary<string, string[]>();
+            this.errors = new Dictionary<string, string[]>();
         }
         protected OperationResult(int code, string message, IDictionary<string, string[]>? errors = null)
         {
             Code = code;
             Message = message;
-            Errors = errors;
-            SuccessOpration = Errors is null || Errors.Count == 0;
+          this. errors = errors;
+            SuccessOpration = errors is null || errors.Count == 0;
         }
         public Guid OperationId { get; }
         public bool SuccessOpration { get; }
         public int Code { get; }
         public string? Message { get; }
-        public IDictionary<string, string[]>? Errors { get; }
+        public IDictionary<string, string[]>? errors { get; }
         public static OperationResult Success(int code = 200, string message = "Valid Operation!") => new OperationResult(code, message);
         public static OperationResult Failure(IDictionary<string, string[]> errors, int code = 400, string message = "Invalid Operation!")
              => new OperationResult(code, message, errors);

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Diagnoses;
@@ -31,18 +32,38 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
 
         public async Task<OperationResult<string>> Handle(CreateInternalExaminationCommand request, CancellationToken cancellationToken)
         {
+          
+                var internalExamination =InternalExamination.Create(
 
-            var internalExamination = InternalExamination.Create(
+                    Ulid.NewUlid().ToString(),
+                    request.Name, request.Code, request.ExaminationTypes
+                    );
+                await _InternalExaminationRepository.AddAsync(internalExamination);
+                return OperationResult<string>.Success(internalExamination.Id);
 
-                Ulid.NewUlid().ToString(),
-                request.Name, request.Code, request.ExaminationTypes
-                );
-            await _InternalExaminationRepository.AddAsync(internalExamination);
-            return OperationResult<string>.Success(internalExamination.Id);
+         
+          
+        }
+    }
+    public class CreateInternalExaminationValidator : AbstractValidator<CreateInternalExaminationCommand>
+    {
+        public CreateInternalExaminationValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Specialization Name is required.")
+                .MaximumLength(100).WithMessage("Internal Examination Name must not exceed 100 characters.");
+            RuleFor(x => x.Code)
+            .NotEmpty().WithMessage("Code is required.")
+            .MaximumLength(100).WithMessage("Code must not exceed 100 characters.");
+
+            RuleFor(x => x.ExaminationTypes)
+                .Must(sections => sections == null || sections.Count > 0)
+                .WithMessage("If provided, Examination Types must contain at least one item.");
 
 
 
         }
+     
     }
 
 }

@@ -23,7 +23,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 
                 var entitiy = await _medicalTestsAndXrayRepository.GetAllAsync();
 
-                var entitiyName = entitiy.Select(x => new BassMasterDataDto { Name = x.ScientificNameByEng });
+                var entitiyName = entitiy.Select(x => new BassMasterDataDto { Name = x.ScientificNameByEng , Id =x.Id});
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(entitiyName);
 

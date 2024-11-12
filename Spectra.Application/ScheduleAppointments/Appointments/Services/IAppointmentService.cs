@@ -12,6 +12,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Services
     {
         Task<OperationResult<string>> CreateAppointment(CreateAppointmentCommand input);
         Task<OperationResult<Unit>> DeleteAppointment(string id);
+        Task<OperationResult<IEnumerable<Appointment>>> GetAllAppointmentsDoctorandDatas(GetAllAppointmentsDoctorAndDateQuery input);
         Task<OperationResult<IEnumerable<AppointmentWithClientDto>>> GetAllAppointmentsStatuDoctor(GetAllAppointmentsStatuDoctorQuery input);
         Task<OperationResult<Appointment>> GetAppointmentById(string id);
         Task<OperationResult<Unit>> UpdateAppointment(string id, UpdateAppointmentCommand input);

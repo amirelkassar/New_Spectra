@@ -10,8 +10,6 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
     public class GetAllDiagnoseNamesQuery : IQuery<OperationResult<IEnumerable<BassMasterDataDto>>>
     {
 
-
-
         public class GetAllSpecializationNamesQueryHandler : IRequestHandler<GetAllDiagnoseNamesQuery, OperationResult<IEnumerable<BassMasterDataDto>>>
         {
             private readonly IDiagnoseRepository _diagnoseRepository;
@@ -27,7 +25,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
 
                 var diagnoses = await _diagnoseRepository.GetAllAsync();
 
-                var diagnose = diagnoses.Select(x => new BassMasterDataDto { Name = x.Name });
+                var diagnose = diagnoses.Select(x => new BassMasterDataDto { Name = x.Name , Id = x.Id });
 
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(diagnose);

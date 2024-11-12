@@ -28,9 +28,10 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             var entity = await _serviceMRepository.GetAllAsync();
 
             var allServicesNamesandTerms = entity
-    .Where(x => x.AvailableSrvices == AvailableSrvice.ServicesView)
-    .Select(x => new ServicesDto
+        .Where(x => x.AvailableSrvices == AvailableSrvice.ServicesView)
+        .Select(x => new ServicesDto
     {
+            Id = x.Id,
         Name = x.Name,
         TermsAndConditions = x.TermsAndConditions,
 

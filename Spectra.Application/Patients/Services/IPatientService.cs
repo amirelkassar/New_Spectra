@@ -9,7 +9,7 @@ namespace Spectra.Infrastructure.Patients
 {
     public interface IPatientService
     {
-        Task<OperationResult<string>> CreatePatient(CreatePatientCommand input);
+        Task<OperationResult<string>> CreatePatient(CreateStaticStringDataCommand input);
         Task<OperationResult<Unit>> DeletePatient(string id);
         Task<OperationResult<IEnumerable<Patient>>> GetAllPatients();
         Task<OperationResult<Patient>> GetPatientById(string id);

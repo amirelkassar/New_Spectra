@@ -48,7 +48,30 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             return filePaths;
         }
+        public async Task<string> CreateAttachment(IFormFile attachment, string folderName)
+        {
+            if (attachment == null || attachment.Length == 0)
+            {
+                return null;
+            }
 
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var uniqueFileName = $"{Guid.NewGuid()}_{attachment.FileName}";
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await attachment.CopyToAsync(fileStream);
+            }
+
+            return $"/{folderName}/{uniqueFileName}";
+        }
 
         public async Task DeleteAttachment(string? attachment)
         {
@@ -97,7 +120,7 @@ namespace Spectra.Application.MasterData.HellperFunc
         }
 
 
-        public async Task<List<string>> UpdateAttachment(List<string>? existingAttachments, List<IFormFile> newAttachments, string folderName)
+        public async Task<List<string>> UpdateAttachments(List<string>? existingAttachments, List<IFormFile> newAttachments, string folderName)
         {
 
             if (existingAttachments != null && existingAttachments.Any())
@@ -142,6 +165,50 @@ namespace Spectra.Application.MasterData.HellperFunc
 
 
             return uploadedFilePaths;
+        }
+        public async Task<string> UpdateAttachment(string? existingAttachment, IFormFile newAttachment, string folderName)
+        {
+            // Delete the existing attachment if it exists
+            if (!string.IsNullOrEmpty(existingAttachment))
+            {
+                var existingFilePath = Path.Combine(_webHostEnvironment.WebRootPath, existingAttachment.TrimStart('/'));
+                if (File.Exists(existingFilePath))
+                {
+                    File.Delete(existingFilePath);
+                }
+            }
+
+            // Check if the new attachment is valid
+            if (newAttachment == null || newAttachment.Length == 0)
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(_webHostEnvironment.WebRootPath))
+            {
+                _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            }
+
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
+
+            // Create the folder if it does not exist
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Generate a unique file name for the new attachment
+            var newFileName = $"{Guid.NewGuid()}{Path.GetExtension(newAttachment.FileName)}";
+            var filePath = Path.Combine(uploadsFolder, newFileName);
+
+            // Save the new attachment
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await newAttachment.CopyToAsync(stream);
+            }
+
+            // Return the path of the new file
+            return $"/{folderName}/{newFileName}";
         }
     }
 }

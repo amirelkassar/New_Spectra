@@ -4,6 +4,7 @@ using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Infrastructure.MasterData.ServicesMD;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MasterData.ServicesM
@@ -52,20 +53,20 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
         public async Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions()
         {
             var filter = Builders<MasterDataServices>.Filter
-        .Eq(x => x.AvailableSrvices, AvailableSrvice.ServicesView);
+        .Eq(x => x.AvailableSrvices, AvailableSrvice.ServicesView);  
 
             var projection = Builders<MasterDataServices>.Projection
-                .Include(x => x.Name)
-                .Include(x => x.TermsAndConditions);
+                .Include(x => x.Name)  
+                .Include(x => x.TermsAndConditions);  
 
             var result = await _masterDataServices
                 .Find(filter)
-                .Project<MasterDataServices>(projection)
+                .Project<MasterDataServices>(projection)  
                 .ToListAsync();
 
             return result;
 
-
+           
         }
     }
 }

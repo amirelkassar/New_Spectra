@@ -1,6 +1,8 @@
-﻿using FluentValidation;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
@@ -18,7 +20,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public List<IFormFile>? Photo { get; set; }
         public string RecommendedDosage { get; set; }
         public string Doncentration { get; set; }
-        public string DrugInteractionsWithOtherdrugs { get; set; }
+        public string InteractionsWithOtherdrugs { get; set; }
         public string Contraindications { get; set; }
         public string? Code { get; set; }
         public string Nots { get; set; }
@@ -46,33 +48,33 @@ namespace Spectra.Application.MasterData.Drug.Commands
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }
-            List<string>? photoPath = null;
-            var uploadPhoto = await _addPhoto.CreateAttachments(request.Photo, "Upload/Image/Drugs");
-            if (uploadPhoto != null)
-            {
-                photoPath = uploadPhoto;
+           List<string>? photoPath = null;
+                var uploadPhoto = await _addPhoto.CreateAttachments(request.Photo, "Upload/Image/Drugs");
+                if (uploadPhoto != null)
+                {
+                    photoPath = uploadPhoto;
 
-            }
+                }
 
-            var drug = DrugMD.Create(
-                Ulid.NewUlid().ToString(),
-                request.Name,
-                request.ActiveIngredient,
-                request.ScientificName,
-                request.RecommendedDosage,
-                request.Doncentration,
-                request.DrugInteractionsWithOtherdrugs,
-                request.Contraindications,
-                photoPath,
-                request.Code,
-                request.Nots,
-                request.Type
-            );
-            await _drugRepository.AddAsync(drug);
+                var drug = DrugMD.Create(
+                    Ulid.NewUlid().ToString(),
+                    request.Name,
+                    request.ActiveIngredient,
+                    request.ScientificName,
+                    request.RecommendedDosage,
+                    request.Doncentration,
+                    request.InteractionsWithOtherdrugs,
+                    request.Contraindications,
+                    photoPath,
+                    request.Code,
+                    request.Nots,
+                    request.Type
+                );
+                await _drugRepository.AddAsync(drug);
 
-            return OperationResult<string>.Success(drug.Id);
-
-
+                return OperationResult<string>.Success(drug.Id);
+           
+           
         }
     }
     public class CreateDrugCommandValidator : AbstractValidator<CreateDrugCommand>
@@ -99,10 +101,10 @@ namespace Spectra.Application.MasterData.Drug.Commands
                 .NotEmpty().WithMessage("Drug concentration is required.")
                 .MaximumLength(100).WithMessage("Drug concentration must not exceed 100 characters.");
             RuleFor(x => x.Code)
-
+                 
               .MaximumLength(100).WithMessage("Drug concentration must not exceed 100 characters.");
 
-            RuleFor(x => x.DrugInteractionsWithOtherdrugs)
+            RuleFor(x => x.InteractionsWithOtherdrugs)
                 .NotEmpty().WithMessage("Drug interactions with other drugs are required.")
                 .MaximumLength(500).WithMessage("Drug interactions must not exceed 500 characters.");
 

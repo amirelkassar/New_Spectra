@@ -34,6 +34,13 @@ namespace Spectra.WebAPI.Controllers
             var appointmenties = await _appointmentService.GetAllAppointmentsStatuDoctor(input);
             return Ok(appointmenties);
         }
+        [HttpGet("AppointmentsDoctorsbyData")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetAllAppointmentsDoctorsbyData( GetAllAppointmentsDoctorAndDateQuery input)
+        {
+            var appointmenties = await _appointmentService.GetAllAppointmentsDoctorandDatas(input);
+            return Ok(appointmenties);
+        }
 
         [HttpGet("id")]
         [AllowAnonymous]

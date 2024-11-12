@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -58,7 +59,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
 
     public class CreateDiagnoseCommandValidator : AbstractValidator<CreateDiagnoseCommand>
     {
-
+    
         public CreateDiagnoseCommandValidator()
         {
             RuleFor(x => x.Name)

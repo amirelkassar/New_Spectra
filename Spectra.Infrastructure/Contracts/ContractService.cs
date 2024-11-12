@@ -1,8 +1,12 @@
 ﻿using MediatR;
+using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Contracts
@@ -20,21 +24,37 @@ namespace Spectra.Infrastructure.Contracts
 
         public async Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input)
         {
-            var command = new CreateContractCommand
+            if (input.ContractCase != ContractCases.SAVE && input.ContractCase != ContractCases.SENDTOADMIN)
             {
-                Freelancer = input.Freelancer,
-                HoursOfWork = input.HoursOfWork,
-                SpectraTeam = input.SpectraTeam,
-                DaysOfWork = input.DaysOfWork,
-                MinutesOfWork = input.MinutesOfWork,
-                ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel
+                throw new RequestErrorException("You can only Send or Save your Contract.");
 
-            };
+            }
+                var command = new CreateContractCommand
+                {
+                    HoursOfWork = input.HoursOfWork,
+                    DaysOfWork = input.DaysOfWork,
+                    ContractCase = input.ContractCase,
+                    EmployeeId = input.EmployeeId,
+                    Titel = input.Titel,
+                    Freelance = input.Freelance,
+                    SpectraTeam = input.SpectraTeam,
+               
+                };
 
+
+
+
+                return await _mediator.Send(command);
+            
+           
+        }
+        public async Task<OperationResult<Unit>> EmployeeAccpetContract(string id)
+        {
+            var command = new UpdateContractSatuseFromEmployeeCommand { Id = id };
+         
             return await _mediator.Send(command);
         }
+
 
         public async Task<OperationResult<Unit>> DeleteContract(string id)
         {
@@ -42,10 +62,28 @@ namespace Spectra.Infrastructure.Contracts
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId)
+        public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
+        {
+            // Create the query and pass pagination parameters
+            var query = new GetAllCopiesOFContractQuery
+            {
+                EmployeeId = input.EmployeeId
+            };
+            return await _mediator.Send(query);
+        }
+
+        public async Task<OperationResult<GetServicesContractQuery>> GetAllContractData()
         {
 
-            var query = new GetAllContactrQuery { EmployeeId = empelyeeId.EmployeeId };
+            var query = new GetServicesContractQuery();
+
+            return await _mediator.Send(query);
+        }
+    public  async  Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId )
+        {
+            var query = new GetServicesFromContractQuery() { Id = EmployeeId };
+
+
             return await _mediator.Send(query);
         }
 
@@ -55,19 +93,21 @@ namespace Spectra.Infrastructure.Contracts
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Unit>> UpdateContract(string id, UpdateContractCommand input)
+
+        public async Task<OperationResult<Unit>> UpdateContract(string id, UpdateAdminContractCommand input)
         {
-            var command = new UpdateContractCommand
+            var command = new UpdateAdminContractCommand
             {
                 id = id,
-                Freelancer = input.Freelancer,
                 HoursOfWork = input.HoursOfWork,
-                SpectraTeam = input.SpectraTeam,
                 DaysOfWork = input.DaysOfWork,
-                MinutesOfWork = input.MinutesOfWork,
                 ContractCase = input.ContractCase,
                 EmployeeId = input.EmployeeId,
-                Titel = input.Titel
+                Titel = input.Titel,
+                Freelance = input.Freelance,
+                SpectraTeam = input.SpectraTeam,
+              
+
             };
 
 

@@ -1,19 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Application.Patients;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.Drug.Commands
 {
@@ -26,7 +18,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public List<IFormFile>? Attachment { get; set; }
         public string RecommendedDosage { get; set; }
         public string Doncentration { get; set; }
-        public string DrugInteractionsWithOtherdrugs { get; set; }
+        public string InteractionsWithOtherdrugs { get; set; }
         public string Contraindications { get; set; }
         public string Code { get; set; }
         public string Nots { get; set; }
@@ -48,21 +40,26 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<Unit>> Handle(UpdateDrugCommand request, CancellationToken cancellationToken)
         {
             var drug = await _drugRepository.GetByIdAsync(request.Id);
-          
+
+            var names = await _drugRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
+            if (names.Any())
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
 
             drug.Name = request.Name;
             drug.ActiveIngredient = request.ActiveIngredient;
             drug.ScientificName = request.ScientificName;
             drug.RecommendedDosage = request.RecommendedDosage;
             drug.Doncentration = request.Doncentration; 
-            drug.InteractionsWithOtherdrugs = request.DrugInteractionsWithOtherdrugs; 
+            drug.InteractionsWithOtherdrugs = request.InteractionsWithOtherdrugs; 
             drug.Contraindications = request.Contraindications;
             drug.Type = request.Type;
             drug.Nots = request.Nots;
 
             if (request.Attachment != null)
             {
-                drug.AttachmentPath = await _addPhoto.UpdateAttachment(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
+                drug.AttachmentPath = await _addPhoto.UpdateAttachments(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
                 // Assuming you want to store paths as a comma-separated string
             }
             drug.Code = request.Code;
@@ -99,7 +96,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
                 .NotEmpty().WithMessage("Drug concentration is required.")
                 .MaximumLength(100).WithMessage("Drug concentration must not exceed 100 characters.");
 
-            RuleFor(x => x.DrugInteractionsWithOtherdrugs)
+            RuleFor(x => x.InteractionsWithOtherdrugs)
                 .NotEmpty().WithMessage("Drug interactions with other drugs are required.")
                 .MaximumLength(500).WithMessage("Drug interactions must not exceed 500 characters.");
 

@@ -23,7 +23,7 @@ namespace Spectra.Application.Admin.Queries
         public GetAllAppointmentsDoctorQueryHandler(IAppointmentRepository appointmentRepository)
         {
             _appointmentRepository = appointmentRepository;
-        }
+        } 
 
         public async Task<OperationResult<PaginatedResult<Appointment>>> Handle(GetAllAppointmentDoctorQuery request, CancellationToken cancellationToken)
         {
