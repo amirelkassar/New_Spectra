@@ -32,6 +32,8 @@ const ROUTES = {
     PROFILE: {
       FAMILY: '/client/profile/family',
       ORG: '/client/profile/org',
+      VIEW_ORG_CLIENT: '/client/profile/org/family/:id',
+      VIEW_ORG_CHILD: '/client/profile/org/child/:id',
     },
     PACKAGES: '/client/packages',
     SERVICE_REQUEST: {

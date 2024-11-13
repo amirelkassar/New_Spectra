@@ -28,6 +28,54 @@ export const CHILDS = [
   },
 ];
 
+export const CHILDS_TABLE = [
+  {
+    id: '1',
+    avatar: '',
+    name: 'محمد عبدالله الشيخ',
+    diagnosis: 'طيف التوحد',
+    age: '5 شهور',
+    gender: 'ذكر',
+    nationalId: 524586231,
+  },
+  {
+    id: '2',
+    avatar: '',
+    name: 'احمد عبدالله الشيخ',
+    diagnosis: 'فرط الحركة',
+    age: '5 شهور',
+    gender: 'ذكر',
+    nationalId: 524586231,
+  },
+  {
+    id: '3',
+    avatar: '',
+    name: 'علي محمد علي',
+    diagnosis: 'فرط الحركة',
+    age: '5 شهور',
+    gender: 'ذكر',
+    nationalId: 524586231,
+  },
+  {
+    id: '4',
+    avatar: '',
+    name: 'علي محمد علي',
+    diagnosis: 'فرط الحركة',
+    age: '5 شهور',
+    gender: 'ذكر',
+    nationalId: 524586231,
+  },
+  {
+    id: '5',
+    avatar: '',
+    name: 'علي محمد علي',
+    diagnosis: 'فرط الحركة',
+    age: '5 شهور',
+    gender: 'ذكر',
+    nationalId: 524586231,
+  },
+];
+
 export const CHILD_TABS = [
   {
     key: 'child-info',
