@@ -107,7 +107,12 @@ function CategoriesVideo({ open }) {
     {
       label: "التاريخ المرضى",
       name: "report3",
-      active: searchParams.get("reportNum") === "report2",
+      active: searchParams.get("reportNum") === "report3",
+    },
+    {
+      label: "Speech",
+      name: "report4",
+      active: searchParams.get("reportNum") === "report4",
     },
   ];
   return (
