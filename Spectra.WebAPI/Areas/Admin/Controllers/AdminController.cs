@@ -6,19 +6,17 @@ using Spectra.Application.Admin.Queries;
 using Spectra.Application.Clients.DTO;
 using Spectra.Application.Clients.DTOs;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Employees.ManagementStaff.Commands.Dto;
 using Spectra.Application.Employees.ManagementStaff.Service;
-using Spectra.Application.Employees.MedicalStaff.Doctors.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Employees.MedicalTeams.Commands;
 using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
-using Spectra.Infrastructure.MedicalTeams;
 
 
 namespace Spectra.WebAPI.Areas.Admin.Controllers
@@ -28,12 +26,12 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IClientService _clientService;
-        private readonly IDoctorService _doctorService;
+        private readonly IMedicalProviderService _doctorService;
         private readonly IContractService _contractService;
         private readonly IManagementStaffService _managementStaffService;
         private readonly IMedicalTeamService _medicalTeamService;
 
-        public AdminController(IAdminService adminService, IClientService clientService, IDoctorService doctorService, IContractService contractService,
+        public AdminController(IAdminService adminService, IClientService clientService, IMedicalProviderService doctorService, IContractService contractService,
             IManagementStaffService managementStaffService, IMedicalTeamService medicalTeamService )
         {
             _adminService = adminService;
@@ -96,7 +94,7 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> GetOneDoctor(string id)
         {
-            var Doctories = await _doctorService.GetDoctorById(id);
+            var Doctories = await _doctorService.GetMedicalProviderById(id);
             return Ok(Doctories);
         }
 
@@ -153,14 +151,14 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         public async Task<ActionResult> UpdateDocotor(string id, UpdateDoctorDto input)
         {
 
-            var contract = await _doctorService.UpdateDoctor(id, input);
+            var contract = await _doctorService.UpdateMedicalProvider(id, input);
             return Ok(contract);
         }
         [HttpPut("ClientsFellowDoctor/id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
         {
-            var clients = await _doctorService.GetAllClintsDoctorCare(id, input);
+            var clients = await _doctorService.GetAllClintsMedicalProviderCare(id, input);
             return Ok(clients);
         }
 

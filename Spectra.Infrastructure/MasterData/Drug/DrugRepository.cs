@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Drug;
-using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;

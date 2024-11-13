@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
-using Spectra.Infrastructure.Employees.MedicalStaff;
-
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 {

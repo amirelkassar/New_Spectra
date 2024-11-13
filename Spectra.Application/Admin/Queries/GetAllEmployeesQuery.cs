@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Employees.ManagementStaff;
-using Spectra.Application.Employees.MedicalStaff.Doctors;
-using Spectra.Application.Employees.MedicalStaff.Specialists;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -18,10 +17,10 @@ namespace Spectra.Application.Admin.Queries
 
     public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, OperationResult<CollectAllEmployeeDto>>
     {
-        private readonly IDoctorRepository _doctorRepositor;
-        private readonly ISpecialistRepository _specialistRepository;
+        private readonly IMedicalProviderRepository _doctorRepositor;
+        private readonly IMedicalProviderRepository _specialistRepository;
         private readonly IManagementStaffRepository _staffRepository;
-        public GetAllEmployeesQueryHandler(IDoctorRepository doctorRepositor , ISpecialistRepository specialistRepository , IManagementStaffRepository managementStaffRepository )
+        public GetAllEmployeesQueryHandler(IMedicalProviderRepository doctorRepositor , IMedicalProviderRepository specialistRepository , IManagementStaffRepository managementStaffRepository )
         {
             _doctorRepositor = doctorRepositor;
             _specialistRepository = specialistRepository;
@@ -33,8 +32,8 @@ namespace Spectra.Application.Admin.Queries
 
 
 
-            var doctors = await _doctorRepositor.GetAllAsync();
-            var specialists = await _specialistRepository.GetAllAsync();
+            var doctors = await _doctorRepositor.GetAllAsync(x=>x.JobType== JobTypes.Doctor);
+            var specialists = await _specialistRepository.GetAllAsync(x => x.JobType == JobTypes.Specialist);
             var managementStaff = await _staffRepository.GetAllAsync();
 
 

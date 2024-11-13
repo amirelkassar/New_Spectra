@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Enums;
