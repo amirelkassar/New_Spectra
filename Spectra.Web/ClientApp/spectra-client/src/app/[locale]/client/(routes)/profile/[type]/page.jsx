@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import OrgProfile from '../_org';
-import FamilyProfile from '../_family';
+
+import OrgPage from './org';
+import FamilyPage from './family';
 
 const ProfilePage = ({ params }) => {
   const type = params?.type;
@@ -8,9 +9,9 @@ const ProfilePage = ({ params }) => {
 
   if (!type || !acceptedTypes.includes(type)) notFound();
 
-  if (type === 'org') return <OrgProfile />;
+  if (type === 'org') return <OrgPage />;
 
-  if (type === 'family') return <FamilyProfile />;
+  if (type === 'family') return <FamilyPage />;
 };
 
 export default ProfilePage;

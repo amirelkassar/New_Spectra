@@ -3,19 +3,20 @@
 import { cn } from '@/lib/utils';
 import Card from '@/components/card';
 import { useRouter } from '@/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export const TabsCard = ({
   tabs = [],
-  setTab = () => {},
-  tab = '',
+  defaultTab = '',
   classNames = {
     container: '',
     list: '',
     item: '',
-    label: '',
   },
 }) => {
   const router = useRouter();
+  const currentTab =
+    useSearchParams()?.get('tab') || defaultTab;
 
   if (!tabs?.length) return null;
   return (
@@ -36,7 +37,6 @@ export const TabsCard = ({
             role='button'
             key={t?.key}
             onClick={() => {
-              setTab(t?.key);
               router.replace(`?tab=${t?.key}`, {
                 scroll: false,
               });
@@ -45,20 +45,13 @@ export const TabsCard = ({
               'lg:rounded-lg transition lg:hover:bg-greenLight lg:text-black lg:font-bold font-normal text-sm mdl:text-base lg:w-full px-5 py-3 flex items-center *:shrink-0 gap-2 w-fit border-b border-grayDark/20 lg:border-0 hover:text-greenMain hover:lg:text-black',
               {
                 'lg:bg-greenMain lg:text-white lg:hover:bg-greenMain hover:lg:text-white border-b-2 border-b-greenMain text-greenMain font-semibold':
-                  tab === t?.key,
+                  currentTab === t?.key,
               },
               classNames.item
             )}
           >
-            <span className='shrink-0'>{t?.icon}</span>
-            <span
-              className={cn(
-                'text-black lg:text-inherit',
-                classNames.label
-              )}
-            >
-              {t?.label}
-            </span>
+            {t?.icon}
+            {t?.label}
           </li>
         ))}
       </ul>

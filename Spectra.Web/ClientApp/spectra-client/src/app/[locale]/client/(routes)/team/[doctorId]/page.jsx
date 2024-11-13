@@ -1,13 +1,13 @@
 import { Container } from '@/client/_components/ui';
-import { MedicalTeamData } from '@/lib/demoData';
 import { Intro } from './_components/intro';
 import { CareerDescription } from './_components/career-description';
 import { Certifications } from './_components/certifications';
 import { Reviews } from './_components/reviews';
 import { Specializations } from './_components/specializations';
+import { TEAM } from '@/data';
 
 const ViewDoctorPage = ({ params: { doctorId } }) => {
-  const doctor = MedicalTeamData.find(
+  const doctor = TEAM.find(
     (doctor) => doctor.id === doctorId
   );
 

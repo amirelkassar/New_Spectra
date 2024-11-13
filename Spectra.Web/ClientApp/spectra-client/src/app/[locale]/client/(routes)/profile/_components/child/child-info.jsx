@@ -6,7 +6,7 @@ import {
 } from '@/client/_components/ui';
 import { EditButton } from '@/components/buttons/edit-button';
 import { DoctorBadge } from '@/components/team';
-import { EditChildInfoModal } from './edit-child-info-modal';
+import { UpdateChildInfoModal } from './update-child-info-modal';
 import Card from '@/components/card';
 
 export const ChildInfo = () => {
@@ -71,11 +71,11 @@ const InfoData = ({ data = CHILD_INFO_DATA }) => {
     <Card>
       <div className='flex items-center justify-between mb-5'>
         <SectionTitle>بيانات الطفل</SectionTitle>
-        <EditChildInfoModal initialData={data}>
+        <UpdateChildInfoModal initialData={data}>
           <EditButton className='bg-greenMain hover:bg-greenMain/90 text-white'>
             تعديل
           </EditButton>
-        </EditChildInfoModal>
+        </UpdateChildInfoModal>
       </div>
 
       <div className='mdl:grid mdl:grid-cols-3'>

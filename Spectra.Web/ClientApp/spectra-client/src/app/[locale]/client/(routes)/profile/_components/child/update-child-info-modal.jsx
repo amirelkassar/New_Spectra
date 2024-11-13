@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 
-export const EditChildInfoModal = ({
+export const UpdateChildInfoModal = ({
   children,
   initialData = {},
 }) => {

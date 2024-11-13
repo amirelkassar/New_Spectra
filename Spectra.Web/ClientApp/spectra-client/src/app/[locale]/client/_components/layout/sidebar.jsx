@@ -3,8 +3,7 @@
 import { Link } from '@/navigation';
 
 import { cn } from '@/lib/utils';
-import { useSidebarStore } from '../../_hooks/use-sidebar-store';
-import { useNav } from '../../_hooks/use-sidebar';
+import { useNav, useSidebarStore } from '@/client/_hooks';
 
 import ROUTES from '@/routes';
 import ArrowNav from '@/assets/icons/arrow-nav';

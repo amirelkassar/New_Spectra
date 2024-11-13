@@ -65,7 +65,7 @@ const CardAction = ({ children, ...props }) => {
     <div
       {...props}
       className={cn(
-        'absolute top-2 end-3',
+        'absolute top-3 end-3',
         props.className
       )}
     >
