@@ -5,6 +5,7 @@ import PostAssessment from "./reports/post_assessment";
 import FollowUp from "./reports/follow_up";
 import History from "./reports/history";
 import Speech from "./reports/speech";
+import MDT from "./reports/mdt";
 
 function AddReport() {
   const searchParams = useSearchParams();
@@ -19,6 +20,8 @@ function AddReport() {
         return <History />;
       case "report4":
         return <Speech />;
+      case "report5":
+        return <MDT />;
     }
   };
   return <ViewCompReports />;
