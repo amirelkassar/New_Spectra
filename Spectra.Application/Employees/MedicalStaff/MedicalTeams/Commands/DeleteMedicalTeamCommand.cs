@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Employees.MedicalStaff.Specialists;
-using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
 

@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.Employees.MedicalStaff.Doctors;
-using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Admin.Commands
@@ -17,10 +14,10 @@ namespace Spectra.Application.Admin.Commands
 
     public class UpdateDoctorEmploymentStatusCommandHandler : IRequestHandler<UpdateDoctorEmploymentStatusCommand, OperationResult<Unit>>
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IMedicalProviderRepository _doctorRepository;
         private readonly ISpecializationsRepository _specializationRepository;
 
-        public UpdateDoctorEmploymentStatusCommandHandler(IDoctorRepository doctorRepository, ISpecializationsRepository specializationRepository)
+        public UpdateDoctorEmploymentStatusCommandHandler(IMedicalProviderRepository doctorRepository, ISpecializationsRepository specializationRepository)
         {
             _doctorRepository = doctorRepository;
             _specializationRepository = specializationRepository;

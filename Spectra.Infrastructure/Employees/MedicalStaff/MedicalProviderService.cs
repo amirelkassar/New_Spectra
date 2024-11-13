@@ -2,6 +2,7 @@
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Enums;

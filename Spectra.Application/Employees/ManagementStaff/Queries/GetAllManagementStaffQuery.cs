@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Spectra.Application.Employees.ManagementStaff;
-using Spectra.Application.Employees.MedicalStaff.Doctors;
 using Spectra.Domain.Employees.ManagementStaff;
-using Spectra.Domain.Employees.MedicalStaff.Doctor;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 
