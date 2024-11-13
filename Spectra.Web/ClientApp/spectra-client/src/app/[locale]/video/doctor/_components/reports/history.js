@@ -1,5 +1,6 @@
 import { Accordion } from "@/components/accordion";
 import TextInput from "@/components/inputs/text-input";
+import { Textarea } from "@/components/inputs/textarea";
 import { SurveyForm } from "@/components/swyc/survey-form";
 import React, { useState } from "react";
 
@@ -10,24 +11,64 @@ function History() {
       ar: "Eye contact ",
       en: "Eye contact",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 2,
       ar: " Responding for calls with name",
       en: " Responding for calls with name",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 3,
       ar: " Show, Share request, Joint attention",
       en: "Show, Share request, Joint attention",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 4,
       ar: "Gestures, pointing",
       en: "Gestures, pointing",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 5,
@@ -50,36 +91,97 @@ function History() {
       ar: "Reciprocity",
       en: "Reciprocity",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 7,
       ar: "Social cues understanding",
       en: "Social cues understanding",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 8,
       ar: "Make relation and maintaining them",
       en: "Make relation and maintaining them",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 9,
       ar: "Understanding facial expressions and empathy with others",
       en: "Understanding facial expressions and empathy with others",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 10,
       ar: " Copy others",
       en: " Copy others",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
+
     {
       id: 11,
       ar: "Imaginative Play",
       en: "Imaginative Play",
       haveText: true, // Add the boolean key
+      options: [
+        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+        { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
+        {
+          id: 3,
+          ar: "  Not at all",
+          en: "  Not at all",
+          value: "  Not at all",
+        },
+      ],
     },
     {
       id: 12,
@@ -98,6 +200,36 @@ function History() {
     },
     {
       id: 13,
+      ar: "Specific interests, routine & ritual",
+      en: "Specific interests, routine & ritual",
+      haveText: false, // Add the boolean key
+      options: [
+        { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+        { id: 2, ar: " No", en: " No", value: " No" },
+      ],
+    },
+    {
+      id: 14,
+      ar: "Side looking",
+      en: "Side looking",
+      haveText: false, // Add the boolean key
+      options: [
+        { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+        { id: 2, ar: " No", en: " No", value: " No" },
+      ],
+    },
+    {
+      id: 15,
+      ar: "Line up objects",
+      en: "Line up objects",
+      haveText: false, // Add the boolean key
+      options: [
+        { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+        { id: 2, ar: " No", en: " No", value: " No" },
+      ],
+    },
+    {
+      id: 16,
       ar: "Sensory issue",
       en: "Sensory issue",
       type: "multi",
@@ -113,7 +245,17 @@ function History() {
       haveText: false, // Add the boolean key
     },
     {
-      id: 14,
+      id: 17,
+      ar: "Picky eater",
+      en: "Picky eater",
+      haveText: false, // Add the boolean key
+      options: [
+        { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+        { id: 2, ar: " No", en: " No", value: " No" },
+      ],
+    },
+    {
+      id: 18,
       ar: "",
       en: "",
       type: "multi",
@@ -176,9 +318,15 @@ function History() {
   return (
     <div dir="ltr" className="my-4 flex flex-col gap-5">
       <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Past medical history"}>
-          <Accordion.Label>Past medical history</Accordion.Label>
+        <Accordion.Item value={"BEHAVIORAL HISTORY & OBSERVATION"}>
+          <Accordion.Label>BEHAVIORAL HISTORY & OBSERVATION</Accordion.Label>
           <Accordion.Content>
+            <p className="text-xs lg:text-base font-Regular px-3">
+              ( DSM-5) autism symptoms& signs{" "}
+              <span className="text-grayDark">
+                ( if he suspect autism the physician needs to fill these items)
+              </span>
+            </p>
             <SurveyForm className="!p-0">
               <SurveyForm.Body className=" border-none">
                 <ul>
@@ -211,30 +359,23 @@ function History() {
                           </SurveyForm.Answers>
                         ) : (
                           <SurveyForm.Answers>
-                            <SurveyForm.SingleAnswer
-                              name={`${question?.id}`}
-                              value="0"
-                              checked={answers[question?.id] === 0}
-                              onChange={() => handleSelect(question?.id, 0)}
-                            >
-                              Poor
-                            </SurveyForm.SingleAnswer>
-                            <SurveyForm.SingleAnswer
-                              name={`${question?.id}`}
-                              value="1"
-                              checked={answers[question?.id] === 1}
-                              onChange={() => handleSelect(question?.id, 1)}
-                            >
-                              Normal
-                            </SurveyForm.SingleAnswer>
-                            <SurveyForm.SingleAnswer
-                              name={`${question?.id}`}
-                              value="2"
-                              checked={answers[question?.id] === 2}
-                              onChange={() => handleSelect(question?.id, 2)}
-                            >
-                              Not at all
-                            </SurveyForm.SingleAnswer>
+                            {question.options.map((singleAns, j) => {
+                              return (
+                                <SurveyForm.SingleAnswer
+                                  key={j}
+                                  name={`${question?.id}`}
+                                  value={singleAns.value}
+                                  checked={
+                                    answers[question?.id] === singleAns.value
+                                  }
+                                  onChange={() =>
+                                    handleSelect(question?.id, singleAns.value)
+                                  }
+                                >
+                                  {singleAns.en}
+                                </SurveyForm.SingleAnswer>
+                              );
+                            })}
                           </SurveyForm.Answers>
                         )}
 
@@ -250,9 +391,14 @@ function History() {
                 </ul>
               </SurveyForm.Body>
             </SurveyForm>
+            <div className="flex gap-3 p-3">
+              <h3>Other</h3>
+              <Textarea className="flex-1 min-w-[300px]  ms-4" />
+            </div>
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
+
       <Accordion classNames={{ content: "px-0 " }}>
         <Accordion.Item value={"Past medical history"}>
           <Accordion.Label>Examination</Accordion.Label>
