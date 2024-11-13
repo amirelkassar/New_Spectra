@@ -96,8 +96,8 @@ export const CHILD_TABS = [
 
 function IconWrapper({ children }) {
   return (
-    <div className='lg:size-7 lg:bg-blueLight lg:rounded-md lg:flex lg:items-center lg:justify-center lg:text-greenMain'>
+    <span className='lg:size-8 lg:bg-blueLight lg:rounded-md lg:flex lg:items-center lg:justify-center lg:text-greenMain shrink-0'>
       {children}
-    </div>
+    </span>
   );
 }

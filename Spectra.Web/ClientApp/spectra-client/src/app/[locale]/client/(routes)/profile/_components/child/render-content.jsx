@@ -8,7 +8,9 @@ import { Prescriptions } from './prescriptions';
 import { Reports } from './reports';
 import { Sessions } from './sessions';
 
-export const RenderChild = ({ tabKey = 'child-info' }) => {
+export const RenderContent = ({
+  tabKey = 'child-info',
+}) => {
   switch (tabKey) {
     case 'child-info':
       return <ChildInfo />;

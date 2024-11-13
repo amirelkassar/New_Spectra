@@ -8,11 +8,9 @@ import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 import Avatar from '@/components/avatar';
 import EditImgIcon from '@/assets/icons/editImg';
-import { cn } from '@/lib/utils';
 
-export const EditFamProfileModal = ({
+export const UpdateOrgInfoModal = ({
   children,
-  className = '',
   initialData = {},
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -32,11 +30,7 @@ export const EditFamProfileModal = ({
     <>
       {/* TRIGGER */}
 
-      <div
-        className={cn('w-fit', className)}
-        role='dialog'
-        onClick={open}
-      >
+      <div className='w-fit' role='dialog' onClick={open}>
         {children}
       </div>
 
@@ -111,16 +105,6 @@ export const EditFamProfileModal = ({
                 }
               />
 
-              {/* ID */}
-              <TextInput
-                label='رقم الهوية'
-                labelClassName='mdl:text-base mb-1 ps-0'
-                value={data?.id}
-                onChange={(e) =>
-                  handleChange('id', e.target.value)
-                }
-              />
-
               {/* COUNTRY */}
               <TextInput
                 label='البلد'
@@ -143,11 +127,24 @@ export const EditFamProfileModal = ({
 
               {/* PROFESSION */}
               <TextInput
-                label='الوظيفة'
+                label='النوع'
                 labelClassName='mdl:text-base mb-1 ps-0'
-                value={data?.profession}
+                value={data?.type}
                 onChange={(e) =>
-                  handleChange('profession', e.target.value)
+                  handleChange(
+                    'specialization',
+                    e.target.value
+                  )
+                }
+              />
+
+              {/* PHONE */}
+              <TextInput
+                label='رقم الهاتف'
+                labelClassName='mdl:text-base mb-1 ps-0'
+                value={data?.phone}
+                onChange={(e) =>
+                  handleChange('phone', e.target.value)
                 }
               />
             </div>

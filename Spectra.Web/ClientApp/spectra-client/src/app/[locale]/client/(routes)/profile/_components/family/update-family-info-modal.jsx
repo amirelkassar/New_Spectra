@@ -8,9 +8,11 @@ import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
 import Avatar from '@/components/avatar';
 import EditImgIcon from '@/assets/icons/editImg';
+import { cn } from '@/lib/utils';
 
-export const EditOrgProfileModal = ({
+export const UpdateFamilyInfoModal = ({
   children,
+  className = '',
   initialData = {},
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -30,7 +32,11 @@ export const EditOrgProfileModal = ({
     <>
       {/* TRIGGER */}
 
-      <div className='w-fit' role='dialog' onClick={open}>
+      <div
+        className={cn('w-fit', className)}
+        role='dialog'
+        onClick={open}
+      >
         {children}
       </div>
 
@@ -105,6 +111,16 @@ export const EditOrgProfileModal = ({
                 }
               />
 
+              {/* ID */}
+              <TextInput
+                label='رقم الهوية'
+                labelClassName='mdl:text-base mb-1 ps-0'
+                value={data?.id}
+                onChange={(e) =>
+                  handleChange('id', e.target.value)
+                }
+              />
+
               {/* COUNTRY */}
               <TextInput
                 label='البلد'
@@ -127,14 +143,11 @@ export const EditOrgProfileModal = ({
 
               {/* PROFESSION */}
               <TextInput
-                label='التخصص'
+                label='الوظيفة'
                 labelClassName='mdl:text-base mb-1 ps-0'
-                value={data?.specialization}
+                value={data?.profession}
                 onChange={(e) =>
-                  handleChange(
-                    'specialization',
-                    e.target.value
-                  )
+                  handleChange('profession', e.target.value)
                 }
               />
             </div>

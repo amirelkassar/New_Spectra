@@ -1,7 +1,7 @@
 import { Container, H1 } from '@/client/_components/ui';
-import { AddChild } from '../../../_family/_components/add-child';
-import { ChildPortfolio } from '../../../_family/_components/child-portfolio';
-import { ProfileInfo } from '../../../_family/_components/profile-info';
+import { AddChild } from '../../../_components/family/add-child';
+import { ChildPortfolio } from '../../../_components/child/child-portfolio';
+import { ProfileInfo } from '../../../_components/family/family-info';
 import { ChildSelect } from '@/client/_components/child';
 import { CHILDS } from '@/data';
 

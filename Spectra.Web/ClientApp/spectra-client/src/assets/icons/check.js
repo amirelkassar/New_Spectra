@@ -1,4 +1,4 @@
-import React from 'react';
+import { cn } from '@/lib/utils';
 
 const CheckIcon = ({ className, rest }) => {
   return (
@@ -8,11 +8,11 @@ const CheckIcon = ({ className, rest }) => {
       height='16'
       fill='none'
       viewBox='0 0 23 16'
-      className={className}
+      className={cn('text-white', className)}
       {...rest}
     >
       <path
-        stroke='#fff'
+        stroke='currentColor'
         strokeLinecap='round'
         strokeLinejoin='round'
         strokeWidth='2'

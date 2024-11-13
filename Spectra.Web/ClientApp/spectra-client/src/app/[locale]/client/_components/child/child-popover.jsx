@@ -1,111 +1,199 @@
 'use client';
-import { Popover } from '@mantine/core';
-import { useState } from 'react';
 
-import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { Popover } from '@mantine/core';
+import { useLocale } from 'next-intl';
+import { useDisclosure } from '@mantine/hooks';
+
 import { cn } from '@/lib/utils';
 import Avatar from '@/components/avatar';
-import { useLocale } from 'next-intl';
+import ArrowDownMainGreen from '@/assets/icons/arrow-down-main-green';
+import CheckIcon from '@/assets/icons/check';
 
 export const ChildPopover = ({
   data = [],
   disabled = false,
-  defaultSelected = '',
+  selected = {},
   onChange = () => {},
 }) => {
-  const initialValue =
-    data?.find((item) => item?.id === defaultSelected) ||
-    data[0];
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(initialValue);
+  const [opened, { toggle, close }] = useDisclosure(false);
+  const [mounted, setMounted] = useState(false);
 
-  if (data.length === 0) return null;
+  const onSelect = useCallback(
+    (child) => {
+      onChange(child);
+      close();
+    },
+    [close, onChange]
+  );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <Loading />;
+
+  if (!data.length) return <NoChild />;
+
   return (
     <Popover
       position='bottom'
-      width={'target'}
-      opened={open}
-      onChange={setOpen}
-      disabled={disabled}
+      width='target'
+      disabled={disabled || !data.length}
+      opened={opened}
+      onClose={close}
     >
       <Popover.Target>
-        <div
-          role='button'
-          onClick={() => setOpen(!open)}
-          className={cn(
-            'bg-white w-full flex items-center justify-between rounded-xl cursor-pointer px-4 py-1 lg:px-5 lg:py-3 max-w-full border-2 border-greenLight lg:border-none',
-            disabled && '!cursor-default opacity-70'
-          )}
+        <Button
+          role={disabled ? '' : 'button'}
+          onClick={() => {
+            if (!disabled) toggle();
+          }}
         >
-          <Child className='hover:bg-white' {...selected} />
-
-          {!disabled && (
-            <span
-              className={cn(
-                'bg-blueLight rounded-full size-7 lg:size-12 items-center justify-center flex transition',
-                {
-                  'rotate-180': open,
-                }
-              )}
-            >
-              <ArrowDownMainGreen className='size-4 lg:size-7' />
-            </span>
-          )}
-        </div>
+          <Child
+            className='hover:bg-white !p-0'
+            {...selected}
+          />
+          <Cheveron />
+        </Button>
       </Popover.Target>
 
-      <div className='max-w-[1400px]'>
-        <Popover.Dropdown className='shadow-md border-none space-y-5 px-0'>
-          {data.map(
-            (child) =>
-              child?.id !== selected?.id && (
-                <div
-                  key={child.id}
-                  role='button'
-                  onClick={() => {
-                    setSelected(child);
-                    onChange(child?.id);
-                    setOpen(false);
-                  }}
-                >
-                  <Child {...child} />
-                </div>
-              )
-          )}
-        </Popover.Dropdown>
-      </div>
+      <Popover.Dropdown className='shadow-md border-none rounded-lg !p-0'>
+        {data?.map((child) => (
+          <Child
+            key={child.id}
+            role='button'
+            isSelected={selected.id === child.id}
+            onClick={() => onSelect(child)}
+            {...child}
+          />
+        ))}
+      </Popover.Dropdown>
     </Popover>
   );
 };
 
 const Child = ({
-  id = '',
   avatar = '',
   name = '',
   diagnosis = '',
-  className = '',
+  isSelected = false,
+  ...props
 }) => {
   const locale = useLocale();
   return (
     <div
-      data-id={id}
+      {...props}
       className={cn(
-        'flex items-center p-2 gap-3 rounded-lg transition hover:bg-blueLight',
-        className
+        'flex grow items-center mdl:px-5 p-3 gap-3 transition hover:bg-blueLighter relative',
+        isSelected && 'bg-blueLighter',
+        props.className
       )}
     >
       <Avatar
-        className='size-[25px] mdl:size-[58px] min-w-max rounded-full inline-flex'
-        src={avatar || ''}
+        className='size-7 mdl:size-14 rounded-full shrink-0'
+        src={avatar}
         name={name}
+        size='sm'
       />
 
-      <div className='text-black flex items-center text-xs mdl:text-base w-fit gap-3'>
-        <h4 className='font-bold w-fit'>
-          {locale === 'ar' ? 'الطفل' : 'Child'} / {name}
-        </h4>
-        <p className='w-fit'>{diagnosis}</p>
-      </div>
+      <h4 className='font-bold text-xs mdl:text-base min-w-36 sml:min-w-44 mdl:min-w-56'>
+        {locale === 'ar' ? 'الطفل' : 'Child'} / {name}
+      </h4>
+
+      {diagnosis && (
+        <p className='text-xs mdl:text-base'>{diagnosis}</p>
+      )}
+
+      {isSelected && <Check />}
     </div>
   );
 };
+
+const NoChild = () => {
+  const locale = useLocale();
+
+  return (
+    <Button>
+      <div className='flex grow items-center gap-3'>
+        <div className='size-7 mdl:size-14 rounded-full shrink-0 bg-blueLight' />
+
+        <h4 className='font-bold text-xs mdl:text-base min-w-44 mdl:min-w-56'>
+          {locale === 'ar' ? 'لا يوجد أطفال' : 'No Childs'}
+        </h4>
+      </div>
+    </Button>
+  );
+};
+
+const Loading = () => {
+  const locale = useLocale();
+
+  return (
+    <Button>
+      <div className='flex grow items-center gap-3'>
+        <div className='size-7 mdl:size-14 rounded-full shrink-0 bg-blueLight' />
+
+        <h4 className='font-bold text-xs mdl:text-base min-w-44 mdl:min-w-56'>
+          {locale === 'ar'
+            ? 'جاري التحميل...'
+            : 'Loading...'}
+        </h4>
+      </div>
+    </Button>
+  );
+};
+
+const Cheveron = ({ ...props }) => {
+  return (
+    <div
+      {...props}
+      className={cn(
+        'bg-blueLighter rounded-full size-7 mdl:size-12 items-center shrink-0 justify-center flex transition group-aria-expanded:rotate-180',
+        props?.className
+      )}
+    >
+      <ArrowDownMainGreen
+        strokeWidth={1.5}
+        className='size-4 mdl:size-7 text-greenMain'
+      />
+    </div>
+  );
+};
+
+const Check = ({ ...props }) => {
+  return (
+    <div
+      {...props}
+      className={cn(
+        'shrink-0 absolute end-3 mdl:end-5 top-1/2 -translate-y-1/2 bg-white rounded-full size-7 mdl:size-12 flex items-center justify-center',
+        props?.className
+      )}
+    >
+      <CheckIcon className='size-4 mdl:size-7 text-greenMain' />
+    </div>
+  );
+};
+
+const Button = React.forwardRef(
+  ({ children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        {...props}
+        className={cn(
+          'bg-white w-full flex items-center rounded-xl mdl:px-5 p-3 group border-2 border-greenLight lg:border-none',
+          props?.className
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Button.displayName = 'Button';
