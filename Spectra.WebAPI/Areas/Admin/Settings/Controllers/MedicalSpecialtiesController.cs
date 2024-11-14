@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.MedicalSpecialties.Commands;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Application.Settings.ShowSpecialltion.Commands;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
