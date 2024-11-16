@@ -24,7 +24,7 @@ namespace Spectra.Application
 
             services.AddScoped<ICountryService, CountryService>();
 
-            services.AddSingleton<ApplicationSettingSeeder>();
+            services.AddScoped<ApplicationSettingSeeder>();
             //Register the Mediator
             services.AddMediatR(cfg =>
             {

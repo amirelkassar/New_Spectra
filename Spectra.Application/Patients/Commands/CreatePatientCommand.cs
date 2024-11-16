@@ -42,11 +42,8 @@ namespace Spectra.Application.Patients.Commands
                 request.Gender,
                 request.DateOfBirth,
                 request.RelationToClient,
-                request.ChildHeight,
-                request.ChildWeightt,
                 request.DateOfOnSetOfSymptoms,
-                request.InheritedOrAcquired, request.ClientId
-
+                request.ClientId
                 );
             await _patientRepository.AddAsync(patient);
             return OperationResult<string>.Success(patient.Id);

@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Settings.ShowSpecialltion;
+using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Domain.Settings.MedicalSpecialties;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
