@@ -17,6 +17,8 @@ namespace Spectra.Domain.Employees
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
+          // this id saved in Identity 
+        public string UserId { get; set; }
         protected BassEmployees() { }
 
         public BassEmployees(
@@ -26,9 +28,10 @@ namespace Spectra.Domain.Employees
                   PhoneNumber phoneNumber,
                   HumenGender humenGenders,
                   EmailAddress emailAddress,
-                  Address address
-
-                  ) : base(id)
+                  Address address,
+                  string userId
+    
+            ) : base(id)
          {
             Id = id;
             Name = name;
@@ -37,7 +40,8 @@ namespace Spectra.Domain.Employees
             EmailAddress = emailAddress;
             HumenGenders = humenGenders;
             Address = address;
-            }
+            UserId= userId;
+        }
     }
 
 

@@ -1,36 +1,15 @@
-import { Container, H1 } from '@/client/_components/ui';
-import { AddChild } from '../../../_components/family/add-child';
-import { ChildPortfolio } from '../../../_components/child/child-portfolio';
-import { ProfileInfo } from '../../../_components/family/family-info';
+import {
+  BackButton,
+  Container,
+} from '@/client/_components/ui';
+import { ChildPortfolio } from '../../../_components/child';
 import { ChildSelect } from '@/client/_components/child';
 import { CHILDS } from '@/data';
 
-const DATA = {
-  fullname: 'عبدالله الشيخ',
-  email: 'mohamed@gmail.com',
-  avatar: '',
-  id: 12345678902,
-  country: 'المملكة العربية السعودية',
-  city: 'الرياض',
-  profession: 'مدير هيئة حكومية',
-  childs: [],
-};
-
-const ChildPage = ({ params }) => {
-  const type = params?.type;
-  const childId = params?.childId;
-
+const ChildPage = () => {
   return (
     <Container>
-      <div className='flex items-center gap-5 mt-5 lg:mt-0 mb-5'>
-        <H1 id='family-profile'>ملفي</H1>
-
-        <AddChild />
-      </div>
-
-      {type === 'family' && (
-        <ProfileInfo initialData={DATA} />
-      )}
+      <BackButton />
 
       <ChildSelect data={CHILDS} />
 

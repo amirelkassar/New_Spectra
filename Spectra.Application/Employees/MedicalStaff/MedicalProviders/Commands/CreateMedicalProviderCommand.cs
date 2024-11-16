@@ -1,7 +1,8 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
@@ -32,7 +33,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
-
+        public string UserId { get; set; }
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
@@ -40,11 +41,13 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         private readonly IMedicalProviderRepository _medicalProvider;
         private readonly ISpecializationsRepository _specializationRepository;
         private readonly IHellper _addFile;
-        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository)
+        private readonly ICurrentUser _currentUser;
+        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository , ICurrentUser currentUser)
         {
             _medicalProvider = doctorRepository;
             _specializationRepository = specializationRepository;
             _addFile = addFile;
+            _currentUser=currentUser;
         }
         public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
@@ -96,9 +99,10 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-                   filePath,
+                filePath,
                 request.empelyeeRate = 0,
-                request.JobType
+                request.JobType,
+                request.UserId
                 );
 
 
