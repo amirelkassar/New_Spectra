@@ -119,6 +119,11 @@ function CategoriesVideo({ open }) {
       name: "report5",
       active: searchParams.get("reportNum") === "report5",
     },
+    {
+      label: "Psychological",
+      name: "report6",
+      active: searchParams.get("reportNum") === "report6",
+    },
   ];
   return (
     <>

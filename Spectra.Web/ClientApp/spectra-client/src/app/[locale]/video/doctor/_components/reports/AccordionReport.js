@@ -4,11 +4,7 @@ import { Textarea } from "@/components/inputs/textarea";
 import { SurveyForm } from "@/components/swyc/survey-form";
 import React from "react";
 
-function AccordionReport({
-  data = {},
-  answers = {},
-  setAnswers,
-}) {
+function AccordionReport({ data = {}, answers = {}, setAnswers }) {
   const handleSelect = (mainId, questionId, value, type = "radio") => {
     setAnswers((prev) => ({
       ...prev,
@@ -64,9 +60,12 @@ function AccordionReport({
                       className=" after:!hidden before:hidden pb-0 ps-6 "
                     >
                       <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
+                        {question?.ar && (
+                          <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
+                            {question?.ar}
+                          </SurveyForm.QuestionLabel>
+                        )}
+
                         {question?.type === "multi" ? (
                           <SurveyForm.Answers>
                             {question.options?.map(({ value, label }) => (

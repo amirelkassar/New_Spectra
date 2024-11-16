@@ -6,10 +6,11 @@ import FollowUp from "./reports/follow_up";
 import History from "./reports/history";
 import Speech from "./reports/speech";
 import MDT from "./reports/mdt";
+import Psychological from "./reports/psychological";
 
 function AddReport() {
   const searchParams = useSearchParams();
-
+ 
   const ViewCompReports = () => {
     switch (searchParams.get("reportNum")) {
       case "report1":
@@ -22,6 +23,8 @@ function AddReport() {
         return <Speech />;
       case "report5":
         return <MDT />;
+      case "report6":
+        return <Psychological />;
     }
   };
   return <ViewCompReports />;
