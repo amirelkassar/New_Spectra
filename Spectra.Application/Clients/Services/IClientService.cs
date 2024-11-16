@@ -9,8 +9,6 @@ namespace Spectra.Application.Clients.Services
     public interface IClientService
     {
         Task<OperationResult<string>> CreateClient(CreateNormalClientDto input);
-
-
         Task<OperationResult<Unit>> UpdateClient(string id, UpdateClientDto input);
         Task<OperationResult<Unit>> DeleteClient(string id);
         Task<OperationResult<Client>> GetClientById(string id);

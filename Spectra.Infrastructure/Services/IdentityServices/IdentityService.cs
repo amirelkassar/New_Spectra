@@ -44,6 +44,11 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 SurName = surName,
             };
 
+            if (await _userManager.FindByEmailAsync(userName) is not null)
+            {
+                throw new AlreadyExistException(userName, nameof(AppUser.Email));
+            }
+
             var result = await _userManager.CreateAsync(user, password);
 
             await _userManager.AddToRoleAsync(user, role);

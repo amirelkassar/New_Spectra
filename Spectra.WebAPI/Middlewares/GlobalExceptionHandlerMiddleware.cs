@@ -51,32 +51,39 @@ namespace Spectra.WebAPI.Middlewares
                     break;
 
                 case RequestErrorException _:
-                    errorType = "RequestError";
-                    errorCollection = new Dictionary<string, string[]>
-            {
-                { "RequestError", new[] { exception.Message } }
-            };
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
+                        errorType = "RequestError";
+                        errorCollection = new Dictionary<string, string[]>
+                {
+                    { "RequestError", new[] { exception.Message } }
+                };
+                        statusCode = HttpStatusCode.BadRequest;
+                        break;
 
                 case DbErrorException _:
-                    errorType = "DbError";
-                    errorCollection = new Dictionary<string, string[]>
-            {
-                { "DbError", new[] { exception.Message } }
-            };
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
+                        errorType = "DbError";
+                        errorCollection = new Dictionary<string, string[]>
+                {
+                    { "DbError", new[] { exception.Message } }
+                };
+                        statusCode = HttpStatusCode.BadRequest;
+                        break;
 
                 case NotFoundException notFoundException:
-                    errorType = "NotFoundError";
+                        errorType = "NotFoundError";
+                        errorCollection = new Dictionary<string, string[]>
+                {
+                    { "NotFoundError", new[] { notFoundException.Message } }
+                };
+                        statusCode = HttpStatusCode.NotFound;
+                        break;
+                case AlreadyExistException alreadyExistException:
+                    errorType = "AlreadyExistException";
                     errorCollection = new Dictionary<string, string[]>
-            {
-                { "NotFoundError", new[] { notFoundException.Message } }
-            };
-                    statusCode = HttpStatusCode.NotFound;
-                    break;
-
+                    {
+                        { alreadyExistException.Key, new[] { alreadyExistException.Value } }
+                    };
+                    statusCode = HttpStatusCode.BadRequest;
+                        break;
                 default:
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
@@ -86,13 +93,6 @@ namespace Spectra.WebAPI.Middlewares
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
-            //var errorResponse = new 
-            //{
-            //    errors = errorCollection,
-            //    errorType,
-            //    errorCode,
-            //    success
-            //};
 
             var errorrs = OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
             var jsonResponsee = JsonConvert.SerializeObject(errorrs);
