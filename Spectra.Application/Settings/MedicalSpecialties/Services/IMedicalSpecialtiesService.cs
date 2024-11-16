@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Settings.MedicalSpecialties.Commands;
+using Spectra.Application.Settings.ShowSpecialltion.Commands;
 using Spectra.Domain.Settings.MedicalSpecialties;
 using Spectra.Domain.Shared.Wrappers;
 
