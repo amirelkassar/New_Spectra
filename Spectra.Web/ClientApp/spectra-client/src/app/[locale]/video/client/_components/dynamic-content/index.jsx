@@ -7,6 +7,7 @@ import { TestsScans } from './tests-scans';
 import { Prescriptions } from './prescriptions';
 import { Reports } from './reports';
 import { Files } from './files';
+
 import { cn } from '@/lib/utils';
 
 export const DynamicContent = ({ ...props }) => {
@@ -27,18 +28,19 @@ export const DynamicContent = ({ ...props }) => {
       case 'chat':
         return <Chat />;
       default:
-        return <Chat />;
+        return null;
     }
   };
 
-  return (
-    <div
-      className={cn(
-        'flex-1 p-5 lgl:h-screen overflow-y-auto overflow-x-hidden flex flex-col *:flex-1',
-        props?.className
-      )}
-    >
-      <Content />
-    </div>
-  );
+  if (Content())
+    return (
+      <div
+        className={cn(
+          'lgl:col-span-3 flex-1 p-5 lgl:h-screen overflow-y-auto overflow-x-hidden flex flex-col *:flex-1',
+          props?.className
+        )}
+      >
+        <Content />
+      </div>
+    );
 };

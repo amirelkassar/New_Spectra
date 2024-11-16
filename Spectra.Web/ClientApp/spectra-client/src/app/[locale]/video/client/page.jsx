@@ -1,12 +1,15 @@
 import { DynamicContent } from './_components/dynamic-content';
 import { Video } from './_components/video';
+import { ClientVideoProvider } from './_hooks';
 
 const ClientVideoPage = () => {
   return (
-    <div className='flex-1 lgl:grid lgl:grid-cols-12 flex flex-col-reverse bg-white'>
-      <DynamicContent className='lgl:col-span-3' />
-      <Video />
-    </div>
+    <ClientVideoProvider>
+      <div className='flex-1 lgl:grid lgl:grid-cols-12 flex flex-col-reverse bg-white'>
+        <DynamicContent />
+        <Video />
+      </div>
+    </ClientVideoProvider>
   );
 };
 
