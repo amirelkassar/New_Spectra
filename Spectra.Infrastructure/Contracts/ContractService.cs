@@ -34,19 +34,11 @@ namespace Spectra.Infrastructure.Contracts
                     HoursOfWork = input.HoursOfWork,
                     DaysOfWork = input.DaysOfWork,
                     ContractCase = input.ContractCase,
-                    EmployeeId = input.EmployeeId,
-                    Titel = input.Titel,
                     Freelance = input.Freelance,
-                    SpectraTeam = input.SpectraTeam,
-               
+                    SpectraTeam = input.SpectraTeam
                 };
 
-
-
-
-                return await _mediator.Send(command);
-            
-           
+                return await _mediator.Send(command);           
         }
         public async Task<OperationResult<Unit>> EmployeeAccpetContract(string id)
         {
@@ -106,11 +98,7 @@ namespace Spectra.Infrastructure.Contracts
                 Titel = input.Titel,
                 Freelance = input.Freelance,
                 SpectraTeam = input.SpectraTeam,
-              
-
             };
-
-
             return await _mediator.Send(command);
         }
 

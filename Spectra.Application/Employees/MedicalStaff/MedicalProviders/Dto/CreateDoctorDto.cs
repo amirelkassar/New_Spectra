@@ -22,5 +22,6 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
         public JobTypes JobTypes { get; set; }
         //public List<IFormFile>? ScientificDegree { get; set; }
 
+
     }
 }

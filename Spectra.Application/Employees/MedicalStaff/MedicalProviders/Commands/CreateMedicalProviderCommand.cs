@@ -2,6 +2,8 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
@@ -38,20 +40,25 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
     public class CreateDoctorCommandHandler : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
     {
         private readonly IMedicalProviderRepository _medicalProvider;
+
         private readonly ISpecializationsRepository _specializationRepository;
+        private readonly IIdentityService _identityService;
+
         private readonly IHellper _addFile;
-        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository)
+        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService )
         {
             _medicalProvider = doctorRepository;
             _specializationRepository = specializationRepository;
             _addFile = addFile;
+            _identityService = identityService;
         }
         public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
             List<string>? filePath = null;
+            (OperationResult Result, string UserId) addUser;
             if (JobTypes.Doctor == request.JobType)
             {
-
+              addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Doctor);
                 var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
                 if (uploadfile != null)
                 {
@@ -68,23 +75,22 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
             }
             if (JobTypes.Specialist == request.JobType)
             {
-
+                 addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Specialist);
                 var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
                 if (uploadfile != null)
                 {
                     filePath = uploadfile;
 
                 }
-              
             }
             if (filePath == null)
             {
 
                 throw new RequestErrorException(" you must to Uplode  your ScientificDegrees ");
             }
-            //here we make Photo = null to test the Server
-
-            var medicalProvider = MedicalProvider.Create(
+            addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Doctor);
+         
+              var medicalProvider = MedicalProvider.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
                 request.NationalId,
@@ -98,15 +104,14 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.Academicdegree,
                    filePath,
                 request.empelyeeRate = 0,
-                request.JobType
+                request.JobType,
+                addUser.UserId
                 );
 
 
             await _medicalProvider.AddAsync(medicalProvider);
 
             return OperationResult<string>.Success(medicalProvider.Id);
-
-
         }
     }
     public class BassMedicalStaffValidator : AbstractValidator<MedicalProvider>

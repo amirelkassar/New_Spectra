@@ -1,5 +1,4 @@
 ﻿
-using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
@@ -14,9 +13,10 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<string>? AttachmentPath { get; set; }=new List<string>();
+        public List<string>? AttachmentPath { get; set; } = new List<string>();
         public EmpelyeeRates? EmpelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
+
 
         protected MedicalProvider() { }
         public MedicalProvider(
@@ -27,15 +27,15 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    HumenGender humenGenders,
                    EmailAddress emailAddress,
                    Address address,
-                  List<string> diagnoses,
+                   List<string> diagnoses,
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
-                    List<string>? attachmentPath,
+                   List<string>? attachmentPath,
                    EmpelyeeRates? empelyeeRate,
-                     JobTypes jobType
-
-                   ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)
+                   JobTypes jobType,
+                   string userId
+                   ) : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, userId)
         {
             Id = id;
             Name = name;
@@ -51,6 +51,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
             AttachmentPath = attachmentPath;
             EmpelyeeRate = empelyeeRate;
             JobType = jobType;
+            UserId = userId;
         }
 
         public static MedicalProvider Create(
@@ -61,13 +62,14 @@ namespace Spectra.Domain.Employees.MedicalStaff
           EmailAddress emailAddress,
           HumenGender humenGenders,
           Address address,
-         List<string> diagnoses,
+          List<string> diagnoses,
           string? licenseNumber,
           string? approvedBy,
           string academicdegree,
-           List<string> attachmentPath,
-           EmpelyeeRates? empelyeeRate,
-          JobTypes jobType
+          List<string> attachmentPath,
+          EmpelyeeRates? empelyeeRate,
+          JobTypes jobType,
+          string userId
           )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -82,7 +84,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
 
             var medicalProvider = new MedicalProvider(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType, userId
                );
 
             return medicalProvider;

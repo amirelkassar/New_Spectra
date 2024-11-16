@@ -4,6 +4,8 @@ using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
+using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 {
@@ -13,14 +15,16 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
     {
         private readonly IMedicalProviderService _medicalProviderService;
         private readonly IChatService _chatService;
-        public DoctorController(IMedicalProviderService DoctorService, IChatService chatService)
+        private readonly ICurrentUser _currentUser;
+        private readonly IIdentityService _identityService;
+
+        public DoctorController(IMedicalProviderService medicalProviderService, IChatService chatService, ICurrentUser currentUser , IIdentityService identityService)
         {
-
-            _medicalProviderService = DoctorService;
+            _medicalProviderService = medicalProviderService;
             _chatService = chatService;
-
+            _currentUser = currentUser;
+            _identityService = identityService;
         }
-
 
         [HttpGet("AllClients/id")]
         [AllowAnonymous]
@@ -51,8 +55,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
         {
-
-
+        
             var doctor = await _medicalProviderService.CreateMedicalProvider(
                     input.FirstName,
                     input.LastName,
@@ -69,6 +72,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
                     input.HumenGenders,
                     input.LicenseNumber,
                     input.JobTypes
+                    
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
         }

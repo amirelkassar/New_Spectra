@@ -1,7 +1,11 @@
 ﻿using MediatR;
+using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.ManagementStaff.Commands;
 using Spectra.Application.Employees.ManagementStaff.Queries;
 using Spectra.Application.Employees.ManagementStaff.Service;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
+using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -13,11 +17,12 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
     {
 
         private readonly IMediator _mediator;
-
-        public ManagementStaffService(IMediator mediator)
+        private readonly IIdentityService _identityService;
+        public ManagementStaffService(IMediator mediator, IChatService chatService, ICurrentUser currentUser, IIdentityService identityService)
         {
-            _mediator = mediator;
 
+            _mediator = mediator;
+            _identityService = identityService;
         }
 
 
@@ -39,7 +44,7 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
        JobTypes jobType
      )
         {
-
+      
             var name = new Name
             {
                 FirstName = firstName,
@@ -75,7 +80,8 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Qualifications = qualifications,
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType = jobType   
+                JobType = jobType,
+           
             };
             return await _mediator.Send(command);
         }
@@ -152,8 +158,8 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Qualifications = qualifications,
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType=jobType,
-                Address=address
+                JobType = jobType,
+                Address = address
                 ,
             };
 
@@ -165,5 +171,5 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
 }
 
 
-    
+
 

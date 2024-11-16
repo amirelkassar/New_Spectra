@@ -8,12 +8,14 @@ using Spectra.Application.Contracts.Services;
 using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Hellper;
+using Spectra.Application.Identities;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Infrastructure.Services.IdentityServices;
 
 
 namespace Spectra.Infrastructure.Admin
@@ -25,9 +27,9 @@ namespace Spectra.Infrastructure.Admin
         private readonly IMedicalProviderService _specialistService;
         private readonly IManagementStaffService _managementStaffService;
         private readonly IContractService _contractService;
+        private readonly IIdentityService  _identityService;
 
-
-        public AdminService(IMediator mediator, IMedicalProviderService doctorService, IMedicalProviderService specialistService, IManagementStaffService managementStaffService , IContractService contractService   )
+        public AdminService(IMediator mediator, IMedicalProviderService doctorService, IMedicalProviderService specialistService, IManagementStaffService managementStaffService , IContractService contractService , IIdentityService identityService)
         {
 
             _mediator = mediator;
@@ -35,6 +37,7 @@ namespace Spectra.Infrastructure.Admin
             _specialistService = specialistService;
             _managementStaffService = managementStaffService;
             _contractService = contractService;
+            _identityService = identityService;
 
         }
         public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
@@ -147,6 +150,7 @@ namespace Spectra.Infrastructure.Admin
 
         public async Task<OperationResult<string>> CreateEmplyee(CreateEmployeesDto input)
         {
+
             OperationResult<string> query;
             if (JobTypes.Doctor == input.JobTypes)
             {
@@ -190,7 +194,7 @@ namespace Spectra.Infrastructure.Admin
                     input.HumenGenders,
                     input.LicenseNumber
                     //input.ScientificDegree
-                    ,JobTypes.Specialist);
+                    , JobTypes.Specialist);
 
                 return query;
             }
