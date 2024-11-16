@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 const PlusInsideCircleIcon = ({ ...props }) => {
@@ -9,6 +10,7 @@ const PlusInsideCircleIcon = ({ ...props }) => {
       fill='none'
       viewBox='0 0 18 19'
       {...props}
+      className={cn('text-greenMain', props?.className)}
     >
       <path
         fill='currentColor'
