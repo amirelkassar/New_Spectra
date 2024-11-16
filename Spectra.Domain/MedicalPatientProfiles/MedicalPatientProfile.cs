@@ -1,10 +1,5 @@
-﻿using Spectra.Domain.MasterData.GeneralComplaints;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MedicalPatientProfiles
 {
@@ -12,12 +7,12 @@ namespace Spectra.Domain.MedicalPatientProfiles
     {
 
         public string DoctorId { get; set; }
-        public string PatientId { get; set;}
+        public string PatientId { get; set; }
         public string PatientName { get; set; }
         public string ClientId { get; set; }
         public string ClientName { get; set; }
 
-      
+
 
 
 
@@ -27,18 +22,18 @@ namespace Spectra.Domain.MedicalPatientProfiles
           string doctorId,
           string patientId,
           string clientId,
-      
+
             string patientName,
             string clientName
             ) : base(id)
-       
+
         {
 
             Id = id;
             DoctorId = doctorId;
             PatientId = patientId;
             ClientId = clientId;
-        
+
             PatientName = patientName;
             ClientName = clientName;
         }
@@ -55,12 +50,12 @@ namespace Spectra.Domain.MedicalPatientProfiles
 
             ArgumentNullException.ThrowIfNull(patientName, nameof(patientName));
             ArgumentNullException.ThrowIfNull(clientName, nameof(clientName));
- 
 
 
 
 
-            return new MedicalPatientProfile(id, doctorId, patientId, clientId  , patientName, clientName);
+
+            return new MedicalPatientProfile(id, doctorId, patientId, clientId, patientName, clientName);
 
         }
     }

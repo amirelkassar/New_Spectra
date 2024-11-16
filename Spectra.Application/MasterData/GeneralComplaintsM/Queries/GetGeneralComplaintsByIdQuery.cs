@@ -1,15 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.Clients;
-using Spectra.Application.MasterData.GeneralComplaintsM;
-using Spectra.Domain.Clients;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
 {
@@ -34,16 +26,16 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
         {
 
 
-     
-                var entitiy = await _generalComplaintRepository.GetByIdAsync(request.Id);
-                if (entitiy == null)
-                {
-                    throw new NotFoundException("GeneralComplaint", request.Id);
-                }
 
-                return OperationResult<GeneralComplaint>.Success(entitiy);
- 
-      
+            var entitiy = await _generalComplaintRepository.GetByIdAsync(request.Id);
+            if (entitiy == null)
+            {
+                throw new NotFoundException("GeneralComplaint", request.Id);
+            }
+
+            return OperationResult<GeneralComplaint>.Success(entitiy);
+
+
         }
     }
 }

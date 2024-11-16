@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Domain.Shared.Wrappers;
 

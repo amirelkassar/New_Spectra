@@ -1,13 +1,13 @@
 ﻿using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Spectra.Domain.Settings.SuccessStorIes
 {
-    public class SuccessStory : BaseAuditableEntity<string> {
+    public class SuccessStory : BaseAuditableEntity<string>
+    {
 
 
         public string ChiledeName { get; set; }
@@ -19,12 +19,12 @@ namespace Spectra.Domain.Settings.SuccessStorIes
         public string ContentComment { get; set; }
         public string? FamilyPhoto { get; set; }
         public string? FamilyVideo { get; set; }
-  
+
         protected SuccessStory() { }
 
         private SuccessStory(
             string id,
-    
+
             string chiledeName,
             string diagnosis,
             string descript,
@@ -34,7 +34,7 @@ namespace Spectra.Domain.Settings.SuccessStorIes
             string contentComment,
             string? familyPhoto,
             string? familyVideo
-     
+
         ) : base(id)
         {
             Id = id;
@@ -48,12 +48,12 @@ namespace Spectra.Domain.Settings.SuccessStorIes
             ContentComment = contentComment;
             FamilyPhoto = familyPhoto;
             FamilyVideo = familyVideo;
-         
+
         }
 
         public static SuccessStory Create(
             string id,
-          
+
             string chiledeName,
             string diagnosis,
             string descript,
@@ -63,7 +63,7 @@ namespace Spectra.Domain.Settings.SuccessStorIes
             string contentComment,
             string? familyPhoto,
             string? familyVideo
-    
+
         )
         {
             // Validate required parameters
@@ -74,10 +74,10 @@ namespace Spectra.Domain.Settings.SuccessStorIes
             ArgumentNullException.ThrowIfNull(chiledPhotoBefore, nameof(chiledPhotoBefore));
             ArgumentNullException.ThrowIfNull(chiledPhotoAfter, nameof(chiledPhotoAfter));
             ArgumentNullException.ThrowIfNull(sectionStory, nameof(sectionStory));
-         
 
 
-     
+
+
             var secationList = sectionStory.Select(x => new SectionSetings
             {
                 SectionDescription = x.SectionDescription,
@@ -95,7 +95,7 @@ namespace Spectra.Domain.Settings.SuccessStorIes
                 contentComment,
                 familyPhoto,
                 familyVideo
-           
+
             );
         }
     }

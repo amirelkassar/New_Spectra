@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2016.Excel;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
@@ -55,11 +54,11 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
 
                 var allPathes = entity.SectionStory.Select(x => x.AttachmentPath).ToList();
 
-                    entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore); 
-                    entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore); 
-                    entity.FamilyPhoto = await CheckMthode(entity.FamilyPhoto, request.FamilyPhoto, Pathes.FamilyPhoto);
-            
-                    var allSections = new List<SectionSetings>();
+                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore);
+                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore);
+                entity.FamilyPhoto = await CheckMthode(entity.FamilyPhoto, request.FamilyPhoto, Pathes.FamilyPhoto);
+
+                var allSections = new List<SectionSetings>();
                 var descriptions = request.SectionDescription ?? new List<string>();
                 var photos = request.AttachmentPath ?? new List<IFormFile>();
 
@@ -89,11 +88,11 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
                 await _successStorIesRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
             }
-            public async Task<string> CheckMthode( string oldPath ,IFormFile data  ,string pathes)
+            public async Task<string> CheckMthode(string oldPath, IFormFile data, string pathes)
             {
                 if (data != null)
                 {
-                   var newPath = await _addPhoto.UpdateAttachment(oldPath, data, pathes);
+                    var newPath = await _addPhoto.UpdateAttachment(oldPath, data, pathes);
                     return newPath;
                 }
                 return oldPath;

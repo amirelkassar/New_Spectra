@@ -21,8 +21,8 @@ namespace Spectra.Application.Contracts.Commands
         public string EmployeeId { get; set; }
         public string Titel { get; set; }
         public string FirstName { get; set; }
-        public string LastName{ get; set; }
-        public ContractCases ContractCase { get; set; }    
+        public string LastName { get; set; }
+        public ContractCases ContractCase { get; set; }
 
     }
 
@@ -69,7 +69,7 @@ namespace Spectra.Application.Contracts.Commands
             //    return OperationResult<Unit>.Success(Unit.Value);
 
             //}
-            if (request.ContractCase== ContractCases.BACkTOEMPlOYEE)
+            if (request.ContractCase == ContractCases.BACkTOEMPlOYEE)
             {
                 contract.ContractCase = ContractCases.BACkTOEMPlOYEE;
             }
@@ -115,16 +115,16 @@ namespace Spectra.Application.Contracts.Commands
               fullName,
               AdminOrEmployee.Employee
              );
-                 
+
                     await _contractRepository.AddAsync(contracts);
                     contract.ContractCase = ContractCases.REFUSE;
                     await _contractRepository.UpdateAsync(contract);
 
                     return OperationResult<Unit>.Success(Unit.Value);
-                    
+
             }
 
-           
+
 
         }
     }

@@ -23,20 +23,20 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
         public async Task<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>> Handle(GetSpecializationByIdQuery request, CancellationToken cancellationToken)
         {
 
-            
-            
-                var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
-                if (Specialization == null)
-                {
-                    throw new NotFoundException("Specialization", request.Id);
-                }
 
 
-                return OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>.Success(Specialization);
-            
-         
-           
-         
+            var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
+            if (Specialization == null)
+            {
+                throw new NotFoundException("Specialization", request.Id);
+            }
+
+
+            return OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>.Success(Specialization);
+
+
+
+
         }
     }
 

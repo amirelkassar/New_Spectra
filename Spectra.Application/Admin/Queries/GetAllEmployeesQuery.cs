@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Employees.ManagementStaff;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -10,30 +9,30 @@ namespace Spectra.Application.Admin.Queries
 {
     public class GetAllEmployeesQuery : IRequest<OperationResult<CollectAllEmployeeDto>>
     {
-        public int PageNumber { get; set; } 
+        public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public JobTypes? JobType { get; set; }
     }
 
     public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, OperationResult<CollectAllEmployeeDto>>
     {
-        private readonly IMedicalProviderRepository _doctorRepositor;
-        private readonly IMedicalProviderRepository _specialistRepository;
+        private readonly IDoctorRepository _doctorRepositor;
+        private readonly ISpecialistRepository _specialistRepository;
         private readonly IManagementStaffRepository _staffRepository;
-        public GetAllEmployeesQueryHandler(IMedicalProviderRepository doctorRepositor , IMedicalProviderRepository specialistRepository , IManagementStaffRepository managementStaffRepository )
+        public GetAllEmployeesQueryHandler(IDoctorRepository doctorRepositor, ISpecialistRepository specialistRepository, IManagementStaffRepository managementStaffRepository)
         {
             _doctorRepositor = doctorRepositor;
             _specialistRepository = specialistRepository;
             _staffRepository = managementStaffRepository;
-    }
+        }
 
         public async Task<OperationResult<CollectAllEmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
 
 
 
-            var doctors = await _doctorRepositor.GetAllAsync(x=>x.JobType== JobTypes.Doctor);
-            var specialists = await _specialistRepository.GetAllAsync(x => x.JobType == JobTypes.Specialist);
+            var doctors = await _doctorRepositor.GetAllAsync();
+            var specialists = await _specialistRepository.GetAllAsync();
             var managementStaff = await _staffRepository.GetAllAsync();
 
 
@@ -73,10 +72,10 @@ namespace Spectra.Application.Admin.Queries
                 .Take(request.PageSize)
                 .ToList();
 
-           
+
             var collectEmployees = new CollectAllEmployeeDto
             {
-                Employees = paginatedEmployees, 
+                Employees = paginatedEmployees,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 TotalPages = totalPages,

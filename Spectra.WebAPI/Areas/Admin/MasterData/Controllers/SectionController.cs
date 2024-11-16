@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Admin.Queries;
 using Spectra.Application.MasterData.Sections.Commands;
-using Spectra.Application.MasterData.Sections.Queries;
 using Spectra.Application.MasterData.Sections.Service;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers

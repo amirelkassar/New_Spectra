@@ -2,11 +2,6 @@
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Settings.AppSettings;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Settings.AppSettings
 {
@@ -22,7 +17,7 @@ namespace Spectra.Infrastructure.Settings.AppSettings
             _dataProtector = dataProtectionProvider.CreateProtector(nameof(SettingService));
         }
 
-        public async Task<bool> AnyAsync(string name)=>await _settingRepository.AnyAsync(s=>s.LogicalName== name);
+        public async Task<bool> AnyAsync(string name) => await _settingRepository.AnyAsync(s => s.LogicalName == name);
 
         public async Task<ApplicationSetting?> CreateSettingAsync(string name, string value, bool encrypted, string? description = null, string? group = null)
         {
@@ -69,7 +64,7 @@ namespace Spectra.Infrastructure.Settings.AppSettings
 
         public async Task<ApplicationSetting> GetSettingAsync(string name)
         {
-            var setting= await _settingRepository.GetByNameAsync(name);
+            var setting = await _settingRepository.GetByNameAsync(name);
             if (setting.Encrypted)
             {
                 setting.Value = _dataProtector.Unprotect(setting.Value);

@@ -24,8 +24,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries
 
         public async Task<OperationResult<IEnumerable<MedicalProvider>>> Handle(GetAllMedicalProviderQuery request, CancellationToken cancellationToken)
         {
-    
-            var MedicalProvider = await _MedicalProviderRepository.GetAllAsync(x=>x.JobType == request.JobTypes);
+
+            var MedicalProvider = await _MedicalProviderRepository.GetAllAsync(x => x.JobType == request.JobTypes);
 
             return OperationResult<IEnumerable<MedicalProvider>>.Success(MedicalProvider);
 

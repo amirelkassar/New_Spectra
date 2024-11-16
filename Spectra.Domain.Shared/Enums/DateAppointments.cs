@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.Shared.Enums
+﻿namespace Spectra.Domain.Shared.Enums
 {
     public enum MoringOrNight
     {
@@ -28,9 +22,9 @@ namespace Spectra.Domain.Shared.Enums
     public enum AppointmentServices
     {
         EarlyServiceRequest = 1,
-        MedicationFollowUpService=2,
-        SessionMultiServiceDiagnostics=3,
-        RequestForSpecializedConsultations=4
+        MedicationFollowUpService = 2,
+        SessionMultiServiceDiagnostics = 3,
+        RequestForSpecializedConsultations = 4
 
     }
     public enum DaysOfWeeks

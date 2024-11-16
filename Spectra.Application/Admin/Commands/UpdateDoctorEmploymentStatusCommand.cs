@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
@@ -14,10 +13,10 @@ namespace Spectra.Application.Admin.Commands
 
     public class UpdateDoctorEmploymentStatusCommandHandler : IRequestHandler<UpdateDoctorEmploymentStatusCommand, OperationResult<Unit>>
     {
-        private readonly IMedicalProviderRepository _doctorRepository;
+        private readonly IDoctorRepository _doctorRepository;
         private readonly ISpecializationsRepository _specializationRepository;
 
-        public UpdateDoctorEmploymentStatusCommandHandler(IMedicalProviderRepository doctorRepository, ISpecializationsRepository specializationRepository)
+        public UpdateDoctorEmploymentStatusCommandHandler(IDoctorRepository doctorRepository, ISpecializationsRepository specializationRepository)
         {
             _doctorRepository = doctorRepository;
             _specializationRepository = specializationRepository;
@@ -39,11 +38,11 @@ namespace Spectra.Application.Admin.Commands
                     specialization.DoctorCount += 1;
                     await _specializationRepository.UpdateAsync(specialization);
                 }
-            
+
 
                 //doctor.Status = request.Status;
 
-             
+
 
                 await _doctorRepository.UpdateAsync(doctor);
 

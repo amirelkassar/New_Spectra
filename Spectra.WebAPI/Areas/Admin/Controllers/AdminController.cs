@@ -32,14 +32,14 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         private readonly IMedicalTeamService _medicalTeamService;
 
         public AdminController(IAdminService adminService, IClientService clientService, IMedicalProviderService doctorService, IContractService contractService,
-            IManagementStaffService managementStaffService, IMedicalTeamService medicalTeamService )
+            IManagementStaffService managementStaffService, IMedicalTeamService medicalTeamService)
         {
             _adminService = adminService;
             _clientService = clientService;
             _contractService = contractService;
-            _doctorService = doctorService; 
+            _doctorService = doctorService;
             _managementStaffService = managementStaffService;
-            _medicalTeamService=medicalTeamService;
+            _medicalTeamService = medicalTeamService;
         }
 
         [HttpGet("GetAllDoctors")]
@@ -162,7 +162,7 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
             return Ok(clients);
         }
 
-     
+
         [HttpGet("GetOneOfNormalStaff/id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetOneOfNormalStaff(string id, JobTypes input)
@@ -174,22 +174,22 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> UpdateNormalStaff(string id, UpdateManagementStaffDto input)
         {
-      var employee = await _managementStaffService.UpdateEmployees(id, 
-        input.FirstName,
-        input.LastName,
-        input.Prefix,
-        input.PhoneNumbers,
-        input.CountryCode,
-        input.Emailaddress,
-        input.Country,
-        input.City,
-        input.NationalId,
-        input.HumenGenders,
-        input.JobName,
-        input.Qualifications,
-        input.TimeToJoin,
-        input.WorkingHours,
-        input.JobType );
+            var employee = await _managementStaffService.UpdateEmployees(id,
+              input.FirstName,
+              input.LastName,
+              input.Prefix,
+              input.PhoneNumbers,
+              input.CountryCode,
+              input.Emailaddress,
+              input.Country,
+              input.City,
+              input.NationalId,
+              input.HumenGenders,
+              input.JobName,
+              input.Qualifications,
+              input.TimeToJoin,
+              input.WorkingHours,
+              input.JobType);
             return Ok(employee);
         }
 
@@ -198,19 +198,19 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
 
         [HttpPost("CreateMedicalTeam")]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateMedicalTeam( CreateMedicalTeamCommand input)
+        public async Task<ActionResult> CreateMedicalTeam(CreateMedicalTeamCommand input)
         {
 
             var employees = await _medicalTeamService.CreateMedicalTeam(input);
             return Ok(employees);
         }
-     
+
         [HttpPut("EditMedicalTeam/id")]
         [AllowAnonymous]
-        public async Task<ActionResult> UpdateMedicalTeam(string id ,UpdateMedicalTeamCommand input)
+        public async Task<ActionResult> UpdateMedicalTeam(string id, UpdateMedicalTeamCommand input)
         {
 
-            var employees = await _medicalTeamService.UpdateMedicalTeam( id,input);
+            var employees = await _medicalTeamService.UpdateMedicalTeam(id, input);
             return Ok(employees);
         }
 

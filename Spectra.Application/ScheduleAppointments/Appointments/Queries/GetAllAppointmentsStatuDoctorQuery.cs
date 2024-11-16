@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Clients;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Application.ScheduleAppointments.Appointments.DTO;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
@@ -20,9 +19,9 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        private readonly IMedicalProviderRepository _doctorRepository;
+        private readonly IDoctorRepository _doctorRepository;
         private readonly IClientRepository _clientRepository;
-        public GetAllAppointmentsStatuDoctorQueryHandler(IAppointmentRepository appointmentRepository, IMedicalProviderRepository doctorRepository, IClientRepository clientRepository)
+        public GetAllAppointmentsStatuDoctorQueryHandler(IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository, IClientRepository clientRepository)
         {
             _appointmentRepository = appointmentRepository;
             _doctorRepository = doctorRepository;

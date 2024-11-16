@@ -3,7 +3,6 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace Spectra.Domain.Contracts
 {
@@ -16,12 +15,12 @@ namespace Spectra.Domain.Contracts
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
         public string EmployeeId { get; set; }
-        public Name EmployeeName{ get; set; }
+        public Name EmployeeName { get; set; }
         public string Titel { get; set; }
         public ContractCases ContractCase { get; set; }
         public AdminOrEmployee? AdminOrEmployee { get; set; }
 
-      
+
         //public DateTime StartDate { get; set; }
         //public DateTime EndDate { get; set; }
         protected EmploymentContract() { }
@@ -37,7 +36,7 @@ namespace Spectra.Domain.Contracts
             string titel,
             ContractCases contractCase,
              Name employeeName,
-         AdminOrEmployee adminOrEmployee 
+         AdminOrEmployee adminOrEmployee
             ) : base(id)
         {
             Id = id;
@@ -49,7 +48,7 @@ namespace Spectra.Domain.Contracts
             EmployeeId = employeeId;
             Titel = titel;
             EmployeeName = employeeName;
-            AdminOrEmployee= adminOrEmployee;
+            AdminOrEmployee = adminOrEmployee;
         }
         public static EmploymentContract Create(
            string id,
@@ -68,11 +67,11 @@ namespace Spectra.Domain.Contracts
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(hoursOfWork, nameof(hoursOfWork));
             ArgumentNullException.ThrowIfNull(daysOfWork, nameof(daysOfWork));
-            ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase)); 
+            ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(employeeId, nameof(employeeId));
             ArgumentNullException.ThrowIfNull(employeeName, nameof(employeeName));
 
-            return new EmploymentContract(id, freelance , spectraTeam, hoursOfWork, daysOfWork ,employeeId, titel, contractCase , employeeName, adminOrEmployee);
+            return new EmploymentContract(id, freelance, spectraTeam, hoursOfWork, daysOfWork, employeeId, titel, contractCase, employeeName, adminOrEmployee);
         }
 
     }

@@ -5,7 +5,6 @@ using Spectra.Application.Admin.Queries;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -21,11 +20,11 @@ namespace Spectra.Infrastructure.Admin
         Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input);
         Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> GetAllContractsOfEployees(GetAllContractWithStatusQuery input);
         Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
-        Task<OperationResult<PaginatedResult<MedicalProvider>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input);
+        Task<OperationResult<PaginatedResult<Doctor>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input);
         Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input);
         Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input);
         Task<OperationResult<Unit>> UpdateContractFromAdmin(string id, UpdateContractToSendToEmployeeCommand input);
-        Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input );
+        Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input);
 
         //Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input);
         //Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);

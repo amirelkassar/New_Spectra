@@ -1,13 +1,13 @@
 ﻿using MediatR;
-using Spectra.Domain.MasterData.Drug;
-using Spectra.Application.MasterData.Drug.Commands;
-using Spectra.Application.MasterData.Drug.Services;
-using Spectra.Application.MasterData.Drug.Queries;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData;
+using Spectra.Application.MasterData.Drug.Commands;
+using Spectra.Application.MasterData.Drug.Queries;
+using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Application.MasterData;
 
 namespace Spectra.Infrastructure.MasterData.Drug
 {
@@ -33,7 +33,7 @@ namespace Spectra.Infrastructure.MasterData.Drug
                 Doncentration = input.Doncentration,
                 ActiveIngredient = input.ActiveIngredient,
                 Contraindications = input.Contraindications,
-               InteractionsWithOtherdrugs = input.InteractionsWithOtherdrugs,
+                InteractionsWithOtherdrugs = input.InteractionsWithOtherdrugs,
                 RecommendedDosage = input.RecommendedDosage,
                 ScientificName = input.ScientificName,
                 Photo = input.Photo,
@@ -54,7 +54,7 @@ namespace Spectra.Infrastructure.MasterData.Drug
                 Doncentration = cells[1],
                 ActiveIngredient = cells[2],
                 Contraindications = cells[3],
-              InteractionsWithOtherdrugs = cells[4],
+                InteractionsWithOtherdrugs = cells[4],
                 RecommendedDosage = cells[5],
                 ScientificName = cells[6],
                 Photo = null,

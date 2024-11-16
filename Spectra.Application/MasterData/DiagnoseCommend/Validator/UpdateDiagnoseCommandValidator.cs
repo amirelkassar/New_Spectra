@@ -12,7 +12,7 @@
 //    {
 //        public UpdateDiagnoseCommandValidator()
 //        {
-          
+
 
 //            RuleFor(x => x.DiagnosisName)
 //                .NotEmpty().WithMessage("Diagnosis name is required.")

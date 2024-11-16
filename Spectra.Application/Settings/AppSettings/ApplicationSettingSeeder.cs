@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Spectra.Domain.Common.Conses.SettingsConses;
+﻿using static Spectra.Domain.Common.Conses.SettingsConses;
 
 namespace Spectra.Application.Settings.AppSettings
 {
@@ -16,10 +11,10 @@ namespace Spectra.Application.Settings.AppSettings
             _settingService = settingService;
         }
 
-        public async Task Initialize() 
+        public async Task Initialize()
         {
             if (!await _settingService.AnyAsync(EmailSettings.Host))
-            await _settingService.CreateSettingAsync(EmailSettings.Host, "127.0.0.1", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.Host, "127.0.0.1", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Port))
                 await _settingService.CreateSettingAsync(EmailSettings.Port, "567", false, group: EmailSettings.Group);

@@ -8,13 +8,9 @@ using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Services.IdentityServices
 {

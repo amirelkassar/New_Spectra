@@ -1,16 +1,8 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.SpecializationCommend;
-
-using Spectra.Domain.MasterData.DoctorsSpecialization;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.Specialization
 {
@@ -25,7 +17,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
         }
         public async Task<Domain.MasterData.DoctorsSpecialization.Specialization> GetByIdAsync(string id)
         {
-         
+
             var entity = await _specializations.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

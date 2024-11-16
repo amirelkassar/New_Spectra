@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.MasterData.InternalExaminations;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Queries
 {
@@ -23,13 +23,13 @@ namespace Spectra.Application.MasterData.InternalExaminations.Queries
         {
 
 
-          
-                var entitiy = await _InternalExaminationRepository.GetByIdAsync(request.Id); ;
-           
 
-                return OperationResult<InternalExamination>.Success(entitiy);
-            
-          
+            var entitiy = await _InternalExaminationRepository.GetByIdAsync(request.Id); ;
+
+
+            return OperationResult<InternalExamination>.Success(entitiy);
+
+
         }
     }
 }

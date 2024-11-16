@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.MasterData.DiagnoseCommend.DTO;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -26,7 +25,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
 
                 var entity = await _generalComplaintRepository.GetAllAsync();
 
-                var entitiesNames = entity.Select(x => new BassMasterDataDto { Name = x.ComplaintName , Id= x.Id});
+                var entitiesNames = entity.Select(x => new BassMasterDataDto { Name = x.ComplaintName, Id = x.Id });
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(entitiesNames);
 

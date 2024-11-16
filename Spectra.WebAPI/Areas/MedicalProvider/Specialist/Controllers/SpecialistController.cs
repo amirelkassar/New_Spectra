@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
 {
@@ -32,7 +31,6 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
             return Ok(doctor);
         }
 
-
         [HttpGet("SpecificService")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllDoctorSpecificService()
@@ -50,11 +48,11 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
             return Ok(doctor);
         }
 
-
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
         {
+
 
             var doctor = await _medicalProviderService.CreateMedicalProvider(
                     input.FirstName,
@@ -74,19 +72,17 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input.JobTypes
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
-       }
-
-
+        }
         [HttpPut("id")]
         [AllowAnonymous]
         public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
         {
 
+
             var doctor = await _medicalProviderService.UpdateMedicalProvider(id, input);
 
             return Ok(doctor);
         }
-
         [HttpDelete("id")]
         [AllowAnonymous]
         public async Task<ActionResult> DeleteDoctor(string id)

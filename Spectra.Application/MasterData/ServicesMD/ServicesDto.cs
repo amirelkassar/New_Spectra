@@ -1,16 +1,9 @@
-﻿using Spectra.Domain.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Application.MasterData.ServicesMD
+﻿namespace Spectra.Application.MasterData.ServicesMD
 {
-    public class ServicesDto: BassMasterDataDto
+    public class ServicesDto : BassMasterDataDto
     {
         public string TermsAndConditions { get; set; }
-    
+
 
 
     }

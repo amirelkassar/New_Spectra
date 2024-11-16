@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.Drug;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;

@@ -23,7 +23,7 @@ namespace Spectra.Application.Contracts.Commands
         public string LastName { get; set; }
 
         public ContractCases ContractCase { get; set; }
- 
+
 
     }
 
@@ -46,19 +46,19 @@ namespace Spectra.Application.Contracts.Commands
         // here we get the Name From token but we Stell did not make it 
         public async Task<OperationResult<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
         {
-            var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId , null);
+            var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId, null);
             if (CheckEmployee.Any())
             {
                 throw new RequestErrorException(" Your Request Under review ");
             }
-          
+
             var fullName = new Name()
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName
             };
 
-             
+
             var contract = EmploymentContract.Create(
             Ulid.NewUlid().ToString(),
             request.Freelance,
@@ -67,7 +67,7 @@ namespace Spectra.Application.Contracts.Commands
             request.DaysOfWork,
             request.EmployeeId,
             request.Titel,
-            request.ContractCase ,
+            request.ContractCase,
               fullName,
      AdminOrEmployee.Employee
                 );
