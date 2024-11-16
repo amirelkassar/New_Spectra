@@ -27,3 +27,9 @@
 /Spectra.Application/Patients/Commands/UpdatePatientCommand.cs
 *.cs
 /Spectra.Infrastructure/DependencyInjection.cs
+/Spectra.Application/Patients/Commands/CreatePatientCommand.cs
+/Spectra.Application/Patients/Services/PatientService.cs
+/Spectra.Application/Patients/Services/IPatientService.cs
+/Spectra.Infrastructure/Patients/PatientService.cs
+/Spectra.Infrastructure/Services/IdentityServices/IdentityService.cs
+/Spectra.WebAPI/Areas/Client/Controllers/PatientController.cs
