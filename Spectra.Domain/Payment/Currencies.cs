@@ -1,4 +1,10 @@
-﻿namespace Spectra.Domain.Payment
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.Domain.Payment
 {
     public class Currencies
     {
@@ -16,7 +22,7 @@
 
         public double BassCurrency { get; set; } = 3.75;
 
-
+        
     }
 
 

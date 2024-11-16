@@ -36,7 +36,7 @@ namespace Spectra.WebAPI.Controllers
         }
         [HttpGet("AppointmentsDoctorsbyData")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAllAppointmentsDoctorsbyData(GetAllAppointmentsDoctorAndDateQuery input)
+        public async Task<ActionResult> GetAllAppointmentsDoctorsbyData( GetAllAppointmentsDoctorAndDateQuery input)
         {
             var appointmenties = await _appointmentService.GetAllAppointmentsDoctorandDatas(input);
             return Ok(appointmenties);

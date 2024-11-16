@@ -1,4 +1,6 @@
-﻿using Spectra.Domain.Shared.Enums;
+﻿
+using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<string>? AttachmentPath { get; set; } = new List<string>();
+        public List<string>? AttachmentPath { get; set; }=new List<string>();
         public EmpelyeeRates? EmpelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
 
@@ -33,7 +35,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    EmpelyeeRates? empelyeeRate,
                      JobTypes jobType
 
-                   ) : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)
+                   ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)
         {
             Id = id;
             Name = name;

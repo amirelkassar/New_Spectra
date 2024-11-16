@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
+using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Settings.ShowMedicalProvider.Commands

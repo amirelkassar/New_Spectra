@@ -8,7 +8,7 @@ namespace Spectra.Application.Admin.Dto
         public string EmployeeId { get; set; }
         public string Name { get; set; }
         public DateTimeOffset DateOfRequest { get; set; }
-        public ContractCases? ContractCase { get; set; }
+        public  ContractCases? ContractCase { get; set; }
         public AdminOrEmployee? WhoSend { get; set; }
 
 

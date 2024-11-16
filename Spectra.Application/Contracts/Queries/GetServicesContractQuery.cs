@@ -29,31 +29,31 @@ namespace Spectra.Application.Contracts.Queries
 
         public async Task<OperationResult<GetServicesContractQuery>> Handle(GetServicesContractQuery request, CancellationToken cancellationToken)
         {
-
+   
             var services = await _serviceMDRepository.GetAllAsync();
 
-
+          
             var serviceData = services.Select(x => new ServiesFromMasterDataDto
             {
                 Name = x.Name,
                 Price = x.Price,
-                TermsAndConditions = x.TermsAndConditions
-
+                TermsAndConditions= x.TermsAndConditions
+                
             }).ToList();
 
-
+          
             var contractData = new GetServicesContractQuery
             {
-                DurationFreelance = 15,
+                DurationFreelance = 15,   
                 DurationTeamSpectra = 30,
-                PlatformFeeToFreelance = 50,
-                PlatformFeeTeamSpectr = 50,
-                Services = serviceData
+                PlatformFeeToFreelance=50,
+                PlatformFeeTeamSpectr=50,
+                Services = serviceData     
             };
 
-
+          
             return OperationResult<GetServicesContractQuery>.Success(contractData);
         }
     }
-
+  
 }

@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.MasterData.DoctorsSpecialization;
+using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
 

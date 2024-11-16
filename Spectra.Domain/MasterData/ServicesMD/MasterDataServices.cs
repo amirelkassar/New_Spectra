@@ -28,8 +28,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string termsAndConditions,
         //string? serviceAddress = null,
         //string? content = null,
-        List<Secation>? secations = null,
-      List<string>? attachmentPath = null
+        List<Secation>? secations =null,
+      List<string>?  attachmentPath = null
                ) : base(id)
         {
             Id = id;
@@ -51,13 +51,13 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string termsAndConditions,
         //string? serviceAddress = null,
         //string? content = null,
-        List<Secation>? secations = null,
-      List<string>? attachmentPath = null
+        List<Secation>? secations=null ,
+      List<string>?  attachmentPath = null
        )
 
         {
 
-
+     
 
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(servicesName, nameof(servicesName));
@@ -74,14 +74,14 @@ namespace Spectra.Domain.MasterData.ServicesMD
 
 
 
-            return new MasterDataServices(id,
-                servicesName, definitionServices,
+            return new MasterDataServices(id, 
+                servicesName, definitionServices, 
                 availableServices, servicePrice,
-                termsAndConditions,
+                termsAndConditions, 
               /*  serviceAddress, content,*/ secationList, attachmentPath);
 
         }
-
+    
 
     }
 }

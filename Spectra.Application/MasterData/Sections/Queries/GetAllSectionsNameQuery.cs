@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.Sections;
+using Spectra.Domain.MasterData.Sections;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Sections.Queries
@@ -25,7 +28,7 @@ namespace Spectra.Application.MasterData.Sections.Queries
 
             var entity = await _sectionsRepository.GetAllAsync();
 
-            var names = entity.Select(x => new BassMasterDataDto { Name = x.Name }).ToList();
+            var names = entity.Select(x =>new BassMasterDataDto { Name = x.Name }).ToList();
 
 
             return OperationResult<List<BassMasterDataDto>>.Success(names);

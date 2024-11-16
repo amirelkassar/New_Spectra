@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Application.Settings.Articles;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Settings.AdvertisingBanners.Commands

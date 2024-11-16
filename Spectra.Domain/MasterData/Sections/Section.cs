@@ -1,16 +1,21 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Domain.MasterData.Sections
 {
     public class Section : BaseAuditableEntity<string>
     {
-
+     
 
         public string Name { get; set; }
         public List<string> Diagnoses { get; set; }
-        public string DoctorId { get; set; }
+        public string DoctorId {  get; set; }
         public string DoctorName { get; set; }
 
 

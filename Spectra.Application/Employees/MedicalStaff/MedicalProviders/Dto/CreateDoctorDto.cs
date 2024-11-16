@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Enums;
+﻿using Microsoft.AspNetCore.Http;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
 {

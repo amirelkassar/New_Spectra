@@ -16,14 +16,14 @@ namespace Spectra.Application.Settings.MedicalSpecialties.Commands
     public class CreateMedicalSpecialtCommandHandler : IRequestHandler<CreateMedicalSpecialtCommand, OperationResult<string>>
     {
         private readonly IMedicalSpecialtiesRepository _entityRepository;
-
+     
 
 
 
         public CreateMedicalSpecialtCommandHandler(IMedicalSpecialtiesRepository entityRepository)
         {
             _entityRepository = entityRepository;
-
+          
         }
 
         public async Task<OperationResult<string>> Handle(CreateMedicalSpecialtCommand request, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ namespace Spectra.Application.Settings.MedicalSpecialties.Commands
                 Ulid.NewUlid().ToString(),
                request.SpecializationId,
                request.DorctorsIds
-
+              
 
                 );
             await _entityRepository.AddAsync(entity);

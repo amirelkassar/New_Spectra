@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
@@ -57,7 +58,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                     filePath = uploadfile;
 
                 }
-
+                
                 foreach (var item in request.Diagnoses)
                 {
                     var specialization = await _specializationRepository.GetByNameAsync(item);
@@ -74,7 +75,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                     filePath = uploadfile;
 
                 }
-
+              
             }
             if (filePath == null)
             {

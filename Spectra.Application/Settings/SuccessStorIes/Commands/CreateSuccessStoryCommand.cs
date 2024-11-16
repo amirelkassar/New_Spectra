@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
@@ -77,7 +78,7 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
                request.ContentComment,
                await CheckMthode(request.FamilyPhoto, Pathes.FamilyPhoto),
               null
-                //CheckMthode(request.FamilyVideo Pathes.FamilyVideo)
+              //CheckMthode(request.FamilyVideo Pathes.FamilyVideo)
                 );
 
             await _successStorIesRepository.AddAsync(entity);
@@ -85,8 +86,8 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
             return OperationResult<string>.Success(entity.Id);
 
         }
-
-        public async Task<string> CheckMthode(IFormFile data, string pathes)
+ 
+            public async Task<string> CheckMthode(IFormFile data, string pathes)
         {
             string photoPath = null;
 
@@ -99,7 +100,7 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
             return photoPath;
         }
     }
-
+   
 
 
 }

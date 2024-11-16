@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Domain.Settings.MedicalSpecialties;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -25,7 +26,7 @@ namespace Spectra.Application.Settings.ShowMedicalProvider.Queries
 
             var entitiy = await _entityRepository.GetByIdAsync(request.Id);
             return null;
-            // return OperationResult<MedicalSpecialt>.Success(entitiy);
+           // return OperationResult<MedicalSpecialt>.Success(entitiy);
         }
     }
 }

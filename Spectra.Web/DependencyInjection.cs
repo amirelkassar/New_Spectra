@@ -2,6 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Spectra.Application;
 using Spectra.Infrastructure;
+using Spectra.Web.CustomFilters;
 using Spectra.Web.Models;
 using Spectra.WebAPI;
 

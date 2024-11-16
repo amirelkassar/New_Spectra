@@ -1,6 +1,11 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Microsoft.AspNetCore.Http;
+using Spectra.Domain.Settings.Articles;
+using Spectra.Domain.Shared.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Domain.Settings.Packages
 {
@@ -47,7 +52,7 @@ namespace Spectra.Domain.Settings.Packages
             ArgumentNullException.ThrowIfNull(pointOfPackage, nameof(pointOfPackage));
             ArgumentNullException.ThrowIfNull(photo, nameof(photo));
 
-            return new Package(id, name, price, contentPackage, pointOfPackage, photo);
+            return new Package(id,name,price,contentPackage,pointOfPackage, photo);
 
 
         }

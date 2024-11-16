@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Spectra.Application.Identities;
 using Spectra.Application.Identities.ApiParams;
+using Spectra.Application.Identities.Dtos;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Common.Exceptions;
