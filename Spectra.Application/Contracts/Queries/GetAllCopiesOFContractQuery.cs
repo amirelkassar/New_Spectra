@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using MongoDB.Driver;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Contracts.Queries
@@ -36,10 +34,10 @@ namespace Spectra.Application.Contracts.Queries
             //}
             var contracts = await _contractRepository.GetAllAsync(c => c.EmployeeId == request.EmployeeId /*&& c.ContractCase != ContractCases.SAVE*/, null);
 
-            
+
 
             var data = contracts.Select(x => new GetAllCopiesWithDataDto
-            { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId ,  AdminOrEmployee =x.AdminOrEmployee})
+            { ContractId = x.Id, ContractCase = x.ContractCase, Date = x.Created, EmployeeId = x.EmployeeId, AdminOrEmployee = x.AdminOrEmployee })
              .OrderByDescending(x => x.Date);
 
             return OperationResult<IEnumerable<GetAllCopiesWithDataDto>>.Success(data);

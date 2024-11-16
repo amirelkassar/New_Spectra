@@ -34,7 +34,7 @@ namespace Spectra.Domain.Documents
             OwnerId = ownerId;
         }
 
-        public static Document Create(string id, 
+        public static Document Create(string id,
             string name,
             DocumentSources documentSource,
             string path,
@@ -43,7 +43,7 @@ namespace Spectra.Domain.Documents
             bool external = false,
             bool isPublic = false)
         {
-            ArgumentNullException.ThrowIfNull(id,nameof(id));
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(documentSource, nameof(documentSource));
             ArgumentNullException.ThrowIfNull(path, nameof(path));
             ArgumentNullException.ThrowIfNull(documentType, nameof(documentType));

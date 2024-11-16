@@ -19,14 +19,14 @@ namespace Spectra.Application.MasterData.Drug.Queries
         }
         public async Task<OperationResult<IEnumerable<DrugMD>>> Handle(GetAllDrugQuery request, CancellationToken cancellationToken)
         {
-         
-         
-                var drugs = await _drugRepository.GetAllAsync();
 
 
-                return OperationResult<IEnumerable<DrugMD>>.Success(drugs);
-         
-   
+            var drugs = await _drugRepository.GetAllAsync();
+
+
+            return OperationResult<IEnumerable<DrugMD>>.Success(drugs);
+
+
 
         }
     }

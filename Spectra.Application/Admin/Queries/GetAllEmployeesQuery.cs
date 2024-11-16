@@ -10,7 +10,7 @@ namespace Spectra.Application.Admin.Queries
 {
     public class GetAllEmployeesQuery : IRequest<OperationResult<CollectAllEmployeeDto>>
     {
-        public int PageNumber { get; set; } 
+        public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public JobTypes? JobType { get; set; }
     }
@@ -20,19 +20,19 @@ namespace Spectra.Application.Admin.Queries
         private readonly IMedicalProviderRepository _doctorRepositor;
         private readonly IMedicalProviderRepository _specialistRepository;
         private readonly IManagementStaffRepository _staffRepository;
-        public GetAllEmployeesQueryHandler(IMedicalProviderRepository doctorRepositor , IMedicalProviderRepository specialistRepository , IManagementStaffRepository managementStaffRepository )
+        public GetAllEmployeesQueryHandler(IMedicalProviderRepository doctorRepositor, IMedicalProviderRepository specialistRepository, IManagementStaffRepository managementStaffRepository)
         {
             _doctorRepositor = doctorRepositor;
             _specialistRepository = specialistRepository;
             _staffRepository = managementStaffRepository;
-    }
+        }
 
         public async Task<OperationResult<CollectAllEmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
 
 
 
-            var doctors = await _doctorRepositor.GetAllAsync(x=>x.JobType== JobTypes.Doctor);
+            var doctors = await _doctorRepositor.GetAllAsync(x => x.JobType == JobTypes.Doctor);
             var specialists = await _specialistRepository.GetAllAsync(x => x.JobType == JobTypes.Specialist);
             var managementStaff = await _staffRepository.GetAllAsync();
 
@@ -73,10 +73,10 @@ namespace Spectra.Application.Admin.Queries
                 .Take(request.PageSize)
                 .ToList();
 
-           
+
             var collectEmployees = new CollectAllEmployeeDto
             {
-                Employees = paginatedEmployees, 
+                Employees = paginatedEmployees,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 TotalPages = totalPages,

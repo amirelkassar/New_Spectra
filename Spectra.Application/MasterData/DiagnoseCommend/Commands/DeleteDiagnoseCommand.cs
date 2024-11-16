@@ -26,10 +26,10 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
             await _diagnoseRepository.DeleteAsync(diagnoses);
             return OperationResult<Unit>.Success(Unit.Value);
         }
-            
 
 
-       
+
+
     }
 
 }

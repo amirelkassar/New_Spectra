@@ -17,7 +17,7 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
         }
         public async Task<Domain.MasterData.GeneralComplaints.GeneralComplaint> GetByIdAsync(string id)
         {
-          
+
             var entity = await _GeneralComplaints.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

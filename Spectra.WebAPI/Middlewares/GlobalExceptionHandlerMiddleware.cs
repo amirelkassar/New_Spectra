@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -46,37 +45,44 @@ namespace Spectra.WebAPI.Middlewares
                     statusCode = HttpStatusCode.UnprocessableEntity;
 
 
-                     errorCollection = validationException.Errors
-                        .GroupBy(e => e.PropertyName)
-                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()); 
+                    errorCollection = validationException.Errors
+                       .GroupBy(e => e.PropertyName)
+                       .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
                     break;
 
                 case RequestErrorException _:
-                        errorType = "RequestError";
-                        errorCollection = new Dictionary<string, string[]>
+                    errorType = "RequestError";
+                    errorCollection = new Dictionary<string, string[]>
                 {
                     { "RequestError", new[] { exception.Message } }
                 };
-                        statusCode = HttpStatusCode.BadRequest;
-                        break;
+                    statusCode = HttpStatusCode.BadRequest;
+                    break;
 
                 case DbErrorException _:
-                        errorType = "DbError";
-                        errorCollection = new Dictionary<string, string[]>
+                    errorType = "DbError";
+                    errorCollection = new Dictionary<string, string[]>
                 {
                     { "DbError", new[] { exception.Message } }
                 };
-                        statusCode = HttpStatusCode.BadRequest;
-                        break;
+                    statusCode = HttpStatusCode.BadRequest;
+
+                    errorType = "RequestError";
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "RequestError", new[] { exception.Message } } 
+            };
+                    statusCode = HttpStatusCode.BadRequest;
+                    break;
 
                 case NotFoundException notFoundException:
-                        errorType = "NotFoundError";
-                        errorCollection = new Dictionary<string, string[]>
+                    errorType = "NotFoundError";
+                    errorCollection = new Dictionary<string, string[]>
                 {
                     { "NotFoundError", new[] { notFoundException.Message } }
                 };
-                        statusCode = HttpStatusCode.NotFound;
-                        break;
+                    statusCode = HttpStatusCode.NotFound;
+                    break;
                 case AlreadyExistException alreadyExistException:
                     errorType = "AlreadyExistException";
                     errorCollection = new Dictionary<string, string[]>
@@ -84,25 +90,25 @@ namespace Spectra.WebAPI.Middlewares
                         { alreadyExistException.Key, new[] { alreadyExistException.Value } }
                     };
                     statusCode = HttpStatusCode.BadRequest;
-                        break;
+                    break;
                 default:
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "UnknownError", new[] { exception.Message } } 
+                { "UnknownError", new[] { exception.Message } }
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 
-             var errorrs= OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
-                var jsonResponsee = JsonConvert.SerializeObject(errorrs);
+            var errorrs = OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
+            var jsonResponsee = JsonConvert.SerializeObject(errorrs);
 
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)statusCode;
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
 
-                return context.Response.WriteAsync(jsonResponsee);
-            
+            return context.Response.WriteAsync(jsonResponsee);
+
         }
     }
 }

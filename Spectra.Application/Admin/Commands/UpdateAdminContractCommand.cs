@@ -76,7 +76,7 @@ namespace Spectra.Application.Admin.Commands
             }
             switch (contract.ContractCase)
             {
-                
+
                 case ContractCases.BACkTOEMPlOYEE:
                     throw new RequestErrorException(" Your Request Under review ");
                 case ContractCases.SendContarctToSignature:

@@ -14,7 +14,7 @@ namespace Spectra.Application.Employees.MedicalTeams.Commands
 
     }
 
-    public  class CreateMedicalTeamCommandHandler : IRequestHandler<CreateMedicalTeamCommand, OperationResult<string>>
+    public class CreateMedicalTeamCommandHandler : IRequestHandler<CreateMedicalTeamCommand, OperationResult<string>>
     {
         private readonly IMedicalTeamRepository _medicalTeamRepository;
 
@@ -34,7 +34,7 @@ namespace Spectra.Application.Employees.MedicalTeams.Commands
                 );
 
 
-           await _medicalTeamRepository.AddAsync(medicalTeam);
+            await _medicalTeamRepository.AddAsync(medicalTeam);
 
 
 

@@ -32,7 +32,7 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
             await _addPhoto.DeleteAttachment(entity.ChiledPhotoBefore);
             await _addPhoto.DeleteAttachment(entity.FamilyPhoto);
             var PathesPhotos = entity.SectionStory.Select(x => x.AttachmentPath).ToList();
-            
+
             await _addPhoto.DeleteAttachments(PathesPhotos);
             await _successStorIesRepository.DeleteAsync(entity);
             return OperationResult<Unit>.Success(Unit.Value);

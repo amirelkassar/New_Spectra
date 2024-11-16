@@ -8,9 +8,7 @@ using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace Spectra.Application.AppUsers.Commands
 {
@@ -30,7 +28,7 @@ namespace Spectra.Application.AppUsers.Commands
         public string Name { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$",ErrorMessage ="Invalid password")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$", ErrorMessage = "Invalid password")]
         public string Password { get; set; }
 
         [Required]
@@ -65,12 +63,12 @@ namespace Spectra.Application.AppUsers.Commands
             public async Task<OperationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
 
-               
+
                 switch (request.UserType)
                 {
                     case UserType.PatientFamily:
                         {
-                            var (results,userId) = await identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
+                            var (results, userId) = await identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
 
                             if (request.Patients is not null && request.Patients.Count > 0)
                             {
@@ -80,7 +78,7 @@ namespace Spectra.Application.AppUsers.Commands
 
                                 //}
                             }
-                           
+
                         }
                         break;
                     case UserType.Organization:

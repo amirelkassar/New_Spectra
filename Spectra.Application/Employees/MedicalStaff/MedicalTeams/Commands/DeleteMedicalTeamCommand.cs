@@ -22,7 +22,7 @@ namespace Spectra.Application.Employees.MedicalTeams.Commands
         {
 
             var medicalTeam = await _medicalTeamRepository.GetByIdAsync(request.Id);
-           
+
             await _medicalTeamRepository.DeleteAsync(medicalTeam);
             return OperationResult<Unit>.Success(Unit.Value);
 

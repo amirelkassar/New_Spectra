@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Domain.ScheduleAppointments;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
@@ -10,7 +9,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
     {
         public string DoctorId { get; set; }
         public DateTime? Daysdate { get; set; }
-        
+
     }
 
     public class GetAllAppointmentsDoctorQueryHandler : IRequestHandler<GetAllAppointmentsDoctorAndDateQuery, OperationResult<IEnumerable<Appointment>>>

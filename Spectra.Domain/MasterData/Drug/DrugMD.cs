@@ -60,7 +60,7 @@ namespace Spectra.Domain.MasterData.Drug
 
 
             return new DrugMD(id, name, activeIngredient, scientificName, recommendedDosage, doncentration,
-                drugInteractionsWithOtherdrugs, contraindications, attachmentPath,code , nots, type);
+                drugInteractionsWithOtherdrugs, contraindications, attachmentPath, code, nots, type);
 
 
         }

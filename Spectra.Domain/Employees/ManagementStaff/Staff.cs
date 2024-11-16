@@ -32,14 +32,14 @@ namespace Spectra.Domain.Employees.ManagementStaff
             : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address
                   )
 
-    {
+        {
             JobName = jobName;
             Qualifications = qualifications;
             TimeToJoin = timeToJoin;
             WorkingHours = workingHours;
             JobType = jobType;
         }
-        
+
 
 
         public static Staff Create(
@@ -76,4 +76,4 @@ namespace Spectra.Domain.Employees.ManagementStaff
 
         }
     }
-    }
+}

@@ -1,9 +1,6 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
-using Spectra.Application.StaticStringDatas;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.StaticStringDatas;
-using System.Xml;
 
 namespace Spectra.Infrastructure.StaticStringDatas
 {
@@ -31,12 +28,12 @@ namespace Spectra.Infrastructure.StaticStringDatas
         //        _staticText = database.GetCollection<StaticText>("MyCollection");
         //    }
 
-            public async Task SeedDataAsync()
+        public async Task SeedDataAsync()
+        {
+            bool hasData = await _staticText.Find(_ => true).AnyAsync();
+            if (!hasData)
             {
-                bool hasData = await _staticText.Find(_ => true).AnyAsync();
-                if (!hasData)
-                {
-                    var seedData = new List<StaticText>
+                var seedData = new List<StaticText>
                     {
                 new StaticText {  Id = 1 , Titel="Contract clause 1" , Data="أولاً: مركز سبيكترا الطبي التابع لشركة مستقبل الرعاية الطبية، المقيد بموجب الترخيص الصادر من وزارة التجارة برقم 1010697542 وعنوانه: الرياض، ظهرة لبن، شارع الفروسية، ويمثله في التوقيع على هذا العقد مديرة العمليات والتشغيل في مركز سبيكترا الطبي، ويشار إليه فيما بعد بالطرف الأول" , TypeData=Domain.Enumeration.TypeDatas.ContracTerms  }  ,
                 new StaticText {  Id = 2 , Titel="Contract clause 2" , Data="\r\nثانياً: السيد/ة/                        سعودي/ة الجنسية بموجب الهوية الوطنية رقم                     ، ويشار اليه فيما بعد بالطرف الثاني.\r\nويشار إلى أي من الطرفين منفرداً بكلمة \"طرف\" وإلى الطرفين مجتمعين بكلمة \"طرفين\"." , TypeData=Domain.Enumeration.TypeDatas.ContracTerms  }  ,
@@ -46,12 +43,12 @@ namespace Spectra.Infrastructure.StaticStringDatas
                 new StaticText {  Id = 6, Titel="Repors" , Data=" Recommendation OT VR" , TypeData=Domain.Enumeration.TypeDatas.Report  }  ,
                 new StaticText {  Id = 7 , Titel="Repors" , Data=" Common question" , TypeData=Domain.Enumeration.TypeDatas.Report  }  ,
                 new StaticText {  Id = 8, Titel="Repors" , Data="Doctors follow up" , TypeData=Domain.Enumeration.TypeDatas.Report  }  ,
-               
+
             };
-                    await _staticText.InsertManyAsync(seedData);
-                }
+                await _staticText.InsertManyAsync(seedData);
             }
-        
+        }
+
         //public async Task UpdateAsync(StaticText staticText)
         //{
         //    await _staticText.ReplaceOneAsync(p => p.Id == staticText.Id, staticText);

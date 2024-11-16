@@ -47,8 +47,8 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
             staff.Qualifications = request.Qualifications;
             staff.TimeToJoin = request.TimeToJoin;
             staff.WorkingHours = request.WorkingHours;
-            
-       
+
+
             await _staffRepository.UpdateAsync(staff);
             return OperationResult<Unit>.Success(Unit.Value);
 

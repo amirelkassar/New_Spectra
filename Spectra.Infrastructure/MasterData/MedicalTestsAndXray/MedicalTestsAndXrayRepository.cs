@@ -1,15 +1,8 @@
 ﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
-using Spectra.Domain.MasterData.GeneralComplaints;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 {
@@ -25,7 +18,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
         }
         public async Task<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray> GetByIdAsync(string id)
         {
-          
+
             var entity = await _medicalTestsAndXrays.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

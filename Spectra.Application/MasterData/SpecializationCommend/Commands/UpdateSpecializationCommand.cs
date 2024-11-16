@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.InternalExaminations;
-using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -50,9 +48,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             await _specializationRepository.UpdateAsync(Specializations);
             return OperationResult<Unit>.Success(Unit.Value);
         }
-      
-}
-    
+
+    }
+
     public class UpdateSpecializationCommandValidator : AbstractValidator<UpdateSpecializationCommand>
     {
         public UpdateSpecializationCommandValidator()

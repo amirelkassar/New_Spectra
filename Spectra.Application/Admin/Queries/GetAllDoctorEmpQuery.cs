@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Enums;
@@ -31,9 +30,9 @@ namespace Spectra.Application.Admin.Queries
         {
 
 
-            var paginatedDoctors = await _doctorRepository.GetAllAsyncA(x=>x.JobType==  JobTypes.Doctor,null  ,request.PageNumber,
+            var paginatedDoctors = await _doctorRepository.GetAllAsyncA(x => x.JobType == JobTypes.Doctor, null, request.PageNumber,
               request.PageSize);
-            paginatedDoctors.Items.Select(c => new GetAllemployeeDto { Name =$"{c.Name.FirstName}+{c.Name.LastName}", DateOfRequest = c.Created.Date});
+            paginatedDoctors.Items.Select(c => new GetAllemployeeDto { Name = $"{c.Name.FirstName}+{c.Name.LastName}", DateOfRequest = c.Created.Date });
 
             return OperationResult<PaginatedResult<MedicalProvider>>.Success(paginatedDoctors);
         }

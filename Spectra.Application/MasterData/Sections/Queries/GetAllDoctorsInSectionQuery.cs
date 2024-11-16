@@ -9,7 +9,7 @@ namespace Spectra.Application.MasterData.Sections.Queries
     public class GetAllDoctorsInSectionQuery : IRequest<OperationResult<IEnumerable<GetAllDoctorsDto>>>
     {
 
-      
+
     }
 
     public class GetAllDoctorsInSectionQueryHandler : IRequestHandler<GetAllDoctorsInSectionQuery, OperationResult<IEnumerable<GetAllDoctorsDto>>>
@@ -29,7 +29,9 @@ namespace Spectra.Application.MasterData.Sections.Queries
             {
                 Name = $"{c.Name.FirstName} {c.Name.LastName}",
                 DateOfRequest = c.Created.Date,
-                Rate = c.EmpelyeeRate, Id = c.Id,   Diagnoses= c.Diagnoses
+                Rate = c.EmpelyeeRate,
+                Id = c.Id,
+                Diagnoses = c.Diagnoses
             });
 
             return OperationResult<IEnumerable<GetAllDoctorsDto>>.Success(data);

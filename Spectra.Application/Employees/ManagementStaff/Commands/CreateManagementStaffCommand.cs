@@ -33,11 +33,11 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 
         public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository)
         {
-            _staffRepository=staffRepository;
+            _staffRepository = staffRepository;
         }
         public async Task<OperationResult<string>> Handle(CreateManagementStaffCommand request, CancellationToken cancellationToken)
         {
-      
+
             var staff = Staff.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
