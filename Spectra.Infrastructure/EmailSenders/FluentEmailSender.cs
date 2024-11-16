@@ -1,6 +1,11 @@
 ﻿using FluentEmail.Core;
 using Spectra.Application.Commons.Dtos;
 using Spectra.Application.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.EmailSenders
 {
@@ -14,17 +19,17 @@ namespace Spectra.Infrastructure.EmailSenders
         }
         public async Task<bool> SendAsync(EmailMetadata input)
         {
-            var response = await _fluentEmail.To(input.ToAddress)
-            .Subject(input.Subject)
-            .Body(input.Body)
-            .SendAsync();
+           var response= await _fluentEmail.To(input.ToAddress)
+           .Subject(input.Subject)
+           .Body(input.Body)
+           .SendAsync();
 
             return response.Successful;
         }
 
         public async Task SendRangeAsync(ICollection<EmailMetadata> input)
         {
-            Parallel.ForEach(input, async email =>
+            Parallel.ForEach(input,async email =>
             {
                 await _fluentEmail.To(email.ToAddress)
                    .Subject(email.Subject)

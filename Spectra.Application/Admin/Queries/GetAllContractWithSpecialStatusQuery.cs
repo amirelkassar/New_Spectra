@@ -2,6 +2,7 @@
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Hellper;
+using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -27,7 +28,7 @@ namespace Spectra.Application.Admin.Queries
 
         public async Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> Handle(GetAllContractWithSpecialStatusQuery request, CancellationToken cancellationToken)
         {
-
+           
             var paginatedContracts = await _contractRepository.GetAllAsyncP(
                 c => c.ContractCase == request.Status,
                 null,
@@ -40,14 +41,14 @@ namespace Spectra.Application.Admin.Queries
                 DateOfRequest = c.Created.Date,
                 ContractCase = c.ContractCase
             })
-            .OrderByDescending(y => y.DateOfRequest)
+            .OrderByDescending(y => y.DateOfRequest) 
             .ToList();
 
-
+  
             var result = new PaginatedResult<GetAllemployeeDto>
             {
                 Items = contractDataList,
-
+              
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize
             };

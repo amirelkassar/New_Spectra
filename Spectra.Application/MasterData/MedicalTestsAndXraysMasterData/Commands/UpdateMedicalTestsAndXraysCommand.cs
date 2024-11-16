@@ -1,9 +1,18 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Application.Patients;
 using Spectra.Domain.Shared.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using FluentValidation;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Application.MasterData.SpecializationCommend;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Application.MasterData.InternalExaminations;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
@@ -33,7 +42,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
-
+           
             var medicalTestsAndXrys = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
             var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.ScientificNameByEng == request.ScientificNameByEng && b.Id != request.Id);
             if (names.Any())
@@ -50,8 +59,8 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 
             await _medicalTestsAndXrayRepository.UpdateAsync(medicalTestsAndXrys);
             return OperationResult<Unit>.Success(Unit.Value);
-
-        }
+       
+}
 
     }
     public class UpdateMedicalTestsAndXraysCommandValidator : AbstractValidator<UpdateMedicalTestsAndXraysCommand>

@@ -1,9 +1,14 @@
-﻿using MediatR;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -35,7 +40,7 @@ namespace Spectra.Application.Settings.Articles.Commands
         public async Task<OperationResult<string>> Handle(CreateArticlesCommand request, CancellationToken cancellationToken)
         {
 
-            string photoPath = null;
+           string photoPath = null;
 
             var uploadPhoto = await _addPhoto.CreateAttachment(request.MainPhoto, Pathes.MainPhotoArticles);
             if (uploadPhoto != null)
@@ -86,9 +91,9 @@ namespace Spectra.Application.Settings.Articles.Commands
 
             return OperationResult<string>.Success(entity.Id);
 
-
-
-        }
+       
+           
+}
     }
-
+  
 }

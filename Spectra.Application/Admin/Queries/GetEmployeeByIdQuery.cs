@@ -43,7 +43,7 @@
 //            var entitiy = await _sectionsRepository.GetByIdAsync(request.Id);
 
 
-
+       
 
 //            return OperationResult<Section>.Success(entitiy);
 

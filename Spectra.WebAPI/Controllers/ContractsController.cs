@@ -27,7 +27,7 @@ namespace Spectra.WebAPI.Controllers
             var contract = await _contractService.GetAllCopiesOfContract(input);
             return Ok(contract);
         }
-
+  
         // this is Contract that User Can Choces this is Come From Services Master data and another 
         [HttpGet("ServicesFromMastrData")]
         [AllowAnonymous]

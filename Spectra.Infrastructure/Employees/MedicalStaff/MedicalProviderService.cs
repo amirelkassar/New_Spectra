@@ -79,7 +79,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 LicenseNumber = licenseNumber,
 
                 JobType = JobTypes
-
+                
                 //ScientificDegree = scientificDegree
             };
 
@@ -156,8 +156,8 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 HumenGenders = input.HumenGenders,
                 LicenseNumber = input.LicenseNumber,
                 ScientificDegree = input.ScientificDegree,
-
-
+               
+                
             };
 
             return await _mediator.Send(command);

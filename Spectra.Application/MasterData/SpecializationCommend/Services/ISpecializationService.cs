@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
+using Spectra.Application.MasterData.SpecializationCommend.DTO;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Services

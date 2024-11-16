@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Spectra.Domain.Contracts
 {
     public class SubContract
     {
         public string SubContractId { get; set; }
-        public EmploymentContract Contracts { get; set; }
+        public EmploymentContract Contracts { get; set; } 
 
         protected SubContract() { }
 
-        private SubContract(string subContractId, EmploymentContract contracts)
+        private SubContract(string subContractId , EmploymentContract contracts)
         {
             SubContractId = subContractId;
             Contracts = contracts;
@@ -19,9 +20,9 @@ namespace Spectra.Domain.Contracts
         {
             ArgumentNullException.ThrowIfNull(subContractId, nameof(subContractId));
             ArgumentNullException.ThrowIfNull(contracts, nameof(contracts));
-            return new SubContract(subContractId, contracts);
+            return new SubContract(subContractId , contracts);
         }
 
-
+       
     }
 }

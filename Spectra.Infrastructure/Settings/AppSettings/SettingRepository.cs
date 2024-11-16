@@ -2,8 +2,14 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Settings.AppSettings;
+using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Common.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Settings.AppSettings
 {

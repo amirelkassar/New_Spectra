@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
+using Spectra.Application.Settings.Articles;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -11,15 +13,15 @@ namespace Spectra.Application.Settings.MedicalSpecialties.Commands
     }
     public class DeleteMedicalSpecialtCommandHandler : IRequestHandler<DeleteMedicalSpecialtCommand, OperationResult<Unit>>
     {
-        private readonly IMedicalSpecialtiesRepository _entityRepository;
-
+       private readonly IMedicalSpecialtiesRepository _entityRepository;
+     
 
 
 
         public DeleteMedicalSpecialtCommandHandler(IMedicalSpecialtiesRepository entityRepository)
         {
             _entityRepository = entityRepository;
-
+          
         }
 
         public async Task<OperationResult<Unit>> Handle(DeleteMedicalSpecialtCommand request, CancellationToken cancellationToken)

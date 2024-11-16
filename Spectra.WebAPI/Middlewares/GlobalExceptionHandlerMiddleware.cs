@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -45,16 +46,16 @@ namespace Spectra.WebAPI.Middlewares
                     statusCode = HttpStatusCode.UnprocessableEntity;
 
 
-                    errorCollection = validationException.Errors
-                       .GroupBy(e => e.PropertyName)
-                       .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+                     errorCollection = validationException.Errors
+                        .GroupBy(e => e.PropertyName)
+                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()); 
                     break;
 
                 case RequestErrorException _:
                     errorType = "RequestError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "RequestError", new[] { exception.Message } }
+                { "RequestError", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
@@ -63,7 +64,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "DbError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "DbError", new[] { exception.Message } }
+                { "DbError", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
@@ -81,7 +82,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "UnknownError", new[] { exception.Message } }
+                { "UnknownError", new[] { exception.Message } } 
             };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
@@ -94,14 +95,14 @@ namespace Spectra.WebAPI.Middlewares
             //    success
             //};
 
-            var errorrs = OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
-            var jsonResponsee = JsonConvert.SerializeObject(errorrs);
+             var errorrs= OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
+                var jsonResponsee = JsonConvert.SerializeObject(errorrs);
 
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)statusCode;
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = (int)statusCode;
 
-            return context.Response.WriteAsync(jsonResponsee);
-
+                return context.Response.WriteAsync(jsonResponsee);
+            
         }
     }
 }

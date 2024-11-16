@@ -18,7 +18,7 @@ namespace Spectra.Infrastructure.MasterData.Drug
         }
         public async Task<DrugMD> GetByIdAsync(string id)
         {
-
+          
             var entity = await _Drug.Find(c => c.Id == id).FirstOrDefaultAsync();
             if (entity == null)
             {

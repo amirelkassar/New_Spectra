@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.Sections;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
 

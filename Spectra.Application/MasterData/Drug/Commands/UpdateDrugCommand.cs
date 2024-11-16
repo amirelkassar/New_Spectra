@@ -51,8 +51,8 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.ActiveIngredient = request.ActiveIngredient;
             drug.ScientificName = request.ScientificName;
             drug.RecommendedDosage = request.RecommendedDosage;
-            drug.Doncentration = request.Doncentration;
-            drug.InteractionsWithOtherdrugs = request.InteractionsWithOtherdrugs;
+            drug.Doncentration = request.Doncentration; 
+            drug.InteractionsWithOtherdrugs = request.InteractionsWithOtherdrugs; 
             drug.Contraindications = request.Contraindications;
             drug.Type = request.Type;
             drug.Nots = request.Nots;
@@ -68,7 +68,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             return OperationResult<Unit>.Success(Unit.Value);
 
         }
-    }
+        }
     public class UpdateDrugCommandValidator : AbstractValidator<UpdateDrugCommand>
     {
         public UpdateDrugCommandValidator()

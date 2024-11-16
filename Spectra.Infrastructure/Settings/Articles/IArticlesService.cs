@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Settings.Articles.Commands;
+using Spectra.Application.Settings.Articles.Dto;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Wrappers;
 

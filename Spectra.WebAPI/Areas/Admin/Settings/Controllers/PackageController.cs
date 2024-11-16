@@ -1,7 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.Packages.Commands;
+using Spectra.Application.Settings.SuccessStorIes.Commands;
 using Spectra.Infrastructure.Settings.Packages;
+using Spectra.Infrastructure.Settings.SuccessStorIes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
@@ -56,5 +63,5 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 
 
     }
-
+   
 }

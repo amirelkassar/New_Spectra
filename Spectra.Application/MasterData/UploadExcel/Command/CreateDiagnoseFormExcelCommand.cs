@@ -2,6 +2,7 @@
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Domain.MasterData.Diagnoses;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.UploadExcel.Command
@@ -21,24 +22,24 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
             public async Task<OperationResult<Unit>> Handle(CreateBulkDataCommand<CreateDiagnoseCommand> request, CancellationToken cancellationToken)
             {
+              
+                    foreach (var item in request.Data)
+                    {
+                        var entity = Diagnose.Create(
+                    Ulid.NewUlid().ToString(),
+                    item.Code1,
+                    item.Code2,
+                    item.Code3,
+                    item.Description, item.Name);
 
-                foreach (var item in request.Data)
-                {
-                    var entity = Diagnose.Create(
-                Ulid.NewUlid().ToString(),
-                item.Code1,
-                item.Code2,
-                item.Code3,
-                item.Description, item.Name);
+                        await _diagnoseRepository.AddAsync(entity);
+                    }
+                    return OperationResult<Unit>.Success(Unit.Value);
 
-                    await _diagnoseRepository.AddAsync(entity);
                 }
-                return OperationResult<Unit>.Success(Unit.Value);
-
+           
             }
-
         }
-    }
 
-
+    
 }

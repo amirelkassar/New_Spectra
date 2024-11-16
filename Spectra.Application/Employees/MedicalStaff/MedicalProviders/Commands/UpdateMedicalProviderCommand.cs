@@ -25,7 +25,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public List<IFormFile>? ScientificDegree { get; set; }
-
+      
     }
 
     public class UpdatemedicalProviderCommandHandler : IRequestHandler<UpdateMedicalProviderCommand, OperationResult<Unit>>
@@ -49,21 +49,21 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 
                 medicalProvider.AttachmentPath = await _addFile.UpdateAttachments(medicalProvider.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             }
-            if (JobTypes.Specialist == medicalProvider.JobType)
-            {
-                medicalProvider.AttachmentPath = await _addFile.UpdateAttachments(medicalProvider.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
+                if (JobTypes.Specialist == medicalProvider.JobType)
+                {
+                    medicalProvider.AttachmentPath = await _addFile.UpdateAttachments(medicalProvider.AttachmentPath, request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
+                
+
+                }
+
+                if (medicalProvider.AttachmentPath == null)
+                {
+
+                    throw new RequestErrorException(" you must to Uplode  your ScientificDegrees ");
+                }
 
 
-            }
-
-            if (medicalProvider.AttachmentPath == null)
-            {
-
-                throw new RequestErrorException(" you must to Uplode  your ScientificDegrees ");
-            }
-
-
-            medicalProvider.Name = request.Name;
+                medicalProvider.Name = request.Name;
             medicalProvider.NationalId = request.NationalId;
             medicalProvider.MobileNumber = request.MobileNumber;
             medicalProvider.HumenGenders = request.HumenGenders;

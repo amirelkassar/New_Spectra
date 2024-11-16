@@ -2,6 +2,7 @@
 using Spectra.Application.Clients;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MedicalPatientProfiles;
+using Spectra.Domain.Patients;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
@@ -32,7 +33,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMedicalPatientProfileRepository _medicalPatientProfileRepository;
         private readonly IClientRepository _clientRepository;
-        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository, IMedicalPatientProfileRepository medicalPatientProfileRepository, IClientRepository clientRepository)
+        public CreateAppointmentCommandHandler(IAppointmentRepository appointmentRepository , IMedicalPatientProfileRepository medicalPatientProfileRepository , IClientRepository clientRepository)
         {
             _appointmentRepository = appointmentRepository;
             _medicalPatientProfileRepository = medicalPatientProfileRepository;
@@ -84,7 +85,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 
                 var clientData = await _clientRepository.GetByIdAsync(request.ClientId);
                 var patientData = clientData.Patients!.FirstOrDefault(x => x.Id == request.PatientId);
-
+               
                 var medicalPatientProfiles = MedicalPatientProfile.Create(Ulid.NewUlid().ToString(), request.DoctorId, request.PatientId, request.ClientId,
                     $"{clientData.Name.FirstName} {clientData.Name.LastName}", $"{patientData.Name.FirstName} {patientData.Name.LastName}"
                     );
@@ -93,7 +94,7 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Commands
 
             await _appointmentRepository.AddAsync(appointment);
 
-
+          
 
 
             return OperationResult<string>.Success(appointment.Id);

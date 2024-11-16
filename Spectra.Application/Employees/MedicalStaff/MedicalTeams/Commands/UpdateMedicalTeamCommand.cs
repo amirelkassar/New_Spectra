@@ -25,9 +25,9 @@ namespace Spectra.Application.Employees.MedicalTeams.Commands
 
             var medicalTeam = await _medicalTeamRepository.GetByIdAsync(request.Id);
 
-            medicalTeam.DoctorId = request.DoctorId;
-            medicalTeam.DoctorName = request.DoctorName;
-            medicalTeam.SpecialistIds = request.SpecialistIds;
+            medicalTeam.DoctorId=request.DoctorId;
+            medicalTeam.DoctorName=request.DoctorName;
+            medicalTeam.SpecialistIds=request.SpecialistIds;
 
 
             await _medicalTeamRepository.UpdateAsync(medicalTeam);

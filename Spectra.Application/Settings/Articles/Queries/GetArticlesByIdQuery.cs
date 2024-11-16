@@ -1,5 +1,8 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Settings.Articles;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Settings.Articles.Queries
@@ -13,21 +16,21 @@ namespace Spectra.Application.Settings.Articles.Queries
     public class GetArticlesByIdQueryHandler : IRequestHandler<GetArticlesByIdQuery, OperationResult<Article>>
     {
         private readonly IArticlesRepository _articlesRepository;
-
+  
 
 
 
         public GetArticlesByIdQueryHandler(IArticlesRepository serviceMRepository)
         {
             _articlesRepository = serviceMRepository;
-
+        
         }
 
         public async Task<OperationResult<Article>> Handle(GetArticlesByIdQuery request, CancellationToken cancellationToken)
         {
 
             var entitiy = await _articlesRepository.GetByIdAsync(request.Id);
-
+        
             return OperationResult<Article>.Success(entitiy);
 
 

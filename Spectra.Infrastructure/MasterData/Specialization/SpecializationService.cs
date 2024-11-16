@@ -1,11 +1,16 @@
-﻿using MediatR;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
+using Spectra.Application.MasterData.SpecializationCommend.DTO;
 using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -35,7 +40,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             {
 
                 ConsultationCost = input.ConsultationCost,
-                Code = input.Code,
+                Code= input.Code,
                 Name = input.Name,
                 Description = input.Description
 
@@ -68,7 +73,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             {
                 Id = id,
                 ConsultationCost = input.ConsultationCost,
-                Code = input.Code,
+              Code   = input.Code,
                 Name = input.Name,
                 Description = input.Description
             };
@@ -105,6 +110,6 @@ namespace Spectra.Infrastructure.MasterData.Specialization
     }
 }
 
-
+    
 
 

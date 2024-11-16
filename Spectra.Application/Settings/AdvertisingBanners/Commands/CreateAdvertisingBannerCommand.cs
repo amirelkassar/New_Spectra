@@ -14,7 +14,7 @@
 //    {
 //        public string Title { get; set; }
 //        public IFormFile MainPhoto { get; set; }
-
+  
 
 
 //    }
@@ -44,13 +44,13 @@
 
 //            }
 
-
+           
 //            var entity = AdvertisingBanner.Create(
 
 //                Ulid.NewUlid().ToString(),
 //               request.Title,
 //                 photoPath
-
+             
 
 //                );
 //            await _articlesRepository.AddAsync(entity);
