@@ -12,8 +12,8 @@ using Spectra.Infrastructure.Data;
 namespace Spectra.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20241116090452_NotesIsNullableInEntityBase")]
-    partial class NotesIsNullableInEntityBase
+    [Migration("20241116200246_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -217,7 +217,6 @@ namespace Spectra.Infrastructure.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
@@ -238,6 +237,9 @@ namespace Spectra.Infrastructure.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("UserImage")
+                        .HasColumnType("text");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)

@@ -271,6 +271,14 @@ namespace Spectra.Infrastructure
                .AddEntityFrameworkStores<IdentityContext>()
                .AddDefaultTokenProviders();
 
+            services.AddDbContext<IdentityContext>(config =>
+            {
+                config.UseNpgsql(configuration.GetConnectionString("IdentityConnection"), ctx =>
+                {
+                    ctx.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
+                });
+            });
+
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IIdentityService, IdentityService>();
             return services;
