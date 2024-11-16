@@ -124,6 +124,11 @@ function CategoriesVideo({ open }) {
       name: "report6",
       active: searchParams.get("reportNum") === "report6",
     },
+    {
+      label: "التقرير التشخيصى",
+      name: "report7",
+      active: searchParams.get("reportNum") === "report7",
+    },
   ];
   return (
     <>
