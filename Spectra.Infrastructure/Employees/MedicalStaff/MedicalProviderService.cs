@@ -3,7 +3,6 @@ using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
-using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Enums;
@@ -15,12 +14,11 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
     public class MedicalProviderService : IMedicalProviderService
     {
         private readonly IMediator _mediator;
-        private readonly ICurrentUser _currentUser;
 
-        public MedicalProviderService(IMediator mediator , ICurrentUser currentUser )
+
+        public MedicalProviderService(IMediator mediator)
         {
             _mediator = mediator;
-            _currentUser = currentUser;
 
         }
         public async Task<OperationResult<string>> CreateMedicalProvider(
@@ -39,7 +37,6 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
       HumenGender humenGenders,
       string licenseNumber,
       JobTypes JobTypes
-     
      /* List<IFormFile>? scientificDegree*/)
         {
             // Create value objects
@@ -80,7 +77,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 Diagnoses = diagnoses,
                 HumenGenders = humenGenders,
                 LicenseNumber = licenseNumber,
-                UserId= _currentUser.Id,
+
                 JobType = JobTypes
                 
                 //ScientificDegree = scientificDegree

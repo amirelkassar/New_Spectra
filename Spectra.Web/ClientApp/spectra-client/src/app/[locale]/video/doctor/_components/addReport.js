@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import PostAssessment from "./reports/post_assessment";
 import FollowUp from "./reports/follow_up";
 import History from "./reports/history";
-import Speech from "./reports/speech";
-import MDT from "./reports/mdt";
 
 function AddReport() {
   const searchParams = useSearchParams();
@@ -16,12 +14,8 @@ function AddReport() {
         return <PostAssessment />;
       case "report2":
         return <FollowUp />;
-      case "report3":
-        return <History />;
-      case "report4":
-        return <Speech />;
-      case "report5":
-        return <MDT />;
+        case "report3":
+          return <History />;
     }
   };
   return <ViewCompReports />;

@@ -26,11 +26,10 @@ namespace Spectra.Domain.Employees.ManagementStaff
             string qualifications,
             DateOnly? timeToJoin,
             double? workingHours,
-            JobTypes jobType,
-            string userid
+            JobTypes jobType
 
             )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, userid
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address
                   )
 
     {
@@ -39,7 +38,6 @@ namespace Spectra.Domain.Employees.ManagementStaff
             TimeToJoin = timeToJoin;
             WorkingHours = workingHours;
             JobType = jobType;
-        
         }
         
 
@@ -56,8 +54,7 @@ namespace Spectra.Domain.Employees.ManagementStaff
         string qualifications,
         DateOnly? timeToJoin,
         double? workingHours,
-           JobTypes jobType,
-            string userid
+           JobTypes jobType
         )
 
         {
@@ -72,7 +69,7 @@ namespace Spectra.Domain.Employees.ManagementStaff
 
 
             var staff = new Staff(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, jobName, qualifications, timeToJoin, workingHours,
-                jobType, userid);
+                jobType);
 
             return staff;
 

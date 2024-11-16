@@ -10,6 +10,8 @@ namespace Spectra.Application.Employees.MedicalTeams.Commands
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
         public List<string> SpecialistIds { get; set; }
+
+
     }
 
     public  class CreateMedicalTeamCommandHandler : IRequestHandler<CreateMedicalTeamCommand, OperationResult<string>>
