@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.ManagementStaff;
@@ -26,17 +25,15 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
         public DateOnly? TimeToJoin { get; set; }
         public double? WorkingHours { get; set; }
         public JobTypes JobType { get; set; }
-       public string UserId { get; set; }
     }
 
     public class CreateManagementStaffCommandHandler : IRequestHandler<CreateManagementStaffCommand, OperationResult<string>>
     {
         private readonly IManagementStaffRepository _staffRepository;
-        private readonly ICurrentUser _currentUser;
-        public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository, ICurrentUser currentUser)
+
+        public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository)
         {
-            _staffRepository = staffRepository;
-            _currentUser = currentUser;
+            _staffRepository=staffRepository;
         }
         public async Task<OperationResult<string>> Handle(CreateManagementStaffCommand request, CancellationToken cancellationToken)
         {
@@ -53,8 +50,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
                 request.Qualifications,
                 request.TimeToJoin,
                 request.WorkingHours,
-                request.JobType,
-                request.UserId
+                request.JobType
                 );
 
 

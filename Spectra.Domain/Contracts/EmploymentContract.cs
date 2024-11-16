@@ -20,7 +20,6 @@ namespace Spectra.Domain.Contracts
         public string Titel { get; set; }
         public ContractCases ContractCase { get; set; }
         public AdminOrEmployee? AdminOrEmployee { get; set; }
-        
 
       
         //public DateTime StartDate { get; set; }
@@ -62,7 +61,7 @@ namespace Spectra.Domain.Contracts
            string titel,
            ContractCases contractCase,
            Name employeeName,
-           AdminOrEmployee adminOrEmployee
+            AdminOrEmployee adminOrEmployee
 
         )
         {

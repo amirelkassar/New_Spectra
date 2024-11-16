@@ -9,19 +9,22 @@ import {
 } from '@/client/_components/ui';
 import { CellRate } from './cell-rate';
 import { doctorsColumns } from './doctors-columns';
+import { MedicalTeamData } from '@/lib/demoData';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
-import { TEAM } from '@/data';
 
 export const DoctorsTable = () => {
   return (
     <Card>
-      <DataTable data={TEAM} columns={doctorsColumns}>
+      <DataTable
+        data={MedicalTeamData}
+        columns={doctorsColumns}
+      >
         <TableItem />
       </DataTable>
 
       <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
-        {TEAM?.map((item) => (
-          <CardItem key={item.id} item={item} />
+        {MedicalTeamData?.map((item, index) => (
+          <CardItem key={index} item={item} />
         ))}
       </div>
     </Card>

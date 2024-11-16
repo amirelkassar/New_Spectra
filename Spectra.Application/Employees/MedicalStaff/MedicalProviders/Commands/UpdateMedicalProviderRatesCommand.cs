@@ -19,16 +19,17 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
     {
         private readonly IMedicalProviderRepository _medicalProvider;
 
-    
+        private readonly IHellper _addFile;
 
-        public UpdateDoctorRatesCommandHandler(IMedicalProviderRepository medicalProvider)
+        public UpdateDoctorRatesCommandHandler(IMedicalProviderRepository medicalProvider, IHellper addFile)
         {
             _medicalProvider = medicalProvider;
-           
+            _addFile = addFile;
         }
 
         public async Task<OperationResult<Unit>> Handle(UpdateMedicalProviderRatesCommand request, CancellationToken cancellationToken)
         {
+
             var Employee = await _medicalProvider.GetByIdAsync(request.Id);
 
             Employee.EmpelyeeRate = request.empelyeeRate;

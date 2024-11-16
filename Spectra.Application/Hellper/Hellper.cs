@@ -12,6 +12,8 @@ namespace Spectra.Application.MasterData.HellperFunc
             _webHostEnvironment = webHostEnvironment;
         }
 
+
+
         public async Task<List<string>> CreateAttachments(IEnumerable<IFormFile> attachments, string folderName)
         {
             var filePaths = new List<string>();
@@ -70,6 +72,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             return $"/{folderName}/{uniqueFileName}";
         }
+
         public async Task DeleteAttachment(string? attachment)
         {
             if (!string.IsNullOrEmpty(attachment))
@@ -81,6 +84,8 @@ namespace Spectra.Application.MasterData.HellperFunc
                 }
             }
         }
+
+
         public async Task DeleteAttachments(List<string> attachmentPaths)
         {
             // Ensure the web root path is correctly set
@@ -113,6 +118,8 @@ namespace Spectra.Application.MasterData.HellperFunc
                 }
             }
         }
+
+
         public async Task<List<string>> UpdateAttachments(List<string>? existingAttachments, List<IFormFile> newAttachments, string folderName)
         {
 

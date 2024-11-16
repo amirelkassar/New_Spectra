@@ -7,7 +7,7 @@ namespace Spectra.Domain.Settings.MedicalSpecialties
 {
     public class MedicalSpecialt : BaseAuditableEntity<string>
     {
-        public string SpecializationId { get; set; }
+        public string SpecializationId{ get; set; }
         public List<string> DorctorsIds { get; set; }
         protected MedicalSpecialt() { }
         private MedicalSpecialt(
@@ -27,7 +27,7 @@ namespace Spectra.Domain.Settings.MedicalSpecialties
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(specialization, nameof(specialization));
-
+      
 
             return new MedicalSpecialt(id,
                 specialization,

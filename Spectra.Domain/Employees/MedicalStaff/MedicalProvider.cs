@@ -27,15 +27,15 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    HumenGender humenGenders,
                    EmailAddress emailAddress,
                    Address address,
-                   List<string> diagnoses,
+                  List<string> diagnoses,
                    string? licenseNumber,
                    string? approvedBy,
                    string academicdegree,
-                   List<string>? attachmentPath,
+                    List<string>? attachmentPath,
                    EmpelyeeRates? empelyeeRate,
-                   JobTypes jobType,
-                    string userid
-                   ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, userid)
+                     JobTypes jobType
+
+                   ) : base( id, name, nationalId, phoneNumber, humenGenders, emailAddress, address)
         {
             Id = id;
             Name = name;
@@ -51,7 +51,6 @@ namespace Spectra.Domain.Employees.MedicalStaff
             AttachmentPath = attachmentPath;
             EmpelyeeRate = empelyeeRate;
             JobType = jobType;
-            UserId= userid;
         }
 
         public static MedicalProvider Create(
@@ -62,14 +61,13 @@ namespace Spectra.Domain.Employees.MedicalStaff
           EmailAddress emailAddress,
           HumenGender humenGenders,
           Address address,
-          List<string> diagnoses,
+         List<string> diagnoses,
           string? licenseNumber,
           string? approvedBy,
           string academicdegree,
-          List<string> attachmentPath,
-          EmpelyeeRates? empelyeeRate,
-          JobTypes jobType,
-          string userid
+           List<string> attachmentPath,
+           EmpelyeeRates? empelyeeRate,
+          JobTypes jobType
           )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -84,7 +82,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
 
             var medicalProvider = new MedicalProvider(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType, userid
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType
                );
 
             return medicalProvider;

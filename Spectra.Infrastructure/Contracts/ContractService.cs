@@ -29,15 +29,17 @@ namespace Spectra.Infrastructure.Contracts
                 throw new RequestErrorException("You can only Send or Save your Contract.");
 
             }
-            var command = new CreateContractCommand
-            {
-                HoursOfWork = input.HoursOfWork,
-                DaysOfWork = input.DaysOfWork,
-                ContractCase = input.ContractCase,
-                Freelance = input.Freelance,
-                SpectraTeam = input.SpectraTeam,
-
-            };
+                var command = new CreateContractCommand
+                {
+                    HoursOfWork = input.HoursOfWork,
+                    DaysOfWork = input.DaysOfWork,
+                    ContractCase = input.ContractCase,
+                    EmployeeId = input.EmployeeId,
+                    Titel = input.Titel,
+                    Freelance = input.Freelance,
+                    SpectraTeam = input.SpectraTeam,
+               
+                };
 
 
 
