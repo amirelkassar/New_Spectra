@@ -25,8 +25,8 @@ namespace Spectra.Application.Settings.ShowMedicalProvider.Commands
             public async Task<OperationResult<Unit>> Handle(UpdateShowSpecialltionCommand request, CancellationToken cancellationToken)
             {
                 var entity = await _entityRepository.GetByIdAsync(request.Id);
-                entity.SpecializationId = request.SpecializationId;
-                entity.DorctorsIds = request.DorctorsIds;
+                //entity.SpecializationId = request.SpecializationId;
+                //entity.DorctorsIds = request.DorctorsIds;
 
                 await _entityRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);

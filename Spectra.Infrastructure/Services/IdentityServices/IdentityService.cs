@@ -89,9 +89,9 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             return result.ToApplicationResult();
         }
 
-        public async Task<LoginModel> LoginAsync(LoginAPIParam input) => await _authTokenProvider.LoginAsync(input);
+        public async Task<OperationResult> LoginAsync(LoginAPIParam input) => await _authTokenProvider.LoginAsync(input);
 
-        public async Task<LoginModel> RefreshTokenAsync(string token) => await _authTokenProvider.RefreshTokenAsync(token);
+        public async Task<OperationResult> RefreshTokenAsync(string token) => await _authTokenProvider.RefreshTokenAsync(token);
 
         public async Task<OperationResult> ValidateUserAsync(LoginAPIParam input) => await _authTokenProvider.ValidateUserAsync(input);
 

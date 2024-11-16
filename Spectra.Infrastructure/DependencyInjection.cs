@@ -9,6 +9,7 @@ using Spectra.Application.ChatHub;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Clients;
 using Spectra.Application.Clients.Services;
+using Spectra.Application.Commons.Dtos;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Countries;
@@ -51,6 +52,7 @@ using Spectra.Application.Settings.Articles;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
 using Spectra.Application.Settings.Packages;
+using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
@@ -91,6 +93,7 @@ using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
 using Spectra.Infrastructure.Settings.Packages;
+using Spectra.Infrastructure.Settings.showSpecialltionies;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
 using System.Reflection;
 using System.Text;
@@ -118,8 +121,7 @@ namespace Spectra.Infrastructure
             services.AddSerilog();
 
             services.AddDataProtection();
-            services.AddFluentEmail("tech@profound-group.com")
-                .AddRazorRenderer();
+            services.ConfigureEmailServices(configuration);
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -136,6 +138,17 @@ namespace Spectra.Infrastructure
                 .GetSection("ThirdParty")
                 .GetSection(nameof(CountriesNow));
             services.Configure<CountriesNow>(countriesNow);
+            return services;
+        }
+
+        private static IServiceCollection ConfigureEmailServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailSettings = new EmailSettingDto();
+            configuration.GetSection("EmailSettings").Bind(emailSettings);
+            services.AddScoped<IEmailSender, FluentEmailSender>();
+            services.AddFluentEmail(emailSettings.FromEmail, emailSettings.FromName)
+                .AddSmtpSender(emailSettings.Host, emailSettings.Port, emailSettings.Username, emailSettings.Password)
+               .AddRazorRenderer();
             return services;
         }
 
@@ -164,8 +177,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
 
             services.AddScoped<IHellper, Hellper>();
-            services.AddScoped<IEmailSender, FluentEmailSender>();
-
 
             return services;
         }
@@ -205,7 +216,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IPackagesRepository, PackagesRepository>();
 
             services.AddScoped<ISettingRepository, SettingRepository>();
-
+            services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
             services.AddSignalR();
 
