@@ -2,9 +2,11 @@
 
 import { cn } from '@/lib/utils';
 import { DynamicContent } from './_components/dynamic-content';
-import { VideoNavbar } from './_components/video-navbar';
-import { VideoCall } from './_components/video/videoCall';
 import { useClientVideoStore } from './_hooks';
+import {
+  VideoCall,
+  VideoNavbar,
+} from './_components/video';
 
 const VideoClient = () => {
   const view = useClientVideoStore((s) => s.view);

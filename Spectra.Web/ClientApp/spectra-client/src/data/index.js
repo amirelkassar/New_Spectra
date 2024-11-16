@@ -27,8 +27,9 @@ import { MOBILE_APP } from './mobile-app';
 import { SOCIAL } from './contact';
 import { REMINDER_MESSAGES } from './reminder-messages';
 import { CHILDS, CHILD_TABS, CHILDS_TABLE } from './child';
-import { FAMILIES } from './families';
+// import { FAMILIES } from './families';
 import { SETTINGS_LIST } from './settings';
+import { CLIENT_VIDEO_NAV } from './video';
 
 export {
   WHAT_WE_CURE,
@@ -58,6 +59,7 @@ export {
   CHILDS,
   CHILD_TABS,
   CHILDS_TABLE,
-  FAMILIES,
+  // FAMILIES,
   SETTINGS_LIST,
+  CLIENT_VIDEO_NAV,
 };
