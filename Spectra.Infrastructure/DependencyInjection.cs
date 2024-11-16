@@ -9,6 +9,7 @@ using Spectra.Application.ChatHub;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Clients;
 using Spectra.Application.Clients.Services;
+using Spectra.Application.Commons.Dtos;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Countries;
@@ -118,8 +119,7 @@ namespace Spectra.Infrastructure
             services.AddSerilog();
 
             services.AddDataProtection();
-            services.AddFluentEmail("tech@profound-group.com")
-                .AddRazorRenderer();
+            services.ConfigureEmailServices(configuration);
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -139,6 +139,16 @@ namespace Spectra.Infrastructure
             return services;
         }
 
+        private static IServiceCollection ConfigureEmailServices(this IServiceCollection services,IConfiguration configuration)
+        {
+            var emailSettings = configuration.GetValue<EmailSettingDto>("EmailSettings");
+            services.AddScoped<IEmailSender, FluentEmailSender>();
+            services.AddFluentEmail("tech@profound-group.com")
+                .AddSmtpSender(emailSettings.Host,emailSettings.Port,emailSettings.Username,emailSettings.Password)
+               .AddRazorRenderer();
+            return services;
+        }
+
         private static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ISettingService, SettingService>();
@@ -151,7 +161,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IGeneralComplaintService, GeneralComplaintService>();
             services.AddScoped<IExcelProcessingService, ExcelProcessingService>();
             services.AddScoped<IServiceMDService, ServiceMDService>();
-            services.AddScoped<IMedicalProviderService, MedicalProviderService>();
+           // services.AddScoped<IMedicalProviderService, MedicalProviderService>();
             services.AddScoped<IContractService, ContractService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
@@ -164,8 +174,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
 
             services.AddScoped<IHellper, Hellper>();
-            services.AddScoped<IEmailSender, FluentEmailSender>();
-
 
             return services;
         }
