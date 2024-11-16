@@ -15,8 +15,9 @@ namespace Spectra.Domain.Shared.Wrappers
         {
             Code = code;
             Message = message;
-          this. errors = errors;
+            this.errors = errors;
             SuccessOpration = errors is null || errors.Count == 0;
+            OperationId = Guid.NewGuid();
         }
         public Guid OperationId { get; }
         public bool SuccessOpration { get; }

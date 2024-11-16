@@ -58,25 +58,30 @@ namespace Spectra.Web
 
         private static void ConfigureSwagger(IServiceCollection services, IConfiguration configuration)
         {
-            var authServer = configuration["IdentityServerSetting:Authority"];
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Spctra Web App", Version = "v1" });
-
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Spectra APIs", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
+                    In = ParameterLocation.Header,
+                    Description = "Please enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
                     {
-                        AuthorizationCode = new OpenApiOAuthFlow
+                        new OpenApiSecurityScheme
                         {
-                            AuthorizationUrl = new Uri($"{authServer}/connect/authorize"),
-                            TokenUrl = new Uri($"{authServer}/connect/token"),
-                            Scopes = new Dictionary<string, string>
+                            Reference = new OpenApiReference
                             {
-                                {"apis","IS4API" }
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
                             }
-                        }
+                        },
+                        Array.Empty<string>()
                     }
                 });
                 var filePath = Path.Combine(Environment.CurrentDirectory, "SpectraApiDocs.xml");
@@ -84,7 +89,6 @@ namespace Spectra.Web
                 {
                     c.IncludeXmlComments(filePath);
                 }
-                c.OperationFilter<AuthorizeCheckOperationFilter>();
             });
         }
 
