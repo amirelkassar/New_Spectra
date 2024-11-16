@@ -1,4 +1,10 @@
-﻿namespace Spectra.Application.Commons.Dtos
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.Application.Commons.Dtos
 {
     public class EmailMetadata(string toAddress, string subject, string? body = "",
         string[]? attachments = default)

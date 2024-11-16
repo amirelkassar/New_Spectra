@@ -1,6 +1,11 @@
 ﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Domain.Employees
 {
@@ -24,7 +29,7 @@ namespace Spectra.Domain.Employees
                   Address address
 
                   ) : base(id)
-        {
+         {
             Id = id;
             Name = name;
             NationalId = nationalId;
@@ -32,7 +37,7 @@ namespace Spectra.Domain.Employees
             EmailAddress = emailAddress;
             HumenGenders = humenGenders;
             Address = address;
-        }
+            }
     }
 
 

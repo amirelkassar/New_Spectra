@@ -1,8 +1,17 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Application.Patients;
+using Spectra.Domain.Shared.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using FluentValidation;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Domain.Shared.Common.Exceptions;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Commands
 {
@@ -30,12 +39,11 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
 
         public async Task<OperationResult<Unit>> Handle(UpdateInternalExaminationCommand request, CancellationToken cancellationToken)
         {
-
+           
             var internalExamination = await _InternalExaminationRepository.GetByIdAsync(request.Id);
-
+       
             var names = await _InternalExaminationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
-            if (names.Any())
-            {
+            if (names.Any()){
                 throw new DbErrorException(" this's Name is a ready exists");
             }
 
@@ -45,8 +53,8 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
 
             await _InternalExaminationRepository.UpdateAsync(internalExamination);
             return OperationResult<Unit>.Success(Unit.Value);
-
-        }
+       
+}
 
 
 

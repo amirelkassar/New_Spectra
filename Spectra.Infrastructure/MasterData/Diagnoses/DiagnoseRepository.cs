@@ -2,6 +2,9 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Domain.MasterData.Diagnoses;
+
+using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
 
 

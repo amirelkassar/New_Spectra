@@ -1,4 +1,10 @@
-﻿namespace Spectra.Domain.Patients.Assessments.PsychologicalInitialAssessmentData
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spectra.Domain.Patients.Assessments.PsychologicalInitialAssessmentData
 {
     public class ReferralReason
     {

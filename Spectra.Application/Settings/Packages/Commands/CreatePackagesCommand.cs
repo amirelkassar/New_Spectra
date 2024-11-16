@@ -25,7 +25,7 @@ namespace Spectra.Application.Settings.Packages.Commands
         private readonly IHellper _addPhoto;
 
 
-
+  
 
         public CreatePackagesCommandHandler(IPackagesRepository packagesRepository, IHellper addPhoto)
         {

@@ -1,11 +1,21 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Application.Messaging;
+using Spectra.Application.Patients;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
@@ -66,9 +76,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
                 await _serviceMRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
+            
 
-
-            }
+    }
 
         }
     }

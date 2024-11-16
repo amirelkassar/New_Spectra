@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.Sections.Commands;
 using Spectra.Application.MasterData.Sections.Dto;
 using Spectra.Domain.MasterData.Sections;

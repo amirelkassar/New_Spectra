@@ -1,5 +1,15 @@
 ﻿using MediatR;
+using Spectra.Application.Clients;
+using Spectra.Domain.Clients;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -25,16 +35,16 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
         {
 
 
+          
+                var entitiy = await  _medicalTestsAndXrayRepository.GetByIdAsync(request.Id); ;
+                if (entitiy == null)
+                {
+                    throw new NotFoundException("medicalTestsAndXray", request.Id);
+                }
 
-            var entitiy = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id); ;
-            if (entitiy == null)
-            {
-                throw new NotFoundException("medicalTestsAndXray", request.Id);
-            }
-
-            return OperationResult<MedicalTestsAndXray>.Success(entitiy);
-
-
+                return OperationResult<MedicalTestsAndXray>.Success(entitiy);
+            
+          
         }
     }
 }

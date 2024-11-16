@@ -105,8 +105,8 @@
 //        }
 
 
-
-
+       
+    
 //        public async Task<OperationResult<Doctor>> GetDoctorById(string id)
 //        {
 //            var query = new GetDoctorByIdQuery { Id = id };

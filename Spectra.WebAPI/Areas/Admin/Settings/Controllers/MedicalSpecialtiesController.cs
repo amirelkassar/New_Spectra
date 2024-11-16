@@ -20,7 +20,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var MedicalSpecialts = await _entityServices.GetAllMedicalSpecialties();
             return Ok(MedicalSpecialts);
         }
-
+       
         [HttpGet("id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetOneMedicalSpecialt(string id)
@@ -51,8 +51,8 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var MedicalSpecialt = await _entityServices.DeleteMedicalSpecialties(id);
             return Ok(MedicalSpecialt);
         }
-
-
+       
+        
     }
 
 }

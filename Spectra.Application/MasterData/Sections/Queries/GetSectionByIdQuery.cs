@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.Sections;
 using Spectra.Domain.MasterData.Sections;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 

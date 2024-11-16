@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Settings.Articles.Commands
@@ -43,9 +45,9 @@ namespace Spectra.Application.Settings.Articles.Commands
                 {
                     throw new DbErrorException(" this's Name is a ready exists");
                 }
-
-
-
+     
+             
+                
                 entity.Title = request.Title;
                 var allPathes = entity.Secations.Select(x => x.AttachmentPath).ToList();
 
@@ -54,7 +56,7 @@ namespace Spectra.Application.Settings.Articles.Commands
 
                     entity.MainPhoto = await _addPhoto.UpdateAttachment(entity.MainPhoto, request.MainPhoto, Pathes.MainPhotoArticles);
 
-
+                
                 }
                 //if (request.AttachmentPath != null)
                 //{
@@ -90,7 +92,7 @@ namespace Spectra.Application.Settings.Articles.Commands
 
                     allSections.Add(section);
                 }
-                entity.Secations = allSections;
+                entity.Secations= allSections;
                 await _articlesRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
 
