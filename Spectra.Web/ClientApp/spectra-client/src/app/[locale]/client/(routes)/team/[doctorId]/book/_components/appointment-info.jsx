@@ -1,26 +1,32 @@
 import Avatar from '@/components/avatar';
 import Card from '@/components/card';
-import { BackButton, H1 } from '@/client/_components/ui';
+import {
+  BackButton,
+  H1,
+  Section,
+} from '@/client/_components/ui';
 import { AppointmentDate } from './appointment-date';
 
 export const AppointmentInfo = ({ data = {} }) => {
   return (
-    <Card className='space-y-5'>
-      <div className='flex gap-5'>
-        <BackButton />
-        <H1>اختيار الميعاد</H1>
-      </div>
+    <Section id='appointment-info' className='pt-0'>
+      <Card className='space-y-7'>
+        <div className='flex items-center gap-5'>
+          <BackButton />
+          <H1 id='appointment-info'>اختيار الميعاد</H1>
+        </div>
 
-      <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
-        <Doctor
-          avatar={data?.avatar}
-          name={data?.doctor}
-          profession={data?.profession}
-        />
+        <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
+          <Doctor
+            avatar={data?.avatar}
+            name={data?.doctor}
+            profession={data?.profession}
+          />
 
-        <AppointmentDate />
-      </div>
-    </Card>
+          <AppointmentDate />
+        </div>
+      </Card>
+    </Section>
   );
 };
 

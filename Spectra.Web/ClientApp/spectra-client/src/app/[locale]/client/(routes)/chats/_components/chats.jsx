@@ -72,6 +72,7 @@ export const Chats = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
+
       <Conversation
         isOpen={isOpen}
         setIsOpen={setIsOpen}

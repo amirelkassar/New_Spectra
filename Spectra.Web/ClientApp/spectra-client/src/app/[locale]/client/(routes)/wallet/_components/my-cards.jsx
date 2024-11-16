@@ -2,14 +2,16 @@ import Card from '@/components/card';
 import ATMCardBG from '@/assets/icons/atm-card-bg';
 import MasterCard from '@/assets/icons/master-card';
 import { AddButton } from '@/components/buttons/add-button';
+import {
+  Section,
+  SectionTitle,
+} from '@/client/_components/ui';
 export const MyCards = () => {
   return (
-    <section>
-      <Card className='text-black space-y-5'>
+    <Section id='my-cards'>
+      <Card className='space-y-5'>
         <div className='flex gap-5 items-center'>
-          <h2 className='font-bold text-sm mdl:text-medium'>
-            بطاقاتي
-          </h2>
+          <SectionTitle id='my-cards'>بطاقاتي</SectionTitle>
 
           <AddButton>اضافة بطاقة</AddButton>
         </div>
@@ -20,7 +22,7 @@ export const MyCards = () => {
           </div>
         </div>
       </Card>
-    </section>
+    </Section>
   );
 };
 

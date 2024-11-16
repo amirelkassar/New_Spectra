@@ -1,13 +1,17 @@
+import {
+  Section,
+  SectionTitle,
+} from '@/client/_components/ui';
 import Card from '@/components/card';
 import { getDate } from '@/lib/utils';
 import Image from 'next/image';
 
 export const Certifications = ({ data }) => {
   return (
-    <div className='space-y-5'>
-      <h3 className='text-base font-bold mdl:text-xl mb-3'>
+    <Section id='certifications'>
+      <SectionTitle id='certifications' className='mb-5'>
         الشهادات
-      </h3>
+      </SectionTitle>
 
       <div className='flex flex-wrap gap-5'>
         {data?.map((item, index) => (
@@ -19,7 +23,7 @@ export const Certifications = ({ data }) => {
           />
         ))}
       </div>
-    </div>
+    </Section>
   );
 };
 

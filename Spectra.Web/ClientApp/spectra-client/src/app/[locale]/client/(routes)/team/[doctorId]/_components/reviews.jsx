@@ -1,22 +1,26 @@
 import { Rating } from '@mantine/core';
 
+import {
+  Section,
+  SectionTitle,
+} from '@/client/_components/ui';
 import { getDate } from '@/lib/utils';
 import Card from '@/components/card';
 import Avatar from '@/components/avatar';
 
 export const Reviews = ({ data }) => {
   return (
-    <div className='space-y-5'>
-      <h3 className='text-base font-bold mdl:text-xl mb-3'>
+    <Section id='reviews'>
+      <SectionTitle id='reviews' className='mb-5'>
         التعليقات
-      </h3>
+      </SectionTitle>
 
       <div className='space-y-5'>
         {data?.map((item, index) => (
           <Review key={index} {...item} />
         ))}
       </div>
-    </div>
+    </Section>
   );
 };
 

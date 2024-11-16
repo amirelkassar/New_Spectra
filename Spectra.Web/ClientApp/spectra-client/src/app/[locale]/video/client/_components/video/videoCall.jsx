@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from '@/navigation';
 
 import { cn } from '@/lib/utils';
 import { Controls } from './controls';
+import { useChat } from '../../_hooks/use-chat';
 
 export const VideoCall = () => {
-  const router = useRouter();
+  const { isOpen, toggleChat } = useChat();
+
   return (
     <div className='relative aspect-video overflow-hidden lgl:rounded-xl'>
       <Image
@@ -27,10 +28,11 @@ export const VideoCall = () => {
 
       <Controls className='z-10 absolute bottom-10 sml:bottom-5 start-1/2 ltr:-translate-x-1/2 translate-x-1/2'>
         <Controls.ChatBtn
+          aria-checked={isOpen}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            router.replace('?view=chat');
+            toggleChat();
           }}
         />
         <Controls.VideoBtn />

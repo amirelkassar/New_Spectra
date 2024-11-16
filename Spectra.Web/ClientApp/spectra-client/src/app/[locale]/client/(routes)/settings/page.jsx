@@ -3,8 +3,8 @@ import { SettingsList } from './_components/settings-list';
 
 const SettingsPage = () => {
   return (
-    <Container className='space-y-5'>
-      <H1>الاعدادات</H1>
+    <Container>
+      <H1 id='settings'>الاعدادات</H1>
       <SettingsList />
     </Container>
   );

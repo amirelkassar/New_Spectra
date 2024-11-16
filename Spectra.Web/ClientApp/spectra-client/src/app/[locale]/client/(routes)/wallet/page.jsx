@@ -3,25 +3,23 @@ import { Divider } from '@mantine/core';
 import { MyAccounts } from './_components/my-accounts';
 import { MyCards } from './_components/my-cards';
 import { AllTransactions } from './_components/all-transactions';
-import { H1, Container } from '@/client/_components/ui';
-import { Wallet } from '@/client/_components/payments';
+import { Container } from '@/client/_components/ui';
+import { MyWallet } from './_components/my-wallet';
 
 const WalletPage = () => {
   return (
-    <Container className='space-y-5'>
-      <H1>محفظة سبيكترا</H1>
-
-      <Wallet />
+    <Container>
+      <MyWallet />
 
       <div className='lg:flex lg:flex-wrap w-full lg:gap-5 space-y-5 lg:space-y-0 lg:*:flex-1'>
-        <div className='space-y-5 h-auto'>
+        <div>
           <MyAccounts />
           <MyCards />
         </div>
 
         <Divider my='sm' className='lg:hidden' />
 
-        <AllTransactions className='h-auto' />
+        <AllTransactions />
       </div>
     </Container>
   );

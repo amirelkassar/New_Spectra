@@ -4,6 +4,7 @@ import Card from '@/components/card';
 import Avatar from '@/components/avatar';
 import {
   DataTable,
+  Section,
   Table,
   TableCard,
 } from '@/client/_components/ui';
@@ -14,20 +15,22 @@ import { MakeAppointment } from './make-appointment';
 
 export const TeamTable = () => {
   return (
-    <Card>
-      <DataTable
-        data={MedicalTeamData}
-        columns={teamColumns}
-      >
-        <TableItem />
-      </DataTable>
+    <Section id='team-table'>
+      <Card className='!py-0'>
+        <DataTable
+          data={MedicalTeamData}
+          columns={teamColumns}
+        >
+          <TableItem />
+        </DataTable>
 
-      <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
-        {MedicalTeamData?.map((item, index) => (
-          <CardItem key={index} item={item} />
-        ))}
-      </div>
-    </Card>
+        <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
+          {MedicalTeamData?.map((item, index) => (
+            <CardItem key={index} item={item} />
+          ))}
+        </div>
+      </Card>
+    </Section>
   );
 };
 
