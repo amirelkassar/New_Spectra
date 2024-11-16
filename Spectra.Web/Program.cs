@@ -1,5 +1,6 @@
 using Serilog;
 using Spectra.Application.Countries.SeedService;
+using Spectra.Application.Identities;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Web;
@@ -25,6 +26,9 @@ using (var scope = app.Services.CreateScope())
 
     var settingsSeedService = scope.ServiceProvider.GetRequiredService<ApplicationSettingSeeder>();
     await settingsSeedService.Initialize();
+
+    var identitySeederService = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+    await identitySeederService.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.
