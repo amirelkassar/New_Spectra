@@ -10,6 +10,7 @@ namespace Spectra.Domain.AppUser
     {
         public string Name { get; set; }
         public string SurName { get; set; }
+        public string? UserImage { get; set; }
         private readonly List<BaseEvent> _domainEvents = [];
 
         [NotMapped]

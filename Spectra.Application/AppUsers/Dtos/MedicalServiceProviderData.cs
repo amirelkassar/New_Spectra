@@ -8,7 +8,7 @@ namespace Spectra.Application.AppUsers.Dtos
         {
             Specifications = [];
         }
-        public JobTypes? JobType { get; set; }
+        public JobTypes JobType { get; set; }
         public string? MainSpecificationId { get; set; }
         public ICollection<string>? Specifications { get; set; }
         public string? LicenseNumber { get; set; }

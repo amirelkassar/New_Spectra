@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using Spectra.Application.Identities;
 using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Interfaces;
@@ -193,6 +194,18 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             user = await _userManager.FindByNameAsync(username);
             user ??= await _userManager.FindByEmailAsync(username);
             return user != default;
+        }
+
+        public async Task<OperationResult> UpdateUserImageAsync(string userId, string imagePath)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                user.UserImage = imagePath;
+                await _userManager.UpdateAsync(user);
+                return OperationResult.Success();
+            }
+            throw new NotFoundException(userId, nameof(user));
         }
     }
 }

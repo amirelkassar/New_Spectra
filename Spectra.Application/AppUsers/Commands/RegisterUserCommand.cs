@@ -44,7 +44,7 @@ namespace Spectra.Application.AppUsers.Commands
         public string Phone { get; set; }
         [Required]
         [EnumDataType(typeof(HumenGenders))]
-        public HumenGenders Gender { get; set; }
+        public HumenGender Gender { get; set; }
         public string? Occupation { get; set; }
         public string? DoctorRefferalCode { get; set; }
 
@@ -56,9 +56,9 @@ namespace Spectra.Application.AppUsers.Commands
             IMedicalProviderService medicalProviderService,
             IClientService clientService) : IRequestHandler<RegisterUserCommand, OperationResult>
         {
-            private readonly IIdentityService identityService = identityService;
-            private readonly IMedicalProviderService medicalProviderService = medicalProviderService;
-            private readonly IClientService clientService = clientService;
+            private readonly IIdentityService _identityService = identityService;
+            private readonly IMedicalProviderService _medicalProviderService = medicalProviderService;
+            private readonly IClientService _clientService = clientService;
 
             public async Task<OperationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
@@ -68,24 +68,46 @@ namespace Spectra.Application.AppUsers.Commands
                 {
                     case UserType.PatientFamily:
                         {
-                            var (results, userId) = await identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
+                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
 
                             if (request.Patients is not null && request.Patients.Count > 0)
                             {
                                 var validator = new PatientDataDtoValidator();
-                                //if (validator.Validate(request.)
-                                //{
 
-                                //}
                             }
 
                         }
                         break;
                     case UserType.Organization:
-
+                        {
+                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
+                        }
                         break;
                     case UserType.MedicalServiceProvider:
-
+                        {
+                            var role = request.MedicalProviderData.JobType switch
+                            {
+                                JobTypes.Doctor => Roles.Doctor,
+                                JobTypes.Specialist => Roles.Specialist,
+                                _ => Roles.User
+                            };
+                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, role);
+                            var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
+                                " ",
+                                "DR.",
+                                request.Phone,
+                                request.CountryCode,
+                                request.EmailAddress,
+                                request.CountryCode,
+                                request.StateCode,
+                                request.NationalId,
+                                request?.MedicalProviderData?.Degree,
+                                request?.MedicalProviderData?.AccreditedBy,
+                                request?.MedicalProviderData?.Specifications?.ToList(),
+                                request.Gender,
+                                request?.MedicalProviderData?.LicenseNumber,
+                                request.MedicalProviderData.JobType);
+                        }
                         break;
                     default:
                         throw new Exception("Invalid User Type");

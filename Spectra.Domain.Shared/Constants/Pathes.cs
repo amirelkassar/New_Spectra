@@ -15,6 +15,8 @@ namespace Spectra.Domain.Shared.Constants
         public const string FamilyPhoto = "Upload/Image/SuccessStory/FamilyPhoto";
         public const string FamilyVideo = "Upload/Videos/SuccessStory/FamilyVideo";
         public const string PackagePhoto = "Upload/Image/SuccessStory/PackagesPaneer";
+        public const string UserImages = "Upload/Image/Users";
+
 
         public static string GetRootPath() => Path.Combine(Environment.CurrentDirectory, "ServerDocuments");
         public static string GetEmailTemplatesPath() => Path.Combine(GetRootPath(), "EmailTemplates");
