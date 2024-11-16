@@ -1,4 +1,3 @@
-import { ClientVideoProvider } from './client-video-context';
-import { useClientVideo } from './client-video-context';
+import { useClientVideoStore } from './use-client-video-store';
 
-export { ClientVideoProvider, useClientVideo };
+export { useClientVideoStore };
