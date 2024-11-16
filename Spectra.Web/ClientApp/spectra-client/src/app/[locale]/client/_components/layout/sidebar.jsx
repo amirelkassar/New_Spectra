@@ -4,6 +4,10 @@ import { Link } from '@/navigation';
 
 import { cn } from '@/lib/utils';
 import { useNav, useSidebarStore } from '@/client/_hooks';
+import {
+  useClickOutside,
+  useMediaQuery,
+} from '@mantine/hooks';
 
 import ROUTES from '@/routes';
 import ArrowNav from '@/assets/icons/arrow-nav';
@@ -11,11 +15,20 @@ import Logo from '@/assets/icons/logo';
 import LogoutIcon from '@/assets/icons/logOut';
 
 export const Sidebar = () => {
-  const { isOpen, toggle } = useSidebarStore();
+  const { isOpen, close } = useSidebarStore();
+
+  const match = useMediaQuery('(max-width: 960px)');
+
+  const ref = useClickOutside(() => {
+    if (isOpen && match) close();
+  });
+
   const { links } = useNav();
 
   return (
     <aside
+      ref={ref}
+      data-open={isOpen}
       className={cn(
         'transition-all w-44 lg:w-14 !bg-white h-screen lg:h-full rounded-e-xl lg:rounded-none shadow-md lg:shadow-none fixed lg:sticky top-0 -start-44 z-50',
         isOpen && 'start-0 lg:w-52'
@@ -28,7 +41,7 @@ export const Sidebar = () => {
 
         <button
           className='size-9 ltr:rotate-180 shrink-0 bg-blueLight rounded-full flex items-center justify-center'
-          onClick={toggle}
+          onClick={close}
         >
           <ArrowNav />
         </button>
@@ -61,12 +74,19 @@ export const Sidebar = () => {
 };
 
 const NavLinks = ({ link }) => {
-  const { isOpen } = useSidebarStore();
+  const { isOpen, close } = useSidebarStore();
+
+  const match = useMediaQuery('(max-width: 960px)');
+
+  const onClick = () => {
+    if (isOpen && match) close();
+  };
 
   return (
     <li className='relative lg:h-11'>
       <Link
-        className='flex gap-3 text-sm lg:text-lg text-black p-2 font-bold relative w-fit rounded-lg group'
+        onClick={onClick}
+        className='flex gap-3 text-sm lg:text-lg p-2 font-bold relative w-fit rounded-lg group'
         href={link.route}
       >
         {/* LINK ICON */}
