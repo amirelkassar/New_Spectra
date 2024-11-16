@@ -13,7 +13,7 @@ const BookAppointmentPage = ({ params: { doctorId } }) => {
   );
 
   return (
-    <Container className='space-y-5'>
+    <Container>
       <AppointmentInfo data={doctor} />
       <PickDateAndAvailableTime />
       <Notes />

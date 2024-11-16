@@ -4,7 +4,7 @@ import HourglassIcon from '@/assets/icons/Hourglass';
 import LicenseIcon from '@/assets/icons/License';
 import QualificationsIcon from '@/assets/icons/qualifications';
 import Card from '@/components/card';
-import { Info } from '@/client/_components/ui';
+import { Info, Section } from '@/client/_components/ui';
 import { getDate } from '@/lib/utils';
 
 const ICONS = {
@@ -21,53 +21,59 @@ export const CareerDescription = ({ data }) => {
   const { fullYear } = getDate(data?.joinDate);
 
   return (
-    <Card className='space-y-5' title='الوصف الوظيفي'>
-      <div className='flex gap-5'>
-        {ICONS.joinDate}
-        <Info
-          titleClassName='font-bold'
-          valueClassName='font-normal'
-          title='تاريخ الانضمام'
-          value={fullYear}
-        />
-      </div>
+    <Section id='career-description'>
+      <Card
+        className='space-y-5'
+        title='الوصف الوظيفي'
+        titleId='career-description'
+      >
+        <div className='flex gap-5'>
+          {ICONS.joinDate}
+          <Info
+            titleClassName='font-bold'
+            valueClassName='font-normal'
+            title='تاريخ الانضمام'
+            value={fullYear}
+          />
+        </div>
 
-      <div className='flex gap-5'>
-        {ICONS.summary}
-        <Info
-          titleClassName='font-bold'
-          valueClassName='font-normal'
-          title='نبذة'
-          value={data?.summary}
-        />
-      </div>
-      <div className='flex gap-5'>
-        {ICONS.qualifications}
-        <Info
-          titleClassName='font-bold'
-          valueClassName='font-normal'
-          title='المؤهلات والتراخيص'
-          value={data?.qualifications}
-        />
-      </div>
-      <div className='flex gap-5'>
-        {ICONS.licenseNo}
-        <Info
-          titleClassName='font-bold'
-          valueClassName='font-normal'
-          title='رقم الترخيص'
-          value={data?.licenseNo}
-        />
-      </div>
-      <div className='flex gap-5'>
-        {ICONS.exp}
-        <Info
-          titleClassName='font-bold'
-          valueClassName='font-normal'
-          title='سنوات الخبرة'
-          value={data?.exp}
-        />
-      </div>
-    </Card>
+        <div className='flex gap-5'>
+          {ICONS.summary}
+          <Info
+            titleClassName='font-bold'
+            valueClassName='font-normal'
+            title='نبذة'
+            value={data?.summary}
+          />
+        </div>
+        <div className='flex gap-5'>
+          {ICONS.qualifications}
+          <Info
+            titleClassName='font-bold'
+            valueClassName='font-normal'
+            title='المؤهلات والتراخيص'
+            value={data?.qualifications}
+          />
+        </div>
+        <div className='flex gap-5'>
+          {ICONS.licenseNo}
+          <Info
+            titleClassName='font-bold'
+            valueClassName='font-normal'
+            title='رقم الترخيص'
+            value={data?.licenseNo}
+          />
+        </div>
+        <div className='flex gap-5'>
+          {ICONS.exp}
+          <Info
+            titleClassName='font-bold'
+            valueClassName='font-normal'
+            title='سنوات الخبرة'
+            value={data?.exp}
+          />
+        </div>
+      </Card>
+    </Section>
   );
 };

@@ -1,25 +1,13 @@
-import BackIcon from '@/assets/icons/back-black';
 import Card from '@/components/card';
 import { servicesData } from '@/lib/demoData';
 import { Link } from '@/navigation';
 import ROUTES from '@/routes';
 import Container from '../../../_components/ui/container';
-import { Heading } from '../../../_components/ui/heading';
 
 const ServicesPage = () => {
   return (
     <Container>
       <Card className='space-y-5'>
-        <Heading
-          label='جميع الخدمات'
-          icon={
-            <Link href={ROUTES.CLIENT.MAIN.HOME}>
-              <BackIcon className='ltr:rotate-180' />
-            </Link>
-          }
-          className='flex-row-reverse justify-end gap-5'
-        />
-
         <div className='grid grid-cols-fill-250 gap-5'>
           {servicesData.map((service) => (
             <Service key={service.label} {...service} />

@@ -1,4 +1,4 @@
-import { H1 } from '@/client/_components/ui';
+import { H1, Section } from '@/client/_components/ui';
 import { Link } from '@/navigation';
 import { AddAppointment } from './add-appointment';
 import ROUTES from '@/routes';
@@ -6,14 +6,17 @@ import CalendarWithBg from '@/assets/icons/calendar-with-bg';
 
 export const ScheduleHeader = () => {
   return (
-    <div className='flex gap-5 justify-between'>
+    <Section
+      id='schedules'
+      className='flex gap-5 justify-between mdl:pt-0'
+    >
       <div className='flex items-center gap-5'>
-        <H1>المواعيد</H1>
+        <H1 id='schedules'>المواعيد</H1>
         <AddAppointment />
       </div>
       <Link href={`${ROUTES.CLIENT.SCHEDULES}/calendar`}>
-        <CalendarWithBg />
+        <CalendarWithBg className='size-10 mdl:size-14' />
       </Link>
-    </div>
+    </Section>
   );
 };

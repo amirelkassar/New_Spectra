@@ -12,7 +12,11 @@ export const PackageTimeSchedule = ({
 
   return (
     <div className='space-y-5'>
-      {title && <SectionTitle>{title}</SectionTitle>}
+      {title && (
+        <SectionTitle className='ps-8'>
+          {title}
+        </SectionTitle>
+      )}
 
       <Card className='!p-0 max-h-[400px] mdl:max-h-[460px] overflow-y-auto border-2 border-greenMain/20 mdl:border-transparent'>
         <ul className='max-h-full'>

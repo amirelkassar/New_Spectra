@@ -18,7 +18,7 @@ import {
 const ControlPage = () => {
   return (
     <Container>
-      <H1>ملخص النشاطات</H1>
+      <H1 className='mt-3 mdl:mt-0'>ملخص النشاطات</H1>
       <ChildSelect data={CHILDS} />
       <StatisticsCards data={USAGE_STATISTICS} />
       <div className='lg:grid lg:grid-cols-2 lg:gap-4'>

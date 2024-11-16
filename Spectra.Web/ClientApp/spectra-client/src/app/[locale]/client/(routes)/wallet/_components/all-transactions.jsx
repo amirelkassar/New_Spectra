@@ -1,11 +1,12 @@
 import Card from '@/components/card';
 import PaymentReceived from '@/assets/icons/payment-received';
-import { cn } from '@/lib/utils';
+import { Section } from '@/client/_components/ui';
 
-export const AllTransactions = ({ className = '' }) => {
+export const AllTransactions = () => {
   return (
-    <section className={cn('text-black', className)}>
+    <Section id='all-transactions'>
       <Card
+        titleId='all-transactions'
         title='جميع التحويلات'
         className='space-y-5 h-full'
       >
@@ -25,7 +26,7 @@ export const AllTransactions = ({ className = '' }) => {
           <Transaction />
         </div>
       </Card>
-    </section>
+    </Section>
   );
 };
 

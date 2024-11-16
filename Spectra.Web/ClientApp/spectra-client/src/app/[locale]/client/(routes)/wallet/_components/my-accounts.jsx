@@ -1,5 +1,6 @@
 import Card from '@/components/card';
 import { BankAccount } from './bank-account';
+import { Section } from '@/client/_components/ui';
 
 const myAcconutData = [
   {
@@ -18,14 +19,18 @@ const myAcconutData = [
 
 export const MyAccounts = () => {
   return (
-    <section className='text-black'>
-      <Card title='حساباتي البنكية' className='space-y-5'>
+    <Section id='my-accounts'>
+      <Card
+        titleId='my-accounts'
+        title='حساباتي البنكية'
+        className='space-y-5'
+      >
         <div className='space-y-3'>
           {myAcconutData.map((a) => (
             <BankAccount key={a.accountHolder} {...a} />
           ))}
         </div>
       </Card>
-    </section>
+    </Section>
   );
 };

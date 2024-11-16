@@ -6,7 +6,7 @@ import { TabsCard } from '@/client/_components/ui';
 import ClockPlus from '@/assets/icons/clock-plus';
 import ClockBack from '@/assets/icons/clock-back';
 
-const data = [
+const DATA = [
   {
     label: 'جديدة',
     key: 'new',
@@ -20,7 +20,7 @@ const data = [
 ];
 
 export const ScheduleNav = () => {
-  const tab = useSearchParams()?.get('tab') || data[0]?.key;
+  const tab = useSearchParams()?.get('tab') || DATA[0]?.key;
 
   return (
     <TabsCard
@@ -28,7 +28,7 @@ export const ScheduleNav = () => {
         container: 'lg:col-span-3 xl:col-span-2',
         item: 'flex-1 lg:flex-none justify-center',
       }}
-      tabs={data}
+      tabs={DATA}
       defaultTab={tab}
     />
   );

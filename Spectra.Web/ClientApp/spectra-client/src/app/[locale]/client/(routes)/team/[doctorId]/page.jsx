@@ -12,7 +12,7 @@ const ViewDoctorPage = ({ params: { doctorId } }) => {
   );
 
   return (
-    <Container className='space-y-5'>
+    <Container>
       <Intro data={doctor} />
       <CareerDescription data={doctor.career} />
       <Specializations data={doctor.specializations} />

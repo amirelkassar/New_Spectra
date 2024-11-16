@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 
 const Card = ({
   title = '',
+  titleId = '',
   children,
   className = '',
   size = 'lg',
@@ -18,7 +19,10 @@ const Card = ({
           {...props}
         >
           {title && (
-            <h2 className='text-base font-bold mdl:text-xl mb-3'>
+            <h2
+              id={titleId}
+              className='text-base font-bold mdl:text-xl mb-3'
+            >
               {title}
             </h2>
           )}

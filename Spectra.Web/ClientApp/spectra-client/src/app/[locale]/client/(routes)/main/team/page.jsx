@@ -1,10 +1,10 @@
-import BackIcon from '@/assets/icons/back-black';
 import Card from '@/components/card';
-import { Link } from '@/navigation';
-import ROUTES from '@/routes';
-import Container from '../../../_components/ui/container';
-import { Heading } from '../../../_components/ui/heading';
 import { TeamMember } from '../_components/team-member';
+import {
+  BackButton,
+  H1,
+  Container,
+} from '@/client/_components/ui';
 
 const TeamPage = () => {
   return (
@@ -12,15 +12,10 @@ const TeamPage = () => {
       <section>
         <Card className='space-y-5'>
           {/* Section Heading */}
-          <Heading
-            label='التخصصات الطبية'
-            icon={
-              <Link href={ROUTES.CLIENT.MAIN.HOME}>
-                <BackIcon className='ltr:rotate-180' />
-              </Link>
-            }
-            className='flex-row-reverse justify-end gap-5'
-          />
+          <div className='flex items-center gap-5'>
+            <BackButton />
+            <H1>التخصصات الطبية</H1>
+          </div>
 
           {/* Autism Specialists */}
           <div className='space-y-7'>
