@@ -38,6 +38,9 @@ export const Recomendations = () => {
         <Package /> {/* Render a package component */}
         <Package /> {/* Render another package component */}
         <Package /> {/* Render another package component */}
+        <Package /> {/* Render another package component */}
+        <Package /> {/* Render another package component */}
+        <Package /> {/* Render another package component */}
       </Tabs.Panel>
 
       {/* Panel for services tab */}

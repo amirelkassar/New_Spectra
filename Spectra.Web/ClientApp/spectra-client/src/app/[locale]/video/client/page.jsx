@@ -1,16 +1,7 @@
-import { DynamicContent } from './_components/dynamic-content';
-import { Video } from './_components/video';
-import { ClientVideoProvider } from './_hooks';
+import VideoClient from './client';
 
 const ClientVideoPage = () => {
-  return (
-    <ClientVideoProvider>
-      <div className='flex-1 lgl:grid lgl:grid-cols-12 flex flex-col-reverse bg-white'>
-        <DynamicContent />
-        <Video />
-      </div>
-    </ClientVideoProvider>
-  );
+  return <VideoClient />;
 };
 
 export default ClientVideoPage;
