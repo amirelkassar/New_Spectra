@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Card from "@/components/card";
-import ContractsTextDetails from "@/components/contractsTextDetails";
 import Button from "@/components/button";
 import useModal from "@/store/modal-slice";
 import Signature from "@/components/Signature";
@@ -11,7 +10,7 @@ import { useDisclosure } from "@mantine/hooks";
 import CloseIcon from "@/assets/icons/close";
 
 function ContractsDetails() {
-  const [EditText, setEditText] = useState(true);
+
   const [signatureData, setSignatureData] = useState(null);
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -64,17 +63,13 @@ function ContractsDetails() {
       `);
   return (
     <Card className={"mt-7"}>
-      {EditText ? (
-        <ContractsTextDetails
-          contractText={contractText}
-          setContractText={setContractText}
-          setEditText={setEditText}
-        />
-      ) : (
+
+       
+
         <div className="contractsDetails">
           <div dangerouslySetInnerHTML={{ __html: contractText }} />
         </div>
-      )}
+    
       <div className="mdl:max-w-[80%] mx-auto my-10 pb-5 border-b-2 border-black/40">
         <h3 className="text-end text-sm mb-2 mdl:text-lg font-Bold">
           Signature
@@ -111,18 +106,7 @@ function ContractsDetails() {
           </div>
         </div>
       </div>
-      {!EditText && (
-        <Button
-          onClick={() => {
-            setEditText(true);
-          }}
-          className={
-            "text-[12px] my-7 lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
-          }
-        >
-          تعديل العقد
-        </Button>
-      )}
+    
       <Button
         onClick={() => {
           editModal("type", "contractsAccept");

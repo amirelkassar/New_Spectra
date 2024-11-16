@@ -124,7 +124,7 @@ function ContractAdd({ id }) {
     createContract(formattedData);
   };
   return (
-    <Card className="mt-5 ">
+    <Card className="mt-5 w-full ">
       <div className=" relative h-11 mdl:h-14 max-h-14 mdl:max-h-16 mb-5">
         <div className="border absolute top-0 overflow-hidden w-full left-0 z-50 border-solid  rounded-xl min-h-11 mdl:min-h-14">
           <NavLink
