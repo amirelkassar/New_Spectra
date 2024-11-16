@@ -3,15 +3,17 @@
 import { useSearchParams } from 'next/navigation';
 
 import { DoctorsTable } from './doctors-table';
+import { ClientsTable } from './clients-table';
+import { ChildsTable } from './childs-table';
 
 export const RenderTables = () => {
   const tab = useSearchParams().get('tab') || 'clients';
 
   switch (tab) {
     case 'clients':
-      return <>Clients table</>;
+      return <ClientsTable />;
     case 'childs':
-      return <>Childs table</>;
+      return <ChildsTable />;
     case 'doctors':
       return <DoctorsTable />;
     default:

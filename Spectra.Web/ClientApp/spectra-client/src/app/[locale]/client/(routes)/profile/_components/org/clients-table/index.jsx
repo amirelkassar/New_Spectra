@@ -1,26 +1,24 @@
 'use client';
 
 import Card from '@/components/card';
-import Avatar from '@/components/avatar';
 import {
   DataTable,
   Table,
   TableCard,
 } from '@/client/_components/ui';
-import { CellRate } from './cell-rate';
-import { doctorsColumns } from './doctors-columns';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
-import { TEAM } from '@/data';
+import { FAMILIES } from '@/data';
+import { clientsColumns } from './clients-columns';
 
-export const DoctorsTable = () => {
+export const ClientsTable = () => {
   return (
     <Card>
-      <DataTable data={TEAM} columns={doctorsColumns}>
+      <DataTable data={FAMILIES} columns={clientsColumns}>
         <TableItem />
       </DataTable>
 
       <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
-        {TEAM?.map((item) => (
+        {FAMILIES?.map((item) => (
           <CardItem key={item.id} item={item} />
         ))}
       </div>
@@ -57,36 +55,23 @@ const CardItem = ({ item = {} }) => {
     <TableCard>
       <TableCard.Container>
         <TableCard.Body>
-          <div className='flex gap-2'>
-            <Avatar
-              name={item?.doctor}
-              src={item?.avatar}
-              className='size-10'
-            />
-            <div className='flex-1 space-y-3'>
-              <div className='grid grid-cols-2 gap-5'>
-                <span>الاسم</span>
-                <span className='font-bold'>
-                  {item?.doctor}
-                </span>
-              </div>
-              <div className='grid grid-cols-2 gap-5'>
-                <span>التخصص</span>
-                <span className='font-bold'>
-                  {item?.profession}
-                </span>
-              </div>
-              <div className='grid grid-cols-2 gap-5'>
-                <span>سنوات الخبرة</span>
-                <span className='font-bold'>
-                  {item?.exp}
-                </span>
-              </div>
-            </div>
+          <div className='grid grid-cols-2 gap-5'>
+            <span>الاسم</span>
+            <span className='font-bold'>{item?.name}</span>
+          </div>
+          <div className='grid grid-cols-2 gap-5'>
+            <span>عدد الاطفال</span>
+            <span className='font-bold'>
+              {item?.childs}
+            </span>
+          </div>
+          <div className='grid grid-cols-2 gap-5'>
+            <span>الايميل</span>
+            <span className='font-bold'>{item?.email}</span>
           </div>
         </TableCard.Body>
         <TableCard.Footer className='grid-cols-2'>
-          <CellRate rate={item?.rate} />
+          {item?.type}
         </TableCard.Footer>
         <TableCard.Action>
           <ThreeDotsIcon />
