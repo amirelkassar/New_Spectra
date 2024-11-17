@@ -141,7 +141,7 @@ function CategoriesVideo({ open }) {
           <ChatsIcon fill="#10B0C1" className={"h-full w-auto"} />
         </Link>
       )}
-      <div className="flex lgl:flex-wrap gap-3 overflow-x-auto snap-none hideScroll	 max-w-[calc(100%-0px)] px-5 lgl:px-0 ">
+      <div className="flex lgl:flex-wrap gap-3 overflow-x-auto  snap-none hideScroll 	 max-w-[calc(100%-0px)] px-5 lgl:px-0 ">
         {data.length > 1 ? (
           <MultiReports data={data} />
         ) : (

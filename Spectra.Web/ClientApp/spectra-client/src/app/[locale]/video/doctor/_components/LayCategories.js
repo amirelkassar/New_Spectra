@@ -101,7 +101,7 @@ function LayCategories() {
     }
   };
   return (
-    <div className="h-full lgl:pb-7 ">
+    <div className="h-full lgl:pb-7 max-h-full ">
       <div className=" lgl:flex hidden items-center  justify-between gap-4 pb-5 border-b-2 border-grayLight">
         <h2 className="text-base font-Bold ">
           {CategoriesData.find((item) => item.active === true)?.label ||
@@ -121,7 +121,9 @@ function LayCategories() {
           </div>
         )}
       </div>
-      <ViewComp />
+      <div className="max-h-[calc(100%-100px)] h-full overflow-y-auto">
+        <ViewComp />
+      </div>
     </div>
   );
 }
