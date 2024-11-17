@@ -8,6 +8,10 @@ export const useClientVideoStore = create((set) => ({
   toggleMic: () => set((state) => ({ mic: !state.mic })),
   toggleCamera: () =>
     set((state) => ({ camera: !state.camera })),
+  enterFullScreen: () =>
+    set(() => ({ isFullScreen: true })),
+  exitFullScreen: () =>
+    set(() => ({ isFullScreen: false })),
   toggleFullScreen: () =>
     set((state) => ({
       isFullScreen: !state.isFullScreen,
