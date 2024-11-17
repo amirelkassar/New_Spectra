@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Spectra.Application.Contracts.Repository;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -14,75 +16,43 @@ namespace Spectra.Application.Contracts.Commands
         public string id { get; set; }
         public List<OperationContract>? Freelance { get; set; }
         public List<OperationContract>? SpectraTeam { get; set; }
-        public double Discount { get; set; }
-        public double Duration { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public string EmployeeId { get; set; }
-        public string Titel { get; set; }
-        public string FirstName { get; set; }
-        public string LastName{ get; set; }
-        public ContractCases ContractCase { get; set; }    
+        public ContractCases ContractCase { get; set; }
 
     }
 
     public class UpdateContractCommandHandler : IRequestHandler<UpdateAdminContractCommand, OperationResult<Unit>>
     {
         private readonly IContractRepository _contractRepository;
+        private readonly ICurrentUser _currentUser;
+  
 
-        public UpdateContractCommandHandler(IContractRepository contractRepository)
+        public UpdateContractCommandHandler(IContractRepository contractRepository, ICurrentUser currentUser)
         {
             _contractRepository = contractRepository;
-
+            _currentUser = currentUser;
         }
 
         public async Task<OperationResult<Unit>> Handle(UpdateAdminContractCommand request, CancellationToken cancellationToken)
         {
 
-            //var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId , null);
-            //if (CheckEmployee.Any())
-            //{
-            //    throw new RequestErrorException(" the Admin Refuse Your Requst ");
-            //}
-
-            var fullName = new Name()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName
-            };
             var contract = await _contractRepository.GetByIdAsync(request.id);
-
-            //if (request.ContractCase == contract.ContractCase)
-            //{
-
-            //contract.ContractCase = request.ContractCase;
-            //contract.PlatformFee = request.Discount;
-            //contract.HoursOfWork = request.HoursOfWork;
-            //contract.DaysOfWork = request.DaysOfWork;
-            //contract.EmployeeId = request.EmployeeId;
-            //contract.Titel = request.Titel;
-            //contract.ContractCase = request.ContractCase;
-            //contract.Freelance = request.Freelance;
-            //contract.ContractCase = ContractCases.SENDTOADMIN;
-            //    await _contractRepository.UpdateAsync(contract);
-
-            //    return OperationResult<Unit>.Success(Unit.Value);
-
-            //}
-            if (request.ContractCase== ContractCases.BACkTOEMPlOYEE)
+            if (_currentUser.Id != contract.EmployeeId)
             {
-                contract.ContractCase = ContractCases.BACkTOEMPlOYEE;
+                throw new RequestErrorException("You are Not Allow to Change the Contract");
             }
+          
             switch (contract.ContractCase)
             {
 
                 case ContractCases.SAVE:
                     contract.ContractCase = request.ContractCase;
-                    contract.PlatformFee = request.Discount;
+                  
                     contract.HoursOfWork = request.HoursOfWork;
                     contract.DaysOfWork = request.DaysOfWork;
-                    contract.EmployeeId = request.EmployeeId;
-                    contract.Titel = request.Titel;
+                    contract.EmployeeName = _currentUser.Name;
+                    contract.EmployeeId = _currentUser.Id;
                     contract.ContractCase = request.ContractCase;
                     contract.Freelance = request.Freelance;
                     contract.ContractCase = ContractCases.SENDTOADMIN;
@@ -109,10 +79,10 @@ namespace Spectra.Application.Contracts.Commands
               request.SpectraTeam,
               request.HoursOfWork,
               request.DaysOfWork,
-              request.EmployeeId,
-              request.Titel,
+              contract.Id,
+              contract.Titel,
               ContractCases.SENDTOADMIN,
-              fullName,
+              _currentUser.Name,
               AdminOrEmployee.Employee
              );
                  

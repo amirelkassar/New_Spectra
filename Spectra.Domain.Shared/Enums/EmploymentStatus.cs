@@ -11,6 +11,6 @@ namespace Spectra.Domain.Shared.Enums
     Doctor=1,
     Specialist=2,
     Accountant=3,
-    secretary=4
+    Secretary=4
     }
 }

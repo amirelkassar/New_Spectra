@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
@@ -38,8 +39,9 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
       List<string> diagnoses,
       HumenGender humenGenders,
       string licenseNumber,
-      JobTypes JobTypes
-     /* List<IFormFile>? scientificDegree*/
+      JobTypes JobTypes,
+      string password, string confirmationPassword
+       //List<IFormFile>? scientificDegree
        )
         {
             // Create value objects
@@ -66,7 +68,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 Country = country,
                 City = city
             };
-          
+
             // Create the command
             var command = new CreateMedicalProviderCommand
             {
@@ -80,9 +82,12 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 Diagnoses = diagnoses,
                 HumenGenders = humenGenders,
                 LicenseNumber = licenseNumber,
-               
-                JobType = JobTypes
-                
+
+                JobType = JobTypes,
+                ConfirmationPassword = confirmationPassword
+                ,
+                Passowrd = password
+
                 //ScientificDegree = scientificDegree
             };
 

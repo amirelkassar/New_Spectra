@@ -16,7 +16,7 @@ namespace Spectra.Domain.Contracts
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
         public string EmployeeId { get; set; }
-        public Name EmployeeName{ get; set; }
+        public string EmployeeName { get; set; }
         public string Titel { get; set; }
         public ContractCases ContractCase { get; set; }
         public AdminOrEmployee? AdminOrEmployee { get; set; }
@@ -36,7 +36,7 @@ namespace Spectra.Domain.Contracts
             string employeeId,
             string titel,
             ContractCases contractCase,
-             Name employeeName,
+             string employeeName,
          AdminOrEmployee adminOrEmployee 
             ) : base(id)
         {
@@ -60,7 +60,7 @@ namespace Spectra.Domain.Contracts
            string employeeId,
            string titel,
            ContractCases contractCase,
-           Name employeeName,
+           string employeeName,
             AdminOrEmployee adminOrEmployee
 
         )

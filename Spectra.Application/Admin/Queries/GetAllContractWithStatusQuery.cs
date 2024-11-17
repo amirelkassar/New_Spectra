@@ -35,7 +35,7 @@ namespace Spectra.Application.Admin.Queries
 
                 var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
                 {
-                    Name = $"{c.EmployeeName.FirstName} +{c.EmployeeName.LastName}",
+                    Name = $"{c.EmployeeName} ",
                     DateOfRequest = c.Created.Date,
                     ContractCase = c.ContractCase, WhoSend= c.AdminOrEmployee, Id=c.Id,EmployeeId=c.EmployeeId
                 })

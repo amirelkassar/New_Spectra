@@ -15,6 +15,9 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public List<string>? AttachmentPath { get; set; } = new List<string>();
         public EmpelyeeRates? EmpelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
+       
+        public string SpecializationId { get; set; }
+        public string SectionMedicalDepartment { get; set; }
 
 
         protected MedicalProvider() { }
@@ -33,7 +36,10 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    List<string>? attachmentPath,
                    EmpelyeeRates? empelyeeRate,
                    JobTypes jobType,
-                   string userId
+                   string userId,
+
+                   string specializationId,
+                   string sectionMedicalDepartment
                    ) : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, userId)
         {
             Id = id;
@@ -51,6 +57,9 @@ namespace Spectra.Domain.Employees.MedicalStaff
             EmpelyeeRate = empelyeeRate;
             JobType = jobType;
             UserId = userId;
+            SpecializationId = specializationId;
+
+            SectionMedicalDepartment = sectionMedicalDepartment;
         }
 
         public static MedicalProvider Create(
@@ -69,6 +78,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
           EmpelyeeRates? empelyeeRate,
           JobTypes jobType,
           string userId
+          , string specializationId,
+          string sectionMedicalDepartment
           )
         {
             ArgumentNullException.ThrowIfNull(id, nameof(Id));
@@ -81,10 +92,13 @@ namespace Spectra.Domain.Employees.MedicalStaff
             ArgumentNullException.ThrowIfNull(diagnoses, nameof(diagnoses));
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
+            ArgumentNullException.ThrowIfNull(specializationId, nameof(specializationId));
+            ArgumentNullException.ThrowIfNull(sectionMedicalDepartment, nameof(sectionMedicalDepartment));
+
 
             var medicalProvider = new MedicalProvider(id, name, 
                 nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
-                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType, userId
+                licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType, userId, specializationId, sectionMedicalDepartment
                );
 
             return medicalProvider;

@@ -1,9 +1,13 @@
-﻿using FluentValidation;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using FluentValidation;
 using MediatR;
+using Spectra.Application.Identities;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -12,14 +16,9 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 {
 
 
-    public class CreateManagementStaffCommand : ICommand<OperationResult<string>>
+    public class CreateManagementStaffCommand : CreateBassEmployeesCommand
     {
-        public Name Name { get; set; }
-        public string NationalId { get; set; }
-        public PhoneNumber? MobileNumber { get; set; }
-        public HumenGender HumenGenders { get; set; }
-        public EmailAddress EmailAddress { get; set; }
-        public Address Address { get; set; }
+ 
         public string JobName { get; set; }
         public string Qualifications { get; set; }
         public DateOnly? TimeToJoin { get; set; }
@@ -31,15 +30,37 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
     public class CreateManagementStaffCommandHandler : IRequestHandler<CreateManagementStaffCommand, OperationResult<string>>
     {
         private readonly IManagementStaffRepository _staffRepository;
+        private readonly IIdentityService _identityService;
+      
 
-        public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository)
+        public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository, IIdentityService identityService)
         {
-            _staffRepository=staffRepository;
+            _staffRepository = staffRepository;
+            _identityService = identityService;
         }
 
+       
         public async Task<OperationResult<string>> Handle(CreateManagementStaffCommand request, CancellationToken cancellationToken)
         {
-      
+            var CheckEmail = await _staffRepository.GetAllAsync(x => x.EmailAddress == request.EmailAddress);
+            if (CheckEmail.Any())
+            {
+                throw new RequestErrorException("This Email is Already Exist");
+            }
+            if (request.Passowrd != request.ConfirmationPassword)
+            {
+                throw new RequestErrorException("This Email is Already Exist");
+            }
+
+            var role = request.JobType == JobTypes.Accountant ? Roles.Accountant : Roles.Secretary;
+
+            var addUser = await _identityService.CreateUserAsync(
+               request.EmailAddress.Emailaddress,
+               request.Passowrd,
+               request.Name.FirstName, 
+               "Employee",
+               role
+            );
             var staff = Staff.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
@@ -53,7 +74,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
                 request.TimeToJoin,
                 request.WorkingHours,
                 request.JobType,
-                request.UserId
+                addUser.UserId
                 );
 
 

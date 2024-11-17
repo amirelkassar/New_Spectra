@@ -80,7 +80,9 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input.Diagnoses,
                     input.HumenGenders,
                     input.LicenseNumber,
-                    input.JobTypes
+                    input.JobTypes, 
+                    input .Passowrd,
+                    input .ConfirmationPassword
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
        }

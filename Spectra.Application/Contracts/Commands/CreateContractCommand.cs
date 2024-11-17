@@ -44,7 +44,6 @@ namespace Spectra.Application.Contracts.Commands
         {
 
             var medicalProvider = await _medicalProvider.GetByIdentityIdAsync( _currentUser.Id);
-
             var CheckEmployees = await _contractRepository.GetAllAsync(x => x.EmployeeId== medicalProvider.Id, null);
 
             if (CheckEmployees.Any())
@@ -52,13 +51,6 @@ namespace Spectra.Application.Contracts.Commands
                 throw new RequestErrorException("Your Request is Under Review");
             }
 
-            var fullName = new Name()
-            {
-                FirstName = medicalProvider.Name.FirstName
-
-            };
-
-             
             var contract = EmploymentContract.Create(       
             Ulid.NewUlid().ToString(),
             request.Freelance,
@@ -68,7 +60,7 @@ namespace Spectra.Application.Contracts.Commands
             medicalProvider.Id,
             medicalProvider.JobType.ToString(),
             request.ContractCase,
-            fullName,
+            medicalProvider.Name.FirstName,
             AdminOrEmployee.Employee  
             );
 

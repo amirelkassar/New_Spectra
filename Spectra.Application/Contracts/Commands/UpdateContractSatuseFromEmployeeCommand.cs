@@ -13,9 +13,6 @@ namespace Spectra.Application.Contracts.Commands
     {
         public string Id { get; set; }
      
- 
-       
-
     }
 
     public class UpdateContractSatuseFromEmployeeCommandHandler : IRequestHandler<UpdateContractSatuseFromEmployeeCommand, OperationResult<Unit>>

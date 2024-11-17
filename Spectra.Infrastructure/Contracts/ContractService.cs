@@ -94,8 +94,7 @@ namespace Spectra.Infrastructure.Contracts
                 HoursOfWork = input.HoursOfWork,
                 DaysOfWork = input.DaysOfWork,
                 ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel,
+              
                 Freelance = input.Freelance,
                 SpectraTeam = input.SpectraTeam,
             };

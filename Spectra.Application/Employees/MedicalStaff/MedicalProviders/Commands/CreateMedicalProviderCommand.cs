@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
@@ -19,14 +20,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
 
 
-    public class CreateMedicalProviderCommand : ICommand<OperationResult<string>>
+    public class CreateMedicalProviderCommand : CreateBassEmployeesCommand
     {
-        public Name Name { get; set; }
-        public string NationalId { get; set; }
-        public PhoneNumber? MobileNumber { get; set; }
-        public HumenGender HumenGenders { get; set; }
-        public EmailAddress EmailAddress { get; set; }
-        public Address Address { get; set; }
         public List<string> Diagnoses { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
@@ -34,7 +29,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public List<IFormFile>? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
-
+        public string specializationId { get; set; }
+        public string SectionMedicalDepartment { get; set; }
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
@@ -43,25 +39,29 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 
         private readonly ISpecializationsRepository _specializationRepository;
         private readonly IIdentityService _identityService;
-
+        private readonly ISectionsRepository _sectionsRepository;
         private readonly IHellper _addFile;
-        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService )
+        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService, ISectionsRepository sectionsRepository)
         {
+            _identityService = identityService;
             _medicalProvider = doctorRepository;
             _specializationRepository = specializationRepository;
             _addFile = addFile;
-            _identityService = identityService;
+            _sectionsRepository = sectionsRepository;
         }
         public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
-            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
-            var addUser = await _identityService.CreateUserAsync(
-                request.EmailAddress.Emailaddress,
-                "testssdadd231@",
-                request.Name.FirstName,
-                "Testt",
-                role
-            );
+             var CheckEmail= await _medicalProvider.GetAllAsync(x => x.EmailAddress == request.EmailAddress);
+            if (CheckEmail.Any())
+            {
+                throw new RequestErrorException("This Email is Already Exist");
+            }
+            if (request.Passowrd !=request.ConfirmationPassword )
+            {
+                throw new RequestErrorException("This Email is Already Exist");
+            }
+         //var section=   await _sectionsRepository.GetAllAsync(x=> x.Id == request.Major);
+         //   section.Select(y=> y.Name).FirstOrDefault();
 
             List<string>? filePath = null;
             if (request.JobType == JobTypes.Doctor)
@@ -85,10 +85,18 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 filePath = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             }
 
-            if (filePath == null || !filePath.Any())
-            {
-                throw new RequestErrorException("You must upload your Scientific Degrees.");
-            }
+
+            //if (filePath == null || !filePath.Any())
+            //{
+            //    throw new RequestErrorException("You must upload your Scientific Degrees.");
+            //}
+            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+            var addUser = await _identityService.CreateUserAsync(
+               request.EmailAddress.Emailaddress,
+               request.Passowrd,
+               request.Name.FirstName, "Employee",
+                role
+            );
 
             var medicalProvider = MedicalProvider.Create(
                 Ulid.NewUlid().ToString(),
@@ -102,10 +110,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-                   filePath,
+                 filePath,
                 request.empelyeeRate = 0,
                 request.JobType,
-                addUser.UserId
+                 addUser.UserId
+                
                 );
 
 

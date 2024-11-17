@@ -13,7 +13,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
     {
 
         public string Name { get; set; }
-        public List<string> Diagnoses { get; set; }
+        public List<string> SpecializationIds { get; set; }
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
     }
@@ -45,7 +45,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
             var entity = Section.Create(
 
              Ulid.NewUlid().ToString(), request.Name,
-           request.DoctorId, request.DoctorName, request.Diagnoses
+           request.DoctorId, request.DoctorName, request.SpecializationIds
 
              );
 

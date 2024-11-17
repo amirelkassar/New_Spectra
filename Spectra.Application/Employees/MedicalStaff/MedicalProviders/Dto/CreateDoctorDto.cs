@@ -20,6 +20,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
         public JobTypes JobTypes { get; set; }
+        public string Passowrd { get; set; }
+        public string ConfirmationPassword { get; set; }
         //public List<IFormFile>? ScientificDegree { get; set; }
 
 
