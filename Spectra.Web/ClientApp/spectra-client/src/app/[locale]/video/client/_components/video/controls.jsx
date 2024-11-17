@@ -1,7 +1,9 @@
 import ChatsIcon from '@/assets/icons/chats';
 import LeaveCallIcon from '@/assets/icons/leaveCall';
+import MicOff from '@/assets/icons/mic-off';
 import MicrophoneIcon from '@/assets/icons/microphone';
 import VideoIcon from '@/assets/icons/video';
+import VideoOff from '@/assets/icons/video-off';
 import { cn } from '@/lib/utils';
 
 export const Controls = ({ children, ...props }) => {
@@ -38,12 +40,13 @@ const MicBtn = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium',
+        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium group',
         props?.className
       )}
       type='button'
     >
-      <MicrophoneIcon className='size-6 lgl:size-8' />
+      <MicrophoneIcon className='size-6 lgl:size-8 group-aria-checked:hidden' />
+      <MicOff className='size-6 lgl:size-8 hidden group-aria-checked:block' />
       {children}
     </button>
   );
@@ -56,12 +59,13 @@ const VideoBtn = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium',
+        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium group',
         props?.className
       )}
       type='button'
     >
-      <VideoIcon className='size-6 lgl:size-8' />
+      <VideoIcon className='size-6 lgl:size-8 group-aria-checked:hidden' />
+      <VideoOff className='size-6 lgl:size-8 hidden group-aria-checked:block' />
       {children}
     </button>
   );
@@ -74,7 +78,7 @@ const ChatBtn = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium aria-checked:bg-greenMain aria-checked:text-white',
+        'bg-grayLight rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium aria-checked:bg-black aria-checked:text-white',
         props?.className
       )}
       type='button'

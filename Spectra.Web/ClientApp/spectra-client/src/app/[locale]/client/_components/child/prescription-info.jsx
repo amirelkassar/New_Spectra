@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 import { Info } from '@/client/_components/ui';
 import { PrescriptionCard } from './prescrtiption-card';
+import { cn } from '@/lib/utils';
 
 export const PrescriptionInfo = ({
   data = {},
   showCard = false,
+  className = '',
 }) => {
   const [showMore, setShowMore] = useState(false);
 
@@ -17,7 +19,12 @@ export const PrescriptionInfo = ({
         <PrescriptionCard data={data} isDetailed />
       )}
 
-      <div className='grid grid-cols-1 sml:grid-cols-3'>
+      <div
+        className={cn(
+          'grid grid-cols-1 sml:grid-cols-3',
+          className
+        )}
+      >
         <Info
           containerClassName='sml:col-span-3'
           withBorder

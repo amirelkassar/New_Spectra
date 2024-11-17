@@ -7,29 +7,46 @@ import { cn } from '@/lib/utils';
 import { Controls } from './controls';
 import { useClientVideoStore } from '../../_hooks';
 import React, { useRef } from 'react';
+import Avatar from '@/components/avatar';
 
 export const VideoCall = ({ ...props }) => {
   const hostRef = useRef(null);
 
-  const { toggleFullScreen, toggleView, view } =
-    useClientVideoStore();
+  const guestCam = false;
+
+  const {
+    toggleFullScreen,
+    toggleView,
+    view,
+    mic,
+    camera,
+    toggleMic,
+    toggleCamera,
+  } = useClientVideoStore();
 
   return (
     <div
       {...props}
       className={cn(
-        'relative overflow-hidden lgl:rounded-xl lgl:m-5 group',
+        'relative overflow-hidden lgl:rounded-xl lgl:m-5 group lgl:shadow-video',
         props?.className
       )}
     >
-      <Image
-        priority
-        src='/demo-videocall-guest.webp'
-        alt='host'
-        width={996}
-        height={664}
-        className='w-full h-full object-cover object-center max-w-full max-h-full'
-      />
+      {guestCam ? (
+        <Image
+          priority
+          src='/demo-videocall-guest.webp'
+          alt='host'
+          width={996}
+          height={664}
+          className='w-full h-full object-cover object-center max-w-full max-h-full'
+        />
+      ) : (
+        <GuestPlaceholder
+          name='احمد محمد'
+          src='/demo-videocall-guest.webp'
+        />
+      )}
 
       <TagName className='absolute top-4 start-4'>
         الاستشاري احمد محمد
@@ -56,8 +73,22 @@ export const VideoCall = ({ ...props }) => {
               toggleView('chat');
             }}
           />
-          <Controls.VideoBtn />
-          <Controls.MicBtn />
+          <Controls.VideoBtn
+            aria-checked={camera}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleCamera();
+            }}
+          />
+          <Controls.MicBtn
+            aria-checked={mic}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleMic();
+            }}
+          />
           <Controls.LeaveBtn>
             <span className='hidden lgl:block'>مغادرة</span>
           </Controls.LeaveBtn>
@@ -100,6 +131,27 @@ const Host = React.forwardRef(({ ...props }, ref) => {
 });
 
 Host.displayName = 'Host';
+
+const GuestPlaceholder = ({ ...props }) => {
+  return (
+    <div className='w-full h-full flex items-center justify-center'>
+      <Avatar
+        {...props}
+        className={cn(
+          'size-40 rounded-full',
+          props?.className
+        )}
+        styles={{
+          root: {
+            boxShadow:
+              '0 0 0 30px rgba(1, 0, 54, 0.03), 0 0 0 60px rgba(1, 0, 54, 0.03)',
+            ...props?.style,
+          },
+        }}
+      />
+    </div>
+  );
+};
 
 const CallDuration = ({ children, ...props }) => {
   return (
