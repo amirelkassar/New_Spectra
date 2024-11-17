@@ -905,5 +905,4 @@ function MDT() {
     </div>
   );
 }
-
 export default MDT;
