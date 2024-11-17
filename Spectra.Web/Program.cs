@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Spectra.Application.Countries.SeedService;
+using Spectra.Application.Identities;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Infrastructure.ChatHub;
+using Spectra.Infrastructure.Data;
 using Spectra.Web;
 using Spectra.WebAPI.Middlewares;
 
@@ -25,6 +28,13 @@ using (var scope = app.Services.CreateScope())
 
     var settingsSeedService = scope.ServiceProvider.GetRequiredService<ApplicationSettingSeeder>();
     await settingsSeedService.Initialize();
+    var dbContext = scope.ServiceProvider.GetRequiredService<IdentityContext>();
+    if (!await dbContext.Database.EnsureCreatedAsync())
+    {
+        await dbContext.Database.MigrateAsync();
+    }
+    var identitySeederService = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+    await identitySeederService.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.

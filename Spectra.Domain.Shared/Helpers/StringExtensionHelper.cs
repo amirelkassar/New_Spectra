@@ -11,6 +11,12 @@ namespace Spectra.Domain.Shared.Helpers
             Regex regex = new(pattern);
             return regex.IsMatch(value);
         }
+        public static bool IsPassword(this string value)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$";
+            Regex regex = new(pattern);
+            return regex.IsMatch(value);
+        }
 
     }
 }

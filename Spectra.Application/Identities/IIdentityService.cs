@@ -28,5 +28,7 @@ namespace Spectra.Application.Identities
         Task<OperationResult<string>> GenerateForgetPasswordTokenAsync(string email);
 
         Task<OperationResult> ResetPasswordAsync(string userId, string token, string newPassword);
+
+        Task<OperationResult> UpdateUserImageAsync(string userId, string imagePath);
     }
 }

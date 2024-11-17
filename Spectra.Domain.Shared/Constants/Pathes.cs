@@ -1,4 +1,7 @@
-﻿namespace Spectra.Domain.Shared.Constants
+﻿using System;
+using System.IO;
+
+namespace Spectra.Domain.Shared.Constants
 {
     public abstract class Pathes
     {
@@ -12,6 +15,8 @@
         public const string FamilyPhoto = "Upload/Image/SuccessStory/FamilyPhoto";
         public const string FamilyVideo = "Upload/Videos/SuccessStory/FamilyVideo";
         public const string PackagePhoto = "Upload/Image/SuccessStory/PackagesPaneer";
+        public const string UserImages = "Upload/Image/Users";
+
 
     }
 }

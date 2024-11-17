@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Services;
+using Spectra.Application.Identities;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
@@ -24,7 +25,8 @@ namespace Spectra.Application
 
             services.AddScoped<ICountryService, CountryService>();
 
-            services.AddSingleton<ApplicationSettingSeeder>();
+            services.AddScoped<ApplicationSettingSeeder>();
+            services.AddScoped<IdentitySeeder>();
             //Register the Mediator
             services.AddMediatR(cfg =>
             {
