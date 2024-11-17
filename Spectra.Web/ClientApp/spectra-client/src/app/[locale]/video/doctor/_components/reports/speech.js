@@ -6,362 +6,309 @@ import LevelDisplay from "@/components/LevelDisplay";
 import Levels from "@/components/levels";
 import { SurveyForm } from "@/components/swyc/survey-form";
 import React, { useState } from "react";
+import AccordionReport from "./AccordionReport";
+const DataAll = [
+  {
+    id: 1,
+    title: "OME",
+    other: true,
+    questions: [
+      {
+        id: 1,
+        ar: "Facial Symmetry",
+        en: "Facial Symmetry",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 2,
+        ar: "Lips",
+        en: "Lips",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 3,
+        ar: "Tongue",
+        en: "Tongue",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 4,
+        ar: "Hard Palate",
+        en: "Hard Palate",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 5,
+        ar: "Soft Palate",
+        en: "Soft Palate",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 6,
+        ar: "Teeth",
+        en: "Teeth",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Pre-communication skills",
+    other: true,
+    questions: [
+      {
+        id: 7,
+        ar: "Cooperation",
+        en: "Cooperation",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 8,
+        ar: "Attention",
+        en: "Attention",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 9,
+        ar: "Eye contact",
+        en: "Eye contact",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
 
+      {
+        id: 4545,
+        ar: "Imitation",
+        en: "Imitation",
+        haveText: false, // Add the boolean key
+        type: "nested",
+        allQuestion: [
+          {
+            id: 11,
+            ar: "Verbal ",
+            en: "Verbal",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+          {
+            id: 12,
+            ar: "Nonverbal",
+            en: "Nonverbal",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 4546,
+        ar: "Playing  skills",
+        en: "Playing  skills",
+        haveText: false, // Add the boolean key
+        type: "nested",
+        allQuestion: [
+          {
+            id: 13,
+            ar: "Symbolic ",
+            en: "Symbolic",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+          {
+            id: 14,
+            ar: "Imaginative",
+            en: "Imaginative",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 4547,
+        ar: "Joint  attention",
+        en: "Joint  attention",
+        haveText: false, // Add the boolean key
+        type: "nested",
+        allQuestion: [
+          {
+            id: 15,
+            ar: "Initiation ",
+            en: "Initiation",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+          {
+            id: 16,
+            ar: "Responding",
+            en: "Responding",
+            haveText: true, // Add the boolean key
+            options: [
+              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+              {
+                id: 3,
+                ar: "Good",
+                en: "Good",
+                value: "Good",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 17,
+        ar: "Social interaction",
+        en: "Social interaction",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Non-verbal communication",
+    other: true,
+    questions: [
+      {
+        id: 11,
+        ar: "Facial expressions",
+        en: "Facial expressions",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 12,
+        ar: "Pointing",
+        en: "Pointing",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 13,
+        ar: "Gestures",
+        en: "Gestures",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+      {
+        id: 14,
+        ar: "AAC",
+        en: "AAC",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+          { id: 3, ar: " Good", en: " Good", value: " Good" },
+        ],
+      },
+    ],
+  },
+];
 function Speech() {
-  const [DataPatientHistory, setDataPatientHistory] = useState([
-    {
-      id: 1,
-      ar: "Facial Symmetry ",
-      en: "Facial Symmetry",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 2,
-      ar: "Lips",
-      en: "Lips",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 3,
-      ar: "Tongue",
-      en: "Tongue",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 4,
-      ar: "Hard Palate",
-      en: "Hard Palate",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 5,
-      ar: "Soft Palate",
-      en: "Soft Palate",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 6,
-      ar: "Teeth",
-      en: "Teeth",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-  ]);
-  const [Communication, setCommunication] = useState([
-    {
-      id: 7,
-      ar: "Facial expressions ",
-      en: "Facial expressions",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 8,
-      ar: "Pointing",
-      en: "Pointing",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 9,
-      ar: "Gestures",
-      en: "Gestures",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 10,
-      ar: "AAC",
-      en: "AAC",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-  ]);
-  const [Skills, setSkills] = useState([
-    {
-      id: 1,
-      ar: "Cooperation ",
-      en: "Cooperation",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 2,
-      ar: "Attention",
-      en: "Attention",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-    {
-      id: 3,
-      ar: "Eye contact",
-      en: "Eye contact",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-
-    {
-      id: 4,
-      ar: "Imitation",
-      en: "Imitation",
-      haveText: true, // Add the boolean key
-      type: "nested",
-      allQuestion: [
-        {
-          id: 111,
-          ar: "Verbal ",
-          en: "Verbal",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-        {
-          id: 211,
-          ar: "Nonverbal",
-          en: "Nonverbal",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 5,
-      ar: "Playing  skills",
-      en: "Playing  skills",
-      haveText: true, // Add the boolean key
-      type: "nested",
-      allQuestion: [
-        {
-          id: 1111,
-          ar: "Symbolic ",
-          en: "Symbolic",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-        {
-          id: 2111,
-          ar: "Imaginative",
-          en: "Imaginative",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 6,
-      ar: "Joint  attention",
-      en: "Joint  attention",
-      haveText: true, // Add the boolean key
-      type: "nested",
-      allQuestion: [
-        {
-          id: 1112,
-          ar: "Initiation ",
-          en: "Initiation",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-        {
-          id: 2112,
-          ar: "Responding",
-          en: "Responding",
-          haveText: true, // Add the boolean key
-          options: [
-            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-            {
-              id: 3,
-              ar: "Good",
-              en: "Good",
-              value: "Good",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 4,
-      ar: "Social interaction",
-      en: "Social interaction",
-      haveText: true, // Add the boolean key
-      options: [
-        { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-        { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-        {
-          id: 3,
-          ar: "Good",
-          en: "Good",
-          value: "Good",
-        },
-      ],
-    },
-  ]);
   const [Verbal, setVerbal] = useState([
     {
       id: 1,
@@ -581,110 +528,110 @@ function Speech() {
       ],
     },
     {
-        id: 10,
-        ar: "Semantic",
-        en: "Semantic",
-        haveText: true, // Add the boolean key
-        type: "nested",
-        allQuestion: [
-          {
-            id: 111,
-            ar: "Family members ",
-            en: "Family members",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-          {
-            id: 211,
-            ar: "Nouns",
-            en: "Nouns",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-          {
-            id: 213,
-            ar: "Verbs",
-            en: "Verbs",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-          {
-            id: 214,
-            ar: "Adjectives",
-            en: "Adjectives",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-          {
-            id: 215,
-            ar: "Prepositions",
-            en: "Prepositions",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-          {
-            id: 216,
-            ar: "Pronouns",
-            en: "Pronouns",
-            haveText: true, // Add the boolean key
-            options: [
-              { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
-              { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
-              {
-                id: 3,
-                ar: "Good",
-                en: "Good",
-                value: "Good",
-              },
-            ],
-          },
-        ],
-      },
+      id: 10,
+      ar: "Semantic",
+      en: "Semantic",
+      haveText: true, // Add the boolean key
+      type: "nested",
+      allQuestion: [
+        {
+          id: 111,
+          ar: "Family members ",
+          en: "Family members",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+        {
+          id: 211,
+          ar: "Nouns",
+          en: "Nouns",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+        {
+          id: 213,
+          ar: "Verbs",
+          en: "Verbs",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+        {
+          id: 214,
+          ar: "Adjectives",
+          en: "Adjectives",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+        {
+          id: 215,
+          ar: "Prepositions",
+          en: "Prepositions",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+        {
+          id: 216,
+          ar: "Pronouns",
+          en: "Pronouns",
+          haveText: true, // Add the boolean key
+          options: [
+            { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+            { id: 2, ar: "Fair", en: "Fair", value: "Fair" },
+            {
+              id: 3,
+              ar: "Good",
+              en: "Good",
+              value: "Good",
+            },
+          ],
+        },
+      ],
+    },
   ]);
   const [answers, setAnswers] = useState({});
   const handleSelect = (questionId, value) => {
@@ -717,225 +664,16 @@ function Speech() {
   };
   return (
     <div dir="ltr" className="my-4 flex flex-col gap-5">
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"OME"}>
-          <Accordion.Label>OME</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {DataPatientHistory?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-
-                        <SurveyForm.Answers>
-                          {question.options.map((singleAns, j) => {
-                            return (
-                              <SurveyForm.SingleAnswer
-                                key={j}
-                                name={`${question?.id}`}
-                                value={singleAns.value}
-                                checked={
-                                  answers[question?.id] === singleAns.value
-                                }
-                                onChange={() =>
-                                  handleSelect(question?.id, singleAns.value)
-                                }
-                              >
-                                {singleAns.en}
-                              </SurveyForm.SingleAnswer>
-                            );
-                          })}
-                        </SurveyForm.Answers>
-
-                        {question.haveText && (
-                          <TextInput
-                            className="flex-1 min-w-[300px]  ms-4"
-                            inputClassName={"bg-grayLight/50 h-9"}
-                          />
-                        )}
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-            <div className="flex gap-3 p-3">
-              <h3>Comments</h3>
-              <Textarea className="flex-1 min-w-[300px]  ms-4" />
-            </div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Pre-communication skills"}>
-          <Accordion.Label>Pre-communication skills</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {Skills?.map((question) =>
-                    question.type !== "nested" ? (
-                      <SurveyForm.QuestionLi
-                        key={question?.id}
-                        className=" after:!hidden before:hidden pb-0 ps-6 "
-                      >
-                        <SurveyForm.Question>
-                          <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                            {question?.ar}
-                          </SurveyForm.QuestionLabel>
-
-                          <SurveyForm.Answers>
-                            {question.options.map((singleAns, j) => {
-                              return (
-                                <SurveyForm.SingleAnswer
-                                  key={j}
-                                  name={`${question?.id}`}
-                                  value={singleAns.value}
-                                  checked={
-                                    answers[question?.id] === singleAns.value
-                                  }
-                                  onChange={() =>
-                                    handleSelect(question?.id, singleAns.value)
-                                  }
-                                >
-                                  {singleAns.en}
-                                </SurveyForm.SingleAnswer>
-                              );
-                            })}
-                          </SurveyForm.Answers>
-
-                          {question.haveText && (
-                            <TextInput
-                              className="flex-1 min-w-[300px]  ms-4"
-                              inputClassName={"bg-grayLight/50 h-9"}
-                            />
-                          )}
-                        </SurveyForm.Question>
-                      </SurveyForm.QuestionLi>
-                    ) : (
-                      <div key={question?.id} className="px-3">
-                        <SurveyForm.QuestionLabel>
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-                        {question.allQuestion.map((subQuestion) => (
-                          <SurveyForm.QuestionLi
-                            key={subQuestion?.id}
-                            className="  pb-0 ps-6 "
-                          >
-                            <SurveyForm.Question>
-                              <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                                {subQuestion?.ar}
-                              </SurveyForm.QuestionLabel>
-
-                              <SurveyForm.Answers>
-                                {subQuestion.options.map((singleAns, j) => {
-                                  return (
-                                    <SurveyForm.SingleAnswer
-                                      key={j}
-                                      name={`${subQuestion?.id}`}
-                                      value={singleAns.value}
-                                      checked={
-                                        answers[subQuestion?.id] ===
-                                        singleAns.value
-                                      }
-                                      onChange={() =>
-                                        handleSelect(
-                                          subQuestion?.id,
-                                          singleAns.value
-                                        )
-                                      }
-                                    >
-                                      {singleAns.en}
-                                    </SurveyForm.SingleAnswer>
-                                  );
-                                })}
-                              </SurveyForm.Answers>
-
-                              {subQuestion.haveText && (
-                                <TextInput
-                                  className="flex-1 min-w-[300px]  ms-4"
-                                  inputClassName={"bg-grayLight/50 h-9"}
-                                />
-                              )}
-                            </SurveyForm.Question>
-                          </SurveyForm.QuestionLi>
-                        ))}
-                      </div>
-                    )
-                  )}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-            <div className="flex gap-3 p-3">
-              <h3>Additional notes</h3>
-              <Textarea className="flex-1 min-w-[300px]  ms-4" />
-            </div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Non-verbal communication"}>
-          <Accordion.Label>Non-verbal communication</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {Communication?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-
-                        <SurveyForm.Answers>
-                          {question.options.map((singleAns, j) => {
-                            return (
-                              <SurveyForm.SingleAnswer
-                                key={j}
-                                name={`${question?.id}`}
-                                value={singleAns.value}
-                                checked={
-                                  answers[question?.id] === singleAns.value
-                                }
-                                onChange={() =>
-                                  handleSelect(question?.id, singleAns.value)
-                                }
-                              >
-                                {singleAns.en}
-                              </SurveyForm.SingleAnswer>
-                            );
-                          })}
-                        </SurveyForm.Answers>
-
-                        {question.haveText && (
-                          <TextInput
-                            className="flex-1 min-w-[300px]  ms-4"
-                            inputClassName={"bg-grayLight/50 h-9"}
-                          />
-                        )}
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-            <div className="flex gap-3 p-3">
-              <h3>Additional notes</h3>
-              <Textarea className="flex-1 min-w-[300px]  ms-4" />
-            </div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
+      {DataAll.map((data, index) => {
+        return (
+          <AccordionReport
+            key={index}
+            data={data}
+            answers={answers}
+            setAnswers={setAnswers}
+          />
+        );
+      })}
 
       <Accordion classNames={{ content: "px-0 " }}>
         <Accordion.Item value={"Verbal Communication"}>

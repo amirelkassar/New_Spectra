@@ -54,89 +54,148 @@ function AccordionReport({ data = {}, answers = {}, setAnswers }) {
             <SurveyForm className="!p-0">
               <SurveyForm.Body className=" border-none">
                 <ul>
-                  {data.questions.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        {question?.ar && (
-                          <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                            {question?.ar}
-                          </SurveyForm.QuestionLabel>
-                        )}
+                  {data.questions.map((question) =>
+                    question.type === "nested" ? (
+                      <div key={question?.id} className="px-3">
+                        <SurveyForm.QuestionLabel>
+                          {question?.ar}
+                        </SurveyForm.QuestionLabel>
+                        {question.allQuestion?.map((subQuestion) => (
+                          <SurveyForm.QuestionLi
+                            key={subQuestion?.id}
+                            className="  pb-0 ps-6 "
+                          >
+                            <SurveyForm.Question>
+                              {subQuestion?.ar && (
+                                <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
+                                  {subQuestion?.ar}
+                                </SurveyForm.QuestionLabel>
+                              )}
+                              <SurveyForm.Answers>
+                                {subQuestion.options.map((singleAns, j) => {
+                                  return (
+                                    <SurveyForm.SingleAnswer
+                                      key={j}
+                                      name={`${subQuestion?.id}`}
+                                      value={singleAns.value}
+                                      checked={
+                                        answers[data.id]?.[subQuestion.id]
+                                          ?.value === singleAns.value
+                                      }
+                                      onChange={() =>
+                                        handleSelect(
+                                          data.id,
+                                          subQuestion.id,
+                                          singleAns.value
+                                        )
+                                      }
+                                    >
+                                      {singleAns.en}
+                                    </SurveyForm.SingleAnswer>
+                                  );
+                                })}
+                              </SurveyForm.Answers>
+                              {subQuestion.haveText && (
+                                <TextInput
+                                  onChange={(e) => {
+                                    handleOtherTextForOneQues(
+                                      data.id,
+                                      subQuestion.id,
+                                      e.target.value
+                                    );
+                                  }}
+                                  className="flex-1 min-w-[300px]  ms-4"
+                                  inputClassName={"bg-grayLight/50 h-9"}
+                                />
+                              )}
+                            </SurveyForm.Question>
+                          </SurveyForm.QuestionLi>
+                        ))}
+                      </div>
+                    ) : (
+                      <SurveyForm.QuestionLi
+                        key={question?.id}
+                        className=" after:!hidden before:hidden pb-0 ps-6 "
+                      >
+                        <SurveyForm.Question>
+                          {question?.ar && (
+                            <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
+                              {question?.ar}
+                            </SurveyForm.QuestionLabel>
+                          )}
 
-                        {question?.type === "multi" ? (
-                          <SurveyForm.Answers>
-                            {question.options?.map(({ value, label }) => (
-                              <SurveyForm.MultiAnswers
-                                key={value}
-                                aria-checked={
-                                  answers[data.id]?.[
-                                    question.id
-                                  ]?.value?.includes(value) || false
-                                }
-                                checked={
-                                  answers[data.id]?.[
-                                    question.id
-                                  ]?.value?.includes(value) || false
-                                }
-                                onChange={() =>
-                                  handleSelect(
-                                    data.id,
-                                    question.id,
-                                    value,
-                                    "multi"
-                                  )
-                                }
-                              >
-                                {label}
-                              </SurveyForm.MultiAnswers>
-                            ))}
-                          </SurveyForm.Answers>
-                        ) : (
-                          <SurveyForm.Answers>
-                            {question.options.map((singleAns, j) => {
-                              return (
-                                <SurveyForm.SingleAnswer
-                                  key={j}
-                                  name={`${question?.id}`}
-                                  value={singleAns.value}
+                          {question?.type === "multi" ? (
+                            <SurveyForm.Answers>
+                              {question.options?.map(({ value, label }) => (
+                                <SurveyForm.MultiAnswers
+                                  key={value}
+                                  aria-checked={
+                                    answers[data.id]?.[
+                                      question.id
+                                    ]?.value?.includes(value) || false
+                                  }
                                   checked={
-                                    answers[data.id]?.[question.id]?.value ===
-                                    singleAns.value
+                                    answers[data.id]?.[
+                                      question.id
+                                    ]?.value?.includes(value) || false
                                   }
                                   onChange={() =>
                                     handleSelect(
                                       data.id,
                                       question.id,
-                                      singleAns.value
+                                      value,
+                                      "multi"
                                     )
                                   }
                                 >
-                                  {singleAns.en}
-                                </SurveyForm.SingleAnswer>
-                              );
-                            })}
-                          </SurveyForm.Answers>
-                        )}
+                                  {label}
+                                </SurveyForm.MultiAnswers>
+                              ))}
+                            </SurveyForm.Answers>
+                          ) : (
+                            <SurveyForm.Answers>
+                              {question.options.map((singleAns, j) => {
+                                return (
+                                  <SurveyForm.SingleAnswer
+                                    key={j}
+                                    name={`${question?.id}`}
+                                    value={singleAns.value}
+                                    checked={
+                                      answers[data.id]?.[question.id]?.value ===
+                                      singleAns.value
+                                    }
+                                    onChange={() =>
+                                      handleSelect(
+                                        data.id,
+                                        question.id,
+                                        singleAns.value
+                                      )
+                                    }
+                                  >
+                                    {singleAns.en}
+                                  </SurveyForm.SingleAnswer>
+                                );
+                              })}
+                            </SurveyForm.Answers>
+                          )}
 
-                        {question.haveText && (
-                          <TextInput
-                            onChange={(e) => {
-                              handleOtherTextForOneQues(
-                                data.id,
-                                question.id,
-                                e.target.value
-                              );
-                            }}
-                            className="flex-1 min-w-[300px]  ms-4"
-                            inputClassName={"bg-grayLight/50 h-9"}
-                          />
-                        )}
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
+                          {question.haveText && (
+                            <TextInput
+                              onChange={(e) => {
+                                handleOtherTextForOneQues(
+                                  data.id,
+                                  question.id,
+                                  e.target.value
+                                );
+                              }}
+                              className="flex-1 min-w-[300px]  ms-4"
+                              inputClassName={"bg-grayLight/50 h-9"}
+                            />
+                          )}
+                        </SurveyForm.Question>
+                      </SurveyForm.QuestionLi>
+                    )
+                  )}
                 </ul>
               </SurveyForm.Body>
             </SurveyForm>
