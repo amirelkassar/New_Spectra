@@ -1,12 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import Draggable from 'react-draggable';
 
 import { cn } from '@/lib/utils';
 import { Controls } from './controls';
 import { useClientVideoStore } from '../../_hooks';
+import React, { useRef } from 'react';
 
 export const VideoCall = ({ ...props }) => {
+  const hostRef = useRef(null);
+
   const { toggleFullScreen, toggleView, view } =
     useClientVideoStore();
 
@@ -35,8 +39,13 @@ export const VideoCall = ({ ...props }) => {
         00:30
       </CallDuration>
 
-      <div className='absolute bottom-3 start-1/2 translate-x-1/2 ltr:-translate-x-1/2 flex flex-col gap-2 w-full px-5'>
-        <Host className='mdl:max-w-52 max-w-36 mb-5 mdl:mb-0' />
+      <div className='absolute bottom-3 start-1/2 translate-x-1/2 ltr:-translate-x-1/2 flex flex-col gap-2 justify-end w-full h-[30vh] px-5'>
+        <Draggable bounds='parent' nodeRef={hostRef}>
+          <Host
+            ref={hostRef}
+            className='mdl:max-w-52 max-w-36 shrink-0 mb-5 mdl:mb-0'
+          />
+        </Draggable>
 
         <Controls className='mx-auto'>
           <Controls.ChatBtn
@@ -68,9 +77,10 @@ export const VideoCall = ({ ...props }) => {
   );
 };
 
-const Host = ({ ...props }) => {
+const Host = React.forwardRef(({ ...props }, ref) => {
   return (
     <div
+      ref={ref}
       {...props}
       className={cn(
         'border-4 border-white rounded-xl overflow-hidden',
@@ -83,11 +93,13 @@ const Host = ({ ...props }) => {
         alt='host'
         width={996}
         height={664}
-        className='w-full h-auto object-cover object-center'
+        className='w-full h-full object-cover object-center pointer-events-none'
       />
     </div>
   );
-};
+});
+
+Host.displayName = 'Host';
 
 const CallDuration = ({ children, ...props }) => {
   return (
