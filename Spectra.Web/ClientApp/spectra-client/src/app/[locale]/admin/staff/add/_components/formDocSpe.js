@@ -1,7 +1,8 @@
+import ArrowDownIcon from "@/assets/icons/arrow-down";
 import ArrowRight from "@/assets/icons/arrow-right";
 import Button from "@/components/button";
 import Input from "@/components/input";
-import { Select, TextInput } from "@mantine/core";
+import { MultiSelect, Select, TextInput } from "@mantine/core";
 import React from "react";
 
 function FormDocSpe({
@@ -11,15 +12,16 @@ function FormDocSpe({
   setDocSpeData,
 }) {
   console.log(DocSpeData);
-  
+
   return (
     <div>
       <form className="flex flex-col gap-3 lg:gap-6 px-3 mb-14 focus:">
         <Select
           data={["دكتور 2", "1دكتور"]}
-          label={"التخصص"}
+          label={"التخصص الرئيسية"}
           placeholder="اختر المهنة"
           name="Diagnoses"
+          rightSection={<ArrowDownIcon />}
           value={DocSpeData.Diagnoses || ""}
           onChange={(value) =>
             setDocSpeData({ ...DocSpeData, Diagnoses: value })
@@ -30,6 +32,18 @@ function FormDocSpe({
             label: "text-base lg:text-xl mb-2",
           }}
         />
+        <MultiSelect
+          data={["نفسى", "علاجى"]}
+          label="التخصصات الفرعية"
+          placeholder="اختر تخصص"
+          rightSection={<ArrowDownIcon />}
+          className="MultiSelect h-auto flex-1"
+          classNames={{
+            input: " rounded-xl border-greenMain   !h-auto py-1 min-h-[60px]",
+            label: "text-base lg:text-xl mb-2",
+          }}
+        />
+
         <TextInput
           label={"رقم الترخيص/الاعتماد "}
           type={"number"}

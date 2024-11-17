@@ -109,31 +109,41 @@ function CategoriesVideo({ open }) {
       name: "report3",
       active: searchParams.get("reportNum") === "report2",
     },
+    {
+      label: "Psychological",
+      name: "report6",
+      active: searchParams.get("reportNum") === "report6",
+    },
+    {
+      label: "التقرير التشخيصى",
+      name: "report7",
+      active: searchParams.get("reportNum") === "report7",
+    },
   ];
   return (
     <>
       {searchParams.get("category") && (
         <Link
           href={pathName}
-          className="bg-blueLight h-11 gap-3 w-fit mx-auto mb-5 duration-200 hover:shadow-md  rounded-full lgl:hidden flex items-center justify-center p-3 "
+          className="bg-blueLight h-9 lg:h-11 gap-2 lg:gap-3 w-fit mx-auto mb-3 lg:mb-5 duration-200 hover:shadow-md  rounded-full lgl:hidden flex items-center justify-center p-2 lg:p-3 "
         >
-          <p className="text-base font-Regular">المحادثات</p>
+          <p className=" text-sm lg:text-base font-Regular">المحادثات</p>
           <ChatsIcon fill="#10B0C1" className={"h-full w-auto"} />
         </Link>
       )}
-      <div className="flex lgl:flex-wrap gap-3 overflow-x-auto snap-none hideScroll	 max-w-[calc(100%-0px)] px-5 lgl:px-0 ">
+      <div className="flex lgl:flex-wrap gap-3 overflow-x-auto  snap-none hideScroll 	 max-w-[calc(100%-0px)] px-5 lgl:px-0 ">
         {data.length > 1 ? (
           <MultiReports data={data} />
         ) : (
           <Link
             href={pathName + "?category=addReport"}
-            className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 py-3 lgl:py-8 w-[96px] lgl:w-[154px] aspect-square flex flex-col justify-center items-center rounded-xl`}
+            className={`bg-greenMain duration-300 hover:shadow-md border-2  border-greenMain min-w-[96px] lgl:min-w-[120px] max-w-[120px] px-2 max-g-h-[95px] lgl:max-h-[120px] cursor-pointer flex-1 py-3 lgl:py-4 w-[96px] lgl:w-[120px] aspect-square flex flex-col justify-center items-center rounded-xl`}
           >
-            <div className=" size-9 lgl:size-[58px]  mb-1 lgl:mb-2 mx-auto flex items-center justify-center ">
+            <div className=" size-9 lgl:size-10  mb-1 lgl:mb-2 mx-auto flex items-center justify-center ">
               <AddReportIcon className={"w-auto h-7 mdl:h-8 "} />
             </div>
 
-            <h2 className="font-Bold text-white lgl:text-nowrap leading-5 text-xs lgl:text-base text-center">
+            <h2 className="font-Bold text-white lgl:text-nowrap leading-5 text-xs lgl:text-sm text-center">
               اضافة تقرير
             </h2>
           </Link>
@@ -152,13 +162,13 @@ function CategoriesVideo({ open }) {
                 category.active
                   ? "border-greenMain"
                   : "border-grayLight lgl:border-white"
-              } min-w-[96px] lgl:min-w-[154px] max-w-[154px] px-2 max-g-h-[95px] lgl:max-h-[154px] cursor-pointer flex-1 pb-0 py-2 lgl:py-8 w-[96px] lgl:w-[154px]  aspect-square flex flex-col justify-center items-center rounded-xl`}
+              } min-w-[96px] lgl:min-w-[120px] max-w-[120px] px-2 max-g-h-[95px] lgl:max-h-[120px] cursor-pointer flex-1 pb-0 py-2 lgl:py-4 w-[96px] lgl:w-[120px]  aspect-square flex flex-col justify-center items-center rounded-xl`}
             >
-              <div className=" size-9 lgl:size-[58px] rounded-lg p-2 lgl:p-[14px] mb-1 lgl:mb-2 mx-auto bg-greenLight flex items-center justify-center ">
+              <div className=" size-8 lgl:size-10 rounded-lg p-2  mb-1 lgl:mb-2 mx-auto bg-greenLight flex items-center justify-center ">
                 {category.icon}
               </div>
 
-              <h2 className="font-Bold min-h-8 place-content-center lgl:text-nowrap mdl:leading-5 text-xs lgl:text-base text-center">
+              <h2 className="font-Bold min-h-7 place-content-center lgl:text-nowrap mdl:leading-5 text-xs lgl:text-sm text-center">
                 {category.label}
               </h2>
             </Link>
