@@ -1,147 +1,464 @@
 import { Accordion } from "@/components/accordion";
 import TextInput from "@/components/inputs/text-input";
-import { SurveyForm } from "@/components/swyc/survey-form";
 import { CheckIcon, Radio } from "@mantine/core";
 import React, { useState } from "react";
-const DataPatientHistory = [
+import AccordionReport from "./reports/AccordionReport";
+
+const DataAll = [
   {
     id: 1,
-    ar: "Seizure ",
-    en: "Seizure",
+    title: "Past medical history",
+    other: false,
+    questions: [
+      {
+        id: 7,
+        ar: "Seizure",
+        en: "Seizure",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 8,
+        ar: " surgery",
+        en: " surgery",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 9,
+        ar: " allergies",
+        en: "allergies",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 10,
+        ar: "medication",
+        en: "medication",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 11,
+        ar: " hearing test",
+        en: " hearing test",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 12,
+        ar: "neuroimages",
+        en: "neuroimages",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 13,
+        ar: "EEG",
+        en: "EEG",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 14,
+        ar: " lab investigation",
+        en: " lab investigation",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 15,
+        ar: " genetic result",
+        en: " genetic result",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 16,
+        ar: "chronic disease",
+        en: "chronic disease",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+    ],
   },
-
   {
     id: 2,
-    ar: " surgery",
-    en: " surgery",
+    title: "Behavioral difficulties",
+    other: false,
+    questions: [
+      {
+        id: 17,
+        ar: "Tantrums",
+        en: "Tantrums",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 18,
+        ar: "disruptive",
+        en: "disruptive",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 19,
+        ar: "aggressiveness",
+        en: "aggressiveness",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+      {
+        id: 20,
+        ar: "self injury",
+        en: "self injury",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: "No",
+            en: "No",
+            value: "No",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
-    ar: " allergies",
-    en: "allergies",
+    title: "Social adaptive",
+    other: false,
+    questions: [
+      {
+        id: 21,
+        ar: "toilet trained",
+        en: "toilet trained",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Normal", en: "Normal", value: "Normal" },
+          {
+            id: 2,
+            ar: "Mild delay",
+            en: "Mild delay",
+            value: "Mild delay",
+          },
+          {
+            id: 3,
+            ar: "Significant delay",
+            en: "Significant delay",
+            value: "Significant delay",
+          },
+        ],
+      },
+      {
+        id: 22,
+        ar: "dressing",
+        en: "dressing",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Normal", en: "Normal", value: "Normal" },
+          {
+            id: 2,
+            ar: "Mild delay",
+            en: "Mild delay",
+            value: "Mild delay",
+          },
+          {
+            id: 3,
+            ar: "Significant delay",
+            en: "Significant delay",
+            value: "Significant delay",
+          },
+        ],
+      },
+      {
+        id: 23,
+        ar: "feeding",
+        en: "feeding",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Normal", en: "Normal", value: "Normal" },
+          {
+            id: 2,
+            ar: "Mild delay",
+            en: "Mild delay",
+            value: "Mild delay",
+          },
+          {
+            id: 3,
+            ar: "Significant delay",
+            en: "Significant delay",
+            value: "Significant delay",
+          },
+        ],
+      },
+      {
+        id: 24,
+        ar: "sleeping",
+        en: "sleeping",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Normal", en: "Normal", value: "Normal" },
+          {
+            id: 2,
+            ar: "Mild delay",
+            en: "Mild delay",
+            value: "Mild delay",
+          },
+          {
+            id: 3,
+            ar: "Significant delay",
+            en: "Significant delay",
+            value: "Significant delay",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 4,
-    ar: "medication",
-    en: "medication",
+    title: "Type of school",
+    other: false,
+    questions: [
+      {
+        id: 25,
+        ar: "",
+        en: "",
+        haveText: false, // Add the boolean key
+        options: [
+          {
+            id: 1,
+            ar: "Inclusive (merge)",
+            en: "Inclusive (merge)",
+            value: "Inclusive (merge)",
+          },
+          {
+            id: 2,
+            ar: "daycare",
+            en: "daycare",
+            value: "daycare",
+          },
+          {
+            id: 3,
+            ar: "Regular school",
+            en: "Regular school",
+            value: "Regular school",
+          },
+          {
+            id: 4,
+            ar: " Autism/ADHD school",
+            en: " Autism/ADHD school",
+            value: " Autism/ADHD school",
+          },
+          {
+            id: 5,
+            ar: "special need school",
+            en: "special need school",
+            value: "special need school",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 5,
-    ar: " hearing test",
-    en: " hearing test",
+    title: "Family/ social history",
+    other: false,
+    questions: [
+      {
+        id: 26,
+        ar: "Consanguinity",
+        en: "Consanguinity",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          { id: 2, ar: "No", en: "No", value: "No" },
+        ],
+      },
+      {
+        id: 27,
+        ar: "Parent’s Occupation",
+        en: "Parent’s Occupation",
+        haveText: false, // Add the boolean key
+        type: "multi",
+        options: [
+          { value: 0, label: "Father Working" },
+          { value: 1, label: " Mother Working" },
+          { value: 2, label: "Housewife" },
+        ],
+      },
+      {
+        id: 28,
+        ar: "Family history of similar condition or chronic illness",
+        en: "Family history of similar condition or chronic illness",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          { id: 2, ar: "No", en: "No", value: "No" },
+        ],
+      },
+      {
+        id: 29,
+        ar: "House  Made",
+        en: "House  Made",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          { id: 2, ar: "No", en: "No", value: "No" },
+        ],
+      },
+      {
+        id: 30,
+        ar: "Socioeconomic Status",
+        en: "Socioeconomic Status",
+        haveText: false, // Add the boolean key
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          { id: 2, ar: "Average", en: "Average", value: "Average" },
+          { id: 3, ar: "High", en: "High", value: "High" },
+        ],
+      },
+    ],
   },
   {
     id: 6,
-    ar: "neuroimages",
-    en: "neuroimages",
-  },
-  {
-    id: 7,
-    ar: "EEG",
-    en: "EEG",
-  },
-  {
-    id: 8,
-    ar: " lab investigation",
-    en: " lab investigation",
-  },
-  {
-    id: 9,
-    ar: " genetic result",
-    en: " genetic result",
-  },
-  {
-    id: 10,
-    ar: "chronic disease",
-    en: "chronic disease",
-  },
-];
-const Behavioral = [
-  {
-    id: 11,
-    ar: "Tantrums ",
-    en: "Tantrums",
-  },
-
-  {
-    id: 12,
-    ar: " disruptive",
-    en: " disruptive",
-  },
-  {
-    id: 13,
-    ar: " aggressiveness",
-    en: "aggressiveness",
-  },
-  {
-    id: 14,
-    ar: "self injury",
-    en: "self injury",
-  },
-];
-const Adaptive = [
-  {
-    id: 15,
-    ar: "toilet trained ",
-    en: "toilet trained",
-  },
-
-  {
-    id: 16,
-    ar: " dressing",
-    en: " dressing",
-  },
-  {
-    id: 17,
-    ar: " feeding",
-    en: "feeding",
-  },
-  {
-    id: 18,
-    ar: "sleeping",
-    en: "sleeping",
-  },
-];
-const School = [
-  {
-    id: 19,
-    ar: "toilet trained ",
-    en: "toilet trained",
+    title: "Impression",
+    other: false,
+    questions: [
+      {
+        id: 31,
+        ar: "",
+        en: "",
+        haveText: false, // Add the boolean key
+        type: "multi",
+        options: [
+          { value: 0, label: "ASD" },
+          { value: 1, label: " ADHD" },
+          { value: 2, label: "ID" },
+          { value: 3, label: "GDD" },
+          { value: 4, label: "Social pragmatic disorders" },
+          { value: 5, label: "ODD" },
+          { value: 6, label: "LD" },
+          { value: 7, label: "Seizure" },
+          { value: 8, label: "Disruptive behaviors" },
+          { value: 9, label: " Genetic disorders" },
+          { value: 10, label: "Sleep issues" },
+          { value: 11, label: "Anxiety" },
+          { value: 12, label: "Speech delay" },
+          { value: 13, label: "Psychiatrical disorders" },
+        ],
+      },
+    ],
   },
 ];
 function PatientHistory() {
   const [answers, setAnswers] = useState({});
-  const [Impression, setImpression] = useState([
-    { value: 0, label: "ASD", selected: false },
-    { value: 1, label: "ADHD", selected: false },
-    { value: 2, label: "ID", selected: false },
-    { value: 3, label: "GDD", selected: false },
-    { value: 4, label: "Social pragmatic disorders", selected: false },
-    { value: 5, label: "GDD", selected: false },
-    { value: 6, label: "ODD", selected: false },
-    { value: 7, label: "LD", selected: false },
-    { value: 8, label: "Seizure", selected: false },
-    { value: 9, label: "Disruptive behaviors", selected: false },
-    { value: 10, label: "Genetic disorders", selected: false },
-    { value: 11, label: "Sleep issues", selected: false },
-    { value: 12, label: "Anxiety", selected: false },
-    { value: 13, label: "Speech delay", selected: false },
-    { value: 14, label: "Psychiatrical disorders", selected: false },
-  ]);
-  const handleSelect = (questionId, value) => {
-    const updatedAnswers = {
-      ...answers,
-      [questionId]: value,
-    };
-    setAnswers(updatedAnswers);
-  };
-  const toggleSelection = (value) => {
-    setImpression((prevImpression) =>
-      prevImpression.map((item) =>
-        item.value === value ? { ...item, selected: !item.selected } : item
-      )
-    );
-  };
+
   return (
     <div dir="ltr" className="my-4 flex flex-col gap-5">
       <Accordion>
@@ -222,7 +539,8 @@ function PatientHistory() {
                         icon={CheckIcon}
                         color="#10B0C1"
                         classNames={{
-                          label: "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
+                          label:
+                            "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
                           body: "items-center",
                         }}
                       />
@@ -239,7 +557,8 @@ function PatientHistory() {
                         icon={CheckIcon}
                         color="#10B0C1"
                         classNames={{
-                          label: "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
+                          label:
+                            "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
                           body: "items-center",
                         }}
                       />
@@ -256,7 +575,8 @@ function PatientHistory() {
                         icon={CheckIcon}
                         color="#10B0C1"
                         classNames={{
-                          label: "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
+                          label:
+                            "text-xs lg:text-base font-Regular min-w-[100px] lg:min-w-[130px]",
                           body: "items-center",
                         }}
                       />
@@ -310,337 +630,16 @@ function PatientHistory() {
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Past medical history"}>
-          <Accordion.Label>Past medical history</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {DataPatientHistory?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-                        <SurveyForm.Answers>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="0"
-                            checked={answers[question?.id] === 0}
-                            onChange={() => handleSelect(question?.id, 0)}
-                          >
-                            Yes
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="1"
-                            checked={answers[question?.id] === 1}
-                            onChange={() => handleSelect(question?.id, 1)}
-                          >
-                            No
-                          </SurveyForm.SingleAnswer>
-                        </SurveyForm.Answers>
-                        <TextInput
-                          className="flex-1 min-w-[300px]  ms-4"
-                          inputClassName={"bg-grayLight/50 h-9"}
-                        />
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Past medical history"}>
-          <Accordion.Label>Behavioral difficulties</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {Behavioral?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-                        <SurveyForm.Answers>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="0"
-                            checked={answers[question?.id] === 0}
-                            onChange={() => handleSelect(question?.id, 0)}
-                          >
-                            Yes
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="1"
-                            checked={answers[question?.id] === 1}
-                            onChange={() => handleSelect(question?.id, 1)}
-                          >
-                            No
-                          </SurveyForm.SingleAnswer>
-                        </SurveyForm.Answers>
-                        <TextInput
-                          className="flex-1 min-w-[300px]  ms-4"
-                          inputClassName={"bg-grayLight/50 h-9"}
-                        />
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Past medical history"}>
-          <Accordion.Label>Behavioral difficulties</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {Adaptive?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                          {question?.ar}
-                        </SurveyForm.QuestionLabel>
-                        <SurveyForm.Answers>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="0"
-                            checked={answers[question?.id] === 0}
-                            onChange={() => handleSelect(question?.id, 0)}
-                          >
-                            Normal
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="1"
-                            checked={answers[question?.id] === 1}
-                            onChange={() => handleSelect(question?.id, 1)}
-                          >
-                            Mild delay
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="3"
-                            checked={answers[question?.id] === 3}
-                            onChange={() => handleSelect(question?.id, 3)}
-                          >
-                            Significant delay
-                          </SurveyForm.SingleAnswer>
-                        </SurveyForm.Answers>
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Type of school"}>
-          <Accordion.Label>Type of school</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  {School?.map((question) => (
-                    <SurveyForm.QuestionLi
-                      key={question?.id}
-                      className=" after:!hidden before:hidden pb-0 ps-6 "
-                    >
-                      <SurveyForm.Question>
-                        <SurveyForm.Answers>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="0"
-                            checked={answers[question?.id] === 0}
-                            onChange={() => handleSelect(question?.id, 0)}
-                          >
-                            Inclusive (merge)
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="1"
-                            checked={answers[question?.id] === 1}
-                            onChange={() => handleSelect(question?.id, 1)}
-                          >
-                            daycare
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="3"
-                            checked={answers[question?.id] === 3}
-                            onChange={() => handleSelect(question?.id, 3)}
-                          >
-                            Regular school
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="4"
-                            checked={answers[question?.id] === 4}
-                            onChange={() => handleSelect(question?.id, 4)}
-                          >
-                            Autism/ADHD school
-                          </SurveyForm.SingleAnswer>
-                          <SurveyForm.SingleAnswer
-                            name={`${question?.id}`}
-                            value="5"
-                            checked={answers[question?.id] === 5}
-                            onChange={() => handleSelect(question?.id, 5)}
-                          >
-                            special need school
-                          </SurveyForm.SingleAnswer>
-                        </SurveyForm.Answers>
-                      </SurveyForm.Question>
-                    </SurveyForm.QuestionLi>
-                  ))}
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Family/ social history"}>
-          <Accordion.Label>Family/ social history</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  <SurveyForm.QuestionLi className=" after:!hidden before:hidden pb-0 ps-6 ">
-                    <SurveyForm.Question>
-                      <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                        Consanguinity
-                      </SurveyForm.QuestionLabel>
-                      <SurveyForm.Answers>
-                        <SurveyForm.SingleAnswer
-                          name={`Consanguinity`}
-                          value="0"
-                        >
-                          Yes
-                        </SurveyForm.SingleAnswer>
-                        <SurveyForm.SingleAnswer
-                          name={`Consanguinity`}
-                          value="1"
-                        >
-                          No
-                        </SurveyForm.SingleAnswer>
-                      </SurveyForm.Answers>
-                    </SurveyForm.Question>
-                  </SurveyForm.QuestionLi>
-                  <SurveyForm.QuestionLi className=" after:!hidden before:hidden pb-0 ps-6 ">
-                    <SurveyForm.Question>
-                      <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                        Family history of similar condition or chronic illness
-                      </SurveyForm.QuestionLabel>
-                      <SurveyForm.Answers>
-                        <SurveyForm.SingleAnswer name={`chronic`} value="0">
-                          Yes
-                        </SurveyForm.SingleAnswer>
-                        <SurveyForm.SingleAnswer name={`chronic`} value="1">
-                          No
-                        </SurveyForm.SingleAnswer>
-                      </SurveyForm.Answers>
-                    </SurveyForm.Question>
-                  </SurveyForm.QuestionLi>
-                  <SurveyForm.QuestionLi className=" after:!hidden before:hidden pb-0 ps-6 ">
-                    <SurveyForm.Question>
-                      <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                        House Made
-                      </SurveyForm.QuestionLabel>
-                      <SurveyForm.Answers>
-                        <SurveyForm.SingleAnswer name={`House`} value="0">
-                          Yes
-                        </SurveyForm.SingleAnswer>
-                        <SurveyForm.SingleAnswer name={`House`} value="1">
-                          No
-                        </SurveyForm.SingleAnswer>
-                      </SurveyForm.Answers>
-                    </SurveyForm.Question>
-                  </SurveyForm.QuestionLi>
-                  <SurveyForm.QuestionLi className=" after:!hidden before:hidden pb-0 ps-6 ">
-                    <SurveyForm.Question>
-                      <SurveyForm.QuestionLabel className="!font-Regular min-w-[100px] lg:min-w-[130px]">
-                        Socioeconomic Status
-                      </SurveyForm.QuestionLabel>
-                      <SurveyForm.Answers>
-                        <SurveyForm.SingleAnswer
-                          name={`Socioeconomic`}
-                          value="0"
-                        >
-                          Poor
-                        </SurveyForm.SingleAnswer>
-                        <SurveyForm.SingleAnswer
-                          name={`Socioeconomic`}
-                          value="1"
-                        >
-                          Average
-                        </SurveyForm.SingleAnswer>
-                        <SurveyForm.SingleAnswer
-                          name={`Socioeconomic`}
-                          value="3"
-                        >
-                          High
-                        </SurveyForm.SingleAnswer>
-                      </SurveyForm.Answers>
-                    </SurveyForm.Question>
-                  </SurveyForm.QuestionLi>
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
-      <Accordion classNames={{ content: "px-0 " }}>
-        <Accordion.Item value={"Impression"}>
-          <Accordion.Label>Impression</Accordion.Label>
-          <Accordion.Content>
-            <SurveyForm className="!p-0">
-              <SurveyForm.Body className=" border-none">
-                <ul>
-                  <SurveyForm.QuestionLi className=" after:!hidden before:hidden pb-0 ps-6 ">
-                    <SurveyForm.Question>
-                      <SurveyForm.Answers>
-                        {Impression?.map(({ value, label, selected }) => (
-                          <SurveyForm.MultiAnswers
-                            key={value}
-                            name={`${label}`}
-                            value={value.toString()}
-                            checked={selected}
-                            onChange={() => toggleSelection(value)}
-                          >
-                            {label}
-                          </SurveyForm.MultiAnswers>
-                        ))}
-                      </SurveyForm.Answers>
-                    </SurveyForm.Question>
-                  </SurveyForm.QuestionLi>
-                </ul>
-              </SurveyForm.Body>
-            </SurveyForm>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion>
+      {DataAll.map((data, index) => {
+        return (
+          <AccordionReport
+            key={index}
+            data={data}
+            answers={answers}
+            setAnswers={setAnswers}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -3,14 +3,339 @@ import TextInput from "@/components/inputs/text-input";
 import { Textarea } from "@/components/inputs/textarea";
 import { SurveyForm } from "@/components/swyc/survey-form";
 import React, { useState } from "react";
+const DataAll = [
+  {
+    id: 1,
+    title: "BEHAVIORAL HISTORY & OBSERVATION",
+    other: true,
+    questions: [
+      {
+        id: 1,
+        ar: "Eye contact",
+        en: "Eye contact",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 2,
+        ar: "Responding for calls with name",
+        en: "Responding for calls with name",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 3,
+        ar: "Show, Share request, Joint attention",
+        en: "Show, Share request, Joint attention",
+        haveText: true, // Add the boolean key
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 4,
+        ar: "Gestures, pointing",
+        en: "Gestures, pointing",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 5,
+        ar: "Echolalia",
+        en: "Echolalia",
+        haveText: false,
+        type: "multi",
+        options: [
+          { value: 0, label: "Early" },
+          { value: 1, label: "  Late" },
+          { value: 2, label: "Verbal" },
+          { value: 3, label: "Nonverbal" },
+          { value: 4, label: "Prosody issues" },
+          { value: 5, label: "Intonation issues" },
+          { value: 6, label: "Formal language" },
+        ],
+      },
+      {
+        id: 6,
+        ar: "Reciprocity",
+        en: "Reciprocity",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 7,
+        ar: "Social cues understanding",
+        en: "Social cues understanding",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 8,
+        ar: "Make relation and maintaining them",
+        en: "Make relation and maintaining them",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 9,
+        ar: "Understanding facial expressions and empathy with others",
+        en: "Understanding facial expressions and empathy with others",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 10,
+        ar: "Copy others",
+        en: "Copy others",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 11,
+        ar: "Imaginative Play",
+        en: "Imaginative Play",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
+          {
+            id: 2,
+            ar: " Normal",
+            en: " Normal",
+            value: " Normal",
+          },
+          {
+            id: 2,
+            ar: "  Not at all",
+            en: "  Not at all",
+            value: "  Not at all",
+          },
+        ],
+      },
+      {
+        id: 12,
+        ar: "Stereotype behaviors",
+        en: "Stereotype behaviors",
+        haveText: false,
+        type: "multi",
+        options: [
+          { value: 0, label: " Vocal" },
+          { value: 1, label: "  Flapping" },
+          { value: 2, label: "Rocking" },
+          { value: 3, label: "Spinning" },
+          { value: 4, label: "Pacing" },
+          { value: 5, label: " Jumping" },
+        ],
+      },
+      {
+        id: 13,
+        ar: "Specific interests, routine & ritual",
+        en: "Specific interests, routine & ritual",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: " No",
+            en: " No",
+            value: " No",
+          },
+        ],
+      },
+      {
+        id: 14,
+        ar: "Side looking",
+        en: "Side looking",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: " No",
+            en: " No",
+            value: " No",
+          },
+        ],
+      },
+      {
+        id: 15,
+        ar: "Line up objects",
+        en: "Line up objects",
+        haveText: true,
+        options: [
+          { id: 1, ar: "Yes", en: "Yes", value: "Yes" },
+          {
+            id: 2,
+            ar: " No",
+            en: " No",
+            value: " No",
+          },
+        ],
+      },
+    ],
+  },
 
+  {
+    id: 6,
+    title: "Impression",
+    other: false,
+    questions: [
+      {
+        id: 31,
+        ar: "",
+        en: "",
+        haveText: false,
+        type: "multi",
+        options: [
+          { value: 0, label: "ASD" },
+          { value: 1, label: " ADHD" },
+          { value: 2, label: "ID" },
+          { value: 3, label: "GDD" },
+          { value: 4, label: "Social pragmatic disorders" },
+          { value: 5, label: "ODD" },
+          { value: 6, label: "LD" },
+          { value: 7, label: "Seizure" },
+          { value: 8, label: "Disruptive behaviors" },
+          { value: 9, label: " Genetic disorders" },
+          { value: 10, label: "Sleep issues" },
+          { value: 11, label: "Anxiety" },
+          { value: 12, label: "Speech delay" },
+          { value: 13, label: "Psychiatrical disorders" },
+        ],
+      },
+    ],
+  },
+];
 function History() {
   const [DataPatientHistory, setDataPatientHistory] = useState([
     {
       id: 1,
       ar: "Eye contact ",
       en: "Eye contact",
-      haveText: true, // Add the boolean key
+      haveText: true,
       options: [
         { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
         { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
@@ -26,7 +351,7 @@ function History() {
       id: 2,
       ar: " Responding for calls with name",
       en: " Responding for calls with name",
-      haveText: true, // Add the boolean key
+      haveText: true,
       options: [
         { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
         { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
@@ -42,7 +367,7 @@ function History() {
       id: 3,
       ar: " Show, Share request, Joint attention",
       en: "Show, Share request, Joint attention",
-      haveText: true, // Add the boolean key
+      haveText: true,
       options: [
         { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
         { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
@@ -58,7 +383,7 @@ function History() {
       id: 4,
       ar: "Gestures, pointing",
       en: "Gestures, pointing",
-      haveText: true, // Add the boolean key
+      haveText: true,
       options: [
         { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
         { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
@@ -84,13 +409,13 @@ function History() {
         { value: 5, label: "Intonation issues", selected: false },
         { value: 6, label: "Formal language", selected: false },
       ],
-      haveText: false, // Add the boolean key
+      haveText: false,
     },
     {
       id: 6,
       ar: "Reciprocity",
       en: "Reciprocity",
-      haveText: true, // Add the boolean key
+      haveText: true,
       options: [
         { id: 1, ar: "Poor", en: "Poor", value: "Poor" },
         { id: 2, ar: " Normal", en: " Normal", value: " Normal" },
