@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -17,7 +16,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
         public string Name { get; set; }
         public string Description { get; set; }
         public string Code { get; set; }
-       
+
 
         public double ConsultationCost { get; set; }
     }
@@ -25,11 +24,11 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     public class CreateSpecializationCommandHandler : IRequestHandler<CreateSpecializationCommand, OperationResult<string>>
     {
         private readonly ISpecializationsRepository _specializationRepository;
-     
+
         public CreateSpecializationCommandHandler(ISpecializationsRepository specializationRepository)
         {
             _specializationRepository = specializationRepository;
-          
+
         }
 
         public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
@@ -41,10 +40,10 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             }
 
             var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(
-                Ulid.NewUlid().ToString(),  
-                request.Name.ToLower() , 
+                Ulid.NewUlid().ToString(),
+                request.Name.ToLower(),
                 0,
-                request.Code ,
+                request.Code,
                 request.Description,
                 request.ConsultationCost);
 
@@ -52,7 +51,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             return OperationResult<string>.Success(Specialization.Id);
 
         }
-         
+
 
     }
     public class CreateSpecializationCommandValidator : AbstractValidator<CreateSpecializationCommand>

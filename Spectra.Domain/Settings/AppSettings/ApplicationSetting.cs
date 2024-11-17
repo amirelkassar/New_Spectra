@@ -1,9 +1,5 @@
 ﻿using Spectra.Domain.Shared.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Settings.AppSettings
 {
@@ -11,7 +7,7 @@ namespace Spectra.Domain.Settings.AppSettings
     {
         protected ApplicationSetting()
         {
-            
+
         }
         private ApplicationSetting(string id,
             string name, bool encrypted)
@@ -35,7 +31,7 @@ namespace Spectra.Domain.Settings.AppSettings
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
             ArgumentNullException.ThrowIfNull(encrypted, nameof(encrypted));
-           
+
             return new ApplicationSetting(id, name, encrypted);
         }
     }

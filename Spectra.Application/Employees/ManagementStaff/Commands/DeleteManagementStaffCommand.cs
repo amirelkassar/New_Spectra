@@ -23,7 +23,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
         {
 
             var staff = await _staffRepository.GetByIdAsync(request.Id);
-           
+
             await _staffRepository.DeleteAsync(staff);
             return OperationResult<Unit>.Success(Unit.Value);
 

@@ -36,7 +36,7 @@ namespace Spectra.Domain.MasterData.DoctorsSpecialization
 
 
         }
-       
+
     }
 
 

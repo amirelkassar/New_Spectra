@@ -30,12 +30,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             var allServicesNamesandTerms = entity
         .Where(x => x.AvailableSrvices == AvailableSrvice.ServicesView)
         .Select(x => new ServicesDto
-    {
+        {
             Id = x.Id,
-        Name = x.Name,
-        TermsAndConditions = x.TermsAndConditions,
+            Name = x.Name,
+            TermsAndConditions = x.TermsAndConditions,
 
-    });
+        });
 
 
             return OperationResult<IEnumerable<ServicesDto>>.Success(allServicesNamesandTerms);

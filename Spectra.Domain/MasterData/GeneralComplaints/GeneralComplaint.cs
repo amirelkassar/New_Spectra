@@ -1,11 +1,5 @@
 ﻿using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MasterData.GeneralComplaints
 {
@@ -13,7 +7,7 @@ namespace Spectra.Domain.MasterData.GeneralComplaints
     {
         public string ComplaintName { get; set; }
         public string Code1 { get; set; }
-        
+
         public string DescriptionOfTheComplaint { get; set; }
 
 

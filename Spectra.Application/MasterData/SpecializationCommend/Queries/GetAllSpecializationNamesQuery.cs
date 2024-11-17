@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Spectra.Application.MasterData.SpecializationCommend.DTO;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Queries
@@ -28,7 +26,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 
                 var specialization = await _specializationRepository.GetAllAsync();
 
-                var AllspecializationNames = specialization.Select(x => new BassMasterDataDto { Name = x.Name ,Id =x.Id });
+                var AllspecializationNames = specialization.Select(x => new BassMasterDataDto { Name = x.Name, Id = x.Id });
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(AllspecializationNames);
 

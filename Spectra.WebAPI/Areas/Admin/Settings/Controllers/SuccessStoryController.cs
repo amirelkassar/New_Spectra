@@ -21,7 +21,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var successStorys = await _entityServices.GetAllSuccessStoryies();
             return Ok(successStorys);
         }
-       
+
         [HttpGet("id")]
         [AllowAnonymous]
         public async Task<ActionResult> GetOneSuccessStory(string id)
@@ -51,8 +51,8 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             var successStorys = await _entityServices.DeleteSuccessStoryies(id);
             return Ok(successStorys);
         }
-       
-        
+
+
     }
 
 }

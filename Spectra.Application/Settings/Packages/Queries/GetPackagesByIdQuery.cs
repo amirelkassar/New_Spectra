@@ -14,7 +14,7 @@ namespace Spectra.Application.Settings.Packages.Queries
     {
         private readonly IPackagesRepository _packagesRepository;
 
-       
+
         public GetPackagesByIdQueryHandler(IPackagesRepository packagesRepository)
         {
             _packagesRepository = packagesRepository;

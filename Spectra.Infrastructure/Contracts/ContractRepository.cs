@@ -60,10 +60,10 @@ namespace Spectra.Infrastructure.Contracts
    int pageNumber = 1,
    int pageSize = 10)
         {
-     
+
             var filterDefinition = filter ?? (x => true);
 
-           
+
             var query = await _EmploymentContracts
                 .Find(filterDefinition, options)
                 //.SortByDescending(x => x.) // Sort by Daysdate in descending order

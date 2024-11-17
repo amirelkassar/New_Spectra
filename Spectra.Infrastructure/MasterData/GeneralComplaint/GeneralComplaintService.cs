@@ -1,22 +1,12 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData;
-using Spectra.Application.MasterData.DiagnoseCommend.Commands;
-using Spectra.Application.MasterData.Drug.Queries;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Queries;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
-using Spectra.Domain.MasterData.Drug;
-using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.MasterData.GeneralComplaint
 {

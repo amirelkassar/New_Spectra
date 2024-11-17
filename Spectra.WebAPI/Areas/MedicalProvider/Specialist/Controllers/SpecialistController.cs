@@ -74,7 +74,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input.JobTypes
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
-       }
+        }
 
 
         [HttpPut("id")]

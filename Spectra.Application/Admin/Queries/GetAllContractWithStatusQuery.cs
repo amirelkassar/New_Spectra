@@ -2,7 +2,6 @@
 using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Hellper;
-using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -27,32 +26,35 @@ namespace Spectra.Application.Admin.Queries
 
         public async Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> Handle(GetAllContractWithStatusQuery request, CancellationToken cancellationToken)
         {
-          
-                var paginatedContracte = await _contractRepository.GetAllAsyncP(c=> c.AdminOrEmployee== AdminOrEmployee.Employee && c.ContractCase != ContractCases.REFUSE,
-               null,
-               request.PageNumber,
-               request.PageSize);
 
-                var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
-                {
-                    Name = $"{c.EmployeeName.FirstName} +{c.EmployeeName.LastName}",
-                    DateOfRequest = c.Created.Date,
-                    ContractCase = c.ContractCase, WhoSend= c.AdminOrEmployee, Id=c.Id,EmployeeId=c.EmployeeId
-                })
-                .OrderByDescending(y => y.DateOfRequest)
-                .ToList();
+            var paginatedContracte = await _contractRepository.GetAllAsyncP(c => c.AdminOrEmployee == AdminOrEmployee.Employee && c.ContractCase != ContractCases.REFUSE,
+           null,
+           request.PageNumber,
+           request.PageSize);
+
+            var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
+            {
+                Name = $"{c.EmployeeName.FirstName} +{c.EmployeeName.LastName}",
+                DateOfRequest = c.Created.Date,
+                ContractCase = c.ContractCase,
+                WhoSend = c.AdminOrEmployee,
+                Id = c.Id,
+                EmployeeId = c.EmployeeId
+            })
+            .OrderByDescending(y => y.DateOfRequest)
+            .ToList();
 
 
-                var results = new PaginatedResult<GetAllemployeeDto>
-                {
-                    Items = contractDataLists,
+            var results = new PaginatedResult<GetAllemployeeDto>
+            {
+                Items = contractDataLists,
 
-                    PageNumber = request.PageNumber,
-                    PageSize = request.PageSize
-                };
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize
+            };
 
-                return OperationResult<PaginatedResult<GetAllemployeeDto>>.Success(results);
-            
+            return OperationResult<PaginatedResult<GetAllemployeeDto>>.Success(results);
+
 
 
         }

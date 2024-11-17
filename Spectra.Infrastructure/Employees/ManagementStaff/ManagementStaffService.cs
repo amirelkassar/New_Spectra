@@ -75,7 +75,7 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Qualifications = qualifications,
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType = jobType   
+                JobType = jobType
             };
             return await _mediator.Send(command);
         }
@@ -152,8 +152,8 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Qualifications = qualifications,
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType=jobType,
-                Address=address
+                JobType = jobType,
+                Address = address
                 ,
             };
 
@@ -165,5 +165,5 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
 }
 
 
-    
+
 

@@ -1,13 +1,12 @@
 ﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace Spectra.Domain.ScheduleAppointments
 {
     public class Appointment : BaseAuditableEntity<string>
     {
-        
+
         public DateTime Daysdate { get; set; }
         public string? AppointmentNotes { get; set; }
         public AppointmentStatus Status { get; set; }
@@ -29,10 +28,10 @@ namespace Spectra.Domain.ScheduleAppointments
 
         protected Appointment() { }
 
-        private Appointment(string id, string doctorId, DateTime daysdate ,
-            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status, 
-            TimeOnly from, TimeOnly to, MoringOrNight toMoringOrNight ) 
-            {
+        private Appointment(string id, string doctorId, DateTime daysdate,
+            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status,
+            TimeOnly from, TimeOnly to, MoringOrNight toMoringOrNight)
+        {
             Id = id;
             DoctorId = doctorId;
             Daysdate = daysdate;
@@ -41,14 +40,14 @@ namespace Spectra.Domain.ScheduleAppointments
             DoctorScheduleId = doctorScheduleId;
             ClientId = clientId;
             Status = status;
-             From = from;
+            From = from;
             To = to;
             ToMoringOrNight = toMoringOrNight;
-      
+
 
         }
-        public static Appointment Create(string id, string doctorId, DateTime daysdate, 
-            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status, 
+        public static Appointment Create(string id, string doctorId, DateTime daysdate,
+            string? appointmentNotes, AppointmentType appointmentType, string doctorScheduleId, string clientId, AppointmentStatus status,
             TimeOnly from, TimeOnly to, MoringOrNight toMoringOrNight)
         {
 
@@ -63,12 +62,12 @@ namespace Spectra.Domain.ScheduleAppointments
             ArgumentNullException.ThrowIfNull(from, nameof(from));
             ArgumentNullException.ThrowIfNull(to, nameof(to));
             ArgumentNullException.ThrowIfNull(toMoringOrNight, nameof(toMoringOrNight));
-         
 
 
 
-            return new Appointment(id, doctorId, daysdate, appointmentNotes , appointmentType , doctorScheduleId , clientId 
-                , status , from, to, toMoringOrNight );
+
+            return new Appointment(id, doctorId, daysdate, appointmentNotes, appointmentType, doctorScheduleId, clientId
+                , status, from, to, toMoringOrNight);
 
         }
 

@@ -15,7 +15,7 @@ namespace Spectra.Application.Contracts.Services
         Task<OperationResult<Unit>> DeleteContract(string id);
         Task<OperationResult<Unit>> EmployeeAccpetContract(string id);
         Task<OperationResult<GetServicesContractQuery>> GetAllContractData();
-   
+
         //Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
         Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
 

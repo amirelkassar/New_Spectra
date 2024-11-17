@@ -1,16 +1,10 @@
 ﻿using Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData;
-using Spectra.Domain.Shared.Common;
 using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments
 {
-    public class SpeechLanguageAssessment(string id, string patientId, string clientId,string sessionId, Name patientName) : PatientAssessmentBase(id, patientId, clientId, sessionId, patientName, AssessmentTypes.SpeechLanguage)
+    public class SpeechLanguageAssessment(string id, string patientId, string clientId, string sessionId, Name patientName) : PatientAssessmentBase(id, patientId, clientId, sessionId, patientName, AssessmentTypes.SpeechLanguage)
     {
         public OralMotorExamination? OralMotorExamination { get; set; }
         public PreCommunicationSkill? PreCommunicationSkill { get; set; }

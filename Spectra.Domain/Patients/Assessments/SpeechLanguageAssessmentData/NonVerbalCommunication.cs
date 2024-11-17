@@ -1,5 +1,4 @@
-﻿using Spectra.Domain.Shared.Common;
-using static Spectra.Domain.Common.Conses.Units;
+﻿using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients.Assessments.SpeechLanguageAssessmentData
 {

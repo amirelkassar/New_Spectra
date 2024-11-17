@@ -1,5 +1,4 @@
 ﻿using Spectra.Domain.Shared.Common;
-using System;
 using System.Collections.Generic;
 
 namespace Spectra.Domain.ValueObjects
@@ -10,7 +9,7 @@ namespace Spectra.Domain.ValueObjects
         public string? LastName { get; set; }
         public string? Prefix { get; set; }
 
-        
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return FirstName;

@@ -39,11 +39,11 @@ namespace Spectra.Application.Admin.Commands
                     specialization.DoctorCount += 1;
                     await _specializationRepository.UpdateAsync(specialization);
                 }
-            
+
 
                 //doctor.Status = request.Status;
 
-             
+
 
                 await _doctorRepository.UpdateAsync(doctor);
 

@@ -1,7 +1,5 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.Validator;
 using Spectra.Domain.Clients;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Enums;
@@ -12,7 +10,7 @@ namespace Spectra.Application.Clients.Commands
 {
     public class CreateClientCommand : ICommand<OperationResult<string>>
     {
-      
+
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
@@ -25,7 +23,7 @@ namespace Spectra.Application.Clients.Commands
         public Organization Organization { get; set; }
         public List<ServicePackage>? ServicePackages { get; set; }
         public List<Patient>? patients { get; set; }
-     
+
 
 
     }
@@ -52,13 +50,13 @@ namespace Spectra.Application.Clients.Commands
                request.Address,
                request.patients,
                 request.Organization,
-               request.ServicePackages=null
+               request.ServicePackages = null
             );
             await _clientRepository.AddAsync(client);
 
             return OperationResult<string>.Success(client.Id);
-       
-         
+
+
         }
     }
     //public class CreateClientCommandValidator : AbstractValidator<CreateClientCommand>
@@ -93,5 +91,5 @@ namespace Spectra.Application.Clients.Commands
     //            .SetValidator(new OrganizationValidator());
     //    }
     //}
-  
+
 }

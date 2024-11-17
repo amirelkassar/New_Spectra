@@ -43,7 +43,7 @@ namespace Spectra.Application.Settings.Packages.Commands
                 entity.PointOfPackage = request.PointOfPackage;
                 entity.ContentPackage = request.ContentPackage;
                 entity.ContentPackage = request.ContentPackage;
-               
+
                 if (request.Photo != null)
                 {
 
@@ -51,7 +51,7 @@ namespace Spectra.Application.Settings.Packages.Commands
 
 
                 }
-         
+
                 await _packagesRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
 

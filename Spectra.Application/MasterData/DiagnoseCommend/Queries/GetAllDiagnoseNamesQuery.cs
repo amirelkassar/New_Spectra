@@ -25,7 +25,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
 
                 var diagnoses = await _diagnoseRepository.GetAllAsync();
 
-                var diagnose = diagnoses.Select(x => new BassMasterDataDto { Name = x.Name , Id = x.Id });
+                var diagnose = diagnoses.Select(x => new BassMasterDataDto { Name = x.Name, Id = x.Id });
 
 
                 return OperationResult<IEnumerable<BassMasterDataDto>>.Success(diagnose);

@@ -2,10 +2,6 @@
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
 {
@@ -34,7 +30,7 @@ namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
             Id = id;
             ScientificNameByEng = scientificNameByEng;
             ScientificNameByEngByArab = scientificNameByEngByArab;
-            Code= code;
+            Code = code;
             ScientificNote = scientificNote;
             ExaminationTypes = examinationType;
         }

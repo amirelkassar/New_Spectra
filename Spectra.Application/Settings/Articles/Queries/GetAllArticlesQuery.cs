@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Wrappers;
 

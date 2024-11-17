@@ -13,9 +13,9 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
     public class DeleteDoctorCommandHandler : IRequestHandler<DeleteMedicalProviderCommand, OperationResult<Unit>>
     {
         private readonly IMedicalProviderRepository _medicalProvider;
-       
+
         private readonly IHellper _addFile;
-    
+
         public DeleteDoctorCommandHandler(IMedicalProviderRepository medicalProvider, IHellper addFile)
         {
             _medicalProvider = medicalProvider;

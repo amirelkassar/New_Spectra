@@ -25,7 +25,7 @@ namespace Spectra.Infrastructure.Admin
         Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input);
         Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input);
         Task<OperationResult<Unit>> UpdateContractFromAdmin(string id, UpdateContractToSendToEmployeeCommand input);
-        Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input );
+        Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input);
 
         //Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input);
         //Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus(UpdateDoctorEmploymentStatusCommand input);

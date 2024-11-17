@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using MongoDB.Driver;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
