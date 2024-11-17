@@ -7,7 +7,7 @@ import MicrophoneIcon from "@/assets/icons/microphone";
 import VideoIcon from "@/assets/icons/video";
 function VideoCall() {
   return (
-    <div className=" relative w-full h-[500px] lgl:h-[540px] mb-6 max-w-full lgl:after:content-none after:absolute after:bottom-0 after:left-0 after:w-full after:h-[50%] after:z-[1] after:bg-gradient-to-t after:from-[#373737] after:to-[#00000000] after:opacity-80">
+    <div className=" relative w-full h-[400px] lgl:h-[450px] mb-6 max-w-full lgl:after:content-none after:absolute after:bottom-0 after:left-0 after:w-full after:h-[50%] after:z-[1] after:bg-gradient-to-t after:from-[#373737] after:to-[#00000000] after:opacity-80">
       <div className="w-full h-full lgl:rounded-xl  overflow-hidden">
         <Image
           src={clientImg}
@@ -17,7 +17,7 @@ function VideoCall() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="w-[118px] lgl:w-[150px] absolute top-20 lgl:top-6 start-7 h-[130px] lgl:h-[168px] rounded-xl overflow-hidden border-[3px] border-white">
+      <div className="w-[100px] lgl:w-[150px] absolute top-3  lg:top-6 start-3 lg:start-7 h-[110px] lgl:h-[168px] rounded-xl overflow-hidden border-[3px] border-white">
         <Image
           src={doctorImg}
           alt="client"
