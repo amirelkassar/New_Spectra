@@ -36,7 +36,7 @@ export const DynamicContent = ({ ...props }) => {
   return (
     <div
       className={cn(
-        'bg-white overflow-y-auto overflow-x-hidden p-2 lgl:p-5 h-[calc(65vh-120px)] mdl:h-[calc(65vh-168px)] lgl:h-screen',
+        'bg-white overflow-y-auto overflow-x-hidden p-2 lgl:p-5',
         props?.className
       )}
     >

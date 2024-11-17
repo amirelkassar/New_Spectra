@@ -3,6 +3,15 @@ import { create } from 'zustand';
 export const useClientVideoStore = create((set) => ({
   isFullScreen: true,
   view: '',
+  mic: true,
+  camera: true,
+  toggleMic: () => set((state) => ({ mic: !state.mic })),
+  toggleCamera: () =>
+    set((state) => ({ camera: !state.camera })),
+  enterFullScreen: () =>
+    set(() => ({ isFullScreen: true })),
+  exitFullScreen: () =>
+    set(() => ({ isFullScreen: false })),
   toggleFullScreen: () =>
     set((state) => ({
       isFullScreen: !state.isFullScreen,
