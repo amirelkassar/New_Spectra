@@ -21,6 +21,7 @@ module.exports = {
       },
       boxShadow: {
         sidebar: '0px -14px 51.7px 8px #0000001A',
+        video: '0px 4px 12.3px 0px rgba(1, 0, 54, 0.08)',
       },
       colors: {
         greenMain: '#10B0C1',

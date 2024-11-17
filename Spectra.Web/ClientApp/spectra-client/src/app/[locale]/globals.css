@@ -724,3 +724,11 @@ Preloader Area CSS
     stroke-dashoffset: 0;
   }
 }
+
+.react-draggable {
+  cursor: grab;
+}
+
+.react-draggable.react-draggable-dragging {
+  cursor: grabbing;
+}
