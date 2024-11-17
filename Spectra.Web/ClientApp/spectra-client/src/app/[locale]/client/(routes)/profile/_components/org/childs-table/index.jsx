@@ -7,20 +7,22 @@ import {
   Table,
   TableCard,
 } from '@/client/_components/ui';
-import { CellRate } from './cell-rate';
-import { doctorsColumns } from './doctors-columns';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
-import { TEAM } from '@/data';
+import { CHILDS_TABLE } from '@/data';
+import { childsColumns } from './childs-columns';
 
-export const DoctorsTable = () => {
+export const ChildsTable = () => {
   return (
     <Card>
-      <DataTable data={TEAM} columns={doctorsColumns}>
+      <DataTable
+        data={CHILDS_TABLE}
+        columns={childsColumns}
+      >
         <TableItem />
       </DataTable>
 
       <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
-        {TEAM?.map((item) => (
+        {CHILDS_TABLE?.map((item) => (
           <CardItem key={item.id} item={item} />
         ))}
       </div>
@@ -57,9 +59,9 @@ const CardItem = ({ item = {} }) => {
     <TableCard>
       <TableCard.Container>
         <TableCard.Body>
-          <div className='flex gap-2'>
+          <div className='flex gap-4'>
             <Avatar
-              name={item?.doctor}
+              name={item?.name}
               src={item?.avatar}
               className='size-10'
             />
@@ -67,26 +69,26 @@ const CardItem = ({ item = {} }) => {
               <div className='grid grid-cols-2 gap-5'>
                 <span>الاسم</span>
                 <span className='font-bold'>
-                  {item?.doctor}
+                  {item?.name}
                 </span>
               </div>
               <div className='grid grid-cols-2 gap-5'>
-                <span>التخصص</span>
+                <span>العمر</span>
                 <span className='font-bold'>
-                  {item?.profession}
+                  {item?.age}
                 </span>
               </div>
               <div className='grid grid-cols-2 gap-5'>
-                <span>سنوات الخبرة</span>
+                <span>الجنس</span>
                 <span className='font-bold'>
-                  {item?.exp}
+                  {item?.gender}
                 </span>
               </div>
             </div>
           </div>
         </TableCard.Body>
         <TableCard.Footer className='grid-cols-2'>
-          <CellRate rate={item?.rate} />
+          {item?.diagnosis}
         </TableCard.Footer>
         <TableCard.Action>
           <ThreeDotsIcon />

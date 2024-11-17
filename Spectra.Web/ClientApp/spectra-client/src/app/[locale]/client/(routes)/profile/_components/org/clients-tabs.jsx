@@ -44,7 +44,7 @@ const Button = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'text-xs mdl:text-base rounded-xl py-2 px-3 mdl:px-8 font-medium',
+        'text-xs mdl:text-base rounded-xl py-2 px-5 mdl:px-8 font-medium',
         props?.className
       )}
     >

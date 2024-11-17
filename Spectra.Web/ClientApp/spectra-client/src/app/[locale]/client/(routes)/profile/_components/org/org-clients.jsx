@@ -7,7 +7,7 @@ import Card from '@/components/card';
 export const OrgClients = () => {
   return (
     <Section>
-      <Card className='space-y-10'>
+      <Card className='space-y-5'>
         <div className='flex items-center justify-between'>
           <ClientsTabs />
 
