@@ -4,7 +4,6 @@ using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
-
 namespace Spectra.Domain.Employees.MedicalStaff
 {
     public class MedicalProvider : BassEmployees
@@ -83,7 +82,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
             ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
             ArgumentNullException.ThrowIfNull(attachmentPath, nameof(attachmentPath));
 
-            var medicalProvider = new MedicalProvider(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
+            var medicalProvider = new MedicalProvider(id, name, 
+                nationalId, phoneNumber, humenGenders, emailAddress, address, diagnoses,
                 licenseNumber, approvedBy, academicdegree, attachmentPath, empelyeeRate, jobType, userId
                );
 

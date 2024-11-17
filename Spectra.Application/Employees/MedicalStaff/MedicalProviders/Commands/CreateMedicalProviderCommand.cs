@@ -54,43 +54,43 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         }
         public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
+            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+            var addUser = await _identityService.CreateUserAsync(
+                request.EmailAddress.Emailaddress,
+                "testssdadd231@",
+                request.Name.FirstName,
+                "Testt",
+                role
+            );
+
             List<string>? filePath = null;
-            (OperationResult Result, string UserId) addUser;
-            if (JobTypes.Doctor == request.JobType)
+            if (request.JobType == JobTypes.Doctor)
             {
-              addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Doctor);
-                var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
-                if (uploadfile != null)
+                filePath = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+                if (request.Diagnoses != null)
                 {
-                    filePath = uploadfile;
-
-                }
-                
-                foreach (var item in request.Diagnoses)
-                {
-                    var specialization = await _specializationRepository.GetByNameAsync(item);
-                    specialization.DoctorCount += 1;
-
+                    var updateTasks = request.Diagnoses.Select(async item =>
+                    {
+                        var specialization = await _specializationRepository.GetByNameAsync(item);
+                        if (specialization != null)
+                        {
+                            specialization.DoctorCount += 1;
+                        }
+                    });
+                    await Task.WhenAll(updateTasks);
                 }
             }
-            if (JobTypes.Specialist == request.JobType)
+            else if (request.JobType == JobTypes.Specialist)
             {
-                 addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Specialist);
-                var uploadfile = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
-                if (uploadfile != null)
-                {
-                    filePath = uploadfile;
-
-                }
+                filePath = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
             }
-            if (filePath == null)
+
+            if (filePath == null || !filePath.Any())
             {
-
-                throw new RequestErrorException(" you must to Uplode  your ScientificDegrees ");
+                throw new RequestErrorException("You must upload your Scientific Degrees.");
             }
-            addUser = await _identityService.CreateUserAsync(request.EmailAddress.Emailaddress, "testssdadd231@", request.Name.FirstName, "Testt", Roles.Doctor);
-         
-              var medicalProvider = MedicalProvider.Create(
+
+            var medicalProvider = MedicalProvider.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
                 request.NationalId,

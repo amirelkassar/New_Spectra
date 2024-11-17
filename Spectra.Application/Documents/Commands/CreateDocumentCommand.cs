@@ -31,7 +31,7 @@ namespace Spectra.Application.Documents.Commands
         {
             var document = Document.Create(
                   Ulid.NewUlid().ToString(),
-            request.Name,
+                request.Name,
                 request.DocumentSource,
                 request.Path,
                 request.DocumentType,

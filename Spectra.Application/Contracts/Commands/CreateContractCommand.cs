@@ -27,12 +27,9 @@ namespace Spectra.Application.Contracts.Commands
 
         private readonly IContractRepository _contractRepository;
         private readonly ICurrentUser _currentUser;
-         private readonly IMedicalProviderRepository _medicalProvider;
+        private readonly IMedicalProviderRepository _medicalProvider;
 
         //private readonly ISubContractRepository _subContractRepository;
-
-
-    
 
         public CreateDoctorCommandHandler(IContractRepository contractRepository, ICurrentUser currentUser, IMedicalProviderRepository medicalProvider)
         {
@@ -48,14 +45,12 @@ namespace Spectra.Application.Contracts.Commands
 
             var medicalProvider = await _medicalProvider.GetByIdentityIdAsync( _currentUser.Id);
 
-
             var CheckEmployees = await _contractRepository.GetAllAsync(x => x.EmployeeId== medicalProvider.Id, null);
 
             if (CheckEmployees.Any())
             {
                 throw new RequestErrorException("Your Request is Under Review");
             }
-         
 
             var fullName = new Name()
             {
@@ -64,7 +59,7 @@ namespace Spectra.Application.Contracts.Commands
             };
 
              
-            var contract = EmploymentContract.Create(
+            var contract = EmploymentContract.Create(       
             Ulid.NewUlid().ToString(),
             request.Freelance,
             request.SpectraTeam,
@@ -73,9 +68,9 @@ namespace Spectra.Application.Contracts.Commands
             medicalProvider.Id,
             medicalProvider.JobType.ToString(),
             request.ContractCase,
-              fullName,
-            AdminOrEmployee.Employee
-                );
+            fullName,
+            AdminOrEmployee.Employee  
+            );
 
             await _contractRepository.AddAsync(contract);
 
