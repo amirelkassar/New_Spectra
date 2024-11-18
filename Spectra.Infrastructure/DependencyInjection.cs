@@ -56,6 +56,7 @@ using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.ChatHub;
@@ -180,8 +181,6 @@ namespace Spectra.Infrastructure
 
             return services;
         }
-
-
         private static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<ICountryRepository, CountryRepository>();
@@ -278,9 +277,10 @@ namespace Spectra.Infrastructure
                     ctx.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
                 });
             });
-
+            services.ConfigurePermissions();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IIdentityService, IdentityService>();
+
             return services;
         }
         private static IServiceCollection ConfigureDataAccess(this IServiceCollection services, IConfiguration configuration)
@@ -297,7 +297,30 @@ namespace Spectra.Infrastructure
 
             return services;
         }
+        private static IServiceCollection ConfigurePermissions(this IServiceCollection services)
+        {
+            var permissionContributors = typeof(IPermissionContributor)
+                .Assembly
+                .GetTypes()
+                .Where(type => typeof(IPermissionContributor).IsAssignableFrom(type) && type.IsClass);
 
+            var permissions = permissionContributors.Select(t => t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+                   .Where(field => field.IsLiteral && !field.IsInitOnly))
+                .SelectMany(f => f.Select(p => p.GetRawConstantValue() as string))
+                .ToArray();
+
+            if (permissions.Length > 0)
+            {
+                foreach (var permission in permissions)
+                {
+                    services.AddAuthorization(config =>
+                    {
+                        config.AddPolicy(permission, permConfig => permConfig.RequireClaim(permission));
+                    });
+                }
+            }
+            return services;
+        }
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();

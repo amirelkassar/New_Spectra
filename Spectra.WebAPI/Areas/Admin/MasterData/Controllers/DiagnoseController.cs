@@ -12,8 +12,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
     {
         private readonly IDiagnosesService _diagnosetService;
 
-
-
         public DiagnoseController(IDiagnosesService diagnosetService)
         {
             _diagnosetService = diagnosetService;

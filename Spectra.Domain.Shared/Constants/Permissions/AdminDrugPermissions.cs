@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectra.Domain.Shared.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Constants.Permissions
 {
-    public class AdminMasterDataPermissions
+    public class AdminDrugPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminMasterDataPermissions);
+        public const string Group = nameof(AdminDrugPermissions);
         //Crud operations permissoins
         public const string CRUDPermissions = Group + nameof(CRUDPermissions);
         public const string Create = CRUDPermissions + nameof(Create);

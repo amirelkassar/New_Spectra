@@ -22,7 +22,6 @@ using Spectra.Infrastructure.Admin;
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
     public class AdminController : BassAdminController
     {
         private readonly IAdminService _adminService;
@@ -44,7 +43,6 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
         }
 
         [HttpGet("GetAllDoctors")]
-        [AllowAnonymous]
         public async Task<ActionResult> GetAllDoctors([FromQuery] GetAllDoctorEmpQuery input)
         {
             var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
@@ -53,7 +51,6 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
 
 
         [HttpGet("GetAllEmployees")]
-        [AllowAnonymous]
         public async Task<ActionResult> GetAllEmployees([FromQuery] GetAllEmployeesQuery input)
         {
             var appointmenties = await _adminService.GetAllEmplyees(input);

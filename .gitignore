@@ -24,12 +24,3 @@
 /Spectra.Web/wwwroot/Upload/ScientificDegree/Doctors/eee42984-29cc-4cf7-a198-9202a2ecaff0_test.jpg
 /Spectra.Web/wwwroot/Upload/ScientificDegree/Doctors/14c20ae6-4c2c-41fe-a4b5-becb8fafee13_درس1.jpg
 /Spectra.Web/wwwroot/Upload/ScientificDegree/Specialist/6c90279f-e9d9-4ab5-afc0-9e2a9cf92379_درس 4.jpg
-/Spectra.Application/Patients/Commands/UpdatePatientCommand.cs
-*.cs
-/Spectra.Infrastructure/DependencyInjection.cs
-/Spectra.Application/Patients/Commands/CreatePatientCommand.cs
-/Spectra.Application/Patients/Services/PatientService.cs
-/Spectra.Application/Patients/Services/IPatientService.cs
-/Spectra.Infrastructure/Patients/PatientService.cs
-/Spectra.Infrastructure/Services/IdentityServices/IdentityService.cs
-/Spectra.WebAPI/Areas/Client/Controllers/PatientController.cs

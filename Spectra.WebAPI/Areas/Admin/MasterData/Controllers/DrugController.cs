@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Services;
+using Spectra.Domain.Shared.Constants.Permissions;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
+
+    [Authorize]
 
     public class DrugController : MasterDataController
     {
@@ -17,7 +20,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminDrugPermissions.ReadList)]
         public async Task<ActionResult> GetAllDrug()
         {
             var Drugies = await _drugtService.GetAllDrugs();
@@ -25,7 +28,8 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet("DrugsNames")]
-        [AllowAnonymous]
+        [Authorize(AdminDrugPermissions.ReadList)]
+
         public async Task<ActionResult> GetAllDrugNames()
         {
             var Drugies = await _drugtService.GetAllDrugsNames();
@@ -35,7 +39,8 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 
 
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(AdminDrugPermissions.ReadOne)]
+
         public async Task<ActionResult> GetOneDrug(string id)
         {
             var Drugies = await _drugtService.GetDrugById(id);
