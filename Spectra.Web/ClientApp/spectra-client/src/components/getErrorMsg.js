@@ -1,6 +1,27 @@
-const GetErrorMsg = (error, title) =>
-  error?.response?.data?.errors[title]?.length
-    ? error.response.data.errors[title][0]
-    : "";
+const generalErrorKeys = [
+  'RequestError',
+  'DbError',
+  'NotFoundError',
+  'UnknownError',
+];
+
+const GetErrorMsg = (error, title) => {
+  if (!error) return '';
+
+  const messages = error?.response?.data?.errors;
+
+  if (!Object.keys(messages).length) return '';
+
+  if (title === 'general') {
+    const generalError = generalErrorKeys.find(
+      (key) => messages[key]
+    );
+    return messages[generalError]?.join(', ');
+  }
+
+  if (messages[title]) return messages[title]?.join(', ');
+
+  return '';
+};
 
 export default GetErrorMsg;

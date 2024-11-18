@@ -5,13 +5,12 @@ import ROUTES from '@/routes';
 import Image from 'next/image';
 import React from 'react';
 import imgDrugs from '@/assets/images/drugs.png';
-import ActionMenu from '../_components/ActionMenuDetails';
+import ActionMenu from '../../_components/ActionMenuDetails';
 import { GetDrugsID } from '@/useAPI/admin/main-data/drugs';
 import HandelShowDataID from '@/components/handelShowDataID';
 
 function page({ params }) {
   const { data, isLoading } = GetDrugsID(params.drugsID);
-  console.log(data?.data.data);
 
   return (
     <div>

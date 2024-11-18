@@ -13,6 +13,8 @@ import {
   useMessages,
 } from 'next-intl';
 import ReactQueryConfig from '@/config/react-query-config';
+import ConfirmModal from '@/components/modal/confirm-modal';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'Spectra App',
@@ -32,7 +34,15 @@ export default function RootLayout({ children, params }) {
           messages={messages}
         >
           <MantineProvider theme={'light'}>
-            <ReactQueryConfig>{children}</ReactQueryConfig>
+            <ReactQueryConfig>
+              {children}
+              <Toaster
+                toastOptions={{
+                  duration: 2000,
+                }}
+              />
+              <ConfirmModal />
+            </ReactQueryConfig>
           </MantineProvider>
         </NextIntlClientProvider>
       </body>

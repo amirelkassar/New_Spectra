@@ -13,7 +13,7 @@ const Card = ({
       {size === 'lg' && (
         <div
           className={cn(
-            'rounded-xl bg-white p-1 mdl:p-5 relative h-full',
+            'rounded-xl bg-white w-full p-1 mdl:p-5 relative h-full',
             className
           )}
           {...props}
