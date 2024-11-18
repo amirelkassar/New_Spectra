@@ -193,6 +193,7 @@ namespace Spectra.Infrastructure.Admin
                     , JobTypes.Specialist,
                     input.Passowrd,
                     input.ConfirmationPassword,
+              
                     input.specializationId
                     );
 

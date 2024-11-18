@@ -100,7 +100,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
             var addUser = await _identityService.CreateUserAsync(
              request.EmailAddress.Emailaddress,
                request.Passowrd,
-              "Admin",
+              request.Name.FirstName,
               "Employee",
                 role
             );
@@ -136,11 +136,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string Id { get; set; }
         public List<string> SpecializationIds { get; set; }
     }
-    public class BassMedicalStaffValidator : AbstractValidator<MedicalProvider>
+    public class BassMedicalStaffValidator : AbstractValidator<CreateMedicalProviderCommand>
     {
         public BassMedicalStaffValidator()
         {
-            // Name is required
+         
             RuleFor(x => x.Name)
                 .NotNull()
                 .WithMessage("Name is required.");
@@ -153,24 +153,22 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 .SetValidator(new PhoneNumberValidator())
                 .When(x => x.MobileNumber != null);
 
-            // HumenGenders should be a valid enum value (if required)
             RuleFor(x => x.HumenGenders)
                 .IsInEnum()
                 .WithMessage("Invalid gender value.");
 
-            // EmailAddress is required and should be valid (assuming validation inside EmailAddress object)
+           
             RuleFor(x => x.EmailAddress)
                 .NotNull()
                 .WithMessage("Email address is required.")
                 .SetValidator(new EmailAddressValidator());
 
-            // Address is required and should be valid (assuming validation inside Address object)
             RuleFor(x => x.Address)
                 .NotNull()
                 .WithMessage("Address is required.")
                 .SetValidator(new AddressValidator());
 
-            // Diagnoses is required and must be non-empty
+         
             RuleFor(x => x.Diagnoses)
                 .NotEmpty()
                 .WithMessage("Diagnoses are required.");
@@ -188,7 +186,18 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
             RuleFor(x => x.Academicdegree)
                 .NotEmpty()
                 .WithMessage("Academic degree is required.");
+            
+            RuleFor(x => x.Passowrd)
+          .NotEmpty().WithMessage("Password is required.")
+          .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
+          .Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter.")
+          .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
+          .Matches(@"[0-9]").WithMessage("Password must contain at least one number.")
+          .Matches(@"[!@#$%^&*(),.?""':;{}|<>]").WithMessage("Password must contain at least one special character (!@#$%^&*(),.?\"':;{}|<>).");
 
+            RuleFor(x => x.ConfirmationPassword)
+                .NotEmpty().WithMessage("Confirmation password is required.")
+                .Equal(x => x.Passowrd).WithMessage("Passwords must match.");
             //RuleFor(x => x.ScientificDegree)
             //        .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
             //        .WithMessage("Invalid image file(s). At least one file must be a valid image.");

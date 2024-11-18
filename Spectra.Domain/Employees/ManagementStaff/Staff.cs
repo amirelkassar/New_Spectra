@@ -40,9 +40,6 @@ namespace Spectra.Domain.Employees.ManagementStaff
             JobType = jobType;
             UserId = userId;
         }
-        
-
-
         public static Staff Create(
         string id,
         Name name,

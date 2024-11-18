@@ -39,7 +39,7 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
        DateOnly? timeToJoin,
        double? workingHours,
        JobTypes jobType,
-        string Passowrd, 
+        string passowrd, 
         string confirmationPassword
 
      )
@@ -81,7 +81,9 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
                 JobType = jobType,
-           
+                Passowrd= passowrd,
+                ConfirmationPassword = confirmationPassword
+
             };
             return await _mediator.Send(command);
         }

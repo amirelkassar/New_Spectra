@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
+using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize(Roles = $"{Roles.SystemAdmin},{Roles.Doctor}")]
     public class ContractsController : ControllerBase
     {
         private readonly IContractService _contractService;
@@ -46,6 +48,7 @@ namespace Spectra.WebAPI.Controllers
             var Contracties = await _contractService.GetContractById(id);
             return Ok(Contracties);
         }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> CreateContractAndSend(CreateContractCommand input)
