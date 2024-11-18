@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.Settings.Articles.Commands;
+using Spectra.Application.Settings.Articles.Dto;
 using Spectra.Application.Settings.Articles.Queries;
 using Spectra.Domain.Settings.Articles;
 using Spectra.Domain.Shared.Wrappers;
