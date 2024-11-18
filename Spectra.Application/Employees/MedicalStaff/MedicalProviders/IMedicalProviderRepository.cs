@@ -12,6 +12,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders
         Task<IEnumerable<MedicalProvider>> GetAllAsync(Expression<Func<MedicalProvider, bool>> filter, FindOptions options = null);
         Task<PaginatedResult<MedicalProvider>> GetAllAsyncA(Expression<Func<MedicalProvider, bool>> filter = null, FindOptions options = null, int pageNumber = 1, int pageSize = 10);
         Task<MedicalProvider> GetByIdAsync(string id);
+        Task<MedicalProvider> GetByIdentityIdAsync(string id);
         Task UpdateAsync(MedicalProvider MedicalProvider);
         Task<UpdateResult> UpdateManyAsync(FilterDefinition<MedicalProvider> filter, UpdateDefinition<MedicalProvider> update);
     }

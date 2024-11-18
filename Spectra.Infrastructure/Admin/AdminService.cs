@@ -16,6 +16,7 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 
+
 namespace Spectra.Infrastructure.Admin
 {
     public class AdminService : IAdminService
@@ -25,17 +26,15 @@ namespace Spectra.Infrastructure.Admin
         private readonly IMedicalProviderService _specialistService;
         private readonly IManagementStaffService _managementStaffService;
         private readonly IContractService _contractService;
+  
 
-
-        public AdminService(IMediator mediator, IMedicalProviderService doctorService, IMedicalProviderService specialistService, IManagementStaffService managementStaffService, IContractService contractService)
+        public AdminService(IMediator mediator, IMedicalProviderService doctorService, IMedicalProviderService specialistService, IManagementStaffService managementStaffService , IContractService contractService)
         {
-
             _mediator = mediator;
             _doctorService = doctorService;
             _specialistService = specialistService;
             _managementStaffService = managementStaffService;
             _contractService = contractService;
-
         }
         public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
         {
@@ -71,7 +70,7 @@ namespace Spectra.Infrastructure.Admin
         }
 
 
-
+      
         public async Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input)
         {
             // Create the query and pass pagination parameters
@@ -109,12 +108,8 @@ namespace Spectra.Infrastructure.Admin
                 HoursOfWork = input.HoursOfWork,
                 DaysOfWork = input.DaysOfWork,
                 ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel,
                 Freelance = input.Freelance,
-                SpectraTeam = input.SpectraTeam,
-
-
+                SpectraTeam = input.SpectraTeam
             };
 
 
@@ -127,13 +122,13 @@ namespace Spectra.Infrastructure.Admin
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input)
+        public async Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input )
         {
             var query = new UpdateContractStatusCommand
             {
                 Id = id
                 ,
-                ContractCases = input.ContractCases
+                ContractCases=input.ContractCases
 
             };
             return await _mediator.Send(query);
@@ -147,6 +142,7 @@ namespace Spectra.Infrastructure.Admin
 
         public async Task<OperationResult<string>> CreateEmplyee(CreateEmployeesDto input)
         {
+
             OperationResult<string> query;
             if (JobTypes.Doctor == input.JobTypes)
             {
@@ -166,7 +162,11 @@ namespace Spectra.Infrastructure.Admin
                     input.HumenGenders,
                     input.LicenseNumber,
                     //input.ScientificDegree,
-                    JobTypes.Doctor
+                    JobTypes.Doctor,
+                    input.Passowrd,
+                    input.ConfirmationPassword,
+                    input.specializationId
+
                     );
 
                 return query;
@@ -190,11 +190,16 @@ namespace Spectra.Infrastructure.Admin
                     input.HumenGenders,
                     input.LicenseNumber
                     //input.ScientificDegree
-                    , JobTypes.Specialist);
+                    , JobTypes.Specialist,
+                    input.Passowrd,
+                    input.ConfirmationPassword,
+              
+                    input.specializationId
+                    );
 
                 return query;
             }
-            if (JobTypes.Accountant == input.JobTypes || JobTypes.secretary == input.JobTypes)
+            if (JobTypes.Accountant == input.JobTypes || JobTypes.Secretary == input.JobTypes)
             {
                 query = await _managementStaffService.CreateStaff(
                  input.FirstName,
@@ -207,19 +212,18 @@ namespace Spectra.Infrastructure.Admin
                     input.City,
                     input.NationalId,
                     input.HumenGenders,
-                    input.JobName,
+                    input.JobName,  
                     input.Qualifications,
                     input.TimeToJoin,
                     input.WorkingHours
-                    , input.JobTypes
+                    , input.JobTypes,
+                    input.Passowrd,
+                    input.ConfirmationPassword
                 );
                 return query;
             }
             throw new RequestErrorException(" you Must Choose  the type Employee  ");
-
-
         }
-
 
         public async Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input)
         {
@@ -237,11 +241,8 @@ namespace Spectra.Infrastructure.Admin
                         ServicesData = y.ServicesData,
                         Price = y.Price
                     }).ToList();
-                    var spectraTeamServices = doctorServices.Data.SelectMany(x => x.SpectraTeam).Select(y => new ServicesDataFromContractDto
-                    {
-                        ServicesData = y.ServicesData,
-                        Price = y.Price
-                    }).ToList();
+                    var spectraTeamServices = doctorServices.Data.SelectMany(x => x.SpectraTeam).Select(y=>new ServicesDataFromContractDto {ServicesData= y.ServicesData,
+                      Price = y.Price}).ToList();
 
 
                     result = new GetEmployIdDto
@@ -261,12 +262,12 @@ namespace Spectra.Infrastructure.Admin
                         HumenGenders = doctor.Data.HumenGenders,
                         LicenseNumber = doctor.Data.LicenseNumber,
                         FreelanceServices = freelanceServices,
-                        TeamSpectraServices = spectraTeamServices
+                        TeamSpectraServices= spectraTeamServices
 
                     };
-
+            
                     //Attachments = doctor.Data.AttachmentPath
-
+           
                     break;
 
                 case JobTypes.Specialist:
@@ -293,7 +294,7 @@ namespace Spectra.Infrastructure.Admin
                     break;
 
                 case JobTypes.Accountant:
-                case JobTypes.secretary:
+                case JobTypes.Secretary:
                     var staff = await _managementStaffService.GetStaffById(id);
                     result = new GetEmployIdDto
                     {
@@ -323,7 +324,7 @@ namespace Spectra.Infrastructure.Admin
             return OperationResult<GetEmployIdDto>.Success(result);
         }
 
-
+    
 
     }
 }

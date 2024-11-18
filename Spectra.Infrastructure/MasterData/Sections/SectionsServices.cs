@@ -28,7 +28,7 @@ namespace Spectra.Infrastructure.MasterData.Sections
             {
                 Name = input.Name,
                 DoctorName = input.DoctorName,
-                Diagnoses = input.Diagnoses,
+                SpecializationIds = input.SpecializationIds,
                 DoctorId = input.DoctorId
             };
 
@@ -45,7 +45,7 @@ namespace Spectra.Infrastructure.MasterData.Sections
                 Id = id,
                 Name = input.Name,
                 DoctorName = input.DoctorName,
-                Diagnoses = input.Diagnoses,
+                SpecializationIds = input.SpecializationIds,
                 DoctorId = input.DoctorId
 
             };

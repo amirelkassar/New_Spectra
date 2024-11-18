@@ -11,5 +11,6 @@
         public const string Client = nameof(Client);
         public const string CustomerSupport = nameof(CustomerSupport);
         public const string Accountant = nameof(Accountant);
+        public const string Secretary = nameof(Secretary);
     }
 }
