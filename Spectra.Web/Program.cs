@@ -29,7 +29,8 @@ using (var scope = app.Services.CreateScope())
     var settingsSeedService = scope.ServiceProvider.GetRequiredService<ApplicationSettingSeeder>();
     await settingsSeedService.Initialize();
     var dbContext = scope.ServiceProvider.GetRequiredService<IdentityContext>();
-    if (!await dbContext.Database.EnsureCreatedAsync())
+
+    if (await dbContext.Database.EnsureCreatedAsync())
     {
         await dbContext.Database.MigrateAsync();
     }

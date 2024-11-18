@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Hellper;
@@ -12,8 +13,25 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services
 {
     public interface IMedicalProviderService
     {
-        Task<OperationResult<string>> CreateMedicalProvider(string firstName, string lastName, string? prefix, string phoneNumbers, string countryCode, string emailAddress, string country, string city, string nationalId, string academicDegree, string approvedBy,
-            List<string> diagnoses, HumenGender humenGenders, string licenseNumber, JobTypes JobTypes , string password, string confirmationPassword ,string specializationId);
+        Task<OperationResult<string>> CreateMedicalProvider(string firstName,
+            string lastName,
+            string? prefix,
+            string phoneNumbers,
+            string countryCode,
+            string emailAddress,
+            string country,
+            string city,
+            string nationalId,
+            string academicDegree,
+            string approvedBy,
+            List<string> specializations,
+            HumenGender humenGenders,
+            string licenseNumber,
+            JobTypes JobTypes,
+            string password,
+            string confirmationPassword,
+            string specializationId,
+            IFormFile? ScientificDegree = default);
         Task<OperationResult<Unit>> DeleteMedicalProvider(string id);
         Task<OperationResult<PaginatedResult<MedicalPatientProfile>>> GetAllClintsMedicalProviderCare(string id, GetAllClientsInMedicalProviderProfileQuery input);
         Task<OperationResult<IEnumerable<MedicalProvider>>> GetAllMedicalProviders();

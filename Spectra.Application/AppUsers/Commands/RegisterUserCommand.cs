@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.AppUsers.Dtos;
 using Spectra.Application.Clients.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
@@ -52,6 +53,10 @@ namespace Spectra.Application.AppUsers.Commands
         public ICollection<PatientDataDto>? Patients { get; set; }
         public OrganizationData? OrganizationData { get; set; }
 
+        public IFormFile? UserImage { get; set; }
+        public IFormFile? MedicalDegreeImage { get; set; }
+
+
         public class RegisterUserCommandHandler(IIdentityService identityService,
             IMedicalProviderService medicalProviderService,
             IClientService clientService) : IRequestHandler<RegisterUserCommand, OperationResult>
@@ -91,22 +96,25 @@ namespace Spectra.Application.AppUsers.Commands
                                 JobTypes.Specialist => Roles.Specialist,
                                 _ => Roles.User
                             };
-                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, role);
-                            //var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
-                            //    " ",
-                            //    "DR.",
-                            //    request.Phone,
-                            //    request.CountryCode,
-                            //    request.EmailAddress,
-                            //    request.CountryCode,
-                            //    request.StateCode,
-                            //    request.NationalId,
-                            //    request?.MedicalProviderData?.Degree,
-                            //    request?.MedicalProviderData?.AccreditedBy,
-                            //    request?.MedicalProviderData?.Specifications?.ToList(),
-                            //    request.Gender,
-                            //    request?.MedicalProviderData?.LicenseNumber,
-                            //    request.MedicalProviderData.JobType);
+                            var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
+                                " ",
+                                "DR.",
+                                request.Phone,
+                                request.CountryCode,
+                                request.EmailAddress,
+                                request.CountryCode,
+                                request.StateCode,
+                                request.NationalId,
+                                request?.MedicalProviderData?.Degree,
+                                request?.MedicalProviderData?.AccreditedBy,
+                                request?.MedicalProviderData?.Specifications?.ToList(),
+                                request.Gender,
+                                request?.MedicalProviderData?.LicenseNumber,
+                                request.MedicalProviderData.JobType,
+                                request.Password,
+                                request.Password,
+                                request.MedicalProviderData.MainSpecificationId,
+                                request.MedicalDegreeImage);
                         }
                         break;
                     default:

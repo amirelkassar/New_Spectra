@@ -25,6 +25,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         private readonly string _audience;
         private readonly string _issuer;
         private AppUser _user;
+        private ICollection<string> _roles;
 
         public AuthenticationService(IConfiguration configuration,
         IHttpContextAccessor httpContextAccessor,
@@ -55,6 +56,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 //preparing the model
                 model.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
                 model.ExpirationTime = lifetime;
+                model.Roles = _roles;
                 return OperationResult<LoginModel>.Success(model);
             }
             throw new UnauthorizedAccessException();
@@ -102,8 +104,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 new(CustomClaims.Iss,_issuer),
             };
             //user roles
-            var roles = await _userManager.GetRolesAsync(_user);
-            foreach (var role in roles)
+            _roles = await _userManager.GetRolesAsync(_user);
+            foreach (var role in _roles)
             {
                 userclaims.Add(new Claim(ClaimTypes.Role, role));
             }
