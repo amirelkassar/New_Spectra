@@ -92,21 +92,21 @@ namespace Spectra.Application.AppUsers.Commands
                                 _ => Roles.User
                             };
                             var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, role);
-                            var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
-                                " ",
-                                "DR.",
-                                request.Phone,
-                                request.CountryCode,
-                                request.EmailAddress,
-                                request.CountryCode,
-                                request.StateCode,
-                                request.NationalId,
-                                request?.MedicalProviderData?.Degree,
-                                request?.MedicalProviderData?.AccreditedBy,
-                                request?.MedicalProviderData?.Specifications?.ToList(),
-                                request.Gender,
-                                request?.MedicalProviderData?.LicenseNumber,
-                                request.MedicalProviderData.JobType);
+                            //var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
+                            //    " ",
+                            //    "DR.",
+                            //    request.Phone,
+                            //    request.CountryCode,
+                            //    request.EmailAddress,
+                            //    request.CountryCode,
+                            //    request.StateCode,
+                            //    request.NationalId,
+                            //    request?.MedicalProviderData?.Degree,
+                            //    request?.MedicalProviderData?.AccreditedBy,
+                            //    request?.MedicalProviderData?.Specifications?.ToList(),
+                            //    request.Gender,
+                            //    request?.MedicalProviderData?.LicenseNumber,
+                            //    request.MedicalProviderData.JobType);
                         }
                         break;
                     default:
