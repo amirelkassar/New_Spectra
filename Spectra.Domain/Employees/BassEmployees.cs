@@ -1,6 +1,11 @@
 ﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spectra.Domain.Employees
 {
@@ -12,6 +17,7 @@ namespace Spectra.Domain.Employees
         public HumenGender HumenGenders { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
+        public string UserId { get; set; }
         protected BassEmployees() { }
 
         public BassEmployees(
@@ -21,10 +27,10 @@ namespace Spectra.Domain.Employees
                   PhoneNumber phoneNumber,
                   HumenGender humenGenders,
                   EmailAddress emailAddress,
-                  Address address
-
+                  Address address,
+                  string userId
                   ) : base(id)
-        {
+         {
             Id = id;
             Name = name;
             NationalId = nationalId;
@@ -32,7 +38,8 @@ namespace Spectra.Domain.Employees
             EmailAddress = emailAddress;
             HumenGenders = humenGenders;
             Address = address;
-        }
+            UserId = userId;
+            }
     }
 
 

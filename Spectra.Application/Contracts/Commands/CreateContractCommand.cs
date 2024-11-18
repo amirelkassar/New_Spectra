@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Contracts.Repository;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -17,68 +19,57 @@ namespace Spectra.Application.Contracts.Commands
         public List<OperationContract>? SpectraTeam { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public string EmployeeId { get; set; }
-        public string Titel { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
         public ContractCases ContractCase { get; set; }
-
-
     }
 
     public class CreateDoctorCommandHandler : IRequestHandler<CreateContractCommand, OperationResult<string>>
     {
 
         private readonly IContractRepository _contractRepository;
+        private readonly ICurrentUser _currentUser;
+        private readonly IMedicalProviderRepository _medicalProvider;
+
         //private readonly ISubContractRepository _subContractRepository;
 
-
-        public CreateDoctorCommandHandler(IContractRepository contractRepository/*/* ISubContractRepository subContractRepository*/)
+        public CreateDoctorCommandHandler(IContractRepository contractRepository, ICurrentUser currentUser, IMedicalProviderRepository medicalProvider)
         {
-
             _contractRepository = contractRepository;
-            //_subContractRepository = subContractRepository;
-
+            _currentUser = currentUser;
+            _medicalProvider = medicalProvider;
         }
 
         // here we Create Contract and have Two options First Send to Admin second Save it So 
         // here we get the Name From token but we Stell did not make it 
         public async Task<OperationResult<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
         {
-            var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId, null);
-            if (CheckEmployee.Any())
+
+            var medicalProvider = await _medicalProvider.GetByIdentityIdAsync( _currentUser.Id);
+            var CheckEmployees = await _contractRepository.GetAllAsync(x => x.EmployeeId== medicalProvider.Id, null);
+
+            if (CheckEmployees.Any())
             {
-                throw new RequestErrorException(" Your Request Under review ");
+                throw new RequestErrorException("Your Request is Under Review");
             }
 
-            var fullName = new Name()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName
-            };
-
-
-            var contract = EmploymentContract.Create(
+            var contract = EmploymentContract.Create(       
             Ulid.NewUlid().ToString(),
             request.Freelance,
             request.SpectraTeam,
             request.HoursOfWork,
             request.DaysOfWork,
-            request.EmployeeId,
-            request.Titel,
+            medicalProvider.Id,
+            medicalProvider.JobType.ToString(),
             request.ContractCase,
-              fullName,
-     AdminOrEmployee.Employee
-                );
+            medicalProvider.Name.FirstName,
+            AdminOrEmployee.Employee  
+            );
 
             await _contractRepository.AddAsync(contract);
 
             return OperationResult<string>.Success(contract.Id);
 
-
         }
     }
 
-
+   
 }

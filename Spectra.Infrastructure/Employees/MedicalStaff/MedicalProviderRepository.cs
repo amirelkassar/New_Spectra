@@ -57,6 +57,17 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff.MedicalProviders
                 throw new NotFoundException("MedicalProvider", id);
             }
             return entity;
+        }  
+        
+        public async Task<MedicalProvider> GetByIdentityIdAsync(string id)
+        {
+
+            var entity = await _MedicalProviders.Find(c => c.UserId == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("MedicalProvider", id);
+            }
+            return entity;
         }
 
         public async Task AddAsync(MedicalProvider MedicalProvider)

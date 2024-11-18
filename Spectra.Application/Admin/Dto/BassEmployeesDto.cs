@@ -25,5 +25,8 @@ namespace Spectra.Application.Admin.Dto
         public string? Qualifications { get; set; }
         public DateOnly? TimeToJoin { get; set; }
         public double? WorkingHours { get; set; }
+        public string Passowrd { get; set; }
+        public string ConfirmationPassword { get; set; }
+      
     }
 }

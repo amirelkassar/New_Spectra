@@ -4,6 +4,8 @@ using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
+using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 {
@@ -12,15 +14,13 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
     public class DoctorController : MedicalProviderController
     {
         private readonly IMedicalProviderService _medicalProviderService;
-        private readonly IChatService _chatService;
-        public DoctorController(IMedicalProviderService DoctorService, IChatService chatService)
+        
+
+        public DoctorController(IMedicalProviderService medicalProviderService)
         {
-
-            _medicalProviderService = DoctorService;
-            _chatService = chatService;
-
+            _medicalProviderService = medicalProviderService;
+          
         }
-
 
         [HttpGet("AllClients/id")]
         [AllowAnonymous]
@@ -49,10 +49,9 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
+        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateMedicalProviderDto input)
         {
-
-
+        
             var doctor = await _medicalProviderService.CreateMedicalProvider(
                     input.FirstName,
                     input.LastName,
@@ -65,10 +64,13 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
                     input.NationalId,
                     input.Academicdegree,
                     input.ApprovedBy,
-                    input.Diagnoses,
+                    input.SpecializationIds,
                     input.HumenGenders,
                     input.LicenseNumber,
-                    input.JobTypes
+                    input.JobTypes,
+                    input.Passowrd,
+                    input.ConfirmationPassword,
+                    input.SpecializationId
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
         }

@@ -32,17 +32,14 @@ namespace Spectra.Application.Admin.Queries
            request.PageNumber,
            request.PageSize);
 
-            var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
-            {
-                Name = $"{c.EmployeeName.FirstName} +{c.EmployeeName.LastName}",
-                DateOfRequest = c.Created.Date,
-                ContractCase = c.ContractCase,
-                WhoSend = c.AdminOrEmployee,
-                Id = c.Id,
-                EmployeeId = c.EmployeeId
-            })
-            .OrderByDescending(y => y.DateOfRequest)
-            .ToList();
+                var contractDataLists = paginatedContracte.Items.Select(c => new GetAllemployeeDto
+                {
+                    Name = $"{c.EmployeeName} ",
+                    DateOfRequest = c.Created.Date,
+                    ContractCase = c.ContractCase, WhoSend= c.AdminOrEmployee, Id=c.Id,EmployeeId=c.EmployeeId
+                })
+                .OrderByDescending(y => y.DateOfRequest)
+                .ToList();
 
 
             var results = new PaginatedResult<GetAllemployeeDto>

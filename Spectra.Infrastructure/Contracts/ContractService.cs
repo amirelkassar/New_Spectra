@@ -29,29 +29,21 @@ namespace Spectra.Infrastructure.Contracts
                 throw new RequestErrorException("You can only Send or Save your Contract.");
 
             }
-            var command = new CreateContractCommand
-            {
-                HoursOfWork = input.HoursOfWork,
-                DaysOfWork = input.DaysOfWork,
-                ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel,
-                Freelance = input.Freelance,
-                SpectraTeam = input.SpectraTeam,
+                var command = new CreateContractCommand
+                {
+                    HoursOfWork = input.HoursOfWork,
+                    DaysOfWork = input.DaysOfWork,
+                    ContractCase = input.ContractCase,
+                    Freelance = input.Freelance,
+                    SpectraTeam = input.SpectraTeam
+                };
 
-            };
-
-
-
-
-            return await _mediator.Send(command);
-
-
+                return await _mediator.Send(command);           
         }
         public async Task<OperationResult<Unit>> EmployeeAccpetContract(string id)
         {
             var command = new UpdateContractSatuseFromEmployeeCommand { Id = id };
-
+         
             return await _mediator.Send(command);
         }
 
@@ -79,7 +71,7 @@ namespace Spectra.Infrastructure.Contracts
 
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId)
+    public  async  Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId )
         {
             var query = new GetServicesFromContractQuery() { Id = EmployeeId };
 
@@ -102,15 +94,10 @@ namespace Spectra.Infrastructure.Contracts
                 HoursOfWork = input.HoursOfWork,
                 DaysOfWork = input.DaysOfWork,
                 ContractCase = input.ContractCase,
-                EmployeeId = input.EmployeeId,
-                Titel = input.Titel,
+              
                 Freelance = input.Freelance,
                 SpectraTeam = input.SpectraTeam,
-
-
             };
-
-
             return await _mediator.Send(command);
         }
 

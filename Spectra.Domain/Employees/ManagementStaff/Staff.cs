@@ -26,22 +26,20 @@ namespace Spectra.Domain.Employees.ManagementStaff
             string qualifications,
             DateOnly? timeToJoin,
             double? workingHours,
-            JobTypes jobType
-
+            JobTypes jobType,
+            string userId
             )
-            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address
+            : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address,userId
                   )
 
-        {
+    {
             JobName = jobName;
             Qualifications = qualifications;
             TimeToJoin = timeToJoin;
             WorkingHours = workingHours;
             JobType = jobType;
+            UserId = userId;
         }
-
-
-
         public static Staff Create(
         string id,
         Name name,
@@ -54,7 +52,8 @@ namespace Spectra.Domain.Employees.ManagementStaff
         string qualifications,
         DateOnly? timeToJoin,
         double? workingHours,
-           JobTypes jobType
+           JobTypes jobType,
+           string userId
         )
 
         {
@@ -66,14 +65,15 @@ namespace Spectra.Domain.Employees.ManagementStaff
             ArgumentNullException.ThrowIfNull(humenGenders, nameof(humenGenders));
             ArgumentNullException.ThrowIfNull(jobName, nameof(jobName));
             ArgumentNullException.ThrowIfNull(qualifications, nameof(qualifications));
+            ArgumentNullException.ThrowIfNull(userId, nameof(userId));
 
 
             var staff = new Staff(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, jobName, qualifications, timeToJoin, workingHours,
-                jobType);
+                jobType , userId);
 
             return staff;
 
 
         }
     }
-}
+    }

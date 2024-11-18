@@ -19,10 +19,8 @@ namespace Spectra.Application.Admin.Commands
         public double Duration { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public string EmployeeId { get; set; }
-        public string Titel { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+      
+    
         public ContractCases ContractCase { get; set; }
 
     }
@@ -40,40 +38,12 @@ namespace Spectra.Application.Admin.Commands
         public async Task<OperationResult<Unit>> Handle(UpdateContractToSendToEmployeeCommand request, CancellationToken cancellationToken)
         {
 
-            //var CheckEmployee = await _contractRepository.GetAllAsync(x => x.EmployeeId == request.EmployeeId , null);
-            //if (CheckEmployee.Any())
-            //{
-            //    throw new RequestErrorException(" the Admin Refuse Your Requst ");
-            //}
+          
 
-            var fullName = new Name()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName
-            };
+       
             var contract = await _contractRepository.GetByIdAsync(request.id);
 
-            //if (request.ContractCase == contract.ContractCase)
-            //{
-
-            //contract.ContractCase = request.ContractCase;
-            //contract.PlatformFee = request.Discount;
-            //contract.HoursOfWork = request.HoursOfWork;
-            //contract.DaysOfWork = request.DaysOfWork;
-            //contract.EmployeeId = request.EmployeeId;
-            //contract.Titel = request.Titel;
-            //contract.ContractCase = request.ContractCase;
-            //contract.Freelance = request.Freelance;
-            //contract.ContractCase = ContractCases.SENDTOADMIN;
-            //    await _contractRepository.UpdateAsync(contract);
-
-            //    return OperationResult<Unit>.Success(Unit.Value);
-
-            //}
-            if (request.ContractCase == ContractCases.BACkTOEMPlOYEE)
-            {
-                contract.ContractCase = ContractCases.SENDTOADMIN;
-            }
+          
             switch (contract.ContractCase)
             {
 
@@ -100,10 +70,10 @@ namespace Spectra.Application.Admin.Commands
               request.SpectraTeam,
               request.HoursOfWork,
               request.DaysOfWork,
-              request.EmployeeId,
-              request.Titel,
+               contract.Id,
+              contract.Titel,
               request.ContractCase,
-              fullName,
+              contract.EmployeeName,
               AdminOrEmployee.Admin
              );
 

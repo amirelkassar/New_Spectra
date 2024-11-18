@@ -10,7 +10,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public List<string> Diagnoses { get; set; }
+        public List<string> SpecializationIds { get; set; }
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }
 
@@ -41,7 +41,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
                 entity.DoctorName = request.DoctorName;
                 entity.Name = request.Name;
-                entity.Diagnoses = request.Diagnoses;
+                entity.SpecializationIds = request.SpecializationIds;
                 entity.DoctorId = request.DoctorId;
 
 
@@ -60,7 +60,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
                     .NotEmpty().WithMessage("Name is required.")
                     .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
 
-                RuleFor(x => x.Diagnoses)
+                RuleFor(x => x.SpecializationIds)
                     .NotNull().WithMessage("Diagnoses list is required.")
                     .Must(d => d.Count > 0).WithMessage("At least one diagnosis is required.")
                     .ForEach(d => d.NotEmpty().WithMessage("Diagnosis cannot be empty."));

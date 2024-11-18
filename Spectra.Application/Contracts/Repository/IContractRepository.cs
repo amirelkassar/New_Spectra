@@ -13,5 +13,6 @@ namespace Spectra.Application.Contracts.Repository
         Task<PaginatedResult<EmploymentContract>> GetAllAsyncP(Expression<Func<EmploymentContract, bool>> filter = null, FindOptions options = null, int pageNumber = 1, int pageSize = 10);
         Task<EmploymentContract> GetByIdAsync(string id);
         Task UpdateAsync(EmploymentContract EmploymentContract);
+
     }
 }

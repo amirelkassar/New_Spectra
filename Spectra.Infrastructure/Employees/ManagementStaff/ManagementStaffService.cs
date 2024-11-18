@@ -1,7 +1,11 @@
 ﻿using MediatR;
+using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.ManagementStaff.Commands;
 using Spectra.Application.Employees.ManagementStaff.Queries;
 using Spectra.Application.Employees.ManagementStaff.Service;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
+using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -13,11 +17,9 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
     {
 
         private readonly IMediator _mediator;
-
         public ManagementStaffService(IMediator mediator)
         {
             _mediator = mediator;
-
         }
 
 
@@ -36,10 +38,13 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
        string qualifications,
        DateOnly? timeToJoin,
        double? workingHours,
-       JobTypes jobType
+       JobTypes jobType,
+        string passowrd, 
+        string confirmationPassword
+
      )
         {
-
+      
             var name = new Name
             {
                 FirstName = firstName,
@@ -75,7 +80,10 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Qualifications = qualifications,
                 TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType = jobType
+                JobType = jobType,
+                Passowrd= passowrd,
+                ConfirmationPassword = confirmationPassword
+
             };
             return await _mediator.Send(command);
         }
@@ -115,6 +123,7 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
       DateOnly? timeToJoin,
       double? workingHours,
       JobTypes jobType
+      
       )
         {
             var name = new Name

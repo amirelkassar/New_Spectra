@@ -22,6 +22,7 @@ using Spectra.Infrastructure.Admin;
 namespace Spectra.WebAPI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class AdminController : BassAdminController
     {
         private readonly IAdminService _adminService;
