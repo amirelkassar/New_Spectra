@@ -194,9 +194,6 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
             return Ok(employee);
         }
 
-        //Add Medical Teams 
-
-
         [HttpPost("CreateMedicalTeam")]
         [AllowAnonymous]
         public async Task<ActionResult> CreateMedicalTeam(CreateMedicalTeamCommand input)

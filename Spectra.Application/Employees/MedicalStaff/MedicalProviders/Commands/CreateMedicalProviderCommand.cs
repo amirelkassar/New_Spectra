@@ -16,91 +16,67 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
     public class CreateMedicalProviderCommand : CreateBassEmployeesCommand
     {
-        public List<string> Diagnoses { get; set; }
+        public List<string> Specializations { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public string Academicdegree { get; set; }
-        public List<IFormFile>? ScientificDegree { get; set; }
+        public IFormFile? ScientificDegree { get; set; }
         public EmpelyeeRates? empelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
         public string SpecializationId { get; set; }
         public string SectionMedicalDepartment { get; set; }
     }
 
-    public class CreateDoctorCommandHandler : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
+    public class CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService, ISectionsRepository sectionsRepository) : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
     {
-        private readonly IMedicalProviderRepository _medicalProvider;
+        private readonly IMedicalProviderRepository _medicalProvider = doctorRepository;
 
-        private readonly ISpecializationsRepository _specializationRepository;
-        private readonly IIdentityService _identityService;
-        private readonly ISectionsRepository _sectionsRepository;
-        private readonly IHellper _addFile;
-        public CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService, ISectionsRepository sectionsRepository)
-        {
-            _identityService = identityService;
-            _medicalProvider = doctorRepository;
-            _specializationRepository = specializationRepository;
-            _addFile = addFile;
-            _sectionsRepository = sectionsRepository;
-        }
-      
+        private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
+        private readonly IIdentityService _identityService = identityService;
+        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
+        private readonly IHellper _addFile = addFile;
+
         public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
-             var CheckEmail= await _medicalProvider.GetAllAsync(x => x.EmailAddress == request.EmailAddress);
+            var CheckEmail = await _medicalProvider.GetAllAsync(x => x.EmailAddress == request.EmailAddress);
             if (CheckEmail.Any())
             {
                 throw new RequestErrorException("This Email is Already Exist");
             }
-            if (request.Passowrd !=request.ConfirmationPassword )
+            if (request.Passowrd != request.ConfirmationPassword)
             {
                 throw new RequestErrorException("Passwords do not match");
             }
 
             var section = await _sectionsRepository.GetAllAsync();
 
-            var sectionList=  section.Select(y => new sectionDto { Id= y.Id , SpecializationIds = y.SpecializationIds}).ToList();
-            
+            var sectionList = section.Select(y => new sectionDto { Id = y.Id, SpecializationIds = y.SpecializationIds }).ToList();
+
             var matchedSection = sectionList.FirstOrDefault(s => s.SpecializationIds.Contains(request.SpecializationId));
-            
+
             if (matchedSection == null)
             {
                 throw new RequestErrorException("No section found for the provided specialization ID");
-            
-            }
-            List<string>? filePath = null;
-            if (request.JobType == JobTypes.Doctor)
-            {
-                filePath = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
-                if (request.Diagnoses != null)
-                {
-                    var updateTasks = request.Diagnoses.Select(async item =>
-                    {
-                        var specialization = await _specializationRepository.GetByNameAsync(item);
-                        if (specialization != null)
-                        {
-                            specialization.DoctorCount += 1;
-                        }
-                    });
-                    await Task.WhenAll(updateTasks);
-                }
-            }
-            else if (request.JobType == JobTypes.Specialist)
-            {
-                filePath = await _addFile.CreateAttachments(request.ScientificDegree, Pathes.ScientificDegreeSpecialist);
-            }
 
-
-            //if (filePath == null || !filePath.Any())
-            //{
-            //    throw new RequestErrorException("You must upload your Scientific Degrees.");
-            //}
+            }
+            string? filePath = null;
+            string targetFolder = request.JobType switch
+            {
+                JobTypes.Doctor => Pathes.ScientificDegreeDoctors,
+                JobTypes.Specialist => Pathes.ScientificDegreeSpecialist,
+                _ => Pathes.UserImages
+            };
+            if (request.ScientificDegree is not null)
+            {
+                filePath = await _addFile.CreateAttachment(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+            }
 
             var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
             var addUser = await _identityService.CreateUserAsync(
              request.EmailAddress.Emailaddress,
                request.Passowrd,
               request.Name.FirstName,
-              "Employee",
+              request.JobType.ToString(),
                 role
             );
 
@@ -112,11 +88,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.EmailAddress,
                 request.HumenGenders,
                 request.Address,
-                request.Diagnoses,
+                request.Specializations,
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.Academicdegree,
-                filePath,  
+                [filePath],
                 request.empelyeeRate = 0,
                 request.JobType,
                 addUser.UserId,
@@ -126,6 +102,17 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 
 
             await _medicalProvider.AddAsync(medicalProvider);
+
+            if (request.Specializations != null)
+            {
+                var specializations = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs == s.Name));
+                Parallel.ForEach(specializations, async spec =>
+                {
+                    spec.DoctorCount++;
+                    await _specializationRepository.UpdateAsync(spec);
+                });
+                
+            }
 
             return OperationResult<string>.Success(medicalProvider.Id);
         }
@@ -139,7 +126,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
     {
         public BassMedicalStaffValidator()
         {
-         
+
             RuleFor(x => x.Name)
                 .NotNull()
                 .WithMessage("Name is required.");
@@ -156,7 +143,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 .IsInEnum()
                 .WithMessage("Invalid gender value.");
 
-           
+
             RuleFor(x => x.EmailAddress)
                 .NotNull()
                 .WithMessage("Email address is required.")
@@ -167,10 +154,10 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 .WithMessage("Address is required.")
                 .SetValidator(new AddressValidator());
 
-         
-            RuleFor(x => x.Diagnoses)
+
+            RuleFor(x => x.Specializations)
                 .NotEmpty()
-                .WithMessage("Diagnoses are required.");
+                .WithMessage("Specializations are required.");
 
 
             RuleFor(x => x.LicenseNumber)
@@ -185,7 +172,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
             RuleFor(x => x.Academicdegree)
                 .NotEmpty()
                 .WithMessage("Academic degree is required.");
-            
+
             RuleFor(x => x.Passowrd)
           .NotEmpty().WithMessage("Password is required.")
           .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
@@ -194,9 +181,6 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
           .Matches(@"[0-9]").WithMessage("Password must contain at least one number.")
           .Matches(@"[!@#$%^&*(),.?""':;{}|<>]").WithMessage("Password must contain at least one special character (!@#$%^&*(),.?\"':;{}|<>).");
 
-            RuleFor(x => x.ConfirmationPassword)
-                .NotEmpty().WithMessage("Confirmation password is required.")
-                .Equal(x => x.Passowrd).WithMessage("Passwords must match.");
             //RuleFor(x => x.ScientificDegree)
             //        .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
             //        .WithMessage("Invalid image file(s). At least one file must be a valid image.");

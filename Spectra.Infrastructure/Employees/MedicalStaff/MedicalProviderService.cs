@@ -16,36 +16,34 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
     public class MedicalProviderService : IMedicalProviderService
     {
         private readonly IMediator _mediator;
-        
-                
 
-        public MedicalProviderService(IMediator mediator )
+
+
+        public MedicalProviderService(IMediator mediator)
         {
             _mediator = mediator;
-          
+
         }
         public async Task<OperationResult<string>> CreateMedicalProvider(
-      string firstName,
-      string lastName,
-      string? prefix,
-      string phoneNumbers,
-      string countryCode,
-      string emailAddress,
-      string country,
-      string city,
-      string nationalId,
-      string academicDegree,
-      string approvedBy,
-      List<string> diagnoses,
-      HumenGender humenGenders,
-      string licenseNumber,
-      JobTypes JobTypes,
-      string password, 
-      string confirmationPassword, 
-      string specializationId
-
-       //List<IFormFile>? scientificDegree
-       )
+              string firstName,
+              string lastName,
+              string? prefix,
+              string phoneNumbers,
+              string countryCode,
+              string emailAddress,
+              string country,
+              string city,
+              string nationalId,
+              string academicDegree,
+              string approvedBy,
+              List<string> specializations,
+              HumenGender humenGenders,
+              string licenseNumber,
+              JobTypes JobTypes,
+              string password,
+              string confirmationPassword,
+              string specializationId,
+              IFormFile? ScientificDegree = default)
         {
             // Create value objects
             var name = new Name
@@ -82,10 +80,10 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 Address = address,
                 Academicdegree = academicDegree,
                 ApprovedBy = approvedBy,
-                Diagnoses = diagnoses,
+                Specializations = specializations,
                 HumenGenders = humenGenders,
                 LicenseNumber = licenseNumber,
-
+                ScientificDegree= ScientificDegree,
                 JobType = JobTypes,
                 ConfirmationPassword = confirmationPassword
                 ,
