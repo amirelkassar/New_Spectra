@@ -10,7 +10,7 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Services.IdentityServices
 {
-    internal class IdentityService : IIdentityService
+    public class IdentityService : IIdentityService
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IUserClaimsPrincipalFactory<AppUser> _userClaimsPrincipalFactory;

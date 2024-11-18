@@ -17,12 +17,9 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
     {
 
         private readonly IMediator _mediator;
-        private readonly IIdentityService _identityService;
-        public ManagementStaffService(IMediator mediator, IChatService chatService, ICurrentUser currentUser, IIdentityService identityService)
+        public ManagementStaffService(IMediator mediator)
         {
-
             _mediator = mediator;
-            _identityService = identityService;
         }
 
 
@@ -41,7 +38,10 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
        string qualifications,
        DateOnly? timeToJoin,
        double? workingHours,
-       JobTypes jobType
+       JobTypes jobType,
+        string Passowrd, 
+        string confirmationPassword
+
      )
         {
       
@@ -121,6 +121,7 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
       DateOnly? timeToJoin,
       double? workingHours,
       JobTypes jobType
+      
       )
         {
             var name = new Name

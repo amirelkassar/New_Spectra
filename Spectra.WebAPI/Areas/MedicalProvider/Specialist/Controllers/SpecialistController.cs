@@ -62,7 +62,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
+        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateMedicalProviderDto input)
         {
 
             var doctor = await _medicalProviderService.CreateMedicalProvider(
@@ -77,12 +77,13 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input.NationalId,
                     input.Academicdegree,
                     input.ApprovedBy,
-                    input.Diagnoses,
+                    input.SpecializationIds,
                     input.HumenGenders,
                     input.LicenseNumber,
                     input.JobTypes, 
                     input .Passowrd,
                     input .ConfirmationPassword
+                    ,input.SpecializationId
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
        }

@@ -30,14 +30,11 @@ namespace Spectra.Infrastructure.Admin
 
         public AdminService(IMediator mediator, IMedicalProviderService doctorService, IMedicalProviderService specialistService, IManagementStaffService managementStaffService , IContractService contractService)
         {
-
             _mediator = mediator;
             _doctorService = doctorService;
             _specialistService = specialistService;
             _managementStaffService = managementStaffService;
             _contractService = contractService;
-         
-
         }
         public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
         {
@@ -111,11 +108,8 @@ namespace Spectra.Infrastructure.Admin
                 HoursOfWork = input.HoursOfWork,
                 DaysOfWork = input.DaysOfWork,
                 ContractCase = input.ContractCase,
-          
                 Freelance = input.Freelance,
-                SpectraTeam = input.SpectraTeam,
-
-
+                SpectraTeam = input.SpectraTeam
             };
 
 
@@ -169,8 +163,10 @@ namespace Spectra.Infrastructure.Admin
                     input.LicenseNumber,
                     //input.ScientificDegree,
                     JobTypes.Doctor,
-                        input.Passowrd,
-                    input.ConfirmationPassword
+                    input.Passowrd,
+                    input.ConfirmationPassword,
+                    input.specializationId
+
                     );
 
                 return query;
@@ -195,8 +191,10 @@ namespace Spectra.Infrastructure.Admin
                     input.LicenseNumber
                     //input.ScientificDegree
                     , JobTypes.Specialist,
-                       input.Passowrd,
-                    input.ConfirmationPassword);
+                    input.Passowrd,
+                    input.ConfirmationPassword,
+                    input.specializationId
+                    );
 
                 return query;
             }
@@ -219,15 +217,12 @@ namespace Spectra.Infrastructure.Admin
                     input.WorkingHours
                     , input.JobTypes,
                     input.Passowrd,
-                     input.ConfirmationPassword
+                    input.ConfirmationPassword
                 );
                 return query;
             }
             throw new RequestErrorException(" you Must Choose  the type Employee  ");
-
-
         }
-
 
         public async Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input)
         {

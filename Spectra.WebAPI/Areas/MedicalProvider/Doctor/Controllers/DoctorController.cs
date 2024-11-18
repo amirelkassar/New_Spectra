@@ -14,16 +14,12 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
     public class DoctorController : MedicalProviderController
     {
         private readonly IMedicalProviderService _medicalProviderService;
-        private readonly IChatService _chatService;
-        private readonly ICurrentUser _currentUser;
-        private readonly IIdentityService _identityService;
+        
 
-        public DoctorController(IMedicalProviderService medicalProviderService, IChatService chatService, ICurrentUser currentUser , IIdentityService identityService)
+        public DoctorController(IMedicalProviderService medicalProviderService)
         {
             _medicalProviderService = medicalProviderService;
-            _chatService = chatService;
-            _currentUser = currentUser;
-            _identityService = identityService;
+          
         }
 
         [HttpGet("AllClients/id")]
@@ -53,7 +49,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateManagementStaffDto input)
+        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateMedicalProviderDto input)
         {
         
             var doctor = await _medicalProviderService.CreateMedicalProvider(
@@ -68,14 +64,13 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
                     input.NationalId,
                     input.Academicdegree,
                     input.ApprovedBy,
-                    input.Diagnoses,
+                    input.SpecializationIds,
                     input.HumenGenders,
                     input.LicenseNumber,
-                    input.JobTypes
-                    ,
+                    input.JobTypes,
                     input.Passowrd,
-                    input.ConfirmationPassword
-                    
+                    input.ConfirmationPassword,
+                    input.SpecializationId
                   /*  input.ScientificDegree*/);
             return Ok(doctor);
         }

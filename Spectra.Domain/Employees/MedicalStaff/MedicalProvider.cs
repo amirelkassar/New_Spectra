@@ -15,31 +15,29 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public List<string>? AttachmentPath { get; set; } = new List<string>();
         public EmpelyeeRates? EmpelyeeRate { get; set; }
         public JobTypes JobType { get; set; }
-       
         public string SpecializationId { get; set; }
         public string SectionMedicalDepartment { get; set; }
 
 
         protected MedicalProvider() { }
         public MedicalProvider(
-                   string id,
-                   Name name,
-                   string nationalId,
-                   PhoneNumber phoneNumber,
-                   HumenGender humenGenders,
-                   EmailAddress emailAddress,
-                   Address address,
-                   List<string> diagnoses,
-                   string? licenseNumber,
-                   string? approvedBy,
-                   string academicdegree,
-                   List<string>? attachmentPath,
-                   EmpelyeeRates? empelyeeRate,
-                   JobTypes jobType,
-                   string userId,
-
-                   string specializationId,
-                   string sectionMedicalDepartment
+               string id,
+               Name name,
+               string nationalId,
+               PhoneNumber phoneNumber,
+               HumenGender humenGenders,
+               EmailAddress emailAddress,
+               Address address,
+               List<string> diagnoses,
+               string? licenseNumber,
+               string? approvedBy,
+               string academicdegree,
+               List<string>? attachmentPath,
+               EmpelyeeRates? empelyeeRate,
+               JobTypes jobType,
+              string userId,
+              string specializationId,
+              string sectionMedicalDepartment
                    ) : base(id, name, nationalId, phoneNumber, humenGenders, emailAddress, address, userId)
         {
             Id = id;
@@ -58,7 +56,6 @@ namespace Spectra.Domain.Employees.MedicalStaff
             JobType = jobType;
             UserId = userId;
             SpecializationId = specializationId;
-
             SectionMedicalDepartment = sectionMedicalDepartment;
         }
 
@@ -77,8 +74,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
           List<string> attachmentPath,
           EmpelyeeRates? empelyeeRate,
           JobTypes jobType,
-          string userId
-          , string specializationId,
+          string userId,
+          string specializationId,
           string sectionMedicalDepartment
           )
         {

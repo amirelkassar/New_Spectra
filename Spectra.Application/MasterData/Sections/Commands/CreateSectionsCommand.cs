@@ -65,7 +65,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
                 .NotEmpty().WithMessage("Name is required.")
                 .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
 
-            RuleFor(x => x.Diagnoses)
+            RuleFor(x => x.SpecializationIds)
                 .NotNull().WithMessage("Diagnoses list is required.")
                 .Must(d => d.Count > 0).WithMessage("At least one diagnosis is required.")
                 .ForEach(d => d.NotEmpty().WithMessage("Diagnosis cannot be empty."));

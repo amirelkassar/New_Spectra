@@ -40,7 +40,10 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
       HumenGender humenGenders,
       string licenseNumber,
       JobTypes JobTypes,
-      string password, string confirmationPassword
+      string password, 
+      string confirmationPassword, 
+      string specializationId
+
        //List<IFormFile>? scientificDegree
        )
         {
@@ -86,7 +89,8 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 JobType = JobTypes,
                 ConfirmationPassword = confirmationPassword
                 ,
-                Passowrd = password
+                Passowrd = password,
+                SpecializationId = specializationId
 
                 //ScientificDegree = scientificDegree
             };
@@ -164,8 +168,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 HumenGenders = input.HumenGenders,
                 LicenseNumber = input.LicenseNumber,
                 ScientificDegree = input.ScientificDegree,
-               
-                
+
             };
 
             return await _mediator.Send(command);
