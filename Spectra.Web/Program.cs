@@ -62,4 +62,5 @@ app.UseSwaggerUI(options =>
 
 app.MapHub<ChatHub>("/chathub");
 
+
 app.Run();
