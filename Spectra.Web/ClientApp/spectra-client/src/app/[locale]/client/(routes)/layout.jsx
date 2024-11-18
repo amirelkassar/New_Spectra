@@ -1,4 +1,3 @@
-import ConfirmModal from '@/components/modal/confirm-modal';
 import {
   Header,
   Sidebar,
@@ -18,7 +17,6 @@ const Layout = ({ children }) => {
           </ChildContextProvider>
         </main>
       </div>
-      <ConfirmModal />
     </div>
   );
 };

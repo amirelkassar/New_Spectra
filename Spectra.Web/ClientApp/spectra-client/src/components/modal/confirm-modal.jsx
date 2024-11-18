@@ -5,8 +5,14 @@ import Button from '@/components/button';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 
 function ConfirmModal() {
-  const { isOpen, close, message, icon, onConfirm } =
-    useConfirmModal();
+  const {
+    isOpen,
+    close,
+    message,
+    icon,
+    onConfirm,
+    isPending,
+  } = useConfirmModal();
 
   const handleSumbit = async () => {
     await onConfirm();
@@ -35,10 +41,13 @@ function ConfirmModal() {
           <Button
             variant='secondary'
             onClick={handleSumbit}
+            disabled={isPending}
           >
             نعم , متأكد
           </Button>
-          <Button onClick={close}>لا</Button>
+          <Button disabled={isPending} onClick={close}>
+            لا
+          </Button>
         </div>
       </div>
     </Modal>

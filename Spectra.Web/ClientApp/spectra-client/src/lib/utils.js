@@ -2,6 +2,7 @@ import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ar';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { serialize } from 'object-to-formdata';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs) {
@@ -86,3 +87,10 @@ export function handlePagination(
   const endIndex = page * noPerPage;
   return data.slice(startIndex, endIndex);
 }
+
+export const getFormData = (data) => {
+  return serialize(data, {
+    indices: true,
+    nullsAsUndefineds: true,
+  });
+};

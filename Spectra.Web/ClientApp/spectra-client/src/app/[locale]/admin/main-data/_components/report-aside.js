@@ -1,128 +1,31 @@
-"use client";
+'use client';
 
-import { Link, usePathname } from "@/navigation";
-import ROUTES from "@/routes";
-import clsx from "clsx";
-
-import { useParams } from "next/navigation";
+import { Link } from '@/navigation';
+import { UseMainDataAside } from '../_hooks/use-main-data-aside';
+import { cn } from '@/lib/utils';
 
 const MainDataAside = () => {
-  const params = useParams();
-  const path = usePathname();
-
-  const pages = [
-    {
-      name: "عقاقير",
-      route: ROUTES.ADMIN.DATAMAIN.HOME,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.HOME ||
-        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(params.drugsID) ||
-        path === ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(params.drugsID),
-    },
-    {
-      name: "تخصصات الاطباء",
-      route: ROUTES.ADMIN.DATAMAIN.SPECIALTIES,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIES ||
-        path === ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(params.doctorsSpecialtiesID) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(params.doctorsSpecialtiesID),
-    },
-    {
-      name: "الاقسام",
-      route: ROUTES.ADMIN.DATAMAIN.DEPARTMENTS,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.DEPARTMENTS ||
-        path === ROUTES.ADMIN.DATAMAIN.DEPARTMENTSADD ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILS(params.departmentsID) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILSEDIT(params.departmentsID),
-    },
-    {
-      name: "التحاليل و الاشاعات",
-      route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS ||
-        path === ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSADD ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILS(
-            params.analysisRumorsID
-          ) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORSDETAILSEDIT(
-            params.analysisRumorsID
-          ),
-    },
-    {
-      name: "التشخيصات",
-      route: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS ||
-        path === ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(params.diagnosticsID) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(params.diagnosticsID),
-    },
-    {
-      name: "الشكاوى العامة",
-      route: ROUTES.ADMIN.DATAMAIN.COMPLAINTS,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTS ||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSADD ||
-        path === ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(params.complaintsID) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(params.complaintsID),
-    },
-    {
-      name: "الخدمات",
-      route: ROUTES.ADMIN.DATAMAIN.SERVICES,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.SERVICES ||
-        path === ROUTES.ADMIN.DATAMAIN.SERVICESADD ||
-        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(params.servicesID) ||
-        path === ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(params.servicesID),
-    },
-    {
-      name: "الفحوصات الداخلية",
-      route: ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR,
-      isActive:
-        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR ||
-        path === ROUTES.ADMIN.DATAMAIN.TESTSINTERIORADD ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(params.testsInteriorID) ||
-        path ===
-          ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(
-            params.testsInteriorID
-          ),
-    },
-  ];
+  const { items } = UseMainDataAside();
 
   return (
-    path !== ROUTES.ADMIN.DATAMAIN.DRUGSADD && (
-      <div className="w-[100%]  lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-12 px-2 pe-6">
-        <ul className="flex lg:flex-col  items-start  gap-5">
-          {pages.map((page) => (
-            <li key={page.name} className="lg:w-[100%] ">
-              <Link
-                href={page.route}
-                className={clsx(
-                  " transition text-nowrap  w-full py-2 flex items-center justify-start px-3 text-[12px] md:text-[16px]   font-bold rounded-xl gap-3",
-                  page.isActive
-                    ? "bg-greenMain text-white"
-                    : "bg-transparent text-black"
-                )}
-              >
-                {page.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
+    <div className='w-[100%] lg:w-56 shrink-0 overflow-auto bg-white lg:rounded-xl py-3 lg:pt-8 lg:ps-6 px-2 pe-6'>
+      <ul className='flex lg:flex-col  items-start  gap-5'>
+        {items.map((i) => (
+          <li key={i.name} className='lg:w-[100%] '>
+            <Link
+              href={i.route}
+              className={cn(
+                ' transition text-nowrap w-full py-2 flex items-center justify-start px-3 text-[12px] md:text-[16px] bg-transparent font-bold rounded-xl gap-3 hover:bg-greenLight',
+                i.isActive &&
+                  'bg-greenMain text-white hover:bg-greenMain'
+              )}
+            >
+              {i.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
