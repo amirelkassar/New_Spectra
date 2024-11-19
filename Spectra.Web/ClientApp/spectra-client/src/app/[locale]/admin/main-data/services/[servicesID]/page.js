@@ -115,7 +115,7 @@ function Page({ params }) {
                     )}
                     className={' flex-1 w-full'}
                   >
-                    <EditIcon pathColor='white' />
+                    <EditIcon className='text-white' />
                     تعديل
                   </LinkGreen>
                   <Button
