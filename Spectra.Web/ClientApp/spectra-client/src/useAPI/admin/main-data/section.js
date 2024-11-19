@@ -1,16 +1,23 @@
-"use client";
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { apiAdmin } from '@/api/api';
+import { Admin } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 //getAll
 export const GetSection = () => {
   return useQuery({
     queryKey: [Admin.Section.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Section.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Section.url,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
@@ -20,67 +27,69 @@ export const GetSectionID = (id) => {
   return useQuery({
     queryKey: [Admin.Section.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Section.getByID(id), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Section.getByID(id),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
 //delete
 export const DeleteSection = (id) => {
-  const { refetch } = GetSection();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["Section"],
+    mutationKey: ['Section'],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(Admin.Section.getByID(id));
+      const response = await apiAdmin.delete(
+        Admin.Section.getByID(id)
+      );
       return response.data;
     },
 
-    onSuccess: (res) => {
-      console.log(res);
-      refetch();
-      queryClient.invalidateQueries(["Section"]);
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.Section.url]);
     },
   });
 };
 //post
 export const useCreateSection = () => {
-  const { refetch } = GetSection();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.Section.url, data, {});
+      const response = await apiAdmin.post(
+        Admin.Section.url,
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
-      console.log("تم الإرسال بنجاح:", data);
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.Section.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
 //put
 export const useEditSection = (id) => {
-  const { refetch } = GetSection();
-  const { refetch: refetch2 } = GetSectionID(id);
-  return useMutation({
-    mutationKey: ["EditSection"],
-    mutationFn: async (data) => {
-      console.log(id);
+  const queryClient = useQueryClient();
 
-      const response = await apiAdmin.put(Admin.Section.getByID(id), data, {});
+  return useMutation({
+    mutationKey: ['EditSection'],
+    mutationFn: async (data) => {
+      const response = await apiAdmin.put(
+        Admin.Section.getByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch2();
-      refetch();
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.Section.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
-    },
+    onError: () => {},
   });
 };
 //getAllDoctors
@@ -88,9 +97,12 @@ export const GetSectionDoctors = () => {
   return useQuery({
     queryKey: [Admin.Section.getAllDoctors],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Section.getAllDoctors, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Section.getAllDoctors,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
