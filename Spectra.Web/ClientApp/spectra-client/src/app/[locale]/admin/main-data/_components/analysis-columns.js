@@ -1,35 +1,38 @@
-import AnalysisIcon from "@/assets/icons/analysis";
-import RumorsIcon from "@/assets/icons/rumors";
-import ActionMenu from "./ActionMenuAnalysis";
+import AnalysisIcon from '@/assets/icons/analysis';
+import RumorsIcon from '@/assets/icons/rumors';
+import ActionMenu from './ActionMenuAnalysis';
 export const ProceduresColumns = [
   {
-    accessorKey: "scientificNameByEngByArab",
-    header: "الاسم",
+    id: 'examinationTypes',
+  },
+  {
+    accessorKey: 'scientificNameByEngByArab',
+    header: 'الاسم',
     cell: ({ getValue, row }) => {
       const name = getValue();
-      const type = row.original.examinationTypes;
+      const type = row?.original?.examinationTypes;
       return (
-        <div className="flex items-center gap-2">
-          <div className="flex bg-blueLight size-[38px] rounded-full items-center justify-center p-1">
+        <div className='flex items-center gap-2'>
+          <div className='flex bg-blueLight size-[38px] rounded-full items-center justify-center p-1'>
             {type === 1 ? <AnalysisIcon /> : <RumorsIcon />}
           </div>
-          <h3 className="font-Bold">{name}</h3>
+          <h3 className='font-Bold'>{name}</h3>
         </div>
       );
     },
   },
   {
-    accessorKey: "code",
-    header: "الكود ",
+    accessorKey: 'code',
+    header: 'الكود ',
   },
   {
-    accessorKey: "notes",
-    header: "ملاحظة",
-    id:'notes'
+    accessorKey: 'notes',
+    header: 'ملاحظة',
+    id: 'notes',
   },
-  
+
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
       return <ActionMenu id={id} />;

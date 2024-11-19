@@ -1,85 +1,99 @@
-"use client";
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import { useRouter } from "@/navigation";
-import ROUTES from "@/routes";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { apiAdmin } from '@/api/api';
+import { Admin } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+
 //getAll
 export const GetMedicalTests = () => {
   return useQuery({
     queryKey: [Admin.MedicalTests.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MedicalTests.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.MedicalTests.url,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //getID
 export const GetMedicalTestsID = (id) => {
   return useQuery({
     queryKey: [Admin.MedicalTests.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MedicalTests.getByID(id), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.MedicalTests.getByID(id),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //delete
 export const DeleteMedicalTests = (id) => {
-  const router = useRouter();
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ["MedicalTests"],
+    mutationKey: ['MedicalTests'],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(Admin.MedicalTests.DeleteByID(id));
+      const response = await apiAdmin.delete(
+        Admin.MedicalTests.DeleteByID(id)
+      );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["MedicalTests"]);
-      router.replace(ROUTES.ADMIN.DATAMAIN.MedicalTestsS);
+      queryClient.refetchQueries([Admin.MedicalTests.url]);
     },
   });
 };
+
 //post
 export const useCreateMedicalTests = () => {
-  const { refetch } = GetMedicalTests();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.MedicalTests.url, data, {});
+      const response = await apiAdmin.post(
+        Admin.MedicalTests.url,
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.MedicalTests.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
+
 //put
 export const useEditMedicalTests = (id) => {
-  const { refetch } = GetMedicalTests();
-  const { refetch: refetch2 } = GetMedicalTestsID(id);
+  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["EditMedicalTests"],
+    mutationKey: ['EditMedicalTests'],
     mutationFn: async (data) => {
-      console.log(id);
-
-      const response = await apiAdmin.put(Admin.MedicalTests.getByID(id), data, {});
+      const response = await apiAdmin.put(
+        Admin.MedicalTests.getByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
-      refetch2();
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.MedicalTests.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
-    },
+    onError: () => {},
   });
 };
