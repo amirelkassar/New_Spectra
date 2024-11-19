@@ -1,50 +1,63 @@
-"use client";
-import DeleteIcon from "@/assets/icons/delete";
-import EditIcon from "@/assets/icons/edit";
-import ExportIcon from "@/assets/icons/export";
-import PrintIcon from "@/assets/icons/print";
-import DataActions from "@/components/data-actions";
-import { useRouter } from "@/navigation";
-import ROUTES from "@/routes";
-import useModal from "@/store/modal-slice";
-import { DeleteSpecialization } from "@/useAPI/admin/main-data/specialties";
-import React from "react";
+'use client';
+import DeleteIcon from '@/assets/icons/delete';
+import EditIcon from '@/assets/icons/edit';
+import ExportIcon from '@/assets/icons/export';
+import PrintIcon from '@/assets/icons/print';
+import DataActions from '@/components/data-actions';
+import { Toast } from '@/components/toast';
+import { useRouter } from '@/navigation';
+import ROUTES from '@/routes';
+import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { DeleteSpecialization } from '@/useAPI/admin/main-data/specialties';
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
-  const { mutate: deleteDiagnostics } = DeleteSpecialization(id);
   const router = useRouter();
 
+  const open = useConfirmModal((s) => s.open);
+
+  const { mutateAsync: deleteDiagnostics, isPending } =
+    DeleteSpecialization(id);
+
   const handleDelete = () => {
-    deleteDiagnostics();
-    router.replace(ROUTES.ADMIN.DATAMAIN.SPECIALTIES);
+    open({
+      isPending,
+      onConfirm: () => {
+        Toast.Promise(deleteDiagnostics(), {
+          success: 'تم مسح التخصص بنجاح',
+          onSuccess: () =>
+            router.replace(
+              ROUTES.ADMIN.DATAMAIN.SPECIALTIES
+            ),
+        });
+      },
+    });
   };
   const options = [
     {
-      label: "مسح",
+      label: 'مسح',
       icon: <DeleteIcon />,
-      type: "btn",
+      type: 'btn',
       action: handleDelete,
-      color: "red",
+      color: 'red',
     },
 
     {
-      label: "تعديل",
+      label: 'تعديل',
       icon: <EditIcon />,
       link: ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(id),
-      type: "link",
+      type: 'link',
     },
     {
-      label: "تصدير",
+      label: 'تصدير',
       icon: <ExportIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
 
     {
-      label: "طباعة",
+      label: 'طباعة',
       icon: <PrintIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
   ];

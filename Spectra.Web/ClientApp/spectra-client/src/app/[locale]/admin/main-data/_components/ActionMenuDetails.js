@@ -23,13 +23,12 @@ function ActionMenu({ id }) {
     open({
       isPending,
       onConfirm: async () => {
-        const toastId = Toast.Loading();
-        const res = await deleteDrug();
-        if (res?.successOpration) {
-          Toast.Dismiss(toastId);
-          router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
-          Toast.Success('تم مسح العقار بنجاح');
-        }
+        Toast.Promise(deleteDrug(), {
+          success: 'تم مسح العقار بنجاح',
+          onSuccess: () => {
+            router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+          },
+        });
       },
     });
   };
