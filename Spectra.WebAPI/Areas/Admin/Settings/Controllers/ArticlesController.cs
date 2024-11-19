@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.Articles.Commands;
+using Spectra.Domain.Shared.Constants.Permissions.AdminSettings;
 using Spectra.Infrastructure.Settings.Articles;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
+    [Authorize]
+
     public class ArticlesController : SettingsController
     {
         private readonly IArticlesService _entityServices;
@@ -15,7 +18,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminArticlesPermissions.ReadList)]
         public async Task<ActionResult> GetAllArticles()
         {
             var Articless = await _entityServices.GetAllArticles();
@@ -23,21 +26,21 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
         }
 
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(AdminArticlesPermissions.ReadOne)]
         public async Task<ActionResult> GetOneArticles(string id)
         {
             var Articless = await _entityServices.GetArticlesMById(id);
             return Ok(Articless);
         }
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(AdminArticlesPermissions.Create)]
         public async Task<ActionResult> CreateArticles(CreateArticlesCommand input)
         {
             var Articless = await _entityServices.CreateArticles(input);
             return Ok(Articless);
         }
         [HttpPut("id")]
-        [AllowAnonymous]
+        [Authorize(AdminArticlesPermissions.Update)]
         public async Task<ActionResult> UpdateArticles(string id, UpdateArticlesCommand input)
         {
             var Articless = await _entityServices.UpdateArticles(id, input);
@@ -45,7 +48,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             return Ok(Articless);
         }
         [HttpDelete("id")]
-        [AllowAnonymous]
+        [Authorize(AdminArticlesPermissions.Delete)]
         public async Task<ActionResult> DeleteArticles(string id)
         {
             var Articless = await _entityServices.DeleteArticles(id);
