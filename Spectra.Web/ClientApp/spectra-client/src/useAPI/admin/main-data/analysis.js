@@ -44,7 +44,6 @@ export const DeleteMedicalTests = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['MedicalTests'],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
         Admin.MedicalTests.DeleteByID(id)
@@ -82,7 +81,6 @@ export const useEditMedicalTests = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['EditMedicalTests'],
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
         Admin.MedicalTests.getByID(id),
