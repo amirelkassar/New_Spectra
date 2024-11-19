@@ -1,49 +1,67 @@
-"use client";
-import React from "react";
-import ExportIcon from "@/assets/icons/export";
-import PrintIcon from "@/assets/icons/print";
-import DataActions from "@/components/data-actions";
-import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
-import EditIcon from "@/assets/icons/edit";
-import ROUTES from "@/routes";
-import { useRouter } from "@/navigation";
-import { DeleteDiagnostics } from "@/useAPI/admin/main-data/diagnostics";
+'use client';
+import React from 'react';
+import ExportIcon from '@/assets/icons/export';
+import PrintIcon from '@/assets/icons/print';
+import DataActions from '@/components/data-actions';
+import DeleteIcon from '@/assets/icons/delete';
+import EditIcon from '@/assets/icons/edit';
+import ROUTES from '@/routes';
+import { useRouter } from '@/navigation';
+import { DeleteDiagnostics } from '@/useAPI/admin/main-data/diagnostics';
+import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { Toast } from '@/components/toast';
 
 function ActionMenu({ id }) {
-  const { modal, editModal } = useModal();
-  const { mutate: deleteDiagnostics, isLoading } = DeleteDiagnostics(id);
   const router = useRouter();
 
+  const open = useConfirmModal((s) => s.open);
+
+  const { mutateAsync: deleteDiagnostics, isPending } =
+    DeleteDiagnostics(id);
+
   const handleDelete = () => {
-    deleteDiagnostics();
-    router.replace(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS);
+    open({
+      isPending,
+      onConfirm: async () => {
+        Toast.Promise(deleteDiagnostics(), {
+          success: 'تم المسح بنجاح',
+          onSuccess: () => {
+            router.replace(
+              ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS
+            );
+          },
+        });
+      },
+    });
   };
+
   const options = [
     {
-      label: "مسح",
+      label: 'مسح',
       icon: <DeleteIcon />,
-      type: "btn",
+      type: 'btn',
       action: handleDelete,
-      color: "red",
+      color: 'red',
     },
     {
-      label: "تعديل",
+      label: 'تعديل',
       icon: <EditIcon />,
-      link: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(id),
-      type: "link",
+      link: ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(
+        id
+      ),
+      type: 'link',
     },
     {
-      label: "تصدير",
+      label: 'تصدير',
       icon: <ExportIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
 
     {
-      label: "طباعة",
+      label: 'طباعة',
       icon: <PrintIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
   ];
