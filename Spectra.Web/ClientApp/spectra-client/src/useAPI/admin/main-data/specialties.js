@@ -6,6 +6,7 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+
 //getAll
 export const GetSpecialization = () => {
   return useQuery({
@@ -21,6 +22,7 @@ export const GetSpecialization = () => {
     },
   });
 };
+
 //getID
 export const GetSpecializationID = (id) => {
   return useQuery({
@@ -36,11 +38,12 @@ export const GetSpecializationID = (id) => {
     },
   });
 };
+
 //delete
 export const DeleteSpecialization = (id) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['Specialization'],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
         Admin.Specialization.DeleteByID(id)
@@ -54,6 +57,7 @@ export const DeleteSpecialization = (id) => {
     },
   });
 };
+
 //post
 export const useCreateSpecialization = () => {
   const queryClient = useQueryClient();
@@ -72,17 +76,15 @@ export const useCreateSpecialization = () => {
         Admin.Specialization.url,
       ]);
     },
-    onError: () => {
-      // console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
+
 //put
 export const useEditSpecialization = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['EditSpecialization'],
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
         Admin.Specialization.getByID(id),
@@ -96,8 +98,6 @@ export const useEditSpecialization = (id) => {
         Admin.Specialization.url,
       ]);
     },
-    onError: () => {
-      // console.error('حدث خطأ أثناء التعديل:', error);
-    },
+    onError: () => {},
   });
 };

@@ -1,45 +1,32 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import BackIcon from '@/assets/icons/back';
-import Button from '@/components/button';
-import GetErrorMsg from '@/components/getErrorMsg';
-import InputGreen from '@/components/Input-green';
-import { Toast } from '@/components/toast';
+import { useState } from 'react';
 import { Link, useRouter } from '@/navigation';
+import Button from '@/components/button';
+import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
-import {
-  GetMasterDataServicesID,
-  useEditMasterDataServices,
-} from '@/useAPI/admin/main-data/services';
 import { Textarea } from '@mantine/core';
+import InputGreen from '@/components/Input-green';
+import { useCreateMasterDataServices } from '@/useAPI/admin/main-data/services';
+import GetErrorMsg from '@/components/getErrorMsg';
+import { Toast } from '@/components/toast';
 
-function Page({ params }) {
+function ServicesNotShow() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    AvailableSrvices: '1',
-    name: '',
+    AvailableSrvices: '2',
+    Name: '',
     DefinitionServices: '',
     Price: '',
     termsAndConditions: '',
   });
 
-  const { data, isLoading } = GetMasterDataServicesID(
-    params.servicesID
-  );
-
   const {
-    mutateAsync: EditMasterDataServices,
+    mutateAsync: createDrug,
     error,
     isPending,
     isError,
     reset,
-  } = useEditMasterDataServices(formData?.id);
-
-  useEffect(() => {
-    data?.data.data ? setFormData(data.data.data) : null;
-  }, [isLoading, data?.data?.data]);
+  } = useCreateMasterDataServices();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,10 +38,11 @@ function Page({ params }) {
       reset();
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formDataToSend = new FormData();
+
     for (const key in formData) {
       if (Array.isArray(formData[key])) {
         formData[key].forEach((file) => {
@@ -65,58 +53,55 @@ function Page({ params }) {
       }
     }
 
-    Toast.Promise(EditMasterDataServices(formDataToSend), {
-      success: 'تم التعديل بنجاح',
+    Toast.Promise(createDrug(formDataToSend), {
+      success: 'تم انشاء الخدمة بنجاح',
       onSuccess: () => {
         router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
       },
     });
   };
+
   return (
     <div>
       <div className='flex items-center gap-4 lg:gap-7 mb-12'>
         <Link
-          href={
-            ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(
-              data?.data.data.id
-            ) + '?show=false'
-          }
+          href={ROUTES.ADMIN.DATAMAIN.SERVICESADD}
           className=' w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%] flex items-center justify-center'
         >
           <BackIcon className={'w-full h-full'} />
         </Link>
         <h2 className='text-[36px]'>
           {' '}
-          تعديل خدمة - داخلية
+          اضافة خدمة - داخلية
         </h2>
       </div>
       <form className='lgl:max-w-[80%] flex flex-col gap-6 lg:gap-10 w-full mx-auto lgl:mt-20'>
         <InputGreen
           label='اسم الخدمة'
-          name='name'
-          value={formData?.name || ''}
+          name='Name'
+          value={formData.Name}
           onChange={handleInputChange}
           error={GetErrorMsg(error, 'Name')}
         />
         <InputGreen
           label='تعريف للخدمة'
-          name='definitionServices'
-          value={formData?.definitionServices || ''}
+          name='DefinitionServices'
+          value={formData.DefinitionServices}
           onChange={handleInputChange}
           error={GetErrorMsg(error, 'DefinitionServices')}
         />
         <InputGreen
           label='سعر الخدمة'
-          name='price'
+          name='Price'
           type='number'
-          value={formData?.price || ''}
+          value={formData.Price}
           onChange={handleInputChange}
           error={GetErrorMsg(error, 'Price')}
         />
         <Textarea
           label='الشروط و الاحكام'
           name='termsAndConditions'
-          value={formData?.termsAndConditions || ''}
+          value={formData.termsAndConditions}
           error={GetErrorMsg(error, 'TermsAndConditions')}
           onChange={handleInputChange}
           radius='md'
@@ -129,6 +114,7 @@ function Page({ params }) {
             label: 'text-base mb-2',
           }}
         />
+
         <div className='flex flex-col mt-16 items-center gap-3'>
           <Button
             disabled={isPending}
@@ -151,4 +137,4 @@ function Page({ params }) {
   );
 }
 
-export default Page;
+export default ServicesNotShow;

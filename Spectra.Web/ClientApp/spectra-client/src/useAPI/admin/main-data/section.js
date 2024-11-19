@@ -22,6 +22,7 @@ export const GetSection = () => {
     },
   });
 };
+
 //getID
 export const GetSectionID = (id) => {
   return useQuery({
@@ -37,11 +38,12 @@ export const GetSectionID = (id) => {
     },
   });
 };
+
 //delete
 export const DeleteSection = (id) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['Section'],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
         Admin.Section.getByID(id)
@@ -54,9 +56,11 @@ export const DeleteSection = (id) => {
     },
   });
 };
+
 //post
 export const useCreateSection = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
@@ -72,12 +76,12 @@ export const useCreateSection = () => {
     onError: () => {},
   });
 };
+
 //put
 export const useEditSection = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['EditSection'],
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
         Admin.Section.getByID(id),
@@ -92,6 +96,7 @@ export const useEditSection = (id) => {
     onError: () => {},
   });
 };
+
 //getAllDoctors
 export const GetSectionDoctors = () => {
   return useQuery({

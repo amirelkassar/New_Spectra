@@ -1,36 +1,49 @@
-"use client";
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { apiAdmin } from '@/api/api';
+import { Admin } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+
 //getAll
 export const GetMasterDataServices = () => {
   return useQuery({
     queryKey: [Admin.MasterDataServices.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MasterDataServices.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.MasterDataServices.url,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //getID
 export const GetMasterDataServicesID = (id) => {
   return useQuery({
     queryKey: [Admin.MasterDataServices.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.MasterDataServices.getByID(id), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.MasterDataServices.getByID(id),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //delete
 export const DeleteMasterDataServices = (id) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ["MasterDataServices"],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
         Admin.MasterDataServices.DeleteByID(id)
@@ -38,36 +51,41 @@ export const DeleteMasterDataServices = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["MasterDataServices"]);
+      queryClient.refetchQueries([
+        Admin.MasterDataServices.url,
+      ]);
     },
   });
 };
+
 //post
 export const useCreateMasterDataServices = () => {
-  const { refetch } = GetMasterDataServices();
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.MasterDataServices.url, data, {});
+      const response = await apiAdmin.post(
+        Admin.MasterDataServices.url,
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
-      console.log("تم الإرسال بنجاح:", data);
+    onSuccess: () => {
+      queryClient.refetchQueries([
+        Admin.MasterDataServices.url,
+      ]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
+
 //put
 export const useEditMasterDataServices = (id) => {
-  const { refetch } = GetMasterDataServices();
+  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["EditMasterDataServices"],
     mutationFn: async (data) => {
-      console.log(id);
-
       const response = await apiAdmin.put(
         Admin.MasterDataServices.getByID(id),
         data,
@@ -75,11 +93,11 @@ export const useEditMasterDataServices = (id) => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
+    onSuccess: () => {
+      queryClient.refetchQueries([
+        Admin.MasterDataServices.url,
+      ]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
-    },
+    onError: () => {},
   });
 };

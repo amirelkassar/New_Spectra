@@ -1,7 +1,7 @@
 'use client';
 import { Textarea, TextInput } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import { Link } from '@/navigation';
+import { Link, useRouter } from '@/navigation';
 import Button from '@/components/button';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
@@ -14,10 +14,14 @@ import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import imgService from '@/assets/images/packages-details-page-bg.webp';
 import { useEditMasterDataServices } from '@/useAPI/admin/main-data/services';
 import GetErrorMsg from '@/components/getErrorMsg';
+import { Toast } from '@/components/toast';
 
 function ServicesDetails({ DataServices, isLoading }) {
+  const router = useRouter();
+
   const [largeFile, setLargeFile] = useState('');
   const [dataImg, setDataImg] = useState(imgService);
+
   //api
   const [formData, setFormData] = useState({
     availableSrvices: '1',
@@ -32,11 +36,12 @@ function ServicesDetails({ DataServices, isLoading }) {
   });
 
   const {
-    mutate: EditMasterDataServices,
+    mutateAsync: EditMasterDataServices,
     error,
     isError,
     reset,
   } = useEditMasterDataServices(DataServices.id);
+
   useEffect(() => {
     if (DataServices) {
       setFormData({
@@ -46,8 +51,7 @@ function ServicesDetails({ DataServices, isLoading }) {
         ],
       });
     }
-  }, [isLoading]);
-
+  }, [isLoading, DataServices]);
 
   const handleHeaderInputChange = (e) => {
     setLargeFile('');
@@ -62,6 +66,7 @@ function ServicesDetails({ DataServices, isLoading }) {
       ],
     }));
   };
+
   const handleInputChangeSection = (index, e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => {
@@ -80,6 +85,7 @@ function ServicesDetails({ DataServices, isLoading }) {
       reset();
     }
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -114,7 +120,12 @@ function ServicesDetails({ DataServices, isLoading }) {
       );
     });
 
-    EditMasterDataServices(formDataToSend);
+    Toast.Promise(EditMasterDataServices(formDataToSend), {
+      success: 'تم التعديل بنجاح',
+      onSuccess: () => {
+        router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
+      },
+    });
   };
   return (
     <div>
@@ -135,7 +146,7 @@ function ServicesDetails({ DataServices, isLoading }) {
               defaultValue={formData.name}
               name='name'
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "Name")}
+              error={GetErrorMsg(error, 'Name')}
               classNames={{
                 input:
                   'min-h-[60px] h-auto  w-full rounded-lg bg-grayBlueLight   border-grayMedium text-[24px] ',
@@ -143,9 +154,12 @@ function ServicesDetails({ DataServices, isLoading }) {
               }}
             />
             <Textarea
-              label="تعريف مختصر للخدمة "
-              name="definitionServices"
-              error={GetErrorMsg(error, "DefinitionServices")}
+              label='تعريف مختصر للخدمة '
+              name='definitionServices'
+              error={GetErrorMsg(
+                error,
+                'DefinitionServices'
+              )}
               value={formData.definitionServices}
               onChange={handleInputChange}
               radius='md'
@@ -296,8 +310,11 @@ function ServicesDetails({ DataServices, isLoading }) {
               defaultValue={formData.termsAndConditions}
               name='termsAndConditions'
               onChange={handleInputChange}
-              error={GetErrorMsg(error, "TermsAndConditions")}
-              radius="md"
+              error={GetErrorMsg(
+                error,
+                'TermsAndConditions'
+              )}
+              radius='md'
               autosize
               minRows={4}
               classNames={{

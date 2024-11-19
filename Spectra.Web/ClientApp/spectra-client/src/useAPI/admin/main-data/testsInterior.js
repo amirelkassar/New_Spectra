@@ -1,37 +1,50 @@
-"use client";
+'use client';
 
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { apiAdmin } from '@/api/api';
+import { Admin } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+
 //getAll
 export const GetInternalExamination = () => {
   return useQuery({
     queryKey: [Admin.InternalExamination.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.InternalExamination.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.InternalExamination.url,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //getID
 export const GetInternalExaminationID = (id) => {
   return useQuery({
     queryKey: [Admin.InternalExamination.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.InternalExamination.getByID(id), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.InternalExamination.getByID(id),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //delete
 export const DeleteInternalExamination = (id) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ["InternalExamination"],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
         Admin.InternalExamination.DeleteByID(id)
@@ -40,33 +53,41 @@ export const DeleteInternalExamination = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["InternalExamination"]);
+      queryClient.refetchQueries([
+        Admin.InternalExamination.url,
+      ]);
     },
   });
 };
+
 //post
 export const useCreateInternalExamination = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.InternalExamination.url, data, {});
+      const response = await apiAdmin.post(
+        Admin.InternalExamination.url,
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log("تم الإرسال بنجاح:", data);
+    onSuccess: () => {
+      queryClient.refetchQueries([
+        Admin.InternalExamination.url,
+      ]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
+
 //put
 export const useEditInternalExamination = (id) => {
-  const { refetch } = GetInternalExamination();
-  return useMutation({
-    mutationKey: ["EditInternalExamination"],
-    mutationFn: async (data) => {
-      console.log(id);
+  const queryClient = useQueryClient();
 
+  return useMutation({
+    mutationFn: async (data) => {
       const response = await apiAdmin.put(
         Admin.InternalExamination.getByID(id),
         data,
@@ -74,11 +95,11 @@ export const useEditInternalExamination = (id) => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
+    onSuccess: () => {
+      queryClient.refetchQueries([
+        Admin.InternalExamination.url,
+      ]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
-    },
+    onError: () => {},
   });
 };
