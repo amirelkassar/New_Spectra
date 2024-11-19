@@ -1,88 +1,97 @@
-"use client";
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import { useRouter } from "@/navigation";
-import ROUTES from "@/routes";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { apiAdmin } from '@/api/api';
+import { Admin } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+
 //getAll
 export const GetComplaint = () => {
   return useQuery({
     queryKey: [Admin.Complaint.url],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Complaint.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Complaint.url,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //getID
 export const GetComplaintID = (id) => {
   return useQuery({
     queryKey: [Admin.Complaint.getByID(id)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Complaint.getByID(id), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Complaint.getByID(id),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
 };
+
 //delete
 export const DeleteComplaint = (id) => {
-  const router = useRouter();
-  const { refetch } = GetComplaint();
-
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ["Complaint"],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(Admin.Complaint.DeleteByID(id));
+      const response = await apiAdmin.delete(
+        Admin.Complaint.DeleteByID(id)
+      );
       return response.data;
     },
-
     onSuccess: () => {
-      router.replace(ROUTES.ADMIN.DATAMAIN.COMPLAINTS);
-      refetch();
-      queryClient.invalidateQueries(["Complaint"]);
+      queryClient.refetchQueries([Admin.Complaint.url]);
     },
   });
 };
+
 //post
 export const useCreateComplaint = () => {
-  const { refetch } = GetComplaint();
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.Complaint.url, data, {});
+      const response = await apiAdmin.post(
+        Admin.Complaint.url,
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch();
-      console.log("تم الإرسال بنجاح:", data);
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.Complaint.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
-    },
+    onError: () => {},
   });
 };
+
 //put
 export const useEditComplaint = (id) => {
-  const { refetch } = GetComplaint();
-  const { refetch: refetch2 } = GetComplaintID(id);
-  return useMutation({
-    mutationKey: ["EditComplaint"],
-    mutationFn: async (data) => {
-      console.log(id);
+  const queryClient = useQueryClient();
 
-      const response = await apiAdmin.put(Admin.Complaint.getByID(id), data, {});
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await apiAdmin.put(
+        Admin.Complaint.getByID(id),
+        data,
+        {}
+      );
       return response.data;
     },
-    onSuccess: (data) => {
-      refetch2();
-      refetch();
+    onSuccess: () => {
+      queryClient.refetchQueries([Admin.Complaint.url]);
     },
-    onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
-    },
+    onError: () => {},
   });
 };
