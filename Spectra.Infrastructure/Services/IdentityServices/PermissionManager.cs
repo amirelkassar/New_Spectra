@@ -2,13 +2,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Application.Identities;
+using Spectra.Application.Identities.Dtos;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Helpers;
 using Spectra.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +31,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
             if (!role.Permissions.Any(p=>p.Permission==permission))
             {
-                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission));
+                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission,permission));
                 _identityContext.Roles.Update(role);
                 await _identityContext.SaveChangesAsync();
             }
@@ -43,6 +46,30 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                ?? throw new NotFoundException(nameof(AppRole), roleName);
 
             return role.Permissions.Select(p => p.Permission).ToArray();
+        }
+
+        public async Task<RolePermissionReadDto> GetRolePermissionListDto(string roleName)
+        {
+            var rolePermissions=await GetRolePermissionList(roleName);
+            var roleModel=new RolePermissionReadDto();
+            roleModel.Name= roleName;
+            var permissionContributors = typeof(IPermissionContributor)
+                .Assembly
+                .GetTypes()
+                .Where(type => typeof(IPermissionContributor).IsAssignableFrom(type) && type.IsClass);
+
+            var fields = permissionContributors.Select(t => t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+                   .Where(field => field.IsLiteral && !field.IsInitOnly))
+                .SelectMany(f=>f);
+
+            var permissionGroups = fields.Where(f => f.Name == "Group").ToArray();
+
+            foreach (var item in fields)
+            {
+
+            }
+
+            throw new Exception();
         }
 
         public async Task<ICollection<string>> GetUserPermissionList(string userId)
@@ -97,7 +124,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             role.Permissions.Clear();
             foreach (var permission in permissions) 
             {
-                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission));
+                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission, permission));
             }
             await _identityContext.SaveChangesAsync();
         }

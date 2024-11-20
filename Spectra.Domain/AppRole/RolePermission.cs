@@ -16,18 +16,23 @@ namespace Spectra.Domain.AppRole
         }
         private RolePermission(string id,
             string roleId,
-            string permission)
+            string permission,
+            string displayName)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(roleId, nameof(roleId));
             ArgumentNullException.ThrowIfNull(permission, nameof(permission));
+            ArgumentNullException.ThrowIfNull(displayName, nameof(displayName));
+
             Id = id;
             RoleId = roleId;
             Permission = permission;
+            DisplayName= displayName;
         }
         public string Id { get; private set; }
         public string RoleId { get; private set; }
         public string Permission { get; private set; }
+        public string DisplayName { get; private set; }
 
 
         private readonly List<BaseEvent> _domainEvents = [];
@@ -50,6 +55,6 @@ namespace Spectra.Domain.AppRole
 
         public void ClearDomainEvents() => _domainEvents.Clear();
 
-        public static RolePermission Create(string id, string roleId, string permission) => new(id, roleId, permission);
+        public static RolePermission Create(string id, string roleId, string permission, string displayName) => new(id, roleId, permission, displayName);
     }
 }

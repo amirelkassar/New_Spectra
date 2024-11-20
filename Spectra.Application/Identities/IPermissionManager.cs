@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectra.Application.Identities.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,6 @@ namespace Spectra.Application.Identities
         Task<ICollection<string>> GetUserPermissionList(string userId);
         Task<bool> RoleHasPermission(string roleName, string permission);
         Task<bool> UserHasPermission(string userId, string permission);
-
+        Task<RolePermissionReadDto> GetRolePermissionListDto(string roleName);
     }
 }
