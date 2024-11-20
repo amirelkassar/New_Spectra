@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
@@ -19,7 +20,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.ReadList)]
         public async Task<ActionResult> GetAllGeneralComplaints()
         {
             var GeneralComplaintsies = await _generalComplaintService.GetAllGeneralComplaintss();
@@ -27,7 +28,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet("GeneralComplaints")]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.ReadList)]
         public async Task<ActionResult> GetAllGeneralComplaintsNames()
         {
             var Drugies = await _generalComplaintService.GetAllGeneralComplaintNames();
@@ -35,7 +36,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
             return Ok(Drugies);
         }
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.ReadOne)]
         public async Task<ActionResult> GetOneGeneralComplaints(string id)
         {
             var GeneralComplaintsies = await _generalComplaintService.GetGeneralComplaintsById(id);
@@ -43,7 +44,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.Create)]
         public async Task<ActionResult> CreateGeneralComplaintss(CreateGeneralComplaintsCommand input)
         {
 
@@ -53,7 +54,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpPut("id")]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.Update)]
         public async Task<ActionResult> UpdateGeneralComplaints(string id, UpdateGeneralComplaintsCommand input)
         {
 
@@ -63,7 +64,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpDelete("id")]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.Delete)]
         public async Task<ActionResult> DeleteGeneralComplaints(string id)
         {
 
@@ -71,7 +72,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
             return Ok(GeneralComplaintsies);
         }
         [HttpPost("upload")]
-        [AllowAnonymous]
+        [Authorize(AdminGeneralComplaintPermissions.SheetsPermissions)]
         public async Task<ActionResult> UploadExcelFile(IFormFile file)
         {
 

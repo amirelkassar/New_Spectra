@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Sections.Commands;
 using Spectra.Application.MasterData.Sections.Service;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
+    [Authorize]
     public class SectionController : MasterDataController
     {
         private readonly ISectionsServices _sectionsServices;
@@ -15,69 +17,60 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAllsection()
+        [Authorize(AdminSectionsPermissions.ReadList)]
+        public async Task<ActionResult> GetAllSection()
         {
             var sections = await _sectionsServices.GetAllSection();
             return Ok(sections);
         }
+
         [HttpGet("GetAllNames")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAlllsectionNames()
+        [Authorize(AdminSectionsPermissions.ReadList)]
+        public async Task<ActionResult> GetAllSectionNames()
         {
-
             var sectionNames = await _sectionsServices.GetAllSectionNames();
-
             return Ok(sectionNames);
         }
 
-
         [HttpGet("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetOnesection(string id)
+        [Authorize(AdminSectionsPermissions.ReadOne)]
+        public async Task<ActionResult> GetOneSection(string id)
         {
             var section = await _sectionsServices.GetSectionById(id);
             return Ok(section);
         }
+
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Createsection(CreateSectionsCommand input)
+        [Authorize(AdminSectionsPermissions.Create)]
+        public async Task<ActionResult> CreateSection(CreateSectionsCommand input)
         {
             var section = await _sectionsServices.CreateSection(input);
             return Ok(section);
         }
+
         [HttpPut("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> Updatesection(string id, UpdateSectionsCommand input)
+        [Authorize(AdminSectionsPermissions.Update)]
+        public async Task<ActionResult> UpdateSection(string id, UpdateSectionsCommand input)
         {
             var section = await _sectionsServices.UpdateSection(id, input);
-
             return Ok(section);
         }
 
         [HttpDelete("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> Deletesection(string id)
+        [Authorize(AdminSectionsPermissions.Delete)]
+        public async Task<ActionResult> DeleteSection(string id)
         {
             var section = await _sectionsServices.DeleteSection(id);
             return Ok(section);
         }
+
         [HttpGet("GetAllDoctors")]
-        [AllowAnonymous]
+        [Authorize(AdminSectionsPermissions.ReadList)]
         public async Task<ActionResult> GetAllDoctors()
         {
-            var appointmenties = await _sectionsServices.GetAllDoctors();
-            return Ok(appointmenties);
+            var doctors = await _sectionsServices.GetAllDoctors();
+            return Ok(doctors);
         }
-        //[HttpPost("upload")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult> UploadExcelFile(IFormFile file)
-        //{
-
-        //    var data = _sectionsServices.CreateFromExcel(file);
-        //    return Ok(data);
-
-        //}
     }
 
 }

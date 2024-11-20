@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Services;
-
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
-
+    [Authorize]
     public class MasterDataServicesController : MasterDataController
     {
         private readonly IServiceMDService _serviceMDService;
@@ -17,54 +17,52 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.ReadList)]
         public async Task<ActionResult> GetAllMasterDataServices()
         {
-            var MasterDataServicesies = await _serviceMDService.GetAllServicesM();
-            return Ok(MasterDataServicesies);
+            var masterDataServices = await _serviceMDService.GetAllServicesM();
+            return Ok(masterDataServices);
         }
 
         [HttpGet("Name&&Terms")]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.ReadList)]
         public async Task<ActionResult> GetAllNameAndTermsAndConditions()
         {
-            var MasterDataServicesies = await _serviceMDService.GetAllNameAndTermsAndConditions();
-            return Ok(MasterDataServicesies);
+            var masterDataServices = await _serviceMDService.GetAllNameAndTermsAndConditions();
+            return Ok(masterDataServices);
         }
 
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.ReadOne)]
         public async Task<ActionResult> GetOneMasterDataServices(string id)
         {
-            var MasterDataServicesies = await _serviceMDService.GetServicesMById(id);
-            return Ok(MasterDataServicesies);
+            var masterDataService = await _serviceMDService.GetServicesMById(id);
+            return Ok(masterDataService);
         }
+
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.Create)]
         public async Task<ActionResult> CreateMasterDataServicess([FromForm] CreateServicesMCommand input)
         {
-
-            var MasterDataServicesies = await _serviceMDService.CreateServicesM(input);
-
-            return Ok(MasterDataServicesies);
+            var masterDataService = await _serviceMDService.CreateServicesM(input);
+            return Ok(masterDataService);
         }
+
         [HttpPut("id")]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.Update)]
         public async Task<ActionResult> UpdateMasterDataServices(string id, [FromForm] UpdateServicesMCommand input)
         {
-
-
-            var MasterDataServicesies = await _serviceMDService.Updateservices(id, input);
-            return Ok(MasterDataServicesies);
+            var masterDataService = await _serviceMDService.Updateservices(id, input);
+            return Ok(masterDataService);
         }
+
         [HttpDelete("id")]
-        [AllowAnonymous]
+        [Authorize(AdminServicesPermissions.Delete)]
         public async Task<ActionResult> DeleteMasterDataServices(string id)
         {
-            var MasterDataServicesies = await _serviceMDService.DeleteMedicalTestsAndXray(id);
-            return Ok(MasterDataServicesies);
+            var masterDataService = await _serviceMDService.DeleteMedicalTestsAndXray(id);
+            return Ok(masterDataService);
         }
-
     }
 
 

@@ -2,7 +2,7 @@
 
 namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [Area("Settings")]
+    [Area("Admin/Settings")]
     public class SettingsController : BassAdminController
     {
     }

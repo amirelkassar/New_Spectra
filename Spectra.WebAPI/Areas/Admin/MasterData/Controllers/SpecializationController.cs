@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {
 
-    public class SpecializationController : MasterDataController
+    [Authorize]
+    public class SpecializationController : ControllerBase
     {
-
         private readonly ISpecializationService _specializationsServices;
 
         public SpecializationController(ISpecializationService specializationsServices)
@@ -18,67 +19,60 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminSpecializationPermissions.ReadList)]
         public async Task<ActionResult> GetAllSpecializations()
         {
-            var Specializationsies = await _specializationsServices.GetAllSpecializations();
-            return Ok(Specializationsies);
+            var specializations = await _specializationsServices.GetAllSpecializations();
+            return Ok(specializations);
         }
+
         [HttpGet("GetAllNames")]
-        [AllowAnonymous]
+        [Authorize(AdminSpecializationPermissions.ReadList)]
         public async Task<ActionResult> GetAllSpecializationsNames()
         {
-            var Specializationsies = await _specializationsServices.GetAllSpecializationsNames();
-
-            return Ok(Specializationsies);
+            var specializationNames = await _specializationsServices.GetAllSpecializationsNames();
+            return Ok(specializationNames);
         }
-
 
         [HttpGet("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetOneSpecializations(string id)
+        [Authorize(AdminSpecializationPermissions.ReadOne)]
+        public async Task<ActionResult> GetOneSpecialization(string id)
         {
-            var Specializationsies = await _specializationsServices.GetSpecializationById(id);
-            return Ok(Specializationsies);
+            var specialization = await _specializationsServices.GetSpecializationById(id);
+            return Ok(specialization);
         }
+
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> CreateSpecializations(CreateSpecializationCommand input)
+        [Authorize(AdminSpecializationPermissions.Create)]
+        public async Task<ActionResult> CreateSpecialization(CreateSpecializationCommand input)
         {
-
-
-            var Specializationsies = await _specializationsServices.CreateSpecialization(input);
-            return Ok(Specializationsies);
+            var specialization = await _specializationsServices.CreateSpecialization(input);
+            return Ok(specialization);
         }
+
         [HttpPost("upload")]
-        [AllowAnonymous]
+        [Authorize(AdminSpecializationPermissions.Create)]
         public async Task<ActionResult> UploadExcelFile(IFormFile file)
         {
-
-
             var data = _specializationsServices.CreateFromExcel(file);
-
-
-
             return Ok(data);
         }
+
         [HttpPut("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> UpdateSpecializations(string id, UpdateSpecializationCommand input)
+        [Authorize(AdminSpecializationPermissions.Update)]
+        public async Task<ActionResult> UpdateSpecialization(string id, UpdateSpecializationCommand input)
         {
-
-
-            var Specializationsies = await _specializationsServices.UpdateSpecialization(id, input);
-            return Ok(Specializationsies);
+            var specialization = await _specializationsServices.UpdateSpecialization(id, input);
+            return Ok(specialization);
         }
+
         [HttpDelete("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> DeleteSpecializations(string id)
+        [Authorize(AdminSpecializationPermissions.Delete)]
+        public async Task<ActionResult> DeleteSpecialization(string id)
         {
-            var Specializationsies = await _specializationsServices.DeleteSpecialization(id);
-            return Ok(Specializationsies);
+            var specialization = await _specializationsServices.DeleteSpecialization(id);
+            return Ok(specialization);
         }
-
     }
 
 }

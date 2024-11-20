@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Shared.Constants.Permissions
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {
     public class AdminDrugPermissions : IPermissionContributor
     {
@@ -20,10 +20,14 @@ namespace Spectra.Domain.Shared.Constants.Permissions
         public const string ReadList = CRUDPermissions + nameof(ReadList);
         public const string ReadOne = CRUDPermissions + nameof(ReadOne);
         //sheets operations permissoins
-        public const string SheetsPermissions= Group + nameof(SheetsPermissions);
+        public const string SheetsPermissions = Group + nameof(SheetsPermissions);
         public const string Print = SheetsPermissions + nameof(Print);
         public const string Download = SheetsPermissions + nameof(Download);
         public const string Export = SheetsPermissions + nameof(Export);
         public const string Import = SheetsPermissions + nameof(Import);
     }
+
+
+
+
 }
