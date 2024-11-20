@@ -176,7 +176,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IMedicalTeamService, MedicalTeamService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
-
+            services.AddScoped<IPermissionManager,PermissionManager>();
             services.AddScoped<IHellper, Hellper>();
 
             return services;

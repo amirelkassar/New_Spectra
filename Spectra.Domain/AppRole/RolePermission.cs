@@ -49,5 +49,7 @@ namespace Spectra.Domain.AppRole
         }
 
         public void ClearDomainEvents() => _domainEvents.Clear();
+
+        public static RolePermission Create(string id, string roleId, string permission) => new(id, roleId, permission);
     }
 }

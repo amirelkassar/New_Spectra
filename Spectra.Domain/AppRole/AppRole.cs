@@ -8,6 +8,10 @@ namespace Spectra.Domain.AppRole
 {
     public class AppRole : IdentityRole, IBaseEntity<string>
     {
+        public AppRole()
+        {
+            Permissions = [];
+        }
         private readonly List<BaseEvent> _domainEvents = [];
 
         [NotMapped]
@@ -27,5 +31,7 @@ namespace Spectra.Domain.AppRole
         }
 
         public void ClearDomainEvents() => _domainEvents.Clear();
+
+        public ICollection<RolePermission> Permissions { get; set; }
     }
 }
