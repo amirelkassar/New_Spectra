@@ -8,78 +8,41 @@ namespace Spectra.Domain.MasterData.ServicesMD
 {
     public class MasterDataServices : BaseAuditableEntity<string>
     {
-        public AvailableSrvice AvailableSrvices { get; set; }
+        public AvailableSrvice AvailableSrvices { get;private set; }
         public string Name { get; set; }
-        public string DefinitionServices { get; set; }
+        public string? Description { get; set; }
         public double Price { get; set; }
-        public string TermsAndConditions { get; set; }
-        //public string? Address { get; set; }
-        //public string? Content { get; set; }
-        public List<Secation>? Secations { get; set; }
-        public List<string>? AttachmentPath { get; set; }
+        public double? Discount { get; set; }
+        public string? TermsAndConditions { get; set; }
+        public List<Secation>? Secations { get; private set; }
+        public List<string>? AttachmentPath { get; private set; }
 
         protected MasterDataServices() { }
         private MasterDataServices(
         string id,
         string name,
-        string definitionServices,
         AvailableSrvice availableServices,
-        double servicePrice,
-        string termsAndConditions,
-        //string? serviceAddress = null,
-        //string? content = null,
-        List<Secation>? secations = null,
-      List<string>? attachmentPath = null
-               ) : base(id)
+        double servicePrice) : base(id)
         {
             Id = id;
             Name = name;
-            DefinitionServices = definitionServices;
             AvailableSrvices = availableServices;
             Price = servicePrice;
-            TermsAndConditions = termsAndConditions;
-            //Address = serviceAddress;
-            //Content = content;
-            Secations = secations;
-            AttachmentPath = attachmentPath;
         }
         public static MasterDataServices Create(string id,
-        string servicesName,
-        string definitionServices,
+        string name,
         AvailableSrvice availableServices,
-        double servicePrice,
-        string termsAndConditions,
-        //string? serviceAddress = null,
-        //string? content = null,
-        List<Secation>? secations = null,
-      List<string>? attachmentPath = null
-       )
-
+        double servicePrice)
         {
-
-
-
             ArgumentNullException.ThrowIfNull(id, nameof(id));
-            ArgumentNullException.ThrowIfNull(servicesName, nameof(servicesName));
+            ArgumentNullException.ThrowIfNull(name, nameof(name));
             ArgumentNullException.ThrowIfNull(availableServices, nameof(availableServices));
             ArgumentNullException.ThrowIfNull(servicePrice, nameof(servicePrice));
-            ArgumentNullException.ThrowIfNull(definitionServices, nameof(definitionServices));
-            ArgumentNullException.ThrowIfNull(termsAndConditions, nameof(termsAndConditions));
-
-            var secationList = secations?.Select(x => new Secation
-            {
-                Sectiontitle = x.Sectiontitle,
-                Sectiondescription = x.Sectiondescription
-            }).ToList() ?? new List<Secation>();
-
-
 
             return new MasterDataServices(id,
-                servicesName, definitionServices,
-                availableServices, servicePrice,
-                termsAndConditions,
-              /*  serviceAddress, content,*/ secationList, attachmentPath);
-
+                name,
+                availableServices, 
+                servicePrice);
         }
 
 

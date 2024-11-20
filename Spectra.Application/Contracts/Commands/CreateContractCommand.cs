@@ -1,68 +1,121 @@
 ﻿using MediatR;
+using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.Sections;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 
 namespace Spectra.Application.Contracts.Commands
 {
 
-    public class CreateContractCommand : ICommand<OperationResult<string>>
+    public class CreateContractCommand : ICommand<OperationResult>
     {
-        public List<OperationContract>? Freelance { get; set; }
-        public List<OperationContract>? SpectraTeam { get; set; }
+        public CreateContractCommand()
+        {
+            FreelancingServices = [];
+            SpectraTeamServices = [];
+        }
+        public string EmployeeUserId { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public ContractCases ContractCase { get; set; }
+        public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
+        public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
     }
 
-    public class CreateDoctorCommandHandler : IRequestHandler<CreateContractCommand, OperationResult<string>>
+    public class CreateContractCommandHandler(IContractRepository contractRepository,
+        IMedicalProviderRepository medicalProvider,
+        IServiceMDRepository serviceMDRepository,
+        ISectionsRepository sectionsRepository) : IRequestHandler<CreateContractCommand, OperationResult>
     {
 
-        private readonly IContractRepository _contractRepository;
-        private readonly ICurrentUser _currentUser;
-        private readonly IMedicalProviderRepository _medicalProvider;
+        private readonly IContractRepository _contractRepository = contractRepository;
+        private readonly IMedicalProviderRepository _medicalProvider = medicalProvider;
+        private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
+        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
 
-        //private readonly ISubContractRepository _subContractRepository;
-
-        public CreateDoctorCommandHandler(IContractRepository contractRepository, ICurrentUser currentUser, IMedicalProviderRepository medicalProvider)
-        {
-            _contractRepository = contractRepository;
-            _currentUser = currentUser;
-            _medicalProvider = medicalProvider;
-        }
-
-        // here we Create Contract and have Two options First Send to Admin second Save it So 
-        // here we get the Name From token but we Stell did not make it 
-        public async Task<OperationResult<string>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreateContractCommand request, CancellationToken cancellationToken)
         {
 
-            var medicalProvider = await _medicalProvider.GetByIdentityIdAsync( _currentUser.Id);
-            var CheckEmployees = await _contractRepository.GetAllAsync(x => x.EmployeeId== medicalProvider.Id, null);
+            var currentContracts = await _contractRepository.GetAsync(c => c.EmployeeUserId == request.EmployeeUserId && c.ContractState != ContractStates.Canceled);
 
-            if (CheckEmployees.Any())
+            if (currentContracts is not null)
             {
                 throw new RequestErrorException("Your Request is Under Review");
             }
+            var medicalProvider = await _medicalProvider.GetByIdentityIdAsync(request.EmployeeUserId);
 
-            var contract = EmploymentContract.Create(       
+            var departmentHead = await _sectionsRepository.GetByIdAsync(medicalProvider.SectionMedicalDepartment);
+            var services = await _serviceMDRepository.GetAllAsync();
+
+            var contractVerion = new ContractVersion
+            {
+                Order=1,
+                AcceptedByAdmin = false,
+                AcceptedByDepartmentHead = false,
+                AcceptedByDoctor = true,
+                CreationDate = DateTime.UtcNow,
+                State = ContractVersionStates.Active
+            };
+
+            foreach (var service in services)
+            {
+                if (request.FreelancingServices.Any(s => s.ServiceId == service.Id) && !contractVerion.FreelancingServices.Any(s => s.ServiceId == service.Id))
+                {
+                    var requestService = request.FreelancingServices.First(s => s.ServiceId == service.Id);
+                    contractVerion.FreelancingServices.Add(new ContractService
+                    {
+                        ServiceId = service.Id,
+                        ServiceName = service.Name,
+                        Duration = requestService.Duration,
+                        EmployeeFees = requestService.EmployeeFees,
+                        EmployeePercentage = requestService.EmployeePercentage,
+                        PlatformFees = requestService.PlatformFees,
+                        PlatformPercentage = requestService.PlatformPercentage,
+                        ServiceFees = requestService.ServiceFees,
+                        ServiceTerms = service.TermsAndConditions
+                    });
+                }
+                if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !contractVerion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
+                {
+                    var requestService = request.SpectraTeamServices.First(s => s.ServiceId == service.Id);
+                    contractVerion.SpectraTeamServices.Add(new ContractService
+                    {
+                        ServiceId = service.Id,
+                        ServiceName = service.Name,
+                        Duration = requestService.Duration,
+                        EmployeeFees = requestService.EmployeeFees,
+                        EmployeePercentage = requestService.EmployeePercentage,
+                        PlatformFees = requestService.PlatformFees,
+                        PlatformPercentage = requestService.PlatformPercentage,
+                        ServiceFees = requestService.ServiceFees,
+                        ServiceTerms = service.TermsAndConditions
+                    });
+                }
+            }
+
+            var contract = EmploymentContract.Create(
             Ulid.NewUlid().ToString(),
-            request.Freelance,
-            request.SpectraTeam,
             request.HoursOfWork,
             request.DaysOfWork,
             medicalProvider.Id,
-            medicalProvider.JobType.ToString(),
-            request.ContractCase,
             medicalProvider.Name.FirstName,
-            AdminOrEmployee.Employee  
+             request.EmployeeUserId,
+            departmentHead.DoctorId,
+            departmentHead.DoctorName,
+            $"Contract Of {medicalProvider.Name.FirstName}",
+            ContractStates.Contracting,
+            [contractVerion]
             );
+            contract.JobTitle =medicalProvider.JobType.ToString();
 
             await _contractRepository.AddAsync(contract);
 
@@ -71,5 +124,5 @@ namespace Spectra.Application.Contracts.Commands
         }
     }
 
-   
+
 }

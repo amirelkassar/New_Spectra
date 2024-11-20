@@ -5,23 +5,18 @@ using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Wrappers;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.Services
 {
     public interface IContractService
     {
-        Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input);
-
-        Task<OperationResult<Unit>> DeleteContract(string id);
-        Task<OperationResult<Unit>> EmployeeAccpetContract(string id);
-        Task<OperationResult<GetServicesContractQuery>> GetAllContractData();
-
-        //Task<OperationResult<IEnumerable<EmploymentContract>>> GetAllContracts(GetAllContactrQuery empelyeeId);
-        Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input);
-
-        Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId);
-        Task<OperationResult<EmploymentContract>> GetContractById(string id);
-
-        Task<OperationResult<Unit>> UpdateContract(string id, UpdateAdminContractCommand input);
+        Task<OperationResult> CreateContractAsync(CreateContractCommand input);
+        Task<OperationResult> DeleteContract(string id);
+        Task<OperationResult> AcceptVersion(string id, ContractApprovals input);
+        Task<OperationResult> CancelContract(string id);
+        Task<OperationResult> UpdateVersion(string id);
+        Task<OperationResult> GetContractById(string id);
+        Task<OperationResult> UpdateContract(string id, UpdateAdminContractCommand input);
     }
 }
