@@ -10,7 +10,7 @@ using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.Employees
 {
-    [Area("Admin/Employees")]
+    [Area("Admin")]
     [Authorize]
     public class EmployeesController : BassAdminController
     {

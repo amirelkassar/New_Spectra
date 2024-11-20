@@ -10,7 +10,7 @@ using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract
 {
-    [Area("Admin/Contract")]
+    [Area("Admin")]
     [Authorize]
     public class AdminContractController : BassAdminController
     {

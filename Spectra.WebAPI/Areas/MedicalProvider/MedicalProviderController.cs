@@ -4,7 +4,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider
 {
     [ApiController]
     [Route("api/[area]/[controller]")]
-    public class MedicalProviderController : ControllerBase
+    public abstract class MedicalProviderController : ControllerBase
     {
     }
 }

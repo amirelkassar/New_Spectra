@@ -11,7 +11,7 @@ using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
 {
-    [Area("MedicalProvider")]
+    [Area("Admin")]
     [Authorize]
     public class MedicalProviderController : BassAdminController
     {
