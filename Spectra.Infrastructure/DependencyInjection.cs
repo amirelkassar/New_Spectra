@@ -56,6 +56,7 @@ using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.Admin;
@@ -315,7 +316,7 @@ namespace Spectra.Infrastructure
                 {
                     services.AddAuthorization(config =>
                     {
-                        config.AddPolicy(permission, permConfig => permConfig.RequireClaim(permission));
+                        config.AddPolicy(permission, permConfig => permConfig.RequireClaim(CustomClaims.Permissions, [permission]));
                     });
                 }
             }
