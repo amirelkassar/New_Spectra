@@ -27,6 +27,8 @@ namespace Spectra.Infrastructure.Handlers
             ? _context.Request.Headers[HttpClaims.Authorization].ToString().Replace("Bearer ", "")
             : string.Empty;
 
+        public string Role => _context.User.FindFirst(ClaimTypes.Role)?.Value;
+
         public bool IsInRole(string role)
         {
             return _context.User.IsInRole(role);
