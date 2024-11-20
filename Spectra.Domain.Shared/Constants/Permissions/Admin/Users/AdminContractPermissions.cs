@@ -9,9 +9,9 @@ namespace Spectra.Domain.Shared.Constants.Permissions.Admin.Users
 {
     public class AdminContractPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminContractPermissions);
+        public const string Group = nameof(AdminContractPermissions) + "Group.";
         //Crud operations permissoins
-        public const string CRUDPermissions = Group + nameof(CRUDPermissions);
+        public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category.";
         public const string Create = CRUDPermissions + nameof(Create);
         public const string Update = CRUDPermissions + nameof(Update);
         public const string ReadList = CRUDPermissions + nameof(ReadList);
