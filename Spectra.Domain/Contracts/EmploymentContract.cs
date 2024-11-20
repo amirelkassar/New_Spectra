@@ -26,10 +26,10 @@ namespace Spectra.Domain.Contracts
         public string? CanceldByUsername { get; set; }
         public string? CancelReason { get; set; }
         public bool? AcceptedByDepartmentHead { get; set; }
+        public string Content { get; set; }
 
 
         public ICollection<ContractVersion> Versions { get; private set; }
-        public string Content { get; set; }
 
         private EmploymentContract(string id,
             int hoursOfWork,
