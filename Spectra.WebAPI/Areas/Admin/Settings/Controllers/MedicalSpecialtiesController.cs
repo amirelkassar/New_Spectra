@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.MedicalSpecialties.Commands;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
 {
+    [Authorize]
     public class MedicalSpecialtiesController : SettingsController
     {
         private readonly IMedicalSpecialtiesService _entityServices;
@@ -14,7 +16,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
             _entityServices = MedicalSpecialtsServices;
         }
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalSpecialtiesPermissions.ReadList)]
         public async Task<ActionResult> GetAllMedicalSpecialt()
         {
             var MedicalSpecialts = await _entityServices.GetAllMedicalSpecialties();
@@ -22,7 +24,7 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
         }
 
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalSpecialtiesPermissions.ReadOne)]
         public async Task<ActionResult> GetOneMedicalSpecialt(string id)
         {
             var MedicalSpecialt = await _entityServices.GetMedicalSpecialtiesMById(id);
@@ -30,22 +32,24 @@ namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalSpecialtiesPermissions.Create)]
         public async Task<ActionResult> CreateMedicalSpecialt(CreateMedicalSpecialtCommand input)
         {
             var MedicalSpecialt = await _entityServices.CreateMedicalSpecialties(input);
             return Ok(MedicalSpecialt);
         }
+
         [HttpPut("id")]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalSpecialtiesPermissions.Update)]
         public async Task<ActionResult> UpdateMedicalSpecialt(string id, UpdateMedicalSpecialtCommand input)
         {
             var MedicalSpecialt = await _entityServices.UpdateMedicalSpecialties(id, input);
 
             return Ok(MedicalSpecialt);
         }
+
         [HttpDelete("id")]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalSpecialtiesPermissions.Delete)]
         public async Task<ActionResult> DeleteMedicalSpecialt(string id)
         {
             var MedicalSpecialt = await _entityServices.DeleteMedicalSpecialties(id);

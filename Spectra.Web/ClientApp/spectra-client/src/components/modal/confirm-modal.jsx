@@ -14,7 +14,8 @@ function ConfirmModal() {
     isPending,
   } = useConfirmModal();
 
-  const handleSumbit = async () => {
+  const handleSumbit = async (e) => {
+    e.preventDefault();
     await onConfirm();
     close();
   };

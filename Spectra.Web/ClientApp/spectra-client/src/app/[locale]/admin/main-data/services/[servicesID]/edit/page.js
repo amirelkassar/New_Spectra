@@ -1,18 +1,22 @@
 'use client';
+
+import { useEffect, useState } from 'react';
 import BackIcon from '@/assets/icons/back';
 import Button from '@/components/button';
 import GetErrorMsg from '@/components/getErrorMsg';
 import InputGreen from '@/components/Input-green';
-import { Link } from '@/navigation';
+import { Toast } from '@/components/toast';
+import { Link, useRouter } from '@/navigation';
 import ROUTES from '@/routes';
 import {
   GetMasterDataServicesID,
   useEditMasterDataServices,
 } from '@/useAPI/admin/main-data/services';
 import { Textarea } from '@mantine/core';
-import React, { useEffect, useState } from 'react';
 
 function Page({ params }) {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     AvailableSrvices: '1',
     name: '',
@@ -20,18 +24,22 @@ function Page({ params }) {
     Price: '',
     termsAndConditions: '',
   });
+
   const { data, isLoading } = GetMasterDataServicesID(
     params.servicesID
   );
+
   const {
-    mutate: EditMasterDataServices,
+    mutateAsync: EditMasterDataServices,
     error,
+    isPending,
     isError,
     reset,
   } = useEditMasterDataServices(formData?.id);
+
   useEffect(() => {
     data?.data.data ? setFormData(data.data.data) : null;
-  }, [isLoading]);
+  }, [isLoading, data?.data?.data]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +53,6 @@ function Page({ params }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = formData.id;
-    console.log(id);
 
     const formDataToSend = new FormData();
     for (const key in formData) {
@@ -59,15 +65,21 @@ function Page({ params }) {
       }
     }
 
-    EditMasterDataServices(formDataToSend);
+    Toast.Promise(EditMasterDataServices(formDataToSend), {
+      success: 'تم التعديل بنجاح',
+      onSuccess: () => {
+        router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
+      },
+    });
   };
   return (
     <div>
       <div className='flex items-center gap-4 lg:gap-7 mb-12'>
         <Link
           href={
-            ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS( data?.data.data.id) +
-            '?show=false'
+            ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(
+              data?.data.data.id
+            ) + '?show=false'
           }
           className=' w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%] flex items-center justify-center'
         >
@@ -119,6 +131,7 @@ function Page({ params }) {
         />
         <div className='flex flex-col mt-16 items-center gap-3'>
           <Button
+            disabled={isPending}
             onClick={handleSubmit}
             className='w-full h-[60px] text-[20px] font-Bold duration-300 hover:shadow-md'
             variant='secondary'
@@ -126,6 +139,7 @@ function Page({ params }) {
             حفظ
           </Button>
           <Link
+            disabled={isPending}
             href={ROUTES.ADMIN.DATAMAIN.SERVICESADD}
             className='w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[60px] text-[20px] font-Bold'
           >

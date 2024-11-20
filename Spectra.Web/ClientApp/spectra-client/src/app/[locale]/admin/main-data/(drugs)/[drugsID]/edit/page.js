@@ -3,7 +3,7 @@ import BackIcon from '@/assets/icons/back';
 import CloseIcon from '@/assets/icons/close';
 import UploadImgIcon from '@/assets/icons/uploadImg';
 import Button from '@/components/button';
-import { FormErrorMessage } from '@/components/form-error-message';
+
 import GetErrorMsg from '@/components/getErrorMsg';
 import HandelShowDataEdit from '@/components/handelShowDataEdit';
 import InputGreen from '@/components/Input-green';
@@ -83,16 +83,25 @@ function Page({ params }) {
     e.preventDefault();
     const data = getFormData(formData);
 
+    Toast.Promise(EditDrug(data), {
+      success: 'تم تعديل العقار بنجاح',
+      onSuccess: () =>
+        router.replace(ROUTES.ADMIN.DATAMAIN.HOME),
+    });
+
+    return;
+    const taostId = Toast.Loading();
     try {
-      const taostId = Toast.Loading();
       const res = await EditDrug(data);
       if (res?.successOpration) {
         router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
         Toast.Dismiss(taostId);
         Toast.Success('تم تعديل العقار بنجاح');
       }
-    } catch {
-      Toast.Dismiss();
+    } catch (error) {
+      Toast.Dismiss(taostId);
+      const generalError = GetErrorMsg(error, 'general');
+      if (generalError) Toast.Error(generalError);
     }
   };
   return (
@@ -252,11 +261,6 @@ function Page({ params }) {
             >
               حفظ
             </Button>
-          </div>
-          <div className='mt-2'>
-            <FormErrorMessage
-              message={GetErrorMsg(error, 'general')}
-            />
           </div>
         </div>
       </HandelShowDataEdit>

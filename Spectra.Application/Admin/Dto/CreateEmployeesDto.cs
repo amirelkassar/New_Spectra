@@ -8,7 +8,5 @@ namespace Spectra.Application.Admin.Dto
         public string specializationId { get; set; }
         public List<IFormFile>? ScientificDegree { get; set; }
 
-
-
     }
 }

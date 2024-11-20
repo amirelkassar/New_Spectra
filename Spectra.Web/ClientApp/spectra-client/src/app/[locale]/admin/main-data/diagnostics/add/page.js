@@ -1,21 +1,25 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BackIcon from '@/assets/icons/back';
-import { Link } from '@/navigation';
+import { Link, useRouter } from '@/navigation';
 import Button from '@/components/button';
 import ROUTES from '@/routes';
 import { Textarea } from '@mantine/core';
 import InputGreen from '@/components/Input-green';
 import { useCreateDiagnostics } from '@/useAPI/admin/main-data/diagnostics';
 import GetErrorMsg from '@/components/getErrorMsg';
+import { Toast } from '@/components/toast';
 function Page() {
+  const router = useRouter();
+
   const {
-    mutate: CreateDiagnostics,
+    mutateAsync: CreateDiagnostics,
     error,
-    isSuccess,
+    isPending,
     isError,
     reset,
   } = useCreateDiagnostics();
+
   const [formData, setFormData] = useState({
     code1: '',
     code2: '',
@@ -23,6 +27,7 @@ function Page() {
     Name: '',
     description: '',
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -33,20 +38,18 @@ function Page() {
       reset();
     }
   };
-  useEffect(() => {
-    isSuccess &&
-      setFormData({
-        code1: '',
-        code2: '',
-        code3: '',
-        Name: '',
-        description: '',
-      });
-  }, [isSuccess]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    CreateDiagnostics(formData);
+
+    Toast.Promise(CreateDiagnostics(formData), {
+      success: 'تم اضافة التشخيص بنجاح',
+      onSuccess: () => {
+        router.replace(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS);
+      },
+    });
   };
+
   return (
     <div>
       <div className='flex mb-10 lgl:mt-0 mt-6   items-center gap-4 '>
@@ -104,6 +107,7 @@ function Page() {
         <div className='flex mt-10 items-center gap-4 md:gap-10 flex-col md:flex-row'>
           <Button
             onClick={handleSubmit}
+            disabled={isPending}
             variant='secondary'
             className={
               'max-w-[290px] w-full font-bold disabled:cursor-not-allowed md:h-[60px]'

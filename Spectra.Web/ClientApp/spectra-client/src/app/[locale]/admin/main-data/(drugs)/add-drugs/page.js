@@ -7,7 +7,7 @@ import BackIcon from '@/assets/icons/back';
 import CloseIcon from '@/assets/icons/close';
 import UploadImgIcon from '@/assets/icons/uploadImg';
 import Button from '@/components/button';
-import { FormErrorMessage } from '@/components/form-error-message';
+
 import GetErrorMsg from '@/components/getErrorMsg';
 import InputGreen from '@/components/Input-green';
 import { getFormData } from '@/lib/utils';
@@ -71,19 +71,16 @@ function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = getFormData(formData);
 
-    try {
-      const taostId = Toast.Loading();
-      const res = await createDrug(data);
-      if (res?.successOpration) {
-        router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
-        Toast.Dismiss(taostId);
-        Toast.Success('تم اضافة العقار بنجاح');
-      }
-    } catch {
-      Toast.Dismiss();
-    }
+    Toast.Promise(createDrug(data), {
+      success: 'تم اضافة العقار بنجاح',
+      onSuccess: (res) => {
+        if (res?.successOpration)
+          router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+      },
+    });
   };
   return (
     <div>
@@ -233,12 +230,6 @@ function Page() {
           >
             حفظ
           </Button>
-        </div>
-
-        <div className='mt-2'>
-          <FormErrorMessage
-            message={GetErrorMsg(error, 'general')}
-          />
         </div>
       </div>
     </div>

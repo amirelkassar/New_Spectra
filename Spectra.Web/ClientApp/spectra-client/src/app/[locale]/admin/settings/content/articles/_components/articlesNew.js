@@ -136,8 +136,9 @@ function ArticlesNew() {
                   }
                 >
                   <EditIcon
-                    pathColor='#10B0C1'
-                    className={'w-[17px] h-auto'}
+                    className={
+                      'w-[17px] h-auto text-greenMain'
+                    }
                   />
                   تعديل
                 </Button>
