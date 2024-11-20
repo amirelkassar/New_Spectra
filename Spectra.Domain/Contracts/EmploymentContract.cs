@@ -86,9 +86,9 @@ namespace Spectra.Domain.Contracts
             ContractState = ContractStates.Accepted;
             AcceptingDate= DateTime.UtcNow;
             var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
-            lastVersion.AcceptedByDoctor = true;
-            lastVersion.AcceptedByDepartmentHead = true;
+            lastVersion.AcceptedByEmployee = true;
             lastVersion.AcceptedByAdmin = true;
+            AcceptedByDepartmentHead = true;
         }
 
         public void Cancel(string userId,string username,string? reason=default)
@@ -99,10 +99,8 @@ namespace Spectra.Domain.Contracts
             CanceldByUsername = username;
             CancelReason = reason;
             var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
-            lastVersion.AcceptedByDoctor = false;
-            lastVersion.AcceptedByDepartmentHead = false;
+            lastVersion.AcceptedByEmployee = false;
             lastVersion.AcceptedByAdmin = false;
-
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Employees.MedicalStaff;
@@ -30,11 +29,13 @@ namespace Spectra.Application.Admin.Queries
         {
 
 
-            var paginatedDoctors = await _doctorRepository.GetAllAsyncA(x => x.JobType == JobTypes.Doctor, null, request.PageNumber,
-              request.PageSize);
-            paginatedDoctors.Items.Select(c => new GetAllemployeeDto { Name = $"{c.Name.FirstName}+{c.Name.LastName}", DateOfRequest = c.Created.Date });
+            //var paginatedDoctors = await _doctorRepository.GetAllAsyncA(x => x.JobType == JobTypes.Doctor, null, request.PageNumber,
+            //  request.PageSize);
+            //paginatedDoctors.Items.Select(c => new GetAllemployeeDto { Name = $"{c.Name.FirstName}+{c.Name.LastName}", DateOfRequest = c.Created.Date });
 
-            return OperationResult<PaginatedResult<MedicalProvider>>.Success(paginatedDoctors);
+            //return OperationResult<PaginatedResult<MedicalProvider>>.Success(paginatedDoctors);
+
+            throw new NotImplementedException();
         }
     }
 

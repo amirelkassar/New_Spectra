@@ -5,6 +5,7 @@ using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
+using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Contracts
@@ -29,7 +30,7 @@ namespace Spectra.Infrastructure.Contracts
             await _EmploymentContracts.DeleteOneAsync(id);
         }
 
-        public async Task<PaginatedResult<EmploymentContract>> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
+        public async Task<(ICollection<EmploymentContract> contracts, long total)> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
             FindOptions options = null,
             int pageNumber = 1,
             int pageSize = 100)
@@ -37,20 +38,14 @@ namespace Spectra.Infrastructure.Contracts
             var filterDefinition = filter ?? (x => true);
             var query = await _EmploymentContracts
                .Find(filterDefinition, options)
-               .SortByDescending(e=>e.Created)
+               .SortByDescending(e => e.Created)
                .Skip((pageNumber - 1) * pageSize)
                .Limit(pageSize)
                .ToListAsync();
 
-            var totalCount = await _EmploymentContracts.CountDocumentsAsync(filterDefinition);
-
-            return new PaginatedResult<EmploymentContract>
-            {
-                Items = query,
-                TotalCount = (int)totalCount,
-                PageNumber = pageNumber,
-                PageSize = pageSize
-            };
+            var total = await _EmploymentContracts.CountDocumentsAsync(filterDefinition);
+            var contracts = query;
+            return (contracts , total);
         }
 
         public async Task<EmploymentContract> GetByIdAsync(string id)

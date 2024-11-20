@@ -26,42 +26,22 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries
 
         public async Task<OperationResult<IEnumerable<MedicalProvider>>> Handle(GetAllMedicalProviderEarlyDetectionQuery request, CancellationToken cancellationToken)
         {
-            //here we will need to the MedicalProviders From supContract that  but we put the contract untile make the admin to accpet the MedicalProvider
 
-            var MedicalProvidersWithContract =
-    await _contractRepository.GetAllAsync(c =>
-    c.Titel == "MedicalProvider" &&
-    c.ContractCase == ContractCases.ACTIVE,
-       new FindOptions()
-   );
+           //         var MedicalProvidersWithContract =
+           // await _contractRepository.GetAllAsync(c =>
+           // c.Titel == "MedicalProvider" &&
+           // c.ContractCase == ContractCases.ACTIVE,
+           //    new FindOptions()
+           //);
 
-            var MedicalProviderIds = MedicalProvidersWithContract.Select(c => c.EmployeeId).ToList();
+           // var MedicalProviderIds = MedicalProvidersWithContract.Select(c => c.EmployeeId).ToList();
 
-            // Fetch the MedicalProvider entities using the EmployeeId
-            var MedicalProviders = await _MedicalProviderRepository.GetAllAsync(d => MedicalProviderIds.Contains(d.Id));
+           // // Fetch the MedicalProvider entities using the EmployeeId
+           // var MedicalProviders = await _MedicalProviderRepository.GetAllAsync(d => MedicalProviderIds.Contains(d.Id));
 
-            // Optionally, if you want to project some custom output
-            //var result = MedicalProviders.Select(d => new  {
-            //    MedicalProviderId = d.Id,
-            //    MedicalProviderName = d.Name.FirstName,
-            //    d.Diagnoses,
-            //    //ContractDetails = MedicalProvidersWithContract
-            //        //.Where(c => c.EmployeeId == d.Id)
-            //        //.Select(c => new {
-            //        //    c.HoursOfWork,
-            //        //    c.DaysOfWork,
-            //        //    FreelancerContracts = c.Freelancer
-            //        //        .Where(f => f.Service == "Early Examination")
-            //        //        .Select(f => new { f.Service, f.Selary }),
-            //        //    SpectraTeamContracts = c.SpectraTeam
-            //        //        .Where(s => s.Service == "Early Examination")
-            //        //        .Select(s => new { s.Service, s.Selary })
-            //        //})
-            //});
+           // return OperationResult<IEnumerable<MedicalProvider>>.Success(MedicalProviders);
 
-
-            return OperationResult<IEnumerable<MedicalProvider>>.Success(MedicalProviders);
-
+            throw new NotImplementedException();
 
         }
     }

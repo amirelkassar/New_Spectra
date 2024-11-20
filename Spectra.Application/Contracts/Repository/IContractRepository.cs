@@ -9,7 +9,7 @@ namespace Spectra.Application.Contracts.Repository
     {
         Task AddAsync(EmploymentContract EmploymentContract);
         Task DeleteAsync(string id);
-        Task<PaginatedResult<EmploymentContract>> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
+        Task<(ICollection<EmploymentContract> contracts, long total)> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
             FindOptions options = null,
             int pageNumber = 1,
             int pageSize = 100);

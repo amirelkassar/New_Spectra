@@ -56,14 +56,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
              Ulid.NewUlid().ToString(),
              request.Name,
-             request.DefinitionServices,
              request.AvailableSrvices,
-             request.Price,
-             request.TermsAndConditions,
-
-             request.Secations,
-             photoPath
-             );
+             request.Price);
             await _serviceMRepository.AddAsync(entity);
 
             return OperationResult<string>.Success(entity.Id);
