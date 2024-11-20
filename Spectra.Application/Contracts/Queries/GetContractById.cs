@@ -17,6 +17,7 @@ namespace Spectra.Application.Contracts.Queries
     {
         public string Id { get; set; }
         public string EmployeeUserId { get; set; }
+        public string CallerUserId { get; set; }
         public string CallerRole { get; set; }
 
         public class GetContractByIdHandler(IContractRepository contractRepository) : IRequestHandler<GetContractById, OperationResult>
@@ -25,8 +26,9 @@ namespace Spectra.Application.Contracts.Queries
 
             public async Task<OperationResult> Handle(GetContractById request, CancellationToken cancellationToken)
             {
-                var contract=await _contractRepository.GetAsync(c=>c.Id==request.Id &&  c.EmployeeUserId==request.EmployeeUserId)
-                    ?? throw new NotFoundException("Contracts",request.Id);
+                var contract = await _contractRepository.GetAsync(c => c.Id == request.Id
+                && (c.EmployeeUserId == request.EmployeeUserId || c.EmployeeUserId == request.CallerUserId || c.EmployeeHeadId == request.CallerUserId || request.CallerRole == Roles.SystemAdmin))
+                    ?? throw new NotFoundException("Contracts", request.Id);
 
                 if (request.CallerRole.Equals(Roles.SystemAdmin))
                 {
