@@ -9,9 +9,9 @@ namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
 {
     public class AdminSuccessStoryPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminSuccessStoryPermissions);
+        public const string Group = nameof(AdminSuccessStoryPermissions) + "Group.";
         //Crud operations permissoins
-        public const string CRUDPermissions = Group + nameof(CRUDPermissions);
+        public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         public const string Create = CRUDPermissions + nameof(Create);
         public const string Update = CRUDPermissions + nameof(Update);
         public const string Delete = CRUDPermissions + nameof(Delete);
