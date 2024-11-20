@@ -6,24 +6,24 @@ using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Employees.MedicalTeams.Commands;
 using Spectra.Application.Employees.MedicalTeams.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
 using Spectra.Infrastructure.Admin;
 
-namespace Spectra.WebAPI.Areas.Admin.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
 {
     [Area("MedicalProvider")]
     [Authorize]
-    public class AdminMedicalProviderController : BassAdminController
+    public class MedicalProviderController : BassAdminController
     {
         private readonly IAdminService _adminService;
         private readonly IMedicalProviderService _doctorService;
         private readonly IMedicalTeamService _medicalTeamService;
 
-        public AdminMedicalProviderController(IAdminService adminService,
-        IMedicalProviderService doctorService,  IMedicalTeamService medicalTeamService)
+        public MedicalProviderController(IAdminService adminService,
+        IMedicalProviderService doctorService, IMedicalTeamService medicalTeamService)
         {
             _adminService = adminService;
-            _doctorService= doctorService;
+            _doctorService = doctorService;
             _medicalTeamService = medicalTeamService;
         }
 
@@ -44,7 +44,7 @@ namespace Spectra.WebAPI.Areas.Admin.Controllers
             return Ok(appointmenties);
         }
         [HttpGet("GetDoctor/id")]
-        [Authorize( AdminMedicalProviderPermissions.ReadOne)]
+        [Authorize(AdminMedicalProviderPermissions.ReadOne)]
         public async Task<ActionResult> GetOneDoctor(string id)
         {
             var Doctories = await _doctorService.GetMedicalProviderById(id);

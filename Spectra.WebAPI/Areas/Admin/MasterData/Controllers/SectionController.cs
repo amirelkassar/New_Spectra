@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Sections.Commands;
 using Spectra.Application.MasterData.Sections.Service;
-using Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.Users
 {
     public class AdminContractPermissions : IPermissionContributor
     {
@@ -15,8 +15,6 @@ namespace Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons
         public const string Create = CRUDPermissions + nameof(Create);
         public const string Update = CRUDPermissions + nameof(Update);
         public const string ReadList = CRUDPermissions + nameof(ReadList);
-
-   
     }
 
 

@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
-using Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons;
-
+using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
 {

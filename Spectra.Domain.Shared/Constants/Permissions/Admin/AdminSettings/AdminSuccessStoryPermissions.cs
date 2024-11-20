@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.AdminSettings
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
 {
     public class AdminSuccessStoryPermissions : IPermissionContributor
     {

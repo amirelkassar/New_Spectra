@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {
-    public class AdminInternalExaminationPermissions : IPermissionContributor
+    public class AdminMedicalTestsAndXrayPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminInternalExaminationPermissions);
+        public const string Group = nameof(AdminMedicalTestsAndXrayPermissions);
         //Crud operations permissoins
         public const string CRUDPermissions = Group + nameof(CRUDPermissions);
         public const string Create = CRUDPermissions + nameof(Create);
@@ -25,6 +25,5 @@ namespace Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons
         public const string Download = SheetsPermissions + nameof(Download);
         public const string Export = SheetsPermissions + nameof(Export);
         public const string Import = SheetsPermissions + nameof(Import);
-
     }
 }

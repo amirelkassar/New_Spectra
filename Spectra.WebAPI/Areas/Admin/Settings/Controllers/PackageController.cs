@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.Packages.Commands;
-using Spectra.Domain.Shared.Constants.Permissions.AdminSettings;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 using Spectra.Infrastructure.Settings.Packages;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers

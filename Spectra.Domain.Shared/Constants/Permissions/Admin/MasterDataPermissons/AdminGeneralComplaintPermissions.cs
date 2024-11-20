@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.MasterDataPermissons
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {
     public class AdminGeneralComplaintPermissions : IPermissionContributor
     {
