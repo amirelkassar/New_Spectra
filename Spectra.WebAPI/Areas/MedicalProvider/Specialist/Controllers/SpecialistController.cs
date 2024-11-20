@@ -6,6 +6,8 @@ using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
+using Spectra.Domain.Shared.Constants.Permissions.MedicalProvider;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
 {
@@ -34,38 +36,38 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
 
 
         [HttpGet("AllClients/id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAllClintsDoctorCare(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
+        [Authorize(MedicalProviderSpecialistPermissions.ReadList)]
+        public async Task<ActionResult> GetAllClintsSpecialistCare(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
         {
-            var doctor = await _medicalProviderService.GetAllClintsMedicalProviderCare(id, input);
-            return Ok(doctor);
+            var Specialist = await _medicalProviderService.GetAllClintsMedicalProviderCare(id, input);
+            return Ok(Specialist);
         }
 
 
         [HttpGet("SpecificService")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAllDoctorSpecificService()
+        [Authorize(MedicalProviderSpecialistPermissions.ReadList)]
+        public async Task<ActionResult> GetAllSpecialistSpecificService()
         {
-            var doctor = await _medicalProviderService.GetAllMedicalProviderSpecificServices();
-            return Ok(doctor);
+            var Specialist = await _medicalProviderService.GetAllMedicalProviderSpecificServices();
+            return Ok(Specialist);
         }
 
 
         [HttpGet("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetOneDoctor(string id)
+        [Authorize(MedicalProviderSpecialistPermissions.ReadOne)]
+        public async Task<ActionResult> GetOneSpecialist(string id)
         {
-            var doctor = await _medicalProviderService.GetMedicalProviderById(id);
-            return Ok(doctor);
+            var Specialist = await _medicalProviderService.GetMedicalProviderById(id);
+            return Ok(Specialist);
         }
 
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateMedicalProviderDto input)
+        [Authorize(MedicalProviderSpecialistPermissions.Create)]
+        public async Task<ActionResult> CreateNormalSpecialist([FromForm] CreateMedicalProviderDto input)
         {
 
-            var doctor = await _medicalProviderService.CreateMedicalProvider(
+            var Specialist = await _medicalProviderService.CreateMedicalProvider(
                     input.FirstName,
                     input.LastName,
                     input.Prefix,
@@ -85,26 +87,27 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input .ConfirmationPassword
                     ,input.SpecializationId
                   /*  input.ScientificDegree*/);
-            return Ok(doctor);
+            return Ok(Specialist);
         }
 
 
         [HttpPut("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
+        
+  [Authorize(MedicalProviderSpecialistPermissions.Update)]
+        public async Task<ActionResult> UpdateSpecialist(string id, [FromForm] UpdateDoctorDto input)
         {
 
-            var doctor = await _medicalProviderService.UpdateMedicalProvider(id, input);
+            var Specialist = await _medicalProviderService.UpdateMedicalProvider(id, input);
 
-            return Ok(doctor);
+            return Ok(Specialist);
         }
 
         [HttpDelete("id")]
-        [AllowAnonymous]
-        public async Task<ActionResult> DeleteDoctor(string id)
+        [Authorize(AdminMedicalProviderPermissions.Delete)]
+        public async Task<ActionResult> DeleteSpecialist(string id)
         {
-            var doctor = await _medicalProviderService.DeleteMedicalProvider(id);
-            return Ok(doctor);
+            var Specialist = await _medicalProviderService.DeleteMedicalProvider(id);
+            return Ok(Specialist);
         }
 
 
