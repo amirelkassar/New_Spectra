@@ -9,5 +9,18 @@ namespace Spectra.Infrastructure.Data
     public class IdentityContext(DbContextOptions<IdentityContext> options) : IdentityDbContext<AppUser, AppRole, string>(options), IDataProtectionKeyContext
     {
         public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<RolePermission>(e =>
+            {
+                e.HasOne<AppRole>()
+                .WithMany()
+                .HasForeignKey(p => p.RoleId);
+            });
+        }
     }
 }

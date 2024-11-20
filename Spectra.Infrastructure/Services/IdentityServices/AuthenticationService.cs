@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Spectra.Application.Identities;
 using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Identities.Dtos;
 using Spectra.Application.Interfaces;
@@ -19,6 +20,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IPermissionManager _permission;
         private readonly int _expDays;
         private readonly string _key;
         private readonly byte[] _keyBytes;
@@ -29,7 +31,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
         public AuthenticationService(IConfiguration configuration,
         IHttpContextAccessor httpContextAccessor,
-        UserManager<AppUser> userManager)
+        UserManager<AppUser> userManager,
+        IPermissionManager permission)
         {
             _key = configuration["Jwt:Key"];
             _expDays = int.Parse(configuration["Jwt:ExpiryDays"]);
@@ -39,6 +42,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _permission = permission;
         }
         public async Task<OperationResult> LoginAsync(LoginAPIParam input)
         {
@@ -109,6 +113,10 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             {
                 userclaims.Add(new Claim(ClaimTypes.Role, role));
             }
+            var permissions = await _permission.GetUserPermissionList(_user.Id);
+            foreach (var permission in permissions)
+                userclaims.Add(new Claim(CustomClaims.Permissions, permission));
+
             return userclaims;
         }
         private JwtSecurityToken GenerateToken(SigningCredentials credentials, ICollection<Claim> claims, out DateTime lifetime)

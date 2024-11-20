@@ -7,6 +7,7 @@
         public const string Username = nameof(Username);
         public const string PhoneConfirmed = nameof(PhoneConfirmed);
         public const string EmailConfirmed = nameof(EmailConfirmed);
+        public const string Permissions = nameof(Permissions);
         public const string Aud = "aud";
         public const string Iss = "iss";
     }

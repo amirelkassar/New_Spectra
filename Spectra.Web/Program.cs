@@ -30,10 +30,8 @@ using (var scope = app.Services.CreateScope())
     await settingsSeedService.Initialize();
     var dbContext = scope.ServiceProvider.GetRequiredService<IdentityContext>();
 
-    if (await dbContext.Database.EnsureCreatedAsync())
-    {
-        await dbContext.Database.MigrateAsync();
-    }
+    await dbContext.Database.MigrateAsync();
+
     var identitySeederService = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
     await identitySeederService.SeedAsync();
 }

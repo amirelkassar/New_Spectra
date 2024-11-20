@@ -44,7 +44,7 @@ namespace Spectra.Application.AppUsers.Commands
         [Phone]
         public string Phone { get; set; }
         [Required]
-        [EnumDataType(typeof(HumenGenders))]
+        [EnumDataType(typeof(HumenGender))]
         public HumenGender Gender { get; set; }
         public string? Occupation { get; set; }
         public string? DoctorRefferalCode { get; set; }
@@ -121,7 +121,7 @@ namespace Spectra.Application.AppUsers.Commands
                         throw new Exception("Invalid User Type");
                 }
 
-                throw new Exception();
+                return OperationResult.Success();
             }
         }
     }
