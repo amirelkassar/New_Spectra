@@ -60,8 +60,7 @@ namespace Spectra.Application.Contracts.Commands
             {
                 Order=1,
                 AcceptedByAdmin = false,
-                AcceptedByDepartmentHead = false,
-                AcceptedByDoctor = true,
+                AcceptedByEmployee = true,
                 CreationDate = DateTime.UtcNow,
                 State = ContractVersionStates.Active
             };

@@ -44,8 +44,7 @@ namespace Spectra.Application.Contracts.Commands
             var newVersion = new ContractVersion
             {
                 AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
-                AcceptedByDoctor = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.Secretary }.Any(r => r.Equals(request.ModifierRole)),
-                AcceptedByDepartmentHead = currentVersion.AcceptedByDepartmentHead,
+                AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.Secretary }.Any(r => r.Equals(request.ModifierRole)),
                 CreationDate = DateTime.UtcNow,
                 Order=currentVersion.Order++,
                 State=ContractVersionStates.Active,

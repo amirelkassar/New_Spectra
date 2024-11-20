@@ -25,6 +25,7 @@ namespace Spectra.Domain.Contracts
         public string? CanceldByUserId { get; set; }
         public string? CanceldByUsername { get; set; }
         public string? CancelReason { get; set; }
+        public bool? AcceptedByDepartmentHead { get; set; }
 
 
         public ICollection<ContractVersion> Versions { get; private set; }

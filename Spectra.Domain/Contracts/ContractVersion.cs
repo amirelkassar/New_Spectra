@@ -11,9 +11,8 @@ namespace Spectra.Domain.Contracts
         public ContractVersionStates State { get; set; }
         public List<ContractService>? FreelancingServices { get; set; }
         public List<ContractService>? SpectraTeamServices { get; set; }
-        public bool AcceptedByDoctor { get; set; }
+        public bool AcceptedByEmployee { get; set; }
         public bool AcceptedByAdmin { get; set; }
-        public bool AcceptedByDepartmentHead { get; set; }
         public DateTimeOffset? DraftingDate { get; set; }
 
     }
