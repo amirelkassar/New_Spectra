@@ -6,6 +6,8 @@ using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
+using Spectra.Domain.Shared.Constants.Permissions.MedicalProvider;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 {
@@ -23,7 +25,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
         }
 
         [HttpGet("AllClients/id")]
-        [AllowAnonymous]
+        [Authorize(MedicalProviderDoctorPermissions.ReadList)]
         public async Task<ActionResult> GetAllClintsDoctorCare(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
         {
             var doctor = await _medicalProviderService.GetAllClintsMedicalProviderCare(id, input);
@@ -31,7 +33,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
         }
 
         [HttpGet("SpecificService")]
-        [AllowAnonymous]
+        [Authorize(MedicalProviderDoctorPermissions.ReadList)]
         public async Task<ActionResult> GetAllDoctorSpecificService()
         {
             var doctor = await _medicalProviderService.GetAllMedicalProviderSpecificServices();
@@ -40,7 +42,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 
 
         [HttpGet("id")]
-        [AllowAnonymous]
+        [Authorize(MedicalProviderDoctorPermissions.ReadOne)]
         public async Task<ActionResult> GetOneDoctor(string id)
         {
             var doctor = await _medicalProviderService.GetMedicalProviderById(id);
@@ -48,7 +50,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(MedicalProviderDoctorPermissions.Create)]
         public async Task<ActionResult> CreateNormalDoctor([FromForm] CreateMedicalProviderDto input)
         {
         
@@ -75,7 +77,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
             return Ok(doctor);
         }
         [HttpPut("id")]
-        [AllowAnonymous]
+        [Authorize(MedicalProviderDoctorPermissions.Update)]
         public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
         {
 
@@ -85,7 +87,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
             return Ok(doctor);
         }
         [HttpDelete("id")]
-        [AllowAnonymous]
+        [Authorize(AdminMedicalProviderPermissions.Delete)]
         public async Task<ActionResult> DeleteDoctor(string id)
         {
             var doctor = await _medicalProviderService.DeleteMedicalProvider(id);
