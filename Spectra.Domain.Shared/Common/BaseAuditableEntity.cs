@@ -14,12 +14,12 @@ namespace Spectra.Domain.Shared.Common
             CreatedBy = createdBy;
             Created = DateTimeOffset.UtcNow;
         }
-        public DateTimeOffset Created { get; private set; }
+        public DateTimeOffset Created { get; protected set; } = DateTimeOffset.UtcNow;
 
-        public string? CreatedBy { get; private set; }
+        public string? CreatedBy { get; protected set; }
 
-        public DateTimeOffset? LastModified { get; private set; }
+        public DateTimeOffset? LastModified { get; protected set; }
 
-        public string? LastModifiedBy { get; private set; }
+        public string? LastModifiedBy { get; protected set; }
     }
 }

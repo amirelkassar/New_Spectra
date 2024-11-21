@@ -32,15 +32,15 @@ namespace Spectra.Infrastructure.Contracts
 
         public async Task<(ICollection<EmploymentContract> contracts, long total)> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
             FindOptions options = null,
-            int pageNumber = 1,
-            int pageSize = 100)
+            int skipCount = 0,
+            int maxCount = 100)
         {
             var filterDefinition = filter ?? (x => true);
             var query = await _EmploymentContracts
                .Find(filterDefinition, options)
                .SortByDescending(e => e.Created)
-               .Skip((pageNumber - 1) * pageSize)
-               .Limit(pageSize)
+               .Skip(skipCount)
+               .Limit(maxCount)
                .ToListAsync();
 
             var total = await _EmploymentContracts.CountDocumentsAsync(filterDefinition);

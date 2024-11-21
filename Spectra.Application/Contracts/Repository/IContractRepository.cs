@@ -11,8 +11,8 @@ namespace Spectra.Application.Contracts.Repository
         Task DeleteAsync(string id);
         Task<(ICollection<EmploymentContract> contracts, long total)> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,
             FindOptions options = null,
-            int pageNumber = 1,
-            int pageSize = 100);
+            int skipCount = 0,
+            int maxCount = 100);
         Task<EmploymentContract> GetByIdAsync(string id);
         Task UpdateAsync(EmploymentContract EmploymentContract);
         Task<EmploymentContract> GetAsync(Expression<Func<EmploymentContract, bool>> filter);
