@@ -1,16 +1,12 @@
 ﻿using MediatR;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.Commands

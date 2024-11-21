@@ -12,25 +12,25 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
 {
     [Area("Admin")]
     [Authorize]
-    public class AdminContractController : BassAdminController
+    public class ContractController : BassAdminController
     {
         private readonly IAdminService _adminService;
         private readonly IContractService _contractService;
 
-        public AdminContractController(IAdminService adminService, IContractService contractService)
+        public ContractController(IAdminService adminService, IContractService contractService)
         {
             _adminService = adminService;
             _contractService = contractService;
         }
-        [HttpGet("GetAllContracts")]
+        [HttpGet("list")]
         [Authorize(AdminContractPermissions.ReadList)]
-        public async Task<ActionResult> GetAllContracts([FromQuery] GetAllContractWithStatusQuery input)
+        public async Task<ActionResult> GetListAsync([FromQuery] GetAllContractWithStatusQuery input)
         {
             var contract = await _adminService.GetAllContractsOfEployees(input);
             return Ok(contract);
         }
 
-        [HttpGet("GetAllCopiesOFContract")]
+        [HttpGet()]
         [Authorize(AdminContractPermissions.ReadList)]
         public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
         {

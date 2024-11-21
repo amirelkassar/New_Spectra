@@ -36,7 +36,7 @@ namespace Spectra.Infrastructure.Admin
             _managementStaffService = managementStaffService;
             _contractService = contractService;
         }
-        public async Task<OperationResult<PaginatedResult<Appointment>>> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
+        public async Task<OperationResult> GetAllAppointmentsDoctorAsync(GetAllAppointmentDoctorQuery input)
         {
             // Create the query and pass pagination parameters
             var query = new GetAllAppointmentDoctorQuery
@@ -48,7 +48,7 @@ namespace Spectra.Infrastructure.Admin
         }
 
         // Contract Qury
-        public async Task<OperationResult<PaginatedResult<GetAllemployeeDto>>> GetAllContractsOfEployees(GetAllContractWithStatusQuery input)
+        public async Task<OperationResult> GetAllContractsOfEployees(GetAllContractWithStatusQuery input)
         {
             // Create the query and pass pagination parameters
 
@@ -59,7 +59,7 @@ namespace Spectra.Infrastructure.Admin
             };
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
+        public async Task<OperationResult> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
         {
             // Create the query and pass pagination parameters
             var query = new GetAllCopiesOFContractQuery
@@ -71,7 +71,7 @@ namespace Spectra.Infrastructure.Admin
 
 
       
-        public async Task<OperationResult<PaginatedResult<Client>>> GetAllClientsAsyncWithPagination(GetAllClientsQuery input)
+        public async Task<OperationResult> GetAllClientsAsyncWithPagination(GetAllClientsQuery input)
         {
             // Create the query and pass pagination parameters
             var query = new GetAllClientsQuery
@@ -81,26 +81,7 @@ namespace Spectra.Infrastructure.Admin
             };
             return await _mediator.Send(query);
         }
-
-        //public async Task<OperationResult<Unit>> UpdateDoctorEmploymentStatus(string id, UpdateDoctorEmploymentStatusCommand input)
-        //{
-        //    var query = new UpdateDoctorEmploymentStatusCommand
-        //    {
-        //        Ids = input.Ids,
-        //        Status = input.Status
-        //    };
-        //    return await _mediator.Send(query);
-        //}
-        //public async Task<OperationResult<Unit>> UpdateDoctorsEmploymentStatus( UpdateDoctorEmploymentStatusCommand input)
-        //{
-        //    var query = new UpdateDoctorEmploymentStatusCommand
-        //    {
-        //        Ids = input.Ids,
-        //        Status = input.Status
-        //    };
-        //    return await _mediator.Send(query);
-        //}
-        public async Task<OperationResult<Unit>> UpdateContractFromAdmin(string id, UpdateContractToSendToEmployeeCommand input)
+        public async Task<OperationResult> UpdateContractFromAdmin(string id, UpdateContractToSendToEmployeeCommand input)
         {
             var command = new UpdateContractToSendToEmployeeCommand
             {
@@ -117,12 +98,12 @@ namespace Spectra.Infrastructure.Admin
         }
 
 
-        public async Task<OperationResult<PaginatedResult<MedicalProvider>>> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input)
+        public async Task<OperationResult> GetAllDoctorsWithPagination(GetAllDoctorEmpQuery input)
         {
             var query = new GetAllDoctorEmpQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize/*, Status = input.Status */};
             return await _mediator.Send(query);
         }
-        public async Task<OperationResult<Unit>> UpdateContractStatus(string id, UpdateContractStatusCommand input )
+        public async Task<OperationResult> UpdateContractStatus(string id, UpdateContractStatusCommand input )
         {
             var query = new UpdateContractStatusCommand
             {
@@ -134,13 +115,13 @@ namespace Spectra.Infrastructure.Admin
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<CollectAllEmployeeDto>> GetAllEmplyees(GetAllEmployeesQuery input)
+        public async Task<OperationResult> GetAllEmplyees(GetAllEmployeesQuery input)
         {
             var query = new GetAllEmployeesQuery() { PageNumber = input.PageNumber, PageSize = input.PageSize };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<string>> CreateEmplyee(CreateEmployeesDto input)
+        public async Task<OperationResult> CreateEmplyee(CreateEmployeesDto input)
         {
 
             OperationResult<string> query;
@@ -225,7 +206,7 @@ namespace Spectra.Infrastructure.Admin
             throw new RequestErrorException(" you Must Choose  the type Employee  ");
         }
 
-        public async Task<OperationResult<GetEmployIdDto>> GetEmployeeByid(string id, JobTypes input)
+        public async Task<OperationResult> GetEmployeeByid(string id, JobTypes input)
         {
             GetEmployIdDto result;
 

@@ -2,15 +2,12 @@
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
-using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
 
