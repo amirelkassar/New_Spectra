@@ -9,13 +9,14 @@ namespace Spectra.Domain.Employees.MedicalStaff
 {
     public class MedicalProvider : EmployeeBase
     {
-        public List<MedicalProviderSpecialization> Specializations { get; set; }
+        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
+        public ICollection<MedicalProviderService> Services { get; set; }
         public string LicenseNumber { get; set; }
         public string ApprovedBy { get; set; }
         public AcademicDegrees AcademicDegree { get; set; }
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
-        public string SectionMedicalDepartment { get; set; }
+        public string SectionId { get; set; }
 
         protected MedicalProvider() { }
         public MedicalProvider(string id,
@@ -25,7 +26,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    HumenGender humenGender,
                    EmailAddress emailAddress,
                    Address address,
-                   List<MedicalProviderSpecialization> specializations,
+                   ICollection<MedicalProviderSpecialization> specializations,
+                   ICollection<MedicalProviderService> services,
                    string licenseNumber,
                    string approvedBy,
                    AcademicDegrees academicdegree,
@@ -50,7 +52,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
             AcademicDegree = academicdegree;
             MainSpecializationId = specializationId;
             MainSpecializationName = specializationName;
-            SectionMedicalDepartment = sectionMedicalDepartment;
+            SectionId = sectionMedicalDepartment;
         }
 
         public static MedicalProvider Create(string id,
@@ -60,7 +62,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
                    HumenGender humenGender,
                    EmailAddress emailAddress,
                    Address address,
-                   List<MedicalProviderSpecialization> specializations,
+                   ICollection<MedicalProviderSpecialization> specializations,
+                   ICollection<MedicalProviderService> services,
                    string licenseNumber,
                    string approvedBy,
                    AcademicDegrees academicdegree,
@@ -80,6 +83,7 @@ namespace Spectra.Domain.Employees.MedicalStaff
                 emailAddress,
                 address,
                 specializations,
+                services,
                 licenseNumber,
                 approvedBy,
                 academicdegree,

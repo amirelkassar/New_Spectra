@@ -20,6 +20,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
     public class CreateMedicalProviderCommand : CreateEmployeeBaseCommand
     {
         public List<MedicalProviderSpecialization> Specializations { get; set; }
+        public ICollection<MedicalProviderService> Services { get; set; }
         public string LicenseNumber { get; set; }
         public string ApprovedBy { get; set; }
         public AcademicDegrees AcademicDegree { get; set; }
@@ -84,6 +85,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.EmailAddress,
                 request.Address,
                 request.Specializations,
+                request.Services,
                 request.LicenseNumber,
                 request.ApprovedBy,
                 request.AcademicDegree,
@@ -93,6 +95,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                request.MainSpecializationId,
                request.MainSpecializationName,
                request.SectionId);
+            medicalProvider.Qualification=request.Qualification;
+            medicalProvider.JobDescription = request.JobDescription;
+            medicalProvider.ExperienceYears = request.ExperienceYears;
+
+
 
             if (request.Certification is not null && request.Certification.Length > 1000)
             {
