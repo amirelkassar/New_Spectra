@@ -1,11 +1,14 @@
-﻿using Spectra.Domain.Employees.MedicalStaff;
+﻿using Microsoft.AspNetCore.Http;
+using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.ValueObjects;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
 {
-    public class CreateMedicalProviderDto
+    public class UpdateMedicalProviderDto
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Prefix { get; set; }
@@ -30,14 +33,6 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
         public string? Qualification { get; set; }
         public string ApprovedBy { get; set; }
         public AcademicDegrees AcademicDegree { get; set; }
-        public string MainSpecializationId { get; set; }
-        public string MainSpecializationName { get; set; }
-        public string SectionId { get; set; }
-        public string SectionName { get; set; }
-        public string Password { get; set; }
-        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
-        public ICollection<MedicalProviderService> Services { get; set; }
-
 
     }
 }

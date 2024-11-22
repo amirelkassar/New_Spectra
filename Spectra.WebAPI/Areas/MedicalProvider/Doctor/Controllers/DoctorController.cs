@@ -78,7 +78,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
         }
         [HttpPut("id")]
         [Authorize(MedicalProviderDoctorPermissions.Update)]
-        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateDoctorDto input)
+        public async Task<ActionResult> UpdateDoctor(string id, [FromForm] UpdateMedicalProviderDto input)
         {
 
 

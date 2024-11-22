@@ -167,7 +167,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IGeneralComplaintService, GeneralComplaintService>();
             services.AddScoped<IExcelProcessingService, ExcelProcessingService>();
             services.AddScoped<IServiceMDService, ServiceMDService>();
-            services.AddScoped<IMedicalProviderService, MedicalProviderService>();
+            services.AddScoped<IAdminMedicalProviderService, AdminMedicalProviderService>();
             services.AddScoped<IContractService, ContractService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();

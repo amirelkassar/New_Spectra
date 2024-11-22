@@ -19,7 +19,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
     public class CreateMedicalProviderCommand : CreateEmployeeBaseCommand
     {
-        public List<MedicalProviderSpecialization> Specializations { get; set; }
+        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
         public ICollection<MedicalProviderService> Services { get; set; }
         public string LicenseNumber { get; set; }
         public string ApprovedBy { get; set; }
@@ -27,10 +27,10 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
         public string SectionId { get; set; }
-        public IFormFile? Certification { get; set; }
+        public string SectionName { get; set; }
     }
 
-    public class CreateDoctorCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> doctorRepository,
+    public class CreateMedicalProviderCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> doctorRepository,
         IHellper addFile,
         ISpecializationsRepository specializationRepository,
         IIdentityService identityService,
@@ -94,30 +94,31 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 addUser.UserId,
                request.MainSpecializationId,
                request.MainSpecializationName,
-               request.SectionId);
+               request.SectionId,
+               request.SectionName);
             medicalProvider.Qualification=request.Qualification;
             medicalProvider.JobDescription = request.JobDescription;
             medicalProvider.ExperienceYears = request.ExperienceYears;
 
 
 
-            if (request.Certification is not null && request.Certification.Length > 1000)
-            {
-                string targetFolder = request.JobType switch
-                {
-                    JobTypes.Doctor => Pathes.ScientificDegreeDoctors,
-                    JobTypes.Specialist => Pathes.ScientificDegreeSpecialist,
-                    _ => Pathes.UserImages
-                };
+            //if (request.Certification is not null && request.Certification.Length > 1000)
+            //{
+            //    string targetFolder = request.JobType switch
+            //    {
+            //        JobTypes.Doctor => Pathes.ScientificDegreeDoctors,
+            //        JobTypes.Specialist => Pathes.ScientificDegreeSpecialist,
+            //        _ => Pathes.UserImages
+            //    };
 
-                var filePath = await _addFile.CreateAttachment(request.Certification, targetFolder);
-                medicalProvider.Attachments.Add(new EmployeeAttachment
-                {
-                    Name = $"{request.Name} Certification",
-                    Path = filePath,
-                    Type = DocumentsConts.FileTypes.Certificate
-                });
-            }
+            //    var filePath = await _addFile.CreateAttachment(request.Certification, targetFolder);
+            //    medicalProvider.Attachments.Add(new EmployeeAttachment
+            //    {
+            //        Name = $"{request.Name} Certification",
+            //        Path = filePath,
+            //        Type = DocumentsConts.FileTypes.Certificate
+            //    });
+            //}
 
             await _medicalProvider.AddAsync(medicalProvider);
 

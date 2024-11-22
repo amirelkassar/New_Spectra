@@ -18,7 +18,15 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries
             public async Task<OperationResult> Handle(GetMedicalProviderListQuery request, CancellationToken cancellationToken)
             {
                 request.Search ??= request.Search.ToLower();
-                var (entities, total) = await _doctorRepository.GetAllAsync(s => s.Name.FirstName.ToLower() == request.Search || s.EmailAddress.Emailaddress.ToLower() == request.Search,
+                var (entities, total) = await _doctorRepository.GetAllAsync(s => s.Name.FirstName.ToLower().StartsWith(request.Search)
+                || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
+                || s.MainSpecializationName.ToLower().StartsWith(request.Search)
+                || s.SectionName.ToLower().StartsWith(request.Search)
+                || s.LicenseNumber.ToLower().StartsWith(request.Search)
+                || s.SectionId.ToLower()==request.Search
+                || s.MainSpecializationId.ToLower() == request.Search
+                || s.Specializations.Any(sp=>sp.Name.ToLower().StartsWith(request.Search) || sp.Id.ToLower()==request.Search)
+                || s.Services.Any(ser => ser.Name.ToLower().StartsWith(request.Search) || ser.Id.ToLower()==request.Search),
                     null,
                     request.SkipCount,
                     request.MaxCount);

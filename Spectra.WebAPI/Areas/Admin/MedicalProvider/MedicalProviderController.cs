@@ -1,88 +1,66 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Admin.Queries;
+using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
-using Spectra.Application.Employees.MedicalTeams.Commands;
-using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
-using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
 {
     [Area("Admin")]
     [Authorize]
-    public class MedicalProviderController : AdminBaseController
+    public class MedicalProviderController(IAdminMedicalProviderService adminMedicalProviderService) : AdminBaseController
     {
-        private readonly IAdminService _adminService;
-        private readonly IMedicalProviderService _doctorService;
-        private readonly IMedicalTeamService _medicalTeamService;
+        private readonly IAdminMedicalProviderService _adminMedicalProviderService = adminMedicalProviderService;
 
-        public MedicalProviderController(IAdminService adminService,
-        IMedicalProviderService doctorService, IMedicalTeamService medicalTeamService)
-        {
-            _adminService = adminService;
-            _doctorService = doctorService;
-            _medicalTeamService = medicalTeamService;
-        }
-
-
-        [HttpGet("AppointmentsDoctor")]
+        [HttpGet("list")]
         [Authorize(AdminMedicalProviderPermissions.ReadList)]
-        public async Task<ActionResult> GetAllAppointmentsDoctor([FromQuery] GetAllAppointmentDoctorQuery input)
+        public async Task<ActionResult> GetListAsync([FromQuery] GetMedicalProviderListQuery input)
         {
-
-            var appointmenties = await _adminService.GetAllAppointmentsDoctorAsync(input);
+            var appointmenties = await _adminMedicalProviderService.GetListAsync(input);
             return Ok(appointmenties);
         }
-        [HttpGet("GetAllDoctors")]
-        [Authorize(AdminMedicalProviderPermissions.ReadList)]
-        public async Task<ActionResult> GetAllDoctors([FromQuery] GetAllDoctorEmpQuery input)
-        {
-            var appointmenties = await _adminService.GetAllDoctorsWithPagination(input);
-            return Ok(appointmenties);
-        }
-        [HttpGet("GetDoctor/id")]
+        [HttpGet]
         [Authorize(AdminMedicalProviderPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneDoctor(string id)
+        public async Task<ActionResult> GetAsync([FromQuery]string id)
         {
-            var Doctories = await _doctorService.GetMedicalProviderById(id);
-            return Ok(Doctories);
+            var response = await _adminMedicalProviderService.GetAsync(id);
+            return Ok(response);
         }
 
-        [HttpPut("EditDocotor/id")]
-        [Authorize(AdminMedicalProviderPermissions.Update)]
-        public async Task<ActionResult> UpdateDocotor(string id, UpdateDoctorDto input)
-        {
-
-            var contract = await _doctorService.UpdateMedicalProvider(id, input);
-            return Ok(contract);
-        }
-
-        [HttpPost("CreateMedicalTeam")]
+        [HttpPost]
         [Authorize(AdminMedicalProviderPermissions.Create)]
-        public async Task<ActionResult> CreateMedicalTeam(CreateMedicalTeamCommand input)
+        public async Task<ActionResult> CreateAsync([FromBody] CreateMedicalProviderDto input)
         {
-
-            var employees = await _medicalTeamService.CreateMedicalTeam(input);
-            return Ok(employees);
+            var response = await _adminMedicalProviderService.CreateAsync(input);
+            return Ok(response);
         }
 
-        [HttpPut("EditMedicalTeam/id")]
+        [HttpPut("personal-data")]
         [Authorize(AdminMedicalProviderPermissions.Update)]
-        public async Task<ActionResult> UpdateMedicalTeam(string id, UpdateMedicalTeamCommand input)
+        public async Task<ActionResult> UpdatePersonalDataAsync([FromBody] UpdateMedicalProviderDto input)
         {
 
-            var employees = await _medicalTeamService.UpdateMedicalTeam(id, input);
-            return Ok(employees);
+            var response = await _adminMedicalProviderService.UpdatePersonalDataAsync(input);
+            return Accepted(response);
         }
-        [HttpPut("ClientsFellowDoctor/id")]
-        [Authorize(AdminMedicalProviderPermissions.ReadList)]
-        public async Task<ActionResult> GetAllClientsFellowDoctor(string id, [FromQuery] GetAllClientsInMedicalProviderProfileQuery input)
+
+        [HttpPut("medical-data")]
+        [Authorize(AdminMedicalProviderPermissions.Update)]
+        public async Task<ActionResult> UpdateMedicalDataAsync([FromBody] UpdateMedicalDataCommand input)
         {
-            var clients = await _doctorService.GetAllClintsMedicalProviderCare(id, input);
-            return Ok(clients);
+
+            var response = await _adminMedicalProviderService.UpdateMedicallDataAsync(input);
+            return Accepted(response);
+        }
+
+        [HttpDelete]
+        [Authorize(AdminMedicalProviderPermissions.Delete)]
+        public async Task<IActionResult> DeleteAsync([FromQuery] string id)
+        {
+            var response = await _adminMedicalProviderService.DeleteAsync(id);
+            return NotFound();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
         public string SectionId { get; set; }
+        public string SectionName { get; set; }
+
 
         protected MedicalProvider() { }
         public MedicalProvider(string id,
@@ -36,7 +38,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
                   string userId,
                   string specializationId,
                   string specializationName,
-                  string sectionMedicalDepartment) : base(id, name, nationalId, phoneNumber, humenGender, emailAddress, address, userId, jobType, jobName)
+                  string sectionId,
+                  string sectionName) : base(id, name, nationalId, phoneNumber, humenGender, emailAddress, address, userId, jobType, jobName)
         {
             ArgumentNullException.ThrowIfNull(specializations, nameof(specializations));
             ArgumentNullException.ThrowIfNull(licenseNumber, nameof(licenseNumber));
@@ -44,7 +47,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
             ArgumentNullException.ThrowIfNull(approvedBy, nameof(approvedBy));
             ArgumentNullException.ThrowIfNull(specializationId, nameof(specializationId));
             ArgumentNullException.ThrowIfNull(specializationName, nameof(specializationName));
-            ArgumentNullException.ThrowIfNull(sectionMedicalDepartment, nameof(sectionMedicalDepartment));
+            ArgumentNullException.ThrowIfNull(sectionId, nameof(sectionId));
+            ArgumentNullException.ThrowIfNull(sectionName, nameof(sectionName));
 
             Specializations = specializations;
             LicenseNumber = licenseNumber;
@@ -52,7 +56,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
             AcademicDegree = academicdegree;
             MainSpecializationId = specializationId;
             MainSpecializationName = specializationName;
-            SectionId = sectionMedicalDepartment;
+            SectionId = sectionId;
+            SectionName = sectionName;
         }
 
         public static MedicalProvider Create(string id,
@@ -72,7 +77,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
                   string userId,
                   string specializationId,
                   string specializationName,
-                  string sectionMedicalDepartment)
+                  string sectionId,
+                  string sectionName)
         {
 
             return new(id,
@@ -92,7 +98,8 @@ namespace Spectra.Domain.Employees.MedicalStaff
                 userId,
                 specializationId,
                 specializationName,
-                sectionMedicalDepartment
+                sectionId,
+                sectionName
                );
         }
 

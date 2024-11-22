@@ -18,7 +18,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
         public string SectionId { get; set; }
-        public List<MedicalProviderSpecialization> Specializations { get; set; }
+        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
         public ICollection<MedicalProviderService> Services { get; set; }
 
         public class UpdateMedicalDataCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> medicalRepository,
