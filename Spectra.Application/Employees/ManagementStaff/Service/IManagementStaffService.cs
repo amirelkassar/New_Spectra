@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Spectra.Domain.Employees.ManagementStaff;
+﻿using Spectra.Application.Employees.ManagementStaff.Queries;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -8,39 +7,43 @@ namespace Spectra.Application.Employees.ManagementStaff.Service
 {
     public interface IManagementStaffService
     {
-        Task<OperationResult<string>> CreateStaff(string firstName,
+        Task<OperationResult> CreateAsync(string firstName,
             string lastName,
             string? prefix,
-            string phoneNumbers,
+            string phoneNumber,
             string countryCode,
             string emailAddress,
+            int? experienceYears,
             string country,
             string city,
             string nationalId,
-            HumenGender humenGenders,
+            HumenGender humenGender,
+            JobTypes jobType,
             string jobName,
-            string qualifications,
-            DateOnly? timeToJoin,
             double? workingHours,
-            JobTypes jobTypes,
-            string Passowrd,
-                    string ConfirmationPassword);
-        Task<OperationResult<Unit>> DeleteStaff(string id);
-        Task<OperationResult<IEnumerable<Staff>>> GetAllStaff();
-        Task<OperationResult<Staff>> GetStaffById(string id);
-        Task<OperationResult<Unit>> UpdateEmployees(string id, 
-            string firstName,
-            string lastName, 
-            string? prefix, 
-            string phoneNumbers,
-            string countryCode, 
+            string jobDescription,
+            string qualification,
+            string passowrd);
+        Task<OperationResult> DeleteAsync(string id);
+        Task<OperationResult> GetAllAsync(GetAllManagementStaffQuery input);
+        Task<OperationResult> GetByIdAsync(string id);
+        Task<OperationResult> UpdateAsync(string id,
+           string firstName,
+            string lastName,
+            string? prefix,
+            string phoneNumber,
+            string countryCode,
             string emailAddress,
-            string country, 
-            string city, 
-            string nationalId, 
-            HumenGender humenGenders,
-            string jobName, 
-            double? workingHours, 
-            JobTypes jobTypes);
+            int? experienceYears,
+            string country,
+            string city,
+            string nationalId,
+            HumenGender humenGender,
+            JobTypes jobType,
+            string jobName,
+            double? workingHours,
+            string jobDescription,
+            string qualification,
+            string passowrd);
     }
 }

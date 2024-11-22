@@ -1,16 +1,12 @@
-﻿using DocumentFormat.OpenXml.Office2016.Excel;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Spectra.Application.Identities;
-using Spectra.Application.Messaging;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.ManagementStaff;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Employees.ManagementStaff.Commands
 {
@@ -67,14 +63,12 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
                 request.JobType,
                 addUser.UserId);
 
+            staff.JobDescription = request.JobDescription;
+            staff.Qualification = request.Qualification;
+            staff.WorkingHours = request.WorkingHours;
 
             await _staffRepository.AddAsync(staff);
-
-
-
             return OperationResult<string>.Success(staff.Id);
-
-
         }
     }
     public class BassMedicalStaffValidator : AbstractValidator<CreateManagementStaffCommand>

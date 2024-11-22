@@ -9,7 +9,6 @@ namespace Spectra.Application.Employees.ManagementStaff.Queries
     public class GetAllManagementStaffQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
-
     }
 
     public class GetAllManagementStaffQueryHandler : IRequestHandler<GetAllManagementStaffQuery, OperationResult>

@@ -1,12 +1,7 @@
 ﻿using MediatR;
-using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.ManagementStaff.Commands;
 using Spectra.Application.Employees.ManagementStaff.Queries;
 using Spectra.Application.Employees.ManagementStaff.Service;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
-using Spectra.Application.Identities;
-using Spectra.Application.Interfaces;
-using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
@@ -22,27 +17,23 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
             _mediator = mediator;
         }
 
-
-        public async Task<OperationResult<string>> CreateStaff(
-       string firstName,
-       string lastName,
-       string? prefix,
-       string phoneNumbers,
-       string countryCode,
-       string emailAddress,
-       string country,
-       string city,
-       string nationalId,
-       HumenGender humenGenders,
-       string jobName,
-       string qualifications,
-       DateOnly? timeToJoin,
-       double? workingHours,
-       JobTypes jobType,
-        string passowrd, 
-        string confirmationPassword
-
-     )
+        public async Task<OperationResult> CreateAsync(string firstName,
+            string lastName,
+            string? prefix,
+            string phoneNumber,
+            string countryCode,
+            string emailAddress,
+            int? experienceYears,
+            string country,
+            string city,
+            string nationalId,
+            HumenGender humenGender,
+            JobTypes jobType,
+            string jobName,
+            double? workingHours,
+            string jobDescription,
+            string qualification,
+            string passowrd)
         {
       
             var name = new Name
@@ -52,9 +43,9 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Prefix = prefix
             };
 
-            var phoneNumber = new PhoneNumber
+            var staffNumber = new PhoneNumber
             {
-                PhoneNumbers = phoneNumbers,
+                PhoneNumbers = phoneNumber,
                 CountryCode = countryCode
             };
 
@@ -68,63 +59,62 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Country = country,
                 City = city
             };
+
             var command = new CreateManagementStaffCommand
             {
                 Name = name,
+                ExperienceYears= experienceYears,
                 NationalId = nationalId,
-                MobileNumber = phoneNumber,
+                JobDescription= jobDescription,
+                Qualification= qualification,
+                MobileNumber = staffNumber,
                 EmailAddress = email,
-                HumenGenders = humenGenders,
+                HumenGender = humenGender,
                 Address = address,
                 JobName = jobName,
-                Qualifications = qualifications,
-                TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
                 JobType = jobType,
                 Passowrd= passowrd,
-                ConfirmationPassword = confirmationPassword
-
             };
             return await _mediator.Send(command);
         }
 
-
-
-        public async Task<OperationResult<Unit>> DeleteStaff(string id)
+        public async Task<OperationResult> DeleteAsync(string id)
         {
             var command = new DeleteManagementStaffCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<IEnumerable<Staff>>> GetAllStaff()
+        public async Task<OperationResult> GetAllAsync(GetAllManagementStaffQuery input)
         {
             var query = new GetAllManagementStaffQuery();
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Staff>> GetStaffById(string id)
+        public async Task<OperationResult> GetByIdAsync(string id)
         {
             var query = new GetManagementStaffByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<Unit>> UpdateEmployees(string id, string firstName,
-       string lastName,
-       string? prefix,
-       string phoneNumbers,
-       string countryCode,
-       string emailAddress,
-       string country,
-       string city,
-       string nationalId,
-       HumenGender humenGenders,
-      string jobName,
-      string qualifications,
-      DateOnly? timeToJoin,
-      double? workingHours,
-      JobTypes jobType
-      
-      )
+        public async Task<OperationResult> UpdateAsync(string id,
+            string firstName,
+            string lastName,
+            string? prefix,
+            string phoneNumber,
+            string countryCode,
+            string emailAddress,
+            int? experienceYears,
+            string country,
+            string city,
+            string nationalId,
+            HumenGender humenGender,
+            JobTypes jobType,
+            string jobName,
+            double? workingHours,
+            string jobDescription,
+            string qualification,
+            string passowrd)
         {
             var name = new Name
             {
@@ -133,9 +123,9 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Prefix = prefix
             };
 
-            var phoneNumber = new PhoneNumber
+            var staffNumber = new PhoneNumber
             {
-                PhoneNumbers = phoneNumbers,
+                PhoneNumbers = phoneNumber,
                 CountryCode = countryCode
             };
 
@@ -149,26 +139,26 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
                 Country = country,
                 City = city
             };
+
             var command = new UpdateManagementStaffCommand
             {
-
+                Id = id,
                 Name = name,
+                ExperienceYears = experienceYears,
                 NationalId = nationalId,
-                MobileNumber = phoneNumber,
-                EmailAddrese = email,
+                JobDescription = jobDescription,
+                Qualification = qualification,
+                MobileNumber = staffNumber,
+                EmailAddress = email,
+                HumenGender = humenGender,
+                Address = address,
                 JobName = jobName,
-                HumenGenders = humenGenders,
-                Qualifications = qualifications,
-                TimeToJoin = timeToJoin,
                 WorkingHours = workingHours,
-                JobType = jobType,
-                Address = address
-                ,
+                JobType = jobType
             };
 
             return await _mediator.Send(command);
         }
-
 
     }
 }
