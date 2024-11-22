@@ -54,9 +54,9 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
 
                 var allPathes = entity.SectionStory.Select(x => x.AttachmentPath).ToList();
 
-                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore);
-                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore);
-                entity.FamilyPhoto = await CheckMthode(entity.FamilyPhoto, request.FamilyPhoto, Pathes.FamilyPhoto);
+                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.GetSucessStoriesPath());
+                entity.ChiledPhotoBefore = await CheckMthode(entity.ChiledPhotoBefore, request.ChiledPhotoBefore, Pathes.GetSucessStoriesPath());
+                entity.FamilyPhoto = await CheckMthode(entity.FamilyPhoto, request.FamilyPhoto, Pathes.GetSucessStoriesPath());
 
                 var allSections = new List<SectionSetings>();
                 var descriptions = request.SectionDescription ?? new List<string>();
@@ -73,7 +73,7 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
                     string photoPaths = null;
                     if (i < photos.Count)
                     {
-                        photoPaths = await _addPhoto.UpdateAttachment(allPathes[i], photos[i], Pathes.SmallIcons);
+                        photoPaths = await _addPhoto.UpdateAttachment(allPathes[i], photos[i], Pathes.GetSucessStoriesPath());
                     }
 
                     var section = new SectionSetings

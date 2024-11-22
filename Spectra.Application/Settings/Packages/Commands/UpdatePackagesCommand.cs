@@ -47,7 +47,7 @@ namespace Spectra.Application.Settings.Packages.Commands
                 if (request.Photo != null)
                 {
 
-                    entity.Photo = await _addPhoto.UpdateAttachment(entity.Photo, request.Photo, Pathes.PackagePhoto);
+                    entity.Photo = await _addPhoto.UpdateAttachment(entity.Photo, request.Photo, Pathes.GetPackagesPath());
 
 
                 }

@@ -23,15 +23,13 @@ namespace Spectra.Application.MasterData.Sections.Queries
 
         public async Task<OperationResult<IEnumerable<GetAllDoctorsDto>>> Handle(GetAllDoctorsInSectionQuery request, CancellationToken cancellationToken)
         {
-            var MedicalProvider = await _doctorRepository.GetAllAsync(x => x.JobType == JobTypes.Doctor);
+            var (emps, total) = await _doctorRepository.GetAllAsync(x => x.JobType == JobTypes.Doctor);
 
-            var data = MedicalProvider.Select(c => new GetAllDoctorsDto
+            var data = emps.Select(c => new GetAllDoctorsDto
             {
                 Name = $"{c.Name.FirstName} {c.Name.LastName}",
                 DateOfRequest = c.Created.Date,
-                Rate = c.EmpelyeeRate,
                 Id = c.Id,
-                Diagnoses = c.Diagnoses
             });
 
             return OperationResult<IEnumerable<GetAllDoctorsDto>>.Success(data);

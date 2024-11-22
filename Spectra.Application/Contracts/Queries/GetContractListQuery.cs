@@ -29,14 +29,9 @@ namespace Spectra.Application.Contracts.Queries
                      || c.EmployeeHeadName.ToLower().StartsWith(request.Search);
                 }
                 var (contracts, total) = await _contractRepository.GetAllAsync(filter, null, request.SkipCount, request.MaxCount);
+                var dtos = contracts.Adapt<IReadOnlyCollection<ContractListReadDto>>();
 
-                return OperationResult<PaginatedResult<ContractListReadDto>>.Success(new PaginatedResult<ContractListReadDto>
-                {
-                    Items = contracts.Adapt<IReadOnlyCollection<ContractListReadDto>>(),
-                    TotalCount = total,
-                    PageSize = request.MaxCount,
-                    PageNumber = (int)Math.Ceiling((double)request.SkipCount / request.MaxCount)
-                });
+                return OperationResult<PaginatedResult<ContractListReadDto>>.Success(new PaginatedResult<ContractListReadDto>(dtos, total, request.MaxCount));
             }
         }
     }

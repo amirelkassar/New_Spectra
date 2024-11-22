@@ -38,7 +38,7 @@ namespace Spectra.Application.Settings.Packages.Commands
 
             string photoPath = null;
 
-            var uploadPhoto = await _addPhoto.CreateAttachment(request.Photo, Pathes.PackagePhoto);
+            var uploadPhoto = await _addPhoto.CreateAttachment(request.Photo, Pathes.GetPackagesPath());
             if (uploadPhoto != null)
             {
                 photoPath = uploadPhoto;

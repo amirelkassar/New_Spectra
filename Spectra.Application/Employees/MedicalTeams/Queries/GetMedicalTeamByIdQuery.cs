@@ -25,16 +25,9 @@ namespace Spectra.Application.Employees.MedicalTeams.Queries
 
             var medicalTeam = await _medicalTeamRepository.GetByIdAsync(request.DoctorId);
 
-            var specialists = await _specialistRepository.GetAllAsync(s => s.JobType == Domain.Shared.Enums.JobTypes.Specialist && medicalTeam.SpecialistIds.Contains(s.Id));
+            var (specialists, total) = await _specialistRepository.GetAllAsync(s => s.JobType == Domain.Shared.Enums.JobTypes.Specialist && medicalTeam.SpecialistIds.Contains(s.Id));
 
-            var specialistsData = specialists.Select(x => new SpecialistDto { Name = $"{x.Name.FirstName} {x.Name.LastName}", Diagnoses = x.Diagnoses, Rate = 10 });
-
-
-
-
-
-
-
+            var specialistsData = specialists.Select(x => new SpecialistDto { Name = $"{x.Name.FirstName} {x.Name.LastName}" });
 
             return OperationResult<IEnumerable<SpecialistDto>>.Success(specialistsData);
         }

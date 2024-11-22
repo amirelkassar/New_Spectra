@@ -22,7 +22,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 
             public async Task<OperationResult> Handle(UpdateUserImageCommand request, CancellationToken cancellationToken)
             {
-                var filePath = await _documentsManager.CreateAttachment(request.Image, Pathes.UserImages);
+                var filePath = await _documentsManager.CreateAttachment(request.Image, Pathes.GetUsersPath());
                 return await _identityService.UpdateUserImageAsync(_currentUser.Id, filePath);
             }
         }

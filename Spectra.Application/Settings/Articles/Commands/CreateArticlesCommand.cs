@@ -37,7 +37,7 @@ namespace Spectra.Application.Settings.Articles.Commands
 
             string photoPath = null;
 
-            var uploadPhoto = await _addPhoto.CreateAttachment(request.MainPhoto, Pathes.MainPhotoArticles);
+            var uploadPhoto = await _addPhoto.CreateAttachment(request.MainPhoto, Pathes.GetArticlesPath());
             if (uploadPhoto != null)
             {
                 photoPath = uploadPhoto;
@@ -61,7 +61,7 @@ namespace Spectra.Application.Settings.Articles.Commands
                 string photoPaths = null;
                 if (i < photos.Count)
                 {
-                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.InteriorPhotsArticles);
+                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.GetArticlesPath());
                 }
 
 

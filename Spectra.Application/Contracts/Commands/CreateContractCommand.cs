@@ -48,9 +48,9 @@ namespace Spectra.Application.Contracts.Commands
             {
                 throw new RequestErrorException("Your Request is Under Review");
             }
-            var medicalProvider = await _medicalProvider.GetByIdentityIdAsync(request.EmployeeUserId);
+            var medicalProvider = await _medicalProvider.GetByIdAsync(request.EmployeeUserId);
 
-            var departmentHead = await _sectionsRepository.GetByIdAsync(medicalProvider.SectionMedicalDepartment);
+            var departmentHead = await _sectionsRepository.GetByIdAsync(medicalProvider.SectionId);
             var services = await _serviceMDRepository.GetAllAsync();
 
             var contractVerion = new ContractVersion
