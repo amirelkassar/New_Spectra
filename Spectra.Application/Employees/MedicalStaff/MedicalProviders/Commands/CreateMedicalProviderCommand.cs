@@ -6,28 +6,33 @@ using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Validator;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
+using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
     public class CreateMedicalProviderCommand : CreateEmployeeBaseCommand
     {
-        public List<string> Specializations { get; set; }
-        public string? LicenseNumber { get; set; }
-        public string? ApprovedBy { get; set; }
-        public string Academicdegree { get; set; }
-        public IFormFile? ScientificDegree { get; set; }
-        public EmpelyeeRates? empelyeeRate { get; set; }
-        public JobTypes JobType { get; set; }
-        public string SpecializationId { get; set; }
-        public string SectionMedicalDepartment { get; set; }
+        public List<MedicalProviderSpecialization> Specializations { get; set; }
+        public string LicenseNumber { get; set; }
+        public string ApprovedBy { get; set; }
+        public AcademicDegrees AcademicDegree { get; set; }
+        public string MainSpecializationId { get; set; }
+        public string MainSpecializationName { get; set; }
+        public string SectionId { get; set; }
+        public IFormFile? Certification { get; set; }
     }
 
-    public class CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository, IHellper addFile, ISpecializationsRepository specializationRepository, IIdentityService identityService, ISectionsRepository sectionsRepository) : IRequestHandler<CreateMedicalProviderCommand, OperationResult<string>>
+    public class CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository,
+        IHellper addFile,
+        ISpecializationsRepository specializationRepository,
+        IIdentityService identityService,
+        ISectionsRepository sectionsRepository) : IRequestHandler<CreateMedicalProviderCommand, OperationResult>
     {
         private readonly IMedicalProviderRepository _medicalProvider = doctorRepository;
 
@@ -36,47 +41,36 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
         private readonly IHellper _addFile = addFile;
 
-        public async Task<OperationResult<string>> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreateMedicalProviderCommand request, CancellationToken cancellationToken)
         {
-            var CheckEmail = await _medicalProvider.GetAllAsync(x => x.EmailAddress == request.EmailAddress);
-            if (CheckEmail.Any())
+            if (await _identityService.IsExist(request.EmailAddress.Emailaddress))
             {
-                throw new RequestErrorException("This Email is Already Exist");
-            }
-            if (request.Passowrd != request.ConfirmationPassword)
-            {
-                throw new RequestErrorException("Passwords do not match");
+                throw new AlreadyExistException(request.EmailAddress.Emailaddress, nameof(request.EmailAddress));
             }
 
-            var section = await _sectionsRepository.GetAllAsync();
-
-            var sectionList = section.Select(y => new sectionDto { Id = y.Id, SpecializationIds = y.SpecializationIds }).ToList();
-
-            var matchedSection = sectionList.FirstOrDefault(s => s.SpecializationIds.Contains(request.SpecializationId));
-
-            if (matchedSection == null)
+            if (await _medicalProvider.Exists(s => s.EmailAddress.Emailaddress.ToLower() == request.EmailAddress.Emailaddress.ToLower()))
             {
-                throw new RequestErrorException("No section found for the provided specialization ID");
-
+                throw new AlreadyExistException(request.EmailAddress.Emailaddress, nameof(request.EmailAddress));
             }
-            string? filePath = null;
-            string targetFolder = request.JobType switch
+
+            if (await _medicalProvider.Exists(s => s.LicenseNumber.ToLower() == request.LicenseNumber.ToLower()))
             {
-                JobTypes.Doctor => Pathes.ScientificDegreeDoctors,
-                JobTypes.Specialist => Pathes.ScientificDegreeSpecialist,
-                _ => Pathes.UserImages
-            };
-            if (request.ScientificDegree is not null)
+                throw new AlreadyExistException(request.LicenseNumber, nameof(request.LicenseNumber));
+            }
+
+            var section = await _sectionsRepository.GetByIdAsync(request.SectionId);
+            if (section == null)
             {
-                filePath = await _addFile.CreateAttachment(request.ScientificDegree, Pathes.ScientificDegreeDoctors);
+                throw new NotFoundException("Sections", request.SectionId);
             }
 
             var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+
             var addUser = await _identityService.CreateUserAsync(
              request.EmailAddress.Emailaddress,
                request.Passowrd,
               request.Name.FirstName,
-              request.JobType.ToString(),
+              " ",
                 role
             );
 
@@ -85,42 +79,52 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 request.Name,
                 request.NationalId,
                 request.MobileNumber,
+                request.HumenGender,
                 request.EmailAddress,
-                request.HumenGenders,
                 request.Address,
                 request.Specializations,
                 request.LicenseNumber,
                 request.ApprovedBy,
-                request.Academicdegree,
-                [filePath],
-                request.empelyeeRate = 0,
+                request.AcademicDegree,
                 request.JobType,
+                request.JobName,
                 addUser.UserId,
-                request.SpecializationId,
-                matchedSection.Id
-                );
+               request.MainSpecializationId,
+               request.MainSpecializationName,
+               request.SectionId);
 
+            if (request.Certification is not null && request.Certification.Length > 1000)
+            {
+                string targetFolder = request.JobType switch
+                {
+                    JobTypes.Doctor => Pathes.ScientificDegreeDoctors,
+                    JobTypes.Specialist => Pathes.ScientificDegreeSpecialist,
+                    _ => Pathes.UserImages
+                };
+
+                var filePath = await _addFile.CreateAttachment(request.Certification, targetFolder);
+                medicalProvider.Attachments.Add(new EmployeeAttachment
+                {
+                    Name = $"{request.Name} Certification",
+                    Path = filePath,
+                    Type = DocumentsConts.FileTypes.Certificate
+                });
+            }
 
             await _medicalProvider.AddAsync(medicalProvider);
 
             if (request.Specializations != null)
             {
-                var specializations = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs == s.Name));
+                var specializations = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs.Id == s.Id) || s.Id == request.MainSpecializationId);
                 Parallel.ForEach(specializations, async spec =>
                 {
                     spec.DoctorCount++;
                     await _specializationRepository.UpdateAsync(spec);
                 });
-                
             }
 
             return OperationResult<string>.Success(medicalProvider.Id);
         }
-    }
-    public class sectionDto
-    {
-        public string Id { get; set; }
-        public List<string> SpecializationIds { get; set; }
     }
     public class BassMedicalStaffValidator : AbstractValidator<CreateMedicalProviderCommand>
     {
@@ -139,7 +143,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 .SetValidator(new PhoneNumberValidator())
                 .When(x => x.MobileNumber != null);
 
-            RuleFor(x => x.HumenGenders)
+            RuleFor(x => x.HumenGender)
                 .IsInEnum()
                 .WithMessage("Invalid gender value.");
 
@@ -169,7 +173,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 .MaximumLength(100)
                 .WithMessage("ApprovedBy field must not exceed 100 characters.");
 
-            RuleFor(x => x.Academicdegree)
+            RuleFor(x => x.AcademicDegree)
+                .IsInEnum()
                 .NotEmpty()
                 .WithMessage("Academic degree is required.");
 
@@ -180,18 +185,9 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
           .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
           .Matches(@"[0-9]").WithMessage("Password must contain at least one number.")
           .Matches(@"[!@#$%^&*(),.?""':;{}|<>]").WithMessage("Password must contain at least one special character (!@#$%^&*(),.?\"':;{}|<>).");
-
-            //RuleFor(x => x.ScientificDegree)
-            //        .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
-            //        .WithMessage("Invalid image file(s). At least one file must be a valid image.");
         }
 
 
-        //private bool BeAValidFilePath(string filePath)
-        //{
-
-        //    return !string.IsNullOrEmpty(filePath);
-        //}
     }
 
 }
