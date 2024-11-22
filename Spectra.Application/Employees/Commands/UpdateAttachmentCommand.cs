@@ -30,7 +30,7 @@ namespace Spectra.Application.Employees.Commands
 
                     if (System.IO.File.Exists(oldAttachment.Path))
                         System.IO.File.Delete(oldAttachment.Path);
-                    
+
                     oldAttachment.Path = filePath;
                     await _employeeRepo.UpdateAsync(employee);
                 }

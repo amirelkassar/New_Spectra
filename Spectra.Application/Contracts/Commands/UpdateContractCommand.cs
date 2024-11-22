@@ -42,8 +42,8 @@ namespace Spectra.Application.Contracts.Commands
                 AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
                 AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.Secretary }.Any(r => r.Equals(request.ModifierRole)),
                 CreationDate = DateTime.UtcNow,
-                Order=currentVersion.Order++,
-                State=ContractVersionStates.Active,
+                Order = currentVersion.Order++,
+                State = ContractVersionStates.Active,
             };
             //update contract
             contract.HoursOfWork = request.HoursOfWork;

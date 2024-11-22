@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Spectra.Domain.Employees.MedicalStaff;
-using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
+﻿using Spectra.Domain.Shared.Enums;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.Employees.Dto

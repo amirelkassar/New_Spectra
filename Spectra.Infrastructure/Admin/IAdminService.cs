@@ -1,12 +1,4 @@
-﻿using MediatR;
-using Spectra.Application.Admin.Commands;
-using Spectra.Application.Admin.Dto;
-using Spectra.Application.Admin.Queries;
-using Spectra.Application.Contracts.Queries;
-using Spectra.Application.Hellper;
-using Spectra.Domain.Clients;
-using Spectra.Domain.Employees.MedicalStaff;
-using Spectra.Domain.ScheduleAppointments;
+﻿using Spectra.Application.Admin.Queries;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 

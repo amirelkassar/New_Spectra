@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Spectra.Application.Contracts.Commands;
+﻿using Spectra.Application.Contracts.Commands;
 using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.Contracts.Services
 {

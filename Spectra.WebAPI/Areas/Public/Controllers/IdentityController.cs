@@ -10,7 +10,7 @@ namespace Spectra.WebAPI.Areas.Public.Controllers
     [ApiController]
     [Area("public")]
     [Route("api/[area]/[controller]")]
-    public class IdentityController(ILogger<IdentityController> logger, 
+    public class IdentityController(ILogger<IdentityController> logger,
         ICurrentUser currentUser,
         IAuthenticationService authenticationService,
         IMediator mediator) : SpectraControllerBase<IdentityController>(logger, currentUser)

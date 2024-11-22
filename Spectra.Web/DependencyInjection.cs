@@ -1,5 +1,4 @@
-﻿using IdentityServer4.AccessTokenValidation;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Spectra.Application;
 using Spectra.Infrastructure;
 using Spectra.Web.Models;

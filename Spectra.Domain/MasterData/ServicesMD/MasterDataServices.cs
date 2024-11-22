@@ -2,13 +2,12 @@
 using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Spectra.Domain.MasterData.ServicesMD
 {
     public class MasterDataServices : BaseAuditableEntity<string>
     {
-        public AvailableSrvice AvailableSrvices { get;private set; }
+        public AvailableSrvice AvailableSrvices { get; private set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public double Price { get; set; }
@@ -41,7 +40,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
 
             return new MasterDataServices(id,
                 name,
-                availableServices, 
+                availableServices,
                 servicePrice);
         }
 

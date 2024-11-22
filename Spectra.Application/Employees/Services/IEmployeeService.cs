@@ -2,11 +2,6 @@
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.Queries;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Employees.Services
 {
@@ -21,6 +16,6 @@ namespace Spectra.Application.Employees.Services
         Task<OperationResult> CreateAsync(CreateEmployeeDto input);
         Task<OperationResult> CreateAttachmentAsync(CreateAttachmentCommand input);
         Task<OperationResult> UpdateAttachmentAsync(UpdateAttachmentCommand input);
-        Task<OperationResult> DeleteAttachmentAsync(Guid id,string empId);
+        Task<OperationResult> DeleteAttachmentAsync(Guid id, string empId);
     }
 }

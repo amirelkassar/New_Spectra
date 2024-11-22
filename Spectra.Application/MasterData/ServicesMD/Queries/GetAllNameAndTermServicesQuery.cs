@@ -34,7 +34,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             Id = x.Id,
             Name = x.Name,
             TermsAndConditions = x.TermsAndConditions,
-            Price=x.Price
+            Price = x.Price
 
         });
 

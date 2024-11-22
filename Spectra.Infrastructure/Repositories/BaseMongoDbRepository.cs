@@ -1,7 +1,5 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common;
 using System.Linq.Expressions;
 

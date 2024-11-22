@@ -19,7 +19,7 @@ namespace Spectra.Application.Employees.Queries
             public async Task<OperationResult> Handle(GetEmployeeListQuery request, CancellationToken cancellationToken)
             {
                 request.Search ??= request.Search.ToLower();
-                var (entities, total) = await _doctorRepository.GetAllAsync(s => (s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant) 
+                var (entities, total) = await _doctorRepository.GetAllAsync(s => (s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant)
                 && (s.Name.FirstName.ToLower().StartsWith(request.Search)
                 || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
                 || s.MainSpecializationName.ToLower().StartsWith(request.Search)

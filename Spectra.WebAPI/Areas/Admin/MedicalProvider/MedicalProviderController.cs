@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.Queries;
-using Spectra.Application.Employees.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
 
 namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
@@ -23,7 +22,7 @@ namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
         }
         [HttpGet]
         [Authorize(AdminMedicalProviderPermissions.ReadOne)]
-        public async Task<ActionResult> GetAsync([FromQuery]string id)
+        public async Task<ActionResult> GetAsync([FromQuery] string id)
         {
             var response = await _adminMedicalProviderService.GetAsync(id);
             return Ok(response);

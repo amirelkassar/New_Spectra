@@ -26,7 +26,7 @@ namespace Spectra.Application.Employees.Commands
                     var filePath = await _documentHellper.CreateAttachment(request.File, folderPath);
                     employee.Attachments.Add(new EmployeeAttachment
                     {
-                        Name=request.Name,
+                        Name = request.Name,
                         Path = filePath,
                         Type = request.Type,
                     });

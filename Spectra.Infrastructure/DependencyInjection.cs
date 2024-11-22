@@ -17,7 +17,6 @@ using Spectra.Application.Countries.Cities;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Countries.States;
 using Spectra.Application.Documents;
-using Spectra.Application.Employees;
 using Spectra.Application.Employees.MedicalTeams;
 using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Application.Employees.Services;
@@ -61,7 +60,6 @@ using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Contracts;
-using Spectra.Infrastructure.Contracts.SubContracts;
 using Spectra.Infrastructure.Countries;
 using Spectra.Infrastructure.Countries.Cities;
 using Spectra.Infrastructure.Countries.States;
@@ -173,7 +171,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IMedicalTeamService, MedicalTeamService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
-            services.AddScoped<IPermissionManager,PermissionManager>();
+            services.AddScoped<IPermissionManager, PermissionManager>();
             services.AddScoped<IDocumentHellper, DocumentHellper>();
             return services;
         }
@@ -210,7 +208,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
-            services.AddScoped(typeof(IBaseMongoDbRepository<,>),typeof(BaseMongoDbRepository<>));
+            services.AddScoped(typeof(IBaseMongoDbRepository<,>), typeof(BaseMongoDbRepository<>));
 
             return services;
         }

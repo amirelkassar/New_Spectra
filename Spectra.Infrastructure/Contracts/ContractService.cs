@@ -1,16 +1,9 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Commands;
-using Spectra.Application.Contracts.DTO;
-using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Contracts;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Infrastructure.Migrations;
 
 namespace Spectra.Infrastructure.Contracts
 {

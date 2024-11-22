@@ -58,7 +58,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 SectionName = input.SectionName,
                 Services = input.Services,
                 Specializations = input.Specializations,
-                WorkingHours=input.WorkingHours
+                WorkingHours = input.WorkingHours
             };
             var response = await _mediator.Send(command);
             return response;
@@ -84,14 +84,14 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
             var response = await _mediator.Send(new DeleteAttachmentCommand
             {
                 DocumentId = id,
-                EmpId= empId
+                EmpId = empId
             });
             return response;
         }
 
         public async Task<OperationResult> GetAsync(GetEmployeeById input)
         {
-            var response=await _mediator.Send(input);
+            var response = await _mediator.Send(input);
             return response;
         }
 
@@ -154,7 +154,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 {
                     Emailaddress = input.Emailaddress
                 },
-                WorkingHours=input.WorkingHours
+                WorkingHours = input.WorkingHours
             };
             var response = await _mediator.Send(command);
             return response;

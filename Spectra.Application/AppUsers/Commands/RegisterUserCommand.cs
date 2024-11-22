@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Spectra.Application.AppUsers.Dtos;
 using Spectra.Application.Clients.Services;
 using Spectra.Application.Employees.Dto;
@@ -98,26 +97,26 @@ namespace Spectra.Application.AppUsers.Commands
 
                             var msp = _medicalProviderService.CreateAsync(new CreateEmployeeDto
                             {
-                                FirstName=request.Name,
-                                LastName=" ",
-                                PhoneNumber=request.Phone,
-                                NationalId=request.NationalId,
-                                HumenGender=request.Gender,
-                                Emailaddress=request.EmailAddress,
-                                Country=request.Country,
-                                City=request.City,
-                                JobDescription=medicalData.JobDescription,
-                                JobName=medicalData.JobName,
-                                JobType=medicalData.JobType,
-                                MainSpecializationId=medicalData.MainSpecializationId,
-                                MainSpecializationName=medicalData.MainSpecializationName,
-                                AcademicDegree= medicalData.AcademicDegree,
-                                ApprovedBy= medicalData.ApprovedBy,
-                                Qualification=medicalData.Qualification,
-                                ExperienceYears=medicalData.ExperienceYears,
-                                LicenseNumber=medicalData.LicenseNumber,
-                                Specializations=medicalData.Specializations,
-                                Password=request.Password,
+                                FirstName = request.Name,
+                                LastName = " ",
+                                PhoneNumber = request.Phone,
+                                NationalId = request.NationalId,
+                                HumenGender = request.Gender,
+                                Emailaddress = request.EmailAddress,
+                                Country = request.Country,
+                                City = request.City,
+                                JobDescription = medicalData.JobDescription,
+                                JobName = medicalData.JobName,
+                                JobType = medicalData.JobType,
+                                MainSpecializationId = medicalData.MainSpecializationId,
+                                MainSpecializationName = medicalData.MainSpecializationName,
+                                AcademicDegree = medicalData.AcademicDegree,
+                                ApprovedBy = medicalData.ApprovedBy,
+                                Qualification = medicalData.Qualification,
+                                ExperienceYears = medicalData.ExperienceYears,
+                                LicenseNumber = medicalData.LicenseNumber,
+                                Specializations = medicalData.Specializations,
+                                Password = request.Password,
                             });
                         }
                         break;

@@ -55,7 +55,7 @@ namespace Spectra.Application.Contracts.Commands
 
             var contractVerion = new ContractVersion
             {
-                Order=1,
+                Order = 1,
                 AcceptedByAdmin = false,
                 AcceptedByEmployee = true,
                 CreationDate = DateTime.UtcNow,
@@ -111,7 +111,7 @@ namespace Spectra.Application.Contracts.Commands
             ContractStates.Contracting,
             [contractVerion]
             );
-            contract.JobTitle =medicalProvider.JobType.ToString();
+            contract.JobTitle = medicalProvider.JobType.ToString();
 
             await _contractRepository.AddAsync(contract);
 

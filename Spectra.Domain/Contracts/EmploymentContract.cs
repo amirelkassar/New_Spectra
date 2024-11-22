@@ -84,14 +84,14 @@ namespace Spectra.Domain.Contracts
         public void Accept()
         {
             ContractState = ContractStates.Accepted;
-            AcceptingDate= DateTime.UtcNow;
+            AcceptingDate = DateTime.UtcNow;
             var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
             lastVersion.AcceptedByEmployee = true;
             lastVersion.AcceptedByAdmin = true;
             AcceptedByDepartmentHead = true;
         }
 
-        public void Cancel(string userId,string username,string? reason=default)
+        public void Cancel(string userId, string username, string? reason = default)
         {
             ContractState = ContractStates.Canceled;
             CancelingDate = DateTime.UtcNow;

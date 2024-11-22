@@ -8,7 +8,7 @@ namespace Spectra.Domain.MasterData.Sections
     {
         public string Name { get; set; }
         public List<string> SpecializationIds { get; set; }
-        public string DoctorId {  get; set; }
+        public string DoctorId { get; set; }
         public string DoctorName { get; set; }
 
         protected Section() { }

@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
 using Spectra.Application.Employees.Dto;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
@@ -82,18 +80,18 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
                     input.SpecializationIds,
                     input.HumenGenders,
                     input.LicenseNumber,
-                    input.JobTypes, 
-                    input .Passowrd,
-                    input .ConfirmationPassword
-                    ,input.SpecializationId
+                    input.JobTypes,
+                    input.Passowrd,
+                    input.ConfirmationPassword
+                    , input.SpecializationId
                   /*  input.ScientificDegree*/);
             return Ok(Specialist);
         }
 
 
         [HttpPut("id")]
-        
-  [Authorize(MedicalProviderSpecialistPermissions.Update)]
+
+        [Authorize(MedicalProviderSpecialistPermissions.Update)]
         public async Task<ActionResult> UpdateSpecialist(string id, [FromForm] UpdateEmployeeDto input)
         {
 

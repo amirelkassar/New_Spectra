@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;

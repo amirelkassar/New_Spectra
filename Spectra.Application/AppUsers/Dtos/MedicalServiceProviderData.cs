@@ -11,7 +11,7 @@ namespace Spectra.Application.AppUsers.Dtos
             Specializations = [];
         }
         public JobTypes JobType { get; set; }
-        public string JobName{ get; set; }
+        public string JobName { get; set; }
         public ICollection<EmployeeSpecialization>? Specializations { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }

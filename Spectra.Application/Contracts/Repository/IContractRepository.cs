@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using Spectra.Application.Hellper;
 using Spectra.Domain.Contracts;
 using System.Linq.Expressions;
 

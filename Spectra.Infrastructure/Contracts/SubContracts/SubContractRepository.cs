@@ -1,8 +1,5 @@
 ﻿using MongoDB.Driver;
-
-using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Contracts;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Contracts.SubContracts

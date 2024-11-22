@@ -1,11 +1,8 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Contracts
@@ -45,7 +42,7 @@ namespace Spectra.Infrastructure.Contracts
 
             var total = await _EmploymentContracts.CountDocumentsAsync(filterDefinition);
             var contracts = query;
-            return (contracts , total);
+            return (contracts, total);
         }
 
         public async Task<EmploymentContract> GetByIdAsync(string id)

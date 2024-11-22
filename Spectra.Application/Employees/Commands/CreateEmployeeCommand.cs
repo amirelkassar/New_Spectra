@@ -99,15 +99,15 @@ namespace Spectra.Application.Employees.Commands
                 request.JobType,
                 request.JobName,
                 addUser.UserId);
-            employee.Specializations=request.Specializations;
-            employee.Services=request.Services;
-            employee.LicenseNumber=request.LicenseNumber; 
-            employee.ApprovedBy=request.ApprovedBy;
-            employee.AcademicDegree=request.AcademicDegree;
-            employee.MainSpecializationName=request.MainSpecializationName;
-            employee.MainSpecializationId=request.MainSpecializationId;
-            employee.SectionId=request.SectionId;
-            employee.SectionName=request.SectionName;
+            employee.Specializations = request.Specializations;
+            employee.Services = request.Services;
+            employee.LicenseNumber = request.LicenseNumber;
+            employee.ApprovedBy = request.ApprovedBy;
+            employee.AcademicDegree = request.AcademicDegree;
+            employee.MainSpecializationName = request.MainSpecializationName;
+            employee.MainSpecializationId = request.MainSpecializationId;
+            employee.SectionId = request.SectionId;
+            employee.SectionName = request.SectionName;
             employee.Qualification = request.Qualification;
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;

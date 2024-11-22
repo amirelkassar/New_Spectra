@@ -55,14 +55,14 @@ namespace Spectra.Domain.Employees
             ArgumentNullException.ThrowIfNull(jobType, nameof(jobType));
             ArgumentNullException.ThrowIfNull(userId, nameof(userId));
             Name = name;
-            NationalId= nationalId;
+            NationalId = nationalId;
             MobileNumber = phoneNumber;
-            HumenGender= humenGender;
-            EmailAddress= emailAddress;
-            Address= address;
-            UserId= userId;
-            JobType= jobType;
-            JobName= jobName;
+            HumenGender = humenGender;
+            EmailAddress = emailAddress;
+            Address = address;
+            UserId = userId;
+            JobType = jobType;
+            JobName = jobName;
         }
 
         public static Employee Create(string id,
@@ -86,7 +86,7 @@ namespace Spectra.Domain.Employees
                 address,
                 jobType,
                 jobName,
-                userId );
+                userId);
         }
 
     }

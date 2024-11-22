@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Admin.Commands;
-using Spectra.Application.Admin.Queries;
-using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract

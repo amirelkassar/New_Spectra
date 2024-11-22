@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
-using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
-using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.WebAPI.Controllers
 {

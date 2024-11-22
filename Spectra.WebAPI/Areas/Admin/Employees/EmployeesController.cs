@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Admin.Dto;
-using Spectra.Application.Admin.Queries;
-using Spectra.Application.Employees.ManagementStaff.Commands;
-using Spectra.Application.Employees.ManagementStaff.Commands.Dto;
-using Spectra.Application.Employees.ManagementStaff.Dto;
-using Spectra.Application.Employees.ManagementStaff.Queries;
-using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Infrastructure.Admin;
 
 namespace Spectra.WebAPI.Areas.Admin.Employees
@@ -53,7 +45,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         public async Task<IActionResult> CreateAsync([FromBody] CreateStaffDto input)
         {
             var employees = await _managementStaffService.CreateAsync(input);
-            return Created("",employees);
+            return Created("", employees);
         }
 
         [HttpPut]

@@ -6,12 +6,7 @@ using Spectra.Application.Hellper;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Contracts.Queries
 {
@@ -40,7 +35,7 @@ namespace Spectra.Application.Contracts.Queries
                     Items = contracts.Adapt<IReadOnlyCollection<ContractListReadDto>>(),
                     TotalCount = total,
                     PageSize = request.MaxCount,
-                    PageNumber = (int)Math.Ceiling((double)request.SkipCount /request.MaxCount)
+                    PageNumber = (int)Math.Ceiling((double)request.SkipCount / request.MaxCount)
                 });
             }
         }
