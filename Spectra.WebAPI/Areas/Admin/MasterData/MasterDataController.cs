@@ -4,7 +4,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
     [Area("Admin/MasterData")]
 
-    public class MasterDataController : BassAdminController
+    public class MasterDataController : AdminBaseController
     {
 
     }

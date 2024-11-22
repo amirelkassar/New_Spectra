@@ -13,7 +13,7 @@ namespace Spectra.WebAPI.Areas.Admin.MedicalProvider
 {
     [Area("Admin")]
     [Authorize]
-    public class MedicalProviderController : BassAdminController
+    public class MedicalProviderController : AdminBaseController
     {
         private readonly IAdminService _adminService;
         private readonly IMedicalProviderService _doctorService;

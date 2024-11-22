@@ -5,7 +5,7 @@ namespace Spectra.WebAPI.Areas.Admin
     [ApiController]
     [Route("api/[area]/[controller]")]
     //[Authorize(Roles = $"{Roles.SystemAdmin}")]
-    public abstract class BassAdminController : ControllerBase
+    public abstract class AdminBaseController : ControllerBase
     {
 
     }

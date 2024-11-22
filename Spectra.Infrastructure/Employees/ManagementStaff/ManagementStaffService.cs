@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Employees.ManagementStaff.Commands;
+using Spectra.Application.Employees.ManagementStaff.Dto;
 using Spectra.Application.Employees.ManagementStaff.Queries;
 using Spectra.Application.Employees.ManagementStaff.Service;
 using Spectra.Domain.Shared.Enums;
@@ -17,64 +18,53 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
             _mediator = mediator;
         }
 
-        public async Task<OperationResult> CreateAsync(string firstName,
-            string lastName,
-            string? prefix,
-            string phoneNumber,
-            string countryCode,
-            string emailAddress,
-            int? experienceYears,
-            string country,
-            string city,
-            string nationalId,
-            HumenGender humenGender,
-            JobTypes jobType,
-            string jobName,
-            double? workingHours,
-            string jobDescription,
-            string qualification,
-            string passowrd)
+        public async Task<OperationResult> CreateAsync(CreateStaffDto input)
         {
       
             var name = new Name
             {
-                FirstName = firstName,
-                LastName = lastName,
-                Prefix = prefix
+                FirstName = input.FirstName,
+                LastName = input.LastName,
             };
 
             var staffNumber = new PhoneNumber
             {
-                PhoneNumbers = phoneNumber,
-                CountryCode = countryCode
+                PhoneNumbers = input.PhoneNumber,
+                CountryCode = input.CountryCode
             };
 
             var email = new EmailAddress
             {
-                Emailaddress = emailAddress
+                Emailaddress = input.EmailAddress,
             };
 
             var address = new Address
             {
-                Country = country,
-                City = city
+                Country = input.Country,
+                City = input.City,
+                Building=input.Building,
+                CommonMark=input.CommonMark,
+                Floor=input.Floor,
+                PostalCode=input.PostalCode,
+                State = input.State,
+                StreetName = input.StreetName
             };
 
             var command = new CreateManagementStaffCommand
             {
                 Name = name,
-                ExperienceYears= experienceYears,
-                NationalId = nationalId,
-                JobDescription= jobDescription,
-                Qualification= qualification,
+                ExperienceYears= input.ExperienceYears,
+                NationalId = input.NationalId,
+                JobDescription= input.NationalId,
+                Qualification= input.NationalId,
                 MobileNumber = staffNumber,
                 EmailAddress = email,
-                HumenGender = humenGender,
+                HumenGender = input.HumenGender,
                 Address = address,
-                JobName = jobName,
-                WorkingHours = workingHours,
-                JobType = jobType,
-                Passowrd= passowrd,
+                JobName = input.NationalId,
+                WorkingHours = input.WorkingHours,
+                JobType = input.JobType,
+                Passowrd= input.Passowrd,
             };
             return await _mediator.Send(command);
         }
@@ -97,64 +87,52 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult> UpdateAsync(string id,
-            string firstName,
-            string lastName,
-            string? prefix,
-            string phoneNumber,
-            string countryCode,
-            string emailAddress,
-            int? experienceYears,
-            string country,
-            string city,
-            string nationalId,
-            HumenGender humenGender,
-            JobTypes jobType,
-            string jobName,
-            double? workingHours,
-            string jobDescription,
-            string qualification,
-            string passowrd)
+        public async Task<OperationResult> UpdateAsync(UpdateStaffDto input)
         {
             var name = new Name
             {
-                FirstName = firstName,
-                LastName = lastName,
-                Prefix = prefix
+                FirstName = input.FirstName,
+                LastName = input.LastName,
             };
 
             var staffNumber = new PhoneNumber
             {
-                PhoneNumbers = phoneNumber,
-                CountryCode = countryCode
+                PhoneNumbers = input.PhoneNumber,
+                CountryCode = input.CountryCode
             };
 
             var email = new EmailAddress
             {
-                Emailaddress = emailAddress
+                Emailaddress = input.EmailAddress,
             };
 
             var address = new Address
             {
-                Country = country,
-                City = city
+                Country = input.Country,
+                City = input.City,
+                Building = input.Building,
+                CommonMark = input.CommonMark,
+                Floor = input.Floor,
+                PostalCode = input.PostalCode,
+                State = input.State,
+                StreetName = input.StreetName
             };
 
             var command = new UpdateManagementStaffCommand
             {
-                Id = id,
+                Id = input.Id,
                 Name = name,
-                ExperienceYears = experienceYears,
-                NationalId = nationalId,
-                JobDescription = jobDescription,
-                Qualification = qualification,
+                ExperienceYears = input.ExperienceYears,
+                NationalId = input.NationalId,
+                JobDescription = input.NationalId,
+                Qualification = input.NationalId,
                 MobileNumber = staffNumber,
                 EmailAddress = email,
-                HumenGender = humenGender,
+                HumenGender = input.HumenGender,
                 Address = address,
-                JobName = jobName,
-                WorkingHours = workingHours,
-                JobType = jobType
+                JobName = input.NationalId,
+                WorkingHours = input.WorkingHours,
+                JobType = input.JobType,
             };
 
             return await _mediator.Send(command);

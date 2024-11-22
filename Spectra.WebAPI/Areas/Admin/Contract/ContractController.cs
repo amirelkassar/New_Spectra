@@ -12,7 +12,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
 {
     [Area("Admin")]
     [Authorize]
-    public class ContractController : BassAdminController
+    public class ContractController : AdminBaseController
     {
         private readonly IAdminService _adminService;
         private readonly IContractService _contractService;
