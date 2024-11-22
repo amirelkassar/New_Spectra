@@ -18,6 +18,7 @@ namespace Spectra.Application.Interfaces
             int maxCount = 100);
         Task<bool> Exists(Expression<Func<T, bool>> filter = null, FindOptions options = null);
         Task<T> GetByIdAsync(Tkey id);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter = null);
         Task AddAsync(T input);
         Task AddRangeAsync(IEnumerable<T> input);
 

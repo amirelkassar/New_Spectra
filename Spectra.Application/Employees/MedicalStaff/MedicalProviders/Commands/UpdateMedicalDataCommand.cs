@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Employees;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.MasterData.ServicesMD;
@@ -18,15 +18,15 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
         public string SectionId { get; set; }
-        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
-        public ICollection<MedicalProviderService> Services { get; set; }
+        public ICollection<EmployeeSpecialization> Specializations { get; set; }
+        public ICollection<EmployeeService> Services { get; set; }
 
-        public class UpdateMedicalDataCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> medicalRepository,
+        public class UpdateMedicalDataCommandHandler(IBaseMongoDbRepository<Employee, string> medicalRepository,
             IBaseMongoDbRepository<Section, string> sectionRepository,
             IBaseMongoDbRepository<Specialization, string> specializationRepository,
             IBaseMongoDbRepository<MasterDataServices, string> servicesRepository) : IRequestHandler<UpdateMedicalDataCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<MedicalProvider, string> _medicalRepository = medicalRepository;
+            private readonly IBaseMongoDbRepository<Employee, string> _medicalRepository = medicalRepository;
             private readonly IBaseMongoDbRepository<Section, string> _sectionRepository = sectionRepository;
             private readonly IBaseMongoDbRepository<Specialization, string> _specializationRepository = specializationRepository;
             private readonly IBaseMongoDbRepository<MasterDataServices, string> _servicesRepository = servicesRepository;
@@ -55,7 +55,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                     Parallel.ForEach(specializationsToBeAdded, async spec =>
                     {
                         spec.DoctorCount++;
-                        medicalProvider.Specializations.Add(new MedicalProviderSpecialization
+                        medicalProvider.Specializations.Add(new EmployeeSpecialization
                         {
                             Id = spec.Id,
                             Name = spec.Name

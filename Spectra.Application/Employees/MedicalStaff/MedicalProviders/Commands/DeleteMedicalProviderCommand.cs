@@ -2,7 +2,7 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
@@ -14,11 +14,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 
     public class DeleteDoctorCommandHandler : IRequestHandler<DeleteMedicalProviderCommand, OperationResult<Unit>>
     {
-        private readonly IBaseMongoDbRepository<MedicalProvider, string> _medicalProvider;
+        private readonly IBaseMongoDbRepository<Employee, string> _medicalProvider;
 
         private readonly IHellper _addFile;
 
-        public DeleteDoctorCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> medicalProvider, IHellper addFile)
+        public DeleteDoctorCommandHandler(IBaseMongoDbRepository<Employee, string> medicalProvider, IHellper addFile)
         {
             _medicalProvider = medicalProvider;
             _addFile = addFile;

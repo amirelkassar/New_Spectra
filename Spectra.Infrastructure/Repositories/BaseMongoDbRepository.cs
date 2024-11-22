@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common;
@@ -45,6 +46,12 @@ namespace Spectra.Infrastructure.Repositories
                 .ToListAsync();
             var total = await _collection.Find(filter, options).CountDocumentsAsync();
             return (data, total);
+        }
+
+        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null)
+        {
+            var entity = await _collection.Find(filter).FirstOrDefaultAsync();
+            return entity;
         }
 
         public async Task<T> GetByIdAsync(string id)

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -34,11 +34,11 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 
     public class UpdatemedicalProviderCommandHandler : IRequestHandler<UpdateMedicalProviderCommand, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<MedicalProvider, string> _medicalProvider;
+        private readonly IBaseMongoDbRepository<Employee, string> _medicalProvider;
 
         private readonly IHellper _addFile;
 
-        public UpdatemedicalProviderCommandHandler(IBaseMongoDbRepository<MedicalProvider,string> medicalProvider, IHellper addFile)
+        public UpdatemedicalProviderCommandHandler(IBaseMongoDbRepository<Employee,string> medicalProvider, IHellper addFile)
         {
             _medicalProvider = medicalProvider;
             _addFile = addFile;

@@ -63,6 +63,11 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
             return response;
         }
 
+        public async Task<OperationResult> CreateAttachmentAsync(EmployeeAttachmentDto input)
+        {
+            var emp=await _
+        }
+
         public async Task<OperationResult> DeleteAsync(string id)
         {
             var response = await _mediator.Send(new DeleteMedicalProviderCommand
@@ -70,6 +75,11 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 Id = id
             });
             return response;
+        }
+
+        public Task<OperationResult> DeleteAttachmentAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<OperationResult> GetAsync(string id)
@@ -82,6 +92,11 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
         {
             var response = await _mediator.Send(input);
             return response;
+        }
+
+        public Task<OperationResult> UpdateAttachmentAsync(Guid id, EmployeeAttachmentDto input)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<OperationResult> UpdateMedicallDataAsync(UpdateMedicalDataCommand input)

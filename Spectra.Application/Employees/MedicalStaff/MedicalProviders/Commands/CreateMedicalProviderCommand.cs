@@ -8,7 +8,6 @@ using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -19,8 +18,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
     public class CreateMedicalProviderCommand : CreateEmployeeBaseCommand
     {
-        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
-        public ICollection<MedicalProviderService> Services { get; set; }
+        public ICollection<EmployeeSpecialization> Specializations { get; set; }
+        public ICollection<EmployeeService> Services { get; set; }
         public string LicenseNumber { get; set; }
         public string ApprovedBy { get; set; }
         public AcademicDegrees AcademicDegree { get; set; }
@@ -30,13 +29,13 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public string SectionName { get; set; }
     }
 
-    public class CreateMedicalProviderCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> doctorRepository,
+    public class CreateMedicalProviderCommandHandler(IBaseMongoDbRepository<Employee, string> doctorRepository,
         IHellper addFile,
         ISpecializationsRepository specializationRepository,
         IIdentityService identityService,
         ISectionsRepository sectionsRepository) : IRequestHandler<CreateMedicalProviderCommand, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<MedicalProvider, string> _medicalProvider = doctorRepository;
+        private readonly IBaseMongoDbRepository<Employee, string> _medicalProvider = doctorRepository;
 
         private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
         private readonly IIdentityService _identityService = identityService;
@@ -76,7 +75,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
                 role
             );
 
-            var medicalProvider = MedicalProvider.Create(
+            var medicalProvider = Employee.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name,
                 request.NationalId,

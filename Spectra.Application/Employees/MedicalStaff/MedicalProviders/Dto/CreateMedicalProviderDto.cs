@@ -1,4 +1,4 @@
-﻿using Spectra.Domain.Employees.MedicalStaff;
+﻿using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Enums;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
@@ -35,8 +35,8 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto
         public string SectionId { get; set; }
         public string SectionName { get; set; }
         public string Password { get; set; }
-        public ICollection<MedicalProviderSpecialization> Specializations { get; set; }
-        public ICollection<MedicalProviderService> Services { get; set; }
+        public ICollection<EmployeeSpecialization> Specializations { get; set; }
+        public ICollection<EmployeeService> Services { get; set; }
 
 
     }

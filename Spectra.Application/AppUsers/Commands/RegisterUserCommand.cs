@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.AppUsers.Dtos;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Identities;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -53,7 +52,6 @@ namespace Spectra.Application.AppUsers.Commands
         public ICollection<PatientDataDto>? Patients { get; set; }
         public OrganizationData? OrganizationData { get; set; }
 
-        public IFormFile? UserImage { get; set; }
         public IFormFile? MedicalDegreeImage { get; set; }
 
 

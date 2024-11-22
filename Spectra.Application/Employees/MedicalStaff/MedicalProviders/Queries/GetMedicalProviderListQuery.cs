@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Employees.MedicalStaff;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -11,9 +11,9 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries
     {
         public string? Search { get; set; }
 
-        public class GetMedicalProviderListQueryHandler(IBaseMongoDbRepository<MedicalProvider, string> doctorRepository) : IRequestHandler<GetMedicalProviderListQuery, OperationResult>
+        public class GetMedicalProviderListQueryHandler(IBaseMongoDbRepository<Employee, string> doctorRepository) : IRequestHandler<GetMedicalProviderListQuery, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<MedicalProvider, string> _doctorRepository = doctorRepository;
+            private readonly IBaseMongoDbRepository<Employee, string> _doctorRepository = doctorRepository;
 
             public async Task<OperationResult> Handle(GetMedicalProviderListQuery request, CancellationToken cancellationToken)
             {
@@ -31,7 +31,7 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries
                     request.SkipCount,
                     request.MaxCount);
 
-                return OperationResult<PaginatedResult<MedicalProvider>>.Success(new PaginatedResult<MedicalProvider>(entities, total, request.MaxCount));
+                return OperationResult<PaginatedResult<Employee>>.Success(new PaginatedResult<Employee>(entities, total, request.MaxCount));
             }
         }
     }

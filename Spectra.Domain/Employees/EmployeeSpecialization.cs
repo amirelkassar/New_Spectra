@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectra.Domain.Employees.MedicalStaff
+namespace Spectra.Domain.Employees
 {
-    public class MedicalProviderSpecialization
+    public class EmployeeSpecialization
     {
         public string Id { get; set; }
         public string Name { get; set; }
