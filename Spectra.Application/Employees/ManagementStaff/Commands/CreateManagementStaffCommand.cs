@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
 using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees.ManagementStaff;
+using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -20,11 +22,11 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 
     public class CreateManagementStaffCommandHandler : IRequestHandler<CreateManagementStaffCommand, OperationResult>
     {
-        private readonly IManagementStaffRepository _staffRepository;
+        private readonly IBaseMongoDbRepository<Staff, string> _staffRepository;
         private readonly IIdentityService _identityService;
       
 
-        public CreateManagementStaffCommandHandler(IManagementStaffRepository staffRepository, IIdentityService identityService)
+        public CreateManagementStaffCommandHandler(IBaseMongoDbRepository<Staff, string> staffRepository, IIdentityService identityService)
         {
             _staffRepository = staffRepository;
             _identityService = identityService;

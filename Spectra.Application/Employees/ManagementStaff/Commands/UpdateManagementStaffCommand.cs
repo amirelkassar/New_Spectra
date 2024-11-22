@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -25,9 +27,9 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
         public double? WorkingHours { get; set; }
     }
 
-    public class UpdateManagementStaffCommandHandler(IManagementStaffRepository staffRepository, IIdentityService identityService) : IRequestHandler<UpdateManagementStaffCommand, OperationResult>
+    public class UpdateManagementStaffCommandHandler(IBaseMongoDbRepository<Staff, string> staffRepository, IIdentityService identityService) : IRequestHandler<UpdateManagementStaffCommand, OperationResult>
     {
-        private readonly IManagementStaffRepository _staffRepository = staffRepository;
+        private readonly IBaseMongoDbRepository<Staff, string> _staffRepository = staffRepository;
         private readonly IIdentityService _identityService = identityService;
 
         public async Task<OperationResult> Handle(UpdateManagementStaffCommand request, CancellationToken cancellationToken)

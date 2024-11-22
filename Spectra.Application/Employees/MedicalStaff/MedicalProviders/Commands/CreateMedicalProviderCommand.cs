@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.SpecializationCommend;
@@ -28,13 +29,13 @@ namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
         public IFormFile? Certification { get; set; }
     }
 
-    public class CreateDoctorCommandHandler(IMedicalProviderRepository doctorRepository,
+    public class CreateDoctorCommandHandler(IBaseMongoDbRepository<MedicalProvider, string> doctorRepository,
         IHellper addFile,
         ISpecializationsRepository specializationRepository,
         IIdentityService identityService,
         ISectionsRepository sectionsRepository) : IRequestHandler<CreateMedicalProviderCommand, OperationResult>
     {
-        private readonly IMedicalProviderRepository _medicalProvider = doctorRepository;
+        private readonly IBaseMongoDbRepository<MedicalProvider, string> _medicalProvider = doctorRepository;
 
         private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
         private readonly IIdentityService _identityService = identityService;

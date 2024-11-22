@@ -88,6 +88,7 @@ using Spectra.Infrastructure.MasterData.Specialization;
 using Spectra.Infrastructure.MedicalPatientProfiles;
 using Spectra.Infrastructure.MedicalTeams;
 using Spectra.Infrastructure.Patients;
+using Spectra.Infrastructure.Repositories;
 using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.IdentityServices;
@@ -121,7 +122,7 @@ namespace Spectra.Infrastructure
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
             services.AddSerilog();
-
+            services.AddSignalR();
             services.AddDataProtection();
             services.ConfigureEmailServices(configuration);
             return services;
@@ -179,7 +180,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
             services.AddScoped<IPermissionManager,PermissionManager>();
             services.AddScoped<IHellper, Hellper>();
-
             return services;
         }
         private static IServiceCollection ConfigureRepositories(this IServiceCollection services)
@@ -202,7 +202,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IMedicalProviderRepository, MedicalProviderRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
-            services.AddScoped<ISubContractRepository, SubContractRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
@@ -218,7 +217,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
-            services.AddSignalR();
+            services.AddScoped(typeof(IBaseMongoDbRepository<,>),typeof(BaseMongoDbRepository<>));
 
             return services;
         }

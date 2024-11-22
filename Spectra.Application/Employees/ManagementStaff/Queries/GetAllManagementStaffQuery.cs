@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Hellper;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
@@ -13,9 +14,9 @@ namespace Spectra.Application.Employees.ManagementStaff.Queries
 
     public class GetAllManagementStaffQueryHandler : IRequestHandler<GetAllManagementStaffQuery, OperationResult>
     {
-        private readonly IManagementStaffRepository _staffRepository;
+        private readonly IBaseMongoDbRepository<Staff, string> _staffRepository;
 
-        public GetAllManagementStaffQueryHandler(IManagementStaffRepository staffRepository)
+        public GetAllManagementStaffQueryHandler(IBaseMongoDbRepository<Staff, string> staffRepository)
         {
             _staffRepository = staffRepository;
         }

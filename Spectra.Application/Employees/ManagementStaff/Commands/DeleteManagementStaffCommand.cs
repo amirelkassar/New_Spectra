@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.ManagementStaff.Commands
@@ -11,9 +13,9 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 
     public class DeleteManagementStaffCommandHandler : IRequestHandler<DeleteManagementStaffCommand, OperationResult<Unit>>
     {
-        private readonly IManagementStaffRepository _staffRepository;
+        private readonly IBaseMongoDbRepository<Staff, string> _staffRepository;
 
-        public DeleteManagementStaffCommandHandler(IManagementStaffRepository staffRepository)
+        public DeleteManagementStaffCommandHandler(IBaseMongoDbRepository<Staff, string> staffRepository)
         {
             _staffRepository = staffRepository;
         }
@@ -21,10 +23,7 @@ namespace Spectra.Application.Employees.ManagementStaff.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeleteManagementStaffCommand request, CancellationToken cancellationToken)
         {
-
-            var staff = await _staffRepository.GetByIdAsync(request.Id);
-
-            await _staffRepository.DeleteAsync(staff);
+            await _staffRepository.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);
 
         }

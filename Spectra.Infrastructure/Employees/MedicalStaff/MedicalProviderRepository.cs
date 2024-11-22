@@ -2,9 +2,7 @@
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
-using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
 using System.Linq.Expressions;
@@ -41,7 +39,14 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff.MedicalProviders
         }
         public async Task UpdateAsync(MedicalProvider input)
         {
-            await _MedicalProviders.ReplaceOneAsync(c => c.Id == input.Id, input);
+            var props=typeof(MedicalProvider).GetProperties();
+            var obj = Builders<MedicalProvider>.Update.Set(nameof(input.Id),input.Id);
+            foreach (var prop in props)
+            {
+                obj.Set(prop.Name, prop.GetValue(input));
+            }
+
+            await _MedicalProviders.UpdateOneAsync(m => m.Id == input.Id, obj);
         }
 
         public async Task DeleteAsync(MedicalProvider input)

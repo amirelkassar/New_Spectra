@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees.ManagementStaff;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -11,23 +12,15 @@ namespace Spectra.Application.Employees.ManagementStaff.Queries
 
     public class GetManagementStaffByIdQueryHandler : IRequestHandler<GetManagementStaffByIdQuery, OperationResult<Staff>>
     {
-        private readonly IManagementStaffRepository _staffRepository;
+        private readonly IBaseMongoDbRepository<Staff, string> _staffRepository;
 
-        public GetManagementStaffByIdQueryHandler(IManagementStaffRepository staffRepository)
+        public GetManagementStaffByIdQueryHandler(IBaseMongoDbRepository<Staff, string> staffRepository)
         {
             _staffRepository = staffRepository;
         }
         public async Task<OperationResult<Staff>> Handle(GetManagementStaffByIdQuery request, CancellationToken cancellationToken)
         {
-
-
-
-
             var doctor = await _staffRepository.GetByIdAsync(request.Id);
-
-
-
-
             return OperationResult<Staff>.Success(doctor);
         }
     }
