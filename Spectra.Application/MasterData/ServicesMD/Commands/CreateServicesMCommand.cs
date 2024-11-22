@@ -30,11 +30,11 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
     public class CreateDrugCommandHandler : IRequestHandler<CreateServicesMCommand, OperationResult<string>>
     {
         private readonly IServiceMDRepository _serviceMRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
-        public CreateDrugCommandHandler(IServiceMDRepository serviceMRepository, IHellper addPhoto)
+        public CreateDrugCommandHandler(IServiceMDRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _serviceMRepository = serviceMRepository;
             _addPhoto = addPhoto;

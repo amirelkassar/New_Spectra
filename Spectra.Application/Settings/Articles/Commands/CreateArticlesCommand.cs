@@ -22,11 +22,11 @@ namespace Spectra.Application.Settings.Articles.Commands
     public class CreateArticlesCommandHandler : IRequestHandler<CreateArticlesCommand, OperationResult<string>>
     {
         private readonly IArticlesRepository _articlesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
-        public CreateArticlesCommandHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+        public CreateArticlesCommandHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _articlesRepository = serviceMRepository;
             _addPhoto = addPhoto;

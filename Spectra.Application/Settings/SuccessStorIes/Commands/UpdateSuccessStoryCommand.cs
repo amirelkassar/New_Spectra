@@ -27,11 +27,11 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
         {
 
             private readonly ISuccessStorIesRepository _successStorIesRepository;
-            private readonly IHellper _addPhoto;
+            private readonly IDocumentHellper _addPhoto;
 
 
 
-            public UpdateSuccessStoryCommandHandler(ISuccessStorIesRepository successStorIesRepository, IHellper addPhoto)
+            public UpdateSuccessStoryCommandHandler(ISuccessStorIesRepository successStorIesRepository, IDocumentHellper addPhoto)
             {
                 _successStorIesRepository = successStorIesRepository;
                 _addPhoto = addPhoto;

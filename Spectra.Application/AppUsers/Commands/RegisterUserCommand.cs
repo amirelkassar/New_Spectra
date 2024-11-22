@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.AppUsers.Dtos;
 using Spectra.Application.Clients.Services;
+using Spectra.Application.Employees.Dto;
+using Spectra.Application.Employees.Services;
 using Spectra.Application.Identities;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -33,8 +35,7 @@ namespace Spectra.Application.AppUsers.Commands
 
         [Required]
         public string CountryCode { get; set; }
-        [Required]
-        public string StateCode { get; set; }
+        public string? StateCode { get; set; }
         [Required]
         public string NationalId { get; set; }
         [Required]
@@ -52,21 +53,20 @@ namespace Spectra.Application.AppUsers.Commands
         public ICollection<PatientDataDto>? Patients { get; set; }
         public OrganizationData? OrganizationData { get; set; }
 
-        public IFormFile? MedicalDegreeImage { get; set; }
-
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
 
         public class RegisterUserCommandHandler(IIdentityService identityService,
-            IMedicalProviderService medicalProviderService,
+            IEmployeeService medicalProviderService,
             IClientService clientService) : IRequestHandler<RegisterUserCommand, OperationResult>
         {
             private readonly IIdentityService _identityService = identityService;
-            private readonly IMedicalProviderService _medicalProviderService = medicalProviderService;
+            private readonly IEmployeeService _medicalProviderService = medicalProviderService;
             private readonly IClientService _clientService = clientService;
 
             public async Task<OperationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
-
-
                 switch (request.UserType)
                 {
                     case UserType.PatientFamily:
@@ -94,25 +94,31 @@ namespace Spectra.Application.AppUsers.Commands
                                 JobTypes.Specialist => Roles.Specialist,
                                 _ => Roles.User
                             };
-                            var msp = _medicalProviderService.CreateMedicalProvider(request.Name,
-                                " ",
-                                "DR.",
-                                request.Phone,
-                                request.CountryCode,
-                                request.EmailAddress,
-                                request.CountryCode,
-                                request.StateCode,
-                                request.NationalId,
-                                request?.MedicalProviderData?.Degree,
-                                request?.MedicalProviderData?.AccreditedBy,
-                                request?.MedicalProviderData?.Specifications?.ToList(),
-                                request.Gender,
-                                request?.MedicalProviderData?.LicenseNumber,
-                                request.MedicalProviderData.JobType,
-                                request.Password,
-                                request.Password,
-                                request.MedicalProviderData.MainSpecificationId,
-                                request.MedicalDegreeImage);
+                            var medicalData = request.MedicalProviderData;
+
+                            var msp = _medicalProviderService.CreateAsync(new CreateEmployeeDto
+                            {
+                                FirstName=request.Name,
+                                LastName=" ",
+                                PhoneNumber=request.Phone,
+                                NationalId=request.NationalId,
+                                HumenGender=request.Gender,
+                                Emailaddress=request.EmailAddress,
+                                Country=request.Country,
+                                City=request.City,
+                                JobDescription=medicalData.JobDescription,
+                                JobName=medicalData.JobName,
+                                JobType=medicalData.JobType,
+                                MainSpecializationId=medicalData.MainSpecializationId,
+                                MainSpecializationName=medicalData.MainSpecializationName,
+                                AcademicDegree= medicalData.AcademicDegree,
+                                ApprovedBy= medicalData.ApprovedBy,
+                                Qualification=medicalData.Qualification,
+                                ExperienceYears=medicalData.ExperienceYears,
+                                LicenseNumber=medicalData.LicenseNumber,
+                                Specializations=medicalData.Specializations,
+                                Password=request.Password,
+                            });
                         }
                         break;
                     default:
@@ -149,10 +155,6 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(r => r.StateCode)
-                .NotEmpty()
-                .NotNull();
-
             RuleFor(r => r.NationalId)
                     .NotEmpty()
                     .NotNull();
@@ -163,6 +165,16 @@ namespace Spectra.Application.AppUsers.Commands
                     .EmailAddress();
 
             RuleFor(r => r.Phone)
+                .NotEmpty()
+                .NotNull();
+
+
+            RuleFor(r => r.Country)
+                .NotEmpty()
+                .NotNull();
+
+
+            RuleFor(r => r.City)
                 .NotEmpty()
                 .NotNull();
 
@@ -187,11 +199,19 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotNull()
                 .IsInEnum();
 
-            RuleFor(m => m.MainSpecificationId)
+            RuleFor(m => m.JobName)
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(m => m.Specifications)
+            RuleFor(m => m.MainSpecializationId)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(m => m.MainSpecializationName)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(m => m.Specializations)
                 .NotEmpty()
                 .NotNull()
                 .Must(s => s.Count >= 1);
@@ -200,12 +220,19 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(m => m.Degree)
+
+            RuleFor(m => m.ApprovedBy)
                 .NotEmpty()
                 .NotNull();
 
 
-            RuleFor(m => m.NumberOfExperience)
+            RuleFor(m => m.AcademicDegree)
+                .IsInEnum()
+                .NotEmpty()
+                .NotNull();
+
+
+            RuleFor(m => m.ExperienceYears)
                 .GreaterThan(0);
         }
     }

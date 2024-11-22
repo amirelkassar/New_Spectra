@@ -1,0 +1,9 @@
+﻿namespace Spectra.Application.Employees.MedicalTeams.Dto
+{
+    public class SpecialistDto
+    {
+        public string Name { get; set; }
+        public List<string> Diagnoses { get; set; }
+        public double Rate { get; set; }
+    }
+}

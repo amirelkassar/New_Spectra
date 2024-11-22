@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.ChatHub.Services;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Dto;
+using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Queries;
 using Spectra.Application.Employees.MedicalStaff.MedicalProviders.Services;
 using Spectra.Application.Identities;
@@ -64,7 +64,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
 
         [HttpPost]
         [Authorize(MedicalProviderSpecialistPermissions.Create)]
-        public async Task<ActionResult> CreateNormalSpecialist([FromForm] CreateMedicalProviderDto input)
+        public async Task<ActionResult> CreateNormalSpecialist([FromForm] CreateEmployeeDto input)
         {
 
             var Specialist = await _medicalProviderService.CreateMedicalProvider(
@@ -94,7 +94,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider.Specialist.Controllers
         [HttpPut("id")]
         
   [Authorize(MedicalProviderSpecialistPermissions.Update)]
-        public async Task<ActionResult> UpdateSpecialist(string id, [FromForm] UpdateMedicalProviderDto input)
+        public async Task<ActionResult> UpdateSpecialist(string id, [FromForm] UpdateEmployeeDto input)
         {
 
             var Specialist = await _medicalProviderService.UpdateMedicalProvider(id, input);

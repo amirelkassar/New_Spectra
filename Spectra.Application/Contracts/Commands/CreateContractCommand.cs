@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Employees.MedicalStaff.MedicalProviders;
+using Spectra.Application.Employees;
 using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
@@ -29,13 +29,13 @@ namespace Spectra.Application.Contracts.Commands
     }
 
     public class CreateContractCommandHandler(IContractRepository contractRepository,
-        IMedicalProviderRepository medicalProvider,
+        IEmployeeRepository medicalProvider,
         IServiceMDRepository serviceMDRepository,
         ISectionsRepository sectionsRepository) : IRequestHandler<CreateContractCommand, OperationResult>
     {
 
         private readonly IContractRepository _contractRepository = contractRepository;
-        private readonly IMedicalProviderRepository _medicalProvider = medicalProvider;
+        private readonly IEmployeeRepository _medicalProvider = medicalProvider;
         private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
         private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
 

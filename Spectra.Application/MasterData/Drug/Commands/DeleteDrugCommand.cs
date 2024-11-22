@@ -12,9 +12,9 @@ namespace Spectra.Application.MasterData.Drug.Commands
     public class DeleteDrugCommandHandler : IRequestHandler<DeleteDrugCommand, OperationResult<Unit>>
     {
         private readonly IDrugRepository _drugRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public DeleteDrugCommandHandler(IDrugRepository drugRepository, IHellper addPhoto)
+        public DeleteDrugCommandHandler(IDrugRepository drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;

@@ -1,4 +1,6 @@
-﻿using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Employees;
+using Spectra.Domain.Shared.Enums;
+using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.AppUsers.Dtos
 {
@@ -6,14 +8,18 @@ namespace Spectra.Application.AppUsers.Dtos
     {
         public MedicalServiceProviderData()
         {
-            Specifications = [];
+            Specializations = [];
         }
         public JobTypes JobType { get; set; }
-        public string? MainSpecificationId { get; set; }
-        public ICollection<string>? Specifications { get; set; }
+        public string JobName{ get; set; }
+        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
         public string? LicenseNumber { get; set; }
-        public string? AccreditedBy { get; set; }
-        public string? Degree { get; set; }
-        public int? NumberOfExperience { get; set; }
+        public string? ApprovedBy { get; set; }
+        public AcademicDegrees? AcademicDegree { get; set; }
+        public string MainSpecializationId { get; set; }
+        public string MainSpecializationName { get; set; }
+        public int? ExperienceYears { get; set; }
+        public string? Qualification { get; set; }
+        public string? JobDescription { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
     public class DeleteDrugCommandHandler : IRequestHandler<DeleteServicesMCommand, OperationResult<Unit>>
     {
         private readonly IServiceMDRepository _serviceMRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public DeleteDrugCommandHandler(IServiceMDRepository serviceMRepository, IHellper addPhoto)
+        public DeleteDrugCommandHandler(IServiceMDRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _serviceMRepository = serviceMRepository;
 

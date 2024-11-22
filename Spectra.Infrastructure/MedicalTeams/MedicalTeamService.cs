@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Spectra.Application.Employees.MedicalStaff.MedicalTeams.NewFolder;
 using Spectra.Application.Employees.MedicalTeams.Commands;
+using Spectra.Application.Employees.MedicalTeams.Dto;
 using Spectra.Application.Employees.MedicalTeams.Queries;
 using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Domain.Shared.Wrappers;

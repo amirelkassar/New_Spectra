@@ -9,16 +9,16 @@ namespace Spectra.Domain.Employees
 {
     public class Employee : BaseAuditableEntity<string>
     {
-        public ICollection<EmployeeSpecialization> Specializations { get; set; }
-        public ICollection<EmployeeService> Services { get; set; }
-        public string LicenseNumber { get; set; }
-        public string ApprovedBy { get; set; }
-        public AcademicDegrees AcademicDegree { get; set; }
+        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
+        public ICollection<EmployeeService>? Services { get; set; }
+        public string? LicenseNumber { get; set; }
+        public string? ApprovedBy { get; set; }
+        public AcademicDegrees? AcademicDegree { get; set; }
         public string MainSpecializationId { get; set; }
         public string MainSpecializationName { get; set; }
-        public string SectionId { get; set; }
-        public string SectionName { get; set; }
-        public double WorkingHours { get; set; }
+        public string? SectionId { get; set; }
+        public string? SectionName { get; set; }
+        public double? WorkingHours { get; set; }
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber? MobileNumber { get; set; }
@@ -41,18 +41,9 @@ namespace Spectra.Domain.Employees
                    HumenGender humenGender,
                    EmailAddress emailAddress,
                    Address address,
-                   ICollection<EmployeeSpecialization> specializations,
-                   ICollection<EmployeeService> services,
-                   string licenseNumber,
-                   string approvedBy,
-                   AcademicDegrees academicdegree,
                    JobTypes jobType,
                    string jobName,
-                  string userId,
-                  string specializationId,
-                  string specializationName,
-                  string sectionId,
-                  string sectionName) : base(id)
+                  string userId) : base(id)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
@@ -63,14 +54,6 @@ namespace Spectra.Domain.Employees
             ArgumentNullException.ThrowIfNull(jobName, nameof(jobName));
             ArgumentNullException.ThrowIfNull(jobType, nameof(jobType));
             ArgumentNullException.ThrowIfNull(userId, nameof(userId));
-            ArgumentNullException.ThrowIfNull(specializations, nameof(specializations));
-            ArgumentNullException.ThrowIfNull(licenseNumber, nameof(licenseNumber));
-            ArgumentNullException.ThrowIfNull(academicdegree, nameof(academicdegree));
-            ArgumentNullException.ThrowIfNull(approvedBy, nameof(approvedBy));
-            ArgumentNullException.ThrowIfNull(specializationId, nameof(specializationId));
-            ArgumentNullException.ThrowIfNull(specializationName, nameof(specializationName));
-            ArgumentNullException.ThrowIfNull(sectionId, nameof(sectionId));
-            ArgumentNullException.ThrowIfNull(sectionName, nameof(sectionName));
             Name = name;
             NationalId= nationalId;
             MobileNumber = phoneNumber;
@@ -80,14 +63,6 @@ namespace Spectra.Domain.Employees
             UserId= userId;
             JobType= jobType;
             JobName= jobName;
-            Specializations = specializations;
-            LicenseNumber = licenseNumber;
-            ApprovedBy = approvedBy;
-            AcademicDegree = academicdegree;
-            MainSpecializationId = specializationId;
-            MainSpecializationName = specializationName;
-            SectionId = sectionId;
-            SectionName = sectionName;
         }
 
         public static Employee Create(string id,
@@ -97,18 +72,9 @@ namespace Spectra.Domain.Employees
                    HumenGender humenGender,
                    EmailAddress emailAddress,
                    Address address,
-                   ICollection<EmployeeSpecialization> specializations,
-                   ICollection<EmployeeService> services,
-                   string licenseNumber,
-                   string approvedBy,
-                   AcademicDegrees academicdegree,
                    JobTypes jobType,
                    string jobName,
-                  string userId,
-                  string specializationId,
-                  string specializationName,
-                  string sectionId,
-                  string sectionName)
+                  string userId)
         {
 
             return new(id,
@@ -118,19 +84,9 @@ namespace Spectra.Domain.Employees
                 humenGender,
                 emailAddress,
                 address,
-                specializations,
-                services,
-                licenseNumber,
-                approvedBy,
-                academicdegree,
                 jobType,
                 jobName,
-                userId,
-                specializationId,
-                specializationName,
-                sectionId,
-                sectionName
-               );
+                userId );
         }
 
     }

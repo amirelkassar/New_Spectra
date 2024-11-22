@@ -30,9 +30,9 @@ namespace Spectra.Application.MasterData.Drug.Commands
     public class CreateDrugCommandHandler : IRequestHandler<CreateDrugCommand, OperationResult<string>>
     {
         private readonly IDrugRepository _drugRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public CreateDrugCommandHandler(IDrugRepository drugRepository, IHellper addPhoto)
+        public CreateDrugCommandHandler(IDrugRepository drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;

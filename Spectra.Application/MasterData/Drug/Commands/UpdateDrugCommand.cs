@@ -29,9 +29,9 @@ namespace Spectra.Application.MasterData.Drug.Commands
     {
 
         private readonly IDrugRepository _drugRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public UpdateDrugCommandHandler(IDrugRepository drugRepository, IHellper addPhoto)
+        public UpdateDrugCommandHandler(IDrugRepository drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;

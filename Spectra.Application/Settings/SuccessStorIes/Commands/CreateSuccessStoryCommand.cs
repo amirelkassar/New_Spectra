@@ -27,9 +27,9 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
     public class CreateSuccessStoryCommanddHandler : IRequestHandler<CreateSuccessStoryCommand, OperationResult<string>>
     {
         private readonly ISuccessStorIesRepository _successStorIesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public CreateSuccessStoryCommanddHandler(ISuccessStorIesRepository successStorIesRepository, IHellper addPhoto)
+        public CreateSuccessStoryCommanddHandler(ISuccessStorIesRepository successStorIesRepository, IDocumentHellper addPhoto)
         {
             _successStorIesRepository = successStorIesRepository;
             _addPhoto = addPhoto;

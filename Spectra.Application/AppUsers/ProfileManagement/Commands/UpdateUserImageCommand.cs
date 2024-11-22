@@ -19,11 +19,11 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 
         public class UpdateUserImageCommandHandler(ICurrentUser currentUser,
             IIdentityService identityService,
-            IHellper documentsManager) : IRequestHandler<UpdateUserImageCommand, OperationResult>
+            IDocumentHellper documentsManager) : IRequestHandler<UpdateUserImageCommand, OperationResult>
         {
             private readonly ICurrentUser _currentUser = currentUser;
             private readonly IIdentityService _identityService = identityService;
-            private readonly IHellper _documentsManager = documentsManager;
+            private readonly IDocumentHellper _documentsManager = documentsManager;
 
             public async Task<OperationResult> Handle(UpdateUserImageCommand request, CancellationToken cancellationToken)
             {

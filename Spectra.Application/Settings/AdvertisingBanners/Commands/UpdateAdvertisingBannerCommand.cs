@@ -24,11 +24,11 @@ namespace Spectra.Application.Settings.AdvertisingBanners.Commands
         {
 
             private readonly IArticlesRepository _articlesRepository;
-            private readonly IHellper _addPhoto;
+            private readonly IDocumentHellper _addPhoto;
 
 
 
-            public UpdateArticlesCommandHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+            public UpdateArticlesCommandHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
             {
                 _articlesRepository = serviceMRepository;
                 _addPhoto = addPhoto;
