@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Employees.ManagementStaff;
 using Spectra.Application.Interfaces;
@@ -49,12 +50,26 @@ namespace Spectra.Infrastructure.Employees.ManagementStaff
         {
             return await _staff.UpdateManyAsync(filter, update);
         }
-        public async Task<IEnumerable<Staff>> GetAllAsync(Expression<Func<Staff, bool>> filter, FindOptions options = null)
+        public async Task<(IEnumerable<Staff> staff, long total)> GetAllAsync(Expression<Func<Staff, bool>> filter, 
+            FindOptions options = null,
+            int skipCount=0,
+            int maxCount=100)
         {
             filter ??= _ => true;
-            return await _staff.Find(filter, options).ToListAsync();
+            var staff= await _staff.Find(filter, options)
+                .SortByDescending(s=>s.Created)
+                .Skip(skipCount)
+                .Limit(maxCount)
+                .ToListAsync();
+            var total = await _staff.Find(filter, options).CountDocumentsAsync();
+            return (staff, total);
         }
 
+        public async Task<bool> Exists(Expression<Func<Staff, bool>> filter = null, FindOptions options = null)
+        {
+            return await _staff.Find(filter).AnyAsync();
+
+        }
     }
 }
 

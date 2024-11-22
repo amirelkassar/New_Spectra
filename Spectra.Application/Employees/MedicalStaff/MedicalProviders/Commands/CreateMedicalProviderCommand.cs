@@ -14,7 +14,7 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.MedicalStaff.MedicalProviders.Commands
 {
-    public class CreateMedicalProviderCommand : CreateBassEmployeesCommand
+    public class CreateMedicalProviderCommand : CreateEmployeeBaseCommand
     {
         public List<string> Specializations { get; set; }
         public string? LicenseNumber { get; set; }

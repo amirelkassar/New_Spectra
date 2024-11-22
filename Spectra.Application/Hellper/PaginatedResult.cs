@@ -2,9 +2,16 @@
 {
     public class PaginatedResult<T>
     {
-        public IEnumerable<T> Items { get; set; }
-        public long TotalCount { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+        public PaginatedResult(IEnumerable<T> items, long total, int pageSize)
+        {
+            Items = items;
+            TotalCount = total;
+            PageSize = pageSize;
+            PageNumber = (int)Math.Ceiling((double)TotalCount / PageSize);
+        }
+        public IEnumerable<T> Items { get; private set; }
+        public long TotalCount { get; private set; }
+        public int PageNumber { get; private set; }
+        public int PageSize { get; private set; }
     }
 }

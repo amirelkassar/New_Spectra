@@ -9,7 +9,12 @@ namespace Spectra.Application.Employees.ManagementStaff
 
         Task AddAsync(Staff staff);
         Task DeleteAsync(Staff staff);
-        Task<IEnumerable<Staff>> GetAllAsync(Expression<Func<Staff, bool>> filter = null, FindOptions options = null);
+        Task<(IEnumerable<Staff> staff, long total)> GetAllAsync(Expression<Func<Staff, bool>> filter = null, 
+            FindOptions options = null,
+            int skipCount=0,
+            int maxCount=100);
+        Task<bool> Exists(Expression<Func<Staff, bool>> filter = null, FindOptions options = null);
+
         Task<Staff> GetByIdAsync(string id);
         Task UpdateAsync(Staff staff);
         Task<UpdateResult> UpdateManyAsync(FilterDefinition<Staff> filter, UpdateDefinition<Staff> update);

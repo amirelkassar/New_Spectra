@@ -1,53 +1,56 @@
 ﻿using MediatR;
+using Spectra.Application.Identities;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Application.Employees.ManagementStaff.Commands
 {
-    public class UpdateManagementStaffCommand : ICommand<OperationResult<Unit>>
+    public class UpdateManagementStaffCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber? MobileNumber { get; set; }
-        public HumenGender HumenGenders { get; set; }
-        public EmailAddress EmailAddrese { get; set; }
+        public HumenGender HumenGender { get; set; }
+        public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }
         public string JobName { get; set; }
-        public string Qualifications { get; set; }
-        public DateOnly? TimeToJoin { get; set; }
-        public double? WorkingHours { get; set; }
         public JobTypes JobType { get; set; }
+        public int? ExperienceYears { get; set; }
+        public string? Qualification { get; set; }
+        public string? JobDescription { get; set; }
+        public double? WorkingHours { get; set; }
     }
 
-    public class UpdateManagementStaffCommandHandler : IRequestHandler<UpdateManagementStaffCommand, OperationResult<Unit>>
+    public class UpdateManagementStaffCommandHandler(IManagementStaffRepository staffRepository, IIdentityService identityService) : IRequestHandler<UpdateManagementStaffCommand, OperationResult>
     {
-        private readonly IManagementStaffRepository _staffRepository;
+        private readonly IManagementStaffRepository _staffRepository = staffRepository;
+        private readonly IIdentityService _identityService = identityService;
 
-        public UpdateManagementStaffCommandHandler(IManagementStaffRepository staffRepository)
-        {
-            _staffRepository = staffRepository;
-        }
-
-        public async Task<OperationResult<Unit>> Handle(UpdateManagementStaffCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(UpdateManagementStaffCommand request, CancellationToken cancellationToken)
         {
 
             var staff = await _staffRepository.GetByIdAsync(request.Id);
 
+            if (await _staffRepository.Exists(s => s.Id != staff.Id && s.EmailAddress.Emailaddress.ToLower() == request.EmailAddress.Emailaddress.ToLower()))
+            {
+                throw new AlreadyExistException(request.EmailAddress.Emailaddress, nameof(request.EmailAddress));
+            }
             staff.Name = request.Name;
             staff.NationalId = request.NationalId;
             staff.MobileNumber = request.MobileNumber;
-            staff.HumenGenders = request.HumenGenders;
-            staff.EmailAddress = request.EmailAddrese;
+            staff.HumenGender = request.HumenGender;
+            staff.EmailAddress = request.EmailAddress;
             staff.Address = request.Address;
             staff.JobName = request.JobName;
             staff.JobType = request.JobType;
-            staff.Qualifications = request.Qualifications;
-            staff.TimeToJoin = request.TimeToJoin;
+            staff.ExperienceYears=request.ExperienceYears;
+            staff.Qualification = request.Qualification;
+            staff.JobDescription = request.JobDescription;
             staff.WorkingHours = request.WorkingHours;
-
 
             await _staffRepository.UpdateAsync(staff);
             return OperationResult<Unit>.Success(Unit.Value);
