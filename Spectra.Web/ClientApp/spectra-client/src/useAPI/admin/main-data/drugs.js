@@ -7,13 +7,16 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
+const queryKey = 'admin.main-data.drugs';
+
 export const GetDrugs = () => {
   return useQuery({
-    queryKey: [Admin.Drugs.url],
+    queryKey: [queryKey],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Drugs.url, {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Drugs.list()
+      );
+
       return response;
     },
   });
@@ -21,10 +24,10 @@ export const GetDrugs = () => {
 
 export const GetDrugsID = (id) => {
   return useQuery({
-    queryKey: [Admin.Drugs.getByID(id)],
+    queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Drugs.getByID(id),
+        Admin.Drugs.actions.get(id),
         {
           headers: {},
         }
@@ -40,13 +43,13 @@ export const DeleteDrugs = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Drugs.DeleteByID(id)
+        Admin.Drugs.actions.delete(id)
       );
       return response.data;
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Drugs.url]);
+      queryClient.refetchQueries([queryKey]);
     },
   });
 };
@@ -57,7 +60,7 @@ export const useCreateDrug = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Drugs.url,
+        Admin.Drugs.actions.add,
         data,
         {
           headers: {
@@ -68,7 +71,7 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Drugs.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });
@@ -80,7 +83,7 @@ export const useEditDrug = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Drugs.getByID(id),
+        Admin.Drugs.actions.update(id),
         data,
         {
           headers: {
@@ -91,7 +94,7 @@ export const useEditDrug = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Drugs.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });

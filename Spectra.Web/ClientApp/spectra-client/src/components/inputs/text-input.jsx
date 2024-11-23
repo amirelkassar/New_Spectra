@@ -22,7 +22,7 @@ const TextInput = ({
   return (
     <MantineTextInput
       {...props}
-      size={size}
+      size={props?.size || size}
       classNames={{
         input: cn(
           'rounded-lg font-Regular placeholder:font-normal focus:border-greenMain read-only:border-transparent read-only:p-0 read-only:focus:border-transparent read-only:focus-within:border-transparent read-only:font-bold',

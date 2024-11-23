@@ -7,8 +7,9 @@ export const DrugsColumns = [
     accessorKey: 'name',
     header: 'اسم العقار',
     id: 'name',
-    cell: ({ getValue }) => {
+    cell: ({ row, getValue }) => {
       const name = getValue();
+      const image = row?.original?.imagePath;
 
       return (
         <div
@@ -16,7 +17,7 @@ export const DrugsColumns = [
         >
           <div className=' size-7 lg:size-12  flex items-start justify-center '>
             <Image
-              src={imgDrugs}
+              src={image || imgDrugs}
               alt={name}
               width={49}
               height={51}

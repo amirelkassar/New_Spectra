@@ -21,16 +21,16 @@ function Page() {
 
   const [formData, setFormData] = useState({
     name: '',
-    code: '',
     ActiveIngredient: '',
     ScientificName: '',
-    type: '',
+    photo: undefined,
     RecommendedDosage: '',
     Doncentration: '',
     InteractionsWithOtherdrugs: '',
     Contraindications: '',
+    code: '',
     Nots: '',
-    photos: [], // Include photos directly in formData
+    type: '',
   });
 
   const {
@@ -41,21 +41,14 @@ function Page() {
     reset,
   } = useCreateDrug();
 
-  const handleHeaderInputChange = (files) => {
+  const handlePhoto = (file) => {
     setFormData((prev) => ({
       ...prev,
-      photos: [...prev.photos, ...files], // Update photos array with uploaded files
+      photo: file,
     }));
     if (isError) {
       reset();
     }
-  };
-
-  const handleDeleteImage = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      photos: prev.photos.filter((_, i) => i !== index), // Remove from photos array
-    }));
   };
 
   const handleInputChange = (e) => {
@@ -91,7 +84,7 @@ function Page() {
         >
           <BackIcon className={'w-full h-full'} />
         </Link>
-        <h2 className='headTitleDash'>اضافة وصفة طبية</h2>
+        <h2 className='headTitleDash'>اضافة عقار</h2>
       </div>
       <div>
         <form
@@ -102,47 +95,17 @@ function Page() {
             <h3 className='text-[12px] md:text-[16px] mb-2 mdl:mb-4'>
               صورة العقار
             </h3>
-            {formData.photos.length > 0 ? (
-              <div className='flex w-full h-auto items-center flex-wrap gap-3'>
-                {formData.photos.map((img, index) => (
-                  <div
-                    key={index}
-                    className='relative flex items-center justify-center max-w-[100px] mdl:max-w-[140px] h-[60px] mdl:h-[98px] w-auto'
-                  >
-                    <Image
-                      src={URL.createObjectURL(img)}
-                      width={100}
-                      height={100}
-                      priority={true}
-                      alt={`img-${index}`}
-                      className='h-full place-content-center block w-auto object-contain object-center'
-                    />
-                    <div
-                      onClick={() =>
-                        handleDeleteImage(index)
-                      }
-                      className='absolute cursor-pointer bg-white duration-200 hover:shadow-md top-0 start-0 bg-red-500 text-white rounded-full'
-                    >
-                      <CloseIcon className={'w-5 h-auto'} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <Dropzone
-                onDrop={handleHeaderInputChange}
-                maxSize={5 * 1024 ** 2}
-                className='mb-1 mdl:mb-5 rounded-xl'
-                accept={['image/*']}
-              >
-                <div className='flex gap-1 p1-8 flex-col justify-center h-14 mdl:h-[80px] items-center'>
-                  <UploadImgIcon className='w-6 mdl:w-8 h-auto' />
-                  <h2 className='text-xs mdl:text-base text-grayDark font-Light'>
-                    اضغط هنا لرفع صورة
-                  </h2>
-                </div>
-              </Dropzone>
-            )}
+
+            <DrugImageUploader
+              image={formData.photo}
+              onSelect={handlePhoto}
+              onRemove={() =>
+                setFormData((prev) => ({
+                  ...prev,
+                  photo: undefined,
+                }))
+              }
+            />
           </div>
 
           <InputGreen
@@ -237,3 +200,46 @@ function Page() {
 }
 
 export default Page;
+
+const DrugImageUploader = ({
+  onSelect = () => {},
+  onRemove = () => {},
+  image = undefined,
+}) => {
+  return image ? (
+    <div className='relative flex items-center justify-center max-w-[100px] mdl:max-w-[140px] h-[60px] mdl:h-[98px] w-auto'>
+      <Image
+        src={URL.createObjectURL(image)}
+        width={100}
+        height={100}
+        priority={true}
+        alt={`drug-photo`}
+        className='h-full place-content-center block w-auto object-contain object-center'
+      />
+      <div
+        onClick={() => {
+          onRemove();
+        }}
+        className='absolute cursor-pointer bg-white duration-200 hover:shadow-md top-0 start-0 bg-red-500 text-white rounded-full'
+      >
+        <CloseIcon className={'w-5 h-auto'} />
+      </div>
+    </div>
+  ) : (
+    <Dropzone
+      onDrop={(file) => {
+        onSelect(file[0]);
+      }}
+      maxSize={5 * 1024 ** 2}
+      className='mb-1 mdl:mb-5 rounded-xl'
+      accept={['image/*']}
+    >
+      <div className='flex gap-1 p1-8 flex-col justify-center h-14 mdl:h-[80px] items-center'>
+        <UploadImgIcon className='w-6 mdl:w-8 h-auto' />
+        <h2 className='text-xs mdl:text-base text-grayDark font-Light'>
+          اضغط هنا لرفع صورة
+        </h2>
+      </div>
+    </Dropzone>
+  );
+};

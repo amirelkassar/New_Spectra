@@ -39,21 +39,9 @@ function page({ params }) {
               <div className='flex items-center gap-2 mt-6 flex-wrap'>
                 <Image
                   alt='drugs'
-                  src={imgDrugs}
-                  className=' h-[60px] lg:h-[100px] w-auto object-contain'
-                  width={100}
-                  height={110}
-                />
-                <Image
-                  alt='drugs'
-                  src={imgDrugs}
-                  className=' h-[60px] lg:h-[100px] w-auto object-contain'
-                  width={100}
-                  height={110}
-                />
-                <Image
-                  alt='drugs'
-                  src={imgDrugs}
+                  src={
+                    data?.data?.data?.imagePath || imgDrugs
+                  }
                   className=' h-[60px] lg:h-[100px] w-auto object-contain'
                   width={100}
                   height={110}

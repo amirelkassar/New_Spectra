@@ -21,10 +21,10 @@ const DrugClient = () => {
       </div>
       <HandelShowData
         isLoading={isLoading}
-        lengthData={data?.data.data.length}
+        lengthData={data?.data?.data?.items?.length}
       >
         <DataTable
-          data={data?.data.data}
+          data={data?.data?.data?.items}
           columns={DrugsColumns}
         />
       </HandelShowData>

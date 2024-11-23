@@ -94,3 +94,20 @@ export const getFormData = (data) => {
     nullsAsUndefineds: true,
   });
 };
+
+export const buildQuery = (baseUrl, params = {}) => {
+  const queryString = Object.entries(params)
+    .filter(
+      ([_, value]) => value !== undefined && value !== null
+    )
+    .map(
+      ([key, value]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(
+          value
+        )}`
+    )
+    .join('&');
+  return queryString
+    ? `${baseUrl}?${queryString}`
+    : baseUrl;
+};
