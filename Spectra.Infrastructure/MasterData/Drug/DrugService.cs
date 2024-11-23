@@ -15,37 +15,17 @@ namespace Spectra.Infrastructure.MasterData.Drug
     {
         private readonly IMediator _mediator;
         private readonly IExcelProcessingService _excelProcessingService;
-
-
-
         public DrugService(IMediator mediator, IExcelProcessingService excelProcessingService)
         {
 
             _mediator = mediator;
             _excelProcessingService = excelProcessingService;
         }
-        public async Task<OperationResult<string>> CreateDrug(CreateDrugCommand input)
+        public async Task<OperationResult> CreateDrug(CreateDrugCommand input)
         {
-
-            var command = new CreateDrugCommand
-            {
-                Name = input.Name,
-                Doncentration = input.Doncentration,
-                ActiveIngredient = input.ActiveIngredient,
-                Contraindications = input.Contraindications,
-                InteractionsWithOtherdrugs = input.InteractionsWithOtherdrugs,
-                RecommendedDosage = input.RecommendedDosage,
-                ScientificName = input.ScientificName,
-                Photo = input.Photo,
-                Type = input.Type,
-                Nots = input.Nots,
-                Code = input.Code
-
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
-        public async Task CreateFromExcel(IFormFile input)
+        public async Task<OperationResult> CreateFromExcel(IFormFile input)
         {
 
             List<CreateDrugCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateDrugCommand
@@ -68,61 +48,34 @@ namespace Spectra.Infrastructure.MasterData.Drug
 
             await _mediator.Send(command);
 
-
+            return OperationResult.Success();
         }
 
-        public async Task<OperationResult<Unit>> UpdateDrug(string id, UpdateDrugCommand input)
+        public async Task<OperationResult> UpdateDrug(UpdateDrugCommand input)
         {
-
-            var command = new UpdateDrugCommand
-            {
-
-                Id = id,
-                Name = input.Name,
-                Doncentration = input.Doncentration,
-                ActiveIngredient = input.ActiveIngredient,
-                Contraindications = input.Contraindications,
-                InteractionsWithOtherdrugs = input.InteractionsWithOtherdrugs,
-                RecommendedDosage = input.RecommendedDosage,
-                ScientificName = input.ScientificName,
-                Attachment = input.Attachment,
-                Type = input.Type,
-                Nots = input.Nots,
-                Code = input.Code
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> DeleteDrug(string id)
+        public async Task<OperationResult> DeleteDrug(string id)
         {
             var command = new DeleteDrugCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<Domain.MasterData.Drug.Drug>> GetDrugById(string id)
+        public async Task<OperationResult> GetDrugById(string id)
         {
             var query = new GetDrugsByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<Domain.MasterData.Drug.Drug>>> GetAllDrugs()
+        public async Task<OperationResult> GetAllDrugNames(GetAllDrugNamesQuery input)
         {
-            var query = new GetAllDrugQuery();
-            return await _mediator.Send(query);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugsNames()
+        public async Task<OperationResult> GetAllDrugs(GetAllDrugQuery input)
         {
-            var query = new GetAllDrugNamesQuery();
-
-            return await _mediator.Send(query);
-
-        }
-
-        public Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugNames()
-        {
-            throw new NotImplementedException();
+            return await _mediator.Send(input);
         }
     }
 }

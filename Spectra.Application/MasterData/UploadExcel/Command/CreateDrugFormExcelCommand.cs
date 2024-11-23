@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Domain.MasterData.Drug;
@@ -14,12 +15,12 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
         public class CreateBulkDataCommandHandler : IRequestHandler<CreateBulkDataCommand<CreateDrugCommand>, OperationResult<Unit>>
         {
-            private readonly IDrugRepository _drugRepository;
+            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
 
 
 
 
-            public CreateBulkDataCommandHandler(IDrugRepository drugRepository, IWebHostEnvironment webHostEnvironment)
+            public CreateBulkDataCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository, IWebHostEnvironment webHostEnvironment)
             {
                 _drugRepository = drugRepository;
 

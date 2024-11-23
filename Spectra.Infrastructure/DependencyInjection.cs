@@ -182,7 +182,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             //MastarData Start
-            services.AddScoped<IDrugRepository, DrugRepository>();
             services.AddScoped<ISpecializationsRepository, SpecializationsRepository>();
             services.AddScoped<IDiagnoseRepository, DiagnoseRepository>();
             services.AddScoped<IMedicalTestsAndXrayRepository, MedicalTestsAndXrayRepository>();

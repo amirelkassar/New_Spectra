@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
@@ -30,10 +31,10 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
     public class CreateDrugCommandHandler : IRequestHandler<CreateDrugCommand, OperationResult<string>>
     {
-        private readonly IDrugRepository _drugRepository;
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
         private readonly IDocumentHellper _addPhoto;
 
-        public CreateDrugCommandHandler(IDrugRepository drugRepository, IDocumentHellper addPhoto)
+        public CreateDrugCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug,string> drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;
@@ -42,8 +43,8 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<string>> Handle(CreateDrugCommand request, CancellationToken cancellationToken)
         {
 
-            var names = await _drugRepository.GetAllAsync(b => b.Name == request.Name);
-            if (names.Any())
+            var check = await _drugRepository.Exists(b => b.Name == request.Name);
+            if (check)
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }
