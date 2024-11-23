@@ -11,9 +11,9 @@ namespace Spectra.Application.Employees.Queries
         public string Id { get; set; }
         public string UserId { get; set; }
 
-        public class GetMedicalProviderByIdHandler(IBaseMongoDbRepository<Employee, string> doctorRepository) : IRequestHandler<GetEmployeeById, OperationResult>
+        public class GetMedicalProviderByIdHandler(IBaseMongoDbRepository<Employee> doctorRepository) : IRequestHandler<GetEmployeeById, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _doctorRepository = doctorRepository;
+            private readonly IBaseMongoDbRepository<Employee> _doctorRepository = doctorRepository;
 
             public async Task<OperationResult> Handle(GetEmployeeById request, CancellationToken cancellationToken)
             {

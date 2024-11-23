@@ -14,10 +14,10 @@ namespace Spectra.Application.Employees.Commands
 
     public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, OperationResult<Unit>>
     {
-        private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo;
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepo;
         private readonly IDocumentHellper _addFile;
 
-        public DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee, string> employeeRepo, IDocumentHellper addFile)
+        public DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper addFile)
         {
             _employeeRepo = employeeRepo;
             _addFile = addFile;

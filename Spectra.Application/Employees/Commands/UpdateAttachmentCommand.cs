@@ -13,9 +13,9 @@ namespace Spectra.Application.Employees.Commands
     {
         public Guid DocumentId { get; set; }
 
-        public class UpdateAttachmentCommandHandler(IBaseMongoDbRepository<Employee, string> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<UpdateAttachmentCommand, OperationResult>
+        public class UpdateAttachmentCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<UpdateAttachmentCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo = employeeRepo;
+            private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
             private readonly IDocumentHellper _documentHellper = documentHellper;
 
             public async Task<OperationResult> Handle(UpdateAttachmentCommand request, CancellationToken cancellationToken)

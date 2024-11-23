@@ -42,13 +42,13 @@ namespace Spectra.Application.Employees.Commands
         public double? WorkingHours { get; set; }
     }
 
-    public class CreateEmployeeCommandHandler(IBaseMongoDbRepository<Employee, string> employeeRepo,
+    public class CreateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo,
         IDocumentHellper addFile,
         ISpecializationsRepository specializationRepository,
         IIdentityService identityService,
         ISectionsRepository sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo = employeeRepo;
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
 
         private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
         private readonly IIdentityService _identityService = identityService;

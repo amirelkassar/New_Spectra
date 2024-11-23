@@ -12,9 +12,9 @@ namespace Spectra.Application.MasterData.Drug.Queries
         public string? Search { get; set; }
         public class GetAllDrugNamesQueryHandler : IRequestHandler<GetAllDrugNamesQuery, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
+            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository;
 
-            public GetAllDrugNamesQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository)
+            public GetAllDrugNamesQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository)
             {
                 _drugRepository = drugRepository;
             }

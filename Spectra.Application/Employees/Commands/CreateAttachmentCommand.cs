@@ -11,9 +11,9 @@ namespace Spectra.Application.Employees.Commands
 {
     public class CreateAttachmentCommand : EmployeeAttachmentDto, IRequest<OperationResult>
     {
-        public class CreateAttachmentCommandHndler(IBaseMongoDbRepository<Employee, string> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<CreateAttachmentCommand, OperationResult>
+        public class CreateAttachmentCommandHndler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<CreateAttachmentCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo = employeeRepo;
+            private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
             private readonly IDocumentHellper _documentHellper = documentHellper;
 
             public async Task<OperationResult> Handle(CreateAttachmentCommand request, CancellationToken cancellationToken)

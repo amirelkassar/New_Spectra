@@ -32,8 +32,8 @@ namespace Spectra.Application.Employees.Commands
 
     public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<Employee, string> _empRepo;
-        public UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee, string> empRepo)
+        private readonly IBaseMongoDbRepository<Employee> _empRepo;
+        public UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> empRepo)
         {
             _empRepo = empRepo;
         }

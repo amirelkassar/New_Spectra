@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Spectra.Application.Employees;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Sections.Dto;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -14,9 +16,9 @@ namespace Spectra.Application.MasterData.Sections.Queries
 
     public class GetAllDoctorsInSectionQueryHandler : IRequestHandler<GetAllDoctorsInSectionQuery, OperationResult<IEnumerable<GetAllDoctorsDto>>>
     {
-        private readonly IEmployeeRepository _doctorRepository;
+        private readonly IBaseMongoDbRepository<Employee> _doctorRepository;
 
-        public GetAllDoctorsInSectionQueryHandler(IEmployeeRepository doctorRepository)
+        public GetAllDoctorsInSectionQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository)
         {
             _doctorRepository = doctorRepository;
         }

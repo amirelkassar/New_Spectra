@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Repositories
 {
-    public class BaseMongoDbRepository<T> : IBaseMongoDbRepository<T, string> where T : BaseEntity<string>
+    public class BaseMongoDbRepository<T> : IBaseMongoDbRepository<T> where T : BaseEntity<string>
     {
         private readonly IMongoCollection<T> _collection;
         public BaseMongoDbRepository(IMongoDbService mongoDbService)

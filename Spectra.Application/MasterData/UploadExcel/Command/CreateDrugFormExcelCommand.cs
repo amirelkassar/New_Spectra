@@ -15,12 +15,12 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
         public class CreateBulkDataCommandHandler : IRequestHandler<CreateBulkDataCommand<CreateDrugCommand>, OperationResult<Unit>>
         {
-            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
+            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository;
 
 
 
 
-            public CreateBulkDataCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository, IWebHostEnvironment webHostEnvironment)
+            public CreateBulkDataCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, IWebHostEnvironment webHostEnvironment)
             {
                 _drugRepository = drugRepository;
 

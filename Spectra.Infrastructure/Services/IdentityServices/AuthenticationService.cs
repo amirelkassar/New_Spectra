@@ -17,8 +17,6 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
         private readonly IPermissionManager _permission;
         private readonly int _expDays;
@@ -39,8 +37,6 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             _keyBytes = Encoding.ASCII.GetBytes(_key);
             _audience = configuration["Jwt:Audience"];
             _issuer = configuration["Jwt:Issuer"];
-            _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _permission = permission;
         }
@@ -61,6 +57,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 model.AccessToken = new JwtSecurityTokenHandler().WriteToken(token);
                 model.ExpirationTime = lifetime;
                 model.Roles = _roles;
+                model.Permissions = await _permission.GetUserPermissionList(_user.Id);
                 return OperationResult<LoginModel>.Success(model);
             }
             throw new UnauthorizedAccessException();
@@ -113,9 +110,6 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             {
                 userclaims.Add(new Claim(ClaimTypes.Role, role));
             }
-            var permissions = await _permission.GetUserPermissionList(_user.Id);
-            foreach (var permission in permissions)
-                userclaims.Add(new Claim(CustomClaims.Permissions, permission));
 
             return userclaims;
         }

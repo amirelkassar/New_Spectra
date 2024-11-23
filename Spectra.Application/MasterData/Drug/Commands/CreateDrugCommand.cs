@@ -31,10 +31,10 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
     public class CreateDrugCommandHandler : IRequestHandler<CreateDrugCommand, OperationResult<string>>
     {
-        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository;
         private readonly IDocumentHellper _addPhoto;
 
-        public CreateDrugCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug,string> drugRepository, IDocumentHellper addPhoto)
+        public CreateDrugCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;

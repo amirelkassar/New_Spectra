@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -205,7 +206,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
-            services.AddScoped(typeof(IBaseMongoDbRepository<,>), typeof(BaseMongoDbRepository<>));
+            services.AddScoped(typeof(IBaseMongoDbRepository<>), typeof(BaseMongoDbRepository<>));
 
             return services;
         }
@@ -303,10 +304,11 @@ namespace Spectra.Infrastructure
                 {
                     services.AddAuthorization(config =>
                     {
-                        config.AddPolicy(permission, permConfig => permConfig.RequireClaim(CustomClaims.Permissions, [permission]));
+                        config.AddPolicy(permission, permConfig => permConfig.AddRequirements(new PermissionRequirement(permission)));
                     });
                 }
             }
+            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             return services;
         }
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
