@@ -5,12 +5,10 @@ using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
 
-    [Authorize]
-
-    public class DrugController : MasterDataController
+    public class DrugController : AdminBaseController
     {
         private readonly IDrugService _drugtService;
 

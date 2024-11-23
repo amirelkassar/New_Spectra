@@ -4,10 +4,9 @@ using Spectra.Application.Settings.Packages.Commands;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 using Spectra.Infrastructure.Settings.Packages;
 
-namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [Authorize]
-    public class PackageController : SettingsController
+    public class PackageController : AdminBaseController
     {
         private readonly IPackagesService _entityServices;
 

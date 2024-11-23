@@ -103,7 +103,7 @@ namespace Spectra.Infrastructure.MasterData.Diagnoses
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDiagnosesNames()
+        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDiagnosesNames()
         {
             var query = new GetAllDiagnoseNamesQuery();
 

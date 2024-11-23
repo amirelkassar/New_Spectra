@@ -1,61 +1,94 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Employees.Commands;
+using Spectra.Application.Employees.Dto;
+using Spectra.Application.Employees.Queries;
+using Spectra.Application.Employees.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
-using Spectra.Infrastructure.Admin;
+using Spectra.WebAPI.Areas.Admin.Employees.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Employees
 {
-    [Area("Admin")]
-    [Authorize]
     public class EmployeesController : AdminBaseController
     {
-        private readonly IManagementStaffService _managementStaffService;
-        public EmployeesController(IAdminService adminService, IManagementStaffService managementStaffService)
+        private readonly IEmployeeService _employeeService;
+        public EmployeesController( IEmployeeService employeeService)
         {
-            _managementStaffService = managementStaffService;
+            _employeeService = employeeService;
         }
 
-
-        [HttpGet("list")]
+        [HttpGet("employee-list")]
         [Authorize(AdminEmployeesPermissions.ReadList)]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllManagementStaffQuery input)
+        public async Task<IActionResult> GetEmployeeListAsync([FromQuery] GetEmployeeListQuery input)
         {
-            var appointmenties = await _managementStaffService.GetAllAsync(input);
-            return Ok(appointmenties);
+            var response = await _employeeService.GetEmployeeListAsync(input);
+            return Ok(response);
+        }
+
+        [HttpGet("medical-provider-list")]
+        [Authorize(AdminEmployeesPermissions.ReadList)]
+        public async Task<IActionResult> GetMedicalProviderListAsync([FromQuery] GetMedicalProvderListQuery input)
+        {
+            var response = await _employeeService.GetMedicalProviderListAsync(input);
+            return Ok(response);
         }
 
         [HttpGet()]
         [Authorize(AdminEmployeesPermissions.ReadList)]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] GetManagementStaffByIdQuery input)
+        public async Task<IActionResult> GetByIdAsync([FromQuery] string id)
         {
-            var appointmenties = await _managementStaffService.GetByIdAsync(input.Id);
-            return Ok(appointmenties);
+            var response = await _employeeService.GetAsync(new GetEmployeeById
+            {
+                Id = id
+            });
+            return Ok(response);
         }
 
         [HttpDelete]
         [Authorize(AdminEmployeesPermissions.Delete)]
-        public async Task<IActionResult> DeleteAsync([FromBody] DeleteManagementStaffCommand input)
+        public async Task<IActionResult> DeleteAsync([FromBody] string id)
         {
-            var employees = await _managementStaffService.DeleteAsync(input.Id);
+            var response = await _employeeService.DeleteAsync(id);
             return NoContent();
         }
 
         [HttpPost]
         [Authorize(AdminEmployeesPermissions.Create)]
-        public async Task<IActionResult> CreateAsync([FromBody] CreateStaffDto input)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateEmployeeDto input)
         {
-            var employees = await _managementStaffService.CreateAsync(input);
-            return Created("", employees);
+            var response = await _employeeService.CreateAsync(input);
+            return Created("", response);
         }
 
         [HttpPut]
         [Authorize(AdminEmployeesPermissions.Update)]
-        public async Task<IActionResult> UpdateAsync([FromBody] UpdateStaffDto input)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeDto input)
         {
-            var employee = await _managementStaffService.UpdateAsync(input);
-            return Accepted(employee);
+            var response = await _employeeService.UpdateEmployeeAsync(input);
+            return Accepted("", response);
+        }
+        [HttpPost("attachment")]
+        [Authorize(AdminEmployeesPermissions.Create)]
+        public async Task<IActionResult> CreateAttachmentAsync([FromForm] CreateAttachmentCommand input)
+        {
+            var response = await _employeeService.CreateAttachmentAsync(input);
+            return Created("", response);
+        }
+        [HttpPut("attachment")]
+        [Authorize(AdminEmployeesPermissions.Update)]
+        public async Task<IActionResult> UpdatettachmentAsync([FromForm] UpdateAttachmentCommand input)
+        {
+            var response = await _employeeService.UpdateAttachmentAsync(input);
+            return Accepted("", response);
         }
 
+        [HttpDelete("attachment")]
+        [Authorize(AdminEmployeesPermissions.Delete)]
+        public async Task<IActionResult> DeleteAttachmentAsync([FromQuery] DeleteAttachmentModel input)
+        {
+            var response = await _employeeService.DeleteAttachmentAsync(input.FileId,input.EmployeeId);
+            return NoContent();
+        }
     }
 
 }

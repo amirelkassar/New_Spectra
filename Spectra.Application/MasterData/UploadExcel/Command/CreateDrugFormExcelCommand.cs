@@ -32,26 +32,21 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
                 foreach (var item in request.Data)
                 {
-                    var entity = DrugMD.Create(
+                    var drug=Domain.MasterData.Drug.Drug.Create(
+                    Ulid.NewUlid().ToString(),
+                    item.Name,
+                    item.ActiveIngredient);
 
-               Ulid.NewUlid().ToString(),
-               item.Name,
-               item.ActiveIngredient,
-               item.ScientificName,
-               item.RecommendedDosage,
-               item.Doncentration,
-               item.InteractionsWithOtherdrugs,
-               item.Contraindications,
-               null,
-               item.Code,
-               item.Nots
-               ,
-               item.Type
-               );
+                    drug.ScientificName = item.ScientificName;
+                    drug.RecommendedDosage = item.RecommendedDosage;
+                    drug.Doncentration = item.Doncentration;
+                    drug.InteractionsWithOtherdrugs = item.InteractionsWithOtherdrugs;
+                    drug.Contraindications = item.Contraindications;
+                    drug.Code = item.Code;
+                    drug.Type = item.Type;
+                    drug.Nots = item.Nots;
 
-
-
-                    await _drugRepository.AddAsync(entity);
+                    await _drugRepository.AddAsync(drug);
                 }
                 return OperationResult<Unit>.Success(Unit.Value);
 

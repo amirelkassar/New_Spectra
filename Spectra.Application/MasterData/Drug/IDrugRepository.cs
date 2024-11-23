@@ -6,11 +6,11 @@ namespace Spectra.Application.MasterData.Drug
 {
     public interface IDrugRepository
     {
-        Task AddAsync(DrugMD Drugs);
-        Task DeleteAsync(DrugMD Drugs);
+        Task AddAsync(Domain.MasterData.Drug.Drug Drugs);
+        Task DeleteAsync(Domain.MasterData.Drug.Drug Drugs);
 
-        Task<IEnumerable<DrugMD>> GetAllAsync(Expression<Func<DrugMD, bool>> filter = null, FindOptions options = null);
-        Task<DrugMD> GetByIdAsync(string id);
-        Task UpdateAsync(DrugMD Drugs);
+        Task<IEnumerable<Domain.MasterData.Drug.Drug>> GetAllAsync(Expression<Func<Domain.MasterData.Drug.Drug, bool>> filter = null, FindOptions options = null);
+        Task<Domain.MasterData.Drug.Drug> GetByIdAsync(string id);
+        Task UpdateAsync(Domain.MasterData.Drug.Drug Drugs);
     }
 }

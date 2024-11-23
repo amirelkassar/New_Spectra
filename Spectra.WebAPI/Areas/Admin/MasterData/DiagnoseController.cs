@@ -5,17 +5,15 @@ using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    [Authorize]
-    public class DiagnoseController : MasterDataController
+    public class DiagnoseController : AdminBaseController
     {
         private readonly IDiagnosesService _diagnosetService;
 
         public DiagnoseController(IDiagnosesService diagnosetService)
         {
             _diagnosetService = diagnosetService;
-
         }
 
 

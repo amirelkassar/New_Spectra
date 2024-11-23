@@ -5,6 +5,7 @@ using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Commands
@@ -14,15 +15,15 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public string Id { get; set; }
         public string Name { get; set; }
         public string ActiveIngredient { get; set; }
-        public string ScientificName { get; set; }
-        public List<IFormFile>? Attachment { get; set; }
-        public string RecommendedDosage { get; set; }
-        public string Doncentration { get; set; }
-        public string InteractionsWithOtherdrugs { get; set; }
-        public string Contraindications { get; set; }
-        public string Code { get; set; }
-        public string Nots { get; set; }
-        public string Type { get; set; }
+        public string? ScientificName { get; set; }
+        public IFormFile? Photo { get; set; }
+        public string? RecommendedDosage { get; set; }
+        public string? Doncentration { get; set; }
+        public string? InteractionsWithOtherdrugs { get; set; }
+        public string? Contraindications { get; set; }
+        public string? Code { get; set; }
+        public string? Nots { get; set; }
+        public string? Type { get; set; }
     }
 
     public class UpdateDrugCommandHandler : IRequestHandler<UpdateDrugCommand, OperationResult<Unit>>
@@ -57,10 +58,9 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.Type = request.Type;
             drug.Nots = request.Nots;
 
-            if (request.Attachment != null)
+            if (request.Photo != null)
             {
-                drug.AttachmentPath = await _addPhoto.UpdateAttachments(drug.AttachmentPath, request.Attachment, "Upload/Image/Drugs");
-                // Assuming you want to store paths as a comma-separated string
+                drug.ImagePath = await _addPhoto.UpdateAttachment(drug.ImagePath, request.Photo, Pathes.GetDrugsPath());
             }
             drug.Code = request.Code;
 
@@ -83,30 +83,6 @@ namespace Spectra.Application.MasterData.Drug.Commands
             RuleFor(x => x.ActiveIngredient)
                 .NotEmpty().WithMessage("Active ingredient is required.")
                 .MaximumLength(100).WithMessage("Active ingredient must not exceed 100 characters.");
-
-            RuleFor(x => x.ScientificName)
-                .NotEmpty().WithMessage("Scientific name is required.")
-                .MaximumLength(100).WithMessage("Scientific name must not exceed 100 characters.");
-
-            RuleFor(x => x.RecommendedDosage)
-                .NotEmpty().WithMessage("Recommended dosage is required.")
-                .MaximumLength(200).WithMessage("Recommended dosage must not exceed 200 characters.");
-
-            RuleFor(x => x.Doncentration)
-                .NotEmpty().WithMessage("Drug concentration is required.")
-                .MaximumLength(100).WithMessage("Drug concentration must not exceed 100 characters.");
-
-            RuleFor(x => x.InteractionsWithOtherdrugs)
-                .NotEmpty().WithMessage("Drug interactions with other drugs are required.")
-                .MaximumLength(500).WithMessage("Drug interactions must not exceed 500 characters.");
-
-            RuleFor(x => x.Contraindications)
-                .NotEmpty().WithMessage("Contraindications are required.")
-                .MaximumLength(500).WithMessage("Contraindications must not exceed 500 characters.");
-
-            RuleFor(x => x.Attachment)
-            .Must(files => files == null || files.All(FileValidationHelper.BeAValidImage))
-            .WithMessage("Invalid image file(s). At least one file must be a valid image.");
         }
 
     }

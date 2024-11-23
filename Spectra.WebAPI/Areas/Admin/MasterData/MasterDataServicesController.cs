@@ -4,10 +4,9 @@ using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    [Authorize]
-    public class MasterDataServicesController : MasterDataController
+    public class MasterDataServicesController : AdminBaseController
     {
         private readonly IServiceMDService _serviceMDService;
 

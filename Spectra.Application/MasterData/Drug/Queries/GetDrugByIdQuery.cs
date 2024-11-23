@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -6,36 +7,26 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.Drug.Queries
 {
 
-    public class GetDrugsByIdQuery : IRequest<OperationResult<DrugMD>>
+    public class GetDrugsByIdQuery : IRequest<OperationResult<Domain.MasterData.Drug.Drug>>
     {
         public string Id { get; set; }
-
-
     }
 
-    public class GetDrugsByIdQueryHandler : IRequestHandler<GetDrugsByIdQuery, OperationResult<DrugMD>>
+    public class GetDrugsByIdQueryHandler : IRequestHandler<GetDrugsByIdQuery, OperationResult<Domain.MasterData.Drug.Drug>>
     {
-        private readonly IDrugRepository _drugRepository;
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
 
-        public GetDrugsByIdQueryHandler(IDrugRepository drugRepository)
+        public GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository)
         {
             _drugRepository = drugRepository;
         }
 
-        public async Task<OperationResult<DrugMD>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Domain.MasterData.Drug.Drug>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
         {
-
-
-
             var entitiy = await _drugRepository.GetByIdAsync(request.Id);
-            if (entitiy == null)
-            {
-                throw new NotFoundException("Drugs", request.Id);
-            }
-
-            return OperationResult<DrugMD>.Success(entitiy);
-
-
+            return entitiy == null
+                ? throw new NotFoundException("Drugs", request.Id)
+                : OperationResult<Domain.MasterData.Drug.Drug>.Success(entitiy);
         }
     }
 }

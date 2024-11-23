@@ -7,13 +7,10 @@ using Spectra.Application.Interfaces;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {
-    [ApiController]
-    [Area("public")]
-    [Route("api/[area]/[controller]")]
     public class IdentityController(ILogger<IdentityController> logger,
         ICurrentUser currentUser,
         IAuthenticationService authenticationService,
-        IMediator mediator) : SpectraControllerBase<IdentityController>(logger, currentUser)
+        IMediator mediator) : PublicControllerBase<IdentityController>(logger, currentUser)
     {
         private readonly IAuthenticationService _authenticationService = authenticationService;
         private readonly IMediator _mediator = mediator;

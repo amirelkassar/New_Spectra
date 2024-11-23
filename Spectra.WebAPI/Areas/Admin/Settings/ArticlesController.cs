@@ -4,11 +4,9 @@ using Spectra.Application.Settings.Articles.Commands;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 using Spectra.Infrastructure.Settings.Articles;
 
-namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [Authorize]
-
-    public class ArticlesController : SettingsController
+    public class ArticlesController : AdminBaseController
     {
         private readonly IArticlesService _entityServices;
 

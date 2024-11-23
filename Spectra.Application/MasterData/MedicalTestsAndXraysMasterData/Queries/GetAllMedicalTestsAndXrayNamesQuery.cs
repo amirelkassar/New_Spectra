@@ -4,12 +4,12 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 {
-    public class GetAllMedicalTestsAndXrayNamesQuery : IQuery<OperationResult<IEnumerable<BassMasterDataDto>>>
+    public class GetAllMedicalTestsAndXrayNamesQuery : IQuery<OperationResult<IEnumerable<BaseMasterDataDto>>>
     {
 
 
 
-        public class GetAllMedicalTestsAndXrayNamesQueryHandler : IRequestHandler<GetAllMedicalTestsAndXrayNamesQuery, OperationResult<IEnumerable<BassMasterDataDto>>>
+        public class GetAllMedicalTestsAndXrayNamesQueryHandler : IRequestHandler<GetAllMedicalTestsAndXrayNamesQuery, OperationResult<IEnumerable<BaseMasterDataDto>>>
         {
             private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
             public GetAllMedicalTestsAndXrayNamesQueryHandler(IMedicalTestsAndXrayRepository medicalTestsAndXrayRepository)
@@ -18,14 +18,14 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
                 _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
             }
 
-            public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> Handle(GetAllMedicalTestsAndXrayNamesQuery request, CancellationToken cancellationToken)
+            public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> Handle(GetAllMedicalTestsAndXrayNamesQuery request, CancellationToken cancellationToken)
             {
 
                 var entitiy = await _medicalTestsAndXrayRepository.GetAllAsync();
 
-                var entitiyName = entitiy.Select(x => new BassMasterDataDto { Name = x.ScientificNameByEng, Id = x.Id });
+                var entitiyName = entitiy.Select(x => new BaseMasterDataDto { Name = x.ScientificNameByEng, Id = x.Id });
 
-                return OperationResult<IEnumerable<BassMasterDataDto>>.Success(entitiyName);
+                return OperationResult<IEnumerable<BaseMasterDataDto>>.Success(entitiyName);
 
 
             }

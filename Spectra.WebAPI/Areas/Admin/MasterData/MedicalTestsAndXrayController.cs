@@ -5,11 +5,9 @@ using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-
-    [Authorize]
-    public class MedicalTestsAndXrayController : MasterDataController
+    public class MedicalTestsAndXrayController : AdminBaseController
     {
         private readonly IMedicalTestsAndXrayService _medicalTestsAndXrayService;
 

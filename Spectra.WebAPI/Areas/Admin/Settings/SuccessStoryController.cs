@@ -4,10 +4,9 @@ using Spectra.Application.Settings.SuccessStorIes.Commands;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
 
-namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [Authorize]
-    public class SuccessStoryController : SettingsController
+    public class SuccessStoryController : AdminBaseController
     {
         private readonly ISuccessStoryService _entityServices;
 

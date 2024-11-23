@@ -5,11 +5,9 @@ using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-
-    [Authorize]
-    public class SpecializationController : ControllerBase
+    public class SpecializationController : AdminBaseController
     {
         private readonly ISpecializationService _specializationsServices;
 

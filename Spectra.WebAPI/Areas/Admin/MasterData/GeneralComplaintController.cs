@@ -5,10 +5,9 @@ using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-
-    public class GeneralComplaintController : MasterDataController
+    public class GeneralComplaintController : AdminBaseController
     {
         private readonly IGeneralComplaintService _generalComplaintService;
 

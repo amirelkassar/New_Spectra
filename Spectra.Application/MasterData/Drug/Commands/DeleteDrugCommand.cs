@@ -25,12 +25,12 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<Unit>> Handle(DeleteDrugCommand request, CancellationToken cancellationToken)
         {
 
-            var drugs = await _drugRepository.GetByIdAsync(request.Id);
+            var drug = await _drugRepository.GetByIdAsync(request.Id);
 
 
-            await _addPhoto.DeleteAttachments(drugs.AttachmentPath);
+            await _addPhoto.DeleteAttachment(drug.ImagePath);
 
-            await _drugRepository.DeleteAsync(drugs);
+            await _drugRepository.DeleteAsync(drug);
             return OperationResult<Unit>.Success(Unit.Value);
 
 

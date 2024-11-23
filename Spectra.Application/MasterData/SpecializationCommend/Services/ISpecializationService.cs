@@ -11,7 +11,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Services
         Task<OperationResult<string>> CreateSpecialization(CreateSpecializationCommand input);
         Task<OperationResult<Unit>> DeleteSpecialization(string id);
         Task<OperationResult<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specialization>>> GetAllSpecializations();
-        Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllSpecializationsNames();
+        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllSpecializationsNames();
         Task<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>> GetSpecializationById(string id);
         Task<OperationResult<Unit>> UpdateSpecialization(string id, UpdateSpecializationCommand input);
     }

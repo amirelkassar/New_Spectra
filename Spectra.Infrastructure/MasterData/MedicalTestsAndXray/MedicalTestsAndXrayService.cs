@@ -97,7 +97,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 
         }
 
-        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllMedicalTestsAndXrayNames()
+        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllMedicalTestsAndXrayNames()
         {
 
             var query = new GetAllMedicalTestsAndXrayNamesQuery();

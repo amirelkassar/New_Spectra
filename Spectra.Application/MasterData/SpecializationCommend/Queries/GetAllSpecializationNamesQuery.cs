@@ -6,12 +6,12 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 {
 
 
-    public class GetAllSpecializationNamesQuery : IQuery<OperationResult<IEnumerable<BassMasterDataDto>>>
+    public class GetAllSpecializationNamesQuery : IQuery<OperationResult<IEnumerable<BaseMasterDataDto>>>
     {
 
 
 
-        public class GetAllSpecializationNamesQueryHandler : IRequestHandler<GetAllSpecializationNamesQuery, OperationResult<IEnumerable<BassMasterDataDto>>>
+        public class GetAllSpecializationNamesQueryHandler : IRequestHandler<GetAllSpecializationNamesQuery, OperationResult<IEnumerable<BaseMasterDataDto>>>
         {
             private readonly ISpecializationsRepository _specializationRepository;
 
@@ -20,15 +20,15 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
                 _specializationRepository = specializationRepository;
             }
 
-            public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> Handle(GetAllSpecializationNamesQuery request, CancellationToken cancellationToken)
+            public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> Handle(GetAllSpecializationNamesQuery request, CancellationToken cancellationToken)
             {
 
 
                 var specialization = await _specializationRepository.GetAllAsync();
 
-                var AllspecializationNames = specialization.Select(x => new BassMasterDataDto { Name = x.Name, Id = x.Id });
+                var AllspecializationNames = specialization.Select(x => new BaseMasterDataDto { Name = x.Name, Id = x.Id });
 
-                return OperationResult<IEnumerable<BassMasterDataDto>>.Success(AllspecializationNames);
+                return OperationResult<IEnumerable<BaseMasterDataDto>>.Success(AllspecializationNames);
 
 
             }

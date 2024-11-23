@@ -4,10 +4,9 @@ using Spectra.Application.MasterData.Sections.Commands;
 using Spectra.Application.MasterData.Sections.Service;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    [Authorize]
-    public class SectionController : MasterDataController
+    public class SectionController : AdminBaseController
     {
         private readonly ISectionsServices _sectionsServices;
 

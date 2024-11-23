@@ -11,10 +11,10 @@ namespace Spectra.Application.MasterData.Drug.Services
         Task<OperationResult<string>> CreateDrug(CreateDrugCommand input);
         Task CreateFromExcel(IFormFile input);
         Task<OperationResult<Unit>> DeleteDrug(string id);
-        Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugNames();
-        Task<OperationResult<IEnumerable<DrugMD>>> GetAllDrugs();
-        Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugsNames();
-        Task<OperationResult<DrugMD>> GetDrugById(string id);
+        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugNames();
+        Task<OperationResult<IEnumerable<Domain.MasterData.Drug.Drug>>> GetAllDrugs();
+        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugsNames();
+        Task<OperationResult<Domain.MasterData.Drug.Drug>> GetDrugById(string id);
         Task<OperationResult<Unit>> UpdateDrug(string id, UpdateDrugCommand input);
     }
 }

@@ -4,11 +4,11 @@ using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
-namespace Spectra.WebAPI.Areas.Admin.MasterData.Controllers
+namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
 
     [Authorize]
-    public class InternalExaminationController : MasterDataController
+    public class InternalExaminationController : AdminBaseController
     {
         private readonly IInternalExaminationService _internalExamination;
 

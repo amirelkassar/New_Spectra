@@ -4,10 +4,9 @@ using Spectra.Application.Settings.MedicalSpecialties.Commands;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 
-namespace Spectra.WebAPI.Areas.Admin.Settings.Controllers
+namespace Spectra.WebAPI.Areas.Admin.Settings
 {
-    [Authorize]
-    public class MedicalSpecialtiesController : SettingsController
+    public class MedicalSpecialtiesController : AdminBaseController
     {
         private readonly IMedicalSpecialtiesService _entityServices;
 

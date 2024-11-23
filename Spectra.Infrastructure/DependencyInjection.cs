@@ -56,7 +56,6 @@ using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.OptionDtos;
-using Spectra.Infrastructure.Admin;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
 using Spectra.Infrastructure.Contracts;
@@ -168,7 +167,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
             services.AddScoped<ISectionsServices, SectionsServices>();
-            services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IMedicalTeamService, MedicalTeamService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
             services.AddScoped<IPermissionManager, PermissionManager>();
