@@ -1,18 +1,32 @@
-import ArrowLeft from '@/assets/icons/arrow-left';
-import Button from '../button';
-import { cn } from '@/lib/utils';
+'use client';
 
-export const BackButton = ({ children, ...props }) => {
+import BackIcon from '@/assets/icons/back-black';
+import { cn } from '@/lib/utils';
+import { useRouter } from '@/navigation';
+
+export const BackButton = ({ href = '', ...props }) => {
+  const router = useRouter();
+
   return (
-    <Button
+    <div
       {...props}
-      className={cn(
-        'text-sm mdl:text-base py-2 gap-3 font-bold',
-        props.className
-      )}
+      role='button'
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (props?.onClick) {
+          props.onClick();
+        } else {
+          if (href) {
+            router.push(href);
+          } else {
+            router.back();
+          }
+        }
+      }}
+      className={cn('w-fit', props?.className)}
     >
-      {children}
-      <ArrowLeft className='ltr:rotate-180' />
-    </Button>
+      <BackIcon className='ltr:rotate-180 size-8 mdl:size-10 inline' />
+    </div>
   );
 };

@@ -1,0 +1,31 @@
+'use client';
+
+import { Stepper } from '@mantine/core';
+
+import CorrectICon from '@/assets/icons/correct';
+
+export const ContractSteps = ({ active }) => {
+  return (
+    <Stepper
+      color='#10B0C1'
+      active={active}
+      allowNextStepsSelect={false}
+      completedIcon={<CorrectICon />}
+      classNames={{
+        stepLabel: 'text-xs lg:text-base',
+        root: 'max-w-2xl mx-auto my-7 lg:my-10',
+        steps: 'flex-nowrap',
+        step: 'data-[completed]:opacity-100 opacity-40',
+        separator: 'mx-1 min-w-3',
+        stepBody: 'ms-1 lg:ms-3',
+        stepIcon:
+          'bg-grayDark text-white border-none size-5 lg:size-8 min-h-5 min-w-5 lg:min-h-8 lg:min-w-8 shrink-0 text-xs lg:text-xl data-[completed]:bg-greenMain',
+      }}
+    >
+      <Stepper.Step label='طلب انضمام' />
+      <Stepper.Step label='ملء بيانات' />
+      <Stepper.Step label='قيد المراجعة' />
+      <Stepper.Step label='إتمام العملية' />
+    </Stepper>
+  );
+};
