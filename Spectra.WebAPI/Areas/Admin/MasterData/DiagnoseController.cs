@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
@@ -20,7 +19,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet("list")]
         [Authorize(AdminDiagnosePermissions.ReadList)]
-        public async Task<ActionResult> GetAllDiagnose([FromQuery]GetAllDiagnoseQuery input)
+        public async Task<ActionResult> GetAllDiagnose([FromQuery] GetAllDiagnoseQuery input)
         {
             var Diagnoseies = await _diagnosetService.GetAllDiagnosess(input);
             return Ok(Diagnoseies);
@@ -38,10 +37,10 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpPost]
         [Authorize(AdminDiagnosePermissions.Create)]
-        public async Task<ActionResult> CreateDiagnose([FromBody]CreateDiagnoseCommand input)
+        public async Task<ActionResult> CreateDiagnose([FromBody] CreateDiagnoseCommand input)
         {
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);
-            return Created("",Diagnoseies);
+            return Created("", Diagnoseies);
         }
         [HttpPut()]
         [Authorize(AdminDiagnosePermissions.Update)]
@@ -55,7 +54,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         [Authorize(AdminDiagnosePermissions.Delete)]
         public async Task<ActionResult> DeleteDiagnose([FromQuery] string id)
         {
-            var delete = await _diagnosetService.DeleteDiagnoses(new DeleteDiagnoseCommand { Id=id});
+            var delete = await _diagnosetService.DeleteDiagnoses(new DeleteDiagnoseCommand { Id = id });
             return NoContent();
         }
         [HttpPost("bulk")]
@@ -63,7 +62,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _diagnosetService.CreateFromExcel(input.File);
-            return Created("",data);
+            return Created("", data);
         }
 
 

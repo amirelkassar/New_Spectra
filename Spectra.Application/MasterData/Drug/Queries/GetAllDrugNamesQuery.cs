@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 

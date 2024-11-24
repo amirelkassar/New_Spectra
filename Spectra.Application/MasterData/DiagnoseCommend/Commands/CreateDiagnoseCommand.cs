@@ -23,7 +23,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
 
         public async Task<OperationResult> Handle(CreateDiagnoseCommand request, CancellationToken cancellationToken)
         {
-            var check = await _diagnoseRepository.Exists(b => b.Name.ToLower() == request.Name.ToLower() || b.Code1.ToLower()==request.Code1.ToLower());
+            var check = await _diagnoseRepository.Exists(b => b.Name.ToLower() == request.Name.ToLower() || b.Code1.ToLower() == request.Code1.ToLower());
             if (check)
             {
                 throw new AlreadyExistException(request.Name, nameof(request.Name));

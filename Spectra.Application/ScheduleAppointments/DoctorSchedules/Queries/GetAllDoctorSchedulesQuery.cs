@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Employees;
 using Spectra.Application.Interfaces;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO;

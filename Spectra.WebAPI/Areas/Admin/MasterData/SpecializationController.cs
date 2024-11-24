@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Queries;
@@ -46,7 +45,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> CreateExcelFile(BulkCreateModel input)
         {
             var data = _specializationsServices.CreateFromExcel(input.File);
-            return Created("",data);
+            return Created("", data);
         }
 
         [HttpPut()]
@@ -59,7 +58,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminSpecializationPermissions.Delete)]
-        public async Task<ActionResult> DeleteSpecialization([FromQuery]string id)
+        public async Task<ActionResult> DeleteSpecialization([FromQuery] string id)
         {
             var specialization = await _specializationsServices.DeleteSpecialization(id);
             return NoContent();

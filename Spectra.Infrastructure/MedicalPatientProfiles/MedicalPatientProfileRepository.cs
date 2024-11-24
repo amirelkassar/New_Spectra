@@ -40,7 +40,7 @@ namespace Spectra.Infrastructure.MedicalPatientProfiles
 
             var totalCount = await _medicalPatientProfile.CountDocumentsAsync(filterDefinition);
 
-            return new PaginatedResult<MedicalPatientProfile>(query,totalCount,pageSize);
+            return new PaginatedResult<MedicalPatientProfile>(query, totalCount, pageSize);
         }
         public async Task<MedicalPatientProfile> GetByIdAsync(string id)
         {

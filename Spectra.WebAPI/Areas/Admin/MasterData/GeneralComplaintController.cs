@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
 using Spectra.Application.MasterData.GeneralComplaintsM.Queries;
@@ -35,10 +34,10 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpPost]
         [Authorize(AdminGeneralComplaintPermissions.Create)]
-        public async Task<ActionResult> CreateGeneralComplaintss([FromBody]CreateGeneralComplaintsCommand input)
+        public async Task<ActionResult> CreateGeneralComplaintss([FromBody] CreateGeneralComplaintsCommand input)
         {
             var GeneralComplaintsies = await _generalComplaintService.CreateGeneralComplaints(input);
-            return Created("",GeneralComplaintsies);
+            return Created("", GeneralComplaintsies);
         }
 
         [HttpPut()]
@@ -51,7 +50,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminGeneralComplaintPermissions.Delete)]
-        public async Task<ActionResult> DeleteGeneralComplaints([FromQuery]string id)
+        public async Task<ActionResult> DeleteGeneralComplaints([FromQuery] string id)
         {
             var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(id);
             return NoContent();
@@ -61,7 +60,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _generalComplaintService.CreateFromExcel(input.File);
-            return Created("",data);
+            return Created("", data);
         }
 
     }

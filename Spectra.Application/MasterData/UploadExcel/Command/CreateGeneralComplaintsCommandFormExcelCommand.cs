@@ -25,12 +25,7 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
 
                 foreach (var item in request.Data)
                 {
-                    var entity = GeneralComplaint.Create(
-                Ulid.NewUlid().ToString(), item.Code1, item.ComplaintName, item.DescriptionOfTheComplaint
-              );
-
-
-
+                    var entity = GeneralComplaint.Create(Ulid.NewUlid().ToString(), item.ComplaintName);
                     await _generalComplaintRepository.AddAsync(entity);
                 }
                 return OperationResult<Unit>.Success(Unit.Value);

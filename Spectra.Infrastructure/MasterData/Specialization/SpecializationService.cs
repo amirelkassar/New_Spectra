@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.SpecializationCommend.Services;

@@ -2,10 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.Drug.Validator;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;

@@ -2,11 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Services.IdentityServices
 {
@@ -16,9 +11,9 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
         protected async override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
         {
-            using (var scope= _serviceProvider.CreateScope())
+            using (var scope = _serviceProvider.CreateScope())
             {
-                var currentUser=scope.ServiceProvider.GetService<ICurrentUser>();
+                var currentUser = scope.ServiceProvider.GetService<ICurrentUser>();
                 var permissionManager = scope.ServiceProvider.GetService<IPermissionManager>();
 
                 if (currentUser == null || currentUser.Id is null || !await permissionManager.UserHasPermission(currentUser.Id, requirement.Permission))
@@ -27,7 +22,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 }
                 context.Succeed(requirement);
             }
-           
+
         }
     }
 }

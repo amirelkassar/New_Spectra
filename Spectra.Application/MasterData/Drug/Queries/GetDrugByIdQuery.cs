@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -15,7 +14,7 @@ namespace Spectra.Application.MasterData.Drug.Queries
         public string Id { get; set; }
     }
 
-    public class GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository,IHttpContextAccessor httpContextAccessor,
+    public class GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, IHttpContextAccessor httpContextAccessor,
         IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetDrugsByIdQuery, OperationResult<Domain.MasterData.Drug.Drug>>
     {
         private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository = drugRepository;

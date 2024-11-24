@@ -2,9 +2,7 @@
 using MediatR;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.DiagnoseCommend.DTO;
 using Spectra.Application.MasterData.GeneralComplaintsM.Dtos;
-using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
@@ -12,12 +10,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
 {
 
-    public class GetAllGeneralComplaintsQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetAllGeneralComplaintsQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
     }
 
-    public class GetAllGeneralComplaintsQueryHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository) 
+    public class GetAllGeneralComplaintsQueryHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository)
         : IRequestHandler<GetAllGeneralComplaintsQuery, OperationResult>
     {
         private readonly IBaseMongoDbRepository<GeneralComplaint> _generalComplaintRepository = generalComplaintRepository;
@@ -26,7 +24,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
         {
             ICollection<GeneralComplaint> complaints = null;
             long totalCount = 0;
-            if (!string.IsNullOrWhiteSpace(request.Search)) 
+            if (!string.IsNullOrWhiteSpace(request.Search))
             {
                 request.Search = request.Search.Trim().ToLower();
                 var (data, total) = await _generalComplaintRepository.GetAllAsync(c => c.ComplaintName.ToLower().StartsWith(request.Search)

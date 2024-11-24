@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Contracts.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
+﻿using Spectra.Application.Contracts.Services;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract
 {

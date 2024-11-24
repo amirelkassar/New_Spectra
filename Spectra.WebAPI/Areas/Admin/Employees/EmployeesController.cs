@@ -12,7 +12,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
     public class EmployeesController : AdminBaseController
     {
         private readonly IEmployeeService _employeeService;
-        public EmployeesController( IEmployeeService employeeService)
+        public EmployeesController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
@@ -86,7 +86,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         [Authorize(AdminEmployeesPermissions.Delete)]
         public async Task<IActionResult> DeleteAttachmentAsync([FromQuery] DeleteAttachmentModel input)
         {
-            var response = await _employeeService.DeleteAttachmentAsync(input.FileId,input.EmployeeId);
+            var response = await _employeeService.DeleteAttachmentAsync(input.FileId, input.EmployeeId);
             return NoContent();
         }
     }

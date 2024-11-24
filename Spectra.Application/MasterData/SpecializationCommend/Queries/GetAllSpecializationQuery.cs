@@ -38,7 +38,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
                 totalData = total;
             }
             var dtos = specializations.Adapt<IReadOnlyCollection<SpecializationReadDto>>();
-            return OperationResult<PaginatedResult<SpecializationReadDto>>.Success(new PaginatedResult<SpecializationReadDto>(dtos,totalData,request.MaxCount));
+            return OperationResult<PaginatedResult<SpecializationReadDto>>.Success(new PaginatedResult<SpecializationReadDto>(dtos, totalData, request.MaxCount));
         }
     }
 }

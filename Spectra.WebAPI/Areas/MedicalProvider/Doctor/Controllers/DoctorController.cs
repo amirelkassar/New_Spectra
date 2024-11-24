@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Employees.Dto;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
-using Spectra.Domain.Shared.Constants.Permissions.MedicalProvider;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider.Doctor.Controllers
 {

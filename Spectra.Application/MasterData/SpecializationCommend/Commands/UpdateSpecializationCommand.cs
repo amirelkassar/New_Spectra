@@ -37,7 +37,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             var names = await _specializationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
             if (names.Any())
             {
-                throw new NotFoundException("Specializations",request.Id);
+                throw new NotFoundException("Specializations", request.Id);
             }
             Specializations.Name = request.Name;
             Specializations.Description = request.Description;

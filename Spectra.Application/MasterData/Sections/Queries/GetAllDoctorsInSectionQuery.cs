@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Employees;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Sections.Dto;
 using Spectra.Domain.Employees;

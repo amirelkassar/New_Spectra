@@ -1,8 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Queries;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Drug.Services

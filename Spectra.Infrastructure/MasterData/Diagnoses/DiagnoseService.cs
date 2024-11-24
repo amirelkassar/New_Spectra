@@ -1,13 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.DTO;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
-using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
-using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Wrappers;
 
 

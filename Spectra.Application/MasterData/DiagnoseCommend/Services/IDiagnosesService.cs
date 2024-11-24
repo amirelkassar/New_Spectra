@@ -1,8 +1,6 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
-using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.DiagnoseCommend.Services

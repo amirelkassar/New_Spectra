@@ -40,7 +40,7 @@ namespace Spectra.Application.MasterData.Drug.Queries
                 drugs = data.ToArray();
                 totalData = total;
             }
-            foreach (var drug in drugs.Where(d=>d.ImagePath is not null))
+            foreach (var drug in drugs.Where(d => d.ImagePath is not null))
             {
                 var filePath = Path.Combine(_webHostEnvironment.WebRootPath, drug.ImagePath);
                 drug.ImagePath = EndPointsHelper.GetFileUrl(filePath, EndPointsRoutes.Drugs, _httpContextAccessor);

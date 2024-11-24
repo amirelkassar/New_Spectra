@@ -32,13 +32,13 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             var exists = await _specializationRepository.GetAllAsync(x => x.Name == request.Name);
             if (exists.Any())
             {
-                throw new AlreadyExistException(request.Name,nameof(request.Name));
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
 
             var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(
                 Ulid.NewUlid().ToString(),
                 request.Name);
-            Specialization.Description=request.Description;
+            Specialization.Description = request.Description;
             Specialization.Code = request.Code;
             Specialization.ConsultationCost = request.ConsultationCost;
 

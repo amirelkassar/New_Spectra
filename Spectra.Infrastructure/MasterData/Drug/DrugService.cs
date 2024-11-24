@@ -1,12 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.Drug.Commands;
 using Spectra.Application.MasterData.Drug.Queries;
 using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Application.MasterData.UploadExcel.Command;
 using Spectra.Application.MasterData.UploadExcel.Services;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.MasterData.Drug
