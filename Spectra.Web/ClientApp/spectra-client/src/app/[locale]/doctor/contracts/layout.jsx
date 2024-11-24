@@ -22,7 +22,7 @@ const Layout = async ({ children }) => {
     >
       <div
         data-case={contractCase[0]}
-        className='my-5 md:m-0 md:p-5 lg:p-3 md:h-full flex flex-col gap-5'
+        className='my-5 md:m-0 md:p-5 lg:p-3 md:h-full flex flex-col'
       >
         <ContractLayout contractCase={contractCase[0]} />
 

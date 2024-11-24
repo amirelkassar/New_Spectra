@@ -9,7 +9,9 @@ export const DrugsColumns = [
     id: 'name',
     cell: ({ row, getValue }) => {
       const name = getValue();
-      const image = row?.original?.imagePath;
+      const image = row?.original?.imagePath
+        ? `${row?.original?.imagePath}?token=${process.env.NEXT_PUBLIC_TOKEN}`
+        : '';
 
       return (
         <div

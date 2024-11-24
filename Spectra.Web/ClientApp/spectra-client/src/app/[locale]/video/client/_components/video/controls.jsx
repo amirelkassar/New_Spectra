@@ -78,15 +78,12 @@ const ChatBtn = ({ children, ...props }) => {
     <button
       {...props}
       className={cn(
-        'bg-grayLight shadow-md rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium aria-checked:bg-black aria-checked:text-white',
+        'bg-grayLight shadow-md rounded-lg p-3 lgl:p-4 transition hover:bg-grayMedium aria-checked:bg-black group',
         props?.className
       )}
       type='button'
     >
-      <ChatsIcon
-        fill='currentColor'
-        className='size-6 lgl:size-8'
-      />
+      <ChatsIcon className='size-6 lgl:size-8 group-aria-checked:text-white' />
       {children}
     </button>
   );

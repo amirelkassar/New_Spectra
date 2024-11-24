@@ -12,6 +12,10 @@ import HandelShowDataID from '@/components/handelShowDataID';
 function page({ params }) {
   const { data, isLoading } = GetDrugsID(params.drugsID);
 
+  const image = data?.data?.data?.imagePath
+    ? `${data?.data?.data?.imagePath}?token=${process.env.NEXT_PUBLIC_TOKEN}`
+    : '';
+
   return (
     <div>
       <div className='flex items-center  mb-10 justify-between gap-4'>
@@ -39,9 +43,7 @@ function page({ params }) {
               <div className='flex items-center gap-2 mt-6 flex-wrap'>
                 <Image
                   alt='drugs'
-                  src={
-                    data?.data?.data?.imagePath || imgDrugs
-                  }
+                  src={image || imgDrugs}
                   className=' h-[60px] lg:h-[100px] w-auto object-contain'
                   width={100}
                   height={110}

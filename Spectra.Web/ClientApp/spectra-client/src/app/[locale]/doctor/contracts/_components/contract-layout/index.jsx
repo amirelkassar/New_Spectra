@@ -13,7 +13,10 @@ export const ContractLayout = ({ contractCase }) => {
 
   return (
     <Card
-      className={cn('md:p-5', activeStep === 0 && 'flex-1')}
+      className={cn(
+        'md:p-5 mb-5',
+        activeStep === 0 && 'flex-1 mb-0'
+      )}
     >
       <ContractHeader />
 
