@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Hellper
 {
-    public class FileUrlHelper
+    public class EndPointsRoutes
     {
-
+        public const string Drugs = nameof(Drugs);
     }
 }

@@ -62,6 +62,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.Code = request.Code;
             drug.Type = request.Type;
             drug.Nots = request.Nots;
+            drug.ImagePath = photoPath;
 
             await _drugRepository.AddAsync(drug);
 

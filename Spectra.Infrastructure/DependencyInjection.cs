@@ -115,7 +115,6 @@ namespace Spectra.Infrastructure
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
-            services.AddSerilog();
             services.AddSignalR();
             services.AddDataProtection();
             services.ConfigureEmailServices(configuration);

@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Common;
@@ -11,14 +13,14 @@ namespace Spectra.Application.MasterData.Drug.Queries
     {
         public string? Search { get; set; }
     }
-    public class GetAllDrugeQueryHandler : IRequestHandler<GetAllDrugQuery, OperationResult>
+    public class GetAllDrugeQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository,
+        IHttpContextAccessor httpContextAccessor,
+        IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetAllDrugQuery, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository;
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository = drugRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
-        public GetAllDrugeQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository)
-        {
-            _drugRepository = drugRepository;
-        }
         public async Task<OperationResult> Handle(GetAllDrugQuery request, CancellationToken cancellationToken)
         {
             ICollection<Domain.MasterData.Drug.Drug> drugs = null;
@@ -38,7 +40,11 @@ namespace Spectra.Application.MasterData.Drug.Queries
                 drugs = data.ToArray();
                 totalData = total;
             }
-
+            foreach (var drug in drugs.Where(d=>d.ImagePath is not null))
+            {
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, drug.ImagePath);
+                drug.ImagePath = EndPointsHelper.GetFileUrl(filePath, EndPointsRoutes.Drugs, _httpContextAccessor);
+            }
             return OperationResult<PaginatedResult<Domain.MasterData.Drug.Drug>>.Success(new PaginatedResult<Domain.MasterData.Drug.Drug>(drugs, totalData, request.MaxCount));
         }
     }

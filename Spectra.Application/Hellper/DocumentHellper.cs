@@ -41,7 +41,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                             await attachment.CopyToAsync(fileStream);
                         }
 
-                        filePaths.Add($"/{folderName}/{uniqueFileName}");
+                        filePaths.Add($"{folderName}/{uniqueFileName}");
                     }
                 }
             }
@@ -70,7 +70,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                 await attachment.CopyToAsync(fileStream);
             }
 
-            return $"/{folderName}/{uniqueFileName}";
+            return $"{folderName}/{uniqueFileName}";
         }
 
         public async Task DeleteAttachment(string? attachment)
@@ -159,7 +159,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                     }
 
 
-                    uploadedFilePaths.Add(Path.Combine(folderName, newFileName).Replace("\\", "/"));
+                    uploadedFilePaths.Add(Path.Combine(folderName, newFileName).Replace("\\", "/").TrimStart('\\', '/'));
                 }
             }
 
@@ -208,7 +208,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             }
 
             // Return the path of the new file
-            return $"/{folderName}/{newFileName}";
+            return $"{folderName}/{newFileName}";
         }
     }
 }

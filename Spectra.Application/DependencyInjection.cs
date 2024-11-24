@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Spectra.Application.Common;
 using Spectra.Application.Countries;
@@ -8,6 +9,7 @@ using Spectra.Application.Countries.Services;
 using Spectra.Application.Identities;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Infrastructure.PipelineBehaviors;
 using System.Reflection;
 
