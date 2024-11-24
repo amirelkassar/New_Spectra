@@ -17,6 +17,7 @@ namespace Spectra.Domain.MasterData.Diagnoses
            string name,
            string code) : base(id)
         {
+            Id = id;
             Name = name;
             Code1 = code;
         }

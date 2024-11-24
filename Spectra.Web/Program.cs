@@ -43,8 +43,6 @@ try
         await identitySeederService.SeedAsync();
     }
 
-    // Configure the HTTP request pipeline.
-
     var methods = typeof(Pathes)
               .GetMethods()
               .Where(m => m.Name.Contains("Path", StringComparison.OrdinalIgnoreCase))

@@ -27,7 +27,7 @@ namespace Spectra.Domain.AppRole
             DisplayName = displayName;
         }
         public string Id { get; private set; }
-        public string RoleId { get; private set; }
+        public string RoleId { get; set; }
         public string Permission { get; private set; }
         public string DisplayName { get; private set; }
 
