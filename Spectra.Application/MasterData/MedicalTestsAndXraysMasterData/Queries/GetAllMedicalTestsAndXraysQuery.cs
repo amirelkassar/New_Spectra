@@ -5,12 +5,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 {
 
-    public class GetAllMedicalTestsAndXraysQuery : IRequest<OperationResult<IEnumerable<MedicalTestsAndXray>>>
+    public class GetAllMedicalTestsAndXraysQuery : IRequest<OperationResult<IEnumerable<MedicalTestAndXray>>>
     {
 
     }
 
-    public class GetAllMedicalTestsAndXraysQueryHandler : IRequestHandler<GetAllMedicalTestsAndXraysQuery, OperationResult<IEnumerable<MedicalTestsAndXray>>>
+    public class GetAllMedicalTestsAndXraysQueryHandler : IRequestHandler<GetAllMedicalTestsAndXraysQuery, OperationResult<IEnumerable<MedicalTestAndXray>>>
     {
 
         private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
@@ -19,12 +19,12 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 
             _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
         }
-        public async Task<OperationResult<IEnumerable<MedicalTestsAndXray>>> Handle(GetAllMedicalTestsAndXraysQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<MedicalTestAndXray>>> Handle(GetAllMedicalTestsAndXraysQuery request, CancellationToken cancellationToken)
         {
 
             var medicalTestsAndXray = await _medicalTestsAndXrayRepository.GetAllAsync();
 
-            return OperationResult<IEnumerable<MedicalTestsAndXray>>.Success(medicalTestsAndXray);
+            return OperationResult<IEnumerable<MedicalTestAndXray>>.Success(medicalTestsAndXray);
 
 
         }

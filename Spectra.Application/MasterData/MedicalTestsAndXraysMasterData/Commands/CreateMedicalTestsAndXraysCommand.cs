@@ -41,7 +41,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }
-            var MedicalTestsAndXray = Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray.Create(
+            var MedicalTestsAndXray = Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray.Create(
 
                     Ulid.NewUlid().ToString(),
            request.ScientificNameEng, request.Notes, request.ExaminationTypes, request.ScientificNameByEngByArab, request.Code

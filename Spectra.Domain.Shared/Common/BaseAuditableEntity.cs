@@ -4,9 +4,9 @@ namespace Spectra.Domain.Shared.Common
 {
     public abstract class BaseAuditableEntity<TKey> : BaseEntity<TKey>
     {
-        protected BaseAuditableEntity(string? createdBy = null) : base()
+        protected BaseAuditableEntity():base() { }
+        protected BaseAuditableEntity(TKey id) : base(id)
         {
-            CreatedBy = createdBy;
             Created = DateTimeOffset.UtcNow;
         }
         protected BaseAuditableEntity(TKey id, string? createdBy = null) : base(id)

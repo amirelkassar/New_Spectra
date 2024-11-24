@@ -6,12 +6,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 {
 
-    public class GetMedicalTestsAndXraysByIdQuery : IRequest<OperationResult<MedicalTestsAndXray>>
+    public class GetMedicalTestsAndXraysByIdQuery : IRequest<OperationResult<MedicalTestAndXray>>
     {
         public string Id { get; set; }
     }
 
-    public class GetDiagnoseByIdQueryHandler : IRequestHandler<GetMedicalTestsAndXraysByIdQuery, OperationResult<MedicalTestsAndXray>>
+    public class GetDiagnoseByIdQueryHandler : IRequestHandler<GetMedicalTestsAndXraysByIdQuery, OperationResult<MedicalTestAndXray>>
     {
         private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
 
@@ -21,7 +21,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
             _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
 
         }
-        public async Task<OperationResult<MedicalTestsAndXray>> Handle(GetMedicalTestsAndXraysByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<MedicalTestAndXray>> Handle(GetMedicalTestsAndXraysByIdQuery request, CancellationToken cancellationToken)
         {
 
 
@@ -32,7 +32,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
                 throw new NotFoundException("medicalTestsAndXray", request.Id);
             }
 
-            return OperationResult<MedicalTestsAndXray>.Success(entitiy);
+            return OperationResult<MedicalTestAndXray>.Success(entitiy);
 
 
         }

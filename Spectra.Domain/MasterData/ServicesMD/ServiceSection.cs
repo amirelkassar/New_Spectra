@@ -1,11 +1,8 @@
 ﻿namespace Spectra.Domain.MasterData.ServicesMD
 {
-    public class Secation
+    public class ServiceSection
     {
-
         public string Sectiontitle { get; set; }
-        public string Sectiondescription { get; set; }
-
-
+        public string SectionDescription { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {
 
-    public class GetAllServicesMDQuery : IRequest<OperationResult<IEnumerable<MasterDataServices>>>
+    public class GetAllServicesMDQuery : IRequest<OperationResult<IEnumerable<PlatformService>>>
     {
 
     }
-    public class GetAllServicesMDQueryHandler : IRequestHandler<GetAllServicesMDQuery, OperationResult<IEnumerable<MasterDataServices>>>
+    public class GetAllServicesMDQueryHandler : IRequestHandler<GetAllServicesMDQuery, OperationResult<IEnumerable<PlatformService>>>
     {
         private readonly IServiceMDRepository _serviceMRepository;
 
@@ -21,12 +21,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             _serviceMRepository = serviceMRepository;
 
         }
-        public async Task<OperationResult<IEnumerable<MasterDataServices>>> Handle(GetAllServicesMDQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<PlatformService>>> Handle(GetAllServicesMDQuery request, CancellationToken cancellationToken)
         {
 
             var entitiy = await _serviceMRepository.GetAllAsync();
 
-            return OperationResult<IEnumerable<MasterDataServices>>.Success(entitiy);
+            return OperationResult<IEnumerable<PlatformService>>.Success(entitiy);
 
         }
     }

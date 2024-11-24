@@ -6,11 +6,11 @@ namespace Spectra.Application.MasterData.ServicesMD
 {
     public interface IServiceMDRepository
     {
-        Task AddAsync(MasterDataServices masterDataServices);
-        Task DeleteAsync(MasterDataServices masterDataServices);
-        Task<IEnumerable<MasterDataServices>> GetAllAsync(Expression<Func<MasterDataServices, bool>> filter = null, FindOptions options = null);
-        Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions();
-        Task<MasterDataServices> GetByIdAsync(string id);
-        Task UpdateAsync(MasterDataServices masterDataServices);
+        Task AddAsync(PlatformService masterDataServices);
+        Task DeleteAsync(PlatformService masterDataServices);
+        Task<IEnumerable<PlatformService>> GetAllAsync(Expression<Func<PlatformService, bool>> filter = null, FindOptions options = null);
+        Task<IEnumerable<PlatformService>> GetAllNameAndTermsAndConditions();
+        Task<PlatformService> GetByIdAsync(string id);
+        Task UpdateAsync(PlatformService masterDataServices);
     }
 }

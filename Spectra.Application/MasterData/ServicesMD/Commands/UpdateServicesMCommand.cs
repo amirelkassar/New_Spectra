@@ -12,7 +12,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
     public class UpdateServicesMCommand : ICommand<OperationResult<Unit>>
     {
         public string Id { get; set; }
-        public AvailableSrvice AvailableSrvices { get; set; }
+        public ServiceTypes AvailableSrvices { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
@@ -20,7 +20,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         //public string? Address { get; set; }
         //public string? Content { get; set; }
 
-        public List<Secation>? Secations { get; set; }
+        public List<ServiceSection>? Secations { get; set; }
         public List<IFormFile>? Photo { get; set; }
 
 

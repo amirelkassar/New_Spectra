@@ -12,7 +12,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
     public class CreateServicesMCommand : ICommand<OperationResult<string>>
     {
-        public AvailableSrvice AvailableSrvices { get; set; }
+        public ServiceTypes AvailableSrvices { get; set; }
         public string Name { get; set; }
         public string DefinitionServices { get; set; }
         public double Price { get; set; }
@@ -20,7 +20,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string TermsAndConditions { get; set; }
 
 
-        public List<Secation>? Secations { get; set; }
+        public List<ServiceSection>? Secations { get; set; }
         public List<IFormFile>? Photo { get; set; }
 
     }
@@ -52,7 +52,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
             }
 
-            var entity = MasterDataServices.Create(
+            var entity = PlatformService.Create(
 
              Ulid.NewUlid().ToString(),
              request.Name,

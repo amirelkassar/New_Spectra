@@ -81,14 +81,14 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetMedicalTestsAndXrayById(string id)
+        public async Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>> GetMedicalTestsAndXrayById(string id)
         {
             var query = new GetMedicalTestsAndXraysByIdQuery { Id = id };
 
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>>> GetAllMedicalTestsAndXray()
+        public async Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>>> GetAllMedicalTestsAndXray()
         {
 
             var query = new GetAllMedicalTestsAndXraysQuery();

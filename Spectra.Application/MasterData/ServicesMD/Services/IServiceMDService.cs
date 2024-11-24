@@ -10,8 +10,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Services
         Task<OperationResult<string>> CreateServicesM(CreateServicesMCommand input);
         Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id);
         Task<OperationResult<IEnumerable<ServicesDto>>> GetAllNameAndTermsAndConditions();
-        Task<OperationResult<IEnumerable<MasterDataServices>>> GetAllServicesM();
-        Task<OperationResult<MasterDataServices>> GetServicesMById(string id);
+        Task<OperationResult<IEnumerable<PlatformService>>> GetAllServicesM();
+        Task<OperationResult<PlatformService>> GetServicesMById(string id);
         Task<OperationResult<Unit>> Updateservices(string id, UpdateServicesMCommand input);
     }
 }

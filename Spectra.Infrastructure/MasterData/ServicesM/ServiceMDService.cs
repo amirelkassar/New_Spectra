@@ -72,13 +72,13 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<MasterDataServices>> GetServicesMById(string id)
+        public async Task<OperationResult<PlatformService>> GetServicesMById(string id)
         {
             var query = new GetServicesMDByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<MasterDataServices>>> GetAllServicesM()
+        public async Task<OperationResult<IEnumerable<PlatformService>>> GetAllServicesM()
         {
             var query = new GetAllServicesMDQuery();
             return await _mediator.Send(query);

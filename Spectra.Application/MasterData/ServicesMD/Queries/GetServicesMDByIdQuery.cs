@@ -6,12 +6,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {
 
-    public class GetServicesMDByIdQuery : IRequest<OperationResult<MasterDataServices>>
+    public class GetServicesMDByIdQuery : IRequest<OperationResult<PlatformService>>
     {
         public string Id { get; set; }
     }
 
-    public class GetDrugsByIdQueryHandler : IRequestHandler<GetServicesMDByIdQuery, OperationResult<MasterDataServices>>
+    public class GetDrugsByIdQueryHandler : IRequestHandler<GetServicesMDByIdQuery, OperationResult<PlatformService>>
     {
         private readonly IServiceMDRepository _serviceMRepository;
 
@@ -24,7 +24,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
 
         }
 
-        public async Task<OperationResult<MasterDataServices>> Handle(GetServicesMDByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PlatformService>> Handle(GetServicesMDByIdQuery request, CancellationToken cancellationToken)
         {
 
             var entitiy = await _serviceMRepository.GetByIdAsync(request.Id);
@@ -33,7 +33,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
                 throw new NotFoundException("Service", request.Id);
             }
 
-            return OperationResult<MasterDataServices>.Success(entitiy);
+            return OperationResult<PlatformService>.Success(entitiy);
 
 
         }
