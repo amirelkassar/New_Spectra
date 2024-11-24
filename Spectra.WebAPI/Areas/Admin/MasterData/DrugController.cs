@@ -58,9 +58,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
         [HttpDelete]
         [Authorize(AdminDrugPermissions.Delete)]
-        public async Task<ActionResult> DeleteAsync(string id)
+        public async Task<ActionResult> DeleteAsync(DeleteDrugCommand input)
         {
-            var response = await _drugtService.DeleteDrug(id);
+            var response = await _drugtService.DeleteDrug(input.Id);
             return NoContent();
         }
         [HttpPost("bulk")]

@@ -6,18 +6,14 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Commands
 {
-    public class UpdateInternalExaminationCommand : ICommand<OperationResult<Unit>>
+    public class UpdateInternalExaminationCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
         public string Name { get; set; }
-
         public string Code { get; set; }
-        public List<string> ExaminationTypes { get; set; }
-
-
     }
 
-    public class UpdateInternalExaminationCommandHandler : IRequestHandler<UpdateInternalExaminationCommand, OperationResult<Unit>>
+    public class UpdateInternalExaminationCommandHandler : IRequestHandler<UpdateInternalExaminationCommand, OperationResult>
     {
 
         private readonly IInternalExaminationRepository _InternalExaminationRepository;
@@ -28,46 +24,29 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
             _InternalExaminationRepository = internalExaminationRepository;
         }
 
-        public async Task<OperationResult<Unit>> Handle(UpdateInternalExaminationCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(UpdateInternalExaminationCommand request, CancellationToken cancellationToken)
         {
 
-            var internalExamination = await _InternalExaminationRepository.GetByIdAsync(request.Id);
-
+            var internalExamination = await _InternalExaminationRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("InternalExamination", nameof(request.Id));
             var names = await _InternalExaminationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
             if (names.Any())
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name,nameof(request.Id));
             }
-
             internalExamination.Name = request.Name;
             internalExamination.Code = request.Code;
-            internalExamination.ExaminationTypes = request.ExaminationTypes;
 
             await _InternalExaminationRepository.UpdateAsync(internalExamination);
             return OperationResult<Unit>.Success(Unit.Value);
-
         }
-
-
-
     }
     public class UpdateInternalExaminationCommandValidator : AbstractValidator<UpdateInternalExaminationCommand>
     {
         public UpdateInternalExaminationCommandValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Specialization Name is required.")
-                .MaximumLength(100).WithMessage("Internal Examination Name must not exceed 100 characters.");
-            RuleFor(x => x.Code)
-            .NotEmpty().WithMessage("Code is required.")
-            .MaximumLength(100).WithMessage("Code must not exceed 100 characters.");
-
-            RuleFor(x => x.ExaminationTypes)
-                .Must(sections => sections == null || sections.Count > 0)
-                .WithMessage("If provided, Examination Types must contain at least one item.");
-
-
-
+                .NotNull()
+                .NotEmpty();
         }
 
     }

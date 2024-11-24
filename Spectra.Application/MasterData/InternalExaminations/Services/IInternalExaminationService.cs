@@ -1,17 +1,17 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
+using Spectra.Application.MasterData.InternalExaminations.Queries;
 using Spectra.Domain.MasterData.InternalExaminations;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Services
-
 {
     public interface IInternalExaminationService
     {
-        Task<OperationResult<string>> CreateInternalExamination(CreateInternalExaminationCommand input);
-        Task<OperationResult<Unit>> DeleteInternalExamination(string id);
-        Task<OperationResult<IEnumerable<InternalExamination>>> GetAllInternalExamination();
-        Task<OperationResult<InternalExamination>> GetInternalExaminationById(string id);
-        Task<OperationResult<Unit>> UpdateInternalExamination(string id, UpdateInternalExaminationCommand input);
+        Task<OperationResult> CreateInternalExamination(CreateInternalExaminationCommand input);
+        Task<OperationResult> DeleteInternalExamination(string id);
+        Task<OperationResult> GetAllInternalExamination(GetAllInternalExaminationQuery input);
+        Task<OperationResult> GetInternalExaminationById(string id);
+        Task<OperationResult> UpdateInternalExamination(UpdateInternalExaminationCommand input);
     }
 }

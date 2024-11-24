@@ -26,9 +26,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet()]
         [Authorize(AdminSpecializationPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneSpecialization([FromQuery] string id)
+        public async Task<ActionResult> GetOneSpecialization([FromQuery] GetSpecializationByIdQuery input)
         {
-            var specialization = await _specializationsServices.GetSpecializationById(id);
+            var specialization = await _specializationsServices.GetSpecializationById(input.Id);
             return Ok(specialization);
         }
 
@@ -58,9 +58,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminSpecializationPermissions.Delete)]
-        public async Task<ActionResult> DeleteSpecialization([FromQuery] string id)
+        public async Task<ActionResult> DeleteSpecialization([FromQuery] DeleteSpecializationCommand input)
         {
-            var specialization = await _specializationsServices.DeleteSpecialization(id);
+            var specialization = await _specializationsServices.DeleteSpecialization(input.Id);
             return NoContent();
         }
     }

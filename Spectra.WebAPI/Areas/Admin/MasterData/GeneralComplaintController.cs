@@ -26,9 +26,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet()]
         [Authorize(AdminGeneralComplaintPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneGeneralComplaints([FromQuery] string id)
+        public async Task<ActionResult> GetOneGeneralComplaints([FromQuery] GetGeneralComplaintsByIdQuery input)
         {
-            var GeneralComplaintsies = await _generalComplaintService.GetGeneralComplaintsById(id);
+            var GeneralComplaintsies = await _generalComplaintService.GetGeneralComplaintsById(input.Id);
             return Ok(GeneralComplaintsies);
         }
 
@@ -50,9 +50,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminGeneralComplaintPermissions.Delete)]
-        public async Task<ActionResult> DeleteGeneralComplaints([FromQuery] string id)
+        public async Task<ActionResult> DeleteGeneralComplaints([FromQuery] DeleteGeneralComplaintsCommand input)
         {
-            var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(id);
+            var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(input.Id);
             return NoContent();
         }
         [HttpPost("bulk")]

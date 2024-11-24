@@ -19,60 +19,33 @@ namespace Spectra.Infrastructure.MasterData.InternalExaminations
 
         }
 
-        public async Task<OperationResult<string>> CreateInternalExamination(CreateInternalExaminationCommand input)
+        public async Task<OperationResult> CreateInternalExamination(CreateInternalExaminationCommand input)
         {
-
-            var command = new CreateInternalExaminationCommand
-            {
-                Name = input.Name,
-                Code = input.Code,
-                ExaminationTypes = input.ExaminationTypes
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
 
-        public async Task<OperationResult<Unit>> UpdateInternalExamination(string id, UpdateInternalExaminationCommand input)
+        public async Task<OperationResult> UpdateInternalExamination(UpdateInternalExaminationCommand input)
         {
-
-            var command = new UpdateInternalExaminationCommand
-            {
-
-                Id = id,
-                Name = input.Name,
-                Code = input.Code,
-                ExaminationTypes = input.ExaminationTypes
-
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> DeleteInternalExamination(string id)
+        public async Task<OperationResult> DeleteInternalExamination(string id)
         {
             var command = new DeleteInternalExaminationCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<InternalExamination>> GetInternalExaminationById(string id)
+        public async Task<OperationResult> GetInternalExaminationById(string id)
         {
             var query = new GetInternalExaminationByIdQuery { Id = id };
-
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<InternalExamination>>> GetAllInternalExamination()
+        public async Task<OperationResult> GetAllInternalExamination(GetAllInternalExaminationQuery input)
         {
-
-            var query = new GetAllInternalExaminationQuery();
-
-            return await _mediator.Send(query);
-
+            return await _mediator.Send(input);
         }
-
-
-
     }
 }
 

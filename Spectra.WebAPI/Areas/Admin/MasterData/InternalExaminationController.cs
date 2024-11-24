@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
+using Spectra.Application.MasterData.InternalExaminations.Queries;
 using Spectra.Application.MasterData.InternalExaminations.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
@@ -17,44 +18,44 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _internalExamination = internalExamination;
         }
 
-        [HttpGet]
+        [HttpGet("lisr")]
         [Authorize(AdminInternalExaminationPermissions.ReadList)]
-        public async Task<ActionResult> GetAllInternalExamination()
+        public async Task<ActionResult> GetAllInternalExamination([FromQuery]GetAllInternalExaminationQuery input)
         {
-            var internalExamination = await _internalExamination.GetAllInternalExamination();
+            var internalExamination = await _internalExamination.GetAllInternalExamination(input);
             return Ok(internalExamination);
         }
 
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminInternalExaminationPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneInternalExamination(string id)
+        public async Task<ActionResult> GetOneInternalExamination([FromQuery] GetInternalExaminationByIdQuery input)
         {
-            var internalExamination = await _internalExamination.GetInternalExaminationById(id);
+            var internalExamination = await _internalExamination.GetInternalExaminationById(input.Id);
             return Ok(internalExamination);
         }
 
         [HttpPost]
         [Authorize(AdminInternalExaminationPermissions.Create)]
-        public async Task<ActionResult> CreateInternalExamination(CreateInternalExaminationCommand input)
+        public async Task<ActionResult> CreateInternalExamination([FromBody]CreateInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.CreateInternalExamination(input);
-            return Ok(internalExamination);
+            return Created("",internalExamination);
         }
 
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminInternalExaminationPermissions.Update)]
-        public async Task<ActionResult> UpdateInternalExamination(string id, UpdateInternalExaminationCommand input)
+        public async Task<ActionResult> UpdateInternalExamination([FromBody]UpdateInternalExaminationCommand input)
         {
-            var internalExamination = await _internalExamination.UpdateInternalExamination(id, input);
-            return Ok(internalExamination);
+            var internalExamination = await _internalExamination.UpdateInternalExamination(input);
+            return Accepted(internalExamination);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminInternalExaminationPermissions.Delete)]
-        public async Task<ActionResult> DeleteInternalExamination(string id)
+        public async Task<ActionResult> DeleteInternalExamination([FromQuery]DeleteInternalExaminationCommand input)
         {
-            var internalExamination = await _internalExamination.DeleteInternalExamination(id);
-            return Ok(internalExamination);
+            var internalExamination = await _internalExamination.DeleteInternalExamination(input.Id);
+            return NoContent();
         }
     }
 }

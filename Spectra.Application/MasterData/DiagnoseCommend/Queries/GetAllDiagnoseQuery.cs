@@ -49,9 +49,6 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
             }
             var dtos = diagnoses.Adapt<IReadOnlyCollection<DiagnoseReadDto>>();
             return OperationResult<PaginatedResult<DiagnoseReadDto>>.Success(new PaginatedResult<DiagnoseReadDto>(dtos, totalData, request.MaxCount));
-
-
-
         }
     }
 }

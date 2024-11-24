@@ -29,9 +29,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet()]
         [Authorize(AdminDiagnosePermissions.ReadOne)]
-        public async Task<ActionResult> GetOneDiagnose([FromQuery] string id)
+        public async Task<ActionResult> GetOneDiagnose([FromQuery] GetDiagnoseByIdQuery input)
         {
-            var Diagnoseies = await _diagnosetService.GetDiagnosesById(id);
+            var Diagnoseies = await _diagnosetService.GetDiagnosesById(input.Id);
             return Ok(Diagnoseies);
         }
 
@@ -52,9 +52,9 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
         [HttpDelete()]
         [Authorize(AdminDiagnosePermissions.Delete)]
-        public async Task<ActionResult> DeleteDiagnose([FromQuery] string id)
+        public async Task<ActionResult> DeleteDiagnose([FromQuery] DeleteDiagnoseCommand input)
         {
-            var delete = await _diagnosetService.DeleteDiagnoses(new DeleteDiagnoseCommand { Id = id });
+            var delete = await _diagnosetService.DeleteDiagnoses(input);
             return NoContent();
         }
         [HttpPost("bulk")]

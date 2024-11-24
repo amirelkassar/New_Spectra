@@ -24,7 +24,6 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
         }
         public async Task<OperationResult> Handle(GetDiagnoseByIdQuery request, CancellationToken cancellationToken)
         {
-
             var diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
             if (diagnose == null)
             {
