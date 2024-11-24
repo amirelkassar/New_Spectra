@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Spectra.Application.MasterData.GeneralComplaintsM.Dtos;
 using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -6,12 +8,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
 {
 
-    public class GetGeneralComplaintsByIdQuery : IRequest<OperationResult<GeneralComplaint>>
+    public class GetGeneralComplaintsByIdQuery : IRequest<OperationResult>
     {
         public string Id { get; set; }
     }
 
-    public class GetDiagnoseByIdQueryHandler : IRequestHandler<GetGeneralComplaintsByIdQuery, OperationResult<GeneralComplaint>>
+    public class GetDiagnoseByIdQueryHandler : IRequestHandler<GetGeneralComplaintsByIdQuery, OperationResult>
     {
 
         private readonly IGeneralComplaintRepository _generalComplaintRepository;
@@ -22,18 +24,15 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
             _generalComplaintRepository = generalComplaintRepository;
         }
 
-        public async Task<OperationResult<GeneralComplaint>> Handle(GetGeneralComplaintsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(GetGeneralComplaintsByIdQuery request, CancellationToken cancellationToken)
         {
-
-
-
             var entitiy = await _generalComplaintRepository.GetByIdAsync(request.Id);
             if (entitiy == null)
             {
                 throw new NotFoundException("GeneralComplaint", request.Id);
             }
-
-            return OperationResult<GeneralComplaint>.Success(entitiy);
+            var dto = entitiy.Adapt<ComplaintReadDto>();
+            return OperationResult<ComplaintReadDto>.Success(dto);
 
 
         }

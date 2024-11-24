@@ -59,10 +59,6 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
             RuleFor(x => x.Code1)
            .NotEmpty().WithMessage("Code name is required.")
            .MaximumLength(20).WithMessage("Complaint name must be less than 20 characters.");
-
-            RuleFor(x => x.DescriptionOfTheComplaint)
-                .NotEmpty().WithMessage("Description of the complaint is required.")
-                .MaximumLength(500).WithMessage("Description of the complaint must be less than 500 characters.");
         }
     }
 }
