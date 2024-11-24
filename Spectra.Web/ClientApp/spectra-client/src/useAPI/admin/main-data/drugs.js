@@ -1,6 +1,5 @@
-'use client';
-
 import {
+  QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
@@ -11,16 +10,24 @@ import { mainData } from '@/api/admin';
 
 const queryKey = 'admin.main-data.drugs';
 
+export const getDrugs = async () =>
+  (await apiAdmin.get(mainData.drugs.list())).data;
+
+export const prefetchDrugs = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [queryKey],
+    queryFn: getDrugs,
+  });
+
+  return queryClient;
+};
+
 export const GetDrugs = () => {
   return useQuery({
     queryKey: [queryKey],
-    queryFn: async () => {
-      const response = (
-        await apiAdmin.get(mainData.drugs.list())
-      ).data;
-
-      return response;
-    },
+    queryFn: getDrugs,
   });
 };
 
