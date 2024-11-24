@@ -9,16 +9,12 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 {
 
-
     public class CreateSpecializationCommand : ICommand<OperationResult<string>>
     {
-
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Code { get; set; }
-
-
-        public double ConsultationCost { get; set; }
+        public string? Description { get; set; }
+        public string? Code { get; set; }
+        public double? ConsultationCost { get; set; }
     }
 
     public class CreateSpecializationCommandHandler : IRequestHandler<CreateSpecializationCommand, OperationResult<string>>
@@ -33,19 +29,18 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
         public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
         {
-            var specialization = await _specializationRepository.GetAllAsync();
-            if (specialization.Any(x => x.Name == request.Name))
+            var exists = await _specializationRepository.GetAllAsync(x => x.Name == request.Name);
+            if (exists.Any())
             {
-                throw new DbErrorException("A specialization with the same Name already exists.");
+                throw new AlreadyExistException(request.Name,nameof(request.Name));
             }
 
             var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(
                 Ulid.NewUlid().ToString(),
-                request.Name.ToLower(),
-                0,
-                request.Code,
-                request.Description,
-                request.ConsultationCost);
+                request.Name);
+            Specialization.Description=request.Description;
+            Specialization.Code = request.Code;
+            Specialization.ConsultationCost = request.ConsultationCost;
 
             await _specializationRepository.AddAsync(Specialization);
             return OperationResult<string>.Success(Specialization.Id);
@@ -59,25 +54,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
         public CreateSpecializationCommandValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Specialization Name is required.")
-                .MaximumLength(100).WithMessage("Specialization Name must not exceed 100 characters.");
-            RuleFor(x => x.Code)
-            .NotEmpty().WithMessage("Code is required.")
-            .MaximumLength(100).WithMessage("Code must not exceed 100 characters.");
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(x => x.Description).NotEmpty()
-                .MaximumLength(1000).WithMessage("Description must not exceed 500 characters.");
-
-
-            RuleFor(x => x.ConsultationCost)
-     .GreaterThan(0).WithMessage("Consultation Cost must be greater than 0.")
-     .Must(HaveValidDecimalPlaces).WithMessage("Consultation Cost must have up to 2 decimal places.");
-
-
-        }
-        private bool HaveValidDecimalPlaces(double cost)
-        {
-            return Math.Round(cost, 2) == cost;
         }
     }
 }

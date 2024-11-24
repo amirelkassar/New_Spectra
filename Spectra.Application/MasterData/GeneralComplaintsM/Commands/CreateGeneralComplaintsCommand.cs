@@ -11,38 +11,25 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
     {
         public string ComplaintName { get; set; }
         public string Code1 { get; set; }
-
         public string DescriptionOfTheComplaint { get; set; }
-
-
     }
 
-
-
-    public class CreateGeneralComplaintsCommandHandler : IRequestHandler<CreateGeneralComplaintsCommand, OperationResult<string>>
+    public class CreateGeneralComplaintsCommandHandler(IGeneralComplaintRepository generalComplaintRepository) : IRequestHandler<CreateGeneralComplaintsCommand, OperationResult<string>>
     {
-        private readonly IGeneralComplaintRepository _generalComplaintRepository;
-
-        public CreateGeneralComplaintsCommandHandler(IGeneralComplaintRepository generalComplaintRepository)
-        {
-
-            _generalComplaintRepository = generalComplaintRepository;
-        }
+        private readonly IGeneralComplaintRepository _generalComplaintRepository = generalComplaintRepository;
 
         public async Task<OperationResult<string>> Handle(CreateGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
             var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName);
             if (names.Any())
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.ComplaintName, nameof(request.ComplaintName));
             }
 
-            var generalComplaint = GeneralComplaint.Create(
-
-                    Ulid.NewUlid().ToString(),
-
-                    request.ComplaintName, request.Code1, request.DescriptionOfTheComplaint
-                    );
+            var generalComplaint = GeneralComplaint.Create(Ulid.NewUlid().ToString(),
+                    request.ComplaintName);
+            generalComplaint.Code1 = request.Code1;
+            generalComplaint.DescriptionOfTheComplaint = request.DescriptionOfTheComplaint;
             await _generalComplaintRepository.AddAsync(generalComplaint);
             return OperationResult<string>.Success(generalComplaint.Id);
 
@@ -54,11 +41,8 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
         public CreateGeneralComplaintsCommandValidator()
         {
             RuleFor(x => x.ComplaintName)
-                .NotEmpty().WithMessage("Complaint name is required.")
-                .MaximumLength(100).WithMessage("Complaint name must be less than 100 characters.");
-            RuleFor(x => x.Code1)
-           .NotEmpty().WithMessage("Code name is required.")
-           .MaximumLength(20).WithMessage("Complaint name must be less than 20 characters.");
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

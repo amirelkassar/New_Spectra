@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Commands
@@ -26,7 +27,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
             if (Specialization == null)
             {
-                throw new Exception("Specialization not found");
+                throw new NotFoundException("Specializations", request.Id);
             }
 
             await _specializationRepository.DeleteAsync(Specialization);

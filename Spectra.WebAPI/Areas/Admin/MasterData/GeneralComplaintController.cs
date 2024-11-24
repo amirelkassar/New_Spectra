@@ -17,8 +17,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _generalComplaintService = generalComplaintService;
         }
 
-
-
         [HttpGet("list")]
         [Authorize(AdminGeneralComplaintPermissions.ReadList)]
         public async Task<ActionResult> GetAllGeneralComplaints([FromQuery] GetAllGeneralComplaintsQuery input)
