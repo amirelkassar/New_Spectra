@@ -1,22 +1,23 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
+const queryKey = 'admin.main-data.diagnostics';
+
 //getAll
 export const GetDiagnostics = () => {
   return useQuery({
-    queryKey: [Admin.Diagnose.url],
+    queryKey: [queryKey],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Diagnose.url,
-        {
-          headers: {},
-        }
+        mainData.diagnose.list()
       );
       return response;
     },
@@ -26,13 +27,10 @@ export const GetDiagnostics = () => {
 //getID
 export const GetDiagnosticsID = (id) => {
   return useQuery({
-    queryKey: [Admin.Diagnose.getByID(id)],
+    queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Diagnose.getByID(id),
-        {
-          headers: {},
-        }
+        mainData.diagnose.actions.get(id)
       );
       return response;
     },
@@ -46,12 +44,12 @@ export const DeleteDiagnostics = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Diagnose.DeleteByID(id)
+        mainData.diagnose.actions.delete(id)
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Diagnose.url]);
+      queryClient.refetchQueries([queryKey]);
     },
   });
 };
@@ -63,14 +61,13 @@ export const useCreateDiagnostics = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Diagnose.url,
-        data,
-        {}
+        mainData.diagnose.actions.add,
+        data
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Diagnose.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });
@@ -83,14 +80,13 @@ export const useEditDiagnostics = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Diagnose.getByID(id),
-        data,
-        {}
+        mainData.diagnose.actions.update(id),
+        data
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Diagnose.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });

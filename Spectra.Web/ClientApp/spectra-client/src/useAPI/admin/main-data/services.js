@@ -1,19 +1,21 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
 //getAll
 export const GetMasterDataServices = () => {
   return useQuery({
-    queryKey: [Admin.MasterDataServices.url],
+    queryKey: [mainData.MasterDataServices.url],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.MasterDataServices.url,
+        mainData.MasterDataServices.url,
         {
           headers: {},
         }
@@ -26,10 +28,10 @@ export const GetMasterDataServices = () => {
 //getID
 export const GetMasterDataServicesID = (id) => {
   return useQuery({
-    queryKey: [Admin.MasterDataServices.getByID(id)],
+    queryKey: [mainData.MasterDataServices.getByID(id)],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.MasterDataServices.getByID(id),
+        mainData.MasterDataServices.getByID(id),
         {
           headers: {},
         }
@@ -46,13 +48,13 @@ export const DeleteMasterDataServices = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.MasterDataServices.DeleteByID(id)
+        mainData.MasterDataServices.DeleteByID(id)
       );
       return response.data;
     },
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.MasterDataServices.url,
+        mainData.MasterDataServices.url,
       ]);
     },
   });
@@ -65,7 +67,7 @@ export const useCreateMasterDataServices = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.MasterDataServices.url,
+        mainData.MasterDataServices.url,
         data,
         {}
       );
@@ -73,7 +75,7 @@ export const useCreateMasterDataServices = () => {
     },
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.MasterDataServices.url,
+        mainData.MasterDataServices.url,
       ]);
     },
     onError: () => {},
@@ -87,7 +89,7 @@ export const useEditMasterDataServices = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.MasterDataServices.getByID(id),
+        mainData.MasterDataServices.getByID(id),
         data,
         {}
       );
@@ -95,7 +97,7 @@ export const useEditMasterDataServices = (id) => {
     },
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.MasterDataServices.url,
+        mainData.MasterDataServices.url,
       ]);
     },
     onError: () => {},

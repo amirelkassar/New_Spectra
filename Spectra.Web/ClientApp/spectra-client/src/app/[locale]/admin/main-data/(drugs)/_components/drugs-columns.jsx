@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
-import ActionMenu from './ActionMenu';
+
 import imgDrugs from '@/assets/images/drugs.png';
+import { CellActions } from './cell-actions';
 
 export const DrugsColumns = [
   {
@@ -17,13 +20,13 @@ export const DrugsColumns = [
         <div
           className={' items-center gap-2 lg:gap-5   flex'}
         >
-          <div className=' size-7 lg:size-12  flex items-start justify-center '>
+          <div className='size-7 lg:size-12 flex items-start justify-center'>
             <Image
               src={image || imgDrugs}
               alt={name}
               width={49}
               height={51}
-              className='w-full h-auto object-contain'
+              className='w-full h-auto object-center object-contain max-w-full max-h-full'
             />
           </div>
           <h3 className='font-bold text-[12px] md:text-[16px]'>
@@ -52,7 +55,7 @@ export const DrugsColumns = [
     id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
-      return <ActionMenu id={id} />;
+      return <CellActions id={id} />;
     },
   },
 ];

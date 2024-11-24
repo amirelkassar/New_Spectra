@@ -10,6 +10,8 @@ import ROUTES from '@/routes';
 function page() {
   const { data, isLoading } = GetComplaint();
 
+  const items = data?.data?.data?.items;
+
   return (
     <div>
       <div className='flex mb-10 flex-col mt-6 lg:mt-0 flex-wrap md:flex-row items-start md:items-center gap-4 md:gap-6'>
@@ -22,10 +24,10 @@ function page() {
 
       <HandelShowData
         isLoading={isLoading}
-        lengthData={data?.data.data.length}
+        lengthData={items?.length}
       >
         <DataTable
-          data={data?.data.data}
+          data={items}
           columns={ComplaintsColumns}
         />
       </HandelShowData>

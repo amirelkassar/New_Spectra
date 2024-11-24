@@ -1,22 +1,23 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
+const queryKey = 'admin.main-data.specialization';
+
 //getAll
 export const GetSpecialization = () => {
   return useQuery({
-    queryKey: [Admin.Specialization.url],
+    queryKey: [queryKey],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Specialization.url,
-        {
-          headers: {},
-        }
+        mainData.specialization.list()
       );
       return response;
     },
@@ -26,13 +27,10 @@ export const GetSpecialization = () => {
 //getID
 export const GetSpecializationID = (id) => {
   return useQuery({
-    queryKey: [Admin.Specialization.getByID(id)],
+    queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Specialization.getByID(id),
-        {
-          headers: {},
-        }
+        mainData.specialization.actions.get(id)
       );
       return response;
     },
@@ -46,14 +44,12 @@ export const DeleteSpecialization = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Specialization.DeleteByID(id)
+        mainData.specialization.actions.delete(id)
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        Admin.Specialization.url,
-      ]);
+      queryClient.refetchQueries([queryKey]);
     },
   });
 };
@@ -65,16 +61,14 @@ export const useCreateSpecialization = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Specialization.url,
+        mainData.specialization.actions.add,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        Admin.Specialization.url,
-      ]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });
@@ -87,16 +81,14 @@ export const useEditSpecialization = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Specialization.getByID(id),
+        mainData.specialization.actions.update(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        Admin.Specialization.url,
-      ]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });

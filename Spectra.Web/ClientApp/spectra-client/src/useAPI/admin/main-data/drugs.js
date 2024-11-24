@@ -1,11 +1,13 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
 
 const queryKey = 'admin.main-data.drugs';
 
@@ -13,9 +15,9 @@ export const GetDrugs = () => {
   return useQuery({
     queryKey: [queryKey],
     queryFn: async () => {
-      const response = await apiAdmin.get(
-        Admin.Drugs.list()
-      );
+      const response = (
+        await apiAdmin.get(mainData.drugs.list())
+      ).data;
 
       return response;
     },
@@ -27,10 +29,7 @@ export const GetDrugsID = (id) => {
     queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Drugs.actions.get(id),
-        {
-          headers: {},
-        }
+        mainData.drugs.actions.get(id)
       );
       return response;
     },
@@ -43,7 +42,7 @@ export const DeleteDrugs = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Drugs.actions.delete(id)
+        mainData.drugs.actions.delete(id)
       );
       return response.data;
     },
@@ -60,7 +59,7 @@ export const useCreateDrug = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Drugs.actions.add,
+        mainData.drugs.actions.add,
         data,
         {
           headers: {
@@ -83,7 +82,7 @@ export const useEditDrug = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Drugs.actions.update(id),
+        mainData.drugs.actions.update(id),
         data,
         {
           headers: {

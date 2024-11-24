@@ -1,16 +1,20 @@
-"use client";
-import { apiAdmin } from "@/api/api";
-import { Admin } from "@/api/endpoints";
-import NumPage from "@/components/numPage";
-import { useRouter } from "@/navigation";
-import ROUTES from "@/routes";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { apiAdmin } from '@/api/axios';
+import { Admin } from '@/api/endpoints';
+import NumPage from '@/components/numPage';
+import { useRouter } from '@/navigation';
+import ROUTES from '@/routes';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 //getAll
 export const GetStaff = () => {
   const page = NumPage();
   return useQuery({
-    queryKey: ["todos", { page }],
+    queryKey: ['todos', { page }],
     queryFn: async () => {
       const response = await apiAdmin.get(
         Admin.Staff.url + `PageNumber=${page}`,
@@ -28,9 +32,12 @@ export const GetStaffID = (id, id2) => {
   return useQuery({
     queryKey: [Admin.Staff.getByID(id, id2)],
     queryFn: async () => {
-      const response = await apiAdmin.get(Admin.Staff.getByID(id, id2), {
-        headers: {},
-      });
+      const response = await apiAdmin.get(
+        Admin.Staff.getByID(id, id2),
+        {
+          headers: {},
+        }
+      );
       return response;
     },
   });
@@ -40,13 +47,15 @@ export const DeleteStaff = (id) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["Staff"],
+    mutationKey: ['Staff'],
     mutationFn: async () => {
-      const response = await apiAdmin.delete(Admin.Staff.DeleteByID(id));
+      const response = await apiAdmin.delete(
+        Admin.Staff.DeleteByID(id)
+      );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["Staff"]);
+      queryClient.invalidateQueries(['Staff']);
       router.replace(ROUTES.ADMIN.DATAMAIN.StaffS);
     },
   });
@@ -55,18 +64,22 @@ export const DeleteStaff = (id) => {
 export const useCreateStaff = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(Admin.Staff.post, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await apiAdmin.post(
+        Admin.Staff.post,
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       return response.data;
     },
     onSuccess: (data) => {
-      console.log("wsdasdasd");
+      console.log('wsdasdasd');
     },
     onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
+      console.error('حدث خطأ أثناء الإرسال:', error);
     },
   });
 };
@@ -76,7 +89,7 @@ export const useEditStaff = (id, id2) => {
   const { refetch: refetch2 } = GetStaffID(id, id2);
 
   return useMutation({
-    mutationKey: ["EditStaff"],
+    mutationKey: ['EditStaff'],
     mutationFn: async (data) => {
       console.log(id);
 
@@ -94,7 +107,7 @@ export const useEditStaff = (id, id2) => {
       refetch2();
     },
     onError: (error) => {
-      console.error("حدث خطأ أثناء التعديل:", error);
+      console.error('حدث خطأ أثناء التعديل:', error);
     },
   });
 };

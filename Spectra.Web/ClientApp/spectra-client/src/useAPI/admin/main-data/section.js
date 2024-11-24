@@ -1,19 +1,21 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
 //getAll
 export const GetSection = () => {
   return useQuery({
-    queryKey: [Admin.Section.url],
+    queryKey: [mainData.Section.url],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Section.url,
+        mainData.Section.url,
         {
           headers: {},
         }
@@ -26,10 +28,10 @@ export const GetSection = () => {
 //getID
 export const GetSectionID = (id) => {
   return useQuery({
-    queryKey: [Admin.Section.getByID(id)],
+    queryKey: [mainData.Section.getByID(id)],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Section.getByID(id),
+        mainData.Section.getByID(id),
         {
           headers: {},
         }
@@ -46,13 +48,13 @@ export const DeleteSection = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Section.getByID(id)
+        mainData.Section.getByID(id)
       );
       return response.data;
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Section.url]);
+      queryClient.refetchQueries([mainData.Section.url]);
     },
   });
 };
@@ -64,14 +66,14 @@ export const useCreateSection = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Section.url,
+        mainData.Section.url,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Section.url]);
+      queryClient.refetchQueries([mainData.Section.url]);
     },
     onError: () => {},
   });
@@ -84,14 +86,14 @@ export const useEditSection = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Section.getByID(id),
+        mainData.Section.getByID(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Section.url]);
+      queryClient.refetchQueries([mainData.Section.url]);
     },
     onError: () => {},
   });
@@ -100,10 +102,10 @@ export const useEditSection = (id) => {
 //getAllDoctors
 export const GetSectionDoctors = () => {
   return useQuery({
-    queryKey: [Admin.Section.getAllDoctors],
+    queryKey: [mainData.Section.getAllDoctors],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Section.getAllDoctors,
+        mainData.Section.getAllDoctors,
         {
           headers: {},
         }

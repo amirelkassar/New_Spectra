@@ -1,20 +1,21 @@
 'use client';
 
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
 //getAll
 export const GetInternalExamination = () => {
   return useQuery({
-    queryKey: [Admin.InternalExamination.url],
+    queryKey: [mainData.InternalExamination.url],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.InternalExamination.url,
+        mainData.InternalExamination.url,
         {
           headers: {},
         }
@@ -27,10 +28,10 @@ export const GetInternalExamination = () => {
 //getID
 export const GetInternalExaminationID = (id) => {
   return useQuery({
-    queryKey: [Admin.InternalExamination.getByID(id)],
+    queryKey: [mainData.InternalExamination.getByID(id)],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.InternalExamination.getByID(id),
+        mainData.InternalExamination.getByID(id),
         {
           headers: {},
         }
@@ -47,14 +48,14 @@ export const DeleteInternalExamination = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.InternalExamination.DeleteByID(id)
+        mainData.InternalExamination.DeleteByID(id)
       );
       return response.data;
     },
 
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.InternalExamination.url,
+        mainData.InternalExamination.url,
       ]);
     },
   });
@@ -67,7 +68,7 @@ export const useCreateInternalExamination = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.InternalExamination.url,
+        mainData.InternalExamination.url,
         data,
         {}
       );
@@ -75,7 +76,7 @@ export const useCreateInternalExamination = () => {
     },
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.InternalExamination.url,
+        mainData.InternalExamination.url,
       ]);
     },
     onError: () => {},
@@ -89,7 +90,7 @@ export const useEditInternalExamination = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.InternalExamination.getByID(id),
+        mainData.InternalExamination.getByID(id),
         data,
         {}
       );
@@ -97,7 +98,7 @@ export const useEditInternalExamination = (id) => {
     },
     onSuccess: () => {
       queryClient.refetchQueries([
-        Admin.InternalExamination.url,
+        mainData.InternalExamination.url,
       ]);
     },
     onError: () => {},

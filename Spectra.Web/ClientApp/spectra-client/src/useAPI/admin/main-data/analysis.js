@@ -1,22 +1,23 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
+const queryKey = 'admin.main-data.analysis';
+
 //getAll
 export const GetMedicalTests = () => {
   return useQuery({
-    queryKey: [Admin.MedicalTests.url],
+    queryKey: [queryKey],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.MedicalTests.url,
-        {
-          headers: {},
-        }
+        mainData.MedicalTests.url
       );
       return response;
     },
@@ -26,10 +27,10 @@ export const GetMedicalTests = () => {
 //getID
 export const GetMedicalTestsID = (id) => {
   return useQuery({
-    queryKey: [Admin.MedicalTests.getByID(id)],
+    queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.MedicalTests.getByID(id),
+        mainData.MedicalTests.getByID(id),
         {
           headers: {},
         }
@@ -46,12 +47,12 @@ export const DeleteMedicalTests = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.MedicalTests.DeleteByID(id)
+        mainData.MedicalTests.DeleteByID(id)
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.MedicalTests.url]);
+      queryClient.refetchQueries([queryKey]);
     },
   });
 };
@@ -63,14 +64,14 @@ export const useCreateMedicalTests = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.MedicalTests.url,
+        mainData.MedicalTests.url,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.MedicalTests.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });
@@ -83,14 +84,14 @@ export const useEditMedicalTests = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.MedicalTests.getByID(id),
+        mainData.MedicalTests.getByID(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.MedicalTests.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });

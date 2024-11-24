@@ -1,22 +1,23 @@
 'use client';
-import { apiAdmin } from '@/api/api';
-import { Admin } from '@/api/endpoints';
+
 import {
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { apiAdmin } from '@/api/axios';
+import { mainData } from '@/api/admin';
+
+const queryKey = 'admin.main-data.complaints';
+
 //getAll
 export const GetComplaint = () => {
   return useQuery({
-    queryKey: [Admin.Complaint.url],
+    queryKey: [queryKey],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Complaint.url,
-        {
-          headers: {},
-        }
+        mainData.complaint.list()
       );
       return response;
     },
@@ -26,13 +27,10 @@ export const GetComplaint = () => {
 //getID
 export const GetComplaintID = (id) => {
   return useQuery({
-    queryKey: [Admin.Complaint.getByID(id)],
+    queryKey: [queryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Complaint.getByID(id),
-        {
-          headers: {},
-        }
+        mainData.complaint.actions.get(id)
       );
       return response;
     },
@@ -46,12 +44,12 @@ export const DeleteComplaint = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Complaint.DeleteByID(id)
+        mainData.complaint.actions.delete(id)
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Complaint.url]);
+      queryClient.refetchQueries([queryKey]);
     },
   });
 };
@@ -63,14 +61,14 @@ export const useCreateComplaint = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        Admin.Complaint.url,
+        mainData.complaint.actions.add,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Complaint.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });
@@ -83,14 +81,14 @@ export const useEditComplaint = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        Admin.Complaint.getByID(id),
+        mainData.complaint.actions.update(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([Admin.Complaint.url]);
+      queryClient.refetchQueries([queryKey]);
     },
     onError: () => {},
   });

@@ -1,5 +1,6 @@
 import MainDataAside from './_components/report-aside';
 import Card from '@/components/card';
+
 export default function FamilyLayout({ children }) {
   return (
     <section className='sec-page'>

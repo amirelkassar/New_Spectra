@@ -1,17 +1,24 @@
-"use client";
-import { api } from "@/api/api";
-import { Doctor } from "@/api/endpoints";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { api } from '@/api/axios';
+import { Doctor } from '@/api/endpoints';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 //getAll
 export const GetContracts = (id) => {
   return useQuery({
     queryKey: [Doctor.Contracts.url(id)],
     queryFn: async () => {
-      const response = await api.get(Doctor.Contracts.url(id), {
-        headers: {},
-      });
-      console.log("dfd");
+      const response = await api.get(
+        Doctor.Contracts.url(id),
+        {
+          headers: {},
+        }
+      );
+      console.log('dfd');
       return response;
     },
     staleTime: Infinity,
@@ -23,10 +30,13 @@ export const GetContractsID = (id) => {
   return useQuery({
     queryKey: [Doctor.Contracts.getByID(id)],
     queryFn: async () => {
-      const response = await api.get(Doctor.Contracts.getByID(id), {
-        headers: {},
-      });
-      console.log("response");
+      const response = await api.get(
+        Doctor.Contracts.getByID(id),
+        {
+          headers: {},
+        }
+      );
+      console.log('response');
 
       return response;
     },
@@ -39,9 +49,12 @@ export const GetContractsServices = () => {
   return useQuery({
     queryKey: [Doctor.Contracts.getServices],
     queryFn: async () => {
-      const response = await api.get(Doctor.Contracts.getServices, {
-        headers: {},
-      });
+      const response = await api.get(
+        Doctor.Contracts.getServices,
+        {
+          headers: {},
+        }
+      );
       return response;
     },
 
@@ -55,9 +68,13 @@ export const useCreateContracts = (employeeId) => {
   const { refetch } = GetContracts(employeeId);
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.post(Doctor.Contracts.post, data, {
-        headers: {},
-      });
+      const response = await api.post(
+        Doctor.Contracts.post,
+        data,
+        {
+          headers: {},
+        }
+      );
       return response.data;
     },
     onSuccess: (data) => {
@@ -65,7 +82,7 @@ export const useCreateContracts = (employeeId) => {
       console.log(data);
     },
     onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
+      console.error('حدث خطأ أثناء الإرسال:', error);
     },
   });
 };
@@ -75,26 +92,32 @@ export const DeleteContracts = (id, employeeId) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["Contracts"],
+    mutationKey: ['Contracts'],
     mutationFn: async () => {
-      const response = await api.delete(Doctor.Contracts.getByID(id));
+      const response = await api.delete(
+        Doctor.Contracts.getByID(id)
+      );
       return response.data;
     },
     onSuccess: (res) => {
       refetch();
-      queryClient.invalidateQueries(["Contracts"]);
+      queryClient.invalidateQueries(['Contracts']);
       console.log(res);
     },
   });
 };
 //Edit
-export const useEditContracts = (id,employeeId) => {
+export const useEditContracts = (id, employeeId) => {
   const { refetch } = GetContracts(employeeId);
   return useMutation({
     mutationFn: async (data) => {
-      const response = await api.put(Doctor.Contracts.getByID(id), data, {
-        headers: {},
-      });
+      const response = await api.put(
+        Doctor.Contracts.getByID(id),
+        data,
+        {
+          headers: {},
+        }
+      );
       return response.data;
     },
     onSuccess: (data) => {
@@ -102,7 +125,7 @@ export const useEditContracts = (id,employeeId) => {
       refetch();
     },
     onError: (error) => {
-      console.error("حدث خطأ أثناء الإرسال:", error);
+      console.error('حدث خطأ أثناء الإرسال:', error);
     },
   });
 };

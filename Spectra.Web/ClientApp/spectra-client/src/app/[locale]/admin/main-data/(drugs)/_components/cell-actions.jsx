@@ -12,7 +12,7 @@ import { DeleteDrugs } from '@/useAPI/admin/main-data/drugs';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { Toast } from '@/components/toast';
 
-function ActionMenu({ id }) {
+export function CellActions({ id }) {
   const open = useConfirmModal((s) => s.open);
 
   const { mutateAsync: deleteDrug, isPending } =
@@ -65,5 +65,3 @@ function ActionMenu({ id }) {
   ];
   return <DataActions options={options} />;
 }
-
-export default ActionMenu;
