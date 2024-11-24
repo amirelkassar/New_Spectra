@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -11,32 +12,24 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
     {
         public string Id { get; set; }
         public string Code1 { get; set; }
-        public string Code2 { get; set; }
-        public string Code3 { get; set; }
+        public string? Code2 { get; set; }
+        public string? Code3 { get; set; }
         public string Name { get; set; }
-
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 
-    public class UpdateDiagnoseCommandHandler : IRequestHandler<UpdateDiagnoseCommand, OperationResult<Unit>>
+    public class UpdateDiagnoseCommandHandler(IBaseMongoDbRepository<Diagnose> diagnoseRepository) : IRequestHandler<UpdateDiagnoseCommand, OperationResult<Unit>>
     {
 
-        private readonly IDiagnoseRepository _diagnoseRepository;
-
-        public UpdateDiagnoseCommandHandler(IDiagnoseRepository diagnoseRepository)
-        {
-            _diagnoseRepository = diagnoseRepository;
-
-        }
+        private readonly IBaseMongoDbRepository<Diagnose> _diagnoseRepository = diagnoseRepository;
 
         public async Task<OperationResult<Unit>> Handle(UpdateDiagnoseCommand request, CancellationToken cancellationToken)
         {
-
             var Diagnose = await _diagnoseRepository.GetByIdAsync(request.Id);
-            var names = await _diagnoseRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
-            if (names.Any())
+            var check = await _diagnoseRepository.Exists(b => b.Name == request.Name && b.Id != request.Id);
+            if (check)
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
 
 
@@ -49,9 +42,6 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
 
             await _diagnoseRepository.UpdateAsync(Diagnose);
             return OperationResult<Unit>.Success(Unit.Value);
-
-
-
         }
 
     }
@@ -60,26 +50,16 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Commands
         public UpdateDiagnoseCommandValidator()
         {
             RuleFor(x => x.Id)
-          .NotEmpty()
-          .WithMessage("Id is required.");
+              .NotEmpty()
+              .NotNull();
+
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Diagnosis name is required.")
-                .MaximumLength(100).WithMessage("Diagnosis name must not exceed 100 characters.");
+              .NotEmpty()
+              .NotNull();
+
             RuleFor(x => x.Code1)
-                    .NotEmpty().WithMessage("Code1 is required.")
-                    .MaximumLength(10).WithMessage("Code1 must not exceed 10 characters.");
-
-            RuleFor(x => x.Code2)
-                .NotEmpty().WithMessage("Code2 is required.")
-                .MaximumLength(10).WithMessage("Code2 must not exceed 10 characters.");
-
-            RuleFor(x => x.Code3)
-                .NotEmpty().WithMessage("Code3 is required.")
-                .MaximumLength(10).WithMessage("Code3 must not exceed 10 characters.");
-
-            RuleFor(x => x.Description)
-            .NotEmpty().WithMessage("Diagnosis description is required.")
-            .MaximumLength(500).WithMessage("Diagnosis description must not exceed 500 characters.");
+              .NotEmpty()
+              .NotNull();
         }
     }
 }
