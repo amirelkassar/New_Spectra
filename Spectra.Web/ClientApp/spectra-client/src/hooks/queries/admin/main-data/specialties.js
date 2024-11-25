@@ -63,7 +63,7 @@ export const GetSpecializationID = (id) => {
       const response = await apiAdmin.get(
         mainData.specialization.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };

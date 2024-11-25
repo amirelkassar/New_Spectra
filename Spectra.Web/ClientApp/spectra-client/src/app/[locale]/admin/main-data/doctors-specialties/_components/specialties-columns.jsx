@@ -10,8 +10,11 @@ export const SpecialtiesColumns = [
     header: 'كود التخصص',
   },
   {
-    accessorKey: 'doctorCount',
-    header: 'عدد الاطباء في هذا التخصص',
+    accessorKey: 'consultationCost',
+    header: 'تكلفة',
+    cell: ({ getValue }) => {
+      return getValue() + ' ر.س';
+    },
   },
   {
     id: 'actions',
