@@ -1,36 +1,52 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Spectra.Application.Hellper;
+using Spectra.Application.MasterData.InternalExaminations.Dtos;
+using Spectra.Application.MasterData.InternalExaminations;
 using Spectra.Application.MasterData.Sections.Dto;
+using Spectra.Domain.MasterData.InternalExaminations;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
+using Spectra.Domain.MasterData.Sections;
+using Spectra.Application.Interfaces;
 
 namespace Spectra.Application.MasterData.Sections.Queries
 {
 
-    public class GetAllSectionsQuery : IRequest<OperationResult<IEnumerable<SectionDto>>>
+    public class GetAllSectionsQuery :QueryPaginationParam, IRequest<OperationResult>
     {
-
-
+        public string? Search { get; set; }
     }
-    public class GetAllSectionsQueryHandler : IRequestHandler<GetAllSectionsQuery, OperationResult<IEnumerable<SectionDto>>>
+    public class GetAllSectionsQueryHandler(IBaseMongoDbRepository<Section> sectionsRepository) : IRequestHandler<GetAllSectionsQuery, OperationResult>
     {
-        private readonly ISectionsRepository _sectionsRepository;
+        private readonly IBaseMongoDbRepository<Section> _sectionsRepository = sectionsRepository;
 
-
-
-
-        public GetAllSectionsQueryHandler(ISectionsRepository sectionsRepository)
+        public async Task<OperationResult> Handle(GetAllSectionsQuery request, CancellationToken cancellationToken)
         {
-            _sectionsRepository = sectionsRepository;
+            IEnumerable<Section> sections = null;
+            long totalData = 0;
+            if (!string.IsNullOrEmpty(request.Search))
+            {
+                request.Search = request.Search.ToLower().Trim();
+                var (data, total) = await _sectionsRepository.GetAllAsync(d => d.Name.ToLower().StartsWith(request.Search),
+                null,
+                request.SkipCount,
+                request.MaxCount);
 
-        }
-
-        public async Task<OperationResult<IEnumerable<SectionDto>>> Handle(GetAllSectionsQuery request, CancellationToken cancellationToken)
-        {
-
-            var entity = await _sectionsRepository.GetAllAsync();
-            var sections = entity.Select(x => new SectionDto { CountDiagnoses = x.SpecializationIds.Count(), Name = x.Name, DoctorName = x.DoctorName, Id = x.Id });
-
-            return OperationResult<IEnumerable<SectionDto>>.Success(sections);
-
+                totalData = total;
+                sections = data.ToArray();
+            }
+            else
+            {
+                var (data, total) = await _sectionsRepository.GetAllAsync(null,
+                    null,
+                    request.SkipCount,
+                    request.MaxCount);
+                totalData = total;
+                sections = data.ToArray();
+            }
+            var dtos = sections.Adapt<IReadOnlyCollection<SectionDto>>();
+            return OperationResult<PaginatedResult<SectionDto>>.Success(new PaginatedResult<SectionDto>(dtos, totalData, request.MaxCount));
         }
     }
 }

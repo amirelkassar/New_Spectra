@@ -16,7 +16,7 @@ namespace Spectra.Domain.MasterData.Sections
        string name
       , string headId,
        string headName,
-        List<SectionSpecsification> specsifications) : base(id)
+        ICollection<SectionSpecsification> specsifications) : base(id)
         {
             Id = id;
             Name = name;
@@ -28,7 +28,7 @@ namespace Spectra.Domain.MasterData.Sections
        string name
       , string headId,
        string headName,
-        List<SectionSpecsification> specsifications)
+        ICollection<SectionSpecsification> specsifications)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));

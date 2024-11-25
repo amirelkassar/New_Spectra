@@ -20,7 +20,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string TermsAndConditions { get; set; }
 
 
-        public List<ServiceSection>? Secations { get; set; }
+        public List<ServiceSection>? Sections { get; set; }
         public List<IFormFile>? Photo { get; set; }
 
     }

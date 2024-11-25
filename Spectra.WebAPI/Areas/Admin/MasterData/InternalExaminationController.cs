@@ -18,7 +18,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _internalExamination = internalExamination;
         }
 
-        [HttpGet("lisr")]
+        [HttpGet("list")]
         [Authorize(AdminInternalExaminationPermissions.ReadList)]
         public async Task<ActionResult> GetAllInternalExamination([FromQuery]GetAllInternalExaminationQuery input)
         {

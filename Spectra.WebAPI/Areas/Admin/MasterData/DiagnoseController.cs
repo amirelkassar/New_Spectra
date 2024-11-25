@@ -4,18 +4,13 @@ using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
+using System.Text.RegularExpressions;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    public class DiagnoseController : AdminBaseController
+    public class DiagnoseController(IDiagnosesService diagnosetService) : AdminBaseController
     {
-        private readonly IDiagnosesService _diagnosetService;
-
-        public DiagnoseController(IDiagnosesService diagnosetService)
-        {
-            _diagnosetService = diagnosetService;
-        }
-
+        private readonly IDiagnosesService _diagnosetService = diagnosetService;
 
         [HttpGet("list")]
         [Authorize(AdminDiagnosePermissions.ReadList)]

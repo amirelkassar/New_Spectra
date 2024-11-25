@@ -1,74 +1,54 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Sections.Commands;
+using Spectra.Application.MasterData.Sections.Queries;
 using Spectra.Application.MasterData.Sections.Service;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    public class SectionController : AdminBaseController
+    public class SectionController(ISectionsService sectionsServices) : AdminBaseController
     {
-        private readonly ISectionsServices _sectionsServices;
+        private readonly ISectionsService _sectionsServices = sectionsServices;
 
-        public SectionController(ISectionsServices sectionsServices)
-        {
-            _sectionsServices = sectionsServices;
-        }
-
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize(AdminSectionsPermissions.ReadList)]
-        public async Task<ActionResult> GetAllSection()
+        public async Task<ActionResult> GetAllSection([FromQuery]GetAllSectionsQuery input)
         {
-            var sections = await _sectionsServices.GetAllSection();
+            var sections = await _sectionsServices.GetAllSection(input);
             return Ok(sections);
         }
 
-        [HttpGet("GetAllNames")]
-        [Authorize(AdminSectionsPermissions.ReadList)]
-        public async Task<ActionResult> GetAllSectionNames()
-        {
-            var sectionNames = await _sectionsServices.GetAllSectionNames();
-            return Ok(sectionNames);
-        }
-
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminSectionsPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneSection(string id)
+        public async Task<ActionResult> GetOneSection([FromQuery] GetSectionByIdQuery input)
         {
-            var section = await _sectionsServices.GetSectionById(id);
+            var section = await _sectionsServices.GetSectionById(input.Id);
             return Ok(section);
         }
 
         [HttpPost]
         [Authorize(AdminSectionsPermissions.Create)]
-        public async Task<ActionResult> CreateSection(CreateSectionsCommand input)
+        public async Task<ActionResult> CreateSection([FromBody] CreateSectionsCommand input)
         {
             var section = await _sectionsServices.CreateSection(input);
-            return Ok(section);
+            return Created("",section);
         }
 
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminSectionsPermissions.Update)]
-        public async Task<ActionResult> UpdateSection(string id, UpdateSectionsCommand input)
+        public async Task<ActionResult> UpdateSection([FromBody] UpdateSectionsCommand input)
         {
-            var section = await _sectionsServices.UpdateSection(id, input);
-            return Ok(section);
+            var section = await _sectionsServices.UpdateSection(input);
+            return Accepted("",section);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminSectionsPermissions.Delete)]
-        public async Task<ActionResult> DeleteSection(string id)
+        public async Task<ActionResult> DeleteSection([FromQuery] DeleteSectionsCommand input)
         {
-            var section = await _sectionsServices.DeleteSection(id);
-            return Ok(section);
-        }
-
-        [HttpGet("GetAllDoctors")]
-        [Authorize(AdminSectionsPermissions.ReadList)]
-        public async Task<ActionResult> GetAllDoctors()
-        {
-            var doctors = await _sectionsServices.GetAllDoctors();
-            return Ok(doctors);
+            var section = await _sectionsServices.DeleteSection(input);
+            return NoContent();
         }
     }
 

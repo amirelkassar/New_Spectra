@@ -1,36 +1,31 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Spectra.Application.MasterData.InternalExaminations.Dtos;
+using Spectra.Application.MasterData.Sections.Dto;
 using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Sections.Queries
 {
-
-    public class GetSectionByIdQuery : IRequest<OperationResult<Section>>
+    public class GetSectionByIdQuery : IRequest<OperationResult>
     {
         public string Id { get; set; }
-
     }
 
-    public class GetSectionByIdQueryHandler : IRequestHandler<GetSectionByIdQuery, OperationResult<Section>>
+    public class GetSectionByIdQueryHandler(ISectionsRepository sectionsRepository) : IRequestHandler<GetSectionByIdQuery, OperationResult>
     {
-        private readonly ISectionsRepository _sectionsRepository;
+        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
 
-        public GetSectionByIdQueryHandler(ISectionsRepository sectionsRepository)
+        public async Task<OperationResult> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
         {
-            _sectionsRepository = sectionsRepository;
-
-        }
-        public async Task<OperationResult<Section>> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
-        {
-
             var entitiy = await _sectionsRepository.GetByIdAsync(request.Id);
-            if (entitiy == null)
+            if (entitiy is null)
             {
-                throw new NotFoundException("Service", request.Id);
+                throw new NotFoundException("Sections", request.Id);
             }
-
-            return OperationResult<Section>.Success(entitiy);
+            var dto= entitiy.Adapt<SectionDto>();
+            return OperationResult<SectionDto>.Success(dto);
 
 
         }
