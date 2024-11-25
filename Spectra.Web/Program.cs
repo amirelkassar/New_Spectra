@@ -81,6 +81,19 @@ try
                 throw new UnauthorizedAccessException();
         }
     });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, Pathes.GetServicesPath())),
+        RequestPath = $"/{EndPointsRoutes.Services}",
+        OnPrepareResponse = ctx =>
+        {
+            var isAuth = ctx.Context?.User?.Identity?.IsAuthenticated;
+            Log.Logger.Information("user is {0}", isAuth);
+            if (isAuth.HasValue && !isAuth.Value)
+                throw new UnauthorizedAccessException();
+        }
+    });
     app.MapControllers();
 
     app.UseSwagger();

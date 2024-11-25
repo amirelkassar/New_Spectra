@@ -9,6 +9,8 @@ using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Application.MasterData.ServicesMD.Dtos;
 using Spectra.Application.Interfaces;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {
@@ -16,9 +18,13 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
     {
         public string? Search { get; set; }
     }
-    public class GetAllServicesMDQueryHandler(IBaseMongoDbRepository<PlatformService> serviceMRepository) : IRequestHandler<GetAllServicesMDQuery, OperationResult>
+    public class GetAllServicesMDQueryHandler(IBaseMongoDbRepository<PlatformService> serviceMRepository,
+        IHttpContextAccessor httpContextAccessor,
+        IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetAllServicesMDQuery, OperationResult>
     {
         private readonly IBaseMongoDbRepository<PlatformService> _serviceMRepository = serviceMRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
         public async Task<OperationResult> Handle(GetAllServicesMDQuery request, CancellationToken cancellationToken)
         {
@@ -44,6 +50,10 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
                 services = data.ToArray();
             }
             var dtos = services.Adapt<IReadOnlyCollection<ServiceReadDto>>();
+            foreach (var item in dtos)
+            {
+                item.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, item.HeroImagePath), EndPointsRoutes.Drugs, _httpContextAccessor);
+            }
             return OperationResult<PaginatedResult<ServiceReadDto>>.Success(new PaginatedResult<ServiceReadDto>(dtos, totalData, request.MaxCount));
 
         }
