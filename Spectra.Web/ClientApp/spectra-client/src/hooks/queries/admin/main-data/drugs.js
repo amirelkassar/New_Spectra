@@ -53,7 +53,7 @@ export const GetDrugsID = (id) => {
       const response = await apiAdmin.get(
         mainData.drugs.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };

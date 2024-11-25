@@ -7,7 +7,7 @@ import { DeleteSpecialization } from '@/hooks/queries/admin/main-data/specialtie
 import ROUTES from '@/routes';
 import { useCallback } from 'react';
 
-export const useMenuActions = (id) => {
+export const useSpecialtyMenuActions = (id) => {
   const router = useRouter();
 
   const open = useConfirmModal((s) => s.open);

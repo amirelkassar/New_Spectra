@@ -1,14 +1,14 @@
 'use client';
 
 import ActionsMenu from '@/components/actions-menu';
-import { useMenuActions } from '../_hooks/use-menu-actions';
+import { useSpecialtyMenuActions } from '../_hooks/use-specialty-menu-actions';
 import { useParams } from 'next/navigation';
 
 export function CellActions({ id }) {
   const paramsId = useParams()?.doctorsSpecialtiesID;
 
   const { onDelete, onEdit, onView, onExport, onPrint } =
-    useMenuActions(id || paramsId);
+    useSpecialtyMenuActions(id || paramsId);
 
   return (
     <ActionsMenu>

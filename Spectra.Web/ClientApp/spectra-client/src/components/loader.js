@@ -1,17 +1,20 @@
-import React from "react";
+import React from 'react';
 
 function Loader() {
   return (
-    <div className="mx-auto w-full my-20 mdl:my-28 flex items-center justify-center">
-      <div className="loader">
-        <div className="loader-outter"></div>
-        <div className="loader-inner"></div>
-        <div className="indicator">
-          <svg width="16px" height="12px">
-            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+    <div className='py-20 mdl:py-28 flex items-center justify-center'>
+      <div className='loader'>
+        <div className='loader-outter'></div>
+        <div className='loader-inner'></div>
+        <div className='indicator'>
+          <svg width='16px' height='12px'>
             <polyline
-              id="front"
-              points="1 6 4 6 6 11 10 1 12 6 15 6"
+              id='back'
+              points='1 6 4 6 6 11 10 1 12 6 15 6'
+            ></polyline>
+            <polyline
+              id='front'
+              points='1 6 4 6 6 11 10 1 12 6 15 6'
             ></polyline>
           </svg>
         </div>

@@ -6,7 +6,7 @@ const ViewSpecialtyPage = ({ params }) => {
   const doctorsSpecialtiesID = params?.doctorsSpecialtiesID;
 
   return (
-    <div className='space-y-5'>
+    <div className='space-y-10'>
       <div className='flex items-center justify-between gap-5'>
         <div className='flex items-center gap-4 md:gap-0'>
           <BackButton />
