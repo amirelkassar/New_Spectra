@@ -58,16 +58,16 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
         [HttpDelete]
         [Authorize(AdminDrugPermissions.Delete)]
-        public async Task<ActionResult> DeleteAsync(DeleteDrugCommand input)
+        public async Task<ActionResult> DeleteAsync([FromQuery]DeleteDrugCommand input)
         {
             var response = await _drugtService.DeleteDrug(input.Id);
             return NoContent();
         }
         [HttpPost("bulk")]
         [Authorize(AdminDrugPermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> UploadExcelFile([FromForm]BulkCreateModel input)
         {
-            var data = _drugtService.CreateFromExcel(file);
+            var data = _drugtService.CreateFromExcel(input.File);
             return Created("", data);
         }
 

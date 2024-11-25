@@ -23,73 +23,37 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
             _excelProcessingService = excelProcessingService;
         }
 
-        public async Task<OperationResult<string>> CreateServicesM(CreateServicesMCommand input)
+        public async Task<OperationResult> CreateServicesM(CreateServicesMCommand input)
         {
-
-
-
-            var command = new CreateServicesMCommand
-            {
-                Name = input.Name,
-                DefinitionServices = input.DefinitionServices,
-                AvailableSrvices = input.AvailableSrvices,
-                Price = input.Price,
-                TermsAndConditions = input.TermsAndConditions,
-                //ServiceAddress = input.ServiceAddress,
-                //Content = input.Content,
-                Secations = input.Secations,
-                Photo = input.Photo
-
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> Updateservices(string id, UpdateServicesMCommand input)
+        public async Task<OperationResult> Updateservices(UpdateServicesMCommand input)
         {
-
-            var command = new UpdateServicesMCommand
-            {
-
-                Id = id,
-                Name = input.Name,
-                AvailableSrvices = input.AvailableSrvices,
-                Price = input.Price,
-                TermsAndConditions = input.TermsAndConditions,
-                //Address = input.Address,
-                //Content = input.Content,
-                Secations = input.Secations,
-                Photo = input.Photo
-
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id)
+        public async Task<OperationResult> DeleteMedicalTestsAndXray(string id)
         {
             var command = new DeleteServicesMCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<PlatformService>> GetServicesMById(string id)
+        public async Task<OperationResult> GetServicesMById(string id)
         {
             var query = new GetServicesMDByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<PlatformService>>> GetAllServicesM()
+        public async Task<OperationResult> GetAllForListing(GetAllServiceForListingQuery input)
         {
-            var query = new GetAllServicesMDQuery();
-            return await _mediator.Send(query);
-        }
-        public async Task<OperationResult<IEnumerable<ServicesDto>>> GetAllNameAndTermsAndConditions()
-        {
-            var query = new GetAllNameAndTermServicesQuery();
-            return await _mediator.Send(query);
+            return await _mediator.Send(input);
         }
 
-
+        public async Task<OperationResult> GetAllServices(GetAllServicesMDQuery input)
+        {
+            return await _mediator.Send(input);
+        }
     }
 }
 

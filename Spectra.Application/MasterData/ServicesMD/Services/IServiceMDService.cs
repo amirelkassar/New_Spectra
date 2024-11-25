@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.MasterData.ServicesMD.Commands;
+using Spectra.Application.MasterData.ServicesMD.Queries;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -7,11 +8,11 @@ namespace Spectra.Application.MasterData.ServicesMD.Services
 {
     public interface IServiceMDService
     {
-        Task<OperationResult<string>> CreateServicesM(CreateServicesMCommand input);
-        Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id);
-        Task<OperationResult<IEnumerable<ServicesDto>>> GetAllNameAndTermsAndConditions();
-        Task<OperationResult<IEnumerable<PlatformService>>> GetAllServicesM();
-        Task<OperationResult<PlatformService>> GetServicesMById(string id);
-        Task<OperationResult<Unit>> Updateservices(string id, UpdateServicesMCommand input);
+        Task<OperationResult> CreateServicesM(CreateServicesMCommand input);
+        Task<OperationResult> DeleteMedicalTestsAndXray(string id);
+        Task<OperationResult> GetAllForListing(GetAllServiceForListingQuery input);
+        Task<OperationResult> GetAllServices(GetAllServicesMDQuery input);
+        Task<OperationResult> GetServicesMById(string id);
+        Task<OperationResult> Updateservices(UpdateServicesMCommand input);
     }
 }

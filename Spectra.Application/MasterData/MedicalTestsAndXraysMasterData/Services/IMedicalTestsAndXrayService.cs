@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services
@@ -8,11 +9,10 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services
     public interface IMedicalTestsAndXrayService
     {
         Task CreateFromExcel(IFormFile input);
-        Task<OperationResult<string>> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input);
-        Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id);
-        Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>>> GetAllMedicalTestsAndXray();
-        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllMedicalTestsAndXrayNames();
-        Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>> GetMedicalTestsAndXrayById(string id);
-        Task<OperationResult<Unit>> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input);
+        Task<OperationResult> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input);
+        Task<OperationResult> DeleteMedicalTestsAndXray(string id);
+        Task<OperationResult> GetAllMedicalTestsAndXray(GetAllMedicalTestsAndXraysQuery input);
+        Task<OperationResult> GetMedicalTestsAndXrayById(string id);
+        Task<OperationResult> UpdateMedicalTestsAndXray(UpdateMedicalTestsAndXraysCommand input);
     }
 }

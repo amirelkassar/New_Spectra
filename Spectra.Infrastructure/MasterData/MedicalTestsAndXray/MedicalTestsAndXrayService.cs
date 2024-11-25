@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
@@ -11,101 +10,50 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
 {
-    public class MedicalTestsAndXrayService : IMedicalTestsAndXrayService
+    public class MedicalTestsAndXrayService(IMediator mediator, IExcelProcessingService excelProcessingService) : IMedicalTestsAndXrayService
     {
-        private readonly IMediator _mediator;
-        private readonly IExcelProcessingService _excelProcessingService;
+        private readonly IMediator _mediator = mediator;
+        private readonly IExcelProcessingService _excelProcessingService = excelProcessingService;
 
-        public MedicalTestsAndXrayService(IMediator mediator, IExcelProcessingService excelProcessingService)
+        public async Task<OperationResult> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input)
         {
-
-            _mediator = mediator;
-            _excelProcessingService = excelProcessingService;
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<string>> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input)
+        public async Task<OperationResult> UpdateMedicalTestsAndXray(UpdateMedicalTestsAndXraysCommand input)
         {
-
-            var command = new CreateMedicalTestsAndXraysCommand
-            {
-                ScientificNameEng = input.ScientificNameEng,
-                ScientificNameByEngByArab = input.ScientificNameByEngByArab,
-                Code = input.Code,
-                Notes = input.Notes,
-                ExaminationTypes = input.ExaminationTypes
-            };
-
-            return await _mediator.Send(command);
-        }
-        public async Task CreateFromExcel(IFormFile input)
-        {
-
-            List<CreateMedicalTestsAndXraysCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateMedicalTestsAndXraysCommand
-            {
-
-                ScientificNameEng = cells[0],
-                ScientificNameByEngByArab = cells[1],
-                ExaminationTypes = Enum.TryParse<ExaminationType>(cells[2], true, out var examinationType) ? examinationType : throw new ArgumentException($"Invalid ExaminationType: {cells[2]}"),
-                Notes = cells[3],
-                Code = cells[4],
-            });
-
-
-            var command = new CreateBulkDataCommand<CreateMedicalTestsAndXraysCommand> { Data = data };
-
-            await _mediator.Send(command);
-
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input)
-        {
-
-            var command = new UpdateMedicalTestsAndXraysCommand
-            {
-
-                Id = id,
-                ScientificNameByEng = input.ScientificNameByEng,
-                Code = input.Code,
-                ScientificNameByEngByArab = input.ScientificNameByEngByArab,
-                Notes = input.Notes,
-                ExaminationTypes = input.ExaminationTypes
-
-            };
-
-            return await _mediator.Send(command);
-        }
-
-        public async Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id)
+        public async Task<OperationResult> DeleteMedicalTestsAndXray(string id)
         {
             var command = new DeleteMedicalTestsAndXraysCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>> GetMedicalTestsAndXrayById(string id)
+        public async Task<OperationResult> GetMedicalTestsAndXrayById(string id)
         {
             var query = new GetMedicalTestsAndXraysByIdQuery { Id = id };
-
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>>> GetAllMedicalTestsAndXray()
+        public async Task<OperationResult> GetAllMedicalTestsAndXray(GetAllMedicalTestsAndXraysQuery input)
         {
-
-            var query = new GetAllMedicalTestsAndXraysQuery();
-
-            return await _mediator.Send(query);
-
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllMedicalTestsAndXrayNames()
+        public async Task CreateFromExcel(IFormFile input)
         {
+            List<CreateMedicalTestsAndXraysCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateMedicalTestsAndXraysCommand
+            {
+                Name = cells[0],
+                ExaminationTypes = Enum.TryParse<ExaminationType>(cells[1], true, out var examinationType) ? examinationType : throw new ArgumentException($"Invalid ExaminationType: {cells[2]}"),
+                Code = cells[2],
+            });
+            var command = new CreateBulkDataCommand<CreateMedicalTestsAndXraysCommand> { Data = data };
 
-            var query = new GetAllMedicalTestsAndXrayNamesQuery();
-
-            return await _mediator.Send(query);
-
+            await _mediator.Send(command);
         }
-
     }
 }
 

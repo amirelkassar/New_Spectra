@@ -15,8 +15,11 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public double Price { get; set; }
         public double? Discount { get; set; }
         public string? TermsAndConditions { get; set; }
-        public List<ServiceSection>? Secations { get; private set; }
-
+        public ICollection<ServiceSection>? Secations { get; set; }
+        public ICollection<ServiceReport>? Reports { get; set; }
+        public ICollection<ServiceSpecification>? Specifications { get; set; }
+        public ICollection<ServiceContent>? Contents { get; set; }
+        public string? HeroImagePath { get; set; }
         protected PlatformService() { }
         private PlatformService(string id,
         string enName,
@@ -33,6 +36,10 @@ namespace Spectra.Domain.MasterData.ServicesMD
             ArName = arName;
             ServiceType = serviceType;
             Price = price;
+            Secations = [];
+            Reports = [];
+            Specifications = [];
+            Contents = [];
         }
         public static PlatformService Create(string id,
         string enName,

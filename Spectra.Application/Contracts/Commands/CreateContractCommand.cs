@@ -71,7 +71,7 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.FreelancingServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
@@ -87,7 +87,7 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.SpectraTeamServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
@@ -106,8 +106,8 @@ namespace Spectra.Application.Contracts.Commands
             medicalProvider.Id,
             medicalProvider.Name.FirstName,
              request.EmployeeUserId,
-            departmentHead.DoctorId,
-            departmentHead.DoctorName,
+            departmentHead.HeadDoctorId,
+            departmentHead.HeadDoctorName,
             $"Contract Of {medicalProvider.Name.FirstName}",
             ContractStates.Contracting,
             [contractVerion]

@@ -4,35 +4,36 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
 {
-    public class CreateServicesMCommand : ICommand<OperationResult<string>>
+    public class CreateServicesMCommand : ICommand<OperationResult>
     {
-        public ServiceTypes AvailableSrvices { get; set; }
-        public string Name { get; set; }
-        public string DefinitionServices { get; set; }
+        public ServiceTypes ServiceType { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+        public string? Description { get; set; }
         public double Price { get; set; }
-
-        public string TermsAndConditions { get; set; }
-
-
-        public List<ServiceSection>? Sections { get; set; }
-        public List<IFormFile>? Photo { get; set; }
-
+        public double? Discount { get; set; }
+        public string? TermsAndConditions { get; set; }
+        public ICollection<ServiceSection>? Secations { get; set; }
+        public ICollection<ServiceReport>? Reports { get; set; }
+        public ICollection<ServiceSpecification>? Specifications { get; set; }
+        public ICollection<ServiceContent>? Contents { get; set; }
+        public IFormFile? HeroImage { get; set; }
     }
 
 
 
-    public class CreateDrugCommandHandler : IRequestHandler<CreateServicesMCommand, OperationResult<string>>
+    public class CreateDrugCommandHandler : IRequestHandler<CreateServicesMCommand, OperationResult>
     {
         private readonly IServiceMDRepository _serviceMRepository;
         private readonly IDocumentHellper _addPhoto;
-
-
 
         public CreateDrugCommandHandler(IServiceMDRepository serviceMRepository, IDocumentHellper addPhoto)
         {
@@ -40,60 +41,59 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
             _addPhoto = addPhoto;
         }
 
-        public async Task<OperationResult<string>> Handle(CreateServicesMCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreateServicesMCommand request, CancellationToken cancellationToken)
         {
-
-            List<string>? photoPath = null;
-
-            var uploadPhoto = await _addPhoto.CreateAttachments(request.Photo, "Upload/Image/Services");
-            if (uploadPhoto != null)
+            var services =await _serviceMRepository.GetAllAsync(s => s.EnName.ToLower() == request.EnName.ToLower() || s.ArName.ToLower() == request.ArName.ToLower());
+            if (services.Any())
             {
-                photoPath = uploadPhoto;
-
+                throw new AlreadyExistException(request.EnName, nameof(request.EnName));
             }
 
             var entity = PlatformService.Create(
-
              Ulid.NewUlid().ToString(),
-             request.Name,
-             request.AvailableSrvices,
+             request.EnName,
+             request.ArName,
+             request.ServiceType,
              request.Price);
+
+            entity.Description=request.Description;
+            entity.Discount = request.Discount;
+            entity.TermsAndConditions = request.TermsAndConditions;
+            entity.Secations = request.Secations;
+            entity.Reports = request.Reports;
+            entity.Specifications = request.Specifications;
+            entity.Contents = request.Contents;
+
+            if (request.HeroImage is not null && request.HeroImage.Length>0)
+            {
+                entity.HeroImagePath = await _addPhoto.CreateAttachment(request.HeroImage, Pathes.GetPackagesPath());
+            }
+
             await _serviceMRepository.AddAsync(entity);
 
             return OperationResult<string>.Success(entity.Id);
-
-
-
         }
     }
     public class CreateServicesMCommandValidator : AbstractValidator<CreateServicesMCommand>
     {
         public CreateServicesMCommandValidator()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Service name is required.")
-                .MaximumLength(100).WithMessage("Service name cannot exceed 100 characters.");
+            RuleFor(x => x.ServiceType)
+                .NotEmpty()
+                .NotNull()
+                .IsInEnum();
 
-            RuleFor(x => x.DefinitionServices)
-                .NotEmpty().WithMessage("Service definition is required.")
-                .MaximumLength(500).WithMessage("Service definition cannot exceed 500 characters.");
+            RuleFor(x => x.EnName)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.ArName)
+                .NotEmpty()
+                .NotNull();
 
             RuleFor(x => x.Price)
-                .GreaterThan(0).WithMessage("Price must be greater than zero.");
-
-            RuleFor(x => x.TermsAndConditions)
-                .NotEmpty().WithMessage("Terms and conditions are required.");
-
-            RuleFor(x => x.AvailableSrvices)
-                .IsInEnum().WithMessage("Invalid value for available services.");
-
-            RuleFor(x => x.Secations)
-                .Must(sections => sections == null || sections.Count > 0)
-                .WithMessage("If provided, sections must contain at least one item.");
-
-            RuleFor(x => x.Photo)
-                .Must(photos => photos == null || photos.All(file => file.Length > 0))
-                .WithMessage("If provided, each photo must be a valid file.");
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

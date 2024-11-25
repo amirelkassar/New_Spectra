@@ -28,7 +28,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
             var entity = await _serviceMRepository.GetByIdAsync(request.Id);
 
-            await _addPhoto.DeleteAttachments(entity.AttachmentPath);
+            await _addPhoto.DeleteAttachment(entity.HeroImagePath);
 
             await _serviceMRepository.DeleteAsync(entity);
             return OperationResult<Unit>.Success(Unit.Value);

@@ -49,24 +49,6 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
             filter ??= _ => true;
             return await _masterDataServices.Find(filter, options).ToListAsync();
         }
-        public async Task<IEnumerable<PlatformService>> GetAllNameAndTermsAndConditions()
-        {
-            var filter = Builders<PlatformService>.Filter
-        .Eq(x => x.AvailableSrvices, ServiceTypes.ServicesView);
-
-            var projection = Builders<PlatformService>.Projection
-                .Include(x => x.Name)
-                .Include(x => x.TermsAndConditions);
-
-            var result = await _masterDataServices
-                .Find(filter)
-                .Project<PlatformService>(projection)
-                .ToListAsync();
-
-            return result;
-
-
-        }
     }
 }
 

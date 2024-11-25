@@ -7,19 +7,15 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
-    public class UpdateMedicalTestsAndXraysCommand : ICommand<OperationResult<Unit>>
+    public class UpdateMedicalTestsAndXraysCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
-        public string ScientificNameByEng { get; set; }
-        public string ScientificNameByEngByArab { get; set; }
-        public string Code { get; set; }
-
-        public string Notes { get; set; }
+        public string Name { get; set; }
+        public string? Code { get; set; }
         public ExaminationType ExaminationTypes { get; set; }
-
     }
 
-    public class UpdateMedicalTestsAndXraysCommandHandler : IRequestHandler<UpdateMedicalTestsAndXraysCommand, OperationResult<Unit>>
+    public class UpdateMedicalTestsAndXraysCommandHandler : IRequestHandler<UpdateMedicalTestsAndXraysCommand, OperationResult>
     {
 
         private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
@@ -31,21 +27,18 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
         }
 
 
-        public async Task<OperationResult<Unit>> Handle(UpdateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(UpdateMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
 
             var medicalTestsAndXrys = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
-            var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.ScientificNameByEng == request.ScientificNameByEng && b.Id != request.Id);
+            var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.Name.ToLower() == request.Name.ToLower() && b.Id != request.Id);
             if (names.Any())
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
 
-            medicalTestsAndXrys.ScientificNameByEng = request.ScientificNameByEng;
-            medicalTestsAndXrys.ScientificNameByEngByArab = request.ScientificNameByEngByArab;
-            medicalTestsAndXrys.Code = request.Code;
-
-            medicalTestsAndXrys.Notes = request.Notes;
+            medicalTestsAndXrys.Name= request.Name;
+            medicalTestsAndXrys.Code= request.Code;
             medicalTestsAndXrys.ExaminationTypes = request.ExaminationTypes;
 
             await _medicalTestsAndXrayRepository.UpdateAsync(medicalTestsAndXrys);
@@ -59,23 +52,20 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
         public UpdateMedicalTestsAndXraysCommandValidator()
         {
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("Id is required.");
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(x => x.ScientificNameByEng)
-                .NotEmpty().WithMessage("Scientific Name is required.")
-                .MaximumLength(100).WithMessage("Scientific Name must not exceed 100 characters.");
-            RuleFor(x => x.ScientificNameByEngByArab)
-                .NotEmpty().WithMessage("Scientific Name is required.")
-                .MaximumLength(100).WithMessage("Scientific Name must not exceed 100 characters.");
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(x => x.Notes)
-                .MaximumLength(500).WithMessage("Notes must not exceed 500 characters.");
+            RuleFor(x => x.Code)
+               .NotEmpty()
+               .NotNull();
 
             RuleFor(x => x.ExaminationTypes)
-                .IsInEnum().WithMessage("Invalid Examination Type.");
-            RuleFor(x => x.Code)
-          .NotEmpty().WithMessage("Code is required.")
-          .MaximumLength(100).WithMessage("Code Name must not exceed 100 characters.");
+               .NotEmpty()
+               .NotNull();
 
         }
     }

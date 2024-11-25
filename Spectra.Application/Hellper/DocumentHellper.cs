@@ -75,13 +75,10 @@ namespace Spectra.Application.MasterData.HellperFunc
 
         public async Task DeleteAttachment(string? attachment)
         {
-            if (!string.IsNullOrEmpty(attachment))
+            if (!string.IsNullOrEmpty(attachment) && File.Exists(attachment))
             {
-                var filePath = _webHostEnvironment.WebRootPath + attachment;
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, attachment);
+                File.Delete(filePath);
             }
         }
 
