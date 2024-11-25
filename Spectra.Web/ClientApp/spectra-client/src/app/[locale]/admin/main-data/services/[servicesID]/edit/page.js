@@ -11,7 +11,7 @@ import ROUTES from '@/routes';
 import {
   GetMasterDataServicesID,
   useEditMasterDataServices,
-} from '@/useAPI/admin/main-data/services';
+} from '@/hooks/queries/admin/main-data/services';
 import { Textarea } from '@mantine/core';
 
 function Page({ params }) {

@@ -2,8 +2,8 @@
 import React from 'react';
 import AddMainData from '../../_components/add-drugs';
 import ROUTES from '@/routes';
-import ActionMenu from '../../_components/ActionMenuComplaintsDetails';
-import { GetComplaintID } from '@/useAPI/admin/main-data/complaints';
+import ActionMenu from '../_components/ActionMenuComplaintsDetails';
+import { GetComplaintID } from '@/hooks/queries/admin/main-data/complaints';
 import { Link } from '@/navigation';
 import BackIcon from '@/assets/icons/back';
 import HandelShowDataID from '@/components/handelShowDataID';

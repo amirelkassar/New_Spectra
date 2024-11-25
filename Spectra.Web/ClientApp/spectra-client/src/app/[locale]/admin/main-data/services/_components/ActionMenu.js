@@ -7,7 +7,7 @@ import ShowIcon from '@/assets/icons/show';
 import ROUTES from '@/routes';
 import DeleteIcon from '@/assets/icons/delete';
 import EditIcon from '@/assets/icons/edit';
-import { DeleteMasterDataServices } from '@/useAPI/admin/main-data/services';
+import { DeleteMasterDataServices } from '@/hooks/queries/admin/main-data/services';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { Toast } from '@/components/toast';
 function ActionMenu({ id, show = true }) {

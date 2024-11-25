@@ -2,11 +2,11 @@
 import React from 'react';
 import AddMainData from '../../_components/add-drugs';
 import ROUTES from '@/routes';
-import ActionMenu from '../../_components/ActionMenuSpecialtiesDetails';
+import { CellActions } from '../_components/cell-actions';
 import { Link } from '@/navigation';
 import BackIcon from '@/assets/icons/back';
 import HandelShowDataID from '@/components/handelShowDataID';
-import { GetSpecializationID } from '@/useAPI/admin/main-data/specialties';
+import { GetSpecializationID } from '@/hooks/queries/admin/main-data/specialties';
 function page({ params }) {
   const { data, isLoading } = GetSpecializationID(
     params.doctorsSpecialtiesID
@@ -28,7 +28,7 @@ function page({ params }) {
             path={ROUTES.ADMIN.DATAMAIN.SPECIALTIESADD}
           />
         </div>
-        <ActionMenu id={params.doctorsSpecialtiesID} />
+        <CellActions id={params.doctorsSpecialtiesID} />
       </div>
       <HandelShowDataID
         isLoading={isLoading}

@@ -1,16 +1,14 @@
-"use client";
-import React from "react";
-import ExportIcon from "@/assets/icons/export";
-import PrintIcon from "@/assets/icons/print";
-import DataActions from "@/components/data-actions";
-import DeleteIcon from "@/assets/icons/delete";
-import { DeleteContracts } from "@/useAPI/doctor/contracts-api";
+'use client';
+import React from 'react';
+import ExportIcon from '@/assets/icons/export';
+import PrintIcon from '@/assets/icons/print';
+import DataActions from '@/components/data-actions';
+import DeleteIcon from '@/assets/icons/delete';
+import { DeleteContracts } from '@/hooks/queries/doctor/contracts-api';
 
 function ActionMenu({ id, activeNow = false, employeeId }) {
-  const { mutate: deleteContracts, isSuccess } = DeleteContracts(
-    id,
-    employeeId
-  );
+  const { mutate: deleteContracts, isSuccess } =
+    DeleteContracts(id, employeeId);
 
   const handleDelete = () => {
     deleteContracts();
@@ -18,24 +16,24 @@ function ActionMenu({ id, activeNow = false, employeeId }) {
 
   const options = [
     !activeNow && {
-      label: "مسح",
+      label: 'مسح',
       icon: <DeleteIcon />,
-      type: "btn",
+      type: 'btn',
       action: handleDelete,
-      color: "red",
+      color: 'red',
     },
 
     {
-      label: "تصدير",
+      label: 'تصدير',
       icon: <ExportIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
 
     {
-      label: "طباعة",
+      label: 'طباعة',
       icon: <PrintIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
   ];

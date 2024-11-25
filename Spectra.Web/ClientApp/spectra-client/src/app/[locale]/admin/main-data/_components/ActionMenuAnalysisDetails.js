@@ -6,7 +6,7 @@ import DataActions from '@/components/data-actions';
 import DeleteIcon from '@/assets/icons/delete';
 import EditIcon from '@/assets/icons/edit';
 import ROUTES from '@/routes';
-import { DeleteMedicalTests } from '@/useAPI/admin/main-data/analysis';
+import { DeleteMedicalTests } from '@/hooks/queries/admin/main-data/analysis';
 import { useRouter } from '@/navigation';
 import { Toast } from '@/components/toast';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';

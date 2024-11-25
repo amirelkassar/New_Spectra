@@ -3,13 +3,14 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query';
 
-import { prefetchDrugs } from '@/useAPI/admin/main-data/drugs';
 import { Heading } from '../_components/heading';
 import { DrugsTable } from './_components/drugs-table';
 import ROUTES from '@/routes';
+import { prefetchDrugs } from '@/hooks/queries/admin/main-data/drugs';
 
-const DrugClient = async () => {
+const DrugPage = async () => {
   const queryClient = await prefetchDrugs();
+
   return (
     <div>
       <Heading
@@ -24,4 +25,4 @@ const DrugClient = async () => {
   );
 };
 
-export default DrugClient;
+export default DrugPage;

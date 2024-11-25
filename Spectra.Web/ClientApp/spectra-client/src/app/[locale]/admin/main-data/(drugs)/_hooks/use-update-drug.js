@@ -5,7 +5,7 @@ import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
 import { getFormData } from '@/lib/utils';
-import { useEditDrug } from '@/useAPI/admin/main-data/drugs';
+import { useEditDrug } from '@/hooks/queries/admin/main-data/drugs';
 import ROUTES from '@/routes';
 
 export const useUpdateDrug = ({ initialValues }) => {

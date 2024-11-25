@@ -1,32 +1,35 @@
-"use client";
-import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
-import EditIcon from "@/assets/icons/edit";
-import Card from "@/components/card";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
-import React, { useEffect, useState } from "react";
-import ServicesFreelancer from "./services-freelancer";
-import ServicesMember from "./services-member";
-import Button from "@/components/button";
-import RefuseIcon from "@/assets/icons/refuse";
-import AcceptIcon from "@/assets/icons/accept";
-import useModal from "@/store/modal-slice";
-import ContractsTextDetails from "@/components/contractsTextDetails";
-import { useSearchParams } from "next/navigation";
-import WorkNum from "./workNum";
+'use client';
+import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
+import EditIcon from '@/assets/icons/edit';
+import Card from '@/components/card';
+import { Link } from '@/navigation';
+import ROUTES from '@/routes';
+import React, { useEffect, useState } from 'react';
+import ServicesFreelancer from './services-freelancer';
+import ServicesMember from './services-member';
+import Button from '@/components/button';
+import RefuseIcon from '@/assets/icons/refuse';
+import AcceptIcon from '@/assets/icons/accept';
+import useModal from '@/store/modal-slice';
+import ContractsTextDetails from '@/components/contractsTextDetails';
+import { useSearchParams } from 'next/navigation';
+import WorkNum from './workNum';
 import {
   GetContractsID,
   GetContractsServices,
-} from "@/useAPI/doctor/contracts-api";
-import { useEditContractsInAdmin } from "@/useAPI/admin/contracts-admin-api";
+} from '@/hooks/queries/doctor/contracts-api';
+import { useEditContractsInAdmin } from '@/hooks/queries/admin/contracts-admin-api';
 
 function ContractInformation({ employeeID, id }) {
-  const { data: dataServices, isLoading } = GetContractsServices();
+  const { data: dataServices, isLoading } =
+    GetContractsServices();
   const { mutate: EditContract, error: errorSend } =
     useEditContractsInAdmin(id);
   console.log(dataServices);
-  const { data: dataContractsDetails, isLoading: isLoadingDetails } =
-    GetContractsID(id);
+  const {
+    data: dataContractsDetails,
+    isLoading: isLoadingDetails,
+  } = GetContractsID(id);
   console.log(dataContractsDetails);
 
   const { modal, editModal } = useModal();
@@ -50,12 +53,19 @@ function ContractInformation({ employeeID, id }) {
   useEffect(() => {
     if (!isLoading) {
       setTeamSpectraNum({
-        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
-        platformFee: dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+        duration:
+          dataServices?.data?.data?.durationTeamSpectra ||
+          0,
+        platformFee:
+          dataServices?.data?.data?.platformFeeTeamSpectr ||
+          0,
       });
       setFreelanceNum({
-        duration: dataServices?.data?.data?.durationFreelance || 0,
-        platformFee: dataServices?.data?.data?.platformFeeToFreelance || 0,
+        duration:
+          dataServices?.data?.data?.durationFreelance || 0,
+        platformFee:
+          dataServices?.data?.data
+            ?.platformFeeToFreelance || 0,
       });
     }
   }, [isLoading]);
@@ -64,43 +74,59 @@ function ContractInformation({ employeeID, id }) {
     if (dataContractsDetails?.data?.data) {
       // Update work limits
       setWorkLimits({
-        hoursOfWork: dataContractsDetails.data.data.hoursOfWork || 0,
-        daysOfWork: dataContractsDetails.data.data.daysOfWork || 0,
+        hoursOfWork:
+          dataContractsDetails.data.data.hoursOfWork || 0,
+        daysOfWork:
+          dataContractsDetails.data.data.daysOfWork || 0,
       });
 
       // Transform freelance data
-      const freelancers = dataContractsDetails.data.data.freelance
-        ? dataContractsDetails.data.data.freelance.map((item) => ({
-            id: item.service,
-            label: item.service,
-            price: item.selary,
-          }))
+      const freelancers = dataContractsDetails.data.data
+        .freelance
+        ? dataContractsDetails.data.data.freelance.map(
+            (item) => ({
+              id: item.service,
+              label: item.service,
+              price: item.selary,
+            })
+          )
         : [];
       setListFreelancer(freelancers);
 
       // Transform spectraTeam data
-      const members = dataContractsDetails.data.data.spectraTeam
-        ? dataContractsDetails.data.data.spectraTeam.map((item) => ({
-            id: item.service,
-            label: item.service,
-            price: item.selary,
-          }))
+      const members = dataContractsDetails.data.data
+        .spectraTeam
+        ? dataContractsDetails.data.data.spectraTeam.map(
+            (item) => ({
+              id: item.service,
+              label: item.service,
+              price: item.selary,
+            })
+          )
         : [];
       setListMember(members);
     }
   }, [dataContractsDetails?.data?.data, isLoadingDetails]);
 
-  const handleServiceDataChange = (serviceId, value, type) => {
-    if (type === "freelancer") {
+  const handleServiceDataChange = (
+    serviceId,
+    value,
+    type
+  ) => {
+    if (type === 'freelancer') {
       setListFreelancer((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId ? { ...item, price: value } : item
+          item.id === serviceId
+            ? { ...item, price: value }
+            : item
         )
       );
-    } else if (type === "member") {
+    } else if (type === 'member') {
       setListMember((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId ? { ...item, price: value } : item
+          item.id === serviceId
+            ? { ...item, price: value }
+            : item
         )
       );
     }
@@ -171,9 +197,9 @@ function ContractInformation({ employeeID, id }) {
       hoursOfWork: workLimits.hoursOfWork, // Set as needed
       daysOfWork: workLimits.daysOfWork, // Set as needed
       employeeId: employeeID, // Replace with actual employee ID
-      titel: "string", // Replace with actual title
-      firstName: "string", // Replace with actual first name
-      lastName: "string", // Replace with actual last name
+      titel: 'string', // Replace with actual title
+      firstName: 'string', // Replace with actual first name
+      lastName: 'string', // Replace with actual last name
       contractCase: 3, // Set as needed
     };
 
@@ -181,8 +207,8 @@ function ContractInformation({ employeeID, id }) {
     EditContract(formattedData);
   };
   return (
-    <div className="flex flex-col gap-7 w-full">
-      <Card className={"flex-1 w-full"}>
+    <div className='flex flex-col gap-7 w-full'>
+      <Card className={'flex-1 w-full'}>
         <ServicesFreelancer
           numHeader={FreelanceNum}
           data={listFreelancer}
@@ -194,13 +220,18 @@ function ContractInformation({ employeeID, id }) {
           data={listMember}
           handleServiceDataChange={handleServiceDataChange}
         />
-        <WorkNum workLimits={workLimits} setWorkLimits={setWorkLimits} />
+        <WorkNum
+          workLimits={workLimits}
+          setWorkLimits={setWorkLimits}
+        />
 
-        <div className="flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]">
-          {searchparams.get("editContracts") === "true" ? (
+        <div className='flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]'>
+          {searchparams.get('editContracts') === 'true' ? (
             <Button
               onClick={() => [handleSubmit()]}
-              className={" w-full max-w-[260px]  md:min-w-[260px] "}
+              className={
+                ' w-full max-w-[260px]  md:min-w-[260px] '
+              }
             >
               حفظ التعديلات
             </Button>
@@ -209,7 +240,7 @@ function ContractInformation({ employeeID, id }) {
               <Button
                 onClick={() => {}}
                 className={
-                  "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+                  'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
                 }
               >
                 <AcceptIcon />
@@ -217,11 +248,11 @@ function ContractInformation({ employeeID, id }) {
               </Button>
               <Button
                 onClick={() => {
-                  editModal("type", "contractsReq");
-                  editModal("open", true);
+                  editModal('type', 'contractsReq');
+                  editModal('open', true);
                 }}
                 className={
-                  "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+                  'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
                 }
               >
                 <RefuseIcon />
@@ -234,7 +265,7 @@ function ContractInformation({ employeeID, id }) {
                   id
                 )}
                 className={
-                  "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+                  '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
                 }
               >
                 <EditIcon />
@@ -252,7 +283,7 @@ function ContractInformation({ employeeID, id }) {
             setEditText={setEditText}
           />
         ) : (
-          <div className="contractsDetails">
+          <div className='contractsDetails'>
             <div
               dangerouslySetInnerHTML={{
                 __html: contractText,
@@ -260,11 +291,11 @@ function ContractInformation({ employeeID, id }) {
             />
           </div>
         )}
-        <div className="flex items-center flex-wrap my-14 gap-7">
+        <div className='flex items-center flex-wrap my-14 gap-7'>
           <Button
             onClick={() => {}}
             className={
-              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
             }
           >
             تجديد العقد
@@ -272,37 +303,40 @@ function ContractInformation({ employeeID, id }) {
           <Button
             onClick={() => {}}
             className={
-              "text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white"
+              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
             }
           >
             قبول
           </Button>
           <Button
             onClick={() => {
-              editModal("type", "contractsReq");
-              editModal("open", true);
+              editModal('type', 'contractsReq');
+              editModal('open', true);
             }}
             className={
-              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
             }
           >
             رفض
           </Button>
           <Button
             onClick={() => {
-              editModal("type", "contractsReq");
-              editModal("open", true);
+              editModal('type', 'contractsReq');
+              editModal('open', true);
             }}
             className={
-              "text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]"
+              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
             }
           >
             الغاء العقد
           </Button>
           <Link
-            href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`}
+            href={
+              ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) +
+              `?chat=true`
+            }
             className={
-              " mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0"
+              ' mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0'
             }
           >
             <ContractsWhiteIcon />
@@ -313,7 +347,7 @@ function ContractInformation({ employeeID, id }) {
               setEditText(true);
             }}
             className={
-              "  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]"
+              '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
             }
           >
             <EditIcon />

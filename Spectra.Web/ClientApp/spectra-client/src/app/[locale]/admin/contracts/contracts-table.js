@@ -1,142 +1,142 @@
-"use client";
-import placeholderImage from "@/assets/images/placeholder-person.png";
-import { DataTable } from "@/components/data-table";
-import { columns } from "./components/columns";
-import CardContacts from "./components/CardContacts";
-import { GetContractsInAdmin } from "@/useAPI/admin/contracts-admin-api";
-import HandelShowData from "@/components/handelShowData";
-import { columnsTest } from "./components/columnsTest";
+'use client';
+import placeholderImage from '@/assets/images/placeholder-person.png';
+import { DataTable } from '@/components/data-table';
+import { columns } from './components/columns';
+import CardContacts from './components/CardContacts';
+import { GetContractsInAdmin } from '@/hooks/queries/admin/contracts-admin-api';
+import HandelShowData from '@/components/handelShowData';
+import { columnsTest } from './components/columnsTest';
 const dataContracts = [
   {
     id: 0,
-    name: "عبدالله الشيخ",
-    status: "active",
+    name: 'عبدالله الشيخ',
+    status: 'active',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "accountant",
+    date: '20/4/2024',
+    job: 'accountant',
   },
   {
     id: 1,
-    name: "عبدالله الشيخ",
-    status: "ultimate",
+    name: 'عبدالله الشيخ',
+    status: 'ultimate',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "secretary",
+    date: '20/4/2024',
+    job: 'secretary',
   },
   {
     id: 2,
-    name: "عبدالله الشيخ",
-    status: "rejected",
+    name: 'عبدالله الشيخ',
+    status: 'rejected',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "accountant",
+    date: '20/4/2024',
+    job: 'accountant',
   },
   {
     id: 3,
-    name: "عبدالله الشيخ",
-    status: "manger",
+    name: 'عبدالله الشيخ',
+    status: 'manger',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "accountant",
+    date: '20/4/2024',
+    job: 'accountant',
   },
   {
     id: 4,
-    name: "عبدالله الشيخ",
-    status: "admin",
+    name: 'عبدالله الشيخ',
+    status: 'admin',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "secretary",
+    date: '20/4/2024',
+    job: 'secretary',
   },
   {
     id: 5,
-    name: "عبدالله الشيخ",
-    status: "reviewed",
+    name: 'عبدالله الشيخ',
+    status: 'reviewed',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: " accountant",
+    date: '20/4/2024',
+    job: ' accountant',
   },
   {
     id: 6,
-    name: "عبدالله الشيخ",
-    status: "ultimate",
+    name: 'عبدالله الشيخ',
+    status: 'ultimate',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "doctor ",
+    date: '20/4/2024',
+    job: 'doctor ',
   },
   {
     id: 7,
-    name: "عبدالله الشيخ",
-    status: "rejected",
+    name: 'عبدالله الشيخ',
+    status: 'rejected',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "specialist ",
+    date: '20/4/2024',
+    job: 'specialist ',
   },
   {
     id: 8,
-    name: "عبدالله الشيخ",
-    status: "reviewed",
+    name: 'عبدالله الشيخ',
+    status: 'reviewed',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "doctor ",
+    date: '20/4/2024',
+    job: 'doctor ',
   },
   {
     id: 10,
-    name: "عبدالله الشيخ",
-    status: "manger",
+    name: 'عبدالله الشيخ',
+    status: 'manger',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "doctor ",
+    date: '20/4/2024',
+    job: 'doctor ',
   },
   {
     id: 11,
-    name: "عبدالله الشيخ",
-    status: "reviewed",
+    name: 'عبدالله الشيخ',
+    status: 'reviewed',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "specialist ",
+    date: '20/4/2024',
+    job: 'specialist ',
   },
   {
     id: 12,
-    name: "عبدالله الشيخ",
-    status: "rejected",
+    name: 'عبدالله الشيخ',
+    status: 'rejected',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "doctor ",
+    date: '20/4/2024',
+    job: 'doctor ',
   },
   {
     id: 13,
-    name: "عبدالله الشيخ",
-    status: "admin",
+    name: 'عبدالله الشيخ',
+    status: 'admin',
     image: placeholderImage,
-    date: "20/4/2024",
-    job: "specialist ",
+    date: '20/4/2024',
+    job: 'specialist ',
   },
 ];
 const FilterOptions = [
   {
-    label: "نشط",
+    label: 'نشط',
     icon: null,
-    key: "active",
+    key: 'active',
   },
   {
-    label: "منتهى",
+    label: 'منتهى',
     icon: null,
-    key: "ultimate",
+    key: 'ultimate',
   },
   {
-    label: "مرفوض",
+    label: 'مرفوض',
     icon: null,
-    key: "rejected",
+    key: 'rejected',
   },
   {
-    label: "قيد المراجعة من رئيس القسم ",
+    label: 'قيد المراجعة من رئيس القسم ',
     icon: null,
-    key: "manger",
+    key: 'manger',
   },
   {
-    label: "قيد المراجعة من  الإدارة",
+    label: 'قيد المراجعة من  الإدارة',
     icon: null,
-    key: "admin",
+    key: 'admin',
   },
 ];
 const ContractsTable = () => {
@@ -161,9 +161,9 @@ const ContractsTable = () => {
         data={dataContracts}
         columns={columns}
         filterData={FilterOptions}
-        filter="buttons"
-        filterText="فلتر بالنوع"
-        filterBy="status"
+        filter='buttons'
+        filterText='فلتر بالنوع'
+        filterBy='status'
         haveComp
         Component={CardContacts}
       />

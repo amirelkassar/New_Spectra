@@ -5,7 +5,7 @@ import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
 import { Textarea } from '@mantine/core';
 import InputGreen from '@/components/Input-green';
-import { useCreateMasterDataServices } from '@/useAPI/admin/main-data/services';
+import { useCreateMasterDataServices } from '@/hooks/queries/admin/main-data/services';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 

@@ -1,22 +1,35 @@
 'use client';
 
-import { GetDrugs } from '@/useAPI/admin/main-data/drugs';
+import { useDrugs } from '@/hooks/queries/admin/main-data/drugs';
+import { DataTable } from '@/components/table/data-table';
 import { DrugsColumns } from './drugs-columns';
-import { DataTable } from '@/components/data-table';
-
-import HandelShowData from '@/components/handelShowData';
+import { QueryWrapper } from '@/components/query-wrapper';
+import { Pagination } from '@/components/table/pagination';
+import { TableItem } from '../../_components/table-item';
+import { useQuery } from '@/hooks/queries/use-query';
 
 export const DrugsTable = () => {
-  const { data, isLoading } = GetDrugs();
-
-  const items = data?.data?.items;
+  const {
+    data,
+    status,
+    pageSize,
+    totalCount,
+    pageNumber,
+    refetch,
+  } = useQuery({ query: useDrugs });
 
   return (
-    <HandelShowData
-      isLoading={isLoading}
-      lengthData={items?.length}
-    >
-      <DataTable data={items} columns={DrugsColumns} />
-    </HandelShowData>
+    <QueryWrapper status={status} refetch={refetch}>
+      <DataTable data={data} columns={DrugsColumns}>
+        <TableItem />
+      </DataTable>
+
+      <Pagination
+        pageSize={pageSize}
+        totalCount={totalCount}
+        pageNumber={pageNumber}
+        disabled={status.isPlaceholderData}
+      />
+    </QueryWrapper>
   );
 };

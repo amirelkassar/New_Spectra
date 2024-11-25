@@ -6,7 +6,7 @@ import ActionMenu from '../../_components/ActionMenuAnalysisDetails';
 import { Link } from '@/navigation';
 import BackIcon from '@/assets/icons/back';
 import AnalysisIcon from '@/assets/icons/analysis';
-import { GetMedicalTestsID } from '@/useAPI/admin/main-data/analysis';
+import { GetMedicalTestsID } from '@/hooks/queries/admin/main-data/analysis';
 import HandelShowDataID from '@/components/handelShowDataID';
 import RumorsIcon from '@/assets/icons/rumors';
 function page({ params }) {

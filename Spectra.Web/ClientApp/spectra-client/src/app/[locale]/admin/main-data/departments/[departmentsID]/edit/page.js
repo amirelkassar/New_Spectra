@@ -6,7 +6,7 @@ import Button from '@/components/button';
 import ROUTES from '@/routes';
 import { MultiSelect } from '@mantine/core';
 import InputGreen from '@/components/Input-green';
-import { GetSpecialization } from '@/useAPI/admin/main-data/specialties';
+import { GetSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import AddManger from '../../_components/addManger';
 import CardDocManger from '../../_components/cardDocManger';
@@ -15,7 +15,7 @@ import {
   GetSectionDoctors,
   GetSectionID,
   useEditSection,
-} from '@/useAPI/admin/main-data/section';
+} from '@/hooks/queries/admin/main-data/section';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 

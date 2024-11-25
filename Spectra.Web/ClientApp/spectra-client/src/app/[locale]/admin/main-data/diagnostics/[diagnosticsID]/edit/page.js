@@ -9,7 +9,7 @@ import InputGreen from '@/components/Input-green';
 import {
   GetDiagnosticsID,
   useEditDiagnostics,
-} from '@/useAPI/admin/main-data/diagnostics';
+} from '@/hooks/queries/admin/main-data/diagnostics';
 import HandelShowDataEdit from '@/components/handelShowDataEdit';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';

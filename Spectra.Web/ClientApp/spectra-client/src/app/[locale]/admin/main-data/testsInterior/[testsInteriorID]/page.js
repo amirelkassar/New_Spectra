@@ -2,8 +2,8 @@
 import React from 'react';
 import AddMainData from '../../_components/add-drugs';
 import ROUTES from '@/routes';
-import ActionMenu from '../../_components/ActionMenuTestsInteriorDetails';
-import { GetInternalExaminationID } from '@/useAPI/admin/main-data/testsInterior';
+import ActionMenu from '../_components/ActionMenuTestsInteriorDetails';
+import { GetInternalExaminationID } from '@/hooks/queries/admin/main-data/testsInterior';
 import HandelShowDataID from '@/components/handelShowDataID';
 function page({ params }) {
   const { data, isLoading } = GetInternalExaminationID(
@@ -45,28 +45,6 @@ function page({ params }) {
               <p className='text-[14px] lg:text-[20px]  font-Regular'>
                 {data?.data.data.code}
               </p>
-            </div>
-            <div className='pb-5 border-b last-of-type:border-none border-grayLight'>
-              <h3 className='font-bold mb-2 text-[12px] lg:text-[16px]'>
-                التخصص
-              </h3>
-              <div className='flex gap-1 flex-wrap'>
-                {data?.data.data.examinationTypes.map(
-                  (item, i) => (
-                    <p
-                      key={i}
-                      className='text-[14px] lg:text-[20px]  font-Regular'
-                    >
-                      {item}{' '}
-                      {data?.data.data.examinationTypes
-                        .length >
-                      +i + 1
-                        ? ','
-                        : ''}{' '}
-                    </p>
-                  )
-                )}
-              </div>
             </div>
           </div>
         )}

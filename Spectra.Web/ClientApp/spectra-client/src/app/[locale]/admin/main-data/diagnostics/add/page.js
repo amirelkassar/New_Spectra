@@ -6,7 +6,7 @@ import Button from '@/components/button';
 import ROUTES from '@/routes';
 import { Textarea } from '@mantine/core';
 import InputGreen from '@/components/Input-green';
-import { useCreateDiagnostics } from '@/useAPI/admin/main-data/diagnostics';
+import { useCreateDiagnostics } from '@/hooks/queries/admin/main-data/diagnostics';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 function Page() {

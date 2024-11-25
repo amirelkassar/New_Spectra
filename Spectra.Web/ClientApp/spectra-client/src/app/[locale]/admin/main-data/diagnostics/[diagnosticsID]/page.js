@@ -2,8 +2,8 @@
 import React from 'react';
 import AddMainData from '../../_components/add-drugs';
 import ROUTES from '@/routes';
-import ActionMenu from '../../_components/ActionMenuDiagnosticsDetails';
-import { GetDiagnosticsID } from '@/useAPI/admin/main-data/diagnostics';
+import ActionMenu from '../_components/ActionMenuDiagnosticsDetails';
+import { GetDiagnosticsID } from '@/hooks/queries/admin/main-data/diagnostics';
 import HandelShowDataID from '@/components/handelShowDataID';
 function page({ params }) {
   const { data, isLoading } = GetDiagnosticsID(

@@ -9,7 +9,7 @@ import { DataTable } from '@/components/data-table';
 import { columns } from './_components/columns';
 // import CardService from "./components/CardService";
 import ActionMenu from './_components/ActionMenuPage';
-import { GetMasterDataServices } from '@/useAPI/admin/main-data/services';
+import { GetMasterDataServices } from '@/hooks/queries/admin/main-data/services';
 import HandelShowData from '@/components/handelShowData';
 // const data = [
 //   {

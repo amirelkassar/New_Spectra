@@ -9,7 +9,7 @@ import InputGreen from '@/components/Input-green';
 import {
   GetSpecializationID,
   useEditSpecialization,
-} from '@/useAPI/admin/main-data/specialties';
+} from '@/hooks/queries/admin/main-data/specialties';
 import HandelShowDataEdit from '@/components/handelShowDataEdit';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';

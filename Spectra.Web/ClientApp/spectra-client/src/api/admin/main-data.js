@@ -55,6 +55,19 @@ export const mainData = {
     },
   },
 
+  internalExamination: {
+    base: '/internalExamination',
+    list: (queries = {}) =>
+      buildQuery('/internalExamination/lisr', queries),
+    actions: {
+      add: '/internalExamination',
+      // addFile: '/specialization/bulk',
+      get: (id) => `/internalExamination?id=${id}`,
+      delete: (id) => `/internalExamination?id=${id}`,
+      update: (id) => `/internalExamination?id=${id}`,
+    },
+  },
+
   //
   //
   //
@@ -65,13 +78,6 @@ export const mainData = {
     getByName: (name) => `/MedicalTestsAndXray/${name}`,
     getByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
     DeleteByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
-  },
-
-  InternalExamination: {
-    url: '/InternalExamination',
-    getByName: (name) => `/InternalExamination/${name}`,
-    getByID: (id) => `/InternalExamination/id?id=${id}`,
-    DeleteByID: (id) => `/InternalExamination/id?id=${id}`,
   },
 
   MasterDataServices: {

@@ -4,7 +4,7 @@ import { DataTable } from '@/components/data-table';
 import AddMainData from '../_components/add-drugs';
 import ROUTES from '@/routes';
 import { DepartmentColumns } from '../_components/departments-columns';
-import { GetSection } from '@/useAPI/admin/main-data/section';
+import { GetSection } from '@/hooks/queries/admin/main-data/section';
 import HandelShowData from '@/components/handelShowData';
 
 function page() {

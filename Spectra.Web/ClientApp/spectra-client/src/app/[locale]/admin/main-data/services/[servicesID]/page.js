@@ -10,7 +10,7 @@ import EditIcon from '@/assets/icons/edit';
 import {
   DeleteMasterDataServices,
   GetMasterDataServicesID,
-} from '@/useAPI/admin/main-data/services';
+} from '@/hooks/queries/admin/main-data/services';
 import HandelShowDataID from '@/components/handelShowDataID';
 import Button from '@/components/button';
 import DeleteIcon from '@/assets/icons/delete';
