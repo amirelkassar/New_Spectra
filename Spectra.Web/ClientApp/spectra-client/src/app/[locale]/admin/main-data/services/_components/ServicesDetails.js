@@ -12,7 +12,7 @@ import EditImgIcon from '@/assets/icons/editImg';
 import CheckHeartIcon from '@/assets/icons/check-heart';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import imgService from '@/assets/images/packages-details-page-bg.webp';
-import { useEditMasterDataServices } from '@/useAPI/admin/main-data/services';
+import { useEditMasterDataServices } from '@/hooks/queries/admin/main-data/services';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 

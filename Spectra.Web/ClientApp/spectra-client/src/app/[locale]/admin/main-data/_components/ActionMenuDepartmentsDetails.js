@@ -8,7 +8,7 @@ import { Toast } from '@/components/toast';
 import { useRouter } from '@/navigation';
 import ROUTES from '@/routes';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
-import { DeleteSection } from '@/useAPI/admin/main-data/section';
+import { DeleteSection } from '@/hooks/queries/admin/main-data/section';
 import React from 'react';
 
 function ActionMenu({ id }) {

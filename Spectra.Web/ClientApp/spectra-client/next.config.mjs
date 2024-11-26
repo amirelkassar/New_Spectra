@@ -13,7 +13,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3-alpha-sig.figma.com',
+        hostname: 'spectra.profound-group.com',
       },
     ],
   },

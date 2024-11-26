@@ -12,9 +12,9 @@ function makeQueryClient() {
       queries: {
         refetchOnWindowFocus: false,
         refetchOnMount: false,
-        refetchOnReconnect: false,
-        refetchInterval: 10000,
-        refetchIntervalInBackground: true,
+        // refetchOnReconnect: false,
+        // refetchInterval: 10000,
+        // refetchIntervalInBackground: true,
         staleTime: 10000,
       },
     },

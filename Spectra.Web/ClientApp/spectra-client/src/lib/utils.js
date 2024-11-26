@@ -94,3 +94,35 @@ export const getFormData = (data) => {
     nullsAsUndefineds: true,
   });
 };
+
+export const buildQuery = (baseUrl, params = {}) => {
+  const queryString = Object.entries(params)
+    .filter(
+      ([_, value]) => value !== undefined && value !== null
+    )
+    .map(
+      ([key, value]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(
+          value
+        )}`
+    )
+    .join('&');
+  return queryString
+    ? `${baseUrl}?${queryString}`
+    : baseUrl;
+};
+
+export function getQueries(pageNum, search = '', queries) {
+  // Ensure pageNum is at least 1
+  const validPageNum = pageNum < 1 ? 1 : pageNum;
+
+  // Calculate skipCount based on the valid page number and maxCount
+  const skipCount = (validPageNum - 1) * queries.maxCount;
+
+  // Return updated queries
+  return {
+    ...queries,
+    skipCount,
+    search,
+  };
+}

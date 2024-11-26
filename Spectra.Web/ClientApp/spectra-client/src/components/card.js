@@ -13,7 +13,7 @@ const Card = ({
       {size === 'lg' && (
         <div
           className={cn(
-            'rounded-xl bg-white w-full p-1 mdl:p-5 relative h-full',
+            'rounded-xl bg-white w-full p-1 mdl:p-5 relative',
             className
           )}
           {...props}
@@ -35,7 +35,7 @@ const Card = ({
             boxShadow: '0px 4px 12px 0px #0000000A',
           }}
           className={cn(
-            'bg-white py-3 px-8 rounded-xl relative h-full',
+            'bg-white py-3 px-8 rounded-xl relative',
             className
           )}
           {...props}

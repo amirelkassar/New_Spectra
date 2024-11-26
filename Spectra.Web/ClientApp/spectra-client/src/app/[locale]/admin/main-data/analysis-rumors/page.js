@@ -6,7 +6,7 @@ import ROUTES from '@/routes';
 import { ProceduresColumns } from '../_components/analysis-columns';
 import AnalysisIcon from '@/assets/icons/analysis';
 import RumorsIcon from '@/assets/icons/rumors';
-import { GetMedicalTests } from '@/useAPI/admin/main-data/analysis';
+import { GetMedicalTests } from '@/hooks/queries/admin/main-data/analysis';
 import HandelShowData from '@/components/handelShowData';
 
 const FilterOptions = [

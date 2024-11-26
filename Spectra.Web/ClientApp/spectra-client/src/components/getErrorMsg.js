@@ -10,7 +10,9 @@ const GetErrorMsg = (error, title) => {
 
   const messages = error?.response?.data?.errors;
 
-  if (!Object.keys(messages).length) return '';
+  if (!messages) return '';
+
+  if (!Object?.keys(messages)?.length) return '';
 
   if (title === 'general') {
     const generalError = generalErrorKeys.find(

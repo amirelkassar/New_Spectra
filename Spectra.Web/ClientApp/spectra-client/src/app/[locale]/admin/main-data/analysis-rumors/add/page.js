@@ -8,7 +8,7 @@ import BackIcon from '@/assets/icons/back';
 import AnalysisIcon from '@/assets/icons/analysis';
 import RumorsIcon from '@/assets/icons/rumors';
 import InputGreen from '@/components/Input-green';
-import { useCreateMedicalTests } from '@/useAPI/admin/main-data/analysis';
+import { useCreateMedicalTests } from '@/hooks/queries/admin/main-data/analysis';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 function Page() {

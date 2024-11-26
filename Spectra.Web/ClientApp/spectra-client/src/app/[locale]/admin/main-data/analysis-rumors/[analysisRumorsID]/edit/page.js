@@ -10,7 +10,7 @@ import RumorsIcon from '@/assets/icons/rumors';
 import {
   GetMedicalTestsID,
   useEditMedicalTests,
-} from '@/useAPI/admin/main-data/analysis';
+} from '@/hooks/queries/admin/main-data/analysis';
 import InputGreen from '@/components/Input-green';
 import HandelShowDataEdit from '@/components/handelShowDataEdit';
 import GetErrorMsg from '@/components/getErrorMsg';

@@ -1,75 +1,47 @@
 export const General = {
   Country: {
-    url: "/Country",
+    url: '/Country',
   },
 };
-export const Admin = {
-  Drugs: {
-    url: "/Drug",
-    getByName: (name) => `/Drug/${name}`,
-    getByID: (id) => `/Drug/id?id=${id}`,
-    DeleteByID: (id) => `/Drug/id?id=${id}`,
-    postUpload: "/Drug/upload",
+
+export const Doctor = {
+  Contracts: {
+    url: (id) =>
+      `/Contracts/GetAllContractsCORS?EmployeeId=${id}`,
+    getByID: (id) => `/Contracts/id?id=${id}`,
+    DeleteByID: (id) => `/Doctor/Contract/id?id=${id}`,
+    post: '/Contracts',
+    getServices: '/Contracts/ServicesFromMastrData',
   },
+};
+
+export const Admin = {
   MedicalTests: {
-    url: "/MedicalTestsAndXray",
+    url: '/MedicalTestsAndXray',
     getByName: (name) => `/MedicalTestsAndXray/${name}`,
     getByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
     DeleteByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
   },
-  Complaint: {
-    url: "/GeneralComplaint",
-    getByName: (name) => `/GeneralComplaint/${name}`,
-    getByID: (id) => `/GeneralComplaint/id?id=${id}`,
-    DeleteByID: (id) => `/GeneralComplaint/id?id=${id}`,
-  },
-  Specialization: {
-    url: "/Specialization",
-    getByName: (name) => `/Specialization/${name}`,
-    getByID: (id) => `/Specialization/id?id=${id}`,
-    DeleteByID: (id) => `/Specialization/id?id=${id}`,
-  },
-  InternalExamination: {
-    url: "/InternalExamination",
-    getByName: (name) => `/InternalExamination/${name}`,
-    getByID: (id) => `/InternalExamination/id?id=${id}`,
-    DeleteByID: (id) => `/InternalExamination/id?id=${id}`,
-  },
-  Diagnose: {
-    url: "/Diagnose",
-    getByName: (name) => `/Diagnose/${name}`,
-    getByID: (id) => `/Diagnose/id?id=${id}`,
-    DeleteByID: (id) => `/Diagnose/id?id=${id}`,
-  },
+
   MasterDataServices: {
-    url: "/MasterDataServices",
+    url: '/MasterDataServices',
     getByName: (name) => `/MasterDataServices/${name}`,
     getByID: (id) => `/MasterDataServices/id?id=${id}`,
     DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
   },
   Staff: {
-    url: "/Admin/GetAllEmployees?PageSize=10&",
-    post: "/Admin/CreateEmployee",
-    getByID: (id,id2) => `/Admin/GetOneOfNormalStaff/id?id=${id}&input=${id2}`,
-    editEmployeeByID: (id) => `/Admin/EditEmployee/id?id=${id}`,
+    url: '/Admin/GetAllEmployees?PageSize=10&',
+    post: '/Admin/CreateEmployee',
+    getByID: (id, id2) =>
+      `/Admin/GetOneOfNormalStaff/id?id=${id}&input=${id2}`,
+    editEmployeeByID: (id) =>
+      `/Admin/EditEmployee/id?id=${id}`,
   },
   Contracts: {
-    url: "/Admin/GetAllContracts?PageSize=5&",
-    getByID: (id) => `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
-    edit: (id) => `/Admin/MakeContractToEmployee/id?id=${id}`,
-  },
-  Section:{
-    url: "/Section",
-    getByID: (id) => `/Section/id?id=${id}`,
-    getAllDoctors: `/Section/GetAllDoctors`,
-  }
-};
-export const Doctor = {
-  Contracts: {
-    url: (id) => `/Contracts/GetAllContractsCORS?EmployeeId=${id}`,
-    getByID: (id) => `/Contracts/id?id=${id}`,
-    DeleteByID: (id) => `/Doctor/Contract/id?id=${id}`,
-    post: "/Contracts",
-    getServices: "/Contracts/ServicesFromMastrData",
+    url: '/Admin/GetAllContracts?PageSize=5&',
+    getByID: (id) =>
+      `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
+    edit: (id) =>
+      `/Admin/MakeContractToEmployee/id?id=${id}`,
   },
 };

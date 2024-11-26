@@ -15,6 +15,7 @@ import {
 import ReactQueryConfig from '@/config/react-query-config';
 import ConfirmModal from '@/components/modal/confirm-modal';
 import { Toaster } from 'react-hot-toast';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata = {
   title: 'Spectra App',
@@ -36,11 +37,8 @@ export default function RootLayout({ children, params }) {
           <MantineProvider theme={'light'}>
             <ReactQueryConfig>
               {children}
-              <Toaster
-                toastOptions={{
-                  duration: 2000,
-                }}
-              />
+              <Toaster />
+              <ReactQueryDevtools initialIsOpen={false} />
               <ConfirmModal />
             </ReactQueryConfig>
           </MantineProvider>

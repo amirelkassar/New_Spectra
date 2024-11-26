@@ -10,11 +10,11 @@ import ArrowDownIcon from '@/assets/icons/arrow-down';
 import AddManger from '../_components/addManger';
 import CardDocManger from '../_components/cardDocManger';
 import DeleteIcon from '@/assets/icons/delete';
-import { GetSpecialization } from '@/useAPI/admin/main-data/specialties';
+import { GetSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import {
   GetSectionDoctors,
   useCreateSection,
-} from '@/useAPI/admin/main-data/section';
+} from '@/hooks/queries/admin/main-data/section';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 

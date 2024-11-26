@@ -1,20 +1,20 @@
-"use client";
-import BackIcon from "@/assets/icons/back";
-import Card from "@/components/card";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
-import React, { useEffect, useState } from "react";
-import FormOne from "./_components/formOne";
-import FormDocSpe from "./_components/formDocSpe";
-import FormStaff from "./_components/formStaff";
-import FormCreateEmail from "./_components/formCreateEmail";
-import Button from "@/components/button";
-import { useCreateStaff } from "@/useAPI/admin/staff/staff";
+'use client';
+import BackIcon from '@/assets/icons/back';
+import Card from '@/components/card';
+import { Link } from '@/navigation';
+import ROUTES from '@/routes';
+import React, { useEffect, useState } from 'react';
+import FormOne from './_components/formOne';
+import FormDocSpe from './_components/formDocSpe';
+import FormStaff from './_components/formStaff';
+import FormCreateEmail from './_components/formCreateEmail';
+import Button from '@/components/button';
+import { useCreateStaff } from '@/hooks/queries/admin/staff/staff';
 
 function Page() {
-  const [firstData, setFirstData] = useState("");
-  const [DocSpeData, setDocSpeData] = useState("");
-  const [StaffData, setStaffData] = useState("");
+  const [firstData, setFirstData] = useState('');
+  const [DocSpeData, setDocSpeData] = useState('');
+  const [StaffData, setStaffData] = useState('');
   const [PageForm, setPageForm] = useState(1);
   console.log(StaffData);
 
@@ -29,15 +29,16 @@ function Page() {
 
   useEffect(() => {
     if (isSuccess) {
-      setFirstData("");
-      setDocSpeData("");
-      setStaffData("");
+      setFirstData('');
+      setDocSpeData('');
+      setStaffData('');
       setPageForm(1);
     }
   }, [isSuccess]);
   const handleSubmit = (e) => {
     let formData =
-      firstData.JobTypes === "1" || firstData.JobTypes === "2"
+      firstData.JobTypes === '1' ||
+      firstData.JobTypes === '2'
         ? { ...firstData, ...DocSpeData }
         : { ...firstData, ...StaffData };
 
@@ -74,7 +75,7 @@ function Page() {
     setFirstData({
       ...firstData,
       PhoneNumbers: value,
-      CountryCode: "+" + country.dialCode,
+      CountryCode: '+' + country.dialCode,
     });
     if (isError) {
       reset();
@@ -107,14 +108,14 @@ function Page() {
   };
   return (
     <Card>
-      <div className="flex mb-10   items-center gap-4 ">
+      <div className='flex mb-10   items-center gap-4 '>
         <Link
           href={ROUTES.ADMIN.STAFF.DASHBOARD}
-          className=" w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center"
+          className=' w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] rounded-[50%]  flex items-center justify-center'
         >
-          <BackIcon className={"w-full h-full"} />
+          <BackIcon className={'w-full h-full'} />
         </Link>
-        <h2 className="headTitleDash">اضافة موظف</h2>
+        <h2 className='headTitleDash'>اضافة موظف</h2>
       </div>
 
       {PageForm === 1 ? (
@@ -127,7 +128,8 @@ function Page() {
           error={error}
         />
       ) : PageForm === 2 ? (
-        firstData.JobTypes === "1" || firstData.JobTypes === "2" ? (
+        firstData.JobTypes === '1' ||
+        firstData.JobTypes === '2' ? (
           <FormDocSpe
             setPageForm={setPageForm}
             handleOnChange={handleOnChangeDoc}
@@ -148,20 +150,20 @@ function Page() {
             handleOnChange={handleOnChangeOne}
             firstData={firstData}
           />
-          <div className="flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20  justify-center flex-1 w-full">
+          <div className='flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20  justify-center flex-1 w-full'>
             <Button
               onClick={(e) => {
-                console.log("done seend ");
+                console.log('done seend ');
                 handleSubmit(e);
               }}
-              variant="secondary"
-              className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
+              variant='secondary'
+              className='font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full'
             >
               حفظ
             </Button>
             <Button
               onClick={() => setPageForm(2)}
-              className="font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full"
+              className='font-Bold flex-1 text-base md:text-xl w-[434px] h-14 max-w-full'
             >
               السابق
             </Button>

@@ -1,11 +1,11 @@
 import Container from './container';
 import { H1 } from './h1';
 import { Info } from './info';
-import { BackButton } from './back-button';
+import { BackButton } from '@/components/buttons/back-button';
 import { TabsCard } from './tabs-card';
-import { DataTable } from './data-table';
-import { Table } from './table';
-import { TableCard } from './table-card';
+import { DataTable } from '@/components/table/data-table';
+import { Table } from '@/components/table/table';
+import { TableCard } from '@/components/table/table-card';
 import { SidebarToggle } from './sidebar-toggle';
 import { SearchBar } from './search-bar';
 import { LocaleButton } from './locale-button';

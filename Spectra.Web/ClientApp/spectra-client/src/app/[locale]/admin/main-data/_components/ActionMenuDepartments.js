@@ -7,7 +7,7 @@ import DeleteIcon from '@/assets/icons/delete';
 import ShowIcon from '@/assets/icons/show';
 import ROUTES from '@/routes';
 import EditIcon from '@/assets/icons/edit';
-import { DeleteSection } from '@/useAPI/admin/main-data/section';
+import { DeleteSection } from '@/hooks/queries/admin/main-data/section';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { Toast } from '@/components/toast';
 

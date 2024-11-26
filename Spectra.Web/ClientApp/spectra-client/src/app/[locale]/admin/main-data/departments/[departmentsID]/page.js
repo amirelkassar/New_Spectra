@@ -6,7 +6,7 @@ import ActionMenu from '../../_components/ActionMenuDepartmentsDetails';
 import { Link } from '@/navigation';
 import BackIcon from '@/assets/icons/back';
 import CardDocManger from '../_components/cardDocManger';
-import { GetSectionID } from '@/useAPI/admin/main-data/section';
+import { GetSectionID } from '@/hooks/queries/admin/main-data/section';
 import HandelShowDataID from '@/components/handelShowDataID';
 
 function page({ params }) {

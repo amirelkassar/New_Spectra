@@ -8,7 +8,7 @@ import ROUTES from '@/routes';
 import { MultiSelect } from '@mantine/core';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import InputGreen from '@/components/Input-green';
-import { useCreateInternalExamination } from '@/useAPI/admin/main-data/testsInterior';
+import { useCreateInternalExamination } from '@/hooks/queries/admin/main-data/testsInterior';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 function Page() {

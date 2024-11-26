@@ -15,7 +15,7 @@ const Button = ({
   switch (variant) {
     case 'primary':
       variantClasses =
-        'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain font-bold rounded-xl py-3';
+        'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain font-bold rounded-xl py-3 text-sm mdl:text-base';
       break;
     case 'secondary':
       variantClasses =

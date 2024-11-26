@@ -12,7 +12,7 @@ import HandelShowDataEdit from '@/components/handelShowDataEdit';
 import {
   GetInternalExaminationID,
   useEditInternalExamination,
-} from '@/useAPI/admin/main-data/testsInterior';
+} from '@/hooks/queries/admin/main-data/testsInterior';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 function Page({ params }) {

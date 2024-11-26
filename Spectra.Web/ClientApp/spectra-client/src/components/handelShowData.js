@@ -1,8 +1,11 @@
-import React from "react";
-import NoDataYet from "./noDataYet";
-import Loader from "./loader";
+import NoDataYet from './noDataYet';
+import Loader from './loader';
 
-function HandelShowData({ children, isLoading, lengthData }) {
+function HandelShowData({
+  children,
+  isLoading,
+  lengthData,
+}) {
   return (
     <>
       {!isLoading ? (
@@ -12,7 +15,7 @@ function HandelShowData({ children, isLoading, lengthData }) {
           <NoDataYet />
         )
       ) : (
-        <div className="flex items-center justify-center min-h-[350px] w-full">
+        <div className='flex items-center justify-center min-h-[350px] w-full'>
           <Loader />
         </div>
       )}
