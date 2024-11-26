@@ -2,9 +2,10 @@
 import React from 'react';
 import AddMainData from '../../_components/add-drugs';
 import ROUTES from '@/routes';
-import ActionMenu from '../_components/ActionMenuDiagnosticsDetails';
+
 import { GetDiagnosticsID } from '@/hooks/queries/admin/main-data/diagnostics';
 import HandelShowDataID from '@/components/handelShowDataID';
+import { CellActions } from '../_components/cell-actions';
 function page({ params }) {
   const { data, isLoading } = GetDiagnosticsID(
     params.diagnosticsID
@@ -19,7 +20,7 @@ function page({ params }) {
             path={ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSADD}
           />
         </div>
-        <ActionMenu id={params.diagnosticsID} />
+        <CellActions />
       </div>
       <HandelShowDataID
         isLoading={isLoading}

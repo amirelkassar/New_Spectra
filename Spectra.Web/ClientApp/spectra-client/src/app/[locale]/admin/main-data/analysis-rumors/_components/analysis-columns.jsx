@@ -10,9 +10,13 @@ export const AnalysisColumns = [
       const name = getValue();
       const type = row?.original?.examinationTypes;
       return (
-        <div className='flex items-center gap-2'>
-          <div className='flex bg-blueLight size-[38px] rounded-full items-center justify-center p-1'>
-            {type === 1 ? <AnalysisIcon /> : <RumorsIcon />}
+        <div className='flex items-center gap-4'>
+          <div className='flex bg-blueLight size-6 md:size-10 rounded-full items-center justify-center shrink-0'>
+            {type === 1 ? (
+              <AnalysisIcon className='text-greenMain size-3 md:size-5' />
+            ) : (
+              <RumorsIcon className='text-greenMain size-3 md:size-5' />
+            )}
           </div>
           <h3 className='font-Bold'>{name}</h3>
         </div>
