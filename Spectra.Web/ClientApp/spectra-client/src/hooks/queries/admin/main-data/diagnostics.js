@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -47,6 +48,7 @@ export const useDiagnostics = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getDiagnostics(queries),
+    placeholderData: keepPreviousData,
   });
 };
 

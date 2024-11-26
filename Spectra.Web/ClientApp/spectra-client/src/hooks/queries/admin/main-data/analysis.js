@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -48,6 +49,7 @@ export const useMedicalTests = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getAnalysis(queries),
+    placeholderData: keepPreviousData,
   });
 };
 

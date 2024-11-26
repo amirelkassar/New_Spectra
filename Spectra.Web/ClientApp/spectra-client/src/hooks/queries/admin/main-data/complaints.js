@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -43,6 +44,7 @@ export const useComplaints = (pageNum = 1, search = '') => {
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getComplaints(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
