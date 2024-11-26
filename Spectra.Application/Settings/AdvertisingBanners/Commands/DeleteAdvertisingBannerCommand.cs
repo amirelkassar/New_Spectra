@@ -14,11 +14,11 @@ namespace Spectra.Application.Settings.AdvertisingBanners.Commands
     public class DeleteArticlesCommandHandler : IRequestHandler<DeleteAdvertisingBannerCommand, OperationResult<Unit>>
     {
         private readonly IArticlesRepository _articlesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
-        public DeleteArticlesCommandHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+        public DeleteArticlesCommandHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _articlesRepository = serviceMRepository;
             _addPhoto = addPhoto;

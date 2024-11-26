@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using Spectra.Application.Identities;
 using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Interfaces;

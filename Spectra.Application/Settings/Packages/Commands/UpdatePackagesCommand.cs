@@ -23,12 +23,12 @@ namespace Spectra.Application.Settings.Packages.Commands
 
             private readonly IPackagesRepository _packagesRepository;
 
-            private readonly IHellper _addPhoto;
+            private readonly IDocumentHellper _addPhoto;
 
 
 
 
-            public UpdateArticlesCommandHandler(IPackagesRepository packagesRepository, IHellper addPhoto)
+            public UpdateArticlesCommandHandler(IPackagesRepository packagesRepository, IDocumentHellper addPhoto)
             {
                 _packagesRepository = packagesRepository;
                 _addPhoto = addPhoto;
@@ -47,7 +47,7 @@ namespace Spectra.Application.Settings.Packages.Commands
                 if (request.Photo != null)
                 {
 
-                    entity.Photo = await _addPhoto.UpdateAttachment(entity.Photo, request.Photo, Pathes.PackagePhoto);
+                    entity.Photo = await _addPhoto.UpdateAttachment(entity.Photo, request.Photo, Pathes.GetPackagesPath());
 
 
                 }

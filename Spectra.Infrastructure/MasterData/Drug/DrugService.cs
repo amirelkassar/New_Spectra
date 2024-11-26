@@ -100,19 +100,19 @@ namespace Spectra.Infrastructure.MasterData.Drug
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<DrugMD>> GetDrugById(string id)
+        public async Task<OperationResult<Domain.MasterData.Drug.Drug>> GetDrugById(string id)
         {
             var query = new GetDrugsByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<DrugMD>>> GetAllDrugs()
+        public async Task<OperationResult<IEnumerable<Domain.MasterData.Drug.Drug>>> GetAllDrugs()
         {
             var query = new GetAllDrugQuery();
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugsNames()
+        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugsNames()
         {
             var query = new GetAllDrugNamesQuery();
 
@@ -120,7 +120,7 @@ namespace Spectra.Infrastructure.MasterData.Drug
 
         }
 
-        public Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDrugNames()
+        public Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDrugNames()
         {
             throw new NotImplementedException();
         }

@@ -14,12 +14,12 @@ namespace Spectra.Application.Settings.Packages.Commands
     {
         private readonly IPackagesRepository _packagesRepository;
 
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
 
-        public DeletePackagesCommandHandler(IPackagesRepository packagesRepository, IHellper addPhoto)
+        public DeletePackagesCommandHandler(IPackagesRepository packagesRepository, IDocumentHellper addPhoto)
         {
             _packagesRepository = packagesRepository;
             _addPhoto = addPhoto;

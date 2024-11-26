@@ -1,107 +1,62 @@
 ﻿using MediatR;
-using Spectra.Application.Admin.Dto;
 using Spectra.Application.Contracts.Commands;
-using Spectra.Application.Contracts.DTO;
-using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Contracts.Services;
-using Spectra.Domain.Contracts;
-using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
+using Spectra.Application.Interfaces;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Contracts
 {
 
-    public class ContractService : IContractService
+    public class ContractService(IMediator mediator, ICurrentUser currentUser) : IContractService
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator _mediator = mediator;
+        private readonly ICurrentUser _currentUser = currentUser;
 
-        public ContractService(IMediator mediator)
+        public async Task<OperationResult> CreateAsync(CreateContractCommand input)
         {
-            _mediator = mediator;
-
-        }
-
-        public async Task<OperationResult<string>> CreateContractSendORSave(CreateContractCommand input)
-        {
-            if (input.ContractCase != ContractCases.SAVE && input.ContractCase != ContractCases.SENDTOADMIN)
+            if (_currentUser.Role.Equals(Roles.Doctor))
             {
-                throw new RequestErrorException("You can only Send or Save your Contract.");
-
+                input.EmployeeUserId = _currentUser.Id;
             }
-                var command = new CreateContractCommand
-                {
-                    HoursOfWork = input.HoursOfWork,
-                    DaysOfWork = input.DaysOfWork,
-                    ContractCase = input.ContractCase,
-                    Freelance = input.Freelance,
-                    SpectraTeam = input.SpectraTeam
-                };
-
-                return await _mediator.Send(command);           
-        }
-        public async Task<OperationResult<Unit>> EmployeeAccpetContract(string id)
-        {
-            var command = new UpdateContractSatuseFromEmployeeCommand { Id = id };
-         
-            return await _mediator.Send(command);
+            var response = await _mediator.Send(input);
+            return response;
         }
 
-
-        public async Task<OperationResult<Unit>> DeleteContract(string id)
+        public async Task<OperationResult> DeleteContract(string id)
         {
-            var command = new DeleteContractCommand { Id = id };
-            return await _mediator.Send(command);
+            var response = await _mediator.Send(new DeleteContractCommand { Id = id });
+            return response;
         }
 
-        public async Task<OperationResult<IEnumerable<GetAllCopiesWithDataDto>>> GetAllCopiesOfContract(GetAllCopiesOFContractQuery input)
+        public async Task<OperationResult> GetContractById(string id)
         {
-            // Create the query and pass pagination parameters
-            var query = new GetAllCopiesOFContractQuery
+            throw new NotImplementedException();
+        }
+
+        public async Task<OperationResult> UpdateAsync(UpdateContractCommand input)
+        {
+            if (_currentUser.Role.Equals(Roles.Doctor))
             {
-                EmployeeId = input.EmployeeId
-            };
-            return await _mediator.Send(query);
+                input.EmployeeUserId = _currentUser.Id;
+                input.ModifierRole = _currentUser.Role;
+            }
+            var response = await _mediator.Send(input);
+            return response;
         }
 
-        public async Task<OperationResult<GetServicesContractQuery>> GetAllContractData()
+        public async Task<OperationResult> UpdateStateAsync(ChangeContractStateCommand input)
         {
-
-            var query = new GetServicesContractQuery();
-
-            return await _mediator.Send(query);
-        }
-    public  async  Task<OperationResult<List<GetAllServicesFromContractDto>>> GetAllDoctorServicesFromContract(string EmployeeId )
-        {
-            var query = new GetServicesFromContractQuery() { Id = EmployeeId };
-
-
-            return await _mediator.Send(query);
-        }
-
-        public async Task<OperationResult<EmploymentContract>> GetContractById(string id)
-        {
-            var query = new GetContractByIdQuery { Id = id };
-            return await _mediator.Send(query);
-        }
-
-
-        public async Task<OperationResult<Unit>> UpdateContract(string id, UpdateAdminContractCommand input)
-        {
-            var command = new UpdateAdminContractCommand
+            if (_currentUser.Role.Equals(Roles.Doctor))
             {
-                id = id,
-                HoursOfWork = input.HoursOfWork,
-                DaysOfWork = input.DaysOfWork,
-                ContractCase = input.ContractCase,
-              
-                Freelance = input.Freelance,
-                SpectraTeam = input.SpectraTeam,
-            };
-            return await _mediator.Send(command);
+                input.EmployeeUserId = _currentUser.Id;
+                input.ModifierRole = _currentUser.Role;
+            }
+            input.CallerUserId = _currentUser.Id;
+            input.CallerName = _currentUser.Name;
+            var response = await _mediator.Send(input);
+            return response;
         }
-
-
     }
 }
 

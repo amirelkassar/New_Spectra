@@ -1,22 +1,19 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Spectra.Domain.Shared.Constants
 {
-    public abstract class Pathes
+    public static class Pathes
     {
-        public const string ScientificDegreeDoctors = "Upload/ScientificDegree/Doctors";
-        public const string ScientificDegreeSpecialist = "Upload/ScientificDegree/Specialist";
-        public const string MainPhotoArticles = "Upload/Image/Articles/MainPhotos";
-        public const string InteriorPhotsArticles = "Upload/Image/Articles/MainPhotos/InteriorPhotsArticles";
-        public const string ChiledPhotoBefore = "Upload/Image/SuccessStory/ChiledPhotoBefore";
-        public const string ChiledPhotoAfter = "Upload/Image/SuccessStory/ChiledPhotoAfter";
-        public const string SmallIcons = "Upload/Image/SuccessStory/SmallIcons";
-        public const string FamilyPhoto = "Upload/Image/SuccessStory/FamilyPhoto";
-        public const string FamilyVideo = "Upload/Videos/SuccessStory/FamilyVideo";
-        public const string PackagePhoto = "Upload/Image/SuccessStory/PackagesPaneer";
-        public const string UserImages = "Upload/Image/Users";
-
-
+        private const string _base = "Documents";
+        public static string GetEmployeesPath() => Path.Combine(_base, "Employees");
+        public static string GetSystemFilesPath() => Path.Combine(_base, "SystemFiles");
+        public static string GetSucessStoriesPath() => Path.Combine(GetSystemFilesPath(), "SucessStories");
+        public static string GetPackagesPath() => Path.Combine(GetSystemFilesPath(), "Packages");
+        public static string GetArticlesPath() => Path.Combine(GetSystemFilesPath(), "Articles");
+        public static string GetAdsPath() => Path.Combine(GetSystemFilesPath(), "ADs");
+        public static string GetDrugsPath() => Path.Combine(GetSystemFilesPath(), "Drugs");
+        public static string GetImagesPath() => Path.Combine(GetSystemFilesPath(), "Imgs");
+        public static string GetClientsPath() => Path.Combine(_base, "Clients");
+        public static string GetUsersPath() => Path.Combine(_base, "Users");
     }
 }

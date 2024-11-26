@@ -70,7 +70,7 @@ namespace Spectra.WebAPI.Middlewares
                     errorType = "RequestError";
                     errorCollection = new Dictionary<string, string[]>
             {
-                { "RequestError", new[] { exception.Message } } 
+                { "RequestError", new[] { exception.Message } }
             };
                     statusCode = HttpStatusCode.BadRequest;
                     break;

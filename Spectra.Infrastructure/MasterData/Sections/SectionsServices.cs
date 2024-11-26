@@ -75,7 +75,7 @@ namespace Spectra.Infrastructure.MasterData.Sections
 
         }
 
-        public async Task<OperationResult<List<BassMasterDataDto>>> GetAllSectionNames()
+        public async Task<OperationResult<List<BaseMasterDataDto>>> GetAllSectionNames()
         {
 
             var query = new GetAllSectionsNameQuery();

@@ -94,7 +94,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllSpecializationsNames()
+        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllSpecializationsNames()
         {
             var query = new GetAllSpecializationNamesQuery();
             return await _mediator.Send(query);

@@ -14,7 +14,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string Id { get; set; }
         public AvailableSrvice AvailableSrvices { get; set; }
         public string Name { get; set; }
-        public string DefinitionServices { get; set; }
+        public string Description { get; set; }
         public double Price { get; set; }
         public string TermsAndConditions { get; set; }
         //public string? Address { get; set; }
@@ -29,11 +29,11 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         {
 
             private readonly IServiceMDRepository _serviceMRepository;
-            private readonly IHellper _addPhoto;
+            private readonly IDocumentHellper _addPhoto;
 
 
 
-            public UpdateServicesMCommandHandler(IServiceMDRepository serviceMRepository, IHellper addPhoto)
+            public UpdateServicesMCommandHandler(IServiceMDRepository serviceMRepository, IDocumentHellper addPhoto)
             {
                 _serviceMRepository = serviceMRepository;
                 _addPhoto = addPhoto;
@@ -49,19 +49,16 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                     throw new DbErrorException(" this's Name is a ready exists");
                 }
                 entity.Name = request.Name;
-                entity.DefinitionServices = request.DefinitionServices;
-                entity.AvailableSrvices = request.AvailableSrvices;
+                entity.Description = request.Description;
                 entity.Price = request.Price;
                 entity.TermsAndConditions = request.TermsAndConditions;
-                //entity.Address = request.Address;
-                //entity.Content = request.Content;
-                entity.Secations = request.Secations;
+                entity.Secations.Clear();
+                entity.Secations.AddRange(request.Secations);
 
                 if (request.Photo != null)
                 {
-
-                    entity.AttachmentPath = await _addPhoto.UpdateAttachments(entity.AttachmentPath, request.Photo, "Upload/Image/Services");
-
+                    entity.AttachmentPath.Clear();
+                    entity.AttachmentPath.AddRange(await _addPhoto.UpdateAttachments(entity.AttachmentPath, request.Photo, "Upload/Image/Services"));
                 }
 
                 await _serviceMRepository.UpdateAsync(entity);

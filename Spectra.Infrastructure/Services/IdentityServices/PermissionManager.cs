@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Application.Identities;
 using Spectra.Application.Identities.Dtos;
@@ -8,16 +7,11 @@ using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Services.IdentityServices
 {
-    internal class PermissionManager(IdentityContext identityContext,UserManager<AppUser> userManager) : IPermissionManager
+    internal class PermissionManager(IdentityContext identityContext, UserManager<AppUser> userManager) : IPermissionManager
     {
         private readonly IdentityContext _identityContext = identityContext;
         private readonly UserManager<AppUser> _userManager = userManager;
@@ -29,9 +23,9 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 .FirstOrDefaultAsync()
                 ?? throw new NotFoundException(nameof(AppRole), roleName);
 
-            if (!role.Permissions.Any(p=>p.Permission==permission))
+            if (!role.Permissions.Any(p => p.Permission == permission))
             {
-                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission,permission));
+                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission, permission));
                 _identityContext.Roles.Update(role);
                 await _identityContext.SaveChangesAsync();
             }
@@ -50,9 +44,9 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
         public async Task<RolePermissionReadDto> GetRolePermissionListDto(string roleName)
         {
-            var rolePermissions=await GetRolePermissionList(roleName);
-            var roleModel=new RolePermissionReadDto();
-            roleModel.Name= roleName;
+            var rolePermissions = await GetRolePermissionList(roleName);
+            var roleModel = new RolePermissionReadDto();
+            roleModel.Name = roleName;
             var permissionContributors = typeof(IPermissionContributor)
                 .Assembly
                 .GetTypes()
@@ -60,7 +54,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
             var fields = permissionContributors.Select(t => t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                    .Where(field => field.IsLiteral && !field.IsInitOnly))
-                .SelectMany(f=>f);
+                .SelectMany(f => f);
 
             var permissionGroups = fields.Where(f => f.Name == "Group").ToArray();
 
@@ -74,15 +68,15 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
         public async Task<ICollection<string>> GetUserPermissionList(string userId)
         {
-            var user=await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
             var userRoles = await _userManager.GetRolesAsync(user);
             var roleIds = await _identityContext.Roles.Where(r => userRoles.Any(ur => ur == r.Name))
                 .Select(r => r.Id)
                 .ToArrayAsync();
 
-            var userPermissions=await _identityContext
-                .RolePermissions.Where(r => roleIds.Any(ur=>ur==r.RoleId))
-                .Select(p=>p.Permission)
+            var userPermissions = await _identityContext
+                .RolePermissions.Where(r => roleIds.Any(ur => ur == r.RoleId))
+                .Select(p => p.Permission)
                 .ToArrayAsync();
 
             return userPermissions;
@@ -97,7 +91,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
             if (role.Permissions.Any(p => p.Permission == permission))
             {
-                var rolePermission = role.Permissions.First(p => p.Permission==permission);
+                var rolePermission = role.Permissions.First(p => p.Permission == permission);
                 role.Permissions.Remove(rolePermission);
                 _identityContext.Roles.Update(role);
                 await _identityContext.SaveChangesAsync();
@@ -107,7 +101,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         public async Task<bool> RoleHasPermission(string roleName, string permission)
         {
             var role = await _identityContext.Roles.Where(r => r.NormalizedName == roleName.ToUpper())
-               .Include(r => r.Permissions.Where(p=>p.Permission==permission))
+               .Include(r => r.Permissions.Where(p => p.Permission == permission))
                .FirstOrDefaultAsync()
                ?? throw new NotFoundException(nameof(AppRole), roleName);
 
@@ -122,7 +116,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
              ?? throw new NotFoundException(nameof(AppRole), roleName);
 
             role.Permissions.Clear();
-            foreach (var permission in permissions) 
+            foreach (var permission in permissions)
             {
                 role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission, permission));
             }

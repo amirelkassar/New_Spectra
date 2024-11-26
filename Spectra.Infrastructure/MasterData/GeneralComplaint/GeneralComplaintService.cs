@@ -88,7 +88,7 @@ namespace Spectra.Infrastructure.MasterData.GeneralComplaint
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllGeneralComplaintNames()
+        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllGeneralComplaintNames()
         {
             var query = new GetAllGeneralComplaintNameQuery();
 

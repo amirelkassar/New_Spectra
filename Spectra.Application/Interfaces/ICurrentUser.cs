@@ -11,6 +11,7 @@
         bool IsPhoneConfirmed { get; }
         string CurrentToken { get; }
 
+        public string Role { get; }
         bool IsInRole(string role);
     }
 }

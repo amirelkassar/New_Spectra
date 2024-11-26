@@ -13,7 +13,7 @@ namespace Spectra.Application.MasterData.Sections.Service
         Task<OperationResult<IEnumerable<SectionDto>>> GetAllSection();
         Task<OperationResult<IEnumerable<GetAllDoctorsDto>>> GetAllDoctors();
 
-        Task<OperationResult<List<BassMasterDataDto>>> GetAllSectionNames();
+        Task<OperationResult<List<BaseMasterDataDto>>> GetAllSectionNames();
         Task<OperationResult<Section>> GetSectionById(string id);
         Task<OperationResult<Unit>> UpdateSection(string id, UpdateSectionsCommand input);
     }

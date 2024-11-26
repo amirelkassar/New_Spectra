@@ -23,11 +23,11 @@ namespace Spectra.Application.Settings.Articles.Commands
         {
 
             private readonly IArticlesRepository _articlesRepository;
-            private readonly IHellper _addPhoto;
+            private readonly IDocumentHellper _addPhoto;
 
 
 
-            public UpdateArticlesCommandHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+            public UpdateArticlesCommandHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
             {
                 _articlesRepository = serviceMRepository;
                 _addPhoto = addPhoto;
@@ -52,7 +52,7 @@ namespace Spectra.Application.Settings.Articles.Commands
                 if (request.MainPhoto != null)
                 {
 
-                    entity.MainPhoto = await _addPhoto.UpdateAttachment(entity.MainPhoto, request.MainPhoto, Pathes.MainPhotoArticles);
+                    entity.MainPhoto = await _addPhoto.UpdateAttachment(entity.MainPhoto, request.MainPhoto, Pathes.GetArticlesPath());
 
 
                 }
@@ -78,7 +78,7 @@ namespace Spectra.Application.Settings.Articles.Commands
                     string photoPaths = null;
                     if (i < photos.Count)
                     {
-                        photoPaths = await _addPhoto.UpdateAttachment(allPathes[i], photos[i], Pathes.InteriorPhotsArticles);
+                        photoPaths = await _addPhoto.UpdateAttachment(allPathes[i], photos[i], Pathes.GetArticlesPath());
                     }
 
 

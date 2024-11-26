@@ -22,11 +22,11 @@ namespace Spectra.Application.Settings.Articles.Commands
     public class CreateArticlesCommandHandler : IRequestHandler<CreateArticlesCommand, OperationResult<string>>
     {
         private readonly IArticlesRepository _articlesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
-        public CreateArticlesCommandHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+        public CreateArticlesCommandHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _articlesRepository = serviceMRepository;
             _addPhoto = addPhoto;
@@ -37,7 +37,7 @@ namespace Spectra.Application.Settings.Articles.Commands
 
             string photoPath = null;
 
-            var uploadPhoto = await _addPhoto.CreateAttachment(request.MainPhoto, Pathes.MainPhotoArticles);
+            var uploadPhoto = await _addPhoto.CreateAttachment(request.MainPhoto, Pathes.GetArticlesPath());
             if (uploadPhoto != null)
             {
                 photoPath = uploadPhoto;
@@ -61,7 +61,7 @@ namespace Spectra.Application.Settings.Articles.Commands
                 string photoPaths = null;
                 if (i < photos.Count)
                 {
-                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.InteriorPhotsArticles);
+                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.GetArticlesPath());
                 }
 
 

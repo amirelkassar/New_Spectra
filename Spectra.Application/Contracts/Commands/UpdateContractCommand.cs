@@ -1,101 +1,95 @@
 ﻿using MediatR;
+using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
-using Spectra.Domain.Employees.MedicalStaff;
 using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.ValueObjects;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.Commands
 {
-    public class UpdateAdminContractCommand : ICommand<OperationResult<Unit>>
+    public class UpdateContractCommand : ICommand<OperationResult>
     {
-        public string id { get; set; }
-        public List<OperationContract>? Freelance { get; set; }
-        public List<OperationContract>? SpectraTeam { get; set; }
+        public string Id { get; set; }
+        public string ModifierRole { get; set; }
         public int HoursOfWork { get; set; }
+        public string EmployeeUserId { get; set; }
         public int DaysOfWork { get; set; }
-        public ContractCases ContractCase { get; set; }
-
+        public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
+        public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
     }
 
-    public class UpdateContractCommandHandler : IRequestHandler<UpdateAdminContractCommand, OperationResult<Unit>>
+    public class UpdateContractCommandHandler(IContractRepository contractRepository, IServiceMDRepository serviceMDRepository) : IRequestHandler<UpdateContractCommand, OperationResult>
     {
-        private readonly IContractRepository _contractRepository;
-        private readonly ICurrentUser _currentUser;
-  
+        private readonly IContractRepository _contractRepository = contractRepository;
+        private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
 
-        public UpdateContractCommandHandler(IContractRepository contractRepository, ICurrentUser currentUser)
-        {
-            _contractRepository = contractRepository;
-            _currentUser = currentUser;
-        }
-
-        public async Task<OperationResult<Unit>> Handle(UpdateAdminContractCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
 
-            var contract = await _contractRepository.GetByIdAsync(request.id);
-            if (_currentUser.Id != contract.EmployeeId)
+            var contract = await _contractRepository.GetAsync(c => c.Id == request.Id && c.EmployeeUserId == request.EmployeeUserId)
+                ?? throw new NotFoundException("Contracts", request.Id);
+            //get the cuurent version to convert it to draft
+            var currentVersion = contract.Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
+            currentVersion.State = ContractVersionStates.Draft;
+            currentVersion.CreationDate = DateTime.UtcNow;
+            //create new version
+            var newVersion = new ContractVersion
             {
-                throw new RequestErrorException("You are Not Allow to Change the Contract");
-            }
-          
-            switch (contract.ContractCase)
+                AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
+                AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.Secretary }.Any(r => r.Equals(request.ModifierRole)),
+                CreationDate = DateTime.UtcNow,
+                Order = currentVersion.Order++,
+                State = ContractVersionStates.Active,
+            };
+            //update contract
+            contract.HoursOfWork = request.HoursOfWork;
+            contract.DaysOfWork = request.DaysOfWork;
+
+            var services = await _serviceMDRepository.GetAllAsync();
+
+            foreach (var service in services)
             {
-
-                case ContractCases.SAVE:
-                    contract.ContractCase = request.ContractCase;
-                  
-                    contract.HoursOfWork = request.HoursOfWork;
-                    contract.DaysOfWork = request.DaysOfWork;
-                    contract.EmployeeName = _currentUser.Name;
-                    contract.EmployeeId = _currentUser.Id;
-                    contract.ContractCase = request.ContractCase;
-                    contract.Freelance = request.Freelance;
-                    contract.ContractCase = ContractCases.SENDTOADMIN;
-                    contract.AdminOrEmployee = AdminOrEmployee.Employee;
-                    await _contractRepository.UpdateAsync(contract);
-
-                    return OperationResult<Unit>.Success(Unit.Value);
-                case ContractCases.SENDTOADMIN:
-                    throw new RequestErrorException(" Your Request Under review ");
-                case ContractCases.SendContarctToSignature:
-                    throw new RequestErrorException("Admin Accpet the Offer cannot modify ");
-                case ContractCases.ACTIVE:
-                    throw new RequestErrorException("You cannot modify right now.");
-
-                case ContractCases.REFUSE:
-                    throw new RequestErrorException("Your request is refused. You cannot make any further requests.");
-
-                // Add any additional cases here if needed
-                default:
-                    var contracts = EmploymentContract.Create(
-
-              Ulid.NewUlid().ToString(),
-              request.Freelance,
-              request.SpectraTeam,
-              request.HoursOfWork,
-              request.DaysOfWork,
-              contract.Id,
-              contract.Titel,
-              ContractCases.SENDTOADMIN,
-              _currentUser.Name,
-              AdminOrEmployee.Employee
-             );
-                 
-                    await _contractRepository.AddAsync(contracts);
-                    contract.ContractCase = ContractCases.REFUSE;
-                    await _contractRepository.UpdateAsync(contract);
-
-                    return OperationResult<Unit>.Success(Unit.Value);
-                    
+                if (request.FreelancingServices.Any(s => s.ServiceId == service.Id) && !newVersion.FreelancingServices.Any(s => s.ServiceId == service.Id))
+                {
+                    var requestService = request.FreelancingServices.First(s => s.ServiceId == service.Id);
+                    newVersion.FreelancingServices.Add(new ContractService
+                    {
+                        ServiceId = service.Id,
+                        ServiceName = service.Name,
+                        Duration = requestService.Duration,
+                        EmployeeFees = requestService.EmployeeFees,
+                        EmployeePercentage = requestService.EmployeePercentage,
+                        PlatformFees = requestService.PlatformFees,
+                        PlatformPercentage = requestService.PlatformPercentage,
+                        ServiceFees = requestService.ServiceFees,
+                        ServiceTerms = service.TermsAndConditions
+                    });
+                }
+                if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !newVersion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
+                {
+                    var requestService = request.SpectraTeamServices.First(s => s.ServiceId == service.Id);
+                    newVersion.SpectraTeamServices.Add(new ContractService
+                    {
+                        ServiceId = service.Id,
+                        ServiceName = service.Name,
+                        Duration = requestService.Duration,
+                        EmployeeFees = requestService.EmployeeFees,
+                        EmployeePercentage = requestService.EmployeePercentage,
+                        PlatformFees = requestService.PlatformFees,
+                        PlatformPercentage = requestService.PlatformPercentage,
+                        ServiceFees = requestService.ServiceFees,
+                        ServiceTerms = service.TermsAndConditions
+                    });
+                }
             }
 
-           
+            await _contractRepository.UpdateAsync(contract);
 
+            return OperationResult.Success();
         }
     }
 

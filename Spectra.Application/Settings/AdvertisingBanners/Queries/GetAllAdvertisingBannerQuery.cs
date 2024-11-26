@@ -15,7 +15,7 @@ namespace Spectra.Application.Settings.AdvertisingBanners.Queries
     {
         private readonly IArticlesRepository _articlesRepository;
 
-        public GetAllArticlesQueryHandler(IArticlesRepository serviceMRepository, IHellper addPhoto)
+        public GetAllArticlesQueryHandler(IArticlesRepository serviceMRepository, IDocumentHellper addPhoto)
         {
             _articlesRepository = serviceMRepository;
         }

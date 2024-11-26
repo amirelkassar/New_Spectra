@@ -18,15 +18,11 @@ namespace Spectra.Application.Contracts.Commands
         public DeleteContractCommandHandler(IContractRepository contractRepository)
         {
             _contractRepository = contractRepository;
-
         }
 
         public async Task<OperationResult<Unit>> Handle(DeleteContractCommand request, CancellationToken cancellationToken)
         {
-
-            var contract = await _contractRepository.GetByIdAsync(request.Id);
-
-            await _contractRepository.DeleteAsync(contract);
+            await _contractRepository.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);
 
         }

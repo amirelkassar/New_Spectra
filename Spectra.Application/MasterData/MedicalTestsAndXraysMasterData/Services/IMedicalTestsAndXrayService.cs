@@ -11,7 +11,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services
         Task<OperationResult<string>> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input);
         Task<OperationResult<Unit>> DeleteMedicalTestsAndXray(string id);
         Task<OperationResult<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>>> GetAllMedicalTestsAndXray();
-        Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllMedicalTestsAndXrayNames();
+        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllMedicalTestsAndXrayNames();
         Task<OperationResult<Domain.MasterData.MedicalTestsAndXrays.MedicalTestsAndXray>> GetMedicalTestsAndXrayById(string id);
         Task<OperationResult<Unit>> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input);
     }

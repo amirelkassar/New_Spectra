@@ -27,9 +27,9 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
     public class CreateSuccessStoryCommanddHandler : IRequestHandler<CreateSuccessStoryCommand, OperationResult<string>>
     {
         private readonly ISuccessStorIesRepository _successStorIesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
-        public CreateSuccessStoryCommanddHandler(ISuccessStorIesRepository successStorIesRepository, IHellper addPhoto)
+        public CreateSuccessStoryCommanddHandler(ISuccessStorIesRepository successStorIesRepository, IDocumentHellper addPhoto)
         {
             _successStorIesRepository = successStorIesRepository;
             _addPhoto = addPhoto;
@@ -53,7 +53,7 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
                 string photoPaths = null;
                 if (i < photos.Count)
                 {
-                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.SmallIcons);
+                    photoPaths = await _addPhoto.CreateAttachment(photos[i], Pathes.GetSucessStoriesPath());
                 }
 
                 var section = new SectionSetings
@@ -71,11 +71,11 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
                request.ChiledeName,
                request.Diagnosis,
                request.Descript,
-               await CheckMthode(request.ChiledPhotoBefore, Pathes.ChiledPhotoBefore),
-               await CheckMthode(request.ChiledPhotoAfter, Pathes.ChiledPhotoAfter),
+               await CheckMthode(request.ChiledPhotoBefore, Pathes.GetSucessStoriesPath()),
+               await CheckMthode(request.ChiledPhotoAfter, Pathes.GetSucessStoriesPath()),
                allSections,
                request.ContentComment,
-               await CheckMthode(request.FamilyPhoto, Pathes.FamilyPhoto),
+               await CheckMthode(request.FamilyPhoto, Pathes.GetSucessStoriesPath()),
               null
                 //CheckMthode(request.FamilyVideo Pathes.FamilyVideo)
                 );
@@ -94,7 +94,6 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
             if (uploadPhoto != null)
             {
                 photoPath = uploadPhoto;
-
             }
             return photoPath;
         }

@@ -14,6 +14,6 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Services
         Task<OperationResult<Diagnose>> GetDiagnosesById(string id);
         Task<OperationResult<Unit>> UpdateDiagnoses(string id, UpdateDiagnoseCommand input);
         Task CreateFromExcel(IFormFile input);
-        Task<OperationResult<IEnumerable<BassMasterDataDto>>> GetAllDiagnosesNames();
+        Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllDiagnosesNames();
     }
 }

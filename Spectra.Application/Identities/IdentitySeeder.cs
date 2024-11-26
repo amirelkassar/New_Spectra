@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Spectra.Application.Identities
 {
-    public class IdentitySeeder(IIdentityService identityService, RoleManager<AppRole> roleManager,IPermissionManager permission)
+    public class IdentitySeeder(IIdentityService identityService, RoleManager<AppRole> roleManager, IPermissionManager permission)
     {
         private readonly IIdentityService _identityService = identityService;
         private readonly RoleManager<AppRole> _roleManager = roleManager;
@@ -41,7 +41,7 @@ namespace Spectra.Application.Identities
 
         private async Task SeedPermissionsAsync()
         {
-            var adminRole=Roles.SystemAdmin;
+            var adminRole = Roles.SystemAdmin;
             var permissionContributors = typeof(IPermissionContributor)
                .Assembly
                .GetTypes()
@@ -51,7 +51,7 @@ namespace Spectra.Application.Identities
                    .Where(field => field.IsLiteral && !field.IsInitOnly))
                 .SelectMany(f => f.Select(p => p.GetRawConstantValue() as string))
                 .ToArray();
-           await  _permission.UpdateRolePermissions(adminRole, permissions);
-        } 
+            await _permission.UpdateRolePermissions(adminRole, permissions);
+        }
     }
 }

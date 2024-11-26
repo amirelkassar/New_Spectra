@@ -13,11 +13,11 @@ namespace Spectra.Application.Settings.SuccessStorIes.Commands
     public class DeleteArticlesCommandHandler : IRequestHandler<DeleteSuccessStoryCommand, OperationResult<Unit>>
     {
         private readonly ISuccessStorIesRepository _successStorIesRepository;
-        private readonly IHellper _addPhoto;
+        private readonly IDocumentHellper _addPhoto;
 
 
 
-        public DeleteArticlesCommandHandler(ISuccessStorIesRepository successStorIesRepository, IHellper addPhoto)
+        public DeleteArticlesCommandHandler(ISuccessStorIesRepository successStorIesRepository, IDocumentHellper addPhoto)
         {
             _successStorIesRepository = successStorIesRepository;
             _addPhoto = addPhoto;

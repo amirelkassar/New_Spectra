@@ -5,7 +5,6 @@ namespace Spectra.Domain.MasterData.DoctorsSpecialization
 {
     public class Specialization : BaseAuditableEntity<string>
     {
-
         public string Name { get; set; }
         public string Description { get; set; }
         public string Code { get; set; }

@@ -1,10 +1,4 @@
 ﻿using Spectra.Domain.Shared.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {

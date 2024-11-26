@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.AppRole
 {
@@ -27,7 +24,7 @@ namespace Spectra.Domain.AppRole
             Id = id;
             RoleId = roleId;
             Permission = permission;
-            DisplayName= displayName;
+            DisplayName = displayName;
         }
         public string Id { get; private set; }
         public string RoleId { get; private set; }

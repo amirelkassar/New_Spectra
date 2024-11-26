@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Spectra.Application.Messaging;
-using Spectra.Application.Settings.MedicalSpecialties;
-using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.Settings.MedicalSpecialties;
 using Spectra.Domain.Shared.Wrappers;
 

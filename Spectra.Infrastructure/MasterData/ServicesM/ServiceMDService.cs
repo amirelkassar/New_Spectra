@@ -44,24 +44,6 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
 
             return await _mediator.Send(command);
         }
-        //public async Task CreateFromExcel(IFormFile input)
-        //{
-
-        //    List<CreateServicesMCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateServicesMCommand
-        //    {
-
-        //        ScientificName = cells[0],
-        //        Notes = cells[1],
-        //        ExaminationTypes = Enum.TryParse<ExaminationType>(cells[2], true, out var examinationType) ? examinationType = throw new ArgumentException($"Invalid ExaminationType= {cells[2]}")
-        //    });
-
-
-        //    var command = new CreateBulkDataCommand<CreateServicesMCommand> { Data = data };
-
-        //    await _mediator.Send(command);
-
-
-        //}
 
         public async Task<OperationResult<Unit>> Updateservices(string id, UpdateServicesMCommand input)
         {
@@ -71,7 +53,6 @@ namespace Spectra.Infrastructure.MasterData.ServicesMD
 
                 Id = id,
                 Name = input.Name,
-                DefinitionServices = input.DefinitionServices,
                 AvailableSrvices = input.AvailableSrvices,
                 Price = input.Price,
                 TermsAndConditions = input.TermsAndConditions,
