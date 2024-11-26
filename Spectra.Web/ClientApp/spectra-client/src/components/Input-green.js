@@ -1,15 +1,20 @@
-import React from "react";
-import { TextInput } from "@mantine/core";
+import React from 'react';
+import { TextInput } from '@mantine/core';
 
-const InputGreen = ({ type = "text",className='', ...props }) => {
+const InputGreen = ({
+  type = 'text',
+  className = '',
+  ...props
+}) => {
   return (
     <TextInput
       {...props}
       type={type}
+      size='lg'
       classNames={{
         input:
-          "!h-14  lgl:!h-[66px] text-[12px] md:text-base border-greenMain w-full rounded-lg  mdl:rounded-xl",
-        label: "text-[12px] md:text-base mb-2",
+          'text-xs md:text-base border-greenMain w-full rounded-lg mdl:rounded-xl',
+        label: 'text-xs md:text-base mb-2',
       }}
       className={className}
     />

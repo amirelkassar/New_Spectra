@@ -42,7 +42,7 @@ export const UseMainDataAside = () => {
         ),
       },
       {
-        name: 'التحاليل و الاشاعات',
+        name: 'التحاليل و الاشعة',
         route: ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS,
         isActive: path.includes(
           ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS

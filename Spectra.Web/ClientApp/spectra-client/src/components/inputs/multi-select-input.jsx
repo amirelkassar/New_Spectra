@@ -19,12 +19,8 @@ const MultiSelectInput = ({
   label = '',
   size = 'md',
   data = [],
-  labelClassName = '',
-  inputClassName = '',
   ...props
 }) => {
-  const [opened, setOpened] = useState(false);
-
   return (
     <MultiSelect
       {...props}
@@ -32,25 +28,30 @@ const MultiSelectInput = ({
       label={label}
       data={data}
       checkIconPosition={props.checkIconPosition || 'right'}
-      onDropdownOpen={() => setOpened(true)}
-      onDropdownClose={() => setOpened(false)}
-      rightSection={
-        <span className={opened ? 'rotate-180' : ''}>
-          <ArrowDownBlack />
-        </span>
-      }
+      rightSection={<ArrowDownBlack />}
       nothingFoundMessage={
-        props.nothingFoundMessage ?? '!Nothing found'
+        props.nothingFoundMessage ?? '!No Data Found'
       }
       classNames={{
+        ...props.classNames,
         input: cn(
-          'rounded-lg group focus:border-greenMain placeholder:font-normal focus-within:border-greenMain',
-          inputClassName
+          'rounded-lg group focus:border-greenMain focus-within:border-greenMain data-[expanded=true]:[&+div]:rotate-180 ',
+          props.classNames?.input
+        ),
+        inputField: cn(
+          'placeholder:text-transparent only:placeholder:text-grayDark',
+          props.classNames?.inputField
         ),
         label: cn(
           'text-base mdl:text-xl mb-2 ps-1',
-          labelClassName
+          props.classNames?.label
         ),
+        pill: cn(
+          'bg-blueLighter rounded-md font-bold text-xs mdl:text-base',
+          props.classNames?.pill
+        ),
+        pillsList: cn('group', props.classNames?.pillsList),
+        section: cn('', props.classNames?.section),
       }}
     />
   );

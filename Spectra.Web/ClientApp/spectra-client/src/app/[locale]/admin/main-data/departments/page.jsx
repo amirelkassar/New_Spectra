@@ -1,31 +1,27 @@
-'use client';
+import {
+  dehydrate,
+  HydrationBoundary,
+} from '@tanstack/react-query';
 
-import { DataTable } from '@/components/data-table';
-import ROUTES from '@/routes';
-import { DepartmentColumns } from '../_components/departments-columns';
-import { useSections } from '@/hooks/queries/admin/main-data/section';
-import HandelShowData from '@/components/handelShowData';
+import { prefetchSections } from '@/hooks/queries/admin/main-data/section';
 import { Heading } from '../_components/heading';
+import ROUTES from '@/routes';
+import { DepartmentsTable } from './_components/departments-table';
 
-function DepartmentsPage() {
-  const { data, isLoading } = useSections();
+async function DepartmentsPage() {
+  const queryClient = await prefetchSections();
 
   return (
-    <div>
+    <div className='space-y-10'>
       <Heading
         btnLabel='اضافة قسم'
         title='الاقسام'
-        path={ROUTES.ADMIN.DATAMAIN.DEPARTMENTS}
+        path={ROUTES.ADMIN.DATAMAIN.DEPARTMENTSADD}
       />
-      <HandelShowData
-        isLoading={isLoading}
-        lengthData={data?.data.length}
-      >
-        <DataTable
-          data={data?.data}
-          columns={DepartmentColumns}
-        />
-      </HandelShowData>
+
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <DepartmentsTable />
+      </HydrationBoundary>
     </div>
   );
 }

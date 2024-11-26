@@ -18,6 +18,7 @@ export const useQuery = ({ query = () => {} }) => {
     isError,
     isPlaceholderData,
     isFetching,
+    failureReason,
   } = myQuery;
 
   const items = data?.data?.items || data?.data;
@@ -25,8 +26,10 @@ export const useQuery = ({ query = () => {} }) => {
   const totalCount = data?.data?.totalCount;
   const isSearching = !!search;
   const hasData = !!items?.length;
+  const errorCode = failureReason?.status;
 
   const status = {
+    errorCode,
     isPending,
     isPaused,
     isError,

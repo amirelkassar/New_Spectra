@@ -1,12 +1,10 @@
 import AnalysisIcon from '@/assets/icons/analysis';
 import RumorsIcon from '@/assets/icons/rumors';
-import ActionMenu from './ActionMenuAnalysis';
-export const ProceduresColumns = [
+import { CellActions } from './cell-actions';
+
+export const AnalysisColumns = [
   {
-    id: 'examinationTypes',
-  },
-  {
-    accessorKey: 'scientificNameByEngByArab',
+    accessorKey: 'name',
     header: 'الاسم',
     cell: ({ getValue, row }) => {
       const name = getValue();
@@ -26,16 +24,10 @@ export const ProceduresColumns = [
     header: 'الكود ',
   },
   {
-    accessorKey: 'notes',
-    header: 'ملاحظة',
-    id: 'notes',
-  },
-
-  {
     id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
-      return <ActionMenu id={id} />;
+      return <CellActions id={id} />;
     },
   },
 ];

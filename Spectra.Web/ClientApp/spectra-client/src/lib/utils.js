@@ -113,6 +113,13 @@ export const buildQuery = (baseUrl, params = {}) => {
 };
 
 export function getQueries(pageNum, search = '', queries) {
+  if (pageNum === '*')
+    return {
+      search: '',
+      skipCount: 0,
+      maxCount: 100,
+    };
+
   // Ensure pageNum is at least 1
   const validPageNum = pageNum < 1 ? 1 : pageNum;
 

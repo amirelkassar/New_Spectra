@@ -79,17 +79,24 @@ export const mainData = {
       update: (id) => `/section?id=${id}`,
     },
   },
-  //
-  //
-  //
-  //
 
-  MedicalTests: {
-    url: '/MedicalTestsAndXray',
-    getByName: (name) => `/MedicalTestsAndXray/${name}`,
-    getByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
-    DeleteByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
+  medicalTestsAndXray: {
+    base: '/medicalTestsAndXray',
+    list: (queries = {}) =>
+      buildQuery('/medicalTestsAndXray/list', queries),
+    actions: {
+      add: '/medicalTestsAndXray',
+      addFile: '/medicalTestsAndXray/bulk',
+      get: (id) => `/medicalTestsAndXray?id=${id}`,
+      delete: (id) => `/medicalTestsAndXray?id=${id}`,
+      update: (id) => `/medicalTestsAndXray?id=${id}`,
+    },
   },
+
+  //
+  //
+  //
+  //
 
   MasterDataServices: {
     url: '/MasterDataServices',
