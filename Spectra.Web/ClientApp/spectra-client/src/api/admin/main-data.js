@@ -58,7 +58,7 @@ export const mainData = {
   internalExamination: {
     base: '/internalExamination',
     list: (queries = {}) =>
-      buildQuery('/internalExamination/lisr', queries),
+      buildQuery('/internalExamination/list', queries),
     actions: {
       add: '/internalExamination',
       // addFile: '/specialization/bulk',
@@ -68,6 +68,17 @@ export const mainData = {
     },
   },
 
+  section: {
+    base: '/section',
+    list: (queries = {}) =>
+      buildQuery('/section/list', queries),
+    actions: {
+      add: '/section',
+      get: (id) => `/section?id=${id}`,
+      delete: (id) => `/section?id=${id}`,
+      update: (id) => `/section?id=${id}`,
+    },
+  },
   //
   //
   //
@@ -100,10 +111,5 @@ export const mainData = {
       `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
     edit: (id) =>
       `/Admin/MakeContractToEmployee/id?id=${id}`,
-  },
-  Section: {
-    url: '/Section',
-    getByID: (id) => `/Section/id?id=${id}`,
-    getAllDoctors: `/Section/GetAllDoctors`,
   },
 };
