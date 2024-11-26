@@ -5,6 +5,7 @@ import { useRouter } from '@/navigation';
 
 import ArrowLeft from '@/assets/icons/arrow-left';
 import Button from '@/components/button';
+import Spinner from '@/assets/icons/spinner';
 
 export const Pagination = ({
   pageSize,
@@ -34,22 +35,26 @@ export const Pagination = ({
         التالي
       </Button>
 
-      <MantinePagination
-        total={totalPages}
-        dir='ltr'
-        disabled={disabled}
-        classNames={{
-          control:
-            '!bg-white hover:!bg-black/5 !transition',
-        }}
-        size='sm'
-        radius='xl'
-        withControls={false}
-        value={currentPage}
-        onChange={(value) =>
-          router.replace(`?page=${value}`)
-        }
-      />
+      {disabled && (
+        <Spinner className='text-grayDark size-9 animate-spin' />
+      )}
+      {!disabled && (
+        <MantinePagination
+          total={totalPages}
+          dir='ltr'
+          classNames={{
+            control:
+              '!bg-white hover:!bg-black/5 !transition',
+          }}
+          size='sm'
+          radius='xl'
+          withControls={false}
+          value={currentPage}
+          onChange={(value) =>
+            router.replace(`?page=${value}`)
+          }
+        />
+      )}
 
       <Button
         className='py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg'
