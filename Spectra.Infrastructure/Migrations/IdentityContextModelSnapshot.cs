@@ -181,9 +181,6 @@ namespace Spectra.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("AppRoleId")
-                        .HasColumnType("text");
-
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -200,8 +197,6 @@ namespace Spectra.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppRoleId");
 
                     b.HasIndex("RoleId");
 
@@ -341,10 +336,6 @@ namespace Spectra.Infrastructure.Migrations
                 {
                     b.HasOne("Spectra.Domain.AppRole.AppRole", null)
                         .WithMany("Permissions")
-                        .HasForeignKey("AppRoleId");
-
-                    b.HasOne("Spectra.Domain.AppRole.AppRole", null)
-                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

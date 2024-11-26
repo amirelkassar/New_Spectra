@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.Drug.Commands;
+using Spectra.Application.MasterData.Drug.Queries;
 using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
@@ -17,64 +18,57 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _drugtService = drugtService;
         }
 
+        [HttpGet("list")]
+        [Authorize(AdminDrugPermissions.ReadList)]
+        public async Task<ActionResult> GetListAsync([FromQuery] GetAllDrugQuery input)
+        {
+            var response = await _drugtService.GetAllDrugs(input);
+            return Ok(response);
+        }
+
+        [HttpGet("name-list")]
+        [Authorize(AdminDrugPermissions.ReadList)]
+        public async Task<ActionResult> GetNameListAsync([FromQuery] GetAllDrugNamesQuery input)
+        {
+            var response = await _drugtService.GetAllDrugNames(input);
+            return Ok(response);
+        }
+
+
         [HttpGet]
-        [Authorize(AdminDrugPermissions.ReadList)]
-        public async Task<ActionResult> GetAllDrug()
-        {
-            var Drugies = await _drugtService.GetAllDrugs();
-            return Ok(Drugies);
-        }
-
-        [HttpGet("DrugsNames")]
-        [Authorize(AdminDrugPermissions.ReadList)]
-        public async Task<ActionResult> GetAllDrugNames()
-        {
-            var Drugies = await _drugtService.GetAllDrugsNames();
-
-            return Ok(Drugies);
-        }
-
-
-        [HttpGet("id")]
         [Authorize(AdminDrugPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneDrug(string id)
+        public async Task<ActionResult> GetAsync([FromQuery] string id)
         {
-            var Drugies = await _drugtService.GetDrugById(id);
-            return Ok(Drugies);
+            var response = await _drugtService.GetDrugById(id);
+            return Ok(response);
         }
         [HttpPost]
         [Authorize(AdminDrugPermissions.Create)]
-        public async Task<ActionResult> CreateDrugs([FromForm] CreateDrugCommand input)
+        public async Task<ActionResult> CreateAsync([FromForm] CreateDrugCommand input)
         {
-
-            var Drugies = await _drugtService.CreateDrug(input);
-            return Ok(Drugies);
+            var response = await _drugtService.CreateDrug(input);
+            return Created("", response);
         }
-        [HttpPut("id")]
+        [HttpPut]
         [Authorize(AdminDrugPermissions.Update)]
-        public async Task<ActionResult> UpdateDrug(string id, [FromForm] UpdateDrugCommand input)
+        public async Task<ActionResult> UpdateAsync([FromForm] UpdateDrugCommand input)
         {
-            var Drugies = await _drugtService.UpdateDrug(id, input);
-            return Ok(Drugies);
+            var response = await _drugtService.UpdateDrug(input);
+            return Accepted(response);
         }
-        [HttpDelete("id")]
+        [HttpDelete]
         [Authorize(AdminDrugPermissions.Delete)]
-        public async Task<ActionResult> DeleteDrug(string id)
+        public async Task<ActionResult> DeleteAsync([FromQuery]DeleteDrugCommand input)
         {
-            var Drugies = await _drugtService.DeleteDrug(id);
-            return Ok(Drugies);
+            var response = await _drugtService.DeleteDrug(input.Id);
+            return NoContent();
         }
-        [HttpPost("upload")]
+        [HttpPost("bulk")]
         [Authorize(AdminDrugPermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> UploadExcelFile([FromForm]BulkCreateModel input)
         {
-
-
-            var data = _drugtService.CreateFromExcel(file);
-
-
-
-            return Ok(data);
+            var data = _drugtService.CreateFromExcel(input.File);
+            return Created("", data);
         }
 
     }

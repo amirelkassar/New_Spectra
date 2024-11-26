@@ -71,7 +71,7 @@ namespace Spectra.Infrastructure.Clients
                 .Take(pageSize)
                 .ToList();
             // Return paginated result
-            return new PaginatedResult<Client>(query,totalCount,pageSize);
+            return new PaginatedResult<Client>(query, totalCount, pageSize);
         }
     }
 }

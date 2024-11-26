@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Employees;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 using static Spectra.Domain.Shared.Constants.ContractConses;
@@ -29,13 +30,13 @@ namespace Spectra.Application.Contracts.Commands
     }
 
     public class CreateContractCommandHandler(IContractRepository contractRepository,
-        IEmployeeRepository medicalProvider,
+        IBaseMongoDbRepository<Employee> medicalProvider,
         IServiceMDRepository serviceMDRepository,
         ISectionsRepository sectionsRepository) : IRequestHandler<CreateContractCommand, OperationResult>
     {
 
         private readonly IContractRepository _contractRepository = contractRepository;
-        private readonly IEmployeeRepository _medicalProvider = medicalProvider;
+        private readonly IBaseMongoDbRepository<Employee> _medicalProvider = medicalProvider;
         private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
         private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
 
@@ -70,7 +71,7 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.FreelancingServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
@@ -86,7 +87,7 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.SpectraTeamServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
@@ -105,8 +106,8 @@ namespace Spectra.Application.Contracts.Commands
             medicalProvider.Id,
             medicalProvider.Name.FirstName,
              request.EmployeeUserId,
-            departmentHead.DoctorId,
-            departmentHead.DoctorName,
+            departmentHead.HeadDoctorId,
+            departmentHead.HeadDoctorName,
             $"Contract Of {medicalProvider.Name.FirstName}",
             ContractStates.Contracting,
             [contractVerion]

@@ -4,7 +4,6 @@ using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
-using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -19,19 +18,17 @@ namespace Spectra.Application.Employees.Commands
         public ICollection<EmployeeSpecialization> Specializations { get; set; }
         public ICollection<EmployeeService> Services { get; set; }
 
-        public class UpdateMedicalDataCommandHandler(IBaseMongoDbRepository<Employee, string> medicalRepository,
-            IBaseMongoDbRepository<Section, string> sectionRepository,
-            IBaseMongoDbRepository<Specialization, string> specializationRepository,
-            IBaseMongoDbRepository<MasterDataServices, string> servicesRepository) : IRequestHandler<UpdateMedicalDataCommand, OperationResult>
+        public class UpdateMedicalDataCommandHandler(IBaseMongoDbRepository<Employee> medicalRepository,
+            IBaseMongoDbRepository<Section> sectionRepository,
+            IBaseMongoDbRepository<Specialization> specializationRepository) : IRequestHandler<UpdateMedicalDataCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _medicalRepository = medicalRepository;
-            private readonly IBaseMongoDbRepository<Section, string> _sectionRepository = sectionRepository;
-            private readonly IBaseMongoDbRepository<Specialization, string> _specializationRepository = specializationRepository;
-            private readonly IBaseMongoDbRepository<MasterDataServices, string> _servicesRepository = servicesRepository;
+            private readonly IBaseMongoDbRepository<Employee> _medicalRepository = medicalRepository;
+            private readonly IBaseMongoDbRepository<Section> _sectionRepository = sectionRepository;
+            private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
 
             public async Task<OperationResult> Handle(UpdateMedicalDataCommand request, CancellationToken cancellationToken)
             {
-                var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+                var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
 
                 if (!medicalProvider.Equals(request.SectionId))
                 {

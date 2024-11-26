@@ -12,9 +12,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Code { get; set; }
-        public double ConsultationCost { get; set; }
+        public string? Description { get; set; }
+        public string? Code { get; set; }
+        public double? ConsultationCost { get; set; }
 
     }
 
@@ -37,7 +37,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
             var names = await _specializationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
             if (names.Any())
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new NotFoundException("Specializations", request.Id);
             }
             Specializations.Name = request.Name;
             Specializations.Description = request.Description;
@@ -59,24 +59,9 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
                 .NotEmpty().WithMessage("Id is required.");
 
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Specialization Name is required.")
-                .MaximumLength(100).WithMessage("Specialization Name must not exceed 100 characters.");
-            RuleFor(x => x.Code)
-              .NotEmpty().WithMessage("Code is required.")
-              .MaximumLength(100).WithMessage("Specialization Code must not exceed 100 characters.");
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(x => x.Description)
-                .MaximumLength(500).WithMessage("Description must not exceed 500 characters.");
-
-            RuleFor(x => x.ConsultationCost)
-     .GreaterThan(0).WithMessage("Consultation Cost must be greater than 0.")
-     .Must(HaveValidDecimalPlaces).WithMessage("Consultation Cost must have up to 2 decimal places.");
-
-
-        }
-        private bool HaveValidDecimalPlaces(double cost)
-        {
-            return Math.Round(cost, 2) == cost;
         }
     }
 }

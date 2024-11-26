@@ -41,7 +41,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                             await attachment.CopyToAsync(fileStream);
                         }
 
-                        filePaths.Add($"/{folderName}/{uniqueFileName}");
+                        filePaths.Add($"{folderName}/{uniqueFileName}");
                     }
                 }
             }
@@ -70,18 +70,15 @@ namespace Spectra.Application.MasterData.HellperFunc
                 await attachment.CopyToAsync(fileStream);
             }
 
-            return $"/{folderName}/{uniqueFileName}";
+            return $"{folderName}/{uniqueFileName}";
         }
 
         public async Task DeleteAttachment(string? attachment)
         {
-            if (!string.IsNullOrEmpty(attachment))
+            if (!string.IsNullOrEmpty(attachment) && File.Exists(attachment))
             {
-                var filePath = _webHostEnvironment.WebRootPath + attachment;
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, attachment);
+                File.Delete(filePath);
             }
         }
 
@@ -96,26 +93,9 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             foreach (var attachmentPath in attachmentPaths)
             {
-                var fullPath = _webHostEnvironment.WebRootPath + attachmentPath;
-
-                // Check if the file exists before attempting to delete it
+                var fullPath =Path.Combine(_webHostEnvironment.WebRootPath ,attachmentPath);
                 if (File.Exists(fullPath))
-                {
-                    try
-                    {
-                        File.Delete(fullPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        // Log or handle any errors that occur during file deletion
-                        Console.WriteLine($"Error deleting file: {ex.Message}");
-                        // You could throw an exception or return a failure result if necessary
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"File not found: {fullPath}");
-                }
+                    File.Delete(fullPath);
             }
         }
 
@@ -159,7 +139,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                     }
 
 
-                    uploadedFilePaths.Add(Path.Combine(folderName, newFileName).Replace("\\", "/"));
+                    uploadedFilePaths.Add(Path.Combine(folderName, newFileName).Replace("\\", "/").TrimStart('\\', '/'));
                 }
             }
 
@@ -208,7 +188,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             }
 
             // Return the path of the new file
-            return $"/{folderName}/{newFileName}";
+            return $"{folderName}/{newFileName}";
         }
     }
 }

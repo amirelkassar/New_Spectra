@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
@@ -10,14 +12,13 @@ namespace Spectra.Application.MasterData.Drug.Queries
     public class GetAllDrugNamesQuery : QueryPaginationParam, IQuery<OperationResult>
     {
         public string? Search { get; set; }
-        public class GetAllDrugNamesQueryHandler : IRequestHandler<GetAllDrugNamesQuery, OperationResult>
+        public class GetAllDrugNamesQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository,
+            IHttpContextAccessor httpContextAccessor,
+            IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetAllDrugNamesQuery, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
-
-            public GetAllDrugNamesQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository)
-            {
-                _drugRepository = drugRepository;
-            }
+            private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository = drugRepository;
+            private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+            private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
             public async Task<OperationResult> Handle(GetAllDrugNamesQuery request, CancellationToken cancellationToken)
             {
@@ -39,9 +40,9 @@ namespace Spectra.Application.MasterData.Drug.Queries
                     totalData = total;
                 }
 
-                var drugNames = drugs.Select(d => new BaseMasterDataDto { Id = d.Id, Name = d.Name });
+                var drugNames = drugs.Select(d => new BaseMasterDataDto { Id = d.Id, Name = d.Name, ImageLink = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, d.ImagePath), EndPointsRoutes.Drugs, _httpContextAccessor) });
 
-                return OperationResult<PaginatedResult<BaseMasterDataDto>>.Success(new PaginatedResult<BaseMasterDataDto>(drugNames.ToArray(),totalData,request.MaxCount));
+                return OperationResult<PaginatedResult<BaseMasterDataDto>>.Success(new PaginatedResult<BaseMasterDataDto>(drugNames.ToArray(), totalData, request.MaxCount));
 
 
             }

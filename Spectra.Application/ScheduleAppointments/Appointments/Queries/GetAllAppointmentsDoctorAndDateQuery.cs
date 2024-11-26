@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using Spectra.Application.Employees;
+using Spectra.Application.Interfaces;
+using Spectra.Domain.Employees;
 using Spectra.Domain.ScheduleAppointments;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -16,8 +17,8 @@ namespace Spectra.Application.ScheduleAppointments.Appointments.Queries
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        private readonly IEmployeeRepository _doctorRepository;
-        public GetAllAppointmentsDoctorQueryHandler(IAppointmentRepository appointmentRepository, IEmployeeRepository doctorRepository)
+        private readonly IBaseMongoDbRepository<Employee> _doctorRepository;
+        public GetAllAppointmentsDoctorQueryHandler(IAppointmentRepository appointmentRepository, IBaseMongoDbRepository<Employee> doctorRepository)
         {
             _appointmentRepository = appointmentRepository;
             _doctorRepository = doctorRepository;

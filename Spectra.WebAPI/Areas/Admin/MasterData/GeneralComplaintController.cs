@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.GeneralComplaintsM.Commands;
+using Spectra.Application.MasterData.GeneralComplaintsM.Queries;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
@@ -16,71 +16,51 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _generalComplaintService = generalComplaintService;
         }
 
-
-
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize(AdminGeneralComplaintPermissions.ReadList)]
-        public async Task<ActionResult> GetAllGeneralComplaints()
+        public async Task<ActionResult> GetAllGeneralComplaints([FromQuery] GetAllGeneralComplaintsQuery input)
         {
-            var GeneralComplaintsies = await _generalComplaintService.GetAllGeneralComplaintss();
+            var GeneralComplaintsies = await _generalComplaintService.GetAllGeneralComplaintss(input);
             return Ok(GeneralComplaintsies);
         }
 
-        [HttpGet("GeneralComplaints")]
-        [Authorize(AdminGeneralComplaintPermissions.ReadList)]
-        public async Task<ActionResult> GetAllGeneralComplaintsNames()
-        {
-            var Drugies = await _generalComplaintService.GetAllGeneralComplaintNames();
-
-            return Ok(Drugies);
-        }
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminGeneralComplaintPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneGeneralComplaints(string id)
+        public async Task<ActionResult> GetOneGeneralComplaints([FromQuery] GetGeneralComplaintsByIdQuery input)
         {
-            var GeneralComplaintsies = await _generalComplaintService.GetGeneralComplaintsById(id);
+            var GeneralComplaintsies = await _generalComplaintService.GetGeneralComplaintsById(input.Id);
             return Ok(GeneralComplaintsies);
         }
 
         [HttpPost]
         [Authorize(AdminGeneralComplaintPermissions.Create)]
-        public async Task<ActionResult> CreateGeneralComplaintss(CreateGeneralComplaintsCommand input)
+        public async Task<ActionResult> CreateGeneralComplaintss([FromBody] CreateGeneralComplaintsCommand input)
         {
-
-
             var GeneralComplaintsies = await _generalComplaintService.CreateGeneralComplaints(input);
-            return Ok(GeneralComplaintsies);
+            return Created("", GeneralComplaintsies);
         }
 
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminGeneralComplaintPermissions.Update)]
-        public async Task<ActionResult> UpdateGeneralComplaints(string id, UpdateGeneralComplaintsCommand input)
+        public async Task<ActionResult> UpdateGeneralComplaints([FromBody] UpdateGeneralComplaintsCommand input)
         {
-
-
-            var GeneralComplaintsies = await _generalComplaintService.UpdateGeneralComplaints(id, input);
-            return Ok(GeneralComplaintsies);
+            var GeneralComplaintsies = await _generalComplaintService.UpdateGeneralComplaints(input);
+            return Accepted(GeneralComplaintsies);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminGeneralComplaintPermissions.Delete)]
-        public async Task<ActionResult> DeleteGeneralComplaints(string id)
+        public async Task<ActionResult> DeleteGeneralComplaints([FromQuery] DeleteGeneralComplaintsCommand input)
         {
-
-            var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(id);
-            return Ok(GeneralComplaintsies);
+            var GeneralComplaintsies = await _generalComplaintService.DeleteGeneralComplaints(input.Id);
+            return NoContent();
         }
-        [HttpPost("upload")]
+        [HttpPost("bulk")]
         [Authorize(AdminGeneralComplaintPermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
-
-
-            var data = _generalComplaintService.CreateFromExcel(file);
-
-
-
-            return Ok(data);
+            var data = _generalComplaintService.CreateFromExcel(input.File);
+            return Created("", data);
         }
 
     }

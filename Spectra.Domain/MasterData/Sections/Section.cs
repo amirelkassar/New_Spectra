@@ -7,39 +7,35 @@ namespace Spectra.Domain.MasterData.Sections
     public class Section : BaseAuditableEntity<string>
     {
         public string Name { get; set; }
-        public List<string> SpecializationIds { get; set; }
-        public string DoctorId { get; set; }
-        public string DoctorName { get; set; }
+        public ICollection<SectionSpecsification> Specsifications { get; set; }
+        public string HeadDoctorId { get; set; }
+        public string HeadDoctorName { get; set; }
 
         protected Section() { }
-        private Section(
-            string id,
+        private Section(string id,
        string name
-      , string doctorId,
-       string doctorName,
-        List<string> specializationIds
-               ) : base(id)
+      , string headId,
+       string headName,
+        ICollection<SectionSpecsification> specsifications) : base(id)
         {
             Id = id;
             Name = name;
-            DoctorId = doctorId;
-            DoctorName = doctorName;
-            SpecializationIds = specializationIds;
+            HeadDoctorId = headId;
+            HeadDoctorName = headName;
+            Specsifications = specsifications;
         }
-        public static Section Create(string id, string name,
-           string doctorId, string doctorName, List<string> specializationIds
-       )
+        public static Section Create(string id,
+       string name
+      , string headId,
+       string headName,
+        ICollection<SectionSpecsification> specsifications)
         {
-
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
-
-            ArgumentNullException.ThrowIfNull(doctorId, nameof(doctorId));
-            ArgumentNullException.ThrowIfNull(doctorName, nameof(doctorName));
-            ArgumentNullException.ThrowIfNull(specializationIds, nameof(specializationIds));
-
-            return new Section(id, name, doctorId, doctorName, specializationIds);
-
+            ArgumentNullException.ThrowIfNull(headId, nameof(headId));
+            ArgumentNullException.ThrowIfNull(headName, nameof(headName));
+            ArgumentNullException.ThrowIfNull(specsifications, nameof(specsifications));
+            return new Section(id, name, headId, headName, specsifications);
         }
 
     }

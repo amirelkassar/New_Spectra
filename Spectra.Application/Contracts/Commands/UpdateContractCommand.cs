@@ -59,7 +59,7 @@ namespace Spectra.Application.Contracts.Commands
                     newVersion.FreelancingServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
@@ -75,7 +75,7 @@ namespace Spectra.Application.Contracts.Commands
                     newVersion.SpectraTeamServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.Name,
+                        ServiceName = service.EnName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,

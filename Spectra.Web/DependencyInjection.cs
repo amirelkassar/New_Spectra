@@ -37,22 +37,6 @@ namespace Spectra.Web
                 });
             });
         }
-        private static void ConfigureIdentityManagement(IServiceCollection services, IConfiguration configuration)
-        {
-            var _identityServerSetting = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
-
-            if (_identityServerSetting != null)
-            {
-                var webClient = _identityServerSetting.Clients.FirstOrDefault(c => c.ClientId.Equals("spectra_web"));
-                services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                   .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
-                   {
-                       options.Authority = _identityServerSetting.Authority;
-                       options.ApiName = "IS4API";
-                       options.SaveToken = true;
-                   });
-            }
-        }
 
         private static void ConfigureSwagger(IServiceCollection services, IConfiguration configuration)
         {

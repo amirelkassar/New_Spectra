@@ -8,52 +8,34 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Sections.Commands
 {
-    public class CreateSectionsCommand : ICommand<OperationResult<string>>
+    public class CreateSectionsCommand : ICommand<OperationResult>
     {
-
         public string Name { get; set; }
-        public List<string> SpecializationIds { get; set; }
-        public string DoctorId { get; set; }
-        public string DoctorName { get; set; }
+        public string HeadDoctorId { get; set; }
+        public string HeadDoctorName { get; set; }
+        public ICollection<SectionSpecsification> Specsifications { get; set; }
     }
 
-
-
-    public class CreateSectionsCommandHandler : IRequestHandler<CreateSectionsCommand, OperationResult<string>>
+    public class CreateSectionsCommandHandler(ISectionsRepository sectionsRepository) : IRequestHandler<CreateSectionsCommand, OperationResult>
     {
-        private readonly ISectionsRepository _sectionsRepository;
+        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
 
-
-
-
-        public CreateSectionsCommandHandler(ISectionsRepository sectionsRepository)
+        public async Task<OperationResult> Handle(CreateSectionsCommand request, CancellationToken cancellationToken)
         {
-            _sectionsRepository = sectionsRepository;
-
-        }
-
-        public async Task<OperationResult<string>> Handle(CreateSectionsCommand request, CancellationToken cancellationToken)
-        {
-
-
-            var names = await _sectionsRepository.GetAllAsync(b => b.Name == request.Name);
+            var names = await _sectionsRepository.GetAllAsync(b => b.Name.ToLower() == request.Name.ToLower());
             if (names.Any())
             {
-                throw new DbErrorException(" this's Name is a ready exists");
-            }
-            var entity = Section.Create(
-
-             Ulid.NewUlid().ToString(), request.Name,
-           request.DoctorId, request.DoctorName, request.SpecializationIds
-
-             );
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
+            } 
+            var entity = Section.Create(Ulid.NewUlid().ToString(), 
+                request.Name,
+                request.HeadDoctorId,
+                request.HeadDoctorName, 
+                request.Specsifications);
 
             await _sectionsRepository.AddAsync(entity);
 
             return OperationResult<string>.Success(entity.Id);
-
-
-
         }
     }
     public class CreateSectionsCommandValidator : AbstractValidator<CreateSectionsCommand>
@@ -61,21 +43,23 @@ namespace Spectra.Application.MasterData.Sections.Commands
         public CreateSectionsCommandValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Name is required.")
-                .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
+                .NotEmpty()
+                .NotNull()
+                .MinimumLength(2);
 
-            RuleFor(x => x.SpecializationIds)
-                .NotNull().WithMessage("Diagnoses list is required.")
-                .Must(d => d.Count > 0).WithMessage("At least one diagnosis is required.")
-                .ForEach(d => d.NotEmpty().WithMessage("Diagnosis cannot be empty."));
+            RuleFor(x => x.Specsifications)
+                .NotEmpty()
+                .NotNull()
+                .Must(s => s.Count > 0)
+                .WithMessage("Specsifications must be more than 0");
 
-            RuleFor(x => x.DoctorId)
-                .NotEmpty().WithMessage("Doctor ID is required.")
-                .MaximumLength(50).WithMessage("Doctor ID must not exceed 50 characters.");
+            RuleFor(x => x.HeadDoctorId)
+                .NotEmpty()
+                .NotNull();
 
-            RuleFor(x => x.DoctorName)
-                .NotEmpty().WithMessage("Doctor name is required.")
-                .MaximumLength(100).WithMessage("Doctor name must not exceed 100 characters.");
+            RuleFor(x => x.HeadDoctorName)
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

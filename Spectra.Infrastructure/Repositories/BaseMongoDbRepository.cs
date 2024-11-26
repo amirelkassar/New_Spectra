@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using Serilog;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Common;
 using System.Linq.Expressions;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.Repositories
 {
-    public class BaseMongoDbRepository<T> : IBaseMongoDbRepository<T, string> where T : BaseEntity<string>
+    public class BaseMongoDbRepository<T> : IBaseMongoDbRepository<T> where T : BaseEntity<string>
     {
         private readonly IMongoCollection<T> _collection;
         public BaseMongoDbRepository(IMongoDbService mongoDbService)
@@ -60,14 +61,16 @@ namespace Spectra.Infrastructure.Repositories
 
         public async Task UpdateAsync(T input)
         {
-            var props = typeof(T).GetProperties();
-            var obj = Builders<T>.Update.Set(nameof(input.Id), input.Id);
-            foreach (var prop in props)
-            {
-                obj.Set(prop.Name, prop.GetValue(input));
-            }
+            //var props = typeof(T).GetProperties();
+            //var obj = Builders<T>.Update.Set(nameof(input.Id), input.Id);
+            //foreach (var prop in props)
+            //{
+            //    var value = prop.GetValue(input);
+            //    Log.Information($"Value of {prop.Name} : {value} ");
+            //    obj.Set(prop.Name, value);
+            //}
 
-            await _collection.UpdateOneAsync(m => m.Id == input.Id, obj);
+            await _collection.ReplaceOneAsync(i=>i.Id== input.Id,input);
         }
     }
 }

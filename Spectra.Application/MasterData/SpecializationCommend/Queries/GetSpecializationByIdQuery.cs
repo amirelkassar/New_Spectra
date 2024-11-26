@@ -1,16 +1,17 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Spectra.Application.MasterData.SpecializationCommend.DTO;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.SpecializationCommend.Queries
 {
-
-    public class GetSpecializationByIdQuery : IRequest<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>>
+    public class GetSpecializationByIdQuery : IRequest<OperationResult>
     {
         public string Id { get; set; }
     }
 
-    public class GetSpecializationByIdQueryHandler : IRequestHandler<GetSpecializationByIdQuery, OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>>
+    public class GetSpecializationByIdQueryHandler : IRequestHandler<GetSpecializationByIdQuery, OperationResult>
     {
         private readonly ISpecializationsRepository _specializationRepository;
 
@@ -18,25 +19,16 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
         {
             _specializationRepository = specializationRepository;
         }
-
-
-        public async Task<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>> Handle(GetSpecializationByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(GetSpecializationByIdQuery request, CancellationToken cancellationToken)
         {
-
-
-
             var Specialization = await _specializationRepository.GetByIdAsync(request.Id);
             if (Specialization == null)
             {
                 throw new NotFoundException("Specialization", request.Id);
             }
 
-
-            return OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>.Success(Specialization);
-
-
-
-
+            var dto = Specialization.Adapt<SpecializationReadDto>();
+            return OperationResult<SpecializationReadDto>.Success(dto);
         }
     }
 

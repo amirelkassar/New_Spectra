@@ -11,14 +11,14 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
     public class ServiceMDRepository : IServiceMDRepository
     {
 
-        private readonly IMongoCollection<MasterDataServices> _masterDataServices;
+        private readonly IMongoCollection<PlatformService> _masterDataServices;
 
         public ServiceMDRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
-            _masterDataServices = database.GetCollection<MasterDataServices>("MasterDataServices");
+            _masterDataServices = database.GetCollection<PlatformService>("MasterDataServices");
         }
-        public async Task<MasterDataServices> GetByIdAsync(string id)
+        public async Task<PlatformService> GetByIdAsync(string id)
         {
 
             var entity = await _masterDataServices.Find(c => c.Id == id).FirstOrDefaultAsync();
@@ -29,43 +29,25 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
             return entity;
         }
 
-        public async Task AddAsync(MasterDataServices masterDataServices)
+        public async Task AddAsync(PlatformService masterDataServices)
         {
             await _masterDataServices.InsertOneAsync(masterDataServices);
         }
 
-        public async Task UpdateAsync(MasterDataServices masterDataServices)
+        public async Task UpdateAsync(PlatformService masterDataServices)
         {
             await _masterDataServices.ReplaceOneAsync(c => c.Id == masterDataServices.Id, masterDataServices);
         }
 
-        public async Task DeleteAsync(MasterDataServices masterDataServices)
+        public async Task DeleteAsync(PlatformService masterDataServices)
         {
             await _masterDataServices.DeleteOneAsync(c => c.Id == masterDataServices.Id);
         }
 
-        public async Task<IEnumerable<MasterDataServices>> GetAllAsync(Expression<Func<MasterDataServices, bool>> filter = null, FindOptions options = null)
+        public async Task<IEnumerable<PlatformService>> GetAllAsync(Expression<Func<PlatformService, bool>> filter = null, FindOptions options = null)
         {
             filter ??= _ => true;
             return await _masterDataServices.Find(filter, options).ToListAsync();
-        }
-        public async Task<IEnumerable<MasterDataServices>> GetAllNameAndTermsAndConditions()
-        {
-            var filter = Builders<MasterDataServices>.Filter
-        .Eq(x => x.AvailableSrvices, AvailableSrvice.ServicesView);
-
-            var projection = Builders<MasterDataServices>.Projection
-                .Include(x => x.Name)
-                .Include(x => x.TermsAndConditions);
-
-            var result = await _masterDataServices
-                .Find(filter)
-                .Project<MasterDataServices>(projection)
-                .ToListAsync();
-
-            return result;
-
-
         }
     }
 }

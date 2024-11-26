@@ -1,84 +1,63 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.DiagnoseCommend.Commands;
+using Spectra.Application.MasterData.DiagnoseCommend.Queries;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
+using System.Text.RegularExpressions;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    public class DiagnoseController : AdminBaseController
+    public class DiagnoseController(IDiagnosesService diagnosetService) : AdminBaseController
     {
-        private readonly IDiagnosesService _diagnosetService;
+        private readonly IDiagnosesService _diagnosetService = diagnosetService;
 
-        public DiagnoseController(IDiagnosesService diagnosetService)
-        {
-            _diagnosetService = diagnosetService;
-        }
-
-
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize(AdminDiagnosePermissions.ReadList)]
-        public async Task<ActionResult> GetAllDiagnose()
+        public async Task<ActionResult> GetAllDiagnose([FromQuery] GetAllDiagnoseQuery input)
         {
-            var Diagnoseies = await _diagnosetService.GetAllDiagnosess();
-
+            var Diagnoseies = await _diagnosetService.GetAllDiagnosess(input);
             return Ok(Diagnoseies);
         }
 
 
 
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminDiagnosePermissions.ReadOne)]
-        public async Task<ActionResult> GetOneDiagnose(string id)
+        public async Task<ActionResult> GetOneDiagnose([FromQuery] GetDiagnoseByIdQuery input)
         {
-            var Diagnoseies = await _diagnosetService.GetDiagnosesById(id);
-            return Ok(Diagnoseies);
-        }
-        [HttpGet("GetAllNames")]
-        [Authorize(AdminDiagnosePermissions.ReadList)]
-        public async Task<ActionResult> GetAllSpecializationsNames()
-        {
-            var Diagnoseies = await _diagnosetService.GetAllDiagnosesNames();
-
+            var Diagnoseies = await _diagnosetService.GetDiagnosesById(input.Id);
             return Ok(Diagnoseies);
         }
 
         [HttpPost]
         [Authorize(AdminDiagnosePermissions.Create)]
-
-        public async Task<ActionResult> CreateDiagnose(CreateDiagnoseCommand input)
+        public async Task<ActionResult> CreateDiagnose([FromBody] CreateDiagnoseCommand input)
         {
-
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);
-
-            return Ok(Diagnoseies);
+            return Created("", Diagnoseies);
         }
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminDiagnosePermissions.Update)]
-        public async Task<ActionResult> UpdateDiagnose(string id, UpdateDiagnoseCommand input)
+        public async Task<ActionResult> UpdateDiagnose([FromBody] UpdateDiagnoseCommand input)
         {
-            var Diagnoseies = await _diagnosetService.UpdateDiagnoses(id, input);
+            var Diagnoseies = await _diagnosetService.UpdateDiagnoses(input);
 
-            return Ok(Diagnoseies);
+            return Accepted(Diagnoseies);
         }
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminDiagnosePermissions.Delete)]
-        public async Task<ActionResult> DeleteDiagnose(string id)
+        public async Task<ActionResult> DeleteDiagnose([FromQuery] DeleteDiagnoseCommand input)
         {
-            var delete = await _diagnosetService.DeleteDiagnoses(id);
-            return Ok(delete);
+            var delete = await _diagnosetService.DeleteDiagnoses(input);
+            return NoContent();
         }
-        [HttpPost("upload")]
+        [HttpPost("bulk")]
         [Authorize(AdminDiagnosePermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
-
-            var data = _diagnosetService.CreateFromExcel(file);
-
-
-
-            return Ok(data);
+            var data = _diagnosetService.CreateFromExcel(input.File);
+            return Created("", data);
         }
 
 

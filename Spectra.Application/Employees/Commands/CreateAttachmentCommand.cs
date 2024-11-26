@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
@@ -11,15 +12,18 @@ namespace Spectra.Application.Employees.Commands
 {
     public class CreateAttachmentCommand : EmployeeAttachmentDto, IRequest<OperationResult>
     {
-        public class CreateAttachmentCommandHndler(IBaseMongoDbRepository<Employee, string> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<CreateAttachmentCommand, OperationResult>
+        public class CreateAttachmentCommandHndler(IBaseMongoDbRepository<Employee> employeeRepo,
+            IDocumentHellper documentHellper,
+            IWebHostEnvironment webHostEnvironment) : IRequestHandler<CreateAttachmentCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo = employeeRepo;
+            private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
             private readonly IDocumentHellper _documentHellper = documentHellper;
+            private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
             public async Task<OperationResult> Handle(CreateAttachmentCommand request, CancellationToken cancellationToken)
             {
                 var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
-                var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
+                var folderPath = Path.Combine(_webHostEnvironment.WebRootPath, Pathes.GetUsersPath(), employee.UserId);
                 Directory.CreateDirectory(folderPath);
                 if (request.File.Length > 0)
                 {

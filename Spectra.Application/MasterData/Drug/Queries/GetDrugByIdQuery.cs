@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -12,18 +14,18 @@ namespace Spectra.Application.MasterData.Drug.Queries
         public string Id { get; set; }
     }
 
-    public class GetDrugsByIdQueryHandler : IRequestHandler<GetDrugsByIdQuery, OperationResult<Domain.MasterData.Drug.Drug>>
+    public class GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, 
+        IHttpContextAccessor httpContextAccessor,
+        IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetDrugsByIdQuery, OperationResult<Domain.MasterData.Drug.Drug>>
     {
-        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> _drugRepository;
-
-        public GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug, string> drugRepository)
-        {
-            _drugRepository = drugRepository;
-        }
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository = drugRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
         public async Task<OperationResult<Domain.MasterData.Drug.Drug>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
         {
             var entitiy = await _drugRepository.GetByIdAsync(request.Id);
+            entitiy.ImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, entitiy.ImagePath), EndPointsRoutes.Drugs, _httpContextAccessor);
             return entitiy == null
                 ? throw new NotFoundException("Drugs", request.Id)
                 : OperationResult<Domain.MasterData.Drug.Drug>.Success(entitiy);

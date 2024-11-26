@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\**" />
+    <Compile Remove="wwwroot\Documents\**" />
+    <Content Remove="ClientApp\**" />
+    <Content Remove="wwwroot\Documents\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
+    <EmbeddedResource Remove="wwwroot\Documents\**" />
+    <None Remove="ClientApp\**" />
+    <None Remove="wwwroot\Documents\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Flurl" Version="4.0.0" />
     <PackageReference Include="Flurl.Http" Version="4.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
@@ -24,8 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
+using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
@@ -16,60 +16,52 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _specializationsServices = specializationsServices;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize(AdminSpecializationPermissions.ReadList)]
-        public async Task<ActionResult> GetAllSpecializations()
+        public async Task<ActionResult> GetAllSpecializations([FromQuery] GetAllSpecializationQuery input)
         {
-            var specializations = await _specializationsServices.GetAllSpecializations();
+            var specializations = await _specializationsServices.GetAllSpecializations(input);
             return Ok(specializations);
         }
 
-        [HttpGet("GetAllNames")]
-        [Authorize(AdminSpecializationPermissions.ReadList)]
-        public async Task<ActionResult> GetAllSpecializationsNames()
-        {
-            var specializationNames = await _specializationsServices.GetAllSpecializationsNames();
-            return Ok(specializationNames);
-        }
-
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminSpecializationPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneSpecialization(string id)
+        public async Task<ActionResult> GetOneSpecialization([FromQuery] GetSpecializationByIdQuery input)
         {
-            var specialization = await _specializationsServices.GetSpecializationById(id);
+            var specialization = await _specializationsServices.GetSpecializationById(input.Id);
             return Ok(specialization);
         }
 
         [HttpPost]
         [Authorize(AdminSpecializationPermissions.Create)]
-        public async Task<ActionResult> CreateSpecialization(CreateSpecializationCommand input)
+        public async Task<ActionResult> CreateSpecialization([FromBody] CreateSpecializationCommand input)
         {
             var specialization = await _specializationsServices.CreateSpecialization(input);
-            return Ok(specialization);
+            return Created("", specialization);
         }
 
-        [HttpPost("upload")]
+        [HttpPost("bulk")]
         [Authorize(AdminSpecializationPermissions.Create)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> CreateExcelFile(BulkCreateModel input)
         {
-            var data = _specializationsServices.CreateFromExcel(file);
-            return Ok(data);
+            var data = _specializationsServices.CreateFromExcel(input.File);
+            return Created("", data);
         }
 
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminSpecializationPermissions.Update)]
-        public async Task<ActionResult> UpdateSpecialization(string id, UpdateSpecializationCommand input)
+        public async Task<ActionResult> UpdateSpecialization([FromBody] UpdateSpecializationCommand input)
         {
-            var specialization = await _specializationsServices.UpdateSpecialization(id, input);
-            return Ok(specialization);
+            var specialization = await _specializationsServices.UpdateSpecialization(input);
+            return Accepted(specialization);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminSpecializationPermissions.Delete)]
-        public async Task<ActionResult> DeleteSpecialization(string id)
+        public async Task<ActionResult> DeleteSpecialization([FromQuery] DeleteSpecializationCommand input)
         {
-            var specialization = await _specializationsServices.DeleteSpecialization(id);
-            return Ok(specialization);
+            var specialization = await _specializationsServices.DeleteSpecialization(input.Id);
+            return NoContent();
         }
     }
 

@@ -5,33 +5,20 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 {
-    public class DeleteMedicalTestsAndXraysCommand : ICommand<OperationResult<Unit>>
+    public class DeleteMedicalTestsAndXraysCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
     }
-    public class DeleteMedicalTestsAndXraysCommandHandler : IRequestHandler<DeleteMedicalTestsAndXraysCommand, OperationResult<Unit>>
+    public class DeleteMedicalTestsAndXraysCommandHandler(IMedicalTestsAndXrayRepository medicalTestsAndXrayRepository) : IRequestHandler<DeleteMedicalTestsAndXraysCommand, OperationResult>
     {
-        private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
+        private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
 
-        public DeleteMedicalTestsAndXraysCommandHandler(IMedicalTestsAndXrayRepository medicalTestsAndXrayRepository)
+        public async Task<OperationResult> Handle(DeleteMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
-
-            _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
-        }
-
-
-        public async Task<OperationResult<Unit>> Handle(DeleteMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
-        {
-
-
             var medicalTestsAndXrayRepository = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
-
-
             await _medicalTestsAndXrayRepository.DeleteAsync(medicalTestsAndXrayRepository);
             return OperationResult<Unit>.Success(Unit.Value);
         }
-
-
     }
 }
 

@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData.Drug.Validator;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Domain.MasterData.Drug;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
@@ -30,10 +29,10 @@ namespace Spectra.Application.MasterData.Drug.Commands
 
     public class CreateDrugCommandHandler : IRequestHandler<CreateDrugCommand, OperationResult<string>>
     {
-        private readonly IDrugRepository _drugRepository;
+        private readonly IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> _drugRepository;
         private readonly IDocumentHellper _addPhoto;
 
-        public CreateDrugCommandHandler(IDrugRepository drugRepository, IDocumentHellper addPhoto)
+        public CreateDrugCommandHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, IDocumentHellper addPhoto)
         {
             _drugRepository = drugRepository;
             _addPhoto = addPhoto;
@@ -42,8 +41,8 @@ namespace Spectra.Application.MasterData.Drug.Commands
         public async Task<OperationResult<string>> Handle(CreateDrugCommand request, CancellationToken cancellationToken)
         {
 
-            var names = await _drugRepository.GetAllAsync(b => b.Name == request.Name);
-            if (names.Any())
+            var check = await _drugRepository.Exists(b => b.Name == request.Name);
+            if (check)
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }
@@ -61,6 +60,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.Code = request.Code;
             drug.Type = request.Type;
             drug.Nots = request.Nots;
+            drug.ImagePath = photoPath;
 
             await _drugRepository.AddAsync(drug);
 

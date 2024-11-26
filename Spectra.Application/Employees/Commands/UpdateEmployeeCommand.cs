@@ -32,8 +32,8 @@ namespace Spectra.Application.Employees.Commands
 
     public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<Employee, string> _empRepo;
-        public UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee, string> empRepo)
+        private readonly IBaseMongoDbRepository<Employee> _empRepo;
+        public UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> empRepo)
         {
             _empRepo = empRepo;
         }
@@ -41,7 +41,7 @@ namespace Spectra.Application.Employees.Commands
         public async Task<OperationResult> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
 
-            var employee = await _empRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+            var employee = await _empRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
 
             employee.Name = request.Name;
             employee.NationalId = request.NationalId;

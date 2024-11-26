@@ -9,34 +9,28 @@ namespace Spectra.Domain.MasterData.InternalExaminations
         public string Name { get; set; }
 
         public string Code { get; set; }
-        public List<string> ExaminationTypes { get; set; }
-
-
 
         protected InternalExamination() { }
         private InternalExamination(
                string id,
            string name,
-           string code,
-           List<string> examinationType
+           string code
                ) : base(id)
         {
             Id = id;
             Name = name;
             Code = code;
-            ExaminationTypes = examinationType;
         }
         public static InternalExamination Create(string id, string name,
-           string code, List<string> examinationType
+           string code
        )
         {
 
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
             ArgumentNullException.ThrowIfNull(code, nameof(code));
-            ArgumentNullException.ThrowIfNull(examinationType, nameof(examinationType));
 
-            return new InternalExamination(id, name, code, examinationType);
+            return new InternalExamination(id, name, code);
 
         }
     }

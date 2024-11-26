@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData;
 using Spectra.Application.MasterData.SpecializationCommend.Commands;
 using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
@@ -27,21 +26,9 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             _excelProcessingService = excelProcessingService;
 
         }
-        public async Task<OperationResult<string>> CreateSpecialization(CreateSpecializationCommand input)
+        public async Task<OperationResult> CreateSpecialization(CreateSpecializationCommand input)
         {
-
-
-            var command = new CreateSpecializationCommand
-            {
-
-                ConsultationCost = input.ConsultationCost,
-                Code = input.Code,
-                Name = input.Name,
-                Description = input.Description
-
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
         public async Task CreateFromExcel(IFormFile input)
         {
@@ -52,55 +39,30 @@ namespace Spectra.Infrastructure.MasterData.Specialization
                 Description = cells[1],
                 ConsultationCost = double.TryParse(cells[2], out cost) ? cost : 0
             });
-
-
             var command = new CreateBulkDataCommand<CreateSpecializationCommand> { Data = data };
-
             await _mediator.Send(command);
-
-
         }
 
-        public async Task<OperationResult<Unit>> UpdateSpecialization(string id, UpdateSpecializationCommand input)
+        public async Task<OperationResult> UpdateSpecialization(UpdateSpecializationCommand input)
         {
-
-            var command = new UpdateSpecializationCommand
-            {
-                Id = id,
-                ConsultationCost = input.ConsultationCost,
-                Code = input.Code,
-                Name = input.Name,
-                Description = input.Description
-            };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(input);
         }
 
-        public async Task<OperationResult<Unit>> DeleteSpecialization(string id)
+        public async Task<OperationResult> DeleteSpecialization(string id)
         {
             var command = new DeleteSpecializationCommand { Id = id };
             return await _mediator.Send(command);
         }
 
-        public async Task<OperationResult<Domain.MasterData.DoctorsSpecialization.Specialization>> GetSpecializationById(string id)
+        public async Task<OperationResult> GetSpecializationById(string id)
         {
             var query = new GetSpecializationByIdQuery { Id = id };
             return await _mediator.Send(query);
         }
 
-        public async Task<OperationResult<IEnumerable<Domain.MasterData.DoctorsSpecialization.Specialization>>> GetAllSpecializations()
+        public async Task<OperationResult> GetAllSpecializations(GetAllSpecializationQuery input)
         {
-            var query = new GetAllSpecializationQuery();
-            return await _mediator.Send(query);
-        }
-
-        public async Task<OperationResult<IEnumerable<BaseMasterDataDto>>> GetAllSpecializationsNames()
-        {
-            var query = new GetAllSpecializationNamesQuery();
-            return await _mediator.Send(query);
-
-
-
+            return await _mediator.Send(input);
         }
     }
 }

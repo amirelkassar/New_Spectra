@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +25,6 @@ using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
-using Spectra.Application.MasterData.Drug;
 using Spectra.Application.MasterData.Drug.Services;
 using Spectra.Application.MasterData.GeneralComplaintsM;
 using Spectra.Application.MasterData.GeneralComplaintsM.Services;
@@ -53,7 +53,6 @@ using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
-using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.ChatHub;
@@ -114,7 +113,6 @@ namespace Spectra.Infrastructure
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
-            services.AddSerilog();
             services.AddSignalR();
             services.AddDataProtection();
             services.ConfigureEmailServices(configuration);
@@ -166,7 +164,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
-            services.AddScoped<ISectionsServices, SectionsServices>();
+            services.AddScoped<ISectionsService, SectionsService>();
             services.AddScoped<IMedicalTeamService, MedicalTeamService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
             services.AddScoped<IPermissionManager, PermissionManager>();
@@ -182,7 +180,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             //MastarData Start
-            services.AddScoped<IDrugRepository, DrugRepository>();
             services.AddScoped<ISpecializationsRepository, SpecializationsRepository>();
             services.AddScoped<IDiagnoseRepository, DiagnoseRepository>();
             services.AddScoped<IMedicalTestsAndXrayRepository, MedicalTestsAndXrayRepository>();
@@ -206,7 +203,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
-            services.AddScoped(typeof(IBaseMongoDbRepository<,>), typeof(BaseMongoDbRepository<>));
+            services.AddScoped(typeof(IBaseMongoDbRepository<>), typeof(BaseMongoDbRepository<>));
 
             return services;
         }
@@ -304,10 +301,11 @@ namespace Spectra.Infrastructure
                 {
                     services.AddAuthorization(config =>
                     {
-                        config.AddPolicy(permission, permConfig => permConfig.RequireClaim(CustomClaims.Permissions, [permission]));
+                        config.AddPolicy(permission, permConfig => permConfig.AddRequirements(new PermissionRequirement(permission)));
                     });
                 }
             }
+            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             return services;
         }
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)

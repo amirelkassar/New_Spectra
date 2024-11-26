@@ -1,7 +1,8 @@
 ﻿using MediatR;
-using Spectra.Application.Employees;
+using Spectra.Application.Interfaces;
 using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules.DTO;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -23,10 +24,10 @@ namespace Spectra.Application.ScheduleAppointments.DoctorSchedules.Queries
     public class GetAllDoctorSchedulesQueryHandler : IRequestHandler<GetAllDoctorSchedulesQuery, OperationResult<IEnumerable<AppointmentDto>>>
     {
         private readonly IDoctorScheduleRepository _doctorScheduleRepository;
-        private readonly IEmployeeRepository _doctorRepository;
+        private readonly IBaseMongoDbRepository<Employee> _doctorRepository;
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public GetAllDoctorSchedulesQueryHandler(IDoctorScheduleRepository doctorScheduleRepository, IEmployeeRepository doctorRepository, IAppointmentRepository appointmentRepository)
+        public GetAllDoctorSchedulesQueryHandler(IDoctorScheduleRepository doctorScheduleRepository, IBaseMongoDbRepository<Employee> doctorRepository, IAppointmentRepository appointmentRepository)
         {
             _doctorScheduleRepository = doctorScheduleRepository;
             _doctorRepository = doctorRepository;

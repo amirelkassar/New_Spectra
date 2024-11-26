@@ -73,7 +73,7 @@ namespace Spectra.Infrastructure.ScheduleAppointments.Appointments
             // Get the total count of matching documents for pagination
             var totalCount = await _appointments.CountDocumentsAsync(filterDefinition);
 
-            return new PaginatedResult<Appointment>(query,totalCount,pageSize);
+            return new PaginatedResult<Appointment>(query, totalCount, pageSize);
         }
     }
 

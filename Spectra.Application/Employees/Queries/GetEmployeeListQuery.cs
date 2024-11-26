@@ -12,9 +12,9 @@ namespace Spectra.Application.Employees.Queries
     {
         public string? Search { get; set; }
 
-        public class GetEmployeeListQueryHandler(IBaseMongoDbRepository<Employee, string> doctorRepository) : IRequestHandler<GetEmployeeListQuery, OperationResult>
+        public class GetEmployeeListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository) : IRequestHandler<GetEmployeeListQuery, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _doctorRepository = doctorRepository;
+            private readonly IBaseMongoDbRepository<Employee> _doctorRepository = doctorRepository;
 
             public async Task<OperationResult> Handle(GetEmployeeListQuery request, CancellationToken cancellationToken)
             {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
@@ -16,59 +17,51 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             _medicalTestsAndXrayService = medicalTestsAndXrayService;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         [Authorize(AdminMedicalTestsAndXrayPermissions.ReadList)]
-        public async Task<ActionResult> GetAllMedicalTestsAndXray()
+        public async Task<ActionResult> GetAllMedicalTestsAndXray([FromQuery] GetAllMedicalTestsAndXraysQuery input)
         {
-            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXray();
+            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXray(input);
             return Ok(medicalTestsAndXrayies);
         }
 
-        [HttpGet("GetAllNames")]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.ReadList)]
-        public async Task<ActionResult> GetAllMedicalTestsAndXrayNames()
-        {
-            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXrayNames();
-            return Ok(medicalTestsAndXrayies);
-        }
-
-        [HttpGet("id")]
+        [HttpGet()]
         [Authorize(AdminMedicalTestsAndXrayPermissions.ReadOne)]
-        public async Task<ActionResult> GetOneMedicalTestsAndXray(string id)
+        public async Task<ActionResult> GetOneMedicalTestsAndXray([FromQuery] GetMedicalTestsAndXraysByIdQuery input)
         {
-            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetMedicalTestsAndXrayById(id);
+            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetMedicalTestsAndXrayById(input.Id);
             return Ok(medicalTestsAndXrayies);
         }
 
         [HttpPost]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Create)]
-        public async Task<ActionResult> CreateMedicalTestsAndXray(CreateMedicalTestsAndXraysCommand input)
+        public async Task<ActionResult> CreateMedicalTestsAndXray([FromBody]CreateMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.CreateMedicalTestsAndXray(input);
-            return Ok(medicalTestsAndXrayies);
+            return Created("",medicalTestsAndXrayies);
         }
 
-        [HttpPut("id")]
+        [HttpPut()]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Update)]
-        public async Task<ActionResult> UpdateMedicalTestsAndXray(string id, UpdateMedicalTestsAndXraysCommand input)
+        public async Task<ActionResult> UpdateMedicalTestsAndXray([FromBody]UpdateMedicalTestsAndXraysCommand input)
         {
-            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(id, input);
-            return Ok(medicalTestsAndXrayies);
+            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(input);
+            return Accepted(medicalTestsAndXrayies);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete()]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Delete)]
-        public async Task<ActionResult> DeleteMedicalTestsAndXray(string id)
+        public async Task<ActionResult> DeleteMedicalTestsAndXray([FromQuery]DeleteMedicalTestsAndXraysCommand input)
         {
-            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(id);
+            var medicalTestsAndXrayies = await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(input.Id);
             return Ok(medicalTestsAndXrayies);
         }
 
-        [HttpPost("upload")]
+        [HttpPost("bulk")]
         [Authorize(AdminMedicalTestsAndXrayPermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile(IFormFile file)
+        public async Task<ActionResult> UploadExcelFile([FromForm]BulkCreateModel input)
         {
-            var data = _medicalTestsAndXrayService.CreateFromExcel(file);
+            var data = _medicalTestsAndXrayService.CreateFromExcel(input.File);
             return Ok(data);
         }
     }

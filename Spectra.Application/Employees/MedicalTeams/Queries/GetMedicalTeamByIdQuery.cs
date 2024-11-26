@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Spectra.Application.Employees.MedicalTeams.Dto;
+using Spectra.Application.Interfaces;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.MedicalTeams.Queries
@@ -12,9 +14,9 @@ namespace Spectra.Application.Employees.MedicalTeams.Queries
     public class GetMedicalTeamByIdQueryHandler : IRequestHandler<GetMedicalTeamByIdQuery, OperationResult<IEnumerable<SpecialistDto>>>
     {
         private readonly IMedicalTeamRepository _medicalTeamRepository;
-        private readonly IEmployeeRepository _specialistRepository;
+        private readonly IBaseMongoDbRepository<Employee> _specialistRepository;
 
-        public GetMedicalTeamByIdQueryHandler(IMedicalTeamRepository medicalTeamRepository, IEmployeeRepository specialistRepository)
+        public GetMedicalTeamByIdQueryHandler(IMedicalTeamRepository medicalTeamRepository, IBaseMongoDbRepository<Employee> specialistRepository)
         {
             _medicalTeamRepository = medicalTeamRepository;
             _specialistRepository = specialistRepository;

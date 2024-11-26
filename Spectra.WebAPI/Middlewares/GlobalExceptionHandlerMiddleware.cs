@@ -91,6 +91,14 @@ namespace Spectra.WebAPI.Middlewares
                     };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
+                case UnauthorizedAccessException unauthorizedAccessException:
+                    errorType = "UnauthorizedAccessException";
+                    errorCollection = new Dictionary<string, string[]>
+                    {
+                        { "token", new[] { "unthorized user ot token not found" } }
+                    };
+                    statusCode = HttpStatusCode.Unauthorized;
+                    break;
                 default:
                     errorType = "UnknownError";
                     errorCollection = new Dictionary<string, string[]>

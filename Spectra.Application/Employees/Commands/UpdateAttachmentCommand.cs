@@ -13,14 +13,14 @@ namespace Spectra.Application.Employees.Commands
     {
         public Guid DocumentId { get; set; }
 
-        public class UpdateAttachmentCommandHandler(IBaseMongoDbRepository<Employee, string> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<UpdateAttachmentCommand, OperationResult>
+        public class UpdateAttachmentCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<UpdateAttachmentCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee, string> _employeeRepo = employeeRepo;
+            private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
             private readonly IDocumentHellper _documentHellper = documentHellper;
 
             public async Task<OperationResult> Handle(UpdateAttachmentCommand request, CancellationToken cancellationToken)
             {
-                var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
+                var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("Employees", request.EmpId);
                 var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
                 Directory.CreateDirectory(folderPath);
                 var oldAttachment = employee.Attachments.FirstOrDefault(a => a.Id == request.DocumentId) ?? throw new NotFoundException("Attachment", request.DocumentId);
