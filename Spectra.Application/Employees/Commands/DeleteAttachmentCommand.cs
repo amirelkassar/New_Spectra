@@ -18,15 +18,14 @@ namespace Spectra.Application.Employees.Commands
 
             public async Task<OperationResult> Handle(DeleteAttachmentCommand request, CancellationToken cancellationToken)
             {
-                var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
+                var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("Employees", request.EmpId);
                 var attachment = employee.Attachments.FirstOrDefault(a => a.Id == request.DocumentId) ?? throw new NotFoundException("Attachment", request.DocumentId);
 
                 employee.Attachments.Remove(attachment);
 
                 await _employeeRepo.UpdateAsync(employee);
 
-                if (File.Exists(attachment.Path))
-                    File.Delete(attachment.Path);
+                await _documentHellper.DeleteAttachments(employee.Attachments.Select(e=>e.Path).ToList());
 
                 return OperationResult.Success();
             }

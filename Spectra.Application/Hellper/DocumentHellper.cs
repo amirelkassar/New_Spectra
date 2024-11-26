@@ -93,26 +93,9 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             foreach (var attachmentPath in attachmentPaths)
             {
-                var fullPath = _webHostEnvironment.WebRootPath + attachmentPath;
-
-                // Check if the file exists before attempting to delete it
+                var fullPath =Path.Combine(_webHostEnvironment.WebRootPath ,attachmentPath);
                 if (File.Exists(fullPath))
-                {
-                    try
-                    {
-                        File.Delete(fullPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        // Log or handle any errors that occur during file deletion
-                        Console.WriteLine($"Error deleting file: {ex.Message}");
-                        // You could throw an exception or return a failure result if necessary
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"File not found: {fullPath}");
-                }
+                    File.Delete(fullPath);
             }
         }
 

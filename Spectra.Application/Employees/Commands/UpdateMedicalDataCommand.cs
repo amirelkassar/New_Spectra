@@ -28,7 +28,7 @@ namespace Spectra.Application.Employees.Commands
 
             public async Task<OperationResult> Handle(UpdateMedicalDataCommand request, CancellationToken cancellationToken)
             {
-                var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+                var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
 
                 if (!medicalProvider.Equals(request.SectionId))
                 {

@@ -31,7 +31,7 @@ namespace Spectra.Domain.Employees
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
-        public List<EmployeeAttachment>? Attachments { get; set; } = [];
+        public ICollection<EmployeeAttachment>? Attachments { get; set; } = [];
 
         protected Employee() { }
         public Employee(string id,

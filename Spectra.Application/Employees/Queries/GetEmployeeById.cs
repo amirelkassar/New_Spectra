@@ -20,11 +20,11 @@ namespace Spectra.Application.Employees.Queries
                 Employee medicalProvider = null;
                 if (!string.IsNullOrWhiteSpace(request.UserId))
                 {
-                    medicalProvider = await _doctorRepository.GetAsync(m => m.UserId == request.UserId && m.Id == request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+                    medicalProvider = await _doctorRepository.GetAsync(m => m.UserId == request.UserId && m.Id == request.Id) ?? throw new NotFoundException("Employees", request.Id);
                 }
                 else
                 {
-                    medicalProvider = await _doctorRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+                    medicalProvider = await _doctorRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
                 }
 
 

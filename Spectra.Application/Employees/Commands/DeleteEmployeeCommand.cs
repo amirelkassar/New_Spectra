@@ -3,6 +3,7 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
+using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.Commands
@@ -26,7 +27,7 @@ namespace Spectra.Application.Employees.Commands
         public async Task<OperationResult<Unit>> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
 
-            var doctor = await _employeeRepo.GetByIdAsync(request.Id);
+            var doctor = await _employeeRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
             await _addFile.DeleteAttachments(doctor.Attachments.Select(a => a.Path).ToList());
             await _employeeRepo.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);

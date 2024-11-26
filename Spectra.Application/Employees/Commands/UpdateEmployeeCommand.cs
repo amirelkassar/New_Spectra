@@ -41,7 +41,7 @@ namespace Spectra.Application.Employees.Commands
         public async Task<OperationResult> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
 
-            var employee = await _empRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("MedicalProviders", request.Id);
+            var employee = await _empRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
 
             employee.Name = request.Name;
             employee.NationalId = request.NationalId;
