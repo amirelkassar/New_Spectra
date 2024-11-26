@@ -7,26 +7,59 @@ import PasswordInput from '@/components/inputs/password-input';
 import Button from '@/components/button';
 import ROUTES from '@/routes';
 import { FormErrorMessage } from '@/components/form-error-message';
+import { useLogin } from '../../../_hooks/use-login';
+import GetErrorMsg from '@/components/getErrorMsg';
 
 export const LoginForm = () => {
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
+  const {
+    formData,
+    login,
+    onChange,
+    validationError,
+    isPending,
+    error,
+  } = useLogin();
 
   return (
-    <form onSubmit={onSubmit} className='space-y-5 '>
-      <FormErrorMessage />
+    <form
+      onSubmit={login}
+      autoComplete='off'
+      className='space-y-5'
+    >
+      <FormErrorMessage
+        message={GetErrorMsg(error, 'general')}
+      />
 
       <TextInput
-        label={'اسم المستخدم'}
-        placeholder={'ادخل اسمك بالكامل'}
+        label='البريد الالكتروني'
+        placeholder='john.doe@example.com'
         size='lg'
+        id='userEmail'
+        name='userEmail'
+        autoComplete='off'
+        value={formData.userEmail}
+        onChange={onChange}
+        error={
+          validationError.userEmail ||
+          GetErrorMsg(error, 'emailAddress')
+        }
+        disabled={isPending}
       />
 
       <PasswordInput
-        label={'كلمة المرور'}
-        placeholder={'ادخل كلمة المرور'}
+        label='كلمة المرور'
+        placeholder='********'
         size='lg'
+        id='password'
+        name='password'
+        autoComplete='off'
+        value={formData.password}
+        onChange={onChange}
+        error={
+          validationError.password ||
+          GetErrorMsg(error, 'password')
+        }
+        disabled={isPending}
       />
 
       <Link
@@ -37,8 +70,9 @@ export const LoginForm = () => {
       </Link>
 
       <Button
+        disabled={isPending}
         variant='secondary'
-        className={'w-full font-bold'}
+        className='w-full font-bold'
         type='submit'
       >
         تسجيل الدخول

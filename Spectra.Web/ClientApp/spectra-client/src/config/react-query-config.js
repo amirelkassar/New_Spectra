@@ -38,23 +38,6 @@ function getQueryClient() {
   }
 }
 
-// const queryClient = new QueryClient({
-//   defaultOptions: {
-//     queries: {
-//       refetchOnWindowFocus: false,
-//       refetchOnMount: false,
-//       refetchOnReconnect: false,
-//       refetchInterval: 10000,
-//       refetchIntervalInBackground: true,
-//     },
-//     mutations: {
-//       onError: (res) => {
-//         // console.log(res)
-//       },
-//     },
-//   },
-// });
-
 const ReactQueryConfig = ({ children }) => {
   const queryClient = getQueryClient();
 
