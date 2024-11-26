@@ -56,7 +56,7 @@ export const GetComplaintID = (id) => {
       const response = await apiAdmin.get(
         mainData.complaint.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
