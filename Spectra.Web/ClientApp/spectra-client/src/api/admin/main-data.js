@@ -93,17 +93,25 @@ export const mainData = {
     },
   },
 
+  services: {
+    base: '/services',
+    list: (queries = {}) =>
+      buildQuery('/services/list', queries),
+    forListing: (queries = {}) =>
+      buildQuery('/services/for-listing', queries),
+    actions: {
+      add: '/services',
+      get: (id) => `/services?id=${id}`,
+      delete: (id) => `/services?id=${id}`,
+      update: (id) => `/services?id=${id}`,
+    },
+  },
+
   //
   //
   //
   //
 
-  MasterDataServices: {
-    url: '/MasterDataServices',
-    getByName: (name) => `/MasterDataServices/${name}`,
-    getByID: (id) => `/MasterDataServices/id?id=${id}`,
-    DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
-  },
   Staff: {
     url: '/Admin/GetAllEmployees?PageSize=10&',
     post: '/Admin/CreateEmployee',

@@ -13,7 +13,7 @@ import CheckHeartIcon from '@/assets/icons/check-heart';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import InputGreen from '@/components/Input-green';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
-import { useCreateMasterDataServices } from '@/hooks/queries/admin/main-data/services';
+import { useAddService } from '@/hooks/queries/admin/main-data/services';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 const dataSelect = [
@@ -43,7 +43,7 @@ function ServicesShow() {
     isPending,
     isError,
     reset,
-  } = useCreateMasterDataServices();
+  } = useAddService();
 
   const handleReportsChange = (selected) => {
     setFormData((prevData) => ({

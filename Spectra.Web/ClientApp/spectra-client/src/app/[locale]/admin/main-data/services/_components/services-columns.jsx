@@ -1,7 +1,7 @@
 import ActionMenu from './ActionMenu';
 import SessionIcon from '@/assets/icons/session';
 
-export const columns = [
+export const servicesColumns = [
   {
     accessorKey: 'name',
     header: 'الاسم',
