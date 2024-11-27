@@ -1,36 +1,24 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
-import { getFormData } from '@/lib/utils';
-import { useEditDrug } from '@/hooks/queries/admin/main-data/drugs';
+import { useEditDiagnostics } from '@/hooks/queries/admin/main-data/diagnostics';
 import ROUTES from '@/routes';
 
-export const useUpdateDrug = ({ initialValues }) => {
+export const useUpdateDaignostic = ({ initialValues }) => {
   const router = useRouter();
 
-  const photo = useMemo(
-    () =>
-      initialValues?.imagePath
-        ? `${initialValues?.imagePath}?token=${process.env.NEXT_PUBLIC_TOKEN}`
-        : undefined,
-    [initialValues?.imagePath]
-  );
-
-  const [formData, setFormData] = useState({
-    ...initialValues,
-    photo,
-  });
+  const [formData, setFormData] = useState(initialValues);
 
   const {
-    mutateAsync: UpdateDrug,
+    mutateAsync: EditDiagnostic,
     error,
     isError,
     isPending,
     reset,
-  } = useEditDrug();
+  } = useEditDiagnostics();
 
   const onChange = useCallback(
     (e) => {
@@ -50,17 +38,13 @@ export const useUpdateDrug = ({ initialValues }) => {
     async (e) => {
       e.preventDefault();
 
-      const data = getFormData(formData);
-
-      Toast.Promise(UpdateDrug(data), {
-        success: 'تم تعديل العقار بنجاح',
-        onSuccess: (res) => {
-          if (res?.successOpration)
-            router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
-        },
+      Toast.Promise(EditDiagnostic(formData), {
+        success: 'تم التعديل بنجاح',
+        onSuccess: () =>
+          router.replace(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS),
       });
     },
-    [UpdateDrug, formData, router]
+    [EditDiagnostic, formData, router]
   );
 
   const form = {

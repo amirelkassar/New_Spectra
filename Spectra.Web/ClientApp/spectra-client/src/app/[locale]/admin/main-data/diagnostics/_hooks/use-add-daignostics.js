@@ -4,34 +4,27 @@ import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
-import { getFormData } from '@/lib/utils';
-import { useCreateDrug } from '@/hooks/queries/admin/main-data/drugs';
+import { useCreateDiagnostics } from '@/hooks/queries/admin/main-data/diagnostics';
 import ROUTES from '@/routes';
 
-export const useAddDrug = () => {
+export const useAddDaignostic = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: '',
-    activeIngredient: '',
-    scientificName: '',
-    photo: undefined,
-    recommendedDosage: '',
-    doncentration: '',
-    interactionsWithOtherdrugs: '',
-    contraindications: '',
-    code: '',
-    nots: '',
-    type: '',
+    code1: '',
+    code2: '',
+    code3: '',
+    description: '',
   });
 
   const {
-    mutateAsync: createDrug,
+    mutateAsync: CreateDiagnostics,
     error,
-    isError,
     isPending,
+    isError,
     reset,
-  } = useCreateDrug();
+  } = useCreateDiagnostics();
 
   const onChange = useCallback(
     (e) => {
@@ -51,17 +44,14 @@ export const useAddDrug = () => {
     async (e) => {
       e.preventDefault();
 
-      const data = getFormData(formData);
-
-      Toast.Promise(createDrug(data), {
-        success: 'تم اضافة العقار بنجاح',
-        onSuccess: (res) => {
-          if (res?.successOpration)
-            router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+      Toast.Promise(CreateDiagnostics(formData), {
+        success: 'تم اضافة التشخيص بنجاح',
+        onSuccess: () => {
+          router.replace(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS);
         },
       });
     },
-    [createDrug, formData, router]
+    [CreateDiagnostics, formData, router]
   );
 
   const form = {

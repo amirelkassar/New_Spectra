@@ -34,7 +34,7 @@ export const useDaignosticsMenuActions = (id) => {
 
   const onView = useCallback(() => {
     router.push(
-      ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILS(id)
+      ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id)
     );
   }, [router, id]);
 
