@@ -15,6 +15,10 @@ import InputGreen from '@/components/Input-green';
 import { SpecializationSelect } from '../../_components/specialization-select';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import HeartCheckedIcon from '@/assets/icons/heart-checked';
+import Image from 'next/image';
+import CloseIcon from '@/assets/icons/close';
+import { PhotoDropzone } from '@/components/photo-dropzone';
+import { ReportSelect } from '../../_components/reports-select';
 
 export const ServiceFrom = ({
   data,
@@ -123,6 +127,13 @@ export const ServiceFrom = ({
 const RemainingInputs = ({ data, error, onChange }) => {
   return (
     <div className='col-span-2 space-y-4 lg:space-y-8'>
+      <ReportSelect
+        label='اضافة التقارير الخاصة بالخدمة'
+        name='reports'
+        defaultValue={data?.reports}
+        onSelect={onChange}
+        error={GetErrorMsg(error, 'Reports')}
+      />
       <SpecializationSelect
         label='اضافة التخصصات المرتبطة بالخدمة'
         name='specifications'
@@ -132,17 +143,23 @@ const RemainingInputs = ({ data, error, onChange }) => {
       />
 
       <ServiceContent
-        data={data.contents}
+        data={data?.contents}
         onChange={onChange}
         error={GetErrorMsg(error, 'Contents')}
+      />
+
+      <ServicePhoto
+        data={data?.heroImage}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'HeroImage')}
       />
     </div>
   );
 };
 
 const ServiceContent = ({ data, error, onChange }) => {
-  const [contents, setContents] = useState(
-    data?.contents || [{ title: '', description: '' }]
+  const [contents, setContents] = useState(() =>
+    !!data?.length ? data : [{ title: '', description: '' }]
   );
 
   const handleChange = useCallback((e, index) => {
@@ -235,11 +252,82 @@ const ServiceContent = ({ data, error, onChange }) => {
       <button
         type='button'
         onClick={handleAddSection}
-        className='w-full bg-blueLighter rounded-xl border border-greenMain p-5 text-center text-sm md:text-xl font-bold transition-shadow hover:shadow-md flex flex-col gap-3 items-center'
+        className='w-full bg-blueLighter rounded-xl border border-greenMain px-5 py-8 text-center text-sm md:text-xl font-bold transition-shadow hover:shadow-md flex flex-col gap-3 items-center'
       >
         <PlusInsideCircleIcon className='text-greenMain shrink-0 size-7 md:size-11' />
         اضافة قسم
       </button>
+    </div>
+  );
+};
+
+const ServicePhoto = ({ data, error, onChange }) => {
+  const src = useMemo(() => {
+    if (!data) return '';
+
+    if (data instanceof File) {
+      return URL.createObjectURL(data);
+    }
+
+    return data;
+  }, [data]);
+
+  return (
+    <div className='flex-1 w-full h-auto relative space-y-5'>
+      <h3 className='text-sm md:text-xl font-bold'>
+        صورة الخدمة
+      </h3>
+
+      {data ? (
+        <div className='relative flex items-center justify-center w-auto h-[484px]'>
+          <Image
+            src={src}
+            width={144}
+            height={96}
+            alt='service-photo'
+            className='h-full w-auto object-contain object-center max-w-full max-h-full'
+          />
+
+          <div
+            onClick={() => {
+              const e = {
+                target: {
+                  value: undefined,
+                  name: 'heroImage',
+                },
+              };
+              onChange(e);
+            }}
+            role='button'
+            title='حذف الصورة'
+            className='absolute duration-200 hover:shadow-md top-1 start-1 bg-white rounded-full size-5 overflow-hidden'
+          >
+            <CloseIcon className='size-5' />
+          </div>
+        </div>
+      ) : (
+        <PhotoDropzone
+          classNames={{
+            root: 'mx-auto max-w-sm',
+            container: 'min-h-[450px] gap-3',
+            icon: 'size-10 md:size-14 mdl:size-14',
+          }}
+          onDrop={(file) => {
+            onChange({
+              target: {
+                value: file[0],
+                name: 'heroImage',
+              },
+            });
+          }}
+        />
+      )}
+
+      {error && (
+        <p className='text-red text-xs md:text-base !m-0'>
+          {error}
+        </p>
+      )}
     </div>
   );
 };

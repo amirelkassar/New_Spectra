@@ -1,7 +1,6 @@
 'use client';
 
 import { MultiSelect } from '@mantine/core';
-import { useState } from 'react';
 import { MultiSelectProps } from '@mantine/core';
 import { cn } from '@/lib/utils';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
@@ -28,14 +27,14 @@ const MultiSelectInput = ({
       label={label}
       data={data}
       checkIconPosition={props.checkIconPosition || 'right'}
-      rightSection={<ArrowDownBlack />}
+      rightSection={<ArrowDownBlack className='' />}
       nothingFoundMessage={
         props.nothingFoundMessage ?? '!No Data Found'
       }
       classNames={{
         ...props.classNames,
         input: cn(
-          'rounded-lg group focus:border-greenMain focus-within:border-greenMain data-[expanded=true]:[&+div]:rotate-180 ',
+          'rounded-lg group focus:border-greenMain focus-within:border-greenMain peer',
           props.classNames?.input
         ),
         inputField: cn(
@@ -51,7 +50,10 @@ const MultiSelectInput = ({
           props.classNames?.pill
         ),
         pillsList: cn('group', props.classNames?.pillsList),
-        section: cn('', props.classNames?.section),
+        section: cn(
+          'peer-data-[expanded=true]:rotate-180 transition-transform',
+          props.classNames?.section
+        ),
       }}
     />
   );

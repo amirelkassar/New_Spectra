@@ -1,5 +1,5 @@
-import ActionMenu from './ActionMenu';
 import SessionIcon from '@/assets/icons/session';
+import { CellActions } from './cell-actions';
 
 export const servicesColumns = [
   {
@@ -57,11 +57,7 @@ export const servicesColumns = [
     id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
-      const availableSrvices =
-        row.original.availableSrvices;
-      return (
-        <ActionMenu id={id} show={availableSrvices === 1} />
-      );
+      return <CellActions id={id} />;
     },
   },
 ];

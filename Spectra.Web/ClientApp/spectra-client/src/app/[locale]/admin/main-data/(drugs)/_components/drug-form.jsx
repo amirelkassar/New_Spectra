@@ -164,13 +164,12 @@ const DrugImageUploader = ({
       ) : (
         <PhotoDropzone
           onDrop={(file) => {
-            const e = {
+            onChange({
               target: {
                 value: file[0],
                 name: 'photo',
               },
-            };
-            onChange(e);
+            });
           }}
         />
       )}

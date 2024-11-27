@@ -119,7 +119,7 @@ export const useAddNewService = () => {
 };
 
 //put
-export const useUpdateService = (id) => {
+export const useUpdateCurrentService = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({

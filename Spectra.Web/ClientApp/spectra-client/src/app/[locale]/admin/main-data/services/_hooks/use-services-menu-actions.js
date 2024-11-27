@@ -5,36 +5,39 @@ import { useCallback } from 'react';
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/navigation';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
-import { DeleteDrugs } from '@/hooks/queries/admin/main-data/drugs';
+import { useDeleteService } from '@/hooks/queries/admin/main-data/services';
 import ROUTES from '@/routes';
 
-export const useDrugsMenuActions = (id) => {
+export const useServicesMenuActions = (id) => {
   const router = useRouter();
 
   const open = useConfirmModal((s) => s.open);
 
-  const { mutateAsync: deleteDrug, isPending } =
-    DeleteDrugs(id);
+  const { mutateAsync: deleteService, isPending } =
+    useDeleteService(id);
 
   const onDelete = useCallback(() => {
     open({
       isPending,
-      onConfirm: () => {
-        Toast.Promise(deleteDrug(), {
-          success: 'تم مسح العقار بنجاح',
-          onSuccess: () =>
-            router.replace(ROUTES.ADMIN.DATAMAIN),
+      onConfirm: async () => {
+        Toast.Promise(deleteService(), {
+          success: 'تم مسح الخدمة بنجاح',
+          onSuccess: () => {
+            router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
+          },
         });
       },
     });
-  }, [deleteDrug, isPending, open, router]);
+  }, [deleteService, isPending, open, router]);
 
   const onView = useCallback(() => {
-    router.push(ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(id));
+    router.push(ROUTES.ADMIN.DATAMAIN.SERVICESDETAILS(id));
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(ROUTES.ADMIN.DATAMAIN.DRUGSDETAILSEDIT(id));
+    router.push(
+      ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id)
+    );
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

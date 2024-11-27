@@ -1,36 +1,25 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
 import { getFormData } from '@/lib/utils';
-import { useEditDrug } from '@/hooks/queries/admin/main-data/drugs';
+import { useUpdateCurrentService } from '@/hooks/queries/admin/main-data/services';
 import ROUTES from '@/routes';
 
-export const useUpdateDrug = ({ initialValues }) => {
+export const useUpdateService = ({ initialValues }) => {
   const router = useRouter();
 
-  const photo = useMemo(
-    () =>
-      initialValues?.imagePath
-        ? `${initialValues?.imagePath}?token=${process.env.NEXT_PUBLIC_TOKEN}`
-        : undefined,
-    [initialValues?.imagePath]
-  );
-
-  const [formData, setFormData] = useState({
-    ...initialValues,
-    photo,
-  });
+  const [formData, setFormData] = useState(initialValues);
 
   const {
-    mutateAsync: UpdateDrug,
+    mutateAsync: UpdateService,
     error,
     isError,
     isPending,
     reset,
-  } = useEditDrug();
+  } = useUpdateCurrentService();
 
   const onChange = useCallback(
     (e) => {
@@ -52,15 +41,15 @@ export const useUpdateDrug = ({ initialValues }) => {
 
       const data = getFormData(formData);
 
-      Toast.Promise(UpdateDrug(data), {
-        success: 'تم تعديل العقار بنجاح',
+      Toast.Promise(UpdateService(data), {
+        success: 'تم تعديل الخدمة بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
-            router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+            router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
         },
       });
     },
-    [UpdateDrug, formData, router]
+    [UpdateService, formData, router]
   );
 
   const form = {

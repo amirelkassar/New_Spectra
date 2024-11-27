@@ -1,11 +1,11 @@
 'use client';
 
 import { QueryWrapper } from '@/components/query-wrapper';
-import { AnalysisForm } from '../../_components/analysis-form';
-import { useUpdateAnalysis } from '../../_hooks/use-update-analysis';
-import { GetMedicalTestsID } from '@/hooks/queries/admin/main-data/analysis';
+import { useServicesById } from '@/hooks/queries/admin/main-data/services';
+import { useUpdateService } from '../../_hooks/use-update-service';
+import { ServiceFrom } from '../../_components/service-form';
 
-export const UpdateAnalysis = ({ id }) => {
+export const UpdateService = ({ id }) => {
   const {
     data,
     isPending,
@@ -13,7 +13,7 @@ export const UpdateAnalysis = ({ id }) => {
     isPaused,
     refetch,
     failureReason,
-  } = GetMedicalTestsID(id);
+  } = useServicesById(id);
 
   const item = data?.data;
   const hasData = !!item?.length;
@@ -30,13 +30,13 @@ export const UpdateAnalysis = ({ id }) => {
       }}
       refetch={refetch}
     >
-      <UpdateAnalysisForm initialValues={item} />
+      <UpdateServiceForm initialValues={item} />
     </QueryWrapper>
   );
 };
 
-const UpdateAnalysisForm = ({ initialValues }) => {
-  const [form, status] = useUpdateAnalysis({
+const UpdateServiceForm = ({ initialValues }) => {
+  const [form, status] = useUpdateService({
     initialValues,
   });
 
@@ -45,7 +45,7 @@ const UpdateAnalysisForm = ({ initialValues }) => {
   const { isPending } = status;
 
   return (
-    <AnalysisForm
+    <ServiceFrom
       data={data}
       onChange={onChange}
       onSubmit={onSubmit}
