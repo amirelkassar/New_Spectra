@@ -12,7 +12,7 @@ import EditImgIcon from '@/assets/icons/editImg';
 import CheckHeartIcon from '@/assets/icons/check-heart';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import imgService from '@/assets/images/packages-details-page-bg.webp';
-import { useEditMasterDataServices } from '@/hooks/queries/admin/main-data/services';
+import { useUpdateService } from '@/hooks/queries/admin/main-data/services';
 import GetErrorMsg from '@/components/getErrorMsg';
 import { Toast } from '@/components/toast';
 
@@ -40,7 +40,7 @@ function ServicesDetails({ DataServices, isLoading }) {
     error,
     isError,
     reset,
-  } = useEditMasterDataServices(DataServices.id);
+  } = useUpdateService(DataServices.id);
 
   useEffect(() => {
     if (DataServices) {
