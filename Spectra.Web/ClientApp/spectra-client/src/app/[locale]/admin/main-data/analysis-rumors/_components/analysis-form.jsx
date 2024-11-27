@@ -9,8 +9,9 @@ import { useCallback } from 'react';
 
 export const AnalysisForm = ({
   data,
-  isPending = false,
   error,
+  isPending = false,
+  btnLabel = 'حفظ',
   onSubmit = () => {},
   onChange = () => {},
 }) => {
@@ -48,7 +49,7 @@ export const AnalysisForm = ({
         variant='secondary'
         className='max-w-xs w-full font-bold py-4 mx-auto md:mx-0 mt-10'
       >
-        حفظ
+        {btnLabel}
       </Button>
     </form>
   );

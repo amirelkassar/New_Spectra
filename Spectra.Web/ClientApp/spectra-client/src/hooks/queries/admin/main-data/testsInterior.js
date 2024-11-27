@@ -63,7 +63,7 @@ export const GetInternalExaminationID = (id) => {
       const response = await apiAdmin.get(
         mainData.internalExamination.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
