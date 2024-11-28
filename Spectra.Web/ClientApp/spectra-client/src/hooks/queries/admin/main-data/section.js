@@ -117,19 +117,3 @@ export const useEditSection = (id) => {
     onError: () => {},
   });
 };
-
-//getAllDoctors
-// export const GetSectionDoctors = () => {
-//   return useQuery({
-//     queryKey: [mainData.Section.getAllDoctors],
-//     queryFn: async () => {
-//       const response = await apiAdmin.get(
-//         mainData.Section.getAllDoctors,
-//         {
-//           headers: {},
-//         }
-//       );
-//       return response;
-//     },
-//   });
-// };
