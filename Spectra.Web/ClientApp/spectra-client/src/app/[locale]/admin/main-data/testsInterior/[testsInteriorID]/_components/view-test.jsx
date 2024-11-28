@@ -16,7 +16,7 @@ export const ViewTest = ({ id }) => {
 
 const Test = ({ data }) => {
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='space-y-5'>
       <Info data={data.name} label='الاسم' />
 
       <Info data={data.code} label='الكود' />
