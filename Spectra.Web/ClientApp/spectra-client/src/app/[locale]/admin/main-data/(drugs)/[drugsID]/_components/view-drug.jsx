@@ -7,15 +7,28 @@ import { GetDrugsID } from '@/hooks/queries/admin/main-data/drugs';
 import { QueryWrapper } from '@/components/query-wrapper';
 
 export const ViewDrug = ({ id }) => {
-  const { data, refetch, isPending, isPaused, isError } =
-    GetDrugsID(id);
+  const {
+    data,
+    refetch,
+    isPending,
+    isPaused,
+    isError,
+    failureReason,
+  } = GetDrugsID(id);
 
   const item = data?.data;
   const hasData = !!item?.name;
+  const errorCode = failureReason?.status;
 
   return (
     <QueryWrapper
-      status={{ isPending, isPaused, isError, hasData }}
+      status={{
+        isPending,
+        isPaused,
+        isError,
+        hasData,
+        errorCode,
+      }}
       refetch={refetch}
     >
       <Drug data={item} />

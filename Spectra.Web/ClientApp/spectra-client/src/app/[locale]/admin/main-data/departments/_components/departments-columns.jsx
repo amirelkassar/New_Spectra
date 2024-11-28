@@ -6,11 +6,12 @@ export const DepartmentColumns = [
     header: 'القسم',
   },
   {
-    accessorKey: 'countDiagnoses',
+    accessorKey: 'specsifications',
     header: 'عدد التخصصات ',
+    cell: ({ getValue }) => getValue()?.length,
   },
   {
-    accessorKey: 'doctorName',
+    accessorKey: 'headDoctorName',
     header: 'رئيس القسم',
   },
   {

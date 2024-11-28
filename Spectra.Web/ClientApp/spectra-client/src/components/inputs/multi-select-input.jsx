@@ -27,7 +27,7 @@ const MultiSelectInput = ({
       label={label}
       data={data}
       checkIconPosition={props.checkIconPosition || 'right'}
-      rightSection={<ArrowDownBlack className='' />}
+      rightSection={<ArrowDownBlack />}
       nothingFoundMessage={
         props.nothingFoundMessage ?? '!No Data Found'
       }

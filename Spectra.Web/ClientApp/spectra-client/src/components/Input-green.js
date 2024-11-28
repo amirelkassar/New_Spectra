@@ -1,24 +1,37 @@
-import React from 'react';
-import { TextInput } from '@mantine/core';
+import { forwardRef } from 'react';
+import { TextInput, TextInputProps } from '@mantine/core';
+import { cn } from '@/lib/utils';
 
-const InputGreen = ({
-  type = 'text',
-  className = '',
-  ...props
-}) => {
+/**
+ * @typedef {Object} TextInputProps
+ */
+
+/**
+ * @param {TextInputProps} props
+ * @param {React.Ref<HTMLInputElement>} ref
+ */
+
+const InputGreen = forwardRef(({ ...props }, ref) => {
   return (
     <TextInput
       {...props}
-      type={type}
-      size='lg'
+      ref={ref}
+      size={props?.size || 'lg'}
       classNames={{
-        input:
-          'text-xs md:text-base border-greenMain w-full rounded-lg mdl:rounded-xl',
-        label: 'text-xs md:text-base mb-2',
+        ...props?.classNames,
+        input: cn(
+          'text-xs md:text-base border-greenMain w-full rounded-lg mdl:rounded-xl peer',
+          props?.classNames?.input
+        ),
+        label: cn(
+          'text-xs md:text-base mb-2',
+          props?.classNames?.label
+        ),
       }}
-      className={className}
     />
   );
-};
+});
+
+InputGreen.displayName = 'InputGreen';
 
 export default InputGreen;

@@ -6,15 +6,28 @@ import { SpecialityForm } from '../../_components/specialty-form';
 import { useUpdateSpecialty } from '../../_hooks/use-update-specialty';
 
 export const UpdateSpecialty = ({ id }) => {
-  const { data, refetch, isPending, isPaused, isError } =
-    GetSpecializationID(id);
+  const {
+    data,
+    refetch,
+    isPending,
+    isPaused,
+    isError,
+    failureReason,
+  } = GetSpecializationID(id);
 
   const item = data?.data;
   const hasData = !!item?.name;
+  const errorCode = failureReason?.status;
 
   return (
     <QueryWrapper
-      status={{ isPending, isPaused, isError, hasData }}
+      status={{
+        isPending,
+        isPaused,
+        isError,
+        hasData,
+        errorCode,
+      }}
       refetch={refetch}
     >
       <UpdateForm initialValues={item} />

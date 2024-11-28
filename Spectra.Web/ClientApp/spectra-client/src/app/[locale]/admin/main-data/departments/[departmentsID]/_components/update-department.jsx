@@ -1,11 +1,11 @@
 'use client';
 
-import { GetDrugsID } from '@/hooks/queries/admin/main-data/drugs';
-import { DrugForm } from '../../_components/drug-form';
-import { useUpdateDrug } from '../../_hooks/use-update-drug';
 import { QueryWrapper } from '@/components/query-wrapper';
+import { useUpdateDepatment } from '../../_hooks/use-update-department';
+import { GetSectionID } from '@/hooks/queries/admin/main-data/section';
+import { DepartmentForm } from '../../_components/department-form';
 
-export const UpdateDrug = ({ id }) => {
+export const UpdateDepartment = ({ id }) => {
   const {
     data,
     refetch,
@@ -13,7 +13,7 @@ export const UpdateDrug = ({ id }) => {
     isPaused,
     isError,
     failureReason,
-  } = GetDrugsID(id);
+  } = GetSectionID(id);
 
   const item = data?.data;
   const hasData = !!item?.name;
@@ -30,20 +30,22 @@ export const UpdateDrug = ({ id }) => {
       }}
       refetch={refetch}
     >
-      <UpdateDrugForm initialValues={item} />
+      <UpdateDepartmentForm initialValues={item} />
     </QueryWrapper>
   );
 };
 
-const UpdateDrugForm = ({ initialValues }) => {
-  const [form, status] = useUpdateDrug({ initialValues });
+const UpdateDepartmentForm = ({ initialValues }) => {
+  const [form, status] = useUpdateDepatment({
+    initialValues,
+  });
 
   const { onSubmit, onChange, error, data } = form;
 
   const { isPending } = status;
 
   return (
-    <DrugForm
+    <DepartmentForm
       data={data}
       error={error}
       onSubmit={onSubmit}
