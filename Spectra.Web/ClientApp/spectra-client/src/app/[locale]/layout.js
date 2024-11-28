@@ -8,22 +8,28 @@ import 'react-phone-input-2/lib/material.css';
 import '@mantine/carousel/styles.css';
 import { MantineProvider } from '@mantine/core';
 import './globals.css';
-import {
-  NextIntlClientProvider,
-  useMessages,
-} from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl';
 import ReactQueryConfig from '@/config/react-query-config';
 import ConfirmModal from '@/components/modal/confirm-modal';
 import { Toaster } from 'react-hot-toast';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { getToken } from '@/lib/token';
+import { getMessages } from 'next-intl/server';
+import { TokenProvider } from '@/hooks/use-token';
 
 export const metadata = {
   title: 'Spectra App',
   description: 'Spectra App',
 };
 
-export default function RootLayout({ children, params }) {
-  const messages = useMessages();
+export default async function RootLayout({
+  children,
+  params,
+}) {
+  const messages = await getMessages();
+
+  const token = await getToken();
+
   return (
     <html
       lang={params.locale}
@@ -34,14 +40,16 @@ export default function RootLayout({ children, params }) {
           locale={params.locale}
           messages={messages}
         >
-          <MantineProvider theme={'light'}>
-            <ReactQueryConfig>
-              {children}
-              <Toaster />
-              <ReactQueryDevtools initialIsOpen={false} />
-              <ConfirmModal />
-            </ReactQueryConfig>
-          </MantineProvider>
+          <TokenProvider value={token}>
+            <MantineProvider theme={'light'}>
+              <ReactQueryConfig>
+                {children}
+                <Toaster />
+                <ReactQueryDevtools initialIsOpen={false} />
+                <ConfirmModal />
+              </ReactQueryConfig>
+            </MantineProvider>
+          </TokenProvider>
         </NextIntlClientProvider>
       </body>
     </html>

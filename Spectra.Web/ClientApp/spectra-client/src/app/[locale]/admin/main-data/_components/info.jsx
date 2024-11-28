@@ -1,6 +1,37 @@
-export const Info = ({ data, label = '', icon }) => {
+import { cn } from '@/lib/utils';
+import { useMemo } from 'react';
+
+export const Info = ({
+  data,
+  label = '',
+  icon,
+  className = '',
+}) => {
+  const renderData = useMemo(() => {
+    if (!data) return null;
+
+    if (
+      typeof data === 'string' ||
+      typeof data === 'number'
+    )
+      return <p className='text-sm md:text-xl'>{data}</p>;
+
+    if (Array.isArray(data))
+      return data?.map((item) => (
+        <p key={item} className='text-sm md:text-xl'>
+          {item}
+        </p>
+      ));
+  }, [data]);
+
+  if (!renderData) return null;
   return (
-    <div className='pb-5 border-b border-grayLight last:border-transparent'>
+    <div
+      className={cn(
+        'pb-5 border-b border-grayLight last:border-transparent',
+        className
+      )}
+    >
       <h3 className='font-bold mb-2 text-xs md:text-base'>
         {label}
       </h3>
@@ -9,10 +40,10 @@ export const Info = ({ data, label = '', icon }) => {
           <div className='flex bg-blueLight size-6 md:size-10 rounded-full items-center justify-center shrink-0'>
             {icon}
           </div>
-          <p className='text-sm md:text-xl'>{data}</p>
+          {renderData}
         </div>
       ) : (
-        <p className='text-sm md:text-xl'>{data}</p>
+        renderData
       )}
     </div>
   );

@@ -23,7 +23,7 @@ export const useDrugsMenuActions = (id) => {
         Toast.Promise(deleteDrug(), {
           success: 'تم مسح العقار بنجاح',
           onSuccess: () =>
-            router.replace(ROUTES.ADMIN.DATAMAIN),
+            router.replace(ROUTES.ADMIN.DATAMAIN.HOME),
         });
       },
     });
