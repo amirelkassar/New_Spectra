@@ -8,31 +8,11 @@ import { useMemo } from 'react';
 import { Info } from '../../../_components/info';
 
 export const ViewAnalysis = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isError,
-    isPaused,
-    refetch,
-    failureReason,
-  } = GetMedicalTestsID(id);
-
-  const errorCode = failureReason?.status;
-  const item = data?.data;
-  const hasData = !!item?.length;
+  const query = GetMedicalTestsID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <Analysis data={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => <Analysis data={data} />}
     </QueryWrapper>
   );
 };

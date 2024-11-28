@@ -6,31 +6,13 @@ import { useUpdateService } from '../../_hooks/use-update-service';
 import { ServiceFrom } from '../../_components/service-form';
 
 export const UpdateService = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isError,
-    isPaused,
-    refetch,
-    failureReason,
-  } = useServicesById(id);
-
-  const item = data?.data;
-  const hasData = !!item?.length;
-  const errorCode = failureReason?.status;
+  const query = useServicesById(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <UpdateServiceForm initialValues={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateServiceForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

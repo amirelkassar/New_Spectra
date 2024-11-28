@@ -6,31 +6,13 @@ import { GetSectionID } from '@/hooks/queries/admin/main-data/section';
 import { DepartmentForm } from '../../_components/department-form';
 
 export const UpdateDepartment = ({ id }) => {
-  const {
-    data,
-    refetch,
-    isPending,
-    isPaused,
-    isError,
-    failureReason,
-  } = GetSectionID(id);
-
-  const item = data?.data;
-  const hasData = !!item?.name;
-  const errorCode = failureReason?.status;
+  const query = GetSectionID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <UpdateDepartmentForm initialValues={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateDepartmentForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

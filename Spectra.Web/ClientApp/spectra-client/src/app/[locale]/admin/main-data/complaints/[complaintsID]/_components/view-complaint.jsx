@@ -5,31 +5,11 @@ import { GetComplaintID } from '@/hooks/queries/admin/main-data/complaints';
 import { Info } from '../../../_components/info';
 
 export const ViewComplaint = ({ id }) => {
-  const {
-    data,
-    isError,
-    isPaused,
-    isPending,
-    failureReason,
-    refetch,
-  } = GetComplaintID(id);
-
-  const errorCode = failureReason?.status;
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
+  const query = GetComplaintID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        errorCode,
-        hasData,
-        isError,
-        isPending,
-        isPaused,
-      }}
-      refetch={refetch}
-    >
-      <Complaint data={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => <Complaint data={data} />}
     </QueryWrapper>
   );
 };

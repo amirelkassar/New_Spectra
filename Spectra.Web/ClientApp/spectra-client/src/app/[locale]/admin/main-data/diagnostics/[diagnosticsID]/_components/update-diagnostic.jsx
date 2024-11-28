@@ -6,31 +6,13 @@ import { GetDiagnosticsID } from '@/hooks/queries/admin/main-data/diagnostics';
 import { useUpdateDaignostic } from '../../_hooks/use-update-daigonstics';
 
 export const UpdateDiagnostic = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isPaused,
-    isError,
-    refetch,
-    failureReason,
-  } = GetDiagnosticsID(id);
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
-
-  const errorCode = failureReason?.status;
+  const query = GetDiagnosticsID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isError,
-        isPending,
-        isPaused,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <UpdateDiagnosticForm initialValues={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateDiagnosticForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

@@ -3,35 +3,37 @@
 import { QueryWrapper } from '@/components/query-wrapper';
 import { DataTable } from '@/components/table/data-table';
 import { useServices } from '@/hooks/queries/admin/main-data/services';
-import { useQuery } from '@/hooks/queries/use-query';
 import { TableItem } from '../../_components/table-item';
 import { Pagination } from '@/components/table/pagination';
 import { servicesColumns } from './services-columns';
+import { useQueryParams } from '@/hooks/queries/use-query-params';
 
 export const ServicesTable = () => {
-  const {
-    data,
-    status,
-    pageSize,
-    totalCount,
-    pageNumber,
-    refetch,
-  } = useQuery({
-    query: useServices,
-  });
+  const { pageNum, search } = useQueryParams();
+
+  const query = useServices(pageNum, search);
 
   return (
-    <QueryWrapper status={status} refetch={refetch}>
-      <DataTable data={data} columns={servicesColumns}>
-        <TableItem />
-      </DataTable>
+    <QueryWrapper query={query} isSearching={!!search}>
+      {({
+        data,
+        isPlaceholderData,
+        totalCount,
+        pageSize,
+      }) => (
+        <>
+          <DataTable data={data} columns={servicesColumns}>
+            <TableItem />
+          </DataTable>
 
-      <Pagination
-        pageSize={pageSize}
-        totalCount={totalCount}
-        pageNumber={pageNumber}
-        disabled={status.isPlaceholderData}
-      />
+          <Pagination
+            pageSize={pageSize}
+            totalCount={totalCount}
+            pageNumber={pageNum}
+            disabled={isPlaceholderData}
+          />
+        </>
+      )}
     </QueryWrapper>
   );
 };

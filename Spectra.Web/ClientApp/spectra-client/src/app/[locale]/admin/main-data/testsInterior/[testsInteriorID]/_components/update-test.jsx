@@ -6,31 +6,13 @@ import { useUpdateTest } from '../../_hooks/use-update-test';
 import { TestForm } from '../../_components/test-form';
 
 export const UpdateTest = ({ id }) => {
-  const {
-    data,
-    isError,
-    isPaused,
-    isPending,
-    failureReason,
-    refetch,
-  } = GetInternalExaminationID(id);
-
-  const errorCode = failureReason?.status;
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
+  const query = GetInternalExaminationID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        errorCode,
-        hasData,
-        isError,
-        isPending,
-        isPaused,
-      }}
-      refetch={refetch}
-    >
-      <UpdateTestForm initialValues={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateTestForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

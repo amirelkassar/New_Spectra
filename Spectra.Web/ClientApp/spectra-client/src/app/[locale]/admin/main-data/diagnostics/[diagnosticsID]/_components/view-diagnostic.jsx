@@ -5,31 +5,11 @@ import { GetDiagnosticsID } from '@/hooks/queries/admin/main-data/diagnostics';
 import { Info } from '../../../_components/info';
 
 export const ViewDiagnostic = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isPaused,
-    isError,
-    refetch,
-    failureReason,
-  } = GetDiagnosticsID(id);
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
-
-  const errorCode = failureReason?.status;
+  const query = GetDiagnosticsID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isError,
-        isPending,
-        isPaused,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <Diagnostic data={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => <Diagnostic data={data} />}
     </QueryWrapper>
   );
 };

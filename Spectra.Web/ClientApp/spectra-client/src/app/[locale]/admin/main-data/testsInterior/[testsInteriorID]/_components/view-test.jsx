@@ -5,31 +5,11 @@ import { Info } from '../../../_components/info';
 import { GetInternalExaminationID } from '@/hooks/queries/admin/main-data/testsInterior';
 
 export const ViewTest = ({ id }) => {
-  const {
-    data,
-    isError,
-    isPaused,
-    isPending,
-    failureReason,
-    refetch,
-  } = GetInternalExaminationID(id);
-
-  const errorCode = failureReason?.status;
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
+  const query = GetInternalExaminationID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        errorCode,
-        hasData,
-        isError,
-        isPending,
-        isPaused,
-      }}
-      refetch={refetch}
-    >
-      <Test data={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => <Test data={data} />}
     </QueryWrapper>
   );
 };

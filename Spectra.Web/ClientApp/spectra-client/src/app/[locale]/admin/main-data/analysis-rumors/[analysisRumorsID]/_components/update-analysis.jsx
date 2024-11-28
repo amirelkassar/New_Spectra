@@ -6,31 +6,13 @@ import { useUpdateAnalysis } from '../../_hooks/use-update-analysis';
 import { GetMedicalTestsID } from '@/hooks/queries/admin/main-data/analysis';
 
 export const UpdateAnalysis = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isError,
-    isPaused,
-    refetch,
-    failureReason,
-  } = GetMedicalTestsID(id);
-
-  const item = data?.data;
-  const hasData = !!item?.length;
-  const errorCode = failureReason?.status;
+  const query = GetMedicalTestsID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <UpdateAnalysisForm initialValues={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateAnalysisForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

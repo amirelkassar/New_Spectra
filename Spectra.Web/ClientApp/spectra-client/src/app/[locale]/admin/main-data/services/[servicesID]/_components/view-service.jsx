@@ -4,34 +4,16 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import { useServicesById } from '@/hooks/queries/admin/main-data/services';
 
 export const ViewService = ({ id }) => {
-  const {
-    data,
-    isPending,
-    isError,
-    isPaused,
-    refetch,
-    failureReason,
-  } = useServicesById(id);
-
-  const item = data?.data;
-  const hasData = !!item?.length;
-  const errorCode = failureReason?.status;
+  const query = useServicesById(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    ></QueryWrapper>
+    <QueryWrapper query={query}>
+      {({ data }) => <Service data={data} />}
+    </QueryWrapper>
   );
 };
 
-const Service = () => {
+const Service = ({ data }) => {
   return (
     <div className='flex flex-col gap-5'>
       <div className='pb-5 border-b last-of-type:border-none border-grayLight'>

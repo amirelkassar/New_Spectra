@@ -6,31 +6,13 @@ import { ComplaintForm } from '../../_components/complaint-form';
 import { useUpdateComplaint } from '../../_hooks/use-update-complaint';
 
 export const UpdateComplaint = ({ id }) => {
-  const {
-    data,
-    isError,
-    isPaused,
-    isPending,
-    failureReason,
-    refetch,
-  } = GetComplaintID(id);
-
-  const errorCode = failureReason?.status;
-
-  const hasData = !!Object.keys(data?.data || {})?.length;
+  const query = GetComplaintID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        errorCode,
-        hasData,
-        isError,
-        isPending,
-        isPaused,
-      }}
-      refetch={refetch}
-    >
-      <UpdateComplaintForm initialValues={data?.data} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateComplaintForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

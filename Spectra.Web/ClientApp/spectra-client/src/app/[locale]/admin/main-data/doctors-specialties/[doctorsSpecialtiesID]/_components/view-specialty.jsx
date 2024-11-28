@@ -6,31 +6,11 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import { GetSpecializationID } from '@/hooks/queries/admin/main-data/specialties';
 
 export const ViewSpeciality = ({ id }) => {
-  const {
-    data,
-    refetch,
-    isPending,
-    isPaused,
-    isError,
-    failureReason,
-  } = GetSpecializationID(id);
-
-  const item = data?.data;
-  const hasData = !!item?.name;
-  const errorCode = failureReason?.status;
+  const query = GetSpecializationID(id);
 
   return (
-    <QueryWrapper
-      status={{
-        isPending,
-        isPaused,
-        isError,
-        hasData,
-        errorCode,
-      }}
-      refetch={refetch}
-    >
-      <Speciality data={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => <Speciality data={data} />}
     </QueryWrapper>
   );
 };
