@@ -32,7 +32,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
                 throw new NotFoundException("Service", request.Id);
             }
             var dto = entitiy.Adapt<ServiceReadDto>();
-            dto.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, entitiy.HeroImagePath), EndPointsRoutes.Drugs, _httpContextAccessor);
+            if(!string.IsNullOrWhiteSpace(dto.HeroImagePath))
+            dto.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, entitiy.HeroImagePath), EndPointsRoutes.Services, _httpContextAccessor);
             return OperationResult<ServiceReadDto>.Success(dto);
 
 

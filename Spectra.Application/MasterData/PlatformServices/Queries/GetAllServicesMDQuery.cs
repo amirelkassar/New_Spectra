@@ -50,9 +50,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
                 services = data.ToArray();
             }
             var dtos = services.Adapt<IReadOnlyCollection<ServiceReadDto>>();
-            foreach (var item in dtos)
+            foreach (var item in dtos.Where(i=>!string.IsNullOrWhiteSpace(i.HeroImagePath)))
             {
-                item.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, item.HeroImagePath), EndPointsRoutes.Drugs, _httpContextAccessor);
+                item.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, item.HeroImagePath), EndPointsRoutes.Services, _httpContextAccessor);
             }
             return OperationResult<PaginatedResult<ServiceReadDto>>.Success(new PaginatedResult<ServiceReadDto>(dtos, totalData, request.MaxCount));
 

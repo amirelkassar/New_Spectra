@@ -18,7 +18,6 @@ namespace Spectra.Application.MasterData.ServicesMD.Dtos
         public string? TermsAndConditions { get; set; }
         public double Price { get; set; }
         public double? Discount { get; set; }
-        public ICollection<ServiceSection>? Secations { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }

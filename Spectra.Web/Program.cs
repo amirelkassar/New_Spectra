@@ -113,4 +113,3 @@ catch (Exception ex)
     Log.Fatal("Couldn't start the application", ex);
     throw;
 }
-//Serilog

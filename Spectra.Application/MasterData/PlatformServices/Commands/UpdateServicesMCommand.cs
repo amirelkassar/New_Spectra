@@ -19,7 +19,6 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public double Price { get; set; }
         public double? Discount { get; set; }
         public string? TermsAndConditions { get; set; }
-        public ICollection<ServiceSection>? Secations { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
@@ -51,7 +50,6 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 entity.Price = request.Price;
                 entity.Discount = request.Discount;
                 entity.TermsAndConditions = request.TermsAndConditions;
-                entity.Secations = request.Secations;
                 entity.Reports = request.Reports;
                 entity.Specifications = request.Specifications;
                 entity.Contents = request.Contents;

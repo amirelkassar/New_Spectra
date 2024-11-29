@@ -16,7 +16,7 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
         public ServiceMDRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
-            _masterDataServices = database.GetCollection<PlatformService>("MasterDataServices");
+            _masterDataServices = database.GetCollection<PlatformService>("PlatformServices");
         }
         public async Task<PlatformService> GetByIdAsync(string id)
         {
