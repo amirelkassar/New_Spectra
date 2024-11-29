@@ -53,7 +53,8 @@ namespace Spectra.Application.Employees.Commands
                         medicalProvider.Specializations.Add(new EmployeeSpecialization
                         {
                             Id = spec.Id,
-                            Name = spec.Name
+                            EnName = spec.EnName,
+                            ArName = spec.ArName
                         });
                         await _specializationRepository.UpdateAsync(spec);
                     });

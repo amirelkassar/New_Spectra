@@ -30,7 +30,7 @@ namespace Spectra.Application.Employees.Queries
                || s.LicenseNumber.ToLower().StartsWith(request.Search)
                || s.SectionId.ToLower() == request.Search
                || s.MainSpecializationId.ToLower() == request.Search
-               || s.Specializations.Any(sp => sp.Name.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
+               || s.Specializations.Any(sp => sp.EnName.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
                || s.Services.Any(ser => ser.Name.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search)),
                    null,
                    request.SkipCount,
@@ -48,7 +48,7 @@ namespace Spectra.Application.Employees.Queries
                     employees = entities;
                     totalCount = total;
                 }
-               
+
 
                 return OperationResult<PaginatedResult<Employee>>.Success(new PaginatedResult<Employee>(employees, totalCount, request.MaxCount));
             }

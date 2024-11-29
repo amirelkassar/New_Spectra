@@ -19,7 +19,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
             var entity = await _sectionsRepository.GetByIdAsync(request.Id);
             if (entity is null)
             {
-                throw new NotFoundException("Sections",request.Id);
+                throw new NotFoundException("Sections", request.Id);
             }
             await _sectionsRepository.DeleteAsync(entity);
             return OperationResult<Unit>.Success(Unit.Value);

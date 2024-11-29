@@ -10,7 +10,8 @@ namespace Spectra.Application.MasterData.Sections.Commands
     public class UpdateSectionsCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
         public string HeadDoctorId { get; set; }
         public string HeadDoctorName { get; set; }
         public ICollection<SectionSpecsification> Specsifications { get; set; }
@@ -21,10 +22,10 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
             public async Task<OperationResult> Handle(UpdateSectionsCommand request, CancellationToken cancellationToken)
             {
-                var entites = await _sectionsRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
+                var entites = await _sectionsRepository.GetAllAsync(b => b.EnName == request.EnName && b.Id != request.Id);
                 if (entites is null)
                 {
-                    throw new AlreadyExistException(request.Name, nameof(request.Name));
+                    throw new AlreadyExistException(request.EnName, nameof(request.EnName));
                 }
                 var entity = await _sectionsRepository.GetByIdAsync(request.Id);
                 if (entity is null)
@@ -32,7 +33,8 @@ namespace Spectra.Application.MasterData.Sections.Commands
                     throw new NotFoundException("Sections", request.Id);
                 }
 
-                entity.Name = request.Name;
+                entity.EnName = request.EnName;
+                entity.ArName = request.ArName;
                 entity.HeadDoctorId = request.HeadDoctorId;
                 entity.HeadDoctorName = request.HeadDoctorName;
                 entity.Specsifications = request.Specsifications;
@@ -52,7 +54,12 @@ namespace Spectra.Application.MasterData.Sections.Commands
                 .NotEmpty()
                 .NotNull();
 
-                RuleFor(x => x.Name)
+                RuleFor(x => x.EnName)
+                    .NotEmpty()
+                    .NotNull()
+                    .MinimumLength(2);
+
+                RuleFor(x => x.ArName)
                     .NotEmpty()
                     .NotNull()
                     .MinimumLength(2);

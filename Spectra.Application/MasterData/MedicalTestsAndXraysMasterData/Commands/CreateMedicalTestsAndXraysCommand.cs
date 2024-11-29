@@ -25,12 +25,12 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
             var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.Name.ToLower() == request.Name.ToLower());
             if (names.data.Any())
             {
-                throw new AlreadyExistException(request.Name,nameof(request.Name));
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
             var MedicalTestsAndXray = Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray.Create(Ulid.NewUlid().ToString(),
                            request.Name,
                            request.ExaminationTypes);
-            MedicalTestsAndXray.Code= request.Code;
+            MedicalTestsAndXray.Code = request.Code;
 
             await _medicalTestsAndXrayRepository.AddAsync(MedicalTestsAndXray);
             return OperationResult<string>.Success(MedicalTestsAndXray.Id);

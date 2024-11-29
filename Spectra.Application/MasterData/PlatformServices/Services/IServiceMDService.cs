@@ -1,7 +1,5 @@
-﻿using MediatR;
-using Spectra.Application.MasterData.ServicesMD.Commands;
+﻿using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Queries;
-using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.ServicesMD.Services

@@ -2,15 +2,15 @@
 using MediatR;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Dtos;
 using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Dtos;
 
 namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
 {
 
-    public class GetAllMedicalTestsAndXraysQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetAllMedicalTestsAndXraysQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
     }

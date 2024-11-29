@@ -93,7 +93,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             foreach (var attachmentPath in attachmentPaths)
             {
-                var fullPath =Path.Combine(_webHostEnvironment.WebRootPath ,attachmentPath);
+                var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, attachmentPath);
                 if (File.Exists(fullPath))
                     File.Delete(fullPath);
             }

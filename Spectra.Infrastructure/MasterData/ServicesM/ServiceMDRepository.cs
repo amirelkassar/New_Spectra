@@ -3,7 +3,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MasterData.ServicesM

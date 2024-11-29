@@ -2,7 +2,6 @@
 using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Queries;
 using Spectra.Application.MasterData.InternalExaminations.Services;
-using Spectra.Domain.MasterData.InternalExaminations;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.MasterData.InternalExaminations

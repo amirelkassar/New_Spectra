@@ -1,20 +1,17 @@
 ﻿using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Dtos;
-using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
-using Spectra.Domain.MasterData.MedicalTestsAndXrays;
+using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.ServicesMD.Dtos;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Application.MasterData.ServicesMD.Dtos;
-using Spectra.Application.Interfaces;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {
-    public class GetAllServicesMDQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetAllServicesMDQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
     }
@@ -50,7 +47,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
                 services = data.ToArray();
             }
             var dtos = services.Adapt<IReadOnlyCollection<ServiceReadDto>>();
-            foreach (var item in dtos.Where(i=>!string.IsNullOrWhiteSpace(i.HeroImagePath)))
+            foreach (var item in dtos.Where(i => !string.IsNullOrWhiteSpace(i.HeroImagePath)))
             {
                 item.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, item.HeroImagePath), EndPointsRoutes.Services, _httpContextAccessor);
             }

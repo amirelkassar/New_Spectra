@@ -10,7 +10,8 @@ namespace Spectra.Application.MasterData.Sections.Commands
 {
     public class CreateSectionsCommand : ICommand<OperationResult>
     {
-        public string Name { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
         public string HeadDoctorId { get; set; }
         public string HeadDoctorName { get; set; }
         public ICollection<SectionSpecsification> Specsifications { get; set; }
@@ -22,15 +23,16 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
         public async Task<OperationResult> Handle(CreateSectionsCommand request, CancellationToken cancellationToken)
         {
-            var names = await _sectionsRepository.GetAllAsync(b => b.Name.ToLower() == request.Name.ToLower());
+            var names = await _sectionsRepository.GetAllAsync(b => b.EnName.ToLower() == request.EnName.ToLower());
             if (names.Any())
             {
-                throw new AlreadyExistException(request.Name, nameof(request.Name));
-            } 
-            var entity = Section.Create(Ulid.NewUlid().ToString(), 
-                request.Name,
+                throw new AlreadyExistException(request.EnName, nameof(request.EnName));
+            }
+            var entity = Section.Create(Ulid.NewUlid().ToString(),
+                request.EnName,
+                request.ArName,
                 request.HeadDoctorId,
-                request.HeadDoctorName, 
+                request.HeadDoctorName,
                 request.Specsifications);
 
             await _sectionsRepository.AddAsync(entity);
@@ -42,7 +44,12 @@ namespace Spectra.Application.MasterData.Sections.Commands
     {
         public CreateSectionsCommandValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.EnName)
+                .NotEmpty()
+                .NotNull()
+                .MinimumLength(2);
+
+            RuleFor(x => x.ArName)
                 .NotEmpty()
                 .NotNull()
                 .MinimumLength(2);

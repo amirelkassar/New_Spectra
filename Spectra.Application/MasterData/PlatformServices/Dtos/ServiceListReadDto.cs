@@ -1,9 +1,4 @@
 ﻿using Spectra.Domain.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.MasterData.ServicesMD.Dtos
 {
@@ -13,7 +8,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Dtos
         public ServiceTypes ServiceType { get; private set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string? Description { get; set; }
-        public string? TermsAndConditions { get; set; }
+        public string? EnDescription { get; set; }
+        public string? ArDescription { get; set; }
+        public string? ArTermsAndConditions { get; set; }
+        public string? EnTermsAndConditions { get; set; }
     }
 }

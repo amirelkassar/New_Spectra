@@ -7,6 +7,7 @@ using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees;
+using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -37,23 +38,19 @@ namespace Spectra.Application.Employees.Commands
         public AcademicDegrees? AcademicDegree { get; set; }
         public string? MainSpecializationId { get; set; }
         public string? MainSpecializationName { get; set; }
-        public string? SectionId { get; set; }
-        public string? SectionName { get; set; }
         public double? WorkingHours { get; set; }
     }
 
     public class CreateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo,
-        IDocumentHellper addFile,
         ISpecializationsRepository specializationRepository,
         IIdentityService identityService,
-        ISectionsRepository sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
+        IBaseMongoDbRepository<Section> sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
     {
         private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
 
         private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
         private readonly IIdentityService _identityService = identityService;
-        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
-        private readonly IDocumentHellper _addFile = addFile;
+        private readonly IBaseMongoDbRepository<Section> _sectionsRepository = sectionsRepository;
 
         public async Task<OperationResult> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
@@ -70,12 +67,6 @@ namespace Spectra.Application.Employees.Commands
             if (await _employeeRepo.Exists(s => s.LicenseNumber.ToLower() == request.LicenseNumber.ToLower()))
             {
                 throw new AlreadyExistException(request.LicenseNumber, nameof(request.LicenseNumber));
-            }
-
-            var section = await _sectionsRepository.GetByIdAsync(request.SectionId);
-            if (section == null)
-            {
-                throw new NotFoundException("Sections", request.SectionId);
             }
 
             var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
@@ -104,13 +95,19 @@ namespace Spectra.Application.Employees.Commands
             employee.LicenseNumber = request.LicenseNumber;
             employee.ApprovedBy = request.ApprovedBy;
             employee.AcademicDegree = request.AcademicDegree;
-            employee.MainSpecializationName = request.MainSpecializationName;
-            employee.MainSpecializationId = request.MainSpecializationId;
-            employee.SectionId = request.SectionId;
-            employee.SectionName = request.SectionName;
             employee.Qualification = request.Qualification;
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;
+
+            if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
+            {
+                employee.MainSpecializationName = request.MainSpecializationName;
+                employee.MainSpecializationId = request.MainSpecializationId;
+                var section = await _sectionsRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == request.MainSpecializationId));
+
+                employee.SectionId = section.Id;
+                employee.SectionName = section.EnName;
+            }
 
             await _employeeRepo.AddAsync(employee);
 

@@ -48,7 +48,7 @@ namespace Spectra.Infrastructure.MasterData.Specialization
         }
         public async Task<Domain.MasterData.DoctorsSpecialization.Specialization> GetByNameAsync(string name)
         {
-            return await _specializations.Find(c => c.Name == name).FirstOrDefaultAsync();
+            return await _specializations.Find(c => c.EnName == name).FirstOrDefaultAsync();
         }
 
 

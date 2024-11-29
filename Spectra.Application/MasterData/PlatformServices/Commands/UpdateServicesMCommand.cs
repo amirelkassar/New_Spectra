@@ -5,7 +5,6 @@ using Spectra.Application.Messaging;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.ServicesMD.Commands
@@ -15,10 +14,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string Id { get; set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string? Description { get; set; }
+        public string? EnDescription { get; set; }
+        public string? ArDescription { get; set; }
         public double Price { get; set; }
         public double? Discount { get; set; }
-        public string? TermsAndConditions { get; set; }
+        public string? ArTermsAndConditions { get; set; }
+        public string? EnTermsAndConditions { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
@@ -46,10 +47,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 }
                 entity.EnName = request.EnName;
                 entity.ArName = request.ArName;
-                entity.Description = request.Description;
+                entity.EnDescription = request.EnDescription;
+                entity.ArDescription = request.ArDescription;
+                entity.ArTermsAndConditions = request.ArTermsAndConditions;
+                entity.EnTermsAndConditions = request.EnTermsAndConditions;
                 entity.Price = request.Price;
                 entity.Discount = request.Discount;
-                entity.TermsAndConditions = request.TermsAndConditions;
                 entity.Reports = request.Reports;
                 entity.Specifications = request.Specifications;
                 entity.Contents = request.Contents;
@@ -57,7 +60,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
                 if (request.HeroImage != null && request.HeroImage.Length > 0)
                 {
-                    newImgaePath = await _addPhoto.CreateAttachment(request.HeroImage,Pathes.GetServicesPath());
+                    newImgaePath = await _addPhoto.CreateAttachment(request.HeroImage, Pathes.GetServicesPath());
                     if (newImgaePath is not null)
                     {
                         await _addPhoto.DeleteAttachment(entity.HeroImagePath);

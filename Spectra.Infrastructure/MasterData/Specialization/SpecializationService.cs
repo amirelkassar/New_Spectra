@@ -35,9 +35,11 @@ namespace Spectra.Infrastructure.MasterData.Specialization
             double cost;
             List<CreateSpecializationCommand> data = await _excelProcessingService.ProcessExcelFile(input, (cells) => new CreateSpecializationCommand
             {
-                Name = cells[0],
-                Description = cells[1],
-                ConsultationCost = double.TryParse(cells[2], out cost) ? cost : 0
+                EnName = cells[0],
+                ArName = cells[1],
+                EnDescription = cells[2],
+                ArDescription = cells[3],
+                ConsultationCost = double.TryParse(cells[4], out cost) ? cost : 0
             });
             var command = new CreateBulkDataCommand<CreateSpecializationCommand> { Data = data };
             await _mediator.Send(command);

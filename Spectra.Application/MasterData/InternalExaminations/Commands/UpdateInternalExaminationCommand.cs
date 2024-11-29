@@ -31,7 +31,7 @@ namespace Spectra.Application.MasterData.InternalExaminations.Commands
             var names = await _InternalExaminationRepository.GetAllAsync(b => b.Name == request.Name && b.Id != request.Id);
             if (names.Any())
             {
-                throw new AlreadyExistException(request.Name,nameof(request.Id));
+                throw new AlreadyExistException(request.Name, nameof(request.Id));
             }
             internalExamination.Name = request.Name;
             internalExamination.Code = request.Code;
