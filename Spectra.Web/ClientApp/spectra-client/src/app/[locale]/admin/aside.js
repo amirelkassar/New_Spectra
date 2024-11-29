@@ -19,6 +19,7 @@ import useMenu from '@/store/auth/signup/menu-store';
 import LogoutIcon from '@/assets/icons/logOut';
 import ContractsIcon from '@/assets/icons/contracts';
 import DatabaseIcon from '@/assets/icons/database';
+import { useLogout } from '@/hooks/queries/auth';
 
 const Aside = () => {
   const menu = useMenu();
@@ -137,6 +138,8 @@ const Aside = () => {
       ),
     },
   ];
+
+  const { logout } = useLogout();
 
   const AsideLink = ({ link }) => (
     <li className='relative h-11'>
@@ -290,7 +293,10 @@ const Aside = () => {
           );
         })}
       </ul>
-      <button className='w-fit flex justify-center gap-[10px] items-center mt-5 md:mt-8'>
+      <button
+        onClick={logout}
+        className='w-fit flex justify-center gap-[10px] items-center mt-5 md:mt-8'
+      >
         <LogoutIcon />
         <p className='text-[14px] lg:text-[16px] font-bold'>
           {' '}

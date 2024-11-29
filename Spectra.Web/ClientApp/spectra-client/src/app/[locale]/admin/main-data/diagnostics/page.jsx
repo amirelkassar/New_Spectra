@@ -8,7 +8,7 @@ import { prefetchDiagnostics } from '@/hooks/queries/admin/main-data/diagnostics
 import { Heading } from '../_components/heading';
 import ROUTES from '@/routes';
 
-async function page() {
+async function DiagnosticsPage() {
   const queryClient = await prefetchDiagnostics();
 
   return (
@@ -25,4 +25,4 @@ async function page() {
   );
 }
 
-export default page;
+export default DiagnosticsPage;

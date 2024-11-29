@@ -2,7 +2,7 @@ import { BackButton } from '@/components/buttons/back-button';
 import { ViewDrug } from './_components/view-drug';
 import { CellActions } from '../_components/cell-actions';
 
-function page({ params }) {
+function ViewDrugPage({ params }) {
   const drugId = params?.drugsID;
 
   return (
@@ -20,4 +20,4 @@ function page({ params }) {
   );
 }
 
-export default page;
+export default ViewDrugPage;

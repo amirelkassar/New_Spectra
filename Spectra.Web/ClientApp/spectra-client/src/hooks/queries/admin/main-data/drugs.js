@@ -48,7 +48,7 @@ export const useDrugs = (pageNum = 1, search = '') => {
 
 export const GetDrugsID = (id) => {
   return useQuery({
-    queryKey: [initialQueryKey, initialQueries, id],
+    queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
         mainData.drugs.actions.get(id)
@@ -70,10 +70,7 @@ export const DeleteDrugs = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([
-        initialQueryKey,
-        initialQueries,
-      ]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
   });
 };
@@ -95,10 +92,7 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        initialQueryKey,
-        initialQueries,
-      ]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
   });
@@ -121,10 +115,7 @@ export const useEditDrug = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        initialQueryKey,
-        initialQueries,
-      ]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
   });

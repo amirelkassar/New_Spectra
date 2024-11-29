@@ -1,6 +1,6 @@
-'use client';
-
 import {
+  keepPreviousData,
+  QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
@@ -8,34 +8,63 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
+import { getQueries } from '@/lib/utils';
 
-const queryKey = 'admin.main-data.analysis';
+export const initialQueries = {
+  search: '',
+  skipCount: 0,
+  maxCount: 5,
+};
+
+export const initialQueryKey = 'admin.main-data.analysis';
+
+export const getAnalysis = async (queries) =>
+  (
+    await apiAdmin.get(
+      mainData.medicalTestsAndXray.list(queries)
+    )
+  ).data;
+
+export const prefetchMedicalTests = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [initialQueryKey, initialQueries],
+    queryFn: () => getAnalysis(initialQueries),
+  });
+
+  return queryClient;
+};
 
 //getAll
-export const GetMedicalTests = () => {
+export const useMedicalTests = (
+  pageNum = 1,
+  search = ''
+) => {
+  const queries = getQueries(
+    pageNum,
+    search,
+    initialQueries
+  );
   return useQuery({
-    queryKey: [queryKey],
-    queryFn: async () => {
-      const response = await apiAdmin.get(
-        mainData.MedicalTests.url
-      );
-      return response;
-    },
+    queryKey: [initialQueryKey, queries],
+    queryFn: () => getAnalysis(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
 //getID
 export const GetMedicalTestsID = (id) => {
   return useQuery({
-    queryKey: [queryKey, id],
+    queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        mainData.MedicalTests.getByID(id),
+        mainData.medicalTestsAndXray.actions.get(id),
         {
           headers: {},
         }
       );
-      return response;
+      return response.data;
     },
   });
 };
@@ -47,12 +76,12 @@ export const DeleteMedicalTests = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        mainData.MedicalTests.DeleteByID(id)
+        mainData.medicalTestsAndXray.actions.delete(id)
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([queryKey]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
   });
 };
@@ -64,14 +93,14 @@ export const useCreateMedicalTests = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        mainData.MedicalTests.url,
+        mainData.medicalTestsAndXray.actions.add,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([queryKey]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
   });
@@ -84,14 +113,14 @@ export const useEditMedicalTests = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        mainData.MedicalTests.getByID(id),
+        mainData.medicalTestsAndXray.actions.update(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([queryKey]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
   });

@@ -1,38 +1,75 @@
 'use client';
 
+import { memo, useCallback, useMemo } from 'react';
+
 import NoDataYet from './noDataYet';
 import Loader from './loader';
-
 import { ServerError } from './server-error';
 import { NoInternet } from './no-internet';
 import { NoSearchResults } from './no-search-results';
+import { NotFound404 } from './not-found-404';
+
+const MemowizedLoader = memo(Loader);
+const MemowizedNotFound404 = memo(NotFound404);
+const MemowizedServerError = memo(ServerError);
+const MemowizedNoInternet = memo(NoInternet);
+const MemowizedNoSearchResults = memo(NoSearchResults);
+const MemowizedNoDataYet = memo(NoDataYet);
+
+/**
+ * @param {Object} props
+ * @param {Object} props.query - The query object from the server.
+ * @param {boolean} [props.isSearching] - Whether the query is in search mode.
+ * @param {(args: { data: any; pageSize?: number; totalCount?: number; isPlaceholderData?: boolean }) => React.ReactNode} props.children - A render function to render the children with provided props.
+ */
 
 export const QueryWrapper = ({
-  status = {
-    isPending: false,
-    isPaused: false,
-    isError: false,
-    isSearching: false,
-    isPlaceholderData: false,
-    hasData: false,
-  },
-  refetch = () => {},
+  query,
+  isSearching = false,
   children,
 }) => {
-  if (status.isPending) return <Loader />;
+  if (!query) throw new Error('No query props provided');
 
-  if (status.isError)
-    return <ServerError onRetry={refetch} />;
+  const items =
+    query?.data?.data?.items || query?.data?.data;
+  const pageSize = query?.data?.data?.pageSize;
+  const totalCount = query?.data?.data?.totalCount;
+  const hasData = useMemo(
+    () =>
+      items
+        ? !!items?.length || !!Object.keys(items)?.length
+        : false,
+    [items]
+  );
 
-  if (status.isPaused)
-    return <NoInternet onRetry={refetch} />;
+  const onRetry = useCallback(
+    () => query?.refetch(),
+    [query]
+  );
 
-  if (status.isSearching && !status.hasData)
-    return <NoSearchResults />;
+  if (query?.isPending) return <MemowizedLoader />;
 
-  if (!status.hasData) return <NoDataYet />;
+  if (
+    query?.isError &&
+    query?.failureReason?.status === 404
+  )
+    return <MemowizedNotFound404 />;
 
-  // if (status.isPlaceholderData)
+  if (query?.isError)
+    return <MemowizedServerError onRetry={onRetry} />;
 
-  return <>{children}</>;
+  if (query?.isPaused)
+    return <MemowizedNoInternet onRetry={onRetry} />;
+
+  if (isSearching && !hasData)
+    return <MemowizedNoSearchResults />;
+
+  if (!hasData) return <MemowizedNoDataYet />;
+
+  return children({
+    data: items,
+    pageSize,
+    totalCount,
+    isPlaceholderData: query?.isPlaceholderData,
+  });
 };

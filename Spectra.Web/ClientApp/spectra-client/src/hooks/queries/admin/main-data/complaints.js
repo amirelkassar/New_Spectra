@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -43,6 +44,7 @@ export const useComplaints = (pageNum = 1, search = '') => {
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getComplaints(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -54,7 +56,7 @@ export const GetComplaintID = (id) => {
       const response = await apiAdmin.get(
         mainData.complaint.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };

@@ -36,6 +36,10 @@ function HeaderTop() {
       router.replace(`?${currentParams.toString()}`);
     }
   }, [debounced, router, searchParams]);
+
+  useEffect(() => {
+    setSearch('');
+  }, [pathname]);
   return (
     <header className='h-9 md:h-16 flex items-center gap-[10px] md:gap-[28px]'>
       <div

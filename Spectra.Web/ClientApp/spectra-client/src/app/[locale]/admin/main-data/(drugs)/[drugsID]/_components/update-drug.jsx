@@ -6,18 +6,13 @@ import { useUpdateDrug } from '../../_hooks/use-update-drug';
 import { QueryWrapper } from '@/components/query-wrapper';
 
 export const UpdateDrug = ({ id }) => {
-  const { data, refetch, isPending, isPaused, isError } =
-    GetDrugsID(id);
-
-  const item = data?.data;
-  const hasData = !!item?.name;
+  const query = GetDrugsID(id);
 
   return (
-    <QueryWrapper
-      status={{ isPending, isPaused, isError, hasData }}
-      refetch={refetch}
-    >
-      <UpdateDrugForm initialValues={item} />
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <UpdateDrugForm initialValues={data} />
+      )}
     </QueryWrapper>
   );
 };

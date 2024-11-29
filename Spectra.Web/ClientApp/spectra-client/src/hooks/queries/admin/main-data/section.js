@@ -1,6 +1,6 @@
-'use client';
-
 import {
+  keepPreviousData,
+  QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
@@ -8,35 +8,54 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
+import { getQueries } from '@/lib/utils';
+
+export const initialQueries = {
+  search: '',
+  skipCount: 0,
+  maxCount: 5,
+};
+
+export const initialQueryKey = 'admin.main-data.sections';
+
+export const getSections = async (queries) =>
+  (await apiAdmin.get(mainData.section.list(queries))).data;
+
+export const prefetchSections = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [initialQueryKey, initialQueries],
+    queryFn: () => getSections(initialQueries),
+  });
+
+  return queryClient;
+};
 
 //getAll
-export const GetSection = () => {
+export const useSections = (pageNum = 1, search = '') => {
+  const queries = getQueries(
+    pageNum,
+    search,
+    initialQueries
+  );
+
   return useQuery({
-    queryKey: [mainData.Section.url],
-    queryFn: async () => {
-      const response = await apiAdmin.get(
-        mainData.Section.url,
-        {
-          headers: {},
-        }
-      );
-      return response;
-    },
+    queryKey: [initialQueryKey, queries],
+    queryFn: () => getSections(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
 //getID
 export const GetSectionID = (id) => {
   return useQuery({
-    queryKey: [mainData.Section.getByID(id)],
+    queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        mainData.Section.getByID(id),
-        {
-          headers: {},
-        }
+        mainData.section.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
@@ -48,13 +67,13 @@ export const DeleteSection = (id) => {
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        mainData.Section.getByID(id)
+        mainData.section.actions.delete(id)
       );
       return response.data;
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([mainData.Section.url]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
   });
 };
@@ -66,14 +85,14 @@ export const useCreateSection = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        mainData.Section.url,
+        mainData.section.actions.add,
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([mainData.Section.url]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
   });
@@ -86,31 +105,15 @@ export const useEditSection = (id) => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        mainData.Section.getByID(id),
+        mainData.section.actions.update(id),
         data,
         {}
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([mainData.Section.url]);
+      queryClient.refetchQueries([initialQueryKey]);
     },
     onError: () => {},
-  });
-};
-
-//getAllDoctors
-export const GetSectionDoctors = () => {
-  return useQuery({
-    queryKey: [mainData.Section.getAllDoctors],
-    queryFn: async () => {
-      const response = await apiAdmin.get(
-        mainData.Section.getAllDoctors,
-        {
-          headers: {},
-        }
-      );
-      return response;
-    },
   });
 };

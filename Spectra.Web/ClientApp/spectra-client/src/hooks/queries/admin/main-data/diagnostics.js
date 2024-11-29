@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -47,6 +48,7 @@ export const useDiagnostics = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getDiagnostics(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -58,7 +60,7 @@ export const GetDiagnosticsID = (id) => {
       const response = await apiAdmin.get(
         mainData.diagnose.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };

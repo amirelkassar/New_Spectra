@@ -58,7 +58,7 @@ export const mainData = {
   internalExamination: {
     base: '/internalExamination',
     list: (queries = {}) =>
-      buildQuery('/internalExamination/lisr', queries),
+      buildQuery('/internalExamination/list', queries),
     actions: {
       add: '/internalExamination',
       // addFile: '/specialization/bulk',
@@ -68,24 +68,50 @@ export const mainData = {
     },
   },
 
+  section: {
+    base: '/section',
+    list: (queries = {}) =>
+      buildQuery('/section/list', queries),
+    actions: {
+      add: '/section',
+      get: (id) => `/section?id=${id}`,
+      delete: (id) => `/section?id=${id}`,
+      update: (id) => `/section?id=${id}`,
+    },
+  },
+
+  medicalTestsAndXray: {
+    base: '/medicalTestsAndXray',
+    list: (queries = {}) =>
+      buildQuery('/medicalTestsAndXray/list', queries),
+    actions: {
+      add: '/medicalTestsAndXray',
+      addFile: '/medicalTestsAndXray/bulk',
+      get: (id) => `/medicalTestsAndXray?id=${id}`,
+      delete: (id) => `/medicalTestsAndXray?id=${id}`,
+      update: (id) => `/medicalTestsAndXray?id=${id}`,
+    },
+  },
+
+  services: {
+    base: '/services',
+    list: (queries = {}) =>
+      buildQuery('/services/list', queries),
+    forListing: (queries = {}) =>
+      buildQuery('/services/for-listing', queries),
+    actions: {
+      add: '/services',
+      get: (id) => `/services?id=${id}`,
+      delete: (id) => `/services?id=${id}`,
+      update: (id) => `/services?id=${id}`,
+    },
+  },
+
   //
   //
   //
   //
 
-  MedicalTests: {
-    url: '/MedicalTestsAndXray',
-    getByName: (name) => `/MedicalTestsAndXray/${name}`,
-    getByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
-    DeleteByID: (id) => `/MedicalTestsAndXray/id?id=${id}`,
-  },
-
-  MasterDataServices: {
-    url: '/MasterDataServices',
-    getByName: (name) => `/MasterDataServices/${name}`,
-    getByID: (id) => `/MasterDataServices/id?id=${id}`,
-    DeleteByID: (id) => `/MasterDataServices/id?id=${id}`,
-  },
   Staff: {
     url: '/Admin/GetAllEmployees?PageSize=10&',
     post: '/Admin/CreateEmployee',
@@ -100,10 +126,5 @@ export const mainData = {
       `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
     edit: (id) =>
       `/Admin/MakeContractToEmployee/id?id=${id}`,
-  },
-  Section: {
-    url: '/Section',
-    getByID: (id) => `/Section/id?id=${id}`,
-    getAllDoctors: `/Section/GetAllDoctors`,
   },
 };

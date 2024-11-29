@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -50,6 +51,7 @@ export const useInternalExamination = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getInternalExamination(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -61,7 +63,7 @@ export const GetInternalExaminationID = (id) => {
       const response = await apiAdmin.get(
         mainData.internalExamination.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
