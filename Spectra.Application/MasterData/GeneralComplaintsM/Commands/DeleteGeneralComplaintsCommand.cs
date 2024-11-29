@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -11,9 +13,9 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
     }
     public class DeleteGeneralComplaintsCommandHandler : IRequestHandler<DeleteGeneralComplaintsCommand, OperationResult<Unit>>
     {
-        private readonly IGeneralComplaintRepository _generalComplaintRepository;
+        private readonly IBaseMongoDbRepository<GeneralComplaint> _generalComplaintRepository;
 
-        public DeleteGeneralComplaintsCommandHandler(IGeneralComplaintRepository generalComplaintRepository)
+        public DeleteGeneralComplaintsCommandHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository)
         {
 
             _generalComplaintRepository = generalComplaintRepository;
@@ -23,11 +25,7 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
         public async Task<OperationResult<Unit>> Handle(DeleteGeneralComplaintsCommand request, CancellationToken cancellationToken)
         {
-
-            var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
-
-
-            await _generalComplaintRepository.DeleteAsync(generalComplaint);
+            await _generalComplaintRepository.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);
 
         }

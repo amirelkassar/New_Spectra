@@ -1,6 +1,8 @@
 ﻿using Mapster;
 using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.GeneralComplaintsM.Dtos;
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -15,9 +17,9 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Queries
     public class GetDiagnoseByIdQueryHandler : IRequestHandler<GetGeneralComplaintsByIdQuery, OperationResult>
     {
 
-        private readonly IGeneralComplaintRepository _generalComplaintRepository;
+        private readonly IBaseMongoDbRepository<GeneralComplaint> _generalComplaintRepository;
 
-        public GetDiagnoseByIdQueryHandler(IGeneralComplaintRepository generalComplaintRepository)
+        public GetDiagnoseByIdQueryHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository)
         {
 
             _generalComplaintRepository = generalComplaintRepository;

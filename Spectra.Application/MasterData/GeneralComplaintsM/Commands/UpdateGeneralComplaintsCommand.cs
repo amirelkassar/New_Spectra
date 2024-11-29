@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.GeneralComplaints;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -20,9 +22,9 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
     public class UpdateGeneralComplaintsCommandHandler : IRequestHandler<UpdateGeneralComplaintsCommand, OperationResult<Unit>>
     {
 
-        private readonly IGeneralComplaintRepository _generalComplaintRepository;
+        private readonly IBaseMongoDbRepository<GeneralComplaint> _generalComplaintRepository;
 
-        public UpdateGeneralComplaintsCommandHandler(IGeneralComplaintRepository generalComplaintRepository)
+        public UpdateGeneralComplaintsCommandHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository)
         {
 
             _generalComplaintRepository = generalComplaintRepository;
@@ -35,10 +37,8 @@ namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
 
 
             var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
-
-
             var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName && b.Id != request.Id);
-            if (names.Any())
+            if (names.data.Any())
             {
                 throw new DbErrorException(" this's Name is a ready exists");
             }
