@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Wrappers;
 
 
@@ -9,14 +11,13 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
     {
         public string Id { get; set; }
     }
-    public class DeleteMedicalTestsAndXraysCommandHandler(IMedicalTestsAndXrayRepository medicalTestsAndXrayRepository) : IRequestHandler<DeleteMedicalTestsAndXraysCommand, OperationResult>
+    public class DeleteMedicalTestsAndXraysCommandHandler(IBaseMongoDbRepository<MedicalTestAndXray> medicalTestsAndXrayRepository) : IRequestHandler<DeleteMedicalTestsAndXraysCommand, OperationResult>
     {
-        private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
+        private readonly IBaseMongoDbRepository<MedicalTestAndXray> _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
 
         public async Task<OperationResult> Handle(DeleteMedicalTestsAndXraysCommand request, CancellationToken cancellationToken)
         {
-            var medicalTestsAndXrayRepository = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
-            await _medicalTestsAndXrayRepository.DeleteAsync(medicalTestsAndXrayRepository);
+            await _medicalTestsAndXrayRepository.DeleteAsync(request.Id);
             return OperationResult<Unit>.Success(Unit.Value);
         }
     }

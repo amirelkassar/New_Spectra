@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.MedicalTestsAndXrays;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
@@ -18,9 +20,9 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
     public class UpdateMedicalTestsAndXraysCommandHandler : IRequestHandler<UpdateMedicalTestsAndXraysCommand, OperationResult>
     {
 
-        private readonly IMedicalTestsAndXrayRepository _medicalTestsAndXrayRepository;
+        private readonly IBaseMongoDbRepository<MedicalTestAndXray> _medicalTestsAndXrayRepository;
 
-        public UpdateMedicalTestsAndXraysCommandHandler(IMedicalTestsAndXrayRepository medicalTestsAndXrayRepository)
+        public UpdateMedicalTestsAndXraysCommandHandler(IBaseMongoDbRepository<MedicalTestAndXray> medicalTestsAndXrayRepository)
         {
 
             _medicalTestsAndXrayRepository = medicalTestsAndXrayRepository;
@@ -32,7 +34,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
 
             var medicalTestsAndXrys = await _medicalTestsAndXrayRepository.GetByIdAsync(request.Id);
             var names = await _medicalTestsAndXrayRepository.GetAllAsync(b => b.Name.ToLower() == request.Name.ToLower() && b.Id != request.Id);
-            if (names.Any())
+            if (names.data.Any())
             {
                 throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
