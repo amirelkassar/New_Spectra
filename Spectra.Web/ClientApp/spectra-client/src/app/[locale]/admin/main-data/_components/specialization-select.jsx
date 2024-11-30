@@ -1,6 +1,11 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import MultiSelectInput from '@/components/inputs/multi-select-input';
 import { useSpecialization } from '@/hooks/queries/admin/main-data/specialties';
@@ -16,30 +21,23 @@ export const SpecializationSelect = ({
 }) => {
   const locale = useLocale();
 
+  const [value, setValue] = useState([]);
+
   const { data, isPending, isError } =
     useSpecialization('*');
-
-  const [value, setValue] = useState(() => {
-    if (!defaultValue.length) return [];
-    return defaultValue.map((item) =>
-      JSON.stringify({
-        id: item.id,
-        arName: item.arName,
-        enName: item.enName,
-      })
-    );
-  });
 
   const items = data?.data?.items;
   const hasData = data?.data?.totalCount;
 
+  // HANDLE ERROR, No DATA AND LOADING MEESAGES
   const messages = useMemo(() => {
     if (isPending) return 'Loading ...';
     if (isError) return 'Error loading data';
     if (!hasData) return 'No data found';
   }, [isPending, isError, hasData]);
 
-  const selectData = useMemo(() => {
+  // HANDLE GET SELECT OPTIONS
+  const options = useMemo(() => {
     if (isPending) return [];
     if (isError) return [];
     if (!hasData) return [];
@@ -54,6 +52,19 @@ export const SpecializationSelect = ({
     }));
   }, [isPending, isError, hasData, items, locale]);
 
+  // HANDLE GET DEFAULT SELETED OPTIONS
+  const selectedOptions = useMemo(() => {
+    if (!defaultValue || !defaultValue?.length) return [];
+    return defaultValue.map((item) =>
+      JSON.stringify({
+        id: item.id,
+        arName: item.arName,
+        enName: item.enName,
+      })
+    );
+  }, [defaultValue]);
+
+  // HANDLE SET ON SELECT IF VALUE CHANGES
   const onChange = useCallback(
     (value) => {
       setValue(value);
@@ -67,9 +78,15 @@ export const SpecializationSelect = ({
     [onSelect, name]
   );
 
+  // HANDLE SET DEFAULT SELECTED OPTIONS
+  useEffect(() => {
+    if (isPending) return;
+    setValue(selectedOptions);
+  }, [selectedOptions, isPending]);
+
   return (
     <MultiSelectInput
-      data={selectData}
+      data={options}
       searchable
       size='lg'
       classNames={{
