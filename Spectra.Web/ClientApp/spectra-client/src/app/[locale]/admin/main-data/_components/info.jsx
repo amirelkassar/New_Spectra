@@ -18,7 +18,7 @@ export const Info = ({
 
     if (Array.isArray(data))
       return data?.map((item) => (
-        <p key={item} className='text-sm md:text-xl'>
+        <p key={item} className='text-sm md:text-xl mb-2'>
           {item}
         </p>
       ));

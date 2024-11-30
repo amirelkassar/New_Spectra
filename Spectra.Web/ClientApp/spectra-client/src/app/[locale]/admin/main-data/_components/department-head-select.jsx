@@ -85,7 +85,7 @@ export function DepartmentHeadSelect({
         className='text-xs md:text-base flex items-center gap-2 justify-evenly hover:bg-blueLighter border-b-2 border-grayLight last:border-transparent aria-selected:bg-blueLight'
         value={item}
         key={item.id}
-        aria-selected={selectedItem.id === item.id}
+        aria-selected={selectedItem?.id === item.id}
       >
         <Avatar
           src={item.avatar}
@@ -105,7 +105,7 @@ export function DepartmentHeadSelect({
         />
       </Combobox.Option>
     ));
-  }, [search, selectedItem.id]);
+  }, [search, selectedItem?.id]);
 
   return (
     <div className='space-y-4'>
@@ -153,11 +153,11 @@ export function DepartmentHeadSelect({
 
         <Combobox.Dropdown className='rounded-xl overflow-hidden border-greenMain rounded-t-none border-t-0'>
           <Combobox.Options>
-            <ScrollArea.Autosize type='scroll' mah={250}>
+            <ScrollArea.Autosize type='scroll' mah={200}>
               {!!options?.length ? (
                 options
               ) : (
-                <Combobox.Empty className='p-5 min-h-[250px] text-center text-sm text-gray-500 flex items-center justify-center'>
+                <Combobox.Empty className='p-5 min-h-[200px] text-center text-sm text-gray-500 flex items-center justify-center'>
                   Nothing found
                 </Combobox.Empty>
               )}
