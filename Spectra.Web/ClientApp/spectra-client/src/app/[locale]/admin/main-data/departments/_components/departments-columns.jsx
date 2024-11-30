@@ -2,8 +2,12 @@ import { CellActions } from './cell-actions';
 
 export const DepartmentColumns = [
   {
-    accessorKey: 'name',
-    header: 'القسم',
+    accessorKey: 'arName',
+    header: 'الاسم باللغة بالعربية',
+  },
+  {
+    accessorKey: 'enName',
+    header: 'الاسم باللغة الانجليزية',
   },
   {
     accessorKey: 'specsifications',

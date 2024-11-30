@@ -9,14 +9,13 @@ import FormDocSpe from './_components/formDocSpe';
 import FormStaff from './_components/formStaff';
 import FormCreateEmail from './_components/formCreateEmail';
 import Button from '@/components/button';
-import { useCreateStaff } from '@/hooks/queries/admin/staff/staff';
+import { useAddStaff } from '@/hooks/queries/admin/staff/staff';
 
 function Page() {
   const [firstData, setFirstData] = useState('');
   const [DocSpeData, setDocSpeData] = useState('');
   const [StaffData, setStaffData] = useState('');
   const [PageForm, setPageForm] = useState(1);
-  console.log(StaffData);
 
   const {
     mutate: CreateStaff,
@@ -24,8 +23,7 @@ function Page() {
     isSuccess,
     isError,
     reset,
-  } = useCreateStaff();
-  console.log(firstData);
+  } = useAddStaff();
 
   useEffect(() => {
     if (isSuccess) {
@@ -41,8 +39,6 @@ function Page() {
       firstData.JobTypes === '2'
         ? { ...firstData, ...DocSpeData }
         : { ...firstData, ...StaffData };
-
-    console.log(formData);
 
     e.preventDefault();
     const formDataToSend = new FormData();
@@ -153,7 +149,6 @@ function Page() {
           <div className='flex flex-col md:flex-row gap-4 md:gap-10 md:max-w-[94%] mx-auto  items-center mt-12 md:mt-20  justify-center flex-1 w-full'>
             <Button
               onClick={(e) => {
-                console.log('done seend ');
                 handleSubmit(e);
               }}
               variant='secondary'

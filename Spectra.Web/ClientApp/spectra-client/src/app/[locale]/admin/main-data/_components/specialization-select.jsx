@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import MultiSelectInput from '@/components/inputs/multi-select-input';
 import { useSpecialization } from '@/hooks/queries/admin/main-data/specialties';
+import { useLocale } from 'next-intl';
 
 export const SpecializationSelect = ({
   error,
@@ -13,21 +14,24 @@ export const SpecializationSelect = ({
   label = '',
   placeholder = '',
 }) => {
+  const locale = useLocale();
+
+  const { data, isPending, isError } =
+    useSpecialization('*');
+
   const [value, setValue] = useState(() => {
     if (!defaultValue.length) return [];
     return defaultValue.map((item) =>
       JSON.stringify({
         id: item.id,
-        name: item.name,
+        arName: item.arName,
+        enName: item.enName,
       })
     );
   });
 
-  const { data, isPending, isError } =
-    useSpecialization('*');
-
   const items = data?.data?.items;
-  const hasData = !!items?.length;
+  const hasData = data?.data?.totalCount;
 
   const messages = useMemo(() => {
     if (isPending) return 'Loading ...';
@@ -43,11 +47,12 @@ export const SpecializationSelect = ({
     return items.map((item) => ({
       value: JSON.stringify({
         id: item.id,
-        name: item.name,
+        arName: item.arName,
+        enName: item.enName,
       }),
-      label: item.name,
+      label: locale === 'ar' ? item.arName : item.enName,
     }));
-  }, [isPending, isError, hasData, items]);
+  }, [isPending, isError, hasData, items, locale]);
 
   const onChange = useCallback(
     (value) => {

@@ -13,7 +13,7 @@ export const ReportSelect = ({
   placeholder = '',
 }) => {
   const [value, setValue] = useState(() => {
-    if (!defaultValue.length) return [];
+    if (!defaultValue?.length) return [];
     return defaultValue.map((item) =>
       JSON.stringify({
         id: item.id,

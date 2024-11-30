@@ -12,7 +12,7 @@ export function cn(...inputs) {
 export function formatCurrency(amount, currency = '$') {
   const formattedAmount = amount.toLocaleString();
 
-  return `${formattedAmount}${currency.toUpperCase()}`;
+  return `${formattedAmount} ${currency.toUpperCase()}`;
 }
 
 export function convertBytesToKB(bytes) {

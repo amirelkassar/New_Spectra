@@ -2,8 +2,12 @@ import { CellActions } from './cell-actions';
 
 export const SpecialtiesColumns = [
   {
-    accessorKey: 'name',
-    header: 'التخصص',
+    accessorKey: 'arName',
+    header: 'الاسم بالعربي',
+  },
+  {
+    accessorKey: 'enName',
+    header: 'الاسم بالانجليزي',
   },
   {
     accessorKey: 'code',

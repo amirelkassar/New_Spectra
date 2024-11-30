@@ -64,7 +64,7 @@ const ImageAndNameCell = ({ name, image }) => {
           />
         )}
       </div>
-      <h3 className='font-bold text-xs md:text-base'>
+      <h3 className='font-bold text-xs md:text-base flex-1'>
         {name}
       </h3>
     </div>

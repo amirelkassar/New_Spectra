@@ -19,11 +19,19 @@ export const DepartmentForm = ({
       className='flex flex-col gap-4 lg:gap-8 px-3 mb-14 max-w-screen-lg mx-auto'
     >
       <InputGreen
-        label='اسم القسم'
-        name='name'
-        value={data?.name}
+        label='اسم القسم باللغة العربية'
+        name='arName'
+        value={data?.arName}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Name')}
+        error={GetErrorMsg(error, 'ArName')}
+      />
+
+      <InputGreen
+        label='اسم القسم باللغة الانجليزية'
+        name='enName'
+        value={data?.enName}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'EnName')}
       />
 
       <SpecializationSelect

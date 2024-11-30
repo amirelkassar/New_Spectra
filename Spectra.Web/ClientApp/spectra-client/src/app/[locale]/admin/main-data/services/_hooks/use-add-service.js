@@ -15,10 +15,12 @@ export const useAddService = () => {
     serviceType: '',
     enName: '',
     arName: '',
-    description: '',
     price: '',
     discount: '',
-    termsAndConditions: '',
+    enDescription: '',
+    arDescription: '',
+    enTermsAndConditions: '',
+    arTermsAndConditions: '',
     reports: [],
     specifications: [],
     contents: [],
@@ -63,9 +65,28 @@ export const useAddService = () => {
     [createService, formData, router]
   );
 
+  const onReset = useCallback(() => {
+    setFormData({
+      serviceType: '',
+      enName: '',
+      arName: '',
+      price: '',
+      discount: '',
+      enDescription: '',
+      arDescription: '',
+      enTermsAndConditions: '',
+      arTermsAndConditions: '',
+      reports: [],
+      specifications: [],
+      contents: [],
+      heroImage: undefined,
+    });
+  }, []);
+
   const form = {
     onChange,
     onSubmit,
+    onReset,
     data: formData,
     error,
   };

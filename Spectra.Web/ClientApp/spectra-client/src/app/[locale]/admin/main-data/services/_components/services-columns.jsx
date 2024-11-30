@@ -1,57 +1,33 @@
-import SessionIcon from '@/assets/icons/session';
+import { useDate } from '@/hooks/use-date';
 import { CellActions } from './cell-actions';
+import { cn, formatCurrency } from '@/lib/utils';
 
 export const servicesColumns = [
   {
-    accessorKey: 'name',
-    header: 'الاسم',
-    id: 'name',
-    cell: ({ getValue, row }) => {
-      const name = getValue();
-      const icon = row.original.icon;
-      return (
-        <div className='flex items-center gap-5'>
-          <div className=' size-[40px] rounded-[50%] items-center flex justify-center bg-greenMain/20 p-2  relative'>
-            {icon || (
-              <SessionIcon className={'w-full h-auto'} />
-            )}
-          </div>
-          <h3 className='text-base font-Bold'>{name}</h3>
-        </div>
-      );
-    },
+    accessorKey: 'arName',
+    header: 'الاسم بالعربي',
+  },
+  {
+    accessorKey: 'enName',
+    header: 'الاسم بالنجليزي',
   },
   {
     accessorKey: 'created',
-    header: '  تاريخ الاضافة ',
-    id: 'created',
-    cell: ({ getValue }) => {
-      const created = getValue();
-      const date = new Date(created);
-      return <p>{date.toLocaleDateString('en-GB')}</p>;
-    },
+    header: 'تاريخ الاضافة ',
+    cell: ({ getValue }) => <CellDate date={getValue()} />,
   },
   {
-    accessorKey: 'availableSrvices',
-    header: ' الحالة ',
-    id: 'availableSrvices',
-    cell: ({ getValue }) => {
-      const availableSrvices = getValue();
-      return availableSrvices === 1 ? (
-        <span className='bg-blueLight font-Bold text-greenMain flex items-center justify-center px-4 w-fit rounded-lg text-center h-8 text-base'>
-          تعرض
-        </span>
-      ) : (
-        <span className='bg-[#F5E4F9] font-Bold text-[#8A22A0] flex items-center justify-center px-4 w-fit rounded-lg text-center h-8 text-base'>
-          داخلية{' '}
-        </span>
-      );
-    },
+    accessorKey: 'serviceType',
+    header: 'نوع الخدمة',
+    cell: ({ getValue }) => (
+      <CellStatus status={getValue()} />
+    ),
   },
   {
     accessorKey: 'price',
-    header: '  رسوم الخدمة ',
-    id: 'price',
+    header: 'رسوم الخدمة',
+    cell: ({ getValue }) =>
+      formatCurrency(getValue(), 'SAR'),
   },
   {
     id: 'actions',
@@ -61,3 +37,38 @@ export const servicesColumns = [
     },
   },
 ];
+
+const CellDate = ({ date }) => {
+  const { fullYear } = useDate(date);
+
+  return fullYear;
+};
+
+const CellStatus = ({ status }) => {
+  const { label, variant } = getLabelAndVariant({ status });
+
+  return <Status variant={variant}>{label}</Status>;
+};
+
+const Status = ({ variant, children }) => {
+  return (
+    <span
+      className={cn(
+        'bg-blueLighter rounded-xl px-4 py-1 text-xs md:text-base font-bold text-greenMain text-center',
+        variant === 'purple' && 'text-purple bg-purple/10'
+      )}
+    >
+      {children}
+    </span>
+  );
+};
+
+function getLabelAndVariant({ status }) {
+  const variant = String(status) === '1' ? 'purple' : '';
+  const label = String(status) === '1' ? 'داخلية' : 'تعرض';
+
+  return {
+    label,
+    variant,
+  };
+}

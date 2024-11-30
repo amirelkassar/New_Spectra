@@ -5,8 +5,9 @@ import { useRouter } from '@/navigation';
 
 import { useEditSection } from '@/hooks/queries/admin/main-data/section';
 import ROUTES from '@/routes';
+import { Toast } from '@/components/toast';
 
-export const useUpdateDepatment = ({ initailValues }) => {
+export const useUpdateDepatment = ({ initialValues }) => {
   const router = useRouter();
 
   const {
@@ -17,7 +18,7 @@ export const useUpdateDepatment = ({ initailValues }) => {
     reset,
   } = useEditSection();
 
-  const [formData, setFormData] = useState(initailValues);
+  const [formData, setFormData] = useState(initialValues);
 
   const onChange = useCallback(
     (e) => {
@@ -36,7 +37,7 @@ export const useUpdateDepatment = ({ initailValues }) => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      return console.log(formData);
+
       Toast.Promise(updateSection(formData), {
         success: 'تم تعديل القسم بنجاح',
         onSuccess: () => {

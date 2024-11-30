@@ -57,10 +57,16 @@ export function DepartmentHeadSelect({
   error,
   onSelect = () => {},
 }) {
-  const [search, setSearch] = useState('');
+  const defaultItem = useMemo(
+    () => TEAM?.find((item) => item.id === defaultValue),
+    [defaultValue]
+  );
+
+  const [search, setSearch] = useState(
+    defaultItem?.doctor || ''
+  );
   const [selectedItem, setSelectedItem] = useState(
-    () =>
-      TEAM?.find((item) => item.id === defaultValue) || null
+    defaultItem || null
   );
 
   const combobox = useCombobox({

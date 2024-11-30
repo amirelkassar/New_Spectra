@@ -1,41 +1,40 @@
-"use client";
-import { DataTable } from "@/components/data-table";
-import { columns } from "./columns";
+'use client';
+import { DataTable } from '@/components/data-table';
+import { columns } from './columns';
 
 const FilterOptions = [
   {
-    label: "رؤساء اقسام",
+    label: 'رؤساء اقسام',
     icon: null,
-    key: "manger",
+    key: 'manger',
   },
   {
-    label: "مختص",
+    label: 'مختص',
     icon: null,
-    key: "Specialist",
+    key: 'Specialist',
   },
   {
-    label: "طبيب",
+    label: 'طبيب',
     icon: null,
-    key: "doctor",
+    key: 'doctor',
   },
   {
-    label: "سكرتير",
+    label: 'سكرتير',
     icon: null,
-    key: "secretary",
+    key: 'secretary',
   },
 ];
 
 const StaffTable = ({ dataStaff }) => {
   return (
     <DataTable
-      data={dataStaff?.data.data.employees}
+      data={dataStaff?.data?.items}
       columns={columns}
       filterData={FilterOptions}
-      filterBy="jopType"
-      filterText="فلتر بالنوع"
-      filter="buttons"
+      filterBy='jopType'
+      filterText='فلتر بالنوع'
+      filter='buttons'
       mdHide={2}
-      totalPages={dataStaff?.data.data.totalPages}
     />
   );
 };

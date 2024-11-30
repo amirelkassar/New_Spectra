@@ -1,113 +1,143 @@
-'use client';
-import { apiAdmin } from '@/api/axios';
-import { Admin } from '@/api/endpoints';
-import NumPage from '@/components/numPage';
-import { useRouter } from '@/navigation';
-import ROUTES from '@/routes';
 import {
+  keepPreviousData,
+  QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
-//getAll
-export const GetStaff = () => {
-  const page = NumPage();
+import { apiAdmin } from '@/api/axios';
+import { staff } from '@/api/admin';
+import { getQueries } from '@/lib/utils';
+
+export const initialQueries = {
+  search: '',
+  skipCount: 0,
+  maxCount: 5,
+};
+
+export const initialQueryKey = 'admin.staff';
+
+export const getStaff = async (queries) =>
+  (await apiAdmin.get(staff.list(queries))).data;
+
+export const getMedicalProviders = async (queries) =>
+  (await apiAdmin.get(staff.providerList(queries))).data;
+
+export const prefetchStaff = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [initialQueryKey, initialQueries],
+    queryFn: () => getStaff(initialQueries),
+  });
+
+  return queryClient;
+};
+
+export const prefetchMedicalProviders = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [initialQueryKey, initialQueries],
+    queryFn: () => getMedicalProviders(initialQueries),
+  });
+
+  return queryClient;
+};
+
+export const useStaff = (pageNum = 1, search = '') => {
+  const queries = getQueries(
+    pageNum,
+    search,
+    initialQueries
+  );
+
   return useQuery({
-    queryKey: ['todos', { page }],
-    queryFn: async () => {
-      const response = await apiAdmin.get(
-        Admin.Staff.url + `PageNumber=${page}`,
-        {
-          headers: {},
-        }
-      );
-      return response;
-    },
-    placeholderData: (previousData) => previousData,
+    queryKey: [initialQueryKey, queries],
+    queryFn: () => getStaff(queries),
+    placeholderData: keepPreviousData,
   });
 };
-//getID
-export const GetStaffID = (id, id2) => {
+
+export const useMedicalProviders = (
+  pageNum = 1,
+  search = ''
+) => {
+  const queries = getQueries(
+    pageNum,
+    search,
+    initialQueries
+  );
+
   return useQuery({
-    queryKey: [Admin.Staff.getByID(id, id2)],
+    queryKey: [initialQueryKey, queries],
+    queryFn: () => getMedicalProviders(queries),
+    placeholderData: keepPreviousData,
+  });
+};
+
+export const useStaffById = (id) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        Admin.Staff.getByID(id, id2),
-        {
-          headers: {},
-        }
+        staff.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
-//delete
-export const DeleteStaff = (id) => {
-  const router = useRouter();
+
+export const useDeleteStaff = (id) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['Staff'],
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        Admin.Staff.DeleteByID(id)
+        staff.actions.delete(id)
+      );
+      return response.data;
+    },
+
+    onSuccess: () => {
+      queryClient.refetchQueries([initialQueryKey]);
+    },
+  });
+};
+
+export const useAddStaff = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await apiAdmin.post(
+        staff.actions.add,
+        data
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['Staff']);
-      router.replace(ROUTES.ADMIN.DATAMAIN.StaffS);
+      queryClient.refetchQueries([initialQueryKey]);
     },
+    onError: () => {},
   });
 };
-//post
-export const useCreateStaff = () => {
-  return useMutation({
-    mutationFn: async (data) => {
-      const response = await apiAdmin.post(
-        Admin.Staff.post,
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-      return response.data;
-    },
-    onSuccess: (data) => {
-      console.log('wsdasdasd');
-    },
-    onError: (error) => {
-      console.error('حدث خطأ أثناء الإرسال:', error);
-    },
-  });
-};
-//put
-export const useEditStaff = (id, id2) => {
-  const { refetch } = GetStaff();
-  const { refetch: refetch2 } = GetStaffID(id, id2);
+
+export const useUpdateStaff = (id) => {
+  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['EditStaff'],
     mutationFn: async (data) => {
-      console.log(id);
-
       const response = await apiAdmin.put(
-        Admin.Staff.editEmployeeByID(id),
-        data,
-        {}
+        staff.actions.update(id),
+        data
       );
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log(data);
-
-      refetch();
-      refetch2();
+    onSuccess: () => {
+      queryClient.refetchQueries([initialQueryKey]);
     },
-    onError: (error) => {
-      console.error('حدث خطأ أثناء التعديل:', error);
-    },
+    onError: () => {},
   });
 };

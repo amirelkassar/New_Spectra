@@ -1,10 +1,14 @@
 'use client';
 
 import { Table } from '@/components/table/table';
+import { cn } from '@/lib/utils';
 
-export const TableItem = () => {
+export const TableItem = ({ className = '' }) => {
   return (
-    <Table className='mb-10' borderColor='#F5F5F5'>
+    <Table
+      className={cn('mb-10', className)}
+      borderColor='#F5F5F5'
+    >
       <Table.Head
         classNames={{
           th: 'bg-blueLighter font-normal first:rounded-s-2xl last:rounded-e-2xl text-base p-3',

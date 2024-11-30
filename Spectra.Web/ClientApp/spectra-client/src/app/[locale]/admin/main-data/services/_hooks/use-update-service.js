@@ -11,7 +11,10 @@ import ROUTES from '@/routes';
 export const useUpdateService = ({ initialValues }) => {
   const router = useRouter();
 
-  const [formData, setFormData] = useState(initialValues);
+  const [formData, setFormData] = useState({
+    ...initialValues,
+    heroImage: initialValues?.heroImagePath,
+  });
 
   const {
     mutateAsync: UpdateService,

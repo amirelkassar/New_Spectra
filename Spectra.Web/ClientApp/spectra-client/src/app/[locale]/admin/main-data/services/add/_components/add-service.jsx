@@ -8,7 +8,7 @@ import { ServiceFrom } from '../../_components/service-form';
 export const AddService = () => {
   const [form, status] = useAddService();
 
-  const { data, error, onSubmit, onChange } = form;
+  const { data, error, onSubmit, onChange, onReset } = form;
 
   return (
     <div>
@@ -22,6 +22,7 @@ export const AddService = () => {
           error={error}
           onSubmit={onSubmit}
           onChange={onChange}
+          onCancel={onReset}
           isPending={status.isPending}
           btnLabel='اضافة'
         />

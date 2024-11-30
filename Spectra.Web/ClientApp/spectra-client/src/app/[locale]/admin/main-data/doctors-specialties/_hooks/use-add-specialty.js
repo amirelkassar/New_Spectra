@@ -11,10 +11,12 @@ export const useAddSpecialty = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    consultationCost: 0,
+    enName: '',
+    arName: '',
+    enDescription: '',
+    arDescription: '',
     code: '',
+    consultationCost: '',
   });
 
   const {

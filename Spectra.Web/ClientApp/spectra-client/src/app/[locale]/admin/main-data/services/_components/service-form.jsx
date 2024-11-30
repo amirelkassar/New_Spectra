@@ -19,6 +19,7 @@ import Image from 'next/image';
 import CloseIcon from '@/assets/icons/close';
 import { PhotoDropzone } from '@/components/photo-dropzone';
 import { ReportSelect } from '../../_components/reports-select';
+import { useImagePath } from '@/hooks/use-image-path';
 
 export const ServiceFrom = ({
   data,
@@ -27,6 +28,7 @@ export const ServiceFrom = ({
   btnLabel = 'حفظ',
   onSubmit = () => {},
   onChange = () => {},
+  onCancel = () => {},
 }) => {
   if (!data) return null;
   return (
@@ -52,37 +54,28 @@ export const ServiceFrom = ({
       />
 
       <InputGreen
-        label='وصف الخدمة'
-        name='description'
-        value={data.description}
+        label='وصف الخدمة باللغة العربية'
+        name='arDescription'
+        value={data.arDescription}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Description')}
+        error={GetErrorMsg(error, 'ArDescription')}
         className='col-span-2'
       />
 
       <InputGreen
-        label='سعر الخدمة'
-        name='price'
-        type='number'
-        value={data.price}
+        label='وصف الخدمة باللغة الانجليزية'
+        name='enDescription'
+        value={data.enDescription}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Price')}
-      />
-
-      <InputGreen
-        label='نسبة الخصم'
-        name='discount'
-        type='number'
-        value={data.discount}
-        onChange={onChange}
-        error={GetErrorMsg(error, 'Discount')}
+        error={GetErrorMsg(error, 'EnDescription')}
+        className='col-span-2'
       />
 
       <Textarea
-        label='الشروط و الاحكام'
-        name='termsAndConditions'
-        value={data.termsAndConditions}
-        error={GetErrorMsg(error, 'TermsAndConditions')}
+        label='الشروط و الاحكام باللغة العربية'
+        name='arTermsAndConditions'
+        value={data.arTermsAndConditions}
+        error={GetErrorMsg(error, 'ArTermsAndConditions')}
         onChange={onChange}
         size='lg'
         autosize
@@ -93,6 +86,43 @@ export const ServiceFrom = ({
           label: 'text-base mb-2',
           root: 'col-span-2',
         }}
+      />
+
+      <Textarea
+        label='الشروط و الاحكام باللغة الانجليزية'
+        name='enTermsAndConditions'
+        value={data.enTermsAndConditions}
+        error={GetErrorMsg(error, 'EnTermsAndConditions')}
+        onChange={onChange}
+        size='lg'
+        autosize
+        minRows={4}
+        classNames={{
+          input:
+            'min-h-[160px] w-full rounded-xl border-greenMain',
+          label: 'text-base mb-2',
+          root: 'col-span-2',
+        }}
+      />
+
+      <InputGreen
+        label='سعر الخدمة'
+        name='price'
+        type='number'
+        value={data.price}
+        onChange={onChange}
+        rightSection={'SAR'}
+        error={GetErrorMsg(error, 'Price')}
+      />
+
+      <InputGreen
+        label='نسبة الخصم'
+        name='discount'
+        type='number'
+        value={data.discount}
+        onChange={onChange}
+        rightSection={'%'}
+        error={GetErrorMsg(error, 'Discount')}
       />
 
       {String(data?.serviceType) === '2' && (
@@ -114,10 +144,15 @@ export const ServiceFrom = ({
         </Button>
         <Button
           disabled={isPending}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onCancel();
+          }}
           type='button'
           className='w-full font-bold py-4'
         >
-          عرض
+          الغاء
         </Button>
       </div>
     </form>
@@ -159,7 +194,16 @@ const RemainingInputs = ({ data, error, onChange }) => {
 
 const ServiceContent = ({ data, error, onChange }) => {
   const [contents, setContents] = useState(() =>
-    !!data?.length ? data : [{ title: '', description: '' }]
+    !!data?.length
+      ? data
+      : [
+          {
+            arTitle: '',
+            enTitle: '',
+            arDescription: '',
+            enDescription: '',
+          },
+        ]
   );
 
   const handleChange = useCallback((e, index) => {
@@ -176,14 +220,23 @@ const ServiceContent = ({ data, error, onChange }) => {
   const handleAddSection = useCallback(() => {
     setContents((prevContents) => [
       ...prevContents,
-      { title: '', description: '' },
+      {
+        arTitle: '',
+        enTitle: '',
+        arDescription: '',
+        enDescription: '',
+      },
     ]);
   }, []);
 
   const debouncedOnChange = useDebouncedCallback(
     (contents) => {
       const filteredContents = contents.filter(
-        (c) => c.title && c.description
+        (c) =>
+          c.arTitle &&
+          c.arDescription &&
+          c.enTitle &&
+          c.enDescription
       );
 
       onChange({
@@ -203,31 +256,64 @@ const ServiceContent = ({ data, error, onChange }) => {
 
   const contentItem = useMemo(() => {
     return contents.map((content, index) => (
-      <div className='flex gap-2 ps-5' key={index}>
-        <HeartCheckedIcon className='shrink-0 text-greenMain' />
-        <div className='space-y-3 lg:space-y-5 flex-1'>
-          <InputGreen
-            placeholder='اكتب العنوان هنا ..'
-            name='title'
-            value={content.title}
-            onChange={(e) => handleChange(e, index)}
-          />
-
-          <Textarea
-            placeholder='اكتب المحتوي هنا ..'
-            name='description'
-            value={contents.description}
-            onChange={(e) => handleChange(e, index)}
-            size='lg'
-            autosize
-            minRows={4}
-            classNames={{
-              input:
-                'min-h-[160px] w-full rounded-xl border-greenMain',
-              label: 'text-base mb-2',
-              root: 'col-span-2',
-            }}
-          />
+      <div
+        className='pb-7 space-y-5 border-b-2 border-grayLight'
+        key={index}
+      >
+        <div className='flex gap-2 ps-5'>
+          <HeartCheckedIcon className='shrink-0 text-greenMain' />
+          <div className='space-y-3 lg:space-y-5 flex-1'>
+            <InputGreen
+              placeholder='اكتب العنوان هنا ..'
+              name='arTitle'
+              value={content.arTitle}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <Textarea
+              placeholder='اكتب المحتوي هنا ..'
+              name='arDescription'
+              value={content.arDescription}
+              onChange={(e) => handleChange(e, index)}
+              size='lg'
+              autosize
+              minRows={4}
+              classNames={{
+                input:
+                  'min-h-[160px] w-full rounded-xl border-greenMain',
+                label: 'text-base mb-2',
+                root: 'col-span-2',
+              }}
+            />
+          </div>
+        </div>
+        <div dir='ltr' className='flex gap-2 ps-5'>
+          <HeartCheckedIcon className='shrink-0 text-greenMain' />
+          <div className='space-y-3 lg:space-y-5 flex-1'>
+            <InputGreen
+              placeholder='Write the title here ..'
+              name='enTitle'
+              value={content.enTitle}
+              onChange={(e) => handleChange(e, index)}
+              classNames={{
+                input: 'text-left',
+              }}
+            />
+            <Textarea
+              placeholder='Write the content here ..'
+              name='enDescription'
+              value={content.enDescription}
+              onChange={(e) => handleChange(e, index)}
+              size='lg'
+              autosize
+              minRows={4}
+              classNames={{
+                input:
+                  'min-h-[160px] w-full rounded-xl border-greenMain text-left',
+                label: 'text-base mb-2',
+                root: 'col-span-2',
+              }}
+            />
+          </div>
         </div>
       </div>
     ));
@@ -236,7 +322,7 @@ const ServiceContent = ({ data, error, onChange }) => {
   return (
     <div className='space-y-5'>
       <h3 className='text-sm md:text-xl font-bold'>
-        محتوي الخدمة
+        محتوي الخدمة باللغة العربية والانجليزية
       </h3>
 
       <div className='space-y-4 lg:space-y-8'>
@@ -262,6 +348,8 @@ const ServiceContent = ({ data, error, onChange }) => {
 };
 
 const ServicePhoto = ({ data, error, onChange }) => {
+  const imagePath = useImagePath(data);
+
   const src = useMemo(() => {
     if (!data) return '';
 
@@ -269,8 +357,8 @@ const ServicePhoto = ({ data, error, onChange }) => {
       return URL.createObjectURL(data);
     }
 
-    return data;
-  }, [data]);
+    return imagePath;
+  }, [data, imagePath]);
 
   return (
     <div className='flex-1 w-full h-auto relative space-y-5'>

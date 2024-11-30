@@ -19,9 +19,19 @@ export const ViewSpeciality = ({ id }) => {
 const Speciality = memo(({ data }) => {
   return (
     <div className='space-y-5'>
-      <Info label='اسم التخصص' data={data?.name} />
+      <Info label='التخصص' data={data?.arName} />
 
-      <Info label='وصف التخصص' data={data?.description} />
+      <Info label='الاسم العلمي' data={data?.enName} />
+
+      <Info
+        label='وصف التخصص باللغة العربية'
+        data={data?.arDescription}
+      />
+
+      <Info
+        label='وصف التخصص باللغة الانجليزية'
+        data={data?.enDescription}
+      />
 
       <Info
         label='تكلفة الجلسة'

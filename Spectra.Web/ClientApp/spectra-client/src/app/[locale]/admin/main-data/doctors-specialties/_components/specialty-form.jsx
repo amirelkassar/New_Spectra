@@ -20,23 +20,45 @@ export const SpecialityForm = ({
       onSubmit={onSubmit}
     >
       <InputGreen
-        label={'اسم التخصص'}
-        name='name'
-        value={data.name}
+        label={'اسم التخصص باللغة العربية'}
+        name='arName'
+        value={data.arName}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Name')}
+        error={GetErrorMsg(error, 'ArName')}
       />
+
+      <InputGreen
+        label={'اسم التخصص باللغة الانجليزية'}
+        name='enName'
+        value={data.enName}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'EnName')}
+      />
+
       <Textarea
         classNames={{
           input:
             'min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px]  border-greenMain rounded-2xl',
           label: 'text-[12px]  md:text-[16px]',
         }}
-        label={'وصف التخصص'}
-        name='description'
-        value={data.description}
+        label={'وصف التخصص باللغة العربية'}
+        name='arDescription'
+        value={data.arDescription}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Description')}
+        error={GetErrorMsg(error, 'ArDescription')}
+      />
+
+      <Textarea
+        classNames={{
+          input:
+            'min-h-[110px] !h-10 h-auto text-[12px] md:text-[16px]  border-greenMain rounded-2xl',
+          label: 'text-[12px]  md:text-[16px]',
+        }}
+        label={'وصف التخصص باللغة الانجليزية'}
+        name='enDescription'
+        value={data.enDescription}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'EnDescription')}
       />
 
       <InputGreen

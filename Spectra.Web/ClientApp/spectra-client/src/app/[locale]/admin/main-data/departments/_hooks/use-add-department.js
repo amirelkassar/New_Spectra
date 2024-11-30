@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { useCreateSection } from '@/hooks/queries/admin/main-data/section';
+import { Toast } from '@/components/toast';
 import ROUTES from '@/routes';
 
 export const useAddDepatment = () => {
@@ -18,7 +19,8 @@ export const useAddDepatment = () => {
   } = useCreateSection();
 
   const [formData, setFormData] = useState({
-    name: '',
+    enName: '',
+    arName: '',
     headDoctorId: '',
     headDoctorName: '',
     specsifications: [],
@@ -41,7 +43,7 @@ export const useAddDepatment = () => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      return console.log(formData);
+
       Toast.Promise(CreateSection(formData), {
         success: 'تم اضافة القسم بنجاح',
         onSuccess: () => {
