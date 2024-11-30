@@ -1,11 +1,11 @@
 ﻿using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.MasterData.ServicesMD.Dtos
 {
-    public class ServiceReadDto
+    public class ServiceReadDto : BaseEntityDto<string>
     {
-        public string Id { get; set; }
         public ServiceTypes ServiceType { get; private set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
@@ -19,5 +19,6 @@ namespace Spectra.Application.MasterData.ServicesMD.Dtos
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
         public string? HeroImagePath { get; set; }
+
     }
 }

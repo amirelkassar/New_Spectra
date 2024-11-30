@@ -52,10 +52,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                     Emailaddress = input.Emailaddress
                 },
                 MainSpecializationId = input.MainSpecializationId,
-                MainSpecializationName = input.MainSpecializationName,
                 Passowrd = input.Password,
-                SectionId = input.SectionId,
-                SectionName = input.SectionName,
                 Services = input.Services,
                 Specializations = input.Specializations,
                 WorkingHours = input.WorkingHours

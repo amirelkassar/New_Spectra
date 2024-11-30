@@ -2,12 +2,11 @@
 using MediatR;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.HellperFunc;
-using Spectra.Application.MasterData.Sections;
-using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
@@ -31,24 +30,25 @@ namespace Spectra.Application.Employees.Commands
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
         public string Passowrd { get; set; }
-        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
-        public ICollection<EmployeeService>? Services { get; set; }
+        public ICollection<string>? Specializations { get; set; }
+        public ICollection<string>? Services { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
         public string? MainSpecializationId { get; set; }
-        public string? MainSpecializationName { get; set; }
         public double? WorkingHours { get; set; }
     }
 
     public class CreateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo,
-        ISpecializationsRepository specializationRepository,
+        IBaseMongoDbRepository<Specialization> specializationRepository,
+        IBaseMongoDbRepository<PlatformService> servicesRepository,
         IIdentityService identityService,
         IBaseMongoDbRepository<Section> sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
     {
         private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
 
-        private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
+        private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
+        private readonly IBaseMongoDbRepository<PlatformService> _servicesRepository = servicesRepository;
         private readonly IIdentityService _identityService = identityService;
         private readonly IBaseMongoDbRepository<Section> _sectionsRepository = sectionsRepository;
 
@@ -90,8 +90,6 @@ namespace Spectra.Application.Employees.Commands
                 request.JobType,
                 request.JobName,
                 addUser.UserId);
-            employee.Specializations = request.Specializations;
-            employee.Services = request.Services;
             employee.LicenseNumber = request.LicenseNumber;
             employee.ApprovedBy = request.ApprovedBy;
             employee.AcademicDegree = request.AcademicDegree;
@@ -99,27 +97,45 @@ namespace Spectra.Application.Employees.Commands
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;
 
+
             if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
             {
-                employee.MainSpecializationName = request.MainSpecializationName;
                 employee.MainSpecializationId = request.MainSpecializationId;
                 var section = await _sectionsRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == request.MainSpecializationId));
-
                 employee.SectionId = section.Id;
-                employee.SectionName = section.EnName;
             }
 
-            await _employeeRepo.AddAsync(employee);
-
-            if (request.Specializations != null)
+            if (request.Specializations != null && request.Specializations.Count > 0)
             {
-                var specializations = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs.Id == s.Id) || s.Id == request.MainSpecializationId);
+                var (specializations, specTotal) = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs == s.Id) || s.Id == request.MainSpecializationId);
                 Parallel.ForEach(specializations, async spec =>
                 {
+                    employee.Specializations.Add(new EmployeeSpecialization
+                    {
+                        Id = spec.Id,
+                        EnName = spec.EnName,
+                        ArName = spec.ArName
+                    });
                     spec.DoctorCount++;
                     await _specializationRepository.UpdateAsync(spec);
                 });
             }
+
+            if (request.Services != null && request.Services.Count > 0)
+            {
+                var (services, serviceTotal) = await _servicesRepository.GetAllAsync(s => request.Services.Any(rs => rs == s.Id));
+                Parallel.ForEach(services, async service =>
+                {
+                    employee.Services.Add(new EmployeeService
+                    {
+                        Id = service.Id,
+                        EnName = service.EnName,
+                        ArName = service.ArName
+                    });
+                });
+            }
+
+            await _employeeRepo.AddAsync(employee);
 
             return OperationResult<string>.Success(employee.Id);
         }

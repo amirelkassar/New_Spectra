@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
+using Spectra.Application.Employees.EmployeeGroups.Commands;
 using Spectra.Application.Employees.Queries;
 using Spectra.Application.Employees.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
@@ -9,13 +11,10 @@ using Spectra.WebAPI.Areas.Admin.Employees.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Employees
 {
-    public class EmployeesController : AdminBaseController
+    public class EmployeesController(IEmployeeService employeeService, IMediator mediator) : AdminBaseController
     {
-        private readonly IEmployeeService _employeeService;
-        public EmployeesController(IEmployeeService employeeService)
-        {
-            _employeeService = employeeService;
-        }
+        private readonly IEmployeeService _employeeService = employeeService;
+        private readonly IMediator _mediator = mediator;
 
         [HttpGet("employee-list")]
         [Authorize(AdminEmployeesPermissions.ReadList)]
@@ -60,6 +59,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
             return Created("", response);
         }
 
+
         [HttpPut]
         [Authorize(AdminEmployeesPermissions.Update)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeDto input)
@@ -87,6 +87,22 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         public async Task<IActionResult> DeleteAttachmentAsync([FromQuery] DeleteAttachmentModel input)
         {
             var response = await _employeeService.DeleteAttachmentAsync(input.FileId, input.EmployeeId);
+            return NoContent();
+        }
+
+        [HttpPost("group-member")]
+        [Authorize(AdminEmployeesPermissions.Create)]
+        public async Task<IActionResult> AddGroupMemeberAsync([FromBody] AddEmployeeToGroupCommand input)
+        {
+            var response = await _mediator.Send(input);
+            return Created("", response);
+        }
+
+        [HttpDelete("group-member")]
+        [Authorize(AdminEmployeesPermissions.Delete)]
+        public async Task<IActionResult> RemoveGroupMemberAsync([FromQuery] RemoveEmployeeFromGroupCommand input)
+        {
+            var response = await _mediator.Send(input);
             return NoContent();
         }
     }

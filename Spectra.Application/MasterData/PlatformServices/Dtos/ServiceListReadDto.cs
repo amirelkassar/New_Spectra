@@ -1,10 +1,10 @@
-﻿using Spectra.Domain.Shared.Enums;
+﻿using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.MasterData.ServicesMD.Dtos
 {
-    public class ServiceListReadDto
+    public class ServiceListReadDto : BaseEntityDto<string>
     {
-        public string Id { get; set; }
         public ServiceTypes ServiceType { get; private set; }
         public string EnName { get; set; }
         public string ArName { get; set; }

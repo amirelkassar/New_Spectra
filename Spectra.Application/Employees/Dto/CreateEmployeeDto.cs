@@ -32,12 +32,9 @@ namespace Spectra.Application.Employees.Dto
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
         public string MainSpecializationId { get; set; }
-        public string MainSpecializationName { get; set; }
-        public string? SectionId { get; set; }
-        public string? SectionName { get; set; }
         public string Password { get; set; }
-        public ICollection<EmployeeSpecialization> Specializations { get; set; }
-        public ICollection<EmployeeService> Services { get; set; }
+        public ICollection<string> Specializations { get; set; }
+        public ICollection<string> Services { get; set; }
 
 
     }

@@ -109,7 +109,6 @@ namespace Spectra.Application.AppUsers.Commands
                                 JobName = medicalData.JobName,
                                 JobType = medicalData.JobType,
                                 MainSpecializationId = medicalData.MainSpecializationId,
-                                MainSpecializationName = medicalData.MainSpecializationName,
                                 AcademicDegree = medicalData.AcademicDegree,
                                 ApprovedBy = medicalData.ApprovedBy,
                                 Qualification = medicalData.Qualification,
@@ -203,10 +202,6 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotNull();
 
             RuleFor(m => m.MainSpecializationId)
-                .NotEmpty()
-                .NotNull();
-
-            RuleFor(m => m.MainSpecializationName)
                 .NotEmpty()
                 .NotNull();
 

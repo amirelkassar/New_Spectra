@@ -4,6 +4,8 @@
     {
         public string ArTitle { get; set; }
         public string EnTitle { get; set; }
-        public string Description { get; set; }
+        public string ArDescription { get; set; }
+        public string EnDescription { get; set; }
+
     }
 }

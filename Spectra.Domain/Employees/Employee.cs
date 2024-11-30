@@ -15,9 +15,11 @@ namespace Spectra.Domain.Employees
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
         public string MainSpecializationId { get; set; }
-        public string MainSpecializationName { get; set; }
+        public string MainSpecializationEnName { get; set; }
+        public string MainSpecializationArName { get; set; }
         public string? SectionId { get; set; }
-        public string? SectionName { get; set; }
+        public string? SectionEnName { get; set; }
+        public string? SectionArEnName { get; set; }
         public double? WorkingHours { get; set; }
         public Name Name { get; set; }
         public string NationalId { get; set; }

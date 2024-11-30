@@ -18,8 +18,6 @@ using Spectra.Application.Countries.Cities;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Countries.States;
 using Spectra.Application.Documents;
-using Spectra.Application.Employees.MedicalTeams;
-using Spectra.Application.Employees.MedicalTeams.Services;
 using Spectra.Application.Employees.Services;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
@@ -78,7 +76,6 @@ using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
 using Spectra.Infrastructure.MedicalPatientProfiles;
-using Spectra.Infrastructure.MedicalTeams;
 using Spectra.Infrastructure.Patients;
 using Spectra.Infrastructure.Repositories;
 using Spectra.Infrastructure.ScheduleAppointments.Appointments;
@@ -165,7 +162,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
             services.AddScoped<ISectionsService, SectionsService>();
-            services.AddScoped<IMedicalTeamService, MedicalTeamService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
             services.AddScoped<IPermissionManager, PermissionManager>();
             services.AddScoped<IDocumentHellper, DocumentHellper>();
@@ -193,7 +189,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
             services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
-            services.AddScoped<IMedicalTeamRepository, MedicalTeamRepository>();
             //AdminSettings Start
             services.AddScoped<IArticlesRepository, ArticlesRepository>();
             services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();

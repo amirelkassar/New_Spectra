@@ -1,8 +1,9 @@
-﻿namespace Spectra.Application.MasterData.SpecializationCommend.DTO
+﻿using Spectra.Domain.Shared.Common;
+
+namespace Spectra.Application.MasterData.SpecializationCommend.DTO
 {
-    public class SpecializationReadDto
+    public class SpecializationReadDto : BaseEntityDto<string>
     {
-        public string Id { get; set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
         public string? EnDescription { get; set; }
