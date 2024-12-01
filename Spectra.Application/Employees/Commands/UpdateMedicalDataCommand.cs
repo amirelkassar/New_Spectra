@@ -92,14 +92,23 @@ namespace Spectra.Application.Employees.Commands
                 if (!request.MainSpecializationId.Equals(medicalProvider.MainSpecializationId))
                 {
                     var newSection = await _sectionRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == request.MainSpecializationId));
-                    medicalProvider.SectionId = newSection.Id;
-                    medicalProvider.SectionEnName = newSection.EnName;
-                    medicalProvider.SectionArEnName = newSection.ArName;
+                    if (newSection != null) 
+                    {
+                        medicalProvider.SectionId = newSection.Id;
+                        medicalProvider.SectionEnName = newSection.EnName;
+                        medicalProvider.SectionArEnName = newSection.ArName;
+                    }
+                    else
+                    {
+                        medicalProvider.SectionId = null;
+                        medicalProvider.SectionEnName = null;
+                        medicalProvider.SectionArEnName = null;
+                    }
                 }
                 #endregion
 
                 #region Update Main Specialization
-                var newMainSpecialization = currentSpecializations.First(m => m.Id == request.MainSpecializationId);
+                var newMainSpecialization = newSpecializations.First(m => m.Id == request.MainSpecializationId);
                 medicalProvider.MainSpecializationId = request.MainSpecializationId;
                 medicalProvider.MainSpecializationEnName = newMainSpecialization.EnName;
                 medicalProvider.MainSpecializationArName = newMainSpecialization.ArName;

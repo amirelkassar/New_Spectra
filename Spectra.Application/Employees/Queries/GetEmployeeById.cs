@@ -36,7 +36,7 @@ namespace Spectra.Application.Employees.Queries
                     medicalProvider = await _doctorRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
                 }
 
-                var dto = medicalProvider.Adapt<EmployeeByIdDto>();
+                var dto = medicalProvider.Adapt<EmployeeByIdDto>(EmployeeByIdDto.GetConfiguration());
 
                 foreach (var attachment in dto.Attachments)
                 {
