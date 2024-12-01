@@ -1,6 +1,6 @@
 ﻿namespace Spectra.Domain.Shared.Enums
 {
-    public enum JobTypes
+    public enum JobTypes : byte
     {
         Doctor = 1,
         Specialist = 2,

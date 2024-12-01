@@ -44,7 +44,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             var check = await _drugRepository.Exists(b => b.Name == request.Name);
             if (check)
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name,nameof(request.Name));
             }
             string? photoPath = await _addPhoto.CreateAttachment(request.Photo, Pathes.GetDrugsPath());
 

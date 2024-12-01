@@ -46,7 +46,6 @@ using Spectra.Application.Settings.AppSettings;
 using Spectra.Application.Settings.Articles;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
-using Spectra.Application.Settings.Packages;
 using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
@@ -84,7 +83,6 @@ using Spectra.Infrastructure.Services.IdentityServices;
 using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
-using Spectra.Infrastructure.Settings.Packages;
 using Spectra.Infrastructure.Settings.showSpecialltionies;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
 using System.Reflection;
@@ -193,7 +191,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IArticlesRepository, ArticlesRepository>();
             services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
             services.AddScoped<ISuccessStorIesRepository, SuccessStorIesRepository>();
-            services.AddScoped<IPackagesRepository, PackagesRepository>();
 
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();

@@ -1,6 +1,6 @@
 ﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
+namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {
     public class AdminPackagePermissions : IPermissionContributor
     {
