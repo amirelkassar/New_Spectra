@@ -3,7 +3,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/client/*": ["./src/app/[locale]/client/*"],
-      "@/guest/*": ["./src/app/[locale]/(root)/*"]
+      "@/guest/*": ["./src/app/[locale]/(root)/*"],
+      "@/admin/*": ["./src/app/[locale]/admin/*"]
     }
   }
 }

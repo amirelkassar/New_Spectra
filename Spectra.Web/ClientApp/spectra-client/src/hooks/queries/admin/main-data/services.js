@@ -7,12 +7,16 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
-import { getQueries } from '@/lib/utils';
+import {
+  getQueries,
+  getSkipCountFromPageNum,
+} from '@/lib/utils';
 
 export const initialQueries = {
   search: '',
   skipCount: 0,
   maxCount: 5,
+  serviceType: '',
 };
 
 export const initialQueryKey = 'admin.main-data.services';
@@ -47,15 +51,22 @@ export const useServices = (pageNum = 1, search = '') => {
 };
 
 //getAll
-export const useServicesForListing = (
-  pageNum = 1,
-  search = ''
-) => {
-  const queries = getQueries(
+export const useServicesForListing = ({
+  pageNum,
+  search = '',
+  serviceType = '',
+}) => {
+  const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
-    search,
-    initialQueries
+    initialQueries.maxCount
   );
+
+  const queries = {
+    maxCount,
+    skipCount,
+    search,
+    serviceType,
+  };
 
   return useQuery({
     queryKey: [initialQueryKey, queries],

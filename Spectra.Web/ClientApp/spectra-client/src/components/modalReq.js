@@ -1,47 +1,47 @@
-"use client";
-import { Modal, ScrollArea } from "@mantine/core";
-import React from "react";
-import ModalType from "./comp_modal/modalType";
-import ModalDate from "./comp_modal/modalDate";
-import ModalSelect from "@/app/[locale]/admin/clients/components/modalSelect";
-import ModalJoin from "./comp_modal/modalJoin";
-import ModalContacts from "./comp_modal/modalContacts";
-import ModalContactsState from "./comp_modal/modalContactsState";
-import UserModal from "./comp_modal/permissions-modal/userModal";
-import useModal from "@/store/modal-slice";
-import AddLevelModal from './comp_modal/permissions-modal/AddLevelModal'
+'use client';
+import { Modal, ScrollArea } from '@mantine/core';
+import React from 'react';
+import ModalType from './comp_modal/modalType';
+import ModalDate from './comp_modal/modalDate';
+import ModalSelect from '@/app/[locale]/admin/(routes)/clients/components/modalSelect';
+import ModalJoin from './comp_modal/modalJoin';
+import ModalContacts from './comp_modal/modalContacts';
+import ModalContactsState from './comp_modal/modalContactsState';
+import UserModal from './comp_modal/permissions-modal/userModal';
+import useModal from '@/store/modal-slice';
+import AddLevelModal from './comp_modal/permissions-modal/AddLevelModal';
 function ModalReq({ id }) {
   const { modal, editModal } = useModal();
 
   return (
     <Modal
       opened={modal.open}
-      size={"lg"}
+      size={'lg'}
       withCloseButton={false}
       centered
       onClose={() => {
-        editModal("open", false);
+        editModal('open', false);
       }}
       scrollAreaComponent={ScrollArea.Autosize}
-      className="modelReq"
+      className='modelReq'
     >
-      {modal.type === "date" ? (
+      {modal.type === 'date' ? (
         <ModalDate id={id} />
-      ) : modal.type === "addDate" ? (
+      ) : modal.type === 'addDate' ? (
         <ModalDate id={id} />
-      ) : modal.type === "join" ? (
+      ) : modal.type === 'join' ? (
         <ModalJoin />
-      ) : modal.type === "addClient" ? (
+      ) : modal.type === 'addClient' ? (
         <ModalSelect />
-      ) : modal.type === "addPermissionsUser" ? (
+      ) : modal.type === 'addPermissionsUser' ? (
         <UserModal />
-      ) : modal.type === "contractsSend" ? (
+      ) : modal.type === 'contractsSend' ? (
         <ModalContacts />
-      ) : modal.type === "contractsReq" ? (
+      ) : modal.type === 'contractsReq' ? (
         <ModalContactsState accept={false} />
-      ) : modal.type === "contractsAccept" ? (
+      ) : modal.type === 'contractsAccept' ? (
         <ModalContactsState accept={true} />
-      ) : modal.type === "addLevelPermissions" ? (
+      ) : modal.type === 'addLevelPermissions' ? (
         <AddLevelModal accept={true} />
       ) : (
         <ModalType state={modal.type} />

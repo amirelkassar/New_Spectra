@@ -12,7 +12,7 @@ export function cn(...inputs) {
 export function formatCurrency(amount, currency = '$') {
   const formattedAmount = amount.toLocaleString();
 
-  return `${formattedAmount}${currency.toUpperCase()}`;
+  return `${formattedAmount} ${currency.toUpperCase()}`;
 }
 
 export function convertBytesToKB(bytes) {
@@ -131,5 +131,21 @@ export function getQueries(pageNum, search = '', queries) {
     ...queries,
     skipCount,
     search,
+    serviceType,
   };
 }
+
+export const getSkipCountFromPageNum = (
+  pageNum,
+  maxCount
+) => {
+  if (!pageNum) return { skipCount: 0, maxCount: 100 };
+
+  // Ensure pageNum is at least 1
+  const validPageNum = pageNum < 1 ? 1 : pageNum;
+
+  // Calculate skipCount based on the valid page number and maxCount
+  const skipCount = (validPageNum - 1) * maxCount;
+
+  return { skipCount, maxCount };
+};
