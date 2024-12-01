@@ -88,30 +88,27 @@ namespace Spectra.Application.Employees.Commands
                 }
                 #endregion
 
-                #region Update Main Section
-                if (!request.MainSpecializationId.Equals(medicalProvider.MainSpecializationId))
-                {
-                    var newSection = await _sectionRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == request.MainSpecializationId));
-                    if (newSection != null) 
-                    {
-                        medicalProvider.SectionId = newSection.Id;
-                        medicalProvider.SectionEnName = newSection.EnName;
-                        medicalProvider.SectionArEnName = newSection.ArName;
-                    }
-                    else
-                    {
-                        medicalProvider.SectionId = null;
-                        medicalProvider.SectionEnName = null;
-                        medicalProvider.SectionArEnName = null;
-                    }
-                }
-                #endregion
-
                 #region Update Main Specialization
                 var newMainSpecialization = newSpecializations.First(m => m.Id == request.MainSpecializationId);
                 medicalProvider.MainSpecializationId = request.MainSpecializationId;
                 medicalProvider.MainSpecializationEnName = newMainSpecialization.EnName;
                 medicalProvider.MainSpecializationArName = newMainSpecialization.ArName;
+                #endregion
+
+                #region Update Main Section
+                var newSection = await _sectionRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == newMainSpecialization.Id));
+                if (newSection != null)
+                {
+                    medicalProvider.SectionId = newSection.Id;
+                    medicalProvider.SectionEnName = newSection.EnName;
+                    medicalProvider.SectionArEnName = newSection.ArName;
+                }
+                else
+                {
+                    medicalProvider.SectionId = null;
+                    medicalProvider.SectionEnName = null;
+                    medicalProvider.SectionArEnName = null;
+                }
                 #endregion
 
                 #region Update Services

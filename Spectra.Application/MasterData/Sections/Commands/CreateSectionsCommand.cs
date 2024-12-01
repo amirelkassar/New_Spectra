@@ -3,6 +3,7 @@ using MediatR;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -18,10 +19,13 @@ namespace Spectra.Application.MasterData.Sections.Commands
         public ICollection<SectionSpecsification> Specsifications { get; set; }
     }
 
-    public class CreateSectionsCommandHandler(ISectionsRepository sectionsRepository,IBaseMongoDbRepository<Employee> empRepository) : IRequestHandler<CreateSectionsCommand, OperationResult>
+    public class CreateSectionsCommandHandler(ISectionsRepository sectionsRepository,
+        IBaseMongoDbRepository<Employee> empRepository,
+         IBaseMongoDbRepository<Specialization> specializationRepository) : IRequestHandler<CreateSectionsCommand, OperationResult>
     {
         private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
         private readonly IBaseMongoDbRepository<Employee> _empRepository = empRepository;
+        private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
 
         public async Task<OperationResult> Handle(CreateSectionsCommand request, CancellationToken cancellationToken)
         {
@@ -30,15 +34,40 @@ namespace Spectra.Application.MasterData.Sections.Commands
             {
                 throw new AlreadyExistException(request.EnName, nameof(request.EnName));
             }
-            var emp = await _empRepository.GetAsync(e => e.Id == request.HeadDoctorId) ?? throw new NotFoundException("Employees", request.HeadDoctorId);
 
             var entity = Section.Create(Ulid.NewUlid().ToString(),
                 request.EnName,
                 request.ArName,
                 request.Specsifications);
 
-            entity.HeadDoctorId = emp.Id;
-            entity.HeadDoctorName = emp.Name.FirstName;
+            if (!string.IsNullOrWhiteSpace(request.HeadDoctorId))
+            {
+                var emp = await _empRepository.GetAsync(e => e.Id == request.HeadDoctorId) ?? throw new NotFoundException("Employees", request.HeadDoctorId);
+                entity.HeadDoctorId = emp.Id;
+                entity.HeadDoctorName = emp.Name.FirstName;
+            }
+            if (request.Specsifications is not null && request.Specsifications.Count > 0)
+            {
+                var (allSpecializations, allSpecTotal) = await _specializationRepository.GetAllAsync();
+
+                foreach (var spec in request.Specsifications)
+                {
+                    if (!allSpecializations.Any(s => s.Id == spec.Id))
+                    {
+                        throw new NotFoundException("Specsifications", spec);
+                    }
+                }
+
+                entity.Specsifications = allSpecializations.Where(s => request.Specsifications.Any(rs => rs.Id == s.Id))
+                    .Select(s => new SectionSpecsification
+                    {
+                        Id = s.Id,
+                        ArName = s.ArName,
+                        EnName = s.EnName
+                    })
+                    .ToArray();
+            }
+
 
             await _sectionsRepository.AddAsync(entity);
 
