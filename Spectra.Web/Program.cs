@@ -24,6 +24,7 @@ try
 
     var app = builder.Build();
     Log.Information("All Services Initalized!");
+
     Log.Information("Starting the application");
 
     // Seed data before handling requests
