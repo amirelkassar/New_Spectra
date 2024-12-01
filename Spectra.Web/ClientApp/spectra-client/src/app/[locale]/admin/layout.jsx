@@ -1,3 +1,4 @@
+import { redirect } from '@/navigation';
 import { getToken } from '@/lib/token';
 import ROUTES from '@/routes';
 import {

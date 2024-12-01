@@ -131,7 +131,6 @@ export function getQueries(pageNum, search = '', queries) {
     ...queries,
     skipCount,
     search,
-    serviceType,
   };
 }
 
