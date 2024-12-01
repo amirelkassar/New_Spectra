@@ -67,6 +67,14 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
             var response = await _employeeService.UpdateEmployeeAsync(input);
             return Accepted("", response);
         }
+
+        [HttpPut("medical-data")]
+        [Authorize(AdminEmployeesPermissions.Update)]
+        public async Task<IActionResult> UpdateMedicalDataAsync([FromBody] UpdateMedicalDataCommand input)
+        {
+            var response = await _mediator.Send(input);
+            return Accepted("", response);
+        }
         [HttpPost("attachment")]
         [Authorize(AdminEmployeesPermissions.Create)]
         public async Task<IActionResult> CreateAttachmentAsync([FromForm] CreateAttachmentCommand input)
