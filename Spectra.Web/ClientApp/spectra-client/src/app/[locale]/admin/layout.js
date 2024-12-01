@@ -1,5 +1,5 @@
 import ModalReq from '@/components/modalReq';
-import HandelDashboardLayout from './handelLayout';
+import { HandelDashboardLayout } from './_components/layouts';
 import { getToken } from '@/lib/token';
 import { redirect } from '@/navigation';
 import ROUTES from '@/routes';
