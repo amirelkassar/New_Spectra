@@ -20,7 +20,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet("list")]
         [Authorize(AdminInternalExaminationPermissions.ReadList)]
-        public async Task<ActionResult> GetAllInternalExamination([FromQuery]GetAllInternalExaminationQuery input)
+        public async Task<ActionResult> GetAllInternalExamination([FromQuery] GetAllInternalExaminationQuery input)
         {
             var internalExamination = await _internalExamination.GetAllInternalExamination(input);
             return Ok(internalExamination);
@@ -36,15 +36,15 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpPost]
         [Authorize(AdminInternalExaminationPermissions.Create)]
-        public async Task<ActionResult> CreateInternalExamination([FromBody]CreateInternalExaminationCommand input)
+        public async Task<ActionResult> CreateInternalExamination([FromBody] CreateInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.CreateInternalExamination(input);
-            return Created("",internalExamination);
+            return Created("", internalExamination);
         }
 
         [HttpPut()]
         [Authorize(AdminInternalExaminationPermissions.Update)]
-        public async Task<ActionResult> UpdateInternalExamination([FromBody]UpdateInternalExaminationCommand input)
+        public async Task<ActionResult> UpdateInternalExamination([FromBody] UpdateInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.UpdateInternalExamination(input);
             return Accepted(internalExamination);
@@ -52,7 +52,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminInternalExaminationPermissions.Delete)]
-        public async Task<ActionResult> DeleteInternalExamination([FromQuery]DeleteInternalExaminationCommand input)
+        public async Task<ActionResult> DeleteInternalExamination([FromQuery] DeleteInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.DeleteInternalExamination(input.Id);
             return NoContent();

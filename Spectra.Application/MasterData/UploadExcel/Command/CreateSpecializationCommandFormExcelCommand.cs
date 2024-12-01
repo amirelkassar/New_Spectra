@@ -32,7 +32,7 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
                 foreach (var item in request.Data)
                 {
 
-                    var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.Name);
+                    var entity = Specialization.Create(Ulid.NewUlid().ToString(), item.EnName, item.ArName);
 
                     await _specializationRepository.AddAsync(entity);
 

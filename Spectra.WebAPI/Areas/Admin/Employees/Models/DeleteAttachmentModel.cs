@@ -2,7 +2,7 @@
 {
     public class DeleteAttachmentModel
     {
-        public Guid FileId { get; set; }
+        public string FileId { get; set; }
         public string EmployeeId { get; set; }
     }
 }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.MasterData.ServicesMD
+﻿namespace Spectra.Domain.MasterData.ServicesMD
 {
     public class ServiceContent
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string ArTitle { get; set; }
+        public string EnTitle { get; set; }
+        public string ArDescription { get; set; }
+        public string EnDescription { get; set; }
+
     }
 }

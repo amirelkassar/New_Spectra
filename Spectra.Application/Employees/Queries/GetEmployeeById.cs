@@ -1,4 +1,9 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Spectra.Application.Employees.Dto;
+using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -11,9 +16,13 @@ namespace Spectra.Application.Employees.Queries
         public string Id { get; set; }
         public string UserId { get; set; }
 
-        public class GetMedicalProviderByIdHandler(IBaseMongoDbRepository<Employee> doctorRepository) : IRequestHandler<GetEmployeeById, OperationResult>
+        public class GetMedicalProviderByIdHandler(IBaseMongoDbRepository<Employee> doctorRepository,
+            IWebHostEnvironment webHostEnvironment,
+            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetEmployeeById, OperationResult>
         {
             private readonly IBaseMongoDbRepository<Employee> _doctorRepository = doctorRepository;
+            private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+            private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
             public async Task<OperationResult> Handle(GetEmployeeById request, CancellationToken cancellationToken)
             {
@@ -27,8 +36,17 @@ namespace Spectra.Application.Employees.Queries
                     medicalProvider = await _doctorRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
                 }
 
+                var dto = medicalProvider.Adapt<EmployeeByIdDto>();
 
-                return OperationResult<Employee>.Success(medicalProvider);
+                foreach (var attachment in dto.Attachments)
+                {
+                    if (attachment.Path is not null)
+                    {
+                        attachment.Path = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, attachment.Path),medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
+                    }
+                }
+
+                return OperationResult<EmployeeByIdDto>.Success(dto);
             }
         }
     }

@@ -28,8 +28,18 @@ namespace Spectra.WebAPI.Areas.Public.Controllers
             return loginResponse.SuccessOpration ? Ok(loginResponse) : BadRequest(loginResponse);
         }
         [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> RegisterAsync([FromForm] RegisterUserCommand input)
+        [Route("register-client")]
+        public async Task<IActionResult> RegisterClientAsync([FromForm] RegisterUserCommand input)
+        {
+            var response = await _mediator.Send(input);
+            return response.SuccessOpration
+                ? Created("", response)
+                : BadRequest(response);
+        }
+
+        [HttpPost]
+        [Route("register-medical-provider")]
+        public async Task<IActionResult> RegisterMedicalProviderAsync([FromForm] RegisterMedicalProvider input)
         {
             var response = await _mediator.Send(input);
             return response.SuccessOpration

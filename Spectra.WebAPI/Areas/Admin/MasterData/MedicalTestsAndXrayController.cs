@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
@@ -35,15 +34,15 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpPost]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Create)]
-        public async Task<ActionResult> CreateMedicalTestsAndXray([FromBody]CreateMedicalTestsAndXraysCommand input)
+        public async Task<ActionResult> CreateMedicalTestsAndXray([FromBody] CreateMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.CreateMedicalTestsAndXray(input);
-            return Created("",medicalTestsAndXrayies);
+            return Created("", medicalTestsAndXrayies);
         }
 
         [HttpPut()]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Update)]
-        public async Task<ActionResult> UpdateMedicalTestsAndXray([FromBody]UpdateMedicalTestsAndXraysCommand input)
+        public async Task<ActionResult> UpdateMedicalTestsAndXray([FromBody] UpdateMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(input);
             return Accepted(medicalTestsAndXrayies);
@@ -51,7 +50,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete()]
         [Authorize(AdminMedicalTestsAndXrayPermissions.Delete)]
-        public async Task<ActionResult> DeleteMedicalTestsAndXray([FromQuery]DeleteMedicalTestsAndXraysCommand input)
+        public async Task<ActionResult> DeleteMedicalTestsAndXray([FromQuery] DeleteMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(input.Id);
             return Ok(medicalTestsAndXrayies);
@@ -59,7 +58,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpPost("bulk")]
         [Authorize(AdminMedicalTestsAndXrayPermissions.SheetsPermissions)]
-        public async Task<ActionResult> UploadExcelFile([FromForm]BulkCreateModel input)
+        public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _medicalTestsAndXrayService.CreateFromExcel(input.File);
             return Ok(data);

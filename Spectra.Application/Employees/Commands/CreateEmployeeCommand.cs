@@ -2,14 +2,15 @@
 using MediatR;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.HellperFunc;
-using Spectra.Application.MasterData.Sections;
-using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Validator;
 using Spectra.Domain.Employees;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
+using Spectra.Domain.MasterData.Sections;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
@@ -18,6 +19,11 @@ namespace Spectra.Application.Employees.Commands
 {
     public class CreateEmployeeCommand : IRequest<OperationResult>
     {
+        public CreateEmployeeCommand()
+        {
+            Specializations = [];
+            Services = [];
+        }
         public Name Name { get; set; }
         public string NationalId { get; set; }
         public PhoneNumber? MobileNumber { get; set; }
@@ -29,31 +35,28 @@ namespace Spectra.Application.Employees.Commands
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
-        public string Passowrd { get; set; }
-        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
-        public ICollection<EmployeeService>? Services { get; set; }
+        public string Password { get; set; }
+        public ICollection<string>? Specializations { get; set; }
+        public ICollection<string>? Services { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
         public string? MainSpecializationId { get; set; }
-        public string? MainSpecializationName { get; set; }
-        public string? SectionId { get; set; }
-        public string? SectionName { get; set; }
         public double? WorkingHours { get; set; }
     }
 
     public class CreateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo,
-        IDocumentHellper addFile,
-        ISpecializationsRepository specializationRepository,
+        IBaseMongoDbRepository<Specialization> specializationRepository,
+        IBaseMongoDbRepository<PlatformService> servicesRepository,
         IIdentityService identityService,
-        ISectionsRepository sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
+        IBaseMongoDbRepository<Section> sectionsRepository) : IRequestHandler<CreateEmployeeCommand, OperationResult>
     {
         private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
 
-        private readonly ISpecializationsRepository _specializationRepository = specializationRepository;
+        private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
+        private readonly IBaseMongoDbRepository<PlatformService> _servicesRepository = servicesRepository;
         private readonly IIdentityService _identityService = identityService;
-        private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
-        private readonly IDocumentHellper _addFile = addFile;
+        private readonly IBaseMongoDbRepository<Section> _sectionsRepository = sectionsRepository;
 
         public async Task<OperationResult> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
@@ -72,21 +75,41 @@ namespace Spectra.Application.Employees.Commands
                 throw new AlreadyExistException(request.LicenseNumber, nameof(request.LicenseNumber));
             }
 
-            var section = await _sectionsRepository.GetByIdAsync(request.SectionId);
-            if (section == null)
+            ICollection<Specialization> specializations = null;
+            if (request.Specializations is not null && request.Specializations.Count > 0)
             {
-                throw new NotFoundException("Sections", request.SectionId);
+                var (allSpecializations, allSpecTotal) = await _specializationRepository.GetAllAsync();
+
+                foreach (var spec in request.Specializations)
+                {
+                    if (!allSpecializations.Any(s => s.Id == spec))
+                    {
+                        throw new NotFoundException("Specializations", spec);
+                    }
+                }
+
+                if (!allSpecializations.Any(s=>s.Id == request.MainSpecializationId))
+                {
+                    throw new NotFoundException("Specializations", request.MainSpecializationId);
+                }
+
+                specializations = allSpecializations.Where(s => request.Specializations.Any(rs => rs == s.Id)).ToArray();
             }
+            ICollection<PlatformService> services = null;
+            if (request.Services is not null && request.Services.Count > 0)
+            {
+                var (allServices, allServiceTotal) = await _servicesRepository.GetAllAsync();
 
-            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+                foreach (var service in request.Services)
+                {
+                    if (!services.Any(s => s.Id == service))
+                    {
+                        throw new NotFoundException("Services", service);
+                    }
+                }
 
-            var addUser = await _identityService.CreateUserAsync(
-             request.EmailAddress.Emailaddress,
-               request.Passowrd,
-              request.Name.FirstName,
-              " ",
-                role
-            );
+                services = allServices.Where(s => request.Services.Any(rs => rs == s.Id)).ToArray();
+            }
 
             var employee = Employee.Create(
                 Ulid.NewUlid().ToString(),
@@ -97,32 +120,71 @@ namespace Spectra.Application.Employees.Commands
                 request.EmailAddress,
                 request.Address,
                 request.JobType,
-                request.JobName,
-                addUser.UserId);
-            employee.Specializations = request.Specializations;
-            employee.Services = request.Services;
+                request.JobName);
             employee.LicenseNumber = request.LicenseNumber;
             employee.ApprovedBy = request.ApprovedBy;
             employee.AcademicDegree = request.AcademicDegree;
-            employee.MainSpecializationName = request.MainSpecializationName;
-            employee.MainSpecializationId = request.MainSpecializationId;
-            employee.SectionId = request.SectionId;
-            employee.SectionName = request.SectionName;
             employee.Qualification = request.Qualification;
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;
 
-            await _employeeRepo.AddAsync(employee);
 
-            if (request.Specializations != null)
+            if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
             {
-                var specializations = await _specializationRepository.GetAllAsync(s => request.Specializations.Any(rs => rs.Id == s.Id) || s.Id == request.MainSpecializationId);
-                Parallel.ForEach(specializations, async spec =>
+                var mainSpecialization = specializations.FirstOrDefault(s => s.Id==request.MainSpecializationId);
+                employee.MainSpecializationId = mainSpecialization.Id;
+                employee.MainSpecializationArName = mainSpecialization.ArName;
+                employee.MainSpecializationEnName = mainSpecialization.EnName;
+                var section = await _sectionsRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == request.MainSpecializationId));
+                if (section is not null)
                 {
+                    employee.SectionId = section.Id;
+                    employee.SectionArEnName = section.ArName;
+                    employee.SectionEnName = section.EnName;
+                }
+            }
+
+            if (specializations is not null && specializations.Count > 0)
+            {
+
+                Parallel.ForEach(specializations.Distinct(), spec =>
+                {
+                    employee.Specializations.Add(new EmployeeSpecialization
+                    {
+                        Id = spec.Id,
+                        EnName = spec.EnName,
+                        ArName = spec.ArName
+                    });
                     spec.DoctorCount++;
-                    await _specializationRepository.UpdateAsync(spec);
+                    _specializationRepository.UpdateAsync(spec).Wait();
                 });
             }
+
+            if (services is not null && services.Count>0)
+            {
+                Parallel.ForEach(services.Distinct(), async service =>
+                {
+                    employee.Services.Add(new EmployeeService
+                    {
+                        Id = service.Id,
+                        EnName = service.EnName,
+                        ArName = service.ArName
+                    });
+                });
+            }
+
+            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+            var addUser = await _identityService.CreateUserAsync(
+             request.EmailAddress.Emailaddress,
+               request.Password,
+              request.Name.FirstName,
+              " ",
+                role
+            );
+
+            employee.SetUser(addUser.UserId);
+
+            await _employeeRepo.AddAsync(employee);
 
             return OperationResult<string>.Success(employee.Id);
         }
@@ -160,13 +222,10 @@ namespace Spectra.Application.Employees.Commands
                 .SetValidator(new AddressValidator());
 
 
-            RuleFor(x => x.Passowrd)
-          .NotEmpty().WithMessage("Password is required.")
-          .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
-          .Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter.")
-          .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
-          .Matches(@"[0-9]").WithMessage("Password must contain at least one number.")
-          .Matches(@"[!@#$%^&*(),.?""':;{}|<>]").WithMessage("Password must contain at least one special character (!@#$%^&*(),.?\"':;{}|<>).");
+            RuleFor(r => r.Password)
+               .NotEmpty()
+               .NotNull()
+               .Must(StringExtensionHelper.IsPassword);
         }
 
 

@@ -52,10 +52,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                     Emailaddress = input.Emailaddress
                 },
                 MainSpecializationId = input.MainSpecializationId,
-                MainSpecializationName = input.MainSpecializationName,
-                Passowrd = input.Password,
-                SectionId = input.SectionId,
-                SectionName = input.SectionName,
+                Password = input.Password,
                 Services = input.Services,
                 Specializations = input.Specializations,
                 WorkingHours = input.WorkingHours
@@ -79,7 +76,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
             return response;
         }
 
-        public async Task<OperationResult> DeleteAttachmentAsync(Guid id, string empId)
+        public async Task<OperationResult> DeleteAttachmentAsync(string id, string empId)
         {
             var response = await _mediator.Send(new DeleteAttachmentCommand
             {

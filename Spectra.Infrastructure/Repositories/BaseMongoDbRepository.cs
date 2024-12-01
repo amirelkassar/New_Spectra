@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using Serilog;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Common;
 using System.Linq.Expressions;
@@ -70,7 +69,7 @@ namespace Spectra.Infrastructure.Repositories
             //    obj.Set(prop.Name, value);
             //}
 
-            await _collection.ReplaceOneAsync(i=>i.Id== input.Id,input);
+            await _collection.ReplaceOneAsync(i => i.Id == input.Id, input);
         }
     }
 }

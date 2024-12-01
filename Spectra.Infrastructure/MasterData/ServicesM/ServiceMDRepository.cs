@@ -3,7 +3,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
-using Spectra.Domain.Shared.Enums;
 using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MasterData.ServicesM
@@ -16,7 +15,7 @@ namespace Spectra.Infrastructure.MasterData.ServicesM
         public ServiceMDRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
-            _masterDataServices = database.GetCollection<PlatformService>("MasterDataServices");
+            _masterDataServices = database.GetCollection<PlatformService>("PlatformServices");
         }
         public async Task<PlatformService> GetByIdAsync(string id)
         {

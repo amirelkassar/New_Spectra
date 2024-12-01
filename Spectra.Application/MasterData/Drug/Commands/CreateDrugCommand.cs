@@ -44,7 +44,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             var check = await _drugRepository.Exists(b => b.Name == request.Name);
             if (check)
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name,nameof(request.Name));
             }
             string? photoPath = await _addPhoto.CreateAttachment(request.Photo, Pathes.GetDrugsPath());
 
@@ -63,10 +63,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.ImagePath = photoPath;
 
             await _drugRepository.AddAsync(drug);
-
             return OperationResult<string>.Success(drug.Id);
-
-
         }
     }
     public class CreateDrugCommandValidator : AbstractValidator<CreateDrugCommand>

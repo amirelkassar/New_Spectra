@@ -1,8 +1,5 @@
-﻿using MediatR;
-using Spectra.Application.MasterData.Sections.Commands;
-using Spectra.Application.MasterData.Sections.Dto;
+﻿using Spectra.Application.MasterData.Sections.Commands;
 using Spectra.Application.MasterData.Sections.Queries;
-using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Sections.Service

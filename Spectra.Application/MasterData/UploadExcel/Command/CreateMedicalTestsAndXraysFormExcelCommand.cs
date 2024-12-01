@@ -16,9 +16,9 @@ namespace Spectra.Application.MasterData.UploadExcel.Command
             {
                 foreach (var item in request.Data)
                 {
-                    var entity = MedicalTestAndXray.Create(Ulid.NewUlid().ToString(), 
+                    var entity = MedicalTestAndXray.Create(Ulid.NewUlid().ToString(),
                         item.Name, item.ExaminationTypes);
-                    entity.Code= item.Code;
+                    entity.Code = item.Code;
                     await _medicalTestsAndXrayRepository.AddAsync(entity);
                 }
                 return OperationResult<Unit>.Success(Unit.Value);

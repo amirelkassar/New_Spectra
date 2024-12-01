@@ -1,6 +1,5 @@
 ﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
@@ -11,11 +10,13 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public ServiceTypes ServiceType { get; private set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string? Description { get; set; }
+        public string? ArDescription { get; set; }
+        public string? EnDescription { get; set; }
         public double Price { get; set; }
         public double? Discount { get; set; }
-        public string? TermsAndConditions { get; set; }
-        public ICollection<ServiceSection>? Secations { get; set; }
+        public string? ArTermsAndConditions { get; set; }
+        public string? EnTermsAndConditions { get; set; }
+
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
@@ -36,7 +37,6 @@ namespace Spectra.Domain.MasterData.ServicesMD
             ArName = arName;
             ServiceType = serviceType;
             Price = price;
-            Secations = [];
             Reports = [];
             Specifications = [];
             Contents = [];
@@ -45,6 +45,6 @@ namespace Spectra.Domain.MasterData.ServicesMD
         string enName,
         string arName,
         ServiceTypes serviceType,
-        double price)=>new(id, enName, arName, serviceType, price);
+        double price) => new(id, enName, arName, serviceType, price);
     }
 }

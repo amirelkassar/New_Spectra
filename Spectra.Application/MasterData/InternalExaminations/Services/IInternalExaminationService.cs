@@ -1,7 +1,5 @@
-﻿using MediatR;
-using Spectra.Application.MasterData.InternalExaminations.Commands;
+﻿using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Queries;
-using Spectra.Domain.MasterData.InternalExaminations;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Services

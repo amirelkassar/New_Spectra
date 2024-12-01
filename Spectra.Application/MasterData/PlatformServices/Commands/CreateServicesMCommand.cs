@@ -17,11 +17,12 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public ServiceTypes ServiceType { get; set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string? Description { get; set; }
         public double Price { get; set; }
         public double? Discount { get; set; }
-        public string? TermsAndConditions { get; set; }
-        public ICollection<ServiceSection>? Secations { get; set; }
+        public string? EnDescription { get; set; }
+        public string? ArDescription { get; set; }
+        public string? ArTermsAndConditions { get; set; }
+        public string? EnTermsAndConditions { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
@@ -43,7 +44,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
         public async Task<OperationResult> Handle(CreateServicesMCommand request, CancellationToken cancellationToken)
         {
-            var services =await _serviceMRepository.GetAllAsync(s => s.EnName.ToLower() == request.EnName.ToLower() || s.ArName.ToLower() == request.ArName.ToLower());
+            var services = await _serviceMRepository.GetAllAsync(s => s.EnName.ToLower() == request.EnName.ToLower() || s.ArName.ToLower() == request.ArName.ToLower());
             if (services.Any())
             {
                 throw new AlreadyExistException(request.EnName, nameof(request.EnName));
@@ -56,17 +57,18 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
              request.ServiceType,
              request.Price);
 
-            entity.Description=request.Description;
+            entity.EnDescription = request.EnDescription;
+            entity.ArDescription = request.ArDescription;
+            entity.ArTermsAndConditions = request.ArTermsAndConditions;
+            entity.EnTermsAndConditions = request.EnTermsAndConditions;
             entity.Discount = request.Discount;
-            entity.TermsAndConditions = request.TermsAndConditions;
-            entity.Secations = request.Secations;
             entity.Reports = request.Reports;
             entity.Specifications = request.Specifications;
             entity.Contents = request.Contents;
 
-            if (request.HeroImage is not null && request.HeroImage.Length>0)
+            if (request.HeroImage is not null && request.HeroImage.Length > 0)
             {
-                entity.HeroImagePath = await _addPhoto.CreateAttachment(request.HeroImage, Pathes.GetPackagesPath());
+                entity.HeroImagePath = await _addPhoto.CreateAttachment(request.HeroImage, Pathes.GetServicesPath());
             }
 
             await _serviceMRepository.AddAsync(entity);

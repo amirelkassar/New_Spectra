@@ -1,7 +1,6 @@
 ﻿using Mapster;
 using MediatR;
 using Spectra.Application.MasterData.InternalExaminations.Dtos;
-using Spectra.Domain.MasterData.InternalExaminations;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 

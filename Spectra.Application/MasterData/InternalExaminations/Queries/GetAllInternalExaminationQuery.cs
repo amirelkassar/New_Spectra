@@ -2,10 +2,7 @@
 using MediatR;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.DiagnoseCommend.DTO;
-using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Application.MasterData.InternalExaminations.Dtos;
-using Spectra.Domain.MasterData.Diagnoses;
 using Spectra.Domain.MasterData.InternalExaminations;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
@@ -13,7 +10,7 @@ using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.MasterData.InternalExaminations.Queries
 {
 
-    public class GetAllInternalExaminationQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetAllInternalExaminationQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
     }
@@ -47,7 +44,7 @@ namespace Spectra.Application.MasterData.InternalExaminations.Queries
                 internalExaminations = data.ToArray();
             }
             var dtos = internalExaminations.Adapt<IReadOnlyCollection<InternalExaminatioReadDto>>();
-            return OperationResult<PaginatedResult<InternalExaminatioReadDto>>.Success(new PaginatedResult<InternalExaminatioReadDto>(dtos, totalData,request.MaxCount));
+            return OperationResult<PaginatedResult<InternalExaminatioReadDto>>.Success(new PaginatedResult<InternalExaminatioReadDto>(dtos, totalData, request.MaxCount));
         }
     }
 }

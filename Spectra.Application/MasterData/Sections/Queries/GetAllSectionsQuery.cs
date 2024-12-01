@@ -1,19 +1,16 @@
 ﻿using Mapster;
 using MediatR;
 using Spectra.Application.Hellper;
-using Spectra.Application.MasterData.InternalExaminations.Dtos;
-using Spectra.Application.MasterData.InternalExaminations;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Sections.Dto;
-using Spectra.Domain.MasterData.InternalExaminations;
+using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Domain.MasterData.Sections;
-using Spectra.Application.Interfaces;
 
 namespace Spectra.Application.MasterData.Sections.Queries
 {
 
-    public class GetAllSectionsQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetAllSectionsQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
     }
@@ -28,7 +25,7 @@ namespace Spectra.Application.MasterData.Sections.Queries
             if (!string.IsNullOrEmpty(request.Search))
             {
                 request.Search = request.Search.ToLower().Trim();
-                var (data, total) = await _sectionsRepository.GetAllAsync(d => d.Name.ToLower().StartsWith(request.Search),
+                var (data, total) = await _sectionsRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search) || d.ArName.StartsWith(request.Search),
                 null,
                 request.SkipCount,
                 request.MaxCount);

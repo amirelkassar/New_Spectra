@@ -23,7 +23,7 @@ namespace Spectra.Application.Employees.Commands
             public async Task<OperationResult> Handle(CreateAttachmentCommand request, CancellationToken cancellationToken)
             {
                 var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
-                var folderPath = Path.Combine(_webHostEnvironment.WebRootPath, Pathes.GetUsersPath(), employee.UserId);
+                var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
                 Directory.CreateDirectory(folderPath);
                 if (request.File.Length > 0)
                 {

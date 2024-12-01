@@ -13,7 +13,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet("list")]
         [Authorize(AdminSectionsPermissions.ReadList)]
-        public async Task<ActionResult> GetAllSection([FromQuery]GetAllSectionsQuery input)
+        public async Task<ActionResult> GetAllSection([FromQuery] GetAllSectionsQuery input)
         {
             var sections = await _sectionsServices.GetAllSection(input);
             return Ok(sections);
@@ -32,7 +32,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> CreateSection([FromBody] CreateSectionsCommand input)
         {
             var section = await _sectionsServices.CreateSection(input);
-            return Created("",section);
+            return Created("", section);
         }
 
         [HttpPut()]
@@ -40,7 +40,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> UpdateSection([FromBody] UpdateSectionsCommand input)
         {
             var section = await _sectionsServices.UpdateSection(input);
-            return Accepted("",section);
+            return Accepted("", section);
         }
 
         [HttpDelete()]

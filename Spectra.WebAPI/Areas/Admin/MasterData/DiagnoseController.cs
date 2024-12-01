@@ -4,7 +4,6 @@ using Spectra.Application.MasterData.DiagnoseCommend.Commands;
 using Spectra.Application.MasterData.DiagnoseCommend.Queries;
 using Spectra.Application.MasterData.DiagnoseCommend.Services;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
-using System.Text.RegularExpressions;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {

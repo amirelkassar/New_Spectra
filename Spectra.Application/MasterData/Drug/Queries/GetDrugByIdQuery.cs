@@ -14,7 +14,7 @@ namespace Spectra.Application.MasterData.Drug.Queries
         public string Id { get; set; }
     }
 
-    public class GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository, 
+    public class GetDrugsByIdQueryHandler(IBaseMongoDbRepository<Domain.MasterData.Drug.Drug> drugRepository,
         IHttpContextAccessor httpContextAccessor,
         IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetDrugsByIdQuery, OperationResult<Domain.MasterData.Drug.Drug>>
     {

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
@@ -25,13 +27,15 @@ namespace Spectra.Application.Employees.Queries
                     var (entities, total) = await _doctorRepository.GetAllAsync(s => (s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant)
                && (s.Name.FirstName.ToLower().StartsWith(request.Search)
                || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
-               || s.MainSpecializationName.ToLower().StartsWith(request.Search)
-               || s.SectionName.ToLower().StartsWith(request.Search)
+               || s.MainSpecializationEnName.ToLower().StartsWith(request.Search)
+               ||s.MainSpecializationArName.StartsWith(request.Search)
+               || s.SectionEnName.ToLower().StartsWith(request.Search)
+               ||s.SectionArEnName.StartsWith(request.Search)
                || s.LicenseNumber.ToLower().StartsWith(request.Search)
                || s.SectionId.ToLower() == request.Search
                || s.MainSpecializationId.ToLower() == request.Search
-               || s.Specializations.Any(sp => sp.Name.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
-               || s.Services.Any(ser => ser.Name.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search)),
+               || s.Specializations.Any(sp => sp.EnName.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
+               || s.Services.Any(ser => ser.EnName.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search)),
                    null,
                    request.SkipCount,
                    request.MaxCount);
@@ -48,9 +52,9 @@ namespace Spectra.Application.Employees.Queries
                     employees = entities;
                     totalCount = total;
                 }
-               
 
-                return OperationResult<PaginatedResult<Employee>>.Success(new PaginatedResult<Employee>(employees, totalCount, request.MaxCount));
+                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>();
+                return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, totalCount, request.MaxCount));
             }
         }
     }

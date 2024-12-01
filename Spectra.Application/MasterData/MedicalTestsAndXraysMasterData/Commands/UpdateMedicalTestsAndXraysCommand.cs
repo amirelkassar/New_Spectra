@@ -39,8 +39,8 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands
                 throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
 
-            medicalTestsAndXrys.Name= request.Name;
-            medicalTestsAndXrys.Code= request.Code;
+            medicalTestsAndXrys.Name = request.Name;
+            medicalTestsAndXrys.Code = request.Code;
             medicalTestsAndXrys.ExaminationTypes = request.ExaminationTypes;
 
             await _medicalTestsAndXrayRepository.UpdateAsync(medicalTestsAndXrys);

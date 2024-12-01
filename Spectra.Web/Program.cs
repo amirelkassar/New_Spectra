@@ -4,6 +4,7 @@ using Serilog;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Hellper;
 using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Infrastructure.ChatHub;
@@ -94,6 +95,20 @@ try
                 throw new UnauthorizedAccessException();
         }
     });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, Pathes.GetUsersPath())),
+        RequestPath = $"/{EndPointsRoutes.Users}",
+        OnPrepareResponse = ctx =>
+        {
+            var isAuth = ctx.Context?.User?.Identity?.IsAuthenticated;
+            Log.Logger.Information("user is {0}", isAuth);
+            if (isAuth.HasValue && !isAuth.Value)
+                throw new UnauthorizedAccessException();
+            var user = ctx.Context.RequestServices.GetRequiredService<ICurrentUser>();
+        }
+    });
     app.MapControllers();
 
     app.UseSwagger();
@@ -113,4 +128,3 @@ catch (Exception ex)
     Log.Fatal("Couldn't start the application", ex);
     throw;
 }
-//Serilog

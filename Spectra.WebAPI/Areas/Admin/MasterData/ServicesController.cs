@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.MasterData.Sections.Queries;
 using Spectra.Application.MasterData.ServicesMD.Commands;
 using Spectra.Application.MasterData.ServicesMD.Queries;
 using Spectra.Application.MasterData.ServicesMD.Services;
@@ -46,7 +45,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> CreateMasterDataServicess([FromForm] CreateServicesMCommand input)
         {
             var masterDataService = await _serviceMDService.CreateServicesM(input);
-            return Created("",masterDataService);
+            return Created("", masterDataService);
         }
 
         [HttpPut()]
@@ -54,7 +53,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         public async Task<ActionResult> UpdateMasterDataServices([FromForm] UpdateServicesMCommand input)
         {
             var masterDataService = await _serviceMDService.Updateservices(input);
-            return Accepted("",masterDataService);
+            return Accepted("", masterDataService);
         }
 
         [HttpDelete()]

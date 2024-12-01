@@ -16,6 +16,6 @@ namespace Spectra.Application.Employees.Services
         Task<OperationResult> CreateAsync(CreateEmployeeDto input);
         Task<OperationResult> CreateAttachmentAsync(CreateAttachmentCommand input);
         Task<OperationResult> UpdateAttachmentAsync(UpdateAttachmentCommand input);
-        Task<OperationResult> DeleteAttachmentAsync(Guid id, string empId);
+        Task<OperationResult> DeleteAttachmentAsync(string id, string empId);
     }
 }

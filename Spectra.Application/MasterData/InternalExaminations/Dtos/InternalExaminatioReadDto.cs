@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Application.MasterData.InternalExaminations.Dtos
 {
-    public class InternalExaminatioReadDto
+    public class InternalExaminatioReadDto : BaseEntityDto<string>
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
     }

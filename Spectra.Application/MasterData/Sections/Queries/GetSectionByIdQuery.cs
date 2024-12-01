@@ -1,8 +1,6 @@
 ﻿using Mapster;
 using MediatR;
-using Spectra.Application.MasterData.InternalExaminations.Dtos;
 using Spectra.Application.MasterData.Sections.Dto;
-using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -24,7 +22,7 @@ namespace Spectra.Application.MasterData.Sections.Queries
             {
                 throw new NotFoundException("Sections", request.Id);
             }
-            var dto= entitiy.Adapt<SectionDto>();
+            var dto = entitiy.Adapt<SectionDto>();
             return OperationResult<SectionDto>.Success(dto);
 
 

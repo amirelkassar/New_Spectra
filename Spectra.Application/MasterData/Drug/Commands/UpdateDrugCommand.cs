@@ -45,7 +45,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             var check = await _drugRepository.Exists(b => b.Name == request.Name && b.Id != request.Id);
             if (check)
             {
-                throw new DbErrorException(" this's Name is a ready exists");
+                throw new AlreadyExistException(request.Name, nameof(request.Name));
             }
 
             drug.Name = request.Name;

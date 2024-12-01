@@ -25,7 +25,7 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Queries
             if (!string.IsNullOrWhiteSpace(request.Search))
             {
                 request.Search = request.Search.ToLower();
-                var (data, total) = await _specializationRepository.GetAllAsync(d => d.Name.ToLower().StartsWith(request.Search)
+                var (data, total) = await _specializationRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search)
                 || d.Code.ToLower().StartsWith(request.Search), null, request.SkipCount, request.MaxCount);
 
                 specializations = data.ToArray();

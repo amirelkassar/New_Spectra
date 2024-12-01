@@ -11,8 +11,10 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
     public class CreateSpecializationCommand : ICommand<OperationResult<string>>
     {
-        public string Name { get; set; }
-        public string? Description { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+        public string? EnDescription { get; set; }
+        public string? ArDescription { get; set; }
         public string? Code { get; set; }
         public double? ConsultationCost { get; set; }
     }
@@ -29,16 +31,18 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
 
         public async Task<OperationResult<string>> Handle(CreateSpecializationCommand request, CancellationToken cancellationToken)
         {
-            var exists = await _specializationRepository.GetAllAsync(x => x.Name == request.Name);
+            var exists = await _specializationRepository.GetAllAsync(x => x.EnName == request.EnName);
             if (exists.Any())
             {
-                throw new AlreadyExistException(request.Name, nameof(request.Name));
+                throw new AlreadyExistException(request.EnName, nameof(request.EnName));
             }
 
             var Specialization = Domain.MasterData.DoctorsSpecialization.Specialization.Create(
                 Ulid.NewUlid().ToString(),
-                request.Name);
-            Specialization.Description = request.Description;
+                request.EnName,
+                request.ArName);
+            Specialization.EnDescription = request.EnDescription;
+            Specialization.ArDescription = request.ArDescription;
             Specialization.Code = request.Code;
             Specialization.ConsultationCost = request.ConsultationCost;
 
@@ -53,7 +57,11 @@ namespace Spectra.Application.MasterData.SpecializationCommend.Commands
     {
         public CreateSpecializationCommandValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.EnName)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.ArName)
                 .NotEmpty()
                 .NotNull();
 
