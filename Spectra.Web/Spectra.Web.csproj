@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <Compile Remove="ClientApp\**" />
+    <Compile Remove="Services\**" />
     <Compile Remove="wwwroot\Documents\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="Services\**" />
     <Content Remove="wwwroot\Documents\**" />
     <EmbeddedResource Remove="ClientApp\**" />
+    <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="wwwroot\Documents\**" />
     <None Remove="ClientApp\**" />
+    <None Remove="Services\**" />
     <None Remove="wwwroot\Documents\**" />
   </ItemGroup>
 
@@ -35,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
