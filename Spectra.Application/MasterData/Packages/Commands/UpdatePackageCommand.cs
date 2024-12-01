@@ -19,7 +19,7 @@ namespace Spectra.Application.MasterData.Packages.Commands
         public double Price { get; set; }
         public double? Discount { get; set; }
         public int? IconCode { get; set; }
-        public ICollection<string> Services { get; set; }
+        public ICollection<PackageServiceCreateDto> Services { get; set; }
         public ICollection<PackageGoalCreateDto> Goals { get; set; }
         public IFormFile? Image { get; set; }
 
@@ -44,14 +44,28 @@ namespace Spectra.Application.MasterData.Packages.Commands
                     throw new AlreadyExistException(request.EnName, nameof(request.EnName));
                 }
 
-                var (services, totalServices) = await _serviceRepository.GetAllAsync(s => request.Services.Any(rs => rs == s.Id));
+                var (services, totalServices) = await _serviceRepository.GetAllAsync(s => request.Services.Any(rs => rs.Id == s.Id));
+
+                var packageServices = new List<PackageService>();
+
+                foreach (var service in services)
+                {
+                    var requestService = request.Services.First(s => s.Id == service.Id);
+                    packageServices.Add(new PackageService
+                    {
+                        Id = service.Id,
+                        ArName = service.ArName,
+                        EnName = service.EnName,
+                        Order = requestService.Order
+                    });
+                }
 
                 package.EnName = request.EnName;
                 package.ArName = request.ArName;
                 package.Price = request.Price;
                 package.Discount = request.Discount;
                 package.IconCode = request.IconCode;
-                package.Services = services.Select(s => new PackageService { Id = s.Id, ArName = s.ArName, EnName = s.EnName }).ToArray();
+                package.Services = packageServices;
                 package.Goals = request.Goals.Select(g => new PackageGoal { ArName = g.ArName, EnName = g.EnName }).ToArray();
 
                 if (request.Image is not null && request.Image.Length > 0)

@@ -7,12 +7,14 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD.Dtos;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.ServicesMD.Queries
 {
     public class GetAllServicesMDQuery : QueryPaginationParam, IRequest<OperationResult>
     {
+        public ServiceTypes? ServiceType { get; set; }
         public string? Search { get; set; }
     }
     public class GetAllServicesMDQueryHandler(IBaseMongoDbRepository<PlatformService> serviceMRepository,
@@ -30,7 +32,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             if (!string.IsNullOrEmpty(request.Search))
             {
                 request.Search = request.Search.ToLower().Trim();
-                var (data, total) = await _serviceMRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search) || d.ArName.ToLower().StartsWith(request.Search),
+                var (data, total) = await _serviceMRepository.GetAllAsync(d => (request.ServiceType.HasValue ? d.ServiceType == request.ServiceType : d.ServiceType == d.ServiceType) && (d.EnName.ToLower().StartsWith(request.Search) || d.ArName.ToLower().StartsWith(request.Search)),
                 null,
                 request.SkipCount,
                 request.MaxCount);
@@ -39,7 +41,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
             }
             else
             {
-                var (data, total) = await _serviceMRepository.GetAllAsync(null,
+                var (data, total) = await _serviceMRepository.GetAllAsync(d => (request.ServiceType.HasValue ? d.ServiceType == request.ServiceType : d.ServiceType == d.ServiceType),
                     null,
                     request.SkipCount,
                     request.MaxCount);
