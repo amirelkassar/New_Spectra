@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useSidebarStore } from '../../_hooks/use-sidebar-store';
+import { useSidebarStore } from '../../../hooks/use-sidebar-store';
 import ArrowNav from '@/assets/icons/arrow-nav';
 import MenuDash from '@/assets/icons/menuDash';
 

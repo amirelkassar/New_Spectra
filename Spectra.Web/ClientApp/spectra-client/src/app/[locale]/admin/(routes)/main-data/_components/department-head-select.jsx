@@ -7,6 +7,7 @@ import {
   ScrollArea,
   Rating,
 } from '@mantine/core';
+
 import Avatar from '@/components/avatar';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
 import InputGreen from '@/components/Input-green';

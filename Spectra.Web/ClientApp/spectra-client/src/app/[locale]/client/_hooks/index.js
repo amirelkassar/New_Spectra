@@ -1,4 +1,4 @@
-import { useSidebarStore } from './use-sidebar-store';
+import { useSidebarStore } from '@/hooks/use-sidebar-store';
 import { useNav } from './use-nav';
 import {
   ChildContextProvider,

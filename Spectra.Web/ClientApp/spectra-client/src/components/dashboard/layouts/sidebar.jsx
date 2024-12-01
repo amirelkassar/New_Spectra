@@ -1,20 +1,21 @@
 'use client';
 
 import { Link } from '@/navigation';
-
-import { cn } from '@/lib/utils';
-import { useNav, useSidebarStore } from '@/client/_hooks';
 import {
   useClickOutside,
   useMediaQuery,
 } from '@mantine/hooks';
 
+import { cn } from '@/lib/utils';
+import { useSidebarStore } from '@/hooks/use-sidebar-store';
+
 import ROUTES from '@/routes';
 import ArrowNav from '@/assets/icons/arrow-nav';
 import Logo from '@/assets/icons/logo';
 import LogoutIcon from '@/assets/icons/logOut';
+import { useLogout } from '@/hooks/queries/auth';
 
-export const Sidebar = () => {
+export const Sidebar = ({ links = [] }) => {
   const { isOpen, close } = useSidebarStore();
 
   const match = useMediaQuery('(max-width: 960px)');
@@ -22,8 +23,6 @@ export const Sidebar = () => {
   const ref = useClickOutside(() => {
     if (isOpen && match) close();
   });
-
-  const { links } = useNav();
 
   return (
     <aside
@@ -54,20 +53,7 @@ export const Sidebar = () => {
           ))}
         </ul>
 
-        <button className='text-sm lg:text-lg font-bold p-2 lg:ps-0 flex gap-3 items-center'>
-          <span className='size-5'>
-            <LogoutIcon />
-          </span>
-
-          <span
-            className={cn(
-              'text-nowrap',
-              !isOpen && 'lg:hidden'
-            )}
-          >
-            تسجيل الخروج
-          </span>
-        </button>
+        <Logout />
       </nav>
     </aside>
   );
@@ -115,5 +101,31 @@ const NavLinks = ({ link }) => {
         <div className='absolute h-full w-3 bg-greenMain rounded-e-md top-0 -start-3 lg:-start-5 z-[999]' />
       )}
     </li>
+  );
+};
+
+const Logout = () => {
+  const { isOpen } = useSidebarStore();
+
+  const { logout } = useLogout();
+
+  return (
+    <button
+      onClick={logout}
+      className='text-sm lg:text-lg font-bold p-2 lg:ps-0 flex gap-3 items-center'
+    >
+      <span className='size-5'>
+        <LogoutIcon />
+      </span>
+
+      <span
+        className={cn(
+          'text-nowrap',
+          !isOpen && 'lg:hidden'
+        )}
+      >
+        تسجيل الخروج
+      </span>
+    </button>
   );
 };

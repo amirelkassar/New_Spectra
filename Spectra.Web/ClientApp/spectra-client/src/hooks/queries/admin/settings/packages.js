@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -6,38 +7,33 @@ import {
 } from '@tanstack/react-query';
 
 import { apiAdmin } from '@/api/axios';
-import { mainData } from '@/api/admin';
-import {
-  getQueries,
-  getSkipCountFromPageNum,
-} from '@/lib/utils';
+import { settings } from '@/api/admin';
+import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
   search: '',
   skipCount: 0,
-  maxCount: 5,
-  serviceType: '',
+  maxCount: 10,
 };
 
-export const initialQueryKey = 'admin.main-data.services';
+export const initialQueryKey = 'admin.settings.packages';
 
-export const getServices = async (queries) =>
-  (await apiAdmin.get(mainData.services.list(queries)))
+export const getPackages = async (queries) =>
+  (await apiAdmin.get(settings.packages.list(queries)))
     .data;
 
-export const prefetchServices = async () => {
+export const prefetchPackages = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: [initialQueryKey, initialQueries],
-    queryFn: () => getServices(initialQueries),
+    queryFn: () => getPackages(initialQueries),
   });
 
   return queryClient;
 };
 
-//getAll
-export const useServices = (pageNum = 1, search = '') => {
+export const usePackages = (pageNum = 1, search = '') => {
   const queries = getQueries(
     pageNum,
     search,
@@ -46,78 +42,47 @@ export const useServices = (pageNum = 1, search = '') => {
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
-    queryFn: () => getServices(queries),
+    queryFn: () => getPackages(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
-//getAll
-export const useServicesForListing = ({
-  pageNum,
-  search = '',
-  serviceType = '',
-}) => {
-  const { maxCount, skipCount } = getSkipCountFromPageNum(
-    pageNum,
-    initialQueries.maxCount
-  );
-
-  const queries = {
-    maxCount,
-    skipCount,
-    search,
-    serviceType,
-  };
-
-  return useQuery({
-    queryKey: [initialQueryKey, queries],
-    queryFn: async () => {
-      return (
-        await apiAdmin.get(
-          mainData.services.forListing(queries)
-        )
-      ).data;
-    },
-  });
-};
-
-//getID
-export const useServicesById = (id) => {
+export const usePackageById = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        mainData.services.actions.get(id)
+        settings.packages.actions.get(id)
       );
       return response.data;
     },
   });
 };
 
-//delete
-export const useDeleteService = (id) => {
+export const useDeletePackage = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async () => {
       const response = await apiAdmin.delete(
-        mainData.services.actions.delete(id)
+        settings.packages.actions.delete(id)
       );
       return response.data;
     },
+
     onSuccess: () => {
       queryClient.refetchQueries([initialQueryKey]);
     },
   });
 };
 
-//post
-export const useAddNewService = () => {
+export const useAddPackage = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
-        mainData.services.actions.add,
+        settings.packages.actions.add,
         data
       );
       return response.data;
@@ -129,14 +94,13 @@ export const useAddNewService = () => {
   });
 };
 
-//put
-export const useUpdateCurrentService = (id) => {
+export const useUpdatePackage = (id) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
-        mainData.services.actions.update(id),
+        settings.packages.actions.update(id),
         data
       );
       return response.data;
