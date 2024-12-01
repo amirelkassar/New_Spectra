@@ -15,5 +15,16 @@ namespace Spectra.Application.Hellper
             }
             return url;
         }
+        public static string GetFileUrl(string filePath, string subFolder,string route, IHttpContextAccessor httpContextAccessor)
+        {
+            string url = string.Empty;
+            if (!string.IsNullOrWhiteSpace(filePath) && File.Exists(filePath))
+            {
+                var fileInfo = new FileInfo(filePath);
+                var request = httpContextAccessor.HttpContext.Request;
+                url = $"{request.Scheme}://{request.Host}{request.PathBase}/{route}/{subFolder}/{fileInfo.Name}";
+            }
+            return url;
+        }
     }
 }

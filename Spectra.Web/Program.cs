@@ -4,6 +4,7 @@ using Serilog;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Hellper;
 using Spectra.Application.Identities;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Infrastructure.ChatHub;
@@ -105,6 +106,7 @@ try
             Log.Logger.Information("user is {0}", isAuth);
             if (isAuth.HasValue && !isAuth.Value)
                 throw new UnauthorizedAccessException();
+            var user = ctx.Context.RequestServices.GetRequiredService<ICurrentUser>();
         }
     });
     app.MapControllers();

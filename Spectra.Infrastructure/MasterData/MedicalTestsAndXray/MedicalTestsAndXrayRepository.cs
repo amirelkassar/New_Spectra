@@ -14,7 +14,7 @@ namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
         public MedicalTestsAndXrayRepository(IMongoDbService mongoDbService)
         {
             var database = mongoDbService.DataBase;
-            _medicalTestsAndXrays = database.GetCollection<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>("MedicalTestsAndXrays");
+            _medicalTestsAndXrays = database.GetCollection<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>("MedicalTestAndXrays");
         }
         public async Task<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray> GetByIdAsync(string id)
         {

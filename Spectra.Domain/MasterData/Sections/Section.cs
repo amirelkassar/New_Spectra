@@ -8,39 +8,30 @@ namespace Spectra.Domain.MasterData.Sections
     {
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string HeadDoctorId { get; set; }
-        public string HeadDoctorName { get; set; }
+        public string? HeadDoctorId { get; set; }
+        public string? HeadDoctorName { get; set; }
         public ICollection<SectionSpecsification> Specsifications { get; set; }
 
         protected Section() { }
         private Section(string id,
        string enName,
        string arName,
-       string headId,
-       string headName,
         ICollection<SectionSpecsification> specsifications) : base(id)
         {
-            Id = id;
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
+            ArgumentNullException.ThrowIfNull(enName, nameof(enName));
+            ArgumentNullException.ThrowIfNull(arName, nameof(arName));
+            ArgumentNullException.ThrowIfNull(specsifications, nameof(specsifications));
             EnName = enName;
             ArName = arName;
-            HeadDoctorId = headId;
-            HeadDoctorName = headName;
             Specsifications = specsifications;
         }
         public static Section Create(string id,
        string enName,
        string arName,
-       string headId,
-       string headName,
         ICollection<SectionSpecsification> specsifications)
         {
-            ArgumentNullException.ThrowIfNull(id, nameof(id));
-            ArgumentNullException.ThrowIfNull(enName, nameof(enName));
-            ArgumentNullException.ThrowIfNull(arName, nameof(arName));
-            ArgumentNullException.ThrowIfNull(headId, nameof(headId));
-            ArgumentNullException.ThrowIfNull(headName, nameof(headName));
-            ArgumentNullException.ThrowIfNull(specsifications, nameof(specsifications));
-            return new Section(id, enName, arName, headId, headName, specsifications);
+            return new Section(id, enName, arName, specsifications);
         }
 
     }

@@ -63,10 +63,7 @@ namespace Spectra.Application.MasterData.Drug.Commands
             drug.ImagePath = photoPath;
 
             await _drugRepository.AddAsync(drug);
-
             return OperationResult<string>.Success(drug.Id);
-
-
         }
     }
     public class CreateDrugCommandValidator : AbstractValidator<CreateDrugCommand>

@@ -11,7 +11,7 @@ namespace Spectra.Application.Employees.Commands
 {
     public class UpdateAttachmentCommand : EmployeeAttachmentDto, IRequest<OperationResult>
     {
-        public Guid DocumentId { get; set; }
+        public string DocumentId { get; set; }
 
         public class UpdateAttachmentCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<UpdateAttachmentCommand, OperationResult>
         {

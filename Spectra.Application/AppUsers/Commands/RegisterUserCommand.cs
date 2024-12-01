@@ -17,13 +17,9 @@ namespace Spectra.Application.AppUsers.Commands
     {
         public RegisterUserCommand()
         {
-            MedicalProviderData = new();
             Patients = [];
             OrganizationData = new();
         }
-        [Required]
-        [EnumDataType(typeof(UserType))]
-        public UserType UserType { get; set; }
         [Required]
         [MinLength(3)]
         public string Name { get; set; }
@@ -48,7 +44,7 @@ namespace Spectra.Application.AppUsers.Commands
         public string? Occupation { get; set; }
         public string? DoctorRefferalCode { get; set; }
 
-        public MedicalServiceProviderData? MedicalProviderData { get; set; }
+
         public ICollection<PatientDataDto>? Patients { get; set; }
         public OrganizationData? OrganizationData { get; set; }
 
@@ -66,83 +62,45 @@ namespace Spectra.Application.AppUsers.Commands
 
             public async Task<OperationResult> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
-                switch (request.UserType)
-                {
-                    case UserType.PatientFamily:
-                        {
-                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
+                //switch (request.UserType)
+                //{
+                //    case UserType.PatientFamily:
+                //        {
+                //            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
 
-                            if (request.Patients is not null && request.Patients.Count > 0)
-                            {
-                                var validator = new PatientDataDtoValidator();
+                //            if (request.Patients is not null && request.Patients.Count > 0)
+                //            {
+                //                var validator = new PatientDataDtoValidator();
 
-                            }
+                //            }
 
-                        }
-                        break;
-                    case UserType.Organization:
-                        {
-                            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
-                        }
-                        break;
-                    case UserType.MedicalServiceProvider:
-                        {
-                            var role = request.MedicalProviderData.JobType switch
-                            {
-                                JobTypes.Doctor => Roles.Doctor,
-                                JobTypes.Specialist => Roles.Specialist,
-                                _ => Roles.User
-                            };
-                            var medicalData = request.MedicalProviderData;
+                //        }
+                //        break;
+                //    case UserType.Organization:
+                //        {
+                //            var (results, userId) = await _identityService.CreateUserAsync(request.EmailAddress, request.Password, request.Name, request.Name, Roles.Client);
+                //        }
+                //        break;
+                //    case UserType.MedicalServiceProvider:
+                //        {
+                           
+                //            var request = request.MedicalProviderData;
 
-                            var msp = _medicalProviderService.CreateAsync(new CreateEmployeeDto
-                            {
-                                FirstName = request.Name,
-                                LastName = " ",
-                                PhoneNumber = request.Phone,
-                                NationalId = request.NationalId,
-                                HumenGender = request.Gender,
-                                Emailaddress = request.EmailAddress,
-                                Country = request.Country,
-                                City = request.City,
-                                JobDescription = medicalData.JobDescription,
-                                JobName = medicalData.JobName,
-                                JobType = medicalData.JobType,
-                                MainSpecializationId = medicalData.MainSpecializationId,
-                                AcademicDegree = medicalData.AcademicDegree,
-                                ApprovedBy = medicalData.ApprovedBy,
-                                Qualification = medicalData.Qualification,
-                                ExperienceYears = medicalData.ExperienceYears,
-                                LicenseNumber = medicalData.LicenseNumber,
-                                Specializations = medicalData.Specializations,
-                                Password = request.Password,
-                            });
-                        }
-                        break;
-                    default:
-                        throw new Exception("Invalid User Type");
-                }
+                           
+                //        }
+                //        break;
+                //    default:
+                //        throw new Exception("Invalid User Type");
+                //}
 
                 return OperationResult.Success();
             }
         }
     }
-
-    public enum UserType : byte
-    {
-        PatientFamily = 1,
-        Organization = 2,
-        MedicalServiceProvider = 3
-    }
-
     public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
     {
         public RegisterUserCommandValidator()
         {
-            RuleFor(r => r.UserType)
-                .NotEmpty()
-                .NotNull()
-                .IsInEnum();
 
             RuleFor(r => r.Name)
                 .NotEmpty()
@@ -185,49 +143,6 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotEmpty()
                 .NotNull()
                 .Must(StringExtensionHelper.IsPassword);
-        }
-    }
-
-    public class MedicalServiceProviderDataValidator : AbstractValidator<MedicalServiceProviderData>
-    {
-        public MedicalServiceProviderDataValidator()
-        {
-            RuleFor(m => m.JobType)
-                .NotEmpty()
-                .NotNull()
-                .IsInEnum();
-
-            RuleFor(m => m.JobName)
-                .NotEmpty()
-                .NotNull();
-
-            RuleFor(m => m.MainSpecializationId)
-                .NotEmpty()
-                .NotNull();
-
-            RuleFor(m => m.Specializations)
-                .NotEmpty()
-                .NotNull()
-                .Must(s => s.Count >= 1);
-
-            RuleFor(m => m.LicenseNumber)
-                .NotEmpty()
-                .NotNull();
-
-
-            RuleFor(m => m.ApprovedBy)
-                .NotEmpty()
-                .NotNull();
-
-
-            RuleFor(m => m.AcademicDegree)
-                .IsInEnum()
-                .NotEmpty()
-                .NotNull();
-
-
-            RuleFor(m => m.ExperienceYears)
-                .GreaterThan(0);
         }
     }
 

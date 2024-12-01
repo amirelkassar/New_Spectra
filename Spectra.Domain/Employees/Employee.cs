@@ -9,8 +9,6 @@ namespace Spectra.Domain.Employees
 {
     public class Employee : BaseAuditableEntity<string>
     {
-        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
-        public ICollection<EmployeeService>? Services { get; set; }
         public string? LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
@@ -33,7 +31,9 @@ namespace Spectra.Domain.Employees
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
-        public ICollection<EmployeeAttachment>? Attachments { get; set; } = [];
+        public ICollection<EmployeeAttachment>? Attachments { get; set; } 
+        public ICollection<EmployeeSpecialization>? Specializations { get; set; }
+        public ICollection<EmployeeService>? Services { get; set; }
 
         protected Employee() { }
         public Employee(string id,
@@ -44,8 +44,7 @@ namespace Spectra.Domain.Employees
                    EmailAddress emailAddress,
                    Address address,
                    JobTypes jobType,
-                   string jobName,
-                  string userId) : base(id)
+                   string jobName) : base(id)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
@@ -55,16 +54,26 @@ namespace Spectra.Domain.Employees
             ArgumentNullException.ThrowIfNull(humenGender, nameof(humenGender));
             ArgumentNullException.ThrowIfNull(jobName, nameof(jobName));
             ArgumentNullException.ThrowIfNull(jobType, nameof(jobType));
-            ArgumentNullException.ThrowIfNull(userId, nameof(userId));
             Name = name;
             NationalId = nationalId;
             MobileNumber = phoneNumber;
             HumenGender = humenGender;
             EmailAddress = emailAddress;
             Address = address;
-            UserId = userId;
             JobType = jobType;
             JobName = jobName;
+
+            Attachments = [];
+            Specializations = [];
+            Services = [];
+        }
+
+        public void SetUser(string userId)
+        {
+            if (UserId is null)
+            {
+                UserId = userId;
+            }
         }
 
         public static Employee Create(string id,
@@ -75,8 +84,7 @@ namespace Spectra.Domain.Employees
                    EmailAddress emailAddress,
                    Address address,
                    JobTypes jobType,
-                   string jobName,
-                  string userId)
+                   string jobName)
         {
 
             return new(id,
@@ -87,8 +95,7 @@ namespace Spectra.Domain.Employees
                 emailAddress,
                 address,
                 jobType,
-                jobName,
-                userId);
+                jobName);
         }
 
     }

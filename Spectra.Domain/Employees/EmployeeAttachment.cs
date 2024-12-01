@@ -7,9 +7,9 @@ namespace Spectra.Domain.Employees
     {
         public EmployeeAttachment()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
         }
-        public Guid Id { get; private set; }
+        public string Id { get; private set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public FileTypes Type { get; set; }

@@ -9,7 +9,7 @@ namespace Spectra.Application.Employees.Commands
 {
     public class DeleteAttachmentCommand : IRequest<OperationResult>
     {
-        public Guid DocumentId { get; set; }
+        public string DocumentId { get; set; }
         public string EmpId { get; set; }
         public class DeleteAttachmentCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper documentHellper) : IRequestHandler<DeleteAttachmentCommand, OperationResult>
         {

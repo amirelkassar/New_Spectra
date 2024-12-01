@@ -42,7 +42,7 @@ namespace Spectra.Application.Employees.Queries
                 {
                     if (attachment.Path is not null)
                     {
-                        attachment.Path = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, attachment.Path), EndPointsRoutes.Users, _httpContextAccessor);
+                        attachment.Path = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, attachment.Path),medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
                     }
                 }
 

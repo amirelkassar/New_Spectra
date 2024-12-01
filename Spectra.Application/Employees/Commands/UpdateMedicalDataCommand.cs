@@ -30,6 +30,25 @@ namespace Spectra.Application.Employees.Commands
             {
                 var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
 
+                var (specializations, specTotal) = await _specializationRepository.GetAllAsync();
+
+                foreach (var spec in request.Specializations)
+                {
+                    if (!specializations.Any(s => s.Id == spec))
+                    {
+                        throw new NotFoundException("Specializations", spec);
+                    }
+                }
+
+                var (checkServices, checkServiceTotal) = await _serviceRepository.GetAllAsync();
+
+                foreach (var service in request.Services)
+                {
+                    if (!checkServices.Any(s => s.Id == service))
+                    {
+                        throw new NotFoundException("Services", service);
+                    }
+                }
 
                 #region Update Specializations
                 var (currentSpecializations, currentSpecializationsTotal) = await _specializationRepository
