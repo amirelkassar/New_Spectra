@@ -1251,14 +1251,33 @@ export const packagesDataSpectra = [
       '1 جلسة اضافية لقياس الذكاء',
     ],
     content: [
-      'خدمة الكشف المبكر',
-      'خدمة الاستشارات الفردية',
-      'خدمة التشخيص المتعدد التخصصات',
-      'متابعة',
-      'تقرير مفصل',
-      'خدمة الاستشارات الجماعية',
-      'خدمة دعم المراكز و الجهات',
-      'خدمة التدريب',
+      {
+        id: '1',
+        arName: 'خدمة الكشف المبكر',
+        enName: 'Early Detection',
+      },
+      {
+        id: '2',
+        arName: 'خدمة التشخيص',
+        enName: 'Diagnosis',
+      },
+      {
+        id: '3',
+        arName: 'خدمة المتابعة',
+        enName: 'Follow Up',
+      },
+      { id: '4', arName: 'خدمة التقرير', enName: 'Report' },
+      {
+        id: '5',
+        arName: 'خدمة الاستشارات',
+        enName: 'Consultation',
+      },
+      { id: '6', arName: 'خدمة الدعم', enName: 'Support' },
+      {
+        id: '7',
+        arName: 'خدمة التدريب',
+        enName: 'Training',
+      },
     ],
     goalsOfPackage: [
       'تطور الجانب الاجتماعى',

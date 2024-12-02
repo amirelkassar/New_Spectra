@@ -69,7 +69,7 @@ const Service = ({ data }) => {
         label='سعر الخدمة'
       />
       <Info
-        data={`${data?.discount}%`}
+        data={data?.discount && `${data?.discount}%`}
         label='نسبة الخصم'
       />
 

@@ -5,8 +5,9 @@ import CircleCheck from '@/assets/icons/circle-check';
 
 export const PackageBadge = ({
   name = '',
-  icon = '',
+  icon,
   price = 0,
+  discount = 0,
   subscribed = false,
   active = false,
   features = [],
@@ -30,12 +31,17 @@ export const PackageBadge = ({
           name={name}
           icon={icon}
           price={price}
+          discount={discount}
           subscribed={subscribed}
         />
 
         <FeaturesList features={features} />
 
-        <Price className='hidden mdl:block' value={price} />
+        <Price
+          className='hidden mdl:block'
+          discount={discount}
+          value={price}
+        />
       </div>
     </div>
   );
@@ -43,18 +49,56 @@ export const PackageBadge = ({
 
 const Price = ({
   value = 0,
-  currancy = '$',
+  discount = 0,
+  currancy = 'SAR',
   className = '',
 }) => {
+  const priceWithDiscount = (
+    +value -
+    (+value * +discount) / 100
+  ).toFixed(2);
+
+  if (!!discount)
+    return (
+      <div className={cn('shrink-0', className)}>
+        <div className='flex items-center gap-2'>
+          <p
+            dir='ltr'
+            className='font-Bold text-2xl mdl:text-4xl w-fit'
+          >
+            {priceWithDiscount}{' '}
+            <span className='text-base mdl:text-xl'>
+              {currancy}
+            </span>
+          </p>
+          <span
+            dir='ltr'
+            className='bg-blueLight text-xs text-black mdl:text-base font-bold rtl:rounded-tr-xl ltr:rounded-tl-xl px-3 py-1 opacity-90'
+          >
+            -{discount} %
+          </span>
+        </div>
+
+        <span
+          dir='ltr'
+          className='text-sm mdl:text-xl line-through text-black'
+        >
+          {value.toFixed(2)} {currancy}
+        </span>
+      </div>
+    );
   return (
     <p
       dir='ltr'
       className={cn(
-        'font-Bold text-2xl mdl:text-4xl',
+        'font-Bold text-2xl mdl:text-4xl w-fit',
         className
       )}
     >
-      {currancy} {value?.toLocaleString('en-US')}
+      {value?.toFixed(2)}{' '}
+      <span className='text-base mdl:text-xl'>
+        {currancy}
+      </span>
     </p>
   );
 };
@@ -88,8 +132,9 @@ const FeaturesList = ({
 
 const NameAndStatus = ({
   name = '',
-  icon = '',
+  icon,
   price = 0,
+  discount = 0,
   subscribed = false,
 }) => {
   return (
@@ -101,7 +146,7 @@ const NameAndStatus = ({
       )}
 
       <div className='flex items-center gap-2'>
-        {icon && (
+        {typeof icon === 'string' ? (
           <div className='relative size-9'>
             <Image
               src={icon}
@@ -110,6 +155,8 @@ const NameAndStatus = ({
               fill
             />
           </div>
+        ) : (
+          icon
         )}
 
         <h4 className='text-base mdl:text-3xl font-bold'>
@@ -117,7 +164,11 @@ const NameAndStatus = ({
         </h4>
       </div>
 
-      <Price className='mdl:hidden' value={price} />
+      <Price
+        className='mdl:hidden'
+        discount={discount}
+        value={price}
+      />
     </div>
   );
 };

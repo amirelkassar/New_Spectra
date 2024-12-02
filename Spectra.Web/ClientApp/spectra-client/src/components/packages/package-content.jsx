@@ -1,8 +1,12 @@
 import { cn } from '@/lib/utils';
+
 export const PackageContent = ({
   content = [],
   className = '',
+  locale = 'ar',
 }) => {
+  const key = locale === 'ar' ? 'arName' : 'enName';
+
   return (
     <div
       className={cn(
@@ -18,13 +22,13 @@ export const PackageContent = ({
         <ul className='p-5'>
           {content?.map((item, index) => (
             <li
-              key={index}
+              key={index + 1}
               className='text-sm ps-8 mdl:text-xl py-3 relative after:absolute after:h-full after:w-[1px] after:border after:border-dashed after:border-greenMain after:start-3 after:ltr:-translate-x-1/2 after:translate-x-1/2 after:top-6 after:last:border-0'
             >
               <span className='absolute start-0 top-1/2 -translate-y-1/2 text-white bg-greenMain size-6 rounded-full font-bold flex items-center justify-center z-10 text-[15px]'>
-                {index + 1}
+                {item?.order || index + 1}
               </span>
-              {item}
+              {item[key]}
             </li>
           ))}
         </ul>

@@ -40,6 +40,7 @@ const PackageCard = ({
   price = 0,
   content = [],
 }) => {
+  const features = content.map((c) => c?.arName || c);
   return (
     <PackageCardItem className='bg-white w-full border-t-transparent border-2 border-greenMain rounded-2xl first:border-4 first:border-grayLight first:border-t-greenMain first:-mt-5 first:hover:border-grayLight first:hover:border-t-greenMain last:lg:order-3 first:lg:order-2 group'>
       <Link href={`${ROUTES.ROOT.PACKAGES}/${id}`}>
@@ -58,7 +59,7 @@ const PackageCard = ({
       <PackageCardItem.Price>
         ${price}
       </PackageCardItem.Price>
-      <PackageCardItem.List features={content} />
+      <PackageCardItem.List features={features} />
       <PackageCardItem.Button className='border border-greenMain hover:bg-transparent bg-transparent text-greenMain group-first:bg-greenMain group-first:text-white group-first:hover:bg-greenMain/90 relative z-10'>
         احجز الان
       </PackageCardItem.Button>
