@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -7,16 +8,11 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
-import {
-  getQueries,
-  getSkipCountFromPageNum,
-} from '@/lib/utils';
+import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
-  serviceType: '',
 };
 
 export const initialQueryKey = 'admin.main-data.services';
@@ -37,16 +33,19 @@ export const prefetchServices = async () => {
 };
 
 //getAll
-export const useServices = (pageNum = 1, search = '') => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+export const useServices = (
+  params = {
+    pageNum: null,
+    serviceType: null,
+    search: '',
+  }
+) => {
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getServices(queries),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -54,23 +53,11 @@ export const useServices = (pageNum = 1, search = '') => {
 export const useServicesForListing = (
   params = {
     pageNum: null,
+    serviceType: null,
     search: '',
-    serviceType: '',
   }
 ) => {
-  const { pageNum, search, serviceType } = params;
-
-  const { maxCount, skipCount } = getSkipCountFromPageNum(
-    pageNum,
-    initialQueries.maxCount
-  );
-
-  const queries = {
-    maxCount,
-    skipCount,
-    search,
-    serviceType,
-  };
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -146,7 +133,7 @@ export const useUpdateCurrentService = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

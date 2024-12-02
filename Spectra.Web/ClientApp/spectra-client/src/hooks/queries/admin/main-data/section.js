@@ -11,7 +11,6 @@ import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
 };
@@ -33,12 +32,13 @@ export const prefetchSections = async () => {
 };
 
 //getAll
-export const useSections = (pageNum = 1, search = '') => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+export const useSections = (
+  params = {
+    pageNum: null,
+    search: '',
+  }
+) => {
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -112,7 +112,7 @@ export const useEditSection = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

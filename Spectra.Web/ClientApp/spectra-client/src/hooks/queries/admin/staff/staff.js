@@ -8,10 +8,9 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { staff } from '@/api/admin';
-import { getSkipCountFromPageNum } from '@/lib/utils';
+import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
 };
@@ -49,18 +48,7 @@ export const prefetchMedicalProviders = async () => {
 export const useStaff = (
   params = { pageNum: null, search: '' }
 ) => {
-  const { pageNum, search } = params;
-
-  const { maxCount, skipCount } = getSkipCountFromPageNum(
-    pageNum,
-    initialQueries.maxCount
-  );
-
-  const queries = {
-    search,
-    maxCount,
-    skipCount,
-  };
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -72,18 +60,7 @@ export const useStaff = (
 export const useMedicalProviders = (
   params = { pageNum: null, search: '' }
 ) => {
-  const { pageNum, search } = params;
-
-  const { maxCount, skipCount } = getSkipCountFromPageNum(
-    pageNum,
-    initialQueries.maxCount
-  );
-
-  const queries = {
-    search,
-    maxCount,
-    skipCount,
-  };
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -151,7 +128,7 @@ export const useUpdateStaff = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

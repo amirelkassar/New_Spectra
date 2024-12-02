@@ -11,7 +11,6 @@ import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
 };
@@ -32,12 +31,13 @@ export const prefetchDrugs = async () => {
   return queryClient;
 };
 
-export const useDrugs = (pageNum = 1, search = '') => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+export const useDrugs = (
+  params = {
+    pageNum: null,
+    search: '',
+  }
+) => {
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -82,12 +82,7 @@ export const useCreateDrug = () => {
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
         mainData.drugs.actions.add,
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
+        data
       );
       return response.data;
     },
@@ -105,17 +100,12 @@ export const useEditDrug = (id) => {
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
         mainData.drugs.actions.update(id),
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
+        data
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

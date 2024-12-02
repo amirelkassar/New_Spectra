@@ -11,7 +11,7 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 export const DiagnosticsTable = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = useDiagnostics(pageNum, search);
+  const query = useDiagnostics({ pageNum, search });
 
   return (
     <QueryWrapper query={query} isSearching={!!search}>

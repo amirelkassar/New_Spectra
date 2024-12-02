@@ -57,6 +57,7 @@ export function DepartmentHeadSelect({
   defaultValue,
   error,
   onSelect = () => {},
+  onRemove = () => {},
 }) {
   const defaultItem = useMemo(
     () => TEAM?.find((item) => item.id === defaultValue),
@@ -172,6 +173,7 @@ export function DepartmentHeadSelect({
           onRemove={() => {
             setSelectedItem(null);
             setSearch('');
+            onRemove();
           }}
           {...selectedItem}
         />

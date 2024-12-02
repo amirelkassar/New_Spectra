@@ -23,8 +23,9 @@ export const SpecializationSelect = ({
 
   const [value, setValue] = useState([]);
 
-  const { data, isPending, isError } =
-    useSpecialization('*');
+  const { data, isPending, isError } = useSpecialization({
+    pageNum: 'all',
+  });
 
   const items = data?.data?.items;
   const hasData = data?.data?.totalCount;

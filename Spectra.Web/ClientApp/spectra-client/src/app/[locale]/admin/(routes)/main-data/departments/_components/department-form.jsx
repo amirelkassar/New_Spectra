@@ -65,6 +65,21 @@ export const DepartmentForm = ({
             },
           });
         }}
+        onRemove={() => {
+          onChange({
+            target: {
+              name: 'headDoctorId',
+              value: '',
+            },
+          });
+
+          onChange({
+            target: {
+              name: 'headDoctorName',
+              value: '',
+            },
+          });
+        }}
       />
 
       <Button

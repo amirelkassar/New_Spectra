@@ -11,7 +11,7 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 export const AnalysisTable = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = useMedicalTests(pageNum, search);
+  const query = useMedicalTests({ pageNum, search });
 
   return (
     <QueryWrapper query={query} isSearching={!!search}>

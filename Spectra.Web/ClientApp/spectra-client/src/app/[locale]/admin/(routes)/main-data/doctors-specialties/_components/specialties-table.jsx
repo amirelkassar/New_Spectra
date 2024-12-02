@@ -11,7 +11,7 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 export const SpecialtiesTable = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = useSpecialization(pageNum, search);
+  const query = useSpecialization({ pageNum, search });
 
   return (
     <QueryWrapper query={query} isSearching={!!search}>
