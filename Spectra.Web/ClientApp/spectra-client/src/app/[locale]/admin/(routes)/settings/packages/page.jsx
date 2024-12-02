@@ -2,8 +2,15 @@ import Card from '@/components/card';
 import ROUTES from '@/routes';
 import { Heading } from '@/admin/_components/ui';
 import { PackagesList } from './_components/packages-list';
+import { prefetchPackages } from '@/hooks/queries/admin/settings/packages';
+import {
+  dehydrate,
+  HydrationBoundary,
+} from '@tanstack/react-query';
 
-const PackagesPage = () => {
+const PackagesPage = async () => {
+  const queryClient = await prefetchPackages();
+
   return (
     <Card className='h-full'>
       <Heading
@@ -13,7 +20,9 @@ const PackagesPage = () => {
         withBackButton
       />
 
-      <PackagesList />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <PackagesList />
+      </HydrationBoundary>
     </Card>
   );
 };

@@ -20,21 +20,21 @@ export const SearchBar = () => {
     useSearchParams()?.get('search') ?? '';
 
   const [search, setSearch] = useState(searchParams);
-
   const [debounced] = useDebouncedValue(search, 500);
 
   useEffect(() => {
     if (debounced === searchParams) return;
 
+    const currentParams = new URLSearchParams(
+      window.location.search
+    );
     if (debounced) {
-      router.replace(`?search=${debounced}`);
+      currentParams.set('search', debounced);
     } else {
-      const currentParams = new URLSearchParams(
-        window.location.search
-      );
       currentParams.delete('search');
-      router.replace(`?${currentParams.toString()}`);
     }
+    currentParams.delete('page'); // Remove `page` when updating `search`
+    router.replace(`?${currentParams.toString()}`);
   }, [debounced, router, searchParams]);
 
   useEffect(() => {

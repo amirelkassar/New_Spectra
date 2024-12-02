@@ -16,10 +16,10 @@ export const TokenProvider = ({ children, value }) => {
 
 export const useToken = () => {
   const context = useContext(tokenConetext);
-  if (!context) {
-    throw new Error(
-      'useToken must be used within a TokenProvider'
-    );
-  }
+  // if (!context) {
+  //   throw new Error(
+  //     'useToken must be used within a TokenProvider'
+  //   );
+  // }
   return context;
 };

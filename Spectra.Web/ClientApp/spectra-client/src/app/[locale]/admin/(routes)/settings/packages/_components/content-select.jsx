@@ -1,35 +1,50 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   Combobox,
   useCombobox,
   ScrollArea,
 } from '@mantine/core';
+import {
+  useDebouncedValue,
+  useDebouncedCallback,
+} from '@mantine/hooks';
+import { ReactSortable } from 'react-sortablejs';
 
 import Card from '@/components/card';
 import TextInput from '@/components/inputs/text-input';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
 import { useServicesForListing } from '@/hooks/queries/admin/main-data/services';
-import { useDebouncedValue } from '@mantine/hooks';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import { useLocale } from 'next-intl';
 import DeleteIcon from '@/assets/icons/delete';
 
 export const ContentSelect = ({
-  defaultValue,
-  onSelect,
+  defaultValue = [],
+  onChange,
   error,
   name = '',
   label = '',
 }) => {
-  const [addedItems, setAddedItems] = useState([]);
+  const [addedItems, setAddedItems] =
+    useState(defaultValue);
 
-  // console.log(addedItems);
-
-  const [uniqueItems, setUniqueItems] = useState([]);
-
-  console.log(uniqueItems);
+  const [uniqueItems, setUniqueItems] = useState(() => {
+    if (!defaultValue?.length) return [];
+    const unique = [];
+    defaultValue.forEach((item) => {
+      if (!unique.find((i) => i.id === item.id)) {
+        unique.push(item);
+      }
+    });
+    return unique;
+  });
 
   const [search, setSearch] = useState('');
 
@@ -52,13 +67,18 @@ export const ContentSelect = ({
   }, [isPending, isError, hasData]);
 
   const handleDelete = useCallback((itemToDelete) => {
-    setAddedItems((prev) =>
-      prev.filter(
+    setAddedItems((prev) => {
+      const filteredItems = prev.filter(
         (item) =>
           item.id !== itemToDelete.id ||
           item.order !== itemToDelete.order
-      )
-    );
+      );
+
+      return filteredItems.map((item, index) => ({
+        ...item,
+        order: index + 1,
+      }));
+    });
 
     setUniqueItems((prev) => {
       const existingItem = prev.find(
@@ -91,6 +111,37 @@ export const ContentSelect = ({
     });
   }, []);
 
+  const debouncedOnChange = useDebouncedCallback(
+    (updatedList) => {
+      const value = updatedList.map((c) => ({
+        id: c.id,
+        order: c.order,
+      }));
+
+      onChange({
+        target: {
+          name,
+          value,
+        },
+      });
+    },
+    500
+  );
+
+  const handleUpdateOrder = useCallback((newList) => {
+    const updatedList = newList.map((item, index) => ({
+      ...item,
+      order: index + 1, // الترتيب الجديد بناءً على الموضع
+    }));
+    setAddedItems(updatedList);
+  }, []);
+
+  useEffect(() => {
+    if (!addedItems?.length) return;
+
+    debouncedOnChange(addedItems);
+  }, [addedItems, debouncedOnChange]);
+
   return (
     <Card className='space-y-5'>
       {label && (
@@ -109,6 +160,7 @@ export const ContentSelect = ({
         search={search}
         onSearch={setSearch}
         label={label}
+        error={error}
         onAdd={setAddedItems}
         setUniqueItems={setUniqueItems}
       />
@@ -119,10 +171,20 @@ export const ContentSelect = ({
             يمكنك السحب والإفلات للأقسام لإعادة ترتيبها،{' '}
           </p>
         )}
-        <SortableItems
-          items={addedItems}
-          onDelete={(item) => handleDelete(item)}
-        />
+
+        <ReactSortable
+          list={addedItems}
+          setList={handleUpdateOrder}
+          animation={200}
+          delay={1}
+          className='flex flex-col gap-2 mdl:max-w-[80%]'
+          easing='ease-out'
+        >
+          <SortableItems
+            items={addedItems}
+            onDelete={(item) => handleDelete(item)}
+          />
+        </ReactSortable>
       </div>
     </Card>
   );
@@ -131,6 +193,7 @@ export const ContentSelect = ({
 const SelectInput = ({
   data,
   messages,
+  error,
   search = '',
   onSearch = () => {},
   onAdd = () => {},
@@ -205,6 +268,7 @@ const SelectInput = ({
         <TextInput
           name='departmentHead'
           size='xl'
+          error={error}
           value={search}
           onChange={(event) =>
             onSearch(event.currentTarget.value)
@@ -223,7 +287,7 @@ const SelectInput = ({
 
       <Combobox.Dropdown className='rounded-xl overflow-hidden border-greenMain'>
         <Combobox.Options>
-          <ScrollArea.Autosize type='scroll' mah={200}>
+          <ScrollArea.Autosize type='scroll' mah={300}>
             {!!options?.length ? (
               options
             ) : (
@@ -257,13 +321,18 @@ const SortableItems = ({ items, onDelete = () => {} }) => {
 
   if (!items.length) return null;
   return items.map((item, index) => (
-    <div key={index} className='flex gap-3 items-center'>
-      <div className='border-4 border-blueLight rounded-xl p-3 text-sm mdl:text-xl font-bold flex items-center gap-2 flex-1'>
-        <span className='bg-black text-white size-6 flex items-center justify-center rounded-full p-1 shrink-0 text-xs mdl:text-base'>
+    <div
+      key={index}
+      className='flex gap-3 items-center group'
+    >
+      <div className='sortable-item relative border-4 border-blueLight rounded-xl p-3 text-sm mdl:text-xl font-bold flex items-center gap-2 flex-1 group-[draggable=true]:cursor-grabbing cursor-grab'>
+        <div className='absolute inset-0 z-10 pointer-events-none bg-transparent' />
+        <span className='bg-black text-white size-6 flex items-center justify-center rounded-full p-1 shrink-0 text-xs mdl:text-base !pointer-events-none'>
           {item?.order}
         </span>
-
-        {locale === 'ar' ? item.arName : item.enName}
+        <span className='!pointer-events-none'>
+          {locale === 'ar' ? item.arName : item.enName}
+        </span>
       </div>
 
       <button

@@ -5,30 +5,24 @@ import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
 import { getFormData } from '@/lib/utils';
-import { useAddPackage as useAddPackageQuery } from '@/hooks/queries/admin/settings/packages';
+import { useUpdatePackage as useUpdatePackageQuery } from '@/hooks/queries/admin/settings/packages';
 import ROUTES from '@/routes';
 
-export const useAddPackage = () => {
+export const useUpdatePackage = ({ initialValues }) => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    arName: '',
-    enName: '',
-    price: '',
-    discount: '',
-    iconCode: '',
-    services: [],
-    goals: [],
-    image: undefined,
+    ...initialValues,
+    image: initialValues?.photoPath,
   });
 
   const {
-    mutateAsync: addPackage,
+    mutateAsync: updatePackage,
     error,
     isError,
     isPending,
     reset,
-  } = useAddPackageQuery();
+  } = useUpdatePackageQuery();
 
   const onChange = useCallback(
     (e) => {
@@ -48,12 +42,10 @@ export const useAddPackage = () => {
     async (e) => {
       e.preventDefault();
 
-      // return console.log(formData);
-
       const data = getFormData(formData);
 
-      Toast.Promise(addPackage(data), {
-        success: 'تم اضافة الباقة بنجاح',
+      Toast.Promise(updatePackage(data), {
+        success: 'تم تعديل الباقة بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
             router.replace(
@@ -62,7 +54,7 @@ export const useAddPackage = () => {
         },
       });
     },
-    [addPackage, formData, router]
+    [updatePackage, formData, router]
   );
 
   const form = {
