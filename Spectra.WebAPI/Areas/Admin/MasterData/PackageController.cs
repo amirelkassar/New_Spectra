@@ -55,7 +55,7 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpDelete]
         [Authorize(AdminPackagePermissions.Delete)]
-        public async Task<IActionResult> DeleteAsync([FromForm] DeletePackageCommand input)
+        public async Task<IActionResult> DeleteAsync([FromQuery] DeletePackageCommand input)
         {
             var response = await _mediator.Send(input);
             return response.SuccessOpration

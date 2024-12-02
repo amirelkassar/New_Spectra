@@ -35,6 +35,9 @@ namespace Spectra.Domain.Employees
         public ICollection<EmployeeSpecialization>? Specializations { get; set; }
         public ICollection<EmployeeService>? Services { get; set; }
 
+        public int? Rating { get; set; }
+        public int? TotalRates { get; set; }
+
         protected Employee() { }
         public Employee(string id,
                    Name name,

@@ -3,7 +3,7 @@ import Card from '@/components/card';
 
 export default function FamilyLayout({ children }) {
   return (
-    <div className='flex flex-col lg:flex-row gap-5'>
+    <div className='flex flex-col lg:flex-row gap-5 h-full'>
       <MainDataAside />
       <Card>{children}</Card>
     </div>

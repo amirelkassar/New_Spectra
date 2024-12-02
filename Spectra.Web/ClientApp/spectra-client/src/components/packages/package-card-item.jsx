@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import Button from '@/components/button';
 import CircleCheck from '@/assets/icons/circle-check';
+import Image from 'next/image';
 
 export const PackageCardItem = ({ children, ...props }) => {
   return (
@@ -57,21 +58,100 @@ const PackageList = ({ features = [], ...props }) => {
 
 PackageCardItem.List = PackageList;
 
-const PackagePrice = ({ children, ...props }) => {
+const PackagePrice = ({
+  children,
+  currancy = '',
+  ...props
+}) => {
   return (
     <p
       {...props}
+      dir='ltr'
       className={cn(
-        'mdl:text-4xl text-2xl text-greenMain font-Bold',
+        'mdl:text-4xl text-2xl text-greenMain font-Bold w-fit',
         props?.className
       )}
     >
-      {children}
+      {children}{' '}
+      <span className='text-base mdl:text-xl'>
+        {currancy}
+      </span>
     </p>
   );
 };
 
 PackageCardItem.Price = PackagePrice;
+
+const Discount = ({ children, ...props }) => {
+  return (
+    <span
+      {...props}
+      dir='ltr'
+      className={cn(
+        'bg-greenMain text-xs text-white mdl:text-base font-bold rtl:rounded-tr-xl ltr:rounded-tl-xl px-3 py-1',
+        props?.className
+      )}
+    >
+      -{children} %
+    </span>
+  );
+};
+
+PackageCardItem.Discount = Discount;
+
+const OldPrice = ({ children, ...props }) => {
+  return (
+    <span
+      {...props}
+      dir='ltr'
+      className={cn(
+        'text-sm mdl:text-xl line-through text-grayDark',
+        props?.className
+      )}
+    >
+      {children}
+    </span>
+  );
+};
+
+PackageCardItem.OldPrice = OldPrice;
+
+const PriceWithDiscount = ({
+  discount,
+  price,
+  currancy = '',
+  ...props
+}) => {
+  const priceWithDiscount = (
+    +price -
+    (+price * +discount) / 100
+  ).toFixed(2);
+
+  return (
+    <div>
+      <div
+        {...props}
+        className={cn(
+          'flex items-center gap-2',
+          props?.className
+        )}
+      >
+        <PackagePrice>
+          {priceWithDiscount}{' '}
+          <span className='text-base mdl:text-xl'>
+            {currancy}
+          </span>
+        </PackagePrice>
+        <Discount>{discount}</Discount>
+      </div>
+      <OldPrice>
+        {price.toFixed(2)} {currancy}
+      </OldPrice>
+    </div>
+  );
+};
+
+PackageCardItem.PriceWithDiscount = PriceWithDiscount;
 
 const PackageTitle = ({ children, ...props }) => {
   return (
@@ -88,3 +168,22 @@ const PackageTitle = ({ children, ...props }) => {
 };
 
 PackageCardItem.Title = PackageTitle;
+
+const PackageIcon = ({ src = '', name, ...props }) => {
+  if (!src) return null;
+  return (
+    <div
+      {...props}
+      className={cn('relative size-9', props?.className)}
+    >
+      <Image
+        src={src}
+        alt={name}
+        sizes='width: 36px; height: 36px;'
+        fill
+      />
+    </div>
+  );
+};
+
+PackageCardItem.Icon = PackageIcon;
