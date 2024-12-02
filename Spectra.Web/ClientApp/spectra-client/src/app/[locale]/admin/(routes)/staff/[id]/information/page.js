@@ -13,7 +13,7 @@ import { useSearchParams } from 'next/navigation';
 import PageEdit from './_components/pageEdit';
 import HourglassIcon from '@/assets/icons/Hourglass';
 import CardInfo from '@/components/card-info';
-import { GetStaffID } from '@/hooks/queries/admin/staff/staff';
+import { useStaffById } from '@/hooks/queries/admin/staff/staff';
 import HandelShowDataID from '@/components/handelShowDataID';
 const datadoc = {
   name: 'احمد محمد كمال',
@@ -106,7 +106,7 @@ const ListCertificates = [
 
 function Page({ params }) {
   const searchParams = useSearchParams();
-  const { data, isLoading } = GetStaffID(
+  const { data, isLoading } = useStaffById(
     params.id,
     searchParams.get('type') === 'Doctor' ? 1 : 2
   );

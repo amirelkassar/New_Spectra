@@ -12,15 +12,17 @@ import {
   useParams,
   useSearchParams,
 } from 'next/navigation';
-import { GetStaffID } from '@/hooks/queries/admin/staff/staff';
 import HandelShowDataID from '@/components/handelShowDataID';
+import { useStaffById } from '@/hooks/queries/admin/staff/staff';
+
 function StaffInformation() {
   const searchParams = useSearchParams();
   const params = useParams();
-  const { data, isLoading } = GetStaffID(
+  const { data, isLoading } = useStaffById(
     params.id,
     searchParams.get('type') === 'Accountant' ? 3 : 4
   );
+
   console.log(data);
 
   return searchParams.get('edit') === 'true' ? (

@@ -16,7 +16,10 @@ import { useDeletePacakge } from '../_hooks/use-delete-package';
 export const PackagesList = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = usePackages(pageNum, search);
+  const query = usePackages({
+    pageNum,
+    search,
+  });
 
   const router = useRouter();
 

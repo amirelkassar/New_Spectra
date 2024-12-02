@@ -84,7 +84,7 @@ export const useStaffById = (id) => {
       const response = await apiAdmin.get(
         staff.actions.get(id)
       );
-      return response.data;
+      return response;
     },
   });
 };

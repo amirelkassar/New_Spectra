@@ -1,12 +1,13 @@
 import Aside from './aside';
-import HeaderTop from '../admin/_components/layouts/header';
+import { Header } from '../admin/_components/layouts/header';
 import './asideStyle.css';
+
 export default function HandelDashboardLayout({
   Children,
 }) {
   return (
     <>
-      <HeaderTop />
+      <Header />
       <section className='space-y-5 flex-1 h-full flex  '>
         <Aside />
         <section className=' bg-white md:bg-[#F5F6FB] max-w-[100%]  rounded-3xl xl:rounded-[35px] grow overflow-auto p-0 ms:p-4 lg:p-3 xl:p-6 '>

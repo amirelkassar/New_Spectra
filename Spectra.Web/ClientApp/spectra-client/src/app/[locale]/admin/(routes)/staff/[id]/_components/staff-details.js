@@ -10,7 +10,7 @@ import SessionIcon from '@/assets/icons/session';
 import { Link } from '@/navigation';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
-import { GetStaffID } from '@/hooks/queries/admin/staff/staff';
+import { useStaffById } from '@/hooks/queries/admin/staff/staff';
 import {
   useParams,
   useSearchParams,
@@ -53,7 +53,7 @@ function StaffDetails() {
   const searchParams = useSearchParams();
   const params = useParams();
 
-  const { data, isLoading } = GetStaffID(
+  const { data, isLoading } = useStaffById(
     params.id,
     searchParams.get('type') === 'Doctor' ? 1 : 2
   );

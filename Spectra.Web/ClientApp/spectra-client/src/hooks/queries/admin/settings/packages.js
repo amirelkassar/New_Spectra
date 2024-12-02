@@ -8,7 +8,7 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { settings } from '@/api/admin';
-import { getQueries } from '@/lib/utils';
+import { getSkipCountFromPageNum } from '@/lib/utils';
 
 export const initialQueries = {
   search: '',
@@ -33,12 +33,17 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = (pageNum = 1, search = '') => {
-  const queries = getQueries(
+export const usePackages = ({ pageNum, search = '' }) => {
+  const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
-    search,
-    initialQueries
+    initialQueries.maxCount
   );
+
+  const queries = {
+    search,
+    maxCount,
+    skipCount,
+  };
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
