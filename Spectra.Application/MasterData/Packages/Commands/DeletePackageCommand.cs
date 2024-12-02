@@ -27,6 +27,10 @@ namespace Spectra.Application.MasterData.Packages.Commands
                 var package = await _packageRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Packages", request.Id);
 
                 await _packageRepository.DeleteAsync(request.Id);
+                if (package.PhotoPath is not null)
+                {
+                    await _documentHellper.DeleteAttachment(package.PhotoPath);
+                }
 
                 return OperationResult.Success();
             }

@@ -1,26 +1,13 @@
 ﻿using Mapster;
-using Mapster.Utils;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
-namespace Spectra.Application.Employees.Dto
+namespace Spectra.Application.UserProfile.Dtos
 {
-    public class EmployeeByIdDto : BaseEntityDto<string>
+    public class EmployeeProfileDto : BaseEntityDto<string>
     {
-        public EmployeeByIdDto()
-        {
-            Attachments = [];
-            Specializations = [];
-            Services = [];
-        }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Prefix { get; set; }
@@ -58,21 +45,22 @@ namespace Spectra.Application.Employees.Dto
         public ICollection<EmployeeService>? Services { get; set; }
         public string UserImage { get; set; }
 
-        public static TypeAdapterConfig GetConfiguration() => TypeAdapterConfig<Employee, EmployeeByIdDto>
-                .NewConfig()
-                .Map(dest => dest.FirstName, src => src.Name.FirstName)
-                .Map(dest => dest.LastName, src => src.Name.LastName)
-                .Map(dest => dest.Prefix, src => src.Name.Prefix)
-                .Map(dest => dest.Emailaddress, src => src.EmailAddress.Emailaddress)
-                .Map(dest => dest.PhoneNumber, src => src.MobileNumber.PhoneNumbers)
-                .Map(dest => dest.CountryCode, src => src.MobileNumber.CountryCode)
-                .Map(dest => dest.Country, src => src.Address.Country)
-                .Map(dest => dest.City, src => src.Address.City)
-                .Map(dest => dest.State, src => src.Address.State)
-                .Map(dest => dest.StreetName, src => src.Address.StreetName)
-                .Map(dest => dest.PostalCode, src => src.Address.PostalCode)
-                .Map(dest => dest.Floor, src => src.Address.Floor)
-                .Map(dest => dest.CommonMark, src => src.Address.CommonMark)
-                .Map(dest => dest.Building, src => src.Address.Building).Config;
+        public static TypeAdapterConfig GetConfiguration() => TypeAdapterConfig<Employee, EmployeeProfileDto>
+               .NewConfig()
+               .Map(dest => dest.FirstName, src => src.Name.FirstName)
+               .Map(dest => dest.LastName, src => src.Name.LastName)
+               .Map(dest => dest.Prefix, src => src.Name.Prefix)
+               .Map(dest => dest.Emailaddress, src => src.EmailAddress.Emailaddress)
+               .Map(dest => dest.PhoneNumber, src => src.MobileNumber.PhoneNumbers)
+               .Map(dest => dest.CountryCode, src => src.MobileNumber.CountryCode)
+               .Map(dest => dest.Country, src => src.Address.Country)
+               .Map(dest => dest.City, src => src.Address.City)
+               .Map(dest => dest.State, src => src.Address.State)
+               .Map(dest => dest.StreetName, src => src.Address.StreetName)
+               .Map(dest => dest.PostalCode, src => src.Address.PostalCode)
+               .Map(dest => dest.Floor, src => src.Address.Floor)
+               .Map(dest => dest.CommonMark, src => src.Address.CommonMark)
+               .Map(dest => dest.Building, src => src.Address.Building).Config;
+
     }
 }

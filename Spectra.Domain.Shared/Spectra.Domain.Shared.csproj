@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Common\AppResults\" />
+    <Folder Include="Constants\Permissions\Employees\" />
   </ItemGroup>
 
   <ItemGroup>
