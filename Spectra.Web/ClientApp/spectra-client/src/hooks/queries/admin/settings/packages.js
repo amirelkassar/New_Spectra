@@ -33,7 +33,11 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = ({ pageNum, search = '' }) => {
+export const usePackages = (
+  params = { pageNum: null, search: '' }
+) => {
+  const { pageNum, search } = params;
+
   const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
     initialQueries.maxCount

@@ -8,7 +8,7 @@ import {
 
 import { apiAdmin } from '@/api/axios';
 import { staff } from '@/api/admin';
-import { getQueries } from '@/lib/utils';
+import { getSkipCountFromPageNum } from '@/lib/utils';
 
 export const initialQueries = {
   search: '',
@@ -46,12 +46,21 @@ export const prefetchMedicalProviders = async () => {
   return queryClient;
 };
 
-export const useStaff = (pageNum = 1, search = '') => {
-  const queries = getQueries(
+export const useStaff = (
+  params = { pageNum: null, search: '' }
+) => {
+  const { pageNum, search } = params;
+
+  const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
-    search,
-    initialQueries
+    initialQueries.maxCount
   );
+
+  const queries = {
+    search,
+    maxCount,
+    skipCount,
+  };
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -61,14 +70,20 @@ export const useStaff = (pageNum = 1, search = '') => {
 };
 
 export const useMedicalProviders = (
-  pageNum = 1,
-  search = ''
+  params = { pageNum: null, search: '' }
 ) => {
-  const queries = getQueries(
+  const { pageNum, search } = params;
+
+  const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
-    search,
-    initialQueries
+    initialQueries.maxCount
   );
+
+  const queries = {
+    search,
+    maxCount,
+    skipCount,
+  };
 
   return useQuery({
     queryKey: [initialQueryKey, queries],

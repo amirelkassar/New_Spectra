@@ -51,11 +51,15 @@ export const useServices = (pageNum = 1, search = '') => {
 };
 
 //getAll
-export const useServicesForListing = ({
-  pageNum,
-  search = '',
-  serviceType = '',
-}) => {
+export const useServicesForListing = (
+  params = {
+    pageNum: null,
+    search: '',
+    serviceType: '',
+  }
+) => {
+  const { pageNum, search, serviceType } = params;
+
   const { maxCount, skipCount } = getSkipCountFromPageNum(
     pageNum,
     initialQueries.maxCount

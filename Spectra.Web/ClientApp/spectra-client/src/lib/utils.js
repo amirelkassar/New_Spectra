@@ -138,7 +138,9 @@ export const getSkipCountFromPageNum = (
   pageNum,
   maxCount
 ) => {
-  if (!pageNum) return { skipCount: 0, maxCount: 100 };
+  if (pageNum === 'all')
+    return { skipCount: 0, maxCount: 100 };
+  if (!pageNum) return { skipCount: 0, maxCount };
 
   // Ensure pageNum is at least 1
   const validPageNum = pageNum < 1 ? 1 : pageNum;
