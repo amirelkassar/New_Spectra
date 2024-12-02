@@ -45,15 +45,15 @@ namespace Spectra.Application.MasterData.Packages.Commands
 
                 var packageServices=new List<PackageService>();
 
-                foreach (var service in services) 
+                foreach (var requestedService in request.Services) 
                 {
-                    var requestService = request.Services.First(s => s.Id == service.Id);
+                    var mainService = services.First(s => s.Id == requestedService.Id);
                     packageServices.Add(new PackageService
                     {
-                        Id = service.Id,
-                        ArName=service.ArName,
-                        EnName=service.EnName,
-                        Order=requestService.Order
+                        Id = mainService.Id,
+                        ArName= mainService.ArName,
+                        EnName= mainService.EnName,
+                        Order= requestedService.Order
                     });
                 }
                 var package = Package.Create(Ulid.NewUlid().ToString(),

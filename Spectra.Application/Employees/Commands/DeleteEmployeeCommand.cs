@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
@@ -13,23 +14,20 @@ namespace Spectra.Application.Employees.Commands
         public string Id { get; set; }
     }
 
-    public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, OperationResult<Unit>>
+    public class DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, 
+        IDocumentHellper addFile,
+        IIdentityService identityService) : IRequestHandler<DeleteEmployeeCommand, OperationResult<Unit>>
     {
-        private readonly IBaseMongoDbRepository<Employee> _employeeRepo;
-        private readonly IDocumentHellper _addFile;
-
-        public DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, IDocumentHellper addFile)
-        {
-            _employeeRepo = employeeRepo;
-            _addFile = addFile;
-        }
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepo = employeeRepo;
+        private readonly IDocumentHellper _addFile = addFile;
+        private readonly IIdentityService _identityService = identityService;
 
         public async Task<OperationResult<Unit>> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-
             var doctor = await _employeeRepo.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
             await _addFile.DeleteAttachments(doctor.Attachments.Select(a => a.Path).ToList());
             await _employeeRepo.DeleteAsync(request.Id);
+            await _identityService.DeleteUserAsync(doctor.UserId);
             return OperationResult<Unit>.Success(Unit.Value);
 
         }

@@ -13,13 +13,9 @@ namespace Spectra.Application.Employees.Dto
     {
         public EmployeeListDto()
         {
+            
 
-            TypeAdapterConfig<Employee, EmployeeListDto>
-                .NewConfig()
-                .Map(dest => dest.FirstName, src => src.Name.FirstName)
-                .Map(dest => dest.LastName, src => src.Name.LastName)
-                .Map(dest => dest.Prefix, src => src.Name.Prefix)
-                .Map(dest => dest.Emailaddress, src => src.EmailAddress.Emailaddress);
+
         }
         public string Id { get; set; }
         public string FirstName { get; set; }
@@ -40,6 +36,13 @@ namespace Spectra.Application.Employees.Dto
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
         public string UserImage { get; set; }
+
+        public static TypeAdapterConfig GetConfigurations() => TypeAdapterConfig<Employee, EmployeeListDto>
+               .NewConfig()
+               .Map(dest => dest.FirstName, src => src.Name.FirstName)
+               .Map(dest => dest.LastName, src => src.Name.LastName)
+               .Map(dest => dest.Prefix, src => src.Name.Prefix)
+               .Map(dest => dest.Emailaddress, src => src.EmailAddress.Emailaddress).Config;
 
     }
 }

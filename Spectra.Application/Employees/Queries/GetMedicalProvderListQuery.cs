@@ -45,15 +45,14 @@ namespace Spectra.Application.Employees.Queries
                 }
                 else
                 {
-                    var (entities, total) = await _doctorRepository.GetAllAsync(s => s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant,
+                    var (entities, total) = await _doctorRepository.GetAllAsync(s => s.JobType == JobTypes.Doctor || s.JobType == JobTypes.Specialist,
                    null,
                    request.SkipCount,
                    request.MaxCount);
                     employees = entities;
                     totalCount = total;
                 }
-
-                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>();
+                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
 
                 return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, totalCount, request.MaxCount));
             }

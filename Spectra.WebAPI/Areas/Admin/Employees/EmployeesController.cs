@@ -45,7 +45,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
 
         [HttpDelete]
         [Authorize(AdminEmployeesPermissions.Delete)]
-        public async Task<IActionResult> DeleteAsync([FromBody] string id)
+        public async Task<IActionResult> DeleteAsync([FromQuery] string id)
         {
             var response = await _employeeService.DeleteAsync(id);
             return NoContent();

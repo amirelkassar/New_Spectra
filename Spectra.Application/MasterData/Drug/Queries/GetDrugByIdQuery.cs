@@ -25,6 +25,7 @@ namespace Spectra.Application.MasterData.Drug.Queries
         public async Task<OperationResult<Domain.MasterData.Drug.Drug>> Handle(GetDrugsByIdQuery request, CancellationToken cancellationToken)
         {
             var entitiy = await _drugRepository.GetByIdAsync(request.Id);
+            if(entitiy.ImagePath is not null)
             entitiy.ImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, entitiy.ImagePath), EndPointsRoutes.Drugs, _httpContextAccessor);
             return entitiy == null
                 ? throw new NotFoundException("Drugs", request.Id)

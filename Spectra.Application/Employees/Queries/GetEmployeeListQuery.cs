@@ -53,7 +53,7 @@ namespace Spectra.Application.Employees.Queries
                     totalCount = total;
                 }
 
-                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>();
+                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
                 return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, totalCount, request.MaxCount));
             }
         }

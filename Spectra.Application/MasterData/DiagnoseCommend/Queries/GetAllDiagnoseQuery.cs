@@ -30,7 +30,7 @@ namespace Spectra.Application.MasterData.DiagnoseCommend.Queries
             if (!string.IsNullOrEmpty(request.Search))
             {
                 request.Search = request.Search.ToLower().Trim();
-                var (data, total) = await _diagnoseRepository.GetAllAsync(d => d.Code2.ToLower().StartsWith(request.Search) || d.Name.ToLower().StartsWith(request.Search),
+                var (data, total) = await _diagnoseRepository.GetAllAsync(d => d.Code1.ToLower().StartsWith(request.Search) || d.Name.ToLower().StartsWith(request.Search),
                     null,
                     request.SkipCount,
                     request.MaxCount);
