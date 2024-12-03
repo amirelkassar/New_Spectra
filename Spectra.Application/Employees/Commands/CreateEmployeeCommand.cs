@@ -88,12 +88,12 @@ namespace Spectra.Application.Employees.Commands
                     }
                 }
 
-                if (!allSpecializations.Any(s=>s.Id == request.MainSpecializationId))
+
+                if (!string.IsNullOrWhiteSpace(request.MainSpecializationId) && !allSpecializations.Any(s => s.Id == request.MainSpecializationId))
                 {
                     throw new NotFoundException("Specializations", request.MainSpecializationId);
                 }
-
-                specializations = allSpecializations.Where(s => request.Specializations.Any(rs => rs == s.Id)).ToArray();
+                specializations = allSpecializations.Where(s => !string.IsNullOrWhiteSpace(request.MainSpecializationId) ? request.MainSpecializationId==s.Id: s.Id==s.Id || request.Specializations.Any(rs => rs == s.Id)).ToArray();
             }
 
             ICollection<PlatformService> services = null;
