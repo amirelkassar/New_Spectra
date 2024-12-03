@@ -13,6 +13,7 @@ namespace Spectra.Application.Employees.Queries
     public class GetEmployeeListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
+        public JobTypes? JobType { get; set; }
 
         public class GetEmployeeListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository) : IRequestHandler<GetEmployeeListQuery, OperationResult>
         {
@@ -24,13 +25,13 @@ namespace Spectra.Application.Employees.Queries
                 long totalCount = 0;
                 if (!string.IsNullOrWhiteSpace(request.Search))
                 {
-                    var (entities, total) = await _doctorRepository.GetAllAsync(s => (s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant)
+                    var (entities, total) = await _doctorRepository.GetAllAsync(s => (request.JobType.HasValue ? s.JobType == request.JobType.Value : s.JobType == s.JobType)
                && (s.Name.FirstName.ToLower().StartsWith(request.Search)
                || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
                || s.MainSpecializationEnName.ToLower().StartsWith(request.Search)
-               ||s.MainSpecializationArName.StartsWith(request.Search)
+               || s.MainSpecializationArName.StartsWith(request.Search)
                || s.SectionEnName.ToLower().StartsWith(request.Search)
-               ||s.SectionArEnName.StartsWith(request.Search)
+               || s.SectionArEnName.StartsWith(request.Search)
                || s.LicenseNumber.ToLower().StartsWith(request.Search)
                || s.SectionId.ToLower() == request.Search
                || s.MainSpecializationId.ToLower() == request.Search
@@ -45,7 +46,7 @@ namespace Spectra.Application.Employees.Queries
                 }
                 else
                 {
-                    var (entities, total) = await _doctorRepository.GetAllAsync(s => s.JobType == JobTypes.Secretary || s.JobType == JobTypes.Accountant,
+                    var (entities, total) = await _doctorRepository.GetAllAsync(s => (request.JobType.HasValue ? s.JobType == request.JobType.Value : s.JobType == s.JobType),
                    null,
                    request.SkipCount,
                    request.MaxCount);

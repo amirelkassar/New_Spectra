@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
@@ -21,20 +23,18 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public string? ArTermsAndConditions { get; set; }
         public string? EnTermsAndConditions { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
-        public ICollection<ServiceSpecification>? Specifications { get; set; }
+        public ICollection<string>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
         public IFormFile? HeroImage { get; set; }
 
-        public class UpdateServicesMCommandHandler : IRequestHandler<UpdateServicesMCommand, OperationResult<Unit>>
+        public class UpdateServicesMCommandHandler(IServiceMDRepository serviceMRepository,
+            IDocumentHellper addPhoto,
+            IBaseMongoDbRepository<Specialization> specializationRepository) : IRequestHandler<UpdateServicesMCommand, OperationResult<Unit>>
         {
 
-            private readonly IServiceMDRepository _serviceMRepository;
-            private readonly IDocumentHellper _addPhoto;
-            public UpdateServicesMCommandHandler(IServiceMDRepository serviceMRepository, IDocumentHellper addPhoto)
-            {
-                _serviceMRepository = serviceMRepository;
-                _addPhoto = addPhoto;
-            }
+            private readonly IServiceMDRepository _serviceMRepository = serviceMRepository;
+            private readonly IDocumentHellper _addPhoto = addPhoto;
+            private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
 
             public async Task<OperationResult<Unit>> Handle(UpdateServicesMCommand request, CancellationToken cancellationToken)
             {
@@ -54,9 +54,14 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 entity.Price = request.Price;
                 entity.Discount = request.Discount;
                 entity.Reports = request.Reports;
-                entity.Specifications = request.Specifications;
                 entity.Contents = request.Contents;
                 string newImgaePath;
+
+                if (request.Specifications is not null && request.Specifications.Count > 0)
+                {
+                    var specializations = await _specializationRepository.GetAllAsync(s => request.Specifications.Any(rs => rs == s.Id));
+                    entity.Specifications = specializations.data.Select(s => new ServiceSpecification { Id = s.Id, ArName = s.ArName, EnName = s.EnName }).ToArray();
+                }
 
                 if (request.HeroImage != null && request.HeroImage.Length > 0)
                 {
