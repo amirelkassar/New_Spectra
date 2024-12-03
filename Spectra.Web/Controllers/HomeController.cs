@@ -7,15 +7,14 @@ namespace Spectra.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController(ICurrentUser currentUser) : ControllerBase
+    public class HomeController(ISnomedService snomedService) : ControllerBase
     {
-        private readonly ICurrentUser currentUser = currentUser;
+        private readonly ISnomedService _snomedService = snomedService;
 
         [HttpGet]
-        [Authorize(Roles = Roles.SystemAdmin)]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(currentUser);
+           return Ok(await _snomedService.GetAll("speech"));
         }
     }
 }

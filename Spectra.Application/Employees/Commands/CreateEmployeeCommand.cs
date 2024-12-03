@@ -95,6 +95,7 @@ namespace Spectra.Application.Employees.Commands
 
                 specializations = allSpecializations.Where(s => request.Specializations.Any(rs => rs == s.Id)).ToArray();
             }
+
             ICollection<PlatformService> services = null;
             if (request.Services is not null && request.Services.Count > 0)
             {
@@ -102,7 +103,7 @@ namespace Spectra.Application.Employees.Commands
 
                 foreach (var service in request.Services)
                 {
-                    if (!services.Any(s => s.Id == service))
+                    if (!allServices.Any(s => s.Id == service))
                     {
                         throw new NotFoundException("Services", service);
                     }

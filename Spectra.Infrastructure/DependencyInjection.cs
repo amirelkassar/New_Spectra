@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using MadEyeMatt.AspNetCore.Authorization.Permissions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -80,6 +81,7 @@ using Spectra.Infrastructure.Repositories;
 using Spectra.Infrastructure.ScheduleAppointments.Appointments;
 using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.IdentityServices;
+using Spectra.Infrastructure.Services.SnomedServices;
 using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
@@ -111,6 +113,7 @@ namespace Spectra.Infrastructure
             services.AddSignalR();
             services.AddDataProtection();
             services.ConfigureEmailServices(configuration);
+            services.ConfigureSnomedServices();
             return services;
         }
         private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
@@ -236,6 +239,8 @@ namespace Spectra.Infrastructure
                    };
                });
 
+
+            services.AddPermissionsAuthorization();
             services.AddIdentityCore<AppUser>(config =>
             {
                 config.Password.RequireNonAlphanumeric = false;
@@ -244,9 +249,9 @@ namespace Spectra.Infrastructure
                 config.Password.RequireUppercase = true;
                 config.Password.RequireDigit = true;
             })
-               .AddRoles<AppRole>()
-               .AddEntityFrameworkStores<IdentityContext>()
-               .AddDefaultTokenProviders();
+            .AddRoles<AppRole>()
+            .AddEntityFrameworkStores<IdentityContext>()
+            .AddDefaultTokenProviders();
 
             services.AddDbContext<IdentityContext>(config =>
             {
@@ -303,6 +308,16 @@ namespace Spectra.Infrastructure
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureSnomedServices(this IServiceCollection services)
+        {
+            services.AddHttpClient(nameof(ISnomedService), config =>
+            {
+                config.BaseAddress = new Uri("https://browser.ihtsdotools.org/snowstorm/snomed-ct/");
+            });
+            services.AddScoped<ISnomedService, SnomedService>();
             return services;
         }
     }

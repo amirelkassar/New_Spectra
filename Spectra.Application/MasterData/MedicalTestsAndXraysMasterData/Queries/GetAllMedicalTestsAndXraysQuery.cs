@@ -31,7 +31,7 @@ namespace Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries
             if (!string.IsNullOrEmpty(request.Search))
             {
                 request.Search = request.Search.ToLower().Trim();
-                var (data, total) = await _medicalTestsAndXrayRepository.GetAllAsync(d => d.Name.ToLower().StartsWith(request.Search),
+                var (data, total) = await _medicalTestsAndXrayRepository.GetAllAsync(d => d.Name.ToLower().Contains(request.Search),
                 null,
                 request.SkipCount,
                 request.MaxCount);
