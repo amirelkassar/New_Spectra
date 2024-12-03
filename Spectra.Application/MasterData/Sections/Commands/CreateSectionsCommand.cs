@@ -16,7 +16,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
         public string EnName { get; set; }
         public string ArName { get; set; }
         public string? HeadDoctorId { get; set; }
-        public ICollection<SectionSpecsification> Specsifications { get; set; }
+        public ICollection<string> Specsifications { get; set; }
     }
 
     public class CreateSectionsCommandHandler(ISectionsRepository sectionsRepository,
@@ -37,8 +37,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
             var entity = Section.Create(Ulid.NewUlid().ToString(),
                 request.EnName,
-                request.ArName,
-                request.Specsifications);
+                request.ArName);
 
             if (!string.IsNullOrWhiteSpace(request.HeadDoctorId))
             {
@@ -52,13 +51,13 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
                 foreach (var spec in request.Specsifications)
                 {
-                    if (!allSpecializations.Any(s => s.Id == spec.Id))
+                    if (!allSpecializations.Any(s => s.Id == spec))
                     {
                         throw new NotFoundException("Specsifications", spec);
                     }
                 }
 
-                entity.Specsifications = allSpecializations.Where(s => request.Specsifications.Any(rs => rs.Id == s.Id))
+                entity.Specsifications = allSpecializations.Where(s => request.Specsifications.Any(rs => rs == s.Id))
                     .Select(s => new SectionSpecsification
                     {
                         Id = s.Id,

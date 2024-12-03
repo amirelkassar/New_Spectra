@@ -18,7 +18,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
         public string EnName { get; set; }
         public string ArName { get; set; }
         public string? HeadDoctorId { get; set; }
-        public ICollection<SectionSpecsification> Specsifications { get; set; }
+        public ICollection<string> Specsifications { get; set; }
 
         public class UpdateSectionsCommandHandler(ISectionsRepository sectionsRepository,
             IBaseMongoDbRepository<Employee> empRepository,
@@ -46,20 +46,19 @@ namespace Spectra.Application.MasterData.Sections.Commands
                     entity.HeadDoctorId = emp.Id;
                     entity.HeadDoctorName = emp.Name.FirstName;
                 }
-                ICollection<SectionSpecsification> specializations = null;
                 if (request.Specsifications is not null && request.Specsifications.Count > 0)
                 {
                     var (allSpecializations, allSpecTotal) = await _specializationRepository.GetAllAsync();
 
                     foreach (var spec in request.Specsifications)
                     {
-                        if (!allSpecializations.Any(s => s.Id == spec.Id))
+                        if (!allSpecializations.Any(s => s.Id == spec))
                         {
                             throw new NotFoundException("Specsifications", spec);
                         }
                     }
 
-                    specializations = allSpecializations.Where(s => request.Specsifications.Any(rs => rs.Id == s.Id))
+                    entity.Specsifications = allSpecializations.Where(s => request.Specsifications.Any(rs => rs == s.Id))
                         .Select(s=>new SectionSpecsification
                         {
                             Id=s.Id,
@@ -70,7 +69,6 @@ namespace Spectra.Application.MasterData.Sections.Commands
                 }
                 entity.EnName = request.EnName;
                 entity.ArName = request.ArName;
-                entity.Specsifications = specializations;
 
                 await _sectionsRepository.UpdateAsync(entity);
                 return OperationResult<Unit>.Success(Unit.Value);
