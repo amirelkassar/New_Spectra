@@ -10,6 +10,9 @@ namespace Spectra.Infrastructure.Data
     {
         public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<PermissionGroup> PermissionGroups { get; set; }
+        public DbSet<PermissoinCategory> PermissoinCategories { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,6 +23,20 @@ namespace Spectra.Infrastructure.Data
                 e.HasOne<AppRole>()
                 .WithMany(r => r.Permissions)
                 .HasForeignKey(p => p.RoleId);
+            });
+
+            builder.Entity<PermissionGroup>(e => 
+            {
+                e.HasMany(p => p.Categories)
+                .WithOne()
+                .HasForeignKey(p => p.PermissionGroupId);
+            });
+
+            builder.Entity<PermissoinCategory>(e =>
+            {
+                e.HasMany(p => p.Permissions)
+                .WithOne()
+                .HasForeignKey(p => p.PermissoinCategoryId);
             });
         }
     }
