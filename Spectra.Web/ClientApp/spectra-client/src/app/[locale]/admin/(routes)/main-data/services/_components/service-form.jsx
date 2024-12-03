@@ -12,7 +12,6 @@ import { useDebouncedCallback } from '@mantine/hooks';
 import Button from '@/components/button';
 import GetErrorMsg from '@/components/getErrorMsg';
 import InputGreen from '@/components/Input-green';
-import { SpecializationSelect } from '../../_components/specialization-select';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import HeartCheckedIcon from '@/assets/icons/heart-checked';
 import Image from 'next/image';
@@ -20,6 +19,7 @@ import CloseIcon from '@/assets/icons/close';
 import { PhotoDropzone } from '@/components/photo-dropzone';
 import { ReportSelect } from '../../_components/reports-select';
 import { useImagePath } from '@/hooks/use-image-path';
+import { SpecializationMultiSelect } from '@/admin/_components/ui/specialization-multi-select';
 
 export const ServiceFrom = ({
   data,
@@ -169,7 +169,7 @@ const RemainingInputs = ({ data, error, onChange }) => {
         onSelect={onChange}
         error={GetErrorMsg(error, 'Reports')}
       />
-      <SpecializationSelect
+      <SpecializationMultiSelect
         label='اضافة التخصصات المرتبطة بالخدمة'
         name='specifications'
         defaultValue={data?.specifications}

@@ -23,7 +23,11 @@ export const ServicesTable = () => {
   });
 
   return (
-    <QueryWrapper query={query} isSearching={!!search}>
+    <QueryWrapper
+      query={query}
+      isSearching={!!search}
+      isFiltered={!!serviceType}
+    >
       {({
         data,
         isPlaceholderData,

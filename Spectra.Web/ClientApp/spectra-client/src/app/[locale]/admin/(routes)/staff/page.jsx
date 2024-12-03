@@ -1,5 +1,5 @@
 import Card from '@/components/card';
-import { Staff } from './_components/staff';
+import { StaffTable } from './_components/staff-table';
 import { prefetchStaff } from '@/hooks/queries/admin/staff/staff';
 import {
   dehydrate,
@@ -12,7 +12,7 @@ const StaffPage = async () => {
   return (
     <Card className='h-full'>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Staff />
+        <StaffTable />
       </HydrationBoundary>
     </Card>
   );

@@ -22,7 +22,6 @@ export const useAddDepatment = () => {
     enName: '',
     arName: '',
     headDoctorId: '',
-    headDoctorName: '',
     specsifications: [],
   });
 

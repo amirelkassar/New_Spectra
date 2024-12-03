@@ -46,7 +46,7 @@ export const prefetchMedicalProviders = async () => {
 };
 
 export const useStaff = (
-  params = { pageNum: null, search: '' }
+  params = { pageNum: null, search: '', jobType: '' }
 ) => {
   const queries = getQueries({ params, initialQueries });
 

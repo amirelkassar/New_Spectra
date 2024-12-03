@@ -87,7 +87,7 @@ const TableBody = ({
               ))}
             </TableTr>
           ))
-        : { children }}
+        : children}
     </TableTbody>
   );
 };

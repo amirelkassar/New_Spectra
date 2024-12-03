@@ -137,10 +137,10 @@ const Submit = (
         const generalError = GetErrorMsg(err, 'general');
         // if (!generalError) return;
         return (
-          <div className='flex items-center gap-5 *:shrink-0 relative'>
+          <div className='flex items-center gap-5 *:shrink-0 relative max-w-full'>
             <CloseIcon className='size-5' />
 
-            <p className='text-xs mdl:text-base font-medium'>
+            <p className='text-xs mdl:text-base font-medium overflow-hidden max-w-[90%]'>
               {generalError ||
                 options.error ||
                 'حدث خطأ ما'}

@@ -35,6 +35,7 @@ export const ProfessionSelect = ({ ...props }) => {
           },
         });
       }}
+      value={String(props.value)}
     />
   );
 };

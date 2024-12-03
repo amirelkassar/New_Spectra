@@ -6,12 +6,12 @@ import SelectInput from '@/components/inputs/select-input';
 
 const DATA = {
   ar: [
-    { label: 'انثي', value: '1' },
     { label: 'ذكر', value: '2' },
+    { label: 'انثي', value: '1' },
   ],
   en: [
-    { label: 'Female', value: '1' },
     { label: 'Male', value: '2' },
+    { label: 'Female', value: '1' },
   ],
 };
 
@@ -31,6 +31,7 @@ export const GenderSelect = ({ ...props }) => {
           },
         });
       }}
+      value={String(props.value)}
     />
   );
 };

@@ -1,7 +1,7 @@
 'use client';
 
-import FilterIcon from '@/assets/icons/filter';
 import { FilterButton } from '@/components/table/filter-button';
+import { FilterType } from '@/components/table/filter-type';
 
 export const ServicesTableFilter = ({
   type = '',
@@ -33,15 +33,6 @@ export const ServicesTableFilter = ({
           تعرض
         </FilterButton>
       </div>
-    </div>
-  );
-};
-
-const FilterType = ({ children }) => {
-  return (
-    <div className='inline-flex items-center gap-3 font-bold text-xs lg:text-base'>
-      <FilterIcon />
-      {children}
     </div>
   );
 };

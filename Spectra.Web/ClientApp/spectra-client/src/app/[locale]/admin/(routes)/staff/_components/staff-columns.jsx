@@ -1,48 +1,54 @@
-import ActionMenu from './ActionMenu';
+'use client';
+
+import { useDate } from '@/hooks/use-date';
+import { EmployeeCellActions } from './employee-cell-actions';
 
 export const StaffColumns = [
   {
     accessorKey: 'name',
     header: 'الاسم ',
-    id: 'name',
+    cell: ({ row }) =>
+      `${row.original?.firstName} ${row.original?.lastName}`,
   },
   {
-    accessorKey: 'email',
+    accessorKey: 'emailaddress',
     header: 'الايميل',
-    id: 'email',
   },
   {
-    accessorKey: 'jopType',
+    accessorKey: 'jobType',
     header: 'الوظيفة',
-    id: 'jopType',
+    cell: ({ row }) => (
+      <RenderJobType jobType={row.original?.jobType} />
+    ),
   },
   {
-    accessorKey: 'timeToJoin',
+    accessorKey: 'created',
     header: ' تاريخ الانضمام',
-    id: 'timeToJoin',
-    cell: ({ getValue }) => {
-      const value = getValue();
-      return (
-        <p className='text-[12px] md:text-[16px]'>
-          {new Date(value).toISOString().split('T')[0]}
-        </p>
-      );
-    },
+    cell: ({ getValue }) => <CellDate date={getValue()} />,
   },
   {
     id: 'actions',
-    cell: ({ row }) => {
-      const type = row.original.jopType;
-      const id = row.original.id;
-      return (
-        <div
-          className={
-            'flex gap-[10px] md:gap-[40px] items-center justify-end '
-          }
-        >
-          <ActionMenu id={id} type={type} />
-        </div>
-      );
-    },
+    cell: ({ row }) => (
+      <EmployeeCellActions id={row.original?.id} />
+    ),
   },
 ];
+
+const RenderJobType = ({ jobType }) => {
+  switch (String(jobType)) {
+    case '1':
+      return 'طبيب';
+    case '2':
+      return 'اخصائي';
+    case '3':
+      return 'سكرتير';
+    case '4':
+      return 'محاسب';
+  }
+};
+
+const CellDate = ({ date }) => {
+  const { fullYear } = useDate(date);
+
+  return fullYear;
+};

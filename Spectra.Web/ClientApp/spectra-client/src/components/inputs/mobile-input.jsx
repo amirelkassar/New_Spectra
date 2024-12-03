@@ -14,11 +14,12 @@ const MobileInput = ({
   size = 'md',
   label = 'رقم الهاتف',
   inputClassName = '',
+  className = '',
   error = '',
   ...props
 }) => {
   return (
-    <div className='space-y-2'>
+    <div className={cn('space-y-2', className)}>
       {label && (
         <label
           htmlFor='phone2'

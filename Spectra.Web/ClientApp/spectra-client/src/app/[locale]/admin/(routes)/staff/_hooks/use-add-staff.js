@@ -10,36 +10,43 @@ import ROUTES from '@/routes';
 export const useAddEmployee = () => {
   const router = useRouter();
 
+  const [validationErrors, setValidationErrors] = useState(
+    {}
+  );
+
+  const [step, setStep] = useState(1);
+
   const [formData, setFormData] = useState({
-    firstName: 'Moataz',
-    lastName: 'Ali',
-    prefix: 'string',
-    nationalId: '123456789',
-    humenGender: 2,
-    emailaddress: 'moataz@doc.com',
-    country: 'EG',
-    city: 'Alex',
-    state: 'Raml',
-    streetName: 'Abdmanaf',
-    building: '38',
-    postalCode: '123456',
-    floor: '2',
-    commonMark: 'bakoos',
-    phoneNumber: '01210127111',
-    countryCode: '+20',
-    jobName: 'doctor',
-    jobType: 1,
-    jobDescription: 'doctor',
-    workingHours: 8,
-    licenseNumber: '12345678',
-    experienceYears: 8,
-    qualification: 'bacherol',
-    approvedBy: 'string',
-    academicDegree: 1,
-    mainSpecializationId: '01JDY9EQGMRP9BV9J4ANA04AM1',
-    password: 'M@3taz159159',
-    specializations: ['01JDY9EQGMRP9BV9J4ANA04AM1'],
-    services: ['01JDYXFBZB9WMRHBC7ZEHW3454'],
+    firstName: '',
+    lastName: '',
+    prefix: '',
+    nationalId: '',
+    humenGender: '',
+    emailaddress: '',
+    country: '',
+    city: '',
+    state: '',
+    streetName: '',
+    building: '',
+    postalCode: '',
+    floor: '',
+    commonMark: '',
+    phoneNumber: '',
+    countryCode: '',
+    jobName: '',
+    jobType: '',
+    jobDescription: '',
+    workingHours: '',
+    licenseNumber: '',
+    experienceYears: '',
+    qualification: '',
+    approvedBy: '',
+    academicDegree: '',
+    mainSpecializationId: '',
+    password: '',
+    confirmPassword: '',
+    specializations: [],
+    services: [],
   });
 
   const {
@@ -60,34 +67,52 @@ export const useAddEmployee = () => {
       }));
 
       if (isError) reset();
+      if (!!Object.keys(validationErrors)?.length)
+        setValidationErrors({});
     },
-    [isError, reset]
+    [isError, reset, validationErrors]
   );
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
 
-      return console.log(formData);
+      // return console.log(formData);
 
       Toast.Promise(addStaff(formData), {
-        success: 'تم اضافة الباقة بنجاح',
+        success: 'تم اضافة الموظف بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
-            router.replace(
-              ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD
-            );
+            router.replace(ROUTES.ADMIN.STAFF.DASHBOARD);
         },
       });
     },
     [addStaff, formData, router]
   );
 
+  const onNext = useCallback(() => {
+    if (formData.password !== formData.confirmPassword) {
+      return setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: 'كلمة المرور غير متطابقة',
+      }));
+    }
+    setStep(2);
+  }, [formData]);
+
+  const onBack = useCallback(() => {
+    setStep(1);
+  }, []);
+
   const form = {
     onChange,
     onSubmit,
+    onNext,
+    onBack,
+    step,
     data: formData,
     error,
+    validationErrors,
     isPending,
     isError,
   };
