@@ -11,7 +11,6 @@ import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
 };
@@ -38,14 +37,13 @@ export const prefetchMedicalTests = async () => {
 
 //getAll
 export const useMedicalTests = (
-  pageNum = 1,
-  search = ''
+  params = {
+    pageNum: null,
+    search: null,
+  }
 ) => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+  const queries = getQueries({ params, initialQueries });
+
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: () => getAnalysis(queries),
@@ -59,10 +57,7 @@ export const GetMedicalTestsID = (id) => {
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await apiAdmin.get(
-        mainData.medicalTestsAndXray.actions.get(id),
-        {
-          headers: {},
-        }
+        mainData.medicalTestsAndXray.actions.get(id)
       );
       return response.data;
     },
@@ -94,8 +89,7 @@ export const useCreateMedicalTests = () => {
     mutationFn: async (data) => {
       const response = await apiAdmin.post(
         mainData.medicalTestsAndXray.actions.add,
-        data,
-        {}
+        data
       );
       return response.data;
     },
@@ -114,13 +108,12 @@ export const useEditMedicalTests = (id) => {
     mutationFn: async (data) => {
       const response = await apiAdmin.put(
         mainData.medicalTestsAndXray.actions.update(id),
-        data,
-        {}
+        data
       );
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

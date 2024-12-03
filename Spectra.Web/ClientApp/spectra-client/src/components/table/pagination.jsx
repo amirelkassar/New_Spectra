@@ -14,9 +14,6 @@ export const Pagination = ({
   disabled = false,
 }) => {
   const router = useRouter();
-  const searchParams = new URLSearchParams(
-    window.location.search
-  );
 
   const totalPages = Math.ceil(totalCount / pageSize);
   const hasPagination = totalPages > 1;
@@ -25,6 +22,10 @@ export const Pagination = ({
   if (!hasPagination) return null;
 
   const updatePage = (newPage) => {
+    if (typeof window === undefined) return;
+    const searchParams = new URLSearchParams(
+      window.location.search
+    );
     searchParams.set('page', newPage.toString());
     router.replace(`?${searchParams.toString()}`);
   };

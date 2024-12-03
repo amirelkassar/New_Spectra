@@ -54,6 +54,7 @@ export const ContentSelect = ({
     useServicesForListing({
       serviceType: '2',
       search: debounced,
+      pageNum: 'all',
     });
 
   const items = data?.data?.items;

@@ -11,7 +11,6 @@ import { staff } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 5,
 };
@@ -46,12 +45,10 @@ export const prefetchMedicalProviders = async () => {
   return queryClient;
 };
 
-export const useStaff = (pageNum = 1, search = '') => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+export const useStaff = (
+  params = { pageNum: null, search: '', jobType: '' }
+) => {
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -61,14 +58,9 @@ export const useStaff = (pageNum = 1, search = '') => {
 };
 
 export const useMedicalProviders = (
-  pageNum = 1,
-  search = ''
+  params = { pageNum: null, search: '' }
 ) => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -84,7 +76,7 @@ export const useStaffById = (id) => {
       const response = await apiAdmin.get(
         staff.actions.get(id)
       );
-      return response.data;
+      return response;
     },
   });
 };
@@ -136,7 +128,7 @@ export const useUpdateStaff = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

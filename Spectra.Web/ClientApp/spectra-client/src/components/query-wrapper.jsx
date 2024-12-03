@@ -20,12 +20,14 @@ const MemowizedNoDataYet = memo(NoDataYet);
  * @param {Object} props
  * @param {Object} props.query - The query object from the server.
  * @param {boolean} [props.isSearching] - Whether the query is in search mode.
+ * @param {boolean} [props.isFiltered] - Whether the query is currently filtering data.
  * @param {(args: { data: any; pageSize?: number; totalCount?: number; isPlaceholderData?: boolean }) => React.ReactNode} props.children - A render function to render the children with provided props.
  */
 
 export const QueryWrapper = ({
   query,
   isSearching = false,
+  isFiltered = false,
   children,
 }) => {
   if (!query) throw new Error('No query props provided');
@@ -34,13 +36,15 @@ export const QueryWrapper = ({
     query?.data?.data?.items || query?.data?.data;
   const pageSize = query?.data?.data?.pageSize;
   const totalCount = query?.data?.data?.totalCount;
-  const hasData = useMemo(
-    () =>
-      items
-        ? !!items?.length || !!Object.keys(items)?.length
-        : false,
-    [items]
-  );
+  const hasData = useMemo(() => {
+    if (Array.isArray(items)) {
+      return items.length > 0;
+    }
+    if (typeof items === 'object' && items !== null) {
+      return Object.keys(items).length > 0; // تحقق إذا كان الكائن يحتوي على مفاتيح
+    }
+    return false; // إذا كانت ليست مصفوفة ولا كائنًا
+  }, [items]);
 
   const onRetry = useCallback(
     () => query?.refetch(),
@@ -64,7 +68,8 @@ export const QueryWrapper = ({
   if (isSearching && !hasData)
     return <MemowizedNoSearchResults />;
 
-  if (!hasData) return <MemowizedNoDataYet />;
+  if (!hasData && !isFiltered)
+    return <MemowizedNoDataYet />;
 
   return children({
     data: items,

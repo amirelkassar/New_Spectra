@@ -43,11 +43,8 @@ const TypeSelect = ({ onChange = () => {} }) => {
 
   return (
     <div className='flex flex-col md:flex-row gap-10 items-center pt-20'>
-      <TypeButton>
-        <InsideIcon
-          onClick={() => onClick('1')}
-          className='text-greenMain w-14 md:w-24'
-        />
+      <TypeButton onClick={() => onClick('1')}>
+        <InsideIcon className='text-greenMain w-14 md:w-24' />
         خدمات داخلية
       </TypeButton>
 

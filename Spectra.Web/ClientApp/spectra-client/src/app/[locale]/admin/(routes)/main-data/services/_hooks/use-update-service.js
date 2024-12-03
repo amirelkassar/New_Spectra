@@ -55,9 +55,14 @@ export const useUpdateService = ({ initialValues }) => {
     [UpdateService, formData, router]
   );
 
+  const onCancel = useCallback(() => {
+    router.replace(ROUTES.ADMIN.DATAMAIN.SERVICES);
+  }, [router]);
+
   const form = {
     onChange,
     onSubmit,
+    onCancel,
     data: formData,
     error,
   };

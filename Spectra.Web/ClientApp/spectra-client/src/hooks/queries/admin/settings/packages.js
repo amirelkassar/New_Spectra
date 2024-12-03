@@ -11,7 +11,6 @@ import { settings } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 
 export const initialQueries = {
-  search: '',
   skipCount: 0,
   maxCount: 10,
 };
@@ -33,12 +32,10 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = (pageNum = 1, search = '') => {
-  const queries = getQueries(
-    pageNum,
-    search,
-    initialQueries
-  );
+export const usePackages = (
+  params = { pageNum: null, search: '' }
+) => {
+  const queries = getQueries({ params, initialQueries });
 
   return useQuery({
     queryKey: [initialQueryKey, queries],
@@ -106,7 +103,7 @@ export const useUpdatePackage = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
     },
     onError: () => {},
   });

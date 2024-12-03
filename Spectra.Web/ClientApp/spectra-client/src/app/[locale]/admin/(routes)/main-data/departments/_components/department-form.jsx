@@ -3,7 +3,7 @@
 import Button from '@/components/button';
 import GetErrorMsg from '@/components/getErrorMsg';
 import InputGreen from '@/components/Input-green';
-import { SpecializationSelect } from '../../_components/specialization-select';
+import { SpecializationMultiSelect } from '@/admin/_components/ui/specialization-multi-select';
 import { DepartmentHeadSelect } from '../../_components/department-head-select';
 
 export const DepartmentForm = ({
@@ -34,7 +34,7 @@ export const DepartmentForm = ({
         error={GetErrorMsg(error, 'EnName')}
       />
 
-      <SpecializationSelect
+      <SpecializationMultiSelect
         label='التخصصات'
         name='specsifications'
         defaultValue={data?.specsifications}
@@ -45,23 +45,20 @@ export const DepartmentForm = ({
       <DepartmentHeadSelect
         label='اختر رئيس القسم'
         defaultValue={data?.headDoctorId}
-        error={
-          GetErrorMsg(error, 'HeadDoctorId') ||
-          GetErrorMsg(error, 'headDoctorName')
-        }
-        onSelect={(val) => {
-          const { headDoctorId, headDoctorName } = val;
+        error={GetErrorMsg(error, 'HeadDoctorId')}
+        onSelect={(value) => {
           onChange({
             target: {
               name: 'headDoctorId',
-              value: headDoctorId,
+              value,
             },
           });
-
+        }}
+        onRemove={() => {
           onChange({
             target: {
-              name: 'headDoctorName',
-              value: headDoctorName,
+              name: 'headDoctorId',
+              value: '',
             },
           });
         }}

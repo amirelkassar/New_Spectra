@@ -11,7 +11,7 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 export const TestInteriorTable = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = useInternalExamination(pageNum, search);
+  const query = useInternalExamination({ pageNum, search });
 
   return (
     <QueryWrapper query={query} isSearching={!!search}>

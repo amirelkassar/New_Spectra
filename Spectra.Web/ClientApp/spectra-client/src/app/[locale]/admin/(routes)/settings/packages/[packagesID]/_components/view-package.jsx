@@ -96,13 +96,19 @@ export const Package = ({ data = {} }) => {
       </Card>
 
       <Card title='الصورة الدعائية'>
-        <Image
-          src={path}
-          alt={enName}
-          width={500}
-          height={500}
-          className='h-32 mdl:h-52 w-auto'
-        />
+        {path ? (
+          <Image
+            src={path}
+            alt={enName}
+            width={500}
+            height={500}
+            className='h-32 mdl:h-52 w-auto'
+          />
+        ) : (
+          <p className='h-32 mdl:h-52 w-full flex items-center justify-center border-2 border-grayLight rounded-xl'>
+            لا يوجد صورة!
+          </p>
+        )}
       </Card>
 
       <EditButton

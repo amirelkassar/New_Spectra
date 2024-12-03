@@ -10,8 +10,8 @@ import imgStaff from '@/assets/images/staff.png';
 import { DatePickerInput } from '@mantine/dates';
 import Button from '@/components/button';
 import {
-  GetStaffID,
-  useEditStaff,
+  useStaffById,
+  useUpdateStaff,
 } from '@/hooks/queries/admin/staff/staff';
 import HandelShowDataID from '@/components/handelShowDataID';
 import { TextInput } from '@mantine/core';
@@ -20,7 +20,7 @@ function PageEditStaff({ id }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [StaffData, setStaffData] = useState('');
-  const { data, isLoading } = GetStaffID(
+  const { data, isLoading } = useStaffById(
     id,
     searchParams.get('type') === 'Accountant' ? 3 : 4
   );
@@ -30,7 +30,7 @@ function PageEditStaff({ id }) {
     isSuccess,
     isError,
     reset,
-  } = useEditStaff(
+  } = useUpdateStaff(
     id,
     searchParams.get('type') === 'Accountant' ? 3 : 4
   );

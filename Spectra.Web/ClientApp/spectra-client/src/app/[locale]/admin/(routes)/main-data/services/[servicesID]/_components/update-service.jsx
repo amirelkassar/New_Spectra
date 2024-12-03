@@ -22,7 +22,8 @@ const UpdateServiceForm = ({ initialValues }) => {
     initialValues,
   });
 
-  const { error, onSubmit, onChange, data } = form;
+  const { error, onSubmit, onChange, data, onCancel } =
+    form;
 
   const { isPending } = status;
 
@@ -32,6 +33,7 @@ const UpdateServiceForm = ({ initialValues }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       isPending={isPending}
+      onCancel={onCancel}
       error={error}
     />
   );

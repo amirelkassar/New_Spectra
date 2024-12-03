@@ -11,7 +11,7 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 export const DepartmentsTable = () => {
   const { pageNum, search } = useQueryParams();
 
-  const query = useSections(pageNum, search);
+  const query = useSections({ pageNum, search });
 
   return (
     <QueryWrapper query={query} isSearching={!!search}>

@@ -4,7 +4,6 @@ import { useCallback, useMemo } from 'react';
 import { useRouter } from '@/navigation';
 import { useLocale } from 'next-intl';
 
-import { useQueryParams } from '@/hooks/queries/use-query-params';
 import { PackageCardItem } from '@/components/packages';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { usePackages } from '@/hooks/queries/admin/settings/packages';
@@ -14,9 +13,7 @@ import ROUTES from '@/routes';
 import { useDeletePacakge } from '../_hooks/use-delete-package';
 
 export const PackagesList = () => {
-  const { pageNum, search } = useQueryParams();
-
-  const query = usePackages(pageNum, search);
+  const query = usePackages();
 
   const router = useRouter();
 
@@ -29,7 +26,7 @@ export const PackagesList = () => {
   );
 
   return (
-    <QueryWrapper query={query} isSearching={!!search}>
+    <QueryWrapper query={query}>
       {({ data }) => (
         <div className='flex gap-5 flex-wrap *:shrink-0'>
           {data?.map((packageItem) => (

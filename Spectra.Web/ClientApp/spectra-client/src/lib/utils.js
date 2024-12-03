@@ -112,33 +112,13 @@ export const buildQuery = (baseUrl, params = {}) => {
     : baseUrl;
 };
 
-export function getQueries(pageNum, search = '', queries) {
-  if (pageNum === '*')
-    return {
-      search: '',
-      skipCount: 0,
-      maxCount: 100,
-    };
-
-  // Ensure pageNum is at least 1
-  const validPageNum = pageNum < 1 ? 1 : pageNum;
-
-  // Calculate skipCount based on the valid page number and maxCount
-  const skipCount = (validPageNum - 1) * queries.maxCount;
-
-  // Return updated queries
-  return {
-    ...queries,
-    skipCount,
-    search,
-  };
-}
-
 export const getSkipCountFromPageNum = (
   pageNum,
   maxCount
 ) => {
-  if (!pageNum) return { skipCount: 0, maxCount: 100 };
+  if (pageNum === 'all')
+    return { skipCount: 0, maxCount: 100 };
+  if (!pageNum) return { skipCount: 0, maxCount };
 
   // Ensure pageNum is at least 1
   const validPageNum = pageNum < 1 ? 1 : pageNum;
@@ -148,3 +128,23 @@ export const getSkipCountFromPageNum = (
 
   return { skipCount, maxCount };
 };
+
+export function getQueries({ params, initialQueries }) {
+  const { maxCount, skipCount } = getSkipCountFromPageNum(
+    params.pageNum,
+    initialQueries.maxCount
+  );
+
+  const filteredParams = Object.fromEntries(
+    Object.entries(params).filter(
+      ([key, value]) =>
+        key !== 'pageNum' && value?.toString().trim() !== ''
+    )
+  );
+
+  return {
+    maxCount,
+    skipCount,
+    ...filteredParams,
+  };
+}

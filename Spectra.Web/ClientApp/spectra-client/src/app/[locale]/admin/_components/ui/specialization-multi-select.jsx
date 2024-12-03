@@ -11,20 +11,21 @@ import MultiSelectInput from '@/components/inputs/multi-select-input';
 import { useSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import { useLocale } from 'next-intl';
 
-export const SpecializationSelect = ({
+export const SpecializationMultiSelect = ({
   error,
-  onSelect = () => {},
   defaultValue = [],
   name = '',
   label = '',
   placeholder = '',
+  onSelect = () => {},
 }) => {
   const locale = useLocale();
 
   const [value, setValue] = useState([]);
 
-  const { data, isPending, isError } =
-    useSpecialization('*');
+  const { data, isPending, isError } = useSpecialization({
+    pageNum: 'all',
+  });
 
   const items = data?.data?.items;
   const hasData = data?.data?.totalCount;
@@ -43,26 +44,10 @@ export const SpecializationSelect = ({
     if (!hasData) return [];
 
     return items.map((item) => ({
-      value: JSON.stringify({
-        id: item.id,
-        arName: item.arName,
-        enName: item.enName,
-      }),
+      value: item.id,
       label: locale === 'ar' ? item.arName : item.enName,
     }));
   }, [isPending, isError, hasData, items, locale]);
-
-  // HANDLE GET DEFAULT SELETED OPTIONS
-  const selectedOptions = useMemo(() => {
-    if (!defaultValue || !defaultValue?.length) return [];
-    return defaultValue.map((item) =>
-      JSON.stringify({
-        id: item.id,
-        arName: item.arName,
-        enName: item.enName,
-      })
-    );
-  }, [defaultValue]);
 
   // HANDLE SET ON SELECT IF VALUE CHANGES
   const onChange = useCallback(
@@ -70,8 +55,8 @@ export const SpecializationSelect = ({
       setValue(value);
       onSelect({
         target: {
-          value: value.map((item) => JSON.parse(item)),
           name,
+          value,
         },
       });
     },
@@ -81,8 +66,13 @@ export const SpecializationSelect = ({
   // HANDLE SET DEFAULT SELECTED OPTIONS
   useEffect(() => {
     if (isPending) return;
-    setValue(selectedOptions);
-  }, [selectedOptions, isPending]);
+    if (!defaultValue || !defaultValue?.length) return;
+
+    const defaultValueIds = defaultValue.map(
+      (item) => item?.id || item
+    );
+    setValue(defaultValueIds);
+  }, [defaultValue, isPending]);
 
   return (
     <MultiSelectInput
@@ -92,7 +82,7 @@ export const SpecializationSelect = ({
       classNames={{
         label:
           'text-xs md:text-base mdl:text-base mb-2 ps-0',
-        input: 'border-greenMain mdl:rounded-xl',
+        input: 'mdl:rounded-xl',
       }}
       label={label}
       placeholder={placeholder}
