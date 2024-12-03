@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Spectra.Domain.Employees;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Employees.Dto
 {
-    public class EmployeeListDto
+    public class EmployeeListDto : BaseEntityDto<string>
     {
         public EmployeeListDto()
         {
@@ -17,7 +18,6 @@ namespace Spectra.Application.Employees.Dto
 
 
         }
-        public string Id { get; set; }
         public string FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Prefix { get; set; }

@@ -70,7 +70,7 @@ namespace Spectra.Application.Employees.Commands
                 throw new AlreadyExistException(request.EmailAddress.Emailaddress, nameof(request.EmailAddress));
             }
 
-            if (await _employeeRepo.Exists(s => s.LicenseNumber.ToLower() == request.LicenseNumber.ToLower()))
+            if (await _employeeRepo.Exists(s => !string.IsNullOrWhiteSpace(s.LicenseNumber) && s.LicenseNumber.ToLower() == request.LicenseNumber.ToLower()))
             {
                 throw new AlreadyExistException(request.LicenseNumber, nameof(request.LicenseNumber));
             }

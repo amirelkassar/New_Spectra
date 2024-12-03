@@ -25,7 +25,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
             if (!role.Permissions.Any(p => p.Permission == permission))
             {
-                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission, permission));
+                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission));
                 _identityContext.Roles.Update(role);
                 await _identityContext.SaveChangesAsync();
             }
@@ -118,7 +118,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             role.Permissions.Clear();
             foreach (var permission in permissions)
             {
-                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission, permission));
+                role.Permissions.Add(RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, permission));
             }
             await _identityContext.SaveChangesAsync();
         }
