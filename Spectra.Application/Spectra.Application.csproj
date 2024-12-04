@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Admin\Commands\" />
     <Folder Include="AppRoles\Commands\" />
+    <Folder Include="Identities\Permissions\Employees\" />
   </ItemGroup>
 
 </Project>

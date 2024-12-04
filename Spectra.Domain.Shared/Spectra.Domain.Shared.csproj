@@ -6,14 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\AppResults\**" />
     <Compile Remove="Constants\Policies\**" />
+    <EmbeddedResource Remove="Common\AppResults\**" />
     <EmbeddedResource Remove="Constants\Policies\**" />
+    <None Remove="Common\AppResults\**" />
     <None Remove="Constants\Policies\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\AppResults\" />
-    <Folder Include="Constants\Permissions\Employees\" />
   </ItemGroup>
 
   <ItemGroup>

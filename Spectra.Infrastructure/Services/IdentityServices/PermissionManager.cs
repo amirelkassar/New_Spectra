@@ -198,7 +198,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                ?? throw new NotFoundException(nameof(AppRole), roleName);
 
             var localGroups =await _identityContext.PermissionGroups
-                .Where(g => groups.Any(pg => pg.Id == g.Id))
+                .Where(g => groups.Select(pg=>pg.Id).Any(pg => pg == g.Id))
                 .Include(g => g.Categories)
                 .ThenInclude(c => c.Permissions)
                 .ToArrayAsync();
