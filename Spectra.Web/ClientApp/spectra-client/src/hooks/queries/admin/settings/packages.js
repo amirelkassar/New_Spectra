@@ -68,7 +68,10 @@ export const useDeletePackage = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -85,7 +88,10 @@ export const useAddPackage = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
@@ -103,7 +109,10 @@ export const useUpdatePackage = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

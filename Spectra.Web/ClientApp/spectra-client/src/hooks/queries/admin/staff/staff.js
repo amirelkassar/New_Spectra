@@ -93,7 +93,10 @@ export const useDeleteStaff = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -110,7 +113,10 @@ export const useAddStaff = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
@@ -128,7 +134,10 @@ export const useUpdateStaff = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

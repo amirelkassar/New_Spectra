@@ -77,7 +77,10 @@ export const DeleteSpecialization = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -96,7 +99,10 @@ export const useCreateSpecialization = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
@@ -116,7 +122,10 @@ export const useEditSpecialization = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

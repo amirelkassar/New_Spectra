@@ -74,7 +74,10 @@ export const DeleteDiagnostics = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -92,7 +95,10 @@ export const useCreateDiagnostics = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
@@ -111,7 +117,10 @@ export const useEditDiagnostics = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

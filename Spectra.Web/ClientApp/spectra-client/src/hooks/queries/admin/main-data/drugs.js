@@ -70,7 +70,10 @@ export const DeleteDrugs = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -87,7 +90,10 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
@@ -105,7 +111,10 @@ export const useEditDrug = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
