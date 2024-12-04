@@ -9,11 +9,11 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.complaints';
 
