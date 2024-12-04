@@ -15,15 +15,10 @@ export const initialQueries = {
   maxCount: 5,
 };
 
-export const initialQueryKey =
-  'admin.main-data.internalExamination';
+export const initialQueryKey = 'admin.main-data.internalExamination';
 
 export const getInternalExamination = async (queries) =>
-  (
-    await apiAdmin.get(
-      mainData.internalExamination.list(queries)
-    )
-  ).data;
+  (await apiAdmin.get(mainData.internalExamination.list(queries))).data;
 
 export const prefetchInternalExamination = async () => {
   const queryClient = new QueryClient();
@@ -79,8 +74,7 @@ export const DeleteInternalExamination = (id) => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -100,8 +94,7 @@ export const useCreateInternalExamination = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -122,8 +115,7 @@ export const useEditInternalExamination = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

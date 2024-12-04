@@ -15,15 +15,10 @@ export const initialQueries = {
   maxCount: 5,
 };
 
-export const initialQueryKey =
-  'admin.main-data.specialization';
+export const initialQueryKey = 'admin.main-data.specialization';
 
 export const getSpecialization = async (queries) =>
-  (
-    await apiAdmin.get(
-      mainData.specialization.list(queries)
-    )
-  ).data;
+  (await apiAdmin.get(mainData.specialization.list(queries))).data;
 
 export const prefetchSpecialization = async () => {
   const queryClient = new QueryClient();
@@ -78,8 +73,7 @@ export const DeleteSpecialization = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -100,8 +94,7 @@ export const useCreateSpecialization = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -123,8 +116,7 @@ export const useEditSpecialization = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

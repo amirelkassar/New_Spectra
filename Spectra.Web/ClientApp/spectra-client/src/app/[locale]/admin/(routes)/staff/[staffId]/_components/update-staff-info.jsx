@@ -147,7 +147,7 @@ const OtherInfoForm = ({ form }) => {
             size='sm'
             label='الوظيفة'
             name='jobName'
-            error={GetErrorMsg(form?.error, 'jobName')}
+            error={GetErrorMsg(form?.error, 'JobName')}
             onChange={form.onChange}
             value={form?.data?.jobName || ''}
             classNames={{

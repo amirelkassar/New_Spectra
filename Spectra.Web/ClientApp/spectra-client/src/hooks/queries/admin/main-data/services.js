@@ -18,8 +18,7 @@ export const initialQueries = {
 export const initialQueryKey = 'admin.main-data.services';
 
 export const getServices = async (queries) =>
-  (await apiAdmin.get(mainData.services.list(queries)))
-    .data;
+  (await apiAdmin.get(mainData.services.list(queries))).data;
 
 export const prefetchServices = async () => {
   const queryClient = new QueryClient();
@@ -62,11 +61,8 @@ export const useServicesForListing = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: async () => {
-      return (
-        await apiAdmin.get(
-          mainData.services.forListing(queries)
-        )
-      ).data;
+      return (await apiAdmin.get(mainData.services.forListing(queries)))
+        .data;
     },
   });
 };
@@ -97,8 +93,7 @@ export const useDeleteService = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -118,8 +113,7 @@ export const useAddNewService = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -140,8 +134,7 @@ export const useUpdateCurrentService = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

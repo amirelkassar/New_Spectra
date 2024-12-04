@@ -73,9 +73,7 @@ export const useStaffById = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await apiAdmin.get(
-        staff.actions.get(id)
-      );
+      const response = await apiAdmin.get(staff.actions.get(id));
       return response.data;
     },
   });
@@ -86,16 +84,15 @@ export const useDeleteStaff = (id) => {
 
   return useMutation({
     mutationFn: async () => {
-      const response = await apiAdmin.delete(
-        staff.actions.delete(id)
-      );
+      const response = await apiAdmin.delete(staff.actions.delete(id));
       return response.data;
     },
 
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+          query.queryKey[0] === initialQueryKey &&
+          query.queryKey[1] !== id,
       });
     },
   });
@@ -106,16 +103,12 @@ export const useAddStaff = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(
-        staff.actions.add,
-        data
-      );
+      const response = await apiAdmin.post(staff.actions.add, data);
       return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -127,16 +120,12 @@ export const useUpdateStaff = (id) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.put(
-        staff.actions.update(id),
-        data
-      );
+      const response = await apiAdmin.put(staff.actions.update(id), data);
       return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

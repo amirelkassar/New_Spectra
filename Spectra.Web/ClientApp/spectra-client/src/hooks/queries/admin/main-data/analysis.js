@@ -18,11 +18,7 @@ export const initialQueries = {
 export const initialQueryKey = 'admin.main-data.analysis';
 
 export const getAnalysis = async (queries) =>
-  (
-    await apiAdmin.get(
-      mainData.medicalTestsAndXray.list(queries)
-    )
-  ).data;
+  (await apiAdmin.get(mainData.medicalTestsAndXray.list(queries))).data;
 
 export const prefetchMedicalTests = async () => {
   const queryClient = new QueryClient();
@@ -77,8 +73,7 @@ export const DeleteMedicalTests = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -98,8 +93,7 @@ export const useCreateMedicalTests = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -120,8 +114,7 @@ export const useEditMedicalTests = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

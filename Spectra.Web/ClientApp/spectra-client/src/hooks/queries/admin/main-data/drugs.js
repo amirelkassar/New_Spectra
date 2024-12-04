@@ -50,9 +50,7 @@ export const GetDrugsID = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await apiAdmin.get(
-        mainData.drugs.actions.get(id)
-      );
+      const response = await apiAdmin.get(mainData.drugs.actions.get(id));
       return response.data;
     },
   });
@@ -71,8 +69,7 @@ export const DeleteDrugs = (id) => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -91,8 +88,7 @@ export const useCreateDrug = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -112,8 +108,7 @@ export const useEditDrug = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

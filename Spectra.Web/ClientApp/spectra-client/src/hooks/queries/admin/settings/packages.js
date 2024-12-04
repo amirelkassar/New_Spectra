@@ -18,8 +18,7 @@ export const initialQueries = {
 export const initialQueryKey = 'admin.settings.packages';
 
 export const getPackages = async (queries) =>
-  (await apiAdmin.get(settings.packages.list(queries)))
-    .data;
+  (await apiAdmin.get(settings.packages.list(queries))).data;
 
 export const prefetchPackages = async () => {
   const queryClient = new QueryClient();
@@ -32,9 +31,7 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = (
-  params = { pageNum: null, search: '' }
-) => {
+export const usePackages = (params = { pageNum: null, search: '' }) => {
   const queries = getQueries({ params, initialQueries });
 
   return useQuery({
@@ -69,8 +66,7 @@ export const useDeletePackage = (id) => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -89,8 +85,7 @@ export const useAddPackage = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -110,8 +105,7 @@ export const useUpdatePackage = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

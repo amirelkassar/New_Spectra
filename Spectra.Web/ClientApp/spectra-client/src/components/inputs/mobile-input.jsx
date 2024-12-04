@@ -33,7 +33,7 @@ const MobileInput = ({
           {label}
         </label>
       )}
-      <div dir='ltr' className={containerClassName}>
+      <div dir='ltr' className={cn('', containerClassName)}>
         <PhoneInput
           specialLabel=''
           country='sa'

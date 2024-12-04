@@ -15,12 +15,10 @@ export const initialQueries = {
   maxCount: 5,
 };
 
-export const initialQueryKey =
-  'admin.main-data.diagnostics';
+export const initialQueryKey = 'admin.main-data.diagnostics';
 
 export const getDiagnostics = async (queries) =>
-  (await apiAdmin.get(mainData.diagnose.list(queries)))
-    .data;
+  (await apiAdmin.get(mainData.diagnose.list(queries))).data;
 
 export const prefetchDiagnostics = async () => {
   const queryClient = new QueryClient();
@@ -75,8 +73,7 @@ export const DeleteDiagnostics = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -96,8 +93,7 @@ export const useCreateDiagnostics = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -118,8 +114,7 @@ export const useEditDiagnostics = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},

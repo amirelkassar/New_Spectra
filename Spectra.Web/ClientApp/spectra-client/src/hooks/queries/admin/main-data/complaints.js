@@ -18,8 +18,7 @@ export const initialQueries = {
 export const initialQueryKey = 'admin.main-data.complaints';
 
 export const getComplaints = async (queries) =>
-  (await apiAdmin.get(mainData.complaint.list(queries)))
-    .data;
+  (await apiAdmin.get(mainData.complaint.list(queries))).data;
 
 export const prefetchComplaints = async () => {
   const queryClient = new QueryClient();
@@ -74,8 +73,7 @@ export const DeleteComplaint = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
   });
@@ -96,8 +94,7 @@ export const useCreateComplaint = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
     onError: () => {},
@@ -119,8 +116,7 @@ export const useEditComplaint = (id) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === initialQueryKey,
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
     onError: () => {},
