@@ -100,7 +100,7 @@ const StaffTableFilter = ({
 }) => {
   return (
     <div className='flex flex-col mdl:flex-row gap-y-4 mdl:gap-x-6 mb-5'>
-      <FilterType>فلتر بالنوع :</FilterType>
+      <FilterType>فلتر بالنوع:</FilterType>
 
       <div className='flex *:flex-1 mdl:*:flex-none'>
         <FilterButton

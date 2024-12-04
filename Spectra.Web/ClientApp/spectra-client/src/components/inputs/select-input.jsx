@@ -19,10 +19,10 @@ const SelectInput = ({ ...props }) => {
       {...props}
       checkIconPosition={props.checkIconPosition || 'right'}
       allowDeselect={props.allowDeselect || false}
-      rightSection={<ArrowDownBlack />}
-      nothingFoundMessage={
-        props.nothingFoundMessage ?? '!No Data Found'
+      rightSection={
+        <ArrowDownBlack className={props?.size === 'sm' && 'size-3'} />
       }
+      nothingFoundMessage={props.nothingFoundMessage ?? '!No Data Found'}
       classNames={{
         ...props.classNames,
         input: cn(

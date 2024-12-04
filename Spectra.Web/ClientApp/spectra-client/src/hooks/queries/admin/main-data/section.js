@@ -9,11 +9,11 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.sections';
 
@@ -73,7 +73,9 @@ export const DeleteSection = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -92,7 +94,9 @@ export const useCreateSection = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -112,7 +116,9 @@ export const useEditSection = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

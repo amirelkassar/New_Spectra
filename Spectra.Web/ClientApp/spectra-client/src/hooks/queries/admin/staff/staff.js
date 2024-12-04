@@ -9,11 +9,11 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { staff } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.staff';
 
@@ -73,10 +73,8 @@ export const useStaffById = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await apiAdmin.get(
-        staff.actions.get(id)
-      );
-      return response;
+      const response = await apiAdmin.get(staff.actions.get(id));
+      return response.data;
     },
   });
 };
@@ -86,14 +84,16 @@ export const useDeleteStaff = (id) => {
 
   return useMutation({
     mutationFn: async () => {
-      const response = await apiAdmin.delete(
-        staff.actions.delete(id)
-      );
+      const response = await apiAdmin.delete(staff.actions.delete(id));
       return response.data;
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === initialQueryKey &&
+          query.queryKey[1] !== id,
+      });
     },
   });
 };
@@ -103,14 +103,13 @@ export const useAddStaff = () => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.post(
-        staff.actions.add,
-        data
-      );
+      const response = await apiAdmin.post(staff.actions.add, data);
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -121,14 +120,13 @@ export const useUpdateStaff = (id) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.put(
-        staff.actions.update(id),
-        data
-      );
+      const response = await apiAdmin.put(staff.actions.update(id), data);
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

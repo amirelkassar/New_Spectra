@@ -9,20 +9,16 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.analysis';
 
 export const getAnalysis = async (queries) =>
-  (
-    await apiAdmin.get(
-      mainData.medicalTestsAndXray.list(queries)
-    )
-  ).data;
+  (await apiAdmin.get(mainData.medicalTestsAndXray.list(queries))).data;
 
 export const prefetchMedicalTests = async () => {
   const queryClient = new QueryClient();
@@ -76,7 +72,9 @@ export const DeleteMedicalTests = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -94,7 +92,9 @@ export const useCreateMedicalTests = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -113,7 +113,9 @@ export const useEditMedicalTests = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

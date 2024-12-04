@@ -96,7 +96,7 @@ function StaffDetails() {
                 </h2>
                 <h3 className=' text-[12px] md:text-[16px]'>
                   {' '}
-                  {data?.data.data.diagnoses[0]}
+                  {/* {data?.data?.data?.diagnoses[0]} */}
                 </h3>
                 <h4 className=' text-[12px]'>
                   كود الحجز / الاحالة{' '}
