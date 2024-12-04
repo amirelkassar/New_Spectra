@@ -62,7 +62,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
 
         [HttpPut]
         [Authorize(AdminEmployeesPermissions.Update)]
-        public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeDto input)
+        public async Task<IActionResult> UpdateAsync([FromForm] UpdateEmployeeDto input)
         {
             var response = await _employeeService.UpdateEmployeeAsync(input);
             return Accepted("", response);
