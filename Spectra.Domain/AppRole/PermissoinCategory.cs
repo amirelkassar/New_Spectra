@@ -9,9 +9,11 @@ namespace Spectra.Domain.AppRole
 {
     public class PermissoinCategory : BaseEntity<string>
     {
-        public PermissoinCategory()
+        public PermissoinCategory(string id)
         {
             Permissions = [];
+            Id = id;
+            LogicalName = $"spectra_per_group_cat_{DateTime.UtcNow.ToFileTimeUtc()}";
         }
         public string EnName { get; set; }
         public string ArName { get; set; }

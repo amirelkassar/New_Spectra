@@ -4,29 +4,47 @@
     {
         public RolePermissionReadDto()
         {
-            PermissionGroups = [];
+            Groups = [];
         }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public ICollection<PermissionGroup> PermissionGroups { get; set; }
+        public ICollection<PermissionGroupReadDto> Groups { get; set; }
     }
 
-    public class PermissionGroup
+    public class PermissionGroupReadDto
     {
-        public PermissionGroup()
+        public PermissionGroupReadDto()
         {
-            PermissionCategories = [];
+            Categories = [];
         }
-        public string Name { get; set; }
-        public ICollection<PermissionCategory> PermissionCategories { get; set; }
+        public string Id { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+        public ICollection<PermissionCategoryReadDto> Categories { get; set; }
     }
 
-    public class PermissionCategory
+    public class PermissionCategoryReadDto
     {
-        public PermissionCategory()
+        public PermissionCategoryReadDto()
         {
             Permissions = [];
         }
-        public string Name { get; set; }
-        public ICollection<string> Permissions { get; set; }
+        public string Id { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+        public ICollection<PermissionReadDto> Permissions { get; set; }
+    }
+
+    public class PermissionReadDto
+    {
+        public PermissionReadDto()
+        {
+            Grant = true;
+        }
+        public string Id { get; set; }
+        public string EnName { get; set; }
+        public string ArName { get; set; }
+        public bool Grant { get; set; }
+
     }
 }
