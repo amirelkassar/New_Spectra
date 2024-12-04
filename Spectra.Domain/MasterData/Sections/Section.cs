@@ -15,23 +15,20 @@ namespace Spectra.Domain.MasterData.Sections
         protected Section() { }
         private Section(string id,
        string enName,
-       string arName,
-        ICollection<SectionSpecsification> specsifications) : base(id)
+       string arName) : base(id)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(enName, nameof(enName));
             ArgumentNullException.ThrowIfNull(arName, nameof(arName));
-            ArgumentNullException.ThrowIfNull(specsifications, nameof(specsifications));
             EnName = enName;
             ArName = arName;
-            Specsifications = specsifications;
+            Specsifications = [];
         }
         public static Section Create(string id,
        string enName,
-       string arName,
-        ICollection<SectionSpecsification> specsifications)
+       string arName)
         {
-            return new Section(id, enName, arName, specsifications);
+            return new Section(id, enName, arName);
         }
 
     }
