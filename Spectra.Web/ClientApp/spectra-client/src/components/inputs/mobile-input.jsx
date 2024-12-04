@@ -39,7 +39,7 @@ const MobileInput = ({
             type: 'text',
             required: true,
             className: cn(
-              '!ps-14 pe-[14px] w-full rounded-lg outline-none focus:border-greenMain border border-[#ced4da] h-[42px]',
+              '!ps-14 pe-[14px] w-full bg-white rounded-lg outline-none focus:border-greenMain border border-[#ced4da] h-[42px]',
               {
                 'h-[50px]': size === 'lg',
               },
