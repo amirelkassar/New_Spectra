@@ -14,6 +14,8 @@ const MobileInput = ({
   size = 'md',
   label = 'رقم الهاتف',
   inputClassName = '',
+  labelClassName = '',
+  containerClassName = '',
   className = '',
   error = '',
   ...props
@@ -23,12 +25,15 @@ const MobileInput = ({
       {label && (
         <label
           htmlFor='phone2'
-          className='text-base mdl:text-xl mb-2 ps-1 font-normal'
+          className={cn(
+            'text-base mdl:text-xl mb-2 ps-1 font-normal',
+            labelClassName
+          )}
         >
           {label}
         </label>
       )}
-      <div dir='ltr'>
+      <div dir='ltr' className={containerClassName}>
         <PhoneInput
           specialLabel=''
           country='sa'
@@ -43,6 +48,7 @@ const MobileInput = ({
               {
                 'h-[50px]': size === 'lg',
               },
+              size === 'sm' && 'h-[36px]',
               inputClassName
             ),
             placeholder: '',
@@ -51,11 +57,7 @@ const MobileInput = ({
           {...props}
         />
       </div>
-      {error && (
-        <p className='text-xs mdl:text-base text-red'>
-          {error}
-        </p>
-      )}
+      {error && <p className='text-xs mdl:text-base text-red'>{error}</p>}
     </div>
   );
 };

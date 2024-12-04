@@ -76,7 +76,7 @@ export const useStaffById = (id) => {
       const response = await apiAdmin.get(
         staff.actions.get(id)
       );
-      return response;
+      return response.data;
     },
   });
 };
