@@ -6,16 +6,16 @@ import '@mantine/dates/styles.css';
 import '@mantine/dropzone/styles.css';
 import 'react-phone-input-2/lib/material.css';
 import '@mantine/carousel/styles.css';
-import { MantineProvider } from '@mantine/core';
 import './globals.css';
+import { Toaster } from 'react-hot-toast';
+import { MantineProvider } from '@mantine/core';
 import { NextIntlClientProvider } from 'next-intl';
+import { TokenProvider } from '@/hooks/use-token';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactQueryConfig from '@/config/react-query-config';
 import ConfirmModal from '@/components/modal/confirm-modal';
-import { Toaster } from 'react-hot-toast';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { getToken } from '@/lib/token';
 import { getMessages } from 'next-intl/server';
-import { TokenProvider } from '@/hooks/use-token';
 
 export const metadata = {
   title: 'Spectra App',
@@ -35,13 +35,13 @@ export default async function RootLayout({
       lang={params.locale}
       dir={params.locale === 'ar' ? 'rtl' : 'ltr'}
     >
-      <body className='text-black'>
+      <body className='text-black bg-white'>
         <NextIntlClientProvider
           locale={params.locale}
           messages={messages}
         >
           <TokenProvider value={token}>
-            <MantineProvider theme={'light'}>
+            <MantineProvider>
               <ReactQueryConfig>
                 {children}
                 <Toaster />

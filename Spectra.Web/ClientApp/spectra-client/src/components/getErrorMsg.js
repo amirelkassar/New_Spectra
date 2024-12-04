@@ -15,9 +15,7 @@ const GetErrorMsg = (error, title) => {
   if (!Object?.keys(messages)?.length) return '';
 
   if (title === 'general') {
-    const generalError = generalErrorKeys.find(
-      (key) => messages[key]
-    );
+    const generalError = generalErrorKeys.find((key) => messages[key]);
     return messages[generalError]?.join(', ');
   }
 

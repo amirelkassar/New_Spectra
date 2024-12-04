@@ -9,17 +9,16 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { settings } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 10,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.settings.packages';
 
 export const getPackages = async (queries) =>
-  (await apiAdmin.get(settings.packages.list(queries)))
-    .data;
+  (await apiAdmin.get(settings.packages.list(queries))).data;
 
 export const prefetchPackages = async () => {
   const queryClient = new QueryClient();
@@ -32,9 +31,7 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = (
-  params = { pageNum: null, search: '' }
-) => {
+export const usePackages = (params = { pageNum: null, search: '' }) => {
   const queries = getQueries({ params, initialQueries });
 
   return useQuery({
@@ -68,7 +65,9 @@ export const useDeletePackage = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -85,7 +84,9 @@ export const useAddPackage = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -103,7 +104,9 @@ export const useUpdatePackage = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });
