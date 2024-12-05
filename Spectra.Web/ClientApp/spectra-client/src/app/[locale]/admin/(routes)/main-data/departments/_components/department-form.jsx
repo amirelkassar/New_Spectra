@@ -40,6 +40,9 @@ export const DepartmentForm = ({
         defaultValue={data?.specsifications}
         onSelect={onChange}
         error={GetErrorMsg(error, 'Diagnoses')}
+        classNames={{
+          input: 'border-greenMain',
+        }}
       />
 
       <DepartmentHeadSelect
