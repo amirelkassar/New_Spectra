@@ -35,7 +35,8 @@ export const useUpdateStaff = ({ initialValues = {} }) => {
       }));
 
       if (isError) reset();
-      if (!!Object.keys(validationErrors)?.length) setValidationErrors({});
+      if (!!Object.keys(validationErrors)?.length)
+        setValidationErrors({});
     },
     [isError, reset, validationErrors]
   );
@@ -58,7 +59,7 @@ export const useUpdateStaff = ({ initialValues = {} }) => {
         success: 'تم تعديل الموظف بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
-            router.replace(ROUTES.ADMIN.STAFF.STAFFID(staffId));
+            router.replace(ROUTES.ADMIN.STAFF.STAFF_ID(staffId));
         },
       });
     },

@@ -26,7 +26,7 @@ const MobileInput = ({
         <label
           htmlFor='phone2'
           className={cn(
-            'text-base mdl:text-xl mb-2 ps-1 font-normal',
+            'text-base mdl:text-xl mb-2 ps-1 font-medium',
             labelClassName
           )}
         >
@@ -57,7 +57,9 @@ const MobileInput = ({
           {...props}
         />
       </div>
-      {error && <p className='text-xs mdl:text-base text-red'>{error}</p>}
+      {error && (
+        <p className='text-xs mdl:text-base text-red'>{error}</p>
+      )}
     </div>
   );
 };

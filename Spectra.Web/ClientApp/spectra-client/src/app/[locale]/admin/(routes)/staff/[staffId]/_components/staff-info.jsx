@@ -45,6 +45,11 @@ const MainInfo = ({
 }) => {
   const src = useImagePath(userImage);
 
+  const name = (() => {
+    if (!firstName || !lastName) return '';
+    return `${firstName} ${lastName}`;
+  })();
+
   return (
     <Card className='space-y-10'>
       {/* HEADER */}
@@ -67,7 +72,7 @@ const MainInfo = ({
         />
 
         <div className='flex flex-col gap-3 justify-around'>
-          <InfoData label='الاسم' value={firstName + ' ' + lastName} />
+          <InfoData label='الاسم' value={name} />
           <InfoData label='رقم الهاتف' value={phoneNumber} />
           <InfoData label='البريد الإلكتروني' value={emailaddress} />
           <InfoData label='رقم الهوية' value={nationalId} />
@@ -110,7 +115,10 @@ const OtherInfo = ({
           <InfoData label='سنوات الخبرة' value={experienceYears} />
           <InfoData label='ساعات العمل' value={workingHours} />
           <InfoData label='النوع' value={gender} />
-          <InfoData label='تاريخ الانضمام' value={joinData.fullYear} />
+          <InfoData
+            label='تاريخ الانضمام'
+            value={joinData.fullYear}
+          />
         </div>
 
         <div className='space-y-5'>

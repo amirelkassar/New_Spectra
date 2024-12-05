@@ -1,10 +1,10 @@
 'use client';
 
-import { UseMainDataAside } from '../_hooks/use-main-data-aside';
+import { UseMedicalProviderAside } from '../../_hooks/use-medical-provider-aside';
 import { AsideCard } from '@/components/aside-card';
 
-const MainDataAside = () => {
-  const { items } = UseMainDataAside();
+export const MedicalProviderAside = () => {
+  const { items } = UseMedicalProviderAside();
 
   return (
     <AsideCard>
@@ -22,5 +22,3 @@ const MainDataAside = () => {
     </AsideCard>
   );
 };
-
-export default MainDataAside;

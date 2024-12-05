@@ -23,9 +23,7 @@ export const Pagination = ({
 
   const updatePage = (newPage) => {
     if (typeof window === undefined) return;
-    const searchParams = new URLSearchParams(
-      window.location.search
-    );
+    const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('page', newPage.toString());
     router.replace(`?${searchParams.toString()}`);
   };
@@ -37,7 +35,7 @@ export const Pagination = ({
         onClick={() => updatePage(currentPage + 1)}
         disabled={currentPage === totalPages || disabled}
       >
-        <ArrowLeft className='rotate-180' />
+        <ArrowLeft className='rotate-180 size-3 mdl:size-5' />
         التالي
       </Button>
 
@@ -49,10 +47,9 @@ export const Pagination = ({
           total={totalPages}
           dir='ltr'
           classNames={{
-            control:
-              '!bg-white hover:!bg-black/5 !transition',
+            control: '!bg-white hover:!bg-black/5 !transition',
           }}
-          size='sm'
+          size='xs'
           radius='xl'
           withControls={false}
           value={currentPage}
@@ -65,7 +62,7 @@ export const Pagination = ({
         onClick={() => updatePage(currentPage - 1)}
         disabled={currentPage === 1 || disabled}
       >
-        <ArrowLeft />
+        <ArrowLeft className='size-3 mdl:size-5' />
         السابق
       </Button>
     </div>
