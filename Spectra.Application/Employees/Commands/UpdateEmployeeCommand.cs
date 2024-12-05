@@ -83,7 +83,8 @@ namespace Spectra.Application.Employees.Commands
 
             if (request.UserImage is not null && request.UserImage.Length > 0)
             {
-                var imagePath = await _documentHellper.CreateAttachment(request.UserImage, Pathes.GetUsersPath());
+                var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
+                var imagePath = await _documentHellper.CreateAttachment(request.UserImage, folderPath);
                 await _identityService.UpdateUserImageAsync(employee.UserId, imagePath);
             }
 

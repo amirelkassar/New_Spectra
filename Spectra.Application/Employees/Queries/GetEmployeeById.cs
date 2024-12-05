@@ -43,7 +43,7 @@ namespace Spectra.Application.Employees.Queries
                 }
 
                 var dto = medicalProvider.Adapt<EmployeeByIdDto>(EmployeeByIdDto.GetConfiguration());
-                var user = await _identityService.FindByIdAsync(dto.Id);
+                var user = await _identityService.FindByIdAsync(dto.UserId);
                 foreach (var attachment in dto.Attachments)
                 {
                     if (attachment.Path is not null)
