@@ -103,11 +103,11 @@ const DoctorInfo = ({
           readOnly
           defaultValue={rate / 2}
         />
-      </div>
-      <div className='flex gap-5 items-center *:shrink-0 w-full justify-around'>
-        <ContactButton type='chat' />
-        <ContactButton type='email' />
-        <ContactButton type='phone' />
+        <div className='flex gap-5 items-center *:shrink-0 w-full justify-around'>
+          <ContactButton type='chat' />
+          <ContactButton type='email' />
+          <ContactButton type='phone' />
+        </div>
       </div>
     </div>
   );
