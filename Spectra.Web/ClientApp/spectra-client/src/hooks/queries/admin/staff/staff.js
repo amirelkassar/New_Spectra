@@ -13,7 +13,8 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.staff';
 
@@ -84,7 +85,9 @@ export const useDeleteStaff = (id) => {
 
   return useMutation({
     mutationFn: async () => {
-      const response = await apiAdmin.delete(staff.actions.delete(id));
+      const response = await apiAdmin.delete(
+        staff.actions.delete(id)
+      );
       return response.data;
     },
 
@@ -120,7 +123,10 @@ export const useUpdateStaff = (id) => {
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await apiAdmin.put(staff.actions.update(id), data);
+      const response = await apiAdmin.put(
+        staff.actions.update(id),
+        data
+      );
       return response.data;
     },
     onSuccess: () => {
@@ -129,5 +135,83 @@ export const useUpdateStaff = (id) => {
       });
     },
     onError: () => {},
+  });
+};
+
+export const useUpdateMedicalData = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await apiAdmin.put(
+        staff.actions.updateMedicalData(data?.id),
+        data
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
+    },
+    onError: () => {},
+  });
+};
+
+export const useAddAttachment = (empId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await apiAdmin.post(
+        staff.actions.addAttachment,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, empId],
+      });
+    },
+    onError: () => {},
+  });
+};
+
+export const useDeleteAttachment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ fileId, employeeId }) => {
+      const response = await apiAdmin.delete(
+        staff.actions.deleteAttachment(fileId, employeeId)
+      );
+      return response.data;
+    },
+    onSuccess: (_, { employeeId }) => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, employeeId],
+      });
+    },
+    onError: () => {},
+  });
+};
+
+export const useUpdateAttachment = (fileId, employeeId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await apiAdmin.put(
+        staff.actions.updateAttachment(fileId),
+        data
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, employeeId],
+      });
+    },
   });
 };

@@ -20,9 +20,11 @@ const SelectInput = ({ ...props }) => {
       checkIconPosition={props.checkIconPosition || 'right'}
       allowDeselect={props.allowDeselect || false}
       rightSection={
-        <ArrowDownBlack className={props?.size === 'sm' && 'size-3'} />
+        <ArrowDownBlack className='group-data-[size=sm]:size-3' />
       }
-      nothingFoundMessage={props.nothingFoundMessage ?? '!No Data Found'}
+      nothingFoundMessage={
+        props.nothingFoundMessage ?? '!No Data Found'
+      }
       classNames={{
         ...props.classNames,
         input: cn(
@@ -37,6 +39,7 @@ const SelectInput = ({ ...props }) => {
           'peer-data-[expanded=true]:rotate-180 transition-transform',
           props.classNames?.section
         ),
+        wrapper: cn('group', props.classNames?.wrapper),
       }}
     />
   );

@@ -27,7 +27,9 @@ const MultiSelectInput = ({
       label={label}
       data={data}
       checkIconPosition={props.checkIconPosition || 'right'}
-      rightSection={<ArrowDownBlack />}
+      rightSection={
+        <ArrowDownBlack className='group-data-[size=sm]:size-3' />
+      }
       nothingFoundMessage={
         props.nothingFoundMessage ?? '!No Data Found'
       }
@@ -54,6 +56,7 @@ const MultiSelectInput = ({
           'peer-data-[expanded=true]:rotate-180 transition-transform',
           props.classNames?.section
         ),
+        wrapper: cn('group', props.classNames?.wrapper),
       }}
     />
   );

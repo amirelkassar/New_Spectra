@@ -34,7 +34,7 @@ export const MedicalProviderMainInfo = ({ data }) => {
         <H1>{title}</H1>
       </div>
 
-      <div className='flex flex-col lg:flex-row gap-5'>
+      <div className='flex flex-col lg:flex-row lg:justify-between gap-5'>
         <DoctorInfo {...data} />
 
         {/* <Services services={data?.services} /> */}
@@ -46,9 +46,10 @@ export const MedicalProviderMainInfo = ({ data }) => {
 };
 
 const DoctorInfo = ({
+  prefix = '',
   firstName = '',
   lastName = '',
-  useImage = '',
+  userImage = '',
   mainSpecializationArName = '',
   mainSpecializationEnName = '',
   emailaddress = '',
@@ -56,7 +57,7 @@ const DoctorInfo = ({
   reservationCode = 'DR-AHMED-2024',
   clientsCount = '0',
 }) => {
-  const src = useImagePath(useImage);
+  const src = useImagePath(userImage);
 
   const locale = useLocale();
 
@@ -64,6 +65,10 @@ const DoctorInfo = ({
     locale === 'ar'
       ? mainSpecializationArName
       : mainSpecializationEnName;
+
+  const name = prefix
+    ? `${prefix}/ ${firstName} ${lastName}`
+    : `${firstName} ${lastName}`;
 
   return (
     <div className='flex flex-wrap items-center gap-x-10 gap-y-5'>
@@ -75,7 +80,7 @@ const DoctorInfo = ({
       />
 
       <div className='flex flex-col gap-1 justify-around shrink-0'>
-        <h4 className='font-bold text-sm mdl:text-base'>{`${firstName} ${lastName}`}</h4>
+        <h4 className='font-bold text-sm mdl:text-base'>{name}</h4>
 
         <p className='text-xs mdl:text-base'>{mainSpecialization}</p>
 

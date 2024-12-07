@@ -11,6 +11,7 @@ import { EditButton } from '@/components/buttons/edit-button';
 import { SectionTitle } from '@/components/dashboard/ui/section-title';
 import { EmployeeCellActions } from '../../_components/employee-cell-actions';
 import { UpdateMedicalProviderInfo } from './update-medical-provider-info';
+import { Certificate } from '@/components/team/certificate';
 
 import Card from '@/components/card';
 import Button from '@/components/button';
@@ -21,7 +22,6 @@ import HourglassIcon from '@/assets/icons/Hourglass';
 import LicenseIcon from '@/assets/icons/License';
 import QualificationsIcon from '@/assets/icons/qualifications';
 import CheckHeartIcon from '@/assets/icons/check-heart';
-import Image from 'next/image';
 import ADHD from '@/assets/icons/adhd';
 
 export const MedicalProviderInfo = ({ data }) => {
@@ -36,11 +36,11 @@ export const MedicalProviderInfo = ({ data }) => {
     <div className='flex-1 space-y-5'>
       <PesonalInfo data={data} />
       <CareerInfo data={data} />
-      <Specializations data={data?.specializations} />
+      <Specializations {...data} />
       {/* <Services data={data?.services} /> */}
       <Certifications />
       <EditButton
-        onClick={() => router.replace('?edit=true')}
+        onClick={() => router.push('?edit=true')}
         className='bg-white border-2 border-black text-black w-full mdl:max-w-xs font-bold transition hover:border-greenMain'
       >
         تعديل
@@ -69,6 +69,14 @@ const PesonalInfo = ({ data }) => {
         </Card>
         <Card>
           <InfoData label='النوع' value={gender} direction='col' />
+        </Card>
+
+        <Card>
+          <InfoData
+            label='الوظيفة'
+            value={data?.jobName}
+            direction='col'
+          />
         </Card>
 
         <Card>
@@ -230,25 +238,56 @@ const CareerInfo = ({ data }) => {
   );
 };
 
-const Specializations = ({ data = [] }) => {
+const Specializations = ({
+  specializations = [],
+  mainSpecializationArName = '',
+  mainSpecializationEnName = '',
+  sectionArEnName = '',
+  sectionEnName = '',
+}) => {
   const locale = useLocale();
 
   const key = locale === 'ar' ? 'arName' : 'enName';
 
+  const mainSpecialization =
+    locale === 'ar'
+      ? mainSpecializationArName
+      : mainSpecializationEnName;
+
+  const section = locale === 'ar' ? sectionArEnName : sectionEnName;
+
   return (
-    <Card
-      className='space-y-5'
-      titleId='specializations'
-      title={
-        <div className='flex items-center gap-3'>
-          <CheckHeartIcon className='size-5 mdl:size-7' />
+    <Card className='space-y-5'>
+      <div className='flex items-start gap-3'>
+        <CheckHeartIcon className='size-5 mdl:size-7' />
+        <InfoData
+          direction='col'
+          weight='reverse'
+          label='القسم'
+          value={section}
+        />
+      </div>
+
+      <div className='flex items-start gap-3'>
+        <CheckHeartIcon className='size-5 mdl:size-7' />
+        <InfoData
+          direction='col'
+          weight='reverse'
+          label='التخصص الرئيسي'
+          value={mainSpecialization}
+        />
+      </div>
+
+      <div className='flex items-start gap-3'>
+        <CheckHeartIcon className='size-5 mdl:size-7' />
+        <h4 className='font-bold text-xs mdl:text-base'>
           التخصصات الفرعية
-        </div>
-      }
-    >
-      {!!data.length ? (
+        </h4>
+      </div>
+
+      {!!specializations.length ? (
         <div className='flex flex-wrap gap-3'>
-          {data.map((item) => (
+          {specializations.map((item) => (
             <Button
               key={item?.id}
               variant='blueLight'
@@ -318,33 +357,5 @@ const Certifications = ({ data = [] }) => {
         ))}
       </div>
     </div>
-  );
-};
-
-const Certificate = ({ name = '', image = '', date = '' }) => {
-  const { fullYear } = useDate(date);
-
-  return (
-    <Card className='flex-none !p-2 mdl:!p-3 space-y-3' size='sm'>
-      <div className='relative rounded-lg overflow-hidden w-36 h-28 mdl:w-56 mdl:h-44'>
-        <Image
-          src={image}
-          alt={name}
-          priority={false}
-          fill
-          sizes='width: 230px; height: 180px;'
-          className='w-full h-full object-center object-cover'
-        />
-      </div>
-
-      <div className='max-w-36 mdl:max-w-56'>
-        <h5 className='text-xs mdl:text-base font-bold inline-block me-2'>
-          {name}
-        </h5>
-        <p className='text-xs mdl:text-base text-grayDark text-end'>
-          {fullYear}
-        </p>
-      </div>
-    </Card>
   );
 };

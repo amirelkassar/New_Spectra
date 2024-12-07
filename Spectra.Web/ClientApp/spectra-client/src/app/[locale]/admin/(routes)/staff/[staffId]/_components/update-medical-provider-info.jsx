@@ -1,7 +1,8 @@
 'use client';
 
+import { memo, useState } from 'react';
+
 import Card from '@/components/card';
-import { useUpdateStaff } from '../../_hooks/use-update-staff';
 import TextInput from '@/components/inputs/text-input';
 import GetErrorMsg from '@/components/getErrorMsg';
 import MobileInput from '@/components/inputs/mobile-input';
@@ -18,15 +19,27 @@ import { SectionTitle } from '@/components/dashboard/ui/section-title';
 import { SpecializationMultiSelect } from '@/admin/_components/ui/specialization-multi-select';
 import PasswordInput from '@/components/inputs/password-input';
 import Button from '@/components/button';
+import EditImgIcon from '@/assets/icons/editImg';
+import CloseIcon from '@/assets/icons/close';
+import Avatar from '@/components/avatar';
+import { useImagePath } from '@/hooks/use-image-path';
+import { SpecializationSingleSelect } from '@/app/[locale]/admin/_components/ui/specialization-single-select';
+import { useUpdateMedicalProvider } from '../../_hooks/use-update-medical-provider';
+import { AddButton } from '@/components/buttons/add-button';
+import { Certificate } from '@/components/team/certificate';
+import { AttachmentModal } from '@/components/modal/attachment-modal';
+import { useAddAttachment } from '@/app/[locale]/admin/_hooks/attachments/use-add-attachment';
+import { useAttachmentMenuActions } from '@/app/[locale]/admin/_hooks/attachments/use-attachment-menu-actions';
 
 export const UpdateMedicalProviderInfo = ({ initialValues }) => {
-  const [form] = useUpdateStaff({ initialValues });
+  const [form] = useUpdateMedicalProvider({ initialValues });
 
   return (
     <form onSubmit={form.onSubmit} className='flex-1 space-y-5'>
       <UpdatePesonalInfo form={form} />
       <UpdateCareerInfo form={form} />
-      {/* <Specializations form={form} /> */}
+      <Specializations form={form} />
+      <UpdateCertifications initialValues={initialValues} />
       <PasswordForm form={form} />
 
       <Button
@@ -44,6 +57,8 @@ export const UpdateMedicalProviderInfo = ({ initialValues }) => {
 const UpdatePesonalInfo = ({ form }) => {
   return (
     <Card title='تعديل البيانات' className='space-y-5'>
+      <ImageUploader form={form} />
+
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
         <TextInput
           size='sm'
@@ -70,6 +85,15 @@ const UpdatePesonalInfo = ({ form }) => {
           error={GetErrorMsg(form?.error, 'Prefix')}
           onChange={form.onChange}
           value={form?.data?.prefix || ''}
+        />
+
+        <TextInput
+          size='sm'
+          label='الوظيفة'
+          name='jobName'
+          error={GetErrorMsg(form?.error, 'JobName')}
+          onChange={form.onChange}
+          value={form?.data?.jobName || ''}
         />
 
         <TextInput
@@ -279,27 +303,43 @@ const UpdateCareerInfo = ({ form }) => {
   );
 };
 
-// const Specializations = ({ form }) => {
-//   return (
-//     <Card
-//       className='space-y-5'
-//       titleId='specializations'
-//       title={
-//         <div className='flex items-center gap-3'>
-//           <CheckHeartIcon className='size-5 mdl:size-7' />
-//           التخصصات الفرعية
-//         </div>
-//       }
-//     >
-//       <SpecializationMultiSelect
-//         name='specializations'
-//         error={GetErrorMsg(form?.error, 'Specializations')}
-//         onSelect={form?.onChange}
-//         defaultValue={form?.data?.specializations}
-//       />
-//     </Card>
-//   );
-// };
+const Specializations = ({ form }) => {
+  return (
+    <Card className='space-y-5'>
+      <div className='flex gap-5'>
+        <CheckHeartIcon className='size-5 mdl:size-7' />
+        <SpecializationSingleSelect
+          size='sm'
+          label='التخصص الرئيسي'
+          name='mainSpecializationId'
+          error={GetErrorMsg(form?.error, 'MainSpecializationId')}
+          onChange={form?.onChange}
+          value={form?.data?.mainSpecializationId}
+          classNames={{
+            label: 'text-base mdl:text-xl mb-2 ps-1',
+          }}
+          className='flex-1'
+        />
+      </div>
+
+      <div className='flex gap-5'>
+        <CheckHeartIcon className='size-5 mdl:size-7' />
+        <SpecializationMultiSelect
+          size='sm'
+          label='التخصصات الفرعية'
+          name='specializations'
+          error={GetErrorMsg(form?.error, 'Specializations')}
+          onSelect={form?.onChange}
+          defaultValue={form?.data?.specializations}
+          classNames={{
+            label: 'text-base mdl:text-xl mb-2 ps-1',
+          }}
+          className='flex-1'
+        />
+      </div>
+    </Card>
+  );
+};
 
 const PasswordForm = ({ form }) => {
   return (
@@ -329,3 +369,123 @@ const PasswordForm = ({ form }) => {
     </Card>
   );
 };
+
+const ImageUploader = ({ form }) => {
+  const [image, setImage] = useState('');
+
+  const src = useImagePath(form?.data?.userImage);
+
+  return (
+    <div className='relative w-fit mx-auto !mb-10'>
+      <Avatar
+        src={image || src}
+        name={form?.data?.emailaddress}
+        className='size-28 mdl:size-36 rounded-full'
+        radius='lg'
+      />
+
+      <label htmlFor='avatar'>
+        <input
+          className='hidden'
+          type='file'
+          accept='image/*'
+          id='avatar'
+          onChange={(e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const url = URL.createObjectURL(file);
+            setImage(url);
+            form?.onChange({
+              target: {
+                name: 'userImage',
+                value: file,
+              },
+            });
+          }}
+        />
+
+        {/* EDIT ICON */}
+        <div
+          role='button'
+          className='absolute bottom-0 start-1/2 translate-x-1/2 ltr:-translate-x-1/2 translate-y-1/4 bg-greenMain rounded-full size-8 flex items-center justify-center'
+        >
+          <EditImgIcon className='size-4 text-white' />
+        </div>
+      </label>
+
+      {/* DELETE ICON */}
+      {(image || src) && (
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            form?.onChange({
+              target: {
+                value: undefined,
+                name: 'userImage',
+              },
+            });
+            setImage('');
+          }}
+          role='button'
+          className='absolute duration-200 hover:shadow-md top-1 start-1 bg-white rounded-full size-5 overflow-hidden'
+        >
+          <CloseIcon className='size-5' />
+        </div>
+      )}
+    </div>
+  );
+};
+
+const UpdateCertifications = memo(({ initialValues }) => {
+  const { isPending, onSubmit, isSuccess, error } = useAddAttachment({
+    empId: initialValues?.id,
+    type: '3', // for certifications
+  });
+
+  const actions = useAttachmentMenuActions({
+    employeeId: initialValues?.id,
+  });
+
+  return (
+    <Card className='space-y-5'>
+      <div className='flex items-center gap-5'>
+        <SectionTitle>الشهادات</SectionTitle>
+
+        <AttachmentModal
+          error={error}
+          isPending={isPending}
+          isSuccess={isSuccess}
+          onSubmit={onSubmit}
+          title='أضافة شهادة'
+        >
+          <AddButton>أضافة شهادة</AddButton>
+        </AttachmentModal>
+      </div>
+
+      {/* <Certificate
+        name={'شهادة طبية'}
+        image={'/demo-certificate.png'}
+        date={'2022-03-01'}
+        id='123'
+        isEdit
+        actions={actions}
+      /> */}
+
+      {/* {!!data.length ?? (
+        <div className='flex flex-wrap gap-5'>
+          {data?.map((item, index) => (
+            <Certificate
+              key={index}
+              name={item?.name}
+              image={item?.image}
+              date={item?.date}
+            />
+          ))}
+        </div>
+      )} */}
+    </Card>
+  );
+});
+
+UpdateCertifications.displayName = 'UpdateCertifications';

@@ -9,12 +9,12 @@ export const staff = {
   actions: {
     add: '/employees',
     addAttachment: '/employees/attachment',
-    updateAttachment: (id) =>
-      `/employees/attachment?id=${id}`,
-    deleteAttachment: (id) =>
-      `/employees/attachment?id=${id}`,
+    updateAttachment: (id) => `/employees/attachment?id=${id}`,
+    deleteAttachment: (fileId, employeeId) =>
+      `/employees/attachment?fileId=${fileId}&employeeId=${employeeId}`,
     get: (id) => `/employees?id=${id}`,
     delete: (id) => `/employees?id=${id}`,
     update: (id) => `/employees?id=${id}`,
+    updateMedicalData: (id) => `/employees/medical-data?id=${id}`,
   },
 };

@@ -1,4 +1,4 @@
-const ExportIcon = ({ strokeWidth = 2, ...props }) => {
+const Download = ({ ...props }) => {
   return (
     <svg
       width={20}
@@ -9,23 +9,23 @@ const ExportIcon = ({ strokeWidth = 2, ...props }) => {
       {...props}
     >
       <path
-        d='M18.0526 11.4209C18.0526 14.263 16.1579 18.9998 9.5263 18.9998C2.89473 18.9998 1 14.263 1 11.4209'
+        d='M1.00014 8.5791C1.00014 5.737 2.89487 1.00017 9.52644 1.00017C16.158 1.00017 18.0527 5.737 18.0527 8.5791'
         stroke='currentColor'
-        strokeWidth={strokeWidth}
+        strokeWidth={2}
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
-        d='M9.5293 1.04785V14.2634'
+        d='M9.52344 18.9521L9.52344 5.73662'
         stroke='currentColor'
-        strokeWidth={strokeWidth}
+        strokeWidth={2}
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
-        d='M3.8418 6.6842L9.526 1L15.2102 6.6842'
+        d='M15.2109 13.3158L9.52674 19L3.84254 13.3158'
         stroke='currentColor'
-        strokeWidth={strokeWidth}
+        strokeWidth={2}
         strokeLinecap='round'
         strokeLinejoin='round'
       />
@@ -33,4 +33,4 @@ const ExportIcon = ({ strokeWidth = 2, ...props }) => {
   );
 };
 
-export default ExportIcon;
+export default Download;

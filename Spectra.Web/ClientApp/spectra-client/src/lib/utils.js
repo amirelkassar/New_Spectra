@@ -10,6 +10,7 @@ export function cn(...inputs) {
 }
 
 export function formatCurrency(amount, currency = '$') {
+  if (!amount) return '--';
   const formattedAmount = amount.toLocaleString();
 
   return `${formattedAmount} ${currency.toUpperCase()}`;
@@ -25,10 +26,7 @@ export function formatDate(date) {
     month: 'short',
     day: 'numeric',
   };
-  return new Date(date).toLocaleDateString(
-    'en-US',
-    options
-  );
+  return new Date(date).toLocaleDateString('en-US', options);
 }
 
 export function getDate(date = '', locale = 'en') {
@@ -40,9 +38,7 @@ export function getDate(date = '', locale = 'en') {
       timeFromNow: '',
     };
 
-  const fullYear = dayjs(date)
-    .locale(locale)
-    .format('YYYY/MM/DD');
+  const fullYear = dayjs(date).locale(locale).format('YYYY/MM/DD');
   const time = dayjs(date).locale(locale).format('hh:mm A');
   const fullYearWithMonthName = dayjs(date)
     .locale(locale)
@@ -78,11 +74,7 @@ export function calculateAgeInMonths(birthDate) {
   return months;
 }
 
-export function handlePagination(
-  noPerPage = 4,
-  page = 1,
-  data = []
-) {
+export function handlePagination(noPerPage = 4, page = 1, data = []) {
   const startIndex = (page - 1) * noPerPage;
   const endIndex = page * noPerPage;
   return data.slice(startIndex, endIndex);
@@ -97,27 +89,17 @@ export const getFormData = (data) => {
 
 export const buildQuery = (baseUrl, params = {}) => {
   const queryString = Object.entries(params)
-    .filter(
-      ([_, value]) => value !== undefined && value !== null
-    )
+    .filter(([_, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(
-          value
-        )}`
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
     .join('&');
-  return queryString
-    ? `${baseUrl}?${queryString}`
-    : baseUrl;
+  return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
-export const getSkipCountFromPageNum = (
-  pageNum,
-  maxCount
-) => {
-  if (pageNum === 'all')
-    return { skipCount: 0, maxCount: 100 };
+export const getSkipCountFromPageNum = (pageNum, maxCount) => {
+  if (pageNum === 'all') return { skipCount: 0, maxCount: 100 };
   if (!pageNum) return { skipCount: 0, maxCount };
 
   // Ensure pageNum is at least 1

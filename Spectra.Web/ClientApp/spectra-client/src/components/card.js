@@ -32,7 +32,7 @@ const Card = ({
       {size === 'sm' && (
         <div
           style={{
-            boxShadow: '0px 4px 12px 0px #0000000A',
+            boxShadow: '0px 0px 30px 0px rgba(0, 0, 0, 0.06)',
           }}
           className={cn(
             'bg-white py-3 px-8 rounded-xl relative',

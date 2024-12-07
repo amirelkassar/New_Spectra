@@ -62,7 +62,9 @@ export const SpecializationMultiSelect = ({
     if (isPending) return;
     if (!defaultValue || !defaultValue?.length) return;
 
-    const defaultValueIds = defaultValue.map((item) => item?.id || item);
+    const defaultValueIds = defaultValue.map(
+      (item) => item?.id || item
+    );
     setValue(defaultValueIds);
   }, [defaultValue, isPending]);
 
