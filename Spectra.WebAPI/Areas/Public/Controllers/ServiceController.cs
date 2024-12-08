@@ -22,6 +22,7 @@ namespace Spectra.WebAPI.Areas.Public.Controllers
         public async Task<ActionResult> GetAllForListing([FromQuery] GetAllServiceForListingQuery input)
         {
             var masterDataServices = await _serviceMDService.GetAllForListing(input);
+
             return Ok(masterDataServices);
         }
 
