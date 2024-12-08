@@ -1,11 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import {
-  Combobox,
-  useCombobox,
-  ScrollArea,
-} from '@mantine/core';
+import { Combobox, useCombobox, ScrollArea } from '@mantine/core';
 
 import Avatar from '@/components/avatar';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
@@ -38,8 +34,7 @@ export function DepartmentHeadSelect({
 
   // HANDLE ERROR, No DATA AND LOADING MEESAGES
   const messages = useMemo(() => {
-    if (isPending || isPlaceholderData)
-      return 'Loading ...';
+    if (isPending || isPlaceholderData) return 'Loading ...';
     if (isError) return 'Error loading data';
     if (!hasData) return 'No data found';
   }, [isPending, isError, hasData, isPlaceholderData]);
@@ -53,9 +48,7 @@ export function DepartmentHeadSelect({
   useEffect(() => {
     if (!defaultValue) return;
     if (isPending || isPlaceholderData) return;
-    const item = items.find(
-      (item) => item.id === defaultValue
-    );
+    const item = items.find((item) => item.id === defaultValue);
     setSelectedItem(item);
   }, [defaultValue, isPending, isPlaceholderData, items]);
 
@@ -63,7 +56,7 @@ export function DepartmentHeadSelect({
     if (isPending || isPlaceholderData) return [];
     return items.map((item) => (
       <Combobox.Option
-        className='text-xs md:text-base flex items-center gap-2 justify-evenly hover:bg-blueLighter border-b-2 border-grayLight last:border-transparent aria-selected:bg-blueLight'
+        className='text-xs md:text-base grid grid-cols-3 items-center gap-2 hover:bg-blueLighter border-b-2 border-grayLight last:border-transparent aria-selected:bg-blueLight'
         value={item}
         key={item?.id}
         aria-selected={selectedItem === item.id}
@@ -71,14 +64,18 @@ export function DepartmentHeadSelect({
         <Avatar
           src={''}
           name={`${item?.firstName} ${item?.lastName}`}
-          className='size-9 md:size-12 rounded-full shrink-0'
+          className='size-9 md:size-12 rounded-full shrink-0 mx-auto'
         />
 
-        <span className='font-bold'>{`${item?.firstName} ${item?.lastName}`}</span>
+        <span className='font-bold'>
+          {`${item?.firstName} ${item?.lastName}`}
+        </span>
 
-        {locale === 'ar'
-          ? item?.mainSpecializationArName
-          : item?.mainSpecializationEnName}
+        <span>
+          {locale === 'ar'
+            ? item?.mainSpecializationArName
+            : item?.mainSpecializationEnName}
+        </span>
 
         {/* <Rating
             dir='ltr'
@@ -88,13 +85,7 @@ export function DepartmentHeadSelect({
           /> */}
       </Combobox.Option>
     ));
-  }, [
-    locale,
-    selectedItem,
-    isPending,
-    isPlaceholderData,
-    items,
-  ]);
+  }, [locale, selectedItem, isPending, isPlaceholderData, items]);
 
   return (
     <div className='space-y-4'>
@@ -115,13 +106,11 @@ export function DepartmentHeadSelect({
               label={label}
               name='departmentHead'
               value={search}
-              onChange={(event) =>
-                setSearch(event.currentTarget.value)
-              }
+              onChange={(event) => setSearch(event.currentTarget.value)}
               rightSection={<ArrowDownBlack />}
               onClick={() => combobox.openDropdown()}
               onFocus={() => combobox.openDropdown()}
-              onBlur={() => combobox.closeDropdown()}
+              // onBlur={() => combobox.closeDropdown()}
               classNames={{
                 section:
                   'peer-data-[expanded=true]:rotate-180 transition-transform',
@@ -132,9 +121,7 @@ export function DepartmentHeadSelect({
           </Combobox.Target>
 
           {error && (
-            <p className='text-xs md:text-base text-red !m-0'>
-              {error}
-            </p>
+            <p className='text-xs md:text-base text-red !m-0'>{error}</p>
           )}
 
           <Combobox.Dropdown className='rounded-xl overflow-hidden border-greenMain rounded-t-none border-t-0'>
@@ -183,9 +170,7 @@ const DepartmentHead = ({
   const locale = useLocale();
 
   const profession =
-    locale === 'ar'
-      ? mainSpecializationArName
-      : mainSpecializationEnName;
+    locale === 'ar' ? mainSpecializationArName : mainSpecializationEnName;
 
   return (
     <div className='flex items-start gap-2'>

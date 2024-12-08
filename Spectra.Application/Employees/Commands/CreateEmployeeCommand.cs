@@ -93,7 +93,7 @@ namespace Spectra.Application.Employees.Commands
                 {
                     throw new NotFoundException("Specializations", request.MainSpecializationId);
                 }
-                specializations = allSpecializations.Where(s => !string.IsNullOrWhiteSpace(request.MainSpecializationId) ? request.MainSpecializationId==s.Id: s.Id==s.Id || request.Specializations.Any(rs => rs == s.Id)).ToArray();
+                specializations = allSpecializations.Where(s => !string.IsNullOrWhiteSpace(request.MainSpecializationId) ? request.MainSpecializationId == s.Id : s.Id == s.Id || request.Specializations.Any(rs => rs == s.Id)).ToArray();
             }
 
             ICollection<PlatformService> services = null;
@@ -132,7 +132,7 @@ namespace Spectra.Application.Employees.Commands
 
             if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
             {
-                var mainSpecialization = specializations.FirstOrDefault(s => s.Id==request.MainSpecializationId);
+                var mainSpecialization = specializations.FirstOrDefault(s => s.Id == request.MainSpecializationId);
                 employee.MainSpecializationId = mainSpecialization.Id;
                 employee.MainSpecializationArName = mainSpecialization.ArName;
                 employee.MainSpecializationEnName = mainSpecialization.EnName;
@@ -161,7 +161,7 @@ namespace Spectra.Application.Employees.Commands
                 });
             }
 
-            if (services is not null && services.Count>0)
+            if (services is not null && services.Count > 0)
             {
                 Parallel.ForEach(services.Distinct(), async service =>
                 {

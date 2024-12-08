@@ -1,5 +1,8 @@
-﻿using Mapster;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
@@ -13,10 +16,15 @@ namespace Spectra.Application.Employees.Queries
     public class GetMedicalProvderListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
+        public JobTypes JobType { get; set; }
 
-        public class GetMedicalProvderListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository) : IRequestHandler<GetMedicalProvderListQuery, OperationResult>
+        public class GetMedicalProvderListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository,
+            IWebHostEnvironment webHostEnvironment,
+            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetMedicalProvderListQuery, OperationResult>
         {
             private readonly IBaseMongoDbRepository<Employee> _doctorRepository = doctorRepository;
+            private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+            private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
             public async Task<OperationResult> Handle(GetMedicalProvderListQuery request, CancellationToken cancellationToken)
             {
@@ -53,6 +61,10 @@ namespace Spectra.Application.Employees.Queries
                     totalCount = total;
                 }
                 var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
+                foreach (var dto in dtos.Where(e=>e.UserImage is not null).ToArray())
+                {
+                    dto.UserImage= EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.UserImage), dto.UserId, EndPointsRoutes.Users, _httpContextAccessor);
+                }
 
                 return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, totalCount, request.MaxCount));
             }

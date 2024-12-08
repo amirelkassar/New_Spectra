@@ -9,11 +9,11 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.drugs';
 
@@ -50,9 +50,7 @@ export const GetDrugsID = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await apiAdmin.get(
-        mainData.drugs.actions.get(id)
-      );
+      const response = await apiAdmin.get(mainData.drugs.actions.get(id));
       return response.data;
     },
   });
@@ -70,7 +68,9 @@ export const DeleteDrugs = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -87,7 +87,9 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -105,7 +107,9 @@ export const useEditDrug = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

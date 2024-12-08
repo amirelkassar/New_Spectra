@@ -1,18 +1,16 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-} from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { Heading } from '@/admin/_components/ui';
 import { ComplaintsTable } from './_components/complaints-table';
 import { prefetchComplaints } from '@/hooks/queries/admin/main-data/complaints';
 import ROUTES from '@/routes';
+import Card from '@/components/card';
 
 const ComplaintsPage = async () => {
   const queryClient = await prefetchComplaints();
 
   return (
-    <div>
+    <Card>
       <Heading
         title='الشكاوي'
         btnLabel='اضافة شكوي'
@@ -21,7 +19,7 @@ const ComplaintsPage = async () => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ComplaintsTable />
       </HydrationBoundary>
-    </div>
+    </Card>
   );
 };
 

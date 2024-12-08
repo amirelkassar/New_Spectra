@@ -16,7 +16,7 @@ namespace Spectra.Application.Contracts.Commands
         public string Id { get; set; }
         public string ModifierRole { get; set; }
         public int HoursOfWork { get; set; }
-        public string EmployeeUserId { get; set; }
+        public string? EmployeeUserId { get; set; }
         public int DaysOfWork { get; set; }
         public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
         public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
@@ -29,9 +29,23 @@ namespace Spectra.Application.Contracts.Commands
 
         public async Task<OperationResult> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
+            EmploymentContract contract;
 
-            var contract = await _contractRepository.GetAsync(c => c.Id == request.Id && c.EmployeeUserId == request.EmployeeUserId)
-                ?? throw new NotFoundException("Contracts", request.Id);
+            if (request.ModifierRole.Equals(Roles.SystemAdmin))
+            {
+                contract = await _contractRepository.GetAsync(c => c.Id == request.Id)
+                 ?? throw new NotFoundException("Contracts", request.Id);
+            }
+            else
+            {
+                contract = await _contractRepository.GetAsync(c => c.Id == request.Id && c.EmployeeUserId == request.EmployeeUserId)
+                 ?? throw new NotFoundException("Contracts", request.Id);
+
+                if (contract.ContractState != ContractStates.Contracting)
+                {
+                    throw new InvalidOperationException("Couldn't edit accepted or canceled contract");
+                }
+            }
             //get the cuurent version to convert it to draft
             var currentVersion = contract.Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
             currentVersion.State = ContractVersionStates.Draft;

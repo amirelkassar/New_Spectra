@@ -1,10 +1,8 @@
-import {
-  Section,
-  SectionTitle,
-} from '@/client/_components/ui';
+import { Section, SectionTitle } from '@/client/_components/ui';
 import Card from '@/components/card';
-import { getDate } from '@/lib/utils';
 import Image from 'next/image';
+
+import { getDate } from '@/lib/utils';
 
 export const Certifications = ({ data }) => {
   return (
@@ -27,18 +25,11 @@ export const Certifications = ({ data }) => {
   );
 };
 
-const Certification = ({
-  name = '',
-  image = '',
-  date = '',
-}) => {
+const Certification = ({ name = '', image = '', date = '' }) => {
   const { fullYear } = getDate(date);
 
   return (
-    <Card
-      className='flex-none !p-2 mdl:!p-3 space-y-3'
-      size='sm'
-    >
+    <Card className='flex-none !p-2 mdl:!p-3 space-y-3' size='sm'>
       <div className='relative rounded-lg overflow-hidden w-36 h-28 mdl:w-56 mdl:h-44'>
         <Image
           src={image}

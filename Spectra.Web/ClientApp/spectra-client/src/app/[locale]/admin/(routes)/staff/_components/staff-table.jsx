@@ -4,10 +4,7 @@ import { useState } from 'react';
 import { Link } from '@/navigation';
 
 import { AddButton } from '@/components/buttons/add-button';
-import {
-  SectionTitle,
-  TableItem,
-} from '@/admin/_components/ui';
+import { SectionTitle, TableItem } from '@/admin/_components/ui';
 import ROUTES from '@/routes';
 import StaffIcon from '@/assets/icons/staff';
 import { useStaff } from '@/hooks/queries/admin/staff/staff';
@@ -39,12 +36,7 @@ export const StaffTable = () => {
         isSearching={!!search}
         isFiltered={!!jobType}
       >
-        {({
-          data,
-          isPlaceholderData,
-          pageSize,
-          totalCount,
-        }) => (
+        {({ data, isPlaceholderData, pageSize, totalCount }) => (
           <>
             <StaffTableFilter
               disabled={isPlaceholderData}
@@ -76,7 +68,7 @@ const Heading = ({ totalCount }) => {
         <SectionTitle>الموظفين</SectionTitle>
         <StaffCount>{totalCount}</StaffCount>
       </div>
-      <Link href={ROUTES.ADMIN.STAFF.STAFFADD}>
+      <Link href={ROUTES.ADMIN.STAFF.STAFF_ADD}>
         <AddButton>إضافة موظف</AddButton>
       </Link>
     </div>
@@ -100,7 +92,7 @@ const StaffTableFilter = ({
 }) => {
   return (
     <div className='flex flex-col mdl:flex-row gap-y-4 mdl:gap-x-6 mb-5'>
-      <FilterType>فلتر بالنوع :</FilterType>
+      <FilterType>فلتر بالنوع:</FilterType>
 
       <div className='flex *:flex-1 mdl:*:flex-none'>
         <FilterButton

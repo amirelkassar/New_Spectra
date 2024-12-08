@@ -30,6 +30,7 @@ import { CHILDS, CHILD_TABS, CHILDS_TABLE } from './child';
 import { FAMILIES } from './families';
 import { SETTINGS_LIST } from './settings';
 import { CLIENT_VIDEO_NAV } from './video';
+import { ACADEMIC_DEGREE } from './academic-degree';
 
 export {
   WHAT_WE_CURE,
@@ -62,4 +63,5 @@ export {
   FAMILIES,
   SETTINGS_LIST,
   CLIENT_VIDEO_NAV,
+  ACADEMIC_DEGREE,
 };

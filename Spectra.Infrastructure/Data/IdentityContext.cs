@@ -13,6 +13,7 @@ namespace Spectra.Infrastructure.Data
         public DbSet<PermissionGroup> PermissionGroups { get; set; }
         public DbSet<PermissoinCategory> PermissoinCategories { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<UserImage> UserImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

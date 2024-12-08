@@ -200,6 +200,10 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
+                if (user.UserImage is not null&&File.Exists(user.UserImage))
+                {
+                    File.Delete(user.UserImage);
+                }
                 user.UserImage = imagePath;
                 await _userManager.UpdateAsync(user);
                 return OperationResult.Success();
