@@ -23,6 +23,8 @@ import LicenseIcon from '@/assets/icons/License';
 import QualificationsIcon from '@/assets/icons/qualifications';
 import CheckHeartIcon from '@/assets/icons/check-heart';
 import ADHD from '@/assets/icons/adhd';
+import { ACADEMIC_DEGREE_OBJ } from '@/data/academic-degree';
+import Book from '@/assets/icons/book';
 
 export const MedicalProviderInfo = ({ data }) => {
   const isEdit = useSearchParams().get('edit') === 'true';
@@ -179,6 +181,9 @@ const ICONS = {
   ),
   licenseNo: <LicenseIcon className='size-5 mdl:size-7' />,
   exp: <HourglassIcon className='size-5 mdl:size-7' />,
+  acadmiceDegree: (
+    <Book className='size-5 mdl:size-7 text-greenMain' />
+  ),
 };
 
 const CareerInfo = ({ data }) => {
@@ -231,6 +236,16 @@ const CareerInfo = ({ data }) => {
             weight='reverse'
             label='سنوات الخبرة'
             value={data?.experienceYears}
+          />
+        </div>
+
+        <div className='flex gap-5'>
+          {ICONS.acadmiceDegree}
+          <InfoData
+            direction='col'
+            weight='reverse'
+            label='الدرجة العلمية'
+            value={ACADEMIC_DEGREE_OBJ[data?.academicDegree]}
           />
         </div>
       </Card>

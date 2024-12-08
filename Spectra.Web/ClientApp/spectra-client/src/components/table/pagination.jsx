@@ -12,6 +12,7 @@ export const Pagination = ({
   totalCount,
   pageNumber = 1,
   disabled = false,
+  setPageNumber,
 }) => {
   const router = useRouter();
 
@@ -32,7 +33,12 @@ export const Pagination = ({
     <div className='font-bold flex ltr:flex-row-reverse items-center justify-between'>
       <Button
         className='py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg'
-        onClick={() => updatePage(currentPage + 1)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (setPageNumber) return setPageNumber(currentPage + 1);
+          updatePage(currentPage + 1);
+        }}
         disabled={currentPage === totalPages || disabled}
       >
         <ArrowLeft className='rotate-180 size-3 mdl:size-5' />
@@ -53,13 +59,21 @@ export const Pagination = ({
           radius='xl'
           withControls={false}
           value={currentPage}
-          onChange={(value) => updatePage(value)}
+          onChange={(value) => {
+            if (setPageNumber) return setPageNumber(value);
+            updatePage(value);
+          }}
         />
       )}
 
       <Button
         className='py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg'
-        onClick={() => updatePage(currentPage - 1)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (setPageNumber) return setPageNumber(currentPage - 1);
+          updatePage(currentPage - 1);
+        }}
         disabled={currentPage === 1 || disabled}
       >
         <ArrowLeft className='size-3 mdl:size-5' />

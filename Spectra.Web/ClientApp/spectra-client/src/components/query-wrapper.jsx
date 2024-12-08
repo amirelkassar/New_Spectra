@@ -32,8 +32,7 @@ export const QueryWrapper = ({
 }) => {
   if (!query) throw new Error('No query props provided');
 
-  const items =
-    query?.data?.data?.items || query?.data?.data;
+  const items = query?.data?.data?.items || query?.data?.data;
   const pageSize = query?.data?.data?.pageSize;
   const totalCount = query?.data?.data?.totalCount;
   const hasData = useMemo(() => {
@@ -46,17 +45,11 @@ export const QueryWrapper = ({
     return false; // إذا كانت ليست مصفوفة ولا كائنًا
   }, [items]);
 
-  const onRetry = useCallback(
-    () => query?.refetch(),
-    [query]
-  );
+  const onRetry = useCallback(() => query?.refetch(), [query]);
 
   if (query?.isPending) return <MemowizedLoader />;
 
-  if (
-    query?.isError &&
-    query?.failureReason?.status === 404
-  )
+  if (query?.isError && query?.failureReason?.status === 404)
     return <MemowizedNotFound404 />;
 
   if (query?.isError)
@@ -65,16 +58,15 @@ export const QueryWrapper = ({
   if (query?.isPaused)
     return <MemowizedNoInternet onRetry={onRetry} />;
 
-  if (isSearching && !hasData)
-    return <MemowizedNoSearchResults />;
+  if (isSearching && !hasData) return <MemowizedNoSearchResults />;
 
-  if (!hasData && !isFiltered)
-    return <MemowizedNoDataYet />;
+  if (!hasData && !isFiltered) return <MemowizedNoDataYet />;
 
-  return children({
-    data: items,
-    pageSize,
-    totalCount,
-    isPlaceholderData: query?.isPlaceholderData,
-  });
+  if (children)
+    return children({
+      data: items,
+      pageSize,
+      totalCount,
+      isPlaceholderData: query?.isPlaceholderData,
+    });
 };

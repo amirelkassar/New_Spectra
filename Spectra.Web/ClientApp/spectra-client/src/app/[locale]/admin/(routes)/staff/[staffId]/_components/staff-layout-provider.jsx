@@ -40,11 +40,12 @@ const RenderLayout = ({ children, data }) => {
 };
 
 const DoctorAndSpecialistLayout = ({ data, children }) => {
+  const jobType = data?.jobType;
   return (
     <div className='space-y-5 h-full'>
       <MedicalProviderMainInfo data={data} />
       <div className='flex flex-col lg:flex-row gap-5'>
-        <MedicalProviderAside />
+        <MedicalProviderAside jobType={String(jobType)} />
         {children}
       </div>
     </div>

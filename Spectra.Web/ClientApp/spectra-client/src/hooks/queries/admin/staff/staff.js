@@ -59,7 +59,7 @@ export const useStaff = (
 };
 
 export const useMedicalProviders = (
-  params = { pageNum: null, search: '' }
+  params = { pageNum: null, search: '', jobType: '' }
 ) => {
   const queries = getQueries({ params, initialQueries });
 

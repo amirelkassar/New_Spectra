@@ -30,6 +30,8 @@ import { Certificate } from '@/components/team/certificate';
 import { AttachmentModal } from '@/components/modal/attachment-modal';
 import { useAddAttachment } from '@/app/[locale]/admin/_hooks/attachments/use-add-attachment';
 import { useAttachmentMenuActions } from '@/app/[locale]/admin/_hooks/attachments/use-attachment-menu-actions';
+import Book from '@/assets/icons/book';
+import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select';
 
 export const UpdateMedicalProviderInfo = ({ initialValues }) => {
   const [form] = useUpdateMedicalProvider({ initialValues });
@@ -241,6 +243,9 @@ const ICONS = {
   ),
   licenseNo: <LicenseIcon className='size-5 mdl:size-7' />,
   exp: <HourglassIcon className='size-5 mdl:size-7' />,
+  acadmiceDegree: (
+    <Book className='size-5 mdl:size-7 text-greenMain' />
+  ),
 };
 
 const UpdateCareerInfo = ({ form }) => {
@@ -295,6 +300,19 @@ const UpdateCareerInfo = ({ form }) => {
             onChange={form?.onChange}
             value={form?.data?.experienceYears || ''}
             type='number'
+            className='flex-1'
+          />
+        </div>
+
+        <div className='flex gap-5'>
+          {ICONS.acadmiceDegree}
+          <AcademicDegreeSelect
+            size='sm'
+            label='الدرجة العلمية'
+            name='academicDegree'
+            error={GetErrorMsg(form?.error, 'AcademicDegree')}
+            onChange={form?.onChange}
+            value={form?.data?.academicDegree}
             className='flex-1'
           />
         </div>
