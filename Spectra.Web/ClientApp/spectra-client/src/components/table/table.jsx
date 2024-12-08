@@ -27,16 +27,10 @@ const TableHead = ({
   return (
     <TableThead>
       {table.getHeaderGroups().map((headerGroup) => (
-        <TableTr
-          className={classNames.tr}
-          key={headerGroup.id}
-        >
+        <TableTr className={classNames.tr} key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
             return (
-              <TableTh
-                className={cn(classNames.th)}
-                key={header.id}
-              >
+              <TableTh className={cn(classNames.th)} key={header.id}>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
@@ -71,14 +65,13 @@ const TableBody = ({
               id={`table-row-${row.id}`}
               data-status={row?.original?.status || 'none'}
               key={row.id}
-              className={cn(classNames.tr)}
-              data-state={row.getIsSelected() && 'selected'}
+              className={cn(
+                'data-[selected=true]:bg-blueLight',
+                classNames.tr
+              )}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableTd
-                  className={cn(classNames.td)}
-                  key={cell.id}
-                >
+                <TableTd className={cn(classNames.td)} key={cell.id}>
                   {flexRender(
                     cell.column.columnDef.cell,
                     cell.getContext()

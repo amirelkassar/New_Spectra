@@ -8,6 +8,7 @@ import ShowIcon from '@/assets/icons/show';
 import EditIcon from '@/assets/icons/edit';
 import ExportIcon from '@/assets/icons/export';
 import PrintIcon from '@/assets/icons/print';
+import Download from '@/assets/icons/download';
 
 export default function ActionsMenu({ children }) {
   return (
@@ -26,8 +27,7 @@ export default function ActionsMenu({ children }) {
       </Menu.Target>
       <Menu.Dropdown
         classNames={{
-          dropdown:
-            'font-bold rounded-xl border-2 border-black/10',
+          dropdown: 'font-bold rounded-xl border-2 border-black/10',
         }}
       >
         {children}
@@ -101,3 +101,16 @@ const PrintButton = ({ children, ...props }) => {
 };
 
 ActionsMenu.Print = PrintButton;
+
+const DownloadButton = ({ children, ...props }) => {
+  return (
+    <Menu.Item
+      leftSection={<Download className='size-4' />}
+      {...props}
+    >
+      {children}
+    </Menu.Item>
+  );
+};
+
+ActionsMenu.Download = DownloadButton;

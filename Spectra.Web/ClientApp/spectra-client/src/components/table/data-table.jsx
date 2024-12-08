@@ -8,11 +8,7 @@ import {
 
 const DataTableContext = createContext(null);
 
-export function DataTable({
-  columns = [],
-  data = [],
-  children,
-}) {
+export function DataTable({ columns = [], data = [], children }) {
   const table = useReactTable({
     data,
     columns,
@@ -20,9 +16,7 @@ export function DataTable({
   });
 
   return (
-    <DataTableContext.Provider
-      value={{ table, columns, data }}
-    >
+    <DataTableContext.Provider value={{ table, columns, data }}>
       {children}
     </DataTableContext.Provider>
   );

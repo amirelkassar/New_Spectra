@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Textarea } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 
@@ -20,6 +15,7 @@ import { PhotoDropzone } from '@/components/photo-dropzone';
 import { ReportSelect } from '../../_components/reports-select';
 import { useImagePath } from '@/hooks/use-image-path';
 import { SpecializationMultiSelect } from '@/admin/_components/ui/specialization-multi-select';
+import DeleteIcon from '@/assets/icons/delete';
 
 export const ServiceFrom = ({
   data,
@@ -81,8 +77,7 @@ export const ServiceFrom = ({
         autosize
         minRows={4}
         classNames={{
-          input:
-            'min-h-[160px] w-full rounded-xl border-greenMain',
+          input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
           root: 'col-span-2',
         }}
@@ -98,8 +93,7 @@ export const ServiceFrom = ({
         autosize
         minRows={4}
         classNames={{
-          input:
-            'min-h-[160px] w-full rounded-xl border-greenMain',
+          input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
           root: 'col-span-2',
         }}
@@ -210,10 +204,14 @@ const ServiceContent = ({ data, error, onChange }) => {
     const { name, value } = e.target;
     setContents((prevContents) =>
       prevContents.map((content, i) =>
-        i === index
-          ? { ...content, [name]: value }
-          : content
+        i === index ? { ...content, [name]: value } : content
       )
+    );
+  }, []);
+
+  const handleRemove = useCallback((index) => {
+    setContents((prevContents) =>
+      prevContents.filter((_, i) => i !== index)
     );
   }, []);
 
@@ -229,25 +227,19 @@ const ServiceContent = ({ data, error, onChange }) => {
     ]);
   }, []);
 
-  const debouncedOnChange = useDebouncedCallback(
-    (contents) => {
-      const filteredContents = contents.filter(
-        (c) =>
-          c.arTitle &&
-          c.arDescription &&
-          c.enTitle &&
-          c.enDescription
-      );
+  const debouncedOnChange = useDebouncedCallback((contents) => {
+    const filteredContents = contents.filter(
+      (c) =>
+        c.arTitle && c.arDescription && c.enTitle && c.enDescription
+    );
 
-      onChange({
-        target: {
-          name: 'contents',
-          value: filteredContents,
-        },
-      });
-    },
-    1500
-  );
+    onChange({
+      target: {
+        name: 'contents',
+        value: filteredContents,
+      },
+    });
+  }, 1500);
 
   useEffect(() => {
     if (!onChange) return;
@@ -315,9 +307,18 @@ const ServiceContent = ({ data, error, onChange }) => {
             />
           </div>
         </div>
+
+        <div
+          onClick={() => handleRemove(index)}
+          role='button'
+          className='border border-red text-red rounded-md max-w-60 px-5 py-2 flex items-center justify-center gap-2 text-sm mdl:text-xl font-bold mx-auto'
+        >
+          <DeleteIcon className='size-4' />
+          مسح القسم
+        </div>
       </div>
     ));
-  }, [contents, handleChange]);
+  }, [contents, handleChange, handleRemove]);
 
   return (
     <div className='space-y-5'>
@@ -325,9 +326,7 @@ const ServiceContent = ({ data, error, onChange }) => {
         محتوي الخدمة باللغة العربية والانجليزية
       </h3>
 
-      <div className='space-y-4 lg:space-y-8'>
-        {contentItem}
-      </div>
+      <div className='space-y-4 lg:space-y-8'>{contentItem}</div>
 
       {error && (
         <p className='text-red text-xs md:text-base ps-12 !m-0'>
@@ -362,9 +361,7 @@ const ServicePhoto = ({ data, error, onChange }) => {
 
   return (
     <div className='flex-1 w-full h-auto relative space-y-5'>
-      <h3 className='text-sm md:text-xl font-bold'>
-        صورة الخدمة
-      </h3>
+      <h3 className='text-sm md:text-xl font-bold'>صورة الخدمة</h3>
 
       {data ? (
         <div className='relative flex items-center justify-center w-auto h-[484px]'>
@@ -412,9 +409,7 @@ const ServicePhoto = ({ data, error, onChange }) => {
       )}
 
       {error && (
-        <p className='text-red text-xs md:text-base !m-0'>
-          {error}
-        </p>
+        <p className='text-red text-xs md:text-base !m-0'>{error}</p>
       )}
     </div>
   );

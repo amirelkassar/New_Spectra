@@ -1,3 +1,4 @@
+import { formatCurrency } from '@/lib/utils';
 import { CellActions } from './cell-actions';
 
 export const SpecialtiesColumns = [
@@ -12,12 +13,16 @@ export const SpecialtiesColumns = [
   {
     accessorKey: 'code',
     header: 'كود التخصص',
+    cell: ({ row }) => {
+      const code = row.original?.code;
+      return code ? code : '--';
+    },
   },
   {
     accessorKey: 'consultationCost',
     header: 'تكلفة',
     cell: ({ getValue }) => {
-      return getValue() + ' ر.س';
+      return formatCurrency(getValue(), ' ر.س');
     },
   },
   {

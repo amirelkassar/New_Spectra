@@ -4,31 +4,29 @@ import Card from '@/components/card';
 import { NotFound404 } from '@/components/not-found-404';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { useStaffById } from '@/hooks/queries/admin/staff/staff';
+import { MedicalProviderMainInfo } from './medical-provider-main-info';
+import { MedicalProviderAside } from './medical-provider-aside';
 
 export const StaffLayoutProvider = ({ id, children }) => {
   const query = useStaffById(id);
 
   return (
     <QueryWrapper query={query}>
-      {({ data }) => {
-        const jobType = data?.jobType;
-
-        return (
-          <RenderLayout jobType={jobType}>
-            {children}
-          </RenderLayout>
-        );
-      }}
+      {({ data }) => (
+        <RenderLayout data={data}>{children}</RenderLayout>
+      )}
     </QueryWrapper>
   );
 };
 
-const RenderLayout = ({ children, jobType }) => {
+const RenderLayout = ({ children, data }) => {
+  const jobType = data?.jobType;
+
   switch (String(jobType)) {
     case '1':
     case '2':
       return (
-        <DoctorAndSpecialistLayout>
+        <DoctorAndSpecialistLayout data={data}>
           {children}
         </DoctorAndSpecialistLayout>
       );
@@ -41,12 +39,13 @@ const RenderLayout = ({ children, jobType }) => {
   }
 };
 
-const DoctorAndSpecialistLayout = ({ children }) => {
+const DoctorAndSpecialistLayout = ({ data, children }) => {
+  const jobType = data?.jobType;
   return (
-    <div>
-      <span>doc info</span>
-      <div className='flex gap-4'>
-        <span>aside</span>
+    <div className='space-y-5 h-full'>
+      <MedicalProviderMainInfo data={data} />
+      <div className='flex flex-col lg:flex-row gap-5'>
+        <MedicalProviderAside jobType={String(jobType)} />
         {children}
       </div>
     </div>

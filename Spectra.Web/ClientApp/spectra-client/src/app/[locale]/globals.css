@@ -356,10 +356,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.staffDetils
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.staffDetils .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -384,22 +381,13 @@ form.clientEdit .mantine-Input-input {
   @apply hidden lg:block;
 }
 .grid-cols-\[repeat\(3\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    3,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(3, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(4\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    4,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
 }
 .grid-cols-\[repeat\(5\2c minmax\(min-content\2c 1fr\)\)\] {
-  grid-template-columns: repeat(
-    5,
-    minmax(max-content, 1fr)
-  );
+  grid-template-columns: repeat(5, minmax(max-content, 1fr));
 }
 @layer components {
   .custom-grid {
@@ -435,10 +423,7 @@ form.clientEdit .mantine-Input-input {
   background-color: #f9f7fc;
   border-radius: 10px;
 }
-.boxDate
-  .mantine-DatePicker-calendarHeaderControl
-  svg
-  path {
+.boxDate .mantine-DatePicker-calendarHeaderControl svg path {
   color: #10b0c1;
   fill: #10b0c1;
 }
@@ -566,13 +551,7 @@ form.clientEdit .mantine-Input-input {
   }
 
   .custom-clipPath-triangle-up {
-    clippath: polygon(
-      0 100%,
-      0 10%,
-      50% 0%,
-      100% 10%,
-      100% 100%
-    );
+    clippath: polygon(0 100%, 0 10%, 50% 0%, 100% 10%, 100% 100%);
   }
 }
 input[type='number']::-webkit-inner-spin-button,
@@ -620,8 +599,8 @@ Preloader Area CSS
   border-bottom: 0;
   -webkit-animation: loader-outter 1s
     cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
-  animation: loader-outter 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  animation: loader-outter 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
   @apply absolute w-full h-full rounded-full;
 }
 
@@ -633,14 +612,13 @@ Preloader Area CSS
   border-top-color: transparent;
   -webkit-animation: loader-inner 1s
     cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
-  animation: loader-inner 1s
-    cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+  animation: loader-inner 1s cubic-bezier(0.42, 0.61, 0.58, 0.41)
+    infinite;
   @apply absolute w-[60px] h-[60px] rounded-full;
 }
 
 .loader .indicator {
-  -webkit-transform: translateY(-50%) translateX(-50%)
-    scale(1.5);
+  -webkit-transform: translateY(-50%) translateX(-50%) scale(1.5);
   transform: translateY(-50%) translateX(-50%) scale(1.5);
   @apply absolute right-auto left-1/2 top-1/2 flex items-center justify-center;
 }

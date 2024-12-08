@@ -10,9 +10,7 @@ import ROUTES from '@/routes';
 export const useAddEmployee = () => {
   const router = useRouter();
 
-  const [validationErrors, setValidationErrors] = useState(
-    {}
-  );
+  const [validationErrors, setValidationErrors] = useState({});
 
   const [step, setStep] = useState(1);
 
@@ -83,7 +81,7 @@ export const useAddEmployee = () => {
         success: 'تم اضافة الموظف بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
-            router.replace(ROUTES.ADMIN.STAFF.DASHBOARD);
+            router.replace(ROUTES.ADMIN.STAFF.HOME);
         },
       });
     },

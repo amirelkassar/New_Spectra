@@ -242,7 +242,6 @@ const DoctorAndSpecialistFields = ({ form = {} }) => {
         error={GetErrorMsg(form?.error, 'LicenseNumber')}
         onChange={form?.onChange}
         value={form?.data?.licenseNumber}
-        type='number'
       />
 
       <TextInput
