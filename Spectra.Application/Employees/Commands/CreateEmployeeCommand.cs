@@ -128,6 +128,7 @@ namespace Spectra.Application.Employees.Commands
             employee.Qualification = request.Qualification;
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;
+            employee.WorkingHours=request.WorkingHours;
 
 
             if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
@@ -228,8 +229,6 @@ namespace Spectra.Application.Employees.Commands
                .NotNull()
                .Must(StringExtensionHelper.IsPassword);
         }
-
-
     }
 
 }

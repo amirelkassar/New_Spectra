@@ -22,7 +22,7 @@ namespace Spectra.Infrastructure.Services.SnomedServices
                 var response = await _httpClient.GetAsync($"browser/MAIN/SNOMEDCT-AU/2024-12-2/descriptions?limit=100&term={search}%20delay&active=true&conceptActive=true&lang=english&groupByConcept=true");
                 if (!response.IsSuccessStatusCode)
                 {
-                    return Enumerable.Empty<SnomedReadDto>();
+                    return [];
                 }
 
                 var data = await response.Content.ReadFromJsonAsync<SnomedApiResultDto>();
