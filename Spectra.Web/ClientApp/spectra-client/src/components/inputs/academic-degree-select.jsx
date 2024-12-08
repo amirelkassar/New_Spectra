@@ -10,12 +10,13 @@ export const AcademicDegreeSelect = ({ ...props }) => {
       data={props.data || ACADEMIC_DEGREE}
       size={props.size || 'lg'}
       onChange={(value) => {
-        props.onChange({
-          target: {
-            value,
-            name: props.name,
-          },
-        });
+        if (props.onChange)
+          props.onChange({
+            target: {
+              value,
+              name: props.name,
+            },
+          });
       }}
       value={String(props.value)}
     />

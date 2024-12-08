@@ -16,6 +16,7 @@
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@headlessui/react": "^2.0.4",
+    "@hookform/resolvers": "^3.9.1",
     "@mantine/carousel": "^7.12.0",
     "@mantine/charts": "^7.11.2",
     "@mantine/core": "^7.11.2",
@@ -38,6 +39,7 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18",
     "react-draggable": "^4.4.6",
+    "react-hook-form": "^7.54.0",
     "react-hot-toast": "^2.4.1",
     "react-phone-input-2": "^2.15.1",
     "react-quill": "^2.0.0",
@@ -47,6 +49,7 @@
     "sortablejs": "^1.15.3",
     "swiper": "^11.1.5",
     "tailwind-merge": "^2.4.0",
+    "zod": "^3.23.8",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

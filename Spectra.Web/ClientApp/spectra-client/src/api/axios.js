@@ -8,6 +8,8 @@ export const api = axios.create({
   baseURL: BASE_URL,
 });
 
+export const apiPublic = getAxiosInstance('/public');
+
 export const apiAdmin = getAxiosInstance('/admin');
 
 export const apiAuth = axios.create({

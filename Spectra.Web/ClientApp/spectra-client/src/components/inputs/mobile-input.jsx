@@ -44,14 +44,15 @@ const MobileInput = ({
             type: 'text',
             required: true,
             className: cn(
-              '!ps-14 pe-[14px] w-full bg-white rounded-lg outline-none focus:border-greenMain border border-[#ced4da] h-[42px]',
+              '!ps-14 pe-[14px] w-full bg-white rounded-lg outline-none focus:border-greenMain border border-[#ced4da] h-[42px] rtl:placeholder:text-right',
               {
                 'h-[50px]': size === 'lg',
               },
               size === 'sm' && 'h-[36px]',
+              error && 'border-red placeholder:text-red',
               inputClassName
             ),
-            placeholder: '',
+            placeholder: props?.placeholder || '',
             id: 'phone2',
           }}
           {...props}

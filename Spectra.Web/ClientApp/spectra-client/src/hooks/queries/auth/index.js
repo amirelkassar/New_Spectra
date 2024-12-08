@@ -14,6 +14,16 @@ export const useLoginMutation = (data) => {
   });
 };
 
+export const useRegisterMedicalProviderMutation = () => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      return (
+        await apiAuth.post('/register-medical-provider', formData)
+      ).data;
+    },
+  });
+};
+
 export const useLogout = () => {
   const router = useRouter();
 
