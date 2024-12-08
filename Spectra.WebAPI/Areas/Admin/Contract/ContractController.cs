@@ -1,47 +1,126 @@
-﻿using Spectra.Application.Contracts.Services;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.Queries;
+using Spectra.Application.Interfaces;
+using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
+using Spectra.WebAPI.Areas.Admin.Contract.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract
 {
 
     public class ContractController : AdminBaseController
     {
-        private readonly IContractService _contractService;
+        private readonly IMediator _mediator;
+        private readonly ICurrentUser _currentUser;
 
-        public ContractController(IContractService contractService)
+        public ContractController(IMediator mediator,
+            ICurrentUser currentUser)
         {
-            _contractService = contractService;
+            _mediator = mediator;
+            _currentUser = currentUser;
         }
-        //[HttpGet("list")]
-        //[Authorize(AdminContractPermissions.ReadList)]
-        //public async Task<ActionResult> GetListAsync([FromQuery] GetAllContractWithStatusQuery input)
-        //{
-        //    var contract = await _adminService.GetAllContractsOfEployees(input);
-        //    return Ok(contract);
-        //}
 
-        //[HttpGet()]
-        //[Authorize(AdminContractPermissions.ReadList)]
-        //public async Task<ActionResult> GetAllCopiesOFContract([FromQuery] GetAllCopiesOFContractQuery input)
-        //{
-        //    var contract = await _contractService.GetAllCopiesOfContract(input);
-        //    return Ok(contract);
-        //}
-        //[HttpPut("RefuesContract/id")]
-        //[Authorize(AdminContractPermissions.Update)]
-        //public async Task<ActionResult> UpdateRefuesContract(string id, UpdateContractStatusCommand input)
-        //{
+        [HttpGet("list")]
+        [Authorize(AdminContractPermissions.ReadList)]
+        public async Task<ActionResult> GetListAsync([FromQuery] GetContractListQuery input)
+        {
+            var contract = await _mediator.Send(input);
+            return Ok(contract);
+        }
 
-        //    var employees = await _adminService.UpdateContractStatus(id, input);
-        //    return Ok(employees);
-        //}
-        //[HttpPut("MakeContractToEmployee/id")]
-        //[Authorize(AdminContractPermissions.Create)]
-        //public async Task<ActionResult> UpdateContractChangeOrAccpets(string id, UpdateContractToSendToEmployeeCommand input)
-        //{
+        [HttpGet()]
+        [Authorize(AdminContractPermissions.ReadList)]
+        public async Task<ActionResult> GetAsync([FromQuery] string contractId)
+        {
+            var contract = await _mediator.Send(new GetContractById
+            {
+                Id = contractId,
+                CallerUserId = _currentUser.Id,
+                CallerRole = Roles.SystemAdmin
+            });
+            return Ok(contract);
+        }
 
-        //    input.ContractCase = ContractCases.BACkTOEMPlOYEE;
-        //    var contract = await _adminService.UpdateContractFromAdmin(id, input);
-        //    return Ok(contract);
-        //}
+        [HttpPost("cancel")]
+        [Authorize(AdminContractPermissions.Update)]
+        public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
+        {
+            var response = await _mediator.Send(new ChangeContractStateCommand
+            {
+                Id = input.Id,
+                ModifierRole = Roles.SystemAdmin,
+                CallerUserId = _currentUser.Id,
+                CallerName = _currentUser.Name,
+                Value = false,
+                Reason = input.Reason,
+                State = ContractConses.ContractStates.Canceled
+            });
+
+            return Accepted(response);
+        }
+
+        [HttpPost("reject")]
+        [Authorize(AdminContractPermissions.Update)]
+        public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
+        {
+            var response = await _mediator.Send(new ChangeContractStateCommand
+            {
+                Id = input.Id,
+                ModifierRole = Roles.SystemAdmin,
+                CallerUserId = _currentUser.Id,
+                CallerName = _currentUser.Name,
+                Value = false,
+                Reason = input.Reason,
+                State = ContractConses.ContractStates.Contracting
+            });
+
+            return Accepted(response);
+        }
+
+        [HttpPost("accept")]
+        [Authorize(AdminContractPermissions.Update)]
+        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
+        {
+            var response = await _mediator.Send(new ChangeContractStateCommand
+            {
+                Id = input.Id,
+                ModifierRole = Roles.SystemAdmin,
+                CallerUserId = _currentUser.Id,
+                CallerName = _currentUser.Name,
+                Value = true,
+                Reason = input.Reason,
+                State = ContractConses.ContractStates.Accepted
+            });
+
+            return Accepted(response);
+        }
+
+        [HttpPut()]
+        [Authorize(AdminContractPermissions.Update)]
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateContractModel input)
+        {
+
+            var response = await _mediator.Send(new UpdateContractCommand
+            {
+                Id = input.Id,
+                DaysOfWork = input.DaysOfWork,
+                FreelancingServices = input.FreelancingServices,
+                HoursOfWork = input.HoursOfWork,
+                ModifierRole=Roles.SystemAdmin,
+                SpectraTeamServices = input.SpectraTeamServices,
+            });
+            return Accepted("", response);
+        }
+
+        [HttpDelete()]
+        [Authorize(AdminContractPermissions.Update)]
+        public async Task<ActionResult> DeleteAsync([FromQuery] DeleteContractCommand input)
+        {
+            var response = await _mediator.Send(input);
+            return NoContent();
+        }
     }
 }

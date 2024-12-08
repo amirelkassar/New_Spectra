@@ -22,7 +22,6 @@ namespace Spectra.Application.Contracts.Commands
             FreelancingServices = [];
             SpectraTeamServices = [];
         }
-        public string EmployeeUserId { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
         public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
@@ -32,26 +31,29 @@ namespace Spectra.Application.Contracts.Commands
     public class CreateContractCommandHandler(IContractRepository contractRepository,
         IBaseMongoDbRepository<Employee> medicalProvider,
         IServiceMDRepository serviceMDRepository,
-        ISectionsRepository sectionsRepository) : IRequestHandler<CreateContractCommand, OperationResult>
+        ISectionsRepository sectionsRepository,
+        ICurrentUser currentUser) : IRequestHandler<CreateContractCommand, OperationResult>
     {
 
         private readonly IContractRepository _contractRepository = contractRepository;
         private readonly IBaseMongoDbRepository<Employee> _medicalProvider = medicalProvider;
         private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
         private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
+        private readonly ICurrentUser _currentUser = currentUser;
 
         public async Task<OperationResult> Handle(CreateContractCommand request, CancellationToken cancellationToken)
         {
 
-            var currentContracts = await _contractRepository.GetAsync(c => c.EmployeeUserId == request.EmployeeUserId && c.ContractState != ContractStates.Canceled);
+            var currentContracts = await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id);
 
             if (currentContracts is not null)
             {
                 throw new RequestErrorException("Your Request is Under Review");
             }
-            var medicalProvider = await _medicalProvider.GetByIdAsync(request.EmployeeUserId);
+            var medicalProvider = await _medicalProvider.GetByIdAsync(_currentUser.Id);
 
             var departmentHead = await _sectionsRepository.GetByIdAsync(medicalProvider.SectionId);
+            var empHead = await _medicalProvider.GetByIdAsync(departmentHead.HeadDoctorId);
             var services = await _serviceMDRepository.GetAllAsync();
 
             var contractVerion = new ContractVersion
@@ -105,9 +107,10 @@ namespace Spectra.Application.Contracts.Commands
             request.DaysOfWork,
             medicalProvider.Id,
             medicalProvider.Name.FirstName,
-             request.EmployeeUserId,
+             _currentUser.Id,
             departmentHead.HeadDoctorId,
             departmentHead.HeadDoctorName,
+            empHead.UserId,
             $"Contract Of {medicalProvider.Name.FirstName}",
             ContractStates.Contracting,
             [contractVerion]

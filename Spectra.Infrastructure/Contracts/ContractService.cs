@@ -15,10 +15,6 @@ namespace Spectra.Infrastructure.Contracts
 
         public async Task<OperationResult> CreateAsync(CreateContractCommand input)
         {
-            if (_currentUser.Role.Equals(Roles.Doctor))
-            {
-                input.EmployeeUserId = _currentUser.Id;
-            }
             var response = await _mediator.Send(input);
             return response;
         }
