@@ -35,6 +35,7 @@ namespace Spectra.Application.Employees.Dto
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
+        public string UserId { get; set; }
         public string UserImage { get; set; }
 
         public static TypeAdapterConfig GetConfigurations() => TypeAdapterConfig<Employee, EmployeeListDto>

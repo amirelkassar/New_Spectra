@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import GetErrorMsg from '@/components/getErrorMsg';
 import { GenderSelect } from '@/components/inputs/gender-select';
 import { ProfessionSelect } from '@/components/inputs/profession-select';
@@ -224,10 +222,7 @@ const DoctorAndSpecialistFields = ({ form = {} }) => {
       <SpecializationSingleSelect
         label='التخصص الرئيسي'
         name='mainSpecializationId'
-        error={GetErrorMsg(
-          form?.error,
-          'MainSpecializationId'
-        )}
+        error={GetErrorMsg(form?.error, 'MainSpecializationId')}
         onChange={form?.onChange}
         value={form?.data?.mainSpecializationId}
       />
@@ -247,7 +242,6 @@ const DoctorAndSpecialistFields = ({ form = {} }) => {
         error={GetErrorMsg(form?.error, 'LicenseNumber')}
         onChange={form?.onChange}
         value={form?.data?.licenseNumber}
-        type='number'
       />
 
       <TextInput

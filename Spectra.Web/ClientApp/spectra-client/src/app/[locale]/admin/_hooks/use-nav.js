@@ -40,25 +40,19 @@ export const useNav = () => {
       {
         name: 'العملاء',
         route: ROUTES.ADMIN.CLIENTS.DASHBOARD,
-        isActive: path.includes(
-          ROUTES.ADMIN.CLIENTS.DASHBOARD
-        ),
+        isActive: path.includes(ROUTES.ADMIN.CLIENTS.DASHBOARD),
         icon: <Customer />,
       },
       {
         name: 'الموظفين',
-        route: ROUTES.ADMIN.STAFF.DASHBOARD,
-        isActive: path.includes(
-          ROUTES.ADMIN.STAFF.DASHBOARD
-        ),
+        route: ROUTES.ADMIN.STAFF.HOME,
+        isActive: path.includes(ROUTES.ADMIN.STAFF.HOME),
         icon: <StaffIcon />,
       },
       {
         name: 'تقارير',
         route: ROUTES.ADMIN.REPORT.DASHBOARD,
-        isActive: path.includes(
-          ROUTES.ADMIN.REPORT.DASHBOARD
-        ),
+        isActive: path.includes(ROUTES.ADMIN.REPORT.DASHBOARD),
         icon: <ReportsIcon />,
       },
       {
@@ -70,17 +64,13 @@ export const useNav = () => {
       {
         name: 'العقود',
         route: ROUTES.ADMIN.CONTRACTS.DASHBOARD,
-        isActive: path.includes(
-          ROUTES.ADMIN.CONTRACTS.DASHBOARD
-        ),
+        isActive: path.includes(ROUTES.ADMIN.CONTRACTS.DASHBOARD),
         icon: <ContractsIcon />,
       },
       {
         name: 'الإعدادات',
         route: ROUTES.ADMIN.SETTINGS.DASHBOARD,
-        isActive: path.includes(
-          ROUTES.ADMIN.SETTINGS.DASHBOARD
-        ),
+        isActive: path.includes(ROUTES.ADMIN.SETTINGS.DASHBOARD),
         icon: <SettingsIcon />,
         type: 'settings',
       },

@@ -1,23 +1,17 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import MultiSelectInput from '@/components/inputs/multi-select-input';
 import { useSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import { useLocale } from 'next-intl';
+import { cn } from '@/lib/utils';
 
 export const SpecializationMultiSelect = ({
-  error,
   defaultValue = [],
   name = '',
-  label = '',
-  placeholder = '',
   onSelect = () => {},
+  ...props
 }) => {
   const locale = useLocale();
 
@@ -76,20 +70,21 @@ export const SpecializationMultiSelect = ({
 
   return (
     <MultiSelectInput
+      {...props}
       data={options}
       searchable
-      size='lg'
+      size={props.size || 'lg'}
       classNames={{
-        label:
+        ...props.classNames,
+        label: cn(
           'text-xs md:text-base mdl:text-base mb-2 ps-0',
-        input: 'mdl:rounded-xl',
+          props.classNames?.label
+        ),
+        input: cn('mdl:rounded-xl', props.classNames?.input),
       }}
-      label={label}
-      placeholder={placeholder}
       nothingFoundMessage={messages}
-      value={value}
       onChange={onChange}
-      error={error}
+      value={value}
     />
   );
 };

@@ -9,17 +9,16 @@ import {
 import { apiAdmin } from '@/api/axios';
 import { mainData } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
+import { initialSiteQueries } from '@/hooks/queries/initials';
 
-export const initialQueries = {
-  skipCount: 0,
-  maxCount: 5,
-};
+const initailCustomQueries = null;
+
+export const initialQueries = initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.services';
 
 export const getServices = async (queries) =>
-  (await apiAdmin.get(mainData.services.list(queries)))
-    .data;
+  (await apiAdmin.get(mainData.services.list(queries))).data;
 
 export const prefetchServices = async () => {
   const queryClient = new QueryClient();
@@ -62,11 +61,8 @@ export const useServicesForListing = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: async () => {
-      return (
-        await apiAdmin.get(
-          mainData.services.forListing(queries)
-        )
-      ).data;
+      return (await apiAdmin.get(mainData.services.forListing(queries)))
+        .data;
     },
   });
 };
@@ -96,7 +92,9 @@ export const useDeleteService = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
   });
 };
@@ -114,7 +112,9 @@ export const useAddNewService = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
     },
     onError: () => {},
   });
@@ -133,7 +133,9 @@ export const useUpdateCurrentService = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      });
     },
     onError: () => {},
   });

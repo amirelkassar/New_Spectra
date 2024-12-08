@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Enums;
+﻿using Microsoft.AspNetCore.Http;
+using Spectra.Domain.Shared.Enums;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.Employees.Dto
@@ -25,12 +26,14 @@ namespace Spectra.Application.Employees.Dto
         public string JobName { get; set; }
         public JobTypes JobType { get; set; }
         public string? JobDescription { get; set; }
-        public string LicenseNumber { get; set; }
+        public string? LicenseNumber { get; set; }
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public double? WorkingHours { get; set; }
-        public string ApprovedBy { get; set; }
-        public AcademicDegrees AcademicDegree { get; set; }
+        public string? ApprovedBy { get; set; }
+        public AcademicDegrees? AcademicDegree { get; set; }
+        public IFormFile? UserImage { get; set; }
+        public string? Password { get; set; }
 
     }
 }

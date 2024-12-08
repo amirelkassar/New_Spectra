@@ -151,7 +151,9 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 {
                     Emailaddress = input.Emailaddress
                 },
-                WorkingHours = input.WorkingHours
+                WorkingHours = input.WorkingHours,
+                Password = input.Password,
+                UserImage=input.UserImage
             };
             var response = await _mediator.Send(command);
             return response;

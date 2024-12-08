@@ -54,8 +54,7 @@ const ROUTES = {
     SETTINGS: {
       HOME: '/client/settings',
       CHANGE_PASSWORD: '/client/settings/change-password',
-      TERMS_AND_CONDITIONS:
-        '/client/settings/terms-and-conditions',
+      TERMS_AND_CONDITIONS: '/client/settings/terms-and-conditions',
       PRIVACY_POLICY: '/client/settings/privacy-policy',
       COMPLAINTS: '/client/settings/complaints',
     },
@@ -64,8 +63,7 @@ const ROUTES = {
   ADMIN: {
     MAIN: '/admin/main',
     APPOINTMENTS: '/admin/appointments',
-    APPOINTMENTSDETAILS: (id) =>
-      `/admin/appointments/${id}`,
+    APPOINTMENTSDETAILS: (id) => `/admin/appointments/${id}`,
     REQUESTS: '/admin/requests',
     REQUESTSNEW: '/admin/requests/new',
     REQUESTSREJECTED: '/admin/requests/rejected',
@@ -74,16 +72,13 @@ const ROUTES = {
     CLIENTS: {
       DASHBOARD: '/admin/clients',
       ORGANIZATION: {
-        DETAILS: (id) =>
-          `/admin/clients/organization/${id}/details`,
+        DETAILS: (id) => `/admin/clients/organization/${id}/details`,
         DETAILSEDIT: (id) =>
           `/admin/clients/organization/${id}/details/edit`,
         EMPLOYEE: (id) =>
           `/admin/clients/organization/${id}/employee`,
-        CLIENTS: (id) =>
-          `/admin/clients/organization/${id}/clients`,
-        DOCTORS: (id) =>
-          `/admin/clients/organization/${id}/doctors`,
+        CLIENTS: (id) => `/admin/clients/organization/${id}/clients`,
+        DOCTORS: (id) => `/admin/clients/organization/${id}/doctors`,
         DOCTORSDETAILS: (id, id2) =>
           `/admin/clients/organization/${id}/doctors/${id2}`,
         APPOINTMENTS: (id) =>
@@ -98,8 +93,7 @@ const ROUTES = {
           `/admin/clients/organization/${id}/clients/${id2}/patients/edit`,
       },
       FAMILY: {
-        DETAILS: (id) =>
-          `/admin/clients/family/${id}/details`,
+        DETAILS: (id) => `/admin/clients/family/${id}/details`,
         DETAILSEDIT: (id) =>
           `/admin/clients/family/${id}/details/edit`,
         APPOINTMENTS: (id) =>
@@ -110,18 +104,15 @@ const ROUTES = {
           `/admin/clients/family/${id}/prescriptions/${id2}`,
         PRESCRIPTIONSEDIT: (id, id2) =>
           `/admin/clients/family/${id}/prescriptions/${id2}/edit`,
-        REPORTS: (id) =>
-          `/admin/clients/family/${id}/reports`,
+        REPORTS: (id) => `/admin/clients/family/${id}/reports`,
         REPORTSDETAILS: (id, id2) =>
           `/admin/clients/family/${id}/reports/${id2}`,
-        PATIENTS: (id) =>
-          `/admin/clients/family/${id}/patients`,
+        PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
         PATIENTSEDIT: (id) =>
           `/admin/clients/family/${id}/patients/edit`,
       },
       PATIENTSDETAILS: {
-        DASHBOARD: (id) =>
-          `/admin/clients/patientDetails/${id}`,
+        DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
         APPOINTMENTS: (id) =>
           `/admin/clients/patientDetails/${id}/appointments`,
         PRESCRIPTIONS: (id) =>
@@ -133,21 +124,17 @@ const ROUTES = {
       },
     },
     STAFF: {
-      DASHBOARD: '/admin/staff',
-      STAFFID: (id) => `/admin/staff/${id}`,
-      STAFFADD: `/admin/staff/add`,
-      STAFFIDEDIT: (id) => `/admin/staff/${id}?edit=true`,
-      STAFFIDINFORMATION: (id) =>
-        `/admin/staff/${id}/information`,
-      STAFFIDINFORMATIONEDIT: (id) =>
-        `/admin/staff/${id}/information?edit=true`,
-      STAFFIDCONTRACTS: (id) =>
-        `/admin/staff/${id}/contracts`,
-
-      STAFFIDPRESCRIPTIONS: (id) =>
+      HOME: '/admin/staff',
+      STAFF_ADD: `/admin/staff/add`,
+      STAFF_ID: (id) => `/admin/staff/${id}`,
+      STAFF_ID_EDIT: (id) => `/admin/staff/${id}?edit=true`,
+      STAFF_ID_APPOINTMENTS: (id) =>
+        `/admin/staff/${id}/appointments`,
+      STAFF_ID_CONTRACTS: (id) => `/admin/staff/${id}/contracts`,
+      STAFF_ID_PRESCRIPTIONS: (id) =>
         `/admin/staff/${id}/prescriptions`,
-      STAFFIDCLIENTS: (id) => `/admin/staff/${id}/clients`,
-      STAFFIDTEAM: (id) => `/admin/staff/${id}/team`,
+      STAFF_ID_CLIENTS: (id) => `/admin/staff/${id}/clients`,
+      STAFF_ID_TEAM: (id) => `/admin/staff/${id}/team`,
     },
     REPORT: {
       DASHBOARD: '/admin/reports',
@@ -157,22 +144,19 @@ const ROUTES = {
       HOME: '/admin/main-data',
       DRUGSADD: '/admin/main-data/add-drugs',
       DRUGSDETAILS: (id) => `/admin/main-data/${id}`,
-      DRUGSDETAILSEDIT: (id) =>
-        `/admin/main-data/${id}/edit`,
+      DRUGSDETAILSEDIT: (id) => `/admin/main-data/${id}/edit`,
       SPECIALTIES: '/admin/main-data/doctors-specialties',
       SPECIALTIESID: (id) =>
         `/admin/main-data/doctors-specialties/${id}`,
       SPECIALTIESIDEDIT: (id) =>
         `/admin/main-data/doctors-specialties/${id}/edit`,
-      SPECIALTIESADD:
-        '/admin/main-data/doctors-specialties/add',
+      SPECIALTIESADD: '/admin/main-data/doctors-specialties/add',
       ANALYSISRUMORS: '/admin/main-data/analysis-rumors',
       ANALYSISRUMORSDETAILS: (id) =>
         `/admin/main-data/analysis-rumors/${id}`,
       ANALYSISRUMORSDETAILSEDIT: (id) =>
         `/admin/main-data/analysis-rumors/${id}/edit`,
-      ANALYSISRUMORSADD:
-        '/admin/main-data/analysis-rumors/add',
+      ANALYSISRUMORSADD: '/admin/main-data/analysis-rumors/add',
       DIAGNOSTICS: '/admin/main-data/diagnostics',
       DIAGNOSTICSADD: '/admin/main-data/diagnostics/add',
       DIAGNOSTICSDETAILS: (id) =>
@@ -180,15 +164,13 @@ const ROUTES = {
       DIAGNOSTICSDETAILSEDIT: (id) =>
         `/admin/main-data/diagnostics/${id}/edit`,
       COMPLAINTS: '/admin/main-data/complaints',
-      COMPLAINTSDETAILS: (id) =>
-        `/admin/main-data/complaints/${id}`,
+      COMPLAINTSDETAILS: (id) => `/admin/main-data/complaints/${id}`,
       COMPLAINTSDETAILSEDIT: (id) =>
         `/admin/main-data/complaints/${id}/edit`,
       COMPLAINTSADD: '/admin/main-data/complaints/add',
       SERVICES: '/admin/main-data/services',
       SERVICESADD: '/admin/main-data/services/add',
-      SERVICESDETAILS: (id) =>
-        `/admin/main-data/services/${id}`,
+      SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
       SERVICESDETAILSEDIT: (id) =>
         `/admin/main-data/services/${id}/edit`,
       TESTSINTERIOR: '/admin/main-data/testsInterior',
@@ -196,8 +178,7 @@ const ROUTES = {
         `/admin/main-data/testsInterior/${id}`,
       TESTSINTERIORDETAILSEDIT: (id) =>
         `/admin/main-data/testsInterior/${id}/edit`,
-      TESTSINTERIORADD:
-        '/admin/main-data/testsInterior/add',
+      TESTSINTERIORADD: '/admin/main-data/testsInterior/add',
       DEPARTMENTS: '/admin/main-data/departments',
       DEPARTMENTSDETAILS: (id) =>
         `/admin/main-data/departments/${id}`,
@@ -228,32 +209,26 @@ const ROUTES = {
       CONTENT: {
         DASHBOARD: '/admin/settings/content',
         BANNERSAD: '/admin/settings/content/bannersAD',
-        MEDICAL:
-          '/admin/settings/content/medicalSpecialties',
+        MEDICAL: '/admin/settings/content/medicalSpecialties',
         MEDICALID: (id) =>
           `/admin/settings/content/medicalSpecialties/${id}`,
         ARTICLES: '/admin/settings/content/articles',
-        ADDARTICLES:
-          '/admin/settings/content/articles/add-articles',
+        ADDARTICLES: '/admin/settings/content/articles/add-articles',
         EDITARTICLES: (id) =>
           `/admin/settings/content/articles/${id}`,
         STORIES: '/admin/settings/content/stories',
-        STORIESID: (id) =>
-          `/admin/settings/content/stories/${id}`,
+        STORIESID: (id) => `/admin/settings/content/stories/${id}`,
         STORIESADD: '/admin/settings/content/stories/add',
       },
       PACKAGES: {
         DASHBOARD: '/admin/settings/packages',
-        PACKAGESDETAILS: (id) =>
-          `/admin/settings/packages/${id}`,
-        PACKAGESEDIT: (id) =>
-          `/admin/settings/packages/${id}/edit`,
+        PACKAGESDETAILS: (id) => `/admin/settings/packages/${id}`,
+        PACKAGESEDIT: (id) => `/admin/settings/packages/${id}/edit`,
         PACKAGESADD: '/admin/settings/packages/add',
       },
       COMPLAINTS: {
         DASHBOARD: '/admin/settings/complaints',
-        COMPLAINTSDETAILS: (id) =>
-          `/admin/settings/complaints/${id}`,
+        COMPLAINTSDETAILS: (id) => `/admin/settings/complaints/${id}`,
       },
     },
   },
@@ -265,12 +240,10 @@ const ROUTES = {
     APPOINTMENTSDEFERRED: '/doctor/appointments/deferred',
     APPOINTMENTSUPCOMING: '/doctor/appointments/upcoming',
     APPOINTMENTSPREVIOUS: '/doctor/appointments/previous',
-    APPOINTMENTSWORK:
-      '/doctor/appointments/appointmentsWork',
+    APPOINTMENTSWORK: '/doctor/appointments/appointmentsWork',
     APPOINTMENTSWORKID: (id) =>
       `/doctor/appointments/appointmentsWork/${id}`,
-    APPOINTMENTSWORKADD:
-      '/doctor/appointments/appointmentsWork/add',
+    APPOINTMENTSWORKADD: '/doctor/appointments/appointmentsWork/add',
     RATINGS: {
       DASHBOARD: '/doctor/ratings',
     },
@@ -280,25 +253,21 @@ const ROUTES = {
       REPORT: '/doctor/clients/reports',
       INVITATIONCODE: '/doctor/clients/invitationCode',
       DETAILS: (id) => `/doctor/clients/${id}/details`,
-      REPORTPATIENTS: (id) =>
-        `/doctor/clients/${id}/reports`,
+      REPORTPATIENTS: (id) => `/doctor/clients/${id}/reports`,
       REPORTPATIENTSDETAILS: (id, id2) =>
         `/doctor/clients/${id}/reports/${id2}`,
       PRESCRIPTIONSPATIENTS: (id) =>
         `/doctor/clients/${id}/prescriptions`,
       PRESCRIPTIONSPATIENTSDETAILS: (id, id2) =>
         `/doctor/clients/${id}/prescriptions/${id2}`,
-      ACTIVITIESSPATIENTS: (id) =>
-        `/doctor/clients/${id}/activities`,
-      ADDREPORTPATIENTS: (id) =>
-        `/doctor/clients/${id}/addReport`,
+      ACTIVITIESSPATIENTS: (id) => `/doctor/clients/${id}/activities`,
+      ADDREPORTPATIENTS: (id) => `/doctor/clients/${id}/addReport`,
       ADDPRESCRIPTIONSPATIENTS: (id) =>
         `/doctor/clients/${id}/addPrescriptions`,
       PATIENTSDETAILS: {
         DETAILS: (id) =>
           `/doctor/clients/patientDetails/${id}/details`,
-        EDIT: (id) =>
-          `/doctor/clients/patientDetails/${id}/edit`,
+        EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
       },
     },
     WALLET: {

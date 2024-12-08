@@ -18,7 +18,12 @@ export const useUpdateDepatment = ({ initialValues }) => {
     reset,
   } = useEditSection();
 
-  const [formData, setFormData] = useState(initialValues);
+  const [formData, setFormData] = useState({
+    ...initialValues,
+    specsifications: initialValues?.specsifications?.map(
+      (spec) => spec?.id
+    ),
+  });
 
   const onChange = useCallback(
     (e) => {

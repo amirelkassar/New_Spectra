@@ -13,6 +13,7 @@ namespace Spectra.Domain.Contracts
         public ContractStates ContractState { get; private set; }
         public string EmployeeId { get; private set; }
         public string EmployeeUserId { get; private set; }
+        public string EmployeeHeadUserId { get; private set; }
         public string EmployeeHeadId { get; private set; }
         public string EmployeeHeadName { get; private set; }
         public string EmployeeName { get; private set; }
@@ -37,8 +38,9 @@ namespace Spectra.Domain.Contracts
             string employeeId,
             string employeeName,
             string employeeUserId,
-            string employeeHeadId,
-            string employeeHeadName,
+            string headId,
+            string headName,
+            string headUserId,
             string titel,
             ContractStates contractCase,
             ICollection<ContractVersion> versions) : base(id)
@@ -48,8 +50,9 @@ namespace Spectra.Domain.Contracts
             EmployeeId = employeeId;
             EmployeeName = employeeName;
             EmployeeUserId = employeeUserId;
-            EmployeeHeadId = employeeHeadId;
-            EmployeeHeadName = employeeHeadName;
+            EmployeeHeadId = headId;
+            EmployeeHeadName = headName;
+            EmployeeHeadUserId = headUserId;
             HoursOfWork = hoursOfWork;
             DaysOfWork = daysOfWork;
             Versions = versions;
@@ -60,8 +63,9 @@ namespace Spectra.Domain.Contracts
             string employeeId,
             string employeeName,
             string employeeUserId,
-            string employeeHeadId,
-            string employeeHeadName,
+            string headId,
+            string headName,
+            string headUserId,
             string titel,
             ContractStates contractCase,
             ICollection<ContractVersion> versions)
@@ -72,13 +76,14 @@ namespace Spectra.Domain.Contracts
             ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(employeeId, nameof(employeeId));
             ArgumentNullException.ThrowIfNull(employeeUserId, nameof(employeeUserId));
-            ArgumentNullException.ThrowIfNull(employeeHeadId, nameof(employeeHeadId));
-            ArgumentNullException.ThrowIfNull(employeeHeadName, nameof(employeeHeadName));
+            ArgumentNullException.ThrowIfNull(headId, nameof(headId));
+            ArgumentNullException.ThrowIfNull(headName, nameof(headName));
+            ArgumentNullException.ThrowIfNull(headUserId, nameof(headUserId));
             ArgumentNullException.ThrowIfNull(titel, nameof(titel));
             ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(versions, nameof(versions));
 
-            return new EmploymentContract(id, hoursOfWork, daysOfWork, employeeId, employeeName, employeeUserId, employeeHeadId, employeeHeadName, titel, contractCase, versions);
+            return new EmploymentContract(id, hoursOfWork, daysOfWork, employeeId, employeeName, employeeUserId, headId, headName,headUserId, titel, contractCase, versions);
         }
 
         public void Accept()
