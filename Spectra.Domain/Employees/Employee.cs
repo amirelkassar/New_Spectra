@@ -38,6 +38,8 @@ namespace Spectra.Domain.Employees
         public int? Rating { get; set; }
         public int? TotalRates { get; set; }
 
+        public string UserImage { get; set; }
+
         protected Employee() { }
         public Employee(string id,
                    Name name,

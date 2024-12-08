@@ -86,6 +86,7 @@ namespace Spectra.Application.Employees.Commands
                 var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
                 var imagePath = await _documentHellper.CreateAttachment(request.UserImage, folderPath);
                 await _identityService.UpdateUserImageAsync(employee.UserId, imagePath);
+                employee.UserImage = imagePath;
             }
 
             if (!request.EmailAddress.Emailaddress.Equals(employee.EmailAddress.Emailaddress, StringComparison.OrdinalIgnoreCase))
