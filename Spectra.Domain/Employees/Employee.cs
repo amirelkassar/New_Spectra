@@ -40,6 +40,8 @@ namespace Spectra.Domain.Employees
 
         public string UserImage { get; set; }
 
+        public bool HasActiveContract { get; set; }
+        public string ContractId { get; set; }
         protected Employee() { }
         public Employee(string id,
                    Name name,

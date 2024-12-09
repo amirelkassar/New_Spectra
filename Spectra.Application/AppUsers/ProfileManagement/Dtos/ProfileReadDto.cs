@@ -54,6 +54,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Dtos
         public ICollection<EmployeeSpecialization>? Specializations { get; set; }
         public ICollection<EmployeeService>? Services { get; set; }
         public string UserImage { get; set; }
+        public bool HasActiveContract { get; set; }
 
         public static TypeAdapterConfig GetEmployeeConfiguration() => TypeAdapterConfig<Employee, ProfileReadDto>
         .NewConfig()

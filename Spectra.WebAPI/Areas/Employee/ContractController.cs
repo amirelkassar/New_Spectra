@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
@@ -20,8 +21,19 @@ namespace Spectra.WebAPI.Areas.Employee
         private readonly IMediator _mediator = mediator;
         private readonly ICurrentUser _currentUser = currentUser;
 
+
+        [HttpGet]
+        [Authorize(Roles = Roles.EmployeesRoles)]
+        public async Task<IActionResult> GetAsync(GetContractByUserIdQuery input)
+        {
+            var response = await _mediator.Send(input);
+            return response.SuccessOpration
+                ? Ok(response)
+                : BadRequest(response);
+        }
+
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = Roles.EmployeesRoles)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {
             var response = await _mediator.Send(input);
@@ -29,7 +41,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = Roles.EmployeesRoles)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateContractModel input)
         {
             var response = await _mediator.Send(new UpdateContractCommand
@@ -46,7 +58,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("cancel")]
-        [Authorize]
+        [Authorize(Roles = Roles.EmployeesRoles)]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -64,7 +76,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("reject")]
-        [Authorize]
+        [Authorize(Roles = Roles.EmployeesRoles)]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -82,7 +94,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("accept")]
-        [Authorize]
+        [Authorize(Roles = Roles.EmployeesRoles)]
         public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand

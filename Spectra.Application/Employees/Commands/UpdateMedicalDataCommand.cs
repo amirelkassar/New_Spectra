@@ -28,75 +28,118 @@ namespace Spectra.Application.Employees.Commands
 
             public async Task<OperationResult> Handle(UpdateMedicalDataCommand request, CancellationToken cancellationToken)
             {
-                var medicalProvider = await _medicalRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Employees", request.Id);
+                var medicalProvider = await GetMedicalProviderAsync(request.Id);
+                await ValidateSpecializationsAsync(request.Specializations);
+                await ValidateServicesAsync(request.Services);
 
-                var (specializations, specTotal) = await _specializationRepository.GetAllAsync();
+                await UpdateSpecializationsAsync(medicalProvider, request.MainSpecializationId, request.Specializations);
+                UpdateMainSpecialization(medicalProvider, request.MainSpecializationId);
+                await UpdateMainSectionAsync(medicalProvider, request.MainSpecializationId);
+                await UpdateServicesAsync(medicalProvider, request.Services);
 
-                foreach (var spec in request.Specializations)
+                await _medicalRepository.UpdateAsync(medicalProvider);
+
+                return OperationResult.Success();
+            }
+
+
+            private async Task<Employee> GetMedicalProviderAsync(string id)
+            {
+                return await _medicalRepository.GetByIdAsync(id)
+                       ?? throw new NotFoundException("Employees", id);
+            }
+
+            private async Task ValidateSpecializationsAsync(ICollection<string>? specializations)
+            {
+                if (specializations == null || !specializations.Any()) return;
+
+                var (allSpecializations, _) = await _specializationRepository.GetAllAsync();
+                foreach (var spec in specializations)
                 {
-                    if (!specializations.Any(s => s.Id == spec))
+                    if (!allSpecializations.Any(s => s.Id == spec))
                     {
                         throw new NotFoundException("Specializations", spec);
                     }
                 }
+            }
 
-                var (checkServices, checkServiceTotal) = await _serviceRepository.GetAllAsync();
+            private async Task ValidateServicesAsync(ICollection<string>? services)
+            {
+                if (services == null || !services.Any()) return;
 
-                foreach (var service in request.Services)
+                var (allServices, _) = await _serviceRepository.GetAllAsync();
+                foreach (var service in services)
                 {
-                    if (!checkServices.Any(s => s.Id == service))
+                    if (!allServices.Any(s => s.Id == service))
                     {
                         throw new NotFoundException("Services", service);
                     }
                 }
+            }
 
-                #region Update Specializations
-                var (currentSpecializations, currentSpecializationsTotal) = await _specializationRepository
-                   .GetAllAsync(s => s.Id == medicalProvider.MainSpecializationId || medicalProvider.Specializations.Select(cs => cs.Id).Any(cs => cs == s.Id));
+            private async Task UpdateSpecializationsAsync(Employee medicalProvider, string mainSpecializationId, ICollection<string>? specializations)
+            {
+                var (currentSpecializations, _) = await _specializationRepository
+                    .GetAllAsync(s => s.Id == medicalProvider.MainSpecializationId ||
+                                      medicalProvider.Specializations.Select(cs => cs.Id).Any(cs => cs == s.Id));
 
-                var (newSpecializations, newSpecializationsTotal) = await _specializationRepository
-                    .GetAllAsync(s => s.Id == request.MainSpecializationId || request.Specializations.Any(cs => cs == s.Id));
+                var (newSpecializations, _) = await _specializationRepository
+                    .GetAllAsync(s => s.Id == mainSpecializationId ||
+                                      (specializations != null && specializations.Any(cs => cs == s.Id)));
 
+                var specializationsToBeAdded = newSpecializations
+                    .Where(ns => !currentSpecializations.Any(cs => cs.Id == ns.Id))
+                    .ToArray();
 
-                var specializationsToBeAdded = newSpecializations.Where(ns => !currentSpecializations.Select(s => s.Id).Any(cs => cs == ns.Id)).ToArray();
-                var specializationsToBeRemoved = currentSpecializations.Where(ns => !newSpecializations.Select(s => s.Id).Any(cs => cs == ns.Id)).ToArray();
+                var specializationsToBeRemoved = currentSpecializations
+                    .Where(cs => !newSpecializations.Any(ns => ns.Id == cs.Id))
+                    .ToArray();
 
-                if (specializationsToBeAdded.Length > 0)
+                await AddSpecializationsAsync(medicalProvider, specializationsToBeAdded);
+                await RemoveSpecializationsAsync(medicalProvider, specializationsToBeRemoved);
+            }
+
+            private async Task AddSpecializationsAsync(Employee medicalProvider, Specialization[] specializationsToBeAdded)
+            {
+                foreach (var spec in specializationsToBeAdded)
                 {
-                    Parallel.ForEach(specializationsToBeAdded, async spec =>
+                    spec.DoctorCount++;
+                    medicalProvider.Specializations.Add(new EmployeeSpecialization
                     {
-                        spec.DoctorCount++;
-                        medicalProvider.Specializations.Add(new EmployeeSpecialization
-                        {
-                            Id = spec.Id,
-                            EnName = spec.EnName,
-                            ArName = spec.ArName
-                        });
-                        await _specializationRepository.UpdateAsync(spec);
+                        Id = spec.Id,
+                        EnName = spec.EnName,
+                        ArName = spec.ArName
                     });
+                    await _specializationRepository.UpdateAsync(spec);
                 }
+            }
 
-                if (specializationsToBeRemoved.Length > 0)
+            private async Task RemoveSpecializationsAsync(Employee medicalProvider, Specialization[] specializationsToBeRemoved)
+            {
+                foreach (var spec in specializationsToBeRemoved)
                 {
-                    Parallel.ForEach(specializationsToBeRemoved, async spec =>
-                    {
-                        spec.DoctorCount--;
-                        var existSpec = medicalProvider.Specializations.First(s => s.Id == spec.Id);
-                        medicalProvider.Specializations.Remove(existSpec);
-                        await _specializationRepository.UpdateAsync(spec);
-                    });
+                    spec.DoctorCount--;
+                    var existSpec = medicalProvider.Specializations.First(s => s.Id == spec.Id);
+                    medicalProvider.Specializations.Remove(existSpec);
+                    await _specializationRepository.UpdateAsync(spec);
                 }
-                #endregion
+            }
 
-                #region Update Main Specialization
-                var newMainSpecialization = newSpecializations.First(m => m.Id == request.MainSpecializationId);
-                medicalProvider.MainSpecializationId = request.MainSpecializationId;
+            private void UpdateMainSpecialization(Employee medicalProvider, string mainSpecializationId)
+            {
+                var newMainSpecialization = _specializationRepository.GetAllAsync()
+                    .Result.Item1.First(m => m.Id == mainSpecializationId);
+
+                medicalProvider.MainSpecializationId = mainSpecializationId;
                 medicalProvider.MainSpecializationEnName = newMainSpecialization.EnName;
                 medicalProvider.MainSpecializationArName = newMainSpecialization.ArName;
-                #endregion
+            }
 
-                #region Update Main Section
+            private async Task UpdateMainSectionAsync(Employee medicalProvider, string mainSpecializationId)
+            {
+                var newMainSpecialization = await _specializationRepository.GetAsync(s => s.Id == mainSpecializationId);
                 var newSection = await _sectionRepository.GetAsync(s => s.Specsifications.Any(sp => sp.Id == newMainSpecialization.Id));
+
                 if (newSection != null)
                 {
                     medicalProvider.SectionId = newSection.Id;
@@ -109,22 +152,20 @@ namespace Spectra.Application.Employees.Commands
                     medicalProvider.SectionEnName = null;
                     medicalProvider.SectionArEnName = null;
                 }
-                #endregion
+            }
 
-                #region Update Services
-                var (services,totalServices) =await _serviceRepository.GetAllAsync(s => request.Services.Any(rs => rs == s.Id));
+            private async Task UpdateServicesAsync(Employee medicalProvider, ICollection<string>? services)
+            {
+                if (services == null || !services.Any()) return;
+
+                var (allServices, _) = await _serviceRepository.GetAllAsync(s => services.Any(rs => rs == s.Id));
                 medicalProvider.Services.Clear();
-                services.ToList().ForEach(service => medicalProvider.Services.Add(new EmployeeService 
+                allServices.ToList().ForEach(service => medicalProvider.Services.Add(new EmployeeService
                 {
                     Id = service.Id,
                     EnName = service.EnName,
-                    ArName= service.ArName
+                    ArName = service.ArName
                 }));
-                #endregion
-
-                await _medicalRepository.UpdateAsync(medicalProvider);
-
-                return OperationResult.Success();
             }
         }
     }

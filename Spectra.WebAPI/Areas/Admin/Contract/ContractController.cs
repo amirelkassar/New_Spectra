@@ -31,14 +31,9 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpGet()]
-        public async Task<ActionResult> GetAsync([FromQuery] string contractId)
+        public async Task<ActionResult> GetAsync([FromQuery] GetContractById input)
         {
-            var contract = await _mediator.Send(new GetContractById
-            {
-                Id = contractId,
-                CallerUserId = _currentUser.Id,
-                CallerRole = Roles.SystemAdmin
-            });
+            var contract = await _mediator.Send(input);
             return Ok(contract);
         }
 

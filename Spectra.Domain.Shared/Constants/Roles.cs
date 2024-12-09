@@ -1,6 +1,6 @@
 ﻿namespace Spectra.Domain.Shared.Constants
 {
-    public abstract class Roles
+    public static class Roles
     {
         public const string SystemAdmin = nameof(SystemAdmin);
         public const string User = nameof(User);
@@ -11,6 +11,7 @@
         public const string Client = nameof(Client);
         public const string CustomerSupport = nameof(CustomerSupport);
         public const string Accountant = nameof(Accountant);
-        public const string Secretary = nameof(Secretary);
+
+        public const string EmployeesRoles = $"{Doctor},{Specialist},{Accountant},{CustomerSupport}";
     }
 }

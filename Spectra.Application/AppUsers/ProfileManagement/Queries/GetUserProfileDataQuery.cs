@@ -37,7 +37,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Queries
 
                 switch (_currentUser.Role)
                 {
-                    case Roles.Secretary:
+                    case Roles.CustomerSupport:
                     case Roles.Doctor:
                     case Roles.ServiceHead:
                     case Roles.DepartmentHead:

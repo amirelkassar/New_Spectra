@@ -42,13 +42,11 @@ namespace Spectra.Application.Employees.Commands
 
     public class UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> empRepo,
         IDocumentHellper documentHellper,
-        IIdentityService identityService,
-        UserManager<AppUser> userManager) : IRequestHandler<UpdateEmployeeCommand, OperationResult>
+        IIdentityService identityService) : IRequestHandler<UpdateEmployeeCommand, OperationResult>
     {
         private readonly IBaseMongoDbRepository<Employee> _empRepo = empRepo;
         private readonly IDocumentHellper _documentHellper = documentHellper;
         private readonly IIdentityService _identityService = identityService;
-        private readonly UserManager<AppUser> _userManager = userManager;
 
         public async Task<OperationResult> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {

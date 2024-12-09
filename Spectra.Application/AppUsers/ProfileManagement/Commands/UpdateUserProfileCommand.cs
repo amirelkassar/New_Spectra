@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 {
-    public class UpdateUserDataCommand : IRequest<OperationResult>
+    public class UpdateUserProfileCommand : IRequest<OperationResult>
     {
         [Required]
         public string FirstName { get; set; }
@@ -30,13 +30,13 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 
         public class UpdateUserDataCommandHandler(ICurrentUser currentUser,
             IIdentityService identityService,
-            IDocumentHellper documentHellper) : IRequestHandler<UpdateUserDataCommand, OperationResult>
+            IDocumentHellper documentHellper) : IRequestHandler<UpdateUserProfileCommand, OperationResult>
         {
             private readonly ICurrentUser _currentUser = currentUser;
             private readonly IIdentityService _identityService = identityService;
             private readonly IDocumentHellper _documentHellper = documentHellper;
 
-            public async Task<OperationResult> Handle(UpdateUserDataCommand request, CancellationToken cancellationToken)
+            public async Task<OperationResult> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
             {
                 var userOperation = await _identityService.FindByIdAsync(_currentUser.Id) as OperationResult<AppUser>;
                 var user = userOperation.Data;
@@ -68,6 +68,9 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
                     if (!res.SuccessOpration)
                         return res;
                 }
+
+                user.Name = request.FirstName;
+                user.SurName = request.LastName;
 
                 var updateUserRes = await _identityService.UpdateUserAsync(user);
                 if (!updateUserRes.SuccessOpration)
