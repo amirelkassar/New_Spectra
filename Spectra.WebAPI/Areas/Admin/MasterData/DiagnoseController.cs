@@ -12,7 +12,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         private readonly IDiagnosesService _diagnosetService = diagnosetService;
 
         [HttpGet("list")]
-        [Authorize(AdminDiagnosePermissions.ReadList)]
         public async Task<ActionResult> GetAllDiagnose([FromQuery] GetAllDiagnoseQuery input)
         {
             var Diagnoseies = await _diagnosetService.GetAllDiagnosess(input);
@@ -22,7 +21,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
 
         [HttpGet()]
-        [Authorize(AdminDiagnosePermissions.ReadOne)]
         public async Task<ActionResult> GetOneDiagnose([FromQuery] GetDiagnoseByIdQuery input)
         {
             var Diagnoseies = await _diagnosetService.GetDiagnosesById(input.Id);
@@ -30,14 +28,12 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminDiagnosePermissions.Create)]
         public async Task<ActionResult> CreateDiagnose([FromBody] CreateDiagnoseCommand input)
         {
             var Diagnoseies = await _diagnosetService.CreateDiagnoses(input);
             return Created("", Diagnoseies);
         }
         [HttpPut()]
-        [Authorize(AdminDiagnosePermissions.Update)]
         public async Task<ActionResult> UpdateDiagnose([FromBody] UpdateDiagnoseCommand input)
         {
             var Diagnoseies = await _diagnosetService.UpdateDiagnoses(input);
@@ -45,14 +41,12 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
             return Accepted(Diagnoseies);
         }
         [HttpDelete()]
-        [Authorize(AdminDiagnosePermissions.Delete)]
         public async Task<ActionResult> DeleteDiagnose([FromQuery] DeleteDiagnoseCommand input)
         {
             var delete = await _diagnosetService.DeleteDiagnoses(input);
             return NoContent();
         }
         [HttpPost("bulk")]
-        [Authorize(AdminDiagnosePermissions.SheetsPermissions)]
         public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _diagnosetService.CreateFromExcel(input.File);

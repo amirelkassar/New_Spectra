@@ -18,7 +18,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         private readonly IMediator _mediator = mediator;
 
         [HttpGet("employee-list")]
-        [Authorize(AdminEmployeesPermissions.ReadList)]
         public async Task<IActionResult> GetEmployeeListAsync([FromQuery] GetEmployeeListQuery input)
         {
             var response = await _employeeService.GetEmployeeListAsync(input);
@@ -26,7 +25,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpGet("medical-provider-list")]
-        [Authorize(AdminEmployeesPermissions.ReadList)]
         public async Task<IActionResult> GetMedicalProviderListAsync([FromQuery] GetMedicalProvderListQuery input)
         {
             var response = await _employeeService.GetMedicalProviderListAsync(input);
@@ -34,7 +32,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpGet()]
-        [Authorize(AdminEmployeesPermissions.ReadList)]
         public async Task<IActionResult> GetByIdAsync([FromQuery] string id)
         {
             var response = await _employeeService.GetAsync(new GetEmployeeById
@@ -45,7 +42,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpDelete]
-        [Authorize(AdminEmployeesPermissions.Delete)]
         public async Task<IActionResult> DeleteAsync([FromQuery] string id)
         {
             var response = await _employeeService.DeleteAsync(id);
@@ -53,7 +49,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpPost]
-        [Authorize(AdminEmployeesPermissions.Create)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateEmployeeDto input)
         {
             var response = await _employeeService.CreateAsync(input);
@@ -62,7 +57,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
 
 
         [HttpPut]
-        [Authorize(AdminEmployeesPermissions.Update)]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdateEmployeeDto input)
         {
             var response = await _employeeService.UpdateEmployeeAsync(input);
@@ -70,21 +64,18 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpPut("medical-data")]
-        [Authorize(AdminEmployeesPermissions.Update)]
         public async Task<IActionResult> UpdateMedicalDataAsync([FromBody] UpdateMedicalDataCommand input)
         {
             var response = await _mediator.Send(input);
             return Accepted("", response);
         }
         [HttpPost("attachment")]
-        [Authorize(AdminEmployeesPermissions.Create)]
         public async Task<IActionResult> CreateAttachmentAsync([FromForm] CreateAttachmentCommand input)
         {
             var response = await _employeeService.CreateAttachmentAsync(input);
             return Created("", response);
         }
         [HttpPut("attachment")]
-        [Authorize(AdminEmployeesPermissions.Update)]
         public async Task<IActionResult> UpdatettachmentAsync([FromForm] UpdateAttachmentCommand input)
         {
             var response = await _employeeService.UpdateAttachmentAsync(input);
@@ -92,7 +83,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpDelete("attachment")]
-        [Authorize(AdminEmployeesPermissions.Delete)]
         public async Task<IActionResult> DeleteAttachmentAsync([FromQuery] DeleteAttachmentModel input)
         {
             var response = await _employeeService.DeleteAttachmentAsync(input.FileId, input.EmployeeId);
@@ -100,7 +90,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpPost("group-member")]
-        [Authorize(AdminEmployeesPermissions.Create)]
         public async Task<IActionResult> AddGroupMemeberAsync([FromBody] UpdateEmployeeGroupCommand input)
         {
             var response = await _mediator.Send(input);
@@ -108,7 +97,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         }
 
         [HttpDelete("group-member")]
-        [Authorize(AdminEmployeesPermissions.Delete)]
         public async Task<IActionResult> RemoveGroupMemberAsync([FromQuery] RemoveEmployeeFromGroupCommand input)
         {
             var response = await _mediator.Send(input);
@@ -117,7 +105,6 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
 
 
         [HttpGet("group-member")]
-        [Authorize(AdminEmployeesPermissions.ReadOne)]
         public async Task<IActionResult>  GetGroupMemeberAsync([FromQuery] GetEmployeeGroupMemeberListQuery input)
         {
             var response = await _mediator.Send(input);

@@ -15,7 +15,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
             _entityServices = MedicalSpecialtsServices;
         }
         [HttpGet]
-        [Authorize(AdminMedicalSpecialtiesPermissions.ReadList)]
         public async Task<ActionResult> GetAllMedicalSpecialt()
         {
             var MedicalSpecialts = await _entityServices.GetAllMedicalSpecialties();
@@ -23,7 +22,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpGet("id")]
-        [Authorize(AdminMedicalSpecialtiesPermissions.ReadOne)]
         public async Task<ActionResult> GetOneMedicalSpecialt(string id)
         {
             var MedicalSpecialt = await _entityServices.GetMedicalSpecialtiesMById(id);
@@ -31,7 +29,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpPost]
-        [Authorize(AdminMedicalSpecialtiesPermissions.Create)]
         public async Task<ActionResult> CreateMedicalSpecialt(CreateMedicalSpecialtCommand input)
         {
             var MedicalSpecialt = await _entityServices.CreateMedicalSpecialties(input);
@@ -39,7 +36,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpPut("id")]
-        [Authorize(AdminMedicalSpecialtiesPermissions.Update)]
         public async Task<ActionResult> UpdateMedicalSpecialt(string id, UpdateMedicalSpecialtCommand input)
         {
             var MedicalSpecialt = await _entityServices.UpdateMedicalSpecialties(id, input);
@@ -48,7 +44,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpDelete("id")]
-        [Authorize(AdminMedicalSpecialtiesPermissions.Delete)]
         public async Task<ActionResult> DeleteMedicalSpecialt(string id)
         {
             var MedicalSpecialt = await _entityServices.DeleteMedicalSpecialties(id);

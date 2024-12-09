@@ -18,7 +18,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet("list")]
-        [Authorize(AdminDrugPermissions.ReadList)]
         public async Task<ActionResult> GetListAsync([FromQuery] GetAllDrugQuery input)
         {
             var response = await _drugtService.GetAllDrugs(input);
@@ -26,7 +25,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet("name-list")]
-        [Authorize(AdminDrugPermissions.ReadList)]
         public async Task<ActionResult> GetNameListAsync([FromQuery] GetAllDrugNamesQuery input)
         {
             var response = await _drugtService.GetAllDrugNames(input);
@@ -35,35 +33,30 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
 
         [HttpGet]
-        [Authorize(AdminDrugPermissions.ReadOne)]
         public async Task<ActionResult> GetAsync([FromQuery] string id)
         {
             var response = await _drugtService.GetDrugById(id);
             return Ok(response);
         }
         [HttpPost]
-        [Authorize(AdminDrugPermissions.Create)]
         public async Task<ActionResult> CreateAsync([FromForm] CreateDrugCommand input)
         {
             var response = await _drugtService.CreateDrug(input);
             return Created("", response);
         }
         [HttpPut]
-        [Authorize(AdminDrugPermissions.Update)]
         public async Task<ActionResult> UpdateAsync([FromForm] UpdateDrugCommand input)
         {
             var response = await _drugtService.UpdateDrug(input);
             return Accepted(response);
         }
         [HttpDelete]
-        [Authorize(AdminDrugPermissions.Delete)]
         public async Task<ActionResult> DeleteAsync([FromQuery] DeleteDrugCommand input)
         {
             var response = await _drugtService.DeleteDrug(input.Id);
             return NoContent();
         }
         [HttpPost("bulk")]
-        [Authorize(AdminDrugPermissions.SheetsPermissions)]
         public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _drugtService.CreateFromExcel(input.File);

@@ -12,7 +12,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         private readonly ISectionsService _sectionsServices = sectionsServices;
 
         [HttpGet("list")]
-        [Authorize(AdminSectionsPermissions.ReadList)]
         public async Task<ActionResult> GetAllSection([FromQuery] GetAllSectionsQuery input)
         {
             var sections = await _sectionsServices.GetAllSection(input);
@@ -20,7 +19,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet()]
-        [Authorize(AdminSectionsPermissions.ReadOne)]
         public async Task<ActionResult> GetOneSection([FromQuery] GetSectionByIdQuery input)
         {
             var section = await _sectionsServices.GetSectionById(input.Id);
@@ -28,7 +26,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminSectionsPermissions.Create)]
         public async Task<ActionResult> CreateSection([FromBody] CreateSectionsCommand input)
         {
             var section = await _sectionsServices.CreateSection(input);
@@ -36,7 +33,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPut()]
-        [Authorize(AdminSectionsPermissions.Update)]
         public async Task<ActionResult> UpdateSection([FromBody] UpdateSectionsCommand input)
         {
             var section = await _sectionsServices.UpdateSection(input);
@@ -44,7 +40,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpDelete()]
-        [Authorize(AdminSectionsPermissions.Delete)]
         public async Task<ActionResult> DeleteSection([FromQuery] DeleteSectionsCommand input)
         {
             var section = await _sectionsServices.DeleteSection(input);

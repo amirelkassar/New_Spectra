@@ -13,7 +13,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
 
         [HttpGet]
-        [Authorize(AdminPackagePermissions.ReadOne)]
         public async Task<IActionResult> GetAsync([FromQuery] GetPackageByIdQuery input)
         {
             var response = await _mediator.Send(input);
@@ -24,7 +23,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
 
         [HttpGet]
         [Route("list")]
-        [Authorize(AdminPackagePermissions.ReadList)]
         public async Task<IActionResult> GetListAsync([FromQuery] GetPackageListQuery input)
         {
             var response = await _mediator.Send(input);
@@ -34,7 +32,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminPackagePermissions.Create)]
         public async Task<IActionResult> CreateAsync([FromForm] CreatePackageCommand input)
         {
             var response = await _mediator.Send(input);
@@ -44,7 +41,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPut]
-        [Authorize(AdminPackagePermissions.Update)]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdatePackageCommand input)
         {
             var response = await _mediator.Send(input);
@@ -54,7 +50,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpDelete]
-        [Authorize(AdminPackagePermissions.Delete)]
         public async Task<IActionResult> DeleteAsync([FromQuery] DeletePackageCommand input)
         {
             var response = await _mediator.Send(input);

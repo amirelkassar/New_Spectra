@@ -17,7 +17,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet("list")]
-        [Authorize(AdminSpecializationPermissions.ReadList)]
         public async Task<ActionResult> GetAllSpecializations([FromQuery] GetAllSpecializationQuery input)
         {
             var specializations = await _specializationsServices.GetAllSpecializations(input);
@@ -25,7 +24,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet()]
-        [Authorize(AdminSpecializationPermissions.ReadOne)]
         public async Task<ActionResult> GetOneSpecialization([FromQuery] GetSpecializationByIdQuery input)
         {
             var specialization = await _specializationsServices.GetSpecializationById(input.Id);
@@ -33,7 +31,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminSpecializationPermissions.Create)]
         public async Task<ActionResult> CreateSpecialization([FromBody] CreateSpecializationCommand input)
         {
             var specialization = await _specializationsServices.CreateSpecialization(input);
@@ -41,7 +38,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost("bulk")]
-        [Authorize(AdminSpecializationPermissions.Create)]
         public async Task<ActionResult> CreateExcelFile(BulkCreateModel input)
         {
             var data = _specializationsServices.CreateFromExcel(input.File);
@@ -49,7 +45,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPut()]
-        [Authorize(AdminSpecializationPermissions.Update)]
         public async Task<ActionResult> UpdateSpecialization([FromBody] UpdateSpecializationCommand input)
         {
             var specialization = await _specializationsServices.UpdateSpecialization(input);
@@ -57,7 +52,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpDelete()]
-        [Authorize(AdminSpecializationPermissions.Delete)]
         public async Task<ActionResult> DeleteSpecialization([FromQuery] DeleteSpecializationCommand input)
         {
             var specialization = await _specializationsServices.DeleteSpecialization(input.Id);

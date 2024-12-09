@@ -24,7 +24,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpGet("list")]
-        [Authorize(AdminContractPermissions.ReadList)]
         public async Task<ActionResult> GetListAsync([FromQuery] GetContractListQuery input)
         {
             var contract = await _mediator.Send(input);
@@ -32,7 +31,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpGet()]
-        [Authorize(AdminContractPermissions.ReadList)]
         public async Task<ActionResult> GetAsync([FromQuery] string contractId)
         {
             var contract = await _mediator.Send(new GetContractById
@@ -45,7 +43,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPost("cancel")]
-        [Authorize(AdminContractPermissions.Update)]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -63,7 +60,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPost("reject")]
-        [Authorize(AdminContractPermissions.Update)]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -81,7 +77,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPost("accept")]
-        [Authorize(AdminContractPermissions.Update)]
         public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -99,7 +94,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPut()]
-        [Authorize(AdminContractPermissions.Update)]
         public async Task<ActionResult> UpdateAsync([FromBody] UpdateContractModel input)
         {
 
@@ -116,7 +110,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpDelete()]
-        [Authorize(AdminContractPermissions.Update)]
         public async Task<ActionResult> DeleteAsync([FromQuery] DeleteContractCommand input)
         {
             var response = await _mediator.Send(input);
