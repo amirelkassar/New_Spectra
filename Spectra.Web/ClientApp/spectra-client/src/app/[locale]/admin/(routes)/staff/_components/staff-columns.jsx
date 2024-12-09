@@ -7,8 +7,16 @@ export const StaffColumns = [
   {
     accessorKey: 'name',
     header: 'الاسم ',
-    cell: ({ row }) =>
-      `${row.original?.firstName} ${row.original?.lastName}`,
+    cell: ({ row }) => {
+      const firstName = row.original?.firstName;
+      const lastName = row.original?.lastName;
+
+      if (firstName && lastName) {
+        return `${firstName} ${lastName}`;
+      }
+
+      return firstName;
+    },
   },
   {
     accessorKey: 'emailaddress',
@@ -28,9 +36,7 @@ export const StaffColumns = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => (
-      <EmployeeCellActions id={row.original?.id} />
-    ),
+    cell: ({ row }) => <EmployeeCellActions id={row.original?.id} />,
   },
 ];
 
