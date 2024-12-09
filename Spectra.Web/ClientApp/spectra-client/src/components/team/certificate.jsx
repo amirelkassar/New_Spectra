@@ -26,7 +26,7 @@ export const Certificate = ({
   return (
     <Card
       data-id={id}
-      className='flex-none !p-2 mdl:!p-3 space-y-3 relative w-fit'
+      className='flex-none !p-4 space-y-3 relative w-fit'
       size='sm'
     >
       <div className='relative rounded-lg overflow-hidden w-36 h-28 mdl:w-56 mdl:h-44'>
