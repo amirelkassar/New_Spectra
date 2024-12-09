@@ -2,19 +2,23 @@
 
 import { useCallback } from 'react';
 
-import { useAddAttachment as useAddAttachmentMutation } from '@/hooks/queries/admin/staff/attachment';
 import { getFormData } from '@/lib/utils';
 import { Toast } from '@/components/toast';
+import { useUpdateAttachment as useUpdateAttachmentMutation } from '@/hooks/queries/admin/staff/attachment';
 
-export const useAddAttachment = ({ empId = '', type = '' }) => {
+export const useUpdateAttachment = ({
+  empId = '',
+  type = '',
+  documentId = '',
+}) => {
   const {
-    mutateAsync: addAttachment,
+    mutateAsync: updateAttachment,
     isPending,
     error,
     isSuccess,
     reset,
     isError,
-  } = useAddAttachmentMutation(empId);
+  } = useUpdateAttachmentMutation(empId);
 
   const onSubmit = useCallback(
     (
@@ -24,14 +28,17 @@ export const useAddAttachment = ({ empId = '', type = '' }) => {
       },
       closeModal = () => {}
     ) => {
-      if (!type && !empId) return;
+      if (!empId) return;
       if (!attachment.file) return;
       if (!attachment.name) return;
+      if (!type) return;
+      if (!documentId) return;
 
       if (isError) reset();
 
       const data = {
         empId,
+        documentId,
         name: attachment.name,
         file: attachment.file,
         type,
@@ -39,12 +46,12 @@ export const useAddAttachment = ({ empId = '', type = '' }) => {
 
       const formData = getFormData(data);
 
-      Toast.Promise(addAttachment(formData), {
-        success: 'تم الاضافة بنجاح',
+      Toast.Promise(updateAttachment(formData), {
+        success: 'تم التعديل بنجاح',
         onSuccess: closeModal,
       });
     },
-    [addAttachment, empId, isError, reset, type]
+    [updateAttachment, empId, isError, reset, type, documentId]
   );
 
   return {

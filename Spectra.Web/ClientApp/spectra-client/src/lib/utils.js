@@ -130,3 +130,27 @@ export function getQueries({ params, initialQueries }) {
     ...filteredParams,
   };
 }
+
+export const getErrors = (error) => {
+  if (!error) return { code: '', message: '' };
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    const code = error?.status;
+    const errors = error?.response?.data?.errors;
+
+    if (!errors) return { code, message: '' };
+
+    const message = Object.entries(errors)
+      .map(([_, value]) => value?.join(', '))
+      .join(', ');
+
+    return { code, message };
+  } //  else if (error.request) {
+  //   // The request was made but no response was received
+  //   return error.request;
+  // } else {
+  //   // Something happened in setting up the request that triggered an Error
+  //   return error.message;
+  // }
+};

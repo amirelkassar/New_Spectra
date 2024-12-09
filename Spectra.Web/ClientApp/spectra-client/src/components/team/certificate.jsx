@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Card from '@/components/card';
 import { useDate } from '@/hooks/use-date';
 import ActionsMenu from '@/components/actions-menu';
+import { useImagePath } from '@/hooks/use-image-path';
 
 export const Certificate = ({
   name = '',
@@ -16,9 +17,10 @@ export const Certificate = ({
     onDelete: () => {},
     onDownload: () => {},
     onPrint: () => {},
-    onEdit: () => {},
   },
 }) => {
+  const path = useImagePath(image);
+
   const { fullYear } = useDate(date);
 
   return (
@@ -28,14 +30,7 @@ export const Certificate = ({
       size='sm'
     >
       <div className='relative rounded-lg overflow-hidden w-36 h-28 mdl:w-56 mdl:h-44'>
-        <Image
-          src={image}
-          alt={name}
-          priority={false}
-          fill
-          sizes='width: 230px; height: 180px;'
-          className='w-full h-full object-center object-cover'
-        />
+        <RenderPreview path={path} name={name} />
       </div>
 
       <div className='max-w-36 mdl:max-w-56'>
@@ -53,19 +48,38 @@ export const Certificate = ({
               مسح
             </ActionsMenu.Delete>
             <ActionsMenu.Download
-              onClick={() => actions.onDownload(id)}
+              onClick={() => actions.onDownload(path, name)}
             >
               تنزيل
             </ActionsMenu.Download>
             <ActionsMenu.Print onClick={() => actions.onPrint(id)}>
               طباعة
             </ActionsMenu.Print>
-            <ActionsMenu.Edit onClick={() => actions.onEdit(id)}>
+            {/* <ActionsMenu.Edit onClick={() => {}}>
               تعديل
-            </ActionsMenu.Edit>
+            </ActionsMenu.Edit> */}
           </ActionsMenu>
         </div>
       )}
     </Card>
+  );
+};
+
+const RenderPreview = ({ path, name }) => {
+  if (!path) return null;
+
+  if (path.includes('pdf')) {
+    return <iframe src={path} width='100%' height='100%' />;
+  }
+
+  return (
+    <Image
+      src={path}
+      alt={name}
+      priority={false}
+      fill
+      sizes='width: 230px; height: 180px;'
+      className='w-full h-full object-center object-cover'
+    />
   );
 };

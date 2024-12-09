@@ -26,7 +26,15 @@ export const ProForm = () => {
   const { stepOneForm, stepTwoForm, onSubmit, isPending } =
     useMedicalProviderRegister();
 
-  const onNext = () => setStep(2);
+  const onNext = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+    setStep(2);
+  };
+
+  const onBack = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+    setStep(1);
+  };
 
   return (
     <form className='space-y-5 lg:max-w-xl'>
@@ -35,9 +43,9 @@ export const ProForm = () => {
         heading={'املأ بيانات مقدم الخدمة'}
       />
 
-      <StepOne step={step} form={stepOneForm} />
+      {step === 1 && <StepOne form={stepOneForm} />}
 
-      <StepTwo step={step} form={stepTwoForm} />
+      {step === 2 && <StepTwo form={stepTwoForm} />}
 
       <div className='py-5'>
         {step === 1 && (
@@ -68,7 +76,7 @@ export const ProForm = () => {
               className='w-full'
               onClick={(e) => {
                 e.preventDefault();
-                setStep(1);
+                onBack();
               }}
               disabled={isPending}
             >
@@ -81,14 +89,14 @@ export const ProForm = () => {
   );
 };
 
-const StepOne = memo(({ step = null, form = {} }) => {
+const StepOne = memo(({ form = {} }) => {
   const {
     register,
     formState: { errors },
   } = form;
 
   return (
-    <div className={cn('space-y-5', { hidden: step !== 1 })}>
+    <div className={cn('space-y-5')}>
       <TextInput
         label='الاسم'
         placeholder='ادخل الاسم الاول'
@@ -196,14 +204,14 @@ const StepOne = memo(({ step = null, form = {} }) => {
 
 StepOne.displayName = 'StepOne';
 
-const StepTwo = memo(({ step = null, form = {} }) => {
+const StepTwo = memo(({ form = {} }) => {
   const {
     register,
     formState: { errors },
   } = form;
 
   return (
-    <div className={cn('space-y-5', { hidden: step !== 2 })}>
+    <div className={cn('space-y-5')}>
       <SelectInput
         label='طبيب / اخصائى'
         placeholder='اختر المهنة الخاصة بك'
@@ -252,6 +260,27 @@ const StepTwo = memo(({ step = null, form = {} }) => {
         }}
       />
 
+      <AcademicDegreeSelect
+        label='الدرجة العلمية'
+        placeholder='ادخل الدرجة العلمية'
+        size='lg'
+        error={errors?.academicDegree?.message}
+        value={form.watch('academicDegree')}
+        onChange={(e) => {
+          form.clearErrors('academicDegree');
+          form.setValue('academicDegree', e.target.value);
+        }}
+      />
+
+      <TextInput
+        label='سنوات الخبرة'
+        placeholder='ادخل عدد سنوات الخبرة'
+        type='number'
+        size='lg'
+        error={errors?.experienceYears?.message}
+        {...register('experienceYears')}
+      />
+
       <TextInput
         label='رقم الترخيص/الاعتماد'
         placeholder='ادخل رقم الترخيص او الاعتماد'
@@ -268,28 +297,15 @@ const StepTwo = memo(({ step = null, form = {} }) => {
         {...register('approvedBy')}
       />
 
-      <AcademicDegreeSelect
-        label='الدرجة العلمية'
-        placeholder='ادخل الدرجة العلمية'
-        size='lg'
-        error={errors?.academicDegree?.message}
-        value={form.watch('academicDegree')}
-        onChange={(e) => {
-          form.clearErrors('academicDegree');
-          form.setValue('academicDegree', e.target.value);
-        }}
-      />
-
       <FileInput
         label='الشهادات'
         size='lg'
         placeholder='ادخل الشهادات الحاصل عليها'
-        multiple
-        error={errors?.certifications?.message}
-        value={form.watch('certifications')}
+        error={errors?.certification?.message}
+        value={form.watch('certification')}
         onChange={(value) => {
-          form.clearErrors('certifications');
-          form.setValue('certifications', value);
+          form.clearErrors('certification');
+          form.setValue('certification', value);
         }}
       />
     </div>

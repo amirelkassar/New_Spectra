@@ -69,7 +69,7 @@ const Heading = ({ totalCount }) => {
         <StaffCount>{totalCount}</StaffCount>
       </div>
       <Link href={ROUTES.ADMIN.STAFF.STAFF_ADD}>
-        <AddButton>إضافة موظف</AddButton>
+        <AddButton>اضافة موظف</AddButton>
       </Link>
     </div>
   );

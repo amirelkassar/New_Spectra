@@ -1,10 +1,9 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 import { CellActions } from './cell-actions';
-import { useToken } from '@/hooks/use-token';
+import { useImagePath } from '@/hooks/use-image-path';
 
 export const DrugsColumns = [
   {
@@ -43,13 +42,7 @@ export const DrugsColumns = [
 ];
 
 const ImageAndNameCell = ({ name, image }) => {
-  const token = useToken();
-
-  const src = useMemo(() => {
-    if (!image) return null;
-
-    return `${image}?token=${token}`;
-  }, [image, token]);
+  const src = useImagePath(image);
 
   return (
     <div className='items-center gap-2 lg:gap-5 flex'>

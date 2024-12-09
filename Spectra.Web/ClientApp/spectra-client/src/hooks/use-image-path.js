@@ -3,7 +3,7 @@
 import { useToken } from './use-token';
 
 export const useImagePath = (path = '') => {
-  const token = useToken();
+  const { token } = useToken();
 
   if (!path) return '';
   if (typeof path !== 'string') return '';

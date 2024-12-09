@@ -16,26 +16,44 @@ export const useAttachmentMenuActions = ({ employeeId }) => {
     (fileId) => {
       open({
         isPending,
-        onConfirm: () => {
-          Toast.Promise(deleteAttachment({ fileId, employeeId }), {
-            success: 'تم مسح المرفق بنجاح',
-          });
+        onConfirm: async () => {
+          await Toast.Promise(
+            deleteAttachment({ fileId, employeeId }),
+            {
+              success: 'تم مسح المرفق بنجاح',
+            }
+          );
         },
       });
     },
     [deleteAttachment, isPending, open, employeeId]
   );
 
-  const onDownload = useCallback(() => {}, []);
+  const onDownload = useCallback(async (url, fileName) => {
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName || 'downloaded-file';
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Error fetching the file:', error);
+      });
+  }, []);
 
   const onPrint = useCallback(() => {}, []);
-
-  const onEdit = useCallback(() => {}, []);
 
   return {
     onDelete,
     onDownload,
     onPrint,
-    onEdit,
   };
 };

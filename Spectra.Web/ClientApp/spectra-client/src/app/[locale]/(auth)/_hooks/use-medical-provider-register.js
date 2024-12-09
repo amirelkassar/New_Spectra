@@ -6,8 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { IMAGE_MIME_TYPE, PDF_MIME_TYPE } from '@mantine/dropzone';
 import { useCallback } from 'react';
 import { useRegisterMedicalProviderMutation } from '@/hooks/queries/auth';
-import { getFormData } from '@/lib/utils';
+import { getErrors, getFormData } from '@/lib/utils';
 import { Toast } from '@/components/toast';
+import { useRouter } from '@/navigation';
+import ROUTES from '@/routes';
 
 const passwordValidation = z
   .string()
@@ -55,26 +57,26 @@ const stepTwoSchema = z.object({
   mainSpecializationId: z
     .string()
     .min(1, 'Main specialization is required'),
-  specializations: z.array(z.string()).optional(),
-  licenseNumber: z.string().optional(),
+  specializations: z
+    .array(z.string())
+    .min(1, 'Select at least one specialization'),
+  experienceYears: z.string().optional(),
+  licenseNumber: z.string().min(1, 'License number is required'),
   approvedBy: z.string().optional(),
   academicDegree: z.string().optional(),
-  certifications: z
-    .array(
-      z
-        .instanceof(File)
-        .refine(
-          (file) =>
-            [...IMAGE_MIME_TYPE, ...PDF_MIME_TYPE].includes(
-              file.type
-            ),
-          'Only images (PNG, JPG) and PDF files are allowed'
-        )
-    )
-    .optional(),
+  certification: z
+    .instanceof(File, { message: 'File is required' })
+    .refine(
+      (file) =>
+        file &&
+        [...IMAGE_MIME_TYPE, ...PDF_MIME_TYPE].includes(file.type),
+      'Only images (PNG, JPG) and PDF files are allowed'
+    ),
 });
 
 export const useMedicalProviderRegister = () => {
+  const router = useRouter();
+
   const stepOneForm = useForm({
     resolver: zodResolver(stepOneSchema),
     defaultValues: {
@@ -98,10 +100,11 @@ export const useMedicalProviderRegister = () => {
       jobName: '',
       mainSpecializationId: '',
       specializations: [],
+      experienceYears: '',
       licenseNumber: '',
       approvedBy: '',
       academicDegree: '',
-      certifications: [],
+      certification: undefined,
     },
   });
 
@@ -123,15 +126,16 @@ export const useMedicalProviderRegister = () => {
 
       Toast.Promise(registerMedicalProvider(formData), {
         success: 'تم تسجيلك بنجاح',
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: () => {
+          router.replace(ROUTES.AUTH.LOGIN);
         },
         onError: (error) => {
-          console.log(error);
+          const { code, message } = getErrors(error);
+          return code === 400 ? message : '';
         },
       });
     },
-    [stepOneForm, isError, reset, registerMedicalProvider]
+    [stepOneForm, isError, reset, registerMedicalProvider, router]
   );
 
   return {

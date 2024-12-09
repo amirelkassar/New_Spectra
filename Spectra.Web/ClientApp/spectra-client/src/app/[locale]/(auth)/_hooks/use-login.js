@@ -4,9 +4,12 @@ import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
+import { useToken } from '@/hooks/use-token';
 import { storeToken } from '@/lib/token';
 import { useLoginMutation } from '@/hooks/queries/auth';
 import ROUTES from '@/routes';
+import { storeAuth } from '@/lib/auth';
+import { useAuth } from '@/hooks/use-auth';
 
 export const useLogin = () => {
   const router = useRouter();
@@ -20,6 +23,9 @@ export const useLogin = () => {
     userEmail: '',
     password: '',
   });
+
+  const { setToken } = useToken();
+  const { setSession } = useAuth();
 
   const {
     mutateAsync: startLogin,
@@ -67,8 +73,7 @@ export const useLogin = () => {
     (e) => {
       e.preventDefault();
 
-      const { isValid, errors } =
-        validateLoginData(formData);
+      const { isValid, errors } = validateLoginData(formData);
 
       if (!isValid) {
         return setValidationError(errors);
@@ -78,13 +83,22 @@ export const useLogin = () => {
         success: 'تم تسجيل الدخول بنجاح',
         loading: 'جاري تسجيل الدخول',
         onSuccess: async (data) => {
-          const isStored = await storeToken(data?.data);
-          if (isStored)
+          const isTokenStored = await storeToken(data?.data);
+          const isAuthStored = await storeAuth(data?.data);
+          if (isAuthStored && isTokenStored) {
+            const { accessToken, permissions, roles } = data?.data;
+            setToken(accessToken);
+            setSession({
+              permissions,
+              roles,
+            });
+
             router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+          }
         },
       });
     },
-    [formData, startLogin, router]
+    [formData, startLogin, router, setToken, setSession]
   );
 
   return {

@@ -16,19 +16,20 @@ import ReactQueryConfig from '@/config/react-query-config';
 import ConfirmModal from '@/components/modal/confirm-modal';
 import { getToken } from '@/lib/token';
 import { getMessages } from 'next-intl/server';
+import { getAuth } from '@/lib/auth';
+import { SessionProvider } from '@/hooks/use-auth';
 
 export const metadata = {
   title: 'Spectra App',
   description: 'Spectra App',
 };
 
-export default async function RootLayout({
-  children,
-  params,
-}) {
-  const messages = await getMessages();
-
-  const token = await getToken();
+export default async function RootLayout({ children, params }) {
+  const [token, session, messages] = await Promise.all([
+    getToken(),
+    getAuth(),
+    getMessages(),
+  ]);
 
   return (
     <html
@@ -41,14 +42,16 @@ export default async function RootLayout({
           messages={messages}
         >
           <TokenProvider value={token}>
-            <MantineProvider>
-              <ReactQueryConfig>
-                {children}
-                <Toaster />
-                <ReactQueryDevtools initialIsOpen={false} />
-                <ConfirmModal />
-              </ReactQueryConfig>
-            </MantineProvider>
+            <SessionProvider value={session}>
+              <MantineProvider>
+                <ReactQueryConfig>
+                  {children}
+                  <Toaster />
+                  <ReactQueryDevtools initialIsOpen={false} />
+                  <ConfirmModal />
+                </ReactQueryConfig>
+              </MantineProvider>
+            </SessionProvider>
           </TokenProvider>
         </NextIntlClientProvider>
       </body>

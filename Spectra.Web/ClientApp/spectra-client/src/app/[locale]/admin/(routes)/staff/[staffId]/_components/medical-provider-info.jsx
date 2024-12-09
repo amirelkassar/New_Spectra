@@ -40,7 +40,7 @@ export const MedicalProviderInfo = ({ data }) => {
       <CareerInfo data={data} />
       <Specializations {...data} />
       {/* <Services data={data?.services} /> */}
-      <Certifications />
+      <Certifications data={data?.attachments} />
       <EditButton
         onClick={() => router.push('?edit=true')}
         className='bg-white border-2 border-black text-black w-full mdl:max-w-xs font-bold transition hover:border-greenMain'
@@ -362,11 +362,11 @@ const Certifications = ({ data = [] }) => {
       <SectionTitle>الشهادات</SectionTitle>
 
       <div className='flex flex-wrap gap-5'>
-        {data?.map((item, index) => (
+        {data?.map((item) => (
           <Certificate
-            key={index}
+            key={item?.id}
             name={item?.name}
-            image={item?.image}
+            image={item?.path}
             date={item?.date}
           />
         ))}

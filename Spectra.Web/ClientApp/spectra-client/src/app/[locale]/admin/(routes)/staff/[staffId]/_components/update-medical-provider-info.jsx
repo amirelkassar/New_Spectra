@@ -32,6 +32,7 @@ import { useAddAttachment } from '@/app/[locale]/admin/_hooks/attachments/use-ad
 import { useAttachmentMenuActions } from '@/app/[locale]/admin/_hooks/attachments/use-attachment-menu-actions';
 import Book from '@/assets/icons/book';
 import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select';
+import { useDisclosure } from '@mantine/hooks';
 
 export const UpdateMedicalProviderInfo = ({ initialValues }) => {
   const [form] = useUpdateMedicalProvider({ initialValues });
@@ -41,7 +42,10 @@ export const UpdateMedicalProviderInfo = ({ initialValues }) => {
       <UpdatePesonalInfo form={form} />
       <UpdateCareerInfo form={form} />
       <Specializations form={form} />
-      <UpdateCertifications initialValues={initialValues} />
+      <UpdateCertifications
+        empId={initialValues?.id}
+        attachments={initialValues?.attachments}
+      />
       <PasswordForm form={form} />
 
       <Button
@@ -455,55 +459,64 @@ const ImageUploader = ({ form }) => {
   );
 };
 
-const UpdateCertifications = memo(({ initialValues }) => {
-  const { isPending, onSubmit, isSuccess, error } = useAddAttachment({
-    empId: initialValues?.id,
-    type: '3', // for certifications
-  });
+const UpdateCertifications = memo(
+  ({ empId = '', attachments = [] }) => {
+    const [isOpen, { open, close }] = useDisclosure();
 
-  const actions = useAttachmentMenuActions({
-    employeeId: initialValues?.id,
-  });
+    const { isPending, onSubmit, error } = useAddAttachment({
+      empId,
+      type: '3',
+    });
 
-  return (
-    <Card className='space-y-5'>
-      <div className='flex items-center gap-5'>
-        <SectionTitle>الشهادات</SectionTitle>
+    return (
+      <Card className='space-y-5'>
+        <div className='flex items-center gap-5'>
+          <SectionTitle>الشهادات</SectionTitle>
+          <AddButton onClick={open}>اضافة شهادة</AddButton>
+        </div>
+
+        <Certifcations attachments={attachments} employeeId={empId} />
 
         <AttachmentModal
           error={error}
           isPending={isPending}
-          isSuccess={isSuccess}
           onSubmit={onSubmit}
           title='أضافة شهادة'
-        >
-          <AddButton>أضافة شهادة</AddButton>
-        </AttachmentModal>
-      </div>
-
-      {/* <Certificate
-        name={'شهادة طبية'}
-        image={'/demo-certificate.png'}
-        date={'2022-03-01'}
-        id='123'
-        isEdit
-        actions={actions}
-      /> */}
-
-      {/* {!!data.length ?? (
-        <div className='flex flex-wrap gap-5'>
-          {data?.map((item, index) => (
-            <Certificate
-              key={index}
-              name={item?.name}
-              image={item?.image}
-              date={item?.date}
-            />
-          ))}
-        </div>
-      )} */}
-    </Card>
-  );
-});
+          isOpen={isOpen}
+          close={close}
+        />
+      </Card>
+    );
+  }
+);
 
 UpdateCertifications.displayName = 'UpdateCertifications';
+
+const Certifcations = memo(
+  ({ attachments = [], employeeId = '' }) => {
+    const actions = useAttachmentMenuActions({
+      employeeId,
+    });
+
+    if (!attachments) return [];
+    return (
+      <div className='flex flex-wrap gap-5'>
+        {attachments
+          .filter((attachment) => attachment.type === 3)
+          ?.map((certificate) => (
+            <Certificate
+              key={certificate?.id}
+              name={certificate?.name}
+              image={certificate?.path}
+              date={certificate?.created}
+              id={certificate?.id}
+              isEdit
+              actions={actions}
+            />
+          ))}
+      </div>
+    );
+  }
+);
+
+Certifcations.displayName = 'Certifcations';
