@@ -40,7 +40,16 @@ namespace Spectra.Application.Identities
                         NormalizedName = propRole.ToUpper(),
                     });
                 }
-                await _permissionManager.UpdateRolePermissions(propRole, groups);
+                if (propRole.Equals(Roles.SystemAdmin))
+                {
+                    var permissionGroups = groups.Where(g => g.Categories.Where(c => c.Permissions.Any(p => p.LogicalName.Contains("Admin"))).Any()).ToArray();
+                    await _permissionManager.UpdateRolePermissions(propRole, permissionGroups);
+                }
+                else
+                {
+                    var permissionGroups = groups.Where(g => g.Categories.Where(c => c.Permissions.Any(p => !p.LogicalName.Contains("Admin"))).Any()).ToArray();
+                    await _permissionManager.UpdateRolePermissions(propRole, permissionGroups);
+                }
             }
         }
 

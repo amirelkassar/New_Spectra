@@ -82,6 +82,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 .PermissionGroups
                 .Where(g => (!string.IsNullOrWhiteSpace(enName) ? g.EnName.ToLower() == enName.ToLower() : g.EnName == g.EnName)
                 && (!string.IsNullOrWhiteSpace(arName) ? g.ArName.ToLower() == arName.ToLower() : g.ArName == g.ArName))
+                .Include(g=>g.Categories)
+                .ThenInclude(c=>c.Permissions)
                 .ToArrayAsync();
             return groups;
         }
@@ -112,6 +114,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             var user = await _userManager.FindByIdAsync(userId);
             var userRoles = await _userManager.GetRolesAsync(user);
             var roleIds = await _identityContext.Roles.Where(r => userRoles.Any(ur => ur == r.Name))
+                .Include(r => r.Permissions)
                 .Select(r => r.Id)
                 .ToArrayAsync();
 
@@ -182,11 +185,11 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             .FirstOrDefaultAsync()
             ?? throw new NotFoundException(nameof(AppRole), roleName);
 
-            foreach (var permission in permissions.Where(p => role.Permissions.Any(rp => rp.Id != p.Id)).ToArray())
+            foreach (var permission in permissions.Where(p => !role.Permissions.Any(rp => rp.Id == p.Id)).ToArray())
             {
                 role.Permissions.Add(permission);
             }
-
+            _identityContext.Roles.Update(role);
             await _identityContext.SaveChangesAsync();
         }
 
@@ -222,6 +225,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             var user = await _userManager.FindByIdAsync(userId);
             var userRoles = await _userManager.GetRolesAsync(user);
             var roleIds = await _identityContext.Roles.Where(r => userRoles.Any(ur => ur == r.Name))
+                .Include(r=>r.Permissions)
                 .Select(r => r.Id)
                 .ToArrayAsync();
 

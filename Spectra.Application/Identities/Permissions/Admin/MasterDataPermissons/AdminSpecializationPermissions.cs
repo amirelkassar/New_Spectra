@@ -1,7 +1,9 @@
-﻿using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Application.Identities;
+using Spectra.Domain.Shared.Helpers;
 
 namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
 {
+    [PermissionGroupName("Specializations", "التخصصات")]
     public class AdminSpecializationPermissions : IPermissionContributor
     {
         public const string Group = nameof(AdminSpecializationPermissions) + "Group.";

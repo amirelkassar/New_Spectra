@@ -260,7 +260,6 @@ namespace Spectra.Infrastructure
                     ctx.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
                 });
             });
-            services.ConfigurePermissions();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IIdentityService, IdentityService>();
 
@@ -278,31 +277,6 @@ namespace Spectra.Infrastructure
                 options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
             });
 
-            return services;
-        }
-        private static IServiceCollection ConfigurePermissions(this IServiceCollection services)
-        {
-            var permissionContributors = typeof(IPermissionContributor)
-                .Assembly
-                .GetTypes()
-                .Where(type => typeof(IPermissionContributor).IsAssignableFrom(type) && type.IsClass);
-
-            var permissions = permissionContributors.Select(t => t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                   .Where(field => field.IsLiteral && !field.IsInitOnly))
-                .SelectMany(f => f.Select(p => p.GetRawConstantValue() as string))
-                .ToArray();
-
-            if (permissions.Length > 0)
-            {
-                foreach (var permission in permissions)
-                {
-                    services.AddAuthorization(config =>
-                    {
-                        config.AddPolicy(permission, permConfig => permConfig.AddRequirements(new PermissionRequirement(permission)));
-                    });
-                }
-            }
-            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             return services;
         }
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
