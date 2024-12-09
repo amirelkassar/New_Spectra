@@ -24,7 +24,6 @@ namespace Spectra.Application.Employees.Commands
             {
                 var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
                 var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
-                Directory.CreateDirectory(folderPath);
                 if (request.File.Length > 0)
                 {
                     var filePath = await _documentHellper.CreateAttachment(request.File, folderPath);

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Spectra.Application.Identities;
 using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Interfaces;
@@ -209,6 +211,35 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 return OperationResult.Success();
             }
             throw new NotFoundException(userId, nameof(user));
+        }
+
+        public async Task<OperationResult> FindByIdAsync(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return user is null ? OperationResult.Failure(new Dictionary<string, string[]> { { "Id", ["Couldn't find user with the passed id"] } },404)
+                : OperationResult<AppUser>.Success(user);
+        }
+
+        public async Task<OperationResult> FindByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user is null ? OperationResult.Failure(new Dictionary<string, string[]> { { "email", ["Couldn't find user with the passed email"] } }, 404)
+                : OperationResult<AppUser>.Success(user);
+        }
+
+        public async Task<OperationResult> FindByPhoneAsync(string phone)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone);
+            return user is null ? OperationResult.Failure(new Dictionary<string, string[]> { { "phone", ["Couldn't find user with the passed phone"] } }, 404)
+                             : OperationResult<AppUser>.Success(user);
+        }
+
+        public async Task<OperationResult> UpdateUserAsync(AppUser user)
+        {
+            var updateUserRes=await _userManager.UpdateAsync(user);
+            return updateUserRes.Succeeded
+                ? OperationResult.Success()
+                : OperationResult.Failure(updateUserRes.Errors.Select(e => new { e.Code, Error = new string[] { e.Description } }).ToDictionary(e => e.Code, e => e.Error));
         }
     }
 }

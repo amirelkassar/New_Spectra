@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Wrappers;
+﻿using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Identities
 {
@@ -30,5 +31,12 @@ namespace Spectra.Application.Identities
         Task<OperationResult> ResetPasswordAsync(string userId, string token, string newPassword);
 
         Task<OperationResult> UpdateUserImageAsync(string userId, string imagePath);
+
+        Task<OperationResult> FindByIdAsync(string id);
+        Task<OperationResult> FindByEmailAsync(string email);
+        Task<OperationResult> FindByPhoneAsync(string phone);
+
+        Task<OperationResult> UpdateUserAsync(AppUser user);
+
     }
 }
