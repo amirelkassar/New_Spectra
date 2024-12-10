@@ -13,7 +13,8 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.services';
 
@@ -61,8 +62,9 @@ export const useServicesForListing = (
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: async () => {
-      return (await apiAdmin.get(mainData.services.forListing(queries)))
-        .data;
+      return (
+        await apiAdmin.get(mainData.services.forListing(queries))
+      ).data;
     },
   });
 };
@@ -112,7 +114,7 @@ export const useAddNewService = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

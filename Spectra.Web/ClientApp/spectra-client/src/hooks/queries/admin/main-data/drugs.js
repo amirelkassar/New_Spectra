@@ -13,7 +13,8 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.drugs';
 
@@ -50,7 +51,9 @@ export const GetDrugsID = (id) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await apiAdmin.get(mainData.drugs.actions.get(id));
+      const response = await apiAdmin.get(
+        mainData.drugs.actions.get(id)
+      );
       return response.data;
     },
   });
@@ -87,7 +90,7 @@ export const useCreateDrug = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

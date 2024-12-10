@@ -13,7 +13,8 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.diagnostics';
 
@@ -92,7 +93,7 @@ export const useCreateDiagnostics = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

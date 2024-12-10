@@ -30,8 +30,62 @@ export const ServiceFrom = ({
   return (
     <form
       onSubmit={onSubmit}
-      className='grid grid-cols-2 gap-4 lg:gap-8 px-3 mb-14 max-w-screen-lg mx-auto'
+      className='px-3 mb-14 max-w-screen-lg mx-auto'
     >
+      <RenderForm data={data} error={error} onChange={onChange} />
+
+      <div className='flex flex-col mt-10 items-center gap-3 col-span-2'>
+        <Button
+          disabled={isPending}
+          type='submit'
+          variant='secondary'
+          className='w-full font-bold py-4'
+        >
+          {btnLabel}
+        </Button>
+        <Button
+          disabled={isPending}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onCancel();
+          }}
+          type='button'
+          className='w-full font-bold py-4'
+        >
+          الغاء
+        </Button>
+      </div>
+    </form>
+  );
+};
+
+const RenderForm = ({ data, error, onChange }) => {
+  switch (String(data?.serviceType)) {
+    case '1':
+      return (
+        <InternalServices
+          data={data}
+          error={error}
+          onChange={onChange}
+        />
+      );
+    case '2':
+      return (
+        <ExternalServices
+          data={data}
+          error={error}
+          onChange={onChange}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
+const InternalServices = ({ data, error, onChange }) => {
+  return (
+    <div className='space-y-4 mdl:space-y-6'>
       <InputGreen
         label='اسم الخدمة باللغة العربية'
         name='arName'
@@ -99,6 +153,22 @@ export const ServiceFrom = ({
         }}
       />
 
+      <ReportSelect
+        label='اضافة التقارير الخاصة بالخدمة'
+        name='reports'
+        defaultValue={data?.reports}
+        onSelect={onChange}
+        error={GetErrorMsg(error, 'Reports')}
+      />
+
+      <SpecializationMultiSelect
+        label='اضافة التخصصات المرتبطة بالخدمة'
+        name='specifications'
+        defaultValue={data?.specifications}
+        onSelect={onChange}
+        error={GetErrorMsg(error, 'Specifications')}
+      />
+
       <InputGreen
         label='سعر الخدمة'
         name='price'
@@ -118,70 +188,61 @@ export const ServiceFrom = ({
         rightSection={'%'}
         error={GetErrorMsg(error, 'Discount')}
       />
-
-      {String(data?.serviceType) === '2' && (
-        <RemainingInputs
-          data={data}
-          error={error}
-          onChange={onChange}
-        />
-      )}
-
-      <div className='flex flex-col mt-10 items-center gap-3 col-span-2'>
-        <Button
-          disabled={isPending}
-          type='submit'
-          variant='secondary'
-          className='w-full font-bold py-4'
-        >
-          {btnLabel}
-        </Button>
-        <Button
-          disabled={isPending}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onCancel();
-          }}
-          type='button'
-          className='w-full font-bold py-4'
-        >
-          الغاء
-        </Button>
-      </div>
-    </form>
+    </div>
   );
 };
 
-const RemainingInputs = ({ data, error, onChange }) => {
+const ExternalServices = ({ data, error, onChange }) => {
   return (
-    <div className='col-span-2 space-y-4 lg:space-y-8'>
-      <ReportSelect
-        label='اضافة التقارير الخاصة بالخدمة'
-        name='reports'
-        defaultValue={data?.reports}
-        onSelect={onChange}
-        error={GetErrorMsg(error, 'Reports')}
+    <div className='grid grid-cols-2 gap-4 lg:gap-8 '>
+      <InputGreen
+        label='اسم الخدمة باللغة العربية'
+        name='arName'
+        value={data.arName}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'ArName')}
+        className='col-span-2'
       />
-      <SpecializationMultiSelect
-        label='اضافة التخصصات المرتبطة بالخدمة'
-        name='specifications'
-        defaultValue={data?.specifications}
-        onSelect={onChange}
-        error={GetErrorMsg(error, 'Specifications')}
+      <InputGreen
+        label='اسم الخدمة باللغة الانجليزية'
+        name='enName'
+        value={data.enName}
+        onChange={onChange}
+        error={GetErrorMsg(error, 'EnName')}
+        className='col-span-2'
       />
 
-      <ServiceContent
-        data={data?.contents}
+      <InputGreen
+        label='وصف الخدمة باللغة العربية'
+        name='arDescription'
+        value={data.arDescription}
         onChange={onChange}
-        error={GetErrorMsg(error, 'Contents')}
+        error={GetErrorMsg(error, 'ArDescription')}
+        className='col-span-2'
       />
 
-      <ServicePhoto
-        data={data?.heroImage}
+      <InputGreen
+        label='وصف الخدمة باللغة الانجليزية'
+        name='enDescription'
+        value={data.enDescription}
         onChange={onChange}
-        error={GetErrorMsg(error, 'HeroImage')}
+        error={GetErrorMsg(error, 'EnDescription')}
+        className='col-span-2'
       />
+
+      <div className='col-span-2 space-y-4 mdl:space-y-6'>
+        <ServiceContent
+          data={data?.contents}
+          onChange={onChange}
+          error={GetErrorMsg(error, 'Contents')}
+        />
+
+        <ServicePhoto
+          data={data?.heroImage}
+          onChange={onChange}
+          error={GetErrorMsg(error, 'HeroImage')}
+        />
+      </div>
     </div>
   );
 };
