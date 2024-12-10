@@ -14,8 +14,8 @@ import { CountrySelect } from '@/components/inputs/country-select';
 import { StateSelect } from '@/components/inputs/state-select';
 import { useMedicalProviderRegister } from '../../../_hooks/use-medical-provider-register';
 import PasswordInput from '@/components/inputs/password-input';
-import { SpecializationSingleSelect } from '@/app/[locale]/(auth)/_components/specialization-single-select';
-import { SpecializationMultiSelect } from '../../../_components/specialization-multi-select';
+import { SpecializationSingleSelect } from '@/components/inputs/specialization-single-select';
+import { SpecializationMultiSelect } from '@/components/inputs/specialization-multi-select';
 import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select';
 
 const MemowizedFormTitle = memo(FormTitle);

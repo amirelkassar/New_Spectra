@@ -1,46 +1,62 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Card from '@/components/card';
+import Avatar from '@/components/avatar';
+import Button from '@/components/button';
 import TextInput from '@/components/inputs/text-input';
-import GetErrorMsg from '@/components/getErrorMsg';
 import MobileInput from '@/components/inputs/mobile-input';
+import GetErrorMsg from '@/components/getErrorMsg';
+import PasswordInput from '@/components/inputs/password-input';
+
+import { H1 } from '@/components/dashboard/ui/h1';
+import { BackButton } from '@/components/buttons/back-button';
+import { QueryWrapper } from '@/components/query-wrapper';
 import { CountrySelect } from '@/components/inputs/country-select';
 import { StateSelect } from '@/components/inputs/state-select';
-
-import { CAREER_ICONS as ICONS } from '@/data/team';
-import CheckHeartIcon from '@/assets/icons/check-heart';
+import { useProfile } from '@/hooks/queries/user/profile';
+import { useImagePath } from '@/hooks/use-image-path';
+import { useUpdateProfile } from '../../_hooks/use-update-profile';
 import { Textarea } from '@/components/inputs/textarea';
 import { SectionTitle } from '@/components/dashboard/ui/section-title';
-import { SpecializationMultiSelect } from '@/admin/_components/ui/specialization-multi-select';
-import PasswordInput from '@/components/inputs/password-input';
-import Button from '@/components/button';
+import { CAREER_ICONS as ICONS } from '@/data/team';
+import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select';
+import { SpecializationSingleSelect } from '@/components/inputs/specialization-single-select';
+import { SpecializationMultiSelect } from '@/components/inputs/specialization-multi-select';
+
 import EditImgIcon from '@/assets/icons/editImg';
 import CloseIcon from '@/assets/icons/close';
-import Avatar from '@/components/avatar';
-import { useImagePath } from '@/hooks/use-image-path';
-import { SpecializationSingleSelect } from '@/app/[locale]/admin/_components/ui/specialization-single-select';
-import { useUpdateMedicalProvider } from '../../_hooks/use-update-medical-provider';
-import { AddButton } from '@/components/buttons/add-button';
-import { Certificate } from '@/components/team/certificate';
-import { AttachmentModal } from '@/components/modal/attachment-modal';
-import { useAddAttachment } from '@/app/[locale]/admin/_hooks/attachments/use-add-attachment';
-import { useAttachmentMenuActions } from '@/app/[locale]/admin/_hooks/attachments/use-attachment-menu-actions';
-import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select';
-import { useDisclosure } from '@mantine/hooks';
+import CheckHeartIcon from '@/assets/icons/check-heart';
 
-export const UpdateMedicalProviderInfo = ({ initialValues }) => {
-  const [form] = useUpdateMedicalProvider({ initialValues });
+export const UpdateProfile = () => {
+  const query = useProfile();
 
   return (
-    <form onSubmit={form.onSubmit} className='flex-1 space-y-5'>
+    <QueryWrapper query={query}>
+      {({ data }) => <UpdateProfileForm initialValues={data} />}
+    </QueryWrapper>
+  );
+};
+
+const UpdateProfileForm = ({ initialValues }) => {
+  const [form] = useUpdateProfile({ initialValues });
+
+  const isContractActive = useMemo(
+    () => initialValues?.hasActiveContract,
+    [initialValues?.hasActiveContract]
+  );
+
+  return (
+    <form onSubmit={form.onSubmit} className='h-full space-y-5'>
       <UpdatePesonalInfo form={form} />
-      <UpdateCareerInfo form={form} />
-      <Specializations form={form} />
-      <UpdateCertifications
-        empId={initialValues?.id}
-        attachments={initialValues?.attachments}
+      <UpdateCareerInfo
+        isContractActive={isContractActive}
+        form={form}
+      />
+      <Specializations
+        isContractActive={isContractActive}
+        form={form}
       />
       <PasswordForm form={form} />
 
@@ -58,7 +74,12 @@ export const UpdateMedicalProviderInfo = ({ initialValues }) => {
 
 const UpdatePesonalInfo = ({ form }) => {
   return (
-    <Card title='تعديل البيانات' className='space-y-5'>
+    <Card className='space-y-5'>
+      <div className='flex items-center gap-4'>
+        <BackButton />
+        <H1>تعديل البيانات</H1>
+      </div>
+
       <ImageUploader form={form} />
 
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
@@ -236,7 +257,7 @@ const UpdatePesonalInfo = ({ form }) => {
   );
 };
 
-const UpdateCareerInfo = ({ form }) => {
+const UpdateCareerInfo = ({ form, isContractActive = false }) => {
   return (
     <div className='space-y-5'>
       <SectionTitle>الوصف الوظيفي</SectionTitle>
@@ -264,6 +285,7 @@ const UpdateCareerInfo = ({ form }) => {
             onChange={form.onChange}
             value={form?.data?.qualification || ''}
             className='flex-1'
+            disabled={isContractActive}
           />
         </div>
         <div className='flex gap-5'>
@@ -276,6 +298,7 @@ const UpdateCareerInfo = ({ form }) => {
             onChange={form.onChange}
             value={form?.data?.licenseNumber || ''}
             className='flex-1'
+            disabled={isContractActive}
           />
         </div>
         <div className='flex gap-5'>
@@ -288,6 +311,7 @@ const UpdateCareerInfo = ({ form }) => {
             onChange={form.onChange}
             value={form?.data?.approvedBy || ''}
             className='flex-1'
+            disabled={isContractActive}
           />
         </div>
         <div className='flex gap-5'>
@@ -301,6 +325,7 @@ const UpdateCareerInfo = ({ form }) => {
             value={form?.data?.experienceYears || ''}
             type='number'
             className='flex-1'
+            disabled={isContractActive}
           />
         </div>
 
@@ -314,6 +339,7 @@ const UpdateCareerInfo = ({ form }) => {
             onChange={form?.onChange}
             value={form?.data?.academicDegree}
             className='flex-1'
+            disabled={isContractActive}
           />
         </div>
       </Card>
@@ -321,7 +347,7 @@ const UpdateCareerInfo = ({ form }) => {
   );
 };
 
-const Specializations = ({ form }) => {
+const Specializations = ({ form, isContractActive = false }) => {
   return (
     <Card className='space-y-5'>
       <div className='flex gap-5'>
@@ -337,6 +363,7 @@ const Specializations = ({ form }) => {
             label: 'text-base mdl:text-xl mb-2 ps-1',
           }}
           className='flex-1'
+          disabled={isContractActive}
         />
       </div>
 
@@ -353,6 +380,7 @@ const Specializations = ({ form }) => {
             label: 'text-base mdl:text-xl mb-2 ps-1',
           }}
           className='flex-1'
+          disabled={isContractActive}
         />
       </div>
     </Card>
@@ -364,12 +392,25 @@ const PasswordForm = ({ form }) => {
     <Card className='space-y-5' title='تغيير كلمة المرور'>
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
         <PasswordInput
-          name='password'
+          name='oldPassword'
           size='sm'
-          label='كلمة المرور'
-          error={GetErrorMsg(form?.error, 'Password')}
+          label='كلمة المرور الحالية'
+          error={GetErrorMsg(form?.error, 'OldPassword')}
           onChange={form.onChange}
-          value={form?.data?.password || ''}
+          value={form?.data?.oldPassword || ''}
+          className='mdl:col-span-2'
+        />
+
+        <PasswordInput
+          name='newPassword'
+          size='sm'
+          label='كلمة المرور الجديدة'
+          error={
+            GetErrorMsg(form?.error, 'NewPassword') ||
+            form?.validationErrors?.newPassword
+          }
+          onChange={form.onChange}
+          value={form?.data?.newPassword || ''}
         />
 
         <PasswordInput
@@ -454,65 +495,3 @@ const ImageUploader = ({ form }) => {
     </div>
   );
 };
-
-const UpdateCertifications = memo(
-  ({ empId = '', attachments = [] }) => {
-    const [isOpen, { open, close }] = useDisclosure();
-
-    const { isPending, onSubmit, error } = useAddAttachment({
-      empId,
-      type: '3',
-    });
-
-    return (
-      <Card className='space-y-5'>
-        <div className='flex items-center gap-5'>
-          <SectionTitle>الشهادات</SectionTitle>
-          <AddButton onClick={open}>اضافة شهادة</AddButton>
-        </div>
-
-        <Certifcations attachments={attachments} employeeId={empId} />
-
-        <AttachmentModal
-          error={error}
-          isPending={isPending}
-          onSubmit={onSubmit}
-          title='أضافة شهادة'
-          isOpen={isOpen}
-          close={close}
-        />
-      </Card>
-    );
-  }
-);
-
-UpdateCertifications.displayName = 'UpdateCertifications';
-
-const Certifcations = memo(
-  ({ attachments = [], employeeId = '' }) => {
-    const actions = useAttachmentMenuActions({
-      employeeId,
-    });
-
-    if (!attachments) return [];
-    return (
-      <div className='flex flex-wrap gap-5'>
-        {attachments
-          .filter((attachment) => attachment.type === 3)
-          ?.map((certificate) => (
-            <Certificate
-              key={certificate?.id}
-              name={certificate?.name}
-              image={certificate?.path}
-              date={certificate?.created}
-              id={certificate?.id}
-              isEdit
-              actions={actions}
-            />
-          ))}
-      </div>
-    );
-  }
-);
-
-Certifcations.displayName = 'Certifcations';

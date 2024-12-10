@@ -1,45 +1,39 @@
 'use client';
 
-import { useMemo } from 'react';
-import { Rating } from '@mantine/core';
 import { useLocale } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
 
 import { H1 } from '@/components/dashboard/ui/h1';
-import { BackButton } from '@/components/buttons/back-button';
 import { useImagePath } from '@/hooks/use-image-path';
 
 import Card from '@/components/card';
 import Avatar from '@/components/avatar';
 
-import CallIcon from '@/assets/icons/call';
-import EmailIcon from '@/assets/icons/email';
-import SmsIcon from '@/assets/icons/sms';
 import SessionIcon from '@/assets/icons/session';
+import { useProfile } from '@/hooks/queries/user/profile';
+import { Divider } from '@mantine/core';
+import { usePathname } from '@/navigation';
 import ROUTES from '@/routes';
 
-export const MedicalProviderMainInfo = ({ data }) => {
-  const isEdit = useSearchParams().get('edit') === 'true';
+export const ProfileMainInfo = () => {
+  const pathname = usePathname();
 
-  const title = useMemo(
-    () =>
-      isEdit ? 'تعديل بيانات مقدم الخدمة' : 'بيانات مقدم الخدمة',
-    [isEdit]
-  );
+  const { isPending, isError, data } = useProfile();
+
+  if (isPending || isError || pathname === ROUTES.DOCTOR.PROFILE.EDIT)
+    return null;
+
+  const profileData = data?.data;
 
   return (
     <Card className='space-y-10'>
-      <div className='flex gap-5'>
-        <BackButton href={ROUTES.ADMIN.STAFF.HOME} />
-        <H1>{title}</H1>
-      </div>
+      <H1>ملفي</H1>
 
       <div className='flex flex-col lg:flex-row lg:justify-between gap-5'>
-        <DoctorInfo {...data} />
+        <DoctorInfo {...profileData} />
 
         {/* <Services services={data?.services} /> */}
 
-        <Statistics licenseNumber={data?.licenseNumber} />
+        <Statistics licenseNumber={profileData?.licenseNumber} />
       </div>
     </Card>
   );
@@ -53,9 +47,8 @@ const DoctorInfo = ({
   mainSpecializationArName = '',
   mainSpecializationEnName = '',
   emailaddress = '',
-  rate = '10',
-  reservationCode = 'DR-AHMED-2024',
-  clientsCount = '0',
+  rate = '4.9',
+  rateCount = '0',
 }) => {
   const src = useImagePath(userImage);
 
@@ -75,7 +68,7 @@ const DoctorInfo = ({
       <Avatar
         src={src}
         name={emailaddress}
-        className='size-28 mdl:size-56'
+        className='size-20 mdl:size-28 rounded-full'
         radius='lg'
       />
 
@@ -84,52 +77,19 @@ const DoctorInfo = ({
 
         <p className='text-xs mdl:text-base'>{mainSpecialization}</p>
 
-        <p className='text-xs mdl:text-base font-bold flex flex-col items-start'>
-          <span className='text-xs font-normal'>كود الحجز</span>
-          {reservationCode}
-        </p>
-
         <p className='text-xs mdl:text-base font-bold'>
           {emailaddress}
         </p>
 
-        <p className='text-xs mdl:text-base font-bold'>
-          {clientsCount} مريض
-        </p>
-
-        <Rating
+        <span
           dir='ltr'
-          size={'md'}
-          readOnly
-          defaultValue={rate / 2}
-        />
-        <div className='flex gap-5 items-center *:shrink-0 w-full justify-around'>
-          <ContactButton type='chat' />
-          <ContactButton type='email' />
-          <ContactButton type='phone' />
-        </div>
-      </div>
-    </div>
-  );
-};
+          className='bg-greenMain font-bold block text-white text-sm mdl:text-xl text-center rounded-xl w-fit py-1 px-5'
+        >
+          {rate} &#9733;
+        </span>
 
-const ContactButton = ({ type = '', ...props }) => {
-  if (!type) return null;
-  return (
-    <div
-      {...props}
-      role='button'
-      className='bg-blueLighter rounded-full p-1 flex items-center justify-center size-9 transition-shadow hover:shadow-md'
-    >
-      {type === 'phone' && (
-        <CallIcon className='text-greenMain size-5' />
-      )}
-      {type === 'email' && (
-        <EmailIcon className='text-greenMain size-5' />
-      )}
-      {type === 'chat' && (
-        <SmsIcon className='text-greenMain size-5' />
-      )}
+        <p className='text-xs'>{rateCount} تقييم</p>
+      </div>
     </div>
   );
 };
@@ -160,15 +120,28 @@ const Services = ({ services = [] }) => {
 
 const Statistics = ({ licenseNumber = '', sessionCount = 0 }) => {
   return (
-    <div className='hidden lg:flex mdl:flex-col gap-5 items-center justify-center border-s-2 border-grayLight ps-5'>
-      <div className='flex flex-col gap-1 items-center pb-5 border-b-2 border-grayLight last:pb-0 last:border-b-transparent'>
+    <div className='flex lg:flex-col items-center lg:items-stretch lg:border-s-2 border-grayLight lg:ps-5 border-t-2 lg:border-t-0 pt-5 lg:pt-0'>
+      <div className='flex flex-col gap-1 items-center flex-1'>
         <p>رقم الترخيص</p>
         <p className='font-bold text-xl mdl:text-2xl'>
           {licenseNumber}
         </p>
       </div>
 
-      <div className='flex flex-col gap-1 items-center pb-5 border-b-2 border-grayLight last:pb-0 last:border-b-transparent'>
+      <Divider
+        className='border-grayLight shrink-0 hidden lg:block'
+        my='md'
+        size='sm'
+      />
+
+      <Divider
+        className='border-grayLight shrink-0 lg:hidden'
+        mx='md'
+        size='sm'
+        orientation='vertical'
+      />
+
+      <div className='flex flex-col gap-1 items-center pb-5 border-b-2 border-grayLight last:pb-0 last:border-b-transparent flex-1'>
         <div className=' size-8 mdl:size-10 rounded-full bg-blueLighter p-1 flex items-center justify-center'>
           <SessionIcon />
         </div>

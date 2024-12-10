@@ -1,48 +1,99 @@
 'use client';
 
+import { Divider } from '@mantine/core';
 import { useLocale } from 'next-intl';
 import { useRouter } from '@/navigation';
-import { useSearchParams } from 'next/navigation';
 
-import { useDate } from '@/hooks/use-date';
+import { useProfile } from '@/hooks/queries/user/profile';
 import { useGender } from '@/hooks/use-gender';
+import { useDate } from '@/hooks/use-date';
+import { Toast } from '@/components/toast';
 import { InfoData } from '@/components/dashboard/ui/info-data';
+import { CopyButton } from '@/components/buttons/copy-button';
 import { EditButton } from '@/components/buttons/edit-button';
+import { QueryWrapper } from '@/components/query-wrapper';
 import { SectionTitle } from '@/components/dashboard/ui/section-title';
-import { EmployeeCellActions } from '../../_components/employee-cell-actions';
-import { UpdateMedicalProviderInfo } from './update-medical-provider-info';
-import { Certificate } from '@/components/team/certificate';
-
-import Card from '@/components/card';
-import Button from '@/components/button';
-
-import CheckHeartIcon from '@/assets/icons/check-heart';
-import ADHD from '@/assets/icons/adhd';
 import { ACADEMIC_DEGREE_OBJ } from '@/data/academic-degree';
 import { CAREER_ICONS as ICONS } from '@/data/team';
 
-export const MedicalProviderInfo = ({ data }) => {
-  const isEdit = useSearchParams().get('edit') === 'true';
+import CheckHeartIcon from '@/assets/icons/check-heart';
+import ADHD from '@/assets/icons/adhd';
 
+import Button from '@/components/button';
+import Card from '@/components/card';
+import ROUTES from '@/routes';
+
+export const ProfileInfo = () => {
   const router = useRouter();
 
-  if (isEdit)
-    return <UpdateMedicalProviderInfo initialValues={data} />;
+  const query = useProfile();
 
   return (
-    <div className='flex-1 space-y-5'>
-      <PesonalInfo data={data} />
-      <CareerInfo data={data} />
-      <Specializations {...data} />
-      {/* <Services data={data?.services} /> */}
-      <Certifications data={data?.attachments} />
-      <EditButton
-        onClick={() => router.push('?edit=true')}
-        className='bg-white border-2 border-black text-black w-full mdl:max-w-xs font-bold transition hover:border-greenMain'
+    <QueryWrapper query={query}>
+      {({ data }) => (
+        <div className='space-y-5'>
+          <ReservationCode bookingCode={data?.id} />
+          <Divider size='sm' className='border-grayLight lg:hidden' />
+          <ReservationLink id={data?.id} />
+          <PesonalInfo data={data} />
+          <CareerInfo data={data} />
+          <Specializations {...data} />
+
+          <EditButton
+            onClick={() => router.push(ROUTES.DOCTOR.PROFILE.EDIT)}
+            className='bg-white border-2 border-black text-black w-full mdl:max-w-xs font-bold transition hover:border-greenMain'
+          >
+            تعديل
+          </EditButton>
+        </div>
+      )}
+    </QueryWrapper>
+  );
+};
+
+const ReservationCode = ({ bookingCode = '' }) => {
+  return (
+    <Card className='flex items-center justify-between'>
+      <div className='group flex flex-col gap-3 text-xs mdl:text-base'>
+        <h4>كود الحجز</h4>
+        <p className='font-bold underline'>{bookingCode}</p>
+      </div>
+      <CopyButton
+        onClick={() => {
+          navigator.clipboard.writeText(bookingCode);
+          Toast.Success('تم نسخ كود الحجز');
+        }}
       >
-        تعديل
-      </EditButton>
-    </div>
+        نسخ
+      </CopyButton>
+    </Card>
+  );
+};
+
+const ReservationLink = ({ id = '' }) => {
+  const reservationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/ar${ROUTES.AUTH.SIGNUP_FAMILY}?doctorCode=${id}`;
+
+  return (
+    <Card className='flex items-center justify-between'>
+      <div className='group flex flex-col gap-3 text-xs mdl:text-base'>
+        <h4>رابط الحجز</h4>
+        <a
+          href={reservationLink}
+          target='_blank'
+          className='font-bold underline'
+        >
+          {reservationLink}
+        </a>
+      </div>
+      <CopyButton
+        onClick={() => {
+          navigator.clipboard.writeText(reservationLink);
+          Toast.Success('تم نسخ رابط الحجز');
+        }}
+      >
+        نسخ
+      </CopyButton>
+    </Card>
   );
 };
 
@@ -56,10 +107,8 @@ const PesonalInfo = ({ data }) => {
 
   return (
     <div className='space-y-3'>
-      <div className='flex items-center justify-between px-5 mdl:px-0'>
-        <SectionTitle>البيانات الشخصية</SectionTitle>
-        <EmployeeCellActions />
-      </div>
+      <SectionTitle>البيانات الشخصية</SectionTitle>
+
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-2'>
         <Card>
           <InfoData label='الاسم' value={name} direction='col' />
@@ -313,59 +362,6 @@ const Specializations = ({
           </p>
         )}
       </Card>
-    </div>
-  );
-};
-
-const Services = ({ data = [] }) => {
-  const locale = useLocale();
-
-  const key = locale === 'ar' ? 'arName' : 'enName';
-
-  return (
-    <Card className='space-y-5' title='رسوم الخدمات'>
-      {!!data?.length ? (
-        data.map((service) => (
-          <InfoData
-            key={service?.id}
-            label={service[key]}
-            value={`${service?.price || 100} SAR`}
-          />
-        ))
-      ) : (
-        <p className='text-grayDark'>
-          <ADHD className='size-4 inline-block me-2' />
-          لا يوجد خدمات
-        </p>
-      )}
-    </Card>
-  );
-};
-
-const Certifications = ({ data = [] }) => {
-  if (!data?.length)
-    return (
-      <Card title='الشهادات' className='space-y-5'>
-        <p className='text-grayDark'>
-          <ADHD className='size-4 inline-block me-2' />
-          لا يوجد شهادات
-        </p>
-      </Card>
-    );
-  return (
-    <div className='space-y-5'>
-      <SectionTitle>الشهادات</SectionTitle>
-
-      <div className='flex flex-wrap gap-5'>
-        {data?.map((item) => (
-          <Certificate
-            key={item?.id}
-            name={item?.name}
-            image={item?.path}
-            date={item?.date}
-          />
-        ))}
-      </div>
     </div>
   );
 };
