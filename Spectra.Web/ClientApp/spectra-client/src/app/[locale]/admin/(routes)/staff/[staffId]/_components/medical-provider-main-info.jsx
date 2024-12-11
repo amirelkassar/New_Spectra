@@ -80,7 +80,9 @@ const DoctorInfo = ({
       />
 
       <div className='flex flex-col gap-1 justify-around shrink-0'>
-        <h4 className='font-bold text-sm mdl:text-base'>{name}</h4>
+        <h4 className='font-bold text-sm mdl:text-base capitalize'>
+          {name}
+        </h4>
 
         <p className='text-xs mdl:text-base'>{mainSpecialization}</p>
 

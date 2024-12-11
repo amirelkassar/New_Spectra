@@ -44,6 +44,7 @@
     "react-show-more-text": "^1.7.1",
     "react-signature-canvas": "^1.0.6",
     "react-sortablejs": "^6.1.4",
+    "sharp": "^0.33.5",
     "sortablejs": "^1.15.3",
     "swiper": "^11.1.5",
     "tailwind-merge": "^2.4.0",

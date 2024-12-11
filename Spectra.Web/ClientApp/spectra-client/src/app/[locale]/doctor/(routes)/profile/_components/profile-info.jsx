@@ -230,6 +230,7 @@ const CareerInfo = ({ data }) => {
             weight='reverse'
             label='تاريخ الانضمام'
             value={date.fullYear}
+            valueClassName='capitalize'
           />
         </div>
 
@@ -343,9 +344,9 @@ const Specializations = ({
           </h4>
         </div>
 
-        {!!specializations.length ? (
+        {!!specializations?.length ? (
           <div className='flex flex-wrap gap-3'>
-            {specializations.map((item) => (
+            {specializations?.map((item) => (
               <Button
                 key={item?.id}
                 variant='blueLight'

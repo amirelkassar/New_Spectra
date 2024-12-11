@@ -62,7 +62,12 @@ const PesonalInfo = ({ data }) => {
       </div>
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-2'>
         <Card>
-          <InfoData label='الاسم' value={name} direction='col' />
+          <InfoData
+            label='الاسم'
+            value={name}
+            direction='col'
+            valueClassName='capitalize'
+          />
         </Card>
         <Card>
           <InfoData label='النوع' value={gender} direction='col' />
