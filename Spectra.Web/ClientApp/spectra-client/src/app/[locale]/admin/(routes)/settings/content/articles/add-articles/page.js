@@ -1,7 +1,6 @@
 'use client';
 import Card from '@/components/card';
 import React, { useState } from 'react';
-import JoditEditor from 'jodit-react';
 import { Link } from '@/i18n/routing';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
