@@ -127,6 +127,15 @@ export const useMedicalProviderRegister = () => {
       Toast.Promise(registerMedicalProvider(formData), {
         success: 'تم تسجيلك بنجاح',
         onSuccess: () => {
+          // save the login data to session storage
+          sessionStorage.setItem(
+            'loginEmail',
+            stepOneData.emailAddress
+          );
+          sessionStorage.setItem(
+            'loginPassword',
+            stepOneData.password
+          );
           router.replace(ROUTES.AUTH.LOGIN);
         },
         onError: (error) => {

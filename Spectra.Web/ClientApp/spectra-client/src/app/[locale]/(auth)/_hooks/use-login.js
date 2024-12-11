@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
@@ -83,21 +83,44 @@ export const useLogin = () => {
         loading: 'جاري تسجيل الدخول',
         onSuccess: async (data) => {
           const isTokenStored = await storeToken(data?.data);
+          const { accessToken, permissions, roles } = data?.data;
           if (isTokenStored) {
-            const { accessToken, permissions, roles } = data?.data;
             setToken(accessToken);
             setSession({
               permissions,
               roles,
             });
-
-            router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+            if (roles[0] === 'Doctor' || roles[0] === 'Specialist') {
+              return router.replace(
+                ROUTES.DOCTOR.CONTRACTS.DASHBOARD
+              );
+            }
+            if (roles[0] === 'Admin') {
+              return router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
+            }
           }
         },
       });
     },
     [formData, startLogin, router, setToken, setSession]
   );
+
+  useEffect(() => {
+    // check if it is the first login after registration
+    const loginEmail = sessionStorage.getItem('loginEmail');
+    const loginPassword = sessionStorage.getItem('loginPassword');
+
+    if (loginEmail && loginPassword) {
+      setFormData({
+        userEmail: loginEmail,
+        password: loginPassword,
+      });
+
+      // clear session storage
+      sessionStorage.removeItem('loginEmail');
+      sessionStorage.removeItem('loginPassword');
+    }
+  }, []);
 
   return {
     login,
