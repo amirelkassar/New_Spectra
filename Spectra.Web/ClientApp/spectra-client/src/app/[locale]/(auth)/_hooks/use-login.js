@@ -4,12 +4,11 @@ import { useCallback, useState } from 'react';
 import { useRouter } from '@/navigation';
 
 import { Toast } from '@/components/toast';
+import { useAuth } from '@/hooks/use-auth';
 import { useToken } from '@/hooks/use-token';
 import { storeToken } from '@/lib/token';
 import { useLoginMutation } from '@/hooks/queries/auth';
 import ROUTES from '@/routes';
-import { storeAuth } from '@/lib/auth';
-import { useAuth } from '@/hooks/use-auth';
 
 export const useLogin = () => {
   const router = useRouter();
@@ -84,8 +83,7 @@ export const useLogin = () => {
         loading: 'جاري تسجيل الدخول',
         onSuccess: async (data) => {
           const isTokenStored = await storeToken(data?.data);
-          const isAuthStored = await storeAuth(data?.data);
-          if (isAuthStored && isTokenStored) {
+          if (isTokenStored) {
             const { accessToken, permissions, roles } = data?.data;
             setToken(accessToken);
             setSession({

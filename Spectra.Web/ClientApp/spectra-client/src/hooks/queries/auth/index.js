@@ -1,7 +1,6 @@
 'use client';
 
 import { apiAuth } from '@/api/axios';
-import { clearAuth } from '@/lib/auth';
 import { clearToken } from '@/lib/token';
 import { useRouter } from '@/navigation';
 import ROUTES from '@/routes';
@@ -30,10 +29,8 @@ export const useLogout = () => {
 
   const logout = async () => {
     const isTokenDeleted = await clearToken();
-    const isSessionDeleted = await clearAuth();
 
-    if (isTokenDeleted && isSessionDeleted)
-      router.push(ROUTES.AUTH.LOGIN);
+    if (isTokenDeleted) router.push(ROUTES.AUTH.LOGIN);
   };
 
   return {

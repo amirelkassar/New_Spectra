@@ -41,8 +41,8 @@ export default async function RootLayout({ children, params }) {
           locale={params.locale}
           messages={messages}
         >
-          <TokenProvider value={token}>
-            <SessionProvider value={session}>
+          <TokenProvider initialValue={token}>
+            <SessionProvider initialValue={session}>
               <MantineProvider>
                 <ReactQueryConfig>
                   {children}

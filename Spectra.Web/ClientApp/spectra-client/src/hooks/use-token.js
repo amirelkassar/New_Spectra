@@ -4,8 +4,8 @@ import { createContext, useContext, useState } from 'react';
 
 const TokenContext = createContext(null);
 
-export const TokenProvider = ({ children, value }) => {
-  const [token, setToken] = useState(value);
+export const TokenProvider = ({ children, initialValue = '' }) => {
+  const [token, setToken] = useState(initialValue);
 
   return (
     <TokenContext.Provider value={{ token, setToken }}>
