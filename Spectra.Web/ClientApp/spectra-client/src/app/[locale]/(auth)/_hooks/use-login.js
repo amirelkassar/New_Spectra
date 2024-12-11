@@ -95,7 +95,7 @@ export const useLogin = () => {
                 ROUTES.DOCTOR.CONTRACTS.DASHBOARD
               );
             }
-            if (roles[0] === 'Admin') {
+            if (roles[0] === 'SystemAdmin') {
               return router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
             }
           }
