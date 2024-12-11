@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import { contractCase as CASE } from '../layout';
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 export const useActiveStep = (contractCase) => {
@@ -23,10 +23,7 @@ export const useActiveStep = (contractCase) => {
       return 1;
     }
 
-    if (
-      contractCase === CASE[1] ||
-      contractCase === CASE[2]
-    ) {
+    if (contractCase === CASE[1] || contractCase === CASE[2]) {
       return 3;
     }
   }, [contractCase, pathname]);

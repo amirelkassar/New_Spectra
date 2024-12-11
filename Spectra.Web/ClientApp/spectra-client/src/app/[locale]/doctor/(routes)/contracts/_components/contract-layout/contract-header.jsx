@@ -3,7 +3,7 @@
 import ChatsIcon from '@/assets/icons/chats';
 import ThreeDotsIcon from '@/assets/icons/three-dots';
 import { BackButton } from '@/components/buttons/back-button';
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { useContractStore } from '../../_hooks';
 
@@ -24,9 +24,7 @@ export const ContractHeader = () => {
 
 const Title = ({ children }) => {
   return (
-    <h2 className='text-base lg:text-xl font-bold'>
-      {children}
-    </h2>
+    <h2 className='text-base lg:text-xl font-bold'>{children}</h2>
   );
 };
 

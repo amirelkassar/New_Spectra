@@ -1,10 +1,7 @@
-import { redirect } from '@/navigation';
+import { redirect } from '@/i18n/routing';
 import { getToken } from '@/lib/token';
 import ROUTES from '@/routes';
-import {
-  Header,
-  AdminSidebar,
-} from '@/admin/_components/layouts';
+import { Header, AdminSidebar } from '@/admin/_components/layouts';
 
 export default async function Layout({ children }) {
   const auth = await getToken();

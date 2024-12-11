@@ -1,7 +1,7 @@
 import Card from '@/components/card';
 import React from 'react';
 import BackIcon from '@/assets/icons/back';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { Textarea, TextInput } from '@mantine/core';
 import Button from '@/components/button';

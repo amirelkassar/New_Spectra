@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   ColumnDef,
@@ -9,20 +9,20 @@ import {
   useReactTable,
   getPaginationRowModel,
   getSortedRowModel,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
-import { Checkbox, Select, Table } from "@mantine/core";
-import { Pagination } from "@mantine/core";
-import { Fragment, useState } from "react";
-import FilterIcon from "@/assets/icons/filter";
-import Button from "@/components/button";
-import { cn } from "@/lib/utils";
-import ArrowLeft from "@/assets/icons/arrow-left";
-import { ArrowDownBlack } from "@/assets/icons/arrow-down-main-green";
-import { SortingState } from "@tanstack/react-table";
-import { useMediaQuery } from "@mantine/hooks";
-import { useRouter } from "@/navigation";
-import { useSearchParams } from "next/navigation";
+import { Checkbox, Select, Table } from '@mantine/core';
+import { Pagination } from '@mantine/core';
+import { Fragment, useState } from 'react';
+import FilterIcon from '@/assets/icons/filter';
+import Button from '@/components/button';
+import { cn } from '@/lib/utils';
+import ArrowLeft from '@/assets/icons/arrow-left';
+import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
+import { SortingState } from '@tanstack/react-table';
+import { useMediaQuery } from '@mantine/hooks';
+import { useRouter } from '@/i18n/routing';
+import { useSearchParams } from 'next/navigation';
 
 export function DataTable({
   columns,
@@ -30,8 +30,8 @@ export function DataTable({
   sort = false,
   IsWidth = false,
   filter = null,
-  filterBy = "",
-  filterText = "",
+  filterBy = '',
+  filterText = '',
   filterData = [],
   sortingData = [],
   selectData = [],
@@ -46,12 +46,12 @@ export function DataTable({
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [paginationPage, setPaginationPage] = useState(
-    Number(searchParams.get("page") ?? 1)
+    Number(searchParams.get('page') ?? 1)
   );
   const updatePaginationPage = (page) => {
     setPaginationPage(page);
     const params = new URLSearchParams(window.location.search);
-    params.set("page", page);
+    params.set('page', page);
     router.replace(`?${params.toString()}`);
   };
 
@@ -84,7 +84,7 @@ export function DataTable({
 
     if (tableColumn) return tableColumn.getFilterValue();
   };
-  const isMobile = useMediaQuery("(max-width: 992px)");
+  const isMobile = useMediaQuery('(max-width: 992px)');
   const [selectedUsers, setSelectedUsers] = useState(new Set());
   const toggleAll = () => {
     if (selectedUsers.size === data.length) {
@@ -103,73 +103,80 @@ export function DataTable({
     setSelectedUsers(newSelectedUsers);
   };
   return (
-    <div className="space-y-5">
+    <div className='space-y-5'>
       {/* Filter */}
       {filter && (
-        <div className="flex mdl:items-center flex-col mdl:flex-row gap-4 my-5 w-full">
-          {filter === "select" && (
+        <div className='flex mdl:items-center flex-col mdl:flex-row gap-4 my-5 w-full'>
+          {filter === 'select' && (
             <div>
               <Select
                 searchable
                 classNames={{
                   input:
-                    "focus:border-greenMain border-black placeholder:text-black placeholder:text-xs disabled:border-black/10 disabled:text-black/50 disabled:placeholder:text-black/50 rounded-lg",
+                    'focus:border-greenMain border-black placeholder:text-black placeholder:text-xs disabled:border-black/10 disabled:text-black/50 disabled:placeholder:text-black/50 rounded-lg',
                 }}
-                checkIconPosition="right"
+                checkIconPosition='right'
                 data={selectData}
                 disabled={selectData?.length === 0}
-                placeholder="اختر التخصص"
-                value={table.getColumn(filterBy)?.getFilterValue() ?? ""}
+                placeholder='اختر التخصص'
+                value={
+                  table.getColumn(filterBy)?.getFilterValue() ?? ''
+                }
                 onChange={(value) =>
                   table.getColumn(filterBy)?.setFilterValue(value)
                 }
                 rightSection={
                   <ArrowDownBlack
-                    className={selectData?.length === 0 ? "opacity-10" : ""}
+                    className={
+                      selectData?.length === 0 ? 'opacity-10' : ''
+                    }
                   />
                 }
               />
             </div>
           )}
 
-          <div className="flex items-center gap-3">
+          <div className='flex items-center gap-3'>
             <FilterIcon />
-            <span className="font-bold text-xs lg:text-base text-black">
-              {filterText ? filterText : "فلتر"}
+            <span className='font-bold text-xs lg:text-base text-black'>
+              {filterText ? filterText : 'فلتر'}
             </span>
           </div>
 
-          {filter === "buttons" && (
-            <div className="flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto">
+          {filter === 'buttons' && (
+            <div className='flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto'>
               <Button
                 onClick={() =>
                   table.getColumn(filterBy)?.setFilterValue(undefined)
                 }
-                variant="blueLight"
+                variant='blueLight'
                 className={cn(
-                  " font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5",
+                  ' font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5',
                   {
-                    "bg-white font-Regular ": getFillterValue() !== undefined,
+                    'bg-white font-Regular ':
+                      getFillterValue() !== undefined,
                   }
                 )}
               >
                 الكل
               </Button>
 
-              <span className="w-[1px] h-6 bg-grayMedium mx-1" />
+              <span className='w-[1px] h-6 bg-grayMedium mx-1' />
 
               {filterData.map((option, index) => (
                 <Fragment key={option.label}>
                   <Button
                     key={option.label}
                     onClick={() =>
-                      table.getColumn(filterBy)?.setFilterValue(option.key)
+                      table
+                        .getColumn(filterBy)
+                        ?.setFilterValue(option.key)
                     }
-                    variant="blueLight"
+                    variant='blueLight'
                     className={cn(
-                      "  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5 min-w-fit",
+                      '  font-Bold flex-1 mdl:flex-initial gap-3 mdl:gap-5 min-w-fit',
                       {
-                        "bg-white font-Regular":
+                        'bg-white font-Regular':
                           option.key !== getFillterValue(),
                       }
                     )}
@@ -178,7 +185,7 @@ export function DataTable({
                     {option.label}
                   </Button>
                   {index !== filterData.length - 1 && (
-                    <span className="w-[1px] h-6 bg-grayMedium mx-1 " />
+                    <span className='w-[1px] h-6 bg-grayMedium mx-1 ' />
                   )}
                 </Fragment>
               ))}
@@ -186,14 +193,14 @@ export function DataTable({
           )}
 
           {sort && (
-            <div className="flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto">
+            <div className='flex items-center w-full mdl:w-auto gap-1 mdl:gap-3 mdl:pb-0 pb-2 overflow-x-auto'>
               <Button
                 onClick={() => table.resetSorting()}
-                variant="blueLight"
+                variant='blueLight'
                 className={cn(
-                  "font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5",
+                  'font-normal flex-1 mdl:flex-initial gap-3 mdl:gap-5',
                   {
-                    "bg-white": table
+                    'bg-white': table
                       .getAllColumns()
                       .some((column) => column.getIsSorted()),
                   }
@@ -202,33 +209,40 @@ export function DataTable({
                 الكل
               </Button>
 
-              <span className="w-[1px] h-6 bg-grayMedium mx-1" />
+              <span className='w-[1px] h-6 bg-grayMedium mx-1' />
 
               {sortingData.map((option, index) => (
                 <Fragment key={option.label}>
                   <Button
                     key={option.label}
-                    onClick={() => table.getColumn(option.key)?.toggleSorting()}
-                    variant="blueLight"
-                    className={cn("font-normal flex-1 mdl:flex-initial gap-1", {
-                      "bg-white": option.key !== getFillterValue(),
-                    })}
+                    onClick={() =>
+                      table.getColumn(option.key)?.toggleSorting()
+                    }
+                    variant='blueLight'
+                    className={cn(
+                      'font-normal flex-1 mdl:flex-initial gap-1',
+                      {
+                        'bg-white': option.key !== getFillterValue(),
+                      }
+                    )}
                   >
                     {table.getColumn(option.key)?.getIsSorted() && (
                       <>
-                        {table.getColumn(option.key)?.getIsSorted() ===
-                          "asc" && (
+                        {table
+                          .getColumn(option.key)
+                          ?.getIsSorted() === 'asc' && (
                           <ArrowLeft
-                            className="rotate-90 size-3"
-                            fill="#10B0C1"
+                            className='rotate-90 size-3'
+                            fill='#10B0C1'
                           />
                         )}
 
-                        {table.getColumn(option.key)?.getIsSorted() ===
-                          "desc" && (
+                        {table
+                          .getColumn(option.key)
+                          ?.getIsSorted() === 'desc' && (
                           <ArrowLeft
-                            className="-rotate-90 size-3"
-                            fill="#10B0C1"
+                            className='-rotate-90 size-3'
+                            fill='#10B0C1'
                           />
                         )}
                       </>
@@ -237,7 +251,7 @@ export function DataTable({
                     {option.label}
                   </Button>
                   {index !== sortingData.length - 1 && (
-                    <span className="w-[1px] h-6 bg-grayMedium mx-1" />
+                    <span className='w-[1px] h-6 bg-grayMedium mx-1' />
                   )}
                 </Fragment>
               ))}
@@ -246,7 +260,7 @@ export function DataTable({
         </div>
       )}
       {haveComp && (
-        <div className=" flex flex-col w-full gap-5 lg:hidden mb-14">
+        <div className=' flex flex-col w-full gap-5 lg:hidden mb-14'>
           {table
             .getRowModel()
             .rows.map((row, i) =>
@@ -257,20 +271,21 @@ export function DataTable({
         </div>
       )}
       {/* Table */}
-      <Table className={`${haveComp && " hidden lg:table"}`}>
-        <Table.Thead className="bg-blueLight h-[50px] min-h-[50px]  ">
+      <Table className={`${haveComp && ' hidden lg:table'}`}>
+        <Table.Thead className='bg-blueLight h-[50px] min-h-[50px]  '>
           {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Tr key={headerGroup.id} className="!border-b-0 ">
-              <Table.Th className="   rounded-s-xl max-w-7  px-2 ">
+            <Table.Tr key={headerGroup.id} className='!border-b-0 '>
+              <Table.Th className='   rounded-s-xl max-w-7  px-2 '>
                 <Checkbox
-                  size={isMobile ? "xs" : "sm"}
-                  color="#10B0C1"
+                  size={isMobile ? 'xs' : 'sm'}
+                  color='#10B0C1'
                   classNames={{
-                    input: "bg-transparent ",
+                    input: 'bg-transparent ',
                   }}
                   checked={selectedUsers.size === data.length}
                   indeterminate={
-                    selectedUsers.size > 0 && selectedUsers.size < data.length
+                    selectedUsers.size > 0 &&
+                    selectedUsers.size < data.length
                   }
                   onChange={toggleAll}
                 />
@@ -280,12 +295,12 @@ export function DataTable({
                   <Table.Th
                     key={header.id}
                     className={` text-black ${
-                      IsWidth && "max-w-[300px] w-[280px]"
+                      IsWidth && 'max-w-[300px] w-[280px]'
                     }   text-xs font-ExtraLight lg:text-base ${
                       i === headerGroup.headers.length - 1
-                        ? "rounded-e-xl pe-5"
-                        : ""
-                    } ${mdHide === i + 1 ? " hidden mdl:block" : ""}`}
+                        ? 'rounded-e-xl pe-5'
+                        : ''
+                    } ${mdHide === i + 1 ? ' hidden mdl:block' : ''}`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -304,17 +319,17 @@ export function DataTable({
             table.getRowModel().rows.map((row, index) => (
               <Table.Tr
                 className={`text-black text-xs lg:text-base ${
-                  selectedUsers.has(index) ? "bg-blueLight/40" : ""
+                  selectedUsers.has(index) ? 'bg-blueLight/40' : ''
                 }
                 `}
                 key={row.id}
-                data-state={row.getIsSelected() && "selected"}
+                data-state={row.getIsSelected() && 'selected'}
                 style={
                   row.original.now
                     ? {
-                        marginBlock: "10px",
+                        marginBlock: '10px',
                         background:
-                          "linear-gradient(263deg, rgba(172,221,249,1) 15%, rgba(172,221,249,1) 44%, rgba(233,247,255,1) 100%)",
+                          'linear-gradient(263deg, rgba(172,221,249,1) 15%, rgba(172,221,249,1) 44%, rgba(233,247,255,1) 100%)',
                       }
                     : {}
                 }
@@ -322,47 +337,53 @@ export function DataTable({
                 <Table.Td
                   className={`px-2 max-w-7 w-6  ps-2  ${
                     appointmentNow
-                      ? row.original.now && " rounded-s-2xl h-[100px]"
-                      : ""
+                      ? row.original.now && ' rounded-s-2xl h-[100px]'
+                      : ''
                   } `}
                 >
                   <Checkbox
-                    color="#10B0C1"
+                    color='#10B0C1'
                     classNames={{
-                      input: "bg-transparent ",
-                      icon: " ",
+                      input: 'bg-transparent ',
+                      icon: ' ',
                     }}
-                    size={isMobile ? "xs" : "sm"}
+                    size={isMobile ? 'xs' : 'sm'}
                     checked={selectedUsers.has(index)}
                     onChange={() => toggleUser(index)}
-                    className="w-fit"
+                    className='w-fit'
                   />
                 </Table.Td>
                 {row.getVisibleCells().map((cell, i) => (
                   <Table.Td
                     className={`py-3   first:lg:text-base max-w-[280px] ${
-                      mdHide === i + 1 ? " hidden mdl:block" : ""
+                      mdHide === i + 1 ? ' hidden mdl:block' : ''
                     }
-                    ${i === 0 ? "font-Bold" : ""}
+                    ${i === 0 ? 'font-Bold' : ''}
                     ${
                       appointmentNow
                         ? row.original.now &&
                           i === row.getVisibleCells().length - 1
-                          ? " rounded-e-2xl h-[100px]"
-                          : ""
+                          ? ' rounded-e-2xl h-[100px]'
+                          : ''
                         : null
                     }
                     `}
                     key={cell.id}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )}
                   </Table.Td>
                 ))}
               </Table.Tr>
             ))
           ) : (
             <Table.Tr>
-              <Table.Td colSpan={columns.length} className="h-24 text-center">
+              <Table.Td
+                colSpan={columns.length}
+                className='h-24 text-center'
+              >
                 No results.
               </Table.Td>
             </Table.Tr>
@@ -370,31 +391,31 @@ export function DataTable({
         </Table.Tbody>
       </Table>
       {totalPages > 1 && (
-        <div className="font-bold flex items-center justify-between">
+        <div className='font-bold flex items-center justify-between'>
           <Button
-            className="py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg"
+            className='py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg'
             onClick={() => updatePaginationPage(paginationPage + 1)}
             disabled={paginationPage >= totalPages}
           >
-            <ArrowLeft className="rotate-180" />
+            <ArrowLeft className='rotate-180' />
             التالي
           </Button>
 
           <Pagination
             total={totalPages}
-            dir="ltr"
+            dir='ltr'
             classNames={{
-              control: "!bg-white hover:!bg-black/5 !transition",
+              control: '!bg-white hover:!bg-black/5 !transition',
             }}
-            size="sm"
-            radius="xl"
+            size='sm'
+            radius='xl'
             withControls={false}
             value={paginationPage}
             onChange={(e) => updatePaginationPage(e)}
           />
 
           <Button
-            className="py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg"
+            className='py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg'
             onClick={() => updatePaginationPage(paginationPage - 1)}
             disabled={paginationPage === 1}
           >
@@ -405,31 +426,31 @@ export function DataTable({
       )}
       {/* Pagination */}
       {data.length > 10 && (
-        <div className="font-bold flex items-center justify-between">
+        <div className='font-bold flex items-center justify-between'>
           <Button
-            className="py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg"
+            className='py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg'
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <ArrowLeft className="rotate-180" />
+            <ArrowLeft className='rotate-180' />
             التالي
           </Button>
 
           <Pagination
             total={table.getPageCount()}
-            dir="ltr"
+            dir='ltr'
             classNames={{
-              control: "!bg-white hover:!bg-black/5 !transition",
+              control: '!bg-white hover:!bg-black/5 !transition',
             }}
-            size="sm"
-            radius="xl"
+            size='sm'
+            radius='xl'
             withControls={false}
             value={table.getState().pagination.pageIndex + 1}
             onChange={(value) => table.setPageIndex(value - 1)}
           />
 
           <Button
-            className="py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg"
+            className='py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg'
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >

@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 import { useDate } from '@/hooks/use-date';

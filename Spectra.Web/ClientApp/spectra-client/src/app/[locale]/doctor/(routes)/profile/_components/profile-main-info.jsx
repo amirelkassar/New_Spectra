@@ -11,7 +11,7 @@ import Avatar from '@/components/avatar';
 import SessionIcon from '@/assets/icons/session';
 import { useProfile } from '@/hooks/queries/user/profile';
 import { Divider } from '@mantine/core';
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 export const ProfileMainInfo = () => {

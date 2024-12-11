@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { DeleteDrugs } from '@/hooks/queries/admin/main-data/drugs';
 import ROUTES from '@/routes';
@@ -13,8 +13,7 @@ export const useDrugsMenuActions = (id) => {
 
   const open = useConfirmModal((s) => s.open);
 
-  const { mutateAsync: deleteDrug, isPending } =
-    DeleteDrugs(id);
+  const { mutateAsync: deleteDrug, isPending } = DeleteDrugs(id);
 
   const onDelete = useCallback(() => {
     open({
@@ -22,8 +21,7 @@ export const useDrugsMenuActions = (id) => {
       onConfirm: () => {
         Toast.Promise(deleteDrug(), {
           success: 'تم مسح العقار بنجاح',
-          onSuccess: () =>
-            router.replace(ROUTES.ADMIN.DATAMAIN.HOME),
+          onSuccess: () => router.replace(ROUTES.ADMIN.DATAMAIN.HOME),
         });
       },
     });

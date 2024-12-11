@@ -5,7 +5,7 @@ import { BannerUploader } from './_components/BannerUploader';
 import { BannerItem } from './_components/BannerItem';
 import Button from '@/components/button';
 
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import BackIcon from '@/assets/icons/back';
 import Image from 'next/image';
@@ -16,15 +16,11 @@ function PFage() {
     '/adv-2.png',
     '/adv-3.png',
   ]);
-  const [SelectedDataImg, setSelectedDataImg] = useState(
-    []
-  );
+  const [SelectedDataImg, setSelectedDataImg] = useState([]);
   console.log(SelectedDataImg);
 
   const handleDeleteImage = (index) => {
-    const updatedImages = dataImg.filter(
-      (_, i) => i !== index
-    );
+    const updatedImages = dataImg.filter((_, i) => i !== index);
     setDataImg(updatedImages);
   };
   return (
@@ -43,10 +39,7 @@ function PFage() {
           </h2>
         </div>
         <div className='max-w-[960px] mx-auto'>
-          <BannerUploader
-            setDataImg={setDataImg}
-            dataImg={dataImg}
-          />
+          <BannerUploader setDataImg={setDataImg} dataImg={dataImg} />
         </div>
       </Card>
       <Card>
@@ -102,9 +95,7 @@ function PFage() {
                 تأكيد
               </Button>
               <Link
-                href={
-                  ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD
-                }
+                href={ROUTES.ADMIN.SETTINGS.CONTENT.DASHBOARD}
                 className='w-full duration-300 hover:shadow-md hover:border-red flex items-center justify-center border rounded-xl h-[48px] lgl:h-[60px] text-[14px] lgl:text-[20px] font-Bold'
               >
                 إلغاء

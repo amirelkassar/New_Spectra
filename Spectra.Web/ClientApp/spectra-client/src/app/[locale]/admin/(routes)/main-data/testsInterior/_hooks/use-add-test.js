@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { Toast } from '@/components/toast';
 import { useCreateInternalExamination } from '@/hooks/queries/admin/main-data/testsInterior';
@@ -44,9 +44,7 @@ export const useAddTest = () => {
       Toast.Promise(createInternalExamination(formData), {
         success: 'تم اضافة الفحص بنجاح',
         onSuccess: () => {
-          router.replace(
-            ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR
-          );
+          router.replace(ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR);
         },
       });
     },

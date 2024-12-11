@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 

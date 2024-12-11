@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import ROUTES from '@/routes';
 import { DeleteDiagnostics } from '@/hooks/queries/admin/main-data/diagnostics';
@@ -23,9 +23,7 @@ export const useDaignosticsMenuActions = (id) => {
         Toast.Promise(deleteDiagnostics(), {
           success: 'تم المسح بنجاح',
           onSuccess: () => {
-            router.replace(
-              ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS
-            );
+            router.replace(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICS);
           },
         });
       },
@@ -33,15 +31,11 @@ export const useDaignosticsMenuActions = (id) => {
   }, [deleteDiagnostics, isPending, open, router]);
 
   const onView = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILS(id));
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.DIAGNOSTICSDETAILSEDIT(id));
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

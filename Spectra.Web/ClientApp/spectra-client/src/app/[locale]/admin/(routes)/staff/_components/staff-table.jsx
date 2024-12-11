@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import { AddButton } from '@/components/buttons/add-button';
 import { SectionTitle, TableItem } from '@/admin/_components/ui';

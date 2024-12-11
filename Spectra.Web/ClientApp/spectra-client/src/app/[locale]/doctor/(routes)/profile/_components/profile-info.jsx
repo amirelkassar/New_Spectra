@@ -2,7 +2,7 @@
 
 import { Divider } from '@mantine/core';
 import { useLocale } from 'next-intl';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { useProfile } from '@/hooks/queries/user/profile';
 import { useGender } from '@/hooks/use-gender';

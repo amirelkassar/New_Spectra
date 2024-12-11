@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { SectionTitle } from '@/admin/_components/ui';
 import { useSettingsData } from '../_hooks/use-settings-data';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@/lib/utils';

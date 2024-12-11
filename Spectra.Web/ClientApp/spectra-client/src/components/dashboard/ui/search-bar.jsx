@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useDebouncedValue } from '@mantine/hooks';
 import { useSearchParams } from 'next/navigation';
-import { usePathname, useRouter } from '@/navigation';
+import { usePathname, useRouter } from '@/i18n/routing';
 
 import { cn } from '@/lib/utils';
 import SearchIcon from '@/assets/icons/search';

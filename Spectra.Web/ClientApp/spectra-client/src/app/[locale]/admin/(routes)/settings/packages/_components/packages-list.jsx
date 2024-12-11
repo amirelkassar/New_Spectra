@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useMemo } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 
 import { PackageCardItem } from '@/components/packages';
@@ -19,9 +19,7 @@ export const PackagesList = () => {
 
   const onView = useCallback(
     (id) =>
-      router.push(
-        ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESDETAILS(id)
-      ),
+      router.push(ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESDETAILS(id)),
     [router]
   );
 
@@ -45,15 +43,8 @@ export const PackagesList = () => {
 const PackageCard = ({ data = {}, onView = () => {} }) => {
   const locale = useLocale();
 
-  const {
-    arName,
-    enName,
-    id,
-    price,
-    services,
-    discount,
-    iconCode,
-  } = data;
+  const { arName, enName, id, price, services, discount, iconCode } =
+    data;
 
   const features = useMemo(() => {
     if (!services?.length) return [];
@@ -61,14 +52,11 @@ const PackageCard = ({ data = {}, onView = () => {} }) => {
     const key = locale === 'ar' ? 'arName' : 'enName';
 
     // Count occurrences of each service
-    const serviceCounts = services.reduce(
-      (acc, service) => {
-        const serviceName = service[key];
-        acc[serviceName] = (acc[serviceName] || 0) + 1;
-        return acc;
-      },
-      {}
-    );
+    const serviceCounts = services.reduce((acc, service) => {
+      const serviceName = service[key];
+      acc[serviceName] = (acc[serviceName] || 0) + 1;
+      return acc;
+    }, {});
 
     // Generate the array with counts and names
     return Object.entries(serviceCounts).map(
@@ -125,9 +113,7 @@ const PackageActions = ({ id }) => {
     (e, id) => {
       e.preventDefault();
       e.stopPropagation();
-      router.push(
-        ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESEDIT(id)
-      );
+      router.push(ROUTES.ADMIN.SETTINGS.PACKAGES.PACKAGESEDIT(id));
     },
     [router]
   );

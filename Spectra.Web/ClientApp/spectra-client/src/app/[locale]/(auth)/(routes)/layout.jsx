@@ -1,5 +1,5 @@
 import ROUTES from '@/routes';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import MessageIcon from '@/assets/icons/message';
 import Image from 'next/image';

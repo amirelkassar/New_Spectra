@@ -2,7 +2,7 @@
 
 import { apiAuth } from '@/api/axios';
 import { clearToken } from '@/lib/token';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { useMutation } from '@tanstack/react-query';
 

@@ -1,17 +1,11 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
 import { SERVICESICONS } from '@/lib/demoData';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const Services = ({
-  title = 'خدمتنا',
-  data = [],
-}) => {
+export const Services = ({ title = 'خدمتنا', data = [] }) => {
   if (!data.length) return null;
   return (
     <Container
@@ -19,10 +13,7 @@ export const Services = ({
       aria-labelledby='services'
       aria-label='Services'
     >
-      <SectionHeading
-        id='services'
-        className='mb-10 text-center'
-      >
+      <SectionHeading id='services' className='mb-10 text-center'>
         {title}
       </SectionHeading>
       <div className='grid grid-cols-2 mdl:grid-cols-3 mdl:gap-10 gap-3'>
@@ -50,11 +41,7 @@ export const Services = ({
   );
 };
 
-const Service = ({
-  label = '',
-  description = '',
-  id = '',
-}) => {
+const Service = ({ label = '', description = '', id = '' }) => {
   return (
     <ServiceCard
       className='hover:border-blueLight h-full'
@@ -64,9 +51,7 @@ const Service = ({
         style={{
           backgroundColor:
             SERVICESICONS[id]?.bg || SERVICESICONS[1]?.bg,
-          color:
-            SERVICESICONS[id]?.color ||
-            SERVICESICONS[1]?.color,
+          color: SERVICESICONS[id]?.color || SERVICESICONS[1]?.color,
         }}
       >
         {SERVICESICONS[id]?.icon || SERVICESICONS[1]?.icon}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { Toast } from '@/components/toast';
 import { getFormData } from '@/lib/utils';
@@ -56,9 +56,7 @@ export const useAddPackage = () => {
         success: 'تم اضافة الباقة بنجاح',
         onSuccess: (res) => {
           if (res?.successOpration)
-            router.replace(
-              ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD
-            );
+            router.replace(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD);
         },
       });
     },

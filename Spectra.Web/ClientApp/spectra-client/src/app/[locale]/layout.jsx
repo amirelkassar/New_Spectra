@@ -18,6 +18,8 @@ import { getToken } from '@/lib/token';
 import { getMessages } from 'next-intl/server';
 import { getAuth } from '@/lib/auth';
 import { SessionProvider } from '@/hooks/use-auth';
+import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
 
 export const metadata = {
   title: 'Spectra App',
@@ -25,6 +27,15 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
+  const locale = params?.locale;
+
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
+
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+
   const [token, session, messages] = await Promise.all([
     getToken(),
     getAuth(),
@@ -32,15 +43,9 @@ export default async function RootLayout({ children, params }) {
   ]);
 
   return (
-    <html
-      lang={params.locale}
-      dir={params.locale === 'ar' ? 'rtl' : 'ltr'}
-    >
+    <html lang={locale} dir={direction}>
       <body className='text-black bg-white'>
-        <NextIntlClientProvider
-          locale={params.locale}
-          messages={messages}
-        >
+        <NextIntlClientProvider messages={messages}>
           <TokenProvider initialValue={token}>
             <SessionProvider initialValue={session}>
               <MantineProvider>

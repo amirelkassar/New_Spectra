@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import Card from '@/components/card';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 export const TabsCard = ({
@@ -15,8 +15,7 @@ export const TabsCard = ({
   },
 }) => {
   const router = useRouter();
-  const currentTab =
-    useSearchParams()?.get('tab') || defaultTab;
+  const currentTab = useSearchParams()?.get('tab') || defaultTab;
 
   if (!tabs?.length) return null;
   return (

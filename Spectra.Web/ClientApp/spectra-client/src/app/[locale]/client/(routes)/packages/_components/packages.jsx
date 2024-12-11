@@ -1,12 +1,9 @@
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import Card from '@/components/card';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { packagesDataSpectra } from '@/lib/demoData';
 import { PackageCardItem } from '@/components/packages';
-import {
-  Section,
-  SectionTitle,
-} from '@/client/_components/ui';
+import { Section, SectionTitle } from '@/client/_components/ui';
 import ROUTES from '@/routes';
 
 export const Packages = () => {
@@ -42,15 +39,11 @@ const PackageCard = ({
         </PackageCardItem.Title>
       </Link>
 
-      <PackageCardItem.Price>
-        {`${price}.00 $`}
-      </PackageCardItem.Price>
+      <PackageCardItem.Price>{`${price}.00 $`}</PackageCardItem.Price>
 
       <PackageCardItem.List features={features} />
 
-      <PackageCardItem.Button>
-        احجز الان
-      </PackageCardItem.Button>
+      <PackageCardItem.Button>احجز الان</PackageCardItem.Button>
     </PackageCardItem>
   );
 };

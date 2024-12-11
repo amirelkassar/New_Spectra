@@ -2,7 +2,7 @@ import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
 import DraftIcon from '@/assets/icons/draft';
 import Button from '@/components/button';
 import { cn, getDate } from '@/lib/utils';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 const STATES = {
@@ -42,9 +42,7 @@ export const ContractCopy = ({
 
 const Icon = ({ state }) => {
   return (
-    <div
-      className={cn('p-2 lg:p-3 bg-white rounded-xl w-fit')}
-    >
+    <div className={cn('p-2 lg:p-3 bg-white rounded-xl w-fit')}>
       {state === STATES.active && (
         <ContractsWhiteIcon className='size-4 lg:size-10 text-greenMain' />
       )}

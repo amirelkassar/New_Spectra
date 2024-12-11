@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { Toast } from '@/components/toast';
 import { useAuth } from '@/hooks/use-auth';

@@ -1,7 +1,7 @@
 import ArrowLeftMainGreen from '@/assets/icons/arrow-left-mainGreen';
 
 import Card from '@/components/card';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { Section } from '@/client/_components/ui';
 import { SETTINGS_LIST } from '@/data';
 

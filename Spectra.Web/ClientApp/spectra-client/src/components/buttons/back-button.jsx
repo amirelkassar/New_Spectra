@@ -2,7 +2,7 @@
 
 import BackIcon from '@/assets/icons/back-black';
 import { cn } from '@/lib/utils';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export const BackButton = ({ href = '', ...props }) => {
   const router = useRouter();

@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import ROUTES from '@/routes';
 

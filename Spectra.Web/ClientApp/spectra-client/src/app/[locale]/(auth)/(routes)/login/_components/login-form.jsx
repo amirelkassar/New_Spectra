@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import TextInput from '@/components/inputs/text-input';
 import PasswordInput from '@/components/inputs/password-input';
@@ -21,14 +21,8 @@ export const LoginForm = () => {
   } = useLogin();
 
   return (
-    <form
-      onSubmit={login}
-      autoComplete='off'
-      className='space-y-5'
-    >
-      <FormErrorMessage
-        message={GetErrorMsg(error, 'general')}
-      />
+    <form onSubmit={login} autoComplete='off' className='space-y-5'>
+      <FormErrorMessage message={GetErrorMsg(error, 'general')} />
 
       <TextInput
         label='البريد الالكتروني'
@@ -56,8 +50,7 @@ export const LoginForm = () => {
         value={formData.password}
         onChange={onChange}
         error={
-          validationError.password ||
-          GetErrorMsg(error, 'password')
+          validationError.password || GetErrorMsg(error, 'password')
         }
         disabled={isPending}
       />

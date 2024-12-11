@@ -1,10 +1,7 @@
 import Card from '@/components/card';
 import { ServiceCard } from '@/components/services';
-import {
-  servicesData,
-  SERVICESICONS,
-} from '@/lib/demoData';
-import { Link } from '@/navigation';
+import { servicesData, SERVICESICONS } from '@/lib/demoData';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { Section } from '@/client/_components/ui';
 
@@ -42,9 +39,7 @@ const Service = ({
         style={{
           backgroundColor:
             SERVICESICONS[id]?.bg || SERVICESICONS[1]?.bg,
-          color:
-            SERVICESICONS[id]?.color ||
-            SERVICESICONS[1]?.color,
+          color: SERVICESICONS[id]?.color || SERVICESICONS[1]?.color,
         }}
       >
         {SERVICESICONS[id]?.icon || SERVICESICONS[1]?.icon}

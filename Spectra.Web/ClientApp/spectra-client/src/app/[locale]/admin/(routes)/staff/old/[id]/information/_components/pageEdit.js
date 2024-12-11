@@ -9,13 +9,9 @@ import QualificationsIcon from '@/assets/icons/qualifications';
 import Button from '@/components/button';
 import Card from '@/components/card';
 import Input from '@/components/input';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
-import {
-  MultiSelect,
-  Select,
-  Textarea,
-} from '@mantine/core';
+import { MultiSelect, Select, Textarea } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -68,8 +64,7 @@ function PageEdit({ id }) {
     email: 'safwa@gmail.com',
     brief:
       'دكتوراه في الفلسفة بالخدمة الاجتماعية مختص في تطوير الذات والعلاقات الاسرية والزوجية والمشاكل النفسية والإدمان والمشكلات ',
-    qualifications:
-      'مرخص معتمد من الهيئة السعودية للتخصصات الصحية',
+    qualifications: 'مرخص معتمد من الهيئة السعودية للتخصصات الصحية',
     daqeqa: [
       'القلق',
       'الضغوط',
@@ -136,15 +131,14 @@ function PageEdit({ id }) {
     );
     const newServicesToAdd = selectedItems
       .filter(
-        (serviceName) =>
-          !existingServiceNames.includes(serviceName)
+        (serviceName) => !existingServiceNames.includes(serviceName)
       )
       .map((serviceName) => ({
         name: serviceName,
         price: '0',
       }));
-    const updatedServices = Data.Services.filter(
-      (service) => selectedItems.includes(service.name)
+    const updatedServices = Data.Services.filter((service) =>
+      selectedItems.includes(service.name)
     );
     setData({
       ...Data,
@@ -214,9 +208,7 @@ function PageEdit({ id }) {
             <Input
               label={'البلد'}
               value={Data.address}
-              containerClassName={
-                '!gap-1 min-w-[calc(50%-10px)]'
-              }
+              containerClassName={'!gap-1 min-w-[calc(50%-10px)]'}
               labelClassName={'!text-[16px] !mb-0 px-4'}
               inputClassName={
                 '!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold'
@@ -225,9 +217,7 @@ function PageEdit({ id }) {
             <Input
               label={'المدينة'}
               value={Data.city}
-              containerClassName={
-                '!gap-1 min-w-[calc(50%-10px)]'
-              }
+              containerClassName={'!gap-1 min-w-[calc(50%-10px)]'}
               labelClassName={'!text-[16px] !mb-0 px-4'}
               inputClassName={
                 '!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold'
@@ -236,9 +226,7 @@ function PageEdit({ id }) {
             <Input
               label={' رقم الهاتف  '}
               value={Data.phone}
-              containerClassName={
-                '!gap-1 min-w-[calc(50%-10px)]'
-              }
+              containerClassName={'!gap-1 min-w-[calc(50%-10px)]'}
               labelClassName={'!text-[16px] !mb-0 px-4'}
               inputClassName={
                 '!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold'
@@ -248,9 +236,7 @@ function PageEdit({ id }) {
               label={'البريد الالكترونى '}
               type={'email'}
               value={Data.email}
-              containerClassName={
-                '!gap-1 min-w-[calc(50%-10px)]'
-              }
+              containerClassName={'!gap-1 min-w-[calc(50%-10px)]'}
               labelClassName={'!text-[16px] !mb-0 px-4'}
               inputClassName={
                 '!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold'
@@ -260,9 +246,7 @@ function PageEdit({ id }) {
             <Input
               label={'رقم الهوية'}
               value={Data.nationalID}
-              containerClassName={
-                '!gap-1 min-w-[calc(50%-10px)]'
-              }
+              containerClassName={'!gap-1 min-w-[calc(50%-10px)]'}
               labelClassName={'!text-[16px] !mb-0 px-4'}
               inputClassName={
                 '!h-[48px] rounded-[10px] !ring-[#CFD0D7] !ring-[0px] !border !border-[#CFD0D7] !outline-none bg-[#FCFCFD] text-[16px] !font-bold'
@@ -440,18 +424,13 @@ function PageEdit({ id }) {
             classNames={{
               input: '!h-auto min-h-12',
             }}
-            value={Data.Services.map(
-              (service) => service.name
-            )}
+            value={Data.Services.map((service) => service.name)}
             onChange={handleAddService}
           />
         </div>
         <div className=' w-full flex flex-col gap-4'>
           {Data.Services.map((service, index) => (
-            <div
-              key={index}
-              className='flex items-center gap-4'
-            >
+            <div key={index} className='flex items-center gap-4'>
               <span className='text-base font-Regular min-w-[120px]'>
                 {service.name}
               </span>
@@ -460,10 +439,7 @@ function PageEdit({ id }) {
                 value={service.price || ''}
                 placeholder='$ 0.00'
                 handleOnChange={(e) =>
-                  handleFeeChange(
-                    service.name,
-                    e.target.value
-                  )
+                  handleFeeChange(service.name, e.target.value)
                 }
                 containerClassName={'!gap-1 flex-1'}
                 labelClassName={'!text-[16px] !mb-0 px-4'}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { Toast } from '@/components/toast';
 import { useEditSpecialization } from '@/hooks/queries/admin/main-data/specialties';

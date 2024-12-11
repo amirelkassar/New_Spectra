@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 import { H1 } from '@/components/dashboard/ui/h1';

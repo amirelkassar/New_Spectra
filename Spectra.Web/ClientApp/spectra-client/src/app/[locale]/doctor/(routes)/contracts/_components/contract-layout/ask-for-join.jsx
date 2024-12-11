@@ -1,4 +1,4 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import ContractsIcon from '@/assets/icons/contracts';
 import ROUTES from '@/routes';

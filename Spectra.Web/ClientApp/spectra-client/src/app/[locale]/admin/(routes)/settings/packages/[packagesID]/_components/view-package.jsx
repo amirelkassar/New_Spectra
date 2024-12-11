@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { QueryWrapper } from '@/components/query-wrapper';
 import { usePackageById } from '@/hooks/queries/admin/settings/packages';
@@ -56,14 +56,11 @@ export const Package = ({ data = {} }) => {
     const key = locale === 'ar' ? 'arName' : 'enName';
 
     // Count occurrences of each service
-    const serviceCounts = services.reduce(
-      (acc, service) => {
-        const serviceName = service[key];
-        acc[serviceName] = (acc[serviceName] || 0) + 1;
-        return acc;
-      },
-      {}
-    );
+    const serviceCounts = services.reduce((acc, service) => {
+      const serviceName = service[key];
+      acc[serviceName] = (acc[serviceName] || 0) + 1;
+      return acc;
+    }, {});
 
     // Generate the array with counts and names
     return Object.entries(serviceCounts).map(

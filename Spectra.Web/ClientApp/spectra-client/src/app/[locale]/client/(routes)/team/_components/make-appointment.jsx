@@ -3,7 +3,7 @@
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { SpecialNeedsData } from '@/lib/demoData';
 import ROUTES from '@/routes';
@@ -17,11 +17,7 @@ export const MakeAppointment = () => {
   return (
     <>
       {/* Modal button trigger */}
-      <Button
-        variant='secondary'
-        onClick={open}
-        className=''
-      >
+      <Button variant='secondary' onClick={open} className=''>
         حجز ميعاد
       </Button>
 
@@ -37,8 +33,7 @@ export const MakeAppointment = () => {
         size={'md'}
         title='اختار التخصص'
         classNames={{
-          title:
-            'text-black font-bold text-sm lg:text-medium',
+          title: 'text-black font-bold text-sm lg:text-medium',
         }}
       >
         <div className='mt-3'>
@@ -61,9 +56,7 @@ export const MakeAppointment = () => {
 
             <Button
               onClick={() =>
-                router.push(
-                  `${ROUTES.CLIENT.TEAM}/bookAppointment`
-                )
+                router.push(`${ROUTES.CLIENT.TEAM}/bookAppointment`)
               }
               variant='secondary'
               className='w-full col-span-2'

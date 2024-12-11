@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { DeleteInternalExamination } from '@/hooks/queries/admin/main-data/testsInterior';
 import ROUTES from '@/routes';
@@ -13,10 +13,8 @@ export const useTestMenuActions = (id) => {
 
   const open = useConfirmModal((s) => s.open);
 
-  const {
-    mutateAsync: deleteInternalExamination,
-    isPending,
-  } = DeleteInternalExamination(id);
+  const { mutateAsync: deleteInternalExamination, isPending } =
+    DeleteInternalExamination(id);
 
   const onDelete = useCallback(() => {
     open({
@@ -25,9 +23,7 @@ export const useTestMenuActions = (id) => {
         Toast.Promise(deleteInternalExamination(), {
           success: 'تم المسح بنجاح',
           onSuccess: () => {
-            router.replace(
-              ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR
-            );
+            router.replace(ROUTES.ADMIN.DATAMAIN.TESTSINTERIOR);
           },
         });
       },
@@ -35,15 +31,11 @@ export const useTestMenuActions = (id) => {
   }, [deleteInternalExamination, isPending, open, router]);
 
   const onView = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILS(id));
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.TESTSINTERIORDETAILSEDIT(id));
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

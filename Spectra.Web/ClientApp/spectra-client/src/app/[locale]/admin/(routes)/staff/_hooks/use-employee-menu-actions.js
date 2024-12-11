@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { useDeleteStaff } from '@/hooks/queries/admin/staff/staff';
 import ROUTES from '@/routes';

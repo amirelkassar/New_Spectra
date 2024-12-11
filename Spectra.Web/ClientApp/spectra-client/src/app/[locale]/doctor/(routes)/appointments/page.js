@@ -1,5 +1,5 @@
 'use client';
-import { Link, usePathname } from '@/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import AppoTable from './appo-table';
 import ROUTES from '@/routes';
 import AppointmentSummary from './appointment-summary';

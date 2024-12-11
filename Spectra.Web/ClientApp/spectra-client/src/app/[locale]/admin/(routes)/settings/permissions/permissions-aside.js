@@ -2,7 +2,7 @@
 import React from 'react';
 import SettingsAside from '../_components/settings-aside';
 import { useParams } from 'next/navigation';
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 function PermissionsAside() {
@@ -13,15 +13,12 @@ function PermissionsAside() {
     {
       name: 'مستويات الصلاحية',
       route: ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD,
-      isActive:
-        path ===
-        ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD,
+      isActive: path === ROUTES.ADMIN.SETTINGS.PERMISSIONS.DASHBOARD,
     },
     {
       name: 'ادارة المستخدمين',
       route: ROUTES.ADMIN.SETTINGS.PERMISSIONS.USERS,
-      isActive:
-        path === ROUTES.ADMIN.SETTINGS.PERMISSIONS.USERS,
+      isActive: path === ROUTES.ADMIN.SETTINGS.PERMISSIONS.USERS,
     },
   ];
   return <SettingsAside pages={pages} />;

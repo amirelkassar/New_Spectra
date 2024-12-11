@@ -7,14 +7,11 @@ import CallIcon from '@/assets/icons/call';
 import EmailIcon from '@/assets/icons/email';
 import SmsIcon from '@/assets/icons/sms';
 import SessionIcon from '@/assets/icons/session';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
 import { useStaffById } from '@/hooks/queries/admin/staff/staff';
-import {
-  useParams,
-  useSearchParams,
-} from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import HandelShowDataID from '@/components/handelShowDataID';
 const datadoc = {
   name: 'احمد محمد كمال',

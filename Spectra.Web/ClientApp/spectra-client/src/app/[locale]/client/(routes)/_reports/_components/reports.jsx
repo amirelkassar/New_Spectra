@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, redirect } from '@/navigation';
+import { Link, redirect } from '@/i18n/routing';
 import { useState } from 'react';
 
 import Card from '@/components/card';
@@ -42,7 +42,10 @@ export const Reports = ({ reportsData = [] }) => {
       <Filter filterData={filterData} setFilter={setFilter} />
       <div className='grid grid-cols-fill-250 gap-5'>
         {filteredData()?.map((report) => (
-          <Link key={report.id} href={`${ROUTES.CLIENT.REPORTS}/${report.id}`}>
+          <Link
+            key={report.id}
+            href={`${ROUTES.CLIENT.REPORTS}/${report.id}`}
+          >
             <Report {...report} />
           </Link>
         ))}
@@ -61,7 +64,12 @@ const Report = ({ id, date, doctor, avatar, isNew }) => {
     >
       {/* Actions */}
       <div className='flex items-center justify-between'>
-        <span className={cn('text-greenMain invisible', isNew && 'visible')}>
+        <span
+          className={cn(
+            'text-greenMain invisible',
+            isNew && 'visible'
+          )}
+        >
           جديدة
         </span>
         <ThreeDotsIcon />
@@ -82,7 +90,8 @@ const Report = ({ id, date, doctor, avatar, isNew }) => {
           className='lg:size-9 size-7 text-xs lg:text-base shrink-0 p-0'
         />
         <div>
-          <span className='font-normal'>الاخصائى:</span> <span>{doctor}</span>
+          <span className='font-normal'>الاخصائى:</span>{' '}
+          <span>{doctor}</span>
         </div>
       </div>
 

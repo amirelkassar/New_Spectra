@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import { useRegisterMedicalProviderMutation } from '@/hooks/queries/auth';
 import { getErrors, getFormData } from '@/lib/utils';
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 const passwordValidation = z

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { QueryWrapper } from '@/components/query-wrapper';
 import { usePackageById } from '@/hooks/queries/admin/settings/packages';
@@ -13,9 +13,7 @@ export const UpdatePackage = ({ id }) => {
 
   return (
     <QueryWrapper query={query}>
-      {({ data }) => (
-        <UpdatePackageForm initialValues={data} />
-      )}
+      {({ data }) => <UpdatePackageForm initialValues={data} />}
     </QueryWrapper>
   );
 };
@@ -31,9 +29,7 @@ const UpdatePackageForm = ({ initialValues }) => {
       title='تعديل الباقة'
       form={form}
       onCancel={() =>
-        router.replace(
-          ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD
-        )
+        router.replace(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD)
       }
     />
   );

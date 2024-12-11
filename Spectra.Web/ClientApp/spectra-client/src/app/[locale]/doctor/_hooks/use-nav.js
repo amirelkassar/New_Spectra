@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
 
 import Appointments from '@/assets/icons/appointments';

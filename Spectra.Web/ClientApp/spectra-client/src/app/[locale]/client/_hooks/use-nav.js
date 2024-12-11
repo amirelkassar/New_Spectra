@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
 
 import { ClockIcon2 } from '@/assets/icons/clock';
@@ -49,9 +49,7 @@ export const useNav = () => {
       {
         name: 'طلب الخدمة',
         route: ROUTES.CLIENT.SERVICE_REQUEST.HOME,
-        isActive: path.includes(
-          ROUTES.CLIENT.SERVICE_REQUEST.HOME
-        ),
+        isActive: path.includes(ROUTES.CLIENT.SERVICE_REQUEST.HOME),
         icon: <Hand />,
       },
       {
@@ -88,9 +86,7 @@ export const useNav = () => {
       {
         name: 'الإعدادات',
         route: ROUTES.CLIENT.SETTINGS.HOME,
-        isActive: path.includes(
-          ROUTES.CLIENT.SETTINGS.HOME
-        ),
+        isActive: path.includes(ROUTES.CLIENT.SETTINGS.HOME),
         icon: <SettingsIcon />,
       },
     ],

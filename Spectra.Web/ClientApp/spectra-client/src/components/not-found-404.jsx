@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import NotFound404Icon from '@/assets/icons/404';
 import Button from './button';

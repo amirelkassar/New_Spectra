@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { useEditSection } from '@/hooks/queries/admin/main-data/section';
 import ROUTES from '@/routes';
