@@ -179,7 +179,7 @@ const CellDoctor = ({ row }) => {
         src={path}
         className='lg:size-14 size-10'
       />
-      <span className='font-bold'>{doctor}</span>
+      <span className='font-bold capitalize'>{doctor}</span>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import { AddButton } from '@/components/buttons/add-button';
 import { SectionTitle, TableItem } from '@/admin/_components/ui';
@@ -69,7 +69,7 @@ const Heading = ({ totalCount }) => {
         <StaffCount>{totalCount}</StaffCount>
       </div>
       <Link href={ROUTES.ADMIN.STAFF.STAFF_ADD}>
-        <AddButton>إضافة موظف</AddButton>
+        <AddButton>اضافة موظف</AddButton>
       </Link>
     </div>
   );

@@ -104,7 +104,6 @@ const MainFields = ({ form = {} }) => {
         size='lg'
         label='رقم الهوية'
         name='nationalId'
-        type='number'
         error={GetErrorMsg(form?.error, 'NationalId')}
         onChange={form.onChange}
         value={form?.data?.nationalId}
@@ -218,13 +217,14 @@ const RenderNextField = ({ form = {} }) => {
 
 const DoctorAndSpecialistFields = ({ form = {} }) => {
   return (
-    <div className='space-y-4 mdl:space-y-6'>
+    <div className='grid grid-cols-1 mdl:grid-cols-2 gap-4 mdl:gap-6'>
       <SpecializationSingleSelect
         label='التخصص الرئيسي'
         name='mainSpecializationId'
         error={GetErrorMsg(form?.error, 'MainSpecializationId')}
         onChange={form?.onChange}
         value={form?.data?.mainSpecializationId}
+        className='mdl:col-span-2'
       />
 
       <SpecializationMultiSelect
@@ -233,6 +233,19 @@ const DoctorAndSpecialistFields = ({ form = {} }) => {
         error={GetErrorMsg(form?.error, 'Specializations')}
         onSelect={form?.onChange}
         defaultValue={form?.data?.specializations}
+        classNames={{
+          label: 'text-base md:text-xl mdl:text-xl',
+        }}
+        className='mdl:col-span-2'
+      />
+
+      <AcademicDegreeSelect
+        label='الدرجة العلمية'
+        name='academicDegree'
+        error={GetErrorMsg(form?.error, 'AcademicDegree')}
+        onChange={form?.onChange}
+        value={form?.data?.academicDegree}
+        className='mdl:col-span-2'
       />
 
       <TextInput
@@ -253,12 +266,23 @@ const DoctorAndSpecialistFields = ({ form = {} }) => {
         value={form?.data?.approvedBy}
       />
 
-      <AcademicDegreeSelect
-        label='الدرجة العلمية'
-        name='academicDegree'
-        error={GetErrorMsg(form?.error, 'AcademicDegree')}
+      <TextInput
+        size='lg'
+        label='المسمي الوظيفي'
+        name='jobName'
+        error={GetErrorMsg(form?.error, 'JobName')}
         onChange={form?.onChange}
-        value={form?.data?.academicDegree}
+        value={form?.data?.jobName}
+      />
+
+      <TextInput
+        size='lg'
+        label='سنوات الخبرة'
+        name='experienceYears'
+        error={GetErrorMsg(form?.error, 'ExperienceYears')}
+        onChange={form?.onChange}
+        value={form?.data?.experienceYears}
+        type='number'
       />
     </div>
   );

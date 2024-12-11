@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import Separator from '@/assets/icons/separator';
 import { PackageCardItem } from '@/components/packages';
@@ -56,9 +56,7 @@ const PackageCard = ({
           {label}
         </PackageCardItem.Title>
       </Link>
-      <PackageCardItem.Price>
-        ${price}
-      </PackageCardItem.Price>
+      <PackageCardItem.Price>${price}</PackageCardItem.Price>
       <PackageCardItem.List features={features} />
       <PackageCardItem.Button className='border border-greenMain hover:bg-transparent bg-transparent text-greenMain group-first:bg-greenMain group-first:text-white group-first:hover:bg-greenMain/90 relative z-10'>
         احجز الان

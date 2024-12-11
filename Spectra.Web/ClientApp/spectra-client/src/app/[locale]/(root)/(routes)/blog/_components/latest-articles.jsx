@@ -1,9 +1,6 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
 import LikeHeartIcon from '@/assets/icons/like-heart';
 
@@ -18,10 +15,7 @@ export const LatestArticles = ({
       aria-label='Latest Articles'
       className='mdl:!p-0 space-y-10'
     >
-      <SectionHeading
-        className='text-center'
-        id='latest-articles'
-      >
+      <SectionHeading className='text-center' id='latest-articles'>
         {title}
       </SectionHeading>
       <div className='mdl:space-y-5 grid grid-cols-2 gap-3 mdl:block'>

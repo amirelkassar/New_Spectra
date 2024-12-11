@@ -1,7 +1,7 @@
 'use client';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { DeleteSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import ROUTES from '@/routes';
@@ -22,9 +22,7 @@ export const useSpecialtyMenuActions = (id) => {
         Toast.Promise(deleteDiagnostics(), {
           success: 'تم مسح التخصص بنجاح',
           onSuccess: () =>
-            router.replace(
-              ROUTES.ADMIN.DATAMAIN.SPECIALTIES
-            ),
+            router.replace(ROUTES.ADMIN.DATAMAIN.SPECIALTIES),
         });
       },
     });
@@ -35,9 +33,7 @@ export const useSpecialtyMenuActions = (id) => {
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.SPECIALTIESIDEDIT(id));
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

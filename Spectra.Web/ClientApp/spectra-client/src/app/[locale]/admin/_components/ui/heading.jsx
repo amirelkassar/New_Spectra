@@ -1,6 +1,6 @@
 import { AddButton } from '@/components/buttons/add-button';
 import { SectionTitle } from '.';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { BackButton } from '@/components/buttons/back-button';
 
 export const Heading = ({

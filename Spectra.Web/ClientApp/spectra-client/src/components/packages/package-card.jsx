@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { PackageCardItem } from './package-card-item';
 import ROUTES from '@/routes';
@@ -17,17 +17,13 @@ export const PackageCard = ({
   return (
     <PackageCardItem
       role='button'
-      onClick={() =>
-        router.push(`${ROUTES.CLIENT.PACKAGES}/${id}`)
-      }
+      onClick={() => router.push(`${ROUTES.CLIENT.PACKAGES}/${id}`)}
       data-id={id}
       className={className}
     >
       <PackageCardItem.Title>{label}</PackageCardItem.Title>
 
-      <PackageCardItem.Price>
-        {`${price}.00 $`}
-      </PackageCardItem.Price>
+      <PackageCardItem.Price>{`${price}.00 $`}</PackageCardItem.Price>
 
       {showPackageList && (
         <PackageCardItem.List features={features} />

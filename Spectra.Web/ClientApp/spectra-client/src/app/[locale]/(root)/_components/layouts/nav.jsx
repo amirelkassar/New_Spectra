@@ -4,7 +4,7 @@ import { Menu } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { useNav } from '@/guest/_hooks/use-nav';
 
@@ -40,8 +40,7 @@ export const Nav = ({ className = '' }) => {
           href={link.href}
           className={cn(
             'font-bold whitespace-nowrap inline-block after:block after:w-full after:border-b-2 after:border-black after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out after:hover:scale-100 after:origin-right ltr:after:origin-left after:mt-0.5',
-            link.isActive &&
-              'after:scale-x-100 after:origin-center'
+            link.isActive && 'after:scale-x-100 after:origin-center'
           )}
           aria-label={link.label}
         >
@@ -59,19 +58,13 @@ const MoreDropdown = ({ data = [] }) => {
 
   if (!data.length) return null;
   return (
-    <Menu
-      trigger='click-hover'
-      openDelay={100}
-      closeDelay={400}
-    >
+    <Menu trigger='click-hover' openDelay={100} closeDelay={400}>
       <Menu.Target>
         <button
           className='font-bold flex items-center border-b-2 border-transparent group whitespace-nowrap'
           aria-haspopup='true'
         >
-          <span className='inline-block me-2'>
-            {t('more')}
-          </span>
+          <span className='inline-block me-2'>{t('more')}</span>
           <ArrowNav
             fill='#010036'
             className='rotate-90 group-aria-expanded:rotate-[-90deg] transition size-3'

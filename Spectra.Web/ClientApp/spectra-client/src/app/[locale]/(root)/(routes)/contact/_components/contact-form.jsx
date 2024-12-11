@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import { Textarea } from '@/components/inputs/textarea';
 import TextInput from '@/components/inputs/text-input';
 import Button from '@/components/button';
@@ -32,10 +29,7 @@ export const ContactForm = () => {
         </div>
 
         <div className='mdl:w1/2 w-full space-y-10'>
-          <SectionHeading
-            id='contact-form'
-            className='mb-10'
-          >
+          <SectionHeading id='contact-form' className='mb-10'>
             اهلا بك
           </SectionHeading>
 
@@ -68,10 +62,7 @@ export const ContactForm = () => {
             <h4 className='text-sm mdl:text-medium font-bold'>
               اترك لنا رسالة
             </h4>
-            <form
-              action=''
-              className='grid grid-cols-2 gap-3'
-            >
+            <form action='' className='grid grid-cols-2 gap-3'>
               <TextInput placeholder='الاسم الاول' />
               <TextInput placeholder='الاسم الثاني' />
               <TextInput
@@ -82,10 +73,7 @@ export const ContactForm = () => {
                 placeholder='رقم الهاتف'
                 className='col-span-2'
               />
-              <Textarea
-                placeholder='رسالة'
-                className='col-span-2'
-              />
+              <Textarea placeholder='رسالة' className='col-span-2' />
 
               <Button
                 variant='secondary'

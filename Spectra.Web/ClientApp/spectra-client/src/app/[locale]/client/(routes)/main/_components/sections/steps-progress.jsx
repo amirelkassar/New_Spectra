@@ -1,7 +1,7 @@
 import { Progress } from '@mantine/core';
 
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { Section } from '@/client/_components/ui';
 import { AddChild } from '../add-child';
 
@@ -12,8 +12,7 @@ const steps = [
   {
     isDone: true,
     label: 'اضف طفل',
-    description:
-      'اول خطوة اضافة طفل عن طريق ملئ بيانات خاصة بطفلك',
+    description: 'اول خطوة اضافة طفل عن طريق ملئ بيانات خاصة بطفلك',
     href: '?add-child=true',
   },
   {

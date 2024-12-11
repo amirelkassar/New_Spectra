@@ -1,11 +1,8 @@
 import Image from 'next/image';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import { cn } from '@/lib/utils';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
 
 export const FeaturesArticles = ({
@@ -86,9 +83,7 @@ const Article = ({
 
       {/* TITLE & MAINCONTENT */}
       <div className='grow'>
-        <h3 className='text-sm mdl:text-2xl font-bold'>
-          {title}
-        </h3>
+        <h3 className='text-sm mdl:text-2xl font-bold'>{title}</h3>
         {isLatest && (
           <p className='text-xs mdl:text-medium mt-3'>
             {mainContent}

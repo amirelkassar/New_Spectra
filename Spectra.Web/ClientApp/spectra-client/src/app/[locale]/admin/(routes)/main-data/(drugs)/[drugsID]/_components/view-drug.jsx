@@ -1,12 +1,11 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 import { GetDrugsID } from '@/hooks/queries/admin/main-data/drugs';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { Info } from '@/admin/_components/ui';
-import { useToken } from '@/hooks/use-token';
+import { useImagePath } from '@/hooks/use-image-path';
 
 export const ViewDrug = ({ id }) => {
   const query = GetDrugsID(id);
@@ -30,32 +29,20 @@ const Drug = ({ data }) => {
 
       <Info label='الاسم' data={data?.name} />
       <Info label='الكود' data={data?.code} />
-      <Info
-        label='المادة الفعالة'
-        data={data?.activeIngredient}
-      />
-      <Info
-        label='الاسم العلمى'
-        data={data?.scientificName}
-      />
+      <Info label='المادة الفعالة' data={data?.activeIngredient} />
+      <Info label='الاسم العلمى' data={data?.scientificName} />
       <Info label='النوع' data={data?.type} />
       <Info
         label='الجرعة الموصى بها'
         data={data?.recommendedDosage}
       />
-      <Info
-        label='تركيز الدواء'
-        data={data?.doncentration}
-      />
+      <Info label='تركيز الدواء' data={data?.doncentration} />
       <Info
         label='تفاعلات الدواء مع ادوية اخرى'
         data={data?.interactionsWithOtherdrugs}
       />
 
-      <Info
-        label='موانع الاستخدام'
-        data={data?.contraindications}
-      />
+      <Info label='موانع الاستخدام' data={data?.contraindications} />
 
       <Info
         label='ملاحظات'
@@ -66,24 +53,12 @@ const Drug = ({ data }) => {
   );
 };
 
-const DrugImage = ({
-  label = '',
-  data = '',
-  noImageText = '',
-}) => {
-  const token = useToken();
-
-  const image = useMemo(() => {
-    if (!data) return null;
-
-    return `${data}?token=${token}`;
-  }, [data, token]);
+const DrugImage = ({ label = '', data = '', noImageText = '' }) => {
+  const image = useImagePath(data);
 
   return (
     <div className='pb-5 border-b border-grayLight last:border-transparent'>
-      <h3 className='font-bold mb-2 text-xs md:text-base'>
-        {label}
-      </h3>
+      <h3 className='font-bold mb-2 text-xs md:text-base'>{label}</h3>
       {image ? (
         <Image
           alt='drugs'
@@ -94,9 +69,7 @@ const DrugImage = ({
           priority
         />
       ) : (
-        <p className='text-sm md:text-base'>
-          {noImageText}
-        </p>
+        <p className='text-sm md:text-base'>{noImageText}</p>
       )}
     </div>
   );

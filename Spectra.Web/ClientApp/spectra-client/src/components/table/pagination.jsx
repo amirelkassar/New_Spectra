@@ -1,7 +1,7 @@
 'use client';
 
 import { Pagination as MantinePagination } from '@mantine/core';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import ArrowLeft from '@/assets/icons/arrow-left';
 import Button from '@/components/button';

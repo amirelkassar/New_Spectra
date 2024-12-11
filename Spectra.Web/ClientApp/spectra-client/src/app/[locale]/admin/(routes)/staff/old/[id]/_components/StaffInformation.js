@@ -1,17 +1,14 @@
 'use client';
 import React from 'react';
 import Card from '@/components/card';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
 import Image from 'next/image';
 import imgStaff from '@/assets/images/staff.png';
 import ActionMenu from './ActionMenuStaff';
 import PageEditStaff from './pageEditStaff';
-import {
-  useParams,
-  useSearchParams,
-} from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import HandelShowDataID from '@/components/handelShowDataID';
 import { useStaffById } from '@/hooks/queries/admin/staff/staff';
 

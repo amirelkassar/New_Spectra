@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { PackageForm } from '../../_components/package-form';
 import { useAddPackage } from '../../_hooks/use-add-package';
@@ -16,9 +16,7 @@ export function AddPackage() {
       form={form}
       btnLabel='اضافة'
       onCancel={() =>
-        router.replace(
-          ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD
-        )
+        router.replace(ROUTES.ADMIN.SETTINGS.PACKAGES.DASHBOARD)
       }
     />
   );

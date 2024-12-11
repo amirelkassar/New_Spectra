@@ -1,12 +1,12 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 import { useDate } from '@/hooks/use-date';
 import { useGender } from '@/hooks/use-gender';
-import { InfoData } from '../../_components/info-data';
+import { InfoData } from '@/components/dashboard/ui/info-data';
 import { EditButton } from '@/components/buttons/edit-button';
 import { SectionTitle } from '@/components/dashboard/ui/section-title';
 import { EmployeeCellActions } from '../../_components/employee-cell-actions';
@@ -16,15 +16,10 @@ import { Certificate } from '@/components/team/certificate';
 import Card from '@/components/card';
 import Button from '@/components/button';
 
-import BriefIcon from '@/assets/icons/brief';
-import CalendarFill from '@/assets/icons/calendar-fill';
-import HourglassIcon from '@/assets/icons/Hourglass';
-import LicenseIcon from '@/assets/icons/License';
-import QualificationsIcon from '@/assets/icons/qualifications';
 import CheckHeartIcon from '@/assets/icons/check-heart';
 import ADHD from '@/assets/icons/adhd';
 import { ACADEMIC_DEGREE_OBJ } from '@/data/academic-degree';
-import Book from '@/assets/icons/book';
+import { CAREER_ICONS as ICONS } from '@/data/team';
 
 export const MedicalProviderInfo = ({ data }) => {
   const isEdit = useSearchParams().get('edit') === 'true';
@@ -40,7 +35,7 @@ export const MedicalProviderInfo = ({ data }) => {
       <CareerInfo data={data} />
       <Specializations {...data} />
       {/* <Services data={data?.services} /> */}
-      <Certifications />
+      <Certifications data={data?.attachments} />
       <EditButton
         onClick={() => router.push('?edit=true')}
         className='bg-white border-2 border-black text-black w-full mdl:max-w-xs font-bold transition hover:border-greenMain'
@@ -60,14 +55,19 @@ const PesonalInfo = ({ data }) => {
   const gender = useGender(data?.humenGender);
 
   return (
-    <div className='space-y-5'>
+    <div className='space-y-3'>
       <div className='flex items-center justify-between px-5 mdl:px-0'>
         <SectionTitle>البيانات الشخصية</SectionTitle>
         <EmployeeCellActions />
       </div>
       <div className='grid grid-cols-1 mdl:grid-cols-2 gap-2'>
         <Card>
-          <InfoData label='الاسم' value={name} direction='col' />
+          <InfoData
+            label='الاسم'
+            value={name}
+            direction='col'
+            valueClassName='capitalize'
+          />
         </Card>
         <Card>
           <InfoData label='النوع' value={gender} direction='col' />
@@ -173,23 +173,10 @@ const PesonalInfo = ({ data }) => {
   );
 };
 
-const ICONS = {
-  joinDate: <CalendarFill className='size-5 mdl:size-7' />,
-  summary: <BriefIcon className='size-5 mdl:size-7' />,
-  qualifications: (
-    <QualificationsIcon className='size-5 mdl:size-7' />
-  ),
-  licenseNo: <LicenseIcon className='size-5 mdl:size-7' />,
-  exp: <HourglassIcon className='size-5 mdl:size-7' />,
-  acadmiceDegree: (
-    <Book className='size-5 mdl:size-7 text-greenMain' />
-  ),
-};
-
 const CareerInfo = ({ data }) => {
   const date = useDate(data?.created);
   return (
-    <div className='space-y-5'>
+    <div className='space-y-3'>
       <SectionTitle>الوصف الوظيفي</SectionTitle>
       <Card className='space-y-5'>
         <div className='flex gap-5'>
@@ -227,6 +214,15 @@ const CareerInfo = ({ data }) => {
             weight='reverse'
             label='رقم الترخيص'
             value={data?.licenseNumber}
+          />
+        </div>
+        <div className='flex gap-5'>
+          {ICONS.approvedBy}
+          <InfoData
+            direction='col'
+            weight='reverse'
+            label='معتمد من'
+            value={data?.approvedBy}
           />
         </div>
         <div className='flex gap-5'>
@@ -272,53 +268,57 @@ const Specializations = ({
   const section = locale === 'ar' ? sectionArEnName : sectionEnName;
 
   return (
-    <Card className='space-y-5'>
-      <div className='flex items-start gap-3'>
-        <CheckHeartIcon className='size-5 mdl:size-7' />
-        <InfoData
-          direction='col'
-          weight='reverse'
-          label='القسم'
-          value={section}
-        />
-      </div>
+    <div className='space-y-3'>
+      <SectionTitle>التخصصات الطبية</SectionTitle>
 
-      <div className='flex items-start gap-3'>
-        <CheckHeartIcon className='size-5 mdl:size-7' />
-        <InfoData
-          direction='col'
-          weight='reverse'
-          label='التخصص الرئيسي'
-          value={mainSpecialization}
-        />
-      </div>
-
-      <div className='flex items-start gap-3'>
-        <CheckHeartIcon className='size-5 mdl:size-7' />
-        <h4 className='font-bold text-xs mdl:text-base'>
-          التخصصات الفرعية
-        </h4>
-      </div>
-
-      {!!specializations.length ? (
-        <div className='flex flex-wrap gap-3'>
-          {specializations.map((item) => (
-            <Button
-              key={item?.id}
-              variant='blueLight'
-              className='font-medium cursor-default px-4'
-            >
-              {item[key]}
-            </Button>
-          ))}
+      <Card className='space-y-5'>
+        <div className='flex items-start gap-3'>
+          <CheckHeartIcon className='size-5 mdl:size-7' />
+          <InfoData
+            direction='col'
+            weight='reverse'
+            label='القسم'
+            value={section}
+          />
         </div>
-      ) : (
-        <p className='text-grayDark'>
-          <ADHD className='size-4 inline-block me-2' />
-          لا يوجد تخصصات
-        </p>
-      )}
-    </Card>
+
+        <div className='flex items-start gap-3'>
+          <CheckHeartIcon className='size-5 mdl:size-7' />
+          <InfoData
+            direction='col'
+            weight='reverse'
+            label='التخصص الرئيسي'
+            value={mainSpecialization}
+          />
+        </div>
+
+        <div className='flex items-start gap-3'>
+          <CheckHeartIcon className='size-5 mdl:size-7' />
+          <h4 className='font-bold text-xs mdl:text-base'>
+            التخصصات الفرعية
+          </h4>
+        </div>
+
+        {!!specializations.length ? (
+          <div className='flex flex-wrap gap-3'>
+            {specializations.map((item) => (
+              <Button
+                key={item?.id}
+                variant='blueLight'
+                className='font-medium cursor-default px-4'
+              >
+                {item[key]}
+              </Button>
+            ))}
+          </div>
+        ) : (
+          <p className='text-grayDark'>
+            <ADHD className='size-4 inline-block me-2' />
+            لا يوجد تخصصات
+          </p>
+        )}
+      </Card>
+    </div>
   );
 };
 
@@ -362,11 +362,11 @@ const Certifications = ({ data = [] }) => {
       <SectionTitle>الشهادات</SectionTitle>
 
       <div className='flex flex-wrap gap-5'>
-        {data?.map((item, index) => (
+        {data?.map((item) => (
           <Certificate
-            key={index}
+            key={item?.id}
             name={item?.name}
-            image={item?.image}
+            image={item?.path}
             date={item?.date}
           />
         ))}

@@ -24,12 +24,13 @@ export const GenderSelect = ({ ...props }) => {
       data={props.data || DATA[locale]}
       size={props.size || 'lg'}
       onChange={(value) => {
-        props.onChange({
-          target: {
-            value,
-            name: props.name,
-          },
-        });
+        if (props?.onChange)
+          props?.onChange({
+            target: {
+              value,
+              name: props.name,
+            },
+          });
       }}
       value={String(props.value)}
     />

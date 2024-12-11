@@ -7,7 +7,7 @@ import { Divider } from '@mantine/core';
 import NotificationIcon from '@/assets/icons/notification';
 import { getDate } from '@/lib/utils';
 import { useLocale } from 'next-intl';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 const NOTIFICATIONS = [
@@ -94,9 +94,7 @@ const NotificationItem = ({
         color={isNew ? '#10B0C1' : '#939393'}
       >
         <div className='flex-1'>
-          <h4 className='font-bold text-sm mdl:text-base'>
-            {title}
-          </h4>
+          <h4 className='font-bold text-sm mdl:text-base'>{title}</h4>
           <p className='text-xs mdl:text-base text-grayDark'>
             {description}
           </p>

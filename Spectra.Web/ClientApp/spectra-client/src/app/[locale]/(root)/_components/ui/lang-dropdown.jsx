@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu } from '@mantine/core';
-import { usePathname, Link } from '@/navigation';
+import { usePathname, Link } from '@/i18n/routing';
 
 import { cn } from '@/lib/utils';
 import Globe from '@/assets/icons/globe';
@@ -42,9 +42,7 @@ export const LangDropdown = ({
           }
         >
           <Menu.Item className='w-fit h-10 font-bold leading-6 text-base'>
-            <span>
-              {currentLocale === 'ar' ? 'English' : 'عربي'}
-            </span>
+            <span>{currentLocale === 'ar' ? 'English' : 'عربي'}</span>
           </Menu.Item>
         </Link>
       </Menu.Dropdown>

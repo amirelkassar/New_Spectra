@@ -1,14 +1,10 @@
 import { Rating } from '@mantine/core';
 
-import {
-  BackButton,
-  H1,
-  Section,
-} from '@/client/_components/ui';
+import { BackButton, H1, Section } from '@/client/_components/ui';
 import Avatar from '@/components/avatar';
 import Card from '@/components/card';
 import Button from '@/components/button';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 export const Intro = ({ data }) => {
@@ -66,17 +62,11 @@ const DoctorInfo = ({
       />
 
       <div className='flex flex-col justify-around'>
-        <h4 className='font-bold text-sm mdl:text-base'>
-          {name}
-        </h4>
+        <h4 className='font-bold text-sm mdl:text-base'>{name}</h4>
 
-        <p className='text-xs mdl:text-base'>
-          {profession}
-        </p>
+        <p className='text-xs mdl:text-base'>{profession}</p>
 
-        <p className='text-xs mdl:text-base font-bold'>
-          {email}
-        </p>
+        <p className='text-xs mdl:text-base font-bold'>{email}</p>
 
         <Rating
           dir='ltr'

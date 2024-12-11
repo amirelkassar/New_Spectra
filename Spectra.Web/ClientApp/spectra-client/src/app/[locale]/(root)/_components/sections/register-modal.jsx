@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -36,9 +36,7 @@ const OPTIONS = [
 
 export const RegisterModal = ({ children, ...props }) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [selectedClient, setSelectedClient] = useState(
-    OPTIONS[0]
-  );
+  const [selectedClient, setSelectedClient] = useState(OPTIONS[0]);
 
   return (
     <>
@@ -73,20 +71,17 @@ export const RegisterModal = ({ children, ...props }) => {
                 {OPTIONS.map((option) => (
                   <div
                     role='button'
-                    onClick={() =>
-                      setSelectedClient(option)
-                    }
+                    onClick={() => setSelectedClient(option)}
                     key={option?.type}
                     className={cn(
                       'shadow relative flex flex-col items-center gap-5 p-5 rounded-lg border border-transparent w-full max-w-44 text-center',
-                      selectedClient?.type ===
-                        option?.type && 'border-greenMain'
+                      selectedClient?.type === option?.type &&
+                        'border-greenMain'
                     )}
                   >
                     {option.icon}
                     <span>{option.name}</span>
-                    {selectedClient?.type ===
-                      option?.type && (
+                    {selectedClient?.type === option?.type && (
                       <div className='rounded-full absolute -top-4 right-1/2 translate-x-1/2 size-8 bg-greenMain flex items-center justify-center'>
                         <CheckIcon />
                       </div>

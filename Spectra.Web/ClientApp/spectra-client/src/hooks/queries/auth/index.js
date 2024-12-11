@@ -2,7 +2,7 @@
 
 import { apiAuth } from '@/api/axios';
 import { clearToken } from '@/lib/token';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { useMutation } from '@tanstack/react-query';
 
@@ -14,13 +14,23 @@ export const useLoginMutation = (data) => {
   });
 };
 
+export const useRegisterMedicalProviderMutation = () => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      return (
+        await apiAuth.post('/register-medical-provider', formData)
+      ).data;
+    },
+  });
+};
+
 export const useLogout = () => {
   const router = useRouter();
 
   const logout = async () => {
-    const isCleared = clearToken();
+    const isTokenDeleted = await clearToken();
 
-    if (isCleared) router.push(ROUTES.AUTH.LOGIN);
+    if (isTokenDeleted) router.push(ROUTES.AUTH.LOGIN);
   };
 
   return {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import Avatar from '@/components/avatar';
 import ROUTES from '@/routes';
@@ -16,10 +16,7 @@ export const CellName = ({ row }) => {
       role='button'
       onClick={() =>
         router.push(
-          ROUTES.CLIENT.PROFILE.VIEW_ORG_CHILD.replace(
-            ':id',
-            id
-          )
+          ROUTES.CLIENT.PROFILE.VIEW_ORG_CHILD.replace(':id', id)
         )
       }
       className='flex items-center gap-5 w-full min-w-max'

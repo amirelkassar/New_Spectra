@@ -1,5 +1,5 @@
 import { H1, Section } from '@/client/_components/ui';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { AddAppointment } from './add-appointment';
 import ROUTES from '@/routes';
 import CalendarWithBg from '@/assets/icons/calendar-with-bg';

@@ -1,4 +1,4 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import { TeamCard } from '@/components/team';
 import ROUTES from '@/routes';
@@ -12,18 +12,13 @@ export const TeamMember = ({
 }) => {
   return (
     <Link
-      href={ROUTES.CLIENT.TEAM.VIEW_DOCTOR.replace(
-        ':id',
-        id
-      )}
+      href={ROUTES.CLIENT.TEAM.VIEW_DOCTOR.replace(':id', id)}
       className='block'
     >
       <TeamCard>
         <TeamCard.Avatar src={avatar} name={name} />
         <TeamCard.Name>{name}</TeamCard.Name>
-        <TeamCard.Profession>
-          {profession}
-        </TeamCard.Profession>
+        <TeamCard.Profession>{profession}</TeamCard.Profession>
         <TeamCard.Rating>{rating}</TeamCard.Rating>
       </TeamCard>
     </Link>

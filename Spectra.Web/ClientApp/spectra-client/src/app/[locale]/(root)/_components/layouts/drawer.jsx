@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useMediaQuery } from '@mantine/hooks';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { Drawer as MantineDrawer } from '@mantine/core';
 
 import { Logo } from '@/components/logo';
@@ -41,9 +41,7 @@ export const Drawer = ({
       overlayProps={{ backgroundOpacity: 0.5, blur: 2 }}
       transitionProps={{
         transition:
-          currentLocale === 'ar'
-            ? 'slide-left'
-            : 'slide-right',
+          currentLocale === 'ar' ? 'slide-left' : 'slide-right',
         duration: 200,
         timingFunction: 'ease-in-out',
       }}

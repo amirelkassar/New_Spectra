@@ -1,6 +1,6 @@
 'use client';
 import Card from '@/components/card';
-import { Link, useRouter } from '@/navigation';
+import { Link, useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -113,9 +113,7 @@ function PageEditStaff({ id }) {
                     رقم الهاتف
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.phoneNumbers
-                    }
+                    defaultValue={data?.data.data.phoneNumbers}
                     name='phoneNumbers'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}
@@ -131,9 +129,7 @@ function PageEditStaff({ id }) {
                     البريد الالكترونى
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.emailaddress
-                    }
+                    defaultValue={data?.data.data.emailaddress}
                     name='emailaddress'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}
@@ -149,9 +145,7 @@ function PageEditStaff({ id }) {
                     رقم الهوية
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.nationalId
-                    }
+                    defaultValue={data?.data.data.nationalId}
                     name='nationalId'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}
@@ -208,9 +202,7 @@ function PageEditStaff({ id }) {
                     القسم
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.diagnoses || '--'
-                    }
+                    defaultValue={data?.data.data.diagnoses || '--'}
                     name='diagnoses'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}
@@ -226,9 +218,7 @@ function PageEditStaff({ id }) {
                     المؤهلات
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.qualifications
-                    }
+                    defaultValue={data?.data.data.qualifications}
                     name='qualifications'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}
@@ -263,9 +253,7 @@ function PageEditStaff({ id }) {
                     ساعات العمل
                   </h4>
                   <TextInput
-                    defaultValue={
-                      data?.data.data.workingHours
-                    }
+                    defaultValue={data?.data.data.workingHours}
                     name='workingHours'
                     onChange={handleChange}
                     className={'!gap-1 flex-1  max-w-full'}

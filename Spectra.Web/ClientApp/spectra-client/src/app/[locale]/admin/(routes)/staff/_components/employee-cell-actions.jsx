@@ -7,8 +7,9 @@ import { useParams } from 'next/navigation';
 export function EmployeeCellActions({ id }) {
   const paramsId = useParams()?.staffId;
 
-  const { onDelete, onEdit, onView, onExport, onPrint } =
-    useEmployeeMenuActions(id || paramsId);
+  const { onDelete, onEdit, onView } = useEmployeeMenuActions(
+    id || paramsId
+  );
 
   return (
     <ActionsMenu>
@@ -17,8 +18,6 @@ export function EmployeeCellActions({ id }) {
         <ActionsMenu.View onClick={onView}>عرض</ActionsMenu.View>
       )}
       <ActionsMenu.Edit onClick={onEdit}>تعديل</ActionsMenu.Edit>
-      <ActionsMenu.Export onClick={onExport}>تصدير</ActionsMenu.Export>
-      <ActionsMenu.Print onClick={onPrint}>طباعة</ActionsMenu.Print>
     </ActionsMenu>
   );
 }

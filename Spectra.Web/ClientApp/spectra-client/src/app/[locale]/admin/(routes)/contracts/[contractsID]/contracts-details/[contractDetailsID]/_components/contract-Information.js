@@ -2,7 +2,7 @@
 import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
 import EditIcon from '@/assets/icons/edit';
 import Card from '@/components/card';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import React, { useEffect, useState } from 'react';
 import ServicesFreelancer from './services-freelancer';
@@ -21,15 +21,12 @@ import {
 import { useEditContractsInAdmin } from '@/hooks/queries/admin/contracts-admin-api';
 
 function ContractInformation({ employeeID, id }) {
-  const { data: dataServices, isLoading } =
-    GetContractsServices();
+  const { data: dataServices, isLoading } = GetContractsServices();
   const { mutate: EditContract, error: errorSend } =
     useEditContractsInAdmin(id);
   console.log(dataServices);
-  const {
-    data: dataContractsDetails,
-    isLoading: isLoadingDetails,
-  } = GetContractsID(id);
+  const { data: dataContractsDetails, isLoading: isLoadingDetails } =
+    GetContractsID(id);
   console.log(dataContractsDetails);
 
   const { modal, editModal } = useModal();
@@ -53,19 +50,14 @@ function ContractInformation({ employeeID, id }) {
   useEffect(() => {
     if (!isLoading) {
       setTeamSpectraNum({
-        duration:
-          dataServices?.data?.data?.durationTeamSpectra ||
-          0,
+        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
         platformFee:
-          dataServices?.data?.data?.platformFeeTeamSpectr ||
-          0,
+          dataServices?.data?.data?.platformFeeTeamSpectr || 0,
       });
       setFreelanceNum({
-        duration:
-          dataServices?.data?.data?.durationFreelance || 0,
+        duration: dataServices?.data?.data?.durationFreelance || 0,
         platformFee:
-          dataServices?.data?.data
-            ?.platformFeeToFreelance || 0,
+          dataServices?.data?.data?.platformFeeToFreelance || 0,
       });
     }
   }, [isLoading]);
@@ -74,59 +66,43 @@ function ContractInformation({ employeeID, id }) {
     if (dataContractsDetails?.data?.data) {
       // Update work limits
       setWorkLimits({
-        hoursOfWork:
-          dataContractsDetails.data.data.hoursOfWork || 0,
-        daysOfWork:
-          dataContractsDetails.data.data.daysOfWork || 0,
+        hoursOfWork: dataContractsDetails.data.data.hoursOfWork || 0,
+        daysOfWork: dataContractsDetails.data.data.daysOfWork || 0,
       });
 
       // Transform freelance data
-      const freelancers = dataContractsDetails.data.data
-        .freelance
-        ? dataContractsDetails.data.data.freelance.map(
-            (item) => ({
-              id: item.service,
-              label: item.service,
-              price: item.selary,
-            })
-          )
+      const freelancers = dataContractsDetails.data.data.freelance
+        ? dataContractsDetails.data.data.freelance.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
         : [];
       setListFreelancer(freelancers);
 
       // Transform spectraTeam data
-      const members = dataContractsDetails.data.data
-        .spectraTeam
-        ? dataContractsDetails.data.data.spectraTeam.map(
-            (item) => ({
-              id: item.service,
-              label: item.service,
-              price: item.selary,
-            })
-          )
+      const members = dataContractsDetails.data.data.spectraTeam
+        ? dataContractsDetails.data.data.spectraTeam.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
         : [];
       setListMember(members);
     }
   }, [dataContractsDetails?.data?.data, isLoadingDetails]);
 
-  const handleServiceDataChange = (
-    serviceId,
-    value,
-    type
-  ) => {
+  const handleServiceDataChange = (serviceId, value, type) => {
     if (type === 'freelancer') {
       setListFreelancer((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId
-            ? { ...item, price: value }
-            : item
+          item.id === serviceId ? { ...item, price: value } : item
         )
       );
     } else if (type === 'member') {
       setListMember((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId
-            ? { ...item, price: value }
-            : item
+          item.id === serviceId ? { ...item, price: value } : item
         )
       );
     }
@@ -229,9 +205,7 @@ function ContractInformation({ employeeID, id }) {
           {searchparams.get('editContracts') === 'true' ? (
             <Button
               onClick={() => [handleSubmit()]}
-              className={
-                ' w-full max-w-[260px]  md:min-w-[260px] '
-              }
+              className={' w-full max-w-[260px]  md:min-w-[260px] '}
             >
               حفظ التعديلات
             </Button>
@@ -332,8 +306,7 @@ function ContractInformation({ employeeID, id }) {
           </Button>
           <Link
             href={
-              ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) +
-              `?chat=true`
+              ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`
             }
             className={
               ' mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0'

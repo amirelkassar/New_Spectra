@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { DeleteComplaint } from '@/hooks/queries/admin/main-data/complaints';
 import ROUTES from '@/routes';
@@ -23,9 +23,7 @@ export const useComplaintsMenuActions = (id) => {
         Toast.Promise(deleteComplaint(), {
           success: 'تم مسح الشكوي بنجاح',
           onSuccess: () => {
-            router.replace(
-              ROUTES.ADMIN.DATAMAIN.COMPLAINTS
-            );
+            router.replace(ROUTES.ADMIN.DATAMAIN.COMPLAINTS);
           },
         });
       },
@@ -33,15 +31,11 @@ export const useComplaintsMenuActions = (id) => {
   }, [deleteComplaint, isPending, open, router]);
 
   const onView = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILS(id));
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.COMPLAINTSDETAILSEDIT(id));
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

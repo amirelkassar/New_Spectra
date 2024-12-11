@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 
@@ -14,10 +14,7 @@ export const CellName = ({ row }) => {
       role='button'
       onClick={() =>
         router.push(
-          ROUTES.CLIENT.PROFILE.VIEW_ORG_CLIENT.replace(
-            ':id',
-            id
-          )
+          ROUTES.CLIENT.PROFILE.VIEW_ORG_CLIENT.replace(':id', id)
         )
       }
       className='font-bold'

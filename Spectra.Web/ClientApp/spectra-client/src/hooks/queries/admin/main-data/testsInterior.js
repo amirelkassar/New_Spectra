@@ -13,12 +13,14 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.internalExamination';
 
 export const getInternalExamination = async (queries) =>
-  (await apiAdmin.get(mainData.internalExamination.list(queries))).data;
+  (await apiAdmin.get(mainData.internalExamination.list(queries)))
+    .data;
 
 export const prefetchInternalExamination = async () => {
   const queryClient = new QueryClient();
@@ -93,7 +95,7 @@ export const useCreateInternalExamination = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

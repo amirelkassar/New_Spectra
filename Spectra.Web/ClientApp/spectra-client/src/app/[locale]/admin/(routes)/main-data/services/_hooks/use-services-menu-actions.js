@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 import { useDeleteService } from '@/hooks/queries/admin/main-data/services';
 import ROUTES from '@/routes';
@@ -35,9 +35,7 @@ export const useServicesMenuActions = (id) => {
   }, [router, id]);
 
   const onEdit = useCallback(() => {
-    router.push(
-      ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id)
-    );
+    router.push(ROUTES.ADMIN.DATAMAIN.SERVICESDETAILSEDIT(id));
   }, [router, id]);
 
   const onExport = useCallback(() => {}, []);

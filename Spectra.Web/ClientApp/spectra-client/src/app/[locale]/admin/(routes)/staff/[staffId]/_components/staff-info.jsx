@@ -1,12 +1,12 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
 
 import { H1 } from '@/components/dashboard/ui/h1';
 import { useDate } from '@/hooks/use-date';
 import { useGender } from '@/hooks/use-gender';
-import { InfoData } from '../../_components/info-data';
+import { InfoData } from '@/components/dashboard/ui/info-data';
 import { BackButton } from '@/components/buttons/back-button';
 import { useImagePath } from '@/hooks/use-image-path';
 import { EmployeeCellActions } from '../../_components/employee-cell-actions';

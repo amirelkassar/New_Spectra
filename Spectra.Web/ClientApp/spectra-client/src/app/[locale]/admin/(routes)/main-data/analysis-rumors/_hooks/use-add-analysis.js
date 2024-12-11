@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 
 import { Toast } from '@/components/toast';
 import { useCreateMedicalTests } from '@/hooks/queries/admin/main-data/analysis';
@@ -45,9 +45,7 @@ export const useAddAnalysis = () => {
       Toast.Promise(createMedicalTests(formData), {
         success: 'تم الاضافة بنجاح',
         onSuccess: () => {
-          router.replace(
-            ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS
-          );
+          router.replace(ROUTES.ADMIN.DATAMAIN.ANALYSISRUMORS);
         },
       });
     },

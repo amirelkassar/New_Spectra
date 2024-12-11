@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 
-import { useAddAttachment as useAddAttachmentMutation } from '@/hooks/queries/admin/staff/staff';
+import { useAddAttachment as useAddAttachmentMutation } from '@/hooks/queries/admin/staff/attachment';
 import { getFormData } from '@/lib/utils';
 import { Toast } from '@/components/toast';
 
@@ -21,7 +21,8 @@ export const useAddAttachment = ({ empId = '', type = '' }) => {
       attachment = {
         name: '',
         file: undefined,
-      }
+      },
+      closeModal = () => {}
     ) => {
       if (!type && !empId) return;
       if (!attachment.file) return;
@@ -40,6 +41,7 @@ export const useAddAttachment = ({ empId = '', type = '' }) => {
 
       Toast.Promise(addAttachment(formData), {
         success: 'تم الاضافة بنجاح',
+        onSuccess: closeModal,
       });
     },
     [addAttachment, empId, isError, reset, type]

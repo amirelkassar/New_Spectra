@@ -1,8 +1,9 @@
 'use client';
 
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import {
   useClickOutside,
+  useDisclosure,
   useMediaQuery,
 } from '@mantine/hooks';
 
@@ -14,6 +15,8 @@ import ArrowNav from '@/assets/icons/arrow-nav';
 import Logo from '@/assets/icons/logo';
 import LogoutIcon from '@/assets/icons/logOut';
 import { useLogout } from '@/hooks/queries/auth';
+import ArrowDownIcon from '@/assets/icons/arrow-down';
+import { Collapse } from '@mantine/core';
 
 export const Sidebar = ({ links = [] }) => {
   const { isOpen, close } = useSidebarStore();
@@ -64,15 +67,18 @@ const NavLinks = ({ link }) => {
 
   const match = useMediaQuery('(max-width: 960px)');
 
+  const [opened, { toggle }] = useDisclosure(false);
+
   const onClick = () => {
-    if (isOpen && match) close();
+    if (isOpen && match && !link.nestedLinks?.length) close();
+    if (!!link.nestedLinks?.length && isOpen) toggle();
   };
 
   return (
-    <li className='relative lg:h-11'>
+    <li className='relative lg:min-h-11'>
       <Link
         onClick={onClick}
-        className='flex gap-3 text-sm lg:text-lg p-2 font-bold relative w-fit rounded-lg group'
+        className='flex items-center gap-3 text-sm lg:text-lg p-2 font-bold relative w-fit rounded-lg group'
         href={link.route}
       >
         {/* LINK ICON */}
@@ -86,19 +92,36 @@ const NavLinks = ({ link }) => {
         </span>
 
         {/* LINK LABEL */}
-        <span
-          className={cn(
-            'text-nowrap',
-            !isOpen && 'lg:hidden'
-          )}
-        >
+        <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
           {link.name}
         </span>
+
+        {!!link?.nestedLinks?.length && isOpen && (
+          <ArrowDownIcon
+            className={cn('transition', opened && 'rotate-180')}
+          />
+        )}
       </Link>
+
+      {!!link.nestedLinks?.length && isOpen && (
+        <Collapse in={opened}>
+          <ul className='my-4 ps-8 space-y-3'>
+            {link?.nestedLinks.map((nestedLink) => (
+              <NestedLink
+                onNestedLinkClick={() => {
+                  if (isOpen && match) close();
+                }}
+                key={nestedLink.name}
+                link={nestedLink}
+              />
+            ))}
+          </ul>
+        </Collapse>
+      )}
 
       {/* ACTIVE LINE */}
       {link.isActive && (
-        <div className='absolute h-full w-3 bg-greenMain rounded-e-md top-0 -start-3 lg:-start-5 z-[999]' />
+        <div className='absolute h-11 w-3 bg-greenMain rounded-e-md top-0 -start-3 lg:-start-5 z-[999]' />
       )}
     </li>
   );
@@ -118,14 +141,28 @@ const Logout = () => {
         <LogoutIcon />
       </span>
 
-      <span
-        className={cn(
-          'text-nowrap',
-          !isOpen && 'lg:hidden'
-        )}
-      >
+      <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
         تسجيل الخروج
       </span>
     </button>
   );
 };
+
+const NestedLink = ({ link, onNestedLinkClick = () => {} }) => (
+  <li
+    onClick={(e) => {
+      e.stopPropagation();
+      onNestedLinkClick();
+    }}
+  >
+    <Link
+      href={link?.route}
+      className={cn(
+        'text-xs mdl:text-base',
+        link?.isActive && 'font-bold'
+      )}
+    >
+      {link?.name}
+    </Link>
+  </li>
+);

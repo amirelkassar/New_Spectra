@@ -1,22 +1,25 @@
-import StarGoldIcon from "@/assets/icons/starGold";
-import Image from "next/image";
-import { Link } from "@/navigation";
-import ROUTES from "@/routes";
-import ActionMenu from "./ActionMenu";
+import StarGoldIcon from '@/assets/icons/starGold';
+import Image from 'next/image';
+import { Link } from '@/i18n/routing';
+import ROUTES from '@/routes';
+import ActionMenu from './ActionMenu';
 const getStar = (num) => {
   const stars = [];
   for (let i = 1; i <= num; i++) {
     stars.push(
-      <StarGoldIcon key={i} className={"w-[14px] lg:w-[18px] h-auto"} />
+      <StarGoldIcon
+        key={i}
+        className={'w-[14px] lg:w-[18px] h-auto'}
+      />
     );
   }
   return stars;
 };
 export const columns = [
   {
-    accessorKey: "title",
-    header: "الاسم",
-    id: "title",
+    accessorKey: 'title',
+    header: 'الاسم',
+    id: 'title',
     cell: ({ getValue, row }) => {
       const title = getValue();
       const img = row.original.image;
@@ -24,41 +27,41 @@ export const columns = [
       return (
         <Link
           href={ROUTES.ADMIN.SETTINGS.CONTENT.EDITARTICLES(id)}
-          className="flex gap-5 items-center "
+          className='flex gap-5 items-center '
         >
           <Image
             src={img}
-            alt=""
+            alt=''
             width={50}
             height={50}
-            className="rounded-full size-[50px] object-cover object-top"
+            className='rounded-full size-[50px] object-cover object-top'
           />
-          <h3 className="text-base font-Bold">{title}</h3>
+          <h3 className='text-base font-Bold'>{title}</h3>
         </Link>
       );
     },
   },
   {
-    accessorKey: "date",
-    header: " تاريخ المقال ",
-    id: "date",
+    accessorKey: 'date',
+    header: ' تاريخ المقال ',
+    id: 'date',
   },
   {
-    accessorKey: "star",
-    header: "التقييم ",
-    id: "star",
+    accessorKey: 'star',
+    header: 'التقييم ',
+    id: 'star',
     cell: ({ getValue, row }) => {
       const numStar = getValue();
       return (
-        <div className="flex gap-[6px] items-center justify-start w-[116px]">
-          {" "}
+        <div className='flex gap-[6px] items-center justify-start w-[116px]'>
+          {' '}
           {getStar(numStar)}
         </div>
       );
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ getValue, row }) => {
       const id = row.original.id;
       return <ActionMenu id={id} />;
