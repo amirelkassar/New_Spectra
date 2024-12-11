@@ -122,7 +122,6 @@ const MainInfoForm = ({ form }) => {
             size='sm'
             label='رقم الهوية'
             name='nationalId'
-            type='number'
             error={GetErrorMsg(form?.error, 'NationalId')}
             onChange={form.onChange}
             value={form?.data?.nationalId || ''}
@@ -274,7 +273,8 @@ const OtherInfoForm = ({ form }) => {
               });
             }}
             value={
-              `${form?.data?.countryCode}-${form?.data?.country}` || ''
+              `${form?.data?.countryCode}-${form?.data?.country}` ||
+              ''
             }
           />
 
