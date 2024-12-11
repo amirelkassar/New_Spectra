@@ -154,3 +154,22 @@ export const getErrors = (error) => {
   //   return error.message;
   // }
 };
+
+export const getFormErrors = (error) => {
+  if (!error) return null;
+  if (!error?.response) return null;
+
+  const errors = error?.response?.data?.errors;
+  if (!errors) return null;
+
+  const errorsObj = Object.entries(errors).reduce(
+    (acc, [key, value]) => {
+      const formattedKey = key[0].toLowerCase() + key.slice(1);
+      acc[formattedKey] = value?.join(', ');
+      return acc;
+    },
+    {}
+  );
+
+  return errorsObj;
+};

@@ -1,16 +1,7 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {
-  Combobox,
-  useCombobox,
-  ScrollArea,
-} from '@mantine/core';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Combobox, useCombobox, ScrollArea } from '@mantine/core';
 import {
   useDebouncedValue,
   useDebouncedCallback,
@@ -32,8 +23,7 @@ export const ContentSelect = ({
   name = '',
   label = '',
 }) => {
-  const [addedItems, setAddedItems] =
-    useState(defaultValue);
+  const [addedItems, setAddedItems] = useState(defaultValue);
 
   const [uniqueItems, setUniqueItems] = useState(() => {
     if (!defaultValue?.length) return [];
@@ -50,12 +40,11 @@ export const ContentSelect = ({
 
   const [debounced] = useDebouncedValue(search, 500);
 
-  const { data, isError, isPending } =
-    useServicesForListing({
-      serviceType: '2',
-      search: debounced,
-      pageNum: 'all',
-    });
+  const { data, isError, isPending } = useServicesForListing({
+    serviceType: '1',
+    search: debounced,
+    pageNum: 'all',
+  });
 
   const items = data?.data?.items;
   const hasData = data?.data?.totalCount;
@@ -101,8 +90,7 @@ export const ContentSelect = ({
         } else {
           // إذا أصبح العداد صفرًا، أزل العنصر من القائمة
           return prev.filter(
-            (uniqueItem) =>
-              uniqueItem.id !== itemToDelete.id
+            (uniqueItem) => uniqueItem.id !== itemToDelete.id
           );
         }
       }
@@ -112,22 +100,19 @@ export const ContentSelect = ({
     });
   }, []);
 
-  const debouncedOnChange = useDebouncedCallback(
-    (updatedList) => {
-      const value = updatedList.map((c) => ({
-        id: c.id,
-        order: c.order,
-      }));
+  const debouncedOnChange = useDebouncedCallback((updatedList) => {
+    const value = updatedList.map((c) => ({
+      id: c.id,
+      order: c.order,
+    }));
 
-      onChange({
-        target: {
-          name,
-          value,
-        },
-      });
-    },
-    500
-  );
+    onChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  }, 500);
 
   const handleUpdateOrder = useCallback((newList) => {
     const updatedList = newList.map((item, index) => ({
@@ -146,9 +131,7 @@ export const ContentSelect = ({
   return (
     <Card className='space-y-5'>
       {label && (
-        <div className='text-base mdl:text-xl mb-2 ps-1'>
-          {label}
-        </div>
+        <div className='text-base mdl:text-xl mb-2 ps-1'>{label}</div>
       )}
 
       <div className='flex items-center gap-5 flex-wrap *:shrink-0'>
@@ -248,10 +231,7 @@ const SelectInput = ({
         key={item?.id}
       >
         {item?.arName}
-        <button
-          type='button'
-          onClick={(e) => onClick(e, item)}
-        >
+        <button type='button' onClick={(e) => onClick(e, item)}>
           <PlusInsideCircleIcon className='size-8' />
         </button>
       </Combobox.Option>
@@ -271,9 +251,7 @@ const SelectInput = ({
           size='xl'
           error={error}
           value={search}
-          onChange={(event) =>
-            onSearch(event.currentTarget.value)
-          }
+          onChange={(event) => onSearch(event.currentTarget.value)}
           rightSection={<ArrowDownBlack />}
           onClick={() => combobox.openDropdown()}
           onFocus={() => combobox.openDropdown()}
@@ -308,10 +286,7 @@ const SelectedView = ({ items }) => {
 
   if (!items.length) return null;
   return items.map((i) => (
-    <div
-      key={i.id}
-      className='bg-blueLight px-5 py-2 rounded-xl'
-    >
+    <div key={i.id} className='bg-blueLight px-5 py-2 rounded-xl'>
       {i.count} {locale === 'ar' ? i.arName : i.enName}
     </div>
   ));
@@ -322,10 +297,7 @@ const SortableItems = ({ items, onDelete = () => {} }) => {
 
   if (!items.length) return null;
   return items.map((item, index) => (
-    <div
-      key={index}
-      className='flex gap-3 items-center group'
-    >
+    <div key={index} className='flex gap-3 items-center group'>
       <div className='sortable-item relative border-4 border-blueLight rounded-xl p-3 text-sm mdl:text-xl font-bold flex items-center gap-2 flex-1 group-[draggable=true]:cursor-grabbing cursor-grab'>
         <div className='absolute inset-0 z-10 pointer-events-none bg-transparent' />
         <span className='bg-black text-white size-6 flex items-center justify-center rounded-full p-1 shrink-0 text-xs mdl:text-base !pointer-events-none'>
