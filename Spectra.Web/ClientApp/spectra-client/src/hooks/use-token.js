@@ -1,18 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { useContext } from 'react';
 
-const TokenContext = createContext(null);
-
-export const TokenProvider = ({ children, initialValue = '' }) => {
-  const [token, setToken] = useState(initialValue);
-
-  return (
-    <TokenContext.Provider value={{ token, setToken }}>
-      {children}
-    </TokenContext.Provider>
-  );
-};
+import { TokenContext } from '@/providers/token-provider';
 
 export const useToken = () => {
   const context = useContext(TokenContext);

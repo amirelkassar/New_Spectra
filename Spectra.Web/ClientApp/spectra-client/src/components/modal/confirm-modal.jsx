@@ -4,15 +4,9 @@ import { Modal } from '@mantine/core';
 import Button from '@/components/button';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 
-function ConfirmModal() {
-  const {
-    isOpen,
-    close,
-    message,
-    icon,
-    onConfirm,
-    isPending,
-  } = useConfirmModal();
+export const ConfirmModal = () => {
+  const { isOpen, close, message, icon, onConfirm, isPending } =
+    useConfirmModal();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -53,6 +47,4 @@ function ConfirmModal() {
       </div>
     </Modal>
   );
-}
-
-export default ConfirmModal;
+};

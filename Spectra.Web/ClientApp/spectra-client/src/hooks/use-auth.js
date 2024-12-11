@@ -1,24 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { useContext } from 'react';
 
-const SessionConetext = createContext(null);
-
-export const SessionProvider = ({ children, initialValue = {} }) => {
-  const [session, setSession] = useState(initialValue);
-
-  const value = {
-    roles: session?.roles,
-    permissions: session?.permissions,
-    setSession,
-  };
-
-  return (
-    <SessionConetext.Provider value={value}>
-      {children}
-    </SessionConetext.Provider>
-  );
-};
+import { SessionConetext } from '@/providers/session-provider';
 
 export const useAuth = () => {
   const context = useContext(SessionConetext);

@@ -32,13 +32,12 @@ function getQueryClient() {
     // This is very important, so we don't re-make a new client if React
     // suspends during the initial render. This may not be needed if we
     // have a suspense boundary BELOW the creation of the query client
-    if (!browserQueryClient)
-      browserQueryClient = makeQueryClient();
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
     return browserQueryClient;
   }
 }
 
-const ReactQueryConfig = ({ children }) => {
+export const QueryProvider = ({ children }) => {
   const queryClient = getQueryClient();
 
   return (
@@ -47,5 +46,3 @@ const ReactQueryConfig = ({ children }) => {
     </QueryClientProvider>
   );
 };
-
-export default ReactQueryConfig;
