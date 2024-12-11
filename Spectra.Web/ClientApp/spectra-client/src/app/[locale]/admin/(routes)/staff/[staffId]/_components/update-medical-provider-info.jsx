@@ -127,7 +127,6 @@ const UpdatePesonalInfo = ({ form }) => {
           size='sm'
           label='رقم الهوية'
           name='nationalId'
-          type='number'
           error={GetErrorMsg(form?.error, 'NationalId')}
           onChange={form.onChange}
           value={form?.data?.nationalId || ''}
