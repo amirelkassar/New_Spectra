@@ -11,9 +11,16 @@ import { PackageIcon } from './package-icon';
 import { ActionButtons } from '@/components/buttons/action-buttons';
 import ROUTES from '@/routes';
 import { useDeletePacakge } from '../_hooks/use-delete-package';
+import { useQueryParams } from '@/hooks/queries/use-query-params';
+import { Pagination } from '@/components/table/pagination';
 
 export const PackagesList = () => {
-  const query = usePackages();
+  const { pageNum, search } = useQueryParams();
+
+  const query = usePackages({
+    pageNum,
+    search,
+  });
 
   const router = useRouter();
 
@@ -24,16 +31,25 @@ export const PackagesList = () => {
   );
 
   return (
-    <QueryWrapper query={query}>
-      {({ data }) => (
-        <div className='flex gap-5 flex-wrap *:shrink-0'>
-          {data?.map((packageItem) => (
-            <PackageCard
-              key={packageItem.id}
-              data={packageItem}
-              onView={onView}
-            />
-          ))}
+    <QueryWrapper query={query} isSearching={!!search}>
+      {({ data, isPlaceholderData, pageSize, totalCount }) => (
+        <div className='space-y-10'>
+          <div className='flex gap-5 flex-wrap *:shrink-0'>
+            {data?.map((packageItem) => (
+              <PackageCard
+                key={packageItem.id}
+                data={packageItem}
+                onView={onView}
+              />
+            ))}
+          </div>
+
+          <Pagination
+            pageSize={pageSize}
+            pageNumber={pageNum}
+            totalCount={totalCount}
+            disabled={isPlaceholderData}
+          />
         </div>
       )}
     </QueryWrapper>
