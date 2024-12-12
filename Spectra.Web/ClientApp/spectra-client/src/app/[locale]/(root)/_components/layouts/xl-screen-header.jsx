@@ -1,3 +1,5 @@
+'use client';
+
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
@@ -6,9 +8,11 @@ import { Logo } from '@/components/logo';
 import { LangDropdown } from '@/guest/_components/ui';
 import { RegisterModal } from '@/app/[locale]/(root)/_components/sections';
 import ROUTES from '@/routes';
+import { useToken } from '@/hooks/use-token';
 
 export const XlScreenHeader = ({ locale = 'ar' }) => {
   const t = useTranslations();
+  const { token } = useToken();
 
   return (
     <div
@@ -22,17 +26,18 @@ export const XlScreenHeader = ({ locale = 'ar' }) => {
       <Nav className='2xl:ms-7' />
 
       {/* REGISTER */}
-      <RegisterModal>{t('register')}</RegisterModal>
+      {!token && <RegisterModal>{t('register')}</RegisterModal>}
 
       {/* LOGIN */}
-      <Link
-        href={ROUTES.AUTH.LOGIN}
-        className='font-bold inline-block after:block after:w-full after:border-b-2 after:border-black after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out after:hover:scale-100 after:origin-right ltr:after:origin-left after:mt-0.5 whitespace-nowrap'
-        aria-label='تسجيل الدخول'
-      >
-        {t('login')}
-      </Link>
-
+      {!token && (
+        <Link
+          href={ROUTES.AUTH.LOGIN}
+          className='font-bold inline-block after:block after:w-full after:border-b-2 after:border-black after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out after:hover:scale-100 after:origin-right ltr:after:origin-left after:mt-0.5 whitespace-nowrap'
+          aria-label='تسجيل الدخول'
+        >
+          {t('login')}
+        </Link>
+      )}
       {/* LOCALE */}
       <LangDropdown currentLocale={locale} />
     </div>

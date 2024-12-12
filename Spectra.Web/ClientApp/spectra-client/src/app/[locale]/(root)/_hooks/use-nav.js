@@ -41,9 +41,9 @@ export const useNav = () => {
     {
       key: 'our_services',
       label: 'خدمتنا',
-      href: ROUTES.ROOT.SERVICES.HOME,
+      href: ROUTES.ROOT.SERVICES,
       icon: <Hand className='size-4 lgl:size-6 inline-block' />,
-      isActive: pathName.includes(ROUTES.ROOT.SERVICES.HOME),
+      isActive: pathName.includes(ROUTES.ROOT.SERVICES),
     },
     {
       key: 'packages',

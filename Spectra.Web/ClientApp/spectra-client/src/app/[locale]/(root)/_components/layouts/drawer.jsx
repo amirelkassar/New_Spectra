@@ -13,6 +13,7 @@ import { LangDropdown } from '../ui/lang-dropdown';
 import LogIn from '@/assets/icons/log-in';
 import ROUTES from '@/routes';
 import { useNav } from '@/guest/_hooks/use-nav';
+import { useToken } from '@/hooks/use-token';
 
 export const Drawer = ({
   onClose = () => {},
@@ -26,6 +27,8 @@ export const Drawer = ({
   const matches = useMediaQuery('(min-width: 768px)');
 
   const { NAVDATA } = useNav();
+
+  const { token } = useToken();
 
   return (
     <MantineDrawer
@@ -106,19 +109,21 @@ export const Drawer = ({
           />
 
           {/* AUTH */}
-          <div className='px-7 py-4 mt-12'>
-            <Button
-              onClick={() => {
-                router.push(ROUTES.AUTH.LOGIN);
-                onClose();
-              }}
-              className='w-full font-bold gap-2 rounded-md'
-              variant='secondary'
-            >
-              <LogIn />
-              تسجيل الدخول
-            </Button>
-          </div>
+          {!token && (
+            <div className='px-7 py-4 mt-12'>
+              <Button
+                onClick={() => {
+                  router.push(ROUTES.AUTH.LOGIN);
+                  onClose();
+                }}
+                className='w-full font-bold gap-2 rounded-md'
+                variant='secondary'
+              >
+                <LogIn />
+                تسجيل الدخول
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </MantineDrawer>

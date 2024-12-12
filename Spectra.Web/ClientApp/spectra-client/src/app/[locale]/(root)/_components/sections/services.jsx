@@ -1,9 +1,6 @@
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import { ShowMoreButton } from '@/components/buttons/show-more-button';
 
 export const Services = ({
@@ -18,12 +15,8 @@ export const Services = ({
       id='services'
     >
       <div className='flex items-center justify-between gap-4 mb-10'>
-        <SectionHeading id='services'>
-          {title}
-        </SectionHeading>
-        <ShowMoreButton
-          href={`${ROUTES.ROOT.SERVICES.HOME}/#services`}
-        >
+        <SectionHeading id='services'>{title}</SectionHeading>
+        <ShowMoreButton href={`${ROUTES.ROOT.SERVICES}/#services`}>
           تصفح جميع الخدمات
         </ShowMoreButton>
       </div>
@@ -40,9 +33,7 @@ export const Services = ({
 const Service = ({ icon, label, color }) => {
   return (
     <ServiceCard className='border-none'>
-      <ServiceCard.Icon className={color}>
-        {icon}
-      </ServiceCard.Icon>
+      <ServiceCard.Icon className={color}>{icon}</ServiceCard.Icon>
       <ServiceCard.Label>{label}</ServiceCard.Label>
     </ServiceCard>
   );

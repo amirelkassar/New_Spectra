@@ -4,10 +4,8 @@ const ROUTES = {
     HOME: '/',
     ABOUT: '/about',
     TEAM: '/team',
-    SERVICES: {
-      HOME: '/services',
-      VIEW_SERVICE: '/services/:id',
-    },
+    SERVICES: '/services',
+    VIEW_SERVICE: '/services/:id',
     PACKAGES: '/packages',
     TREATMENT: '/treatment',
     SUCCESS_STORIES: '/success-stories',
