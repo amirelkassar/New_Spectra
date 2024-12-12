@@ -19,7 +19,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public ServiceTypes ServiceType { get; set; }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public double? Discount { get; set; }
         public string? EnDescription { get; set; }
         public string? ArDescription { get; set; }
@@ -53,8 +53,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
              Ulid.NewUlid().ToString(),
              request.EnName,
              request.ArName,
-             request.ServiceType,
-             request.Price);
+             request.ServiceType);
+            entity.Price = request.Price;
 
             entity.EnDescription = request.EnDescription;
             entity.ArDescription = request.ArDescription;

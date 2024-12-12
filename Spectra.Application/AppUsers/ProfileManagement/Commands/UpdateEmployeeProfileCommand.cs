@@ -126,22 +126,26 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
                 employee.HumenGender = request.HumenGender;
                 employee.JobDescription = request.JobDescription;
                 employee.WorkingHours = request.WorkingHours;
-                employee.LicenseNumber = request.LicenseNumber;
-                employee.ExperienceYears = request.ExperienceYears;
-                employee.Qualification = request.Qualification;
-                employee.ApprovedBy = request.ApprovedBy;
-                employee.AcademicDegree = request.AcademicDegree;
+                if (!employee.HasActiveContract)
+                {
+                    employee.LicenseNumber = request.LicenseNumber;
+                    employee.ExperienceYears = request.ExperienceYears;
+                    employee.Qualification = request.Qualification;
+                    employee.ApprovedBy = request.ApprovedBy;
+                    employee.AcademicDegree = request.AcademicDegree;
+                }
+
             }
 
             private async Task UpdateEmailAndPhoneAsync(AppUser user, Employee employee, UpdateEmployeeProfileCommand request)
             {
-                if (!string.Equals(employee.EmailAddress.Emailaddress, request.Emailaddress, System.StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(employee.EmailAddress.Emailaddress, request.Emailaddress, StringComparison.OrdinalIgnoreCase))
                 {
                     await _identityService.ChangeUserEmail(user.Id, request.Emailaddress);
                     employee.EmailAddress.Emailaddress = request.Emailaddress;
                 }
 
-                if (!string.Equals(employee.MobileNumber.PhoneNumbers, request.PhoneNumber, System.StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(employee.MobileNumber.PhoneNumbers, request.PhoneNumber, StringComparison.OrdinalIgnoreCase))
                 {
                     await _identityService.ChangePhoneAsync(user.Id, request.PhoneNumber);
                     employee.MobileNumber.PhoneNumbers = request.PhoneNumber;
@@ -163,30 +167,34 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 
             private async Task UpdateSpecializationsAsync(Employee employee, UpdateEmployeeProfileCommand request)
             {
-                var (allSpecializations,totalCount) = await _specializationRepository.GetAllAsync();
-                var validSpecializations = allSpecializations.Where(s => request.Specializations.Contains(s.Id)).ToList();
-
-                if (validSpecializations.Count != request.Specializations.Count)
+                if (!employee.HasActiveContract)
                 {
-                    throw new NotFoundException("Some specializations are invalid.","id");
+                    var (allSpecializations, totalCount) = await _specializationRepository.GetAllAsync();
+                    var validSpecializations = allSpecializations.Where(s => request.Specializations.Contains(s.Id)).ToList();
+
+                    if (validSpecializations.Count != request.Specializations.Count)
+                    {
+                        throw new NotFoundException("Some specializations are invalid.", "id");
+                    }
+
+                    employee.Specializations = validSpecializations.Select(s => new EmployeeSpecialization
+                    {
+                        Id = s.Id,
+                        EnName = s.EnName,
+                        ArName = s.ArName
+                    }).ToList();
+
+                    var mainSpecialization = allSpecializations.FirstOrDefault(s => s.Id == request.MainSpecializationId);
+                    if (mainSpecialization == null)
+                    {
+                        throw new NotFoundException("Main specialization not found.", "id");
+                    }
+
+                    employee.MainSpecializationId = request.MainSpecializationId;
+                    employee.MainSpecializationEnName = mainSpecialization.EnName;
+                    employee.MainSpecializationArName = mainSpecialization.ArName;
                 }
-
-                employee.Specializations = validSpecializations.Select(s => new EmployeeSpecialization
-                {
-                    Id = s.Id,
-                    EnName = s.EnName,
-                    ArName = s.ArName
-                }).ToList();
-
-                var mainSpecialization = allSpecializations.FirstOrDefault(s => s.Id == request.MainSpecializationId);
-                if (mainSpecialization == null)
-                {
-                    throw new NotFoundException("Main specialization not found.", "id");
-                }
-
-                employee.MainSpecializationId = request.MainSpecializationId;
-                employee.MainSpecializationEnName = mainSpecialization.EnName;
-                employee.MainSpecializationArName = mainSpecialization.ArName;
+               
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public string ArName { get; set; }
         public string? ArDescription { get; set; }
         public string? EnDescription { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public double? Discount { get; set; }
         public string? ArTermsAndConditions { get; set; }
         public string? EnTermsAndConditions { get; set; }
@@ -25,18 +25,15 @@ namespace Spectra.Domain.MasterData.ServicesMD
         private PlatformService(string id,
         string enName,
         string arName,
-        ServiceTypes serviceType,
-        double price) : base(id)
+        ServiceTypes serviceType) : base(id)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(enName, nameof(enName));
             ArgumentNullException.ThrowIfNull(arName, nameof(arName));
             ArgumentNullException.ThrowIfNull(serviceType, nameof(serviceType));
-            ArgumentNullException.ThrowIfNull(price, nameof(price));
             EnName = enName;
             ArName = arName;
             ServiceType = serviceType;
-            Price = price;
             Reports = [];
             Specifications = [];
             Contents = [];
@@ -44,7 +41,6 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public static PlatformService Create(string id,
         string enName,
         string arName,
-        ServiceTypes serviceType,
-        double price) => new(id, enName, arName, serviceType, price);
+        ServiceTypes serviceType) => new(id, enName, arName, serviceType);
     }
 }
