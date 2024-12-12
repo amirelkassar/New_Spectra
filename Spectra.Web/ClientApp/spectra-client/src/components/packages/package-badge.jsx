@@ -67,9 +67,7 @@ const Price = ({
             className='font-Bold text-2xl mdl:text-4xl w-fit'
           >
             {priceWithDiscount}{' '}
-            <span className='text-base mdl:text-xl'>
-              {currancy}
-            </span>
+            <span className='text-base mdl:text-xl'>{currancy}</span>
           </p>
           <span
             dir='ltr'
@@ -96,9 +94,7 @@ const Price = ({
       )}
     >
       {value?.toFixed(2)}{' '}
-      <span className='text-base mdl:text-xl'>
-        {currancy}
-      </span>
+      <span className='text-base mdl:text-xl'>{currancy}</span>
     </p>
   );
 };
@@ -118,10 +114,7 @@ const FeaturesList = ({
           )}
         >
           <CircleCheck
-            className={cn(
-              'size-4 mt-0.5 mdl:mt-2',
-              classNames?.icon
-            )}
+            className={cn('size-4 mt-0.5 mdl:mt-2', classNames?.icon)}
           />
           {feature}
         </li>
@@ -159,9 +152,7 @@ const NameAndStatus = ({
           icon
         )}
 
-        <h4 className='text-base mdl:text-3xl font-bold'>
-          {name}
-        </h4>
+        <h4 className='text-base mdl:text-3xl font-bold'>{name}</h4>
       </div>
 
       <Price

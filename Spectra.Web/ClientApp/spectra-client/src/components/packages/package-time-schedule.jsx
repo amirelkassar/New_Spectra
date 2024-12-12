@@ -1,8 +1,8 @@
 import { cn, getDate } from '@/lib/utils';
 import Card from '@/components/card';
 import CheckIcon from '@/assets/icons/check';
-import { StatusBadge } from '@/client/_components/schedules';
-import { SectionTitle } from '@/client/_components/ui';
+import { StatusBadge } from '@/app/[locale]/(dashboard)/client/_components/schedules';
+import { SectionTitle } from '@/app/[locale]/(dashboard)/client/_components/ui';
 
 export const PackageTimeSchedule = ({
   title = '',
@@ -12,11 +12,7 @@ export const PackageTimeSchedule = ({
 
   return (
     <div className='space-y-5'>
-      {title && (
-        <SectionTitle className='ps-8'>
-          {title}
-        </SectionTitle>
-      )}
+      {title && <SectionTitle className='ps-8'>{title}</SectionTitle>}
 
       <Card className='!p-0 max-h-[400px] mdl:max-h-[460px] overflow-y-auto border-2 border-greenMain/20 mdl:border-transparent'>
         <ul className='max-h-full'>
@@ -43,8 +39,7 @@ const Schedule = ({
       className={cn(
         'flex gap-10 mdl:gap-32 opacity-70 items-center p-5 ps-16 relative before:absolute before:h-full before:w-[1px] before:border before:border-dashed before:border-greenMain before:start-[30px] before:ltr:-translate-x-1/2 before:translate-x-1/2 before:top-0',
         {
-          'bg-blueLight opacity-100':
-            status === 'available',
+          'bg-blueLight opacity-100': status === 'available',
         }
       )}
     >
@@ -57,9 +52,7 @@ const Schedule = ({
           }
         )}
       >
-        {status === 'done' && (
-          <CheckIcon className='size-4' />
-        )}
+        {status === 'done' && <CheckIcon className='size-4' />}
         {status === 'pending' && index + 1}
       </span>
       <div
@@ -67,18 +60,14 @@ const Schedule = ({
           'text-black': status === 'available',
         })}
       >
-        <span className='text-sm mdl:text-xl font-bold'>
-          {label}
-        </span>
+        <span className='text-sm mdl:text-xl font-bold'>{label}</span>
         <time className='flex items-center gap-10 text-xs mdl:text-base'>
           <span>{fullYear}</span>
           <span>{time}</span>
         </time>
       </div>
 
-      <StatusBadge status={status}>
-        {getStatus(status)}
-      </StatusBadge>
+      <StatusBadge status={status}>{getStatus(status)}</StatusBadge>
     </li>
   );
 };

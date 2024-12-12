@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from '@/navigation';
+import { usePathname } from '@/i18n/routing';
 
 import LinkGreen from './linkGreen';
 import NoDataIcon from '@/assets/icons/no-data';
@@ -11,11 +11,9 @@ function NoDataYet() {
   const pathname = usePathname() || '';
 
   const href = useMemo(() => {
-    if (pathname.includes('admin'))
-      return ROUTES.ADMIN.MAIN;
+    if (pathname.includes('admin')) return ROUTES.ADMIN.MAIN;
 
-    if (pathname.includes('client'))
-      return ROUTES.CLIENT.MAIN;
+    if (pathname.includes('client')) return ROUTES.CLIENT.MAIN;
   }, [pathname]);
 
   return (
@@ -25,9 +23,8 @@ function NoDataYet() {
         هذه الصفحة لا تحتوي على بيانات في الوقت الحالي.
       </h2>
       <p className='text-sm mdl:text-xl text-center max-w-2xl mx-auto'>
-        يُرجى التفاعل مع الأنشطة أو العمليات المطلوبة لتسجيل
-        البيانات هنا. سيتم تحديث المحتوى تلقائيًا عند توفر
-        البيانات الجديدة.
+        يُرجى التفاعل مع الأنشطة أو العمليات المطلوبة لتسجيل البيانات
+        هنا. سيتم تحديث المحتوى تلقائيًا عند توفر البيانات الجديدة.
       </p>
       <LinkGreen
         href={href}

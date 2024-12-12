@@ -1,6 +1,7 @@
 'use client';
 
 import { MultiSelect } from '@mantine/core';
+// eslint-disable-next-line no-unused-vars
 import { MultiSelectProps } from '@mantine/core';
 import { cn } from '@/lib/utils';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';

@@ -3,7 +3,7 @@ import { Modal, ScrollArea } from '@mantine/core';
 import React from 'react';
 import ModalType from './comp_modal/modalType';
 import ModalDate from './comp_modal/modalDate';
-import ModalSelect from '@/app/[locale]/admin/(routes)/clients/components/modalSelect';
+import ModalSelect from '@/app/[locale]/(dashboard)/admin/(routes)/clients/components/modalSelect';
 import ModalJoin from './comp_modal/modalJoin';
 import ModalContacts from './comp_modal/modalContacts';
 import ModalContactsState from './comp_modal/modalContactsState';

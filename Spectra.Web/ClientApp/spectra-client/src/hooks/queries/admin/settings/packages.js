@@ -13,7 +13,8 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.settings.packages';
 
@@ -31,7 +32,9 @@ export const prefetchPackages = async () => {
   return queryClient;
 };
 
-export const usePackages = (params = { pageNum: null, search: '' }) => {
+export const usePackages = (
+  params = { pageNum: null, search: '' }
+) => {
   const queries = getQueries({ params, initialQueries });
 
   return useQuery({
@@ -84,7 +87,7 @@ export const useAddPackage = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

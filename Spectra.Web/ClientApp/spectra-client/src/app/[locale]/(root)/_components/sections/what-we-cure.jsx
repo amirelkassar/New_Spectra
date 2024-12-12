@@ -1,12 +1,9 @@
 import Image from 'next/image';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import ThreeDotsRowIcon from '@/assets/icons/three-dots-row';
 import { ArrowRightIcon } from '@/assets/icons/arrow-right';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
 
 export const WhatWeCure = ({
@@ -50,9 +47,7 @@ const Treatment = ({ image = '', label = '' }) => {
           <ArrowRightIcon className='size-4 mdl:size-6' />
         </span>
       </div>
-      <p className='text-black text-base mdl:text-medium'>
-        {label}
-      </p>
+      <p className='text-black text-base mdl:text-medium'>{label}</p>
     </div>
   );
 };

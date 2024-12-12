@@ -4,7 +4,7 @@ import {
   Notifications,
   SearchBar,
   SidebarToggle,
-} from '@/client/_components/ui';
+} from '@/app/[locale]/(dashboard)/client/_components/ui';
 
 const DashboardHeader = ({ children, ...props }) => {
   return (

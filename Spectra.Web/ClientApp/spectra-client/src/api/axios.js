@@ -2,13 +2,19 @@ import axios from 'axios';
 
 import { getToken } from '@/lib/token';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const api = axios.create({
   baseURL: BASE_URL,
 });
 
+export const apiPublic = getAxiosInstance('/public');
+
 export const apiAdmin = getAxiosInstance('/admin');
+
+export const apiUser = getAxiosInstance('/user');
+
+export const apiEmployee = getAxiosInstance('/employee');
 
 export const apiAuth = axios.create({
   baseURL: BASE_URL + '/public/identity',

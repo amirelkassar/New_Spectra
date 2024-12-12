@@ -1,25 +1,15 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { useContext } from 'react';
 
-const tokenConetext = createContext(null);
-
-export const TokenProvider = ({ children, value }) => {
-  const [token] = useState(value);
-
-  return (
-    <tokenConetext.Provider value={token}>
-      {children}
-    </tokenConetext.Provider>
-  );
-};
+import { TokenContext } from '@/providers/token-provider';
 
 export const useToken = () => {
-  const context = useContext(tokenConetext);
-  // if (!context) {
-  //   throw new Error(
-  //     'useToken must be used within a TokenProvider'
-  //   );
-  // }
+  const context = useContext(TokenContext);
+  if (!context) {
+    throw new Error(
+      'useToken must be used within a TokenProvider or no Token was provided!!'
+    );
+  }
   return context;
 };

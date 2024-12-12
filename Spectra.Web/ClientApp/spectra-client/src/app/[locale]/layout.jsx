@@ -1,56 +1,41 @@
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+// CSS IMPORTS
+import './globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/dropzone/styles.css';
-import 'react-phone-input-2/lib/material.css';
 import '@mantine/carousel/styles.css';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
-import { MantineProvider } from '@mantine/core';
-import { NextIntlClientProvider } from 'next-intl';
-import { TokenProvider } from '@/hooks/use-token';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import ReactQueryConfig from '@/config/react-query-config';
-import ConfirmModal from '@/components/modal/confirm-modal';
-import { getToken } from '@/lib/token';
-import { getMessages } from 'next-intl/server';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'react-phone-input-2/lib/material.css';
 
+// COMPONENTS IMPORTS
+import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
+
+// PROVIDERS IMPORTS
+import AppProviders from '@/providers';
+
+// META DATA
 export const metadata = {
   title: 'Spectra App',
   description: 'Spectra App',
 };
 
-export default async function RootLayout({
-  children,
-  params,
-}) {
-  const messages = await getMessages();
+export default async function RootLayout({ children, params }) {
+  const locale = params?.locale;
 
-  const token = await getToken();
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
+
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
 
   return (
-    <html
-      lang={params.locale}
-      dir={params.locale === 'ar' ? 'rtl' : 'ltr'}
-    >
+    <html lang={locale} dir={direction}>
       <body className='text-black bg-white'>
-        <NextIntlClientProvider
-          locale={params.locale}
-          messages={messages}
-        >
-          <TokenProvider value={token}>
-            <MantineProvider>
-              <ReactQueryConfig>
-                {children}
-                <Toaster />
-                <ReactQueryDevtools initialIsOpen={false} />
-                <ConfirmModal />
-              </ReactQueryConfig>
-            </MantineProvider>
-          </TokenProvider>
-        </NextIntlClientProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

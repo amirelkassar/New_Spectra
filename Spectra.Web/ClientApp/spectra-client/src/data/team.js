@@ -1,3 +1,11 @@
+import Book from '@/assets/icons/book';
+import BriefIcon from '@/assets/icons/brief';
+import CalendarFill from '@/assets/icons/calendar-fill';
+import Certificate from '@/assets/icons/certificate';
+import HourglassIcon from '@/assets/icons/Hourglass';
+import LicenseIcon from '@/assets/icons/License';
+import QualificationsIcon from '@/assets/icons/qualifications';
+
 export const TEAM = [
   {
     id: '1',
@@ -1050,3 +1058,19 @@ export const TEAM = [
     ],
   },
 ];
+
+export const CAREER_ICONS = {
+  joinDate: <CalendarFill className='size-5 mdl:size-7' />,
+  summary: <BriefIcon className='size-5 mdl:size-7' />,
+  qualifications: (
+    <QualificationsIcon className='size-5 mdl:size-7' />
+  ),
+  licenseNo: <LicenseIcon className='size-5 mdl:size-7' />,
+  exp: <HourglassIcon className='size-5 mdl:size-7' />,
+  acadmiceDegree: (
+    <Book className='size-5 mdl:size-7 text-greenMain' />
+  ),
+  approvedBy: (
+    <Certificate className='size-5 mdl:size-7 text-greenMain' />
+  ),
+};

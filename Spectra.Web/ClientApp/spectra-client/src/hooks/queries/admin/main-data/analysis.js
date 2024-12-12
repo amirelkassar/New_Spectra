@@ -13,12 +13,14 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = null;
 
-export const initialQueries = initailCustomQueries || initialSiteQueries;
+export const initialQueries =
+  initailCustomQueries || initialSiteQueries;
 
 export const initialQueryKey = 'admin.main-data.analysis';
 
 export const getAnalysis = async (queries) =>
-  (await apiAdmin.get(mainData.medicalTestsAndXray.list(queries))).data;
+  (await apiAdmin.get(mainData.medicalTestsAndXray.list(queries)))
+    .data;
 
 export const prefetchMedicalTests = async () => {
   const queryClient = new QueryClient();
@@ -92,7 +94,7 @@ export const useCreateMedicalTests = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey, initialQueries],
       });
     },

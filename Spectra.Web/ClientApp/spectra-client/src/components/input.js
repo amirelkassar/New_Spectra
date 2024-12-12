@@ -15,19 +15,26 @@ export default function Input({
   min,
   minLength,
   error,
-  setError,
   handleOnChange,
   isOptional = false,
 }) {
   const [hideErr, setHideErr] = useState(false);
   return (
-    <div className={cn('flex flex-col gap-2 relative', containerClassName)}>
+    <div
+      className={cn(
+        'flex flex-col gap-2 relative',
+        containerClassName
+      )}
+    >
       {isOptional && (
         <div className='absolute end-0 top-2 text-xs text-grayDark'>
           اختياري
         </div>
       )}{' '}
-      <label htmlFor={id ? id : label} className={cn('', labelClassName)}>
+      <label
+        htmlFor={id ? id : label}
+        className={cn('', labelClassName)}
+      >
         {label}
       </label>
       <input
@@ -53,7 +60,9 @@ export default function Input({
         minLength={minLength}
       />
       {error && (
-        <p className='text-red whitespace-pre-line'>{hideErr ? '' : error}</p>
+        <p className='text-red whitespace-pre-line'>
+          {hideErr ? '' : error}
+        </p>
       )}
     </div>
   );

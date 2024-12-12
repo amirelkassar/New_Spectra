@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 

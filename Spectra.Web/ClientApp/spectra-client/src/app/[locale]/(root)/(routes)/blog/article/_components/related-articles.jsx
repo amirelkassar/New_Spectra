@@ -1,10 +1,7 @@
 import Image from 'next/image';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
-import { Link } from '@/navigation';
+import { Container, SectionHeading } from '@/guest/_components/ui';
+import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 export const RelatedArticles = ({

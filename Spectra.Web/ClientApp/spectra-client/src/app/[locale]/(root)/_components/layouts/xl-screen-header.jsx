@@ -1,4 +1,4 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { Nav } from '@/guest/_components/layouts';

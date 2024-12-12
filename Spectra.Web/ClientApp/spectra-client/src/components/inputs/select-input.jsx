@@ -1,4 +1,5 @@
 import { Select } from '@mantine/core';
+// eslint-disable-next-line no-unused-vars
 import { SelectProps } from '@mantine/core';
 
 import { cn } from '@/lib/utils';

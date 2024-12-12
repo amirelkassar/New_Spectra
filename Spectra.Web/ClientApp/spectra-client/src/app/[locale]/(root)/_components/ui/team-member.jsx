@@ -1,4 +1,4 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 
 import { TeamCard } from '@/components/team';
 import ROUTES from '@/routes';
@@ -18,9 +18,7 @@ export const TeamMember = ({
       <TeamCard>
         <TeamCard.Avatar src={avatar} name={name} />
         <TeamCard.Name>{name}</TeamCard.Name>
-        <TeamCard.Profession>
-          {profession}
-        </TeamCard.Profession>
+        <TeamCard.Profession>{profession}</TeamCard.Profession>
         <TeamCard.Rating>{rating}</TeamCard.Rating>
       </TeamCard>
     </Link>

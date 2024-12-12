@@ -1,13 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import { ArrowIcon } from './features-articles';
 import { handlePagination } from '@/lib/utils';
 import { Pagination } from '@/components/pagination';
@@ -25,10 +22,7 @@ export const ImportantArticles = ({
       aria-label='Important Articles'
       className='mdl:col-span-3 space-y-10 !p-0'
     >
-      <SectionHeading
-        id='important-articles'
-        className='text-center'
-      >
+      <SectionHeading id='important-articles' className='text-center'>
         {title}
       </SectionHeading>
       <div className='space-y-5'>
@@ -83,13 +77,9 @@ const Article = ({
 
       {/* TITLE & MAINCONTENT & READ BUTTON & WRITER */}
       <div>
-        <h3 className='text-sm mdl:text-2xl font-bold'>
-          {title}
-        </h3>
+        <h3 className='text-sm mdl:text-2xl font-bold'>{title}</h3>
 
-        <p className='text-xs mdl:text-medium mt-3'>
-          {mainContent}
-        </p>
+        <p className='text-xs mdl:text-medium mt-3'>{mainContent}</p>
 
         <div className='flex items-center justify-between mt-3'>
           <span>{writer}</span>
@@ -98,11 +88,7 @@ const Article = ({
             className='flex border transition border-greenMain items-center hover:border-black py-1 mdl:py-2 px-2 mdl:px-5 text-sm mdl:text-medium rounded-lg'
           >
             <span className='flex-1 block'>قراءة</span>
-            <ArrowIcon
-              lineWidth='25'
-              className='w-14'
-              fill='black'
-            />
+            <ArrowIcon lineWidth='25' className='w-14' fill='black' />
           </Link>
         </div>
       </div>

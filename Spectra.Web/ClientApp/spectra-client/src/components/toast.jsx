@@ -19,9 +19,7 @@ const Success = (message = '') => {
       <div className='flex items-center gap-5 *:shrink-0 relative'>
         <FilledCheck className='text-greenMain' />
 
-        <p className='text-xs mdl:text-base font-medium'>
-          {message}
-        </p>
+        <p className='text-xs mdl:text-base font-medium'>{message}</p>
       </div>
     ),
     {
@@ -47,9 +45,7 @@ const Error = (message = '') => {
       <div className='flex items-center gap-5 *:shrink-0 relative'>
         <CloseIcon className='size-5' />
 
-        <p className='text-xs mdl:text-base font-medium'>
-          {message}
-        </p>
+        <p className='text-xs mdl:text-base font-medium'>{message}</p>
       </div>
     ),
     {
@@ -74,9 +70,7 @@ const Loading = (message = 'جاري الارسال') => {
       <div className='flex flex-col items-center gap-2 *:shrink-0 relative'>
         <Spinner className='text-grayDark animate-spin' />
 
-        <p className='text-xs mdl:text-base font-medium'>
-          {message}
-        </p>
+        <p className='text-xs mdl:text-base font-medium'>{message}</p>
       </div>
     ),
     {
@@ -121,19 +115,27 @@ const Submit = (
         </div>
       ),
       success: (res) => {
-        if (options?.onSuccess) options?.onSuccess(res);
+        let returnedMessage = '';
+        if (options?.onSuccess) {
+          returnedMessage = options.onSuccess(res);
+        }
         return (
           <div className='flex items-center gap-5 *:shrink-0 relative'>
             <FilledCheck className='text-greenMain' />
 
             <p className='text-xs mdl:text-base font-medium'>
-              {options.success || 'تم الارسال بنجاح'}
+              {options.success ||
+                returnedMessage ||
+                'تم الارسال بنجاح'}
             </p>
           </div>
         );
       },
       error: (err) => {
-        if (options?.onError) options?.onError(err);
+        let returnedError = '';
+        if (options?.onError) {
+          returnedError = options?.onError(err);
+        }
         const generalError = GetErrorMsg(err, 'general');
         // if (!generalError) return;
         return (
@@ -141,8 +143,9 @@ const Submit = (
             <CloseIcon className='size-5' />
 
             <p className='text-xs mdl:text-base font-medium overflow-hidden max-w-[90%]'>
-              {generalError ||
-                options.error ||
+              {options.error ||
+                returnedError ||
+                generalError ||
                 'حدث خطأ ما'}
             </p>
           </div>

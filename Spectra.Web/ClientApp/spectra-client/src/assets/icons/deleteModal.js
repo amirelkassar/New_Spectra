@@ -1,11 +1,6 @@
-import Image from 'next/image';
 import React from 'react';
-import deleteModal from '@/assets/images/deleteModal.png';
 
-function DeleteModalIcon({
-  className = '',
-  color = '#10B0C1',
-}) {
+function DeleteModalIcon({ className = '', color = '#10B0C1' }) {
   return (
     <svg
       className={className}

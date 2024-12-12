@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useCallback, useMemo, useState } from 'react';
 import { Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import {
   Dropzone,
   IMAGE_MIME_TYPE,
@@ -25,12 +24,10 @@ export function AttachmentModal({
   },
   error,
   isPending = false,
-  isSuccess = false,
+  isOpen = false,
+  close = () => {},
   onSubmit = () => {},
-  children,
 }) {
-  const [isOpen, { open, close }] = useDisclosure();
-
   const [value, setValue] = useState(data);
 
   const [validationError, setValidationError] = useState({
@@ -42,7 +39,7 @@ export function AttachmentModal({
   const onClose = useCallback(() => {
     setValue(data);
     close();
-  }, [close, data]);
+  }, [data, close]);
 
   // handle submit
   const handleSubmit = useCallback(
@@ -54,10 +51,9 @@ export function AttachmentModal({
           ...prev,
           name: 'Please enter a name for the file',
         }));
-      onSubmit(value);
-      if (isSuccess) onClose();
+      onSubmit(value, onClose);
     },
-    [onSubmit, value, isSuccess, onClose]
+    [onSubmit, value, onClose]
   );
 
   // handle file change
@@ -85,7 +81,10 @@ export function AttachmentModal({
   const fileError = useMemo(() => {
     return GetErrorMsg(error, 'File') || validationError.file;
   }, [error, validationError.file]);
-
+  //
+  //
+  //
+  //
   // handle file preview
   const filePreview = useMemo(() => {
     if (!value.file) return null;
@@ -122,96 +121,85 @@ export function AttachmentModal({
   }, [value.file]);
 
   return (
-    <>
-      {/* TRIGGER */}
-      <div className='w-fit' role='dialog' onClick={open}>
-        {children}
-      </div>
+    <Modal
+      withCloseButton={false}
+      centered
+      opened={isOpen}
+      onClose={onClose}
+      size='lg'
+      classNames={{
+        content: 'rounded-xl lg:py-5 lg:px-10',
+      }}
+    >
+      <div className='space-y-5'>
+        <h3 className='text-sm mdl:text-xl font-bold'>{title}</h3>
 
-      <Modal
-        withCloseButton={false}
-        centered
-        opened={isOpen}
-        onClose={onClose}
-        size='lg'
-        classNames={{
-          content: 'rounded-xl lg:py-5 lg:px-10',
-        }}
-      >
-        <div className='space-y-5'>
-          <h3 className='text-sm mdl:text-xl font-bold'>{title}</h3>
-
-          {value.file ? (
-            filePreview
-          ) : (
-            <Dropzone
-              maxSize={5 * 1024 ** 2}
+        {value.file ? (
+          filePreview
+        ) : (
+          <Dropzone
+            maxSize={5 * 1024 ** 2}
+            className={cn('rounded-xl transition hover:bg-grayLight')}
+            accept={[...IMAGE_MIME_TYPE, ...PDF_MIME_TYPE]}
+            multiple={false}
+            onDrop={(files) => onFileChange(files[0])}
+          >
+            <div
               className={cn(
-                'rounded-xl transition hover:bg-grayLight'
+                'flex gap-2 flex-col justify-center items-center w-full p-4'
               )}
-              accept={[...IMAGE_MIME_TYPE, ...PDF_MIME_TYPE]}
-              multiple={false}
-              onDrop={(files) => onFileChange(files[0])}
             >
-              <div
+              <ExportIcon
+                strokeWidth={1}
                 className={cn(
-                  'flex gap-2 flex-col justify-center items-center w-full p-4'
+                  'size-6 mdl:size-8 shrink-0 text-greenMain'
                 )}
+              />
+              <span
+                className={cn('text-sm mdl:text-xl text-grayDark')}
               >
-                <ExportIcon
-                  strokeWidth={1}
-                  className={cn(
-                    'size-6 mdl:size-8 shrink-0 text-greenMain'
-                  )}
-                />
-                <span
-                  className={cn('text-sm mdl:text-xl text-grayDark')}
-                >
-                  اضغط لاضافة صورة او ملف , او قم بالسحب و الافلات
-                </span>
-              </div>
-            </Dropzone>
-          )}
-          {fileError && (
-            <p className='text-red text-xs mdl:text-base !m-0'>
-              {fileError}
-            </p>
-          )}
+                اضغط لاضافة صورة او ملف , او قم بالسحب و الافلات
+              </span>
+            </div>
+          </Dropzone>
+        )}
+        {fileError && (
+          <p className='text-red text-xs mdl:text-base !m-0'>
+            {fileError}
+          </p>
+        )}
 
-          <TextInput
-            size='lg'
-            label='اسم المرفق'
-            value={value?.name}
-            onChange={(e) => {
-              if (validationError.name) {
-                setValidationError((prev) => ({ ...prev, name: '' }));
-              }
-              setValue((prev) => ({ ...prev, name: e.target.value }));
-            }}
-            error={
-              GetErrorMsg(error, 'Name') || validationError?.name
+        <TextInput
+          size='lg'
+          label='اسم المرفق'
+          value={value?.name}
+          onChange={(e) => {
+            if (validationError.name) {
+              setValidationError((prev) => ({ ...prev, name: '' }));
             }
-          />
+            setValue((prev) => ({ ...prev, name: e.target.value }));
+          }}
+          error={GetErrorMsg(error, 'Name') || validationError?.name}
+        />
 
-          <div className='flex *:flex-1 flex-col lg:flex-row gap-5 font-bold text-sm lg:text-base !mt-10'>
-            <Button
-              type='button'
-              onClick={handleSubmit}
-              disabled={isPending || !value?.file}
-              variant='secondary'
-            >
-              حفظ
-            </Button>
-            <Button
-              type='button'
-              disabled={isPending}
-              onClick={onClose}
-            >
-              الغاء
-            </Button>
-          </div>
+        <div className='flex *:flex-1 flex-col lg:flex-row gap-5 font-bold text-sm lg:text-base !mt-10'>
+          <Button
+            type='button'
+            onClick={handleSubmit}
+            disabled={isPending || !value?.file}
+            variant='secondary'
+          >
+            حفظ
+          </Button>
+          <Button
+            type='button'
+            disabled={isPending}
+            onClick={onClose}
+          >
+            الغاء
+          </Button>
         </div>
-      </Modal>
-    </>
+      </div>
+    </Modal>
   );
 }

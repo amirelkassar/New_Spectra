@@ -1,4 +1,4 @@
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { Nav } from '@/guest/_components/layouts';
@@ -50,9 +50,7 @@ const EmailSubscription = () => {
     >
       <div className='mdl:p-14 p-8 space-y-5'>
         <div className='text-white text-center text-base mdl:text-3xl relative space-y-3'>
-          <h5 className='font-bold'>
-            {t('be_part_of_our_family')}
-          </h5>
+          <h5 className='font-bold'>{t('be_part_of_our_family')}</h5>
 
           <p className='font-light'>
             {t('subscribe_to_our_newsletter')}
@@ -117,11 +115,7 @@ const Social = () => {
   return (
     <div className='flex items-center gap-5'>
       {SOCIALDATA.map(({ icon, href }) => (
-        <Link
-          key={href}
-          href={href}
-          className='text-black text-3xl'
-        >
+        <Link key={href} href={href} className='text-black text-3xl'>
           {icon}
         </Link>
       ))}

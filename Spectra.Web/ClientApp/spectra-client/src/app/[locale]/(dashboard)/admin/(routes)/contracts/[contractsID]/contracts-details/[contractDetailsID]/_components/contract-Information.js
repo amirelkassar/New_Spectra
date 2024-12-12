@@ -1,0 +1,332 @@
+'use client';
+import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
+import EditIcon from '@/assets/icons/edit';
+import Card from '@/components/card';
+import { Link } from '@/i18n/routing';
+import ROUTES from '@/routes';
+import React, { useEffect, useState } from 'react';
+import ServicesFreelancer from './services-freelancer';
+import ServicesMember from './services-member';
+import Button from '@/components/button';
+import RefuseIcon from '@/assets/icons/refuse';
+import AcceptIcon from '@/assets/icons/accept';
+import useModal from '@/store/modal-slice';
+import ContractsTextDetails from '@/components/contractsTextDetails';
+import { useSearchParams } from 'next/navigation';
+import WorkNum from './workNum';
+import {
+  GetContractsID,
+  // GetContractsServices,
+} from '@/hooks/queries/doctor/contracts-api';
+import { useEditContractsInAdmin } from '@/hooks/queries/admin/contracts-admin-api';
+
+function ContractInformation({ employeeID, id }) {
+  // const { data: dataServices, isLoading } = GetContractsServices();
+  const { mutate: EditContract } = useEditContractsInAdmin(id);
+  const { data: dataContractsDetails, isLoading: isLoadingDetails } =
+    GetContractsID(id);
+
+  const { editModal } = useModal();
+  const searchparams = useSearchParams();
+
+  const [listFreelancer, setListFreelancer] = useState([]);
+  const [listMember, setListMember] = useState([]);
+  const [workLimits, setWorkLimits] = useState({
+    hoursOfWork: 0,
+    daysOfWork: 0,
+  });
+  const [FreelanceNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
+  const [TeamSpectraNum] = useState({
+    duration: 0,
+    platformFee: 0,
+  });
+
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setTeamSpectraNum({
+  //       duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+  //     });
+  //     setFreelanceNum({
+  //       duration: dataServices?.data?.data?.durationFreelance || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeToFreelance || 0,
+  //     });
+  //   }
+  // }, [isLoading]);
+
+  useEffect(() => {
+    if (dataContractsDetails?.data?.data) {
+      // Update work limits
+      setWorkLimits({
+        hoursOfWork: dataContractsDetails.data.data.hoursOfWork || 0,
+        daysOfWork: dataContractsDetails.data.data.daysOfWork || 0,
+      });
+
+      // Transform freelance data
+      const freelancers = dataContractsDetails.data.data.freelance
+        ? dataContractsDetails.data.data.freelance.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListFreelancer(freelancers);
+
+      // Transform spectraTeam data
+      const members = dataContractsDetails.data.data.spectraTeam
+        ? dataContractsDetails.data.data.spectraTeam.map((item) => ({
+            id: item.service,
+            label: item.service,
+            price: item.selary,
+          }))
+        : [];
+      setListMember(members);
+    }
+  }, [dataContractsDetails?.data?.data, isLoadingDetails]);
+
+  const handleServiceDataChange = (serviceId, value, type) => {
+    if (type === 'freelancer') {
+      setListFreelancer((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
+    } else if (type === 'member') {
+      setListMember((prevData) =>
+        prevData.map((item) =>
+          item.id === serviceId ? { ...item, price: value } : item
+        )
+      );
+    }
+  };
+  // console.log(selectedServices);
+  // console.log(freelancerServiceData);
+  const [EditText, setEditText] = useState(false);
+
+  const [contractText, setContractText] = useState(`
+    <div style="text-align: right;">
+    <p >أنه في يوم ______ الموافق _____/______/2024</p>
+    <p>تم الاتفاق بين كل من :</p>
+    
+    <h3>أولاً:</h3>
+   <p>مركز سبيكترا الطبي التابع لشركة مستقبل الرعاية الطبية، المقيد بموجب الترخيص الصادر من وزارة التجارة برقم 1010697542 وعنوانه: الرياض، ظهرة لبن، شارع الفروسية، ويمثله في التوقيع على هذا العقد مديرة العمليات والتشغيل في مركز سبيكترا الطبي، ويشار إليه فيما بعد بالطرف الأول.</p>
+    
+    <h3>ثانيًا:</h3>
+    <p>السيد/_______________ ويحمل رقم الهوية الوطنية/___________ (ويشار إليه فيما بعد بـ "الطرف الثاني").</p>
+    
+    <h3>تمهيد:</h3>
+    <p>حيث أن الطرف الأول يمتلك _______ ويرغب في التعاقد مع الطرف الثاني على ___________، وحيث أبدى الطرف الثاني قبوله لهذا العقد ورغبته في التعاقد على ____________.</p>
+    
+    <p>فقد اتفق الطرفان وهما بكامل الأهلية القانونية للتعاقد والتصرف على الشروط والبنود الآتية:</p>
+    
+    <h3>البند الأول: موضوع العقد</h3>
+    <p>موضوع هذا العقد هو قيام الطرف الثاني بـ __________ وفقاً للتعليمات والتوجيهات الصادرة من الطرف الأول.</p>
+    
+    <h3>البند الثاني: مدة العقد</h3>
+    <p>مدة هذا العقد هي ________ تبدأ من تاريخ توقيع العقد ويمكن تجديدها بناءً على اتفاق الطرفين.</p>
+    
+    <h3>البند الثالث: المقابل المالي</h3>
+    <p>يتقاضى الطرف الثاني مقابل عمله بموجب هذا العقد مبلغاً وقدره ________ يتم دفعه وفقاً للآلية التالية:</p>
+    <ul>
+      <li>دفعة أولى: ________ عند توقيع العقد.</li>
+      <li>دفعة ثانية: ________ عند انتهاء نصف مدة العقد.</li>
+      <li>دفعة ثالثة: ________ عند انتهاء العقد وتسليم الأعمال المطلوبة.</li>
+    </ul>
+    
+    <h3>البند الرابع: التزامات الطرفين</h3>
+    <ul>
+      <li>يلتزم الطرف الأول بتقديم كافة المستندات والمعلومات المطلوبة للطرف الثاني.</li>
+      <li>يلتزم الطرف الثاني بتنفيذ العمل وفقاً لما تم الاتفاق عليه ووفقاً للمواعيد المحددة.</li>
+    </ul>
+    
+    <h3>البند الخامس: أحكام عامة</h3>
+    <ul>
+      <li>في حالة حدوث نزاع بين الطرفين يتم اللجوء إلى ________ لحله.</li>
+      <li>هذا العقد مُلزم للطرفين ولا يجوز لأحد الطرفين التنازل عن أي حق أو التزام فيه إلا بموافقة الطرف الآخر.</li>
+    </ul>
+
+    <p>حرر هذا العقد من نسختين أصليتين، تسلم كل طرف نسخة للعمل بها وقت الحاجة.</p>
+    </div>
+  
+  `);
+  const handleSubmit = () => {
+    // Transform data to match API requirements
+
+    const formattedData = {
+      freelance: listFreelancer.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      spectraTeam: listMember.map((item) => ({
+        service: item.label,
+        selary: item.price,
+      })),
+      id: id,
+      hoursOfWork: workLimits.hoursOfWork, // Set as needed
+      daysOfWork: workLimits.daysOfWork, // Set as needed
+      employeeId: employeeID, // Replace with actual employee ID
+      titel: 'string', // Replace with actual title
+      firstName: 'string', // Replace with actual first name
+      lastName: 'string', // Replace with actual last name
+      contractCase: 3, // Set as needed
+    };
+
+    // Send formatted data with useCreateContracts
+    EditContract(formattedData);
+  };
+  return (
+    <div className='flex flex-col gap-7 w-full'>
+      <Card className={'flex-1 w-full'}>
+        <ServicesFreelancer
+          numHeader={FreelanceNum}
+          data={listFreelancer}
+          handleServiceDataChange={handleServiceDataChange}
+        />
+
+        <ServicesMember
+          numHeader={TeamSpectraNum}
+          data={listMember}
+          handleServiceDataChange={handleServiceDataChange}
+        />
+        <WorkNum
+          workLimits={workLimits}
+          setWorkLimits={setWorkLimits}
+        />
+
+        <div className='flex px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap !mt-5 md:!mt-[40px]'>
+          {searchparams.get('editContracts') === 'true' ? (
+            <Button
+              onClick={() => [handleSubmit()]}
+              className={' w-full max-w-[260px]  md:min-w-[260px] '}
+            >
+              حفظ التعديلات
+            </Button>
+          ) : (
+            <>
+              <Button
+                onClick={() => {}}
+                className={
+                  'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+                }
+              >
+                <AcceptIcon />
+                قبول
+              </Button>
+              <Button
+                onClick={() => {
+                  editModal('type', 'contractsReq');
+                  editModal('open', true);
+                }}
+                className={
+                  'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+                }
+              >
+                <RefuseIcon />
+                رفض
+              </Button>
+
+              <Link
+                href={ROUTES.ADMIN.CONTRACTS.CONTRACTSUSERDETAILSEDIT(
+                  employeeID,
+                  id
+                )}
+                className={
+                  '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
+                }
+              >
+                <EditIcon />
+                تعديل
+              </Link>
+            </>
+          )}
+        </div>
+      </Card>
+      <Card>
+        {EditText ? (
+          <ContractsTextDetails
+            contractText={contractText}
+            setContractText={setContractText}
+            setEditText={setEditText}
+          />
+        ) : (
+          <div className='contractsDetails'>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: contractText,
+              }}
+            />
+          </div>
+        )}
+        <div className='flex items-center flex-wrap my-14 gap-7'>
+          <Button
+            onClick={() => {}}
+            className={
+              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+            }
+          >
+            تجديد العقد
+          </Button>
+          <Button
+            onClick={() => {}}
+            className={
+              'text-[12px] lg:text-[16px]   mdl:max-w-[260px] !w-full !py-0 !px-3 md:!px-5 font-bold items-center flex-1 flex  bg-greenMain justify-center  md:w-[120px] !min-h-11 ring-1 !gap-[8px] !ring-greenMain border-none text-white'
+            }
+          >
+            قبول
+          </Button>
+          <Button
+            onClick={() => {
+              editModal('type', 'contractsReq');
+              editModal('open', true);
+            }}
+            className={
+              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+            }
+          >
+            رفض
+          </Button>
+          <Button
+            onClick={() => {
+              editModal('type', 'contractsReq');
+              editModal('open', true);
+            }}
+            className={
+              'text-[12px] lg:text-[16px]  mdl:max-w-[260px] !w-full  !py-0 !px-3 md:!px-5 flex font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-red text-red border-none  md:w-[120px] !gap-[8px]'
+            }
+          >
+            الغاء العقد
+          </Button>
+          <Link
+            href={
+              ROUTES.ADMIN.CONTRACTS.CONTRACTSUSER(id) + `?chat=true`
+            }
+            className={
+              ' mdl:max-w-[260px]  !min-h-11  rounded-xl !py-0 text-[14px] md:text-[20px] min-w-[200px] flex-1 !px-5 font-bold   flex items-center bg-greenMain justify-center h-11 ring-1 !gap-4 !ring-greenMain border-none text-white mb-5 md:mb-0'
+            }
+          >
+            <ContractsWhiteIcon />
+            ارسال عقد
+          </Link>
+          <Button
+            onClick={() => {
+              setEditText(true);
+            }}
+            className={
+              '  mdl:max-w-[260px] w-full !py-0 text-[14px] md:text-[20px] min-w-[200px] !px-5  flex gap-[15px] font-bold items-center flex-1 justify-center !min-h-11 ring-1 !ring-[#010036] text-[#010036] border-none rounded-[10px]'
+            }
+          >
+            <EditIcon />
+            تعديل
+          </Button>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+export default ContractInformation;

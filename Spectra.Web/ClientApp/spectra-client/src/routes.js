@@ -277,6 +277,7 @@ const ROUTES = {
       DASHBOARD: '/doctor/profile',
       CERTIFICATES: '/doctor/profile/certificates',
       TEAM: '/doctor/profile/team',
+      EDIT: '/doctor/profile/edit',
     },
     CONTRACTS: {
       DASHBOARD: '/doctor/contracts',

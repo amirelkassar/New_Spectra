@@ -89,6 +89,7 @@ export const getFormData = (data) => {
 
 export const buildQuery = (baseUrl, params = {}) => {
   const queryString = Object.entries(params)
+    // eslint-disable-next-line no-unused-vars
     .filter(([_, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
@@ -130,3 +131,47 @@ export function getQueries({ params, initialQueries }) {
     ...filteredParams,
   };
 }
+
+export const getErrors = (error) => {
+  if (!error) return { code: '', message: '' };
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    const code = error?.status;
+    const errors = error?.response?.data?.errors;
+
+    if (!errors) return { code, message: '' };
+
+    const message = Object.entries(errors)
+      // eslint-disable-next-line no-unused-vars
+      .map(([_, value]) => value?.join(', '))
+      .join(', ');
+
+    return { code, message };
+  } //  else if (error.request) {
+  //   // The request was made but no response was received
+  //   return error.request;
+  // } else {
+  //   // Something happened in setting up the request that triggered an Error
+  //   return error.message;
+  // }
+};
+
+export const getFormErrors = (error) => {
+  if (!error) return null;
+  if (!error?.response) return null;
+
+  const errors = error?.response?.data?.errors;
+  if (!errors) return null;
+
+  const errorsObj = Object.entries(errors).reduce(
+    (acc, [key, value]) => {
+      const formattedKey = key[0].toLowerCase() + key.slice(1);
+      acc[formattedKey] = value?.join(', ');
+      return acc;
+    },
+    {}
+  );
+
+  return errorsObj;
+};

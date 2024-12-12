@@ -1,15 +1,17 @@
+import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { PasswordInput as MantinePasswordInput } from '@mantine/core';
 
-const PasswordInput = ({ ...props }) => {
+const PasswordInput = forwardRef(({ ...props }, ref) => {
   return (
     <MantinePasswordInput
       {...props}
+      ref={ref}
       size={props.size || 'lg'}
       classNames={{
         ...props.classNames,
         input: cn(
-          'rounded-lg focus:border-greenMain focus-within:border-greenMain  placeholder:font-normal',
+          'rounded-lg focus:border-greenMain focus-within:border-greenMain placeholder:font-normal',
           props.classNames?.input
         ),
         label: cn(
@@ -30,6 +32,8 @@ const PasswordInput = ({ ...props }) => {
       }}
     />
   );
-};
+});
+
+PasswordInput.displayName = 'PasswordInput';
 
 export default PasswordInput;
