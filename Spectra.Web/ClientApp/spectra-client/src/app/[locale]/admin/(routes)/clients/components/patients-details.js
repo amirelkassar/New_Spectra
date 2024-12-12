@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import person from '@/assets/images/child.png';
 import BackIcon from '@/assets/icons/back';
 import { useRouter } from '@/i18n/routing';
-import { useParams } from 'next/navigation';
 import Card from '@/components/card';
 import ReportChart from '@/components/reportChart';
 const data = {
@@ -26,10 +25,8 @@ const apiData = [
   { title: 'جلسة 1', num: 4 },
 ];
 function PatientsDetails() {
-  const [value, setValue] = useState(new Date());
   const [ShowDate, setShowDate] = useState(true);
   const router = useRouter();
-  const params = useParams();
 
   return (
     <div className='flex gap-6 flex-col lgl:flex-row  staffDetils'>

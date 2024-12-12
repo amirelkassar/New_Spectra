@@ -2,10 +2,7 @@
 import { api, apiAdmin } from '@/api/axios';
 import { Admin, Doctor } from '@/api/endpoints';
 import NumPage from '@/components/numPage';
-import {
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 //getAll
 export const GetContractsInAdmin = () => {
@@ -19,7 +16,6 @@ export const GetContractsInAdmin = () => {
           headers: {},
         }
       );
-      console.log('dfd');
       return response;
     },
     placeholderData: (previousData) => previousData,
@@ -37,7 +33,6 @@ export const GetContractsIDInAdmin = (id) => {
           headers: {},
         }
       );
-      console.log('response');
       return response;
     },
     staleTime: Infinity,
@@ -58,9 +53,7 @@ export const useEditContractsInAdmin = (id) => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
+    onSuccess: () => {},
     onError: (error) => {
       console.error('حدث خطأ أثناء الإرسال:', error);
     },
@@ -72,12 +65,9 @@ export const GetContractsServicesInAdmin = () => {
   return useQuery({
     queryKey: [Doctor.Contracts.getServices],
     queryFn: async () => {
-      const response = await api.get(
-        Doctor.Contracts.getServices,
-        {
-          headers: {},
-        }
-      );
+      const response = await api.get(Doctor.Contracts.getServices, {
+        headers: {},
+      });
       return response;
     },
     staleTime: Infinity,

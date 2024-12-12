@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
-import MenuActions from "./menu-actions";
-import Button from "./button";
-import RecoveryIcon from "@/assets/icons/recovery";
-import AcceptIcon from "@/assets/icons/accept";
-import RefuseIcon from "@/assets/icons/refuse";
-import Checkbox from "./checkbox";
-import clsx from "clsx";
-import Statue from "./status";
-import Image from "next/image";
-import StarGoldIcon from "@/assets/icons/starGold";
-import ReportDecIcon from "@/assets/icons/reportDec";
-import ContractsWhiteIcon from "@/assets/icons/contractsWhite";
-import DeleteIcon from "@/assets/icons/delete";
-import ReschedulingIcon from "@/assets/icons/rescheduling";
-import useModal from "@/store/modal-slice";
+'use client';
+import React from 'react';
+import MenuActions from './menu-actions';
+import Button from './button';
+import RecoveryIcon from '@/assets/icons/recovery';
+import AcceptIcon from '@/assets/icons/accept';
+import RefuseIcon from '@/assets/icons/refuse';
+import Checkbox from './checkbox';
+import clsx from 'clsx';
+import Statue from './status';
+import Image from 'next/image';
+import StarGoldIcon from '@/assets/icons/starGold';
+import ReportDecIcon from '@/assets/icons/reportDec';
+import ContractsWhiteIcon from '@/assets/icons/contractsWhite';
+import DeleteIcon from '@/assets/icons/delete';
+import ReschedulingIcon from '@/assets/icons/rescheduling';
+import useModal from '@/store/modal-slice';
 
 function TableComponents({
   data,
@@ -27,7 +27,6 @@ function TableComponents({
   dataLine,
   haveImg,
   reqType,
-  setState,
   hide,
   hide2,
   colNum,
@@ -37,7 +36,7 @@ function TableComponents({
   report,
   contracts,
 }) {
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
 
   const toggleRow = (id) => {
     setSelected((prev) =>
@@ -51,7 +50,10 @@ function TableComponents({
     const stars = [];
     for (let i = 1; i <= num; i++) {
       stars.push(
-        <StarGoldIcon key={i} className={"w-[14px] lg:w-[18px] h-auto"} />
+        <StarGoldIcon
+          key={i}
+          className={'w-[14px] lg:w-[18px] h-auto'}
+        />
       );
     }
     return stars;
@@ -60,29 +62,31 @@ function TableComponents({
     <div
       className={`${
         data.length > 0
-          ? "md:h-[calc(100vh-480px)] min-h-[600px]"
-          : "md:h-[calc(100vh-550px)] min-h-[260px]"
+          ? 'md:h-[calc(100vh-480px)] min-h-[600px]'
+          : 'md:h-[calc(100vh-550px)] min-h-[260px]'
       } relative  max-h-[100vh] md:h-[calc(100vh-480px)] min-h-[600px] overflow-auto grid  custom-grid2 md:custom-grid  gap-y-1 w-full`}
       style={{
-        "--colNum": colNum,
-        "--colNumSmall": hide ? colNumSmall : colNum,
+        '--colNum': colNum,
+        '--colNumSmall': hide ? colNumSmall : colNum,
       }}
     >
-      <div className=" contents ">
+      <div className=' contents '>
         {header.map((item, i) => {
           return (
             <div
               key={i * 10}
               className={` ${
                 i === 0
-                  ? "rounded-s-xl"
+                  ? 'rounded-s-xl'
                   : i === 1
-                  ? "text-start"
+                  ? 'text-start'
                   : i === header.length - 1
-                  ? "rounded-e-xl"
-                  : ""
+                  ? 'rounded-e-xl'
+                  : ''
               } ${
-                i === hide - 1 || i === hide2 - 1 ? " hidden md:block" : "block"
+                i === hide - 1 || i === hide2 - 1
+                  ? ' hidden md:block'
+                  : 'block'
               }   bg-blueLight h-[44px] md:h-[52px]  py-3 px-3 sticky top-0 text-nowrap text-[12px] md:text-[16px] min-w-[40px] z-[0]`}
             >
               {item}
@@ -91,37 +95,41 @@ function TableComponents({
         })}
       </div>
       {data.length < 1 ? (
-        <p className="text-center text-[16px] mdl:text-[24px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <p className='text-center text-[16px] mdl:text-[24px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]'>
           لا يوجد عملاء خاص بك
         </p>
       ) : (
         data.map((item, index) => (
-          <div key={item.id} className="contents ">
+          <div key={item.id} className='contents '>
             {order.map((orderItem, j) => {
-              return orderItem === "Req&Res" ? (
+              return orderItem === 'Req&Res' ? (
                 <div
                   key={j}
                   className={clsx(
-                    " flex  py-3 ps-4 pe-2 xl:ps-10 me-1 md:me-7 xl:me-5 content-center  items-center gap-3 lg:gap-5 justify-end transition",
+                    ' flex  py-3 ps-4 pe-2 xl:ps-10 me-1 md:me-7 xl:me-5 content-center  items-center gap-3 lg:gap-5 justify-end transition',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent"
+                      ? 'bg-grayLight'
+                      : 'bg-transparent'
                   )}
                 >
                   {selectPage.length > 0 ? (
                     <>
-                      <MenuActions type={type || 1} path={route} id={item.id} />
+                      <MenuActions
+                        type={type || 1}
+                        path={route}
+                        id={item.id}
+                      />
                     </>
                   ) : (
                     <>
-                      {reqType === "rejected" ? (
+                      {reqType === 'rejected' ? (
                         <>
                           <Button
                             className={
-                              " btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
+                              ' btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]'
                             }
                           >
                             <RecoveryIcon />
@@ -129,35 +137,38 @@ function TableComponents({
                           </Button>
                           <Button
                             onClick={() => {
-                              editModal("type", "delete");
-                              editModal("open", true);
+                              editModal('type', 'delete');
+                              editModal('open', true);
                             }}
                             className={
-                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                              'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
                             }
                           >
                             <DeleteIcon />
                             مسح
                           </Button>
                         </>
-                      ) : reqType === "deferred" ? (
+                      ) : reqType === 'deferred' ? (
                         <>
                           <Button
-                          onClick={()=>{editModal('type','date');editModal('open',true); }}
+                            onClick={() => {
+                              editModal('type', 'date');
+                              editModal('open', true);
+                            }}
                             className={
-                              " btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]"
+                              ' btnReqTable  !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex   justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-black border-none text-[#010036]'
                             }
                           >
-                          <ReschedulingIcon />
+                            <ReschedulingIcon />
                             اعادة جدولة
                           </Button>
                           <Button
                             onClick={() => {
-                              editModal("type", "delete");
-                              editModal("open", true);
+                              editModal('type', 'delete');
+                              editModal('open', true);
                             }}
                             className={
-                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                              'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
                             }
                           >
                             <DeleteIcon />
@@ -168,11 +179,11 @@ function TableComponents({
                         <>
                           <Button
                             onClick={() => {
-                              editModal("type", "accept");
-                              editModal("open", true);
+                              editModal('type', 'accept');
+                              editModal('open', true);
                             }}
                             className={
-                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                              'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white'
                             }
                           >
                             <AcceptIcon />
@@ -180,11 +191,11 @@ function TableComponents({
                           </Button>
                           <Button
                             onClick={() => {
-                              editModal("type", "req");
-                              editModal("open", true);
+                              editModal('type', 'req');
+                              editModal('open', true);
                             }}
                             className={
-                              "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                              'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
                             }
                           >
                             <RefuseIcon />
@@ -193,27 +204,31 @@ function TableComponents({
                         </>
                       )}
 
-                      <MenuActions type={type || 1} path={route} id={item.id} />
+                      <MenuActions
+                        type={type || 1}
+                        path={route}
+                        id={item.id}
+                      />
                     </>
                   )}
                 </div>
-              ) : orderItem === "status" ? (
+              ) : orderItem === 'status' ? (
                 <div
                   key={j}
                   className={clsx(
-                    "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 content-center items-start ",
+                    'flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 content-center items-start ',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent"
+                      ? 'bg-grayLight'
+                      : 'bg-transparent'
                   )}
                 >
                   <Statue statue={item.statu} />
                   {report && (
-                    <div className="mx-6">
-                      <div className="flex items-center justify-center p-3 rounded-[50%] bg-blueLight">
+                    <div className='mx-6'>
+                      <div className='flex items-center justify-center p-3 rounded-[50%] bg-blueLight'>
                         <ReportDecIcon />
                       </div>
                     </div>
@@ -224,34 +239,34 @@ function TableComponents({
                 <div
                   key={j}
                   className={clsx(
-                    " flex  py-3 md:ps-4 md:pe-2 xl:ps-10 me-2 md:me-7 xl:me-12 content-center  items-center gap-5 justify-end transition ",
+                    ' flex  py-3 md:ps-4 md:pe-2 xl:ps-10 me-2 md:me-7 xl:me-12 content-center  items-center gap-5 justify-end transition ',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent"
+                      ? 'bg-grayLight'
+                      : 'bg-transparent'
                   )}
                 >
                   {report && (
-                    <div className="mx-6">
-                      <div className="flex items-center justify-center p-3 rounded-[50%] bg-blueLight">
+                    <div className='mx-6'>
+                      <div className='flex items-center justify-center p-3 rounded-[50%] bg-blueLight'>
                         <ReportDecIcon />
                       </div>
                     </div>
                   )}
-                  {contracts?.open && contracts?.type === "old" ? (
+                  {contracts?.open && contracts?.type === 'old' ? (
                     item.active ? (
-                      <div className="mx-6 flex items-center gap-4">
-                        <div className="bg-[#F1FCFF] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
-                          <span className=" size-3 rounded-[50%]  bg-greenMain animate-pulse z-[1] md:block hidden"></span>
-                          <p className="font-Bold text-[12px] md:text-[16px] text-greenMain">
+                      <div className='mx-6 flex items-center gap-4'>
+                        <div className='bg-[#F1FCFF] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]'>
+                          <span className=' size-3 rounded-[50%]  bg-greenMain animate-pulse z-[1] md:block hidden'></span>
+                          <p className='font-Bold text-[12px] md:text-[16px] text-greenMain'>
                             نشط
                           </p>
                         </div>
                         <Button
                           className={
-                            "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                            'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
                           }
                         >
                           الغاء العقد
@@ -259,33 +274,33 @@ function TableComponents({
                       </div>
                     ) : (
                       <div
-                        className="mx-6 flex items-center gap-4"
+                        className='mx-6 flex items-center gap-4'
                         key={j + orderItem}
                       >
-                        <div className="bg-[#FFF2F2] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]">
-                          <span className=" size-3 rounded-[50%]  bg-red  z-[1] md:block hidden"></span>
-                          <p className="font-Bold text-[12px] md:text-[16px] text-red">
+                        <div className='bg-[#FFF2F2] py-1 px-3 rounded-[10px] flex items-center justify-center gap-[10px]'>
+                          <span className=' size-3 rounded-[50%]  bg-red  z-[1] md:block hidden'></span>
+                          <p className='font-Bold text-[12px] md:text-[16px] text-red'>
                             منتهى
                           </p>
                         </div>
                         <Button
                           className={
-                            "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                            'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white'
                           }
                         >
                           تجديد العقد
                         </Button>
                       </div>
                     )
-                  ) : contracts?.open && contracts?.type === "new" ? (
+                  ) : contracts?.open && contracts?.type === 'new' ? (
                     <div
-                      className="mx-6 flex items-center gap-4"
+                      className='mx-6 flex items-center gap-4'
                       key={j + orderItem}
                     >
                       <Button
                         onClick={() => {}}
                         className={
-                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white"
+                          'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 font-bold items-center flex  bg-greenMain justify-center h-[38px] lg:h-11 ring-1 !gap-4 !ring-greenMain border-none text-white'
                         }
                       >
                         <ContractsWhiteIcon />
@@ -294,7 +309,7 @@ function TableComponents({
                       <Button
                         onClick={() => {}}
                         className={
-                          "btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none"
+                          'btnReqTable !py-0 text-[12px] lg:text-[14px] !px-2 lg:!px-5 flex font-bold items-center justify-center h-[38px] lg:h-11 ring-1 !ring-red text-red border-none'
                         }
                       >
                         <RefuseIcon />
@@ -309,22 +324,23 @@ function TableComponents({
                     id={item.id}
                   />
                 </div>
-              ) : orderItem === "stars" ? (
+              ) : orderItem === 'stars' ? (
                 <div
                   className={clsx(
-                    "flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 justify-start items-start",
-                    index !== data.length - 1 && "border-b border-grayMedium",
+                    'flex gap-[10px] md:gap-[40px] py-2 md:py-5 px-3 justify-start items-start',
+                    index !== data.length - 1 &&
+                      'border-b border-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent",
+                      ? 'bg-grayLight'
+                      : 'bg-transparent',
                     j === hide - 1 || j === hide2 - 1
-                      ? " hidden md:flex"
-                      : "flex"
+                      ? ' hidden md:flex'
+                      : 'flex'
                   )}
                   key={j + orderItem}
                 >
-                  <div className="flex gap-[6px] items-center justify-start w-[116px]">
-                    {" "}
+                  <div className='flex gap-[6px] items-center justify-start w-[116px]'>
+                    {' '}
                     {getStar(item.star)}
                   </div>
                 </div>
@@ -332,23 +348,23 @@ function TableComponents({
                 <div
                   key={j + orderItem}
                   className={clsx(
-                    " items-center  gap-3 row-span-1 col-span-1 mdl:py-3 py-1 px-3  content-center   transition text-[12px] md:text-[16px] min-w-40",
-                    j === 0 ? "text-start" : "",
+                    ' items-center  gap-3 row-span-1 col-span-1 mdl:py-3 py-1 px-3  content-center   transition text-[12px] md:text-[16px] min-w-40',
+                    j === 0 ? 'text-start' : '',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent",
+                      ? 'bg-grayLight'
+                      : 'bg-transparent',
                     j === hide - 1 || j === hide2 - 1
-                      ? " hidden md:flex"
-                      : "flex"
+                      ? ' hidden md:flex'
+                      : 'flex'
                   )}
                 >
                   {j === 0 && (
                     <div
                       className={clsx(
-                        "mb-0 mdl:mb-0     flex items-center  justify-center transition text-[12px] md:text-[16px] "
+                        'mb-0 mdl:mb-0     flex items-center  justify-center transition text-[12px] md:text-[16px] '
                       )}
                       onClick={(e) => e.stopPropagation()}
                     >
@@ -356,39 +372,39 @@ function TableComponents({
                         id={item.id}
                         checked={selectPage.includes(item.id)}
                         onChange={() => toggleRow(item.id)}
-                        className=" bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]"
+                        className=' bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]'
                       />
                     </div>
                   )}
                   {j === 0 && haveImg && (
-                    <div className=" size-14 rounded-full bg-red flex items-start justify-center overflow-hidden">
-                      <Image src={item.image} alt="Doctor image" />
+                    <div className=' size-14 rounded-full bg-red flex items-start justify-center overflow-hidden'>
+                      <Image src={item.image} alt='Doctor image' />
                     </div>
                   )}
-                  <strong className="text-sm mdl:text-base">
+                  <strong className='text-sm mdl:text-base'>
                     {item[orderItem]}
                   </strong>
                 </div>
               ) : j === 0 ? (
                 <div
                   className={clsx(
-                    "flex items-center gap-5 py-2 md:py-5 px-3 min-w-40",
-                    j === 0 ? "text-start" : "",
+                    'flex items-center gap-5 py-2 md:py-5 px-3 min-w-40',
+                    j === 0 ? 'text-start' : '',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent",
+                      ? 'bg-grayLight'
+                      : 'bg-transparent',
                     j === hide - 1 || j === hide2 - 1
-                      ? " hidden md:flex"
-                      : "flex"
+                      ? ' hidden md:flex'
+                      : 'flex'
                   )}
                   key={j + orderItem}
                 >
                   <div
                     className={clsx(
-                      "mb-0 mdl:mb-0    flex items-center  justify-center transition text-[12px] md:text-[16px] "
+                      'mb-0 mdl:mb-0    flex items-center  justify-center transition text-[12px] md:text-[16px] '
                     )}
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -396,19 +412,19 @@ function TableComponents({
                       id={item.id}
                       checked={selectPage.includes(item.id)}
                       onChange={() => toggleRow(item.id)}
-                      className=" bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]"
+                      className=' bg-gray text-gray !w-4 !h-4 md:!w-[22px] md:!h-[22px]'
                     />
-                  </div>{" "}
+                  </div>{' '}
                   {haveImg && (
-                    <div className=" size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden">
-                      <Image src={item.image} alt="Doctor image" />
+                    <div className=' size-14 rounded-full bg-red hidden md:flex items-start justify-center overflow-hidden'>
+                      <Image src={item.image} alt='Doctor image' />
                     </div>
                   )}
                   <div>
-                    <p className="font-bold text-[12px] md:text-[16px]">
+                    <p className='font-bold text-[12px] md:text-[16px]'>
                       {item[orderItem[0]]}
                     </p>
-                    <p className="text-[12px] md:text-[16px]">
+                    <p className='text-[12px] md:text-[16px]'>
                       {item[orderItem[1]]}
                     </p>
                   </div>
@@ -417,23 +433,23 @@ function TableComponents({
                 <div
                   key={j + orderItem}
                   className={clsx(
-                    " items-start block gap-3 row-span-1 col-span-1 mdl:py-3 py-1 px-3  content-center   transition text-[12px] md:text-[16px]",
-                    j === 0 ? "text-start" : "",
+                    ' items-start block gap-3 row-span-1 col-span-1 mdl:py-3 py-1 px-3  content-center   transition text-[12px] md:text-[16px]',
+                    j === 0 ? 'text-start' : '',
                     index === data.length - 1
-                      ? ""
-                      : "border-b border-b-grayMedium",
+                      ? ''
+                      : 'border-b border-b-grayMedium',
                     selectPage.includes(item.id)
-                      ? "bg-grayLight"
-                      : "bg-transparent",
+                      ? 'bg-grayLight'
+                      : 'bg-transparent',
                     j === hide - 1 || j === hide2 - 1
-                      ? " hidden md:block"
-                      : "block"
+                      ? ' hidden md:block'
+                      : 'block'
                   )}
                 >
-                  <p className="font-bold text-[12px] md:text-[16px]">
+                  <p className='font-bold text-[12px] md:text-[16px]'>
                     {item[orderItem[0]]}
                   </p>
-                  <p className="text-[12px] md:text-[16px]">
+                  <p className='text-[12px] md:text-[16px]'>
                     {item[orderItem[1]]}
                   </p>
                 </div>

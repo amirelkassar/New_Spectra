@@ -1,4 +1,3 @@
-import MenuActions from '@/components/menu-actions';
 import Statue from '@/components/status';
 import Image from 'next/image';
 import ActionMenu from './ActionMenu';

@@ -1,11 +1,10 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import OneOpinion from "./oneOpinion";
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import OneOpinion from './oneOpinion';
 
-function Opinions({data}) {
- 
+function Opinions({ data }) {
   return (
-    <div className="opinions ">
+    <div className='opinions '>
       <Swiper
         slidesPerView={2}
         spaceBetween={10}
@@ -18,11 +17,14 @@ function Opinions({data}) {
             spaceBetween: 20,
           },
         }}
-        className="mySwiper max-w-[100%]"
+        className='mySwiper max-w-[100%]'
       >
-        {data.map((item, i) => {
+        {data.map((item) => {
           return (
-            <SwiperSlide key={item.id} className="flex justify-center">
+            <SwiperSlide
+              key={item.id}
+              className='flex justify-center'
+            >
               <OneOpinion data={item} />
             </SwiperSlide>
           );

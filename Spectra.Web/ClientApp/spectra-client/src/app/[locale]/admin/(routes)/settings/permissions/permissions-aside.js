@@ -1,12 +1,10 @@
 'use client';
 import React from 'react';
 import SettingsAside from '../_components/settings-aside';
-import { useParams } from 'next/navigation';
 import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
 function PermissionsAside() {
-  const params = useParams();
   const path = usePathname();
 
   const pages = [

@@ -7,8 +7,7 @@ import DeleteIcon from '@/assets/icons/delete';
 import { DeleteContracts } from '@/hooks/queries/doctor/contracts-api';
 
 function ActionMenu({ id, activeNow = false, employeeId }) {
-  const { mutate: deleteContracts, isSuccess } =
-    DeleteContracts(id, employeeId);
+  const { mutate: deleteContracts } = DeleteContracts(id, employeeId);
 
   const handleDelete = () => {
     deleteContracts();

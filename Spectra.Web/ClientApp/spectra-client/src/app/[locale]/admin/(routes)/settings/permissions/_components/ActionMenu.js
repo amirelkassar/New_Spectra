@@ -1,36 +1,36 @@
-"use client";
-import React from "react";
-import ExportIcon from "@/assets/icons/export";
-import PrintIcon from "@/assets/icons/print";
-import DataActions from "@/components/data-actions";
-import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
-function ActionMenu({  }) {
-  const { modal, editModal } = useModal();
+'use client';
+import React from 'react';
+import ExportIcon from '@/assets/icons/export';
+import PrintIcon from '@/assets/icons/print';
+import DataActions from '@/components/data-actions';
+import DeleteIcon from '@/assets/icons/delete';
+import useModal from '@/store/modal-slice';
+function ActionMenu({}) {
+  const { editModal } = useModal();
 
   const options = [
     {
-      label: "مسح",
+      label: 'مسح',
       icon: <DeleteIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
+        editModal('type', 'delete');
+        editModal('open', true);
       },
-      color: "red",
+      color: 'red',
     },
 
     {
-      label: "تصدير",
+      label: 'تصدير',
       icon: <ExportIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
 
     {
-      label: "طباعة",
+      label: 'طباعة',
       icon: <PrintIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
   ];

@@ -2,7 +2,7 @@ import { AvatarGroup } from '@mantine/core';
 import Avatar from '@/components/avatar';
 import { cn } from '@/lib/utils';
 
-export const GroupChat = ({ id, name, members, className, ...props }) => {
+export const GroupChat = ({ name, members, className, ...props }) => {
   return (
     <div
       role='button'

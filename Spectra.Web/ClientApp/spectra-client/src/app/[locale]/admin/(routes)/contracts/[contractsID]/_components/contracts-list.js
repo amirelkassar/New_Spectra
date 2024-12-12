@@ -11,7 +11,6 @@ import HandelShowData from '@/components/handelShowData';
 
 function ContractsList({ idUser }) {
   const { data, isLoading } = GetContractsIDInAdmin(idUser);
-  console.log(data);
   return (
     <Card className='flex-1 rounded-lg'>
       <div className='flex flex-col gap-4 lg:pt-4 w-full lg:max-w-[94%] mx-auto'>

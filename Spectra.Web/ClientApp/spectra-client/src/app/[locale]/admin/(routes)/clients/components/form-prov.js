@@ -1,20 +1,30 @@
-"use client";
-import ArrowDownIcon from "@/assets/icons/arrow-down";
-import ArrowLeft from "@/assets/icons/arrow-left";
-import ArrowNav from "@/assets/icons/arrow-nav";
-import ArrowRight from "@/assets/icons/arrow-right";
-import Button from "@/components/button";
-import CloseModalClient from "@/components/closeModalClient";
-import Input from "@/components/input";
-import SelectBox from "@/components/select-box";
-import useProv from "@/store/auth/signup/prov-slice";
-import React, { useState } from "react";
-import PhoneInput from "react-phone-input-2";
+'use client';
+
+import ArrowRight from '@/assets/icons/arrow-right';
+import Button from '@/components/button';
+import CloseModalClient from '@/components/closeModalClient';
+import Input from '@/components/input';
+import SelectBox from '@/components/select-box';
+import useProv from '@/store/auth/signup/prov-slice';
+import React, { useState } from 'react';
+import PhoneInput from 'react-phone-input-2';
 
 function FormProvider() {
-  const specialties = ["تخصص  1", " تخصص  2", "تخصص  3", "تخصص  4", "تخصص  5"];
-  const cites = ["مدينة 1", " مدينة 2", "مدينة 3", "مدينة 4", "مدينة 5"];
-  const countries = ["بلد 1", " بلد 2", "بلد 3", "بلد 4", "بلد 5"];
+  const specialties = [
+    'تخصص  1',
+    ' تخصص  2',
+    'تخصص  3',
+    'تخصص  4',
+    'تخصص  5',
+  ];
+  const cites = [
+    'مدينة 1',
+    ' مدينة 2',
+    'مدينة 3',
+    'مدينة 4',
+    'مدينة 5',
+  ];
+  const countries = ['بلد 1', ' بلد 2', 'بلد 3', 'بلد 4', 'بلد 5'];
 
   const prov = useProv();
   const [active, setActive] = useState(0);
@@ -22,51 +32,56 @@ function FormProvider() {
     <div>
       {active === 0 ? (
         <div>
-          <form className="flex flex-col gap-5 mb-14">
+          <form className='flex flex-col gap-5 mb-14'>
             <Input
               value={prov.ProvName}
               setValue={prov.setProvName}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={"اسم المنظمة"}
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={'اسم المنظمة'}
             />
             <SelectBox
-              options={["ولد", "بنت"]}
+              options={['ولد', 'بنت']}
               selectedOption={prov.ProvGender}
-              handleOnChange={(selected) => prov.seProvGender(selected)}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={"النوع"}
+              handleOnChange={(selected) =>
+                prov.seProvGender(selected)
+              }
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={'النوع'}
             />
             <SelectBox
               options={countries}
               selectedOption={prov.ProvCountry}
               setSelectedOption={prov.setProvCountry}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={"بلد المنظمة"}
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={'بلد المنظمة'}
             />
             <SelectBox
               options={cites}
               selectedOption={prov.ProvCity}
               setSelectedOption={prov.setProvCity}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={" مدينة المنظمة"}
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={' مدينة المنظمة'}
             />
-            <div className="space-y-2">
-              <label htmlFor="phone2" className={'text-[12px] md:text-[16px]'}>
+            <div className='space-y-2'>
+              <label
+                htmlFor='phone2'
+                className={'text-[12px] md:text-[16px]'}
+              >
                 رقم الهاتف
               </label>
-              <div dir="ltr">
+              <div dir='ltr'>
                 <PhoneInput
-                  specialLabel=""
+                  specialLabel=''
                   enableSearch={true}
-                  country={"eg"}
+                  country={'eg'}
                   enableAreaCodes={true}
                   autoFormat={false}
                   inputProps={{
-                    type: "text",
+                    type: 'text',
                     required: true,
-                    className: "default-field !ps-14 w-full",
-                    placeholder: "",
-                    id: "phone2",
+                    className: 'default-field !ps-14 w-full',
+                    placeholder: '',
+                    id: 'phone2',
                   }}
                   onChange={(phone) => prov.setPhone(`+${phone}`)}
                 />
@@ -75,22 +90,24 @@ function FormProvider() {
             <Input
               value={prov.ProvEmail}
               setValue={prov.setEmail}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={"البريد الالكترونى"}
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={'البريد الالكترونى'}
             />
             <Input
               value={prov.ProvNationalId}
               setValue={prov.setNationalId}
-             labelClassName={'text-[12px] md:text-[16px]'}
-              label={"رقم الهوية"}
+              labelClassName={'text-[12px] md:text-[16px]'}
+              label={'رقم الهوية'}
             />
           </form>
-          <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
+          <div className='flex items-center gap-4 md:gap-10 flex-col md:flex-row'>
             <Button
-             onClick={() => {setActive(1)}}
-              variant="secondary"
+              onClick={() => {
+                setActive(1);
+              }}
+              variant='secondary'
               className={
-                "w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
+                'w-full font-bold disabled:cursor-not-allowed md:h-[60px]'
               }
             >
               التالى
@@ -100,31 +117,52 @@ function FormProvider() {
         </div>
       ) : (
         <div>
-          <form className="flex flex-col gap-5 mb-14">
-            <SelectBox options={specialties} label={" مدينة المنظمة"} labelClassName={'text-[12px] md:text-[16px]'}  />
-            <Input label={"رقم الترخيص / الاعتماد"} labelClassName={'text-[12px] md:text-[16px]'}  />
-            <Input label={"مرخص / معتمد من "} labelClassName={'text-[12px] md:text-[16px]'}  />
-            <Input label={"الدرجة العلمية"} labelClassName={'text-[12px] md:text-[16px]'}  />
-            <div className="flex gap-4 items-end flex-wrap">
-              <Input label={"الشهادات "} containerClassName={"flex-1"} labelClassName={'text-[12px] md:text-[16px]'}  />
-              <div className="h-[56px] flex items-center justify-center gap-4 px-5 py-3 rounded-[10px] bg-greenMain w-[132px]">
+          <form className='flex flex-col gap-5 mb-14'>
+            <SelectBox
+              options={specialties}
+              label={' مدينة المنظمة'}
+              labelClassName={'text-[12px] md:text-[16px]'}
+            />
+            <Input
+              label={'رقم الترخيص / الاعتماد'}
+              labelClassName={'text-[12px] md:text-[16px]'}
+            />
+            <Input
+              label={'مرخص / معتمد من '}
+              labelClassName={'text-[12px] md:text-[16px]'}
+            />
+            <Input
+              label={'الدرجة العلمية'}
+              labelClassName={'text-[12px] md:text-[16px]'}
+            />
+            <div className='flex gap-4 items-end flex-wrap'>
+              <Input
+                label={'الشهادات '}
+                containerClassName={'flex-1'}
+                labelClassName={'text-[12px] md:text-[16px]'}
+              />
+              <div className='h-[56px] flex items-center justify-center gap-4 px-5 py-3 rounded-[10px] bg-greenMain w-[132px]'>
                 <ArrowRight />
-                <p className="text-white text-[16px] font-Bold">رفع ملف</p>
+                <p className='text-white text-[16px] font-Bold'>
+                  رفع ملف
+                </p>
               </div>
             </div>
           </form>
-          <div className="flex items-center gap-4 md:gap-10 flex-col md:flex-row">
+          <div className='flex items-center gap-4 md:gap-10 flex-col md:flex-row'>
             <Button
-              variant="secondary"
+              variant='secondary'
               className={
-                "w-full font-bold disabled:cursor-not-allowed md:h-[60px]"
+                'w-full font-bold disabled:cursor-not-allowed md:h-[60px]'
               }
             >
               تأكيد
             </Button>
             <Button
-              onClick={() => {setActive(0)}}
-              className={"w-full font-bold  md:h-[60px]"}
+              onClick={() => {
+                setActive(0);
+              }}
+              className={'w-full font-bold  md:h-[60px]'}
             >
               السابق
             </Button>

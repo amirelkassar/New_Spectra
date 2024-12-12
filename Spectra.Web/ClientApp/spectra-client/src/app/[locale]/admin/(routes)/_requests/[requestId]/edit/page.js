@@ -34,7 +34,7 @@ const ListCertificates = [
 ];
 const EditPage = ({ params: { requestId } }) => {
   const sala7eya = ['طبيب', 'متخصص', 'محاسب', 'سكرتير'];
-  const [Data, setData] = useState({
+  const [Data] = useState({
     name: 'احمد محمد كمال',
     spec: 'طبيب',
     desc: ' دكتورا في الفلسفة بالخدمة الاجتماعية مختص في تطوير الذات والعلاقات الاسرية والزوجية والمشاكل النفسية والإدمان ومشكلات العمل\nمرخص معتمد من الهيئة السعودية للتخصصات الصحية',
@@ -51,27 +51,27 @@ const EditPage = ({ params: { requestId } }) => {
       'فرط الحركة',
     ],
   });
-  const handleDescChange = (e) => {
-    setData({ ...Data, desc: e.target.value });
-  };
+  // const handleDescChange = (e) => {
+  //   setData({ ...Data, desc: e.target.value });
+  // };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const { selectionStart, selectionEnd } = e.target;
-      const newValue =
-        Data.desc.substring(0, selectionStart) +
-        '\n' +
-        Data.desc.substring(selectionEnd);
-      setData({ ...Data, desc: newValue });
+  // const handleKeyDown = (e) => {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault();
+  //     const { selectionStart, selectionEnd } = e.target;
+  //     const newValue =
+  //       Data.desc.substring(0, selectionStart) +
+  //       '\n' +
+  //       Data.desc.substring(selectionEnd);
+  //     setData({ ...Data, desc: newValue });
 
-      // Move the cursor to the right position
-      setTimeout(() => {
-        e.target.selectionStart = e.target.selectionEnd =
-          selectionStart + 1;
-      }, 0);
-    }
-  };
+  //     // Move the cursor to the right position
+  //     setTimeout(() => {
+  //       e.target.selectionStart = e.target.selectionEnd =
+  //         selectionStart + 1;
+  //     }, 0);
+  //   }
+  // };
 
   const data = {
     name: 'عبدالله الشيخ',
@@ -281,7 +281,7 @@ const EditPage = ({ params: { requestId } }) => {
         <div className=' w-full mb-14 lg:mb-20'>
           <h2 className='headTitleDash mb-6'> الشهادات </h2>
           <div className='flex gap-2 mdl:gap-4 flex-wrap '>
-            {ListCertificates.map((item, i) => {
+            {ListCertificates.map((item) => {
               return (
                 <div
                   key={item.id}

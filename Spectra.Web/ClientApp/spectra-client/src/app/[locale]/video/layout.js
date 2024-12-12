@@ -1,5 +1,4 @@
 import ModalReq from '@/components/modalReq';
-import HeaderVideo from './_components/headerVideo';
 
 function layout({ children }) {
   return (

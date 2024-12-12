@@ -1,6 +1,5 @@
 import { childPopupData } from '@/lib/demoData';
 import ChildPopover from '../../../_components/child-popover';
-import { cn } from '@/lib/utils';
 import PlayIcon from '@/assets/icons/play';
 import FileIcon from '@/assets/icons/file';
 import CheckedIcon from '@/assets/icons/checked';
@@ -36,13 +35,7 @@ export const Steps = () => {
   );
 };
 
-const Step = ({
-  title,
-  isDone = false,
-  description,
-  id,
-  icon,
-}) => {
+const Step = ({ title, isDone = false, description, icon }) => {
   return (
     <div className='text-black py-5 border-b border-grayDark last:border-transparent flex items-center justify-between'>
       <div className='flex items-center gap-5'>
@@ -51,21 +44,14 @@ const Step = ({
 
         {/* TITLE & DESCRIPTION */}
         <div>
-          <h4 className='text-xs lg:text-base font-bold'>
-            {title}
-          </h4>
-          <p className='text-sm lg:text-medium'>
-            {description}
-          </p>
+          <h4 className='text-xs lg:text-base font-bold'>{title}</h4>
+          <p className='text-sm lg:text-medium'>{description}</p>
         </div>
       </div>
 
       {/* IS DONE ICON */}
       <div>
-        <CheckedIcon
-          className='lg:size-9'
-          checked={isDone}
-        />
+        <CheckedIcon className='lg:size-9' checked={isDone} />
       </div>
     </div>
   );

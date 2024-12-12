@@ -89,6 +89,7 @@ export const getFormData = (data) => {
 
 export const buildQuery = (baseUrl, params = {}) => {
   const queryString = Object.entries(params)
+    // eslint-disable-next-line no-unused-vars
     .filter(([_, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
@@ -142,6 +143,7 @@ export const getErrors = (error) => {
     if (!errors) return { code, message: '' };
 
     const message = Object.entries(errors)
+      // eslint-disable-next-line no-unused-vars
       .map(([_, value]) => value?.join(', '))
       .join(', ');
 

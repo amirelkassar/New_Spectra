@@ -5,7 +5,7 @@ import { Link } from '@/i18n/routing';
 import BackIcon from '@/assets/icons/back';
 import ROUTES from '@/routes';
 import UploadImgIcon from '@/assets/icons/uploadImg';
-import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { Dropzone } from '@mantine/dropzone';
 import Image from 'next/image';
 import DeleteIcon from '@/assets/icons/delete';
 import { Textarea, TextInput } from '@mantine/core';
@@ -13,14 +13,14 @@ import Button from '@/components/button';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 
 function Page() {
-  const [largeFile, setLargeFile] = useState('');
-  const [dataImg, setDataImg] = useState('');
+  // const [largeFile, setLargeFile] = useState('');
+  // const [dataImg, setDataImg] = useState('');
   const [sections, setSections] = useState([]); // State for managing sections
 
-  const handleHeaderInputChange = (e) => {
-    setLargeFile('');
-    setDataImg(URL.createObjectURL(e[0]));
-  };
+  // const handleHeaderInputChange = (e) => {
+  //   setLargeFile('');
+  //   setDataImg(URL.createObjectURL(e[0]));
+  // };
 
   const handleAddSection = () => {
     setSections((prevSections) => [
@@ -42,10 +42,10 @@ function Page() {
     setSections(newSections);
   };
 
-  const handleRemoveSection = (index) => {
-    const newSections = sections.filter((_, i) => i !== index);
-    setSections(newSections);
-  };
+  // const handleRemoveSection = (index) => {
+  //   const newSections = sections.filter((_, i) => i !== index);
+  //   setSections(newSections);
+  // };
   const handleRemoveSectionImg = (index) => {
     const newSections = [...sections];
     newSections[index].img = ''; // Only clear the image for that section

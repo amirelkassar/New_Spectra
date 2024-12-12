@@ -2,12 +2,9 @@
 import { Link, usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import clsx from 'clsx';
-import { useParams } from 'next/navigation';
 import React, { useMemo } from 'react';
 
 function ClientsAside() {
-  const params = useParams();
-
   const path = usePathname();
 
   const pages = useMemo(

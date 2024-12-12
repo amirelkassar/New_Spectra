@@ -7,13 +7,13 @@ import useModal from '@/store/modal-slice';
 import ROUTES from '@/routes';
 
 function ContractsActionBtn({ status, id }) {
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
 
   return (
     <div className='mx-1 flex items-center justify-between gap-4'>
       <div className='flex items-center gap-4 flex-1 w-full'>
         {status === 'active' && (
-          <div className='flex flex-1 w-full px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end w-[100%] flex-wrap '>
+          <div className='flex flex-1 w-full px-1 flex-col mdl:flex-row gap-5 md:gap-8 justify-center items-center mdl:justify-end flex-wrap '>
             <Button
               onClick={() => {
                 editModal('type', 'contractsReq');

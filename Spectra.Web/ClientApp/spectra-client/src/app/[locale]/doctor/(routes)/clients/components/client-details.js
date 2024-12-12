@@ -1,9 +1,3 @@
-import BackIcon from '@/assets/icons/back';
-import ImagePlaceholderIcon from '@/assets/icons/image-placeholder';
-import MenuActions from '@/components/menu-actions';
-import { Link } from '@/i18n/routing';
-import ROUTES from '@/routes';
-
 const Card = ({ title, values }) => {
   return (
     <div className='bg-white py-4 lg:py-7 px-6 lg:px-12 lg:rounded-xl flex flex-row lg:flex-col gap-2'>

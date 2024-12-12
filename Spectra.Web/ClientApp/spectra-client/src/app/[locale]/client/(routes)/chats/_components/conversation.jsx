@@ -6,11 +6,7 @@ import SendIcon from '@/assets/icons/send';
 import { cn } from '@/lib/utils';
 import BackIcon from '@/assets/icons/back-black';
 import { Textarea } from '@/components/inputs/textarea';
-export const Conversation = ({
-  selectedConversation,
-  isOpen,
-  setIsOpen,
-}) => {
+export const Conversation = ({ isOpen, setIsOpen }) => {
   return (
     <Card
       className={cn(
@@ -30,11 +26,7 @@ export const Conversation = ({
 
       {/* HEADER */}
       <div className='border-b border-b-grayMedium px-1 flex items-center pb-3 gap-4'>
-        <Avatar
-          className='size-11'
-          name={'احمد محمد'}
-          src={''}
-        />
+        <Avatar className='size-11' name={'احمد محمد'} src={''} />
         <div className='text-black'>
           <h3 className='font-bold'>
             <span>الطبيب</span> {'احمد محمد'}
@@ -47,11 +39,7 @@ export const Conversation = ({
       <div className='overflow-y-auto space-y-3 flex-1'>
         {/* RECEIVED MESSAGE */}
         <div className='flex flex-row-reverse items-center gap-3'>
-          <Avatar
-            className='size-11'
-            src=''
-            name='احمد محمد'
-          />
+          <Avatar className='size-11' src='' name='احمد محمد' />
           <p className='bg-grayLight rounded-lg text-black text-xs lg:text-base px-3 py-2'>
             اخذ الجرعة لمدة شهر مع المتابعة للحالة
           </p>
@@ -59,11 +47,7 @@ export const Conversation = ({
 
         {/* SENT MESSAGE */}
         <div className='flex items-center gap-3'>
-          <Avatar
-            className='size-11'
-            src=''
-            name='احمد محمد'
-          />
+          <Avatar className='size-11' src='' name='احمد محمد' />
           <p className='bg-greenMain text-white rounded-lg text-xs lg:text-base px-3 py-2'>
             شكرا يا دكتور الله يعافيك
           </p>

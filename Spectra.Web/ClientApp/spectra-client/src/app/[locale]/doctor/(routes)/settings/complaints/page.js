@@ -40,7 +40,6 @@ function Page() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); // You can replace this with your API call
     setSubmitted(true);
   };
   return (

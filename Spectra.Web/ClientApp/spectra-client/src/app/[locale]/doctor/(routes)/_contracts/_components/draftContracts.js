@@ -5,18 +5,16 @@ import ROUTES from '@/routes';
 import DraftIcon from '@/assets/icons/draft';
 import ActionMenu from './ActionMenuContractsRow';
 import { getDate } from '@/lib/utils';
-const dataContacts = [
-  {
-    id: 1,
-    name: 'admin',
-    title: 'النسخة الاولى',
-    date: '20/4/2024',
-    time: '10:30 م',
-  },
-];
-function DraftContracts({ data = [], newContracts = false }) {
-  console.log(data);
-
+// const dataContacts = [
+//   {
+//     id: 1,
+//     name: 'admin',
+//     title: 'النسخة الاولى',
+//     date: '20/4/2024',
+//     time: '10:30 م',
+//   },
+// ];
+function DraftContracts({ data = [] }) {
   return (
     <Card className={'mt-4'}>
       <h2 className='text-sm lg:text-xl mb-2 lg:mb-5 px-3'>

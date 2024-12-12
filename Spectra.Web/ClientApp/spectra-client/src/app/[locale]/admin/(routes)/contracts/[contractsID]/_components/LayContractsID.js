@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import imgDoc from '@/assets/images/placeholder-person.png';
 import Image from 'next/image';
 import ChatsIcon from '@/assets/icons/chats';
@@ -9,24 +9,22 @@ import ROUTES from '@/routes';
 import { useSearchParams } from 'next/navigation';
 import ActionMenu from '../../components/ActionMenuPage';
 import ChatContracts from './chatContracts';
-import ArrowAccordionIcon from '@/assets/icons/arrowAccordion';
-import BriefIcon from '@/assets/icons/brief';
-import DaqeqaIcon from '@/assets/icons/daqeqa';
-const daqeqa = [
-  'القلق',
-  'الضغوط',
-  'مشكلات في العلاقات',
-  'مشكلات بالتواصل',
-  'اضطرابات الشخصية',
-  'التعامل مع الغضب',
-  'ثنائي القطب',
-  'القلق الاجتماعي ، الفوبيا',
-  'فرط الحركة',
-];
+
+// const daqeqa = [
+//   'القلق',
+//   'الضغوط',
+//   'مشكلات في العلاقات',
+//   'مشكلات بالتواصل',
+//   'اضطرابات الشخصية',
+//   'التعامل مع الغضب',
+//   'ثنائي القطب',
+//   'القلق الاجتماعي ، الفوبيا',
+//   'فرط الحركة',
+// ];
 function LayContractsID({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  const [openDetails, setOpenDetails] = useState(false);
+  // const [openDetails, setOpenDetails] = useState(false);
   return (
     <div>
       <div className='flex items-center justify-between gap-3'>

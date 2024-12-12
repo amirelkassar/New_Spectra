@@ -17,7 +17,6 @@ function PFage() {
     '/adv-3.png',
   ]);
   const [SelectedDataImg, setSelectedDataImg] = useState([]);
-  console.log(SelectedDataImg);
 
   const handleDeleteImage = (index) => {
     const updatedImages = dataImg.filter((_, i) => i !== index);

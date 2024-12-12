@@ -6,7 +6,7 @@ import SendIcon from '@/assets/icons/send';
 import { Textarea } from '@mantine/core';
 import { cn } from '@/lib/utils';
 import BackIcon from '@/assets/icons/back-black';
-export const Conversation = ({ selectedConversation, isOpen, setIsOpen }) => {
+export const Conversation = ({ isOpen, setIsOpen }) => {
   return (
     <Card
       className={cn(
@@ -16,7 +16,10 @@ export const Conversation = ({ selectedConversation, isOpen, setIsOpen }) => {
     >
       {/* CLOSE BUTTON */}
       <div>
-        <button className='p-2 lg:hidden' onClick={() => setIsOpen(false)}>
+        <button
+          className='p-2 lg:hidden'
+          onClick={() => setIsOpen(false)}
+        >
           <BackIcon />
         </button>
       </div>
@@ -66,7 +69,8 @@ export const Conversation = ({ selectedConversation, isOpen, setIsOpen }) => {
             size='xs'
             radius='md'
             classNames={{
-              input: 'focus-within:border-black active:border-black pe-12',
+              input:
+                'focus-within:border-black active:border-black pe-12',
             }}
             placeholder='اكتب رسالة ...'
           />

@@ -3,7 +3,6 @@ import AcceptIcon from '@/assets/icons/accept';
 import EditIcon from '@/assets/icons/edit';
 import RefuseIcon from '@/assets/icons/refuse';
 import Button from '@/components/button';
-import MenuActions from '@/components/menu-actions';
 import { Link } from '@/i18n/routing';
 import useModal from '@/store/modal-slice';
 import React from 'react';
@@ -70,7 +69,7 @@ const Card = ({ title, values }) => {
   );
 };
 const RequestDetailsPage = ({ params: { requestId } }) => {
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
   return (
     <div className=' text-xl space-y-2 !justify-start !items-start  text-start !gap-y-3 md:!gap-y-8 '>
       <h2 className='text-sm mb-4 lg:mb-6 lg:text-xl font-bold'>
@@ -160,7 +159,7 @@ const RequestDetailsPage = ({ params: { requestId } }) => {
         <div className=' w-full mb-14 lg:mb-20'>
           <h2 className='headTitleDash mb-6'> الشهادات </h2>
           <div className='flex gap-2 mdl:gap-4 flex-wrap '>
-            {ListCertificates.map((item, i) => {
+            {ListCertificates.map((item) => {
               return (
                 <div
                   key={item.id}

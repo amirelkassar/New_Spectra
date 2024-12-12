@@ -63,7 +63,7 @@ function Page() {
           <MenuActions type={2} />
         </div>
         <div className='flex flex-col gap-8 mb-5 '>
-          {data.map((item, i) => {
+          {data.map((item) => {
             return (
               <div
                 key={item.id}

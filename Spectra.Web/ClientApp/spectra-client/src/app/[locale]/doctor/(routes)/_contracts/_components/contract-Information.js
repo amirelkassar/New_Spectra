@@ -17,54 +17,49 @@ import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import {
   GetContractsID,
-  GetContractsServices,
   useEditContracts,
 } from '@/hooks/queries/doctor/contracts-api';
 
 function ContractInformation({ id }) {
-  const { data: dataServices, isLoading } = GetContractsServices();
-  const { mutate: createContract, error: errorSend } =
-    useEditContracts(id);
-  console.log(dataServices);
+  // const { data: dataServices, isLoading } = GetContractsServices();
+  const { mutate: createContract } = useEditContracts(id);
 
   const { data: dataContractsDetails, isLoading: isLoadingDetails } =
     GetContractsID(id);
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
   const searchparams = useSearchParams();
   const [workLimits, setWorkLimits] = useState({
     hoursOfWork: 0,
     daysOfWork: 0,
   });
-  console.log(errorSend);
 
   const [listFreelancer, setListFreelancer] = useState([]);
   const [listMember, setListMember] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // State to track search input
   const [filteredOptions, setFilteredOptions] = useState([]);
-  const [FreelanceNum, setFreelanceNum] = useState({
+  const [FreelanceNum] = useState({
     duration: 0,
     platformFee: 0,
   });
-  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+  const [TeamSpectraNum] = useState({
     duration: 0,
     platformFee: 0,
   });
-  useEffect(() => {
-    if (!isLoading) {
-      setFilteredOptions(dataServices?.data?.data?.services);
-      setTeamSpectraNum({
-        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
-        platformFee:
-          dataServices?.data?.data?.platformFeeTeamSpectr || 0,
-      });
-      setFreelanceNum({
-        duration: dataServices?.data?.data?.durationFreelance || 0,
-        platformFee:
-          dataServices?.data?.data?.platformFeeToFreelance || 0,
-      });
-    }
-  }, [isLoading]);
-  console.log(dataContractsDetails);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setFilteredOptions(dataServices?.data?.data?.services);
+  //     setTeamSpectraNum({
+  //       duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+  //     });
+  //     setFreelanceNum({
+  //       duration: dataServices?.data?.data?.durationFreelance || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeToFreelance || 0,
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (dataContractsDetails?.data?.data) {
@@ -126,9 +121,6 @@ function ContractInformation({ id }) {
       setListMember(updatedList);
     }
   };
-
-  console.log(listFreelancer);
-  console.log(listMember);
 
   const handleSearch = (e) => {
     const value = e.target.value;

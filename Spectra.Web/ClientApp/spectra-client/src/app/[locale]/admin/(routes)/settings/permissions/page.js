@@ -31,7 +31,7 @@ const PermissionsPage = () => {
     },
   ];
 
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
 
   return (
     <LayoutPermissions>

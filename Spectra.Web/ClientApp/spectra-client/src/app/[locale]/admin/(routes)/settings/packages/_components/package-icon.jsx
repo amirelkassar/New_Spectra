@@ -10,7 +10,7 @@ export const PackageIcon = ({ iconCode }) => {
 
   if (!icon) return null;
   return (
-    <div className='bg-blueLight rounded-xl p-1 size-9 text-greenMain'>
+    <div className='bg-blueLight rounded-xl p-1 size-9 text-greenMain shrink-0'>
       {icon}
     </div>
   );

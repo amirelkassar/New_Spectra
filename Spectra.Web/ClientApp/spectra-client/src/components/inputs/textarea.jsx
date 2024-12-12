@@ -1,5 +1,9 @@
 import { cn } from '@/lib/utils';
-import { Textarea as MantineTextarea, TextareaProps } from '@mantine/core';
+import {
+  Textarea as MantineTextarea,
+  // eslint-disable-next-line no-unused-vars
+  TextareaProps,
+} from '@mantine/core';
 
 /**
  * @typedef {Object} TextareaProps

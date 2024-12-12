@@ -7,7 +7,6 @@ import PrintIcon from '@/assets/icons/print';
 import RefuseIcon from '@/assets/icons/refuse';
 import Button from '@/components/button';
 import { DataTable } from '@/components/data-table';
-import MenuActions from '@/components/menu-actions';
 import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import useModal from '@/store/modal-slice';
@@ -126,7 +125,7 @@ const RequestsTable = ({ type }) => {
     },
   ];
 
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
   return (
     <>
       <div className=' block'>

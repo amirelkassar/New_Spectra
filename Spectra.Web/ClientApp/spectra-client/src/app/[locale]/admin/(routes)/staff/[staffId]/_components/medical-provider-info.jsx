@@ -322,30 +322,30 @@ const Specializations = ({
   );
 };
 
-const Services = ({ data = [] }) => {
-  const locale = useLocale();
+// const Services = ({ data = [] }) => {
+//   const locale = useLocale();
 
-  const key = locale === 'ar' ? 'arName' : 'enName';
+//   const key = locale === 'ar' ? 'arName' : 'enName';
 
-  return (
-    <Card className='space-y-5' title='رسوم الخدمات'>
-      {!!data?.length ? (
-        data.map((service) => (
-          <InfoData
-            key={service?.id}
-            label={service[key]}
-            value={`${service?.price || 100} SAR`}
-          />
-        ))
-      ) : (
-        <p className='text-grayDark'>
-          <ADHD className='size-4 inline-block me-2' />
-          لا يوجد خدمات
-        </p>
-      )}
-    </Card>
-  );
-};
+//   return (
+//     <Card className='space-y-5' title='رسوم الخدمات'>
+//       {!!data?.length ? (
+//         data.map((service) => (
+//           <InfoData
+//             key={service?.id}
+//             label={service[key]}
+//             value={`${service?.price || 100} SAR`}
+//           />
+//         ))
+//       ) : (
+//         <p className='text-grayDark'>
+//           <ADHD className='size-4 inline-block me-2' />
+//           لا يوجد خدمات
+//         </p>
+//       )}
+//     </Card>
+//   );
+// };
 
 const Certifications = ({ data = [] }) => {
   if (!data?.length)

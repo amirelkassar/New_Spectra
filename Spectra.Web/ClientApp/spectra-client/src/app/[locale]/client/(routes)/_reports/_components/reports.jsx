@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, redirect } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
 import { useState } from 'react';
 
 import Card from '@/components/card';

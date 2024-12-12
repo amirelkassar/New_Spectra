@@ -2,7 +2,6 @@
 
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { DatePicker } from '@mantine/dates';
 import { DateTimePicker } from '@mantine/dates';
 
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
@@ -82,13 +81,10 @@ export const AddReminderModal = () => {
               placeholder='Pick date and time'
               size='md'
               classNames={{
-                label:
-                  'font-bold text-xs lg:text-base mb-2 ps-1',
+                label: 'font-bold text-xs lg:text-base mb-2 ps-1',
                 input: 'rounded-xl focus:border-greenMain',
               }}
-              onChange={(val) =>
-                setForm({ ...form, date: val })
-              }
+              onChange={(val) => setForm({ ...form, date: val })}
               value={form.date}
             />
 

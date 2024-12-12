@@ -1,36 +1,36 @@
-import ActionCancelled from "./actionCancelled";
+import ActionCancelled from './actionCancelled';
 export const columns = [
   {
-    accessorKey: "name",
-    header: "الاسم ",
-    id: "name",
+    accessorKey: 'name',
+    header: 'الاسم ',
+    id: 'name',
   },
   {
-    accessorKey: "patientName",
-    header: "اسم الطفل ",
-    id: "patientName",
+    accessorKey: 'patientName',
+    header: 'اسم الطفل ',
+    id: 'patientName',
   },
   {
-    accessorKey: "numChild",
-    header: "عدد الاطفال ",
-    id: "numChild",
+    accessorKey: 'numChild',
+    header: 'عدد الاطفال ',
+    id: 'numChild',
   },
   {
-    accessorKey: "date",
-    header: "التاريخ",
-    id: "date",
+    accessorKey: 'date',
+    header: 'التاريخ',
+    id: 'date',
   },
   {
-    accessorKey: "time",
-    header: "الـميعاد",
-    id: "time",
+    accessorKey: 'time',
+    header: 'الـميعاد',
+    id: 'time',
   },
 
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => {
       const id = row.original.id;
-      return <ActionCancelled />;
+      return <ActionCancelled id={id} />;
     },
   },
 ];

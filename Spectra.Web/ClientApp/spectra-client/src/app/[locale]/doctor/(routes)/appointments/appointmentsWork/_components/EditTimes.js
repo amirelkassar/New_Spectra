@@ -21,7 +21,7 @@ function EditTimes() {
     period: 'AM',
   });
   const [opened, { open, close }] = useDisclosure(false);
-  const [ModelOne, setModelOne] = useState(false);
+  const [ModelOne] = useState(false);
   return (
     <div className='p-4'>
       <div className='flex items-center gap-8 flex-wrap mb-6'>

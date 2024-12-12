@@ -1,4 +1,3 @@
-import MenuActions from '@/components/menu-actions';
 import ReportsFiltration from './reports-filtration';
 import imgDoctor from '@/assets/images/placeholder-person.png';
 import imgPatient from '@/assets/images/placeholder-person.png';

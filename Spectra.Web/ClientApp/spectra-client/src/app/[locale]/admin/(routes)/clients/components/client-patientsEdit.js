@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import childPlaceholder from '@/assets/images/child-placeholder.jpg';
 import BackIcon from '@/assets/icons/back';
-import { useParams } from 'next/navigation';
 import Input from '@/components/input';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
@@ -51,12 +50,12 @@ const ClientPatientsEdit = () => {
       Weight: '40 كيلوجرام',
     },
   ]);
-  const handleDescChange = (e, item) => {
-    setData({ ...data, [item]: e.target.value });
-  };
-  const handleDescChangeMantine = (e, item) => {
-    setData({ ...data, [item]: e });
-  };
+  // const handleDescChange = (e, item) => {
+  //   setData({ ...data, [item]: e.target.value });
+  // };
+  // const handleDescChangeMantine = (e, item) => {
+  //   setData({ ...data, [item]: e });
+  // };
   const handleChange = (id, property, e) => {
     setData((prevData) =>
       prevData.map((item) =>
@@ -73,7 +72,7 @@ const ClientPatientsEdit = () => {
       )
     );
   };
-  const params = useParams();
+  // const params = useParams();
   const router = useRouter();
   return (
     <section className='default-page grow'>

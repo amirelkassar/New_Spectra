@@ -1,6 +1,6 @@
 'use client';
 import Card from '@/components/card';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ServicesFreelancer from './services-freelancer';
 import ServicesMember from './services-member';
 import { NavLink, TextInput } from '@mantine/core';
@@ -9,17 +9,12 @@ import WorkNum from './workNum';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import DraftIcon from '@/assets/icons/draft';
-import {
-  GetContractsServices,
-  useCreateContracts,
-} from '@/hooks/queries/doctor/contracts-api';
+import { useCreateContracts } from '@/hooks/queries/doctor/contracts-api';
 
-function ContractAdd({ id }) {
-  const { data: dataServices, isLoading } =
-    GetContractsServices();
+function ContractAdd() {
+  // const { data: dataServices, isLoading } = GetContractsServices();
   const { mutate: createContract, error: errorSend } =
     useCreateContracts('01JC8C207X83TANTKBYHY2W67F');
-  console.log(dataServices?.data?.data?.services);
 
   const [listFreelancer, setListFreelancer] = useState([]);
   const [listMember, setListMember] = useState([]);
@@ -28,43 +23,32 @@ function ContractAdd({ id }) {
     daysOfWork: 0,
   });
   const [searchTerm, setSearchTerm] = useState(''); // State to track search input
-  const [filteredOptions, setFilteredOptions] = useState(
-    []
-  );
-  const [FreelanceNum, setFreelanceNum] = useState({
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [FreelanceNum] = useState({
     duration: 0,
     platformFee: 0,
   });
-  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+  const [TeamSpectraNum] = useState({
     duration: 0,
     platformFee: 0,
   });
-  useEffect(() => {
-    if (!isLoading) {
-      setFilteredOptions(
-        dataServices?.data?.data?.services
-      );
-      setTeamSpectraNum({
-        duration:
-          dataServices?.data?.data?.durationTeamSpectra ||
-          0,
-        platformFee:
-          dataServices?.data?.data?.platformFeeTeamSpectr ||
-          0,
-      });
-      setFreelanceNum({
-        duration:
-          dataServices?.data?.data?.durationFreelance || 0,
-        platformFee:
-          dataServices?.data?.data
-            ?.platformFeeToFreelance || 0,
-      });
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setFilteredOptions(dataServices?.data?.data?.services);
+  //     setTeamSpectraNum({
+  //       duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+  //     });
+  //     setFreelanceNum({
+  //       duration: dataServices?.data?.data?.durationFreelance || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeToFreelance || 0,
+  //     });
+  //   }
+  // }, [isLoading]);
   const handleAddToList = (value) => {
-    if (
-      !listFreelancer.find((item) => item.id === value.name)
-    ) {
+    if (!listFreelancer.find((item) => item.id === value.name)) {
       const newItem = {
         id: value.name,
         label: value.name,
@@ -72,9 +56,7 @@ function ContractAdd({ id }) {
       };
       setListFreelancer([...listFreelancer, newItem]);
     }
-    if (
-      !listMember.find((item) => item.id === value.name)
-    ) {
+    if (!listMember.find((item) => item.id === value.name)) {
       const newItem = {
         id: value.name,
         label: value.name,
@@ -92,15 +74,10 @@ function ContractAdd({ id }) {
       setListFreelancer(updatedList);
     }
     if (type === 'member') {
-      const updatedList = listMember.filter(
-        (item) => item.id !== id
-      );
+      const updatedList = listMember.filter((item) => item.id !== id);
       setListMember(updatedList);
     }
   };
-
-  console.log(listFreelancer);
-  console.log(listMember);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -111,25 +88,17 @@ function ContractAdd({ id }) {
     );
     setFilteredOptions(filtered);
   };
-  const handleServiceDataChange = (
-    serviceId,
-    value,
-    type
-  ) => {
+  const handleServiceDataChange = (serviceId, value, type) => {
     if (type === 'freelancer') {
       setListFreelancer((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId
-            ? { ...item, price: value }
-            : item
+          item.id === serviceId ? { ...item, price: value } : item
         )
       );
     } else if (type === 'member') {
       setListMember((prevData) =>
         prevData.map((item) =>
-          item.id === serviceId
-            ? { ...item, price: value }
-            : item
+          item.id === serviceId ? { ...item, price: value } : item
         )
       );
     }
@@ -203,9 +172,7 @@ function ContractAdd({ id }) {
                       className={` size-5 mdl:size-7  duration-300 hover:shadow-md hover:scale-[1.02]  text-white rounded-full`}
                     >
                       <PlusInsideCircleIcon
-                        className={
-                          ' w-full h-full rounded-full'
-                        }
+                        className={' w-full h-full rounded-full'}
                       />
                     </button>
                   </div>
@@ -259,8 +226,7 @@ function ContractAdd({ id }) {
           حفظ كمسودة
         </Button>
       </div>
-      {errorSend?.response?.data?.errors
-        ?.RequestError[0] ? (
+      {errorSend?.response?.data?.errors?.RequestError[0] ? (
         <p className='text-red my-3'>
           {errorSend.response.data.errors.RequestError[0]}
         </p>

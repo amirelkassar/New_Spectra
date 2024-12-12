@@ -3,7 +3,6 @@ import { Link, usePathname } from '@/i18n/routing';
 import AppoTable from './appo-table';
 import ROUTES from '@/routes';
 import AppointmentSummary from './appointment-summary';
-import DateIcon2 from '@/assets/icons/date2';
 import LinkToCalender from './_components/LinkToCalender';
 import OpeningDates from './_components/openingDates';
 

@@ -1,57 +1,57 @@
-"use client";
-import React from "react";
-import EditIcon from "@/assets/icons/edit";
-import ExportIcon from "@/assets/icons/export";
-import PrintIcon from "@/assets/icons/print";
-import DataActions from "@/components/data-actions";
-import ShowIcon from "@/assets/icons/show";
-import ROUTES from "@/routes";
-import DeleteIcon from "@/assets/icons/delete";
-import useModal from "@/store/modal-slice";
+'use client';
+import React from 'react';
+import EditIcon from '@/assets/icons/edit';
+import ExportIcon from '@/assets/icons/export';
+import PrintIcon from '@/assets/icons/print';
+import DataActions from '@/components/data-actions';
+import ShowIcon from '@/assets/icons/show';
+import ROUTES from '@/routes';
+import DeleteIcon from '@/assets/icons/delete';
+import useModal from '@/store/modal-slice';
 
 function ActionMenu({ id, type }) {
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
 
   const options = [
     {
-      label: "مسح",
+      label: 'مسح',
       icon: <DeleteIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {
-        editModal("type", "delete");
-        editModal("open", true);
+        editModal('type', 'delete');
+        editModal('open', true);
       },
-      color: "red",
+      color: 'red',
     },
     {
-      label: "عرض",
+      label: 'عرض',
       icon: <ShowIcon />,
       link:
-        type === "family"
+        type === 'family'
           ? ROUTES.ADMIN.CLIENTS.FAMILY.DETAILS(id)
           : ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILS(id),
-      type: "link",
+      type: 'link',
     },
     {
-      label: "تعديل",
+      label: 'تعديل',
       icon: <EditIcon />,
       link:
-        type === "family"
+        type === 'family'
           ? ROUTES.ADMIN.CLIENTS.FAMILY.DETAILSEDIT(id)
           : ROUTES.ADMIN.CLIENTS.ORGANIZATION.DETAILSEDIT(id),
-      type: "link",
+      type: 'link',
     },
     {
-      label: "تصدير",
+      label: 'تصدير',
       icon: <ExportIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
 
     {
-      label: "طباعة",
+      label: 'طباعة',
       icon: <PrintIcon />,
-      type: "btn",
+      type: 'btn',
       action: () => {},
     },
   ];

@@ -17,14 +17,12 @@ import {
 import useModal from '@/store/modal-slice';
 
 export default function MenuActions({
-  id,
   className,
   type = 1,
   path,
   pathEdit,
-  routeClients,
 }) {
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
   const options = [
     {
       icon: <DeleteIcon />,

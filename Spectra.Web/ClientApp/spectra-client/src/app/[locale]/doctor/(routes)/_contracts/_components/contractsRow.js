@@ -9,8 +9,6 @@ import { getDate } from '@/lib/utils';
 import ActionMenu from './ActionMenuContractsRow';
 
 function ContractsRow({ data, newContracts = false }) {
-  console.log(data);
-
   return (
     <div
       className={`${

@@ -5,7 +5,7 @@ import ContractsList from './_components/contracts-list';
 import DraftContracts from './_components/draftContracts';
 import { GetContracts } from '@/hooks/queries/doctor/contracts-api';
 import HandelShowData from '@/components/handelShowData';
-function page({ params }) {
+function page() {
   const { data, isLoading } = GetContracts(
     '01JC8C207X83TANTKBYHY2W67F'
   );
@@ -27,10 +27,7 @@ function page({ params }) {
               isLoading={isLoading}
             />
           ) : (
-            <ContractsList
-              data={data}
-              isLoading={isLoading}
-            />
+            <ContractsList data={data} isLoading={isLoading} />
           )}
         </HandelShowData>
       </div>

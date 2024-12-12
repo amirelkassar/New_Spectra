@@ -186,7 +186,7 @@ function AddStory() {
             قبل العلاج
           </h3>
           <div className='space-y-4'>
-            {sections.map((section, index) => (
+            {sections.map((section) => (
               <div
                 key={section.id}
                 className='flex items-center gap-3 lgl:gap-7'
@@ -304,7 +304,7 @@ function AddStory() {
             بعد العلاج{' '}
           </h3>
           <div className='space-y-4'>
-            {sections.map((section, index) => (
+            {sections.map((section) => (
               <div
                 key={section.id}
                 className='flex items-center gap-3 lgl:gap-7'

@@ -1,26 +1,24 @@
 'use client';
 
-import { useDisclosure } from '@mantine/hooks';
+import { useMemo } from 'react';
 
 import { AddButton } from '@/components/buttons/add-button';
 import { SectionTitle } from '@/components/dashboard/ui/section-title';
-import { AttachmentModal } from '@/components/modal/attachment-modal';
-
-import Card from '@/components/card';
 import { useProfile } from '@/hooks/queries/user/profile';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { Certificate } from '@/components/team/certificate';
+
 import ADHD from '@/assets/icons/adhd';
-import { useMemo } from 'react';
+import Card from '@/components/card';
 
 export const Certifications = () => {
-  const [isOpen, { open, close }] = useDisclosure();
+  // const [isOpen, { open, close }] = useDisclosure();
 
   return (
     <Card className='space-y-5 h-full'>
       <div className='flex items-center gap-5'>
         <SectionTitle>الشهادات</SectionTitle>
-        <AddButton onClick={open}>اضافة شهادة</AddButton>
+        <AddButton>اضافة شهادة</AddButton>
       </div>
 
       <Certificates />

@@ -32,7 +32,7 @@ const dataChat = [
 function Layout({ children }) {
   const pathname = usePathname();
   const searchparams = useSearchParams();
-  const [active, setActive] = useState(2);
+  const [active] = useState(2);
   return (
     <div className='flex flex-col h-full'>
       <Steps

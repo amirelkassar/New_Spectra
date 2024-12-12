@@ -1,6 +1,5 @@
 import PillsIcon from '@/assets/icons/pills';
 import TherapyIcon from '@/assets/icons/therapy';
-import { Link } from '@/i18n/routing';
 import React from 'react';
 
 function PrescriptionCard({ type = 'all', data }) {

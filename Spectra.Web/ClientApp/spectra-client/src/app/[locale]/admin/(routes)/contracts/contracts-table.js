@@ -141,7 +141,6 @@ const FilterOptions = [
 ];
 const ContractsTable = () => {
   const { data, isLoading } = GetContractsInAdmin();
-  console.log(data);
 
   return (
     <div>

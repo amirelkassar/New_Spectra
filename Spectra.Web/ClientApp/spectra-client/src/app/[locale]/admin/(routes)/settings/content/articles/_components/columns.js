@@ -50,7 +50,7 @@ export const columns = [
     accessorKey: 'star',
     header: 'التقييم ',
     id: 'star',
-    cell: ({ getValue, row }) => {
+    cell: ({ getValue }) => {
       const numStar = getValue();
       return (
         <div className='flex gap-[6px] items-center justify-start w-[116px]'>
@@ -62,7 +62,7 @@ export const columns = [
   },
   {
     id: 'actions',
-    cell: ({ getValue, row }) => {
+    cell: ({ row }) => {
       const id = row.original.id;
       return <ActionMenu id={id} />;
     },

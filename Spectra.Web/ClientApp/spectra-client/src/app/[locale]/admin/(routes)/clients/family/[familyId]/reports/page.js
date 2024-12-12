@@ -3,7 +3,6 @@ import Card from '@/components/card';
 import Report from '../../../components/report';
 import imgDoctor from '@/assets/images/placeholder-person.png';
 import imgPatient from '@/assets/images/placeholder-person.png';
-import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 const reports = [
   {

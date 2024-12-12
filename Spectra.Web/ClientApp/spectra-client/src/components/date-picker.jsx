@@ -1,5 +1,6 @@
 import {
   DatePicker as MantineDatePicker,
+  // eslint-disable-next-line no-unused-vars
   DatePickerProps,
 } from '@mantine/dates';
 import { Indicator } from '@mantine/core';
@@ -16,9 +17,7 @@ import { cn } from '@/lib/utils';
 
 export const DatePicker = ({ locale = 'en', ...props }) => {
   return (
-    <div
-      className={cn('w-full max-w-2xl', props.className)}
-    >
+    <div className={cn('w-full max-w-2xl', props.className)}>
       <MantineDatePicker
         size='xl'
         minDate={new Date()}

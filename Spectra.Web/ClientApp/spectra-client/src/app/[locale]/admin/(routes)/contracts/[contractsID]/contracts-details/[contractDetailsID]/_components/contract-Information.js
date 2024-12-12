@@ -16,20 +16,17 @@ import { useSearchParams } from 'next/navigation';
 import WorkNum from './workNum';
 import {
   GetContractsID,
-  GetContractsServices,
+  // GetContractsServices,
 } from '@/hooks/queries/doctor/contracts-api';
 import { useEditContractsInAdmin } from '@/hooks/queries/admin/contracts-admin-api';
 
 function ContractInformation({ employeeID, id }) {
-  const { data: dataServices, isLoading } = GetContractsServices();
-  const { mutate: EditContract, error: errorSend } =
-    useEditContractsInAdmin(id);
-  console.log(dataServices);
+  // const { data: dataServices, isLoading } = GetContractsServices();
+  const { mutate: EditContract } = useEditContractsInAdmin(id);
   const { data: dataContractsDetails, isLoading: isLoadingDetails } =
     GetContractsID(id);
-  console.log(dataContractsDetails);
 
-  const { modal, editModal } = useModal();
+  const { editModal } = useModal();
   const searchparams = useSearchParams();
 
   const [listFreelancer, setListFreelancer] = useState([]);
@@ -38,29 +35,29 @@ function ContractInformation({ employeeID, id }) {
     hoursOfWork: 0,
     daysOfWork: 0,
   });
-  const [FreelanceNum, setFreelanceNum] = useState({
+  const [FreelanceNum] = useState({
     duration: 0,
     platformFee: 0,
   });
-  const [TeamSpectraNum, setTeamSpectraNum] = useState({
+  const [TeamSpectraNum] = useState({
     duration: 0,
     platformFee: 0,
   });
 
-  useEffect(() => {
-    if (!isLoading) {
-      setTeamSpectraNum({
-        duration: dataServices?.data?.data?.durationTeamSpectra || 0,
-        platformFee:
-          dataServices?.data?.data?.platformFeeTeamSpectr || 0,
-      });
-      setFreelanceNum({
-        duration: dataServices?.data?.data?.durationFreelance || 0,
-        platformFee:
-          dataServices?.data?.data?.platformFeeToFreelance || 0,
-      });
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setTeamSpectraNum({
+  //       duration: dataServices?.data?.data?.durationTeamSpectra || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeTeamSpectr || 0,
+  //     });
+  //     setFreelanceNum({
+  //       duration: dataServices?.data?.data?.durationFreelance || 0,
+  //       platformFee:
+  //         dataServices?.data?.data?.platformFeeToFreelance || 0,
+  //     });
+  //   }
+  // }, [isLoading]);
 
   useEffect(() => {
     if (dataContractsDetails?.data?.data) {

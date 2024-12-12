@@ -50,7 +50,7 @@ const ContentPage = () => {
               الاقسام
             </h3>
             <div className='mt-10 flex flex-col gap-6'>
-              {sections.map((item, i) => {
+              {sections.map((item) => {
                 return (
                   <div
                     key={item.id}
@@ -75,7 +75,7 @@ const ContentPage = () => {
               وسائط ( صور )
             </h3>
             <div className='mt-10 flex flex-col gap-6'>
-              {media.map((item, i) => {
+              {media.map((item) => {
                 return (
                   <div
                     key={item.id}

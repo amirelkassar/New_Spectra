@@ -43,7 +43,7 @@ export const columns = [
 
   {
     id: 'actions',
-    cell: ({ getValue, row }) => {
+    cell: ({ row }) => {
       const id = row.original.id;
       return <ActionMenu id={id} />;
     },

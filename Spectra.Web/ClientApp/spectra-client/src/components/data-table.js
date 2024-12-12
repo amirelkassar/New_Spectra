@@ -1,8 +1,6 @@
 'use client';
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -19,7 +17,6 @@ import Button from '@/components/button';
 import { cn } from '@/lib/utils';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
-import { SortingState } from '@tanstack/react-table';
 import { useMediaQuery } from '@mantine/hooks';
 import { useRouter } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
