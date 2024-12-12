@@ -5,7 +5,7 @@ import { useState } from 'react';
 import {
   ReportAccordion,
   ReportCard,
-} from '@/client/_components/child';
+} from '@/app/[locale]/(dashboard)/client/_components/child';
 import { REPORTSDATA } from '@/lib/demoData';
 import BackIcon from '@/assets/icons/back';
 
@@ -20,9 +20,7 @@ export const Reports = () => {
           </div>
         )}
 
-        <h3 className='font-bold text-sm lgl:text-xl'>
-          التقارير
-        </h3>
+        <h3 className='font-bold text-sm lgl:text-xl'>التقارير</h3>
       </div>
       {!view && (
         <div className='grid grid-cols-1 sml:grid-cols-2 mdl:grid-cols-3 lgl:grid-cols-1 gap-5'>
@@ -37,9 +35,7 @@ export const Reports = () => {
         </div>
       )}
 
-      {view && (
-        <ReportAccordion reports={view?.reportDetails} />
-      )}
+      {view && <ReportAccordion reports={view?.reportDetails} />}
     </div>
   );
 };

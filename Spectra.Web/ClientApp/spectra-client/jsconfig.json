@@ -2,9 +2,10 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@/client/*": ["./src/app/[locale]/client/*"],
+      "@/dashboard/*": ["./src/app/[locale]/(dashboard)/*"],
+      "@/client/*": ["./src/app/[locale]/(dashboard)/client/*"],
       "@/guest/*": ["./src/app/[locale]/(root)/*"],
-      "@/admin/*": ["./src/app/[locale]/admin/*"]
+      "@/admin/*": ["./src/app/[locale]/(dashboard)/admin/*"]
     }
   }
 }

@@ -3,7 +3,7 @@
 // Import necessary hooks and components from React and Mantine
 import { useState } from 'react';
 import { Tabs } from '@mantine/core';
-import { ListCheckMark } from '@/client/_components/ui';
+import { ListCheckMark } from '@/app/[locale]/(dashboard)/client/_components/ui';
 
 const DATA = [
   'الأشعة السينية x-ray',

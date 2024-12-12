@@ -1,4 +1,4 @@
-import { Package } from '@/app/[locale]/client/(routes)/packages/_components/package';
+import { Package } from '@/app/[locale]/(dashboard)/client/(routes)/packages/_components/package';
 import CloseIcon from '@/assets/icons/close';
 import React from 'react';
 const packagesDataSpectra = {

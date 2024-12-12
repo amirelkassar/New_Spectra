@@ -1,6 +1,6 @@
 'use client';
 
-import { Attachment } from '@/client/_components/child';
+import { Attachment } from '@/app/[locale]/(dashboard)/client/_components/child';
 import UploadInput from '@/components/inputs/upload-input';
 import dayjs from 'dayjs';
 
@@ -42,8 +42,7 @@ const File = ({ fileName = '', date = '', size = '' }) => {
       <div>
         <Attachment.Name>{fileName}</Attachment.Name>
         <Attachment.SizeAndDate>
-          {size} .{' '}
-          {dayjs(date).locale('en').format('DD MMM, YYYY')}
+          {size} . {dayjs(date).locale('en').format('DD MMM, YYYY')}
         </Attachment.SizeAndDate>
       </div>
     </Attachment>

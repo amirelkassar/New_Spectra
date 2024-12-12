@@ -149,7 +149,7 @@ const NameAndStatus = ({
             />
           </div>
         ) : (
-          <div className='shrink-0'>{icon}</div>
+          icon
         )}
 
         <h4 className='text-base mdl:text-3xl font-bold'>{name}</h4>
