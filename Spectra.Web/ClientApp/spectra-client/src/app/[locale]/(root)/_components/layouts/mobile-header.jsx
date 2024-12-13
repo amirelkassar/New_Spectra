@@ -1,7 +1,7 @@
 'use client';
 
 import { useDisclosure } from '@mantine/hooks';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/logo';
@@ -10,8 +10,9 @@ import { useToken } from '@/hooks/use-token';
 import { RegisterModal } from '@/guest/_components/sections';
 import MenuDash from '@/assets/icons/menuDash';
 
-export const MobileHeader = ({ locale = 'ar' }) => {
+export const MobileHeader = () => {
   const t = useTranslations();
+  const locale = useLocale();
 
   const { token } = useToken();
 

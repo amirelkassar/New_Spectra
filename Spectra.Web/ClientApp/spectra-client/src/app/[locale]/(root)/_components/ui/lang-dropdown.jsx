@@ -2,16 +2,16 @@
 
 import { Menu } from '@mantine/core';
 import { usePathname, Link } from '@/i18n/routing';
+import { useLocale } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import Globe from '@/assets/icons/globe';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 
-export const LangDropdown = ({
-  currentLocale = 'ar',
-  className = '',
-}) => {
+export const LangDropdown = ({ className = '' }) => {
   const pathName = usePathname();
+
+  const currentLocale = useLocale();
 
   return (
     <Menu trigger='click' openDelay={100} closeDelay={400}>

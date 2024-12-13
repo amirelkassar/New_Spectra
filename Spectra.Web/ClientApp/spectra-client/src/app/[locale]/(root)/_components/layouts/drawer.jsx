@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMediaQuery } from '@mantine/hooks';
 import { useRouter } from '@/i18n/routing';
 import { Drawer as MantineDrawer } from '@mantine/core';
@@ -15,14 +15,12 @@ import ROUTES from '@/routes';
 import { useNav } from '@/guest/_hooks/use-nav';
 import { useToken } from '@/hooks/use-token';
 
-export const Drawer = ({
-  onClose = () => {},
-  isOpen = false,
-  currentLocale = 'ar',
-}) => {
+export const Drawer = ({ onClose = () => {}, isOpen = false }) => {
   const t = useTranslations();
 
   const router = useRouter();
+
+  const currentLocale = useLocale();
 
   const matches = useMediaQuery('(min-width: 768px)');
 
@@ -103,10 +101,7 @@ export const Drawer = ({
           </nav>
 
           {/* LOCALE */}
-          <LangDropdown
-            className='py-4 px-7'
-            currentLocale={currentLocale}
-          />
+          <LangDropdown className='py-4 px-7' />
 
           {/* AUTH */}
           {!token && (

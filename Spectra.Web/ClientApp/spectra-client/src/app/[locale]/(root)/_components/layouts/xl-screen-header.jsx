@@ -10,7 +10,7 @@ import { RegisterModal } from '@/app/[locale]/(root)/_components/sections';
 import ROUTES from '@/routes';
 import { useToken } from '@/hooks/use-token';
 
-export const XlScreenHeader = ({ locale = 'ar' }) => {
+export const XlScreenHeader = () => {
   const t = useTranslations();
   const { token } = useToken();
 
@@ -39,7 +39,7 @@ export const XlScreenHeader = ({ locale = 'ar' }) => {
         </Link>
       )}
       {/* LOCALE */}
-      <LangDropdown currentLocale={locale} />
+      <LangDropdown />
     </div>
   );
 };
