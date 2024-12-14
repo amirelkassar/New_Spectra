@@ -131,7 +131,7 @@ namespace Spectra.Web.Extensions
 
         private static void SetupHubs(WebApplication application)
         {
-            application.MapHub<ChatHub>("/chathub");
+           //application.MapHub<>
         }
     }
 }

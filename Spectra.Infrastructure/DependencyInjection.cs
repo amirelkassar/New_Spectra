@@ -108,7 +108,11 @@ namespace Spectra.Infrastructure
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
-            services.AddSignalR();
+            services.AddSignalR(config =>
+            {
+                config.EnableDetailedErrors = true;
+                config.StatefulReconnectBufferSize = 100000;
+            });
             services.AddDataProtection();
             services.ConfigureEmailServices(configuration);
             services.ConfigureSnomedServices();
