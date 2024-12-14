@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.AppUsers.ProfileManagement.Commands;
 using Spectra.Application.AppUsers.ProfileManagement.Queries;
+using Spectra.Application.Employees.EmployeeGroups.Queries;
 using Spectra.Application.Employees.Queries;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
@@ -47,6 +48,13 @@ namespace Spectra.WebAPI.Areas.User
             return Ok(response);
         }
 
+        [HttpGet("employee-groups")]
+        public async Task<IActionResult> GetEmployeeGroupAsync()
+        {
+            var response=await _mediator.Send(new GetEmployeeGroupMemeberListQuery { OwnerId = CurrentUser.Id });
+            return Ok(response);
+        }
+
         [HttpPut()]
         [Authorize(Roles = $"{Roles.Client},{Roles.SystemAdmin}")]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdateUserProfileCommand input)
@@ -62,5 +70,7 @@ namespace Spectra.WebAPI.Areas.User
             var response = await _mediator.Send(input);
             return Accepted("", response);
         }
+
+
     }
 }
