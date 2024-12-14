@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using Spectra.Application.ChatHub.Commands;
 using Spectra.Application.ChatHub.Services;
 
-namespace Spectra.Infrastructure.ChatHub
+namespace Spectra.Infrastructure.Chats
 {
     public class ChatService : IChatService
     {

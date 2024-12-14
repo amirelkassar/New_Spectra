@@ -5,6 +5,7 @@ using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Hellper;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
+using Spectra.Application.Notifications.Hubs;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Infrastructure.ChatHub;
@@ -131,7 +132,7 @@ namespace Spectra.Web.Extensions
 
         private static void SetupHubs(WebApplication application)
         {
-           //application.MapHub<>
+            application.MapHub<NotificationHub>("/hubs/notification");
         }
     }
 }

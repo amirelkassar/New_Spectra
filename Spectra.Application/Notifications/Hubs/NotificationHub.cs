@@ -7,5 +7,10 @@ namespace Spectra.Application.Notifications.Hubs
     public class NotificationHub : Hub<INotificationClientHub>
     {
 
+        public override Task OnConnectedAsync()
+        {
+            var user = Context.User;
+            return base.OnConnectedAsync();
+        }
     }
 }

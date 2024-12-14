@@ -40,7 +40,7 @@ namespace Spectra.Application.Notifications.Commands
 
                 await _notificationRepository.AddAsync(notification);
 
-                return OperationResult.Success();
+                return OperationResult<Notification>.Success(notification);
             }
         }
     }
