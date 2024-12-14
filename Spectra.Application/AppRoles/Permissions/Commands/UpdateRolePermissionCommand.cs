@@ -12,7 +12,7 @@ namespace Spectra.Application.AppRoles.Permissions.Commands
     public class UpdateRolePermissionCommand : IRequest<OperationResult>
     {
         public string Id { get; set; }
-        public ICollection<PermissoinGroupUpdateDto> Groups { get; set; }
+        public ICollection<PermissionGroupUpdateDto> Groups { get; set; }
 
         public class UpdateRolePermissionCommandHandler(IPermissionManager permissionManager,
             RoleManager<AppRole> roleManager) : IRequestHandler<UpdateRolePermissionCommand, OperationResult>
@@ -26,7 +26,7 @@ namespace Spectra.Application.AppRoles.Permissions.Commands
 
                 var permissions = request.Groups
                     .SelectMany(g => g.Categories)
-                    .SelectMany(c => c.Permissoins)
+                    .SelectMany(c => c.Permissions)
                     .Where(p => p.Grant)
                     .Select(p => p.LogicalName)
                     .ToArray();
