@@ -1,4 +1,4 @@
-﻿using Spectra.Application.Identities.Dtos;
+﻿using Spectra.Application.AppRoles.Permissions.Dtos;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.Shared.Constants;
 
@@ -14,7 +14,7 @@ namespace Spectra.Application.Identities
             AccessLevel accessLevel);
         Task RemovePermissionFromRole(string roleName, string permission);
         Task AddRolePermissions(string roleName, IEnumerable<RolePermission> permissions);
-        Task UpdateRolePermissions(string roleName, IEnumerable<PermissionGroup> groups, AccessLevel accessLevel);
+        Task UpdateRolePermissions(string roleName, IEnumerable<string> permissions, AccessLevel accessLevel);
         Task<IEnumerable<PermissionGroup>> GetRolePermissionGroups(string roleName);
         Task<ICollection<string>> GetRolePermissionList(string roleName);
         Task<ICollection<string>> GetUserPermissionList(string userId);

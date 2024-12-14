@@ -19,9 +19,9 @@ namespace Spectra.WebAPI.Areas.Employee
 
         [HttpGet]
         [Authorize(ContractPermissions.ReadOne)]
-        public async Task<IActionResult> GetAsync(GetContractByUserIdQuery input)
+        public async Task<IActionResult> GetAsync()
         {
-            var response = await _mediator.Send(input);
+            var response = await _mediator.Send(new GetContractByUserIdQuery { });
             return response.SuccessOpration
                 ? Ok(response)
                 : BadRequest(response);

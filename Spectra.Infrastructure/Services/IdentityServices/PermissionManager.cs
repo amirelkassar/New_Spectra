@@ -1,8 +1,8 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Spectra.Application.AppRoles.Permissions.Dtos;
 using Spectra.Application.Identities;
-using Spectra.Application.Identities.Dtos;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -193,7 +193,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             await _identityContext.SaveChangesAsync();
         }
 
-        public async Task UpdateRolePermissions(string roleName, IEnumerable<PermissionGroup> groups, AccessLevel accessLevel)
+        public async Task UpdateRolePermissions(string roleName, IEnumerable<string> permissions, AccessLevel accessLevel)
         {
             var role = await _identityContext.Roles.Where(r => r.NormalizedName == roleName.ToUpper())
              .Include(r => r.Permissions)
@@ -201,7 +201,6 @@ namespace Spectra.Infrastructure.Services.IdentityServices
              ?? throw new NotFoundException(nameof(AppRole), roleName);
 
             var localGroups = await _identityContext.PermissionGroups
-                .Where(g => groups.Select(pg => pg.Id).Any(pg => pg == g.Id))
                 .Include(g => g.Categories)
                 .ThenInclude(c => c.Permissions)
                 .ToArrayAsync();
@@ -211,6 +210,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             foreach (var group in localGroups)
             {
                 permissoins.AddRange(group.Categories.SelectMany(c => c.Permissions)
+                .Where(p=>permissions.Any(np=>np.Equals(p.LogicalName)))
                 .Select(p => RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, p.LogicalName, p.Id, p.PermissoinCategoryId, group.Id, accessLevel)));
             }
 
