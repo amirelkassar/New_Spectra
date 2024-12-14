@@ -9,41 +9,32 @@ using Spectra.WebAPI.Areas.Admin.Contract.Models;
 namespace Spectra.WebAPI.Areas.Admin.Contract
 {
 
-    public class ContractController : AdminBaseController
+    public class ContractController(IMediator mediator,
+        ICurrentUser currentUser) : AdminBaseController
     {
-        private readonly IMediator _mediator;
-        private readonly ICurrentUser _currentUser;
-
-        public ContractController(IMediator mediator,
-            ICurrentUser currentUser)
-        {
-            _mediator = mediator;
-            _currentUser = currentUser;
-        }
-
         [HttpGet("list")]
         public async Task<ActionResult> GetListAsync([FromQuery] GetContractListQuery input)
         {
-            var contract = await _mediator.Send(input);
+            var contract = await mediator.Send(input);
             return Ok(contract);
         }
 
         [HttpGet()]
         public async Task<ActionResult> GetAsync([FromQuery] GetContractById input)
         {
-            var contract = await _mediator.Send(input);
+            var contract = await mediator.Send(input);
             return Ok(contract);
         }
 
         [HttpPost("cancel")]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await mediator.Send(new ChangeContractStateCommand
             {
                 Id = input.Id,
                 ModifierRole = Roles.SystemAdmin,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
+                CallerUserId = currentUser.Id,
+                CallerName = currentUser.Name,
                 Value = false,
                 Reason = input.Reason,
                 State = ContractConses.ContractStates.Canceled
@@ -55,12 +46,12 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         [HttpPost("reject")]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await mediator.Send(new ChangeContractStateCommand
             {
                 Id = input.Id,
                 ModifierRole = Roles.SystemAdmin,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
+                CallerUserId = currentUser.Id,
+                CallerName = currentUser.Name,
                 Value = false,
                 Reason = input.Reason,
                 State = ContractConses.ContractStates.Contracting
@@ -72,12 +63,12 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         [HttpPost("accept")]
         public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await mediator.Send(new ChangeContractStateCommand
             {
                 Id = input.Id,
                 ModifierRole = Roles.SystemAdmin,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
+                CallerUserId = currentUser.Id,
+                CallerName = currentUser.Name,
                 Value = true,
                 Reason = input.Reason,
                 State = ContractConses.ContractStates.Accepted
@@ -90,7 +81,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         public async Task<ActionResult> UpdateAsync([FromBody] UpdateContractModel input)
         {
 
-            var response = await _mediator.Send(new UpdateContractCommand
+            var response = await mediator.Send(new UpdateContractCommand
             {
                 Id = input.Id,
                 DaysOfWork = input.DaysOfWork,
@@ -105,7 +96,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         [HttpDelete()]
         public async Task<ActionResult> DeleteAsync([FromQuery] DeleteContractCommand input)
         {
-            var response = await _mediator.Send(input);
+            var response = await mediator.Send(input);
             return NoContent();
         }
     }

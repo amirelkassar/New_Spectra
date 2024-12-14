@@ -1,22 +1,23 @@
-﻿using static Spectra.Domain.Shared.Constants.ContractConses;
+﻿using Spectra.Domain.Shared.Common;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO
 {
-    public class ContractEmployeeReadDto
+    public class ContractReadDto : BaseEntityDto<string>
     {
         public string Titel { get; set; }
-        public ContractStates ContractState { get; private set; }
-        public string EmployeeId { get; private set; }
-        public string EmployeeUserId { get; private set; }
-        public string EmployeeHeadId { get; private set; }
-        public string EmployeeHeadName { get; private set; }
-        public string EmployeeName { get; private set; }
+        public ContractStates ContractState { get; set; }
+        public string EmployeeId { get;  set; }
+        public string EmployeeUserId { get;  set; }
+        public string EmployeeHeadId { get;  set; }
+        public string EmployeeHeadName { get;  set; }
+        public string EmployeeName { get;  set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
         public string JobDescription { get; set; }
         public string JobTitle { get; set; }
-        public DateTimeOffset? AcceptingDate { get; private set; }
-        public DateTimeOffset? CancelingDate { get; private set; }
+        public DateTimeOffset? AcceptingDate { get;  set; }
+        public DateTimeOffset? CancelingDate { get;  set; }
         public string? CanceldByUserId { get; set; }
         public string? CanceldByUsername { get; set; }
         public string? CancelReason { get; set; }

@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
+using Spectra.Application.Identities.Permissions.Users;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
@@ -15,7 +17,16 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
         private readonly IMediator _mediator = mediator;
 
         [HttpGet("list")]
-        public async Task<IActionResult> GetListAsync([FromQuery] GetHeadDoctorContractListQuery input)
+        [Authorize(ContractPermissions.ReadList)]
+        public async Task<IActionResult> GetListAsync([FromQuery] GetEmployeeHeadContractListQuery input)
+        {
+            var response = await _mediator.Send(input);
+            return Ok(response);
+        }
+
+        [HttpGet()]
+        [Authorize(ContractPermissions.ReadList)]
+        public async Task<IActionResult> GetAsync([FromQuery] GetEmployeeHeadContractByIdQuery input)
         {
             var response = await _mediator.Send(input);
             return Ok(response);
