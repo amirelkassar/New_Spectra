@@ -175,3 +175,52 @@ export const getFormErrors = (error) => {
 
   return errorsObj;
 };
+
+export const downloadFile = async (url, fileName) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    // إنشاء URL من blob
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    // إنشاء عنصر <a> لتحميل الملف
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = fileName || 'downloaded-file'; // اسم الملف مع امتداده
+
+    // محاكاة النقر على الرابط
+    document.body.appendChild(link);
+    link.click();
+
+    // تنظيف الـ DOM وإلغاء الـ objectURL
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Error fetching the file:', error);
+  }
+};
+
+export const printFile = async (url) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    // إنشاء URL للملف
+    const blobUrl = URL.createObjectURL(blob);
+
+    // فتح نافذة جديدة
+    const printWindow = window.open(blobUrl, '_blank');
+
+    // التأكد من تحميل الملف ثم الطباعة
+    printWindow.onload = () => {
+      printWindow.print();
+      printWindow.onafterprint = () => {
+        printWindow.close(); // إغلاق النافذة بعد الطباعة
+        URL.revokeObjectURL(blobUrl); // تنظيف الـ objectURL
+      };
+    };
+  } catch (error) {
+    console.error('Error fetching or printing the file:', error);
+  }
+};

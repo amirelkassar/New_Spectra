@@ -4,27 +4,27 @@ import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
 import { useConfirmModal } from '@/store/modal/use-confirm-modal';
-import { useDeleteAttachment } from '@/hooks/queries/admin/staff/staff';
+import { useDeleteProfileAttachment } from '@/hooks/queries/user/profile';
 import { downloadFile, printFile } from '@/lib/utils';
 
-export const useAttachmentMenuActions = ({ employeeId }) => {
+export const useCertificateActions = () => {
   const open = useConfirmModal((s) => s.open);
 
-  const { mutateAsync: deleteAttachment, isPending } =
-    useDeleteAttachment();
+  const { mutateAsync: deleteCertificate, isPending } =
+    useDeleteProfileAttachment();
 
   const onDelete = useCallback(
     (fileId) => {
       open({
         isPending,
         onConfirm: async () => {
-          Toast.Promise(deleteAttachment({ fileId, employeeId }), {
-            success: 'تم مسح المرفق بنجاح',
+          Toast.Promise(deleteCertificate(fileId), {
+            success: 'تم مسح الشهادة بنجاح',
           });
         },
       });
     },
-    [deleteAttachment, isPending, open, employeeId]
+    [deleteCertificate, isPending, open]
   );
 
   const onDownload = useCallback(downloadFile, []);

@@ -52,7 +52,7 @@ export const Certificate = ({
             >
               تنزيل
             </ActionsMenu.Download>
-            <ActionsMenu.Print onClick={() => actions.onPrint(id)}>
+            <ActionsMenu.Print onClick={() => actions.onPrint(path)}>
               طباعة
             </ActionsMenu.Print>
             {/* <ActionsMenu.Edit onClick={() => {}}>
