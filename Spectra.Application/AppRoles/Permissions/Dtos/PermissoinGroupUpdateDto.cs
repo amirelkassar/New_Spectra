@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.AppRoles.Permissions.Dtos
 {
-    public class PermissoinGroupUpdateDto
+    public class PermissionGroupUpdateDto
     {
         public string Id { get; set; }
         public string LogicalName { get; set; }
-        public ICollection<PermissoinCategoryUpdateDto> Categories { get; set; }
+        public ICollection<PermissionCategoryUpdateDto> Categories { get; set; }
     }
 
-    public class PermissoinCategoryUpdateDto
+    public class PermissionCategoryUpdateDto
     {
         public string Id { get; set; }
         public string LogicalName { get; set; }
-        public ICollection<PermissoinUpdateDto> Permissoins { get; set; }
+        public ICollection<PermissionUpdateDto> Permissions { get; set; }
     }
 
-    public class PermissoinUpdateDto
+    public class PermissionUpdateDto
     {
         public string Id { get; set; }
         public string LogicalName { get; set; }

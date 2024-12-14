@@ -48,7 +48,13 @@ namespace Spectra.Application.Identities
                     Roles.ServiceHead => AccessLevel.Department,
                     _ => AccessLevel.Self
                 };
-                await _permissionManager.UpdateRolePermissions(propRole, groups, accessLevel);
+
+                var permissions = groups
+                        .SelectMany(g => g.Categories)
+                        .SelectMany(c => c.Permissions)
+                        .Select(p => p.LogicalName)
+                        .ToArray();
+                await _permissionManager.UpdateRolePermissions(propRole, permissions, accessLevel);
             }
         }
 
