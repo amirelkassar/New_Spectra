@@ -13,4 +13,11 @@
         Error = 9,
         Custom = 10
     }
+
+    public enum NotificationChangeStatuses
+    {
+        Read = 1,
+        Unread,
+        Deleted
+    }
 }

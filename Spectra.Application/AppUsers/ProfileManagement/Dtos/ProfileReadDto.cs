@@ -58,7 +58,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Dtos
         public int Rating { get; set; }
         public int RateCount { get; set; }
 
-        public DateTimeOffset Created { get; set; }
+        public DateTimeOffset? Created { get; set; }
 
         public static TypeAdapterConfig GetEmployeeConfiguration() => TypeAdapterConfig<Employee, ProfileReadDto>
         .NewConfig()

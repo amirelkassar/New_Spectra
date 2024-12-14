@@ -2,7 +2,7 @@
 using Spectra.Application.ChatHub;
 using Spectra.Application.Interfaces;
 
-namespace Spectra.Infrastructure.ChatHub
+namespace Spectra.Infrastructure.Chats
 {
 
     public class ChatRepository : IChatRepository
