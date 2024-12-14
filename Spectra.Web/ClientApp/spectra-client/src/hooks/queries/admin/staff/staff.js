@@ -111,7 +111,8 @@ export const useAddStaff = () => {
     },
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: [initialQueryKey, initialQueries],
+        predicate: (query) => query.queryKey[0] === initialQueryKey,
+        exact: false,
       });
     },
     onError: () => {},

@@ -8,6 +8,9 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import { useImagePath } from '@/hooks/use-image-path';
 import { useDeleteMember } from '../_hooks/use-delete-member';
 import DeleteIcon from '@/assets/icons/delete';
+import { SectionTitle } from '@/dashboard/_components/ui/section-title';
+import { AddTeamModal } from './add-team-modal';
+import Card from '@/components/card';
 
 export const Team = ({ ownerId }) => {
   const query = useGroupMembers({ ownerId });
@@ -15,19 +18,25 @@ export const Team = ({ ownerId }) => {
   const { onDelete } = useDeleteMember({ ownerId });
 
   return (
-    <QueryWrapper query={query}>
-      {({ data }) => (
-        <div className='flex flex-wrap gap-4 *:shrink-0'>
-          {data?.map((member) => (
-            <TeamMember
-              onDelete={onDelete}
-              key={member.id}
-              {...member}
-            />
-          ))}
-        </div>
-      )}
-    </QueryWrapper>
+    <Card className='space-y-10'>
+      <div className='flex items-center gap-5'>
+        <SectionTitle>الفريق الطبي</SectionTitle>
+        <AddTeamModal />
+      </div>
+      <QueryWrapper query={query}>
+        {({ data }) => (
+          <div className='flex flex-wrap gap-4 *:shrink-0'>
+            {data?.map((member) => (
+              <TeamMember
+                onDelete={onDelete}
+                key={member.id}
+                {...member}
+              />
+            ))}
+          </div>
+        )}
+      </QueryWrapper>
+    </Card>
   );
 };
 
@@ -51,7 +60,11 @@ const TeamMember = ({
       : mainSpecializationEnName;
 
   return (
-    <div className='flex items-start gap-2 h-auto'>
+    <div
+      data-id={id}
+      id='team-member'
+      className='flex items-start gap-2 h-auto'
+    >
       <DoctorBadge
         name={`${firstName} ${lastName}`}
         profession={profession}
