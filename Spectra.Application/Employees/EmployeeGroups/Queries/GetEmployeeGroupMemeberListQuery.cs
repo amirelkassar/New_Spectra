@@ -27,7 +27,6 @@ namespace Spectra.Application.Employees.EmployeeGroups.Queries
             private readonly IBaseMongoDbRepository<EmployeeGroup> _empGroupRepository = empGroupRepository;
             private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
             private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
-            private readonly UserManager<AppUser> _identityService = identityService;
 
             public async Task<OperationResult> Handle(GetEmployeeGroupMemeberListQuery request, CancellationToken cancellationToken)
             {

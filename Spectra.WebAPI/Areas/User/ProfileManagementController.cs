@@ -23,9 +23,9 @@ namespace Spectra.WebAPI.Areas.User
         private readonly IIdentityService _identityService = identityService;
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] GetUserProfileDataQuery input)
+        public async Task<IActionResult> GetAsync()
         {
-            var response = await _mediator.Send(input);
+            var response = await _mediator.Send(new GetUserProfileDataQuery());
             return Ok(response);
         }
 
