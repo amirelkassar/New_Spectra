@@ -8,14 +8,14 @@ const DATA = {
   ar: [
     { label: 'دكتور', value: '1' },
     { label: 'اخصائي', value: '2' },
-    { label: 'سكرتير', value: '3' },
-    { label: 'محاسب', value: '4' },
+    { label: 'محاسب', value: '3' },
+    { label: 'سكرتير', value: '4' },
   ],
   en: [
     { label: 'Doctor', value: '1' },
     { label: 'Specialist', value: '2' },
-    { label: 'Secretary', value: '3' },
-    { label: 'Accountant', value: '4' },
+    { label: 'Accountant', value: '3' },
+    { label: 'Secretary', value: '4' },
   ],
 };
 

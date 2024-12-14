@@ -53,7 +53,7 @@ const DoctorInfo = ({
   mainSpecializationArName = '',
   mainSpecializationEnName = '',
   emailaddress = '',
-  rate = '10',
+  rating = 0,
   reservationCode = 'DR-AHMED-2024',
   clientsCount = '0',
 }) => {
@@ -103,7 +103,7 @@ const DoctorInfo = ({
           dir='ltr'
           size={'md'}
           readOnly
-          defaultValue={rate / 2}
+          defaultValue={rating / 2}
         />
         <div className='flex gap-5 items-center *:shrink-0 w-full justify-around'>
           <ContactButton type='chat' />

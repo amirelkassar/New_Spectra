@@ -47,9 +47,9 @@ const RenderJobType = ({ jobType }) => {
     case '2':
       return 'اخصائي';
     case '3':
-      return 'سكرتير';
-    case '4':
       return 'محاسب';
+    case '4':
+      return 'سكرتير';
   }
 };
 

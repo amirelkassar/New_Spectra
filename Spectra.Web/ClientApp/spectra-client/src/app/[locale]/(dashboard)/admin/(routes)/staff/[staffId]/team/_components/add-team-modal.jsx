@@ -24,6 +24,7 @@ import {
   memo,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -58,7 +59,6 @@ export const AddTeamModal = () => {
         </h3>
 
         {/* BODY */}
-
         <MedicalSpecialistTable close={close} />
       </Modal>
     </>
@@ -95,12 +95,24 @@ const MedicalSpecialistTable = memo(({ close = () => {} }) => {
   const [pageNum, setPageNum] = useState(1);
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState([]);
+  const [currentTeam, setCurrentTeam] = useState([]);
 
   const query = useStaff({
     search,
     pageNum,
     jobType: 2,
   });
+
+  useEffect(() => {
+    const teamElement = document.querySelectorAll('#team-member');
+    if (!teamElement) return;
+    const team = [];
+    teamElement.forEach((el) => {
+      const id = el.getAttribute('data-id');
+      team.push(id);
+    });
+    setCurrentTeam(team);
+  }, []);
 
   return (
     <div className='mt-10 space-y-5 px-3 mdl:px-5'>
@@ -116,7 +128,7 @@ const MedicalSpecialistTable = memo(({ close = () => {} }) => {
         {({ data, isPlaceholderData, pageSize, totalCount }) => (
           <>
             <SelectedContext.Provider
-              value={{ selected, setSelected }}
+              value={{ selected, setSelected, currentTeam }}
             >
               <DataTable data={data} columns={columns}>
                 <TableItem />
@@ -209,7 +221,13 @@ const CellProfession = ({ row }) => {
 };
 
 const CellSelect = ({ id }) => {
-  const { selected, setSelected } = useContext(SelectedContext);
+  const { selected, setSelected, currentTeam } =
+    useContext(SelectedContext);
+
+  const isDisabled = useMemo(
+    () => currentTeam.includes(id),
+    [id, currentTeam]
+  );
 
   const handleSelect = useCallback(() => {
     setSelected((prev) => {
@@ -232,6 +250,7 @@ const CellSelect = ({ id }) => {
       color='#10B0C1'
       radius='xs'
       size='md'
+      disabled={isDisabled}
     />
   );
 };

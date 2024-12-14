@@ -127,7 +127,7 @@ const StaffTableFilter = ({
           aria-pressed={type === '3'}
           disabled={disabled}
         >
-          سكرتير
+          محاسب
         </FilterButton>
 
         <FilterButton
@@ -135,7 +135,7 @@ const StaffTableFilter = ({
           aria-pressed={type === '4'}
           disabled={disabled}
         >
-          محاسب
+          سكرتير
         </FilterButton>
       </div>
     </div>

@@ -7,11 +7,12 @@ export async function getAuth() {
   try {
     const res = (await apiUser.get(profile.authInfo)).data;
 
-    const roles = [res?.role] || res?.roles || [];
+    const roles = res?.roles || [];
     const permissions = res?.permissions || [];
+    const hasActiveContract = res?.hasActiveContract || false;
 
-    return { roles, permissions };
+    return { roles, permissions, hasActiveContract };
   } catch {
-    return null;
+    return { roles: [], permissions: [], hasActiveContract: false };
   }
 }

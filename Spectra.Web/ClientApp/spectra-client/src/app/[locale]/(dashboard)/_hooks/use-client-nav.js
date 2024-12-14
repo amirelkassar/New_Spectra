@@ -25,12 +25,14 @@ export const useClientNav = () => {
         route: ROUTES.CLIENT.MAIN.HOME,
         isActive: path.includes(ROUTES.CLIENT.MAIN.HOME),
         icon: <MainIcon />,
+        show: true,
       },
       {
         name: 'قائمة التحكم',
         route: ROUTES.CLIENT.CONTROL_MENU,
         isActive: path.includes(ROUTES.CLIENT.CONTROL_MENU),
         icon: <ControlIcon />,
+        show: true,
       },
       {
         name: 'ملفي',
@@ -39,24 +41,28 @@ export const useClientNav = () => {
           path.includes(ROUTES.CLIENT.PROFILE.FAMILY) ||
           path.includes(ROUTES.CLIENT.PROFILE.ORG),
         icon: <ProfileIcon />,
+        show: true,
       },
       {
         name: 'الباقات',
         route: ROUTES.CLIENT.PACKAGES,
         isActive: path.includes(ROUTES.CLIENT.PACKAGES),
         icon: <HeartIcon />,
+        show: true,
       },
       {
         name: 'طلب الخدمة',
         route: ROUTES.CLIENT.SERVICE_REQUEST.HOME,
         isActive: path.includes(ROUTES.CLIENT.SERVICE_REQUEST.HOME),
         icon: <Hand />,
+        show: true,
       },
       {
         name: 'المواعيد',
         route: ROUTES.CLIENT.SCHEDULES,
         isActive: path.includes(ROUTES.CLIENT.SCHEDULES),
         icon: <ClockIcon2 />,
+        show: true,
       },
 
       {
@@ -64,6 +70,7 @@ export const useClientNav = () => {
         route: ROUTES.CLIENT.TEAM.HOME,
         isActive: path.includes(ROUTES.CLIENT.TEAM.HOME),
         icon: <StaffIcon />,
+        show: true,
       },
       // {
       //   name: 'تقارير',
@@ -76,18 +83,21 @@ export const useClientNav = () => {
         route: ROUTES.CLIENT.CHATS,
         isActive: path.includes(ROUTES.CLIENT.CHATS),
         icon: <ChatIcon />,
+        show: true,
       },
       {
         name: 'المحفظة',
         route: ROUTES.CLIENT.WALLET,
         isActive: path.includes(ROUTES.CLIENT.WALLET),
         icon: <WalletIcon />,
+        show: true,
       },
       {
         name: 'الإعدادات',
         route: ROUTES.CLIENT.SETTINGS.HOME,
         isActive: path.includes(ROUTES.CLIENT.SETTINGS.HOME),
         icon: <SettingsIcon />,
+        show: true,
       },
     ],
     [path]

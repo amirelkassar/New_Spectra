@@ -9,6 +9,7 @@ export const Heading = ({
   btnLabel = '',
   path = '',
   withBackButton = false,
+  showAddButton = true,
 }) => {
   return (
     <div className='flex mb-10 flex-col mt-6 lg:mt-0 flex-wrap mdl:flex-row items-start mdl:items-center gap-4 mdl:gap-6'>
@@ -16,9 +17,11 @@ export const Heading = ({
         {withBackButton && <BackButton />}
         <SectionTitle>{title}</SectionTitle>
       </div>
-      <Link href={path}>
-        <AddButton>{btnLabel}</AddButton>
-      </Link>
+      {showAddButton && (
+        <Link href={path}>
+          <AddButton>{btnLabel}</AddButton>
+        </Link>
+      )}
     </div>
   );
 };

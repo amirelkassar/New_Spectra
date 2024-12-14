@@ -1,16 +1,20 @@
 'use client';
 
 import { useDisclosure } from '@mantine/hooks';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/logo';
 import { Drawer } from '@/guest/_components/layouts';
+import { useToken } from '@/hooks/use-token';
 import { RegisterModal } from '@/guest/_components/sections';
 import MenuDash from '@/assets/icons/menuDash';
 
-export const MobileHeader = ({ locale = 'ar' }) => {
+export const MobileHeader = () => {
   const t = useTranslations();
+  const locale = useLocale();
+
+  const { token } = useToken();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -30,9 +34,7 @@ export const MobileHeader = ({ locale = 'ar' }) => {
         )}
         style={{
           transform:
-            locale !== 'ar'
-              ? 'rotateY(180deg)'
-              : 'rotateY(0)',
+            locale !== 'ar' ? 'rotateY(180deg)' : 'rotateY(0)',
         }}
       >
         <MenuDash />
@@ -42,7 +44,7 @@ export const MobileHeader = ({ locale = 'ar' }) => {
         <Logo className='h-8' />
       </div>
 
-      <RegisterModal>{t('register')}</RegisterModal>
+      {!token && <RegisterModal>{t('register')}</RegisterModal>}
     </div>
   );
 };

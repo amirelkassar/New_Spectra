@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useMemo, useRef } from 'react';
-import { Popover, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { Popover, ScrollArea } from '@mantine/core';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
 import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
@@ -10,6 +10,9 @@ import Minus from '@/assets/icons/minus';
 
 export const ServicesSelect = ({
   data = [],
+  isLoading = false,
+  isError = false,
+  isDataEmpty = false,
   selectedFreelance = [],
   selectedSpectra = [],
   onFreelanceSelect = () => {},
@@ -20,10 +23,7 @@ export const ServicesSelect = ({
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const totalSelected = useMemo(() => {
-    return new Set([
-      ...selectedFreelance,
-      ...selectedSpectra,
-    ]).size;
+    return new Set([...selectedFreelance, ...selectedSpectra]).size;
   }, [selectedFreelance, selectedSpectra]);
 
   const handleSelect = useCallback(
@@ -35,42 +35,48 @@ export const ServicesSelect = ({
     [onFreelanceSelect, onSpectraSelect]
   );
 
-  const servicesList = useMemo(
-    () =>
-      data.map((s) => {
-        const isFreelanceSelected =
-          selectedFreelance.includes(s.id);
-        const isSpectraSelected = selectedSpectra.includes(
-          s.id
-        );
+  const servicesList = useMemo(() => {
+    if (isLoading) return <NoData>Loading services...</NoData>;
+    if (isError) return <NoData>Error Loading services!</NoData>;
+    if (isDataEmpty) return <NoData>No services found!</NoData>;
 
-        return (
-          <ServiceItem key={s.id} name={s.name}>
-            <Button
-              aria-pressed={isFreelanceSelected}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!isFreelanceSelected)
-                  handleSelect(s.id, 'freelance');
-              }}
-            >
-              freelance
-            </Button>
-            <Button
-              aria-pressed={isSpectraSelected}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!isSpectraSelected)
-                  handleSelect(s.id, 'spectra');
-              }}
-            >
-              spectra team
-            </Button>
-          </ServiceItem>
-        );
-      }),
-    [data, handleSelect, selectedFreelance, selectedSpectra]
-  );
+    return data.map((s) => {
+      const isFreelanceSelected = selectedFreelance.includes(s.id);
+      const isSpectraSelected = selectedSpectra.includes(s.id);
+
+      return (
+        <ServiceItem key={s?.id} name={s?.enName}>
+          <Button
+            aria-pressed={isFreelanceSelected}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!isFreelanceSelected)
+                handleSelect(s.id, 'freelance');
+            }}
+          >
+            freelance
+          </Button>
+          <Button
+            aria-pressed={isSpectraSelected}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!isSpectraSelected) handleSelect(s.id, 'spectra');
+            }}
+          >
+            spectra team
+          </Button>
+        </ServiceItem>
+      );
+    });
+  }, [
+    data,
+    handleSelect,
+    selectedFreelance,
+    selectedSpectra,
+    isDataEmpty,
+    isError,
+    isLoading,
+  ]);
 
   return (
     <Popover
@@ -94,21 +100,14 @@ export const ServicesSelect = ({
         dir='ltr'
         className='shadow-md !p-0 border border-black rounded-lg overflow-x-hidden'
       >
-        {!!data.length && (
-          <ScrollArea.Autosize
-            viewportRef={viewportRef}
-            mah={320}
-            type='always'
-            scrollbars='y'
-          >
-            {servicesList}
-          </ScrollArea.Autosize>
-        )}
-        {!data.length && (
-          <div className='px-5 py-10 text-center text-sm lg:text-xl'>
-            No services found.
-          </div>
-        )}
+        <ScrollArea.Autosize
+          viewportRef={viewportRef}
+          mah={320}
+          type='always'
+          scrollbars='y'
+        >
+          {servicesList}
+        </ScrollArea.Autosize>
       </Popover.Dropdown>
     </Popover>
   );
@@ -137,3 +136,9 @@ const Button = ({ children = '', ...props }) => {
     </button>
   );
 };
+
+const NoData = ({ children }) => (
+  <div className='px-5 py-10 text-center text-sm lg:text-xl'>
+    {children}
+  </div>
+);
