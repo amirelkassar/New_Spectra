@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { useToken } from '@/hooks/use-token';
 import { storeToken } from '@/lib/token';
 import { useLoginMutation } from '@/hooks/queries/auth';
-import ROUTES from '@/routes';
+import { getRedirectPath } from '@/lib/utils';
 
 export const useLogin = () => {
   const router = useRouter();
@@ -83,21 +83,24 @@ export const useLogin = () => {
         loading: 'جاري تسجيل الدخول',
         onSuccess: async (data) => {
           const isTokenStored = await storeToken(data?.data);
-          const { accessToken, permissions, roles } = data?.data;
+          const {
+            accessToken,
+            permissions,
+            roles,
+            hasActiveContract,
+          } = data?.data;
           if (isTokenStored) {
             setToken(accessToken);
             setSession({
               permissions,
               roles,
+              hasActiveContract,
             });
-            if (roles[0] === 'Doctor' || roles[0] === 'Specialist') {
-              return router.replace(
-                ROUTES.DOCTOR.CONTRACTS.DASHBOARD
-              );
-            }
-            if (roles[0] === 'SystemAdmin') {
-              return router.replace(ROUTES.ADMIN.DATAMAIN.HOME);
-            }
+            const pathToRedirect = getRedirectPath(
+              roles,
+              hasActiveContract
+            );
+            router.push(pathToRedirect);
           }
         },
       });

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMediaQuery } from '@mantine/hooks';
 import { useRouter } from '@/i18n/routing';
 import { Drawer as MantineDrawer } from '@mantine/core';
@@ -13,19 +13,20 @@ import { LangDropdown } from '../ui/lang-dropdown';
 import LogIn from '@/assets/icons/log-in';
 import ROUTES from '@/routes';
 import { useNav } from '@/guest/_hooks/use-nav';
+import { useToken } from '@/hooks/use-token';
 
-export const Drawer = ({
-  onClose = () => {},
-  isOpen = false,
-  currentLocale = 'ar',
-}) => {
+export const Drawer = ({ onClose = () => {}, isOpen = false }) => {
   const t = useTranslations();
 
   const router = useRouter();
 
+  const currentLocale = useLocale();
+
   const matches = useMediaQuery('(min-width: 768px)');
 
   const { NAVDATA } = useNav();
+
+  const { token } = useToken();
 
   return (
     <MantineDrawer
@@ -100,25 +101,24 @@ export const Drawer = ({
           </nav>
 
           {/* LOCALE */}
-          <LangDropdown
-            className='py-4 px-7'
-            currentLocale={currentLocale}
-          />
+          <LangDropdown className='py-4 px-7' />
 
           {/* AUTH */}
-          <div className='px-7 py-4 mt-12'>
-            <Button
-              onClick={() => {
-                router.push(ROUTES.AUTH.LOGIN);
-                onClose();
-              }}
-              className='w-full font-bold gap-2 rounded-md'
-              variant='secondary'
-            >
-              <LogIn />
-              تسجيل الدخول
-            </Button>
-          </div>
+          {!token && (
+            <div className='px-7 py-4 mt-12'>
+              <Button
+                onClick={() => {
+                  router.push(ROUTES.AUTH.LOGIN);
+                  onClose();
+                }}
+                className='w-full font-bold gap-2 rounded-md'
+                variant='secondary'
+              >
+                <LogIn />
+                تسجيل الدخول
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </MantineDrawer>

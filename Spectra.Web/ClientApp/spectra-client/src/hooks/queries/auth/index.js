@@ -1,10 +1,14 @@
 'use client';
 
+import { useRouter } from '@/i18n/routing';
+import { useMutation } from '@tanstack/react-query';
+
+import { useToken } from '@/hooks/use-token';
+
 import { apiAuth } from '@/api/axios';
 import { clearToken } from '@/lib/token';
-import { useRouter } from '@/i18n/routing';
+
 import ROUTES from '@/routes';
-import { useMutation } from '@tanstack/react-query';
 
 export const useLoginMutation = (data) => {
   return useMutation({
@@ -26,11 +30,15 @@ export const useRegisterMedicalProviderMutation = () => {
 
 export const useLogout = () => {
   const router = useRouter();
+  const { setToken } = useToken();
 
   const logout = async () => {
     const isTokenDeleted = await clearToken();
 
-    if (isTokenDeleted) router.push(ROUTES.AUTH.LOGIN);
+    if (isTokenDeleted) {
+      setToken(null);
+      router.push(ROUTES.AUTH.LOGIN);
+    }
   };
 
   return {

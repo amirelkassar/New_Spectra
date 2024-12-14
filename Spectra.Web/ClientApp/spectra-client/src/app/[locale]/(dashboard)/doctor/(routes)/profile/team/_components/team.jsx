@@ -3,29 +3,27 @@
 import { QueryWrapper } from '@/components/query-wrapper';
 import { DoctorBadge } from '@/components/team';
 import { useLocale } from 'next-intl';
-import { useProfile } from '@/hooks/queries/user/profile';
 import { useImagePath } from '@/hooks/use-image-path';
+import { useProfileEmployeeGroups } from '@/hooks/queries/user/employee-groups';
 import Card from '@/components/card';
 import ADHD from '@/assets/icons/adhd';
 
 export const Team = () => {
-  const query = useProfile();
+  const query = useProfileEmployeeGroups();
   return (
-    <QueryWrapper query={query}>
-      {({ data }) => (
-        <RenderTeam jobType={data?.jobType} team={data?.team} />
-      )}
-    </QueryWrapper>
+    <Card className='h-full space-y-5' title='الفريق الطبي'>
+      <QueryWrapper query={query}>
+        {({ data }) => <RenderTeam team={data} />}
+      </QueryWrapper>
+    </Card>
   );
 };
 
-const RenderTeam = ({ jobType = '', team = [] }) => {
-  if (String(jobType) !== '1') return null;
-
+const RenderTeam = ({ team = [] }) => {
   return (
-    <Card className='h-full' title='الفريق الطبي'>
+    <>
       {!!team?.length ? (
-        <div>
+        <div className='flex gap-4 flex-wrap *:shrink-0'>
           {team.map((member) => (
             <TeamMember key={member?.id} {...member} />
           ))}
@@ -36,7 +34,7 @@ const RenderTeam = ({ jobType = '', team = [] }) => {
           لا يوجد فريق طبي
         </p>
       )}
-    </Card>
+    </>
   );
 };
 

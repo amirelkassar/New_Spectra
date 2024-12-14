@@ -5,9 +5,15 @@ import { DrugsTable } from './_components/drugs-table';
 import ROUTES from '@/routes';
 import { prefetchDrugs } from '@/hooks/queries/admin/main-data/drugs';
 import Card from '@/components/card';
+import { getAuth } from '@/lib/auth';
 
 const DrugPage = async () => {
-  const queryClient = await prefetchDrugs();
+  const [queryClient, session] = await Promise.all([
+    prefetchDrugs(),
+    getAuth(),
+  ]);
+
+  const permissions = session?.permissions;
 
   return (
     <Card>

@@ -51,9 +51,10 @@ export const Sidebar = ({ links = [] }) => {
 
       <nav className='space-y-12 mt-5'>
         <ul className='space-y-3 p-2 lg:ps-0'>
-          {links.map((link) => (
-            <NavLinks key={link.route} link={link} />
-          ))}
+          {links.map(
+            (link) =>
+              link?.show && <NavLinks key={link.route} link={link} />
+          )}
         </ul>
 
         <Logout />

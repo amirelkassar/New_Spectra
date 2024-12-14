@@ -1,3 +1,4 @@
+// import { QueryInvalidateButton } from '@/components/query-invalidate-button';
 import { Header } from '@/dashboard/_components/layouts/header';
 import { Sidebar } from '@/dashboard/_components/layouts/sidebar';
 
@@ -11,6 +12,8 @@ const DashboardLayout = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/* <QueryInvalidateButton /> */}
     </div>
   );
 };

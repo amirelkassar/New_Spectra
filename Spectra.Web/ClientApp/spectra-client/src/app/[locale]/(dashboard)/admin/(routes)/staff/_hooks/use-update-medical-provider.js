@@ -28,6 +28,7 @@ export const useUpdateMedicalProvider = ({ initialValues = {} }) => {
 
   const [formData, setFormData] = useState({
     ...initialValues,
+    mainSpecializationId: initialValues?.mainSpecializationId,
     specializations,
     services,
   });
@@ -91,9 +92,9 @@ export const useUpdateMedicalProvider = ({ initialValues = {} }) => {
       const data = getFormData(formData);
       const medicalData = {
         id: formData.id,
-        mainSpecializationId: formData.mainSpecializationId,
-        services: formData.services,
-        specializations: formData.specializations,
+        mainSpecializationId: formData?.mainSpecializationId,
+        services: formData?.services,
+        specializations: formData?.specializations,
       };
 
       // Check for changes in services and specializations
@@ -104,11 +105,19 @@ export const useUpdateMedicalProvider = ({ initialValues = {} }) => {
         JSON.stringify(formData.specializations) !==
         JSON.stringify(specializations);
 
+      const isMainSpecializationIdChanged =
+        formData.mainSpecializationId !==
+        initialValues?.mainSpecializationId;
+
       // Prepare update operations
       const operations = [];
 
       // Only call updateMedicalData if there are changes
-      if (isServicesChanged || isSpecializationsChanged) {
+      if (
+        isServicesChanged ||
+        isSpecializationsChanged ||
+        isMainSpecializationIdChanged
+      ) {
         operations.push(updateMedicalData(medicalData));
       }
 
@@ -134,6 +143,7 @@ export const useUpdateMedicalProvider = ({ initialValues = {} }) => {
       staffId,
       services,
       specializations,
+      initialValues?.mainSpecializationId,
       resetUpdateMedicalData,
       resetUpdateStaff,
     ]

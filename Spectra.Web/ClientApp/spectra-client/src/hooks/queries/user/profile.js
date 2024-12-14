@@ -65,3 +65,32 @@ export const useUpdateEmployeeProfile = () => {
     onError: () => {},
   });
 };
+
+export const useAddProfileAttachment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data) =>
+      (await apiUser.post(profile.actions.addAttachment, data)).data,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey],
+      });
+    },
+  });
+};
+
+export const useDeleteProfileAttachment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id) =>
+      (await apiUser.delete(profile.actions.deleteAttachment(id)))
+        .data,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey],
+      });
+    },
+  });
+};

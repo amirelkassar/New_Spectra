@@ -20,10 +20,7 @@ export const Services = ({ title = 'خدمتنا', data = [] }) => {
         {data?.map((item) => (
           <Link
             key={item.label}
-            href={ROUTES.ROOT.SERVICES.VIEW_SERVICE.replace(
-              ':id',
-              item?.id
-            )}
+            href={ROUTES.ROOT.VIEW_SERVICE.replace(':id', item?.id)}
           >
             <Service {...item} />
           </Link>

@@ -11,5 +11,13 @@ export const useAuth = () => {
       'useAuth must be used within a SessionProvider or no Session was provided!!'
     );
   }
-  return context;
+
+  const value = {
+    roles: context?.roles || [],
+    permissions: context?.permissions || [],
+    hasActiveContract: context?.hasActiveContract || false,
+    setSession: context?.setSession,
+  };
+
+  return value;
 };

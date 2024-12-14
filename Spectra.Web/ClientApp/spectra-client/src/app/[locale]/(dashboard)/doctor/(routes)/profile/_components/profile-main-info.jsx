@@ -47,8 +47,8 @@ const DoctorInfo = ({
   mainSpecializationArName = '',
   mainSpecializationEnName = '',
   emailaddress = '',
-  rate = '4.9',
-  rateCount = '0',
+  rating = 0,
+  rateCount = 0,
 }) => {
   const src = useImagePath(userImage);
 
@@ -87,7 +87,7 @@ const DoctorInfo = ({
           dir='ltr'
           className='bg-greenMain font-bold block text-white text-sm mdl:text-xl text-center rounded-xl w-fit py-1 px-5'
         >
-          {rate} &#9733;
+          {rating || 'NA'} &#9733;
         </span>
 
         <p className='text-xs'>{rateCount} تقييم</p>

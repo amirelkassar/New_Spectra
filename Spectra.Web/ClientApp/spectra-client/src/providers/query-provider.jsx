@@ -16,6 +16,17 @@ function makeQueryClient() {
         // refetchInterval: 10000,
         // refetchIntervalInBackground: true,
         staleTime: 10000,
+        retry: (failureCount, error) => {
+          const status = error.response?.status;
+
+          const nonRetryableErrors = [400, 401, 403, 404, 422];
+
+          if (nonRetryableErrors.includes(status)) {
+            return false;
+          }
+
+          return failureCount < 3;
+        },
       },
     },
   });

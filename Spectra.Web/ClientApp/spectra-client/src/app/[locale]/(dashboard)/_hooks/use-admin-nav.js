@@ -23,12 +23,14 @@ export const useAdminNav = () => {
         route: ROUTES.ADMIN.MAIN,
         isActive: path === ROUTES.ADMIN.MAIN,
         icon: <MainIcon />,
+        show: true,
       },
       {
         name: 'المواعيد',
         route: ROUTES.ADMIN.APPOINTMENTS,
         isActive: path.includes(ROUTES.ADMIN.APPOINTMENTS),
         icon: <Appointments />,
+        show: true,
       },
       // {
       //   name: "طلبات الاشتراك",
@@ -42,30 +44,35 @@ export const useAdminNav = () => {
         route: ROUTES.ADMIN.CLIENTS.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.CLIENTS.DASHBOARD),
         icon: <Customer />,
+        show: true,
       },
       {
         name: 'الموظفين',
         route: ROUTES.ADMIN.STAFF.HOME,
         isActive: path.includes(ROUTES.ADMIN.STAFF.HOME),
         icon: <StaffIcon />,
+        show: true,
       },
       {
         name: 'تقارير',
         route: ROUTES.ADMIN.REPORT.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.REPORT.DASHBOARD),
         icon: <ReportsIcon />,
+        show: true,
       },
       {
         name: 'البيانات الرئيسية',
         route: ROUTES.ADMIN.DATAMAIN.HOME,
         isActive: path.includes(ROUTES.ADMIN.DATAMAIN.HOME),
         icon: <DatabaseIcon />,
+        show: true,
       },
       {
         name: 'العقود',
         route: ROUTES.ADMIN.CONTRACTS.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.CONTRACTS.DASHBOARD),
         icon: <ContractsIcon />,
+        show: true,
       },
       {
         name: 'الإعدادات',
@@ -73,6 +80,7 @@ export const useAdminNav = () => {
         isActive: path.includes(ROUTES.ADMIN.SETTINGS.DASHBOARD),
         icon: <SettingsIcon />,
         type: 'settings',
+        show: true,
       },
     ],
     [path]

@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Divider } from '@mantine/core';
 import { useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
@@ -8,11 +9,11 @@ import { useProfile } from '@/hooks/queries/user/profile';
 import { useGender } from '@/hooks/use-gender';
 import { useDate } from '@/hooks/use-date';
 import { Toast } from '@/components/toast';
-import { InfoData } from '@/app/[locale]/(dashboard)/_components/ui/info-data';
+import { InfoData } from '@/dashboard/_components/ui/info-data';
 import { CopyButton } from '@/components/buttons/copy-button';
 import { EditButton } from '@/components/buttons/edit-button';
 import { QueryWrapper } from '@/components/query-wrapper';
-import { SectionTitle } from '@/app/[locale]/(dashboard)/_components/ui/section-title';
+import { SectionTitle } from '@/dashboard/_components/ui/section-title';
 import { ACADEMIC_DEGREE_OBJ } from '@/data/academic-degree';
 import { CAREER_ICONS as ICONS } from '@/data/team';
 
@@ -71,7 +72,15 @@ const ReservationCode = ({ bookingCode = '' }) => {
 };
 
 const ReservationLink = ({ id = '' }) => {
-  const reservationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/ar${ROUTES.AUTH.SIGNUP_FAMILY}?doctorCode=${id}`;
+  const baseUrl = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.origin;
+    }
+  }, []);
+
+  const reservationLink = `${
+    baseUrl || process.env.NEXT_PUBLIC_BASE_URL
+  }/ar${ROUTES.AUTH.SIGNUP_FAMILY}?doctorCode=${id}`;
 
   return (
     <Card className='flex items-center justify-between'>
