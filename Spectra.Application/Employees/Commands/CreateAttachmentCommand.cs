@@ -22,7 +22,12 @@ namespace Spectra.Application.Employees.Commands
 
             public async Task<OperationResult> Handle(CreateAttachmentCommand request, CancellationToken cancellationToken)
             {
-                var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("MedicalProviders", request.EmpId);
+                Employee employee = null;
+                if (!string.IsNullOrWhiteSpace(request.EmpId))
+                    employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("Employees", request.EmpId);
+                else if (!string.IsNullOrWhiteSpace(request.UserId))
+                    employee = await _employeeRepo.GetAsync(e => e.UserId == request.UserId) ?? throw new NotFoundException("Employees", request.UserId);
+
                 var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
                 if (request.File.Length > 0)
                 {

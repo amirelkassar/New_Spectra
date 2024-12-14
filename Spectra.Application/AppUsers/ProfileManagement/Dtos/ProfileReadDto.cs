@@ -55,6 +55,11 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Dtos
         public string UserImage { get; set; }
         public bool HasActiveContract { get; set; }
 
+        public int Rating { get; set; }
+        public int RateCount { get; set; }
+
+        public DateTimeOffset Created { get; set; }
+
         public static TypeAdapterConfig GetEmployeeConfiguration() => TypeAdapterConfig<Employee, ProfileReadDto>
         .NewConfig()
         .Map(dest => dest.FirstName, src => src.Name.FirstName)
@@ -63,6 +68,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Dtos
         .Map(dest => dest.Emailaddress, src => src.EmailAddress.Emailaddress)
         .Map(dest => dest.PhoneNumber, src => src.MobileNumber.PhoneNumbers)
         .Map(dest => dest.CountryCode, src => src.MobileNumber.CountryCode)
+        .Map(dest => dest.Address, src => src.Address.FullAddress)
         .Map(dest => dest.Country, src => src.Address.Country)
         .Map(dest => dest.City, src => src.Address.City)
         .Map(dest => dest.State, src => src.Address.State)

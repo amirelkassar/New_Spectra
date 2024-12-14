@@ -25,5 +25,7 @@ namespace Spectra.Domain.ValueObjects
             yield return Floor;
             yield return CommonMark;
         }
+
+        public string FullAddress => $"{Country},{City} , {Building} {StreetName} F : {Floor} PS : {PostalCode}";
     }
 }

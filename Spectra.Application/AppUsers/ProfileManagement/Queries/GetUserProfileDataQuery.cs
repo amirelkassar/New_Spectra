@@ -61,6 +61,8 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Queries
 
                 if (user is not null && user.UserImage is not null)
                     userDto.UserImage = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, user.UserImage), _currentUser.Id, EndPointsRoutes.Users, _httpContextAccessor);
+
+                userDto.Created = user.Created;
                 return OperationResult<ProfileReadDto>.Success(userDto);
             }
         }

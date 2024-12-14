@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.AppUsers.ProfileManagement.Commands;
 using Spectra.Application.AppUsers.ProfileManagement.Queries;
+using Spectra.Application.Employees.Commands;
+using Spectra.Application.Employees.Dto;
+using Spectra.Application.Employees.EmployeeGroups.Queries;
 using Spectra.Application.Employees.Queries;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
+using Spectra.Application.ScheduleAppointments.Appointments.Commands;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.WebAPI.Areas.User.Models;
@@ -23,9 +27,9 @@ namespace Spectra.WebAPI.Areas.User
         private readonly IIdentityService _identityService = identityService;
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] GetUserProfileDataQuery input)
+        public async Task<IActionResult> GetAsync()
         {
-            var response = await _mediator.Send(input);
+            var response = await _mediator.Send(new GetUserProfileDataQuery());
             return Ok(response);
         }
 
@@ -46,6 +50,36 @@ namespace Spectra.WebAPI.Areas.User
             var response = await _mediator.Send(input);
             return Ok(response);
         }
+        [HttpPost("attchment")]
+        public async Task<IActionResult> CreateAttachmentAsync([FromForm] AttachmentCreateModel input)
+        {
+            var response = await _mediator.Send(new CreateAttachmentCommand
+            {
+                UserId = CurrentUser.Id,
+                File = input.File,
+                Name = input.Name,
+                Type = input.Type,
+            });
+            return Created("", response);
+        }
+
+        [HttpDelete("attchment")]
+        public async Task<IActionResult> DeleteAttachmentAsync([FromQuery] DeleteAttachmentModel input)
+        {
+            var response = await _mediator.Send(new DeleteAttachmentCommand
+            {
+                UserId= CurrentUser.Id,
+                DocumentId=input.Id
+            });
+            return NoContent();
+        }
+
+        [HttpGet("employee-groups")]
+        public async Task<IActionResult> GetEmployeeGroupAsync()
+        {
+            var response = await _mediator.Send(new GetEmployeeGroupMemeberListQuery { OwnerId = CurrentUser.Id });
+            return Ok(response);
+        }
 
         [HttpPut()]
         [Authorize(Roles = $"{Roles.Client},{Roles.SystemAdmin}")]
@@ -62,5 +96,7 @@ namespace Spectra.WebAPI.Areas.User
             var response = await _mediator.Send(input);
             return Accepted("", response);
         }
+
+
     }
 }
