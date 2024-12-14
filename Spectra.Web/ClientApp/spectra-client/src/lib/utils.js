@@ -1,3 +1,4 @@
+import ROUTES from '@/routes';
 import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ar';
@@ -222,5 +223,25 @@ export const printFile = async (url) => {
     };
   } catch (error) {
     console.error('Error fetching or printing the file:', error);
+  }
+};
+
+export const getRedirectPath = (roles, hasActiveContract = true) => {
+  switch (roles[0]) {
+    case 'SystemAdmin':
+    case 'CustomerSupport':
+    case 'Accountant':
+      return ROUTES.ADMIN.MAIN;
+    case 'Doctor':
+    case 'Specialist':
+    case 'DepartmentHead':
+    case 'ServiceHead':
+      if (!hasActiveContract)
+        return ROUTES.DOCTOR.CONTRACTS.DASHBOARD;
+      return ROUTES.DOCTOR.MAIN;
+    case 'Client':
+      return ROUTES.CLIENT.MAIN.HOME;
+    default:
+      return ROUTES.HOME;
   }
 };

@@ -24,12 +24,15 @@ export const useDoctorNav = () => {
         route: ROUTES.DOCTOR.MAIN,
         isActive: path.includes(ROUTES.DOCTOR.MAIN),
         icon: <MainIcon />,
+        show: true,
       },
       {
         name: 'المواعيد',
         route: ROUTES.DOCTOR.APPOINTMENTS,
         isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
         icon: <Appointments />,
+        show: true,
+
         nestedLinks: [
           {
             name: 'المواعيد القادمة',
@@ -66,30 +69,35 @@ export const useDoctorNav = () => {
         route: ROUTES.DOCTOR.RATINGS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.RATINGS.DASHBOARD),
         icon: <RatingsIcon />,
+        show: true,
       },
       {
         name: 'العملاء',
         route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
         icon: <Customer />,
+        show: true,
       },
       {
         name: 'المحفظة',
         route: ROUTES.DOCTOR.WALLET.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
         icon: <WalletIcon />,
+        show: true,
       },
       {
         name: 'ملف',
         route: ROUTES.DOCTOR.PROFILE.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.PROFILE.DASHBOARD),
         icon: <ProfileIcon />,
+        show: true,
       },
       {
         name: 'العقود',
         route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
         icon: <ContractsIcon />,
+        show: true,
       },
 
       {
@@ -97,16 +105,15 @@ export const useDoctorNav = () => {
         route: ROUTES.DOCTOR.CHATS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.CHATS.DASHBOARD),
         icon: <ChatsIcon />,
+        show: true,
       },
 
       {
         name: 'الإعدادات',
         route: ROUTES.DOCTOR.SETTINGS.DASHBOARD,
-        isActive:
-          path === ROUTES.DOCTOR.SETTINGS.DASHBOARD ||
-          path === ROUTES.DOCTOR.SETTINGS.CHANGEPASSWORD ||
-          path === ROUTES.DOCTOR.SETTINGS.NOTIFICATIONS,
+        isActive: path.includes(ROUTES.DOCTOR.SETTINGS.DASHBOARD),
         icon: <SettingsIcon />,
+        show: true,
       },
     ],
     [path]

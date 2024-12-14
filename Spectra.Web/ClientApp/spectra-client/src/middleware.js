@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { routing } from '@/i18n/routing';
 import { decodeToken } from '@/lib/token';
+import { getRedirectPath } from '@/lib/utils';
 import ROUTES from '@/routes';
 
 const intlMiddleware = createMiddleware(routing);
@@ -16,7 +17,7 @@ export default async function middleware(request) {
   const { nextUrl } = request;
 
   const { isAdminRoute, isAuthRoute, isClientRoute, isDoctorRoute } =
-    getRoutesStatus(nextUrl.pathname);
+    getRoutesPermissions(nextUrl.pathname);
 
   // get the token from the cookie
   const token = request.cookies.get('accessToken')?.value;
@@ -48,8 +49,10 @@ export default async function middleware(request) {
 
   if (token && isAuthRoute) {
     if (!locale) return response;
+    const pathToRedirect = getRedirectPath([role]);
+
     const homeUrl = new URL(
-      `/${locale}${ROUTES.HOME}`,
+      `/${locale}${pathToRedirect}`,
       nextUrl.origin
     );
     return NextResponse.redirect(homeUrl);
@@ -75,7 +78,7 @@ const CLIENT_ROUTES = ['/client', '/video/client'];
 const ADMIN_ROUTES = '/admin';
 const DOCTOR_ROUTES = ['/doctor', '/video/doctor'];
 
-function getRoutesStatus(path) {
+function getRoutesPermissions(path) {
   if (!path) return;
 
   const pathname = path.replace(/^\/(ar|en)(\/|$)/, '/');

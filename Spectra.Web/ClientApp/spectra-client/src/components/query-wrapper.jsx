@@ -8,9 +8,11 @@ import { ServerError } from './server-error';
 import { NoInternet } from './no-internet';
 import { NoSearchResults } from './no-search-results';
 import { NotFound404 } from './not-found-404';
+import { Forbidden403 } from './forbidden-403';
 
 const MemowizedLoader = memo(Loader);
 const MemowizedNotFound404 = memo(NotFound404);
+const MemowizedForbiden403 = memo(Forbidden403);
 const MemowizedServerError = memo(ServerError);
 const MemowizedNoInternet = memo(NoInternet);
 const MemowizedNoSearchResults = memo(NoSearchResults);
@@ -51,6 +53,9 @@ export const QueryWrapper = ({
 
   if (query?.isError && query?.failureReason?.status === 404)
     return <MemowizedNotFound404 />;
+
+  if (query?.isError && query?.failureReason?.status === 403)
+    return <MemowizedForbiden403 />;
 
   if (query?.isError)
     return <MemowizedServerError onRetry={onRetry} />;

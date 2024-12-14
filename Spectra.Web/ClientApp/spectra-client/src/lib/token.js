@@ -66,7 +66,7 @@ export async function decodeToken(token) {
         ],
       role: decoded[
         'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-      ]?.toLowerCase(),
+      ],
     };
   } catch {
     return null;

@@ -1,3 +1,5 @@
+import { buildQuery } from '@/lib/utils';
+
 export const profile = {
   base: '/profilemanagement',
   get: '/profilemanagement',
@@ -10,4 +12,9 @@ export const profile = {
     addAttachment: '/profilemanagement/attchment',
     deleteAttachment: (id) => `/profilemanagement/attchment?id=${id}`,
   },
+};
+
+export const services = {
+  base: '/service',
+  list: (queries = {}) => buildQuery('/service', queries),
 };
