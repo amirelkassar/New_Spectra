@@ -15,7 +15,8 @@ namespace Spectra.Application.Employees.EmployeeGroups.Queries
 {
     public class GetEmployeeGroupMemeberListQuery : IRequest<OperationResult>
     {
-        public string OwnerId { get; set; }
+        public string? OwnerId { get; set; }
+        public string? OwnerUserId { get; set; }
 
         public class GetEmployeeGroupMemeberListQueryHandler(IBaseMongoDbRepository<Employee> empRepository,
             IBaseMongoDbRepository<EmployeeGroup> empGroupRepository,
@@ -30,8 +31,13 @@ namespace Spectra.Application.Employees.EmployeeGroups.Queries
 
             public async Task<OperationResult> Handle(GetEmployeeGroupMemeberListQuery request, CancellationToken cancellationToken)
             {
-                var owner = await _empRepository.GetByIdAsync(request.OwnerId) ?? throw new NotFoundException("Employees", request.OwnerId);
-                var group = await _empGroupRepository.GetAsync(g => g.OwnerId == request.OwnerId);
+                Employee owner = null;
+                if (!string.IsNullOrWhiteSpace(request.OwnerId))
+                    owner = await _empRepository.GetByIdAsync(request.OwnerId) ?? throw new NotFoundException("Employees", request.OwnerId);
+                else if (!string.IsNullOrWhiteSpace(request.OwnerUserId))
+                    owner = await _empRepository.GetAsync(e => e.UserId == request.OwnerUserId) ?? throw new NotFoundException("Employees", request.OwnerUserId);
+
+                var group = await _empGroupRepository.GetAsync(g => g.OwnerId == owner.Id);
                 if (group == null)
                     return OperationResult.Success();
 

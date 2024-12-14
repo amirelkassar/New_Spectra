@@ -175,7 +175,13 @@ namespace Spectra.Application.Employees.Commands
                 });
             }
 
-            var role = request.JobType == JobTypes.Doctor ? Roles.Doctor : Roles.Specialist;
+            var role = request.JobType switch
+            {
+                JobTypes.Specialist=>Roles.Specialist,
+                JobTypes.Doctor=>Roles.Doctor,
+                JobTypes.Accountant=>Roles.Accountant,
+                JobTypes.Secretary=>Roles.CustomerSupport
+            };
             var addUser = await _identityService.CreateUserAsync(
              request.EmailAddress.Emailaddress,
                request.Password,

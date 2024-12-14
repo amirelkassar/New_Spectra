@@ -77,7 +77,7 @@ namespace Spectra.WebAPI.Areas.User
         [HttpGet("employee-groups")]
         public async Task<IActionResult> GetEmployeeGroupAsync()
         {
-            var response = await _mediator.Send(new GetEmployeeGroupMemeberListQuery { OwnerId = CurrentUser.Id });
+            var response = await _mediator.Send(new GetEmployeeGroupMemeberListQuery { OwnerUserId = CurrentUser.Id });
             return Ok(response);
         }
 
