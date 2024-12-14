@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.Shared.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Domain.Shared.Common
 {

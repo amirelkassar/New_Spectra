@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.Countries;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Spectra.Domain.Countries;
 
 namespace Spectra.Application.Countries
 {

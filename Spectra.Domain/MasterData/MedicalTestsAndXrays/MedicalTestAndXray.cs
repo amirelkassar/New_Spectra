@@ -1,7 +1,7 @@
 ﻿
+using System;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using System;
 
 namespace Spectra.Domain.MasterData.MedicalTestsAndXrays
 {

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Queries;
 using Spectra.Application.MasterData.InternalExaminations.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
@@ -19,7 +18,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet("list")]
-        [Authorize(AdminInternalExaminationPermissions.ReadList)]
         public async Task<ActionResult> GetAllInternalExamination([FromQuery] GetAllInternalExaminationQuery input)
         {
             var internalExamination = await _internalExamination.GetAllInternalExamination(input);
@@ -27,7 +25,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet()]
-        [Authorize(AdminInternalExaminationPermissions.ReadOne)]
         public async Task<ActionResult> GetOneInternalExamination([FromQuery] GetInternalExaminationByIdQuery input)
         {
             var internalExamination = await _internalExamination.GetInternalExaminationById(input.Id);
@@ -35,7 +32,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminInternalExaminationPermissions.Create)]
         public async Task<ActionResult> CreateInternalExamination([FromBody] CreateInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.CreateInternalExamination(input);
@@ -43,7 +39,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPut()]
-        [Authorize(AdminInternalExaminationPermissions.Update)]
         public async Task<ActionResult> UpdateInternalExamination([FromBody] UpdateInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.UpdateInternalExamination(input);
@@ -51,7 +46,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpDelete()]
-        [Authorize(AdminInternalExaminationPermissions.Delete)]
         public async Task<ActionResult> DeleteInternalExamination([FromQuery] DeleteInternalExaminationCommand input)
         {
             var internalExamination = await _internalExamination.DeleteInternalExamination(input.Id);

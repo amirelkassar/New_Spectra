@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.Commands;
@@ -10,7 +11,6 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
-using System.ComponentModel.DataAnnotations;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.AppUsers.Commands
@@ -20,7 +20,6 @@ namespace Spectra.Application.AppUsers.Commands
         public RegisterMedicalProvider()
         {
             Specializations = [];
-            Certifications = [];
         }
         [Required]
         [MinLength(3)]
@@ -55,7 +54,7 @@ namespace Spectra.Application.AppUsers.Commands
         [Required]
         public string JobName { get; set; }
         public ICollection<string>? Specializations { get; set; }
-        public string? LicenseNumber { get; set; }
+        public string LicenseNumber { get; set; }
         public string? ApprovedBy { get; set; }
         public AcademicDegrees? AcademicDegree { get; set; }
         [Required]
@@ -63,7 +62,8 @@ namespace Spectra.Application.AppUsers.Commands
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
-        public ICollection<IFormFile> Certifications { get; set; }
+        [Required]
+        public IFormFile Certification { get; set; }
 
         public class RegisterMedicalProviderHandler(IEmployeeService medicalProviderService) : IRequestHandler<RegisterMedicalProvider, OperationResult>
         {
@@ -106,18 +106,15 @@ namespace Spectra.Application.AppUsers.Commands
                 {
                     var empId = ((OperationResult<string>)medicalProviderResults).Data;
                     var medicalProvider = (OperationResult<EmployeeByIdDto>)await _medicalProviderService.GetAsync(new GetEmployeeById { Id = empId });
-                    foreach (var cer in request.Certifications)
+                    if (request.Certification is not null && request.Certification.Length >= 0)
                     {
-                        if (cer.Length >= 0)
+                        await _medicalProviderService.CreateAttachmentAsync(new CreateAttachmentCommand
                         {
-                            await _medicalProviderService.CreateAttachmentAsync(new CreateAttachmentCommand
-                            {
-                                EmpId = medicalProvider.Data.Id,
-                                File = cer,
-                                Name = cer.Name,
-                                Type = DocumentsConts.FileTypes.Certificate
-                            });
-                        }
+                            EmpId = medicalProvider.Data.Id,
+                            File = request.Certification,
+                            Name = request.Certification.Name,
+                            Type = DocumentsConts.FileTypes.Certificate
+                        });
                     }
                 }
                 return OperationResult.Success();

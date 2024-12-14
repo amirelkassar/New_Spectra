@@ -268,10 +268,25 @@ namespace Spectra.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<int>("AccessLevel")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
                     b.Property<string>("Permission")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PermissoinCategoryId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PermissoinGroupId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PermissoinId")
                         .IsRequired()
                         .HasColumnType("text");
 

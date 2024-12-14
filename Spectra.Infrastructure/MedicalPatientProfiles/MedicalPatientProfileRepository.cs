@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-
 using Spectra.Domain.MedicalPatientProfiles;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System.Linq.Expressions;
 
 namespace Spectra.Infrastructure.MedicalPatientProfiles
 {

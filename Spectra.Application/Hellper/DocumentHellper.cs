@@ -36,7 +36,7 @@ namespace Spectra.Application.MasterData.HellperFunc
                         var uniqueFileName = $"{Guid.NewGuid()}_{attachment.FileName}";
                         var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
                         {
                             await attachment.CopyToAsync(fileStream);
                         }
@@ -65,7 +65,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             var uniqueFileName = $"{Guid.NewGuid()}_{attachment.FileName}";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
             {
                 await attachment.CopyToAsync(fileStream);
             }
@@ -133,7 +133,7 @@ namespace Spectra.Application.MasterData.HellperFunc
 
                     var filePath = Path.Combine(uploadsFolder, newFileName);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
                     {
                         await file.CopyToAsync(stream);
                     }
@@ -182,7 +182,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             var filePath = Path.Combine(uploadsFolder, newFileName);
 
             // Save the new attachment
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
             {
                 await newAttachment.CopyToAsync(stream);
             }

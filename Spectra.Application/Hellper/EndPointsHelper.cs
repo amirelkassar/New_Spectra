@@ -15,7 +15,7 @@ namespace Spectra.Application.Hellper
             }
             return url;
         }
-        public static string GetFileUrl(string filePath, string subFolder,string route, IHttpContextAccessor httpContextAccessor)
+        public static string GetFileUrl(string filePath, string subFolder, string route, IHttpContextAccessor httpContextAccessor)
         {
             string url = string.Empty;
             if (!string.IsNullOrWhiteSpace(filePath) && File.Exists(filePath))

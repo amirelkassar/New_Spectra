@@ -1,8 +1,8 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using System;
+using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Domain.Employees
@@ -31,7 +31,7 @@ namespace Spectra.Domain.Employees
         public int? ExperienceYears { get; set; }
         public string? Qualification { get; set; }
         public string? JobDescription { get; set; }
-        public ICollection<EmployeeAttachment>? Attachments { get; set; } 
+        public ICollection<EmployeeAttachment>? Attachments { get; set; }
         public ICollection<EmployeeSpecialization>? Specializations { get; set; }
         public ICollection<EmployeeService>? Services { get; set; }
 
@@ -40,6 +40,8 @@ namespace Spectra.Domain.Employees
 
         public string UserImage { get; set; }
 
+        public bool HasActiveContract { get; set; }
+        public string ContractId { get; set; }
         protected Employee() { }
         public Employee(string id,
                    Name name,

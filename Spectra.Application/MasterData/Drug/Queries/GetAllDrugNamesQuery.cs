@@ -40,7 +40,7 @@ namespace Spectra.Application.MasterData.Drug.Queries
                     totalData = total;
                 }
 
-                var drugNames = drugs.Select(d => new BaseMasterDataDto { Id = d.Id, Name = d.Name, ImageLink = d.ImagePath is not null ? EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, d.ImagePath), EndPointsRoutes.Drugs, _httpContextAccessor):"" });
+                var drugNames = drugs.Select(d => new BaseMasterDataDto { Id = d.Id, Name = d.Name, ImageLink = d.ImagePath is not null ? EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, d.ImagePath), EndPointsRoutes.Drugs, _httpContextAccessor) : "" });
 
                 return OperationResult<PaginatedResult<BaseMasterDataDto>>.Success(new PaginatedResult<BaseMasterDataDto>(drugNames.ToArray(), totalData, request.MaxCount));
 

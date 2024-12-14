@@ -1,15 +1,13 @@
-﻿using FluentValidation;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 using MediatR;
 using Spectra.Application.AppUsers.Dtos;
 using Spectra.Application.Clients.Services;
-using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.Services;
 using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
-using System.ComponentModel.DataAnnotations;
 
 namespace Spectra.Application.AppUsers.Commands
 {
@@ -83,10 +81,10 @@ namespace Spectra.Application.AppUsers.Commands
                 //        break;
                 //    case UserType.MedicalServiceProvider:
                 //        {
-                           
+
                 //            var request = request.MedicalProviderData;
 
-                           
+
                 //        }
                 //        break;
                 //    default:

@@ -1,12 +1,10 @@
 ﻿using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Application.Messaging;
-using Spectra.Domain.AppUser;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
@@ -42,13 +40,11 @@ namespace Spectra.Application.Employees.Commands
 
     public class UpdateEmployeeCommandHandler(IBaseMongoDbRepository<Employee> empRepo,
         IDocumentHellper documentHellper,
-        IIdentityService identityService,
-        UserManager<AppUser> userManager) : IRequestHandler<UpdateEmployeeCommand, OperationResult>
+        IIdentityService identityService) : IRequestHandler<UpdateEmployeeCommand, OperationResult>
     {
         private readonly IBaseMongoDbRepository<Employee> _empRepo = empRepo;
         private readonly IDocumentHellper _documentHellper = documentHellper;
         private readonly IIdentityService _identityService = identityService;
-        private readonly UserManager<AppUser> _userManager = userManager;
 
         public async Task<OperationResult> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {

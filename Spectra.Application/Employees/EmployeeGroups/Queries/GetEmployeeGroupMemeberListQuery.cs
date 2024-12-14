@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,11 +10,6 @@ using Spectra.Domain.AppUser;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Employees.EmployeeGroups.Queries
 {
@@ -48,7 +42,7 @@ namespace Spectra.Application.Employees.EmployeeGroups.Queries
                 {
                     if (dto.UserImage is not null)
                     {
-                        dto.UserImage= EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.UserImage), dto.UserId, EndPointsRoutes.Users, _httpContextAccessor);
+                        dto.UserImage = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.UserImage), dto.UserId, EndPointsRoutes.Users, _httpContextAccessor);
                     }
                 }
                 return OperationResult<IReadOnlyCollection<EmployeeListDto>>.Success(dtos);

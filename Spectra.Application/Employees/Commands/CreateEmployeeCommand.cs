@@ -190,6 +190,8 @@ namespace Spectra.Application.Employees.Commands
 
             return OperationResult<string>.Success(employee.Id);
         }
+
+
     }
     public class BassMedicalStaffValidator : AbstractValidator<CreateEmployeeCommand>
     {

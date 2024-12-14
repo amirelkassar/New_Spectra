@@ -2,16 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
+using Spectra.Application.Contracts.Queries;
+using Spectra.Application.Identities.Permissions.Users;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Areas.Employee
 {
@@ -20,8 +16,19 @@ namespace Spectra.WebAPI.Areas.Employee
         private readonly IMediator _mediator = mediator;
         private readonly ICurrentUser _currentUser = currentUser;
 
+
+        [HttpGet]
+        [Authorize(ContractPermissions.ReadOne)]
+        public async Task<IActionResult> GetAsync()
+        {
+            var response = await _mediator.Send(new GetContractByUserIdQuery { });
+            return response.SuccessOpration
+                ? Ok(response)
+                : BadRequest(response);
+        }
+
         [HttpPost]
-        [Authorize]
+        [Authorize(ContractPermissions.Apply)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {
             var response = await _mediator.Send(input);
@@ -29,24 +36,24 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(ContractPermissions.Update)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateContractModel input)
         {
             var response = await _mediator.Send(new UpdateContractCommand
             {
                 DaysOfWork = input.DaysOfWork,
-                EmployeeUserId=_currentUser.Id,
+                EmployeeUserId = _currentUser.Id,
                 Id = input.Id,
                 FreelancingServices = input.FreelancingServices,
                 HoursOfWork = input.HoursOfWork,
-                ModifierRole=_currentUser.Role,
+                ModifierRole = _currentUser.Role,
                 SpectraTeamServices = input.SpectraTeamServices
             });
             return Accepted("", response);
         }
 
         [HttpPost("cancel")]
-        [Authorize]
+        [Authorize(ContractPermissions.Cancel)]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -64,7 +71,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("reject")]
-        [Authorize]
+        [Authorize(ContractPermissions.Reject)]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -82,7 +89,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("accept")]
-        [Authorize]
+        [Authorize(ContractPermissions.Accept)]
         public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -93,7 +100,7 @@ namespace Spectra.WebAPI.Areas.Employee
                 CallerName = _currentUser.Name,
                 Value = true,
                 Reason = input.Reason,
-                State= ContractConses.ContractStates.Contracting
+                State = ContractConses.ContractStates.Contracting
             });
 
             return Accepted(response);

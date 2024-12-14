@@ -25,7 +25,7 @@ namespace Spectra.Application.Employees.Commands
 
                 await _employeeRepo.UpdateAsync(employee);
 
-                await _documentHellper.DeleteAttachments(employee.Attachments.Select(e => e.Path).ToList());
+                await _documentHellper.DeleteAttachment(attachment.Path);
 
                 return OperationResult.Success();
             }

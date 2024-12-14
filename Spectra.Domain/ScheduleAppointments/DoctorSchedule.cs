@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.Shared.Enums;
-using System;
+﻿using System;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Domain.ScheduleAppointments
 {

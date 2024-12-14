@@ -1,9 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.Employees
 {
@@ -11,12 +8,12 @@ namespace Spectra.Domain.Employees
     {
         protected EmployeeGroup()
         {
-            
+
         }
         private EmployeeGroup(string id,
             string ownerId,
             string name,
-            ICollection<EmployeeGroupMemeber> memebers):base(id)
+            ICollection<EmployeeGroupMemeber> memebers) : base(id)
         {
             ArgumentNullException.ThrowIfNullOrWhiteSpace(ownerId, nameof(ownerId));
             ArgumentNullException.ThrowIfNullOrWhiteSpace(name, nameof(name));
@@ -32,6 +29,6 @@ namespace Spectra.Domain.Employees
         public static EmployeeGroup Create(string id,
             string ownerId,
             string name,
-            ICollection<EmployeeGroupMemeber> memebers) => new(id, ownerId,name, memebers);
+            ICollection<EmployeeGroupMemeber> memebers) => new(id, ownerId, name, memebers);
     }
 }

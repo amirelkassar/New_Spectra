@@ -1,6 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.Settings.MedicalSpecialties
 {

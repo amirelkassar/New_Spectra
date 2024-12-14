@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Commands;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Queries;
 using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
@@ -17,7 +15,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet("list")]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.ReadList)]
         public async Task<ActionResult> GetAllMedicalTestsAndXray([FromQuery] GetAllMedicalTestsAndXraysQuery input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetAllMedicalTestsAndXray(input);
@@ -25,7 +22,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpGet()]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.ReadOne)]
         public async Task<ActionResult> GetOneMedicalTestsAndXray([FromQuery] GetMedicalTestsAndXraysByIdQuery input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.GetMedicalTestsAndXrayById(input.Id);
@@ -33,7 +29,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.Create)]
         public async Task<ActionResult> CreateMedicalTestsAndXray([FromBody] CreateMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.CreateMedicalTestsAndXray(input);
@@ -41,7 +36,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPut()]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.Update)]
         public async Task<ActionResult> UpdateMedicalTestsAndXray([FromBody] UpdateMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.UpdateMedicalTestsAndXray(input);
@@ -49,7 +43,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpDelete()]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.Delete)]
         public async Task<ActionResult> DeleteMedicalTestsAndXray([FromQuery] DeleteMedicalTestsAndXraysCommand input)
         {
             var medicalTestsAndXrayies = await _medicalTestsAndXrayService.DeleteMedicalTestsAndXray(input.Id);
@@ -57,7 +50,6 @@ namespace Spectra.WebAPI.Areas.Admin.MasterData
         }
 
         [HttpPost("bulk")]
-        [Authorize(AdminMedicalTestsAndXrayPermissions.SheetsPermissions)]
         public async Task<ActionResult> UploadExcelFile([FromForm] BulkCreateModel input)
         {
             var data = _medicalTestsAndXrayService.CreateFromExcel(input.File);

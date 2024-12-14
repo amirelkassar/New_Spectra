@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.SuccessStorIes.Commands;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings
@@ -16,7 +14,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpGet]
-        [Authorize(AdminSuccessStoryPermissions.ReadList)]
         public async Task<ActionResult> GetAllSuccessStory()
         {
             var successStorys = await _entityServices.GetAllSuccessStoryies();
@@ -24,21 +21,18 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
         }
 
         [HttpGet("id")]
-        [Authorize(AdminSuccessStoryPermissions.ReadOne)]
         public async Task<ActionResult> GetOneSuccessStory(string id)
         {
             var successStorys = await _entityServices.GetSuccessStoryiesMById(id);
             return Ok(successStorys);
         }
         [HttpPost]
-        [Authorize(AdminSuccessStoryPermissions.Create)]
         public async Task<ActionResult> CreateSuccessStory(CreateSuccessStoryCommand input)
         {
             var successStorys = await _entityServices.CreateSuccessStoryies(input);
             return Ok(successStorys);
         }
         [HttpPut("id")]
-        [Authorize(AdminSuccessStoryPermissions.Update)]
         public async Task<ActionResult> UpdateSuccessStory(string id, UpdateSuccessStoryCommand input)
         {
             var successStorys = await _entityServices.UpdateSuccessStoryies(id, input);
@@ -46,7 +40,6 @@ namespace Spectra.WebAPI.Areas.Admin.Settings
             return Ok(successStorys);
         }
         [HttpDelete("id")]
-        [Authorize(AdminSuccessStoryPermissions.Delete)]
         public async Task<ActionResult> DeleteSuccessStory(string id)
         {
             var successStorys = await _entityServices.DeleteSuccessStoryies(id);

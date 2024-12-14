@@ -43,17 +43,17 @@ namespace Spectra.Application.MasterData.Packages.Commands
                 }
                 var (services, totalServices) = await _serviceRepository.GetAllAsync(s => request.Services.Any(rs => rs.Id == s.Id));
 
-                var packageServices=new List<PackageService>();
+                var packageServices = new List<PackageService>();
 
-                foreach (var requestedService in request.Services) 
+                foreach (var requestedService in request.Services)
                 {
                     var mainService = services.First(s => s.Id == requestedService.Id);
                     packageServices.Add(new PackageService
                     {
                         Id = mainService.Id,
-                        ArName= mainService.ArName,
-                        EnName= mainService.EnName,
-                        Order= requestedService.Order
+                        ArName = mainService.ArName,
+                        EnName = mainService.EnName,
+                        Order = requestedService.Order
                     });
                 }
                 var package = Package.Create(Ulid.NewUlid().ToString(),

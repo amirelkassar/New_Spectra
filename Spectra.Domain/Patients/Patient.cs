@@ -1,8 +1,8 @@
-﻿using Spectra.Domain.Patients.PatientsData;
+﻿using System;
+using Spectra.Domain.Patients.PatientsData;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using System;
 using static Spectra.Domain.Common.Conses.Units;
 
 

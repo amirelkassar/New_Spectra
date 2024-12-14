@@ -14,7 +14,7 @@ namespace Spectra.Application.Employees.Commands
         public string Id { get; set; }
     }
 
-    public class DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo, 
+    public class DeleteEmployeeCommandHandler(IBaseMongoDbRepository<Employee> employeeRepo,
         IDocumentHellper addFile,
         IIdentityService identityService) : IRequestHandler<DeleteEmployeeCommand, OperationResult<Unit>>
     {

@@ -26,7 +26,7 @@ namespace Spectra.Infrastructure.Data
                 .HasForeignKey(p => p.RoleId);
             });
 
-            builder.Entity<PermissionGroup>(e => 
+            builder.Entity<PermissionGroup>(e =>
             {
                 e.HasMany(p => p.Categories)
                 .WithOne()

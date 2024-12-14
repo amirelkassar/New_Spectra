@@ -1,12 +1,6 @@
-﻿using Spectra.Application.Interfaces;
+﻿using System.Net.Http.Json;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Common.SnomedDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Infrastructure.Services.SnomedServices
 {
@@ -38,7 +32,7 @@ namespace Spectra.Infrastructure.Services.SnomedServices
 
                 throw;
             }
-           
+
         }
     }
 }

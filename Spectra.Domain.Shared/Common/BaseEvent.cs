@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Spectra.Domain.Shared.Enums;
-using System;
 
 namespace Spectra.Domain.Shared.Common
 {

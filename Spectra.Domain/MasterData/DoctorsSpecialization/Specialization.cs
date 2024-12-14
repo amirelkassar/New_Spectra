@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.MasterData.DoctorsSpecialization
 {

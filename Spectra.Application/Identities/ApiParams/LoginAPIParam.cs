@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace Spectra.Application.Identities.ApiParams
 {

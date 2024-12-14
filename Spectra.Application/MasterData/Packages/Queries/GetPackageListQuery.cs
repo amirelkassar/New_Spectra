@@ -1,17 +1,17 @@
 ﻿using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.Packages.Dtos;
 using Spectra.Domain.MasterData.Packages;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using Spectra.Application.MasterData.Packages.Dtos;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace Spectra.Application.MasterData.Packages.Queries
 {
-    public class GetPackageListQuery : QueryPaginationParam,IRequest<OperationResult>
+    public class GetPackageListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
 
@@ -30,7 +30,7 @@ namespace Spectra.Application.MasterData.Packages.Queries
                 if (!string.IsNullOrEmpty(request.Search))
                 {
                     request.Search = request.Search.ToLower().Trim();
-                    var (data, total) = await _packageRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search)||d.ArName.StartsWith(request.Search) ,
+                    var (data, total) = await _packageRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search) || d.ArName.StartsWith(request.Search),
                     null,
                     request.SkipCount,
                     request.MaxCount);
@@ -51,7 +51,7 @@ namespace Spectra.Application.MasterData.Packages.Queries
                 {
                     if (dto.PhotoPath is not null)
                     {
-                        dto.PhotoPath= EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.PhotoPath), EndPointsRoutes.Packages, _httpContextAccessor);
+                        dto.PhotoPath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.PhotoPath), EndPointsRoutes.Packages, _httpContextAccessor);
                     }
                 }
                 return OperationResult<PaginatedResult<PackageReadDto>>.Success(new PaginatedResult<PackageReadDto>(dtos, totalData, request.MaxCount));

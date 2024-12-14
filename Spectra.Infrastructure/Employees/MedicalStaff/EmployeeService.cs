@@ -153,7 +153,7 @@ namespace Spectra.Infrastructure.Employees.MedicalStaff
                 },
                 WorkingHours = input.WorkingHours,
                 Password = input.Password,
-                UserImage=input.UserImage
+                UserImage = input.UserImage
             };
             var response = await _mediator.Send(command);
             return response;

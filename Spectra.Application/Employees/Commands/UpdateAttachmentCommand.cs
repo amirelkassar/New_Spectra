@@ -22,7 +22,6 @@ namespace Spectra.Application.Employees.Commands
             {
                 var employee = await _employeeRepo.GetByIdAsync(request.EmpId) ?? throw new NotFoundException("Employees", request.EmpId);
                 var folderPath = Path.Combine(Pathes.GetUsersPath(), employee.UserId);
-                Directory.CreateDirectory(folderPath);
                 var oldAttachment = employee.Attachments.FirstOrDefault(a => a.Id == request.DocumentId) ?? throw new NotFoundException("Attachment", request.DocumentId);
                 if (request.File.Length > 0)
                 {
