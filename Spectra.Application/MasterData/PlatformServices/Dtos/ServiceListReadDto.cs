@@ -10,6 +10,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Dtos
         public string ArName { get; set; }
         public string? EnDescription { get; set; }
         public string? ArDescription { get; set; }
+        public double Price { get; set; }
+        public double? Discount { get; set; }
         public string? ArTermsAndConditions { get; set; }
         public string? EnTermsAndConditions { get; set; }
     }
