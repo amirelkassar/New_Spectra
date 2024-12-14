@@ -1,7 +1,7 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Spectra.Domain.Shared.Common;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Domain.Contracts
@@ -83,7 +83,7 @@ namespace Spectra.Domain.Contracts
             ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(versions, nameof(versions));
 
-            return new EmploymentContract(id, hoursOfWork, daysOfWork, employeeId, employeeName, employeeUserId, headId, headName,headUserId, titel, contractCase, versions);
+            return new EmploymentContract(id, hoursOfWork, daysOfWork, employeeId, employeeName, employeeUserId, headId, headName, headUserId, titel, contractCase, versions);
         }
 
         public void Accept()

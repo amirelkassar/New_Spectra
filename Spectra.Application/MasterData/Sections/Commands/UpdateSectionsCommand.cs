@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.SpecializationCommend;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
-using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -59,11 +57,11 @@ namespace Spectra.Application.MasterData.Sections.Commands
                     }
 
                     entity.Specsifications = allSpecializations.Where(s => request.Specsifications.Any(rs => rs == s.Id))
-                        .Select(s=>new SectionSpecsification
+                        .Select(s => new SectionSpecsification
                         {
-                            Id=s.Id,
-                            ArName=s.ArName,
-                            EnName=s.EnName
+                            Id = s.Id,
+                            ArName = s.ArName,
+                            EnName = s.EnName
                         })
                         .ToArray();
                 }

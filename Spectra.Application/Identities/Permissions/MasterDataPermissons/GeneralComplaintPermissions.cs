@@ -1,12 +1,11 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
+namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
     [PermissionGroupName("General Complaints", "الشكاوى العامة")]
-    public class AdminGeneralComplaintPermissions : IPermissionContributor
+    public class GeneralComplaintPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminGeneralComplaintPermissions) + "Group.";
+        public const string Group = nameof(GeneralComplaintPermissions) + "Group.";
         [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         [PermissoinName("Create", "اضافة", Create)]

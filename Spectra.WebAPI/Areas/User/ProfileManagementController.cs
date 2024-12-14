@@ -8,15 +8,19 @@ using Spectra.Application.Employees.Queries;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Wrappers;
+using Spectra.WebAPI.Areas.User.Models;
 namespace Spectra.WebAPI.Areas.User
 {
     public class ProfileManagementController(ILogger<ProfileManagementController> logger,
         ICurrentUser currentUser,
         IMediator mediator,
-        IPermissionManager permissionManager) : UserControllerBase<ProfileManagementController>(logger, currentUser)
+        IPermissionManager permissionManager,
+        IIdentityService identityService) : UserControllerBase<ProfileManagementController>(logger, currentUser)
     {
         private readonly IMediator _mediator = mediator;
         private readonly IPermissionManager _permissionManager = permissionManager;
+        private readonly IIdentityService _identityService = identityService;
 
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromQuery] GetUserProfileDataQuery input)
@@ -29,12 +33,10 @@ namespace Spectra.WebAPI.Areas.User
         public async Task<IActionResult> GetPermissionListAsync()
         {
             var permissions = await _permissionManager.GetUserPermissionList(CurrentUser.Id);
-            var response = new
-            {
-                CurrentUser.Role,
-                Permissions = permissions
-            };
-            return Ok(response);
+            var rolesResults = (OperationResult<IReadOnlyCollection<string>>)await _identityService.GetUserRoleListAsync(CurrentUser.Id);
+            var roles = rolesResults.Data;
+            var model = new AuthenticationInfoModel([.. roles], [.. permissions], false);
+            return Ok(model);
         }
 
         [HttpGet("attchment-list")]
@@ -50,11 +52,11 @@ namespace Spectra.WebAPI.Areas.User
         public async Task<IActionResult> UpdateAsync([FromForm] UpdateUserProfileCommand input)
         {
             var response = await _mediator.Send(input);
-            return Accepted("",response);
+            return Accepted("", response);
         }
 
         [HttpPut("employee-profile")]
-        [Authorize(Roles =$"{Roles.Doctor},{Roles.CustomerSupport},{Roles.Specialist},{Roles.Accountant},{Roles.ServiceHead},{Roles.DepartmentHead}")]
+        [Authorize(Roles = $"{Roles.Doctor},{Roles.CustomerSupport},{Roles.Specialist},{Roles.Accountant},{Roles.ServiceHead},{Roles.DepartmentHead}")]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdateEmployeeProfileCommand input)
         {
             var response = await _mediator.Send(input);

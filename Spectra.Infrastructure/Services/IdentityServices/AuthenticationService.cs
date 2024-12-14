@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -9,9 +12,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Spectra.Infrastructure.Services.IdentityServices
 {

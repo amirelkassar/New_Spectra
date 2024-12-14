@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract
@@ -98,7 +96,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
                 DaysOfWork = input.DaysOfWork,
                 FreelancingServices = input.FreelancingServices,
                 HoursOfWork = input.HoursOfWork,
-                ModifierRole=Roles.SystemAdmin,
+                ModifierRole = Roles.SystemAdmin,
                 SpectraTeamServices = input.SpectraTeamServices,
             });
             return Accepted("", response);

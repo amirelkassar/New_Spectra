@@ -14,4 +14,11 @@
 
         public const string EmployeesRoles = $"{Doctor},{Specialist},{Accountant},{CustomerSupport}";
     }
+
+    public enum AccessLevel
+    {
+        All = 1,
+        Department = 2,
+        Self = 3
+    }
 }

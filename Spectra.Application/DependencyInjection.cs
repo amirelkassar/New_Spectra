@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
 using Mapster;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +11,6 @@ using Spectra.Application.Identities;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
-using System.Reflection;
 
 namespace Spectra.Application
 {

@@ -1,15 +1,12 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.AppRole;
-using Spectra.Domain.Shared.Helpers;
-using System.Threading.Tasks;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
+namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
     [PermissionGroupName("Articles", "المقالات")]
-    public class AdminArticlesPermissions : IPermissionContributor
+    public class ArticlesPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminArticlesPermissions) + "Group.";
-        [PermissoinCategoryName("Management", "ادارة",CRUDPermissions)]
+        public const string Group = nameof(ArticlesPermissions) + "Group.";
+        [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         [PermissoinName("Create", "اضافة", Create)]
         public const string Create = CRUDPermissions + nameof(Create);

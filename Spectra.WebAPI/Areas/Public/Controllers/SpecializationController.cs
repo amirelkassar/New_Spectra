@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.SpecializationCommend.Queries;
 using Spectra.Application.MasterData.SpecializationCommend.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {

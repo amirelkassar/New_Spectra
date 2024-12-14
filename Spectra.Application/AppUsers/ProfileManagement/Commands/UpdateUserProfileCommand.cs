@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
@@ -7,7 +8,6 @@ using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
-using System.ComponentModel.DataAnnotations;
 
 namespace Spectra.Application.AppUsers.ProfileManagement.Commands
 {
@@ -81,7 +81,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
                     var filePath = await _documentHellper.CreateAttachment(request.UserImage, Pathes.GetUsersPath());
                     await _identityService.UpdateUserImageAsync(_currentUser.Id, filePath);
                 }
-               
+
 
                 return OperationResult.Success();
 

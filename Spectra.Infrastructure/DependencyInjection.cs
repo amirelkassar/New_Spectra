@@ -1,6 +1,7 @@
-﻿using MadEyeMatt.AspNetCore.Authorization.Permissions;
+﻿using System.Reflection;
+using System.Text;
+using MadEyeMatt.AspNetCore.Authorization.Permissions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -51,7 +52,6 @@ using Spectra.Application.Settings.ShowMedicalProvider;
 using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
-using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Clients;
@@ -87,8 +87,6 @@ using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
 using Spectra.Infrastructure.Settings.showSpecialltionies;
 using Spectra.Infrastructure.Settings.SuccessStorIes;
-using System.Reflection;
-using System.Text;
 
 namespace Spectra.Infrastructure
 {

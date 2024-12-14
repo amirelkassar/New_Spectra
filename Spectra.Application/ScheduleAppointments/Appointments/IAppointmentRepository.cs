@@ -1,7 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Application.Hellper;
 using Spectra.Domain.ScheduleAppointments;
-using System.Linq.Expressions;
 
 namespace Spectra.Application.ScheduleAppointments.Appointments
 {

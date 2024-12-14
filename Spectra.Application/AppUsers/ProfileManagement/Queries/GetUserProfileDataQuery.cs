@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Spectra.Application.AppUsers.ProfileManagement.Dtos;
 using Spectra.Application.Hellper;
-using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Employees;

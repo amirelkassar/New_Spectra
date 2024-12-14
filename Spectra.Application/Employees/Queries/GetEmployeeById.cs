@@ -5,13 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
-using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System.Net.Mail;
 
 namespace Spectra.Application.Employees.Queries
 {
@@ -48,13 +46,13 @@ namespace Spectra.Application.Employees.Queries
                 {
                     if (attachment.Path is not null)
                     {
-                        attachment.Path = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, attachment.Path),medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
+                        attachment.Path = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, attachment.Path), medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
                     }
                 }
 
                 if (user is not null && user.UserImage is not null)
                 {
-                    dto.UserImage= EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, user.UserImage), medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
+                    dto.UserImage = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, user.UserImage), medicalProvider.UserId, EndPointsRoutes.Users, _httpContextAccessor);
                 }
 
                 return OperationResult<EmployeeByIdDto>.Success(dto);

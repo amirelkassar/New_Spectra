@@ -65,7 +65,7 @@ namespace Spectra.Application.MasterData.HellperFunc
             var uniqueFileName = $"{Guid.NewGuid()}_{attachment.FileName}";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create,FileAccess.ReadWrite))
+            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
             {
                 await attachment.CopyToAsync(fileStream);
             }

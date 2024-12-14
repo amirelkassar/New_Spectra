@@ -1,6 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Domain.Settings.Articles;
-using System.Linq.Expressions;
 
 namespace Spectra.Application.Settings.Articles
 {

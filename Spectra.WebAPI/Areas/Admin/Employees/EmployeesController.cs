@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
@@ -7,7 +6,6 @@ using Spectra.Application.Employees.EmployeeGroups.Commands;
 using Spectra.Application.Employees.EmployeeGroups.Queries;
 using Spectra.Application.Employees.Queries;
 using Spectra.Application.Employees.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.Users;
 using Spectra.WebAPI.Areas.Admin.Employees.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Employees
@@ -105,7 +103,7 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
 
 
         [HttpGet("group-member")]
-        public async Task<IActionResult>  GetGroupMemeberAsync([FromQuery] GetEmployeeGroupMemeberListQuery input)
+        public async Task<IActionResult> GetGroupMemeberAsync([FromQuery] GetEmployeeGroupMemeberListQuery input)
         {
             var response = await _mediator.Send(input);
             return Ok(response);

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
-using System.Security.Claims;
 
 namespace Spectra.Infrastructure.Handlers
 {

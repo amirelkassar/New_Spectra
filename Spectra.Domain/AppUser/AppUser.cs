@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.AppUser
 {

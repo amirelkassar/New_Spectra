@@ -13,5 +13,6 @@
         public string? RefereshToken { get; set; }
         public ICollection<string> Roles { get; set; }
         public ICollection<string> Permissions { get; set; }
+        public bool HasActiveContract { get; set; }
     }
 }

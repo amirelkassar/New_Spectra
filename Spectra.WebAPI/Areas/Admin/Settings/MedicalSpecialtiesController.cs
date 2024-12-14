@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Settings.MedicalSpecialties.Commands;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings;
 
 namespace Spectra.WebAPI.Areas.Admin.Settings
 {

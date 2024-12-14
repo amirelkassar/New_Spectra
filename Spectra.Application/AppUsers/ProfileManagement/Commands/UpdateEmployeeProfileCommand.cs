@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
@@ -9,14 +10,7 @@ using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.AppUsers.ProfileManagement.Commands
@@ -194,7 +188,7 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Commands
                     employee.MainSpecializationEnName = mainSpecialization.EnName;
                     employee.MainSpecializationArName = mainSpecialization.ArName;
                 }
-               
+
             }
         }
     }

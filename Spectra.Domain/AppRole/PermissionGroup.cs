@@ -1,9 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.AppRole
 {
@@ -17,7 +14,7 @@ namespace Spectra.Domain.AppRole
         }
         public string EnName { get; set; }
         public string ArName { get; set; }
-        public string LogicalName { get; private set; } 
+        public string LogicalName { get; private set; }
         public ICollection<PermissoinCategory> Categories { get; set; }
     }
 }

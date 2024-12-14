@@ -1,11 +1,9 @@
-﻿using Spectra.Application.Identities;
-
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
+﻿namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
     [PermissionGroupName("Employee Group", "فرق الموظفين")]
-    public class AdminMedicalSpecialtiesPermissions
+    public class MedicalSpecialtiesPermissions
     {
-        public const string Group = nameof(AdminMedicalSpecialtiesPermissions) + "Group.";
+        public const string Group = nameof(MedicalSpecialtiesPermissions) + "Group.";
         //Crud operations permissoins
         [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";

@@ -1,7 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
-using Spectra.Domain.ValueObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.MasterData.Packages
 {

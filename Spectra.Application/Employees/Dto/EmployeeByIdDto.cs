@@ -1,14 +1,7 @@
 ﻿using Mapster;
-using Mapster.Utils;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.Employees.Dto

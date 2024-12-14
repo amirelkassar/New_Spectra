@@ -3,11 +3,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Employees.EmployeeGroups.Commands
 {

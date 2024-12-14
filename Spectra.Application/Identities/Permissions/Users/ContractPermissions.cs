@@ -1,12 +1,11 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
+namespace Spectra.Application.Identities.Permissions.Users
 {
-    [PermissionGroupName("Diagnoses", "التشخصيات")]
-    public class AdminDiagnosePermissions : IPermissionContributor
+    [PermissionGroupName("Contract", "العقود")]
+    public class ContractPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminDiagnosePermissions) + "Group.";
+        public const string Group = nameof(ContractPermissions) + "Group.";
         [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         [PermissoinName("Create", "اضافة", Create)]
@@ -23,16 +22,20 @@ namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
         public const string BulkCreate = CRUDPermissions + nameof(BulkCreate);
         [PermissoinName("Bulk Update", "تعديل مجموعة", BulkUpdate)]
         public const string BulkUpdate = CRUDPermissions + nameof(BulkUpdate);
-        //sheets operations permissoins
-        [PermissoinCategoryName("Data Sheets", "ملفات البيانات",SheetsPermissions)]
-        public const string SheetsPermissions = Group + nameof(SheetsPermissions) + "Category.";
-        [PermissoinName("Print", "طباعة", Print)]
-        public const string Print = SheetsPermissions + nameof(Print);
-        [PermissoinName("Download", "تحميل", Download)]
-        public const string Download = SheetsPermissions + nameof(Download);
-        [PermissoinName("Export", "تصدير", Export)]
-        public const string Export = SheetsPermissions + nameof(Export);
-        [PermissoinName("Import", "اداراج", Import)]
-        public const string Import = SheetsPermissions + nameof(Import);
+
+        [PermissoinCategoryName("Contracting", "التعاقد", Contracting)]
+        public const string Contracting = Group + nameof(Contracting) + "Category";
+        [PermissoinName("Apply Contract", "تقديم", Apply)]
+        public const string Apply = Contracting + nameof(Apply);
+        [PermissoinName("Cancel", "الغاء", Cancel)]
+        public const string Cancel = Contracting + nameof(Cancel);
+        [PermissoinName("Reject", "رفض", Reject)]
+        public const string Reject = Contracting + nameof(Reject);
+        [PermissoinName("Accept", "موافقة", Accept)]
+        public const string Accept = Contracting + nameof(Accept);
     }
+
+
+
+
 }

@@ -1,7 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Application.Hellper;
 using Spectra.Domain.Clients;
-using System.Linq.Expressions;
 
 namespace Spectra.Application.Clients
 {

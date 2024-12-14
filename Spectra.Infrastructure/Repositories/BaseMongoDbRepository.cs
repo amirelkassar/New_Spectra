@@ -1,7 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Common;
-using System.Linq.Expressions;
 
 
 namespace Spectra.Infrastructure.Repositories

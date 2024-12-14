@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using System.Linq.Expressions;
+using Mapster;
 using MediatR;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
@@ -6,7 +7,6 @@ using Spectra.Application.Hellper;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
-using System.Linq.Expressions;
 
 namespace Spectra.Application.Contracts.Queries
 {

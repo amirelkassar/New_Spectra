@@ -1,8 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.DiagnoseCommend;
 using Spectra.Domain.MasterData.Diagnoses;
-using System.Linq.Expressions;
 
 
 namespace Spectra.Infrastructure.MasterData.Diagnoses

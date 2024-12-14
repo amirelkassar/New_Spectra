@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.Web.Controllers
 {
@@ -14,7 +12,7 @@ namespace Spectra.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-           return Ok(await _snomedService.GetAll("speech"));
+            return Ok(await _snomedService.GetAll("speech"));
         }
     }
 }

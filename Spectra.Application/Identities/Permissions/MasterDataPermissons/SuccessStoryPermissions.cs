@@ -1,12 +1,11 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.AdminSettings
+namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
-    [PermissionGroupName("Success Story","قصص النجاح")]
-    public class AdminSuccessStoryPermissions : IPermissionContributor
+    [PermissionGroupName("Success Story", "قصص النجاح")]
+    public class SuccessStoryPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminSuccessStoryPermissions) + "Group.";
+        public const string Group = nameof(SuccessStoryPermissions) + "Group.";
         [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         [PermissoinName("Create", "اضافة", Create)]

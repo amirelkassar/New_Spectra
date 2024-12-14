@@ -1,6 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 using Spectra.Domain.Settings.SuccessStorIes;
-using System.Linq.Expressions;
 
 namespace Spectra.Application.Settings.SuccessStorIes
 {

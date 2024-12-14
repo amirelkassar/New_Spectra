@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.ValueObjects;
-using System;
+﻿using System;
+using Spectra.Domain.ValueObjects;
 
 namespace Spectra.Domain.Payment
 {

@@ -1,10 +1,10 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using Spectra.Domain.Patients;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
 
 
 namespace Spectra.Domain.Clients

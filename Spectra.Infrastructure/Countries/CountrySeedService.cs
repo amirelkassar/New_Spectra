@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Cities;
@@ -8,7 +9,6 @@ using Spectra.Domain.Countries;
 using Spectra.Domain.Countries.Cities;
 using Spectra.Domain.Countries.States;
 using Spectra.Domain.Shared.OptionDtos;
-using System.Net.Http.Json;
 
 
 namespace Spectra.Infrastructure.Countries

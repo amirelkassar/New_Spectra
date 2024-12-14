@@ -1,5 +1,5 @@
-﻿using Spectra.Domain.Shared.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.ValueObjects
 {

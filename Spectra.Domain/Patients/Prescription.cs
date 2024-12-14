@@ -1,6 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using System.Collections.Generic;
 using static Spectra.Domain.Common.Conses.Units;
 
 namespace Spectra.Domain.Patients

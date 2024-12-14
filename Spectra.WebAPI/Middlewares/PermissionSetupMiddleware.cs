@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Identities;
 using Spectra.Domain.Shared.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.WebAPI.Middlewares
 {
@@ -18,7 +13,7 @@ namespace Spectra.WebAPI.Middlewares
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context,IPermissionManager permissionManager)
+        public async Task InvokeAsync(HttpContext context, IPermissionManager permissionManager)
         {
             var permissionContributors = typeof(IPermissionContributor)
             .Assembly
@@ -30,9 +25,9 @@ namespace Spectra.WebAPI.Middlewares
             {
                 var groupAttr = permissionContributor.GetCustomAttribute<PermissionGroupNameAttribute>();
                 var group = await permissionManager.CreatePermissoinGroup(groupAttr.EnName, groupAttr.ArName);
-                foreach (var filed in permissionContributor.GetFields().Where(f=>f.GetCustomAttribute<PermissoinCategoryNameAttribute>() !=null).ToArray())
+                foreach (var filed in permissionContributor.GetFields().Where(f => f.GetCustomAttribute<PermissoinCategoryNameAttribute>() != null).ToArray())
                 {
-                    var permissionFields = permissionContributor.GetFields().Where(f =>f.Name.Contains(filed.Name) && f.GetCustomAttribute<PermissoinNameAttribute>() != null).ToArray();
+                    var permissionFields = permissionContributor.GetFields().Where(f => f.Name.Contains(filed.Name) && f.GetCustomAttribute<PermissoinNameAttribute>() != null).ToArray();
                 }
             }
             await _next(context);

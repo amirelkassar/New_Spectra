@@ -1,12 +1,11 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
+namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
     [PermissionGroupName("Specializations", "التخصصات")]
-    public class AdminSpecializationPermissions : IPermissionContributor
+    public class SpecializationPermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminSpecializationPermissions) + "Group.";
+        public const string Group = nameof(SpecializationPermissions) + "Group.";
         //Crud operations permissoins
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category.";
         public const string Create = CRUDPermissions + nameof(Create);

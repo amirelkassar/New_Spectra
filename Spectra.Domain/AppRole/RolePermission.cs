@@ -1,5 +1,6 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
+using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.Domain.AppRole
 {
@@ -14,7 +15,8 @@ namespace Spectra.Domain.AppRole
             string permission,
             string permissoinId,
             string categoryId,
-            string groupId)
+            string groupId,
+            AccessLevel accessLevel)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
             ArgumentNullException.ThrowIfNull(roleId, nameof(roleId));
@@ -22,12 +24,15 @@ namespace Spectra.Domain.AppRole
             ArgumentNullException.ThrowIfNull(permissoinId, nameof(permissoinId));
             ArgumentNullException.ThrowIfNull(categoryId, nameof(categoryId));
             ArgumentNullException.ThrowIfNull(groupId, nameof(groupId));
+            ArgumentNullException.ThrowIfNull(accessLevel, nameof(accessLevel));
+
             Id = id;
             RoleId = roleId;
             Permission = permission;
             PermissoinId = permissoinId;
             PermissoinCategoryId = categoryId;
             PermissoinGroupId = groupId;
+            AccessLevel = accessLevel;
         }
         public string RoleId { get; set; }
         public string Permission { get; private set; }
@@ -35,11 +40,14 @@ namespace Spectra.Domain.AppRole
         public string PermissoinCategoryId { get; private set; }
         public string PermissoinGroupId { get; private set; }
 
+        public AccessLevel AccessLevel { get; set; }
+
         public static RolePermission Create(string id,
             string roleId,
             string permission,
             string permissoinId,
             string categoryId,
-            string groupId) => new(id, roleId, permission, permissoinId, categoryId, groupId);
+            string groupId,
+            AccessLevel accessLevel) => new(id, roleId, permission, permissoinId, categoryId, groupId, accessLevel);
     }
 }

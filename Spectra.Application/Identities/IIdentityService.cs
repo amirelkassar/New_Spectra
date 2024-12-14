@@ -38,5 +38,7 @@ namespace Spectra.Application.Identities
 
         Task<OperationResult> UpdateUserAsync(AppUser user);
 
+        Task<OperationResult> GetUserRoleListAsync(string userId);
+
     }
 }

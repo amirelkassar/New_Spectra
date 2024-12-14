@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.Commands;
@@ -10,8 +11,6 @@ using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.ConstrainedExecution;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
 
 namespace Spectra.Application.AppUsers.Commands

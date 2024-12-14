@@ -2,11 +2,6 @@
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Application.Employees.Dto
 {
@@ -14,7 +9,7 @@ namespace Spectra.Application.Employees.Dto
     {
         public EmployeeListDto()
         {
-            
+
 
 
         }

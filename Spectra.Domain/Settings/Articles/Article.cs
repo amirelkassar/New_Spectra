@@ -1,7 +1,7 @@
-﻿using Spectra.Domain.Shared.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.Settings.Articles
 {

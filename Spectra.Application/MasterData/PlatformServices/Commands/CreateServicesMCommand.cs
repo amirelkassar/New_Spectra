@@ -33,7 +33,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
 
 
 
-    public class CreateDrugCommandHandler(IServiceMDRepository serviceMRepository, 
+    public class CreateDrugCommandHandler(IServiceMDRepository serviceMRepository,
         IDocumentHellper addPhoto,
         IBaseMongoDbRepository<Specialization> specializationRepository) : IRequestHandler<CreateServicesMCommand, OperationResult>
     {
@@ -64,7 +64,7 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
             entity.Reports = request.Reports;
             entity.Contents = request.Contents;
 
-            if (request.Specifications is not null && request.Specifications.Count>0)
+            if (request.Specifications is not null && request.Specifications.Count > 0)
             {
                 var specializations = await _specializationRepository.GetAllAsync(s => request.Specifications.Any(rs => rs == s.Id));
                 entity.Specifications = specializations.data.Select(s => new ServiceSpecification { Id = s.Id, ArName = s.ArName, EnName = s.EnName }).ToArray();

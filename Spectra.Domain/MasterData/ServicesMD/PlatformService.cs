@@ -1,7 +1,7 @@
-﻿using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
+using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Domain.MasterData.ServicesMD
 {

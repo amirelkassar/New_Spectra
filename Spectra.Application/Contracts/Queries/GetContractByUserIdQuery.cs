@@ -10,7 +10,7 @@ namespace Spectra.Application.Contracts.Queries
 {
     public class GetContractByUserIdQuery : IRequest<OperationResult>
     {
-        public class GetContractByUserIdQueryHandler(IContractRepository contractRepository,ICurrentUser currentUser) : IRequestHandler<GetContractByUserIdQuery, OperationResult>
+        public class GetContractByUserIdQueryHandler(IContractRepository contractRepository, ICurrentUser currentUser) : IRequestHandler<GetContractByUserIdQuery, OperationResult>
         {
             private readonly IContractRepository _contractRepository = contractRepository;
             private readonly ICurrentUser _currentUser = currentUser;

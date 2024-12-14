@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Helpers;
-using System.Reflection;
 
 namespace Spectra.Application.Identities
 {
@@ -40,16 +40,15 @@ namespace Spectra.Application.Identities
                         NormalizedName = propRole.ToUpper(),
                     });
                 }
-                if (propRole.Equals(Roles.SystemAdmin))
+
+                var accessLevel = propRole switch
                 {
-                    var permissionGroups = groups.Where(g => g.Categories.Where(c => c.Permissions.Any(p => p.LogicalName.Contains("Admin"))).Any()).ToArray();
-                    await _permissionManager.UpdateRolePermissions(propRole, permissionGroups);
-                }
-                else
-                {
-                    var permissionGroups = groups.Where(g => g.Categories.Where(c => c.Permissions.Any(p => !p.LogicalName.Contains("Admin"))).Any()).ToArray();
-                    await _permissionManager.UpdateRolePermissions(propRole, permissionGroups);
-                }
+                    Roles.SystemAdmin => AccessLevel.All,
+                    Roles.DepartmentHead => AccessLevel.Department,
+                    Roles.ServiceHead => AccessLevel.Department,
+                    _ => AccessLevel.Self
+                };
+                await _permissionManager.UpdateRolePermissions(propRole, groups, accessLevel);
             }
         }
 
@@ -68,16 +67,16 @@ namespace Spectra.Application.Identities
                 {
                     var group = await _permissionManager.CreatePermissoinGroup(groupName.EnName, groupName.ArName);
 
-                    var categoriesNames = permissionContributor.GetFields().SelectMany(p=>p.GetCustomAttributes<PermissoinCategoryNameAttribute>()).ToArray();
+                    var categoriesNames = permissionContributor.GetFields().SelectMany(p => p.GetCustomAttributes<PermissoinCategoryNameAttribute>()).ToArray();
                     foreach (var categoryName in categoriesNames)
                     {
-                        var category = new PermissoinCategory(Ulid.NewUlid().ToString()) 
+                        var category = new PermissoinCategory(Ulid.NewUlid().ToString())
                         {
-                            EnName=categoryName.EnName,
-                            ArName=categoryName.ArName,
+                            EnName = categoryName.EnName,
+                            ArName = categoryName.ArName,
                         };
                         permissionContributor.GetFields().SelectMany(p => p.GetCustomAttributes<PermissoinNameAttribute>())
-                            .Where(n=>n.LogicalName.Contains(categoryName.LogicalName))
+                            .Where(n => n.LogicalName.Contains(categoryName.LogicalName))
                            .ToList()
                            .ForEach(per => category.Permissions.Add(new Permission(Ulid.NewUlid().ToString())
                            {

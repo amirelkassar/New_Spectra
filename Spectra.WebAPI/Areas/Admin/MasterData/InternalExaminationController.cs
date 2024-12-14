@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.MasterData.InternalExaminations.Commands;
 using Spectra.Application.MasterData.InternalExaminations.Queries;
 using Spectra.Application.MasterData.InternalExaminations.Services;
-using Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {

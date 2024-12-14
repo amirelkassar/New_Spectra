@@ -1,12 +1,11 @@
-﻿using Spectra.Application.Identities;
-using Spectra.Domain.Shared.Helpers;
+﻿using Spectra.Domain.Shared.Helpers;
 
-namespace Spectra.Domain.Shared.Constants.Permissions.Admin.MasterDataPermissons
+namespace Spectra.Application.Identities.Permissions.MasterDataPermissons
 {
-    [PermissionGroupName("Medical Tests And Xray", "التحاليل والاشاعات")]
-    public class AdminMedicalTestsAndXrayPermissions : IPermissionContributor
+    [PermissionGroupName("Diagnoses", "التشخصيات")]
+    public class DiagnosePermissions : IPermissionContributor
     {
-        public const string Group = nameof(AdminMedicalTestsAndXrayPermissions) + "Group.";
+        public const string Group = nameof(DiagnosePermissions) + "Group.";
         [PermissoinCategoryName("Management", "ادارة", CRUDPermissions)]
         public const string CRUDPermissions = Group + nameof(CRUDPermissions) + "Category";
         [PermissoinName("Create", "اضافة", Create)]
