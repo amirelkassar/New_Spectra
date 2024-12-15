@@ -23,7 +23,7 @@ export const notifications = {
   base: '/notification',
   list: (queries = {}) => buildQuery('/notification/list', queries),
   actions: {
-    makeItRead: '/notification',
-    delete: '/notification',
+    makeItRead: (id) => `/notification?id=${id}`,
+    delete: (id) => `/notification?id=${id}`,
   },
 };

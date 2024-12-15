@@ -1,62 +1,18 @@
 'use client';
 
-import { useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { Popover } from '@mantine/core';
 import { Divider } from '@mantine/core';
 import { Link } from '@/i18n/routing';
 import { Notification } from '@mantine/core';
 
-import { getDate } from '@/lib/utils';
-
 import ROUTES from '@/routes';
 import NotificationIcon from '@/assets/icons/notification';
-import { startSignalR, stopSignalR } from '@/lib/signalr';
-import { useToken } from '@/hooks/use-token';
-import { NOTIFICATIONS_HUB_URL } from '@/api/signalr';
-
-const NOTIFICATIONS = [
-  {
-    id: 1,
-    title: 'تم تحديث بيانات الحساب',
-    description: 'تم تحديث بيانات الحساب بنجاح',
-    date: '2024-11-02T12:44:26.808Z',
-    isNew: true,
-  },
-  {
-    id: 2,
-    title: 'تم تحديث بيانات الحساب',
-    description: 'تم تحديث بيانات الحساب بنجاح',
-    date: '2024-11-02T12:44:26.808Z',
-    isNew: false,
-  },
-];
+import { useNotifications } from '@/hooks/queries/user/notifications';
+import { QueryWrapper } from '@/components/query-wrapper';
+import { useDate } from '@/hooks/use-date';
 
 export const Notifications = () => {
-  const locale = useLocale();
-
-  const { token } = useToken();
-
-  const [notifications, setNotifications] = useState([]);
-
-  useEffect(() => {
-    // رابط الـ Hub الخاص بك
-
-    // return console.log(NOTIFICATIONS_HUB_URL);
-
-    // تفعيل الاتصال
-    startSignalR(NOTIFICATIONS_HUB_URL, token, (data) => {
-      console.log('Notification received!');
-      console.log(data);
-      if (!data) return;
-      setNotifications((prev) => [...prev, data]); // إضافة الإشعار الجديد إلى القائمة
-    });
-
-    // تنظيف الاتصال عند خروج المكوّن
-    return () => {
-      stopSignalR();
-    };
-  }, [token]);
+  const query = useNotifications();
 
   return (
     <Popover
@@ -76,16 +32,19 @@ export const Notifications = () => {
       <Popover.Dropdown>
         <div className='min-w-[calc(100vw-67px)] h-96 overflow-y-auto mdl:min-w-[650px] flex flex-col'>
           <div className='flex-1'>
-            {NOTIFICATIONS.map((notification) => (
-              <NotificationItem
-                onClick={() => {
-                  // console.log(notification.id);
-                }}
-                key={notification.id}
-                locale={locale}
-                {...notification}
-              />
-            ))}
+            <QueryWrapper query={query}>
+              {({ data }) =>
+                data.map((notification) => (
+                  <NotificationItem
+                    onClick={() => {
+                      // console.log(notification.id);
+                    }}
+                    key={notification.id}
+                    {...notification}
+                  />
+                ))
+              }
+            </QueryWrapper>
           </div>
 
           <Link
@@ -102,13 +61,14 @@ export const Notifications = () => {
 
 const NotificationItem = ({
   title = '',
-  description = '',
-  date = '',
-  locale = 'en',
-  isNew = false,
+  content = '',
+  created = '',
+  status = 2,
   onClick = () => {},
 }) => {
-  const { timeFromNow } = getDate(date, locale);
+  const { timeFromNow } = useDate(created);
+
+  const isNew = status === 2;
 
   return (
     <>
@@ -125,7 +85,7 @@ const NotificationItem = ({
         <div className='flex-1'>
           <h4 className='font-bold text-sm mdl:text-base'>{title}</h4>
           <p className='text-xs mdl:text-base text-grayDark'>
-            {description}
+            {content}
           </p>
         </div>
 
