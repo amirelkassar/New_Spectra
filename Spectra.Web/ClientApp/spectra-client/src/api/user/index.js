@@ -18,3 +18,12 @@ export const services = {
   base: '/service',
   list: (queries = {}) => buildQuery('/service', queries),
 };
+
+export const notifications = {
+  base: '/notification',
+  list: (queries = {}) => buildQuery('/notification/list', queries),
+  actions: {
+    makeItRead: '/notification',
+    delete: '/notification',
+  },
+};

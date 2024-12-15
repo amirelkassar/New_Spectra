@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 
 export const Input = ({ indicator = '', ...props }) => {
   return (
-    <div className='relative w-full max-w-36 lg:max-w-48 text-xs lg:text-base font-bold'>
+    <div className='relative w-full max-w-72 text-xs lg:text-base font-bold'>
       <input
         {...props}
         type='text'

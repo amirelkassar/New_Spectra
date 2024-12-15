@@ -27,10 +27,10 @@ export const ServicesSelect = ({
   }, [selectedFreelance, selectedSpectra]);
 
   const handleSelect = useCallback(
-    (id, type) => {
-      if (type === 'freelance') onFreelanceSelect(id);
+    (service, type) => {
+      if (type === 'freelance') onFreelanceSelect(service);
 
-      if (type === 'spectra') onSpectraSelect(id);
+      if (type === 'spectra') onSpectraSelect(service);
     },
     [onFreelanceSelect, onSpectraSelect]
   );
@@ -50,8 +50,7 @@ export const ServicesSelect = ({
             aria-pressed={isFreelanceSelected}
             onClick={(e) => {
               e.stopPropagation();
-              if (!isFreelanceSelected)
-                handleSelect(s.id, 'freelance');
+              if (!isFreelanceSelected) handleSelect(s, 'freelance');
             }}
           >
             freelance
@@ -60,7 +59,7 @@ export const ServicesSelect = ({
             aria-pressed={isSpectraSelected}
             onClick={(e) => {
               e.stopPropagation();
-              if (!isSpectraSelected) handleSelect(s.id, 'spectra');
+              if (!isSpectraSelected) handleSelect(s, 'spectra');
             }}
           >
             spectra team

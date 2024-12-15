@@ -15,7 +15,7 @@ import {
   BackButton,
 } from '@/app/[locale]/(dashboard)/client/_components/ui';
 import { useLocale } from 'next-intl';
-import { PackageIcon } from '../../_components/package-icon';
+import { PackageIcon } from '../../../../../../../../../components/packages/package-icon';
 import { useMemo } from 'react';
 import { EditButton } from '@/components/buttons/edit-button';
 import ROUTES from '@/routes';

@@ -1,3 +1,5 @@
+'use client';
+
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
 import { Container, SectionHeading } from '@/guest/_components/ui';

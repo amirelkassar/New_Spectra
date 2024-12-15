@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useId, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Service } from './ui';
 
 export const ServiceInfo = ({
@@ -8,46 +8,22 @@ export const ServiceInfo = ({
   name = '',
   price = 0,
   terms = '',
-  fee = 30 / 100,
-  editable = false,
+  employeePercentage = 0,
   deletable = false,
   onDelete = () => {},
-  value = '',
-  onValueChange = () => {},
 }) => {
-  const randomName = useId();
-
   const netEarnings = useMemo(() => {
-    if ((!price && !value) || !fee) return '0';
-    if (isNaN(+value) || isNaN(+price) || isNaN(+fee))
-      return '0';
-    const net = editable
-      ? +value - +value * fee
-      : price - price * fee;
+    if (!price && !employeePercentage) return '0';
+    if (!employeePercentage) return price.toLocaleString();
+    if (isNaN(+employeePercentage) || isNaN(+price)) return '--';
+
+    const net = price * (employeePercentage / 100);
     return Math.round(net, 2).toLocaleString();
-  }, [price, fee, editable, value]);
-
-  const onChange = useCallback(
-    (e) => {
-      const { value } = e.target;
-
-      if (!/^\d*$/.test(value)) return;
-
-      onValueChange(value);
-    },
-    [onValueChange]
-  );
-
-  const onPaste = useCallback((e) => {
-    const pasteData = e.clipboardData.getData('text');
-    if (!/^\d*$/.test(pasteData)) {
-      e.preventDefault();
-    }
-  }, []);
+  }, [price, employeePercentage]);
 
   return (
-    <Service className='flex gap-3'>
-      {(editable || deletable) && (
+    <Service data-id={id} className='flex gap-3'>
+      {deletable && (
         <div>
           <Service.Delete
             onClick={(e) => {
@@ -60,34 +36,18 @@ export const ServiceInfo = ({
       <div className='space-y-2 flex-1'>
         <div className='flex flex-col lg:flex-row gap-2 lg:justify-between lg:items-start'>
           <div className='flex items-center justify-between lg:justify-start gap-3'>
-            <h4 className='text-xs lg:text-base shrink-0 capitalize min-w-52'>
+            <h4 className='text-xs mdl:text-base shrink-0 capitalize'>
               {name}
             </h4>
-            {editable && (
-              <Service.PriceInput
-                name={randomName}
-                value={value}
-                placeholder='Write Your Price...'
-                indicator='$'
-                onChange={onChange}
-                onPaste={onPaste}
-              />
-            )}
-            {!editable && (
-              <Service.PriceInput
-                id={id}
-                name={randomName}
-                defaultValue={price?.toLocaleString()}
-                readOnly
-              />
-            )}
+
+            <Service.Price>{price?.toLocaleString()}</Service.Price>
           </div>
 
           <div className='flex items-center justify-between lg:block space-y-2 gap-3'>
-            <span className='text-grayDark text-xs lg:text-base lg:text-center block'>
+            <span className='text-grayDark text-xs mdl:text-base lg:text-center block'>
               Net Earnings
             </span>
-            <Service.NetEarnings>
+            <Service.NetEarnings currancy='SAR'>
               {netEarnings?.toLocaleString()}
             </Service.NetEarnings>
           </div>

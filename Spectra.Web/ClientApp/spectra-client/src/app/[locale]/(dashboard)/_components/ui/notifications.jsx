@@ -1,14 +1,19 @@
 'use client';
 
-import { Popover } from '@mantine/core';
-import { Notification } from '@mantine/core';
-import { Divider } from '@mantine/core';
-
-import NotificationIcon from '@/assets/icons/notification';
-import { getDate } from '@/lib/utils';
 import { useLocale } from 'next-intl';
+import { useEffect, useState } from 'react';
+import { Popover } from '@mantine/core';
+import { Divider } from '@mantine/core';
 import { Link } from '@/i18n/routing';
+import { Notification } from '@mantine/core';
+
+import { getDate } from '@/lib/utils';
+
 import ROUTES from '@/routes';
+import NotificationIcon from '@/assets/icons/notification';
+import { startSignalR, stopSignalR } from '@/lib/signalr';
+import { useToken } from '@/hooks/use-token';
+import { NOTIFICATIONS_HUB_URL } from '@/api/signalr';
 
 const NOTIFICATIONS = [
   {
@@ -29,6 +34,30 @@ const NOTIFICATIONS = [
 
 export const Notifications = () => {
   const locale = useLocale();
+
+  const { token } = useToken();
+
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    // رابط الـ Hub الخاص بك
+
+    // return console.log(NOTIFICATIONS_HUB_URL);
+
+    // تفعيل الاتصال
+    startSignalR(NOTIFICATIONS_HUB_URL, token, (data) => {
+      console.log('Notification received!');
+      console.log(data);
+      if (!data) return;
+      setNotifications((prev) => [...prev, data]); // إضافة الإشعار الجديد إلى القائمة
+    });
+
+    // تنظيف الاتصال عند خروج المكوّن
+    return () => {
+      stopSignalR();
+    };
+  }, [token]);
+
   return (
     <Popover
       position='bottom-end'

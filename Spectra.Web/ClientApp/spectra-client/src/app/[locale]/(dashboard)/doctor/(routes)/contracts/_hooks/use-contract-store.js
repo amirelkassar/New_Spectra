@@ -8,37 +8,34 @@ const ContractContext = createContext(undefined);
 export const ContractProvider = ({
   children,
   initialState = {
-    allServices: [],
     freelancer: [],
     spectraTeam: [],
     workDays: {
       hoursPerDay: '',
       daysPerWeek: '',
     },
+    freelanceEmployeePercentage: '',
   },
 }) => {
   const [store] = useState(() =>
-    createStore((set, get) => ({
-      allServices: initialState?.allServices || [],
-
+    createStore((set) => ({
       freelancer: initialState?.freelancer || [],
 
       spectraTeam: initialState?.spectraTeam || [],
 
       selectedFreelanceIds:
-        initialState?.freelancer?.map(
-          (service) => service.id
-        ) || [],
+        initialState?.freelancer?.map((service) => service.id) || [],
 
       selectedSpectraTeamIds:
-        initialState?.spectraTeam?.map(
-          (service) => service.id
-        ) || [],
+        initialState?.spectraTeam?.map((service) => service.id) || [],
 
       workDays: initialState?.workDays || {
         hoursPerDay: '',
         daysPerWeek: '',
       },
+
+      freelanceEmployeePercentage:
+        initialState?.freelanceEmployeePercentage || '',
 
       isChatOpen: false,
 
@@ -51,36 +48,41 @@ export const ContractProvider = ({
 
       setWorkDays: (workDays) => set(() => ({ workDays })),
 
-      setSelectedFreelanceIds: (serviceId) => {
-        const service = get().allServices.find(
-          (service) => service.id === serviceId
-        );
+      setfreelanceEmployeePercentage: (freelanceEmployeePercentage) =>
+        set(() => {
+          if (freelanceEmployeePercentage > 70)
+            return {
+              freelanceEmployeePercentage: '70',
+            };
 
-        if (!service) return;
+          if (freelanceEmployeePercentage < 0)
+            return {
+              freelanceEmployeePercentage: '0',
+            };
 
+          return {
+            freelanceEmployeePercentage,
+          };
+        }),
+
+      setSelectedFreelanceIds: (service) => {
         set((state) => {
           return {
             selectedFreelanceIds: [
               ...state.selectedFreelanceIds,
-              serviceId,
+              service.id,
             ],
             freelancer: [...state.freelancer, service],
           };
         });
       },
 
-      setSelectedSpectraTeamIds: (serviceId) => {
-        const service = get().allServices.find(
-          (service) => service.id === serviceId
-        );
-
-        if (!service) return;
-
+      setSelectedSpectraTeamIds: (service) => {
         set((state) => {
           return {
             selectedSpectraTeamIds: [
               ...state.selectedSpectraTeamIds,
-              serviceId,
+              service.id,
             ],
             spectraTeam: [...state.spectraTeam, service],
           };
@@ -93,22 +95,18 @@ export const ContractProvider = ({
         set((state) => {
           if (category === 'freelancer') {
             const freelancer = state.freelancer;
-            const selectedFreelanceIds =
-              state.selectedFreelanceIds;
+            const selectedFreelanceIds = state.selectedFreelanceIds;
 
             const updatedFreelancer = freelancer.filter(
               (s) => s.id !== serviceId
             );
 
             const updatedSelectedFreelanceIds =
-              selectedFreelanceIds.filter(
-                (s) => s !== serviceId
-              );
+              selectedFreelanceIds.filter((s) => s !== serviceId);
 
             return {
               freelancer: updatedFreelancer,
-              selectedFreelanceIds:
-                updatedSelectedFreelanceIds,
+              selectedFreelanceIds: updatedSelectedFreelanceIds,
             };
           } else {
             const spectraTeam = state.spectraTeam;
@@ -120,39 +118,13 @@ export const ContractProvider = ({
             );
 
             const updatedSelectedSpectraTeamIds =
-              selectedSpectraTeamIds.filter(
-                (s) => s !== serviceId
-              );
+              selectedSpectraTeamIds.filter((s) => s !== serviceId);
 
             return {
               spectraTeam: updatedSpectraTeam,
-              selectedSpectraTeamIds:
-                updatedSelectedSpectraTeamIds,
+              selectedSpectraTeamIds: updatedSelectedSpectraTeamIds,
             };
           }
-        });
-      },
-
-      setFreelancerPrice: (newPrice, serviceId) => {
-        if (!serviceId) return;
-
-        set((state) => {
-          const freelancer = state.freelancer;
-
-          const updatedFreelancer = freelancer.map((s) => {
-            if (s.id === serviceId) {
-              return {
-                ...s,
-                price: newPrice,
-              };
-            }
-
-            return s;
-          });
-
-          return {
-            freelancer: updatedFreelancer,
-          };
         });
       },
     }))

@@ -1,9 +1,6 @@
-import {
-  Header,
-  Footer,
-} from '@/guest/_components/layouts';
+import { Header, Footer } from '@/guest/_components/layouts';
 
-const Layout = ({ children }) => {
+const Layout = async ({ children }) => {
   return (
     <div className='overflow-hidden relative'>
       <Header />
