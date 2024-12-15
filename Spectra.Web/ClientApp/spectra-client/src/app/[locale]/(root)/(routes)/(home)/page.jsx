@@ -15,7 +15,6 @@ import {
 } from '@/guest/_components/sections';
 import {
   WHAT_WE_CURE,
-  SERVICES_1,
   ABOUT_US,
   TESTIMONIALS,
   STATISTICS,
@@ -31,7 +30,7 @@ export default function Homepage() {
   return (
     <main>
       <HomeIntro />
-      <Services data={SERVICES_1} />
+      <Services />
       <WhatWeCure data={WHAT_WE_CURE} showOther />
       <Wrapper>
         <AboutUs data={ABOUT_US} />
