@@ -14,8 +14,8 @@ import {
   H1,
   BackButton,
 } from '@/app/[locale]/(dashboard)/client/_components/ui';
-import { useLocale } from 'next-intl';
-import { PackageIcon } from '../../_components/package-icon';
+import { useLocale, useTranslations } from 'next-intl';
+import { PackageIcon } from '../../../../../../../../../components/packages/package-icon';
 import { useMemo } from 'react';
 import { EditButton } from '@/components/buttons/edit-button';
 import ROUTES from '@/routes';
@@ -34,6 +34,9 @@ export const ViewPackage = ({ id }) => {
 
 export const Package = ({ data = {} }) => {
   const locale = useLocale();
+
+  const t = useTranslations('packages_obj');
+  const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
@@ -77,7 +80,9 @@ export const Package = ({ data = {} }) => {
       <Card className='h-full'>
         <div className='flex items-center gap-5 mb-10'>
           <BackButton />
-          <H1>الباقات - {name}</H1>
+          <H1>
+            {t('title')} - {name}
+          </H1>
         </div>
         <div className='max-w-[1600px] mx-auto'>
           <PackageBadge
@@ -89,13 +94,13 @@ export const Package = ({ data = {} }) => {
             icon={<PackageIcon iconCode={iconCode} />}
           />
 
-          <PackageContent content={services} />
+          <PackageContent locale={locale} content={services} />
 
-          <PackageGoals goals={goals} />
+          <PackageGoals locale={locale} goals={goals} />
         </div>
       </Card>
 
-      <Card title='الصورة الدعائية'>
+      <Card title={t('photo')}>
         {path ? (
           <Image
             src={path}
@@ -106,7 +111,7 @@ export const Package = ({ data = {} }) => {
           />
         ) : (
           <p className='h-32 mdl:h-52 w-full flex items-center justify-center border-2 border-grayLight rounded-xl'>
-            لا يوجد صورة!
+            {tg('not_photo')}
           </p>
         )}
       </Card>
@@ -122,7 +127,7 @@ export const Package = ({ data = {} }) => {
         }}
         className='bg-white border-2 w-full mdl:max-w-xs transition hover:border-greenMain rounded-3xl'
       >
-        تعديل
+        {tg('edit')}
       </EditButton>
     </div>
   );

@@ -1,4 +1,4 @@
-import { MOBILE_APP, TEAM, WHY_US } from '@/data';
+import { MOBILE_APP, WHY_US } from '@/data';
 import {
   MobileApp,
   SpectraLicenses,
@@ -11,7 +11,7 @@ const TeamPage = () => {
   return (
     <main>
       <TeamIntro />
-      <Team data={TEAM} />
+      <Team />
       <Wrapper>
         <WhyUs data={WHY_US} />
       </Wrapper>

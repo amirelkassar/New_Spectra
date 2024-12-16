@@ -15,11 +15,7 @@ export const contractCase = {
 
 const Layout = async ({ children }) => {
   return (
-    <ContractProvider
-      initialState={{
-        allServices: await getServices(),
-      }}
-    >
+    <ContractProvider>
       <div
         data-case={contractCase[0]}
         className='my-5 md:m-0 md:p-5 lg:p-3 md:h-full flex flex-col'
@@ -37,33 +33,3 @@ const Layout = async ({ children }) => {
 };
 
 export default Layout;
-
-async function getServices() {
-  return [
-    {
-      id: 1,
-      name: 'Examination Service',
-      price: 100,
-    },
-    {
-      id: 2,
-      name: 'Counseling Service',
-      price: 200,
-    },
-    {
-      id: 3,
-      name: 'Diagnostic Service',
-      price: 300,
-    },
-    {
-      id: 4,
-      name: 'Follow-up Service',
-      price: 400,
-    },
-    {
-      id: 5,
-      name: 'Treatment Service',
-      price: '',
-    },
-  ];
-}

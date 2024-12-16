@@ -22,5 +22,15 @@
   "subscribe_now": "Subscribe Now",
   "we_accept_instalments_from": "We accept installment payments from",
   "join_as_doctor": "Join as a doctor",
-  "hello": "Hello"
+  "hello": "Hello",
+  "general_obj": {
+    "edit": "Edit",
+    "not_photo": "No photo available!"
+  },
+  "packages_obj": {
+    "title": "Packages",
+    "content": "Package content",
+    "goals": "Package goals",
+    "photo": "Package photo"
+  }
 }

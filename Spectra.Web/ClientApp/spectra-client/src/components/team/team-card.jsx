@@ -49,7 +49,7 @@ const Profession = ({ children, ...props }) => {
     <p
       {...props}
       className={cn(
-        'text-sm mdl:text-xl text-center',
+        'text-sm mdl:text-xl text-center max-w-40 mx-auto',
         props?.className
       )}
     >

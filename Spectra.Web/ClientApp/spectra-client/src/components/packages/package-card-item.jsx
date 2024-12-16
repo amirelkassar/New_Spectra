@@ -23,7 +23,7 @@ const PackageBtn = ({ children, ...props }) => {
       {...props}
       variant={props?.variant || 'secondary'}
       className={cn(
-        'font-bold w-full block py-2 text-sm mdl:text-base',
+        'font-bold w-full block py-2 text-sm mdl:text-base mt-auto',
         props?.className
       )}
     >
@@ -44,10 +44,7 @@ const PackageList = ({ features = [], ...props }) => {
       )}
     >
       {features.map((feature) => (
-        <li
-          key={feature}
-          className='flex items-center gap-2 py-1'
-        >
+        <li key={feature} className='flex items-center gap-2 py-1'>
           <CircleCheck className='size-4 text-greenMain' />
           <span>{feature}</span>
         </li>
@@ -58,24 +55,18 @@ const PackageList = ({ features = [], ...props }) => {
 
 PackageCardItem.List = PackageList;
 
-const PackagePrice = ({
-  children,
-  currancy = '',
-  ...props
-}) => {
+const PackagePrice = ({ children, currancy = '', ...props }) => {
   return (
     <p
       {...props}
       dir='ltr'
       className={cn(
-        'mdl:text-4xl text-2xl text-greenMain font-Bold w-fit',
+        'mdl:text-4xl text-2xl text-greenMain font-Bold w-fit text-nowrap',
         props?.className
       )}
     >
       {children}{' '}
-      <span className='text-base mdl:text-xl'>
-        {currancy}
-      </span>
+      <span className='text-base mdl:text-xl'>{currancy}</span>
     </p>
   );
 };
@@ -88,7 +79,7 @@ const Discount = ({ children, ...props }) => {
       {...props}
       dir='ltr'
       className={cn(
-        'bg-greenMain text-xs text-white mdl:text-base font-bold rtl:rounded-tr-xl ltr:rounded-tl-xl px-3 py-1',
+        'bg-greenMain text-xs text-white mdl:text-base font-bold rtl:rounded-tr-xl ltr:rounded-tl-xl px-3 py-1 text-nowrap',
         props?.className
       )}
     >
@@ -132,15 +123,13 @@ const PriceWithDiscount = ({
       <div
         {...props}
         className={cn(
-          'flex items-center gap-2',
+          'flex items-start gap-2 flex-wrap',
           props?.className
         )}
       >
         <PackagePrice>
           {priceWithDiscount}{' '}
-          <span className='text-base mdl:text-xl'>
-            {currancy}
-          </span>
+          <span className='text-base mdl:text-xl'>{currancy}</span>
         </PackagePrice>
         <Discount>{discount}</Discount>
       </div>

@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
 import Button from './button';
+import { Toast } from './toast';
 
 export const QueryInvalidateButton = () => {
   if (process.env.NODE_ENV === 'development') {
@@ -31,6 +33,22 @@ const InvalidateButton = () => {
       variant='secondary'
     >
       Invalidate
+    </Button>
+  );
+};
+
+const ToastButton = () => {
+  const onClick = () => {
+    Toast.Notification('تم تسجيل مقدم خدمة جديد');
+  };
+
+  return (
+    <Button
+      className='fixed top-24 end-10 z-[999]'
+      onClick={onClick}
+      variant='secondary'
+    >
+      toast
     </Button>
   );
 };

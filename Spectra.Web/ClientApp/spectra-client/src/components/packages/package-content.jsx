@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 export const PackageContent = ({
   content = [],
@@ -6,6 +7,8 @@ export const PackageContent = ({
   locale = 'ar',
 }) => {
   const key = locale === 'ar' ? 'arName' : 'enName';
+
+  const t = useTranslations('packages_obj');
 
   return (
     <div
@@ -16,7 +19,7 @@ export const PackageContent = ({
     >
       <div className='p-5'>
         <h4 className='text-sm mdl:text-xl font-bold'>
-          محتوي الباقة
+          {t('content')}
         </h4>
 
         <ul className='p-5'>

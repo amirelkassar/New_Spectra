@@ -5,7 +5,7 @@ import { ServicesSelect } from '../../_components/ui';
 import { useContractStore } from '../../_hooks';
 
 export const ChooseServices = () => {
-  const { data, isLoading, isError } = useUserServices({
+  const { data, isPending, isError } = useUserServices({
     pageNum: 'all',
     serviceType: 1,
   });
@@ -29,7 +29,7 @@ export const ChooseServices = () => {
   return (
     <ServicesSelect
       data={data?.data?.items}
-      isLoading={isLoading}
+      isLoading={isPending}
       isError={isError}
       isDataEmpty={!data?.data?.totalCount}
       selectedFreelance={selectedFreelanceIds}

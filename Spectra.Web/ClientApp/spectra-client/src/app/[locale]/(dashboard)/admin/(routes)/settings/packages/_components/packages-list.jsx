@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl';
 import { PackageCardItem } from '@/components/packages';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { usePackages } from '@/hooks/queries/admin/settings/packages';
-import { PackageIcon } from './package-icon';
+import { PackageIcon } from '@/components/packages/package-icon';
 import { ActionButtons } from '@/components/buttons/action-buttons';
 import ROUTES from '@/routes';
 import { useDeletePacakge } from '../_hooks/use-delete-package';

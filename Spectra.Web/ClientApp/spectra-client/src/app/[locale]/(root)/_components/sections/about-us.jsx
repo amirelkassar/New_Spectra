@@ -1,10 +1,7 @@
 import Image from 'next/image';
 
 import CheckHeartIcon from '@/assets/icons/check-heart';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
 export const AboutUs = ({
   data = {
@@ -29,7 +26,7 @@ export const AboutUs = ({
           src={data?.image}
           alt='about-us-img'
           priority
-          className='object-contain w-auto h-full object-center col-span-1 max-w-56 mdl:max-w-[414px] mx-auto min-w-56 lgl:min-w-[414px]'
+          className='object-contain w-full h-auto object-center col-span-1 max-w-56 mdl:max-w-[414px] mx-auto flex-1'
           width={414}
           height={442}
         />

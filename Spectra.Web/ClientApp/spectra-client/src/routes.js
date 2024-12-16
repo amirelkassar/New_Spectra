@@ -7,6 +7,7 @@ const ROUTES = {
     SERVICES: '/services',
     VIEW_SERVICE: '/services/:id',
     PACKAGES: '/packages',
+    VIEW_PACKAGE: '/packages/:id',
     TREATMENT: '/treatment',
     SUCCESS_STORIES: '/success-stories',
     BLOG: '/blog',

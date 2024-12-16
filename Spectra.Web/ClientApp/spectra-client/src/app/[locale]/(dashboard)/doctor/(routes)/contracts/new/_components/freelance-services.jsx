@@ -13,8 +13,8 @@ export const FreelanceServices = () => {
 
   const remove = useContractStore((s) => s.removeService);
 
-  const setPrice = useContractStore(
-    (s) => s.setFreelancerPrice
+  const percentage = useContractStore(
+    (state) => state.freelanceEmployeePercentage
   );
 
   if (!freelancer?.length)
@@ -24,14 +24,14 @@ export const FreelanceServices = () => {
     <div>
       {freelancer.map((s) => (
         <MemoizedServiceInfo
-          key={s.id}
-          id={s.id}
-          name={s.name}
-          value={s.price}
-          onValueChange={(price) => setPrice(price, s.id)}
-          editable
+          key={s?.id}
+          id={s?.id}
+          name={s?.enName}
+          price={s?.price}
+          employeePercentage={percentage}
           deletable
-          onDelete={() => remove(s.id, 'freelancer')}
+          onDelete={() => remove(s?.id, 'freelancer')}
+          terms={s?.enTermsAndConditions}
         />
       ))}
     </div>

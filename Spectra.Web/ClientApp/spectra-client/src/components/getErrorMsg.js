@@ -16,7 +16,8 @@ const GetErrorMsg = (error, title) => {
   if (!Object?.keys(messages)?.length) return '';
 
   if (title === 'general') {
-    if (code === 401) return 'لا تملك الصلاحيات الكافية';
+    if (code === 401 || code === 403)
+      return 'لا تملك الصلاحيات الكافية';
     const generalError = generalErrorKeys.find(
       (key) => messages[key]
     );

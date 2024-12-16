@@ -1,17 +1,24 @@
-import { MOBILE_APP, TEAM } from '@/data';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+
+import { MOBILE_APP } from '@/data';
 import { MobileApp } from '@/guest/_components/sections';
 import { DoctorInfo } from './_components/doctor-info';
 import { DoctorReviews } from './_components/doctor-reviews';
+import { prefetchPublicMedicalProvidersById } from '@/hooks/queries/public/medical-provider';
 
-const DoctorPage = ({ params }) => {
+const DoctorPage = async ({ params }) => {
   const doctorId = params?.doctorId || '';
 
-  const data = TEAM.find((item) => item.id === doctorId);
+  const queryClient = await prefetchPublicMedicalProvidersById(
+    doctorId
+  );
 
   return (
     <main>
-      <DoctorInfo doctor={data} />
-      <DoctorReviews data={data.reviews} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <DoctorInfo id={doctorId} />
+        <DoctorReviews />
+      </HydrationBoundary>
       <MobileApp data={MOBILE_APP} />
     </main>
   );

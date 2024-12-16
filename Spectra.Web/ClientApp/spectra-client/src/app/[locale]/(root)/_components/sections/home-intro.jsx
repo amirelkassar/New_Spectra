@@ -5,7 +5,7 @@ import Button from '@/components/button';
 import HeroSectionImg from '@/assets/images/hero-section-img.png';
 import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
 import PlayIcon from '@/assets/icons/play';
-import { Container } from '@/guest/_components/ui';
+import { Container, IntroVideo } from '@/guest/_components/ui';
 
 export const HomeIntro = () => {
   return (
@@ -27,9 +27,8 @@ export const HomeIntro = () => {
             بحب و إبداع
           </h1>
           <p className='text-black text-sm mdl:text-xl mdl:max-w-[80%]'>
-            سبيكترا هو أول مركز طب اتصالي ورعاية عن بعد
-            لتشخيص وعلاج الاضطرابات النمائية والسلوكية
-            والنفسية للأطفال
+            سبيكترا هو أول مركز طب اتصالي ورعاية عن بعد لتشخيص وعلاج
+            الاضطرابات النمائية والسلوكية والنفسية للأطفال
           </p>
         </div>
 
@@ -60,13 +59,15 @@ export const HomeIntro = () => {
         >
           احجز استشارة مدفوعة لمدة 30د
         </Button>
-        <Button
-          className='w-full mdl:max-w-80 mdl:text-xl'
-          aria-label='تعرف علينا'
-        >
-          <PlayIcon className='size-5 mdl:size-6 text-greenMain' />
-          تعرف علينا
-        </Button>
+        <IntroVideo>
+          <Button
+            className='w-full mdl:max-w-80 mdl:text-xl'
+            aria-label='تعرف علينا'
+          >
+            <PlayIcon className='size-5 mdl:size-6 text-greenMain' />
+            تعرف علينا
+          </Button>
+        </IntroVideo>
       </div>
     </Container>
   );
