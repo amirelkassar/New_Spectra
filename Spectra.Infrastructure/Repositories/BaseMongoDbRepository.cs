@@ -63,10 +63,10 @@ namespace Spectra.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<IFindFluent<T, T>> GetQueryAsync(Expression<Func<T, bool>> filter = null, FindOptions options = null, int skipCount = 0, int maxCount = 100)
+        public async Task<IQueryable<T>> GetQueryAsync(Expression<Func<T, bool>> filter = null)
         {
             filter ??= _ => true;
-            var query = _collection.Find(filter, options);
+            var query = _collection.AsQueryable().Where(filter);
             await Task.CompletedTask;
             return query;
         }

@@ -22,6 +22,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public double? Discount { get; set; }
         public string? ArTermsAndConditions { get; set; }
         public string? EnTermsAndConditions { get; set; }
+        public bool? EnableForFreeLancer { get; set; }
+        public bool? EnableForSpectraTeam { get; set; }
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<string>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }

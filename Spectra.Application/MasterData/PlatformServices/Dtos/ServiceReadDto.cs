@@ -19,6 +19,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Dtos
         public ICollection<ServiceSpecification>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
         public string? HeroImagePath { get; set; }
+        public bool? EnableForFreeLancer { get; set; }
+        public bool? EnableForSpectraTeam { get; set; }
 
     }
 }

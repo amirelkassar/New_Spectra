@@ -1,43 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.PlatformServices.Queries;
 using Spectra.Application.MasterData.ServicesMD.Queries;
 using Spectra.Application.MasterData.ServicesMD.Services;
 using Spectra.Domain.Shared.Common;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {
-    public class ServiceController(ILogger<ServiceController> logger, ICurrentUser currentUser, IServiceMDService serviceMDService) : PublicControllerBase<ServiceController>(logger, currentUser)
+    public class ServiceController(ILogger<ServiceController> logger,
+        ICurrentUser currentUser,
+        IMediator mediator) : PublicControllerBase<ServiceController>(logger, currentUser)
     {
-        private readonly IServiceMDService _serviceMDService = serviceMDService;
-
+        private readonly IMediator _mediator = mediator;
 
         [HttpGet("list")]
-        public async Task<ActionResult> GetAllForListing([FromQuery] GetAllServiceForListingQuery input)
+        public async Task<ActionResult> GetAllForListing([FromQuery] GetAllPublicServiceListQuery input)
         {
-            var masterDataServices = await _serviceMDService.GetAllForListing(input);
+            var masterDataServices = await _mediator.Send(input);
 
             return Ok(masterDataServices);
         }
 
 
         [HttpGet("list-display")]
-        public async Task<ActionResult> GetAllForDisplaying([FromQuery] QueryPaginationParam input)
+        public async Task<ActionResult> GetAllForDisplaying([FromQuery] GetAllPublicServiceListQuery input)
         {
-            var masterDataServices = await _serviceMDService.GetAllServices(new GetAllServicesMDQuery
-            { 
-                MaxCount = input.MaxCount,
-                SkipCount = input.SkipCount,
-                ServiceType=Domain.Shared.Enums.ServiceTypes.PublicService
-            });
+            var masterDataServices = await _mediator.Send(input);
 
             return Ok(masterDataServices);
         }
 
         [HttpGet()]
-        public async Task<ActionResult> GetById([FromQuery] GetServicesMDByIdQuery input)
+        public async Task<ActionResult> GetById([FromQuery] GetPublicServiceByIdQuery input)
         {
-            var masterDataService = await _serviceMDService.GetServicesMById(input.Id);
+            var masterDataService = await _mediator.Send(input);
             return Ok(masterDataService);
         }
     }
