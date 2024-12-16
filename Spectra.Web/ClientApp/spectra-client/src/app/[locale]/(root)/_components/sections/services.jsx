@@ -33,7 +33,7 @@ export const Services = ({ title = 'الخدمات المقدمة' }) => {
           <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
             {data?.slice(0, 3)?.map((item, index) => (
               <Service
-                key={item.label}
+                key={item.enName}
                 index={index + 1}
                 locale={locale}
                 {...item}

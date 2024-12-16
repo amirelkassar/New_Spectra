@@ -25,3 +25,12 @@ export const packages = {
     get: (id) => `/package?id=${id}`,
   },
 };
+
+export const medicalProviders = {
+  base: '/medicalprovider',
+  list: (queries = {}) =>
+    buildQuery('/medicalprovider/list', queries),
+  actions: {
+    get: (id) => `/medicalprovider?id=${id}`,
+  },
+};

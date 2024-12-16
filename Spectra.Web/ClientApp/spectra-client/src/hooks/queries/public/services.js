@@ -12,7 +12,7 @@ export const prefetchPublicServices = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [initialQueryKey, initialQueries],
+    queryKey: [initialQueryKey],
     queryFn: getPublicServices,
   });
 

@@ -5,6 +5,12 @@ import {
   initialQueryKey as servicesInitialQueryKey,
 } from './services';
 
+import {
+  initialQueryKey as providersInitialQueryKey,
+  initialQueries as providersInitialQueries,
+  getPublicMedicalProviders,
+} from './medical-provider';
+
 export const prefetchLandingPageData = async () => {
   const queryClient = new QueryClient();
 
@@ -12,6 +18,11 @@ export const prefetchLandingPageData = async () => {
     queryClient.prefetchQuery({
       queryKey: [servicesInitialQueryKey],
       queryFn: getPublicServices,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: [providersInitialQueryKey, providersInitialQueries],
+      queryFn: () =>
+        getPublicMedicalProviders(providersInitialQueries),
     }),
   ]);
 

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Container,
   Carousel,
@@ -6,8 +8,12 @@ import {
 import { TeamMember } from '../ui/team-member';
 import { ShowMoreButton } from '@/components/buttons/show-more-button';
 import ROUTES from '@/routes';
+import { usePublicMedicalProviders } from '@/hooks/queries/public/medical-provider';
+import { QueryWrapper } from '@/components/query-wrapper';
 
 export const OurMedicalTeam = () => {
+  const query = usePublicMedicalProviders();
+
   return (
     <Container
       aria-label='Our Medical Team'
@@ -23,57 +29,38 @@ export const OurMedicalTeam = () => {
           جميع التخصصات
         </ShowMoreButton>
       </div>
-      <div className='space-y-5'>
-        <div>
-          <h3 className='text-center font-bold text-base mdl:text-xl'>
-            اخصائيين التوحد
-          </h3>
-          <Carousel>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <TeamMember />
-            </Carousel.Slide>
-          </Carousel>
-        </div>
-        <h3 className='text-center font-bold text-base mdl:text-xl'>
-          اخصائيين التغذية
-        </h3>
 
+      <QueryWrapper query={query}>
+        {({ data }) => <RenderTeam data={data} />}
+      </QueryWrapper>
+    </Container>
+  );
+};
+
+const RenderTeam = ({ data }) => {
+  return (
+    <div className='space-y-5'>
+      <div>
+        {/* <h3 className='text-center font-bold text-base mdl:text-xl'>
+          اخصائيين التوحد
+        </h3> */}
         <Carousel>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <TeamMember />
-          </Carousel.Slide>
+          {data?.map((member) => (
+            <Carousel.Slide key={member.id}>
+              <TeamMember {...member} />
+            </Carousel.Slide>
+          ))}
         </Carousel>
       </div>
-    </Container>
+      {/* <h3 className='text-center font-bold text-base mdl:text-xl'>
+      اخصائيين التغذية
+    </h3>
+
+    <Carousel>
+      <Carousel.Slide>
+        <TeamMember />
+      </Carousel.Slide>
+    </Carousel> */}
+    </div>
   );
 };
