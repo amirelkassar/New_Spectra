@@ -63,12 +63,10 @@ namespace Spectra.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<IQueryable<T>> GetQueryAsync(Expression<Func<T, bool>> filter = null)
+        public async Task<IMongoCollection<T>> GetCollectionAsync()
         {
-            filter ??= _ => true;
-            var query = _collection.AsQueryable().Where(filter);
             await Task.CompletedTask;
-            return query;
+            return _collection;
         }
 
         public async Task UpdateAsync(T input)

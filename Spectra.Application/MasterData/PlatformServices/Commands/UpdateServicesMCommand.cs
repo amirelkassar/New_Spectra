@@ -57,6 +57,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
                 entity.Discount = request.Discount;
                 entity.Reports = request.Reports;
                 entity.Contents = request.Contents;
+                entity.EnableForFreeLancer = request.EnableForFreeLancer;
+                entity.EnableForSpectraTeam = request.EnableForSpectraTeam;
                 string newImgaePath;
 
                 if (request.Specifications is not null && request.Specifications.Count > 0)
