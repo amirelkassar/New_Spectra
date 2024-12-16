@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using System.Linq.Expressions;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.Queries
@@ -16,6 +18,7 @@ namespace Spectra.Application.Employees.Queries
     {
         public string? Search { get; set; }
         public JobTypes JobType { get; set; }
+        public string? MainSpecializationId { get; set; }
 
         public class GetMedicalProvderListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository,
             IWebHostEnvironment webHostEnvironment,
@@ -29,36 +32,42 @@ namespace Spectra.Application.Employees.Queries
             {
                 IEnumerable<Employee> employees = null;
                 long totalCount = 0;
+                Expression<Func<Employee, bool>> condition = e => e.Id == e.Id;
                 if (!string.IsNullOrWhiteSpace(request.Search))
                 {
-                    var (entities, total) = await _doctorRepository.GetAllAsync(s => (s.JobType == JobTypes.Doctor || s.JobType == JobTypes.Specialist)
-               && (s.Name.FirstName.ToLower().StartsWith(request.Search)
-               || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
-               || s.MainSpecializationEnName.ToLower().StartsWith(request.Search)
-               || s.MainSpecializationArName.StartsWith(request.Search)
-               || s.SectionEnName.ToLower().StartsWith(request.Search)
-               || s.SectionArEnName.StartsWith(request.Search)
-               || s.LicenseNumber.ToLower().StartsWith(request.Search)
-               || s.SectionId.ToLower() == request.Search
-               || s.MainSpecializationId.ToLower() == request.Search
-               || s.Specializations.Any(sp => sp.EnName.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
-               || s.Services.Any(ser => ser.EnName.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search)),
-                   null,
-                   request.SkipCount,
-                   request.MaxCount);
+                    condition.And(s => s.Name.FirstName.ToLower().StartsWith(request.Search)
+                       || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
+                       || s.MainSpecializationEnName.ToLower().StartsWith(request.Search)
+                       || s.MainSpecializationArName.StartsWith(request.Search)
+                       || s.SectionEnName.ToLower().StartsWith(request.Search)
+                       || s.SectionArEnName.StartsWith(request.Search)
+                       || s.LicenseNumber.ToLower().StartsWith(request.Search)
+                       || s.SectionId.ToLower() == request.Search
+                       || s.MainSpecializationId.ToLower() == request.Search
+                       || s.Specializations.Any(sp => sp.EnName.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
+                       || s.Services.Any(ser => ser.EnName.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search));
+                }
 
-                    employees = entities;
-                    totalCount = total;
+                if(!string.IsNullOrWhiteSpace(request.MainSpecializationId))
+                {
+                    condition.And(e => e.MainSpecializationId == request.MainSpecializationId);
+                }
+
+                if (request.JobType !=null)
+                {
+                    condition.And(e => e.JobType == request.JobType);
                 }
                 else
                 {
-                    var (entities, total) = await _doctorRepository.GetAllAsync(s => s.JobType == JobTypes.Doctor || s.JobType == JobTypes.Specialist,
-                   null,
-                   request.SkipCount,
-                   request.MaxCount);
-                    employees = entities;
-                    totalCount = total;
+                    condition.And(e => e.JobType == JobTypes.Specialist || e.JobType==JobTypes.Doctor);
                 }
+
+                var (entities, total) = await _doctorRepository.GetAllAsync(condition,
+                  null,
+                  request.SkipCount,
+                  request.MaxCount);
+                employees = entities;
+                totalCount = total;
                 var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
                 foreach (var dto in dtos.Where(e => e.UserImage is not null).ToArray())
                 {

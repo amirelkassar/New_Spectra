@@ -74,7 +74,7 @@ namespace Spectra.Application.Contracts.Commands
                     {
                         ServiceId = service.Id,
                         ServiceName = service.EnName,
-                        Duration = requestService.Duration,
+                        Duration = TimeSpan.FromMinutes(requestService.Duration),
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
@@ -90,7 +90,7 @@ namespace Spectra.Application.Contracts.Commands
                     {
                         ServiceId = service.Id,
                         ServiceName = service.EnName,
-                        Duration = requestService.Duration,
+                        Duration = TimeSpan.FromMinutes(requestService.Duration),
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,

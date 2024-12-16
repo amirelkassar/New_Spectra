@@ -50,7 +50,7 @@ namespace Spectra.Application.Contracts.Commands
             {
                 throw new RequestErrorException("Your Request is Under Review");
             }
-            var medicalProvider = await _medicalProvider.GetByIdAsync(_currentUser.Id);
+            var medicalProvider = await _medicalProvider.GetAsync(e => e.UserId == _currentUser.Id);
 
             var departmentHead = await _sectionsRepository.GetByIdAsync(medicalProvider.SectionId);
             var empHead = await _medicalProvider.GetByIdAsync(departmentHead.HeadDoctorId);
@@ -74,7 +74,7 @@ namespace Spectra.Application.Contracts.Commands
                     {
                         ServiceId = service.Id,
                         ServiceName = service.EnName,
-                        Duration = requestService.Duration,
+                        Duration = TimeSpan.FromMinutes(requestService.Duration),
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
@@ -90,7 +90,7 @@ namespace Spectra.Application.Contracts.Commands
                     {
                         ServiceId = service.Id,
                         ServiceName = service.EnName,
-                        Duration = requestService.Duration,
+                        Duration = TimeSpan.FromMinutes(requestService.Duration),
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,

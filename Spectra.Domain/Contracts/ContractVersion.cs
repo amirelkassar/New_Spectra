@@ -6,6 +6,11 @@ namespace Spectra.Domain.Contracts
 {
     public class ContractVersion
     {
+        public ContractVersion()
+        {
+            FreelancingServices = [];
+            SpectraTeamServices = [];
+        }
         public int Order { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public ContractVersionStates State { get; set; }

@@ -18,7 +18,6 @@ namespace Spectra.WebAPI.Areas.Employee
 
 
         [HttpGet]
-        [Authorize(ContractPermissions.ReadOne)]
         public async Task<IActionResult> GetAsync()
         {
             var response = await _mediator.Send(new GetContractByUserIdQuery { });
@@ -28,7 +27,6 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost]
-        [Authorize(ContractPermissions.Apply)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {
             var response = await _mediator.Send(input);
@@ -36,7 +34,6 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPut]
-        [Authorize(ContractPermissions.Update)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateContractModel input)
         {
             var response = await _mediator.Send(new UpdateContractCommand
@@ -53,7 +50,6 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("cancel")]
-        [Authorize(ContractPermissions.Cancel)]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -71,7 +67,6 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("reject")]
-        [Authorize(ContractPermissions.Reject)]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
@@ -89,7 +84,6 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("accept")]
-        [Authorize(ContractPermissions.Accept)]
         public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
         {
             var response = await _mediator.Send(new ChangeContractStateCommand
