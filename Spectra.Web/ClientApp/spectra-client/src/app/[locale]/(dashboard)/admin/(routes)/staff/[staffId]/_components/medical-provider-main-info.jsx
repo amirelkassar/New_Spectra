@@ -54,7 +54,7 @@ const DoctorInfo = ({
   mainSpecializationEnName = '',
   emailaddress = '',
   rating = 0,
-  reservationCode = 'DR-AHMED-2024',
+  id = '',
   clientsCount = '0',
 }) => {
   const src = useImagePath(userImage);
@@ -88,7 +88,7 @@ const DoctorInfo = ({
 
         <p className='text-xs mdl:text-base font-bold flex flex-col items-start'>
           <span className='text-xs font-normal'>كود الحجز</span>
-          {reservationCode}
+          {id}
         </p>
 
         <p className='text-xs mdl:text-base font-bold'>
