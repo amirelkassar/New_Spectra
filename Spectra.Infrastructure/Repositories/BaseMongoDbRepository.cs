@@ -34,15 +34,20 @@ namespace Spectra.Infrastructure.Repositories
             return await _collection.Find(filter).AnyAsync();
         }
 
-        public async Task<(IEnumerable<T> data, long total)> GetAllAsync(Expression<Func<T, bool>> filter = null, FindOptions options = null, int skipCount = 0, int maxCount = 100)
+        public async Task<(IEnumerable<T> data, long total)> GetAllAsync(Expression<Func<T, bool>> filter = null,
+            FindOptions options = null,
+            int skipCount = 0,
+            int maxCount = 100)
         {
             filter ??= _ => true;
-            var data = await _collection.Find(filter, options)
+            var query = _collection.Find(filter, options)
                 .SortByDescending(s => s.Id)
                 .Skip(skipCount)
-                .Limit(maxCount)
-                .ToListAsync();
-            var total = await _collection.Find(filter, options).CountDocumentsAsync();
+                .Limit(maxCount);
+
+            var total = await query.CountDocumentsAsync();
+            var data=await query.ToListAsync();
+
             return (data, total);
         }
 
@@ -58,16 +63,16 @@ namespace Spectra.Infrastructure.Repositories
             return entity;
         }
 
+        public async Task<IFindFluent<T, T>> GetQueryAsync(Expression<Func<T, bool>> filter = null, FindOptions options = null, int skipCount = 0, int maxCount = 100)
+        {
+            filter ??= _ => true;
+            var query = _collection.Find(filter, options);
+            await Task.CompletedTask;
+            return query;
+        }
+
         public async Task UpdateAsync(T input)
         {
-            //var props = typeof(T).GetProperties();
-            //var obj = Builders<T>.Update.Set(nameof(input.Id), input.Id);
-            //foreach (var prop in props)
-            //{
-            //    var value = prop.GetValue(input);
-            //    Log.Information($"Value of {prop.Name} : {value} ");
-            //    obj.Set(prop.Name, value);
-            //}
 
             await _collection.ReplaceOneAsync(i => i.Id == input.Id, input);
         }

@@ -7,7 +7,7 @@ namespace Spectra.WebAPI.Areas.MedicalProvider
     [Area("employee")]
     [ApiController]
     [Route("api/[area]/[controller]")]
-    [Authorize(Roles = Roles.EmployeesRoles)]
+    [Authorize]
     public abstract class EmployeeControllerBase : ControllerBase
     {
     }

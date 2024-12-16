@@ -93,7 +93,8 @@ namespace Spectra.Application.Employees.Commands
                 {
                     throw new NotFoundException("Specializations", request.MainSpecializationId);
                 }
-                specializations = allSpecializations.Where(s =>  request.Specializations.Any(rs => rs == s.Id)).ToArray();
+                specializations = allSpecializations.Where(s =>  request.Specializations.Any(rs => rs == s.Id)).ToList();
+                specializations.Add(allSpecializations.First(s => s.Id == request.MainSpecializationId));
             }
 
             ICollection<PlatformService> services = null;

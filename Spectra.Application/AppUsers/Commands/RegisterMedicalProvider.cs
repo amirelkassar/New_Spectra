@@ -130,7 +130,7 @@ namespace Spectra.Application.AppUsers.Commands
                     title: "New Medical Provider",
                     content: "A new medical provider has registred!",
                     NotificationTypes.System,
-                    objectUrl: $"/employees/{empId}");
+                    objectUrl: $"/admin/staff/{empId}");
             }
         }
     }

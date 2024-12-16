@@ -41,9 +41,9 @@ namespace Spectra.WebAPI.Areas.Employee
         {
             var response = await _mediator.Send(new UpdateContractCommand
             {
+                Id = input.Id,
                 DaysOfWork = input.DaysOfWork,
                 EmployeeUserId = _currentUser.Id,
-                Id = input.Id,
                 FreelancingServices = input.FreelancingServices,
                 HoursOfWork = input.HoursOfWork,
                 ModifierRole = _currentUser.Role,

@@ -2,7 +2,7 @@
 {
     public enum ServiceTypes : byte
     {
-        PublicService = 1,
-        InternalService = 2
+        PublicService = 2,
+        InternalService = 1
     }
 }

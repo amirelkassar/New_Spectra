@@ -96,10 +96,6 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
             RuleFor(x => x.ArName)
                 .NotEmpty()
                 .NotNull();
-
-            RuleFor(x => x.Price)
-                .NotEmpty()
-                .NotNull();
         }
     }
 }

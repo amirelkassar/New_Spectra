@@ -9,7 +9,7 @@ using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Domain.Notifications
 {
-    public class Notification : BaseEntity<string>
+    public class Notification : BaseAuditableEntity<string>
     {
         protected Notification() { }
         public Notification(string id,

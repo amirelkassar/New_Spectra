@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD.Queries;
 using Spectra.Application.MasterData.ServicesMD.Services;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {
@@ -15,6 +16,20 @@ namespace Spectra.WebAPI.Areas.Public.Controllers
         public async Task<ActionResult> GetAllForListing([FromQuery] GetAllServiceForListingQuery input)
         {
             var masterDataServices = await _serviceMDService.GetAllForListing(input);
+
+            return Ok(masterDataServices);
+        }
+
+
+        [HttpGet("list-display")]
+        public async Task<ActionResult> GetAllForDisplaying([FromQuery] QueryPaginationParam input)
+        {
+            var masterDataServices = await _serviceMDService.GetAllServices(new GetAllServicesMDQuery
+            { 
+                MaxCount = input.MaxCount,
+                SkipCount = input.SkipCount,
+                ServiceType=Domain.Shared.Enums.ServiceTypes.PublicService
+            });
 
             return Ok(masterDataServices);
         }

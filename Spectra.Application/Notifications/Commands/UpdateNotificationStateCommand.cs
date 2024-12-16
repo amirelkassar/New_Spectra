@@ -25,6 +25,7 @@ namespace Spectra.Application.Notifications.Commands
             {
                 var notification = await _notifyRepository.GetAsync(n => n.Id == request.Id && n.Changes.Any(c => c.ReceiverId == request.UserId));
                 notification.Changes.FirstOrDefault(c => c.ReceiverId == request.UserId).Status = request.Status;
+                await _notifyRepository.UpdateAsync(notification);
                 return OperationResult.Success();
             }
         }
