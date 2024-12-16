@@ -11,5 +11,11 @@ export const useToken = () => {
       'useToken must be used within a TokenProvider or no Token was provided!!'
     );
   }
-  return context;
+
+  const value = {
+    token: context.token,
+    setToken: context.setToken,
+  };
+
+  return value;
 };

@@ -10,7 +10,7 @@ import { notifications } from '@/api/user';
 import { initialSiteQueries } from '../initials';
 import { getQueries } from '@/lib/utils';
 
-const initialQueries = initialSiteQueries;
+export const initialQueries = initialSiteQueries;
 
 export const initialQueryKey = 'user.notifications';
 

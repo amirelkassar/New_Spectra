@@ -6,6 +6,8 @@ import FilledCheck from '@/assets/icons/filled-check';
 import Spinner from '@/assets/icons/spinner';
 import CloseIcon from '@/assets/icons/close';
 import GetErrorMsg from './getErrorMsg';
+import CloseCircle from '@/assets/icons/close-circle';
+import NotificationIcon2 from '@/assets/icons/notification2';
 
 export const Toast = () => {
   return toast;
@@ -177,3 +179,36 @@ const Submit = (
 };
 
 Toast.Promise = Submit;
+
+const Notification = (message = '') => {
+  if (!message) return null;
+
+  return toast.custom(
+    (t) => (
+      <div
+        style={{
+          background:
+            'linear-gradient(90.87deg, #FFFFFF 60.75%, #DBF3F6 96.31%)',
+          boxShadow:
+            '0px 8px 10px 0px rgba(0, 0, 0, 0.2), 0px 6px 30px 0px rgba(0, 0, 0, 0.12), 0px 16px 24px 0px rgba(0, 0, 0, 0.14)',
+        }}
+        className='flex items-center gap-5 relative w-fit rounded-xl border-b-[3px] border-greenMain p-5'
+      >
+        <NotificationIcon2 className='size-4 mdl:size-6 shrink-0' />
+
+        <p className='text-xs mdl:text-base font-medium flex-1'>
+          {message}
+        </p>
+
+        <button onClick={() => toast.remove(t.id)}>
+          <CloseCircle className='text-grayDark size-5' />
+        </button>
+      </div>
+    ),
+    {
+      duration: 2000,
+    }
+  );
+};
+
+Toast.Notification = Notification;
