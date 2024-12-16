@@ -22,5 +22,15 @@
   "subscribe_now": "اشترك الآن",
   "we_accept_instalments_from": "نقبل الدفع بالتقسيط عن طريق",
   "join_as_doctor": "انضم كأخصائي",
-  "hello": "مرحبا"
+  "hello": "مرحبا",
+  "general_obj": {
+    "edit": "تعديل",
+    "not_photo": "لا يوجد صورة"
+  },
+  "packages_obj": {
+    "title": "الباقات",
+    "content": "محتوي الباقة",
+    "goals": "الهدف من الباقة",
+    "photo": "الصورة الدعائية"
+  }
 }

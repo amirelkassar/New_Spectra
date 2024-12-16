@@ -15,7 +15,7 @@ export const Carousel = ({
   dragFree = true,
   loop = false,
   classNames = {
-    root: 'mdl:px-24 px-16',
+    root: 'mdl:px-24',
   },
   ...props
 }) => {
@@ -33,18 +33,12 @@ export const Carousel = ({
       loop={loop}
       nextControlIcon={
         <span className='rotate-180 h-32 mdl:h-52 -mt-14 mdl:-mt-20 mdl:w-16 w-10 rounded-full flex justify-center bg-[#f5f5f5] items-center'>
-          <ArrowLeftMainGreen
-            fill='black'
-            className='size-6'
-          />
+          <ArrowLeftMainGreen fill='black' className='size-6' />
         </span>
       }
       previousControlIcon={
         <span className='h-32 mdl:h-52 -mt-14 mdl:-mt-20 w-10 mdl:w-16 rounded-full flex justify-center bg-[#f5f5f5] items-center'>
-          <ArrowLeftMainGreen
-            fill='black'
-            className='size-6'
-          />
+          <ArrowLeftMainGreen fill='black' className='size-6' />
         </span>
       }
       classNames={classNames}

@@ -4,6 +4,7 @@ import { Link } from '@/i18n/routing';
 import { TeamCard } from '@/components/team';
 import ROUTES from '@/routes';
 import { useImagePath } from '@/hooks/use-image-path';
+import { cn } from '@/lib/utils';
 
 export const TeamMember = ({
   id = '',
@@ -14,6 +15,7 @@ export const TeamMember = ({
   mainSpecializationArName = '',
   emailaddress = '',
   rating = 0,
+  className = '',
 }) => {
   const locale = useLocale();
 
@@ -29,7 +31,7 @@ export const TeamMember = ({
   return (
     <Link
       href={`${ROUTES.ROOT.TEAM}/${id}`}
-      className='mt-14 mdl:mt-20 block'
+      className={cn('mt-14 mdl:mt-20 block', className)}
     >
       <TeamCard className={'h-full'}>
         <TeamCard.Avatar src={path} name={emailaddress} />

@@ -80,9 +80,9 @@ const ViewPackage = ({ data = {} }) => {
         icon={<PackageIcon iconCode={iconCode} />}
       />
 
-      <PackageContent content={services} />
+      <PackageContent locale={locale} content={services} />
 
-      <PackageGoals goals={goals} />
+      <PackageGoals locale={locale} goals={goals} />
 
       <Button className='mt-5 font-bold w-full' variant='secondary'>
         احجز الان
