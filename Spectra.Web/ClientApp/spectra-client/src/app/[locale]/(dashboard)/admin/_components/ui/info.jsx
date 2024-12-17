@@ -1,9 +1,11 @@
 import { cn } from '@/lib/utils';
-import { useMemo } from 'react';
+import { isValidElement, useMemo } from 'react';
 
 export const Info = ({ data, label = '', icon, ...props }) => {
   const renderData = useMemo(() => {
     if (!data) return null;
+
+    if (isValidElement(data)) return data;
 
     if (typeof data === 'string' || typeof data === 'number')
       return <p className='text-sm md:text-xl'>{data}</p>;

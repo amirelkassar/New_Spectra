@@ -24,6 +24,8 @@ export const useAddService = () => {
     reports: [],
     specifications: [],
     contents: [],
+    enableForFreeLancer: true,
+    enableForSpectraTeam: true,
     heroImage: undefined,
   });
 
@@ -79,6 +81,8 @@ export const useAddService = () => {
       reports: [],
       specifications: [],
       contents: [],
+      enableForFreeLancer: true,
+      enableForSpectraTeam: true,
       heroImage: undefined,
     });
   }, []);

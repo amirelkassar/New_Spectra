@@ -3,8 +3,7 @@ import { buildQuery } from '@/lib/utils';
 export const mainData = {
   drugs: {
     base: '/drug',
-    list: (queries = {}) =>
-      buildQuery('/drug/list', queries),
+    list: (queries = {}) => buildQuery('/drug/list', queries),
     nameList: (queries = {}) =>
       buildQuery('/drug/name-list', queries),
     actions: {
@@ -18,8 +17,7 @@ export const mainData = {
 
   diagnose: {
     base: '/diagnose',
-    list: (queries = {}) =>
-      buildQuery('/diagnose/list', queries),
+    list: (queries = {}) => buildQuery('/diagnose/list', queries),
     actions: {
       add: '/diagnose',
       addFile: '/diagnose/bulk',
@@ -70,8 +68,7 @@ export const mainData = {
 
   section: {
     base: '/section',
-    list: (queries = {}) =>
-      buildQuery('/section/list', queries),
+    list: (queries = {}) => buildQuery('/section/list', queries),
     actions: {
       add: '/section',
       get: (id) => `/section?id=${id}`,
@@ -94,16 +91,15 @@ export const mainData = {
   },
 
   services: {
-    base: '/services',
-    list: (queries = {}) =>
-      buildQuery('/services/list', queries),
+    base: '/service',
+    list: (queries = {}) => buildQuery('/service/list', queries),
     forListing: (queries = {}) =>
-      buildQuery('/services/for-listing', queries),
+      buildQuery('/service/for-listing', queries),
     actions: {
-      add: '/services',
-      get: (id) => `/services?id=${id}`,
-      delete: (id) => `/services?id=${id}`,
-      update: (id) => `/services?id=${id}`,
+      add: '/service',
+      get: (id) => `/service?id=${id}`,
+      delete: (id) => `/service?id=${id}`,
+      update: (id) => `/service?id=${id}`,
     },
   },
 
@@ -117,14 +113,11 @@ export const mainData = {
     post: '/Admin/CreateEmployee',
     getByID: (id, id2) =>
       `/Admin/GetOneOfNormalStaff/id?id=${id}&input=${id2}`,
-    editEmployeeByID: (id) =>
-      `/Admin/EditEmployee/id?id=${id}`,
+    editEmployeeByID: (id) => `/Admin/EditEmployee/id?id=${id}`,
   },
   Contracts: {
     url: '/Admin/GetAllContracts?PageSize=5&',
-    getByID: (id) =>
-      `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
-    edit: (id) =>
-      `/Admin/MakeContractToEmployee/id?id=${id}`,
+    getByID: (id) => `/Admin/GetAllCopiesOFContract?EmployeeId=${id}`,
+    edit: (id) => `/Admin/MakeContractToEmployee/id?id=${id}`,
   },
 };

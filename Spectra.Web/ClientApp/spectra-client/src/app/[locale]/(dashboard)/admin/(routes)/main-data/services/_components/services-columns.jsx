@@ -9,7 +9,7 @@ export const servicesColumns = [
   },
   {
     accessorKey: 'enName',
-    header: 'الاسم بالنجليزي',
+    header: 'الاسم بالانجليزي',
   },
   {
     accessorKey: 'created',
@@ -19,15 +19,12 @@ export const servicesColumns = [
   {
     accessorKey: 'serviceType',
     header: 'نوع الخدمة',
-    cell: ({ getValue }) => (
-      <CellStatus status={getValue()} />
-    ),
+    cell: ({ getValue }) => <CellStatus status={getValue()} />,
   },
   {
     accessorKey: 'price',
     header: 'رسوم الخدمة',
-    cell: ({ getValue }) =>
-      formatCurrency(getValue(), 'SAR'),
+    cell: ({ getValue }) => formatCurrency(getValue(), 'SAR'),
   },
   {
     id: 'actions',

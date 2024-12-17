@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Textarea } from '@mantine/core';
+import { Checkbox, Textarea } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 
 import Button from '@/components/button';
@@ -92,7 +92,6 @@ const InternalServices = ({ data, error, onChange }) => {
         value={data.arName}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArName')}
-        className='col-span-2'
       />
       <InputGreen
         label='اسم الخدمة باللغة الانجليزية'
@@ -100,7 +99,6 @@ const InternalServices = ({ data, error, onChange }) => {
         value={data.enName}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnName')}
-        className='col-span-2'
       />
 
       <InputGreen
@@ -109,7 +107,6 @@ const InternalServices = ({ data, error, onChange }) => {
         value={data.arDescription}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArDescription')}
-        className='col-span-2'
       />
 
       <InputGreen
@@ -118,7 +115,6 @@ const InternalServices = ({ data, error, onChange }) => {
         value={data.enDescription}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnDescription')}
-        className='col-span-2'
       />
 
       <Textarea
@@ -133,7 +129,6 @@ const InternalServices = ({ data, error, onChange }) => {
         classNames={{
           input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
-          root: 'col-span-2',
         }}
       />
 
@@ -149,7 +144,6 @@ const InternalServices = ({ data, error, onChange }) => {
         classNames={{
           input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
-          root: 'col-span-2',
         }}
       />
 
@@ -187,6 +181,42 @@ const InternalServices = ({ data, error, onChange }) => {
         onChange={onChange}
         rightSection={'%'}
         error={GetErrorMsg(error, 'Discount')}
+      />
+
+      <Checkbox
+        checked={data.enableForSpectraTeam}
+        name='enableForSpectraTeam'
+        onChange={(e) => {
+          onChange({
+            target: {
+              name: 'enableForSpectraTeam',
+              value: e.target.checked,
+            },
+          });
+        }}
+        error={GetErrorMsg(error, 'EnableForSpectraTeam')}
+        label='إتاحة الخدمة لفريق أطباء سبيكترا'
+        color='#10B0C1'
+        radius='xs'
+        size='md'
+      />
+
+      <Checkbox
+        checked={data.enableForFreeLancer}
+        name='enableForFreeLancer'
+        onChange={(e) => {
+          onChange({
+            target: {
+              name: 'enableForFreeLancer',
+              value: e.target.checked,
+            },
+          });
+        }}
+        error={GetErrorMsg(error, 'EnableForFreeLancer')}
+        label='إتاحة الخدمة للأطباء المستقلين'
+        color='#10B0C1'
+        radius='xs'
+        size='md'
       />
     </div>
   );
