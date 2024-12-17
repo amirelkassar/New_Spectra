@@ -52,6 +52,10 @@ namespace Spectra.Application.Employees.Queries
                        filterBuilder.Regex(s => s.SectionId, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")));
                     filter &= searchFilter;
                 }
+                if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
+                {
+                    filter &= filterBuilder.Regex(s => s.MainSpecializationId, new MongoDB.Bson.BsonRegularExpression($"^{request.MainSpecializationId}", "i"));
+                }
 
                 var total = await collection.CountDocumentsAsync(filter);
                 var data = await collection.Find(filter)

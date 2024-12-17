@@ -21,9 +21,7 @@ namespace Spectra.WebAPI.Areas.Employee
         public async Task<IActionResult> GetAsync()
         {
             var response = await _mediator.Send(new GetContractByUserIdQuery { });
-            return response.SuccessOpration
-                ? Ok(response)
-                : BadRequest(response);
+            return Ok(response);
         }
 
         [HttpPost]

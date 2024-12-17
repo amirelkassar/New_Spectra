@@ -56,6 +56,7 @@ namespace Spectra.Domain.Contracts
             HoursOfWork = hoursOfWork;
             DaysOfWork = daysOfWork;
             Versions = versions;
+            ContractState = ContractStates.Contracting;
         }
         public static EmploymentContract Create(string id,
             int hoursOfWork,
