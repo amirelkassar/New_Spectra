@@ -3,10 +3,12 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Driver;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
@@ -30,51 +32,40 @@ namespace Spectra.Application.Employees.Queries
 
             public async Task<OperationResult> Handle(GetMedicalProvderListQuery request, CancellationToken cancellationToken)
             {
-                IEnumerable<Employee> employees = null;
-                long totalCount = 0;
-                Expression<Func<Employee, bool>> condition = e => e.Id == e.Id;
+                var collection = await _doctorRepository.GetCollectionAsync();
+                var filterBuilder = Builders<Employee>.Filter;
+                var filter = filterBuilder.Empty;
+
                 if (!string.IsNullOrWhiteSpace(request.Search))
                 {
-                    condition.And(s => s.Name.FirstName.ToLower().StartsWith(request.Search)
-                       || s.EmailAddress.Emailaddress.ToLower().StartsWith(request.Search)
-                       || s.MainSpecializationEnName.ToLower().StartsWith(request.Search)
-                       || s.MainSpecializationArName.StartsWith(request.Search)
-                       || s.SectionEnName.ToLower().StartsWith(request.Search)
-                       || s.SectionArEnName.StartsWith(request.Search)
-                       || s.LicenseNumber.ToLower().StartsWith(request.Search)
-                       || s.SectionId.ToLower() == request.Search
-                       || s.MainSpecializationId.ToLower() == request.Search
-                       || s.Specializations.Any(sp => sp.EnName.ToLower().StartsWith(request.Search) || sp.Id.ToLower() == request.Search)
-                       || s.Services.Any(ser => ser.EnName.ToLower().StartsWith(request.Search) || ser.Id.ToLower() == request.Search));
+                    var searchLower = request.Search.ToLower().Trim();
+                    var searchFilter = filterBuilder.Or(
+                       filterBuilder.Regex(s => s.Name.FirstName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.Name.LastName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.EmailAddress.Emailaddress, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.MobileNumber.PhoneNumbers, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.MainSpecializationEnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.MainSpecializationArName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.SectionEnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.SectionArEnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.LicenseNumber, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                       filterBuilder.Regex(s => s.SectionId, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")));
+                    filter &= searchFilter;
                 }
 
-                if(!string.IsNullOrWhiteSpace(request.MainSpecializationId))
-                {
-                    condition.And(e => e.MainSpecializationId == request.MainSpecializationId);
-                }
-
-                if (request.JobType !=null)
-                {
-                    condition.And(e => e.JobType == request.JobType);
-                }
-                else
-                {
-                    condition.And(e => e.JobType == JobTypes.Specialist || e.JobType==JobTypes.Doctor);
-                }
-
-                var (entities, total) = await _doctorRepository.GetAllAsync(condition,
-                  null,
-                  request.SkipCount,
-                  request.MaxCount);
-                employees = entities;
-                totalCount = total;
-                var dtos = employees.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
+                var total = await collection.CountDocumentsAsync(filter);
+                var data = await collection.Find(filter)
+                    .SortByDescending(s => s.Id)
+                    .Skip(request.SkipCount)
+                    .Limit(request.MaxCount)
+                    .ToListAsync(cancellationToken);
+                var dtos = data.Adapt<IReadOnlyCollection<EmployeeListDto>>(EmployeeListDto.GetConfigurations());
                 foreach (var dto in dtos.Where(e => e.UserImage is not null).ToArray())
                 {
                     dto.UserImage = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.UserImage), dto.UserId, EndPointsRoutes.Users, _httpContextAccessor);
                 }
 
-                return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, totalCount, request.MaxCount));
+                return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, total, request.MaxCount));
             }
         }
     }
