@@ -68,24 +68,38 @@ export const Notifications = () => {
         {isPending && <Loader />}
         {isError && <ServerError />}
         {isSuccess &&
-          data?.pages?.map((page, pageIndex) => (
-            <div key={pageIndex}>
-              {page.data?.items?.map((notification, index) => {
-                const isLastItem =
-                  pageIndex === data.pages.length - 1 &&
-                  index === page.data.items.length - 1;
+          data?.pages?.map((page, pageIndex) => {
+            if (!page.data?.totalCount)
+              return (
+                <div
+                  key={pageIndex}
+                  className='w-full h-full flex justify-center items-center text-grayDark'
+                >
+                  لا يوجد اشعارات
+                </div>
+              );
 
-                return (
-                  <NotificationItem
-                    key={notification.id}
-                    ref={isLastItem ? ref : null}
-                    onClick={() => onNotificationClick(notification)}
-                    {...notification}
-                  />
-                );
-              })}
-            </div>
-          ))}
+            return (
+              <div key={pageIndex}>
+                {page.data?.items?.map((notification, index) => {
+                  const isLastItem =
+                    pageIndex === data.pages.length - 1 &&
+                    index === page.data.items.length - 1;
+
+                  return (
+                    <NotificationItem
+                      key={notification.id}
+                      ref={isLastItem ? ref : null}
+                      onClick={() =>
+                        onNotificationClick(notification)
+                      }
+                      {...notification}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
         {isFetchingNextPage && (
           <div className='w-fit mx-auto'>
             <Spinner className='text-grayDark size-7 animate-spin' />

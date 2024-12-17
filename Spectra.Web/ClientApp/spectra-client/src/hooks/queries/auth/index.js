@@ -7,6 +7,7 @@ import { useToken } from '@/hooks/use-token';
 
 import { apiAuth } from '@/api/axios';
 import { clearToken } from '@/lib/token';
+import { useQueryClient } from '@tanstack/react-query';
 
 import ROUTES from '@/routes';
 
@@ -31,12 +32,16 @@ export const useRegisterMedicalProviderMutation = () => {
 export const useLogout = () => {
   const router = useRouter();
   const { setToken } = useToken();
+  const queryClient = useQueryClient();
 
   const logout = async () => {
     const isTokenDeleted = await clearToken();
 
     if (isTokenDeleted) {
       setToken(null);
+
+      queryClient.clear();
+
       router.push(ROUTES.AUTH.LOGIN);
     }
   };
