@@ -6,6 +6,7 @@ import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { cn } from '@/lib/utils';
+import { useToken } from '@/hooks/use-token';
 import ROUTES from '@/routes';
 import Button from '@/components/button';
 import FamilyIcon from '@/assets/icons/family';
@@ -35,9 +36,11 @@ const OPTIONS = [
 ];
 
 export const RegisterModal = ({ children, ...props }) => {
+  const { token } = useToken();
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedClient, setSelectedClient] = useState(OPTIONS[0]);
 
+  if (token) return null;
   return (
     <>
       <div

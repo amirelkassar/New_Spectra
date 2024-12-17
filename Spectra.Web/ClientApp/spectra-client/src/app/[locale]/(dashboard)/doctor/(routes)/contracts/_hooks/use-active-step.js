@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { contractCase as CASE } from '../layout';
+import { contractState as CASE } from '../layout';
 import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 

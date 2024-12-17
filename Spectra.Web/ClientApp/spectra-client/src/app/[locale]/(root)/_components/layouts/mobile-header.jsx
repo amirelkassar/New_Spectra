@@ -6,15 +6,13 @@ import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/logo';
 import { Drawer } from '@/guest/_components/layouts';
-import { useToken } from '@/hooks/use-token';
 import { RegisterModal } from '@/guest/_components/sections';
 import MenuDash from '@/assets/icons/menuDash';
+import { DashboardButton } from '../ui/dashboard-button';
 
 export const MobileHeader = () => {
   const t = useTranslations();
   const locale = useLocale();
-
-  const { token } = useToken();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -44,7 +42,10 @@ export const MobileHeader = () => {
         <Logo className='h-8' />
       </div>
 
-      {!token && <RegisterModal>{t('register')}</RegisterModal>}
+      <RegisterModal>{t('register')}</RegisterModal>
+
+      {/* DASHBOARD BUTTON */}
+      <DashboardButton>لوحة التحكم</DashboardButton>
     </div>
   );
 };

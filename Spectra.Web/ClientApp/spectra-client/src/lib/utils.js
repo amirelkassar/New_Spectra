@@ -240,7 +240,10 @@ export const printFile = async (url) => {
   }
 };
 
-export const getRedirectPath = (roles, hasActiveContract = true) => {
+export const getRedirectPath = (
+  roles = [],
+  hasActiveContract = true
+) => {
   switch (roles[0]) {
     case 'SystemAdmin':
     case 'CustomerSupport':

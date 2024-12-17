@@ -6,13 +6,13 @@ import { useTranslations } from 'next-intl';
 import { Nav } from '@/guest/_components/layouts';
 import { Logo } from '@/components/logo';
 import { LangDropdown } from '@/guest/_components/ui';
-import { RegisterModal } from '@/app/[locale]/(root)/_components/sections';
-import ROUTES from '@/routes';
+import { RegisterModal } from '@/guest/_components/sections';
 import { useToken } from '@/hooks/use-token';
+import ROUTES from '@/routes';
+import { DashboardButton } from '../ui/dashboard-button';
 
 export const XlScreenHeader = () => {
   const t = useTranslations();
-  const { token } = useToken();
 
   return (
     <div
@@ -26,20 +26,33 @@ export const XlScreenHeader = () => {
       <Nav className='2xl:ms-7' />
 
       {/* REGISTER */}
-      {!token && <RegisterModal>{t('register')}</RegisterModal>}
+      <RegisterModal>{t('register')}</RegisterModal>
+
+      {/* DASHBOARD BUTTON */}
+      <DashboardButton>لوحة التحكم</DashboardButton>
 
       {/* LOGIN */}
-      {!token && (
-        <Link
-          href={ROUTES.AUTH.LOGIN}
-          className='font-bold inline-block after:block after:w-full after:border-b-2 after:border-black after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out after:hover:scale-100 after:origin-right ltr:after:origin-left after:mt-0.5 whitespace-nowrap'
-          aria-label='تسجيل الدخول'
-        >
-          {t('login')}
-        </Link>
-      )}
+      <LoginBtn />
+
       {/* LOCALE */}
       <LangDropdown />
     </div>
+  );
+};
+
+const LoginBtn = () => {
+  const t = useTranslations();
+
+  const { token } = useToken();
+
+  if (token) return null;
+  return (
+    <Link
+      href={ROUTES.AUTH.LOGIN}
+      className='font-bold inline-block after:block after:w-full after:border-b-2 after:border-black after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out after:hover:scale-100 after:origin-right ltr:after:origin-left after:mt-0.5 whitespace-nowrap'
+      aria-label='تسجيل الدخول'
+    >
+      {t('login')}
+    </Link>
   );
 };

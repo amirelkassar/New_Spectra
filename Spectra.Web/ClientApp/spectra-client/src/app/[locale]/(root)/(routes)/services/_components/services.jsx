@@ -30,7 +30,7 @@ export const Services = ({ title = 'خدمتنا' }) => {
           <div className='grid grid-cols-2 mdl:grid-cols-3 mdl:gap-10 gap-3'>
             {data?.map((service, i) => (
               <Link
-                key={service.id}
+                key={service.id || i}
                 href={ROUTES.ROOT.VIEW_SERVICE.replace(
                   ':id',
                   service?.id

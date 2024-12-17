@@ -65,7 +65,7 @@ export const ContractProvider = ({
           };
         }),
 
-      setSelectedFreelanceIds: (service) => {
+      setSelectedFreelance: (service) => {
         set((state) => {
           return {
             selectedFreelanceIds: [
@@ -77,7 +77,7 @@ export const ContractProvider = ({
         });
       },
 
-      setSelectedSpectraTeamIds: (service) => {
+      setSelectedSpectraTeam: (service) => {
         set((state) => {
           return {
             selectedSpectraTeamIds: [

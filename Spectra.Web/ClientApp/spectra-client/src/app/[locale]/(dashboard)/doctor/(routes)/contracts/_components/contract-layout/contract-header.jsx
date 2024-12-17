@@ -6,33 +6,22 @@ import { BackButton } from '@/components/buttons/back-button';
 import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 import { useContractStore } from '../../_hooks';
+import { H1 } from '@/dashboard/_components/ui/h1';
 
 export const ContractHeader = () => {
   const pathname = usePathname();
 
   if (pathname === ROUTES.DOCTOR.CONTRACTS.DASHBOARD) {
-    return <Title>العقود</Title>;
+    return <H1>العقود</H1>;
   }
   return (
     <div className='flex justify-between items-center gap-5'>
-      <TitleWithBackButton title='العقد' />
+      <div className='flex items-center gap-5'>
+        <BackButton />
+        <H1>العقد</H1>
+      </div>
 
       <Actions />
-    </div>
-  );
-};
-
-const Title = ({ children }) => {
-  return (
-    <h2 className='text-base lg:text-xl font-bold'>{children}</h2>
-  );
-};
-
-const TitleWithBackButton = ({ title }) => {
-  return (
-    <div className='flex items-center gap-5'>
-      <BackButton />
-      <Title>{title}</Title>
     </div>
   );
 };

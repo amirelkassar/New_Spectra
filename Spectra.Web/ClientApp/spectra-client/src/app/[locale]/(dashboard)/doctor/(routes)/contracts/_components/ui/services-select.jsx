@@ -1,38 +1,28 @@
 'use client';
 
 import { useDisclosure } from '@mantine/hooks';
-import { Popover, ScrollArea } from '@mantine/core';
-import { useCallback, useMemo, useRef } from 'react';
+import { Checkbox, Popover, ScrollArea } from '@mantine/core';
+import { useMemo, useRef } from 'react';
 
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
-import PlusInsideCircleIcon from '@/assets/icons/plus-inside-circle';
-import Minus from '@/assets/icons/minus';
 
 export const ServicesSelect = ({
   data = [],
   isLoading = false,
   isError = false,
   isDataEmpty = false,
-  selectedFreelance = [],
-  selectedSpectra = [],
-  onFreelanceSelect = () => {},
-  onSpectraSelect = () => {},
+  selectedIds = [],
+  placeholder = 'Select services',
+  onSelect = () => {},
+  onRemove = () => {},
 }) => {
   const viewportRef = useRef(null);
 
   const [opened, { toggle, close }] = useDisclosure(false);
 
-  const totalSelected = useMemo(() => {
-    return new Set([...selectedFreelance, ...selectedSpectra]).size;
-  }, [selectedFreelance, selectedSpectra]);
-
-  const handleSelect = useCallback(
-    (service, type) => {
-      if (type === 'freelance') onFreelanceSelect(service);
-
-      if (type === 'spectra') onSpectraSelect(service);
-    },
-    [onFreelanceSelect, onSpectraSelect]
+  const totalSelected = useMemo(
+    () => selectedIds.length,
+    [selectedIds]
   );
 
   const servicesList = useMemo(() => {
@@ -41,37 +31,28 @@ export const ServicesSelect = ({
     if (isDataEmpty) return <NoData>No services found!</NoData>;
 
     return data.map((s) => {
-      const isFreelanceSelected = selectedFreelance.includes(s.id);
-      const isSpectraSelected = selectedSpectra.includes(s.id);
+      const isSelected = selectedIds.includes(s?.id);
 
       return (
         <ServiceItem key={s?.id} name={s?.enName}>
-          <Button
-            aria-pressed={isFreelanceSelected}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (!isFreelanceSelected) handleSelect(s, 'freelance');
+          <Checkbox
+            radius='xs'
+            size='lg'
+            color='#10B0C1'
+            checked={isSelected}
+            onChange={() => {
+              if (isSelected) return onRemove(s?.id);
+              return onSelect(s);
             }}
-          >
-            freelance
-          </Button>
-          <Button
-            aria-pressed={isSpectraSelected}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (!isSpectraSelected) handleSelect(s, 'spectra');
-            }}
-          >
-            spectra team
-          </Button>
+          />
         </ServiceItem>
       );
     });
   }, [
     data,
-    handleSelect,
-    selectedFreelance,
-    selectedSpectra,
+    onRemove,
+    onSelect,
+    selectedIds,
     isDataEmpty,
     isError,
     isLoading,
@@ -91,7 +72,7 @@ export const ServicesSelect = ({
         >
           {!!totalSelected
             ? `${totalSelected} Services selected`
-            : 'Choose services'}
+            : placeholder}
           <ArrowDownBlack className='lg:size-5 group-aria-expanded:rotate-180 transition-transform' />
         </button>
       </Popover.Target>
@@ -114,25 +95,12 @@ export const ServicesSelect = ({
 
 const ServiceItem = ({ name = '', children }) => {
   return (
-    <div className='p-2 md:p-5 rounded-lg flex gap-2 lg:gap-4 items-center border-b-2 border-grayLight last:border-transparent'>
-      <span className='text-xs lg:text-xl capitalize flex-1'>
-        {name}
-      </span>
-      {children}
+    <div className='p-2 md:p-5 rounded-lg border-b-2 border-grayLight last:border-transparent'>
+      <label className='text-xs lg:text-xl capitalize flex gap-2 lg:gap-4 items-center w-fit'>
+        {children}
+        <span className='flex-1'>{name}</span>
+      </label>
     </div>
-  );
-};
-
-const Button = ({ children = '', ...props }) => {
-  return (
-    <button
-      className='py-1 px-2 rounded-xl bg-greenMain text-white capitalize flex items-center gap-2 text-xs lg:text-base font-bold aria-pressed:bg-grayLight aria-pressed:text-grayDark aria-pressed:pointer-events-none group'
-      {...props}
-    >
-      <PlusInsideCircleIcon className='text-white size-3 lg:size-4 shrink-0 group-aria-pressed:hidden' />
-      <Minus className='text-grayDark size-3 lg:size-4 shrink-0 hidden group-aria-pressed:block' />
-      {children}
-    </button>
   );
 };
 

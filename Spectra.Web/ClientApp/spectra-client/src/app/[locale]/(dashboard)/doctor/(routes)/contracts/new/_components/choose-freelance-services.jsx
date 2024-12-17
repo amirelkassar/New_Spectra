@@ -4,27 +4,22 @@ import { useUserServices } from '@/hooks/queries/user/services';
 import { ServicesSelect } from '../../_components/ui';
 import { useContractStore } from '../../_hooks';
 
-export const ChooseServices = () => {
+export const ChooseFreelanceServices = () => {
   const { data, isPending, isError } = useUserServices({
     pageNum: 'all',
     serviceType: 1,
+    freeLancerOnly: 'true',
   });
 
   const selectedFreelanceIds = useContractStore(
     (s) => s.selectedFreelanceIds
   );
 
-  const selectedSpectraTeamIds = useContractStore(
-    (s) => s.selectedSpectraTeamIds
+  const setSelectedFreelance = useContractStore(
+    (s) => s.setSelectedFreelance
   );
 
-  const setSelectedFreelanceIds = useContractStore(
-    (s) => s.setSelectedFreelanceIds
-  );
-
-  const setSelectedSpectraTeamIds = useContractStore(
-    (s) => s.setSelectedSpectraTeamIds
-  );
+  const removeService = useContractStore((s) => s.removeService);
 
   return (
     <ServicesSelect
@@ -32,10 +27,10 @@ export const ChooseServices = () => {
       isLoading={isPending}
       isError={isError}
       isDataEmpty={!data?.data?.totalCount}
-      selectedFreelance={selectedFreelanceIds}
-      selectedSpectra={selectedSpectraTeamIds}
-      onFreelanceSelect={setSelectedFreelanceIds}
-      onSpectraSelect={setSelectedSpectraTeamIds}
+      selectedIds={selectedFreelanceIds}
+      onSelect={setSelectedFreelance}
+      onRemove={(id) => removeService(id, 'freelancer')}
+      placeholder='Select freelance services'
     />
   );
 };

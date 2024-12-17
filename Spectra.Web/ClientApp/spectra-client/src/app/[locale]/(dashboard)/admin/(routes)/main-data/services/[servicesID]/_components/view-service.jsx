@@ -82,7 +82,7 @@ const Service = ({ data }) => {
         data={
           <div className='grid grid-cols-1 mdl:grid-cols-2 gap-x-2 gap-y-4'>
             <Checkbox
-              checked={data.enableForSpectraTeam}
+              checked={data?.enableForSpectraTeam || false}
               onChange={() => {}}
               label='إتاحة الخدمة لفريق أطباء سبيكترا'
               color='#10B0C1'
@@ -90,7 +90,7 @@ const Service = ({ data }) => {
               size='md'
             />
             <Checkbox
-              checked={data.enableForFreeLancer}
+              checked={data?.enableForFreeLancer || false}
               onChange={() => {}}
               label='إتاحة الخدمة للأطباء المستقلين'
               color='#10B0C1'

@@ -35,6 +35,8 @@ export const useUserServices = (
     pageNum: null,
     search: '',
     serviceType: '',
+    freeLancerOnly: '',
+    spectraTeamOnly: '',
   }
 ) => {
   const queries = getQueries({ params, initialQueries });
