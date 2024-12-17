@@ -21,6 +21,7 @@ import { EditButton } from '@/components/buttons/edit-button';
 import ROUTES from '@/routes';
 import { useImagePath } from '@/hooks/use-image-path';
 import Image from 'next/image';
+import Button from '@/components/button';
 
 export const ViewPackage = ({ id }) => {
   const query = usePackageById(id);
@@ -50,6 +51,7 @@ export const Package = ({ data = {} }) => {
     iconCode,
     goals,
     photoPath,
+    tags,
   } = data;
 
   const path = useImagePath(photoPath);
@@ -100,6 +102,8 @@ export const Package = ({ data = {} }) => {
         </div>
       </Card>
 
+      <PackageTypes data={tags || []} />
+
       <Card title={t('photo')}>
         {path ? (
           <Image
@@ -130,5 +134,24 @@ export const Package = ({ data = {} }) => {
         {tg('edit')}
       </EditButton>
     </div>
+  );
+};
+
+const PackageTypes = ({ data = [] }) => {
+  if (!data.length) return null;
+  return (
+    <Card title='نوع الباقة'>
+      <div className='flex flex-wrap gap-4'>
+        {data.map((t) => (
+          <Button
+            key={t}
+            variant='blueLight'
+            className='text-xs mdl:text-base font-normal'
+          >
+            {t}
+          </Button>
+        ))}
+      </div>
+    </Card>
   );
 };
