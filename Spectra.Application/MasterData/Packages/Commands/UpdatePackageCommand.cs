@@ -22,6 +22,7 @@ namespace Spectra.Application.MasterData.Packages.Commands
         public ICollection<PackageServiceCreateDto> Services { get; set; }
         public ICollection<PackageGoalCreateDto> Goals { get; set; }
         public IFormFile? Image { get; set; }
+        public ICollection<string> Tags { get; set; }
 
         public class UpdatePackageCommandHandler(IBaseMongoDbRepository<Package> packageRepository,
             IDocumentHellper documentHellper,
@@ -66,6 +67,7 @@ namespace Spectra.Application.MasterData.Packages.Commands
                 package.Discount = request.Discount;
                 package.IconCode = request.IconCode;
                 package.Services = packageServices;
+                package.Tags = request.Tags;
                 package.Goals = request.Goals.Select(g => new PackageGoal { ArName = g.ArName, EnName = g.EnName }).ToArray();
 
                 if (request.Image is not null && request.Image.Length > 0)

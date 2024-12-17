@@ -2,10 +2,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Driver;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Packages.Dtos;
 using Spectra.Domain.MasterData.Packages;
+using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -14,6 +16,7 @@ namespace Spectra.Application.MasterData.Packages.Queries
     public class GetPackageListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public string? Search { get; set; }
+        public ICollection<string>? Tags { get; set; }
 
         public class GetPackageListQueryHandler(IBaseMongoDbRepository<Package> packageRepository,
             IHttpContextAccessor httpContextAccessor,
@@ -25,28 +28,30 @@ namespace Spectra.Application.MasterData.Packages.Queries
 
             public async Task<OperationResult> Handle(GetPackageListQuery request, CancellationToken cancellationToken)
             {
-                IEnumerable<Package> packages = null;
-                long totalData = 0;
+                var collection = await _packageRepository.GetCollectionAsync();
+                var filterBuilder = Builders<Package>.Filter;
+                var filter = filterBuilder.Empty;
                 if (!string.IsNullOrEmpty(request.Search))
                 {
-                    request.Search = request.Search.ToLower().Trim();
-                    var (data, total) = await _packageRepository.GetAllAsync(d => d.EnName.ToLower().StartsWith(request.Search) || d.ArName.StartsWith(request.Search),
-                    null,
-                    request.SkipCount,
-                    request.MaxCount);
-                    totalData = total;
-                    packages = data.ToArray();
+                    var searchLower = request.Search.ToLower().Trim();
+                    var searchFilter = filterBuilder.Or(
+                        filterBuilder.Regex(s => s.EnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                        filterBuilder.Regex(s => s.ArName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i"))
+                    );
+                    filter &= searchFilter;
                 }
-                else
+                if (request.Tags != null && request.Tags.Any())
                 {
-                    var (data, total) = await _packageRepository.GetAllAsync(null,
-                        null,
-                        request.SkipCount,
-                        request.MaxCount);
-                    totalData = total;
-                    packages = data.ToArray();
+                    var tagsFilter = filterBuilder.AnyIn(s => s.Tags, request.Tags);
+                    filter &= tagsFilter;
                 }
-                var dtos = packages.Adapt<IReadOnlyCollection<PackageReadDto>>();
+                var total = await collection.CountDocumentsAsync(filter);
+                var data = await collection.Find(filter)
+                    .SortByDescending(s => s.Id)
+                    .Skip(request.SkipCount)
+                    .Limit(request.MaxCount)
+                    .ToListAsync(cancellationToken);
+                var dtos = data.Adapt<IReadOnlyCollection<PackageReadDto>>();
                 foreach (var dto in dtos)
                 {
                     if (dto.PhotoPath is not null)
@@ -54,7 +59,7 @@ namespace Spectra.Application.MasterData.Packages.Queries
                         dto.PhotoPath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, dto.PhotoPath), EndPointsRoutes.Packages, _httpContextAccessor);
                     }
                 }
-                return OperationResult<PaginatedResult<PackageReadDto>>.Success(new PaginatedResult<PackageReadDto>(dtos, totalData, request.MaxCount));
+                return OperationResult<PaginatedResult<PackageReadDto>>.Success(new PaginatedResult<PackageReadDto>(dtos, total, request.MaxCount));
             }
         }
     }
