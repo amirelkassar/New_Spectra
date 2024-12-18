@@ -12,6 +12,7 @@ namespace Spectra.Domain.Shared.Enums
         Audio = 2,
         Video = 3,
         File = 4,
-        Ads = 5
+        Image=5,
+        Ads = 6
     }
 }

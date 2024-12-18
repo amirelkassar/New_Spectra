@@ -33,6 +33,8 @@ namespace Spectra.Application.Identities
         Task<OperationResult> UpdateUserImageAsync(string userId, string imagePath);
 
         Task<OperationResult> FindByIdAsync(string id);
+        Task<OperationResult> FindByIdListAsync(params string[] ids);
+
         Task<OperationResult> FindByEmailAsync(string email);
         Task<OperationResult> FindByPhoneAsync(string phone);
 

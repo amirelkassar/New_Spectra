@@ -247,5 +247,15 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             var roles = await _userManager.GetRolesAsync(user);
             return OperationResult<IReadOnlyCollection<string>>.Success([.. roles]);
         }
+
+        public async Task<OperationResult> FindByIdListAsync(params string[] ids)
+        {
+            var users =await _userManager
+                .Users
+                .Where(u => ids.Contains(u.Id))
+                .ToArrayAsync();
+
+            return OperationResult<ICollection<AppUser>>.Success(users);
+        }
     }
 }
