@@ -21,6 +21,8 @@ namespace Spectra.Domain.Contracts
         public bool AcceptedByEmployee { get; set; }
         public bool AcceptedByAdmin { get; set; }
         public DateTimeOffset? DraftingDate { get; set; }
+        public int HoursOfWork { get; set; }
+        public int DaysOfWork { get; set; }
 
     }
 }

@@ -24,6 +24,8 @@ namespace Spectra.Application.Contracts.Commands
         }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
+        public double PlatformPercentage { get; set; }
+        public double EmployeePercentage { get; set; }
         public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
         public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
     }
@@ -62,7 +64,9 @@ namespace Spectra.Application.Contracts.Commands
                 AcceptedByAdmin = false,
                 AcceptedByEmployee = true,
                 CreationDate = DateTime.UtcNow,
-                State = ContractVersionStates.Active
+                State = ContractVersionStates.Active,
+                DaysOfWork = request.DaysOfWork,
+                HoursOfWork = request.HoursOfWork
             };
 
             foreach (var service in services)
@@ -77,9 +81,9 @@ namespace Spectra.Application.Contracts.Commands
                         ArName = service.ArName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = requestService.EmployeePercentage,
+                        EmployeePercentage = request.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = requestService.PlatformPercentage,
+                        PlatformPercentage = request.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms=service.EnTermsAndConditions
@@ -95,9 +99,9 @@ namespace Spectra.Application.Contracts.Commands
                         ArName = service.ArName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = requestService.EmployeePercentage,
+                        EmployeePercentage = request.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = requestService.PlatformPercentage,
+                        PlatformPercentage = request.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms = service.EnTermsAndConditions
@@ -107,8 +111,6 @@ namespace Spectra.Application.Contracts.Commands
 
             var contract = EmploymentContract.Create(
             Ulid.NewUlid().ToString(),
-            request.HoursOfWork,
-            request.DaysOfWork,
             medicalProvider.Id,
             medicalProvider.Name.FirstName,
              _currentUser.Id,

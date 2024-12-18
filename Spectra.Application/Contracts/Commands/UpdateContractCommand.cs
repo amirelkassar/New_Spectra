@@ -15,9 +15,11 @@ namespace Spectra.Application.Contracts.Commands
     {
         public string Id { get; set; }
         public string ModifierRole { get; set; }
-        public int HoursOfWork { get; set; }
         public string? EmployeeUserId { get; set; }
+        public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
+        public double PlatformPercentage { get; set; }
+        public double EmployeePercentage { get; set; }
         public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
         public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
     }
@@ -58,10 +60,9 @@ namespace Spectra.Application.Contracts.Commands
                 CreationDate = DateTime.UtcNow,
                 Order = currentVersion.Order + 1,
                 State = ContractVersionStates.Active,
+                DaysOfWork=request.DaysOfWork,
+                HoursOfWork=request.HoursOfWork,
             };
-            //update contract
-            contract.HoursOfWork = request.HoursOfWork;
-            contract.DaysOfWork = request.DaysOfWork;
 
             var services = await _serviceMDRepository.GetAllAsync();
 
@@ -77,9 +78,9 @@ namespace Spectra.Application.Contracts.Commands
                         ArName = service.ArName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = requestService.EmployeePercentage,
+                        EmployeePercentage = request.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = requestService.PlatformPercentage,
+                        PlatformPercentage = request.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms = service.EnTermsAndConditions
@@ -95,9 +96,9 @@ namespace Spectra.Application.Contracts.Commands
                         ArName = service.ArName,
                         Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = requestService.EmployeePercentage,
+                        EmployeePercentage = request.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = requestService.PlatformPercentage,
+                        PlatformPercentage = request.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms = service.EnTermsAndConditions

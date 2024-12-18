@@ -17,8 +17,6 @@ namespace Spectra.Domain.Contracts
         public string EmployeeHeadId { get; private set; }
         public string EmployeeHeadName { get; private set; }
         public string EmployeeName { get; private set; }
-        public int HoursOfWork { get; set; }
-        public int DaysOfWork { get; set; }
         public string JobDescription { get; set; }
         public string JobTitle { get; set; }
         public DateTimeOffset? AcceptingDate { get; private set; }
@@ -33,8 +31,6 @@ namespace Spectra.Domain.Contracts
         public ICollection<ContractVersion> Versions { get; private set; }
 
         private EmploymentContract(string id,
-            int hoursOfWork,
-            int daysOfWork,
             string employeeId,
             string employeeName,
             string employeeUserId,
@@ -53,14 +49,10 @@ namespace Spectra.Domain.Contracts
             EmployeeHeadId = headId;
             EmployeeHeadName = headName;
             EmployeeHeadUserId = headUserId;
-            HoursOfWork = hoursOfWork;
-            DaysOfWork = daysOfWork;
             Versions = versions;
             ContractState = ContractStates.Contracting;
         }
         public static EmploymentContract Create(string id,
-            int hoursOfWork,
-            int daysOfWork,
             string employeeId,
             string employeeName,
             string employeeUserId,
@@ -72,8 +64,6 @@ namespace Spectra.Domain.Contracts
             ICollection<ContractVersion> versions)
         {
             ArgumentNullException.ThrowIfNull(id, nameof(id));
-            ArgumentNullException.ThrowIfNull(hoursOfWork, nameof(hoursOfWork));
-            ArgumentNullException.ThrowIfNull(daysOfWork, nameof(daysOfWork));
             ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(employeeId, nameof(employeeId));
             ArgumentNullException.ThrowIfNull(employeeUserId, nameof(employeeUserId));
@@ -84,7 +74,7 @@ namespace Spectra.Domain.Contracts
             ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
             ArgumentNullException.ThrowIfNull(versions, nameof(versions));
 
-            return new EmploymentContract(id, hoursOfWork, daysOfWork, employeeId, employeeName, employeeUserId, headId, headName, headUserId, titel, contractCase, versions);
+            return new EmploymentContract(id, employeeId, employeeName, employeeUserId, headId, headName, headUserId, titel, contractCase, versions);
         }
 
         public void Accept()
