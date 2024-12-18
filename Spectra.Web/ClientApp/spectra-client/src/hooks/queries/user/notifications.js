@@ -1,7 +1,7 @@
 import {
   QueryClient,
+  useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
@@ -10,7 +10,12 @@ import { notifications } from '@/api/user';
 import { initialSiteQueries } from '../initials';
 import { getQueries } from '@/lib/utils';
 
-export const initialQueries = initialSiteQueries;
+const customQueries = {
+  skipCount: 0,
+  maxCount: 10,
+};
+
+export const initialQueries = customQueries || initialSiteQueries;
 
 export const initialQueryKey = 'user.notifications';
 
@@ -28,16 +33,25 @@ export const prefetchNotifications = async () => {
   return queryClient;
 };
 
-export const useNotifications = (
-  params = {
-    pageNum: null,
-  }
-) => {
-  const queries = getQueries({ params, initialQueries });
+export const useNotifications = () => {
+  return useInfiniteQuery({
+    queryKey: [initialQueryKey],
+    queryFn: async ({ pageParam = 1 }) => {
+      const queries = getQueries({
+        params: { pageNum: pageParam },
+        initialQueries,
+      });
+      return await getNotifications(queries);
+    },
+    initialPageParam: 1,
+    getNextPageParam: (initialData, pages) => {
+      const totalCount = initialData?.data?.totalCount;
+      const pageSize = initialData?.data?.pageSize;
 
-  return useQuery({
-    queryKey: [initialQueryKey, initialQueries],
-    queryFn: () => getNotifications(queries),
+      const totalPages = Math.ceil(totalCount / pageSize);
+
+      return pages.length < totalPages ? pages.length + 1 : undefined;
+    },
   });
 };
 

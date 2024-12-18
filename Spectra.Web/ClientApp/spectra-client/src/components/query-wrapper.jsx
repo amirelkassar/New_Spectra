@@ -23,7 +23,7 @@ const MemowizedNoDataYet = memo(NoDataYet);
  * @param {Object} props.query - The query object from the server.
  * @param {boolean} [props.isSearching] - Whether the query is in search mode.
  * @param {boolean} [props.isFiltered] - Whether the query is currently filtering data.
- * @param {(args: { data: any; pageSize?: number; totalCount?: number; isPlaceholderData?: boolean }) => React.ReactNode} props.children - A render function to render the children with provided props.
+ * @param {(args: { data: any; pageSize?: number; totalCount?: number; isPlaceholderData?: boolean; hasData?: boolean; }) => React.ReactNode} props.children - A render function to render the children with provided props.
  */
 
 export const QueryWrapper = ({
@@ -72,6 +72,7 @@ export const QueryWrapper = ({
       data: items,
       pageSize,
       totalCount,
+      hasData,
       isPlaceholderData: query?.isPlaceholderData,
     });
 };

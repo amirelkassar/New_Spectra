@@ -1,19 +1,13 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import { Heading } from '@/app/[locale]/(dashboard)/admin/_components/ui';
+import { Heading } from '@/dashboard/admin/_components/ui';
 import { DrugsTable } from './_components/drugs-table';
-import ROUTES from '@/routes';
 import { prefetchDrugs } from '@/hooks/queries/admin/main-data/drugs';
+import ROUTES from '@/routes';
 import Card from '@/components/card';
-import { getAuth } from '@/lib/auth';
 
 const DrugPage = async () => {
-  const [queryClient, session] = await Promise.all([
-    prefetchDrugs(),
-    getAuth(),
-  ]);
-
-  const permissions = session?.permissions;
+  const queryClient = await prefetchDrugs();
 
   return (
     <Card>

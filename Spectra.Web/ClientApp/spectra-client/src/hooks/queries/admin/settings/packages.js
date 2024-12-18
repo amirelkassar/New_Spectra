@@ -33,7 +33,7 @@ export const prefetchPackages = async () => {
 };
 
 export const usePackages = (
-  params = { pageNum: null, search: '' }
+  params = { pageNum: null, search: '', tags: [] }
 ) => {
   const queries = getQueries({ params, initialQueries });
 

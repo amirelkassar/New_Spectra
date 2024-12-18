@@ -20,6 +20,7 @@ export const useAddPackage = () => {
     services: [],
     goals: [],
     image: undefined,
+    tags: [],
   });
 
   const {
@@ -47,8 +48,6 @@ export const useAddPackage = () => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-
-      // return console.log(formData);
 
       const data = getFormData(formData);
 

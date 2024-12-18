@@ -15,21 +15,16 @@ import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
  * @param {MultiSelectProps} props
  */
 
-const MultiSelectInput = ({
-  label = '',
-  size = 'md',
-  data = [],
-  ...props
-}) => {
+const MultiSelectInput = ({ ...props }) => {
   return (
     <MultiSelect
       {...props}
-      size={size}
-      label={label}
-      data={data}
-      checkIconPosition={props.checkIconPosition || 'right'}
+      size={props?.size || 'lg'}
+      checkIconPosition={props?.checkIconPosition || 'right'}
       rightSection={
-        <ArrowDownBlack className='group-data-[size=sm]:size-3' />
+        props?.rightSection || (
+          <ArrowDownBlack className='group-data-[size=sm]:size-3' />
+        )
       }
       nothingFoundMessage={
         props.nothingFoundMessage ?? '!No Data Found'

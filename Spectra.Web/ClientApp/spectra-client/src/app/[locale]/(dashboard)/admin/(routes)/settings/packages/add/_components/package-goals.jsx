@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -18,6 +19,8 @@ export const PackageGoals = ({
   label = '',
   onChange = () => {},
 }) => {
+  const addBtnRef = useRef(null);
+
   const [list, setList] = useState(defaultValue);
 
   const [inputValue, setInputValue] = useState({
@@ -26,9 +29,7 @@ export const PackageGoals = ({
   });
 
   const isAddDisabled = useMemo(
-    () =>
-      !inputValue.arName?.trim() ||
-      !inputValue.enName?.trim(),
+    () => !inputValue.arName?.trim() || !inputValue.enName?.trim(),
     [inputValue]
   );
 
@@ -41,29 +42,29 @@ export const PackageGoals = ({
   }, []);
 
   // Handle adding a new item to the list
-  const handleAddToList = useCallback(() => {
-    if (
-      !inputValue.arName?.trim() &&
-      !inputValue.enName?.trim()
-    )
-      return;
+  const handleAddToList = useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    setList((prevList) => [
-      ...prevList,
-      { id: Date.now(), ...inputValue },
-    ]);
-    setInputValue({
-      arName: '',
-      enName: '',
-    });
-  }, [inputValue]);
+      if (isAddDisabled) return;
+
+      setList((prevList) => [
+        ...prevList,
+        { id: Date.now(), ...inputValue },
+      ]);
+      setInputValue({
+        arName: '',
+        enName: '',
+      });
+    },
+    [isAddDisabled, inputValue]
+  );
 
   // Handle deleting an item from the list
   const handleDeleteItem = useCallback(
     (id) => {
-      const updatedList = list.filter(
-        (item) => item.id !== id
-      );
+      const updatedList = list.filter((item) => item.id !== id);
       setList(updatedList);
     },
     [list]
@@ -84,18 +85,22 @@ export const PackageGoals = ({
     });
   }, []);
 
-  const debouncedOnChange = useDebouncedCallback(
-    (value) => {
-      onChange &&
-        onChange({
-          target: {
-            name,
-            value,
-          },
-        });
-    },
-    500
-  );
+  const debouncedOnChange = useDebouncedCallback((value) => {
+    onChange &&
+      onChange({
+        target: {
+          name,
+          value,
+        },
+      });
+  }, 500);
+
+  const onBlur = useCallback(() => {
+    if (isAddDisabled) return;
+    if (!addBtnRef?.current) return;
+
+    addBtnRef.current.click();
+  }, [isAddDisabled]);
 
   useEffect(() => {
     if (!list?.length) return;
@@ -105,9 +110,7 @@ export const PackageGoals = ({
   return (
     <Card className=''>
       {label && (
-        <div className='text-base mdl:text-xl mb-5 ps-1'>
-          {label}
-        </div>
+        <div className='text-base mdl:text-xl mb-5 ps-1'>{label}</div>
       )}
       <ul className='mdl:max-w-[80%]'>
         {list.map((item) => (
@@ -133,6 +136,7 @@ export const PackageGoals = ({
             input: 'text-right',
           }}
           error={error}
+          onBlur={onBlur}
         />
 
         <TextInput
@@ -146,10 +150,12 @@ export const PackageGoals = ({
           classNames={{
             input: 'text-left',
           }}
+          onBlur={onBlur}
         />
 
         {/* Add Button */}
         <button
+          ref={addBtnRef}
           onClick={handleAddToList}
           disabled={isAddDisabled}
           aria-disabled={isAddDisabled}
@@ -162,9 +168,7 @@ export const PackageGoals = ({
   );
 };
 
-const Dot = () => (
-  <div className='size-2 rounded-full bg-black' />
-);
+const Dot = () => <div className='size-2 rounded-full bg-black' />;
 
 const GoalList = ({
   item,
@@ -185,8 +189,7 @@ const GoalList = ({
         size='xl'
         dir='rtl'
         classNames={{
-          input:
-            'font-bold text-sm mdl:text-xl w-full text-right',
+          input: 'font-bold text-sm mdl:text-xl w-full text-right',
         }}
       />
 

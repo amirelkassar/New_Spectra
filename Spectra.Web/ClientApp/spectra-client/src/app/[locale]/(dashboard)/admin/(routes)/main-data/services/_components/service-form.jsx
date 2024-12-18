@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Textarea } from '@mantine/core';
+import { Checkbox, Textarea } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 
 import Button from '@/components/button';
@@ -89,42 +89,38 @@ const InternalServices = ({ data, error, onChange }) => {
       <InputGreen
         label='اسم الخدمة باللغة العربية'
         name='arName'
-        value={data.arName}
+        value={data?.arName || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArName')}
-        className='col-span-2'
       />
       <InputGreen
         label='اسم الخدمة باللغة الانجليزية'
         name='enName'
-        value={data.enName}
+        value={data?.enName || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnName')}
-        className='col-span-2'
       />
 
       <InputGreen
         label='وصف الخدمة باللغة العربية'
         name='arDescription'
-        value={data.arDescription}
+        value={data?.arDescription || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArDescription')}
-        className='col-span-2'
       />
 
       <InputGreen
         label='وصف الخدمة باللغة الانجليزية'
         name='enDescription'
-        value={data.enDescription}
+        value={data?.enDescription || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnDescription')}
-        className='col-span-2'
       />
 
       <Textarea
         label='الشروط و الاحكام باللغة العربية'
         name='arTermsAndConditions'
-        value={data.arTermsAndConditions}
+        value={data?.arTermsAndConditions || ''}
         error={GetErrorMsg(error, 'ArTermsAndConditions')}
         onChange={onChange}
         size='lg'
@@ -133,14 +129,13 @@ const InternalServices = ({ data, error, onChange }) => {
         classNames={{
           input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
-          root: 'col-span-2',
         }}
       />
 
       <Textarea
         label='الشروط و الاحكام باللغة الانجليزية'
         name='enTermsAndConditions'
-        value={data.enTermsAndConditions}
+        value={data?.enTermsAndConditions || ''}
         error={GetErrorMsg(error, 'EnTermsAndConditions')}
         onChange={onChange}
         size='lg'
@@ -149,14 +144,13 @@ const InternalServices = ({ data, error, onChange }) => {
         classNames={{
           input: 'min-h-[160px] w-full rounded-xl border-greenMain',
           label: 'text-base mb-2',
-          root: 'col-span-2',
         }}
       />
 
       <ReportSelect
         label='اضافة التقارير الخاصة بالخدمة'
         name='reports'
-        defaultValue={data?.reports}
+        defaultValue={data?.reports || []}
         onSelect={onChange}
         error={GetErrorMsg(error, 'Reports')}
       />
@@ -164,7 +158,7 @@ const InternalServices = ({ data, error, onChange }) => {
       <SpecializationMultiSelect
         label='اضافة التخصصات المرتبطة بالخدمة'
         name='specifications'
-        defaultValue={data?.specifications}
+        defaultValue={data?.specifications || []}
         onSelect={onChange}
         error={GetErrorMsg(error, 'Specifications')}
       />
@@ -173,7 +167,7 @@ const InternalServices = ({ data, error, onChange }) => {
         label='سعر الخدمة'
         name='price'
         type='number'
-        value={data.price}
+        value={data?.price || ''}
         onChange={onChange}
         rightSection={'SAR'}
         error={GetErrorMsg(error, 'Price')}
@@ -183,10 +177,46 @@ const InternalServices = ({ data, error, onChange }) => {
         label='نسبة الخصم'
         name='discount'
         type='number'
-        value={data.discount}
+        value={data?.discount || ''}
         onChange={onChange}
         rightSection={'%'}
         error={GetErrorMsg(error, 'Discount')}
+      />
+
+      <Checkbox
+        checked={data?.enableForSpectraTeam || false}
+        name='enableForSpectraTeam'
+        onChange={(e) => {
+          onChange({
+            target: {
+              name: 'enableForSpectraTeam',
+              value: e.target.checked,
+            },
+          });
+        }}
+        error={GetErrorMsg(error, 'EnableForSpectraTeam')}
+        label='إتاحة الخدمة لفريق أطباء سبيكترا'
+        color='#10B0C1'
+        radius='xs'
+        size='md'
+      />
+
+      <Checkbox
+        checked={data?.enableForFreeLancer || false}
+        name='enableForFreeLancer'
+        onChange={(e) => {
+          onChange({
+            target: {
+              name: 'enableForFreeLancer',
+              value: e.target.checked,
+            },
+          });
+        }}
+        error={GetErrorMsg(error, 'EnableForFreeLancer')}
+        label='إتاحة الخدمة للأطباء المستقلين'
+        color='#10B0C1'
+        radius='xs'
+        size='md'
       />
     </div>
   );
@@ -198,7 +228,7 @@ const ExternalServices = ({ data, error, onChange }) => {
       <InputGreen
         label='اسم الخدمة باللغة العربية'
         name='arName'
-        value={data.arName}
+        value={data?.arName || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArName')}
         className='col-span-2'
@@ -206,7 +236,7 @@ const ExternalServices = ({ data, error, onChange }) => {
       <InputGreen
         label='اسم الخدمة باللغة الانجليزية'
         name='enName'
-        value={data.enName}
+        value={data?.enName || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnName')}
         className='col-span-2'
@@ -215,7 +245,7 @@ const ExternalServices = ({ data, error, onChange }) => {
       <InputGreen
         label='وصف الخدمة باللغة العربية'
         name='arDescription'
-        value={data.arDescription}
+        value={data?.arDescription || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'ArDescription')}
         className='col-span-2'
@@ -224,7 +254,7 @@ const ExternalServices = ({ data, error, onChange }) => {
       <InputGreen
         label='وصف الخدمة باللغة الانجليزية'
         name='enDescription'
-        value={data.enDescription}
+        value={data?.enDescription || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'EnDescription')}
         className='col-span-2'
@@ -232,7 +262,7 @@ const ExternalServices = ({ data, error, onChange }) => {
 
       <div className='col-span-2 space-y-4 mdl:space-y-6'>
         <ServiceContent
-          data={data?.contents}
+          data={data?.contents || []}
           onChange={onChange}
           error={GetErrorMsg(error, 'Contents')}
         />
@@ -319,13 +349,13 @@ const ServiceContent = ({ data, error, onChange }) => {
             <InputGreen
               placeholder='اكتب العنوان هنا ..'
               name='arTitle'
-              value={content.arTitle}
+              value={content?.arTitle || ''}
               onChange={(e) => handleChange(e, index)}
             />
             <Textarea
               placeholder='اكتب المحتوي هنا ..'
               name='arDescription'
-              value={content.arDescription}
+              value={content?.arDescription || ''}
               onChange={(e) => handleChange(e, index)}
               size='lg'
               autosize
@@ -345,7 +375,7 @@ const ServiceContent = ({ data, error, onChange }) => {
             <InputGreen
               placeholder='Write the title here ..'
               name='enTitle'
-              value={content.enTitle}
+              value={content?.enTitle || ''}
               onChange={(e) => handleChange(e, index)}
               classNames={{
                 input: 'text-left',
@@ -354,7 +384,7 @@ const ServiceContent = ({ data, error, onChange }) => {
             <Textarea
               placeholder='Write the content here ..'
               name='enDescription'
-              value={content.enDescription}
+              value={content?.enDescription || ''}
               onChange={(e) => handleChange(e, index)}
               size='lg'
               autosize

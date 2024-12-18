@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 
@@ -13,13 +13,18 @@ import ROUTES from '@/routes';
 import { useDeletePacakge } from '../_hooks/use-delete-package';
 import { useQueryParams } from '@/hooks/queries/use-query-params';
 import { Pagination } from '@/components/table/pagination';
+import MultiSelectInput from '@/components/inputs/multi-select-input';
+import { PACKAGES_TAGS } from '@/data';
 
 export const PackagesList = () => {
   const { pageNum, search } = useQueryParams();
 
+  const [tags, setTags] = useState([]);
+
   const query = usePackages({
     pageNum,
     search,
+    tags,
   });
 
   const router = useRouter();
@@ -31,9 +36,19 @@ export const PackagesList = () => {
   );
 
   return (
-    <QueryWrapper query={query} isSearching={!!search}>
+    <QueryWrapper
+      query={query}
+      isFiltered={!!tags.length}
+      isSearching={!!search}
+    >
       {({ data, isPlaceholderData, pageSize, totalCount }) => (
         <div className='space-y-10'>
+          <TagsFilter
+            disabled={isPlaceholderData}
+            tags={tags}
+            setTags={setTags}
+          />
+
           <div className='flex gap-5 flex-wrap *:shrink-0'>
             {data?.map((packageItem) => (
               <PackageCard
@@ -50,6 +65,12 @@ export const PackagesList = () => {
             totalCount={totalCount}
             disabled={isPlaceholderData}
           />
+
+          {!totalCount && !!tags.length && (
+            <p className='text-grayDark'>
+              لا يوجد باقات مطابقة لهذا النوع!
+            </p>
+          )}
         </div>
       )}
     </QueryWrapper>
@@ -142,5 +163,23 @@ const PackageActions = ({ id }) => {
         className='text-greenMain'
       />
     </ActionButtons>
+  );
+};
+
+const TagsFilter = ({ tags, setTags, disabled = false }) => {
+  return (
+    <div className='mdl:max-w-screen-sml'>
+      <MultiSelectInput
+        disabled={disabled}
+        value={tags}
+        onChange={setTags}
+        data={PACKAGES_TAGS}
+        size='xl'
+        placeholder='فلتر بالنوع'
+        classNames={{
+          inputField: 'only:placeholder:text-black font-bold',
+        }}
+      />
+    </div>
   );
 };

@@ -92,11 +92,22 @@ export const buildQuery = (baseUrl, params = {}) => {
   const queryString = Object.entries(params)
     // eslint-disable-next-line no-unused-vars
     .filter(([_, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
+    .flatMap(([key, value]) => {
+      // Handle arrays by returning multiple key=value pairs
+      if (Array.isArray(value)) {
+        return value
+          .filter((item) => item?.toString().trim() !== '') // Filter empty items
+          .map(
+            (item) =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(item)}`
+          );
+      }
+      return `${encodeURIComponent(key)}=${encodeURIComponent(
+        value
+      )}`;
+    })
     .join('&');
+
   return queryString ? `${baseUrl}?${queryString}` : baseUrl;
 };
 
@@ -120,10 +131,13 @@ export function getQueries({ params, initialQueries }) {
   );
 
   const filteredParams = Object.fromEntries(
-    Object.entries(params).filter(
-      ([key, value]) =>
-        key !== 'pageNum' && value?.toString().trim() !== ''
-    )
+    Object.entries(params).filter(([key, value]) => {
+      if (key === 'pageNum') return false; // Ignore pageNum
+      if (Array.isArray(value)) {
+        return value.some((item) => item?.toString().trim() !== ''); // Check non-empty arrays
+      }
+      return value?.toString().trim() !== ''; // Filter non-empty single values
+    })
   );
 
   return {
@@ -226,7 +240,10 @@ export const printFile = async (url) => {
   }
 };
 
-export const getRedirectPath = (roles, hasActiveContract = true) => {
+export const getRedirectPath = (
+  roles = [],
+  hasActiveContract = true
+) => {
   switch (roles[0]) {
     case 'SystemAdmin':
     case 'CustomerSupport':

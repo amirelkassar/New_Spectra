@@ -36,7 +36,9 @@ export const prefetchServices = async () => {
 export const useServices = (
   params = {
     pageNum: null,
-    serviceType: null,
+    serviceType: '',
+    freeLancerOnly: '',
+    spectraTeamOnly: '',
     search: '',
   }
 ) => {

@@ -11,6 +11,7 @@ import { useLocale } from 'next-intl';
 import HeartCheckedIcon from '@/assets/icons/heart-checked';
 import Image from 'next/image';
 import { useImagePath } from '@/hooks/use-image-path';
+import { Checkbox } from '@mantine/core';
 
 export const ViewService = ({ id }) => {
   const query = useServicesById(id);
@@ -47,27 +48,21 @@ const Service = ({ data }) => {
 
   return (
     <div className='grid grid-cols-1 mdl:grid-cols-2 gap-5'>
-      <Info dir='rtl' data={data?.arName} label='اسم الخدمة' />
+      <Info data={data?.arName} label='اسم الخدمة' />
 
-      <Info dir='ltr' data={data?.enName} label='Service Name' />
+      <Info data={data?.enName} label='Service Name' />
 
-      <Info dir='rtl' data={data?.arDescription} label='وصف الخدمة' />
+      <Info data={data?.arDescription} label='وصف الخدمة' />
 
-      <Info
-        dir='ltr'
-        data={data?.enDescription}
-        label='Service Description'
-      />
+      <Info data={data?.enDescription} label='Service Description' />
 
       <Info
-        dir='rtl'
         data={data?.arTermsAndConditions}
         label='الشرط والاحكام'
         className='mdl:col-span-2'
       />
 
       <Info
-        dir='ltr'
         data={data?.enTermsAndConditions}
         label='Terms and Conditions'
         className='mdl:col-span-2'
@@ -80,6 +75,30 @@ const Service = ({ data }) => {
       <Info
         data={data?.discount && `${data?.discount}%`}
         label='نسبة الخصم'
+      />
+
+      <Info
+        className='mdl:col-span-2'
+        data={
+          <div className='grid grid-cols-1 mdl:grid-cols-2 gap-x-2 gap-y-4'>
+            <Checkbox
+              checked={data?.enableForSpectraTeam || false}
+              onChange={() => {}}
+              label='إتاحة الخدمة لفريق أطباء سبيكترا'
+              color='#10B0C1'
+              radius='xs'
+              size='md'
+            />
+            <Checkbox
+              checked={data?.enableForFreeLancer || false}
+              onChange={() => {}}
+              label='إتاحة الخدمة للأطباء المستقلين'
+              color='#10B0C1'
+              radius='xs'
+              size='md'
+            />
+          </div>
+        }
       />
 
       {!!data?.reports?.length && (

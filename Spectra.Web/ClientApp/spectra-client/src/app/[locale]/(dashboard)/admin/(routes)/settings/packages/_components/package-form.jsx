@@ -20,6 +20,8 @@ import { PackageGoals } from '../add/_components/package-goals';
 import { PhotoDropzone } from '@/components/photo-dropzone';
 import Button from '@/components/button';
 import { useImagePath } from '@/hooks/use-image-path';
+import MultiSelectInput from '@/components/inputs/multi-select-input';
+import { PACKAGES_TAGS } from '@/data';
 
 export const PackageForm = ({
   form,
@@ -134,6 +136,24 @@ const PackageInfo = ({ data, onChange, error, title }) => {
           error={GetErrorMsg(error, 'Discount')}
         />
       </div>
+
+      <MultiSelectInput
+        size='xl'
+        label='نوع الباقة'
+        name='tags'
+        value={data.tags}
+        onChange={(value) => {
+          onChange({
+            target: {
+              name: 'tags',
+              value,
+            },
+          });
+        }}
+        error={GetErrorMsg(error, 'Tags')}
+        data={PACKAGES_TAGS}
+        searchable
+      />
 
       <IconSelect
         label='يمكنك اختيار رمز الباقة'

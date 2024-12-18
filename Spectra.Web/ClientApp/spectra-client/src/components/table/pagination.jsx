@@ -26,7 +26,9 @@ export const Pagination = ({
     if (typeof window === undefined) return;
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('page', newPage.toString());
-    router.replace(`?${searchParams.toString()}`);
+    router.replace(`?${searchParams.toString()}`, {
+      scroll: false,
+    });
   };
 
   return (
