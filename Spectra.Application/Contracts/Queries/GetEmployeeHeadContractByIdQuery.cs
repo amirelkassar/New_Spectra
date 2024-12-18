@@ -30,6 +30,7 @@ namespace Spectra.Application.Contracts.Queries
                 Expression<Func<EmploymentContract, bool>> filter = c => c.EmployeeHeadUserId == _currentUser.Id && c.Id==request.Id;
                 var contract= await _contractRepository.GetAsync(filter) ?? throw new NotFoundException("Contracts", request.Id);
                 var dto = contract.Adapt<ContractWithoutFeeReadDto>();
+                dto.Versions = dto.Versions.OrderByDescending(v => v.Order).ToArray();
                 return OperationResult<ContractWithoutFeeReadDto>.Success(dto);
             }
         }

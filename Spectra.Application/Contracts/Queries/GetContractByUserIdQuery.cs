@@ -23,6 +23,7 @@ namespace Spectra.Application.Contracts.Queries
                     OperationResult.Success();
                 }
                 var contractDto = contract.Adapt<ContractReadDto>();
+                contractDto.Versions = contractDto.Versions.OrderByDescending(v => v.Order).ToArray();
                 return OperationResult<ContractReadDto>.Success(contractDto);
             }
         }

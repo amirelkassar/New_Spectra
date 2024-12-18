@@ -23,6 +23,7 @@ namespace Spectra.Application.Contracts.Queries
             {
                 var contract = await _contractRepository.GetAsync(c => c.Id == request.Id) ?? throw new NotFoundException("Contracts", request.Id);
                 var contractDto = contract.Adapt<ContractReadDto>();
+                contractDto.Versions= contractDto.Versions.OrderByDescending(v=>v.Order).ToArray();
                 return OperationResult<ContractReadDto>.Success(contractDto);
             }
         }
