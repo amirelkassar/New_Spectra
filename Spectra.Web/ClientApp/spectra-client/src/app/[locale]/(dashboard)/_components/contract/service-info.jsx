@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { Service } from './ui';
+import { useTranslations } from 'next-intl';
 
 export const ServiceInfo = ({
   id = '',
@@ -12,6 +13,9 @@ export const ServiceInfo = ({
   deletable = false,
   onDelete = () => {},
 }) => {
+  const t = useTranslations('contract_obj');
+  const tg = useTranslations('general_obj');
+
   const netEarnings = useMemo(() => {
     if (!price && !employeePercentage) return '0';
     if (!employeePercentage) return price.toLocaleString();
@@ -35,8 +39,8 @@ export const ServiceInfo = ({
       )}
       <div className='space-y-2 flex-1'>
         <div className='flex flex-col lg:flex-row gap-2 lg:justify-between lg:items-start'>
-          <div className='flex items-center justify-between lg:justify-start gap-3'>
-            <h4 className='text-xs mdl:text-base shrink-0 capitalize'>
+          <div className='flex items-start justify-between lg:justify-start gap-3'>
+            <h4 className='text-xs mdl:text-base capitalize'>
               {name}
             </h4>
 
@@ -44,8 +48,8 @@ export const ServiceInfo = ({
           </div>
 
           <div className='flex items-center justify-between lg:block space-y-2 gap-3'>
-            <span className='text-grayDark text-xs mdl:text-base lg:text-center block'>
-              Net Earnings
+            <span className='text-grayDark text-xs mdl:text-base lg:text-center block capitalize'>
+              {t('net_earnings')}
             </span>
             <Service.NetEarnings currancy='SAR'>
               {netEarnings?.toLocaleString()}
@@ -53,7 +57,11 @@ export const ServiceInfo = ({
           </div>
         </div>
 
-        {terms && <Service.Terms>{terms}</Service.Terms>}
+        {terms && (
+          <Service.Terms headline={tg('terms_and_conditions')}>
+            {terms}
+          </Service.Terms>
+        )}
       </div>
     </Service>
   );

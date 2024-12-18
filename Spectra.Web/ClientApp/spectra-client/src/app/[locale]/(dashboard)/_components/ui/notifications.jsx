@@ -44,6 +44,7 @@ export const Notifications = () => {
     isPending,
     isSuccess,
     isError,
+    refetch,
   } = useNotifications();
 
   const { mutate: makeNotificationRead } = useMakeNotificationRead();
@@ -66,7 +67,12 @@ export const Notifications = () => {
         className='min-w-[calc(100vw-26px)] h-[400px] overflow-y-auto mdl:min-w-[650px] flex flex-col p-4'
       >
         {isPending && <Loader />}
-        {isError && <ServerError />}
+        {isError && (
+          <ServerError
+            onRetry={refetch}
+            classNames={{ icon: 'size-60 mb-5', container: 'h-auto' }}
+          />
+        )}
         {isSuccess &&
           data?.pages?.map((page, pageIndex) => {
             if (!page.data?.totalCount)
@@ -115,6 +121,7 @@ export const Notifications = () => {
     isPending,
     isSuccess,
     isError,
+    refetch,
   ]);
 
   // Trigger fetchNextPage when last element is visible

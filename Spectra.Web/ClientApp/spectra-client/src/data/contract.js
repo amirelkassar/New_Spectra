@@ -8,3 +8,14 @@ export const CONTRACT_RATES = {
     employeePercentage: 60,
   },
 };
+
+export const CONTRACT_STATE = {
+  canceled: 0,
+  contracting: 1,
+  accepted: 2,
+};
+
+export const VERSION_STATE = {
+  draft: 0,
+  active: 1,
+};

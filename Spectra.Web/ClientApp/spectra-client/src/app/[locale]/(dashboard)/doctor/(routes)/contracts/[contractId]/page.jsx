@@ -1,14 +1,8 @@
-import Card from '@/components/card';
-import { SignModal } from '../_components/sign-modal';
+import { ViewContract } from './_components/view-contract';
 
 const ContractPage = ({ params }) => {
   const contractId = params?.contractId || '';
-  return (
-    <Card>
-      <h1>Contract: {contractId}</h1>
-      <SignModal />
-    </Card>
-  );
+  return <ViewContract id={contractId} />;
 };
 
 export default ContractPage;

@@ -74,7 +74,7 @@ const Terms = ({
       <span className='text-greenMain text-nowrap shrink-0'>
         {headline}
       </span>
-      <ShowTerms>{children}</ShowTerms>
+      <ShowTerms>: {children}</ShowTerms>
     </div>
   );
 };

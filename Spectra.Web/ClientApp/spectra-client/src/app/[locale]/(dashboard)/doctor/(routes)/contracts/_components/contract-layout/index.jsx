@@ -1,20 +1,22 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { AskForJoin } from './ask-for-join';
-import { ContractSteps } from './contract-steps';
-import { Chat } from './chat';
-import { ContractHeader } from './contract-header';
-import { useActiveStep } from '../../_hooks';
+import { useTranslations } from 'next-intl';
 
-import Card from '@/components/card';
-import { ContractProvider } from '../../_hooks/use-contract-store';
-import { useEmployeeContract } from '@/hooks/queries/employee/contract';
+import { cn } from '@/lib/utils';
 import { H1 } from '@/dashboard/_components/ui/h1';
+import { Chat } from './chat';
+import { AskForJoin } from './ask-for-join';
 import { QueryWrapper } from '@/components/query-wrapper';
+import { useActiveStep } from '../../_hooks';
+import { ContractSteps } from './contract-steps';
+import { ContractHeader } from './contract-header';
+import { ContractProvider } from '@/dashboard/_hooks/use-contract-store';
+import { useEmployeeContract } from '@/hooks/queries/employee/contract';
+import Card from '@/components/card';
+import { VERSION_STATE } from '@/data';
 
 export const ContractLayout = ({ children }) => {
-  // const { activeStep } = useActiveStep(contractCase);
+  const t = useTranslations('contract_obj');
 
   const query = useEmployeeContract();
 
@@ -25,7 +27,7 @@ export const ContractLayout = ({ children }) => {
         query.isSuccess && '!p-0 rounded-none bg-transparent'
       )}
     >
-      {!query.isSuccess && <H1>العقود</H1>}
+      {!query.isSuccess && <H1>{t('contracts')}</H1>}
       <QueryWrapper query={query} isFiltered={true}>
         {({ data, hasData }) => (
           <RenderLayout data={data} hasData={hasData}>
@@ -38,27 +40,44 @@ export const ContractLayout = ({ children }) => {
 };
 
 const RenderLayout = ({ data = {}, hasData = false, children }) => {
-  console.log(hasData);
-};
+  const activeContract =
+    data?.versions?.find((v) => v?.state === VERSION_STATE.active) ||
+    {};
 
-const Temp = () => {
   return (
-    <ContractProvider>
-      <div className='flex flex-col h-full'>
-        <Card className='h-full'>
-          <ContractHeader />
+    <ContractProvider
+      initialState={{
+        daysOfWork: data?.daysOfWork || '',
+        hoursOfWork: data?.hoursOfWork || '',
+        freelancingServices:
+          activeContract?.freelancingServices || [],
+        spectraTeamServices:
+          activeContract?.spectraTeamServices || [],
+      }}
+    >
+      <div className='flex flex-col h-full space-y-5'>
+        <Steps hasData={hasData} state={data?.contractState} />
 
-          <ContractSteps active={0} />
-
-          {0 === 0 && <AskForJoin />}
-        </Card>
-
-        <div className='flex overflow-hidden'>
+        <div className='flex overflow-hidden flex-1'>
           <Chat />
 
           <div className='flex-1'>{children}</div>
         </div>
       </div>
     </ContractProvider>
+  );
+};
+
+const Steps = ({ hasData = false, state }) => {
+  const { activeStep } = useActiveStep({ hasData, state });
+
+  return (
+    <Card>
+      <ContractHeader />
+
+      <ContractSteps active={activeStep} />
+
+      {activeStep === 0 && <AskForJoin />}
+    </Card>
   );
 };

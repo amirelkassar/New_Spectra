@@ -32,6 +32,11 @@ import { SETTINGS_LIST } from './settings';
 import { CLIENT_VIDEO_NAV } from './video';
 import { ACADEMIC_DEGREE } from './academic-degree';
 import { PACKAGES_TAGS } from './packages';
+import {
+  CONTRACT_RATES,
+  CONTRACT_STATE,
+  VERSION_STATE,
+} from './contract';
 
 export {
   WHAT_WE_CURE,
@@ -66,4 +71,7 @@ export {
   CLIENT_VIDEO_NAV,
   ACADEMIC_DEGREE,
   PACKAGES_TAGS,
+  CONTRACT_RATES,
+  CONTRACT_STATE,
+  VERSION_STATE,
 };

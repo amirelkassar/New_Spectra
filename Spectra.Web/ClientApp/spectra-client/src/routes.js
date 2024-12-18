@@ -282,8 +282,7 @@ const ROUTES = {
       DASHBOARD: '/doctor/contracts',
       CONTRACTSNEW: '/doctor/contracts/new',
       CONTRACTSID: (id) => `/doctor/contracts/${id}`,
-      CONTRACTSIDEDIT: (id) =>
-        `/doctor/contracts/${id}?editContracts=true`,
+      EDIT_CONTRACT: (id) => `/doctor/contracts/${id}/edit`,
     },
     CHATS: {
       DASHBOARD: '/doctor/chats',
