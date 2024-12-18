@@ -73,14 +73,16 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.FreelancingServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.EnName,
-                        Duration = TimeSpan.FromMinutes(requestService.Duration),
+                        EnName = service.EnName,
+                        ArName = service.ArName,
+                        Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
-                        ServiceTerms = service.ArTermsAndConditions
+                        ArTerms = service.ArTermsAndConditions,
+                        EnTerms=service.ArTermsAndConditions
                     });
                 }
                 if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !contractVerion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
@@ -89,14 +91,16 @@ namespace Spectra.Application.Contracts.Commands
                     contractVerion.SpectraTeamServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
-                        ServiceName = service.EnName,
-                        Duration = TimeSpan.FromMinutes(requestService.Duration),
+                        EnName = service.EnName,
+                        ArName = service.ArName,
+                        Duration = requestService.Duration,
                         EmployeeFees = requestService.EmployeeFees,
                         EmployeePercentage = requestService.EmployeePercentage,
                         PlatformFees = requestService.PlatformFees,
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
-                        ServiceTerms = service.ArTermsAndConditions
+                        ArTerms = service.ArTermsAndConditions,
+                        EnTerms = service.ArTermsAndConditions
                     });
                 }
             }

@@ -8,6 +8,6 @@
         public double ServiceFees { get; set; }
         public double EmployeeFees { get; set; }
         public double PlatformFees { get; set; }
-        public double Duration { get; set; }
+        public int Duration { get; set; }
     }
 }
