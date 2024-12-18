@@ -5,6 +5,10 @@ namespace Spectra.Application.Contracts.DTO
 {
     public class ContractReadDto : BaseEntityDto<string>
     {
+        public ContractReadDto()
+        {
+            Versions = [];
+        }
         public string Titel { get; set; }
         public ContractStates ContractState { get; set; }
         public string EmployeeId { get;  set; }

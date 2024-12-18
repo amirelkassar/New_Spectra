@@ -10,6 +10,10 @@ namespace Spectra.Application.Contracts.DTO
 {
     public class ContractWithoutFeeReadDto : BaseEntityDto<string>
     {
+        public ContractWithoutFeeReadDto()
+        {
+            Versions = [];
+        }
         public string Titel { get; set; }
         public ContractStates ContractState { get; set; }
         public string EmployeeId { get;  set; }
