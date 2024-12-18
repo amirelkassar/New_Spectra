@@ -82,7 +82,7 @@ namespace Spectra.Application.Contracts.Commands
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
-                        EnTerms=service.ArTermsAndConditions
+                        EnTerms=service.EnTermsAndConditions
                     });
                 }
                 if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !contractVerion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
@@ -100,7 +100,7 @@ namespace Spectra.Application.Contracts.Commands
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
-                        EnTerms = service.ArTermsAndConditions
+                        EnTerms = service.EnTermsAndConditions
                     });
                 }
             }
