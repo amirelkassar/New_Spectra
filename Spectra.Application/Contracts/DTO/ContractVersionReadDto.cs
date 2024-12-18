@@ -4,6 +4,7 @@ namespace Spectra.Application.Contracts.DTO
 {
     public class ContractVersionReadDto
     {
+        public string Id { get; set; }
         public int Order { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public ContractVersionStates State { get; set; }

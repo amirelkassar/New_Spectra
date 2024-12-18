@@ -13,5 +13,6 @@
         public long TotalCount { get; private set; }
         public int PageNumber { get; private set; }
         public int PageSize { get; private set; }
+        public bool UnReadNotifications { get; set; }
     }
 }

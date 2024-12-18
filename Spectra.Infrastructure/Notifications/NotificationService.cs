@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
@@ -24,6 +25,7 @@ namespace Spectra.Infrastructure.Notifications
         public async Task<Notification> PushToRoleAsync(string roleName, string title, string content, NotificationTypes type, string? senderId = null, string? objectUrl = null)
         {
             var users = await _userManager.GetUsersInRoleAsync(roleName);
+            var userIds = users.Select(u => u.Id).ToArray();
             var notificationRes =(OperationResult<Notification>) await _sender.Send(new CreateNotificationCommand
             {
                 Content = content,
@@ -31,13 +33,14 @@ namespace Spectra.Infrastructure.Notifications
                 ObjectUrl = objectUrl,
                 SenderId = senderId,
                 Type = type,
-                Receivers=users.Select(u=>u.Id).ToArray()
+                Receivers= userIds
             });
 
             var notification = notificationRes.Data;
             var notificationDto = notification.Adapt<NotificationReadDto>();
 
-            await _notificationContext.Clients.Users(users.Select(u => u.Id).ToArray()).Receive(notificationDto);
+            await _notificationContext.Clients.Users(userIds).Receive(notificationDto);
+
 
             return notification;
         }

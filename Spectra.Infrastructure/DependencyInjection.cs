@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using System.Text;
+using DocumentFormat.OpenXml.InkML;
 using MadEyeMatt.AspNetCore.Authorization.Permissions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -107,12 +109,8 @@ namespace Spectra.Infrastructure
             services.AddHttpClient();
             services.ConfigureAuth(configuration);
             services.ConfigureDataAccess(configuration);
-            services.AddSignalR(config =>
-            {
-                config.EnableDetailedErrors = true;
-                config.StatefulReconnectBufferSize = 100000;
-            });
             services.AddDataProtection();
+            services.ConfigureSignalrServices();
             services.ConfigureEmailServices(configuration);
             services.ConfigureSnomedServices();
             return services;
@@ -225,10 +223,19 @@ namespace Spectra.Infrastructure
                    {
                        OnMessageReceived = async ctx =>
                        {
-                           // Check if the token is in the query string
-                           var token = ctx.Request.Query["token"].FirstOrDefault();
-                           if (!string.IsNullOrEmpty(token))
-                               ctx.Token = token;
+                           var path = ctx.HttpContext.Request.Path;
+                           if (path.StartsWithSegments("/hubs"))
+                           {
+                               var accessToken = ctx.Request.Query["access_token"];
+                               ctx.Token = accessToken;
+                           }
+                           else
+                           {
+                               var token = ctx.Request.Query["token"].FirstOrDefault();
+                               if (!string.IsNullOrEmpty(token))
+                                   ctx.Token = token;
+                           }
+                          
 
                            await Task.CompletedTask;
                        },
@@ -294,6 +301,17 @@ namespace Spectra.Infrastructure
                 config.BaseAddress = new Uri("https://browser.ihtsdotools.org/snowstorm/snomed-ct/");
             });
             services.AddScoped<ISnomedService, SnomedService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureSignalrServices(this IServiceCollection services)
+        {
+            services.AddSignalR(config =>
+            {
+                config.EnableDetailedErrors = true;
+                config.StatefulReconnectBufferSize = 100000;
+            });
+            services.AddSingleton<IUserIdProvider, SignalRUserIdProvider>();
             return services;
         }
     }

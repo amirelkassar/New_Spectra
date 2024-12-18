@@ -56,7 +56,7 @@ namespace Spectra.Application.Contracts.Commands
             var empHead = await _medicalProvider.GetByIdAsync(departmentHead.HeadDoctorId);
             var services = await _serviceMDRepository.GetAllAsync();
 
-            var contractVerion = new ContractVersion
+            var contractVerion = new ContractVersion(Ulid.NewUlid().ToString())
             {
                 Order = 1,
                 AcceptedByAdmin = false,

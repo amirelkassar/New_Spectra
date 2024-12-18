@@ -51,7 +51,7 @@ namespace Spectra.Application.Contracts.Commands
             currentVersion.State = ContractVersionStates.Draft;
             currentVersion.CreationDate = DateTime.UtcNow;
             //create new version
-            var newVersion = new ContractVersion
+            var newVersion = new ContractVersion(Ulid.NewUlid().ToString())
             {
                 AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
                 AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.CustomerSupport }.Any(r => r.Equals(request.ModifierRole)),

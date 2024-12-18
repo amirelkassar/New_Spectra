@@ -11,13 +11,13 @@ namespace Spectra.Domain.Notifications
 {
     public class Notification : BaseAuditableEntity<string>
     {
-        protected Notification() { }
+        protected Notification() : base() { }
         public Notification(string id,
             string title,
             string content,
             NotificationTypes type,
-            string? senderId=default,
-            string? url = default)
+            string? senderId = default,
+            string? url = default) : base()
         {
             Id = id;
             Title = title;
@@ -25,13 +25,13 @@ namespace Spectra.Domain.Notifications
             SenderId = senderId;
             Type = type;
             ObjectUrl = url;
-
+            Created = DateTimeOffset.UtcNow;
             Changes = [];
         }
 
         public string Title { get; private set; }
         public string Content { get; private set; }
-        public string SenderId { get; private set; }
+        public string? SenderId { get; private set; }
         public NotificationTypes Type { get; private set; }
         public string? ObjectUrl { get; private set; }
         public ICollection<NotificationChange> Changes { get; private set; }
