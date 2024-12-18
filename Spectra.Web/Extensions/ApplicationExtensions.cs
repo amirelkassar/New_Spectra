@@ -8,7 +8,6 @@ using Spectra.Application.Interfaces;
 using Spectra.Application.Notifications.Hubs;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain.Shared.Constants;
-using Spectra.Infrastructure.ChatHub;
 using Spectra.Infrastructure.Data;
 using Spectra.WebAPI.Middlewares;
 
