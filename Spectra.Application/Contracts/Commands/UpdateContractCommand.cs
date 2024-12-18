@@ -18,10 +18,12 @@ namespace Spectra.Application.Contracts.Commands
         public string? EmployeeUserId { get; set; }
         public int HoursOfWork { get; set; }
         public int DaysOfWork { get; set; }
-        public double PlatformPercentage { get; set; }
-        public double EmployeePercentage { get; set; }
-        public List<ContractServiceCreateDto>? FreelancingServices { get; set; }
-        public List<ContractServiceCreateDto>? SpectraTeamServices { get; set; }
+        public double FreelancingPercentage { get; set; }
+        public double SpectraTeamPercentage { get; set; }
+        public int FreelancingDuration { get; set; }
+        public int SpectraTeamDuration { get; set; }
+        public List<string>? FreelancingServices { get; set; }
+        public List<string>? SpectraTeamServices { get; set; }
     }
 
     public class UpdateContractCommandHandler(IContractRepository contractRepository, IServiceMDRepository serviceMDRepository) : IRequestHandler<UpdateContractCommand, OperationResult>
@@ -60,46 +62,53 @@ namespace Spectra.Application.Contracts.Commands
                 CreationDate = DateTime.UtcNow,
                 Order = currentVersion.Order + 1,
                 State = ContractVersionStates.Active,
-                DaysOfWork=request.DaysOfWork,
-                HoursOfWork=request.HoursOfWork,
+                DaysOfWork = request.DaysOfWork,
+                HoursOfWork = request.HoursOfWork,
             };
 
             var services = await _serviceMDRepository.GetAllAsync();
+            //adding freelancing services
 
-            foreach (var service in services)
+            foreach (var service in services.Where(s => s.EnableForFreeLancer == true).ToArray())
             {
-                if (request.FreelancingServices.Any(s => s.ServiceId == service.Id) && !newVersion.FreelancingServices.Any(s => s.ServiceId == service.Id))
+                var platformPercentage = 100 - request.FreelancingPercentage;
+                if (request.FreelancingServices.Any(s => s == service.Id) && !newVersion.FreelancingServices.Any(s => s.ServiceId == service.Id))
                 {
-                    var requestService = request.FreelancingServices.First(s => s.ServiceId == service.Id);
+                    var requestService = request.FreelancingServices.First(s => s == service.Id);
                     newVersion.FreelancingServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
                         EnName = service.EnName,
                         ArName = service.ArName,
-                        Duration = requestService.Duration,
-                        EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = request.EmployeePercentage,
-                        PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = request.PlatformPercentage,
-                        ServiceFees = requestService.ServiceFees,
+                        Duration = request.FreelancingDuration,
+                        EmployeeFees = service.Price * (request.FreelancingPercentage / 100),
+                        EmployeePercentage = request.FreelancingPercentage,
+                        PlatformFees = service.Price * (platformPercentage / 100),
+                        PlatformPercentage = platformPercentage,
+                        ServiceFees = service.Price,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms = service.EnTermsAndConditions
                     });
                 }
-                if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !newVersion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
+            }
+            //spectra team services
+            foreach (var service in services.Where(s => s.EnableForSpectraTeam == true).ToArray())
+            {
+                var platformPercentage = 100 - request.SpectraTeamPercentage;
+                if (request.SpectraTeamServices.Any(s => s == service.Id) && !newVersion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
                 {
-                    var requestService = request.SpectraTeamServices.First(s => s.ServiceId == service.Id);
+                    var requestService = request.SpectraTeamServices.First(s => s == service.Id);
                     newVersion.SpectraTeamServices.Add(new ContractService
                     {
                         ServiceId = service.Id,
                         EnName = service.EnName,
                         ArName = service.ArName,
-                        Duration = requestService.Duration,
-                        EmployeeFees = requestService.EmployeeFees,
-                        EmployeePercentage = request.EmployeePercentage,
-                        PlatformFees = requestService.PlatformFees,
-                        PlatformPercentage = request.PlatformPercentage,
-                        ServiceFees = requestService.ServiceFees,
+                        Duration = request.SpectraTeamDuration,
+                        EmployeeFees = service.Price * (request.SpectraTeamPercentage / 100),
+                        EmployeePercentage = request.SpectraTeamPercentage,
+                        PlatformFees = service.Price * (platformPercentage / 100),
+                        PlatformPercentage = platformPercentage,
+                        ServiceFees = service.Price,
                         ArTerms = service.ArTermsAndConditions,
                         EnTerms = service.EnTermsAndConditions
                     });
