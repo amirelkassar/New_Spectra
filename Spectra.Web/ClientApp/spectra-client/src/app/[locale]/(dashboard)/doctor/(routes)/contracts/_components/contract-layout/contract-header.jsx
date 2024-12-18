@@ -1,27 +1,38 @@
 'use client';
 
-import ChatsIcon from '@/assets/icons/chats';
-import ThreeDotsIcon from '@/assets/icons/three-dots';
-import { BackButton } from '@/components/buttons/back-button';
+import { useMemo } from 'react';
 import { usePathname } from '@/i18n/routing';
-import ROUTES from '@/routes';
-import { useContractStore } from '../../_hooks';
+import { useTranslations } from 'next-intl';
+
 import { H1 } from '@/dashboard/_components/ui/h1';
+import { BackButton } from '@/components/buttons/back-button';
+import { useContractStore } from '../../_hooks';
+
+import ChatsIcon from '@/assets/icons/chats';
+import ROUTES from '@/routes';
 
 export const ContractHeader = () => {
+  const t = useTranslations('contract_obj');
+
   const pathname = usePathname();
 
-  if (pathname === ROUTES.DOCTOR.CONTRACTS.DASHBOARD) {
-    return <H1>العقود</H1>;
-  }
+  const isContractHome = useMemo(
+    () => pathname === ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
+    [pathname]
+  );
+
   return (
     <div className='flex justify-between items-center gap-5'>
-      <div className='flex items-center gap-5'>
-        <BackButton />
-        <H1>العقد</H1>
-      </div>
+      {isContractHome ? (
+        <H1>{t('contracts')}</H1>
+      ) : (
+        <div className='flex items-center gap-5'>
+          <BackButton />
+          <H1>{t('contract')}</H1>
+        </div>
+      )}
 
-      <Actions />
+      <ChatsButton />
     </div>
   );
 };
@@ -39,11 +50,11 @@ const ChatsButton = () => {
   );
 };
 
-const Actions = () => {
-  return (
-    <div className='flex items-center gap-5 *:shrink-0'>
-      <ChatsButton />
-      <ThreeDotsIcon />
-    </div>
-  );
-};
+// const Actions = () => {
+//   return (
+//     <div className='flex items-center gap-5 *:shrink-0'>
+//       <ChatsButton />
+//       <ThreeDotsIcon />
+//     </div>
+//   );
+// };

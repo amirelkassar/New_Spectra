@@ -25,12 +25,52 @@
   "hello": "Hello",
   "general_obj": {
     "edit": "Edit",
-    "not_photo": "No photo available!"
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "min": "Min",
+    "send": "Send",
+    "view": "View",
+    "accept": "Accept",
+    "reject": "Reject",
+    "save_changes": "Save Changes",
+    "duration": "Duration",
+    "not_photo": "No photo available!",
+    "loading": "Loading...",
+    "no_data": "No data available!",
+    "no_results": "No results found!",
+    "error_loading_data": "Error loading data!",
+    "no_data_selected": "No data selected!",
+    "terms_and_conditions": "Terms & Conditions",
+    "read_more": "Read more",
+    "read_less": "Read less"
   },
   "packages_obj": {
     "title": "Packages",
     "content": "Package content",
     "goals": "Package goals",
     "photo": "Package photo"
+  },
+  "contract_obj": {
+    "contracts": "Contracts",
+    "contract": "Contract",
+    "old_copy": "Old copy",
+    "current_copy": "Current copy",
+    "active": "Active",
+    "draft": "Draft",
+    "send_join_request": "Send join request",
+    "join_request": "Join request",
+    "data_fill": "Data fill",
+    "under_review": "Under review",
+    "accepted": "Accepted",
+    "price_of_service_as_freelancer": "Price of your service as freelancer",
+    "price_of_service_as_spectra": "Price of your services as a member of the Spectra team",
+    "duration": "Duration",
+    "your_percentage": "Your Percentage",
+    "your_share": "Your Share",
+    "hours_per_day": "The number of hours worked per day",
+    "days_per_week": "The number of days worked per week",
+    "net_earnings": "Net earnings",
+    "select_freelance_services": "Select freelance services",
+    "select_spectra_services": "Select Spectra services"
   }
 }

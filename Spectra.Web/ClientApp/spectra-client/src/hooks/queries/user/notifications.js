@@ -62,8 +62,8 @@ export const useMakeNotificationRead = () => {
     mutationFn: async (id) =>
       (await apiUser.put(notifications.actions.makeItRead(id))).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [initialQueryKey, initialQueries],
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey],
       });
     },
     onError: () => {},
@@ -77,8 +77,8 @@ export const useDeleteNotification = () => {
     mutationFn: async (id) =>
       (await apiUser.delete(notifications.actions.delete(id))).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [initialQueryKey, initialQueries],
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey],
       });
     },
   });

@@ -4,12 +4,11 @@ import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 
 import { Toast } from '@/components/toast';
-import { useAddEmployeeContract } from '@/hooks/queries/employee/contract';
+import { useUpateEmployeeContract } from '@/hooks/queries/employee/contract';
 import { useContractStore } from '@/dashboard/_hooks/use-contract-store';
-
 import ROUTES from '@/routes';
 
-export const useNewContract = () => {
+export const useUpdateContract = (id) => {
   const locale = useLocale();
 
   const router = useRouter();
@@ -30,8 +29,8 @@ export const useNewContract = () => {
     (s) => s.spectraTeamPercentage
   );
 
-  const { mutateAsync: sendContract, isPending } =
-    useAddEmployeeContract();
+  const { mutateAsync: updateContract, isPending } =
+    useUpateEmployeeContract();
 
   const disabled =
     (!freelancingServices.length && !spectraTeamServices.length) ||
@@ -46,17 +45,20 @@ export const useNewContract = () => {
     if (disabled) return;
 
     const data = {
+      id,
       hoursOfWork,
       daysOfWork,
       freelancingServices,
       spectraTeamServices,
     };
 
-    Toast.Promise(sendContract(data), {
+    // return console.log(data);
+
+    Toast.Promise(updateContract(data), {
       success:
         locale === 'en'
-          ? 'Contract sent successfully'
-          : 'تم إرسال العقد بنجاح',
+          ? 'Contract updated successfully'
+          : 'تم تعديل العقد بنجاح',
       onSuccess: () =>
         router.replace(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
     });

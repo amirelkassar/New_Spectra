@@ -1,32 +1,24 @@
 'use client';
 
 import { useMemo } from 'react';
-import { contractState as CASE } from '../layout';
+import { CONTRACT_STATE } from '../../../../../../../data/contract';
 import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
-export const useActiveStep = (contractCase) => {
+export const useActiveStep = ({ hasData, state }) => {
   const pathname = usePathname();
 
   const activeStep = useMemo(() => {
-    if (
-      pathname === ROUTES.DOCTOR.CONTRACTS.DASHBOARD &&
-      contractCase === CASE[0]
-    ) {
+    if (!hasData && pathname === ROUTES.DOCTOR.CONTRACTS.DASHBOARD)
       return 0;
-    }
 
-    if (
-      pathname === ROUTES.DOCTOR.CONTRACTS.CONTRACTSNEW &&
-      contractCase === CASE[0]
-    ) {
-      return 1;
-    }
+    if (!hasData && pathname === ROUTES.DOCTOR.CONTRACTS.CONTRACTSNEW)
+      return 2;
 
-    if (contractCase === CASE[1] || contractCase === CASE[2]) {
-      return 3;
-    }
-  }, [contractCase, pathname]);
+    if (hasData) return 3;
+
+    if (hasData && CONTRACT_STATE.accepted === state) return 4;
+  }, [state, pathname, hasData]);
 
   return { activeStep };
 };

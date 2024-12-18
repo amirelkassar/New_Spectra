@@ -2,14 +2,11 @@
 
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import * as signalR from '@microsoft/signalr';
 
 import { useToken } from '@/hooks/use-token';
 import { Toast } from '@/components/toast';
-import { startSignalR, stopSignalR } from '@/lib/signalr';
-import {
-  initialQueryKey,
-  initialQueries,
-} from '@/hooks/queries/user/notifications';
+import { initialQueryKey } from '@/hooks/queries/user/notifications';
 
 export const NotificationsToast = () => {
   const { token } = useToken();
@@ -17,18 +14,44 @@ export const NotificationsToast = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/notification`;
+    let connection = null;
 
-    startSignalR(HUB_URL, token, (message) => {
-      if (!message) return;
-      Toast.Notification(message);
-      queryClient.invalidateQueries({
-        queryKey: [initialQueryKey, initialQueries],
+    const connectSignalR = async () => {
+      const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/notification`;
+
+      connection = new signalR.HubConnectionBuilder()
+        .withUrl(HUB_URL, { accessTokenFactory: () => token })
+        .configureLogging(signalR.LogLevel.Error)
+        .build();
+
+      connection.on('Receive', (message) => {
+        if (!message) return;
+        // return console.log(message);
+        Toast.Notification(message?.title);
+        queryClient.refetchQueries({
+          queryKey: [initialQueryKey],
+        });
       });
-    });
+
+      try {
+        await connection.start();
+        // console.log('SignalR connected successfully!');
+      } catch {
+        // console.error('SignalR connection failed: ', error);
+      }
+
+      connection.onclose(() => {
+        console.warn('SignalR connection closed. Reconnecting...');
+        setTimeout(connectSignalR, 5000);
+      });
+    };
+
+    connectSignalR();
 
     return () => {
-      stopSignalR();
+      if (connection) {
+        connection.stop();
+      }
     };
   }, [token, queryClient]);
 };

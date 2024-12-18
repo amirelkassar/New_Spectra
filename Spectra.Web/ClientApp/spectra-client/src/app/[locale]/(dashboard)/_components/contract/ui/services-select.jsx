@@ -1,5 +1,6 @@
 'use client';
 
+import { useLocale, useTranslations } from 'next-intl';
 import { useDisclosure } from '@mantine/hooks';
 import { Checkbox, Popover, ScrollArea } from '@mantine/core';
 import { useMemo, useRef } from 'react';
@@ -18,6 +19,10 @@ export const ServicesSelect = ({
 }) => {
   const viewportRef = useRef(null);
 
+  const locale = useLocale();
+
+  const t = useTranslations('general_obj');
+
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const totalSelected = useMemo(
@@ -25,16 +30,24 @@ export const ServicesSelect = ({
     [selectedIds]
   );
 
+  const totalSelectedText = useMemo(() => {
+    return locale === 'en'
+      ? `${totalSelected} Services Selected`
+      : `تم تحديد ${totalSelected} خدمات`;
+  }, [locale, totalSelected]);
+
   const servicesList = useMemo(() => {
-    if (isLoading) return <NoData>Loading services...</NoData>;
-    if (isError) return <NoData>Error Loading services!</NoData>;
-    if (isDataEmpty) return <NoData>No services found!</NoData>;
+    if (isLoading) return <NoData>{t('loading')}</NoData>;
+    if (isError) return <NoData>{t('error_loading_data')}</NoData>;
+    if (isDataEmpty) return <NoData>{t('no_data')}</NoData>;
+
+    const nameKey = locale === 'en' ? 'enName' : 'arName';
 
     return data.map((s) => {
       const isSelected = selectedIds.includes(s?.id);
 
       return (
-        <ServiceItem key={s?.id} name={s?.enName}>
+        <ServiceItem key={s?.id} name={s[nameKey]}>
           <Checkbox
             radius='xs'
             size='lg'
@@ -56,6 +69,8 @@ export const ServicesSelect = ({
     isDataEmpty,
     isError,
     isLoading,
+    t,
+    locale,
   ]);
 
   return (
@@ -70,16 +85,11 @@ export const ServicesSelect = ({
           onClick={toggle}
           className='group border border-black rounded-lg px-5 py-3 w-full max-w-2xl flex items-center justify-between text-sm lg:text-xl transition ring-1 ring-transparent hover:ring-greenMain hover:border-greenMain aria-expanded:ring-greenMain aria-expanded:border-greenMain'
         >
-          {!!totalSelected
-            ? `${totalSelected} Services selected`
-            : placeholder}
+          {!!totalSelected ? totalSelectedText : placeholder}
           <ArrowDownBlack className='lg:size-5 group-aria-expanded:rotate-180 transition-transform' />
         </button>
       </Popover.Target>
-      <Popover.Dropdown
-        dir='ltr'
-        className='shadow-md !p-0 border border-black rounded-lg overflow-x-hidden'
-      >
+      <Popover.Dropdown className='shadow-md !p-0 border border-black rounded-lg overflow-x-hidden'>
         <ScrollArea.Autosize
           viewportRef={viewportRef}
           mah={320}

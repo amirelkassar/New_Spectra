@@ -1,10 +1,13 @@
 'use client';
 
 import { Stepper } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 import CorrectICon from '@/assets/icons/correct';
 
 export const ContractSteps = ({ active }) => {
+  const t = useTranslations('contract_obj');
+
   return (
     <Stepper
       color='#10B0C1'
@@ -12,7 +15,7 @@ export const ContractSteps = ({ active }) => {
       allowNextStepsSelect={false}
       completedIcon={<CorrectICon />}
       classNames={{
-        stepLabel: 'text-xs lg:text-base',
+        stepLabel: 'text-xs lg:text-base capitalize',
         root: 'max-w-2xl mx-auto my-7 lg:my-10',
         steps: 'flex-nowrap',
         step: 'data-[completed]:opacity-100 opacity-40',
@@ -22,10 +25,10 @@ export const ContractSteps = ({ active }) => {
           'bg-grayDark text-white border-none size-5 lg:size-8 min-h-5 min-w-5 lg:min-h-8 lg:min-w-8 shrink-0 text-xs lg:text-xl data-[completed]:bg-greenMain',
       }}
     >
-      <Stepper.Step label='طلب انضمام' />
-      <Stepper.Step label='ملء بيانات' />
-      <Stepper.Step label='قيد المراجعة' />
-      <Stepper.Step label='إتمام العملية' />
+      <Stepper.Step label={t('join_request')} />
+      <Stepper.Step label={t('data_fill')} />
+      <Stepper.Step label={t('under_review')} />
+      <Stepper.Step label={t('accepted')} />
     </Stepper>
   );
 };
