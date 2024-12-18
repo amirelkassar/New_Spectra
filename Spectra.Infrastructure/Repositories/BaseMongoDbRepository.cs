@@ -45,7 +45,7 @@ namespace Spectra.Infrastructure.Repositories
                 .Skip(skipCount)
                 .Limit(maxCount);
 
-            var total = await query.CountDocumentsAsync();
+            var total = await _collection.Find(filter, options).CountDocumentsAsync();
             var data=await query.ToListAsync();
 
             return (data, total);
@@ -63,12 +63,10 @@ namespace Spectra.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<IFindFluent<T, T>> GetQueryAsync(Expression<Func<T, bool>> filter = null, FindOptions options = null, int skipCount = 0, int maxCount = 100)
+        public async Task<IMongoCollection<T>> GetCollectionAsync()
         {
-            filter ??= _ => true;
-            var query = _collection.Find(filter, options);
             await Task.CompletedTask;
-            return query;
+            return _collection;
         }
 
         public async Task UpdateAsync(T input)

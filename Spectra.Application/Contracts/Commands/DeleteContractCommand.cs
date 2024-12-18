@@ -5,12 +5,12 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Contracts.Commands
 {
-    public class DeleteContractCommand : ICommand<OperationResult<Unit>>
+    public class DeleteContractCommand : ICommand<OperationResult>
     {
         public string Id { get; set; }
     }
 
-    public class DeleteContractCommandHandler : IRequestHandler<DeleteContractCommand, OperationResult<Unit>>
+    public class DeleteContractCommandHandler : IRequestHandler<DeleteContractCommand, OperationResult>
     {
         private readonly IContractRepository _contractRepository;
 
@@ -20,10 +20,10 @@ namespace Spectra.Application.Contracts.Commands
             _contractRepository = contractRepository;
         }
 
-        public async Task<OperationResult<Unit>> Handle(DeleteContractCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(DeleteContractCommand request, CancellationToken cancellationToken)
         {
             await _contractRepository.DeleteAsync(request.Id);
-            return OperationResult<Unit>.Success(Unit.Value);
+            return OperationResult.Success();
 
         }
 

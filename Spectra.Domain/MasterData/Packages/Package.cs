@@ -14,6 +14,7 @@ namespace Spectra.Domain.MasterData.Packages
         public ICollection<PackageService> Services { get; set; }
         public ICollection<PackageGoal> Goals { get; set; }
         public string? PhotoPath { get; set; }
+        public ICollection<string> Tags { get; set; }
         protected Package() { }
         private Package(string id,
         string arName,

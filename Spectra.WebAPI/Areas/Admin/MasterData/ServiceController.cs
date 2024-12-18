@@ -5,11 +5,11 @@ using Spectra.Application.MasterData.ServicesMD.Services;
 
 namespace Spectra.WebAPI.Areas.Admin.MasterData
 {
-    public class ServicesController : AdminBaseController
+    public class ServiceController : AdminBaseController
     {
         private readonly IServiceMDService _serviceMDService;
 
-        public ServicesController(IServiceMDService serviceMDService)
+        public ServiceController(IServiceMDService serviceMDService)
         {
             _serviceMDService = serviceMDService;
         }

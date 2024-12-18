@@ -1,7 +1,9 @@
-﻿using Mapster;
+﻿using System.Linq.Expressions;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Driver;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.ServicesMD.Dtos;
@@ -16,45 +18,70 @@ namespace Spectra.Application.MasterData.ServicesMD.Queries
     {
         public ServiceTypes? ServiceType { get; set; }
         public string? Search { get; set; }
+        public bool? FreeLancerOnly { get; set; }
+        public bool? SpectraTeamOnly { get; set; }
     }
-    public class GetAllServicesMDQueryHandler(IBaseMongoDbRepository<PlatformService> serviceMRepository,
-        IHttpContextAccessor httpContextAccessor,
-        IWebHostEnvironment webHostEnvironment) : IRequestHandler<GetAllServicesMDQuery, OperationResult>
+
+    public class GetAllServicesMDQueryHandler : IRequestHandler<GetAllServicesMDQuery, OperationResult>
     {
-        private readonly IBaseMongoDbRepository<PlatformService> _serviceMRepository = serviceMRepository;
-        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
-        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+        private readonly IBaseMongoDbRepository<PlatformService> _serviceMRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public GetAllServicesMDQueryHandler(
+            IBaseMongoDbRepository<PlatformService> serviceMRepository,
+            IHttpContextAccessor httpContextAccessor,
+            IWebHostEnvironment webHostEnvironment)
+        {
+            _serviceMRepository = serviceMRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _webHostEnvironment = webHostEnvironment;
+        }
 
         public async Task<OperationResult> Handle(GetAllServicesMDQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<PlatformService> services = null;
-            long totalData = 0;
+            var collection = await _serviceMRepository.GetCollectionAsync();
+            var filterBuilder = Builders<PlatformService>.Filter;
+            var filter = filterBuilder.Empty;
+
             if (!string.IsNullOrEmpty(request.Search))
             {
-                request.Search = request.Search.ToLower().Trim();
-                var (data, total) = await _serviceMRepository.GetAllAsync(d => (request.ServiceType.HasValue ? d.ServiceType == request.ServiceType : d.ServiceType == d.ServiceType) && (d.EnName.ToLower().StartsWith(request.Search) || d.ArName.ToLower().StartsWith(request.Search)),
-                null,
-                request.SkipCount,
-                request.MaxCount);
-                totalData = total;
-                services = data.ToArray();
+                var searchLower = request.Search.ToLower().Trim();
+                var searchFilter = filterBuilder.Or(
+                    filterBuilder.Regex(s => s.EnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
+                    filterBuilder.Regex(s => s.ArName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i"))
+                );
+                filter &= searchFilter;
             }
-            else
+
+            if (request.ServiceType.HasValue)
             {
-                var (data, total) = await _serviceMRepository.GetAllAsync(d => (request.ServiceType.HasValue ? d.ServiceType == request.ServiceType : d.ServiceType == d.ServiceType),
-                    null,
-                    request.SkipCount,
-                    request.MaxCount);
-                totalData = total;
-                services = data.ToArray();
+                filter &= filterBuilder.Eq(s => s.ServiceType, request.ServiceType.Value);
             }
-            var dtos = services.Adapt<IReadOnlyCollection<ServiceReadDto>>();
+
+            if (request.FreeLancerOnly.HasValue && request.FreeLancerOnly.Value)
+            {
+                filter &= filterBuilder.Eq(s => s.EnableForFreeLancer, true);
+            }
+            else if (request.SpectraTeamOnly.HasValue && request.SpectraTeamOnly.Value)
+            {
+                filter &= filterBuilder.Eq(s => s.EnableForSpectraTeam, true);
+            }
+
+            var total = await collection.CountDocumentsAsync(filter);
+            var data = await collection.Find(filter)
+                .SortByDescending(s => s.Id)
+                .Skip(request.SkipCount)
+                .Limit(request.MaxCount)
+                .ToListAsync(cancellationToken);
+
+            var dtos = data.Adapt<IReadOnlyCollection<ServiceReadDto>>();
             foreach (var item in dtos.Where(i => !string.IsNullOrWhiteSpace(i.HeroImagePath)))
             {
                 item.HeroImagePath = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, item.HeroImagePath), EndPointsRoutes.Services, _httpContextAccessor);
             }
-            return OperationResult<PaginatedResult<ServiceReadDto>>.Success(new PaginatedResult<ServiceReadDto>(dtos, totalData, request.MaxCount));
 
+            return OperationResult<PaginatedResult<ServiceReadDto>>.Success(new PaginatedResult<ServiceReadDto>(dtos, total, request.MaxCount));
         }
     }
 }

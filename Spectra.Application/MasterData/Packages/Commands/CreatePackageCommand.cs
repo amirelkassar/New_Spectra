@@ -21,6 +21,7 @@ namespace Spectra.Application.MasterData.Packages.Commands
         public ICollection<PackageServiceCreateDto> Services { get; set; }
         public ICollection<PackageGoalCreateDto> Goals { get; set; }
         public IFormFile? Image { get; set; }
+        public ICollection<string> Tags { get; set; }
 
         public class CreatePackageCommandHandler(IBaseMongoDbRepository<Package> packageRepository,
             IDocumentHellper documentHellper,
@@ -63,6 +64,7 @@ namespace Spectra.Application.MasterData.Packages.Commands
                     packageServices);
                 package.Discount = request.Discount;
                 package.IconCode = request.IconCode;
+                package.Tags = request.Tags;
 
                 package.Goals = request.Goals.Select(g => new PackageGoal { ArName = g.ArName, EnName = g.EnName }).ToArray();
 

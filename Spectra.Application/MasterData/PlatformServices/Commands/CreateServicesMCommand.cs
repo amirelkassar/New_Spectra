@@ -28,6 +28,8 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<string>? Specifications { get; set; }
         public ICollection<ServiceContent>? Contents { get; set; }
+        public bool? EnableForFreeLancer { get; set; }
+        public bool? EnableForSpectraTeam { get; set; }
         public IFormFile? HeroImage { get; set; }
     }
 
@@ -63,6 +65,9 @@ namespace Spectra.Application.MasterData.ServicesMD.Commands
             entity.Discount = request.Discount;
             entity.Reports = request.Reports;
             entity.Contents = request.Contents;
+            entity.EnableForFreeLancer = request.EnableForFreeLancer;
+            entity.EnableForSpectraTeam = request.EnableForSpectraTeam;
+
 
             if (request.Specifications is not null && request.Specifications.Count > 0)
             {

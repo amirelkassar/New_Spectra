@@ -24,7 +24,7 @@ namespace Spectra.Infrastructure.Contracts
 
         public async Task DeleteAsync(string id)
         {
-            await _EmploymentContracts.DeleteOneAsync(id);
+            await _EmploymentContracts.DeleteOneAsync(c=>c.Id== id);
         }
 
         public async Task<(ICollection<EmploymentContract> contracts, long total)> GetAllAsync(Expression<Func<EmploymentContract, bool>> filter = null,

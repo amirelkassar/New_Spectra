@@ -16,6 +16,8 @@ namespace Spectra.Domain.MasterData.ServicesMD
         public double? Discount { get; set; }
         public string? ArTermsAndConditions { get; set; }
         public string? EnTermsAndConditions { get; set; }
+        public bool? EnableForFreeLancer { get; set; }
+        public bool? EnableForSpectraTeam { get; set; }
 
         public ICollection<ServiceReport>? Reports { get; set; }
         public ICollection<ServiceSpecification>? Specifications { get; set; }

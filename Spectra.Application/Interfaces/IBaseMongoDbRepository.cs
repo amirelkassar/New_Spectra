@@ -11,10 +11,7 @@ namespace Spectra.Application.Interfaces
             int skipCount = 0,
             int maxCount = 100);
 
-        Task<IFindFluent<T,T>> GetQueryAsync(Expression<Func<T, bool>> filter = null,
-            FindOptions options = null,
-            int skipCount = 0,
-            int maxCount = 100);
+        Task<IMongoCollection<T>> GetCollectionAsync();
 
         Task<bool> Exists(Expression<Func<T, bool>> filter = null, FindOptions options = null);
         Task<T> GetByIdAsync(string id);
