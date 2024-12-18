@@ -17,7 +17,11 @@ namespace Spectra.Application.Contracts.Queries
 
             public async Task<OperationResult> Handle(GetContractByUserIdQuery request, CancellationToken cancellationToken)
             {
-                var contract = await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id) ?? throw new NotFoundException("Contracts", _currentUser.Id);
+                var contract = await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id);
+                if (contract is null)
+                {
+                    return OperationResult.Success();
+                }
                 var contractDto = contract.Adapt<ContractReadDto>();
                 return OperationResult<ContractReadDto>.Success(contractDto);
             }
