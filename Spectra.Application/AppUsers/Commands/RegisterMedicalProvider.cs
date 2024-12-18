@@ -4,9 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
-using Spectra.Application.Employees.Queries;
 using Spectra.Application.Employees.Services;
-using Spectra.Application.Notifications;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
@@ -66,11 +64,9 @@ namespace Spectra.Application.AppUsers.Commands
         [Required]
         public IFormFile Certification { get; set; }
 
-        public class RegisterMedicalProviderHandler(IEmployeeService medicalProviderService,
-            INotificationService notificationService) : IRequestHandler<RegisterMedicalProvider, OperationResult>
+        public class RegisterMedicalProviderHandler(IEmployeeService medicalProviderService) : IRequestHandler<RegisterMedicalProvider, OperationResult>
         {
             private readonly IEmployeeService _medicalProviderService = medicalProviderService;
-            private readonly INotificationService _notificationService = notificationService;
 
             public async Task<OperationResult> Handle(RegisterMedicalProvider request, CancellationToken cancellationToken)
             {
@@ -108,29 +104,18 @@ namespace Spectra.Application.AppUsers.Commands
                 if (medicalProviderResults.SuccessOpration)
                 {
                     var empId = ((OperationResult<string>)medicalProviderResults).Data;
-                    var medicalProvider = (OperationResult<EmployeeByIdDto>)await _medicalProviderService.GetAsync(new GetEmployeeById { Id = empId });
                     if (request.Certification is not null && request.Certification.Length >= 0)
                     {
                         await _medicalProviderService.CreateAttachmentAsync(new CreateAttachmentCommand
                         {
-                            EmpId = medicalProvider.Data.Id,
+                            EmpId = empId,
                             File = request.Certification,
                             Name = request.Certification.Name,
                             Type = DocumentsConts.FileTypes.Certificate
                         });
                     }
-                    await SendNotificationsAsync(empId);
                 }
                 return OperationResult.Success();
-            }
-
-            private async Task SendNotificationsAsync(string empId)
-            {
-                await _notificationService.PushToRoleAsync(Roles.SystemAdmin,
-                    title: "New Medical Provider",
-                    content: "A new medical provider has registred!",
-                    NotificationTypes.System,
-                    objectUrl: $"/admin/staff/{empId}");
             }
         }
     }

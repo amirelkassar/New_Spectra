@@ -16,7 +16,7 @@ namespace Spectra.Domain.Clients
         public string NationalId { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
         public PhoneNumber? MobileNumber { get; set; }
-        public ClientTypes ClientType { get; set; }
+        public UserTypes ClientType { get; set; }
         public string UserId { get; set; }
         public string? Position { get; set; }
         public PhoneNumber? LandLine { get; set; }
@@ -34,7 +34,7 @@ namespace Spectra.Domain.Clients
             Name name,
             string nationalId,
             PhoneNumber phoneNumber,
-            ClientTypes clientTypes,
+            UserTypes clientTypes,
             string userId,
             EmailAddress emailAddress,
             Address address,
@@ -61,7 +61,7 @@ namespace Spectra.Domain.Clients
             Name name,
             string nationalId,
             PhoneNumber phoneNumber,
-            ClientTypes clientTypes,
+            UserTypes clientTypes,
             string userId,
             EmailAddress emailAddress,
             Address address,

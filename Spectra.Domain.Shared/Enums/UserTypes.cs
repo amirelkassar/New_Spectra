@@ -1,6 +1,6 @@
 ﻿namespace Spectra.Domain.Shared.Enums
 {
-    public enum ClientTypes
+    public enum UserTypes
     {
         Parent = 1,
         Organization = 2,

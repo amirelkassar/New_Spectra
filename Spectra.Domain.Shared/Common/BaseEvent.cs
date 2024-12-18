@@ -5,8 +5,14 @@ using Spectra.Domain.Shared.Enums;
 namespace Spectra.Domain.Shared.Common
 {
 
-    public record BaseEvent(Guid Id, DomainEventType EventType = DomainEventType.AfterCommit) : INotification
+    public record BaseEvent : INotification
     {
-
+        public BaseEvent(DomainEventType EventType = DomainEventType.AfterCommit)
+        {
+            this.EventType = EventType;
+            Id= Guid.NewGuid();
+        }
+        public Guid Id { get;private set; }
+        public DomainEventType EventType { get; }
     }
 }

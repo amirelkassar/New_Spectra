@@ -16,7 +16,7 @@ namespace Spectra.Application.Clients.Commands
         public PhoneNumber PhoneNumber { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
-        public ClientTypes ClientType { get; set; }
+        public UserTypes ClientType { get; set; }
         public string UserId { get; set; }
         public EmailAddress EmailAddress { get; set; }
         public Address Address { get; set; }

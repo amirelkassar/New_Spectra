@@ -9,7 +9,7 @@ namespace Spectra.Application.Clients.Queries
     public class GetAllClientsQuery : QueryPaginationParam, IRequest<OperationResult<IEnumerable<Client>>>
     {
         public string? Search { get; set; }
-        public ICollection<ClientTypes> ClientTypes { get; set; }
+        public ICollection<UserTypes> ClientTypes { get; set; }
     }
 
     public class GetAllClientsQueryHandler : IRequestHandler<GetAllClientsQuery, OperationResult<IEnumerable<Client>>>

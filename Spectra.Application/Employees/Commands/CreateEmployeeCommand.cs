@@ -3,6 +3,7 @@ using MediatR;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Validator;
+using Spectra.Domain.AppUser.DomainEvents;
 using Spectra.Domain.Employees;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
@@ -75,10 +76,10 @@ namespace Spectra.Application.Employees.Commands
                 throw new AlreadyExistException(request.LicenseNumber, nameof(request.LicenseNumber));
             }
 
+            var (allSpecializations, allSpecTotal) = await _specializationRepository.GetAllAsync();
             ICollection<Specialization> specializations = null;
             if (request.Specializations is not null && request.Specializations.Count > 0)
             {
-                var (allSpecializations, allSpecTotal) = await _specializationRepository.GetAllAsync();
 
                 foreach (var spec in request.Specializations)
                 {
@@ -93,7 +94,7 @@ namespace Spectra.Application.Employees.Commands
                 {
                     throw new NotFoundException("Specializations", request.MainSpecializationId);
                 }
-                specializations = allSpecializations.Where(s =>  request.Specializations.Any(rs => rs == s.Id)).ToList();
+                specializations = allSpecializations.Where(s => request.Specializations.Any(rs => rs == s.Id)).ToList();
                 specializations.Add(allSpecializations.First(s => s.Id == request.MainSpecializationId));
             }
 
@@ -129,12 +130,12 @@ namespace Spectra.Application.Employees.Commands
             employee.Qualification = request.Qualification;
             employee.JobDescription = request.JobDescription;
             employee.ExperienceYears = request.ExperienceYears;
-            employee.WorkingHours=request.WorkingHours;
+            employee.WorkingHours = request.WorkingHours;
 
 
             if (!string.IsNullOrWhiteSpace(request.MainSpecializationId))
             {
-                var mainSpecialization = specializations.FirstOrDefault(s => s.Id == request.MainSpecializationId);
+                var mainSpecialization = allSpecializations.FirstOrDefault(s => s.Id == request.MainSpecializationId);
                 employee.MainSpecializationId = mainSpecialization.Id;
                 employee.MainSpecializationArName = mainSpecialization.ArName;
                 employee.MainSpecializationEnName = mainSpecialization.EnName;
@@ -178,10 +179,10 @@ namespace Spectra.Application.Employees.Commands
 
             var role = request.JobType switch
             {
-                JobTypes.Specialist=>Roles.Specialist,
-                JobTypes.Doctor=>Roles.Doctor,
-                JobTypes.Accountant=>Roles.Accountant,
-                JobTypes.Secretary=>Roles.CustomerSupport
+                JobTypes.Specialist => Roles.Specialist,
+                JobTypes.Doctor => Roles.Doctor,
+                JobTypes.Accountant => Roles.Accountant,
+                JobTypes.Secretary => Roles.CustomerSupport
             };
             var addUser = await _identityService.CreateUserAsync(
              request.EmailAddress.Emailaddress,
@@ -195,7 +196,9 @@ namespace Spectra.Application.Employees.Commands
 
             await _employeeRepo.AddAsync(employee);
 
-            return OperationResult<string>.Success(employee.Id);
+            var response = OperationResult<string>.Success(employee.Id);
+            response.AddDomainEvent(new OnNewUserRegisterEvent(addUser.UserId, role));
+            return response;
         }
 
 

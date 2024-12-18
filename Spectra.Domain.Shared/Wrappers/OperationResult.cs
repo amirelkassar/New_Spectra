@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.Shared.Wrappers
 {
 
     public class OperationResult
     {
+        private readonly ICollection<BaseEvent> _events;
         private OperationResult()
         {
             OperationId = Guid.NewGuid();
@@ -18,6 +20,7 @@ namespace Spectra.Domain.Shared.Wrappers
             this.errors = errors;
             SuccessOpration = errors is null || errors.Count == 0;
             OperationId = Guid.NewGuid();
+            _events = [];
         }
         public Guid OperationId { get; }
         public bool SuccessOpration { get; }
@@ -27,6 +30,9 @@ namespace Spectra.Domain.Shared.Wrappers
         public static OperationResult Success(int code = 200, string message = "Valid Operation!") => new OperationResult(code, message);
         public static OperationResult Failure(IDictionary<string, string[]> errors, int code = 400, string message = "Invalid Operation!")
              => new OperationResult(code, message, errors);
+        public void AddDomainEvent(BaseEvent domainEvent) => _events.Add(domainEvent);
+        public ICollection<BaseEvent> GetEvents() => _events;
+        public void ClearEvents() => _events.Clear();
     }
     public class OperationResult<TData> : OperationResult
     {

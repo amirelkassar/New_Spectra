@@ -7,7 +7,7 @@ namespace Spectra.Application.Admin.Dto
         public string Name { get; set; }
         public int NumberOfKids { get; set; }
         //public int lastActivation {  get; set; }
-        public ClientTypes ClientType { get; set; }
+        public UserTypes ClientType { get; set; }
 
 
     }

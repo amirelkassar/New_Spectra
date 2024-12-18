@@ -4,6 +4,7 @@ using Mapster;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Spectra.Application.Behavior;
 using Spectra.Application.Common;
 using Spectra.Application.Countries;
 using Spectra.Application.Countries.Services;
@@ -34,8 +35,9 @@ namespace Spectra.Application
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
-
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(EventDispatcherBehavior<,>));
+
             });
 
             TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());

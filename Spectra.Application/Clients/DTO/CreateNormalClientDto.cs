@@ -12,7 +12,7 @@ namespace Spectra.Application.Clients.DTOs
         public string NationalId { get; set; }
         public string PhoneNumbers { get; set; }
         public string CountryCode { get; set; }
-        public ClientTypes ClientType { get; set; }
+        public UserTypes ClientType { get; set; }
         public string UserId { get; set; }
         public string Emailaddress { get; set; }
         public string Country { get; set; }
