@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Spectra.Domain.Shared.Enums;
+
+namespace Spectra.Application.Chats.Dtos
+{
+    public class CreateParticipantDto
+    {
+        public string UserId { get; set; }
+        public ChatParticipantType Type { get; set; }
+        public DateTimeOffset? ExprationDate { get; set; }
+        public bool Expried { get; set; }
+        public bool CanSend { get; set; }
+    }
+}

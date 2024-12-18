@@ -11,5 +11,7 @@
             CommercialRegistration = 5,
 
         }
+
+        public static string[] SupportedFileExtensions = { ".png", ".jpeg", ".jpg", ".pdf", ".gif", ".webp", ".ico", ".svg", ".pdf", ".word", ".txt", ".excel", ".mp4", ".mp3", ".wav" };
     }
 }

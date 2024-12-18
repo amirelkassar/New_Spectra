@@ -56,7 +56,7 @@ namespace Spectra.Application.Contracts.Commands
                 AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
                 AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.CustomerSupport }.Any(r => r.Equals(request.ModifierRole)),
                 CreationDate = DateTime.UtcNow,
-                Order = currentVersion.Order++,
+                Order = currentVersion.Order + 1,
                 State = ContractVersionStates.Active,
             };
             //update contract
@@ -82,7 +82,7 @@ namespace Spectra.Application.Contracts.Commands
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
-                        EnTerms = service.ArTermsAndConditions
+                        EnTerms = service.EnTermsAndConditions
                     });
                 }
                 if (request.SpectraTeamServices.Any(s => s.ServiceId == service.Id) && !newVersion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))
@@ -100,11 +100,12 @@ namespace Spectra.Application.Contracts.Commands
                         PlatformPercentage = requestService.PlatformPercentage,
                         ServiceFees = requestService.ServiceFees,
                         ArTerms = service.ArTermsAndConditions,
-                        EnTerms = service.ArTermsAndConditions
+                        EnTerms = service.EnTermsAndConditions
                     });
                 }
             }
 
+            contract.Versions.Add(newVersion);
             await _contractRepository.UpdateAsync(contract);
 
             return OperationResult.Success();

@@ -1,18 +1,23 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Net.Mail;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.GlobalExceptions;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Webp;
+using NAudio.Wave;
+using NAudio.Lame;
 
 namespace Spectra.Application.MasterData.HellperFunc
 {
     public class DocumentHellper : IDocumentHellper
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-
         public DocumentHellper(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
         }
-
-
 
         public async Task<List<string>> CreateAttachments(IEnumerable<IFormFile> attachments, string folderName)
         {
@@ -20,7 +25,13 @@ namespace Spectra.Application.MasterData.HellperFunc
 
             if (attachments != null && attachments.Any())
             {
-
+                foreach (var attachment in attachments)
+                {
+                    if (!IsSupportedExtension(attachment.FileName))
+                    {
+                        throw new UnsupportedFileTypeException(string.Join(" ,", DocumentsConts.SupportedFileExtensions));
+                    }
+                }
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
 
 
@@ -54,7 +65,10 @@ namespace Spectra.Application.MasterData.HellperFunc
             {
                 return null;
             }
-
+            if (!IsSupportedExtension(attachment.FileName))
+            {
+                throw new UnsupportedFileTypeException(string.Join(" ,", DocumentsConts.SupportedFileExtensions));
+            }
             var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderName);
 
             if (!Directory.Exists(uploadsFolder))
@@ -103,11 +117,13 @@ namespace Spectra.Application.MasterData.HellperFunc
         public async Task<List<string>> UpdateAttachments(List<string>? existingAttachments, List<IFormFile> newAttachments, string folderName)
         {
 
-            if (existingAttachments != null && existingAttachments.Any())
+            foreach (var attachment in newAttachments)
             {
-                await DeleteAttachments(existingAttachments);
+                if (!IsSupportedExtension(attachment.FileName))
+                {
+                    throw new UnsupportedFileTypeException(string.Join(" ,", DocumentsConts.SupportedFileExtensions));
+                }
             }
-
 
             if (string.IsNullOrEmpty(_webHostEnvironment.WebRootPath))
             {
@@ -143,19 +159,18 @@ namespace Spectra.Application.MasterData.HellperFunc
                 }
             }
 
+            if (existingAttachments != null && existingAttachments.Any())
+            {
+                await DeleteAttachments(existingAttachments);
+            }
 
             return uploadedFilePaths;
         }
         public async Task<string> UpdateAttachment(string? existingAttachment, IFormFile newAttachment, string folderName)
         {
-            // Delete the existing attachment if it exists
-            if (!string.IsNullOrEmpty(existingAttachment))
+            if (!IsSupportedExtension(newAttachment.FileName))
             {
-                var existingFilePath = Path.Combine(_webHostEnvironment.WebRootPath, existingAttachment.TrimStart('/'));
-                if (File.Exists(existingFilePath))
-                {
-                    File.Delete(existingFilePath);
-                }
+                throw new UnsupportedFileTypeException(string.Join(" ,", DocumentsConts.SupportedFileExtensions));
             }
 
             // Check if the new attachment is valid
@@ -187,8 +202,43 @@ namespace Spectra.Application.MasterData.HellperFunc
                 await newAttachment.CopyToAsync(stream);
             }
 
+            // Delete the existing attachment if it exists
+            if (!string.IsNullOrEmpty(existingAttachment))
+            {
+                var existingFilePath = Path.Combine(_webHostEnvironment.WebRootPath, existingAttachment.TrimStart('/'));
+                if (File.Exists(existingFilePath))
+                {
+                    File.Delete(existingFilePath);
+                }
+            }
             // Return the path of the new file
             return $"{folderName}/{newFileName}";
+        }
+
+        public bool IsSupportedExtension(string fileName)
+        {
+            var fileInfo = new FileInfo(fileName);
+            return DocumentsConts.SupportedFileExtensions.Any(e => e.Equals(fileInfo.Extension, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task<Stream> ConvertAudioToMP3(Stream audioStream)
+        {
+            using var reader = new WaveFileReader(audioStream);
+            using var mp3Stream = new MemoryStream();
+            using var writer = new LameMP3FileWriter(mp3Stream, reader.WaveFormat, LAMEPreset.STANDARD);
+            await reader.CopyToAsync(writer);
+            return mp3Stream;
+        }
+
+        public async Task<Stream> ConvertImageToWebp(Stream imageStream)
+        {
+            using var image = await Image.LoadAsync(imageStream);
+            using var webpStream = new MemoryStream();
+            await image.SaveAsWebpAsync(webpStream, new WebpEncoder()
+            {
+                Quality = 75
+            });
+            return webpStream;
         }
     }
 }

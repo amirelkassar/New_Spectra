@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
 
-namespace Spectra.Application.Chats.Hubs
+namespace Spectra.Domain.Shared.Enums
 {
-    public class ChatHub : Hub
+    public enum ChatParticipantType : byte
     {
-
+        Participant = 1,
+        Admin = 2,
     }
 }
