@@ -178,10 +178,6 @@ namespace Spectra.Application.AppUsers.Commands
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(m => m.Specializations)
-                .NotEmpty()
-                .NotNull()
-                .Must(s => s.Count >= 1);
 
             RuleFor(m => m.LicenseNumber)
                 .NotEmpty()

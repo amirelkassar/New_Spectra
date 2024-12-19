@@ -4,6 +4,7 @@ using MediatR;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.Hellper;
+using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Helpers;
@@ -17,9 +18,9 @@ namespace Spectra.Application.Contracts.Queries
         public string Search { get; set; }
         public ContractStates? State { get; set; }
 
-        public class GetContractListQueryHandler(IContractRepository contractRepository) : IRequestHandler<GetContractListQuery, OperationResult>
+        public class GetContractListQueryHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository) : IRequestHandler<GetContractListQuery, OperationResult>
         {
-            private readonly IContractRepository _contractRepository = contractRepository;
+            private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository = contractRepository;
 
             public async Task<OperationResult> Handle(GetContractListQuery request, CancellationToken cancellationToken)
             {

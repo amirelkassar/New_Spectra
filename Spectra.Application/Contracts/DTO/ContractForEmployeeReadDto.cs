@@ -10,8 +10,6 @@ namespace Spectra.Application.Contracts.DTO
         public string EmployeeUserId { get; set; }
         public string EmployeeHeadName { get; set; }
         public string EmployeeName { get; set; }
-        public int HoursOfWork { get; set; }
-        public int DaysOfWork { get; set; }
         public string JobDescription { get; set; }
         public string JobTitle { get; set; }
         public DateTimeOffset? AcceptingDate { get; set; }
