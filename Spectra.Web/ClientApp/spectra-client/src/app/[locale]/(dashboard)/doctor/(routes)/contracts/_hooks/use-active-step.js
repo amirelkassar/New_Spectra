@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { CONTRACT_STATE } from '../../../../../../../data/contract';
+import { CONTRACT_STATE } from '@/data';
 import { usePathname } from '@/i18n/routing';
 import ROUTES from '@/routes';
 

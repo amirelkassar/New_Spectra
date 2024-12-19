@@ -13,21 +13,24 @@ export const useUpdateContract = (id) => {
 
   const router = useRouter();
 
-  const freelancingServices =
-    useContractStore((s) => s.freelancingServices) || [];
-  const spectraTeamServices =
-    useContractStore((s) => s.spectraTeamServices) || [];
-
-  const hoursOfWork = useContractStore((s) => s.hoursOfWork);
-  const daysOfWork = useContractStore((s) => s.daysOfWork);
-
-  const freelancePercentage = useContractStore(
+  const hoursOfWork = +useContractStore((s) => s.hoursOfWork);
+  const daysOfWork = +useContractStore((s) => s.daysOfWork);
+  const freelancingPercentage = +useContractStore(
     (s) => s.freelancePercentage
   );
-
-  const spectraTeamPercentage = useContractStore(
+  const spectraTeamPercentage = +useContractStore(
     (s) => s.spectraTeamPercentage
   );
+  const freelancingDuration = +useContractStore(
+    (s) => s.freelancingDuration
+  );
+  const spectraTeamDuration = +useContractStore(
+    (s) => s.spectraTeamDuration
+  );
+  const freelancingServices =
+    useContractStore((s) => s.freelancingServicesIds) || [];
+  const spectraTeamServices =
+    useContractStore((s) => s.spectraTeamServicesIds) || [];
 
   const { mutateAsync: updateContract, isPending } =
     useUpateEmployeeContract();
@@ -36,8 +39,10 @@ export const useUpdateContract = (id) => {
     (!freelancingServices.length && !spectraTeamServices.length) ||
     !hoursOfWork ||
     !daysOfWork ||
-    !freelancePercentage ||
-    !spectraTeamPercentage;
+    !freelancingPercentage ||
+    !spectraTeamPercentage ||
+    !freelancingDuration ||
+    !spectraTeamDuration;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -48,11 +53,13 @@ export const useUpdateContract = (id) => {
       id,
       hoursOfWork,
       daysOfWork,
+      freelancingPercentage,
+      spectraTeamPercentage,
+      freelancingDuration,
+      spectraTeamDuration,
       freelancingServices,
       spectraTeamServices,
     };
-
-    // return console.log(data);
 
     Toast.Promise(updateContract(data), {
       success:

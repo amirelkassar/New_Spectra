@@ -47,8 +47,16 @@ const RenderLayout = ({ data = {}, hasData = false, children }) => {
   return (
     <ContractProvider
       initialState={{
-        daysOfWork: data?.daysOfWork || '',
-        hoursOfWork: data?.hoursOfWork || '',
+        daysOfWork: activeContract?.daysOfWork || '',
+        hoursOfWork: activeContract?.hoursOfWork || '',
+        freelancingPercentage:
+          activeContract?.freelancingPercentage || '',
+        spectraTeamPercentage:
+          activeContract?.spectraTeamPercentage || '',
+        freelancingDuration:
+          activeContract?.freelancingDuration || '',
+        spectraTeamDuration:
+          activeContract?.spectraTeamDuration || '',
         freelancingServices:
           activeContract?.freelancingServices || [],
         spectraTeamServices:

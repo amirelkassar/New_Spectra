@@ -12,15 +12,31 @@ import Card from '@/components/card';
 export const ContractData = ({
   freelancingServices = [],
   spectraTeamServices = [],
+  freelancingDuration = '',
+  spectraTeamDuration = '',
+  freelancingPercentage = '',
+  spectraTeamPercentage = '',
   hoursOfWork = '',
   daysOfWork = '',
   children,
 }) => {
+  const freelanceData = {
+    freelancingServices,
+    freelancingDuration,
+    freelancingPercentage,
+  };
+
+  const spectraTeamData = {
+    spectraTeamServices,
+    spectraTeamDuration,
+    spectraTeamPercentage,
+  };
+
   return (
     <div className='space-y-5'>
-      <Freelancer services={freelancingServices} />
+      <Freelancer data={freelanceData} />
 
-      <SpectraTeam services={spectraTeamServices} />
+      <SpectraTeam data={spectraTeamData} />
 
       <Card className='space-y-20'>
         <WorkDays hoursOfWork={hoursOfWork} daysOfWork={daysOfWork} />
@@ -30,12 +46,13 @@ export const ContractData = ({
   );
 };
 
-const Freelancer = ({ services = [] }) => {
+const Freelancer = ({ data = {} }) => {
   const t = useTranslations('contract_obj');
   const tg = useTranslations('general_obj');
 
-  const employeePercentage = services?.[0]?.employeePercentage;
-  const duration = services?.[0]?.duration;
+  const duration = data?.freelancingDuration;
+  const percentage = data?.freelancingPercentage;
+  const services = data?.freelancingServices;
 
   return (
     <Card className='space-y-5'>
@@ -48,7 +65,7 @@ const Freelancer = ({ services = [] }) => {
             {t('duration')}: {duration} {tg('min')}
           </Badge>
           <Badge>
-            {t('your_share')}: {employeePercentage} %
+            {t('your_share')}: {percentage} %
           </Badge>
         </div>
       </div>
@@ -86,12 +103,13 @@ export const FreelanceServices = ({ freelancer = [] }) => {
   );
 };
 
-const SpectraTeam = ({ services = [] }) => {
+const SpectraTeam = ({ data = {} }) => {
   const t = useTranslations('contract_obj');
   const tg = useTranslations('general_obj');
 
-  const employeePercentage = services?.[0]?.employeePercentage;
-  const duration = services?.[0]?.duration;
+  const duration = data?.spectraTeamDuration;
+  const percentage = data?.spectraTeamPercentage;
+  const services = data?.spectraTeamServices;
 
   return (
     <Card className='space-y-5'>
@@ -104,7 +122,7 @@ const SpectraTeam = ({ services = [] }) => {
             {t('duration')}: {duration} {tg('min')}
           </Badge>
           <Badge>
-            {t('your_share')}: {employeePercentage} %
+            {t('your_share')}: {percentage} %
           </Badge>
         </div>
       </div>

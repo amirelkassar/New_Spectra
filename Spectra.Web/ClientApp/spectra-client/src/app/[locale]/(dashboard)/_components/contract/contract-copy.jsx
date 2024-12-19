@@ -4,7 +4,7 @@ import Button from '@/components/button';
 import { cn, getDate } from '@/lib/utils';
 import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
-import { VERSION_STATE } from '../../../../../data/contract';
+import { VERSION_STATE } from '@/data';
 import { useTranslations } from 'next-intl';
 
 export const ContractCopy = ({
