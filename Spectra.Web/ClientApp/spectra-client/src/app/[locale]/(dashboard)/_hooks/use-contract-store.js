@@ -11,37 +11,44 @@ export const ContractProvider = ({
   initialState = {
     hoursOfWork: '',
     daysOfWork: '',
+    freelancingPercentage: '',
+    spectraTeamPercentage: '',
+    freelancingDuration: '',
+    spectraTeamDuration: '',
     freelancingServices: [],
     spectraTeamServices: [],
   },
 }) => {
   const [store] = useState(() =>
     createStore((set) => ({
+      hoursOfWork: initialState?.hoursOfWork || '',
+
+      daysOfWork: initialState?.daysOfWork || '',
+
+      freelancePercentage: initialState?.freelancingPercentage || '',
+
+      spectraTeamPercentage:
+        initialState?.spectraTeamPercentage || '',
+
+      freelancingDuration:
+        initialState?.freelancingDuration ||
+        CONTRACT_RATES.freelancer.duration,
+
+      spectraTeamDuration:
+        initialState?.spectraTeamDuration ||
+        CONTRACT_RATES.spectraTeam.duration,
+
       freelancingServices: initialState?.freelancingServices || [],
 
       spectraTeamServices: initialState?.spectraTeamServices || [],
 
-      freelancePercentage: String(
-        initialState?.freelancingServices[0]?.employeePercentage || ''
-      ),
+      freelancingServicesIds:
+        initialState?.freelancingServices?.map((s) => s?.serviceId) ||
+        [],
 
-      spectraTeamPercentage: String(
-        initialState?.spectraTeamServices[0]?.employeePercentage || ''
-      ),
-
-      selectedFreelanceIds:
-        initialState?.freelancingServices?.map(
-          (service) => service.serviceId
-        ) || [],
-
-      selectedSpectraTeamIds:
-        initialState?.spectraTeamServices?.map(
-          (service) => service.serviceId
-        ) || [],
-
-      hoursOfWork: String(initialState?.hoursOfWork) || '',
-
-      daysOfWork: String(initialState?.daysOfWork) || '',
+      spectraTeamServicesIds:
+        initialState?.spectraTeamServices?.map((s) => s?.serviceId) ||
+        [],
 
       isChatOpen: false,
 
@@ -52,153 +59,95 @@ export const ContractProvider = ({
       toggleChat: () =>
         set((state) => ({ isChatOpen: !state.isChatOpen })),
 
-      setHoursOfWork: (hoursOfWork) => set(() => ({ hoursOfWork })),
+      setHoursOfWork: (hoursOfWork) =>
+        set(() => {
+          // the houres of work must be a number between 1 and 16
+          let hours = +hoursOfWork;
 
-      setDaysOfWork: (daysOfWork) => set(() => ({ daysOfWork })),
+          if (hours > 16) hours = '';
+          if (hours < 1) hours = '';
 
-      setFreelancePercentage: (value) => {
-        let percentage = +value;
+          return { hoursOfWork: String(hours) };
+        }),
 
-        if (percentage > 70) percentage = 70;
-        if (percentage < 0) percentage = 0;
+      setDaysOfWork: (daysOfWork) =>
+        set(() => {
+          // the days of work must be a number between 1 and 7
+          let days = +daysOfWork;
 
+          if (days > 7) days = '';
+          if (days < 1) days = '';
+
+          return { daysOfWork: String(days) };
+        }),
+
+      setFreelancePercentage: (value) =>
+        set(() => {
+          // the percentage must be a number between 1 and 70
+          let percentage = +value;
+
+          if (percentage > 70) percentage = '';
+          if (percentage < 1) percentage = '';
+
+          return { freelancePercentage: String(percentage) };
+        }),
+
+      setSpectraTeamPercentage: (value) =>
+        set(() => {
+          // the percentage must be a number between 1 and 40
+          let percentage = +value;
+
+          if (percentage > 40) percentage = '';
+          if (percentage < 1) percentage = '';
+
+          return { spectraTeamPercentage: String(percentage) };
+        }),
+
+      setSelectedFreelance: (service) =>
         set((state) => {
-          const employeePercentage = percentage;
-          const platformPercentage = 100 - employeePercentage;
-          const updatedFreelance = state.freelancingServices.map(
-            (service) => ({
-              ...service,
-              employeePercentage,
-              platformPercentage,
-              employeeFees: Math.round(
-                (service.serviceFees * employeePercentage) / 100
-              ),
-              platformFees: Math.round(
-                (service.serviceFees * platformPercentage) / 100
-              ),
-            })
-          );
-
-          return {
-            freelancePercentage: percentage,
-            freelancingServices: updatedFreelance,
-          };
-        });
-      },
-
-      setSpectraTeamPercentage: (value) => {
-        let percentage = +value;
-
-        if (percentage > 60) percentage = 60;
-        if (percentage < 0) percentage = 0;
-
-        set((state) => {
-          const employeePercentage = percentage;
-          const platformPercentage = 100 - employeePercentage;
-          const updatedSpectraTeam = state.spectraTeamServices.map(
-            (service) => ({
-              ...service,
-              employeePercentage,
-              platformPercentage,
-              employeeFees: Math.round(
-                (service.serviceFees * employeePercentage) / 100
-              ),
-              platformFees: Math.round(
-                (service.serviceFees * platformPercentage) / 100
-              ),
-            })
-          );
-          return {
-            spectraTeamPercentage: percentage,
-            spectraTeamServices: updatedSpectraTeam,
-          };
-        });
-      },
-      setSelectedFreelance: (service) => {
-        set((state) => {
-          const employeePercentage = +state.freelancePercentage;
-          const platformPercentage = 100 - employeePercentage;
-          const employeeFees = Math.round(
-            (service?.price ||
-              service?.serviceFees * employeePercentage) / 100
-          );
-          const platformFees = Math.round(
-            (service?.price ||
-              service?.serviceFees * platformPercentage) / 100
-          );
-
           const newService = {
-            serviceId: service?.id || service?.serviceId,
+            serviceId: service?.id,
             arName: service?.arName,
             enName: service?.enName,
-            arTerms:
-              service?.arTermsAndConditions || service?.arTerms,
-            enTerms:
-              service?.enTermsAndConditions || service?.enTerms,
-            serviceFees: service?.price || service?.serviceFees,
-            duration:
-              service?.duration || CONTRACT_RATES.freelancer.duration,
-            employeePercentage,
-            platformPercentage,
-            employeeFees,
-            platformFees,
+            arTerms: service?.arTermsAndConditions,
+            enTerms: service?.enTermsAndConditions,
+            serviceFees: service?.price,
           };
+
           return {
-            selectedFreelanceIds: [
-              ...state.selectedFreelanceIds,
-              service.id,
-            ],
             freelancingServices: [
               ...state.freelancingServices,
               newService,
             ],
+            freelancingServicesIds: [
+              ...state.freelancingServicesIds,
+              service?.id,
+            ],
           };
-        });
-      },
+        }),
 
-      setSelectedSpectraTeam: (service) => {
+      setSelectedSpectraTeam: (service) =>
         set((state) => {
-          const employeePercentage = +state.spectraTeamPercentage;
-          const platformPercentage = 100 - employeePercentage;
-          const employeeFees = Math.round(
-            (service?.price ||
-              service?.serviceFees * employeePercentage) / 100
-          );
-          const platformFees = Math.round(
-            (service?.price ||
-              service?.serviceFees * platformPercentage) / 100
-          );
-
           const newService = {
-            serviceId: service?.id || service?.serviceId,
+            serviceId: service?.id,
             arName: service?.arName,
             enName: service?.enName,
-            arTerms:
-              service?.arTermsAndConditions || service?.arTerms,
-            enTerms:
-              service?.enTermsAndConditions || service?.enTerms,
-            serviceFees: service?.price || service?.serviceFees,
-            duration:
-              service?.duration ||
-              CONTRACT_RATES.spectraTeam.duration,
-            employeePercentage,
-            platformPercentage,
-            employeeFees,
-            platformFees,
+            arTerms: service?.arTermsAndConditions,
+            enTerms: service?.enTermsAndConditions,
+            serviceFees: service?.price,
           };
 
           return {
-            selectedSpectraTeamIds: [
-              ...state.selectedSpectraTeamIds,
-              service.id,
-            ],
             spectraTeamServices: [
               ...state.spectraTeamServices,
               newService,
             ],
+            spectraTeamServicesIds: [
+              ...state.spectraTeamServicesIds,
+              service?.id,
+            ],
           };
-        });
-      },
+        }),
 
       removeService: (removedId, category) => {
         if (!removedId || !category) return;
@@ -206,34 +155,35 @@ export const ContractProvider = ({
         set((state) => {
           if (category === 'freelancer') {
             const freelancer = state.freelancingServices;
-            const selectedFreelanceIds = state.selectedFreelanceIds;
+            const freelancerIds = state.freelancingServicesIds;
 
             const updatedFreelancer = freelancer.filter(
               (s) => s.serviceId !== removedId
             );
 
-            const updatedSelectedFreelanceIds =
-              selectedFreelanceIds.filter((id) => id !== removedId);
+            const updatedFreelancerIds = freelancerIds.filter(
+              (id) => id !== removedId
+            );
 
             return {
               freelancingServices: updatedFreelancer,
-              selectedFreelanceIds: updatedSelectedFreelanceIds,
+              freelancingServicesIds: updatedFreelancerIds,
             };
           } else {
             const spectraTeam = state.spectraTeamServices;
-            const selectedSpectraTeamIds =
-              state.selectedSpectraTeamIds;
+            const spectraTeamIds = state.spectraTeamServicesIds;
 
             const updatedSpectraTeam = spectraTeam.filter(
               (s) => s.serviceId !== removedId
             );
 
-            const updatedSelectedSpectraTeamIds =
-              selectedSpectraTeamIds.filter((id) => id !== removedId);
+            const updatedSpectraTeamIds = spectraTeamIds.filter(
+              (id) => id !== removedId
+            );
 
             return {
               spectraTeamServices: updatedSpectraTeam,
-              selectedSpectraTeamIds: updatedSelectedSpectraTeamIds,
+              spectraTeamServicesIds: updatedSpectraTeamIds,
             };
           }
         });

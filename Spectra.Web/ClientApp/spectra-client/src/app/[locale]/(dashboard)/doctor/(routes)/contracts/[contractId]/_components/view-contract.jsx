@@ -42,7 +42,7 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
   const acceptedByEmployee = contractVersion?.acceptedByEmployee;
 
   return (
-    <ContractData {...contractVersion} {...contract}>
+    <ContractData {...contractVersion}>
       <Actions
         state={state}
         acceptedByEmployee={acceptedByEmployee}

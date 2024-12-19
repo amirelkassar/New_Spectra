@@ -15,7 +15,8 @@ export default NewContractPage;
 const getHasContract = async () => {
   try {
     const res = await getEmployeeContract();
-    return !!res?.data;
+    if (res?.data) return true;
+    return false;
   } catch {
     return false;
   }

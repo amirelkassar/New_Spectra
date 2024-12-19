@@ -3,7 +3,6 @@
 import { memo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { CONTRACT_RATES } from '@/data';
 import { useUserServices } from '@/hooks/queries/user/services';
 import { useContractStore } from '@/dashboard/_hooks/use-contract-store';
 import { Alert } from '@/components/alert';
@@ -45,9 +44,7 @@ const ChooseFreelanceServices = () => {
     freeLancerOnly: 'true',
   });
 
-  const selectedFreelanceIds = useContractStore(
-    (s) => s.selectedFreelanceIds
-  );
+  const selected = useContractStore((s) => s.freelancingServicesIds);
 
   const setSelectedFreelance = useContractStore(
     (s) => s.setSelectedFreelance
@@ -61,7 +58,7 @@ const ChooseFreelanceServices = () => {
       isLoading={isPending}
       isError={isError}
       isDataEmpty={!data?.data?.totalCount}
-      selectedIds={selectedFreelanceIds}
+      selectedIds={selected}
       onSelect={setSelectedFreelance}
       onRemove={(id) => removeService(id, 'freelancer')}
       placeholder={t('select_freelance_services')}
@@ -73,6 +70,8 @@ const Freelancer = () => {
   const t = useTranslations('contract_obj');
   const tg = useTranslations('general_obj');
 
+  const duration = useContractStore((s) => s.freelancingDuration);
+
   return (
     <div className='space-y-5'>
       <div className='flex flex-wrap gap-3 items-center'>
@@ -81,8 +80,7 @@ const Freelancer = () => {
         </SectionTitle>
         <div className='flex justify-end grow gap-3 *:flex-1'>
           <Badge>
-            {t('duration')}: {CONTRACT_RATES.freelancer.duration}{' '}
-            {tg('min')}
+            {t('duration')}: {duration} {tg('min')}
           </Badge>
           <FreelancePercentageInput />
         </div>
@@ -123,26 +121,28 @@ export const FreelanceServices = () => {
 
   const locale = useLocale();
 
-  const freelancer = useContractStore((s) => s.freelancingServices);
+  const freelance = useContractStore((s) => s.freelancingServices);
 
   const remove = useContractStore((s) => s.removeService);
+
+  const percentage = useContractStore((s) => s.freelancePercentage);
 
   const nameKey = locale === 'en' ? 'enName' : 'arName';
   const termsKey = locale === 'en' ? 'enTerms' : 'arTerms';
 
-  if (!freelancer?.length)
+  if (!freelance?.length)
     return <Alert>{tg('no_data_selected')}</Alert>;
 
   return (
     <div>
-      {freelancer.map((s) => (
+      {freelance.map((s) => (
         <MemoizedServiceInfo
           key={s?.serviceId}
           id={s?.serviceId}
           name={s[nameKey]}
           terms={s[termsKey]}
           price={s?.serviceFees}
-          employeePercentage={s?.employeePercentage}
+          employeePercentage={percentage}
           deletable
           onDelete={() => remove(s?.serviceId, 'freelancer')}
         />
@@ -160,9 +160,7 @@ const ChooseSpectraServices = () => {
     spectraTeamOnly: 'true',
   });
 
-  const selectedSpectraTeamIds = useContractStore(
-    (s) => s.selectedSpectraTeamIds
-  );
+  const selected = useContractStore((s) => s.spectraTeamServicesIds);
 
   const setSelectedSpectraTeam = useContractStore(
     (s) => s.setSelectedSpectraTeam
@@ -176,7 +174,7 @@ const ChooseSpectraServices = () => {
       isLoading={isPending}
       isError={isError}
       isDataEmpty={!data?.data?.totalCount}
-      selectedIds={selectedSpectraTeamIds}
+      selectedIds={selected}
       onSelect={setSelectedSpectraTeam}
       onRemove={(id) => removeService(id, 'spectraTeam')}
       placeholder={t('select_spectra_services')}
@@ -188,6 +186,8 @@ const SpectraTeam = () => {
   const t = useTranslations('contract_obj');
   const tg = useTranslations('general_obj');
 
+  const duration = useContractStore((s) => s.spectraTeamDuration);
+
   return (
     <div className='space-y-5'>
       <div className='flex flex-wrap gap-3 items-center'>
@@ -196,8 +196,7 @@ const SpectraTeam = () => {
         </SectionTitle>
         <div className='flex justify-end grow gap-3'>
           <Badge>
-            {t('duration')}: {CONTRACT_RATES.spectraTeam.duration}{' '}
-            {tg('min')}
+            {t('duration')}: {duration} {tg('min')}
           </Badge>
 
           <SpectraPercentageInput />
@@ -239,6 +238,10 @@ const SpectraTeamServices = () => {
 
   const spectraTeam = useContractStore((s) => s.spectraTeamServices);
 
+  const percentage = useContractStore(
+    (state) => state.spectraTeamPercentage
+  );
+
   const remove = useContractStore((s) => s.removeService);
 
   if (!spectraTeam?.length)
@@ -256,7 +259,7 @@ const SpectraTeamServices = () => {
           name={s[nameKey]}
           terms={s[termsKey]}
           price={s?.serviceFees}
-          employeePercentage={s?.employeePercentage}
+          employeePercentage={percentage}
           deletable
           onDelete={() => remove(s?.serviceId, 'spectraTeam')}
         />
@@ -285,6 +288,7 @@ const WorkDays = () => {
         label={tg('daily')}
         value={hoursOfWork}
         onChange={setHoursOfWork}
+        placeholder='من 1 الي 16 ساعة'
       />
 
       <DurationInput
@@ -293,6 +297,7 @@ const WorkDays = () => {
         label={tg('weekly')}
         value={daysOfWork}
         onChange={setDaysOfWork}
+        placeholder='من 1 الي 7 يوم'
       />
     </div>
   );
