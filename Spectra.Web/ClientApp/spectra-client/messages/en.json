@@ -71,6 +71,11 @@
     "days_per_week": "The number of days worked per week",
     "net_earnings": "Net earnings",
     "select_freelance_services": "Select freelance services",
-    "select_spectra_services": "Select Spectra services"
+    "select_spectra_services": "Select Spectra services",
+    "hours_limit": "From 1 to 16 hours",
+    "days_limit": "From 1 to 7 days",
+    "already_have_contract": "You have already sent the job offer",
+    "already_have_contract_subtitle": "You can proceed with the contract request from your Contracts section or Notifications",
+    "go_to_contracts_section": "Go to Contracts section"
   }
 }

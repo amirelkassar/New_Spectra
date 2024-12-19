@@ -71,6 +71,11 @@
     "days_per_week": "عدد الأيام المسموح العمل بها في الأسبوع",
     "net_earnings": "صافي الدخل",
     "select_freelance_services": "حدد الخدمات التي تريد تقديمها كطبيب مستقل",
-    "select_spectra_services": "حدد الخدمات التي تريد تقديمها كطبيب فرد من فريق سبيكترا"
+    "select_spectra_services": "حدد الخدمات التي تريد تقديمها كطبيب فرد من فريق سبيكترا",
+    "hours_limit": "من 1 إلى 16 ساعة",
+    "days_limit": "من 1 إلى 7 أيام",
+    "already_have_contract": "لقد قمت بالفعل بارسال عرض عمل",
+    "already_have_contract_subtitle": "يمكنك متابعة طلب العقد من قسم العقود او الاشعارات الخاصة بك",
+    "go_to_contracts_section": "الذهاب الي قسم العقود"
   }
 }

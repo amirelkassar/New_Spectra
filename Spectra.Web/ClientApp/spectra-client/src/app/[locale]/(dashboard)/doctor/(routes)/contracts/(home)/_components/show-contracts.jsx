@@ -24,6 +24,7 @@ const ContractVersions = ({ versions = [], hasData = false }) => {
   if (!hasData) return null;
 
   if (!versions.length) return null;
+
   return (
     <Card className='space-y-5 h-full'>
       {versions.map((copy, i) => (

@@ -23,6 +23,7 @@ const MemowizedNoDataYet = memo(NoDataYet);
  * @param {Object} props.query - The query object from the server.
  * @param {boolean} [props.isSearching] - Whether the query is in search mode.
  * @param {boolean} [props.isFiltered] - Whether the query is currently filtering data.
+ * @param {boolean} [props.showLoaderOnFetching] - Whether the query is currently fetching data.
  * @param {(args: { data: any; pageSize?: number; totalCount?: number; isPlaceholderData?: boolean; hasData?: boolean; }) => React.ReactNode} props.children - A render function to render the children with provided props.
  */
 
@@ -30,6 +31,7 @@ export const QueryWrapper = ({
   query,
   isSearching = false,
   isFiltered = false,
+  showLoaderOnFetching = false,
   children,
 }) => {
   if (!query) throw new Error('No query props provided');
@@ -49,7 +51,8 @@ export const QueryWrapper = ({
 
   const onRetry = useCallback(() => query?.refetch(), [query]);
 
-  if (query?.isPending) return <MemowizedLoader />;
+  if (query?.isPending || (query?.isFetching && showLoaderOnFetching))
+    return <MemowizedLoader />;
 
   if (query?.isError && query?.failureReason?.status === 404)
     return <MemowizedNotFound404 />;
