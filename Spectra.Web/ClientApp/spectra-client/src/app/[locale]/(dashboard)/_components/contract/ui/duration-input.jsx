@@ -8,6 +8,7 @@ export const DurationInput = ({
   value = '',
   onChange = () => {},
   readOnly = false,
+  placeholder = '',
 }) => {
   return (
     <div className='flex flex-col items-stretch lg:items-center lg:flex-row gap-3'>
@@ -24,6 +25,7 @@ export const DurationInput = ({
           id={label}
           className='text-center'
           readOnly={readOnly}
+          placeholder={placeholder}
         />
         <label htmlFor={label}>{label}</label>
       </div>
