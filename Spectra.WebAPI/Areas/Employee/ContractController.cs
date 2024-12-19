@@ -42,7 +42,11 @@ namespace Spectra.WebAPI.Areas.Employee
                 FreelancingServices = input.FreelancingServices,
                 HoursOfWork = input.HoursOfWork,
                 ModifierRole = _currentUser.Role,
-                SpectraTeamServices = input.SpectraTeamServices
+                SpectraTeamServices = input.SpectraTeamServices,
+                FreelancingDuration = input.FreelancingDuration,
+                FreelancingPercentage = input.FreelancingPercentage,
+                SpectraTeamDuration = input.SpectraTeamDuration,
+                SpectraTeamPercentage = input.SpectraTeamPercentage
             });
             return Accepted("", response);
         }
