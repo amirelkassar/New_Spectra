@@ -46,7 +46,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractAcceptModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
         {
             var response = await mediator.Send(new ChangeContractByAdminCommand
             {

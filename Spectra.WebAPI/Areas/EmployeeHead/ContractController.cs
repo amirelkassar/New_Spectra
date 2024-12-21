@@ -38,14 +38,14 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
             var response = await _mediator.Send(new ChangeContractByHeadCommand
             {
                 Id = input.Id,
-                Value = false
+                Value = false,
             });
 
             return Accepted(response);
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractAcceptModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
         {
             var response = await _mediator.Send(new ChangeContractByHeadCommand
             {

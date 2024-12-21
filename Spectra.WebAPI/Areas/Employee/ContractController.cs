@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
-using Spectra.Application.Identities.Permissions.Users;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Constants;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
 
@@ -15,7 +12,6 @@ namespace Spectra.WebAPI.Areas.Employee
     {
         private readonly IMediator _mediator = mediator;
         private readonly ICurrentUser _currentUser = currentUser;
-
 
         [HttpGet]
         public async Task<IActionResult> GetAsync()
@@ -75,7 +71,7 @@ namespace Spectra.WebAPI.Areas.Employee
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractAcceptModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
         {
             var response = await _mediator.Send(new ChangeContractByEmployeeCommand
             {
