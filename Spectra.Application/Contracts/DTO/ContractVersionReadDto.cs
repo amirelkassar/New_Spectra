@@ -20,8 +20,9 @@ namespace Spectra.Application.Contracts.DTO
         public int SpectraTeamDuration { get; set; }
         public List<ContractServiceReadDto>? FreelancingServices { get; set; }
         public List<ContractServiceReadDto>? SpectraTeamServices { get; set; }
-        public bool AcceptedByEmployee { get; set; }
         public bool AcceptedByAdmin { get; set; }
+        public bool AcceptedByEmployee { get; set; }
+        public bool AcceptedByHead { get; set; }
         public DateTimeOffset? DraftingDate { get; set; }
     }
 }

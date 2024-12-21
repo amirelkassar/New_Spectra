@@ -20,6 +20,7 @@ namespace Spectra.Domain.Contracts
         public List<ContractService>? SpectraTeamServices { get; set; } = [];
         public bool AcceptedByEmployee { get; set; }
         public bool AcceptedByAdmin { get; set; }
+        public bool AcceptedByHead { get; set; }
         public DateTimeOffset? DraftingDate { get; set; }
         public int HoursOfWork { get; private set; } = hoursOfWork;
         public int DaysOfWork { get; private set; } = daysOfWork;
