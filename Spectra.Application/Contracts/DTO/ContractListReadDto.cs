@@ -1,4 +1,6 @@
-﻿using static Spectra.Domain.Shared.Constants.ContractConses;
+﻿using Mapster;
+using Spectra.Domain.Contracts;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO
 {
@@ -9,5 +11,10 @@ namespace Spectra.Application.Contracts.DTO
         public DateTimeOffset CreationDate { get; set; }
         public string JobTitle { get; set; }
         public ContractStates ContractState { get; set; }
+
+        public static TypeAdapterConfig Configure() => TypeAdapterConfig<EmploymentContract, ContractListReadDto>
+            .NewConfig()
+            .Map(dto => dto.CreationDate, src => src.Created)
+            .Config;
     }
 }

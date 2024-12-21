@@ -15,7 +15,7 @@ namespace Spectra.Application.Contracts.Queries
 {
     public class GetContractListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
-        public string Search { get; set; }
+        public string? Search { get; set; }
         public ContractStates? State { get; set; }
 
         public class GetContractListQueryHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository) : IRequestHandler<GetContractListQuery, OperationResult>
@@ -35,7 +35,7 @@ namespace Spectra.Application.Contracts.Queries
                     filter.And(c => c.ContractState == request.State.Value);
                 }
                 var (contracts, total) = await _contractRepository.GetAllAsync(filter, null, request.SkipCount, request.MaxCount);
-                var dtos = contracts.Adapt<IReadOnlyCollection<ContractListReadDto>>();
+                var dtos = contracts.Adapt<IReadOnlyCollection<ContractListReadDto>>(ContractListReadDto.Configure());
 
                 return OperationResult<PaginatedResult<ContractListReadDto>>.Success(new PaginatedResult<ContractListReadDto>(dtos, total, request.MaxCount));
             }

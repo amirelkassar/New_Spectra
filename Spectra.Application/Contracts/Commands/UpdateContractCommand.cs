@@ -3,7 +3,9 @@ using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
+using Spectra.Application.Notifications;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Contracts.DomainEvents;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
@@ -26,10 +28,13 @@ namespace Spectra.Application.Contracts.Commands
         public List<string>? SpectraTeamServices { get; set; }
     }
 
-    public class UpdateContractCommandHandler(IContractRepository contractRepository, IServiceMDRepository serviceMDRepository) : IRequestHandler<UpdateContractCommand, OperationResult>
+    public class UpdateContractCommandHandler(IContractRepository contractRepository,
+        IServiceMDRepository serviceMDRepository,
+        INotificationService notificationService) : IRequestHandler<UpdateContractCommand, OperationResult>
     {
         private readonly IContractRepository _contractRepository = contractRepository;
         private readonly IServiceMDRepository _serviceMDRepository = serviceMDRepository;
+        private readonly INotificationService _notificationService = notificationService;
 
         public async Task<OperationResult> Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
@@ -53,7 +58,7 @@ namespace Spectra.Application.Contracts.Commands
             //get the cuurent version to convert it to draft
             var currentVersion = contract.Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
             currentVersion.State = ContractVersionStates.Draft;
-            currentVersion.CreationDate = DateTime.UtcNow;
+            currentVersion.DraftingDate = DateTime.UtcNow;
             //create new version
             var newVersion = new ContractVersion(Ulid.NewUlid().ToString(),
                 request.HoursOfWork,
@@ -122,7 +127,10 @@ namespace Spectra.Application.Contracts.Commands
             contract.Versions.Add(newVersion);
             await _contractRepository.UpdateAsync(contract);
 
-            return OperationResult.Success();
+            var response = OperationResult.Success();
+            response.AddDomainEvent(new EmployeeCreateContractEvent(contract));
+
+            return response;
         }
     }
 
