@@ -40,19 +40,6 @@ namespace Spectra.Infrastructure.Contracts
             var response = await _mediator.Send(input);
             return response;
         }
-
-        public async Task<OperationResult> UpdateStateAsync(ChangeContractStateCommand input)
-        {
-            if (_currentUser.Role.Equals(Roles.Doctor))
-            {
-                input.EmployeeUserId = _currentUser.Id;
-                input.ModifierRole = _currentUser.Role;
-            }
-            input.CallerUserId = _currentUser.Id;
-            input.CallerName = _currentUser.Name;
-            var response = await _mediator.Send(input);
-            return response;
-        }
     }
 }
 

@@ -19,8 +19,13 @@ namespace Spectra.Domain.Contracts
         public List<ContractService>? FreelancingServices { get; set; } = [];
         public List<ContractService>? SpectraTeamServices { get; set; } = [];
         public bool AcceptedByEmployee { get; set; }
+        public DateTimeOffset? ChangedByEmployeeDate { get; set; }
         public bool AcceptedByAdmin { get; set; }
+        public DateTimeOffset? ChangedByAdminDate { get; set; }
+
         public bool AcceptedByHead { get; set; }
+        public DateTimeOffset? ChangedByHeadDate { get; set; }
+
         public DateTimeOffset? DraftingDate { get; set; }
         public int HoursOfWork { get; private set; } = hoursOfWork;
         public int DaysOfWork { get; private set; } = daysOfWork;

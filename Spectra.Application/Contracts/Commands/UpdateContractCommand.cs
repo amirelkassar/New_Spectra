@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Contracts.Repository;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
@@ -8,6 +7,7 @@ using Spectra.Domain.Contracts;
 using Spectra.Domain.Contracts.DomainEvents;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
@@ -127,8 +127,13 @@ namespace Spectra.Application.Contracts.Commands
             contract.Versions.Add(newVersion);
             await _contractRepository.UpdateAsync(contract);
 
+            var updateType = request.ModifierRole switch
+            {
+                Roles.SystemAdmin => ContractChangeType.Admin,
+                _ => ContractChangeType.Doctor
+            };
             var response = OperationResult.Success();
-            response.AddDomainEvent(new EmployeeCreateContractEvent(contract));
+            response.AddDomainEvent(new ContractUpdateEvent(contract, updateType));
 
             return response;
         }

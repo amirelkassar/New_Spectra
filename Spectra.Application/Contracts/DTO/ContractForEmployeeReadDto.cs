@@ -1,4 +1,5 @@
-﻿using static Spectra.Domain.Shared.Constants.ContractConses;
+﻿using Spectra.Domain.Contracts;
+using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO
 {
@@ -18,6 +19,10 @@ namespace Spectra.Application.Contracts.DTO
         public string? CancelReason { get; set; }
         public bool? AcceptedByDepartmentHead { get; set; }
         public string Content { get; set; }
+        public string? DoctorSignaturePath { get; set; }
+        public string? AdminSignaturePath { get; set; }
+        public string? HeadSignaturePath { get; set; }
         public ICollection<ContractVersionReadDto> Versions { get; set; }
+        public ICollection<ContractTextSection> Sections { get; set; }
     }
 }
