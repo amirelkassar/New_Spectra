@@ -4,14 +4,14 @@ import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/i18n/routing';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { DeleteInternalExamination } from '@/hooks/queries/admin/main-data/testsInterior';
 import ROUTES from '@/routes';
 
 export const useTestMenuActions = (id) => {
   const router = useRouter();
 
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deleteInternalExamination, isPending } =
     DeleteInternalExamination(id);

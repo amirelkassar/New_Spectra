@@ -4,14 +4,14 @@ import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/i18n/routing';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { useDeletePackage as useDeletePackageQuery } from '@/hooks/queries/admin/settings/packages';
 import ROUTES from '@/routes';
 
 export const useDeletePacakge = (id) => {
   const router = useRouter();
 
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deletePackage, isPending } =
     useDeletePackageQuery(id);

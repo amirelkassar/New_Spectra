@@ -23,7 +23,7 @@ const initialQueries = customQueries || initialSiteQueries;
 export const getAdminContractList = async (queries) =>
   (await apiAdmin.get(contract.list(queries))).data;
 
-export const prefetchAdminContract = async () => {
+export const prefetchAdminContracts = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -34,7 +34,7 @@ export const prefetchAdminContract = async () => {
   return queryClient;
 };
 
-export const useAdminContract = (
+export const useAdminContracts = (
   params = {
     pageNum: null,
     search: '',
@@ -50,17 +50,19 @@ export const useAdminContract = (
   });
 };
 
-export const useAdminUpateContract = () => {
-  const queryClient = useQueryClient();
+export const useAdminContractById = (id) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () =>
+      (await apiAdmin.get(contract.actions.get(id))).data,
+    placeholderData: keepPreviousData,
+  });
+};
 
+export const useAdminUpdateContract = () => {
   return useMutation({
     mutationFn: async (data) =>
       await apiAdmin.put(contract.actions.update, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === initialQueryKey,
-      });
-    },
     onError: () => {},
   });
 };

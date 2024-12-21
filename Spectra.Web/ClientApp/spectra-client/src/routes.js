@@ -187,13 +187,11 @@ const ROUTES = {
     },
     CONTRACTS: {
       DASHBOARD: '/admin/contracts',
-      REQUESTS: '/admin/contracts/requests',
-      EXPIRED: '/admin/contracts/expired',
-      CONTRACTSUSER: (id) => `/admin/contracts/${id}`,
-      CONTRACTSUSERDETAILS: (id, id2) =>
-        `/admin/contracts/${id}/contracts-details/${id2}`,
-      CONTRACTSUSERDETAILSEDIT: (id, id2) =>
-        `/admin/contracts/${id}/contracts-details/${id2}?editContracts=true`,
+      VIEW_CONTRACT: (id) => `/admin/contracts/${id}`,
+      VIEW_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}`,
+      UPDATE_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/edit`,
     },
     SETTINGS: {
       DASHBOARD: '/admin/settings',

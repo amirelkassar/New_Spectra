@@ -2,14 +2,14 @@
 
 import DeleteIcon from '@/assets/icons/delete';
 import Avatar from '@/components/avatar';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 
 export const BankAccount = ({
   bankName = '',
   accountHolder = '',
   bankLogo = '',
 }) => {
-  const { open } = useConfirmModal();
+  const { open } = useConfirmModalStore();
 
   const handleDelete = () => {
     open({

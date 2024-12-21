@@ -1,3 +1,5 @@
+import { buildQuery } from '@/lib/utils';
+
 export const contract = {
   base: '/contract',
   list: (queries = {}) => buildQuery('/contract/list', queries),

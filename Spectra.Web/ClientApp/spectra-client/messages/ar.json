@@ -25,6 +25,8 @@
   "hello": "مرحبا",
   "general_obj": {
     "edit": "تعديل",
+    "delete": "حذف",
+    "cancel": "إلغاء",
     "daily": "يوميا",
     "weekly": "اسبوعيا",
     "min": "دقيقة",
@@ -42,7 +44,19 @@
     "no_data_selected": "لم يتم اختيار أي بيانات!",
     "terms_and_conditions": "الشروط والأحكام",
     "read_more": "اقرأ المزيد",
-    "read_less": "أقل"
+    "read_less": "أقل",
+    "name": "الاسم",
+    "job": "الوظيفة",
+    "status": "الحالة",
+    "all": "الكل",
+    "rejected": "مرفوض",
+    "contracting": "قيد التعاقد",
+    "accepted": "مقبول",
+    "accepted_by": "مقبول من",
+    "filter": "فلتر",
+    "delete_confirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "yes_sure": "نعم، أنا متأكد",
+    "no": "لا"
   },
   "packages_obj": {
     "title": "الباقات",
@@ -55,8 +69,10 @@
     "contract": "العقد",
     "old_copy": "نسخة سابقة",
     "current_copy": "نسخة حالية",
+    "copy_num": "النسخة رقم",
     "active": "مفعلة",
     "draft": "مسودة",
+    "draft_date": "مسودة بتاريخ",
     "send_join_request": "إرسال طلب الإنضمام",
     "join_request": "طلب انضمام",
     "data_fill": "ملء البيانات",
@@ -76,6 +92,11 @@
     "days_limit": "من 1 إلى 7 أيام",
     "already_have_contract": "لقد قمت بالفعل بارسال عرض عمل",
     "already_have_contract_subtitle": "يمكنك متابعة طلب العقد من قسم العقود او الاشعارات الخاصة بك",
-    "go_to_contracts_section": "الذهاب الي قسم العقود"
+    "go_to_contracts_section": "الذهاب الي قسم العقود",
+    "contract_date": "تاريخ العقد",
+    "copies": "عدد النسخ",
+    "accepted_by_admin": "تمت الموافقة من قبل المسؤول",
+    "accepted_by_department_head": "تمت الموافقة من قبل رئيس القسم",
+    "accepted_by_doctor": "تمت الموافقة من قبل الطبيب"
   }
 }

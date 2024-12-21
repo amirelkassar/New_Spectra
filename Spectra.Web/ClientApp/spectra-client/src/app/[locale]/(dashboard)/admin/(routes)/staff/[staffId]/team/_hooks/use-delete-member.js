@@ -3,11 +3,11 @@
 import { useCallback } from 'react';
 
 import { useDeleteGroupMember } from '@/hooks/queries/admin/staff/team';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { Toast } from '@/components/toast';
 
 export const useDeleteMember = ({ ownerId }) => {
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deleteMember, isPending } =
     useDeleteGroupMember();

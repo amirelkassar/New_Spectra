@@ -2,7 +2,7 @@
 
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/i18n/routing';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { DeleteSpecialization } from '@/hooks/queries/admin/main-data/specialties';
 import ROUTES from '@/routes';
 import { useCallback } from 'react';
@@ -10,7 +10,7 @@ import { useCallback } from 'react';
 export const useSpecialtyMenuActions = (id) => {
   const router = useRouter();
 
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deleteDiagnostics, isPending } =
     DeleteSpecialization(id);

@@ -3,12 +3,12 @@
 import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { useDeleteProfileAttachment } from '@/hooks/queries/user/profile';
 import { downloadFile, printFile } from '@/lib/utils';
 
 export const useCertificateActions = () => {
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deleteCertificate, isPending } =
     useDeleteProfileAttachment();

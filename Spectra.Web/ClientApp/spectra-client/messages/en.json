@@ -24,7 +24,10 @@
   "join_as_doctor": "Join as a doctor",
   "hello": "Hello",
   "general_obj": {
+    "all": "All",
     "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
     "daily": "Daily",
     "weekly": "Weekly",
     "min": "Min",
@@ -42,7 +45,18 @@
     "no_data_selected": "No data selected!",
     "terms_and_conditions": "Terms & Conditions",
     "read_more": "Read more",
-    "read_less": "Read less"
+    "read_less": "Read less",
+    "name": "Name",
+    "job": "Job",
+    "status": "Status",
+    "rejected": "Rejected",
+    "contracting": "Contracting",
+    "accepted": "Accepted",
+    "accepted_by": "Accepted by",
+    "filter": "Filter",
+    "delete_confirmation": "Are you sure you want to delete this item? This action cannot be undone.",
+    "yes_sure": "Yes, I'm sure",
+    "no": "No"
   },
   "packages_obj": {
     "title": "Packages",
@@ -57,6 +71,8 @@
     "current_copy": "Current copy",
     "active": "Active",
     "draft": "Draft",
+    "draft_date": "Draft date",
+    "copy_num": "Copy number",
     "send_join_request": "Send join request",
     "join_request": "Join request",
     "data_fill": "Data fill",
@@ -76,6 +92,11 @@
     "days_limit": "From 1 to 7 days",
     "already_have_contract": "You have already sent the job offer",
     "already_have_contract_subtitle": "You can proceed with the contract request from your Contracts section or Notifications",
-    "go_to_contracts_section": "Go to Contracts section"
+    "go_to_contracts_section": "Go to Contracts section",
+    "contract_date": "Contract date",
+    "copies": "Copies",
+    "accepted_by_admin": "Accepted by admin",
+    "accepted_by_department_head": "Accepted by department head",
+    "accepted_by_doctor": "Accepted by doctor"
   }
 }

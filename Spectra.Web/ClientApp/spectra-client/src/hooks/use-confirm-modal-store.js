@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import DeleteModalIcon from '@/assets/icons/deleteModal';
+import { Translate } from '@/components/translate';
 
-export const useConfirmModal = create((set) => ({
+export const useConfirmModalStore = create((set) => ({
   isOpen: false,
   isPending: false,
-  message: 'هل انت متأكد من مسح هذا العنصر؟',
+  message: <Translate value='delete_confirmation' />,
   icon: <DeleteModalIcon className='lg:size-40 size-32' />,
   onConfirm: async () => {},
 
@@ -12,7 +13,7 @@ export const useConfirmModal = create((set) => ({
     set({
       isOpen: true,
       isPending: isPending || false,
-      message: message || 'هل انت متأكد من مسح هذا العنصر؟',
+      message: message || <Translate value='delete_confirmation' />,
       icon: icon || (
         <DeleteModalIcon className='lg:size-40 size-32' />
       ),

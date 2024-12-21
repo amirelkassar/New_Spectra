@@ -4,6 +4,7 @@ import Card from '@/components/card';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { ContractCopy } from '@/dashboard/_components/contract/contract-copy';
 import { useEmployeeContract } from '@/hooks/queries/employee/contract';
+import ROUTES from '@/routes';
 
 export const ShowContracts = () => {
   const query = useEmployeeContract();
@@ -28,7 +29,11 @@ const ContractVersions = ({ versions = [], hasData = false }) => {
   return (
     <Card className='space-y-5 h-full'>
       {versions.map((copy, i) => (
-        <ContractCopy key={copy?.id || i} {...copy} />
+        <ContractCopy
+          key={copy?.id || i}
+          {...copy}
+          viewHref={ROUTES.DOCTOR.CONTRACTS.CONTRACTSID(id)}
+        />
       ))}
     </Card>
   );

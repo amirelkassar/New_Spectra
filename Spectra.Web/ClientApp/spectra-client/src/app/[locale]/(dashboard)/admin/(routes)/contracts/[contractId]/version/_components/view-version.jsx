@@ -3,19 +3,19 @@
 import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
-import { ContractData } from '@/dashboard/_components/contract/contract-data';
+import { VERSION_STATE } from '@/data';
 import { NotFound404 } from '@/components/not-found-404';
 import { QueryWrapper } from '@/components/query-wrapper';
-import { useEmployeeContract } from '@/hooks/queries/employee/contract';
+import { useAdminContractById } from '@/hooks/queries/admin/contract';
+import { ContractData } from '@/dashboard/_components/contract/contract-data';
 import { AcceptButton } from '@/dashboard/_components/ui/accept-button';
-import { RejectButton } from '@/dashboard/_components/ui/reject-button';
 import { EditButton } from '@/dashboard/_components/ui/edit-button';
-import { VERSION_STATE } from '@/data';
-import Card from '@/components/card';
+import { RejectButton } from '@/dashboard/_components/ui/reject-button';
 import ROUTES from '@/routes';
+import Card from '@/components/card';
 
-export const ViewContract = ({ id }) => {
-  const query = useEmployeeContract();
+export const ViewVersion = ({ id = '', contractId = '' }) => {
+  const query = useAdminContractById(contractId);
 
   return (
     <QueryWrapper query={query}>
@@ -39,39 +39,47 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
     );
 
   const state = contractVersion?.state;
-  const acceptedByEmployee = contractVersion?.acceptedByEmployee;
+  const acceptedByAdmin = contractVersion?.acceptedByAdmin;
 
   return (
     <ContractData {...contractVersion}>
       <Actions
         state={state}
-        acceptedByEmployee={acceptedByEmployee}
+        acceptedByAdmin={acceptedByAdmin}
+        contractId={contract?.id}
         id={versionId}
       />
     </ContractData>
   );
 };
 
-const Actions = ({ acceptedByEmployee = false, state, id = '' }) => {
+const Actions = ({
+  acceptedByAdmin = false,
+  state,
+  contractId = '',
+  id = '',
+}) => {
   const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
   const onEdit = () =>
-    router.push(ROUTES.DOCTOR.CONTRACTS.EDIT_CONTRACT(id));
+    router.push(
+      ROUTES.ADMIN.CONTRACTS.UPDATE_VERSION(contractId, id)
+    );
 
   if (state === VERSION_STATE.draft) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
-        {!acceptedByEmployee && (
+        {!acceptedByAdmin && (
           <AcceptButton className='w-full'>
             {tg('accept')}
           </AcceptButton>
         )}
       </div>
       <div>
-        {!acceptedByEmployee && (
+        {!acceptedByAdmin && (
           <RejectButton className='w-full'>
             {tg('reject')}
           </RejectButton>
