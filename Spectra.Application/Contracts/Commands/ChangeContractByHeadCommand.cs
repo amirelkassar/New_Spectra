@@ -60,7 +60,7 @@ namespace Spectra.Application.Contracts.Commands
 
                 var response = OperationResult.Success();
 
-                response.AddDomainEvent(new ContractAcceptEvent(contract, ContractChangeType.Head));
+                response.AddDomainEvent(new ContractChangeEvent(contract, ContractChangeType.Head, request.Value));
 
                 return response;
             }

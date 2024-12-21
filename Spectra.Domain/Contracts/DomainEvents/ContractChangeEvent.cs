@@ -3,7 +3,7 @@ using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Domain.Contracts.DomainEvents
 {
-    public record ContractAcceptEvent(EmploymentContract Contract, ContractChangeType Type) : BaseEvent
+    public record ContractChangeEvent(EmploymentContract Contract, ContractChangeType Type,bool Value) : BaseEvent
     {
     }
 }
