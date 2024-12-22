@@ -14,7 +14,7 @@ export const IntroVideo = ({ children }) => {
 
       <Modal
         withCloseButton={false}
-        size='auto'
+        size={1024}
         opened={opened}
         onClose={close}
         radius='md'
@@ -22,7 +22,7 @@ export const IntroVideo = ({ children }) => {
           body: 'p-0',
         }}
       >
-        <div className='rounded-xl shadow-lg w-full h-auto'>
+        <div className='w-full h-auto'>
           <video autoPlay controls width='100%'>
             <source src='/intro.webm' type='video/webm' />
             Your browser does not support the video tag.
