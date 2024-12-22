@@ -29,6 +29,7 @@
     "save": "Save",
     "delete": "Delete",
     "cancel": "Cancel",
+    "clear": "Clear",
     "daily": "Daily",
     "weekly": "Weekly",
     "min": "Min",
@@ -101,6 +102,7 @@
     "copies": "Copies",
     "accepted_by_admin": "Accepted by admin",
     "accepted_by_department_head": "Accepted by department head",
-    "accepted_by_doctor": "Accepted by doctor"
+    "accepted_by_doctor": "Accepted by doctor",
+    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen."
   }
 }

@@ -50,6 +50,49 @@ export const ContractTermsProvider = ({
           return { sections };
         });
       },
+
+      addSection: (index) =>
+        set((state) => {
+          const newSection = {
+            id: Date.now().toString(),
+            arTitle: '',
+            enTitle: '',
+            arPoints: [''],
+            enPoints: [''],
+          };
+          const updatedSections = [...state.sections];
+          updatedSections.splice(index + 1, 0, newSection);
+          return { sections: updatedSections };
+        }),
+
+      removeSection: (id) =>
+        set((state) => ({
+          sections: state.sections.filter(
+            (section) => section.id !== id
+          ),
+        })),
+
+      addPoint: (sectionId, index) =>
+        set((state) => {
+          const updatedSections = [...state.sections];
+          const section = updatedSections.find(
+            (section) => section.id === sectionId
+          );
+          section.arPoints.splice(index + 1, 0, '');
+          section.enPoints.splice(index + 1, 0, '');
+          return { sections: updatedSections };
+        }),
+
+      removePoint: (sectionId, index) =>
+        set((state) => {
+          const updatedSections = [...state.sections];
+          const section = updatedSections.find(
+            (section) => section.id === sectionId
+          );
+          section.arPoints.splice(index, 1);
+          section.enPoints.splice(index, 1);
+          return { sections: updatedSections };
+        }),
     }))
   );
 
