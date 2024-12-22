@@ -35,32 +35,23 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
         [HttpPost("reject")]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await _mediator.Send(new ChangeContractByHeadCommand
             {
                 Id = input.Id,
-                ModifierRole = CurrentUser.Role,
-                CallerUserId = CurrentUser.Id,
-                CallerName = CurrentUser.Name,
                 Value = false,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Contracting
             });
 
             return Accepted(response);
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await _mediator.Send(new ChangeContractByHeadCommand
             {
                 Id = input.Id,
-                ModifierRole = CurrentUser.Role,
-                CallerUserId = CurrentUser.Id,
-                CallerName = CurrentUser.Name,
                 Value = true,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Contracting
+                Signature=input.Signature
             });
 
             return Accepted(response);

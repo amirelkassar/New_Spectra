@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Spectra.Domain.Contracts;
+
+namespace Spectra.Application.Contracts.DTO
+{
+    public class ContractTextReadDto
+    {
+        public ContractTextReadDto()
+        {
+            InfoSection = new();
+            Sections = [];
+        }
+        public ContractEmployeeInfoSection InfoSection { get; set; }
+        public ICollection<ContractTextSection> Sections { get; set; }
+        public string? DoctorSignaturePath { get; set; }
+        public string? AdminSignaturePath { get; set; }
+        public string? HeadSignaturePath { get; set; }
+
+    }
+}

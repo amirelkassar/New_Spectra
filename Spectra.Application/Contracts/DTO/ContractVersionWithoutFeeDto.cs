@@ -14,8 +14,9 @@ namespace Spectra.Application.Contracts.DTO
         public ContractVersionStates State { get; set; }
         public List<ContractWithoutFeeReadDto>? FreelancingServices { get; set; }
         public List<ContractWithoutFeeReadDto>? SpectraTeamServices { get; set; }
-        public bool AcceptedByEmployee { get; set; }
         public bool AcceptedByAdmin { get; set; }
+        public bool AcceptedByEmployee { get; set; }
+        public bool AcceptedByHead { get; set; }
         public DateTimeOffset? DraftingDate { get; set; }
     }
 }

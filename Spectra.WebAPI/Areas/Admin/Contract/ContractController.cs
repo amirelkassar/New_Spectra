@@ -26,19 +26,17 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
             return Ok(contract);
         }
 
-        [HttpPost("cancel")]
-        public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
+        [HttpGet("text")]
+        public async Task<IActionResult> GetTextSection([FromQuery] GetContractTextQuery input)
         {
-            var response = await mediator.Send(new ChangeContractStateCommand
-            {
-                Id = input.Id,
-                ModifierRole = Roles.SystemAdmin,
-                CallerUserId = currentUser.Id,
-                CallerName = currentUser.Name,
-                Value = false,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Canceled
-            });
+            var contract = await mediator.Send(input);
+            return Ok(contract);
+        }
+
+        [HttpPost("cancel")]
+        public async Task<ActionResult> CancelContractAsync([FromBody] CancelContractCommand input)
+        {
+            var response = await mediator.Send(input);
 
             return Accepted(response);
         }
@@ -46,32 +44,23 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         [HttpPost("reject")]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await mediator.Send(new ChangeContractStateCommand
+            var response = await mediator.Send(new ChangeContractByAdminCommand
             {
                 Id = input.Id,
-                ModifierRole = Roles.SystemAdmin,
-                CallerUserId = currentUser.Id,
-                CallerName = currentUser.Name,
                 Value = false,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Contracting
             });
-
             return Accepted(response);
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] AdminContractAcceptModel input)
         {
-            var response = await mediator.Send(new ChangeContractStateCommand
+            var response = await mediator.Send(new ChangeContractByAdminCommand
             {
                 Id = input.Id,
-                ModifierRole = Roles.SystemAdmin,
-                CallerUserId = currentUser.Id,
-                CallerName = currentUser.Name,
                 Value = true,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Accepted
+                Signature=input.Signature,
+                TextSections=input.TextSections
             });
 
             return Accepted(response);
@@ -89,6 +78,11 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
                 HoursOfWork = input.HoursOfWork,
                 ModifierRole = Roles.SystemAdmin,
                 SpectraTeamServices = input.SpectraTeamServices,
+                FreelancingDuration = input.FreelancingDuration,
+                FreelancingPercentage = input.FreelancingPercentage,
+                SpectraTeamDuration = input.SpectraTeamDuration,
+                SpectraTeamPercentage = input.SpectraTeamPercentage
+                
             });
             return Accepted("", response);
         }

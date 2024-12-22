@@ -9,6 +9,29 @@ namespace Spectra.Domain.Contracts
     public class EmploymentContract : BaseAuditableEntity<string>
     {
         protected EmploymentContract() { }
+        private EmploymentContract(string id,
+        string employeeId,
+        string employeeName,
+        string employeeUserId,
+        string headId,
+        string headName,
+        string headUserId,
+        string titel,
+        ContractStates contractCase,
+        ICollection<ContractVersion> versions) : base(id)
+        {
+            Id = id;
+            Titel = titel;
+            EmployeeId = employeeId;
+            EmployeeName = employeeName;
+            EmployeeUserId = employeeUserId;
+            EmployeeHeadId = headId;
+            EmployeeHeadName = headName;
+            EmployeeHeadUserId = headUserId;
+            Versions = versions;
+            ContractState = ContractStates.Contracting;
+            Sections = [];
+        }
         public string Titel { get; set; }
         public ContractStates ContractState { get; private set; }
         public string EmployeeId { get; private set; }
@@ -24,34 +47,14 @@ namespace Spectra.Domain.Contracts
         public string? CanceldByUserId { get; set; }
         public string? CanceldByUsername { get; set; }
         public string? CancelReason { get; set; }
-        public bool? AcceptedByDepartmentHead { get; set; }
         public string Content { get; set; }
-
-
+        public string? DoctorSignaturePath { get; set; }
+        public string? AdminSignaturePath { get; set; }
+        public string? HeadSignaturePath { get; set; }
+        public ContractEmployeeInfoSection InfoSection { get; set; }
+        public ICollection<ContractTextSection> Sections { get; set; }
         public ICollection<ContractVersion> Versions { get; private set; }
 
-        private EmploymentContract(string id,
-            string employeeId,
-            string employeeName,
-            string employeeUserId,
-            string headId,
-            string headName,
-            string headUserId,
-            string titel,
-            ContractStates contractCase,
-            ICollection<ContractVersion> versions) : base(id)
-        {
-            Id = id;
-            Titel = titel;
-            EmployeeId = employeeId;
-            EmployeeName = employeeName;
-            EmployeeUserId = employeeUserId;
-            EmployeeHeadId = headId;
-            EmployeeHeadName = headName;
-            EmployeeHeadUserId = headUserId;
-            Versions = versions;
-            ContractState = ContractStates.Contracting;
-        }
         public static EmploymentContract Create(string id,
             string employeeId,
             string employeeName,
@@ -81,10 +84,6 @@ namespace Spectra.Domain.Contracts
         {
             ContractState = ContractStates.Accepted;
             AcceptingDate = DateTime.UtcNow;
-            var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
-            lastVersion.AcceptedByEmployee = true;
-            lastVersion.AcceptedByAdmin = true;
-            AcceptedByDepartmentHead = true;
         }
 
         public void Cancel(string userId, string username, string? reason = default)

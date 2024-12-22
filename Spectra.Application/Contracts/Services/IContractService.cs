@@ -6,7 +6,6 @@ namespace Spectra.Application.Contracts.Services
     {
         Task<OperationResult> CreateAsync(CreateContractCommand input);
         Task<OperationResult> DeleteContract(string id);
-        Task<OperationResult> UpdateStateAsync(ChangeContractStateCommand input);
         Task<OperationResult> UpdateAsync(UpdateContractCommand input);
         Task<OperationResult> GetContractById(string id);
     }

@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
-using Spectra.Application.Identities.Permissions.Users;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Constants;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
 
@@ -15,7 +12,6 @@ namespace Spectra.WebAPI.Areas.Employee
     {
         private readonly IMediator _mediator = mediator;
         private readonly ICurrentUser _currentUser = currentUser;
-
 
         [HttpGet]
         public async Task<IActionResult> GetAsync()
@@ -54,15 +50,10 @@ namespace Spectra.WebAPI.Areas.Employee
         [HttpPost("cancel")]
         public async Task<ActionResult> CancelContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await _mediator.Send(new CancelContractCommand
             {
                 Id = input.Id,
-                ModifierRole = _currentUser.Role,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
-                Value = false,
                 Reason = input.Reason,
-                State = ContractConses.ContractStates.Canceled
             });
 
             return Accepted(response);
@@ -71,32 +62,21 @@ namespace Spectra.WebAPI.Areas.Employee
         [HttpPost("reject")]
         public async Task<ActionResult> RejectContractAsync([FromBody] ContractActionModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await _mediator.Send(new ChangeContractByEmployeeCommand
             {
-                Id = input.Id,
-                ModifierRole = _currentUser.Role,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
-                Value = false,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Contracting
+               Value=false
             });
 
             return Accepted(response);
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromBody] ContractActionModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
         {
-            var response = await _mediator.Send(new ChangeContractStateCommand
+            var response = await _mediator.Send(new ChangeContractByEmployeeCommand
             {
-                Id = input.Id,
-                ModifierRole = _currentUser.Role,
-                CallerUserId = _currentUser.Id,
-                CallerName = _currentUser.Name,
-                Value = true,
-                Reason = input.Reason,
-                State = ContractConses.ContractStates.Contracting
+                Signature = input.Signature,
+                Value=true
             });
 
             return Accepted(response);
