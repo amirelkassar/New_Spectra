@@ -15,7 +15,7 @@ namespace Spectra.Domain.Contracts
             ARPoints = [];
             Id = Guid.NewGuid().ToString();
         }
-        public string Id { get; set; }
+        public string Id { get;private set; }
         public string ArTitle { get; set; }
         public string EnTitle { get; set; }
         public string ArDescription { get; set; }

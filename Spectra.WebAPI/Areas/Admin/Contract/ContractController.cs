@@ -26,6 +26,13 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
             return Ok(contract);
         }
 
+        [HttpGet("text")]
+        public async Task<IActionResult> GetTextSection([FromQuery] GetContractTextQuery input)
+        {
+            var contract = await mediator.Send(input);
+            return Ok(contract);
+        }
+
         [HttpPost("cancel")]
         public async Task<ActionResult> CancelContractAsync([FromBody] CancelContractCommand input)
         {
@@ -46,13 +53,14 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpPost("accept")]
-        public async Task<ActionResult> AcceptContractAsync([FromForm] ContractAcceptModel input)
+        public async Task<ActionResult> AcceptContractAsync([FromForm] AdminContractAcceptModel input)
         {
             var response = await mediator.Send(new ChangeContractByAdminCommand
             {
                 Id = input.Id,
                 Value = true,
                 Signature=input.Signature,
+                TextSections=input.TextSections
             });
 
             return Accepted(response);

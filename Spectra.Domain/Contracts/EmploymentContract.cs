@@ -51,6 +51,7 @@ namespace Spectra.Domain.Contracts
         public string? DoctorSignaturePath { get; set; }
         public string? AdminSignaturePath { get; set; }
         public string? HeadSignaturePath { get; set; }
+        public ContractEmployeeInfoSection InfoSection { get; set; }
         public ICollection<ContractTextSection> Sections { get; set; }
         public ICollection<ContractVersion> Versions { get; private set; }
 

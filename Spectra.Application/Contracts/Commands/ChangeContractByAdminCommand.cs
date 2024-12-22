@@ -20,6 +20,7 @@ namespace Spectra.Application.Contracts.Commands
         public bool Value { get; set; }
         public string Id { get; set; }
         public IFormFile Signature { get; set; }
+        public ICollection<ContractTextSection> TextSections { get; set; }
 
         public class AcceptContractByAdminCommandHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository,
             ICurrentUser currentUser,
@@ -56,7 +57,10 @@ namespace Spectra.Application.Contracts.Commands
 
 
                 if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                {
                     contract.Accept();
+                    contract.Sections = request.TextSections;
+                }
 
                 await _contractRepository.UpdateAsync(contract);
 

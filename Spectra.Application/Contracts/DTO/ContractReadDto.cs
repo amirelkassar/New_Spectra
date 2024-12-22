@@ -9,7 +9,6 @@ namespace Spectra.Application.Contracts.DTO
         public ContractReadDto()
         {
             Versions = [];
-            Sections = [];
         }
         public string Titel { get; set; }
         public ContractStates ContractState { get;  set; }
@@ -30,7 +29,6 @@ namespace Spectra.Application.Contracts.DTO
         public string? DoctorSignaturePath { get; set; }
         public string? AdminSignaturePath { get; set; }
         public string? HeadSignaturePath { get; set; }
-        public ICollection<ContractTextSection> Sections { get; set; }
         public ICollection<ContractVersionReadDto> Versions { get; set; }
     }
 }
