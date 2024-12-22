@@ -9,6 +9,7 @@ import EditIcon from '@/assets/icons/edit';
 import ExportIcon from '@/assets/icons/export';
 import PrintIcon from '@/assets/icons/print';
 import Download from '@/assets/icons/download';
+import CloseCircle from '@/assets/icons/close-circle';
 
 export default function ActionsMenu({ children }) {
   return (
@@ -114,3 +115,16 @@ const DownloadButton = ({ children, ...props }) => {
 };
 
 ActionsMenu.Download = DownloadButton;
+
+const CancelButton = ({ children, ...props }) => {
+  return (
+    <Menu.Item
+      leftSection={<CloseCircle className='size-4' />}
+      {...props}
+    >
+      {children}
+    </Menu.Item>
+  );
+};
+
+ActionsMenu.Cancel = CancelButton;

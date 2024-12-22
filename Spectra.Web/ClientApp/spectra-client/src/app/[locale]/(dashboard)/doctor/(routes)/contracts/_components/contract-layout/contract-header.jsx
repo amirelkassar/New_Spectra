@@ -6,9 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import { H1 } from '@/dashboard/_components/ui/h1';
 import { BackButton } from '@/components/buttons/back-button';
-import { useContractStore } from '../../_hooks';
-
-import ChatsIcon from '@/assets/icons/chats';
+import { ChatsButton } from '@/dashboard/_components/contract/ui';
 import ROUTES from '@/routes';
 
 export const ContractHeader = () => {
@@ -34,19 +32,6 @@ export const ContractHeader = () => {
 
       <ChatsButton />
     </div>
-  );
-};
-
-const ChatsButton = () => {
-  const toggleChat = useContractStore((s) => s.toggleChat);
-
-  return (
-    <button
-      onClick={toggleChat}
-      className='size-10 lg:size-14 bg-blueLighter flex items-center justify-center rounded-full'
-    >
-      <ChatsIcon className='text-greenMain size-5 lg:size-8' />
-    </button>
   );
 };
 

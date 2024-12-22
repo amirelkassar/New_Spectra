@@ -8,6 +8,7 @@ const ContractContext = createContext(undefined);
 
 export const ContractProvider = ({
   children,
+  role = '',
   initialState = {
     hoursOfWork: '',
     daysOfWork: '',
@@ -86,7 +87,8 @@ export const ContractProvider = ({
           // the percentage must be a number between 1 and 70
           let percentage = +value;
 
-          if (percentage > 70) percentage = '';
+          if (percentage > 70 && role !== 'admin') percentage = '';
+          if (percentage > 100 && role === 'admin') percentage = '';
           if (percentage < 1) percentage = '';
 
           return { freelancePercentage: String(percentage) };
@@ -97,7 +99,8 @@ export const ContractProvider = ({
           // the percentage must be a number between 1 and 40
           let percentage = +value;
 
-          if (percentage > 40) percentage = '';
+          if (percentage > 40 && role !== 'admin') percentage = '';
+          if (percentage > 100 && role === 'admin') percentage = '';
           if (percentage < 1) percentage = '';
 
           return { spectraTeamPercentage: String(percentage) };

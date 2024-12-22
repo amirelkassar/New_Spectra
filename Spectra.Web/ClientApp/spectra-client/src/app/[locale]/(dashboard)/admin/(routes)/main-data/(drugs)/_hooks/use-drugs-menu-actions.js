@@ -4,14 +4,14 @@ import { useCallback } from 'react';
 
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/i18n/routing';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import { DeleteDrugs } from '@/hooks/queries/admin/main-data/drugs';
 import ROUTES from '@/routes';
 
 export const useDrugsMenuActions = (id) => {
   const router = useRouter();
 
-  const open = useConfirmModal((s) => s.open);
+  const open = useConfirmModalStore((s) => s.open);
 
   const { mutateAsync: deleteDrug, isPending } = DeleteDrugs(id);
 

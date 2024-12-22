@@ -1,20 +1,14 @@
 import { cn } from '@/lib/utils';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
 export const Steps = ({
   data = {
     traditionalSteps: [],
     spectraSteps: [],
   },
-  title = 'استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية الرقمية',
+  title = 'استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية الرقمية للحصول على تشخيص و الخطط العلاجية',
 }) => {
-  if (
-    !data.traditionalSteps.length &&
-    !data.spectraSteps.length
-  )
+  if (!data.traditionalSteps.length && !data.spectraSteps.length)
     return null;
 
   const { spectraSteps, traditionalSteps } = data;
@@ -25,32 +19,26 @@ export const Steps = ({
       id='steps'
       className='mb-10'
     >
-      <SectionHeading
-        id='steps'
-        className='mb-10 text-center'
-      >
+      <SectionHeading id='steps' className='mb-10 text-center'>
         {title}
       </SectionHeading>
 
       <div className='mdl:space-y-44 space-y-16'>
         <div>
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold'>
-            سنتين للطريق التقليدي
+            رحلة تصل الى اكثر من سنة بالطريق التقليدى
           </h3>
           <Stepper steps={traditionalSteps} />
           <StepperMobile steps={traditionalSteps} />
         </div>
 
         <div className='relative mdl:px-20'>
-          <div className='absolute -top-8 right-0 w-full h-64 bg-blueLighter rounded-xl' />
+          <div className='absolute -top-8 right-0 w-full h-[calc(100%+80px)] mdl:h-72 bg-blueLighter rounded-xl' />
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold relative'>
-            10 ايام لسبيكترا
+            14-7 ايام لفريق سبيكترا
           </h3>
-          <Stepper
-            className='block'
-            variant='green'
-            steps={spectraSteps}
-          />
+          <Stepper variant='green' steps={spectraSteps} />
+          <StepperMobile variant='green' steps={spectraSteps} />
         </div>
       </div>
     </Container>
@@ -63,11 +51,7 @@ function getPosition(array = [], index) {
   return `calc(${(index + 1) * stepSize}% - 40px)`;
 }
 
-const Stepper = ({
-  variant = '',
-  steps = [],
-  className = '',
-}) => {
+const Stepper = ({ variant = '', steps = [], className = '' }) => {
   if (!steps.length) return null;
   return (
     <div
@@ -94,6 +78,7 @@ const Stepper = ({
               'bg-black/10 text-black rounded-xl py-1 w-16 mdl:w-20 block text-xs text-center ms-8 mdl:ms-16',
               {
                 'bg-greenMain/10': variant === 'green',
+                invisible: step.duration === 'hidden',
               }
             )}
           >
@@ -112,7 +97,7 @@ const Stepper = ({
             >
               {step.id}
             </div>
-            <span className='block text-center max-w-12 mdl:max-w-24 text-xs mdl:text-base'>
+            <span className='block text-center max-w-12 mdl:max-w-28 text-xs mdl:text-base px-2'>
               {step.title}
             </span>
           </div>
@@ -162,6 +147,7 @@ const StepperMobile = ({ variant = '', steps = [] }) => {
                   'bg-[#D1D0DB] text-black rounded-xl py-1 w-20 block text-xs text-center ms-auto',
                   {
                     'bg-[#33C7D3]': variant === 'green',
+                    invisible: step.duration === 'hidden',
                   }
                 )}
               >

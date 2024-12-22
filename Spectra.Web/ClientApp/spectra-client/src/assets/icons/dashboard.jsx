@@ -1,22 +1,29 @@
 const Dashboard = ({ ...props }) => {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width={24}
-      height={24}
-      viewBox='0 0 24 24'
+      width={15}
+      height={14}
+      viewBox='0 0 15 14'
       fill='none'
-      stroke='currentColor'
-      strokeWidth={2}
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      className='lucide lucide-layout-dashboard'
+      xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
-      <rect width={7} height={9} x={3} y={3} rx={1} />
-      <rect width={7} height={5} x={14} y={3} rx={1} />
-      <rect width={7} height={9} x={14} y={12} rx={1} />
-      <rect width={7} height={5} x={3} y={16} rx={1} />
+      <path
+        d='M14.0526 1H1V4.91579H14.0526V1Z'
+        stroke='currentColor'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M1 12.7579L4.97322 8.74421L7.12005 10.8L9.74461 8.17969L11.2065 9.60504'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M14.0526 4.64572V13.1299M1 4.64572V9.21414M3.94206 13.4001H14.0526M5.24211 2.95801H12.0947M2.95789 2.95703H3.28421'
+        stroke='currentColor'
+        strokeLinecap='round'
+      />
     </svg>
   );
 };

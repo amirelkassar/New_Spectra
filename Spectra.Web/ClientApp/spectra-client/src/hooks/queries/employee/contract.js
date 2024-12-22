@@ -1,4 +1,5 @@
 import {
+  keepPreviousData,
   QueryClient,
   useMutation,
   useQuery,
@@ -28,20 +29,14 @@ export const useEmployeeContract = () => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: getEmployeeContract,
+    placeholderData: keepPreviousData,
   });
 };
 
 export const useUpateEmployeeContract = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data) =>
       await apiEmployee.put(contract.actions.update, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [initialQueryKey],
-      });
-    },
     onError: () => {},
   });
 };

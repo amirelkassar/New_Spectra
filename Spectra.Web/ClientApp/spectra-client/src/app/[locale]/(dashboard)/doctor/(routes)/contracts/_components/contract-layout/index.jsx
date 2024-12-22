@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { H1 } from '@/dashboard/_components/ui/h1';
-import { Chat } from './chat';
+import { Chat } from '@/dashboard/_components/contract/chat';
 import { AskForJoin } from './ask-for-join';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { useActiveStep } from '../../_hooks';

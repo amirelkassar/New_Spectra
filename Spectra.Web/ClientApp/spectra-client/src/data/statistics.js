@@ -5,7 +5,7 @@ import VideoOutline from '@/assets/icons/video-outline';
 export const STATISTICS = [
   {
     label: 'دقيقة من الاستشارات والإرشاد',
-    value: `+${(2_000_000).toLocaleString('en-US')}`,
+    value: `+${(60_000).toLocaleString('en-US')}`,
   },
   {
     label: 'مستفيد ومستفيدة',
@@ -13,7 +13,7 @@ export const STATISTICS = [
   },
   {
     label: 'رضا المستفيدين عن جودة الاستشارة',
-    value: 4.9,
+    value: 4.8,
   },
 ];
 
@@ -44,9 +44,7 @@ export const USAGE_STATISTICS_ICONS = {
     color: 'bg-red/10',
   },
   sessions: {
-    icon: (
-      <VideoOutline className='size-5 mdl:size-9 text-purple' />
-    ),
+    icon: <VideoOutline className='size-5 mdl:size-9 text-purple' />,
     color: 'bg-purple/10',
   },
   appointments: {

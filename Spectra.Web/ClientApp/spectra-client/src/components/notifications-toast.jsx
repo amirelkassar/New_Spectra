@@ -15,6 +15,7 @@ export const NotificationsToast = () => {
 
   useEffect(() => {
     let connection = null;
+    const audio = new Audio('/notification-received.mp3');
 
     const connectSignalR = async () => {
       const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/notification`;
@@ -27,6 +28,7 @@ export const NotificationsToast = () => {
       connection.on('Receive', (message) => {
         if (!message) return;
         // return console.log(message);
+        audio.play();
         Toast.Notification(message?.title);
         queryClient.refetchQueries({
           queryKey: [initialQueryKey],

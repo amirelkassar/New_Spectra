@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from '@/i18n/routing';
-import { cn, getRedirectPath } from '@/lib/utils';
+
 import Dashboard from '@/assets/icons/dashboard';
 import { useAuth } from '@/hooks/use-auth';
+import { cn, getRedirectPath } from '@/lib/utils';
 
 export const DashboardButton = ({ children, props }) => {
   const { hasActiveContract, roles } = useAuth();

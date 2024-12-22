@@ -2,14 +2,20 @@
 
 import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { Toast } from '@/components/toast';
-import { useUpateEmployeeContract } from '@/hooks/queries/employee/contract';
+import {
+  initialQueryKey,
+  useUpateEmployeeContract,
+} from '@/hooks/queries/employee/contract';
 import { useContractStore } from '@/dashboard/_hooks/use-contract-store';
 import ROUTES from '@/routes';
 
 export const useUpdateContract = (id) => {
   const locale = useLocale();
+
+  const queryClient = useQueryClient();
 
   const router = useRouter();
 
@@ -66,8 +72,12 @@ export const useUpdateContract = (id) => {
         locale === 'en'
           ? 'Contract updated successfully'
           : 'تم تعديل العقد بنجاح',
-      onSuccess: () =>
-        router.replace(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
+      onSuccess: () => {
+        router.replace(ROUTES.DOCTOR.CONTRACTS.DASHBOARD);
+        queryClient.invalidateQueries({
+          queryKey: [initialQueryKey],
+        });
+      },
     });
   };
 

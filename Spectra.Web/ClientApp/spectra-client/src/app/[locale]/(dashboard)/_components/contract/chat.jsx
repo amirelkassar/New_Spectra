@@ -1,9 +1,9 @@
 'use client';
 
-import { useContractStore } from '../../_hooks';
 import { cn } from '@/lib/utils';
+import { useContractStore } from '@/dashboard/_hooks/use-contract-store';
 
-export const Chat = ({}) => {
+export const Chat = () => {
   const isOpen = useContractStore((s) => s.isChatOpen);
 
   return (

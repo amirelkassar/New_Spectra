@@ -288,7 +288,7 @@ const WorkDays = () => {
         label={tg('daily')}
         value={hoursOfWork}
         onChange={setHoursOfWork}
-        placeholder='من 1 الي 16 ساعة'
+        placeholder={t('hours_limit')}
       />
 
       <DurationInput
@@ -297,7 +297,7 @@ const WorkDays = () => {
         label={tg('weekly')}
         value={daysOfWork}
         onChange={setDaysOfWork}
-        placeholder='من 1 الي 7 يوم'
+        placeholder={t('days_limit')}
       />
     </div>
   );

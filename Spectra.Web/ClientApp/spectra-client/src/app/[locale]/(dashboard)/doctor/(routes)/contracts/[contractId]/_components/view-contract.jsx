@@ -60,6 +60,7 @@ const Actions = ({ acceptedByEmployee = false, state, id = '' }) => {
   const onEdit = () =>
     router.push(ROUTES.DOCTOR.CONTRACTS.EDIT_CONTRACT(id));
 
+  if (state === VERSION_STATE.draft) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>

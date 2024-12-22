@@ -25,6 +25,9 @@ const StatisticCard = ({ label, value }) => {
         className='mdl:text-4xl font-bold text-base block'
       >
         {value}
+        <span className='mdl:text-2xl text-xs hidden group-last:inline'>
+          /5
+        </span>
         <span className='text-greenMain hidden group-last:inline px-2'>
           &#9733;
         </span>

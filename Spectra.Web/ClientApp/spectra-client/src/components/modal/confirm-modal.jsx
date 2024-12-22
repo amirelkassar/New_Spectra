@@ -1,12 +1,16 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Modal } from '@mantine/core';
+
+import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 import Button from '@/components/button';
-import { useConfirmModal } from '@/store/modal/use-confirm-modal';
 
 export const ConfirmModal = () => {
+  const tg = useTranslations('general_obj');
+
   const { isOpen, close, message, icon, onConfirm, isPending } =
-    useConfirmModal();
+    useConfirmModalStore();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -20,7 +24,7 @@ export const ConfirmModal = () => {
       centered
       opened={isOpen}
       onClose={close}
-      size='auto'
+      size='lg'
       classNames={{
         content: 'rounded-xl lg:py-5 lg:px-10',
       }}
@@ -38,10 +42,10 @@ export const ConfirmModal = () => {
             onClick={handleSumbit}
             disabled={isPending}
           >
-            نعم , متأكد
+            {tg('yes_sure')}
           </Button>
           <Button disabled={isPending} onClick={close}>
-            لا
+            {tg('no')}
           </Button>
         </div>
       </div>
