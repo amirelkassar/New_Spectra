@@ -192,6 +192,10 @@ const ROUTES = {
         `/admin/contracts/${contractId}/version/${versionId}`,
       UPDATE_VERSION: (contractId, versionId) =>
         `/admin/contracts/${contractId}/version/${versionId}/edit`,
+      ACCEPT_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/accept`,
+      UPDATE_TERMS: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/accept?edit=true`,
     },
     SETTINGS: {
       DASHBOARD: '/admin/settings',

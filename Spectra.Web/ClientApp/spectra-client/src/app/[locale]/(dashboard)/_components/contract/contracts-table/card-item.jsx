@@ -6,8 +6,9 @@ import { TableCard } from '@/components/table/table-card';
 import { useImagePath } from '@/hooks/use-image-path';
 import { useTranslations } from 'next-intl';
 import { ContractStatus } from '../contract-status';
+import { CellAcceptedBy } from './cell-accepted-by';
 
-export const CardItem = ({ item = {} }) => {
+export const CardItem = ({ item = {}, children }) => {
   const path = useImagePath(item?.imagePath);
 
   const tg = useTranslations('general_obj');
@@ -41,13 +42,21 @@ export const CardItem = ({ item = {} }) => {
                   <CellDate date={item?.creationDate} />
                 </span>
               </div>
+              <div className='grid grid-cols-2 gap-5'>
+                <span>{tg('accepted_by')}</span>
+                <CellAcceptedBy
+                  acceptedByAdmin={item?.acceptedByAdmin}
+                  acceptedByEmployee={item?.acceptedByEmployee}
+                  acceptedByHead={item?.acceptedByHead}
+                />
+              </div>
             </div>
           </div>
         </TableCard.Body>
         <TableCard.Footer className='grid-cols-2'>
           <ContractStatus state={item?.contractState} />
         </TableCard.Footer>
-        <TableCard.Action>{/* <CellActions /> */}</TableCard.Action>
+        <TableCard.Action>{children}</TableCard.Action>
       </TableCard.Container>
     </TableCard>
   );

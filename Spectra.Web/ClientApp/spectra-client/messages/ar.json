@@ -25,6 +25,7 @@
   "hello": "مرحبا",
   "general_obj": {
     "edit": "تعديل",
+    "save": "حفظ",
     "delete": "حذف",
     "cancel": "إلغاء",
     "daily": "يوميا",
@@ -56,7 +57,10 @@
     "filter": "فلتر",
     "delete_confirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه.",
     "yes_sure": "نعم، أنا متأكد",
-    "no": "لا"
+    "no": "لا",
+    "admin": "مدير",
+    "doctor": "طبيب",
+    "department_head": "رئيس القسم"
   },
   "packages_obj": {
     "title": "الباقات",

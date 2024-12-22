@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { VERSION_STATE } from '@/data';
@@ -11,7 +10,7 @@ import { ContractData } from '@/dashboard/_components/contract/contract-data';
 import { AcceptButton } from '@/dashboard/_components/ui/accept-button';
 import { EditButton } from '@/dashboard/_components/ui/edit-button';
 import { RejectButton } from '@/dashboard/_components/ui/reject-button';
-import ROUTES from '@/routes';
+import { useContractVersionActions } from '../../../_hooks/use-contract-version-actions';
 import Card from '@/components/card';
 
 export const ViewVersion = ({ id = '', contractId = '' }) => {
@@ -61,26 +60,24 @@ const Actions = ({
 }) => {
   const tg = useTranslations('general_obj');
 
-  const router = useRouter();
-
-  const onEdit = () =>
-    router.push(
-      ROUTES.ADMIN.CONTRACTS.UPDATE_VERSION(contractId, id)
-    );
+  const { onEdit, onReject, onAccept } = useContractVersionActions({
+    contractId,
+    id,
+  });
 
   if (state === VERSION_STATE.draft) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
         {!acceptedByAdmin && (
-          <AcceptButton className='w-full'>
+          <AcceptButton onClick={onAccept} className='w-full'>
             {tg('accept')}
           </AcceptButton>
         )}
       </div>
       <div>
         {!acceptedByAdmin && (
-          <RejectButton className='w-full'>
+          <RejectButton onClick={onReject} className='w-full'>
             {tg('reject')}
           </RejectButton>
         )}

@@ -59,6 +59,16 @@ export const useAdminContractById = (id) => {
   });
 };
 
+export const useAdminContractTerms = (id) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id, 'terms'],
+    queryFn: async () =>
+      (await apiAdmin.get(contract.actions.getContractTerms(id)))
+        .data,
+    placeholderData: keepPreviousData,
+  });
+};
+
 export const useAdminUpdateContract = () => {
   return useMutation({
     mutationFn: async (data) =>

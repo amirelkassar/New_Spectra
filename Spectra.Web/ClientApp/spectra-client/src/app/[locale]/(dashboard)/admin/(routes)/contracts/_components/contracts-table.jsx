@@ -14,6 +14,7 @@ import { Pagination } from '@/components/table/pagination';
 import { contractsColumns } from './contracts-columns';
 import { StateFilter } from '@/dashboard/_components/contract/state-filter';
 import { CardItem } from '@/dashboard/_components/contract/contracts-table';
+import { CellActions } from './cell-actions';
 
 export const ContractsTable = () => {
   const t = useTranslations('contract_obj');
@@ -46,7 +47,9 @@ export const ContractsTable = () => {
 
               <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
                 {data?.map((item) => (
-                  <CardItem key={item.id} item={item} />
+                  <CardItem key={item.id} item={item}>
+                    <CellActions contractId={item.id} />
+                  </CardItem>
                 ))}
               </div>
             </DataTable>

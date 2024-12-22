@@ -32,7 +32,7 @@ const ContractVersions = ({ versions = [], hasData = false }) => {
         <ContractCopy
           key={copy?.id || i}
           {...copy}
-          viewHref={ROUTES.DOCTOR.CONTRACTS.CONTRACTSID(id)}
+          viewHref={ROUTES.DOCTOR.CONTRACTS.CONTRACTSID(copy?.id)}
         />
       ))}
     </Card>

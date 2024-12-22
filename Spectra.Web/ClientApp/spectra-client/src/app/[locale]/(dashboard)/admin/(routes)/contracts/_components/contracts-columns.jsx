@@ -31,7 +31,13 @@ export const contractsColumns = [
   {
     accessorKey: 'acceptedBy',
     header: () => <Translate value='accepted_by' />,
-    cell: ({ row }) => <CellAcceptedBy row={row} />,
+    cell: ({ row }) => (
+      <CellAcceptedBy
+        acceptedByAdmin={row.original?.acceptedByAdmin}
+        acceptedByEmployee={row.original?.acceptedByEmployee}
+        acceptedByHead={row.original?.acceptedByHead}
+      />
+    ),
   },
   {
     accessorKey: 'contractState',
