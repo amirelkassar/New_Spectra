@@ -8,7 +8,10 @@ import { useAdminDeleteContract } from '@/hooks/queries/admin/contract';
 import ROUTES from '@/routes';
 import { useConfirmModalStore } from '@/hooks/use-confirm-modal-store';
 
-export const useContractMenuActions = (contractId) => {
+export const useContractMenuActions = (
+  contractId = '',
+  lastVersionId = ''
+) => {
   const router = useRouter();
 
   const locale = useLocale;
@@ -19,6 +22,7 @@ export const useContractMenuActions = (contractId) => {
     useAdminDeleteContract();
 
   const onDelete = useCallback(() => {
+    if (!contractId) return;
     open({
       isPending,
       onConfirm: () => {
@@ -34,13 +38,17 @@ export const useContractMenuActions = (contractId) => {
     });
   }, [deleteContract, isPending, open, router, contractId, locale]);
 
-  const onView = useCallback(
-    () =>
-      router.push(ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(contractId)),
-    [router, contractId]
-  );
+  const onView = useCallback(() => {
+    if (!contractId) return;
+    router.push(ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(contractId));
+  }, [router, contractId]);
 
-  const onEdit = useCallback(() => {}, []);
+  const onEdit = useCallback(() => {
+    if (!contractId || !lastVersionId) return;
+    router.push(
+      ROUTES.ADMIN.CONTRACTS.UPDATE_VERSION(contractId, lastVersionId)
+    );
+  }, [router, contractId, lastVersionId]);
 
   const onCancel = useCallback(() => {}, []);
 

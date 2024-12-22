@@ -46,6 +46,11 @@ export const contractsColumns = [
   },
   {
     id: 'id',
-    cell: ({ getValue }) => <CellActions contractId={getValue()} />,
+    cell: ({ row }) => (
+      <CellActions
+        contractId={row.original?.id}
+        lastVersionId={row.original?.lastVersionId}
+      />
+    ),
   },
 ];
