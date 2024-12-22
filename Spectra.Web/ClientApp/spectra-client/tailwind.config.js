@@ -41,6 +41,8 @@ module.exports = {
       backgroundImage: {
         blueLinerGradient:
           'linear-gradient(91.44deg, #EFFAFC 0.15%, #E9F7FF 43.42%, #ACDDF9 98.36%)',
+        blueBlackGradient:
+          'linear-gradient(180deg, #04025E 0%, #010036 100%)',
       },
       screens: {
         xs: '320px',

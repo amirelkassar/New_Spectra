@@ -79,7 +79,7 @@ const Discount = ({ children, ...props }) => {
       {...props}
       dir='ltr'
       className={cn(
-        'bg-greenMain text-xs text-white mdl:text-base font-bold rtl:rounded-tr-xl ltr:rounded-tl-xl px-3 py-1 text-nowrap',
+        'bg-greenMain text-xs text-white mdl:text-base font-bold rounded-tr-xl px-3 py-1 text-nowrap',
         props?.className
       )}
     >
