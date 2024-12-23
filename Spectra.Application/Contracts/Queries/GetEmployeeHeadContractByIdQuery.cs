@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mapster;
 using MediatR;
+using MongoDB.Driver;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
@@ -27,8 +28,11 @@ namespace Spectra.Application.Contracts.Queries
 
             public async Task<OperationResult> Handle(GetEmployeeHeadContractByIdQuery request, CancellationToken cancellationToken)
             {
-                Expression<Func<EmploymentContract, bool>> filter = c => c.EmployeeHeadUserId == _currentUser.Id && c.Id==request.Id;
-                var contract= await _contractRepository.GetAsync(filter) ?? throw new NotFoundException("Contracts", request.Id);
+                var collection = await _contractRepository.GetCollectionAsync();
+                var filterBuilder = Builders<EmploymentContract>.Filter;
+                var filter = filterBuilder.Eq(c => c.EmployeeHeadUserId, _currentUser.Id);
+                filter &= filterBuilder.Eq(c => c.Id, request.Id);
+                var contract = await collection.Find(filter).FirstOrDefaultAsync(cancellationToken: cancellationToken) ?? throw new NotFoundException("Contracts", request.Id);
                 var dto = contract.Adapt<ContractWithoutFeeReadDto>();
                 dto.Versions = dto.Versions.OrderByDescending(v => v.Order).ToArray();
                 return OperationResult<ContractWithoutFeeReadDto>.Success(dto);

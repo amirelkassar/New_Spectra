@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Spectra.Application.Contracts.DTO;
 using Spectra.Domain.Contracts;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract.Models
@@ -13,6 +14,6 @@ namespace Spectra.WebAPI.Areas.Admin.Contract.Models
         {
             TextSections = [];
         }
-        public ICollection<ContractTextSection> TextSections { get; set; }
+        public ICollection<ContractTextSectionCreateDto> TextSections { get; set; }
     }
 }

@@ -96,6 +96,7 @@ namespace Spectra.Domain.Contracts
             var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
             lastVersion.AcceptedByEmployee = false;
             lastVersion.AcceptedByAdmin = false;
+            lastVersion.State = ContractVersionStates.Draft;
         }
     }
 

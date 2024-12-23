@@ -15,7 +15,6 @@ namespace Spectra.Domain.Shared.Constants
         public static string GetServicesPath() => Path.Combine(GetSystemFilesPath(), "Services");
         public static string GetImagesPath() => Path.Combine(GetSystemFilesPath(), "Imgs");
         public static string GetClientsPath() => Path.Combine(_base, "Clients");
-
         public static string GetUsersPath() => Path.Combine(_base, "Users");
     }
 }

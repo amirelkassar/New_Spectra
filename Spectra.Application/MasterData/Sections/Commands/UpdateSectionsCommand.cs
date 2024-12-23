@@ -1,11 +1,13 @@
 ﻿using FluentValidation;
 using MediatR;
+using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Employees;
 using Spectra.Domain.MasterData.DoctorsSpecialization;
 using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.Sections.Commands
@@ -20,11 +22,13 @@ namespace Spectra.Application.MasterData.Sections.Commands
 
         public class UpdateSectionsCommandHandler(ISectionsRepository sectionsRepository,
             IBaseMongoDbRepository<Employee> empRepository,
-            IBaseMongoDbRepository<Specialization> specializationRepository) : IRequestHandler<UpdateSectionsCommand, OperationResult>
+            IBaseMongoDbRepository<Specialization> specializationRepository,
+            IIdentityService identityService) : IRequestHandler<UpdateSectionsCommand, OperationResult>
         {
             private readonly ISectionsRepository _sectionsRepository = sectionsRepository;
             private readonly IBaseMongoDbRepository<Employee> _empRepository = empRepository;
             private readonly IBaseMongoDbRepository<Specialization> _specializationRepository = specializationRepository;
+            private readonly IIdentityService _identityService = identityService;
 
             public async Task<OperationResult> Handle(UpdateSectionsCommand request, CancellationToken cancellationToken)
             {
@@ -43,6 +47,7 @@ namespace Spectra.Application.MasterData.Sections.Commands
                     var emp = await _empRepository.GetAsync(e => e.Id == request.HeadDoctorId) ?? throw new NotFoundException("Employees", request.HeadDoctorId);
                     entity.HeadDoctorId = emp.Id;
                     entity.HeadDoctorName = emp.Name.FirstName;
+                    await _identityService.AddUserToRole(emp.UserId, Roles.DepartmentHead);
                 }
                 if (request.Specsifications is not null && request.Specsifications.Count > 0)
                 {

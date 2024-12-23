@@ -9,7 +9,7 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
     [Area("employee-head")]
     [ApiController]
     [Route("api/[area]/[controller]")]
-    [Authorize]
+    [Authorize(Roles = Roles.DepartmentHead)]
     public abstract class EmployeeHeadControllerBase<TController>(ILogger<TController> logger, ICurrentUser currentUser) : SpectraControllerBase<TController>(logger, currentUser) where TController : EmployeeHeadControllerBase<TController>
     {
     }

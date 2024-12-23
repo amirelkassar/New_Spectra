@@ -15,7 +15,7 @@ namespace Spectra.Application.Contracts.DTO
             Sections = [];
         }
         public ContractEmployeeInfoSection InfoSection { get; set; }
-        public ICollection<ContractTextSection> Sections { get; set; }
+        public ICollection<ContractVersionReadDto> Sections { get; set; }
         public string? DoctorSignaturePath { get; set; }
         public string? AdminSignaturePath { get; set; }
         public string? HeadSignaturePath { get; set; }

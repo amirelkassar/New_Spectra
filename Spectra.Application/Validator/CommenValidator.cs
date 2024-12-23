@@ -30,8 +30,7 @@ namespace Spectra.Application.Validator
                 .Matches(@"^\d+$").WithMessage("Phone number must contain only digits.");
 
             RuleFor(x => x.CountryCode)
-                .NotEmpty().WithMessage("Country code is required.")
-                .Matches(@"^\+\d{1,3}$").WithMessage("Country code must be a valid format.");
+                .NotEmpty().WithMessage("Country code is required.");
         }
     }
     public class EmailAddressValidator : AbstractValidator<EmailAddress>

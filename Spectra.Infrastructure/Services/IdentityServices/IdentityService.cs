@@ -257,5 +257,11 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
             return OperationResult<ICollection<AppUser>>.Success(users);
         }
+
+        public async Task AddUserToRole(string userId, string role)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.AddToRoleAsync(user, role);
+        }
     }
 }

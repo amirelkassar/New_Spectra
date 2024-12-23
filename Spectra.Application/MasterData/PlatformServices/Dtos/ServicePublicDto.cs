@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Application.MasterData.PlatformServices.Dtos
 {
-    public class ServicePublicDto
+    public class ServicePublicDto : BaseEntityDto<string>
     {
         public string EnName { get; set; }
         public string ArName { get; set; }

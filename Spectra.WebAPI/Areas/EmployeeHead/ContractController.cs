@@ -17,7 +17,6 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
         private readonly IMediator _mediator = mediator;
 
         [HttpGet("list")]
-        [Authorize(ContractPermissions.ReadList)]
         public async Task<IActionResult> GetListAsync([FromQuery] GetEmployeeHeadContractListQuery input)
         {
             var response = await _mediator.Send(input);
@@ -25,7 +24,6 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
         }
 
         [HttpGet()]
-        [Authorize(ContractPermissions.ReadList)]
         public async Task<IActionResult> GetAsync([FromQuery] GetEmployeeHeadContractByIdQuery input)
         {
             var response = await _mediator.Send(input);

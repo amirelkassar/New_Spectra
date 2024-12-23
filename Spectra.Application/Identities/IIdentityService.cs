@@ -42,5 +42,7 @@ namespace Spectra.Application.Identities
 
         Task<OperationResult> GetUserRoleListAsync(string userId);
 
+        Task AddUserToRole(string userId, string role);
+
     }
 }
