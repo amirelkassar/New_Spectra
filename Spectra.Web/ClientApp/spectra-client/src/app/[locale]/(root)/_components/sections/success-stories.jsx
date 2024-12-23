@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 
@@ -5,10 +6,11 @@ import { Container, SectionHeading } from '@/guest/_components/ui';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import ROUTES from '@/routes';
 
-export const SuccessStories = ({
-  data = [],
-  title = 'قصص النجاح',
-}) => {
+export const SuccessStories = ({ data = [], title = '' }) => {
+  const tg = useTranslations('guest_obj');
+
+  const titleValue = title || tg('success_stories');
+
   if (!data.length) return null;
   return (
     <Container
@@ -20,7 +22,7 @@ export const SuccessStories = ({
         id='success-stories'
         className='mb-10 text-center'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
         {data.map((item) => (

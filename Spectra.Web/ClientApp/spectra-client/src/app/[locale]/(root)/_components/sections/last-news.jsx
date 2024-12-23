@@ -1,14 +1,13 @@
+import { useTranslations } from 'next-intl';
 import { ShowMoreButton } from '@/components/buttons/show-more-button';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
 
-export const LastNews = ({
-  data = [],
-  title = 'اخر الاخبار',
-}) => {
+export const LastNews = ({ data = [], title = '' }) => {
+  const tg = useTranslations('general_obj');
+
+  const titleValue = title || tg('last_news');
+
   if (!data.length) return null;
   return (
     <Container
@@ -17,11 +16,14 @@ export const LastNews = ({
       id='last-news'
     >
       <div className='flex items-center justify-between mb-10'>
-        <SectionHeading id='last-news'>
-          {title}
+        <SectionHeading className='capitalize' id='last-news'>
+          {titleValue}
         </SectionHeading>
-        <ShowMoreButton href={ROUTES.ROOT.BLOG}>
-          تصفح المزيد
+        <ShowMoreButton
+          className='capitalize'
+          href={ROUTES.ROOT.BLOG}
+        >
+          {tg('browse_more')}
         </ShowMoreButton>
       </div>
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>

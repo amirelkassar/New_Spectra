@@ -1,17 +1,24 @@
+import { useLocale, useTranslations } from 'next-intl';
+
 import { cn } from '@/lib/utils';
 import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const Steps = ({
-  data = {
-    traditionalSteps: [],
-    spectraSteps: [],
-  },
-  title = 'استبدل شهور من الانتظار بأسبوع واحد فقط من الرعاية الرقمية للحصول على تشخيص و الخطط العلاجية',
-}) => {
-  if (!data.traditionalSteps.length && !data.spectraSteps.length)
+export const Steps = ({ data, title = '' }) => {
+  const t = useTranslations('guest_obj');
+
+  const locale = useLocale();
+
+  const titleValue = title || t('steps_sentence_1');
+
+  const STEPS = data[locale];
+
+  if (
+    !STEPS?.traditionalSteps?.length &&
+    !STEPS?.spectraSteps?.length
+  )
     return null;
 
-  const { spectraSteps, traditionalSteps } = data;
+  const { spectraSteps, traditionalSteps } = STEPS;
   return (
     <Container
       aria-label='Steps'
@@ -20,13 +27,13 @@ export const Steps = ({
       className='mb-10'
     >
       <SectionHeading id='steps' className='mb-10 text-center'>
-        {title}
+        {titleValue}
       </SectionHeading>
 
       <div className='mdl:space-y-44 space-y-16'>
         <div>
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold'>
-            رحلة تصل الى اكثر من سنة بالطريق التقليدى
+            {t('steps_sentence_2')}
           </h3>
           <Stepper steps={traditionalSteps} />
           <StepperMobile steps={traditionalSteps} />
@@ -35,7 +42,7 @@ export const Steps = ({
         <div className='relative mdl:px-20'>
           <div className='absolute -top-8 right-0 w-full h-[calc(100%+80px)] mdl:h-72 bg-blueLighter rounded-xl' />
           <h3 className='mdl:mb-20 mb-5 text-base mdl:text-2xl text-center font-bold relative'>
-            14-7 ايام لفريق سبيكترا
+            {t('steps_sentence_3')}
           </h3>
           <Stepper variant='green' steps={spectraSteps} />
           <StepperMobile variant='green' steps={spectraSteps} />
@@ -110,7 +117,7 @@ const Stepper = ({ variant = '', steps = [], className = '' }) => {
 const StepperMobile = ({ variant = '', steps = [] }) => {
   if (!steps.length) return null;
   return (
-    <div className='w-full ps-52'>
+    <div className='w-full rtl:ps-52 ltr:pe-52'>
       <div
         dir='ltr'
         style={{ height: `${steps.length * 100}px` }}

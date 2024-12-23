@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import {
@@ -6,10 +7,11 @@ import {
   SectionHeading,
 } from '@/guest/_components/ui';
 
-export const Licenses = ({
-  data = [],
-  title = 'تراخيص',
-}) => {
+export const Licenses = ({ data = [], title = '' }) => {
+  const tg = useTranslations('guest_obj');
+
+  const titleValue = title || tg('licenses');
+
   if (!data.length) return null;
   return (
     <Container
@@ -19,9 +21,9 @@ export const Licenses = ({
     >
       <SectionHeading
         id='licenses'
-        className='text-center mb-10'
+        className='text-center mb-10 capitalize'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <Carousel
         withControls={false}
