@@ -29,6 +29,7 @@
     "save": "Save",
     "delete": "Delete",
     "cancel": "Cancel",
+    "clear": "Clear",
     "daily": "Daily",
     "weekly": "Weekly",
     "min": "Min",
@@ -51,6 +52,7 @@
     "job": "Job",
     "status": "Status",
     "rejected": "Rejected",
+    "canceled": "Canceled",
     "contracting": "Contracting",
     "accepted": "Accepted",
     "accepted_by": "Accepted by",
@@ -60,7 +62,9 @@
     "no": "No",
     "admin": "Admin",
     "doctor": "Doctor",
-    "department_head": "Department Head"
+    "department_head": "Department Head",
+    "write_message": "Write a message...",
+    "no_messages_yet": "No messages yet, start a conversation by sending a message."
   },
   "packages_obj": {
     "title": "Packages",
@@ -84,6 +88,8 @@
     "accepted": "Accepted",
     "price_of_service_as_freelancer": "Price of your service as freelancer",
     "price_of_service_as_spectra": "Price of your services as a member of the Spectra team",
+    "services_as_freelancer": "Services as freelancer",
+    "services_as_spectra": "Services as a member of the Spectra team",
     "duration": "Duration",
     "your_percentage": "Your Percentage",
     "your_share": "Your Share",
@@ -101,6 +107,7 @@
     "copies": "Copies",
     "accepted_by_admin": "Accepted by admin",
     "accepted_by_department_head": "Accepted by department head",
-    "accepted_by_doctor": "Accepted by doctor"
+    "accepted_by_doctor": "Accepted by doctor",
+    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen."
   }
 }

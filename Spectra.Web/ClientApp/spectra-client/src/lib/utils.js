@@ -1,3 +1,4 @@
+import { ROLES } from '@/data';
 import ROUTES from '@/routes';
 import { clsx } from 'clsx';
 import dayjs from 'dayjs';
@@ -245,18 +246,17 @@ export const getRedirectPath = (
   hasActiveContract = true
 ) => {
   switch (roles[0]) {
-    case 'SystemAdmin':
-    case 'CustomerSupport':
-    case 'Accountant':
+    case ROLES.admin:
+    case ROLES.customerSupport:
+    case ROLES.accountant:
       return ROUTES.ADMIN.MAIN;
-    case 'Doctor':
-    case 'Specialist':
-    case 'DepartmentHead':
-    case 'ServiceHead':
-      if (!hasActiveContract)
-        return ROUTES.DOCTOR.CONTRACTS.DASHBOARD;
+    case ROLES.doctor:
+    case ROLES.specialist:
+    case ROLES.departmentHead:
+    case ROLES.serviceHead:
+      if (!hasActiveContract) return ROUTES.DOCTOR.CONTRACT.DASHBOARD;
       return ROUTES.DOCTOR.MAIN;
-    case 'Client':
+    case ROLES.client:
       return ROUTES.CLIENT.MAIN.HOME;
     default:
       return ROUTES.HOME;

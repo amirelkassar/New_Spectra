@@ -280,11 +280,17 @@ const ROUTES = {
       TEAM: '/doctor/profile/team',
       EDIT: '/doctor/profile/edit',
     },
+    CONTRACT: {
+      DASHBOARD: '/doctor/contract',
+      CONTRACTSNEW: '/doctor/contract/new',
+      CONTRACTSID: (id) => `/doctor/contract/${id}`,
+      EDIT_CONTRACT: (id) => `/doctor/contract/${id}/edit`,
+    },
     CONTRACTS: {
       DASHBOARD: '/doctor/contracts',
-      CONTRACTSNEW: '/doctor/contracts/new',
-      CONTRACTSID: (id) => `/doctor/contracts/${id}`,
-      EDIT_CONTRACT: (id) => `/doctor/contracts/${id}/edit`,
+      VIEW_CONTRACT: (id) => `/doctor/contracts/${id}`,
+      VIEW_VERSION: (contractId, versionId) =>
+        `/doctor/contracts/${contractId}/version/${versionId}`,
     },
     CHATS: {
       DASHBOARD: '/doctor/chats',

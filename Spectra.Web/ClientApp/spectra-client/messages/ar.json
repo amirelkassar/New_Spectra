@@ -28,6 +28,7 @@
     "save": "حفظ",
     "delete": "حذف",
     "cancel": "إلغاء",
+    "clear": "مسح",
     "daily": "يوميا",
     "weekly": "اسبوعيا",
     "min": "دقيقة",
@@ -51,6 +52,7 @@
     "status": "الحالة",
     "all": "الكل",
     "rejected": "مرفوض",
+    "canceled": "ملغي",
     "contracting": "قيد التعاقد",
     "accepted": "مقبول",
     "accepted_by": "مقبول من",
@@ -60,7 +62,9 @@
     "no": "لا",
     "admin": "مدير",
     "doctor": "طبيب",
-    "department_head": "رئيس القسم"
+    "department_head": "رئيس القسم",
+    "write_message": "اكتب رسالة...",
+    "no_messages_yet": "لا توجد رسائل حتى الآن، ابدأ المحادثة بإرسال رسالة."
   },
   "packages_obj": {
     "title": "الباقات",
@@ -84,6 +88,8 @@
     "accepted": "إتمام العملية",
     "price_of_service_as_freelancer": "سعر نسبتك كطبيب مستقل",
     "price_of_service_as_spectra": "سعر نسبتك كطبيب فرد من فريق سبيكترا",
+    "services_as_freelancer": "الخدمات كطبيب مستقل",
+    "services_as_spectra": "الخدمات كطبيب فرد من فريق سبيكترا",
     "duration": "المدة",
     "your_percentage": "حدد حصتك من سعر الخدمات",
     "your_share": "حصتك",
@@ -101,6 +107,7 @@
     "copies": "عدد النسخ",
     "accepted_by_admin": "تمت الموافقة من قبل المسؤول",
     "accepted_by_department_head": "تمت الموافقة من قبل رئيس القسم",
-    "accepted_by_doctor": "تمت الموافقة من قبل الطبيب"
+    "accepted_by_doctor": "تمت الموافقة من قبل الطبيب",
+    "sign_msg": "يرجى التوقيع باستخدام الماوس أو لوحة التتبع الخاصة بجهاز اللابتوب أو باستخدام اللمس علي شاشة المحمول."
   }
 }

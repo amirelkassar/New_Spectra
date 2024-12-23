@@ -28,18 +28,11 @@ function Signature({ setSignatureData, close }) {
           }}
         />
       </div>
-      <div className='flex items-center justify-center gap-3 mdl:gap-7 mt-8 mdl:mt-11'>
-        <Button
-          variant='secondary'
-          className='h-[60px] flex-1 font-Bold text-base mdl:text-xl'
-          onClick={saveSignature}
-        >
-          ارسال{' '}
+      <div className='flex items-center *:flex-1 gap-4 mt-8 mdl:mt-11'>
+        <Button variant='secondary' onClick={saveSignature}>
+          ارسال
         </Button>
-        <Button
-          className='h-[60px] flex-1 font-Bold text-base mdl:text-xl'
-          onClick={() => sigCanvas.current.clear()}
-        >
+        <Button onClick={() => sigCanvas.current.clear()}>
           اعادة المحاولة
         </Button>
       </div>

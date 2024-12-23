@@ -6,12 +6,18 @@ import {
 } from '@/dashboard/_components/contract/contracts-table';
 import { ContractStatus } from '@/dashboard/_components/contract/contract-status';
 import { CellActions } from './cell-actions';
+import ROUTES from '@/routes';
 
 export const contractsColumns = [
   {
     accessorKey: 'employeeName',
     header: () => <Translate value='name' />,
-    cell: ({ row }) => <CellName row={row} />,
+    cell: ({ row }) => (
+      <CellName
+        href={ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(row.original?.id)}
+        row={row}
+      />
+    ),
   },
   {
     accessorKey: 'jobTitle',
@@ -46,6 +52,11 @@ export const contractsColumns = [
   },
   {
     id: 'id',
-    cell: ({ getValue }) => <CellActions contractId={getValue()} />,
+    cell: ({ row }) => (
+      <CellActions
+        contractId={row.original?.id}
+        lastVersionId={row.original?.lastVersionId}
+      />
+    ),
   },
 ];

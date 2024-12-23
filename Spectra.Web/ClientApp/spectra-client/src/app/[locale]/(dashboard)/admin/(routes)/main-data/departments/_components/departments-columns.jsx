@@ -17,6 +17,9 @@ export const DepartmentColumns = [
   {
     accessorKey: 'headDoctorName',
     header: 'رئيس القسم',
+    cell: ({ getValue }) => (
+      <span className='capitalize'>{getValue()}</span>
+    ),
   },
   {
     id: 'actions',

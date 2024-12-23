@@ -5,13 +5,13 @@ import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { useContractMenuActions } from '../_hooks/use-contract-menu-actions';
 
-export function CellActions({ contractId = '' }) {
+export function CellActions({ contractId = '', lastVersionId = '' }) {
   const paramsId = useParams()?.contractId;
 
   const tg = useTranslations('general_obj');
 
   const { onDelete, onEdit, onView, onCancel } =
-    useContractMenuActions(contractId || paramsId);
+    useContractMenuActions(contractId || paramsId, lastVersionId);
 
   return (
     <ActionsMenu>

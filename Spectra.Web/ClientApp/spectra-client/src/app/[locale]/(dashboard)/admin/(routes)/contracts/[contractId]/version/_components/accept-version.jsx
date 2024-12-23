@@ -23,6 +23,7 @@ import { useSearchParams } from 'next/navigation';
 import TextInput from '@/components/inputs/text-input';
 import { useState } from 'react';
 import Button from '@/components/button';
+import { SignModal } from '@/dashboard/_components/contract/sign-modal';
 
 export const AcceptVersion = ({ id = '', contractId = '' }) => {
   const query = useAdminContractById(contractId);
@@ -92,7 +93,8 @@ const Actions = () => {
 
   const isEdit = useSearchParams().get('edit') === 'true';
 
-  const { onEdit, onSend, onSave } = useContractTermsActions();
+  const { onEdit, onSend, onSave, isPending } =
+    useContractTermsActions();
 
   if (isEdit)
     return (
@@ -112,9 +114,11 @@ const Actions = () => {
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
-        <SendButton onClick={onSend} className='w-full'>
-          {tg('send')} {t('contract')}
-        </SendButton>
+        <SignModal isPending={isPending} onSend={onSend}>
+          <SendButton className='w-full'>
+            {tg('send')} {t('contract')}
+          </SendButton>
+        </SignModal>
       </div>
       <div>
         <EditButton onClick={onEdit} className='w-full'>
@@ -136,12 +140,19 @@ const ViewUpdateContractTerms = () => {
 const EditTerms = () => {
   const locale = useLocale();
 
-  const { infoSection, sections, setSection } =
-    useContractTermsStore();
+  const {
+    infoSection,
+    sections,
+    setSection,
+    addSection,
+    removeSection,
+    addPoint,
+    removePoint,
+  } = useContractTermsStore();
 
   const nameKey = locale === 'en' ? 'enName' : 'arName';
   const dateKey = locale === 'en' ? 'enDate' : 'arDate';
-  const titleKey = locale === 'en' ? 'enTitle' : 'arTitle';
+  // const titleKey = locale === 'en' ? 'enTitle' : 'arTitle';
   const pointsKey = locale === 'en' ? 'enPoints' : 'arPoints';
 
   return (
@@ -153,19 +164,28 @@ const EditTerms = () => {
 
       {!!sections.length &&
         sections.map((section, i) => (
-          <div className='space-y-2' key={section?.id || i}>
-            <TextInput
-              name='arTitle'
-              value={section.arTitle}
-              placeholder='عنوان البند'
-              onChange={(e) => setSection(section?.id, e)}
-              size='lg'
-              classNames={{
-                input: 'font-bold text-right',
-              }}
-            />
-
-            <ul className='list-disc ps-5 space-y-1'>
+          <div
+            className='space-y-3 border border-grayMedium p-4 rounded-xl'
+            key={section?.id || i}
+          >
+            <div className='flex gap-3'>
+              <TextInput
+                name='arTitle'
+                value={section.arTitle}
+                placeholder='عنوان البند'
+                onChange={(e) => setSection(section?.id, e)}
+                size='lg'
+                classNames={{
+                  input: 'font-bold text-right',
+                }}
+                className='flex-1'
+              />
+              <button onClick={() => addSection(i)}>+</button>
+              <button onClick={() => removeSection(section?.id)}>
+                -
+              </button>
+            </div>
+            <ul className='list-disc ps-5 space-y-1 pe-10 mdl:pe-16'>
               <ListInput
                 points={section[pointsKey]}
                 onValuesChange={(values) =>
@@ -176,6 +196,10 @@ const EditTerms = () => {
                     },
                   })
                 }
+                addPoint={(index) => addPoint(section?.id, index)}
+                removePoint={(index) =>
+                  removePoint(section?.id, index)
+                }
               />
             </ul>
           </div>
@@ -184,7 +208,12 @@ const EditTerms = () => {
   );
 };
 
-const ListInput = ({ points = [], onValuesChange = () => {} }) => {
+const ListInput = ({
+  points = [],
+  onValuesChange = () => {},
+  addPoint = () => {},
+  removePoint = () => {},
+}) => {
   const [values, setValues] = useState(points);
 
   const handleChange = (e, index) => {
@@ -195,13 +224,18 @@ const ListInput = ({ points = [], onValuesChange = () => {} }) => {
   };
 
   return values?.map((point, i) => (
-    <li key={i}>
+    <li className='flex gap-3' key={i}>
       <TextInput
         name={`point ${i}`}
         value={point}
         onChange={(e) => handleChange(e, i)}
         size='sm'
+        className='flex-1'
       />
+
+      <button onClick={() => addPoint(i)}>+</button>
+
+      <button onClick={() => removePoint(i)}>-</button>
     </li>
   ));
 };

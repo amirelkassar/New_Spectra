@@ -89,9 +89,9 @@ export const FreelanceServices = ({ freelancer = [] }) => {
 
   return (
     <div>
-      {freelancer.map((s) => (
+      {freelancer.map((s, i) => (
         <ServiceInfo
-          key={s?.serviceId}
+          key={s?.serviceId || i}
           id={s?.serviceId}
           name={s[nameKey]}
           terms={s[termsKey]}
@@ -145,9 +145,9 @@ const SpectraTeamServices = ({ spectraTeam = [] }) => {
 
   return (
     <div>
-      {spectraTeam.map((s) => (
+      {spectraTeam.map((s, i) => (
         <ServiceInfo
-          key={s?.serviceId}
+          key={s?.serviceId || i}
           id={s?.serviceId}
           name={s[nameKey]}
           terms={s[termsKey]}

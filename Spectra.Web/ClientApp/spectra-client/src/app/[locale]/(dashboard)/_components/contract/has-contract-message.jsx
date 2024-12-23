@@ -18,7 +18,7 @@ export const HasContractMessage = () => {
         {t('already_have_contract_subtitle')}
       </p>
 
-      <Link href={ROUTES.DOCTOR.CONTRACTS.DASHBOARD}>
+      <Link href={ROUTES.DOCTOR.CONTRACT.DASHBOARD}>
         <Button
           variant='secondary'
           className='text-sm mdl:text-xl px-16 font-bold mx-auto mt-5'

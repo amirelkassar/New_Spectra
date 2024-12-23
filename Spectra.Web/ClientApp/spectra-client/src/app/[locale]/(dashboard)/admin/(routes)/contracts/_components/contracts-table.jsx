@@ -48,7 +48,10 @@ export const ContractsTable = () => {
               <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
                 {data?.map((item) => (
                   <CardItem key={item.id} item={item}>
-                    <CellActions contractId={item.id} />
+                    <CellActions
+                      lastVersionId={item?.lastVersionId}
+                      contractId={item.id}
+                    />
                   </CardItem>
                 ))}
               </div>
