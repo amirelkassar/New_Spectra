@@ -112,7 +112,7 @@ const RenderPackages = ({ packages = [] }) => {
 
       <div className='max-w-2xl mx-auto flex items-center justify-between gap-4'>
         <SwipeButton onClick={scrollRight} disabled={isLeftDisabled}>
-          <ArrowLeft className='rotate-180 w-4 mdl:w-5' />
+          <ArrowLeft className='rtl:rotate-180 w-4 mdl:w-5' />
         </SwipeButton>
 
         <div className='flex justify-center items-center gap-2'>
