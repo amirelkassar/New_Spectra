@@ -1,13 +1,13 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
-import Button from '@/components/button';
-
-import HeroSectionImg from '@/assets/images/hero-section-img.png';
-import LogoOnlyIcon from '@/assets/icons/logo-only-icon';
-import PlayIcon from '@/assets/icons/play';
 import { Container, IntroVideo } from '@/guest/_components/ui';
+import Button from '@/components/button';
+import PlayIcon from '@/assets/icons/play';
 
 export const HomeIntro = () => {
+  const t = useTranslations('guest_obj');
+
   return (
     <Container
       role='region'
@@ -17,55 +17,48 @@ export const HomeIntro = () => {
     >
       <div className='flex gap-5 justify-between'>
         {/* TEXT */}
-        <div className='space-y-5'>
+        <div className='space-y-5 min-h-60'>
           <h1
             id='hero-heading'
-            className='mdl:text-4xl text-2xl font-bold text-black mdl:leading-[54px]'
-          >
-            نحتضن تميزهم
-            <br />
-            بحب و إبداع
-          </h1>
+            className='mdl:text-4xl ltr:mdl:text-3xl ltr:lgl:text-4xl text-2xl font-bold text-black mdl:leading-[54px] capitalize'
+            dangerouslySetInnerHTML={{
+              __html: t('spectra_intro'),
+            }}
+          />
+
           <p className='text-black text-sm mdl:text-xl mdl:max-w-[80%]'>
-            سبيكترا هو أول مركز طب اتصالي ورعاية عن بعد لتشخيص وعلاج
-            الاضطرابات النمائية والسلوكية والنفسية للأطفال
+            {t('spectra_sub_intro')}
           </p>
         </div>
 
         {/* IMAGE */}
-        <div className='relative w-fit'>
-          <div className='mdl:size-[400px] size-40 bg-greenLight rounded-full relative rounded-tl-none overflow-hidden'>
-            <Image
-              src={HeroSectionImg}
-              alt='hero-section-img'
-              priority
-              className='w-full h-full object-cover'
-              sizes='width:1024px; height:682px'
-              fill
-            />
-          </div>
-          <span className='absolute -start-4 bottom-8 size-12 mdl:size-20 mdl:start-2 mdl:bottom-10 rounded-full flex items-center justify-center bg-blueLight'>
-            <LogoOnlyIcon className='size-8 mdl:size-16' />
-          </span>
-        </div>
+        <Image
+          src='/intro.webp'
+          alt='hero-section-img'
+          priority
+          width={420}
+          height={409}
+          quality={100}
+          className='w-full h-auto object-contain shrink min-w-40 max-w-[420px]'
+        />
       </div>
 
       {/* BUTTONS */}
-      <div className='mdl:-mt-32 mt-5 flex flex-col gap-3'>
+      <div className='mt-5 lgl:-mt-32 flex flex-col gap-3'>
         <Button
           variant='secondary'
-          className='w-full mdl:max-w-80 mdl:text-xl'
-          aria-label='احجز استشارة مجانية'
+          className='w-full mdl:max-w-96 mdl:text-xl'
+          aria-label='book a 30 minute free consultation'
         >
-          احجز استشارة مدفوعة لمدة 30د
+          {t('book_a_30_minute_paid_consultation')}
         </Button>
         <IntroVideo>
           <Button
-            className='w-full mdl:max-w-80 mdl:text-xl'
-            aria-label='تعرف علينا'
+            className='w-full mdl:max-w-96 mdl:text-xl'
+            aria-label='get to know us'
           >
             <PlayIcon className='size-5 mdl:size-6 text-greenMain' />
-            تعرف علينا
+            {t('get_to_know_us')}
           </Button>
         </IntroVideo>
       </div>

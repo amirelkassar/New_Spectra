@@ -5,34 +5,51 @@ import IMG_4 from '@/assets/images/what-we-cure/4.png';
 import IMG_5 from '@/assets/images/what-we-cure/5.png';
 import IMG_6 from '@/assets/images/what-we-cure/6.png';
 import IMG_7 from '@/assets/images/what-we-cure/7.png';
+import { Translate } from '@/components/translate';
 
 export const WHAT_WE_CURE = [
   {
     image: IMG_1,
-    label: 'اضراب طيف التوحد',
+    label: <Translate value='asd' target='guest_obj' />,
   },
   {
     image: IMG_2,
-    label: 'مشاكل اللغة والتواصل',
+    label: (
+      <Translate value='language_communication' target='guest_obj' />
+    ),
   },
   {
     image: IMG_3,
-    label: 'فرط الحركة و نقص الانتباه',
+    label: <Translate value='adhd' target='guest_obj' />,
   },
   {
     image: IMG_4,
-    label: 'الاعاقة الذهنية والجسدية',
+    label: (
+      <Translate
+        value='mental_physical_disability'
+        target='guest_obj'
+      />
+    ),
   },
   {
     image: IMG_5,
-    label: 'العناد والعنف والخوف والقلق',
+    label: (
+      <Translate
+        value='stubbornness_violence_fear_anxiety'
+        target='guest_obj'
+      />
+    ),
   },
   {
     image: IMG_6,
-    label: 'صعوبات التعلم',
+    label: (
+      <Translate value='learning_difficulties' target='guest_obj' />
+    ),
   },
   {
     image: IMG_7,
-    label: 'التأخر النمائى',
+    label: (
+      <Translate value='developmental_delay' target='guest_obj' />
+    ),
   },
 ];

@@ -2,14 +2,20 @@ import Image from 'next/image';
 
 import CheckHeartIcon from '@/assets/icons/check-heart';
 import { Container, SectionHeading } from '@/guest/_components/ui';
+import { useTranslations } from 'next-intl';
 
 export const AboutUs = ({
   data = {
     image: '',
     list: [],
   },
-  title = 'من نحن',
+  title = '',
 }) => {
+  const tg = useTranslations();
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || tg('about_us');
+
   if (!data.list.length) return null;
   return (
     <Container
@@ -18,7 +24,7 @@ export const AboutUs = ({
       id='about-us'
     >
       <SectionHeading className='mb-10 text-center'>
-        {title}
+        {titleValue}
       </SectionHeading>
 
       <div className='mdl:flex mdl:items-center mdl:gap-10 space-y-10 mdl:space-y-0'>
@@ -32,13 +38,13 @@ export const AboutUs = ({
         />
 
         <ul className='space-y-10 mdl:space-y-14 col-span-2'>
-          {data?.list?.map((item) => (
+          {data?.list?.map((item, index) => (
             <li
-              key={item}
+              key={item || index}
               className='flex items-center gap-3 text-sm mdl:text-xl'
             >
               <CheckHeartIcon className='size-6 shrink-0' />
-              {item}
+              {t(item)}
             </li>
           ))}
         </ul>

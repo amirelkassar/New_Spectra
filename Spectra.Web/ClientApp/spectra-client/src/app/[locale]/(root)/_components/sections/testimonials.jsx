@@ -8,7 +8,7 @@ export const Testimonials = ({ data = [] }) => {
       aria-labelledby='testimonials'
       id='testimonials'
     >
-      <div className='flex justify-between text-center items-center flex-col mdl:flex-row gap-5'>
+      <div className='flex justify-between text-center items-center mdl:items-start flex-col mdl:flex-row gap-5'>
         {data.map((item) => (
           <Item key={item?.text} {...item} />
         ))}

@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import {
   Accordion,
   AccordionItem,
@@ -6,15 +7,13 @@ import {
 } from '@mantine/core';
 
 import PlusCircleOutlineIcon from '@/assets/icons/plus-circle-outline';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const FAQ = ({
-  data = [],
-  title = 'أسئلة شائعة',
-}) => {
+export const FAQ = ({ data = [], title = '' }) => {
+  const t = useTranslations('general_obj');
+
+  const titleValue = title || t('faq');
+
   if (!data.length) return null;
   return (
     <Container
@@ -26,14 +25,13 @@ export const FAQ = ({
         id='frequently-asked-questions'
         className='mb-10 text-center'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <Accordion
         classNames={{
           root: 'space-y-5',
           item: 'border-none',
-          chevron:
-            'w-fit data-[rotate=true]:rotate-[135deg]',
+          chevron: 'w-fit data-[rotate=true]:rotate-[135deg]',
           control:
             'text-black bg-blueLighter hover:bg-blueLight/80 text-base mdl:text-2xl',
         }}
@@ -44,9 +42,7 @@ export const FAQ = ({
       >
         {data?.map((item) => (
           <AccordionItem key={item.id} value={item.label}>
-            <AccordionControl>
-              {item.label}
-            </AccordionControl>
+            <AccordionControl>{item.label}</AccordionControl>
             <AccordionPanel>{item.content}</AccordionPanel>
           </AccordionItem>
         ))}

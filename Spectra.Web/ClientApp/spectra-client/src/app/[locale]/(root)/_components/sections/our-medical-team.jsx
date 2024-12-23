@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import {
   Container,
   Carousel,
@@ -13,6 +15,8 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import { useMediaQuery } from '@mantine/hooks';
 
 export const OurMedicalTeam = () => {
+  const tg = useTranslations('general_obj');
+
   const query = usePublicMedicalProviders();
 
   return (
@@ -22,12 +26,15 @@ export const OurMedicalTeam = () => {
       id='our-medical-team'
     >
       <div className='flex justify-between gap-5 items-center mb-10'>
-        <SectionHeading id='our-medical-team'>
-          فريقنا الطبي
+        <SectionHeading className='capitalize' id='our-medical-team'>
+          {tg('our_medical_team')}
         </SectionHeading>
 
-        <ShowMoreButton href={ROUTES.ROOT.TEAM}>
-          جميع التخصصات
+        <ShowMoreButton
+          className='capitalize'
+          href={ROUTES.ROOT.TEAM}
+        >
+          {tg('all_specialties')}
         </ShowMoreButton>
       </div>
 

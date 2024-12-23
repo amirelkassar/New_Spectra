@@ -1,4 +1,71 @@
-export const STEPS = {
+const EN_STEPS = {
+  traditionalSteps: [
+    {
+      id: 1,
+      title: 'Family concern / Disorder onset',
+      duration: '2 weeks',
+    },
+    {
+      id: 2,
+      title: 'Primary healthcare',
+      duration: '1-2 months',
+    },
+    {
+      id: 3,
+      title: 'Referral to pediatrician',
+      duration: '4-5 months',
+    },
+    {
+      id: 4,
+      title: 'Referral to specialized center',
+      duration: '2-3 months',
+    },
+    {
+      id: 5,
+      title: 'Initial examination and assessment',
+      duration: '1 month',
+    },
+    {
+      id: 6,
+      title: 'Final report from specialist',
+      duration: '2 months',
+    },
+    {
+      id: 7,
+      title: 'Care plan',
+      duration: 'hidden',
+    },
+  ],
+  spectraSteps: [
+    {
+      id: 1,
+      title: "Enter your child's details",
+      duration: '1-2 days',
+    },
+    {
+      id: 2,
+      title: 'Early screening',
+      duration: '1-2 days',
+    },
+    {
+      id: 3,
+      title: 'Initial consultation with screening clinic',
+      duration: '2-4 days',
+    },
+    {
+      id: 4,
+      title: 'Diagnosis by multidisciplinary team (MDT)',
+      duration: '4-6 days',
+    },
+    {
+      id: 5,
+      title: 'Final diagnosis and therapeutic plans',
+      duration: 'hidden',
+    },
+  ],
+};
+
+const AR_STEPS = {
   traditionalSteps: [
     {
       id: 1,
@@ -58,3 +125,5 @@ export const STEPS = {
     },
   ],
 };
+
+export const STEPS = { en: EN_STEPS, ar: AR_STEPS };
