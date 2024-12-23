@@ -31,8 +31,9 @@ namespace Spectra.Application.Notifications.Queries
             {
                 var collection = await _notifyRepository.GetCollectionAsync();
                 var filterBuilder = Builders<Notification>.Filter;
-                var filter = filterBuilder.Empty;
-                filterBuilder.Where(n => n.SenderId != request.UserId && n.Changes.Any(c => c.ReceiverId == request.UserId && c.Status != NotificationChangeStatuses.Deleted));
+                var filter = filterBuilder.Not(filterBuilder.Eq(n => n.SenderId, request.UserId));
+                filter &= filterBuilder.ElemMatch(n => n.Changes,
+                    c => c.ReceiverId == request.UserId && c.Status != NotificationChangeStatuses.Deleted);
                 var total = await collection.CountDocumentsAsync(filter);
                 var sortBuilder = Builders<Notification>.Sort;
                 var sort = sortBuilder.Descending("Changes.Status");

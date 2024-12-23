@@ -17,10 +17,6 @@ namespace Spectra.Domain.Shared.Common
             Created = DateTimeOffset.UtcNow;
         }
 
-        public DateTimeOffset? Created {  get;protected set; }
-
-        public string? CreatedBy { get; protected set; }
-
         public DateTimeOffset? LastModified { get; set; }
 
         public string? LastModifiedBy { get; set; }
@@ -28,8 +24,6 @@ namespace Spectra.Domain.Shared.Common
 
     public interface IBaseAuditableEntity<TKey> : IBaseEntity<TKey>
     {
-        DateTimeOffset? Created { get; }
-        string? CreatedBy { get;  }
 
         DateTimeOffset? LastModified { get; set; }
         string? LastModifiedBy { get; set; }

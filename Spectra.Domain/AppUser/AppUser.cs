@@ -41,5 +41,11 @@ namespace Spectra.Domain.AppUser
         }
 
         public void ClearDomainEvents() => _domainEvents.Clear();
+
+        public void SetCreator(string id)
+        {
+            CreatedBy ??= id;
+            Created ??= DateTimeOffset.UtcNow;
+        }
     }
 }

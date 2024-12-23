@@ -25,6 +25,10 @@ namespace Spectra.Domain.Shared.Common
 
         public string? Notes { get; set; }
 
+        public DateTimeOffset? Created { get; protected set; }
+
+        public string? CreatedBy { get; protected set; }
+
         public void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
 
         public void RemoveDomainEvent(Guid eventId)
@@ -38,7 +42,11 @@ namespace Spectra.Domain.Shared.Common
 
         public void ClearDomainEvents() => _domainEvents.Clear();
 
-
+        public void SetCreator(string id)
+        {
+            CreatedBy ??= id;
+            Created ??= DateTimeOffset.UtcNow;
+        }
     }
 
     public interface IBaseEntity<TKey>
@@ -51,6 +59,11 @@ namespace Spectra.Domain.Shared.Common
         void AddDomainEvent(BaseEvent domainEvent);
         void RemoveDomainEvent(Guid eventId);
         void ClearDomainEvents();
+
+        void SetCreator(string id);
+
+        DateTimeOffset? Created { get; }
+        string? CreatedBy { get; }
 
         string? Notes { get; set; }
     }

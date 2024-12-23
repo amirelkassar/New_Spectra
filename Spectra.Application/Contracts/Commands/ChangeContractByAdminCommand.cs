@@ -21,8 +21,8 @@ namespace Spectra.Application.Contracts.Commands
     {
         public bool Value { get; set; }
         public string Id { get; set; }
-        public IFormFile Signature { get; set; }
-        public ICollection<ContractTextSectionCreateDto> TextSections { get; set; }
+        public IFormFile? Signature { get; set; }
+        public ICollection<ContractTextSectionCreateDto>? TextSections { get; set; }
 
         public class AcceptContractByAdminCommandHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository,
             ICurrentUser currentUser,
@@ -47,22 +47,29 @@ namespace Spectra.Application.Contracts.Commands
                 {
                     throw new ContractSignatureNeededException();
                 }
-                else
+                else if(request.Value)
                 {
                     var folderPath = Pathes.GetEmployeesPath();
 
                     contract.AdminSignaturePath = await _documentHellper.CreateAttachment(request.Signature, folderPath);
+                    currentVersion.AcceptedByAdmin = true;
+                    currentVersion.ChangedByAdminDate = DateTimeOffset.UtcNow;
+
+                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                    {
+                        contract.Accept();
+                        contract.Sections = request.TextSections.Adapt<ICollection<ContractTextSection>>();
+                    }
                 }
-                currentVersion.AcceptedByAdmin = true;
-                currentVersion.ChangedByAdminDate = DateTimeOffset.UtcNow;
-
-
-
-                if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                else
                 {
-                    contract.Accept();
-                    contract.Sections = request.TextSections.Adapt<ICollection<ContractTextSection>>();
+                    currentVersion.State = ContractVersionStates.Draft;
+                    currentVersion.AcceptedByAdmin = false;
                 }
+
+
+
+
 
                 await _contractRepository.UpdateAsync(contract);
 
@@ -81,11 +88,6 @@ namespace Spectra.Application.Contracts.Commands
             RuleFor(c => c.Id)
                 .NotEmpty()
                 .NotNull();
-
-            RuleFor(c => c.Signature)
-                .NotEmpty()
-                .NotNull()
-                .Must(s => s.Length > 0);
         }
     }
 }

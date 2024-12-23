@@ -18,7 +18,7 @@ namespace Spectra.Application.Contracts.Commands
     public class ChangeContractByEmployeeCommand : IRequest<OperationResult>
     {
         public bool Value { get; set; }
-        public IFormFile Signature { get; set; }
+        public IFormFile? Signature { get; set; }
         public class AcceptContractByEmployeeCommandHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository,
             ICurrentUser currentUser,
             IDocumentHellper documentHellper) : IRequestHandler<ChangeContractByEmployeeCommand, OperationResult>
@@ -42,17 +42,23 @@ namespace Spectra.Application.Contracts.Commands
                 {
                     throw new ContractSignatureNeededException();
                 }
-                else
+                else if(request.Value)
                 {
                     var folderPath = Pathes.GetEmployeesPath();
 
                     contract.DoctorSignaturePath = await _documentHellper.CreateAttachment(request.Signature, folderPath);
-                }
-                currentVersion.AcceptedByEmployee = request.Value;
-                currentVersion.ChangedByEmployeeDate = DateTimeOffset.UtcNow;
+                    currentVersion.AcceptedByEmployee = request.Value;
+                    currentVersion.ChangedByEmployeeDate = DateTimeOffset.UtcNow;
 
-                if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
-                    contract.Accept();
+                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                        contract.Accept();
+                }
+                else
+                {
+                    currentVersion.State = ContractVersionStates.Draft;
+                    currentVersion.AcceptedByEmployee = false;
+                }
+
 
                 await _contractRepository.UpdateAsync(contract);
 
@@ -63,17 +69,6 @@ namespace Spectra.Application.Contracts.Commands
 
                 return response;
             }
-        }
-    }
-
-    public class AcceptContractByEmployeeCommandValidator : AbstractValidator<ChangeContractByEmployeeCommand>
-    {
-        public AcceptContractByEmployeeCommandValidator()
-        {
-            RuleFor(c => c.Signature)
-                .NotEmpty()
-                .NotNull()
-                .Must(s => s.Length > 0);
         }
     }
 }

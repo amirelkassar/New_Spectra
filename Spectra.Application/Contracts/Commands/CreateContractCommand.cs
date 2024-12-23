@@ -7,6 +7,7 @@ using Spectra.Application.MasterData.Sections;
 using Spectra.Application.MasterData.ServicesMD;
 using Spectra.Application.Messaging;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Contracts.DomainEvents;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
@@ -139,7 +140,10 @@ namespace Spectra.Application.Contracts.Commands
 
             await _contractRepository.AddAsync(contract);
 
-            return OperationResult<string>.Success(contract.Id);
+            var response = OperationResult<string>.Success(contract.Id);
+            response.AddDomainEvent(new EmployeeCreateContractEvent(contract));
+
+            return response;
 
         }
     }

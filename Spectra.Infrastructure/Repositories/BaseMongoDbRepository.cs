@@ -9,18 +9,27 @@ namespace Spectra.Infrastructure.Repositories
     public class BaseMongoDbRepository<T> : IBaseMongoDbRepository<T> where T : BaseEntity<string>
     {
         private readonly IMongoCollection<T> _collection;
-        public BaseMongoDbRepository(IMongoDbService mongoDbService)
+        private readonly ICurrentUser _currentUser;
+
+        public BaseMongoDbRepository(IMongoDbService mongoDbService,
+            ICurrentUser currentUser)
         {
             var database = mongoDbService.DataBase;
             _collection = database.GetCollection<T>($"{typeof(T).Name}s");
+            _currentUser = currentUser;
         }
         public async Task AddAsync(T input)
         {
+            input.SetCreator(_currentUser.Id);
             await _collection.InsertOneAsync(input);
         }
 
         public async Task AddRangeAsync(IEnumerable<T> input)
         {
+            foreach (var item in input)
+            {
+                item.SetCreator(_currentUser.Id);
+            }
             await _collection.InsertManyAsync(input);
         }
 
@@ -71,7 +80,6 @@ namespace Spectra.Infrastructure.Repositories
 
         public async Task UpdateAsync(T input)
         {
-
             await _collection.ReplaceOneAsync(i => i.Id == input.Id, input);
         }
     }

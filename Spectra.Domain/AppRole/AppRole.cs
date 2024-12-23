@@ -32,6 +32,16 @@ namespace Spectra.Domain.AppRole
 
         public void ClearDomainEvents() => _domainEvents.Clear();
 
+        public void SetCreator(string id)
+        {
+            CreatedBy ??= id;
+            Created ??= DateTimeOffset.UtcNow;
+        }
+
         public ICollection<RolePermission> Permissions { get; set; }
+
+        public DateTimeOffset? Created { get; private set; }
+
+        public string? CreatedBy { get; private set; }
     }
 }
