@@ -37,6 +37,7 @@ import {
   CONTRACT_STATE,
   VERSION_STATE,
 } from './contract';
+import { ROLES } from './roles';
 
 export {
   WHAT_WE_CURE,
@@ -74,4 +75,5 @@ export {
   CONTRACT_RATES,
   CONTRACT_STATE,
   VERSION_STATE,
+  ROLES,
 };

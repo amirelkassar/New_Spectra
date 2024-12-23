@@ -23,7 +23,7 @@ export const DoctorBadge = ({
         radius='lg'
       />
       <div className='text-black text-center lg:text-start !text-xs lg:!text-base'>
-        <h5 className='font-bold'>{name}</h5>
+        <h5 className='font-bold capitalize'>{name}</h5>
         <p>{profession}</p>
         {rate && (
           <p className='text-grayDark rounded-full border border-grayDark font-bold flex items-center justify-center gap-x-1 px-2 w-full mt-2'>

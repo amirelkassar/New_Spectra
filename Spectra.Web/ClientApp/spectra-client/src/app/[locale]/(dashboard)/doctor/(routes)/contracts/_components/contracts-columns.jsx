@@ -14,7 +14,7 @@ export const contractsColumns = [
     header: () => <Translate value='name' />,
     cell: ({ row }) => (
       <CellName
-        href={ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(row.original?.id)}
+        href={ROUTES.DOCTOR.CONTRACTS.VIEW_CONTRACT(row.original?.id)}
         row={row}
       />
     ),

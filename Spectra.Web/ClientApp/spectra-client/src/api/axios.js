@@ -18,6 +18,8 @@ export const apiUser = getAxiosInstance('/user');
 
 export const apiEmployee = getAxiosInstance('/employee');
 
+export const apiEmployeeHead = getAxiosInstance('/employee-head');
+
 export const apiAuth = axios.create({
   baseURL: BASE_URL + '/public/identity',
 });

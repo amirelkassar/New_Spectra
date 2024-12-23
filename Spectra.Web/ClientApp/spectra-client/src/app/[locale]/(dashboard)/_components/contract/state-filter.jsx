@@ -24,7 +24,7 @@ export const StateFilter = ({ value = '', setValue = () => {} }) => {
           onClick={() => setValue('0')}
           aria-pressed={value === '0'}
         >
-          {tg('rejected')}
+          {tg('canceled')}
         </FilterButton>
 
         <FilterButton

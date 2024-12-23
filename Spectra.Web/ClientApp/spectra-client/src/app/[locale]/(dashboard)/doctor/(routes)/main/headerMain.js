@@ -17,7 +17,7 @@ function HeaderMain({ setActive }) {
       </div>
       <div className='mt-9 w-full flex items-center justify-center flex-col gap-4'>
         <Link
-          href={ROUTES.DOCTOR.CONTRACTS.CONTRACTSNEW}
+          href={ROUTES.DOCTOR.CONTRACT.CONTRACTSNEW}
           onClick={() => {
             setActive(true);
           }}

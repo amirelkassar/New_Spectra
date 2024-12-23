@@ -82,12 +82,8 @@ export const useAdminDeleteContract = () => {
 
   return useMutation({
     mutationFn: async (contractId) =>
-      (
-        await apiAdmin.delete(
-          contract.actions.delete(contractId),
-          data
-        )
-      ).data,
+      (await apiAdmin.delete(contract.actions.delete(contractId)))
+        .data,
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,

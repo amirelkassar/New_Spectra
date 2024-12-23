@@ -164,7 +164,10 @@ const EditTerms = () => {
 
       {!!sections.length &&
         sections.map((section, i) => (
-          <div className='space-y-2' key={section?.id || i}>
+          <div
+            className='space-y-3 border border-grayMedium p-4 rounded-xl'
+            key={section?.id || i}
+          >
             <div className='flex gap-3'>
               <TextInput
                 name='arTitle'
@@ -182,7 +185,7 @@ const EditTerms = () => {
                 -
               </button>
             </div>
-            <ul className='list-disc ps-5 space-y-1 pe-16'>
+            <ul className='list-disc ps-5 space-y-1 pe-10 mdl:pe-16'>
               <ListInput
                 points={section[pointsKey]}
                 onValuesChange={(values) =>

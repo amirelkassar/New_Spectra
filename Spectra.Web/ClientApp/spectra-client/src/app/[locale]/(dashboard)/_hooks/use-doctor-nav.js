@@ -3,6 +3,7 @@
 import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
 
+import { useAuth } from '@/hooks/use-auth';
 import Appointments from '@/assets/icons/appointments';
 import Customer from '@/assets/icons/customer';
 import SettingsIcon from '@/assets/icons/settings';
@@ -13,9 +14,13 @@ import ProfileIcon from '@/assets/icons/profile';
 import ChatsIcon from '@/assets/icons/chats';
 import MainIcon from '@/assets/icons/main';
 import ROUTES from '@/routes';
+import ContractsPlus from '@/assets/icons/contracts-plus';
+import { ROLES } from '@/data';
 
 export const useDoctorNav = () => {
   const path = usePathname();
+
+  const { roles } = useAuth();
 
   const links = useMemo(
     () => [
@@ -93,13 +98,21 @@ export const useDoctorNav = () => {
         show: true,
       },
       {
-        name: 'العقود',
-        route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
+        name: 'العقد',
+        route: ROUTES.DOCTOR.CONTRACT.DASHBOARD,
+        isActive:
+          path.includes(ROUTES.DOCTOR.CONTRACT.DASHBOARD) &&
+          !path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
         icon: <ContractsIcon />,
         show: true,
       },
-
+      {
+        name: 'العقود',
+        route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
+        icon: <ContractsPlus />,
+        show: roles.includes(ROLES.departmentHead),
+      },
       {
         name: 'محادثات',
         route: ROUTES.DOCTOR.CHATS.DASHBOARD,
@@ -116,7 +129,7 @@ export const useDoctorNav = () => {
         show: true,
       },
     ],
-    [path]
+    [path, roles]
   );
 
   return {
