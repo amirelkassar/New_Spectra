@@ -62,7 +62,9 @@
     "no": "No",
     "admin": "Admin",
     "doctor": "Doctor",
-    "department_head": "Department Head"
+    "department_head": "Department Head",
+    "write_message": "Write a message...",
+    "no_messages_yet": "No messages yet, start a conversation by sending a message."
   },
   "packages_obj": {
     "title": "Packages",

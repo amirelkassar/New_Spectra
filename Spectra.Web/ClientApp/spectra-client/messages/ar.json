@@ -62,7 +62,9 @@
     "no": "لا",
     "admin": "مدير",
     "doctor": "طبيب",
-    "department_head": "رئيس القسم"
+    "department_head": "رئيس القسم",
+    "write_message": "اكتب رسالة...",
+    "no_messages_yet": "لا توجد رسائل حتى الآن، ابدأ المحادثة بإرسال رسالة."
   },
   "packages_obj": {
     "title": "الباقات",
