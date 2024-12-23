@@ -1,18 +1,19 @@
 import BarsIcon from '@/assets/icons/bars';
 import CalenderIcon from '@/assets/icons/calender';
 import VideoOutline from '@/assets/icons/video-outline';
+import { Translate } from '@/components/translate';
 
 export const STATISTICS = [
   {
-    label: 'دقيقة من الاستشارات والإرشاد',
+    label: <Translate value='statistics_1' target='guest_obj' />,
     value: `+${(60_000).toLocaleString('en-US')}`,
   },
   {
-    label: 'مستفيد ومستفيدة',
+    label: <Translate value='statistics_2' target='guest_obj' />,
     value: `+${(500_000).toLocaleString('en-US')}`,
   },
   {
-    label: 'رضا المستفيدين عن جودة الاستشارة',
+    label: <Translate value='statistics_3' target='guest_obj' />,
     value: 4.8,
   },
 ];

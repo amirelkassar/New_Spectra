@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
@@ -10,8 +10,12 @@ import { SERVICESICONS } from '@/data';
 import { usePublicServices } from '@/hooks/queries/public/services';
 import { QueryWrapper } from '@/components/query-wrapper';
 
-export const Services = ({ title = 'الخدمات المقدمة' }) => {
+export const Services = ({ title = '' }) => {
   const locale = useLocale();
+
+  const tg = useTranslations('general_obj');
+
+  const titleValue = title || tg('provided_services');
 
   const query = usePublicServices();
 
@@ -22,9 +26,14 @@ export const Services = ({ title = 'الخدمات المقدمة' }) => {
       id='services'
     >
       <div className='flex items-center justify-between gap-4 mb-10'>
-        <SectionHeading id='services'>{title}</SectionHeading>
-        <ShowMoreButton href={`${ROUTES.ROOT.SERVICES}/#services`}>
-          تصفح جميع الخدمات
+        <SectionHeading className='capitalize' id='services'>
+          {titleValue}
+        </SectionHeading>
+        <ShowMoreButton
+          className='capitalize'
+          href={`${ROUTES.ROOT.SERVICES}/#services`}
+        >
+          {tg('browse_all_services')}
         </ShowMoreButton>
       </div>
 

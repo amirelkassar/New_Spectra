@@ -45,7 +45,7 @@ export const MobileHeader = () => {
       <RegisterModal>{t('register')}</RegisterModal>
 
       {/* DASHBOARD BUTTON */}
-      <DashboardButton>لوحة التحكم</DashboardButton>
+      <DashboardButton>{t('dashboard')}</DashboardButton>
     </div>
   );
 };

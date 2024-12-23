@@ -5,12 +5,17 @@ import ThreeDotsRowIcon from '@/assets/icons/three-dots-row';
 import { ArrowRightIcon } from '@/assets/icons/arrow-right';
 import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
+import { useTranslations } from 'next-intl';
 
 export const WhatWeCure = ({
   data = [],
-  title = 'ماذا نعالج',
+  title = '',
   showOther = false,
 }) => {
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || t('what_we_cure');
+
   if (!data.length) return null;
   return (
     <Container
@@ -19,7 +24,7 @@ export const WhatWeCure = ({
       aria-labelledby='what-we-cure'
     >
       <SectionHeading className='text-center mb-10'>
-        {title}
+        {titleValue}
       </SectionHeading>
       <div className='grid grid-cols-3 lg:grid-cols-4 gap-5'>
         {data?.map((item) => (
@@ -53,6 +58,8 @@ const Treatment = ({ image = '', label = '' }) => {
 };
 
 const Other = () => {
+  const tg = useTranslations('general_obj');
+
   return (
     <div className='flex flex-col items-center gap-y-4'>
       <Link
@@ -62,7 +69,7 @@ const Other = () => {
         <ThreeDotsRowIcon className='w-6 mdl:w-11' />
       </Link>
       <div className='flex items-center gap-x-3 text-black mdl:text-medium text-base'>
-        اخري
+        {tg('other')}
         <span className='ltr:rotate-180 block text-2xl mdl:text-4xl'>
           &larr;
         </span>

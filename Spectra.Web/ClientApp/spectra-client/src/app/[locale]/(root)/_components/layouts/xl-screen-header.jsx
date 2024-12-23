@@ -29,7 +29,7 @@ export const XlScreenHeader = () => {
       <RegisterModal>{t('register')}</RegisterModal>
 
       {/* DASHBOARD BUTTON */}
-      <DashboardButton>لوحة التحكم</DashboardButton>
+      <DashboardButton>{t('dashboard')}</DashboardButton>
 
       {/* LOGIN */}
       <LoginBtn />

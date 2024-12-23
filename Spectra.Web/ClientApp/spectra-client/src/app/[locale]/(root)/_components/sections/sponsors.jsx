@@ -5,11 +5,13 @@ import {
   Carousel,
   SectionHeading,
 } from '@/guest/_components/ui';
+import { useTranslations } from 'next-intl';
 
-export const Sponsors = ({
-  data = [],
-  title = 'شركاء النجاح',
-}) => {
+export const Sponsors = ({ data = [], title = '' }) => {
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || t('success_partners');
+
   if (!data.length) return null;
   return (
     <Container
@@ -18,10 +20,10 @@ export const Sponsors = ({
       id='sponsors'
     >
       <SectionHeading
-        className='mb-10 text-center'
+        className='mb-10 text-center capitalize'
         id='sponsors'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <Carousel
         withControls={false}
