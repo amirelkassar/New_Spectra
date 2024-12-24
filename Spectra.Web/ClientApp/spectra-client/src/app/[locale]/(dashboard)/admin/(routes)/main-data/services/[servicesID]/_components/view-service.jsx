@@ -68,38 +68,43 @@ const Service = ({ data }) => {
         className='mdl:col-span-2'
       />
 
-      <Info
-        data={formatCurrency(data?.price, 'sar')}
-        label='سعر الخدمة'
-      />
-      <Info
-        data={data?.discount && `${data?.discount}%`}
-        label='نسبة الخصم'
-      />
-
-      <Info
-        className='mdl:col-span-2'
-        data={
-          <div className='grid grid-cols-1 mdl:grid-cols-2 gap-x-2 gap-y-4'>
-            <Checkbox
-              checked={data?.enableForSpectraTeam || false}
-              onChange={() => {}}
-              label='إتاحة الخدمة لفريق أطباء سبيكترا'
-              color='#10B0C1'
-              radius='xs'
-              size='md'
-            />
-            <Checkbox
-              checked={data?.enableForFreeLancer || false}
-              onChange={() => {}}
-              label='إتاحة الخدمة للأطباء المستقلين'
-              color='#10B0C1'
-              radius='xs'
-              size='md'
-            />
-          </div>
-        }
-      />
+      {data?.serviceType === 1 && (
+        <>
+          <Info
+            data={formatCurrency(data?.price, 'sar')}
+            label='سعر الخدمة'
+          />
+          <Info
+            data={data?.discount && `${data?.discount}%`}
+            label='نسبة الخصم'
+          />
+        </>
+      )}
+      {data?.serviceType === 1 && (
+        <Info
+          className='mdl:col-span-2'
+          data={
+            <div className='grid grid-cols-1 mdl:grid-cols-2 gap-x-2 gap-y-4'>
+              <Checkbox
+                checked={data?.enableForSpectraTeam || false}
+                onChange={() => {}}
+                label='إتاحة الخدمة لفريق أطباء سبيكترا'
+                color='#10B0C1'
+                radius='xs'
+                size='md'
+              />
+              <Checkbox
+                checked={data?.enableForFreeLancer || false}
+                onChange={() => {}}
+                label='إتاحة الخدمة للأطباء المستقلين'
+                color='#10B0C1'
+                radius='xs'
+                size='md'
+              />
+            </div>
+          }
+        />
+      )}
 
       {!!data?.reports?.length && (
         <div className='mdl:col-span-2'>
@@ -136,7 +141,7 @@ const Service = ({ data }) => {
         </div>
       )}
       {!!data?.contents?.length && (
-        <div className='mdl:col-span-2 space-y-5 pt-10 border-t-2 border-grayLight'>
+        <div className='mdl:col-span-2 space-y-5'>
           <SectionTitle>محتوي الخدمة</SectionTitle>
           {data?.contents?.map((c) => (
             <div className='space-y-3' key={c?.arTitle}>

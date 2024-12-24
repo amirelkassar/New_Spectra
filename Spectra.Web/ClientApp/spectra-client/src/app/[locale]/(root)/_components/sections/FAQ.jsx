@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   Accordion,
   AccordionItem,
@@ -9,12 +9,16 @@ import {
 import PlusCircleOutlineIcon from '@/assets/icons/plus-circle-outline';
 import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const FAQ = ({ data = [], title = '' }) => {
+export const FAQ = ({ data = {}, title = '' }) => {
   const t = useTranslations('general_obj');
+
+  const locale = useLocale();
+
+  const FAQ_DATA = data[locale] || data['ar'];
 
   const titleValue = title || t('faq');
 
-  if (!data.length) return null;
+  if (!FAQ_DATA.length) return null;
   return (
     <Container
       aria-label='Frequently Asked Questions'
@@ -40,7 +44,7 @@ export const FAQ = ({ data = [], title = '' }) => {
           <PlusCircleOutlineIcon className='size-5 mdl:size-7' />
         }
       >
-        {data?.map((item) => (
+        {FAQ_DATA?.map((item) => (
           <AccordionItem key={item.id} value={item.label}>
             <AccordionControl>{item.label}</AccordionControl>
             <AccordionPanel>{item.content}</AccordionPanel>
