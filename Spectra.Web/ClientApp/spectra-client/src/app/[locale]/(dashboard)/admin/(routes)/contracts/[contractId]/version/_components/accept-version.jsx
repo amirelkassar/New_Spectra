@@ -1,29 +1,30 @@
 'use client';
 
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
 import Card from '@/components/card';
+import Button from '@/components/button';
+import TextInput from '@/components/inputs/text-input';
 import { NotFound404 } from '@/components/not-found-404';
+import { EditButton } from '@/dashboard/_components/ui/edit-button';
+import { SendButton } from '@/dashboard/_components/ui/send-button';
 import { QueryWrapper } from '@/components/query-wrapper';
+import { VERSION_STATE } from '@/data';
+import { ContractData } from '@/dashboard/_components/contract/contract-data';
+import { ContractTerms } from '@/dashboard/_components/contract/contract-terms';
+import { useContractTermsActions } from '../../../_hooks/use-contract-terms-actions';
+import { SignModal } from '@/dashboard/_components/contract/sign-modal';
 import {
   useAdminContractById,
   useAdminContractTerms,
 } from '@/hooks/queries/admin/contract';
-import { ContractData } from '@/dashboard/_components/contract/contract-data';
-import { ContractTerms } from '@/dashboard/_components/contract/contract-terms';
-import { VERSION_STATE } from '@/data';
-import { EditButton } from '@/dashboard/_components/ui/edit-button';
-import { SendButton } from '@/dashboard/_components/ui/send-button';
 import {
   ContractTermsProvider,
   useContractTermsStore,
 } from '@/dashboard/_hooks/use-contract-terms-store';
-import { useContractTermsActions } from '../../../_hooks/use-contract-terms-actions';
-import { useSearchParams } from 'next/navigation';
-import TextInput from '@/components/inputs/text-input';
-import { useState } from 'react';
-import Button from '@/components/button';
-import { SignModal } from '@/dashboard/_components/contract/sign-modal';
+import { NoActionsAvailable } from '@/dashboard/_components/contract/no-actions-available';
 
 export const AcceptVersion = ({ id = '', contractId = '' }) => {
   const query = useAdminContractById(contractId);
@@ -52,7 +53,8 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
   const state = contractVersion?.state;
   const acceptedByAdmin = contractVersion?.acceptedByAdmin;
 
-  if (state === VERSION_STATE.draft || acceptedByAdmin) return null;
+  if (state === VERSION_STATE.draft || acceptedByAdmin)
+    return <NoActionsAvailable versionNum={contractVersion?.order} />;
 
   return (
     <div className='space-y-5'>

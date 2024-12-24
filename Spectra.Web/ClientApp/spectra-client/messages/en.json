@@ -146,6 +146,7 @@
     "accepted_by_admin": "Accepted by admin",
     "accepted_by_department_head": "Accepted by department head",
     "accepted_by_doctor": "Accepted by doctor",
-    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen."
+    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen.",
+    "no_actions_available_for_this_version": "No actions are currently available for version number"
   }
 }

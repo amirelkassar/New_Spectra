@@ -6,15 +6,13 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/inputs/textarea';
 import { useDelay } from '@/hooks/use-delay';
-import { useContractStore } from '@/dashboard/_hooks/use-contract-store';
+import { useChat } from '@/hooks/use-chat';
 
 import Avatar from '@/components/avatar';
-import MicIcon from '@/assets/icons/mic';
 import SendIcon from '@/assets/icons/send';
-import AttachIcon from '@/assets/icons/attach';
 
 export const Chat = () => {
-  const isOpen = useContractStore((s) => s.isChatOpen);
+  const isOpen = useChat((s) => s.isOpen);
 
   const isOpenDelayed = useDelay(isOpen, 500);
 
@@ -99,15 +97,7 @@ const ChatActions = memo(() => {
 
   return (
     <div className='flex items-center gap-5 p-1 mdl:p-5'>
-      <button>
-        <AttachIcon className='w-3 h-5' />
-      </button>
-
       <div className='relative flex-1'>
-        <button className='absolute top-1/2 end-5 -translate-y-1/2 z-50'>
-          <MicIcon className='h-5 w-3' />
-        </button>
-
         <Textarea
           size='xs'
           radius='md'

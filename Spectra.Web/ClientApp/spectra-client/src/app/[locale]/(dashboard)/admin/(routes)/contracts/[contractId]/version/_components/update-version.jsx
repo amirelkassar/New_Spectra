@@ -1,14 +1,20 @@
 'use client';
 
-import { ContractForm } from '@/dashboard/_components/contract/contract-form';
+import { useTranslations } from 'next-intl';
+
+import Card from '@/components/card';
+import Button from '@/components/button';
+import { NotFound404 } from '@/components/not-found-404';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { VERSION_STATE } from '@/data';
+import { ContractForm } from '@/dashboard/_components/contract/contract-form';
 import { useAdminContractById } from '@/hooks/queries/admin/contract';
-import { useTranslations } from 'next-intl';
-import Button from '@/components/button';
-import Card from '@/components/card';
-import { NotFound404 } from '@/components/not-found-404';
 import { useUpdateContractVersion } from '../../../_hooks/use-update-contract-version';
+import {
+  ContractProvider,
+  getContractFormInitialState,
+} from '@/dashboard/_hooks/use-contract-store';
+import { NoActionsAvailable } from '@/dashboard/_components/contract/no-actions-available';
 
 export const UpdateVersion = ({ id = '', contractId = '' }) => {
   const query = useAdminContractById(contractId);
@@ -29,17 +35,25 @@ const UpdateContractForm = ({ contract = {}, versionId = '' }) => {
 
   const isDraft = contractVersion?.state === VERSION_STATE.draft;
 
-  if (!contractVersion || isDraft)
+  if (!contractVersion)
     return (
       <Card className='h-full'>
         <NotFound404 />
       </Card>
     );
 
+  if (isDraft)
+    return <NoActionsAvailable versionNum={contractVersion?.order} />;
+
   return (
-    <ContractForm>
-      <Actions contractId={contract?.id} />
-    </ContractForm>
+    <ContractProvider
+      role='admin'
+      initialState={getContractFormInitialState(contractVersion)}
+    >
+      <ContractForm>
+        <Actions contractId={contract?.id} />
+      </ContractForm>
+    </ContractProvider>
   );
 };
 

@@ -2,15 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Chat } from '@/dashboard/_components/contract/chat';
-import { QueryWrapper } from '@/components/query-wrapper';
-import { useAdminContractById } from '@/hooks/queries/admin/contract';
-import { ContractProvider } from '@/dashboard/_hooks/use-contract-store';
-import { VERSION_STATE } from '@/data';
-import { DoctorDataCard } from '@/dashboard/_components/contract/doctor-data-card';
-import { BackButton } from '@/components/buttons/back-button';
 import { H1 } from '@/dashboard/_components/ui/h1';
+import { Chat } from '@/dashboard/_components/contract/chat';
+import { BackButton } from '@/components/buttons/back-button';
 import { CellActions } from '../../_components/cell-actions';
+import { QueryWrapper } from '@/components/query-wrapper';
+import { DoctorDataCard } from '@/dashboard/_components/contract/doctor-data-card';
+import { useAdminContractById } from '@/hooks/queries/admin/contract';
 
 export const RenderLayout = ({ id = '', children }) => {
   const t = useTranslations('contract_obj');
@@ -38,10 +36,7 @@ export const RenderLayout = ({ id = '', children }) => {
 const ContractLayout = ({ contract, children }) => {
   const t = useTranslations('contract_obj');
 
-  const activeContract =
-    contract?.versions?.find(
-      (v) => v?.state === VERSION_STATE.active
-    ) || {};
+  const lastVersionId = contract?.versions[0]?.id;
 
   return (
     <div className='h-full flex flex-col gap-5'>
@@ -50,37 +45,18 @@ const ContractLayout = ({ contract, children }) => {
           <BackButton />
           <H1>{t('contract')}</H1>
         </div>
-        <CellActions lastVersionId={activeContract?.id} />
+        <CellActions lastVersionId={lastVersionId} />
       </div>
-      <ContractProvider
-        role='admin'
-        initialState={getInitialState(activeContract)}
-      >
-        <div className='flex-1 flex flex-col gap-5'>
-          <DoctorDataCard {...contract} showChatButton />
 
-          <div className='flex overflow-hidden flex-1'>
-            <Chat />
+      <div className='flex-1 flex flex-col gap-5'>
+        <DoctorDataCard {...contract} showChatButton />
 
-            <div className='flex-1'>{children}</div>
-          </div>
+        <div className='flex overflow-hidden flex-1'>
+          <Chat />
+
+          <div className='flex-1'>{children}</div>
         </div>
-      </ContractProvider>
+      </div>
     </div>
   );
 };
-
-function getInitialState(activeContract) {
-  return {
-    daysOfWork: activeContract?.daysOfWork || '',
-    hoursOfWork: activeContract?.hoursOfWork || '',
-    freelancingPercentage:
-      activeContract?.freelancingPercentage || '',
-    spectraTeamPercentage:
-      activeContract?.spectraTeamPercentage || '',
-    freelancingDuration: activeContract?.freelancingDuration || '',
-    spectraTeamDuration: activeContract?.spectraTeamDuration || '',
-    freelancingServices: activeContract?.freelancingServices || [],
-    spectraTeamServices: activeContract?.spectraTeamServices || [],
-  };
-}

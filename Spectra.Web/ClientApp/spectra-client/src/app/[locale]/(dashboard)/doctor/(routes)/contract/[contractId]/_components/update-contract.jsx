@@ -10,6 +10,11 @@ import { NotFound404 } from '@/components/not-found-404';
 import { VERSION_STATE } from '@/data';
 import Button from '@/components/button';
 import { useUpdateContract } from '../../_hooks/use-update-contract';
+import {
+  ContractProvider,
+  getContractFormInitialState,
+} from '@/dashboard/_hooks/use-contract-store';
+import { NoActionsAvailable } from '@/dashboard/_components/contract/no-actions-available';
 
 export const UpdateContract = ({ id = '' }) => {
   const query = useEmployeeContract();
@@ -30,17 +35,24 @@ const UpdateContractForm = ({ contract = {}, versionId = '' }) => {
 
   const isDraft = contractVersion?.state === VERSION_STATE.draft;
 
-  if (!contractVersion || isDraft)
+  if (!contractVersion)
     return (
       <Card className='h-full'>
         <NotFound404 />
       </Card>
     );
 
+  if (isDraft)
+    return <NoActionsAvailable versionNum={contractVersion?.order} />;
+
   return (
-    <ContractForm>
-      <Actions contractId={contract?.id} />
-    </ContractForm>
+    <ContractProvider
+      initialState={getContractFormInitialState(contractVersion)}
+    >
+      <ContractForm>
+        <Actions contractId={contract?.id} />
+      </ContractForm>
+    </ContractProvider>
   );
 };
 

@@ -5,12 +5,15 @@ import { useNewContract } from '../../_hooks/use-new-contract';
 
 import Button from '@/components/button';
 import { ContractForm } from '@/dashboard/_components/contract/contract-form';
+import { ContractProvider } from '@/dashboard/_hooks/use-contract-store';
 
 export const NewContract = () => {
   return (
-    <ContractForm>
-      <Actions />
-    </ContractForm>
+    <ContractProvider>
+      <ContractForm>
+        <Actions />
+      </ContractForm>
+    </ContractProvider>
   );
 };
 

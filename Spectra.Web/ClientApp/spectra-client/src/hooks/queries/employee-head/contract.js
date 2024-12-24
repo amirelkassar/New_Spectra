@@ -67,7 +67,7 @@ export const useEmployeeHeadRejectContract = () => {
       (await apiEmployeeHead.post(contract.actions.reject, data))
         .data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
@@ -83,7 +83,7 @@ export const useEmployeeHeadAcceptContract = () => {
       (await apiEmployeeHead.post(contract.actions.accept, data))
         .data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },

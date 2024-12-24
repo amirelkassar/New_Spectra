@@ -74,7 +74,7 @@ export const useUpdateContract = (id) => {
           : 'تم تعديل العقد بنجاح',
       onSuccess: () => {
         router.replace(ROUTES.DOCTOR.CONTRACT.DASHBOARD);
-        queryClient.invalidateQueries({
+        queryClient.refetchQueries({
           queryKey: [initialQueryKey],
         });
       },

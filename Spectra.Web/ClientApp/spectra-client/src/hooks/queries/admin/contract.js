@@ -85,7 +85,7 @@ export const useAdminDeleteContract = () => {
       (await apiAdmin.delete(contract.actions.delete(contractId)))
         .data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
@@ -100,7 +100,7 @@ export const useAdminCancelContract = () => {
     mutationFn: async (data) =>
       (await apiAdmin.post(contract.actions.cancel, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
@@ -115,7 +115,7 @@ export const useAdminRejectContract = () => {
     mutationFn: async (data) =>
       (await apiAdmin.post(contract.actions.reject, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },
@@ -130,7 +130,7 @@ export const useAdminAcceptContract = () => {
     mutationFn: async (data) =>
       (await apiAdmin.post(contract.actions.accept, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         predicate: (query) => query.queryKey[0] === initialQueryKey,
       });
     },

@@ -51,15 +51,6 @@ export const ContractProvider = ({
         initialState?.spectraTeamServices?.map((s) => s?.serviceId) ||
         [],
 
-      isChatOpen: false,
-
-      openChat: () => set(() => ({ isChatOpen: true })),
-
-      closeChat: () => set(() => ({ isChatOpen: false })),
-
-      toggleChat: () =>
-        set((state) => ({ isChatOpen: !state.isChatOpen })),
-
       setHoursOfWork: (hoursOfWork) =>
         set(() => {
           // the houres of work must be a number between 1 and 16
@@ -211,29 +202,17 @@ export const useContractStore = (selector) => {
   return useStore(store, selector);
 };
 
-// {
-//   "hoursOfWork": 5,
-//   "daysOfWork": 4,
-//   "freelancingServices": [
-//     {
-//       "serviceId": "01JEX8NKKX5GCAQ3C5R0Q2N5DC",
-//       "platformPercentage": 30,
-//       "employeePercentage": 70,
-//       "serviceFees": 400,
-//       "employeeFees": 280,
-//       "platformFees": 120,
-//       "duration": 15
-//     }
-//   ],
-//   "spectraTeamServices": [
-//     {
-//       "serviceId": "01JEX8NKKX5GCAQ3C5R0Q2N5DC",
-//       "platformPercentage": 40,
-//       "employeePercentage": 60,
-//       "serviceFees": 400,
-//       "employeeFees": 240,
-//       "platformFees": 160,
-//       "duration": 30
-//     }
-//   ]
-// }
+export function getContractFormInitialState(activeContract) {
+  return {
+    daysOfWork: activeContract?.daysOfWork || '',
+    hoursOfWork: activeContract?.hoursOfWork || '',
+    freelancingPercentage:
+      activeContract?.freelancingPercentage || '',
+    spectraTeamPercentage:
+      activeContract?.spectraTeamPercentage || '',
+    freelancingDuration: activeContract?.freelancingDuration || '',
+    spectraTeamDuration: activeContract?.spectraTeamDuration || '',
+    freelancingServices: activeContract?.freelancingServices || [],
+    spectraTeamServices: activeContract?.spectraTeamServices || [],
+  };
+}
