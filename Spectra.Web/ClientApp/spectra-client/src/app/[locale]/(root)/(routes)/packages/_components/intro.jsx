@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from '@/i18n/routing';
-import { useMemo, useRef, useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useMemo } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { Carousel } from '@mantine/carousel';
 
 import { Container } from '@/guest/_components/ui';
 import { usePublicPackages } from '@/hooks/queries/public/packages';
@@ -13,8 +14,11 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import CircleCheck from '@/assets/icons/circle-check';
 import PackageTag from '@/assets/icons/pacakge-tag';
 import ArrowLeft from '@/assets/icons/arrow-left';
+import { useMediaQuery } from '@mantine/hooks';
 
 export const Intro = () => {
+  const t = useTranslations('packages_obj');
+
   const query = usePublicPackages();
 
   return (
@@ -25,12 +29,12 @@ export const Intro = () => {
       className='mt-20 mdl:mt-24'
     >
       <div className='mb-12'>
-        <h2
+        <h1
           id='all-packages'
-          className='text-2xl mdl:text-4xl text-center font-bold mb-4'
+          className='text-2xl mdl:text-4xl text-center font-bold mb-4 capitalize'
         >
-          جميع الباقات
-        </h2>
+          {t('all_packages')}
+        </h1>
         <Separator className='mx-auto text-greenMain' />
       </div>
 
@@ -42,100 +46,84 @@ export const Intro = () => {
 };
 
 const RenderPackages = ({ packages = [] }) => {
+  const t = useTranslations('packages_obj');
+
   const router = useRouter();
-  const scrollContainerRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLeftDisabled, setIsLeftDisabled] = useState(true);
-  const [isRightDisabled, setIsRightDisabled] = useState(false);
 
-  const scrollRight = () => {
-    const container = scrollContainerRef.current;
-    const visibleWidth = container.offsetWidth;
-    container.scrollBy({ left: visibleWidth, behavior: 'smooth' });
-  };
+  const slidesToScroll = useSlideToScroll();
 
-  const scrollLeft = () => {
-    const container = scrollContainerRef.current;
-    const visibleWidth = container.offsetWidth;
-    container.scrollBy({ left: -visibleWidth, behavior: 'smooth' });
-  };
+  const slides = useMemo(() => {
+    return packages.map((item) => (
+      <Carousel.Slide key={item.id}>
+        <PackageCard
+          data={item}
+          onView={(id) =>
+            router.push(ROUTES.ROOT.VIEW_PACKAGE.replace(':id', id))
+          }
+        />
+      </Carousel.Slide>
+    ));
+  }, [packages, router]);
 
-  const updateScrollState = () => {
-    const container = scrollContainerRef.current;
-    const visibleWidth = container.offsetWidth;
-    const scrollLeft = container.scrollLeft;
-    const scrollWidth = container.scrollWidth;
-
-    // حساب المؤشر الحالي
-    const newIndex = Math.round(scrollLeft / visibleWidth);
-    setCurrentIndex(newIndex);
-
-    // تحديث حالة الأزرار
-    setIsLeftDisabled(scrollLeft === 0);
-    setIsRightDisabled(scrollLeft + visibleWidth >= scrollWidth);
-  };
   return (
     <div
       style={{
         boxShadow: '6px 4px 24.5px 0px #0000000F',
         scrollbarWidth: 'none',
       }}
-      className='bg-white/50 rounded-xl py-10 px-5 space-y-7 overflow-hidden'
+      className='bg-white/50 rounded-xl py-10 px-5 space-y-7 overflow-hidden relative pb-24 mdl:pb-10'
     >
       <div className='flex items-center gap-4'>
         <PackageTag className='text-greenMain shrink-0' />
-        <h3 className='text-base mdl:text-[28px] font-bold'>
-          الباقات التشخيصية
-        </h3>
+        <h2 className='text-base mdl:text-[28px] font-bold'>
+          {t('diagnostic_packages')}
+        </h2>
       </div>
 
-      <div
-        className='flex *:shrink-0 max-w-[366px] lg:max-w-[736px] xl:max-w-[1106px] mx-auto gap-5 p-1 overflow-x-auto scroll-snap-x'
-        ref={scrollContainerRef}
-        onScroll={updateScrollState}
-        style={{
-          scrollSnapType: 'x mandatory',
-          scrollbarWidth: 'none',
-        }}
-      >
-        {packages.map((item) => (
-          <PackageCard
-            key={item.id}
-            data={item}
-            onView={(id) =>
-              router.push(ROUTES.ROOT.VIEW_PACKAGE.replace(':id', id))
-            }
-            className='scroll-snap-align-start'
-          />
-        ))}
-      </div>
-
-      <div className='max-w-2xl mx-auto flex items-center justify-between gap-4'>
-        <SwipeButton onClick={scrollRight} disabled={isLeftDisabled}>
-          <ArrowLeft className='rtl:rotate-180 w-4 mdl:w-5' />
-        </SwipeButton>
-
-        <div className='flex justify-center items-center gap-2'>
-          {Array.from({ length: Math.ceil(packages.length / 2) }).map(
-            (_, index) => (
-              <span
-                key={index}
-                className={`size-4 rounded-full ${
-                  index === currentIndex
-                    ? 'bg-greenMain size-5'
-                    : 'bg-grayMedium'
-                }`}
-              />
-            )
-          )}
-        </div>
-
-        <SwipeButton onClick={scrollLeft} disabled={isRightDisabled}>
-          <ArrowLeft className='ltr:rotate-180 w-4 mdl:w-5' />
-        </SwipeButton>
+      <div className='max-w-[366px] lg:max-w-[736px] xl:max-w-[1106px] mx-auto min-h-[610px]'>
+        <Carousel
+          key={slidesToScroll}
+          dir='ltr'
+          withIndicators
+          slideSize={{
+            base: '100%',
+            lg: '50%',
+            xl: '33.33%',
+          }}
+          slideGap={20}
+          align='start'
+          slidesToScroll={slidesToScroll}
+          height='100%'
+          classNames={{
+            container: 'ps-4',
+            indicator:
+              'size-4 rounded-full bg-grayMedium data-[active]:bg-greenMain data-[active]:size-5',
+            indicators:
+              'items-center bottom-12 mdl:bottom-16 max-w-[350px] overflow-hidden mx-auto',
+            controls:
+              'top-auto bottom-10 mdl:bottom-12 px-10 lg:px-32',
+            control: 'group data-[inactive]:cursor-not-allowed',
+            root: 'static',
+          }}
+          nextControlIcon={<Next />}
+          previousControlIcon={<Previous />}
+        >
+          {slides}
+        </Carousel>
       </div>
     </div>
   );
+};
+
+const useSlideToScroll = () => {
+  const lg = useMediaQuery('(min-width: 960px)');
+  const xl = useMediaQuery('(min-width: 1280px)');
+
+  return useMemo(() => {
+    if (xl) return 3;
+    if (lg) return 2;
+    return 1;
+  }, [lg, xl]);
 };
 
 const PackageCard = ({
@@ -167,12 +155,13 @@ const PackageCard = ({
   }, [services, locale]);
   return (
     <div
+      dir={locale === 'ar' ? 'rtl' : 'ltr'}
       onClick={(e) => {
         e.stopPropagation();
         onView(id);
       }}
       data-id={id}
-      className='rounded-3xl ring-[5px] bg-white ring-blueLight transition-colors hover:ring-transparent p-3 group min-h-[600px] max-w-[350px] flex flex-col cursor-pointer overflow-hidden relative'
+      className='rounded-3xl ring-[5px] m-[5px] bg-white ring-blueLight transition-colors hover:ring-transparent p-3 group min-h-[600px] max-w-[350px] flex flex-col cursor-pointer overflow-hidden relative'
     >
       {/* HOVER BG */}
       <div
@@ -197,7 +186,7 @@ const PackageCard = ({
           <div className='shadow-md w-fit rounded-lg overflow-hidden shrink-0'>
             <PackageIcon iconCode={iconCode} />
           </div>
-          <h4 className='text-sm md:text-xl text-greenMain font-bold'>
+          <h4 className='text-sm md:text-xl text-greenMain font-bold max-h-[82px] overflow-hidden'>
             {locale === 'ar' ? arName : enName}
           </h4>
         </div>
@@ -272,13 +261,25 @@ const PackageCard = ({
   );
 };
 
+const Previous = () => (
+  <SwipeButton>
+    <ArrowLeft className='w-4 mdl:w-5' />
+  </SwipeButton>
+);
+
+const Next = () => (
+  <SwipeButton>
+    <ArrowLeft className='w-4 mdl:w-5 rotate-180' />
+  </SwipeButton>
+);
+
 const SwipeButton = ({ children, ...props }) => {
   return (
-    <button
-      className='rounded-xl border border-black size-10 mdl:w-16 mdl:h-14 flex items-center justify-center transition hover:border-greenMain hover:ring-1 hover:ring-greenMain disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none'
+    <div
+      className='rounded-xl border border-black size-10 mdl:w-16 mdl:h-14 flex items-center justify-center transition hover:border-greenMain hover:ring-1 hover:ring-greenMain group-data-[inactive]:opacity-30 group-data-[inactive]:cursor-not-allowed group-data-[inactive]:pointer-events-none'
       {...props}
     >
       {children}
-    </button>
+    </div>
   );
 };

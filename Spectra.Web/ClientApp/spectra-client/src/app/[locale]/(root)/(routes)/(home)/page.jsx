@@ -42,9 +42,9 @@ export default function Homepage() {
       <div className='-mt-40'>
         <Statistics data={STATISTICS} />
       </div>
+      <Steps data={STEPS} />
       <FAQ data={FAQDATA} />
       <Sponsors data={SPONSORS} />
-      <Steps data={STEPS} />
       <LastNews data={LAST_NEWS} />
       <Licenses data={LICENSES} />
       <SuccessStories data={STORIES.slice(0, 3)} />

@@ -33,17 +33,19 @@ export const Licenses = ({ data = [], title = '' }) => {
         classNames={{
           root: 'px-0',
         }}
-        slideSize={{ base: '50%', sm: '33.33%' }}
+        slideSize={{ base: '50%', mdl: '33.33%' }}
       >
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Carousel.Slide key={i}>
-            <Image
-              src={'/demo-sponsor.png'}
-              alt='sponsor'
-              width={450}
-              height={350}
-              className='object-contian object-center w-56 h-20'
-            />
+        {data.map((image, i) => (
+          <Carousel.Slide key={image || i}>
+            <div>
+              <Image
+                src={image}
+                alt={image}
+                width={450}
+                height={350}
+                className='object-contian object-center w-auto h-24 shrink-0 mx-auto'
+              />
+            </div>
           </Carousel.Slide>
         ))}
       </Carousel>

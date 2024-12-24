@@ -13,7 +13,7 @@ export const HomeIntro = () => {
       role='region'
       aria-label='Hero Section'
       aria-labelledby='hero-heading'
-      className='mt-20 mdl:mt-28'
+      className='mt-20 mdl:mt-28 2xl:px-28'
     >
       <div className='flex gap-5 justify-between'>
         {/* TEXT */}
@@ -44,7 +44,7 @@ export const HomeIntro = () => {
       </div>
 
       {/* BUTTONS */}
-      <div className='mt-5 lgl:-mt-32 flex flex-col gap-3'>
+      <div className='mt-5 lgl:-mt-32 flex flex-col xl:flex-row gap-3 xl:*:flex-1 relative z-10'>
         <Button
           variant='secondary'
           className='w-full mdl:max-w-96 mdl:text-xl'

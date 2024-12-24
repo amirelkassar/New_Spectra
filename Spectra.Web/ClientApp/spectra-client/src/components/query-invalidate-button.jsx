@@ -15,24 +15,23 @@ const InvalidateButton = () => {
   const queryClient = useQueryClient();
 
   const onClick = () => {
-    const initialQueryKey = 'admin.staff';
+    const initialQueryKey = 'employee.contract';
     const initialQueries = {
       skipCount: 0,
       maxCount: 5,
     };
     queryClient.refetchQueries({
       predicate: (query) => query.queryKey[0] === initialQueryKey,
-      exact: false,
     });
   };
 
   return (
     <Button
-      className='fixed top-24 end-10 z-[999]'
+      className='fixed top-7 end-40 z-[999] rounded-full !p-3 size-16 uppercase'
       onClick={onClick}
       variant='secondary'
     >
-      Invalidate
+      fetch
     </Button>
   );
 };

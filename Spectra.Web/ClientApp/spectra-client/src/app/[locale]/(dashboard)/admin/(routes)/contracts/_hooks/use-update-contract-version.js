@@ -74,8 +74,8 @@ export const useUpdateContractVersion = (id) => {
           : 'تم تعديل العقد بنجاح',
       onSuccess: () => {
         router.replace(ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(id));
-        queryClient.invalidateQueries({
-          queryKey: [initialQueryKey, id],
+        queryClient.refetchQueries({
+          predicate: (query) => query.queryKey[0] === initialQueryKey,
         });
       },
     });

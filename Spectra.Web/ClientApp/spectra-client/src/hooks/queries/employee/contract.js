@@ -48,7 +48,7 @@ export const useAddEmployeeContract = () => {
     mutationFn: async (data) =>
       (await apiEmployee.post(contract.actions.add, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },
@@ -63,7 +63,7 @@ export const useCancelEmployeeContract = () => {
     mutationFn: async (data) =>
       (await apiEmployee.post(contract.actions.cancel, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },
@@ -78,7 +78,7 @@ export const useRejectEmployeeContract = () => {
     mutationFn: async (data) =>
       (await apiEmployee.post(contract.actions.reject, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },
@@ -93,7 +93,7 @@ export const useAcceptEmployeeContract = () => {
     mutationFn: async (data) =>
       (await apiEmployee.post(contract.actions.accept, data)).data,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },

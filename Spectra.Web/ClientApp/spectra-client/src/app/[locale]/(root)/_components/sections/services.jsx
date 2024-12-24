@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
@@ -12,6 +13,8 @@ import { QueryWrapper } from '@/components/query-wrapper';
 
 export const Services = ({ title = '' }) => {
   const locale = useLocale();
+
+  const router = useRouter();
 
   const tg = useTranslations('general_obj');
 
@@ -42,10 +45,15 @@ export const Services = ({ title = '' }) => {
           <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
             {data?.slice(0, 3)?.map((item, index) => (
               <Service
-                key={item.enName}
+                key={item?.id || item?.enName}
+                {...item}
                 index={index + 1}
                 locale={locale}
-                {...item}
+                onClick={() => {
+                  router.push(
+                    ROUTES.ROOT.VIEW_SERVICE.replace(':id', item?.id)
+                  );
+                }}
               />
             ))}
           </div>
@@ -60,6 +68,7 @@ const Service = ({
   arName = '',
   enName = '',
   locale = 'ar',
+  onClick = () => {},
 }) => {
   const label = locale === 'ar' ? arName : enName;
   return (
@@ -74,7 +83,9 @@ const Service = ({
       >
         {SERVICESICONS[index]?.icon || SERVICESICONS[1]?.icon}
       </ServiceCard.Icon>
-      <ServiceCard.Label>{label}</ServiceCard.Label>
+      <ServiceCard.Label className='cursor-pointer' onClick={onClick}>
+        {label}
+      </ServiceCard.Label>
     </ServiceCard>
   );
 };

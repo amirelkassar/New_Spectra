@@ -1,17 +1,17 @@
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
 export const WeMakeSmile = ({
   data = {
+    title: '',
     image: '',
     list: [],
   },
-  title = 'سبيكترا .تصنع الابتسامة لطفلك',
 }) => {
+  const locale = useLocale();
+
   if (!data?.list.length && !data?.image) return null;
   return (
     <Container
@@ -22,22 +22,19 @@ export const WeMakeSmile = ({
     >
       <div className='flex-[0.65]'>
         <div className='w-fit mx-auto'>
-          <SectionHeading
-            id='we-make-smile'
-            className='mb-10'
-          >
-            {title}
+          <SectionHeading id='we-make-smile' className='mb-10'>
+            {data.title[locale]}
           </SectionHeading>
 
           <ul className='space-y-5'>
             {data?.list?.map((item) => (
               <li
-                key={item.label}
+                key={item.label.en}
                 className='text-sm mdl:text-medium'
               >
                 <span className='flex items-center gap-3'>
                   {item.icon}
-                  <span>{item.label}</span>
+                  <span>{item.label[locale]}</span>
                 </span>
               </li>
             ))}

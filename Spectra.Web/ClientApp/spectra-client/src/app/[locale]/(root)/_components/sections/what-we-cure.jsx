@@ -23,12 +23,12 @@ export const WhatWeCure = ({
       id='what-we-cure'
       aria-labelledby='what-we-cure'
     >
-      <SectionHeading className='text-center mb-10'>
+      <SectionHeading className='text-center mb-10 capitalize'>
         {titleValue}
       </SectionHeading>
       <div className='grid grid-cols-3 lg:grid-cols-4 gap-5'>
         {data?.map((item) => (
-          <Treatment key={item?.label} {...item} />
+          <Treatment key={item?.id} {...item} />
         ))}
         {showOther && <Other />}
       </div>
@@ -36,23 +36,30 @@ export const WhatWeCure = ({
   );
 };
 
-const Treatment = ({ image = '', label = '' }) => {
+const Treatment = ({ image = '', label = '', id = '' }) => {
   return (
-    <div className='flex flex-col items-center gap-y-4 text-center'>
-      <div className='w-fit relative'>
-        <Image
-          src={image}
-          alt={label}
-          width={150}
-          height={150}
-          className='size-20 mdl:size-36 object-center object-cover rounded-full'
-        />
+    <div>
+      <Link
+        href={ROUTES.ROOT.VIEW_TREATMENT.replace(':id', id)}
+        className='flex flex-col items-center gap-y-4 text-center'
+      >
+        <div className='w-fit relative'>
+          <Image
+            src={image}
+            alt={label}
+            width={150}
+            height={150}
+            className='size-20 mdl:size-36 object-center object-cover rounded-full'
+          />
 
-        <span className='absolute size-6 mdl:size-10 rounded-full flex items-center justify-center bg-greenLight bottom-0 end-0'>
-          <ArrowRightIcon className='size-4 mdl:size-6' />
-        </span>
-      </div>
-      <p className='text-black text-base mdl:text-medium'>{label}</p>
+          <span className='absolute size-6 mdl:size-10 rounded-full flex items-center justify-center bg-greenLight bottom-0 end-0'>
+            <ArrowRightIcon className='size-4 mdl:size-6' />
+          </span>
+        </div>
+        <p className='text-black text-base mdl:text-medium'>
+          {label}
+        </p>
+      </Link>
     </div>
   );
 };

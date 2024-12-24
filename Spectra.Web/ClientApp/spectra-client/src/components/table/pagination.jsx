@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Pagination as MantinePagination } from '@mantine/core';
 import { useRouter } from '@/i18n/routing';
 
@@ -15,6 +16,8 @@ export const Pagination = ({
   setPageNumber,
 }) => {
   const router = useRouter();
+
+  const tg = useTranslations('general_obj');
 
   const totalPages = Math.ceil(totalCount / pageSize);
   const hasPagination = totalPages > 1;
@@ -44,7 +47,7 @@ export const Pagination = ({
         disabled={currentPage === totalPages || disabled}
       >
         <ArrowLeft className='rotate-180 size-3 mdl:size-5' />
-        التالي
+        {tg('next')}
       </Button>
 
       {disabled && (
@@ -79,7 +82,7 @@ export const Pagination = ({
         disabled={currentPage === 1 || disabled}
       >
         <ArrowLeft className='size-3 mdl:size-5' />
-        السابق
+        {tg('previous')}
       </Button>
     </div>
   );

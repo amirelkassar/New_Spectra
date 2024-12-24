@@ -1,6 +1,9 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export const TeamIntro = () => {
+  const t = useTranslations('guest_obj');
+
   return (
     <section
       aria-label='Team Intro'
@@ -11,13 +14,12 @@ export const TeamIntro = () => {
       <div className='px-5 2xl:ps-40 mt-28 mdl:mt-40 mdl:px-20 space-y-5 w-1/2 relative'>
         <h1
           id='team-intro'
-          className='text-base mdl:text-4xl font-bold'
+          className='text-base mdl:text-4xl font-bold capitalize'
         >
-          العناية بطفلك اهم من كل شىء
+          {t('child_care_message')}
         </h1>
         <p className='text-sm mdl:text-medium'>
-          أول مركز طب اتصالي ورعاية عن بعد لتخيص وعلاج
-          الاضطرابات النمائية للاطفال
+          {t('telemedicine_center_message')}
         </p>
       </div>
 

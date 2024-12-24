@@ -1,9 +1,7 @@
 import Image from 'next/image';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
+import { useTranslations } from 'next-intl';
 
 export const MobileApp = ({
   data = {
@@ -13,8 +11,12 @@ export const MobileApp = ({
     googleIcon: null,
     appStoreIcon: null,
   },
-  title = 'حمل تطبيق سبيكترا الان',
+  title = '',
 }) => {
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || t('app_download_message');
+
   if (
     !data.info ||
     !data.mobileApp ||
@@ -40,12 +42,12 @@ export const MobileApp = ({
         <div className='relative pe-20'>
           <SectionHeading
             id='mobile-app'
-            className='text-white'
+            className='text-white capitalize'
           >
-            {title}
+            {titleValue}
           </SectionHeading>
           <p className='text-sm mdl:text-medium mt-5 mb-12 text-white'>
-            {data.info}
+            {t(data.info)}
           </p>
           <div className='flex items-center justify-between'>
             <div className='mdl:size-32 size-14 rounded-2xl bg-white flex items-center justify-center overflow-hidden'>

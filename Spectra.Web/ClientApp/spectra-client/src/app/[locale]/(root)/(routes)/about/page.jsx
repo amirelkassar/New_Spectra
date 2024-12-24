@@ -18,14 +18,17 @@ import {
   Testimonials,
   Statistics,
 } from '@/guest/_components/sections';
+import { useTranslations } from 'next-intl';
 
 const AboutPage = () => {
+  const t = useTranslations('guest_obj');
+
   return (
     <main>
       <div className='mt-20'>
         <AboutUs
           data={ABOUT_US}
-          title='رعاية مبكرة, لغد مشرق'
+          title={t('early_care_for_a_bright_tomorrow')}
         />
       </div>
       <WeMakeSmile data={WE_MAKE_SMILE} />

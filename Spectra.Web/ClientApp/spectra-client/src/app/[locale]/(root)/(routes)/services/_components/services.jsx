@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
@@ -10,8 +10,14 @@ import { Container, SectionHeading } from '@/guest/_components/ui';
 import { usePublicServices } from '@/hooks/queries/public/services';
 import { QueryWrapper } from '@/components/query-wrapper';
 
-export const Services = ({ title = 'خدمتنا' }) => {
+export const Services = ({ title = '' }) => {
   const locale = useLocale();
+
+  const tg = useTranslations();
+
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || tg('our_services');
 
   const query = usePublicServices();
 
@@ -21,8 +27,11 @@ export const Services = ({ title = 'خدمتنا' }) => {
       aria-labelledby='services'
       aria-label='Services'
     >
-      <SectionHeading id='services' className='mb-10 text-center'>
-        {title}
+      <SectionHeading
+        id='services'
+        className='mb-10 capitalize text-center'
+      >
+        {titleValue}
       </SectionHeading>
 
       <QueryWrapper query={query}>
@@ -41,10 +50,10 @@ export const Services = ({ title = 'خدمتنا' }) => {
             ))}
             <ServiceCard className='bg-blueLighter border-none flex flex-col items-center justify-center py-10'>
               <ServiceCard.Label>
-                لا تعرف مالذي يحتاجه طفلك؟
+                {t('child_needs_message')}
               </ServiceCard.Label>
               <ServiceCard.Button>
-                حجز استشارة مدفوعة لمدة 30د
+                {t('book_a_30_minute_paid_consultation')}
               </ServiceCard.Button>
             </ServiceCard>
           </div>

@@ -3,7 +3,8 @@
   "dashboard": "Dashboard",
   "about_us": "About Us",
   "medical_team": "Our Team",
-  "our_services": "Services",
+  "services": "Services",
+  "our_services": "Our Services",
   "packages": "Packages",
   "what_we_cure": "Treatments",
   "success_stories": "Success Stories",
@@ -73,7 +74,12 @@
     "all_specialties": "All specialties",
     "faq": "FAQ",
     "last_news": "Last news",
-    "browse_more": "Browse more"
+    "browse_more": "Browse more",
+    "our_values": "Our values",
+    "what_makes_us_special": "What makes us special",
+    "next": "Next",
+    "previous": "Previous",
+    "why_us": "Why us?"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -102,13 +108,27 @@
     "steps_sentence_2": "A journey that traditionally takes over a year.",
     "steps_sentence_3": "7-14 days for the Spectra team",
     "licenses": "Licenses",
-    "success_stories": "Success Stories"
+    "success_stories": "Success Stories",
+    "early_care_for_a_bright_tomorrow": "Early Care, For a Bright Tomorrow",
+    "child_care_message": "Taking care of your child is more important than anything else",
+    "telemedicine_center_message": "The first telemedicine and remote care center for diagnosing and treating developmental disorders in children",
+    "healthcare_team_message": "An accredited and comprehensive healthcare team",
+    "app_download_message": "Download the Spectra app now",
+    "spectra_description": "Spectra is the first telemedicine and remote care center that diagnoses, treats, and cares for children's developmental and behavioral disorders, through our carefully selected multidisciplinary teams, following global quality and technical standards.",
+    "licensed_healthcare_message": "Our healthcare staff is licensed by the Saudi Commission for Health Specialties",
+    "create_smile_message": "We create your child's smile",
+    "flexible_support_message": "We help you handle your child with high flexibility and love",
+    "early_diagnosis_service": "Early diagnosis service",
+    "intro_video": "Introductory video",
+    "child_needs_message": "Don't know what your child needs?"
   },
   "packages_obj": {
     "title": "Packages",
+    "all_packages": "All packages",
     "content": "Package content",
     "goals": "Package goals",
-    "photo": "Package photo"
+    "photo": "Package photo",
+    "diagnostic_packages": "Diagnostic Packages"
   },
   "contract_obj": {
     "contracts": "Contracts",
@@ -146,6 +166,7 @@
     "accepted_by_admin": "Accepted by admin",
     "accepted_by_department_head": "Accepted by department head",
     "accepted_by_doctor": "Accepted by doctor",
-    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen."
+    "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen.",
+    "no_actions_available_for_this_version": "No actions are currently available for version number"
   }
 }
