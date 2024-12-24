@@ -120,7 +120,10 @@
     "flexible_support_message": "نساعدك على التعامل مع طفلك بمرونة عالية وبكل حب",
     "early_diagnosis_service": "خدمة الكشف المبكر",
     "intro_video": "فيديو تعريفي",
-    "child_needs_message": "لا تعرف مالذي يحتاجه طفلك؟"
+    "child_needs_message": "لا تعرف مالذي يحتاجه طفلك؟",
+    "success_story": "قصة نجاح",
+    "before_treatment": "قبل العلاج",
+    "after_treatment": "بعد العلاج"
   },
   "packages_obj": {
     "title": "الباقات",

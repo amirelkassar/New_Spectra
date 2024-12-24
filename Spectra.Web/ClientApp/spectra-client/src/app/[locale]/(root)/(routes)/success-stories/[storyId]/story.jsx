@@ -9,19 +9,16 @@ export const Story = ({ data = {} }) => {
     <>
       <Description
         childName={data?.childName}
-        daignosis={data?.daignosis}
+        daignosis={data?.diagnosis}
         image={data?.image}
         description={data?.story.description}
       />
-      <BeforeTreatment
-        data={data?.story?.beforeTreatment}
-      />
+      <BeforeTreatment data={data?.story?.beforeTreatment} />
       <CureMethod data={data?.story?.cureMethod} />
       <AfterTreatment data={data?.story?.afterTreatment} />
       <FamilyReview
         familyReview={data?.story?.familyReview}
         video={data?.story?.video}
-        childName={data?.childName}
       />
     </>
   );

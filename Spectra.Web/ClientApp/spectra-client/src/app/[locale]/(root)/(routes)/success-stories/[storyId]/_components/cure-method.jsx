@@ -1,23 +1,17 @@
 import Image from 'next/image';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { useLocale } from 'next-intl';
 
-export const CureMethod = ({
-  data = [],
-  title = 'طريقة العلاج',
-}) => {
+import { Container } from '@/guest/_components/ui';
+
+export const CureMethod = ({ data = [] }) => {
+  const locale = useLocale();
+
   return (
     <Container
       id='cure-method'
       aria-label='Cure Method'
       aria-labelledby='cure-method'
     >
-      <SectionHeading className='mb-2'>
-        {title}
-      </SectionHeading>
-
       <ul className='space-y-5 mdl:space-y-10'>
         {data.map((item) => (
           <li
@@ -25,22 +19,24 @@ export const CureMethod = ({
             className='text-sm mdl:text-medium flex items-center *:flex-1 gap-5'
           >
             <div className='relative'>
-              <p className='text-sm relative mdl:text-medium mdl:pe-20 z-10'>
-                {item?.text}
-              </p>
+              <ul className='text-sm relative mdl:text-medium mdl:pe-20 z-10 list-disc list-inside'>
+                {item?.text[locale]?.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
               <span
-                className='absolute font-sans top-0 start-0 text-black/5 text-[100px] mdl:text-[200px] font-black pointer-events-none select-none'
+                className='absolute font-sans top-0 start-5 text-black/5 text-[100px] mdl:text-[200px] font-black pointer-events-none select-none'
                 aria-hidden='true'
               >
                 {item?.id}
               </span>
             </div>
-            <div className='rounded-xl overflow-hidden'>
+            <div className='overflow-hidden'>
               <Image
                 src={item?.image}
                 alt='Child in treatment'
-                className='w-full h-full max-h-64 object-cover object-center'
-                width={575}
+                className='w-full max-w-[475] h-auto object-cover object-center rounded-xl mx-auto'
+                width={475}
                 height={250}
                 priority={false}
               />
