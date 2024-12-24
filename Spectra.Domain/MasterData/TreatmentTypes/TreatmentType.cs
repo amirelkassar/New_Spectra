@@ -9,7 +9,7 @@ namespace Spectra.Domain.MasterData.TreatmentTypes
 {
     public class TreatmentType : BaseAuditableEntity<string>
     {
-        public TreatmentType()
+        public TreatmentType(string id) : base(id)
         {
             Sections = [];
         }

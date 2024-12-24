@@ -9,7 +9,7 @@ namespace Spectra.Domain.MasterData.Articles
 {
     public class Article : BaseAuditableEntity<string>
     {
-        public Article()
+        public Article(string id):base(id)
         {
             Sections = [];
         }
@@ -18,7 +18,7 @@ namespace Spectra.Domain.MasterData.Articles
         public string EnTitle { get; set; }
         public string EnDescription { get; set; }
         public string HeroImage { get; set; }
-        public int Rate { get; set; }
+        public int? Rate { get; set; }
         public ICollection<ArticleSection> Sections { get; set; }
         public ICollection<ArticleComment> Comments { get; set; }
 
@@ -40,6 +40,11 @@ namespace Spectra.Domain.MasterData.Articles
 
     public class ArticleComment : BaseEntity<string>
     {
+        public ArticleComment()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+        public string Id { get; private set; }
         public string? UserId { get; set; }
         public string? UserName { get; set; }
         public string? Comment { get; set; }

@@ -9,7 +9,7 @@ namespace Spectra.Domain.MasterData.SuccessStories
 {
     public class SuccessStory : BaseAuditableEntity<string>
     {
-        public SuccessStory()
+        public SuccessStory(string id) : base(id)
         {
             Sections = [];
         }
