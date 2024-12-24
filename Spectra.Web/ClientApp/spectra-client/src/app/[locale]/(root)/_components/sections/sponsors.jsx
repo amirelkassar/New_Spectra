@@ -34,8 +34,8 @@ export const Sponsors = ({ data = [], title = '' }) => {
         classNames={{
           root: 'px-0',
         }}
-        slideSize={{ base: '50%', sm: '20%' }}
-        align='center'
+        slideSize={{ base: '50%', mdl: '25%' }}
+        align='start'
       >
         {data?.map((image, i) => (
           <Carousel.Slide key={i}>

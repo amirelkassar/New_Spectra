@@ -4,14 +4,13 @@ import Button from '@/components/button';
 import PlayIcon from '@/assets/icons/play';
 import NotificationIcon from '@/assets/icons/notification';
 import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
-import { Container } from '@/guest/_components/ui';
+import { Container, IntroVideo } from '@/guest/_components/ui';
 
 export const Intro = () => {
   return (
     <div
       style={{
-        clipPath:
-          'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
+        clipPath: 'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
       }}
       className='bg-blueLight pt-24 mdl:pt-28 overflow-hidden relative'
     >
@@ -40,8 +39,7 @@ export const Intro = () => {
               نصنع ابتسامة طفلك
             </h1>
             <p className='text-sm mdl:text-medium'>
-              نساعدك على التعامل مع طفلك بمرونة عالية وبكل
-              حب
+              نساعدك على التعامل مع طفلك بمرونة عالية وبكل حب
             </p>
           </div>
           <div className='flex flex-col lg:flex-row lg:*:flex-1 gap-2 mdl:gap-3 font-bold text-sm mdl:text-base'>
@@ -54,15 +52,17 @@ export const Intro = () => {
               </span>
               خدمة الكشف المبكر
             </Button>
-            <Button className='mdl:py-3 py-2 gap-3 px-5 text-xs mdl:text-xl w-fit lg:w-full mx-auto rounded-lg'>
-              <span className='shrink-0'>
-                <PlayIcon
-                  fill='black'
-                  className='size-5 mdl:size-7'
-                />
-              </span>
-              فيديو تعريفي
-            </Button>
+            <IntroVideo>
+              <Button className='mdl:py-3 py-2 gap-3 px-5 text-xs mdl:text-xl w-fit lg:w-full mx-auto rounded-lg'>
+                <span className='shrink-0'>
+                  <PlayIcon
+                    fill='black'
+                    className='size-5 mdl:size-7'
+                  />
+                </span>
+                فيديو تعريفي
+              </Button>
+            </IntroVideo>
           </div>
         </div>
       </Container>

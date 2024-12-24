@@ -10,7 +10,7 @@ export const STATISTICS = [
   },
   {
     label: <Translate value='statistics_2' target='guest_obj' />,
-    value: `+${(500_000).toLocaleString('en-US')}`,
+    value: `+${(1_000).toLocaleString('en-US')}`,
   },
   {
     label: <Translate value='statistics_3' target='guest_obj' />,
