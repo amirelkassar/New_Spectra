@@ -16,11 +16,12 @@ const TreatmentPage = ({ params }) => {
       <Treatment data={DATA} />
       <div
         style={{
-          clipPath: 'polygon(50% 100%, 100% 90%, 100% 0, 0 0, 0 90%)',
+          clipPath:
+            'polygon(50% 5%, 100% 10%, 100% 100%, 0 100%, 0 10%)',
           background:
             'linear-gradient(0deg, #FFFFFF 0%, #E8FAFF 66.1%)',
         }}
-        className='py-14'
+        className='pt-14'
       >
         <WhatWeCure data={FILTERED_DATA} />
       </div>

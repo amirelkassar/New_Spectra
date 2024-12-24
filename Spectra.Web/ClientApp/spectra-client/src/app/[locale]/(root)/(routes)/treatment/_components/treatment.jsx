@@ -1,15 +1,16 @@
-import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+import Image from 'next/image';
 
 import { Container } from '@/guest/_components/ui';
 
 export const Treatment = ({ data }) => {
-  const t = useTranslations('guest_obj');
+  const locale = useLocale();
 
   return (
     <Container
-      aria-label='All Packages'
-      id='all-packages'
-      aria-labelledby='all-packages'
+      aria-label='What do we treat?'
+      id='what-do-we-treat?'
+      aria-labelledby='what-do-we-treat?'
       className='mt-20 mdl:mt-24'
     >
       <div className='mb-12'>
@@ -20,6 +21,50 @@ export const Treatment = ({ data }) => {
           {data?.label}
         </h1>
         <Separator />
+      </div>
+
+      <div className='space-y-5 mdl:space-y-10 max-w-5xl mx-auto'>
+        <div>
+          <Image
+            src={data?.image}
+            alt={data?.label}
+            width={877}
+            height={436}
+            className='mx-auto object-contain w-full h-auto max-w-[877px] rounded-xl'
+          />
+        </div>
+
+        <div>
+          {data?.description1[locale]?.map((p) => (
+            <p key={p} className='text-sm mdl:text-xl'>
+              {p}
+            </p>
+          ))}
+        </div>
+
+        <ul className='list-disc list-inside space-y-2 mdl:space-y-4'>
+          {data?.points1[locale]?.map((l) => (
+            <li key={l} className='text-sm mdl:text-xl'>
+              {l}
+            </li>
+          ))}
+        </ul>
+
+        <div>
+          {data?.description2[locale]?.map((p) => (
+            <p key={p} className='text-sm mdl:text-xl'>
+              {p}
+            </p>
+          ))}
+        </div>
+
+        <ul className='list-disc list-inside space-y-2 mdl:space-y-4'>
+          {data?.points2[locale]?.map((l) => (
+            <li key={l} className='text-sm mdl:text-xl'>
+              {l}
+            </li>
+          ))}
+        </ul>
       </div>
     </Container>
   );
