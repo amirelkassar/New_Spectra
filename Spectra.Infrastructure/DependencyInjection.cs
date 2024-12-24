@@ -46,11 +46,8 @@ using Spectra.Application.ScheduleAppointments.Appointments;
 using Spectra.Application.ScheduleAppointments.Appointments.Services;
 using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Application.Settings.AppSettings;
-using Spectra.Application.Settings.Articles;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
-using Spectra.Application.Settings.ShowMedicalProvider;
-using Spectra.Application.Settings.SuccessStorIes;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
@@ -84,10 +81,7 @@ using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.IdentityServices;
 using Spectra.Infrastructure.Services.SnomedServices;
 using Spectra.Infrastructure.Settings.AppSettings;
-using Spectra.Infrastructure.Settings.Articles;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
-using Spectra.Infrastructure.Settings.showSpecialltionies;
-using Spectra.Infrastructure.Settings.SuccessStorIes;
 
 namespace Spectra.Infrastructure
 {
@@ -190,13 +184,9 @@ namespace Spectra.Infrastructure
             services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
             services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
-            //AdminSettings Start
-            services.AddScoped<IArticlesRepository, ArticlesRepository>();
             services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
-            services.AddScoped<ISuccessStorIesRepository, SuccessStorIesRepository>();
 
             services.AddScoped<ISettingRepository, SettingRepository>();
-            services.AddScoped<IShowSpecialltionRepository, ShowSpecialltionRepository>();
 
             services.AddScoped(typeof(IBaseMongoDbRepository<>), typeof(BaseMongoDbRepository<>));
 
