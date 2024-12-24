@@ -1,15 +1,16 @@
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 
 import CheckHeartIcon from '@/assets/icons/check-heart';
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const WhyUs = ({
-  data = [],
-  title = 'لماذا نحن',
-}) => {
+export const WhyUs = ({ data = [], title = '' }) => {
+  const locale = useLocale();
+
+  const tg = useTranslations('general_obj');
+
+  const titleValue = title || tg('why_us');
+
   if (!data.length) return null;
   return (
     <Container
@@ -19,9 +20,9 @@ export const WhyUs = ({
     >
       <SectionHeading
         id='why-us'
-        className='mb-10 text-center'
+        className='mb-10 text-center capitalize'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <div className='flex items-center gap-10'>
         <div className='w-1/2 overflow-hidden flex justify-end'>
@@ -37,13 +38,13 @@ export const WhyUs = ({
 
         <div className='w-1/2'>
           <ul className='space-y-5'>
-            {data?.map((item, index) => (
+            {data?.map((item) => (
               <li
-                key={index}
+                key={item.en}
                 className='text-sm mdl:text-medium flex items-center gap-5'
               >
                 <CheckHeartIcon className='size-4 mdl:size-6' />
-                {item}
+                {item[locale]}
               </li>
             ))}
           </ul>

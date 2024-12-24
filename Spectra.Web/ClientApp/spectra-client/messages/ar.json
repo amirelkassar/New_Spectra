@@ -3,6 +3,7 @@
   "dashboard": "لوحة التحكم",
   "about_us": "من نحن",
   "medical_team": "فريقنا الطبي",
+  "services": "خدماتنا",
   "our_services": "خدماتنا",
   "packages": "الباقات",
   "what_we_cure": "ماذا نعالج",
@@ -73,7 +74,12 @@
     "all_specialties": "جميع التخصصات",
     "faq": "اسئلة شائعة",
     "last_news": "اخر الأخبار",
-    "browse_more": "تصفح المزيد"
+    "browse_more": "تصفح المزيد",
+    "our_values": "قيمنا",
+    "what_makes_us_special": "مايميزنا",
+    "next": "التالي",
+    "previous": "السابق",
+    "why_us": "لماذا نحن؟"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
@@ -102,13 +108,27 @@
     "steps_sentence_2": "رحلة تصل الى أكثر من سنة بالطريق التقليدي",
     "steps_sentence_3": "14-7 أيام لفريق سبيكترا",
     "licenses": "التراخيص",
-    "success_stories": "قصص النجاح"
+    "success_stories": "قصص النجاح",
+    "early_care_for_a_bright_tomorrow": "رعاية مبكرة, لغد مشرق",
+    "child_care_message": "العناية بطفلك اهم من كل شىء",
+    "telemedicine_center_message": "أول مركز طب اتصالي ورعاية عن بعد لتخيص وعلاج الاضطرابات النمائية للاطفال",
+    "healthcare_team_message": "فريق صحي معتمد متكامل",
+    "app_download_message": "حمل تطبيق سبيكترا الان",
+    "spectra_description": "سبيكترا هو أول مركز طب إتصالي و رعاية عن بعد، يقوم بتشخيص و علاج و رعاية إضطرابات تطور و سلوك الاطفال، عن طريق فرقنا المتعددة التخصصات المختارة بعناية، وفق جودة و معايير فنية و مهنية عالمية.",
+    "licensed_healthcare_message": "كوادرنا الصحية مرخصة لدى الهيئة السعودية للتخصصات الطبية",
+    "create_smile_message": "نصنع ابتسامة طفلك",
+    "flexible_support_message": "نساعدك على التعامل مع طفلك بمرونة عالية وبكل حب",
+    "early_diagnosis_service": "خدمة الكشف المبكر",
+    "intro_video": "فيديو تعريفي",
+    "child_needs_message": "لا تعرف مالذي يحتاجه طفلك؟"
   },
   "packages_obj": {
     "title": "الباقات",
+    "all_packages": "جميع الباقات",
     "content": "محتوي الباقة",
     "goals": "الهدف من الباقة",
-    "photo": "الصورة الدعائية"
+    "photo": "الصورة الدعائية",
+    "diagnostic_packages": "الباقات التشخيصية"
   },
   "contract_obj": {
     "contracts": "العقود",

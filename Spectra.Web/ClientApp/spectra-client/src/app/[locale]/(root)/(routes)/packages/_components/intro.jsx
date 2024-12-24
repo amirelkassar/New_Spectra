@@ -2,7 +2,7 @@
 
 import { useRouter } from '@/i18n/routing';
 import { useMemo } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Carousel } from '@mantine/carousel';
 
 import { Container } from '@/guest/_components/ui';
@@ -17,6 +17,8 @@ import ArrowLeft from '@/assets/icons/arrow-left';
 import { useMediaQuery } from '@mantine/hooks';
 
 export const Intro = () => {
+  const t = useTranslations('packages_obj');
+
   const query = usePublicPackages();
 
   return (
@@ -27,12 +29,12 @@ export const Intro = () => {
       className='mt-20 mdl:mt-24'
     >
       <div className='mb-12'>
-        <h2
+        <h1
           id='all-packages'
-          className='text-2xl mdl:text-4xl text-center font-bold mb-4'
+          className='text-2xl mdl:text-4xl text-center font-bold mb-4 capitalize'
         >
-          جميع الباقات
-        </h2>
+          {t('all_packages')}
+        </h1>
         <Separator className='mx-auto text-greenMain' />
       </div>
 
@@ -44,6 +46,8 @@ export const Intro = () => {
 };
 
 const RenderPackages = ({ packages = [] }) => {
+  const t = useTranslations('packages_obj');
+
   const router = useRouter();
 
   const slidesToScroll = useSlideToScroll();
@@ -71,9 +75,9 @@ const RenderPackages = ({ packages = [] }) => {
     >
       <div className='flex items-center gap-4'>
         <PackageTag className='text-greenMain shrink-0' />
-        <h3 className='text-base mdl:text-[28px] font-bold'>
-          الباقات التشخيصية
-        </h3>
+        <h2 className='text-base mdl:text-[28px] font-bold'>
+          {t('diagnostic_packages')}
+        </h2>
       </div>
 
       <div className='max-w-[366px] lg:max-w-[736px] xl:max-w-[1106px] mx-auto min-h-[610px]'>

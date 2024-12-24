@@ -1,14 +1,17 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { Container } from '@/guest/_components/ui';
 import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-white';
 
 export const Intro = () => {
+  const tg = useTranslations();
+  const t = useTranslations('guest_obj');
+
   return (
     <div
       style={{
-        clipPath:
-          'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
+        clipPath: 'polygon(49% 100%, 100% 80%, 100% 0, 0 0, 0 80%)',
       }}
       className='bg-blueLight pt-20 mdl:pt-28 overflow-hidden custom-clipPath-triangle relative'
     >
@@ -32,15 +35,11 @@ export const Intro = () => {
           />
         </div>
         <div className='w-1/2 mdl:space-y-5 space-y-2 pb-16 mdl:pb-0'>
-          <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold'>
-            قصص النجاح
+          <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold capitalize'>
+            {tg('success_stories')}
           </h1>
           <p className='text-sm mdl:text-medium'>
-            سبيكترا هو أول مركز طب إتصالي و رعاية عن بعد،
-            يقوم بتشخيص و علاج و رعاية إضطرابات تطور و سلوك
-            الاطفال، عن طريق فرقنا المتعددة التخصصات
-            المختارة بعناية، وفق جودة و معايير فنية و مهنية
-            عالمية معتبرة
+            {t('spectra_description')}
           </p>
         </div>
       </Container>

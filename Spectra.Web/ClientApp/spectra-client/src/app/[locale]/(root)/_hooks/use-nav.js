@@ -39,7 +39,7 @@ export const useNav = () => {
       isActive: pathName.includes(ROUTES.ROOT.TEAM),
     },
     {
-      key: 'our_services',
+      key: 'services',
       label: 'خدمتنا',
       href: ROUTES.ROOT.SERVICES,
       icon: <Hand className='size-4 lgl:size-6 inline-block' />,

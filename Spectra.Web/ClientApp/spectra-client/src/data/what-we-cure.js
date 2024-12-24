@@ -1,29 +1,26 @@
-import IMG_1 from '@/assets/images/what-we-cure/1.png';
-import IMG_2 from '@/assets/images/what-we-cure/2.png';
-import IMG_3 from '@/assets/images/what-we-cure/3.png';
-import IMG_4 from '@/assets/images/what-we-cure/4.png';
-import IMG_5 from '@/assets/images/what-we-cure/5.png';
-import IMG_6 from '@/assets/images/what-we-cure/6.png';
-import IMG_7 from '@/assets/images/what-we-cure/7.png';
 import { Translate } from '@/components/translate';
 
 export const WHAT_WE_CURE = [
   {
-    image: IMG_1,
+    id: 'asd',
+    image: '/what-we-treat/autism.webp',
     label: <Translate value='asd' target='guest_obj' />,
   },
   {
-    image: IMG_2,
+    id: 'language-and-communication-problems',
+    image: '/what-we-treat/lang-problems.webp',
     label: (
       <Translate value='language_communication' target='guest_obj' />
     ),
   },
   {
-    image: IMG_3,
+    id: 'attention-deficit-hyperactivity-disorder',
+    image: '/what-we-treat/hyper.webp',
     label: <Translate value='adhd' target='guest_obj' />,
   },
   {
-    image: IMG_4,
+    id: 'psychological-problems-in-children',
+    image: '/what-we-treat/mental-dis.webp',
     label: (
       <Translate
         value='mental_physical_disability'
@@ -32,24 +29,27 @@ export const WHAT_WE_CURE = [
     ),
   },
   {
-    image: IMG_5,
+    id: 'intellectual-and-physical-disabilities',
+    image: '/what-we-treat/grow-dis.webp',
     label: (
-      <Translate
-        value='stubbornness_violence_fear_anxiety'
-        target='guest_obj'
-      />
+      <Translate value='developmental_delay' target='guest_obj' />
     ),
   },
   {
-    image: IMG_6,
+    id: 'learning-disabilities',
+    image: '/what-we-treat/learning-diff.webp',
     label: (
       <Translate value='learning_difficulties' target='guest_obj' />
     ),
   },
   {
-    image: IMG_7,
+    id: 'stubbornness-and-violence-fear-and-anxiety',
+    image: '/what-we-treat/anxity.webp',
     label: (
-      <Translate value='developmental_delay' target='guest_obj' />
+      <Translate
+        value='stubbornness_violence_fear_anxiety'
+        target='guest_obj'
+      />
     ),
   },
 ];

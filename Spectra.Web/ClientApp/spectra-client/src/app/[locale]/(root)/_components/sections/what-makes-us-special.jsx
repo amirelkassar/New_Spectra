@@ -1,12 +1,13 @@
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { useLocale, useTranslations } from 'next-intl';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const WhatMakesUsSpecial = ({
-  data = [],
-  title = 'مايميزنا',
-}) => {
+export const WhatMakesUsSpecial = ({ data = [], title = '' }) => {
+  const locale = useLocale();
+
+  const tg = useTranslations('general_obj');
+
+  const titleValue = title || tg('what_makes_us_special');
+
   if (!data.length) return null;
   return (
     <Container
@@ -18,12 +19,12 @@ export const WhatMakesUsSpecial = ({
         id='what-makes-us-special'
         className='text-center mb-10'
       >
-        {title}
+        {titleValue}
       </SectionHeading>
       <ul className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
-        {data.map((item, i) => (
+        {data.map((item) => (
           <li
-            key={i}
+            key={item.title.en}
             className='text-center text-sm mdl:text-medium p-7'
           >
             <span
@@ -34,8 +35,8 @@ export const WhatMakesUsSpecial = ({
             >
               {item.icon}
             </span>
-            <h3 className='font-bold mb-1'>{item.title}</h3>
-            <p>{item.content}</p>
+            <h3 className='font-bold mb-1'>{item.title[locale]}</h3>
+            <p>{item.content[locale]}</p>
           </li>
         ))}
       </ul>

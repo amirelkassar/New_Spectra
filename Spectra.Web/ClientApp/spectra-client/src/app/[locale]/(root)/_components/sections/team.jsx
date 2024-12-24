@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Select } from '@mantine/core';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import {
   Container,
@@ -16,7 +16,11 @@ import { useQueryParams } from '@/hooks/queries/use-query-params';
 import { usePublicMedicalProviders } from '@/hooks/queries/public/medical-provider';
 import { usePublicSpecialization } from '@/hooks/queries/public/specialization';
 
-export const Team = ({ title = 'فريق صحي معتمد متكامل' }) => {
+export const Team = ({ title = '' }) => {
+  const t = useTranslations('guest_obj');
+
+  const titleValue = title || t('healthcare_team_message');
+
   const [mainSpecializationId, setMainSpecializationId] =
     useState('');
 
@@ -30,7 +34,7 @@ export const Team = ({ title = 'فريق صحي معتمد متكامل' }) => {
   return (
     <Container aria-label='Team' aria-labelledby='team' id='team'>
       <div className='flex justify-between items-center mdl:mb-10'>
-        <SectionHeading>{title}</SectionHeading>
+        <SectionHeading>{titleValue}</SectionHeading>
 
         <SelectFilter
           value={mainSpecializationId}

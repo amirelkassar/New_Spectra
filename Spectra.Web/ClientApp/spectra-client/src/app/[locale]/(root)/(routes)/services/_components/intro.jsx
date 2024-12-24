@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import Button from '@/components/button';
 import PlayIcon from '@/assets/icons/play';
@@ -7,6 +8,8 @@ import ArrowGreenDownCircleWhite from '@/assets/icons/arrow-green-down-circle-wh
 import { Container, IntroVideo } from '@/guest/_components/ui';
 
 export const Intro = () => {
+  const t = useTranslations('guest_obj');
+
   return (
     <div
       style={{
@@ -23,7 +26,7 @@ export const Intro = () => {
         aria-labelledby='Services-intro'
         className='flex items-center gap-5 !py-0'
       >
-        <div className='w-1/2'>
+        <div className='w-1/2 ltr:w-[45%]'>
           <Image
             priority
             width={918}
@@ -33,13 +36,13 @@ export const Intro = () => {
             className='w-full h-full -mb-2 mdl:mb-0 object-cover object-center'
           />
         </div>
-        <div className='w-1/2 mdl:space-y-5 space-y-2 pb-16 mdl:pb-5'>
+        <div className='w-1/2 ltr:w-[60%] mdl:space-y-5 space-y-2 pb-16 mdl:pb-5'>
           <div>
-            <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold'>
-              نصنع ابتسامة طفلك
+            <h1 className='text-medium mdl:space-y-3 mdl:text-4xl font-bold capitalize ltr:text-[15px] ltr:mdl:text-4xl'>
+              {t('create_smile_message')}
             </h1>
             <p className='text-sm mdl:text-medium'>
-              نساعدك على التعامل مع طفلك بمرونة عالية وبكل حب
+              {t('flexible_support_message')}
             </p>
           </div>
           <div className='flex flex-col lg:flex-row lg:*:flex-1 gap-2 mdl:gap-3 font-bold text-sm mdl:text-base'>
@@ -50,7 +53,7 @@ export const Intro = () => {
               <span className='shrink-0 size-5 mdl:size-7 rounded-full bg-white flex items-center justify-center'>
                 <NotificationIcon className='size-3 mdl:size-4' />
               </span>
-              خدمة الكشف المبكر
+              {t('early_diagnosis_service')}
             </Button>
             <IntroVideo>
               <Button className='mdl:py-3 py-2 gap-3 px-5 text-xs mdl:text-xl w-fit lg:w-full mx-auto rounded-lg'>
@@ -60,7 +63,7 @@ export const Intro = () => {
                     className='size-5 mdl:size-7'
                   />
                 </span>
-                فيديو تعريفي
+                {t('intro_video')}
               </Button>
             </IntroVideo>
           </div>
