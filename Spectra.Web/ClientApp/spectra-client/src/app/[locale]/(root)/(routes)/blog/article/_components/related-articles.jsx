@@ -1,20 +1,22 @@
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
 import { Container, SectionHeading } from '@/guest/_components/ui';
 import { Link } from '@/i18n/routing';
 import ROUTES from '@/routes';
 
-export const RelatedArticles = ({
-  data = [],
-  title = 'مقالات ذات صلة',
-}) => {
+export const RelatedArticles = ({ data = [] }) => {
+  const locale = useLocale();
+
+  const title =
+    locale === 'ar' ? 'مقالات ذات صلة' : 'Related Articles';
+
   if (!data.length) return null;
   return (
     <Container
       id='related-article'
       aria-label='Related Article'
       aria-labelledby='related-article'
-      heading='مقالات ذات صلة'
     >
       <SectionHeading
         className='mb-10 text-center'
@@ -27,17 +29,17 @@ export const RelatedArticles = ({
           <Link
             href={`${ROUTES.ROOT.BLOG}/article/${article?.id}`}
             className='w-72 block space-y-3'
-            key={i}
+            key={article.id || i}
           >
             <Image
               src={article?.poster}
-              alt={article?.title}
+              alt={article?.title.en}
               width={320}
               height={200}
               className='w-full h-44 object-cover object-center'
             />
             <h3 className='text-sm mdl:text-medium font-bold'>
-              {article?.title}
+              {article?.title[locale]}
             </h3>
           </Link>
         ))}

@@ -39,7 +39,7 @@ export const PackageForm = ({
       />
 
       <ContentSelect
-        defaultValue={form.data.services}
+        defaultValue={form.data.services || []}
         onChange={form.onChange}
         error={GetErrorMsg(form.error, 'Services')}
         name='services'
@@ -47,7 +47,7 @@ export const PackageForm = ({
       />
 
       <PackageGoals
-        defaultValue={form.data.goals}
+        defaultValue={form.data.goals || []}
         error={GetErrorMsg(form.error, 'Goals')}
         onChange={form.onChange}
         name='goals'
@@ -103,7 +103,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
           size='xl'
           label='اسم الباقة بااللغة العربية'
           name='arName'
-          value={data.arName}
+          value={data.arName || ''}
           onChange={onChange}
           error={GetErrorMsg(error, 'ArName')}
         />
@@ -111,7 +111,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
           size='xl'
           label='اسم الباقة باللغة الانجليزية'
           name='enName'
-          value={data.enName}
+          value={data.enName || ''}
           onChange={onChange}
           error={GetErrorMsg(error, 'EnName')}
         />
@@ -121,7 +121,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
           name='price'
           rightSection='SAR'
           type='number'
-          value={data.price}
+          value={data.price || ''}
           onChange={onChange}
           error={GetErrorMsg(error, 'Price')}
         />
@@ -131,7 +131,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
           name='discount'
           rightSection='%'
           type='number'
-          value={data.discount}
+          value={data.discount || ''}
           onChange={onChange}
           error={GetErrorMsg(error, 'Discount')}
         />
@@ -141,7 +141,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
         size='xl'
         label='نوع الباقة'
         name='tags'
-        value={data.tags}
+        value={data.tags || []}
         onChange={(value) => {
           onChange({
             target: {
@@ -158,7 +158,7 @@ const PackageInfo = ({ data, onChange, error, title }) => {
       <IconSelect
         label='يمكنك اختيار رمز الباقة'
         name='iconCode'
-        value={data.iconCode}
+        value={data.iconCode || ''}
         onChange={onChange}
         error={GetErrorMsg(error, 'IconCode')}
       />

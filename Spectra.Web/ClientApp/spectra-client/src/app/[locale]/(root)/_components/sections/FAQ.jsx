@@ -33,15 +33,15 @@ export const FAQ = ({ data = {}, title = '' }) => {
       </SectionHeading>
       <Accordion
         classNames={{
-          root: 'space-y-5',
-          item: 'border-none',
-          chevron: 'w-fit data-[rotate=true]:rotate-[135deg]',
+          root: '!space-y-5',
+          item: '!border-none',
+          chevron: '!w-fit data-[rotate=true]:!rotate-[135deg]',
           control:
-            'text-black bg-blueLighter hover:bg-blueLight/80 text-base mdl:text-2xl',
+            '!text-black !bg-blueLighter hover:!bg-blueLight/80 !text-base mdl:!text-2xl',
         }}
         radius='xl'
         chevron={
-          <PlusCircleOutlineIcon className='size-5 mdl:size-7' />
+          <PlusCircleOutlineIcon className='!size-5 mdl:!size-7' />
         }
       >
         {FAQ_DATA?.map((item) => (

@@ -79,7 +79,18 @@
     "what_makes_us_special": "What makes us special",
     "next": "Next",
     "previous": "Previous",
-    "why_us": "Why us?"
+    "why_us": "Why us?",
+    "welcome": "Welcome",
+    "whats_app": "WhatsApp",
+    "call_us": "Call us",
+    "leave_message": "Leave a message",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "phone_number": "Phone number",
+    "message": "Message",
+    "or_by": "Or by",
+    "follow_us_on": "Follow us on"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -123,7 +134,11 @@
     "child_needs_message": "Don't know what your child needs?",
     "success_story": "Success story",
     "before_treatment": "Before treatment",
-    "after_treatment": "After treatment"
+    "after_treatment": "After treatment",
+    "articles_series": "We present to you a series of articles focusing on disorders and their challenges",
+    "articles": "Articles",
+    "latest_articles": "Latest articles",
+    "features_articles": "Features articles"
   },
   "packages_obj": {
     "title": "Packages",

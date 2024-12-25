@@ -1,12 +1,11 @@
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { useLocale, useTranslations } from 'next-intl';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 
-export const Emails = ({
-  data = [],
-  title = 'أو عن طريق',
-}) => {
+export const Emails = ({ data = [] }) => {
+  const tg = useTranslations('general_obj');
+
+  const locale = useLocale();
+
   if (!data.length) return null;
   return (
     <div className='bg-[#F5F5F5]'>
@@ -15,15 +14,15 @@ export const Emails = ({
         aria-labelledby='emails'
         aria-label='Emails'
       >
-        <SectionHeading className='text-center mb-10'>
-          {title}
+        <SectionHeading className='text-center mb-10 capitalize'>
+          {tg('or_by')}
         </SectionHeading>
         <div className='grid grid-cols-1 mdl:grid-cols-3 gap-5'>
-          {data.map(({ email, label }, index) => (
+          {data.map(({ email, label }) => (
             <Email
-              key={index}
+              key={label.en}
               email={email}
-              label={label}
+              label={label[locale]}
             />
           ))}
           <Email />
@@ -42,8 +41,6 @@ const Email = ({ email = '', label = '' }) => (
       {email}
     </a>
 
-    <p className='text-sm mdl:text-2xl font-light'>
-      {label}
-    </p>
+    <p className='text-sm mdl:text-2xl font-light'>{label}</p>
   </div>
 );

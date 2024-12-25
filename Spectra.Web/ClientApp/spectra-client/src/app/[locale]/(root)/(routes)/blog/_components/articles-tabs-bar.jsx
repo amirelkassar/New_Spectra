@@ -3,6 +3,7 @@
 import { useRouter } from '@/i18n/routing';
 import { useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Container } from '@/guest/_components/ui';
@@ -11,36 +12,59 @@ import ArrowNav from '@/assets/icons/arrow-nav';
 const TABS = [
   {
     key: 'general',
-    value: 'عام',
+    value: {
+      ar: 'عام',
+      en: 'General',
+    },
   },
   {
     key: 'psychology',
-    value: 'علم نفس',
+    value: {
+      ar: 'علم نفس',
+      en: 'Psychology',
+    },
   },
   {
     key: 'meetings',
-    value: 'لقاءات',
+    value: {
+      ar: 'لقاءات',
+      en: 'Meetings',
+    },
   },
   {
     key: 'autism',
-    value: 'التوحد',
+    value: {
+      ar: 'التوحد',
+      en: 'Autism',
+    },
   },
   {
     key: 'hyperactivity',
-    value: 'فرط الحركة',
+    value: {
+      ar: 'فرط الحركة',
+      en: 'Hyperactivity',
+    },
   },
   {
     key: 'family-relationships',
-    value: 'العلاقات الأسرية',
+    value: {
+      ar: 'العلاقات الأسرية',
+      en: 'Family Relationships',
+    },
   },
-
   {
     key: 'counseling',
-    value: 'ساعة مع المستشار',
+    value: {
+      ar: 'ساعة مع المستشار',
+      en: 'An Hour with the Counselor',
+    },
   },
   {
     key: 'awareness',
-    value: 'وعي',
+    value: {
+      ar: 'وعي',
+      en: 'Awareness',
+    },
   },
 ];
 
@@ -48,6 +72,7 @@ export const ArticlesTabsBar = () => {
   const currentTab = useSearchParams()?.get('tab') || '';
   const router = useRouter();
   const ref = useRef(null);
+  const locale = useLocale();
 
   const scrollLeft = useCallback(() => {
     if (ref.current) {
@@ -101,7 +126,7 @@ export const ArticlesTabsBar = () => {
                 })
               }
             >
-              {tab.value}
+              {tab.value[locale]}
             </li>
           ))}
         </ul>

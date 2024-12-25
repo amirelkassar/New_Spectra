@@ -1,14 +1,19 @@
+'use client';
+
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Container, SectionHeading } from '@/guest/_components/ui';
 import ROUTES from '@/routes';
+import { useDate } from '@/hooks/use-date';
 
-export const FeaturesArticles = ({
-  data = [],
-  title = 'اهم المقالات',
-}) => {
+export const FeaturesArticles = ({ data = [] }) => {
+  const t = useTranslations('guest_obj');
+
+  const locale = useLocale();
+
   return (
     <div className='bg-blueLight'>
       <Container
@@ -17,10 +22,10 @@ export const FeaturesArticles = ({
         aria-label='Features Articles'
       >
         <SectionHeading
-          className='mb-10 text-center'
+          className='mb-10 text-center capitalize'
           id='features-articles'
         >
-          {title}
+          {t('features_articles')}
         </SectionHeading>
         <div className='grid grid-cols-3 gap-5 mdl:gap-10'>
           {data?.map((article, index) => (
@@ -29,6 +34,7 @@ export const FeaturesArticles = ({
               {...article}
               isLatest={index === 0}
               isSecond={index === 1}
+              locale={locale}
             />
           ))}
         </div>
@@ -40,14 +46,17 @@ export const FeaturesArticles = ({
 const Article = ({
   id = '',
   poster = '',
-  isNew = false,
   title = '',
   writer = '',
   date = '',
   mainContent = '',
+  locale = 'ar',
+  isNew = false,
   isLatest = false,
   isSecond = false,
 }) => {
+  const { fullYear } = useDate(date);
+
   return (
     <div
       className={cn('h-auto flex flex-col gap-5', {
@@ -58,35 +67,35 @@ const Article = ({
       {/* POSTER */}
       <Link
         className={cn(
-          'block relative',
-          isLatest
-            ? 'mdl:h-[530px] h-[190px] w-auto'
-            : 'h-full w-auto'
+          'block relative h-auto w-full overflow-hidden',
+          isLatest ? 'max-h-[530px]' : 'max-h-[388px]'
         )}
         href={`${ROUTES.ROOT.BLOG}/article/${id}`}
       >
         <Image
           src={poster}
-          alt={title}
+          alt={title.en}
           priority
-          className='w-auto h-full object-cover object-center'
+          className='w-full h-auto object-cover object-center'
           width={400}
           height={530}
         />
 
         {isNew && (
           <span className='absolute bottom-4 start-4 bg-greenMain rounded-lg text-white text-sm font-bold py-1 px-5'>
-            جديد
+            {locale === 'ar' ? 'جديد' : 'New'}
           </span>
         )}
       </Link>
 
       {/* TITLE & MAINCONTENT */}
       <div className='grow'>
-        <h3 className='text-sm mdl:text-2xl font-bold'>{title}</h3>
+        <h3 className='text-sm mdl:text-2xl font-bold'>
+          {title[locale]}
+        </h3>
         {isLatest && (
           <p className='text-xs mdl:text-medium mt-3'>
-            {mainContent}
+            {mainContent[locale].split(' ', 50).join(' ')}...
           </p>
         )}
       </div>
@@ -94,7 +103,7 @@ const Article = ({
       {/* WRITER & DATE */}
       <div className='text-xs mdl:text-base flex items-center justify-between'>
         <span>{writer}</span>
-        <span>{date}</span>
+        <span>{fullYear}</span>
       </div>
 
       {/* READMORE */}
@@ -103,7 +112,9 @@ const Article = ({
           href={`${ROUTES.ROOT.BLOG}/article/${id}`}
           className='flex items-center py-1 mdl:py-2 px-2 mdl:px-5 w-full bg-greenMain text-white text-sm mdl:text-medium rounded-lg'
         >
-          <span className='flex-1 block'>اقرأ اكثر</span>
+          <span className='flex-1 block'>
+            {locale === 'ar' ? 'اقرأ المزيد' : 'Read More'}
+          </span>
           <ArrowIcon lineWidth='25' className='w-14' />
         </Link>
       )}
