@@ -95,15 +95,15 @@ const RenderPackages = ({ packages = [] }) => {
           slidesToScroll={slidesToScroll}
           height='100%'
           classNames={{
-            container: 'ps-4',
+            container: '!ps-4',
             indicator:
-              'size-4 rounded-full bg-grayMedium data-[active]:bg-greenMain data-[active]:size-5',
+              '!size-4 !rounded-full !bg-grayMedium data-[active]:!bg-greenMain data-[active]:!size-5',
             indicators:
-              'items-center bottom-12 mdl:bottom-16 max-w-[350px] overflow-hidden mx-auto',
+              '!items-center !bottom-12 mdl:!bottom-16 !max-w-[350px] !overflow-hidden !mx-auto',
             controls:
-              'top-auto bottom-10 mdl:bottom-12 px-10 lg:px-32',
-            control: 'group data-[inactive]:cursor-not-allowed',
-            root: 'static',
+              '!top-auto !bottom-10 mdl:!bottom-12 !px-10 lg:!px-32',
+            control: '!group data-[inactive]:!cursor-not-allowed',
+            root: '!static',
           }}
           nextControlIcon={<Next />}
           previousControlIcon={<Previous />}
