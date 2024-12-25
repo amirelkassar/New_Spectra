@@ -1,10 +1,10 @@
+import { STORIES } from '@/data';
 import { Story } from './story';
-import { storiesData } from '@/lib/demoData';
 
-const StoryPage = ({ params: { storyId } }) => {
-  const story = storiesData.find(
-    (story) => story.id === storyId
-  );
+const StoryPage = ({ params }) => {
+  const storyId = params?.storyId || '';
+
+  const story = STORIES.find((story) => story.id === storyId);
 
   return (
     <main>

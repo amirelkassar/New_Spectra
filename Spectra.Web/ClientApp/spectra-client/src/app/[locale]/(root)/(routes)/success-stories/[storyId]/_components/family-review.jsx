@@ -1,16 +1,12 @@
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { Container, SectionHeading } from '@/guest/_components/ui';
 import QuoteIcon from '@/assets/icons/quote';
 
-export const FamilyReview = ({
-  familyReview = '',
-  video = '',
-  childName,
-}) => {
+export const FamilyReview = ({ familyReview = {}, video = '' }) => {
+  const locale = useLocale();
+
   return (
     <Container
       id='family-review'
@@ -21,7 +17,7 @@ export const FamilyReview = ({
         id='family-review'
         className='mb-10 text-center'
       >
-        رأي عائلة {childName}
+        {familyReview?.title[locale]}
       </SectionHeading>
       {/* FAMILY REVIEW */}
       <div className='w-full pe-5 mdl:pe-28'>
@@ -31,11 +27,11 @@ export const FamilyReview = ({
             <QuoteIcon className='w-2 h-4 mdl:w-6 mdl:h-11' />
           </span>
           <p className='bg-white py-4 px-4 mdl:px-10 rounded-full mdl:rounded-3xl text-xs mdl:text-2xl w-4/5 mdl:w-2/3'>
-            {familyReview}
+            {familyReview?.text[locale]}
           </p>
 
           <Image
-            src='/demo-family.png'
+            src={familyReview?.image}
             alt='family photo'
             priority={false}
             className='rounded-full size-20 mdl:size-52 border-8 border-white absolute top-1/2 end-0 -translate-y-1/2 rtl:-translate-x-1/2 ltr:translate-x-1/2 object-cover object-center'

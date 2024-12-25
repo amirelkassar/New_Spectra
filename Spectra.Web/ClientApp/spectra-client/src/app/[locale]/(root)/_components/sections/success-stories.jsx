@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 
@@ -8,6 +8,8 @@ import ROUTES from '@/routes';
 
 export const SuccessStories = ({ data = [], title = '' }) => {
   const tg = useTranslations('guest_obj');
+
+  const locale = useLocale();
 
   const titleValue = title || tg('success_stories');
 
@@ -26,7 +28,7 @@ export const SuccessStories = ({ data = [], title = '' }) => {
       </SectionHeading>
       <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
         {data.map((item) => (
-          <Story key={item.childName} {...item} />
+          <Story key={item.id} {...item} locale={locale} />
         ))}
       </div>
     </Container>
@@ -34,10 +36,11 @@ export const SuccessStories = ({ data = [], title = '' }) => {
 };
 
 const Story = ({
-  childName = '',
-  daignosis = '',
+  childName = {},
+  diagnosis = {},
   image = '',
   id = '',
+  locale = 'ar',
 }) => {
   return (
     <div className='space-y-2'>
@@ -45,11 +48,11 @@ const Story = ({
         <div className='h-40 mdl:h-72 w-full rounded-lg overflow-hidden relative'>
           <Image
             src={image}
-            alt={childName}
+            alt={id}
             priority={false}
             sizes='width: 384px; height: 288px;'
             fill
-            className='w-full h-full object-cover object-center'
+            className='w-full h-full object-cover object-right'
           />
         </div>
       </Link>
@@ -57,10 +60,10 @@ const Story = ({
       <div className='flex items-center justify-between px-5'>
         <div>
           <p className='text-black text-sm mdl:text-medium font-bold'>
-            {childName}
+            {childName[locale]}
           </p>
           <p className='text-black text-sm mdl:text-medium'>
-            {daignosis}
+            {diagnosis[locale]}
           </p>
         </div>
         <ArrowLeft className='ltr:rotate-180' />

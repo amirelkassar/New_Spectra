@@ -120,7 +120,10 @@
     "flexible_support_message": "We help you handle your child with high flexibility and love",
     "early_diagnosis_service": "Early diagnosis service",
     "intro_video": "Introductory video",
-    "child_needs_message": "Don't know what your child needs?"
+    "child_needs_message": "Don't know what your child needs?",
+    "success_story": "Success story",
+    "before_treatment": "Before treatment",
+    "after_treatment": "After treatment"
   },
   "packages_obj": {
     "title": "Packages",
