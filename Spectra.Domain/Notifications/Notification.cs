@@ -52,7 +52,5 @@ namespace Spectra.Domain.Notifications
         public NotificationChangeStatuses Status { get; set; }
         public string NotificationId { get; private set; }
         public string ReceiverId { get; private set; }
-
-
     }
 }

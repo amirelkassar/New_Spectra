@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Admin\Commands\" />
     <Folder Include="Chats\EventHandlers\" />
-    <Folder Include="Chats\Queries\" />
     <Folder Include="MasterData\TreatmentTypes\" />
     <Folder Include="MasterData\SuccessStories\" />
   </ItemGroup>

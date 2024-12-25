@@ -10,6 +10,8 @@ namespace Spectra.Domain.Chats
         public string RoomName { get; set; }
         public ICollection<ChatRoomParticipant> Participants { get; set; } = [];
         public bool IsGroup { get; private set; } = isGroup;
+        public string? LastMessage { get; set; }
+        public DateTimeOffset? LastMeesageDate { get; set; }
     }
 
     public class ChatMessage(string id, MessageType type,

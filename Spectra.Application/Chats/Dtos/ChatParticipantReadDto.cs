@@ -7,7 +7,7 @@ using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.Chats.Dtos
 {
-    public class CreateParticipantDto
+    public class ChatParticipantReadDto
     {
         public string UserId { get; set; }
         public ChatParticipantType Type { get; set; }

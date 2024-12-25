@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
-using MediatR;
+﻿using MediatR;
 using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Chats;
@@ -13,7 +7,7 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Chats.Commands
 {
-    public class AddParticipantToChatRoomCommand : CreateParticipantDto, IRequest<OperationResult>
+    public class AddParticipantToChatRoomCommand : ChatParticipantReadDto, IRequest<OperationResult>
     {
         public string ChatId { get; set; }
         public class AddParticipantToChatRoomCommandHandler(IBaseMongoDbRepository<ChatRoom> chatRepository) : IRequestHandler<AddParticipantToChatRoomCommand, OperationResult>

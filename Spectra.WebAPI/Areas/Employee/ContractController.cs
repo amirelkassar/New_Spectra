@@ -1,17 +1,26 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Chats.Commands;
+using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
+using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Enums;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
 
 namespace Spectra.WebAPI.Areas.Employee
 {
-    public class ContractController(IMediator mediator, ICurrentUser currentUser) : EmployeeControllerBase
+    public class ContractController(IMediator mediator,
+        ICurrentUser currentUser,
+        UserManager<AppUser> userManager) : EmployeeControllerBase
     {
         private readonly IMediator _mediator = mediator;
         private readonly ICurrentUser _currentUser = currentUser;
+        private readonly UserManager<AppUser> _userManager = userManager;
 
         [HttpGet]
         public async Task<IActionResult> GetAsync()
@@ -24,6 +33,27 @@ namespace Spectra.WebAPI.Areas.Employee
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {
             var response = await _mediator.Send(input);
+            var adminUsers = await _userManager.GetUsersInRoleAsync(Roles.SystemAdmin);
+            var adminUser = adminUsers.First();
+            var chatRoomId = await _mediator.Send(new CreateChatRoomCommand
+            {
+                IsGroup = false,
+                RoomName = $"Contract Of {_currentUser.Name}",
+                Participants = [new ChatParticipantReadDto
+                {
+                    CanSend = true,
+                    Expried=false,
+                    Type=ChatParticipantType.Participant,
+                    UserId=_currentUser.Id,
+                },
+                new ChatParticipantReadDto{
+                    CanSend = true,
+                    Expried=false,
+                    Type=ChatParticipantType.Admin,
+                    UserId=adminUser.Id,
+                }]
+            });
+
             return Created("", response);
         }
 
@@ -64,7 +94,7 @@ namespace Spectra.WebAPI.Areas.Employee
         {
             var response = await _mediator.Send(new ChangeContractByEmployeeCommand
             {
-               Value=false
+                Value = false
             });
 
             return Accepted(response);
@@ -76,7 +106,7 @@ namespace Spectra.WebAPI.Areas.Employee
             var response = await _mediator.Send(new ChangeContractByEmployeeCommand
             {
                 Signature = input.Signature,
-                Value=true
+                Value = true
             });
 
             return Accepted(response);
