@@ -1,9 +1,12 @@
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
 import { Rating } from '@mantine/core';
 import { Container } from '@/guest/_components/ui';
 
 export const Article = ({ data = [] }) => {
+  const locale = useLocale();
+
   return (
     <Container
       id='article'
@@ -14,10 +17,11 @@ export const Article = ({ data = [] }) => {
       {/* Heading */}
       <div className='flex justify-between gap-5 items-center'>
         <h1 className='font-bold text-base mdl:text-3xl'>
-          {data?.title}
+          {data?.title[locale]}
         </h1>
         <span className='text-xs mdl:text-base text-grayDark'>
-          {data?.readCount} دقائق قراءة
+          {data?.readCount}{' '}
+          {locale === 'ar' ? 'دقائق قراءة' : 'Read Time'}
         </span>
       </div>
 
@@ -25,7 +29,9 @@ export const Article = ({ data = [] }) => {
       <div className='flex items-center gap-5'>
         {!data?.rate && (
           <span className='text-xs mdl:text-base'>
-            لا يوجد تقييم حتي الأن
+            {locale === 'ar'
+              ? 'لا يوجد تقييم حتي الأن'
+              : 'No Rate Yet'}
           </span>
         )}
 
@@ -41,9 +47,9 @@ export const Article = ({ data = [] }) => {
       <div className='space-y-10'>
         {data?.content?.map((c, i) => (
           <div className='space-y-5' key={i}>
-            {c?.title && (
+            {c?.title[locale] && (
               <h2 className='text-sm mdl:text-medium font-bold'>
-                {c?.title}
+                {c?.title[locale]}
               </h2>
             )}
 
@@ -58,12 +64,9 @@ export const Article = ({ data = [] }) => {
               />
             )}
 
-            {c?.paragraphs.length > 0 &&
-              c?.paragraphs?.map((p, j) => (
-                <p
-                  className='text-sm mdl:text-medium'
-                  key={j}
-                >
+            {c?.paragraphs[locale]?.length > 0 &&
+              c?.paragraphs[locale]?.map((p, j) => (
+                <p className='text-sm mdl:text-medium' key={j}>
                   {p}
                 </p>
               ))}

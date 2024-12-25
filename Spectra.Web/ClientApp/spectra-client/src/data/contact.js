@@ -12,9 +12,7 @@ export const SOCIAL = [
   },
   {
     href: '#',
-    icon: (
-      <SnapChatCircleIcon className='size-7 mdl:size-16' />
-    ),
+    icon: <SnapChatCircleIcon className='size-7 mdl:size-16' />,
   },
   {
     href: '#',
@@ -22,20 +20,38 @@ export const SOCIAL = [
   },
   {
     href: '#',
-    icon: (
-      <FaceBookCircleIcon className='size-7 mdl:size-16' />
-    ),
+    icon: <FaceBookCircleIcon className='size-7 mdl:size-16' />,
   },
   {
     href: '#',
-    icon: (
-      <XSocialCircleIcon className='size-7 mdl:size-16' />
-    ),
+    icon: <XSocialCircleIcon className='size-7 mdl:size-16' />,
   },
   {
     href: '#',
-    icon: (
-      <WhatsappCircleIcon className='size-7 mdl:size-16' />
-    ),
+    icon: <WhatsappCircleIcon className='size-7 mdl:size-16' />,
+  },
+];
+
+export const EMAILS = [
+  {
+    email: 'info@startsmart.com',
+    label: {
+      ar: 'دعم العملاء',
+      en: 'Customer Support',
+    },
+  },
+  {
+    email: 'info@startsmart.com',
+    label: {
+      ar: 'الملاحظات والمقترحات',
+      en: 'Feedback & Suggestions',
+    },
+  },
+  {
+    email: 'info@startsmart.com',
+    label: {
+      ar: 'الشكاوي',
+      en: 'Complaints',
+    },
   },
 ];

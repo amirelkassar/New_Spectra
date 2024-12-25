@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import { Container, SectionHeading } from '@/guest/_components/ui';
 import QuoteIcon from '@/assets/icons/quote';
+import { ReviewVideo } from './review-video';
 
 export const FamilyReview = ({ familyReview = {}, video = '' }) => {
   const locale = useLocale();
@@ -15,7 +16,7 @@ export const FamilyReview = ({ familyReview = {}, video = '' }) => {
     >
       <SectionHeading
         id='family-review'
-        className='mb-10 text-center'
+        className='mb-10 text-center capitalize'
       >
         {familyReview?.title[locale]}
       </SectionHeading>
@@ -42,10 +43,10 @@ export const FamilyReview = ({ familyReview = {}, video = '' }) => {
       </div>
 
       {/* Video */}
-      <div>
-        {/* TODO: ADD THE VIDEO */}
-        {video}
-      </div>
+      <ReviewVideo
+        videoUrl={video}
+        previewImage={familyReview?.image}
+      />
     </Container>
   );
 };

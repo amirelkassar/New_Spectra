@@ -1,23 +1,23 @@
+import { useTranslations } from 'next-intl';
+
 import { Container } from '@/guest/_components/ui';
+import { SearchBar } from './search-bar';
 
 export const Intro = () => {
+  const t = useTranslations('guest_obj');
+
   return (
     <Container
       id='blogs-intro'
       aria-label='Blog intro'
       aria-labelledby='blogs-intro'
-      className='mt-20 mdl:mt-28 space-y-3'
+      className='mt-16 mdl:mt-20 space-y-5'
     >
-      <h1
-        id='blogs-intro'
-        className='font-bold text-base mdl:text-3xl'
-      >
-        مدونات واخبار سبيكترا
-      </h1>
       <p className='text-sm mdl:text-medium'>
-        نقدم لكم سلسلة من المقالات التي تخص الاضطرابات
-        ومشاكلها
+        {t('articles_series')}
       </p>
+
+      <SearchBar />
     </Container>
   );
 };

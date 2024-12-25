@@ -1,12 +1,10 @@
-import {
-  Container,
-  SectionHeading,
-} from '@/guest/_components/ui';
+import { useTranslations } from 'next-intl';
 
-export const SocialSites = ({
-  data = [],
-  title = 'تابعنا علي',
-}) => {
+import { Container, SectionHeading } from '@/guest/_components/ui';
+
+export const SocialSites = ({ data = [] }) => {
+  const tg = useTranslations('general_obj');
+
   if (!data.length) return null;
   return (
     <Container
@@ -15,10 +13,10 @@ export const SocialSites = ({
       aria-labelledby='social-sites'
     >
       <SectionHeading
-        className='text-center mb-10'
+        className='text-center mb-10 capitalize'
         id='social-sites'
       >
-        {title}
+        {tg('follow_us_on')}
       </SectionHeading>
       <div className='flex items-center justify-evenly gap-5'>
         {data?.map((item, index) => (

@@ -97,7 +97,7 @@ export const STORIES = [
           en: 'Praise be to God, my experience was wonderful with the specialists and doctors I dealt with, and with the information I benefited greatly from. Their main focus was on the mother, which I appreciated a lot. They educated mothers on how to deal with their children, and when I applied what they said, I saw improvements in my child Saad.',
         },
       },
-      video: '',
+      video: '/stories/saad-story.webm',
     },
   },
   {
@@ -194,7 +194,7 @@ export const STORIES = [
           en: 'The platform is extremely wonderful in terms of the doctors and everything about it. The idea is incredibly innovative and beneficial for parents. It felt like a study session for me since I was actively involved and understood everything, including tantrums and behaviors. The doctor followed up and guided me on what to do. The platform is truly excellent. May God reward you.',
         },
       },
-      video: '',
+      video: '/stories/jaser-story.webm',
     },
   },
   // {

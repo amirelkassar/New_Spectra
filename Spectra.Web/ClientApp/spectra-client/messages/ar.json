@@ -79,7 +79,18 @@
     "what_makes_us_special": "مايميزنا",
     "next": "التالي",
     "previous": "السابق",
-    "why_us": "لماذا نحن؟"
+    "why_us": "لماذا نحن؟",
+    "welcome": "اهلا بك",
+    "whats_app": "الواتساب",
+    "call_us": "اتصل بنا",
+    "leave_message": "اترك لنا رسالة",
+    "first_name": "الاسم الاول",
+    "last_name": "الاسم الاخير",
+    "email": "البريد الالكتروني",
+    "phone_number": "رقم الهاتف",
+    "message": "الرسالة",
+    "or_by": "أو من خلال",
+    "follow_us_on": "تابعنا على"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
@@ -123,7 +134,11 @@
     "child_needs_message": "لا تعرف مالذي يحتاجه طفلك؟",
     "success_story": "قصة نجاح",
     "before_treatment": "قبل العلاج",
-    "after_treatment": "بعد العلاج"
+    "after_treatment": "بعد العلاج",
+    "articles_series": "نقدم لكم سلسلة من المقالات التي تخص الاضطرابات ومشاكلها",
+    "articles": "المقالات",
+    "latest_articles": "احدث المقالات",
+    "features_articles": "اهم المقالات"
   },
   "packages_obj": {
     "title": "الباقات",

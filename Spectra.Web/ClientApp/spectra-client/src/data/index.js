@@ -24,7 +24,7 @@ import { WHAT_MAKES_US_SPECIAL } from './what-makes-us-special';
 import { TEAM } from './team';
 import { WHY_US } from './why-us';
 import { MOBILE_APP } from './mobile-app';
-import { SOCIAL } from './contact';
+import { SOCIAL, EMAILS } from './contact';
 import { REMINDER_MESSAGES } from './reminder-messages';
 import { CHILDS, CHILD_TABS, CHILDS_TABLE } from './child';
 import { FAMILIES } from './families';
@@ -38,6 +38,7 @@ import {
   VERSION_STATE,
 } from './contract';
 import { ROLES } from './roles';
+import { ARTICLES } from './blog';
 
 export {
   WHAT_WE_CURE,
@@ -76,4 +77,6 @@ export {
   CONTRACT_STATE,
   VERSION_STATE,
   ROLES,
+  ARTICLES,
+  EMAILS,
 };
