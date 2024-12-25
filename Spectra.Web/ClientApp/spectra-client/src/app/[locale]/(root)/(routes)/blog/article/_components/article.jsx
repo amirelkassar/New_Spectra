@@ -54,14 +54,16 @@ export const Article = ({ data = [] }) => {
             )}
 
             {c?.image && (
-              <Image
-                src={c?.image}
-                alt='image'
-                width={900}
-                height={500}
-                className='w-full h-[436px] object-cover object-center'
-                priority
-              />
+              <div className='w-full min-h-[436px] max-w-[877px] relative'>
+                <Image
+                  src={c?.image}
+                  alt='image'
+                  fill
+                  sizes='width:100%, height:100%'
+                  className='w-full h-auto object-cover object-center'
+                  priority
+                />
+              </div>
             )}
 
             {c?.paragraphs[locale]?.length > 0 &&
