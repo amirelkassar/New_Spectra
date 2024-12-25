@@ -18,7 +18,7 @@ namespace Spectra.Application.Chats.Commands
             Participants = [];
         }
         public bool IsGroup { get; set; }
-        public ICollection<CreateParticipantDto> Participants { get; set; }
+        public ICollection<ChatParticipantReadDto> Participants { get; set; }
         public string? RoomName { get; set; }
 
         public class CreateChatRoomCommandHandler(IBaseMongoDbRepository<ChatRoom> chatRepository,
