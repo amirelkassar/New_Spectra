@@ -146,7 +146,12 @@
     "content": "Package content",
     "goals": "Package goals",
     "photo": "Package photo",
-    "diagnostic_packages": "Diagnostic Packages"
+    "diagnostic": "Diagnostic Packages",
+    "behavioral": "Behavioral and Dialectical Packages",
+    "functional": "Behavioral Functional and Nutrition Packages",
+    "learningDifficulties": "Learning Difficulties Packages",
+    "skillAndBehavior": "Skill and Behavior Development Packages",
+    "psychological": "Psychological Support Packages"
   },
   "contract_obj": {
     "contracts": "Contracts",

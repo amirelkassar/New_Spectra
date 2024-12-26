@@ -146,7 +146,12 @@
     "content": "محتوي الباقة",
     "goals": "الهدف من الباقة",
     "photo": "الصورة الدعائية",
-    "diagnostic_packages": "الباقات التشخيصية"
+    "diagnostic": "باقات تشخيصية",
+    "behavioral": "باقات سلوكية وجدلية",
+    "functional": "باقات سلوكية وظيفية ومشاكل التغذية",
+    "learningDifficulties": "باقات صعوبات التعلم",
+    "skillAndBehavior": "باقات تنمية مهارية وسلوكية",
+    "psychological": "باقات دعم نفسي"
   },
   "contract_obj": {
     "contracts": "العقود",
@@ -162,8 +167,8 @@
     "data_fill": "ملء البيانات",
     "under_review": "قيد المراجعة",
     "accepted": "إتمام العملية",
-    "price_of_service_as_freelancer": "سعر نسبتك كطبيب مستقل",
-    "price_of_service_as_spectra": "سعر نسبتك كطبيب فرد من فريق سبيكترا",
+    "price_of_service_as_freelancer": "سعر نسبتك كطبيب / متخصص مستقل",
+    "price_of_service_as_spectra": "سعر نسبتك كطبيب / متخصص فرد من فريق سبيكترا",
     "services_as_freelancer": "الخدمات كطبيب مستقل",
     "services_as_spectra": "الخدمات كطبيب فرد من فريق سبيكترا",
     "duration": "المدة",

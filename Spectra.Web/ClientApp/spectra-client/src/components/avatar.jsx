@@ -5,7 +5,7 @@ const Avatar = ({
   src = '',
   name = '',
   className = '',
-  size = 'lg',
+  size = 'md',
   radius = 'xl',
   ...props
 }) => {

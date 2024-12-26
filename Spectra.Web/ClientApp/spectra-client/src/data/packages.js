@@ -1,28 +1,37 @@
+export const PACKAGES_TAGS_OBJ = {
+  diagnostic: 'diagnostic-packages',
+  behavioral: 'behavioral-and-dialectical-packages',
+  functional: 'behavioral-functional-and-nutrition-packages',
+  learningDifficulties: 'learning-difficulties-packages',
+  skillAndBehavior: 'skill-and-behavior-development-packages',
+  psychological: 'psychological-support-packages',
+};
+
 // Arabic labels
 export const PACKAGES_TAGS_AR = [
   {
     label: 'باقات تشخيصية',
-    value: 'diagnostic-packages',
+    value: PACKAGES_TAGS_OBJ.diagnostic,
   },
   {
     label: 'باقات سلوكية وجدلية',
-    value: 'behavioral-and-dialectical-packages',
+    value: PACKAGES_TAGS_OBJ.behavioral,
   },
   {
     label: 'باقات سلوكية وظيفية ومشاكل التغذية',
-    value: 'behavioral-functional-and-nutrition-packages',
+    value: PACKAGES_TAGS_OBJ.functional,
   },
   {
     label: 'باقات صعوبات التعلم',
-    value: 'learning-difficulties-packages',
+    value: PACKAGES_TAGS_OBJ.learningDifficulties,
   },
   {
     label: 'باقات تنمية مهارية وسلوكية',
-    value: 'skill-and-behavior-development-packages',
+    value: PACKAGES_TAGS_OBJ.skillAndBehavior,
   },
   {
     label: 'باقات دعم نفسي',
-    value: 'psychological-support-packages',
+    value: PACKAGES_TAGS_OBJ.psychological,
   },
 ];
 
@@ -30,26 +39,26 @@ export const PACKAGES_TAGS_AR = [
 export const PACKAGES_TAGS_EN = [
   {
     label: 'Diagnostic Packages',
-    value: 'diagnostic-packages',
+    value: PACKAGES_TAGS_OBJ.diagnostic,
   },
   {
     label: 'Behavioral and Dialectical Packages',
-    value: 'behavioral-and-dialectical-packages',
+    value: PACKAGES_TAGS_OBJ.behavioral,
   },
   {
     label: 'Behavioral Functional and Nutrition Packages',
-    value: 'behavioral-functional-and-nutrition-packages',
+    value: PACKAGES_TAGS_OBJ.functional,
   },
   {
     label: 'Learning Difficulties Packages',
-    value: 'learning-difficulties-packages',
+    value: PACKAGES_TAGS_OBJ.learningDifficulties,
   },
   {
     label: 'Skill and Behavior Development Packages',
-    value: 'skill-and-behavior-development-packages',
+    value: PACKAGES_TAGS_OBJ.skillAndBehavior,
   },
   {
     label: 'Psychological Support Packages',
-    value: 'psychological-support-packages',
+    value: PACKAGES_TAGS_OBJ.psychological,
   },
 ];
