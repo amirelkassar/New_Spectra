@@ -204,7 +204,7 @@ const GoalList = ({
         size='xl'
         classNames={{
           input:
-            'font-bold text-sm mdl:text-xl w-full text-left pe-5 ps-14',
+            'font-bold text-sm mdl:text-xl w-full text-left !pe-5 !ps-14',
         }}
       />
 

@@ -14,7 +14,7 @@ import { useDeletePacakge } from '../_hooks/use-delete-package';
 import { useQueryParams } from '@/hooks/queries/use-query-params';
 import { Pagination } from '@/components/table/pagination';
 import MultiSelectInput from '@/components/inputs/multi-select-input';
-import { PACKAGES_TAGS } from '@/data';
+import { PACKAGES_TAGS_AR, PACKAGES_TAGS_EN } from '@/data';
 
 export const PackagesList = () => {
   const { pageNum, search } = useQueryParams();
@@ -167,6 +167,11 @@ const PackageActions = ({ id }) => {
 };
 
 const TagsFilter = ({ tags, setTags, disabled = false }) => {
+  const locale = useLocale();
+
+  const PACKAGES_TAGS =
+    locale === 'ar' ? PACKAGES_TAGS_AR : PACKAGES_TAGS_EN;
+
   return (
     <div className='mdl:max-w-screen-sml'>
       <MultiSelectInput

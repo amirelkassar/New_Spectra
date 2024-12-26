@@ -1,42 +1,55 @@
-export const PACKAGES_TAGS = [
+// Arabic labels
+export const PACKAGES_TAGS_AR = [
   {
-    label: 'treatment',
-    value: 'treatment',
+    label: 'باقات تشخيصية',
+    value: 'diagnostic-packages',
   },
   {
-    label: 'diagnostic',
-    value: 'diagnostic',
+    label: 'باقات سلوكية وجدلية',
+    value: 'behavioral-and-dialectical-packages',
   },
   {
-    label: 'consultation',
-    value: 'consultation',
+    label: 'باقات سلوكية وظيفية ومشاكل التغذية',
+    value: 'behavioral-functional-and-nutrition-packages',
   },
   {
-    label: 'surgery',
-    value: 'surgery',
+    label: 'باقات صعوبات التعلم',
+    value: 'learning-difficulties-packages',
   },
   {
-    label: 'therapy',
-    value: 'therapy',
+    label: 'باقات تنمية مهارية وسلوكية',
+    value: 'skill-and-behavior-development-packages',
   },
   {
-    label: 'rehabilitation',
-    value: 'rehabilitation',
+    label: 'باقات دعم نفسي',
+    value: 'psychological-support-packages',
+  },
+];
+
+// English labels
+export const PACKAGES_TAGS_EN = [
+  {
+    label: 'Diagnostic Packages',
+    value: 'diagnostic-packages',
   },
   {
-    label: 'medication',
-    value: 'medication',
+    label: 'Behavioral and Dialectical Packages',
+    value: 'behavioral-and-dialectical-packages',
   },
   {
-    label: 'screening',
-    value: 'screening',
+    label: 'Behavioral Functional and Nutrition Packages',
+    value: 'behavioral-functional-and-nutrition-packages',
   },
   {
-    label: 'imaging',
-    value: 'imaging',
+    label: 'Learning Difficulties Packages',
+    value: 'learning-difficulties-packages',
   },
   {
-    label: 'lab tests',
-    value: 'lab tests',
+    label: 'Skill and Behavior Development Packages',
+    value: 'skill-and-behavior-development-packages',
+  },
+  {
+    label: 'Psychological Support Packages',
+    value: 'psychological-support-packages',
   },
 ];
