@@ -14,7 +14,7 @@ const Avatar = ({
       {...props}
       variant='filled'
       src={src}
-      className={cn('!size-12', className)}
+      className={cn('size-12', className)}
       classNames={{
         placeholder: 'text-black text-[9px] mdl:text-base',
       }}
