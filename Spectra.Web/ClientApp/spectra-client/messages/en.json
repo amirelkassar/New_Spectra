@@ -146,12 +146,14 @@
     "content": "Package content",
     "goals": "Package goals",
     "photo": "Package photo",
-    "diagnostic": "Diagnostic Packages",
-    "behavioral": "Behavioral and Dialectical Packages",
-    "functional": "Behavioral Functional and Nutrition Packages",
-    "learningDifficulties": "Learning Difficulties Packages",
-    "skillAndBehavior": "Skill and Behavior Development Packages",
-    "psychological": "Psychological Support Packages"
+    "behavioralAndNutrition": "Behavioral and Nutrition Issues",
+    "learningDifficulties": "Learning Difficulties",
+    "skillAndBehaviorDevelopment": "Skill and Behavioral Development",
+    "psychologicalSupport": "Psychological Support and Therapy",
+    "behavioralModification": "Behavioral Modification (ABA)",
+    "occupationalAndSensory": "Occupational Therapy and Sensory Integration",
+    "speechAndCommunication": "Speech, Communication, and Language Therapy",
+    "diagnostic": "Diagnostic Packages"
   },
   "contract_obj": {
     "contracts": "Contracts",

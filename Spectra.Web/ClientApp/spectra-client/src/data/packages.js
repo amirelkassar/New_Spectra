@@ -1,64 +1,82 @@
 export const PACKAGES_TAGS_OBJ = {
-  diagnostic: 'diagnostic-packages',
-  behavioral: 'behavioral-and-dialectical-packages',
-  functional: 'behavioral-functional-and-nutrition-packages',
-  learningDifficulties: 'learning-difficulties-packages',
-  skillAndBehavior: 'skill-and-behavior-development-packages',
-  psychological: 'psychological-support-packages',
+  behavioralAndNutrition: '1',
+  learningDifficulties: '2',
+  skillAndBehaviorDevelopment: '3',
+  psychologicalSupport: '4',
+  behavioralModification: '5',
+  occupationalAndSensory: '6',
+  speechAndCommunication: '7',
+  diagnostic: '8',
 };
 
 // Arabic labels
 export const PACKAGES_TAGS_AR = [
   {
-    label: 'باقات تشخيصية',
-    value: PACKAGES_TAGS_OBJ.diagnostic,
+    label: 'سلوكيات ومشاكل التغذية',
+    value: PACKAGES_TAGS_OBJ.behavioralAndNutrition,
   },
   {
-    label: 'باقات سلوكية وجدلية',
-    value: PACKAGES_TAGS_OBJ.behavioral,
-  },
-  {
-    label: 'باقات سلوكية وظيفية ومشاكل التغذية',
-    value: PACKAGES_TAGS_OBJ.functional,
-  },
-  {
-    label: 'باقات صعوبات التعلم',
+    label: 'صعوبات التعلم',
     value: PACKAGES_TAGS_OBJ.learningDifficulties,
   },
   {
-    label: 'باقات تنمية مهارية وسلوكية',
-    value: PACKAGES_TAGS_OBJ.skillAndBehavior,
+    label: 'التنمية المهارية والسلوكية',
+    value: PACKAGES_TAGS_OBJ.skillAndBehaviorDevelopment,
   },
   {
-    label: 'باقات دعم نفسي',
-    value: PACKAGES_TAGS_OBJ.psychological,
+    label: 'الدعم والعلاج النفسي',
+    value: PACKAGES_TAGS_OBJ.psychologicalSupport,
+  },
+  {
+    label: 'التعديل السلوكي ABA',
+    value: PACKAGES_TAGS_OBJ.behavioralModification,
+  },
+  {
+    label: 'العلاج الوظيفي والتكامل الحسي',
+    value: PACKAGES_TAGS_OBJ.occupationalAndSensory,
+  },
+  {
+    label: 'التخاطب والتواصل واللغة',
+    value: PACKAGES_TAGS_OBJ.speechAndCommunication,
+  },
+  {
+    label: 'التشخيصية',
+    value: PACKAGES_TAGS_OBJ.diagnostic,
   },
 ];
 
 // English labels
 export const PACKAGES_TAGS_EN = [
   {
-    label: 'Diagnostic Packages',
-    value: PACKAGES_TAGS_OBJ.diagnostic,
+    label: 'Behavioral and Nutrition Issues',
+    value: PACKAGES_TAGS_OBJ.behavioralAndNutrition,
   },
   {
-    label: 'Behavioral and Dialectical Packages',
-    value: PACKAGES_TAGS_OBJ.behavioral,
-  },
-  {
-    label: 'Behavioral Functional and Nutrition Packages',
-    value: PACKAGES_TAGS_OBJ.functional,
-  },
-  {
-    label: 'Learning Difficulties Packages',
+    label: 'Learning Difficulties',
     value: PACKAGES_TAGS_OBJ.learningDifficulties,
   },
   {
-    label: 'Skill and Behavior Development Packages',
-    value: PACKAGES_TAGS_OBJ.skillAndBehavior,
+    label: 'Skill and Behavioral Development',
+    value: PACKAGES_TAGS_OBJ.skillAndBehaviorDevelopment,
   },
   {
-    label: 'Psychological Support Packages',
-    value: PACKAGES_TAGS_OBJ.psychological,
+    label: 'Psychological Support and Therapy',
+    value: PACKAGES_TAGS_OBJ.psychologicalSupport,
+  },
+  {
+    label: 'Behavioral Modification (ABA)',
+    value: PACKAGES_TAGS_OBJ.behavioralModification,
+  },
+  {
+    label: 'Occupational Therapy and Sensory Integration',
+    value: PACKAGES_TAGS_OBJ.occupationalAndSensory,
+  },
+  {
+    label: 'Speech, Communication, and Language Therapy',
+    value: PACKAGES_TAGS_OBJ.speechAndCommunication,
+  },
+  {
+    label: 'Diagnostic Packages',
+    value: PACKAGES_TAGS_OBJ.diagnostic,
   },
 ];

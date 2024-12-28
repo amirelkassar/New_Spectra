@@ -43,8 +43,7 @@ export const NotificationsToast = () => {
       }
 
       connection.onclose(() => {
-        console.warn('SignalR connection closed. Reconnecting...');
-        setTimeout(connectSignalR, 5000);
+        console.warn('SignalR connection closed.');
       });
     };
 

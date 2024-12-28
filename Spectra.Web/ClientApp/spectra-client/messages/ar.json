@@ -146,12 +146,14 @@
     "content": "محتوي الباقة",
     "goals": "الهدف من الباقة",
     "photo": "الصورة الدعائية",
-    "diagnostic": "باقات تشخيصية",
-    "behavioral": "باقات سلوكية وجدلية",
-    "functional": "باقات سلوكية وظيفية ومشاكل التغذية",
-    "learningDifficulties": "باقات صعوبات التعلم",
-    "skillAndBehavior": "باقات تنمية مهارية وسلوكية",
-    "psychological": "باقات دعم نفسي"
+    "behavioralAndNutrition": "سلوكيات ومشاكل التغذية",
+    "learningDifficulties": "صعوبات التعلم",
+    "skillAndBehaviorDevelopment": "التنمية المهارية والسلوكية",
+    "psychologicalSupport": "الدعم والعلاج النفسي",
+    "behavioralModification": "التعديل السلوكي ABA",
+    "occupationalAndSensory": "العلاج الوظيفي والتكامل الحسي",
+    "speechAndCommunication": "التخاطب والتواصل واللغة",
+    "diagnostic": "التشخيصية"
   },
   "contract_obj": {
     "contracts": "العقود",
