@@ -13,7 +13,7 @@ const CardContainer = ({ children, ...props }) => {
         ...props.style,
       }}
       className={cn(
-        'p-5 relative rounded-xl transition hover:bg-blueLight',
+        'p-5 relative rounded-xl transition group hover:bg-blueLight',
         props.className
       )}
     >

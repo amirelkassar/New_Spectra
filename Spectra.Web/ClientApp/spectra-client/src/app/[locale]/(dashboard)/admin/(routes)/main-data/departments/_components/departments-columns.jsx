@@ -1,9 +1,14 @@
+import { useRouter } from '@/i18n/routing';
 import { CellActions } from './cell-actions';
+import ROUTES from '@/routes';
 
 export const DepartmentColumns = [
   {
     accessorKey: 'arName',
     header: 'الاسم باللغة بالعربية',
+    cell: ({ row }) => (
+      <CellArName value={row.original.arName} id={row.original.id} />
+    ),
   },
   {
     accessorKey: 'enName',
@@ -11,7 +16,7 @@ export const DepartmentColumns = [
   },
   {
     accessorKey: 'specsifications',
-    header: 'عدد التخصصات ',
+    header: 'عدد التخصصات',
     cell: ({ getValue }) => getValue()?.length,
   },
   {
@@ -29,3 +34,19 @@ export const DepartmentColumns = [
     },
   },
 ];
+
+const CellArName = ({ value, id }) => {
+  const router = useRouter();
+
+  return (
+    <div
+      role='button'
+      onClick={() => {
+        if (!id) return;
+        router.push(ROUTES.ADMIN.DATAMAIN.DEPARTMENTSDETAILS(id));
+      }}
+    >
+      {value}
+    </div>
+  );
+};
