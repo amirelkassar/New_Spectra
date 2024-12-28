@@ -4,12 +4,8 @@ import { useState } from 'react';
 import { Link } from '@/i18n/routing';
 
 import { AddButton } from '@/components/buttons/add-button';
-import {
-  SectionTitle,
-  TableItem,
-} from '@/app/[locale]/(dashboard)/admin/_components/ui';
+import { SectionTitle, TableItem } from '@/admin/_components/ui';
 import ROUTES from '@/routes';
-import StaffIcon from '@/assets/icons/staff';
 import { useStaff } from '@/hooks/queries/admin/staff/staff';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { useQueryParams } from '@/hooks/queries/use-query-params';
@@ -18,6 +14,7 @@ import { Pagination } from '@/components/table/pagination';
 import { StaffColumns } from './staff-columns';
 import { FilterButton } from '@/components/table/filter-button';
 import { FilterType } from '@/components/table/filter-type';
+import { StaffCount } from '@/dashboard/_components/ui/staff-count';
 
 export const StaffTable = () => {
   const [jobType, setJobType] = useState('');
@@ -74,16 +71,6 @@ const Heading = ({ totalCount }) => {
       <Link href={ROUTES.ADMIN.STAFF.STAFF_ADD}>
         <AddButton>اضافة موظف</AddButton>
       </Link>
-    </div>
-  );
-};
-
-const StaffCount = ({ children }) => {
-  if (!children) return null;
-  return (
-    <div className='font-bold text-greenMain text-sm mdl:text-base flex items-center gap-1'>
-      <StaffIcon className='fill-greenMain size-3' />
-      {children}
     </div>
   );
 };

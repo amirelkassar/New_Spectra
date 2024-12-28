@@ -28,14 +28,12 @@ const CardBody = ({ children, ...props }) => {
     <div
       {...props}
       className={cn(
-        'pb-5 border-b-2 border-grayMedium/50',
+        'pb-5 border-b-2 border-grayMedium/50 last:border-none last:pb-0',
         props.className
       )}
     >
       <div className='grid grid-cols-12 gap-5'>
-        <div className='col-span-9 text-xs space-y-3'>
-          {children}
-        </div>
+        <div className='col-span-9 text-xs space-y-3'>{children}</div>
         <span className='col-span-3' />
       </div>
     </div>
@@ -64,10 +62,7 @@ const CardAction = ({ children, ...props }) => {
   return (
     <div
       {...props}
-      className={cn(
-        'absolute top-3 end-3',
-        props.className
-      )}
+      className={cn('absolute top-3 end-3', props.className)}
     >
       {children}
     </div>

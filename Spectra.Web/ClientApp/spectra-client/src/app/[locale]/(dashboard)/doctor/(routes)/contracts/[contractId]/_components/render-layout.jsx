@@ -9,6 +9,7 @@ import { BackButton } from '@/components/buttons/back-button';
 import { H1 } from '@/dashboard/_components/ui/h1';
 import { useEmployeeHeadContractById } from '@/hooks/queries/employee-head/contract';
 import { ContractProvider } from '@/dashboard/_hooks/use-contract-store';
+import ROUTES from '@/routes';
 
 export const RenderLayout = ({ id = '', children }) => {
   const t = useTranslations('contract_obj');
@@ -36,6 +37,8 @@ export const RenderLayout = ({ id = '', children }) => {
 const ContractLayout = ({ contract, children }) => {
   const t = useTranslations('contract_obj');
 
+  const employeeId = contract?.employeeId || '';
+
   return (
     <div className='h-full flex flex-col gap-5'>
       <div className='flex items-center gap-4'>
@@ -45,7 +48,11 @@ const ContractLayout = ({ contract, children }) => {
 
       <ContractProvider>
         <div className='flex-1 flex flex-col gap-5'>
-          <DoctorDataCard {...contract} showChatButton />
+          <DoctorDataCard
+            {...contract}
+            showChatButton
+            href={ROUTES.DOCTOR.TEAM.VIEW_TEAM(employeeId)}
+          />
 
           <div className='flex overflow-hidden flex-1'>
             <Chat />
