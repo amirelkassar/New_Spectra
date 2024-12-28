@@ -166,6 +166,7 @@
     "reject": "مرفوضة",
     "draft_date": "مسودة بتاريخ",
     "reject_date": "مرفوضة بتاريخ",
+    "cancel_contract": "الغاء العقد",
     "send_join_request": "إرسال طلب الإنضمام",
     "join_request": "طلب انضمام",
     "data_fill": "ملء البيانات",
@@ -194,6 +195,7 @@
     "accepted_by_department_head": "تمت الموافقة من قبل رئيس القسم",
     "accepted_by_doctor": "تمت الموافقة من قبل الطبيب",
     "sign_msg": "يرجى التوقيع باستخدام الماوس أو لوحة التتبع الخاصة بجهاز اللابتوب أو باستخدام اللمس علي شاشة المحمول.",
-    "no_actions_available_for_this_version": "لا يوجد اجراءات متاحة حاليا للنسخة رقم"
+    "no_actions_available_for_this_version": "لا يوجد اجراءات متاحة حاليا للنسخة رقم",
+    "contracting": "قيد التعاقد"
   }
 }

@@ -11,7 +11,9 @@ import { useActiveStep } from '../../_hooks';
 import { ContractSteps } from './contract-steps';
 import { ContractHeader } from './contract-header';
 import { useEmployeeContract } from '@/hooks/queries/employee/contract';
+import { CancelButton } from '@/dashboard/_components/ui/cancel-button';
 import Card from '@/components/card';
+import { useCancelContract } from '../../_hooks/use-cancel-contract';
 
 export const ContractLayout = ({ children }) => {
   const t = useTranslations('contract_obj');
@@ -40,7 +42,11 @@ export const ContractLayout = ({ children }) => {
 const RenderLayout = ({ data = {}, hasData = false, children }) => {
   return (
     <div className='flex flex-col h-full space-y-5'>
-      <Steps hasData={hasData} state={data?.contractState} />
+      <Steps
+        hasData={hasData}
+        contractId={data?.id}
+        state={data?.contractState}
+      />
 
       <div className='flex overflow-hidden flex-1'>
         <Chat />
@@ -51,7 +57,7 @@ const RenderLayout = ({ data = {}, hasData = false, children }) => {
   );
 };
 
-const Steps = ({ hasData = false, state }) => {
+const Steps = ({ hasData = false, contractId = '', state }) => {
   const { activeStep } = useActiveStep({ hasData, state });
 
   return (
@@ -61,6 +67,23 @@ const Steps = ({ hasData = false, state }) => {
       <ContractSteps active={activeStep} />
 
       {activeStep === 0 && <AskForJoin />}
+
+      {activeStep === 3 && <CancelContract id={contractId} />}
     </Card>
+  );
+};
+
+const CancelContract = ({ id = '' }) => {
+  const t = useTranslations('contract_obj');
+
+  const { onCancel } = useCancelContract(id);
+
+  return (
+    <CancelButton
+      onClick={onCancel}
+      className='w-full max-w-xs mx-auto py-2'
+    >
+      {t('cancel_contract')}
+    </CancelButton>
   );
 };

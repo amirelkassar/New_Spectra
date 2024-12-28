@@ -8,9 +8,12 @@ import { H1 } from '@/dashboard/_components/ui/h1';
 import { BackButton } from '@/components/buttons/back-button';
 import { ChatsButton } from '@/dashboard/_components/contract/ui';
 import ROUTES from '@/routes';
+import { CanceledBadge } from '@/dashboard/_components/ui/canceled-badge';
 
 export const ContractHeader = ({ activeStep }) => {
   const t = useTranslations('contract_obj');
+
+  const tg = useTranslations('general_obj');
 
   const pathname = usePathname();
 
@@ -21,14 +24,13 @@ export const ContractHeader = ({ activeStep }) => {
 
   return (
     <div className='flex justify-between items-center gap-5'>
-      {isContractHome ? (
+      <div className='flex items-center gap-5'>
+        {!isContractHome && <BackButton />}
         <H1>{t('contract')}</H1>
-      ) : (
-        <div className='flex items-center gap-5'>
-          <BackButton />
-          <H1>{t('contract')}</H1>
-        </div>
-      )}
+        {activeStep === 4 && (
+          <CanceledBadge>{tg('canceled')}</CanceledBadge>
+        )}
+      </div>
 
       {activeStep >= 3 && <ChatsButton />}
     </div>

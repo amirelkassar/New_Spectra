@@ -165,6 +165,7 @@
     "reject": "Reject",
     "draft_date": "Draft date",
     "reject_date": "Reject date",
+    "cancel_contract": "Cancel contract",
     "copy_num": "Copy number",
     "send_join_request": "Send join request",
     "join_request": "Join request",
@@ -194,6 +195,7 @@
     "accepted_by_department_head": "Accepted by department head",
     "accepted_by_doctor": "Accepted by doctor",
     "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen.",
-    "no_actions_available_for_this_version": "No actions are currently available for version number"
+    "no_actions_available_for_this_version": "No actions are currently available for version number",
+    "contracting": "Contracting"
   }
 }

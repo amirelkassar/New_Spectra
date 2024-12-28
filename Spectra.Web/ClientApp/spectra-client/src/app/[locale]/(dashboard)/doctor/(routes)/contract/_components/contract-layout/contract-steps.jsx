@@ -27,7 +27,7 @@ export const ContractSteps = ({ active }) => {
     >
       <Stepper.Step label={t('join_request')} />
       <Stepper.Step label={t('data_fill')} />
-      <Stepper.Step label={t('under_review')} />
+      <Stepper.Step label={t('contracting')} />
       <Stepper.Step label={t('accepted')} />
     </Stepper>
   );

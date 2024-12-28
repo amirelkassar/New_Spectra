@@ -15,9 +15,11 @@ export const useActiveStep = ({ hasData, state }) => {
     if (!hasData && pathname === ROUTES.DOCTOR.CONTRACT.CONTRACTSNEW)
       return 2;
 
-    if (hasData) return 3;
+    if (hasData && CONTRACT_STATE.contracting === state) return 3;
 
-    if (hasData && CONTRACT_STATE.accepted === state) return 4;
+    if (hasData && CONTRACT_STATE.canceled === state) return 4;
+
+    if (hasData && CONTRACT_STATE.accepted === state) return 5;
   }, [state, pathname, hasData]);
 
   return { activeStep };
