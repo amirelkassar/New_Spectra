@@ -27,3 +27,13 @@ export const notifications = {
     delete: (id) => `/notification?id=${id}`,
   },
 };
+
+export const chat = {
+  base: '/chat',
+  list: (queries = {}) => buildQuery('/chat/list', queries),
+  messages: (queries = {}) => buildQuery('/chat/messages', queries),
+  actions: {
+    addMessage: '/chat/message',
+    deleteMessage: (id) => `/chat/message?messageId=${id}`,
+  },
+};
