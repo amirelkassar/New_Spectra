@@ -62,7 +62,11 @@ const CardAction = ({ children, ...props }) => {
   return (
     <div
       {...props}
-      className={cn('absolute top-3 end-3', props.className)}
+      className={cn('absolute top-1 end-2', props.className)}
+      onClick={(e) => {
+        e.stopPropagation();
+        props?.onClick && props.onClick(e);
+      }}
     >
       {children}
     </div>

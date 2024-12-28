@@ -2,25 +2,18 @@
 
 import { useDate } from '@/hooks/use-date';
 import { EmployeeCellActions } from './employee-cell-actions';
+import { useRouter } from '@/i18n/routing';
+import ROUTES from '@/routes';
 
 export const StaffColumns = [
   {
     accessorKey: 'name',
     header: 'الاسم ',
-    cell: ({ row }) => {
-      const firstName = row.original?.firstName;
-      const lastName = row.original?.lastName;
-
-      if (firstName && lastName) {
-        return `${firstName} ${lastName}`;
-      }
-
-      return firstName;
-    },
+    cell: ({ row }) => <CellName row={row} />,
   },
   {
     accessorKey: 'emailaddress',
-    header: 'الايميل',
+    header: 'البريد الالكتروني',
   },
   {
     accessorKey: 'jobType',
@@ -40,7 +33,7 @@ export const StaffColumns = [
   },
 ];
 
-const RenderJobType = ({ jobType }) => {
+export const RenderJobType = ({ jobType }) => {
   switch (String(jobType)) {
     case '1':
       return 'طبيب';
@@ -53,8 +46,27 @@ const RenderJobType = ({ jobType }) => {
   }
 };
 
-const CellDate = ({ date }) => {
+export const CellDate = ({ date }) => {
   const { fullYear } = useDate(date);
 
   return fullYear;
+};
+
+const CellName = ({ row }) => {
+  const router = useRouter();
+
+  if (!row || !row.original) return null;
+
+  const firstName = row.original?.firstName || '';
+  const lastName = row.original?.lastName || '';
+  const id = row.original?.id || '';
+
+  return (
+    <div
+      role='button'
+      onClick={() => router.push(ROUTES.ADMIN.STAFF.STAFF_ID(id))}
+    >
+      {firstName} {lastName}
+    </div>
+  );
 };
