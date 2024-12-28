@@ -9,7 +9,7 @@ import { BackButton } from '@/components/buttons/back-button';
 import { ChatsButton } from '@/dashboard/_components/contract/ui';
 import ROUTES from '@/routes';
 
-export const ContractHeader = () => {
+export const ContractHeader = ({ activeStep }) => {
   const t = useTranslations('contract_obj');
 
   const pathname = usePathname();
@@ -30,7 +30,7 @@ export const ContractHeader = () => {
         </div>
       )}
 
-      <ChatsButton />
+      {activeStep >= 3 && <ChatsButton />}
     </div>
   );
 };

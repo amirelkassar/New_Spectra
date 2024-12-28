@@ -56,7 +56,7 @@ const Steps = ({ hasData = false, state }) => {
 
   return (
     <Card>
-      <ContractHeader />
+      <ContractHeader activeStep={activeStep} />
 
       <ContractSteps active={activeStep} />
 

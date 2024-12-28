@@ -6,6 +6,7 @@ import { Link } from '@/i18n/routing';
 import { VERSION_STATE } from '@/data';
 import { useTranslations } from 'next-intl';
 import { useDate } from '@/hooks/use-date';
+import ContractReject from '@/assets/icons/contract-reject';
 
 export const ContractCopy = ({
   id = '',
@@ -13,6 +14,7 @@ export const ContractCopy = ({
   state = VERSION_STATE.active,
   creationDate = '',
   draftingDate = '',
+  rejectingDate = '',
   viewHref = '#',
 }) => {
   return (
@@ -20,7 +22,8 @@ export const ContractCopy = ({
       data-id={id}
       className={cn(
         'rounded-xl p-3 bg-grayLight flex items-center gap-5',
-        state === VERSION_STATE.active && 'bg-blueLighter'
+        state === VERSION_STATE.active && 'bg-blueLighter',
+        state === VERSION_STATE.reject && 'bg-red/10'
       )}
     >
       <Icon state={state} />
@@ -30,6 +33,7 @@ export const ContractCopy = ({
           state={state}
           order={order}
           draftDate={draftingDate}
+          rejectDate={rejectingDate}
         />
         <CreationDate date={creationDate} />
       </div>
@@ -41,21 +45,35 @@ export const ContractCopy = ({
 
 const Icon = ({ state }) => {
   return (
-    <div className={cn('p-2 lg:p-3 bg-white rounded-xl w-fit')}>
+    <div
+      className={cn(
+        'p-2 lg:p-3 bg-white rounded-xl w-fit',
+        state === VERSION_STATE.reject && 'bg-red/10'
+      )}
+    >
       {state === VERSION_STATE.active && (
         <ContractsWhiteIcon className='size-4 lg:size-10 text-greenMain' />
       )}
       {state === VERSION_STATE.draft && (
         <DraftIcon className='size-4 lg:size-10' />
       )}
+      {state === VERSION_STATE.reject && (
+        <ContractReject className='size-4 lg:size-10 text-red' />
+      )}
     </div>
   );
 };
 
-const VersionAndState = ({ state, order, draftDate = '' }) => {
+const VersionAndState = ({
+  state,
+  order,
+  draftDate = '',
+  rejectDate = '',
+}) => {
   const t = useTranslations('contract_obj');
 
-  const { fullYear } = useDate(draftDate);
+  const { fullYear: draftingDate } = useDate(draftDate);
+  const { fullYear: rejectingDate } = useDate(rejectDate);
 
   return (
     <div className='flex flex-col gap-1'>
@@ -66,12 +84,23 @@ const VersionAndState = ({ state, order, draftDate = '' }) => {
       <span className='text-xs lg:text-base capitalize'>
         {state === VERSION_STATE.active
           ? t('active')
-          : state === VERSION_STATE.draft && !!fullYear
+          : state === VERSION_STATE.draft && !!draftingDate
           ? t('draft_date')
-          : t('draft')}
+          : state === VERSION_STATE.draft
+          ? t('draft')
+          : state === VERSION_STATE.reject && !!rejectingDate
+          ? t('reject_date')
+          : t('reject')}
       </span>
-      {!!fullYear && (
-        <span className='text-xs lg:text-base -mt-1'>{fullYear}</span>
+      {!!draftingDate && (
+        <span className='text-xs lg:text-base -mt-1'>
+          {draftingDate}
+        </span>
+      )}
+      {!!rejectingDate && (
+        <span className='text-xs lg:text-base -mt-1'>
+          {rejectingDate}
+        </span>
       )}
     </div>
   );
