@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { ContractData } from '@/dashboard/_components/contract/contract-data';
@@ -12,7 +11,8 @@ import { RejectButton } from '@/dashboard/_components/ui/reject-button';
 import { EditButton } from '@/dashboard/_components/ui/edit-button';
 import { VERSION_STATE } from '@/data';
 import Card from '@/components/card';
-import ROUTES from '@/routes';
+import { useContractVersionActions } from '../../_hooks/use-contract-version-actions';
+import { SignModal } from '@/dashboard/_components/contract/sign-modal';
 
 export const ViewContract = ({ id }) => {
   const query = useEmployeeContract();
@@ -46,33 +46,39 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
       <Actions
         state={state}
         acceptedByEmployee={acceptedByEmployee}
-        id={versionId}
+        versionId={versionId}
+        contractId={contract.id}
       />
     </ContractData>
   );
 };
 
-const Actions = ({ acceptedByEmployee = false, state, id = '' }) => {
+const Actions = ({
+  acceptedByEmployee = false,
+  state,
+  versionId = '',
+  contractId = '',
+}) => {
   const tg = useTranslations('general_obj');
 
-  const router = useRouter();
-
-  const onEdit = () =>
-    router.push(ROUTES.DOCTOR.CONTRACT.EDIT_CONTRACT(id));
+  const { onEdit, onAccept, onReject, isPendingAccept } =
+    useContractVersionActions(versionId, contractId);
 
   if (state === VERSION_STATE.draft) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
         {!acceptedByEmployee && (
-          <AcceptButton className='w-full'>
-            {tg('accept')}
-          </AcceptButton>
+          <SignModal isPending={isPendingAccept} onSend={onAccept}>
+            <AcceptButton className='w-full'>
+              {tg('accept')}
+            </AcceptButton>
+          </SignModal>
         )}
       </div>
       <div>
         {!acceptedByEmployee && (
-          <RejectButton className='w-full'>
+          <RejectButton onClick={onReject} className='w-full'>
             {tg('reject')}
           </RejectButton>
         )}

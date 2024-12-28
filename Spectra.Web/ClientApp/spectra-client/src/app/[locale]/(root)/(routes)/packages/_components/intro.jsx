@@ -62,9 +62,12 @@ const RenderPackages = ({ packages = [] }) => {
 
   return (
     <div className='space-y-5 mdl:space-y-10'>
-      {Object.entries(filteredPackages).map(([key, packages]) => (
-        <Packages key={key} title={key} packages={packages} />
-      ))}
+      {Object.entries(filteredPackages).map(
+        ([key, packages]) =>
+          !!packages?.length && (
+            <Packages key={key} title={key} packages={packages} />
+          )
+      )}
     </div>
   );
 };
