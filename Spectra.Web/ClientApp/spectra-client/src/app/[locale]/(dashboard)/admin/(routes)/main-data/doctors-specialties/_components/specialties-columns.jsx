@@ -1,10 +1,15 @@
 import { formatCurrency } from '@/lib/utils';
 import { CellActions } from './cell-actions';
+import { useRouter } from '@/i18n/routing';
+import ROUTES from '@/routes';
 
 export const SpecialtiesColumns = [
   {
     accessorKey: 'arName',
     header: 'الاسم بالعربي',
+    cell: ({ row }) => (
+      <CellArName value={row.original.arName} id={row.original.id} />
+    ),
   },
   {
     accessorKey: 'enName',
@@ -13,10 +18,7 @@ export const SpecialtiesColumns = [
   {
     accessorKey: 'code',
     header: 'كود التخصص',
-    cell: ({ row }) => {
-      const code = row.original?.code;
-      return code ? code : '--';
-    },
+    cell: ({ getValue }) => getValue() || '--',
   },
   {
     accessorKey: 'consultationCost',
@@ -33,3 +35,19 @@ export const SpecialtiesColumns = [
     },
   },
 ];
+
+const CellArName = ({ value, id }) => {
+  const router = useRouter();
+
+  return (
+    <div
+      role='button'
+      onClick={() => {
+        if (!id) return;
+        router.push(ROUTES.ADMIN.DATAMAIN.SPECIALTIESID(id));
+      }}
+    >
+      {value}
+    </div>
+  );
+};
