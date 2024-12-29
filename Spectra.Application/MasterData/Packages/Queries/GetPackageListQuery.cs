@@ -35,8 +35,8 @@ namespace Spectra.Application.MasterData.Packages.Queries
                 {
                     var searchLower = request.Search.ToLower().Trim();
                     var searchFilter = filterBuilder.Or(
-                        filterBuilder.Regex(s => s.EnName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i")),
-                        filterBuilder.Regex(s => s.ArName, new MongoDB.Bson.BsonRegularExpression($"^{searchLower}", "i"))
+                        filterBuilder.Regex(s => s.EnName, new MongoDB.Bson.BsonRegularExpression($".*{searchLower}", "i")),
+                        filterBuilder.Regex(s => s.ArName, new MongoDB.Bson.BsonRegularExpression($".*{searchLower}", "i"))
                     );
                     filter &= searchFilter;
                 }

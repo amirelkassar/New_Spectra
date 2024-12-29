@@ -10,6 +10,7 @@ using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Identities.Dtos;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
+using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -19,6 +20,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IPermissionManager _permission;
+        private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository;
         private readonly int _expDays;
         private readonly string _key;
         private readonly byte[] _keyBytes;
@@ -30,7 +32,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         public AuthenticationService(IConfiguration configuration,
         IHttpContextAccessor httpContextAccessor,
         UserManager<AppUser> userManager,
-        IPermissionManager permission)
+        IPermissionManager permission,
+        IBaseMongoDbRepository<EmploymentContract> contractRepository)
         {
             _key = configuration["Jwt:Key"];
             _expDays = int.Parse(configuration["Jwt:ExpiryDays"]);
@@ -39,6 +42,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             _issuer = configuration["Jwt:Issuer"];
             _userManager = userManager;
             _permission = permission;
+            _contractRepository = contractRepository;
         }
         public async Task<OperationResult> LoginAsync(LoginAPIParam input)
         {
@@ -58,6 +62,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 model.ExpirationTime = lifetime;
                 model.Roles = _roles;
                 model.Permissions = await _permission.GetUserPermissionList(_user.Id);
+                var contract = await _contractRepository.GetAsync(c => c.EmployeeUserId == _user.Id);
+                model.HasActiveContract = contract != null && contract.Versions is not null && contract.Versions.Any(v => v.State == ContractConses.ContractVersionStates.Active);
                 return OperationResult<LoginModel>.Success(model);
             }
             throw new UnauthorizedAccessException();

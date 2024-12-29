@@ -7,6 +7,7 @@ using Spectra.Application.AppUsers.ProfileManagement.Dtos;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
+using Spectra.Domain.Contracts;
 using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
@@ -20,13 +21,15 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Queries
             UserManager<AppUser> identityService,
             IBaseMongoDbRepository<Employee> employeeRepository,
             IWebHostEnvironment webHostEnvironment,
-            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetUserProfileDataQuery, OperationResult>
+            IHttpContextAccessor httpContextAccessor,
+            IBaseMongoDbRepository<EmploymentContract> contractRepository) : IRequestHandler<GetUserProfileDataQuery, OperationResult>
         {
             private readonly ICurrentUser _currentUser = currentUser;
             private readonly UserManager<AppUser> _identityService = identityService;
             private readonly IBaseMongoDbRepository<Employee> _employeeRepository = employeeRepository;
             private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
             private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+            private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository = contractRepository;
 
             public async Task<OperationResult> Handle(GetUserProfileDataQuery request, CancellationToken cancellationToken)
             {
@@ -63,6 +66,9 @@ namespace Spectra.Application.AppUsers.ProfileManagement.Queries
                     userDto.UserImage = EndPointsHelper.GetFileUrl(Path.Combine(_webHostEnvironment.WebRootPath, user.UserImage), _currentUser.Id, EndPointsRoutes.Users, _httpContextAccessor);
 
                 userDto.Created = user.Created;
+
+                var contract = await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id);
+                userDto.HasActiveContract = contract != null && contract.Versions is not null && contract.Versions.Any(v => v.State == ContractConses.ContractVersionStates.Active);
                 return OperationResult<ProfileReadDto>.Success(userDto);
             }
         }
