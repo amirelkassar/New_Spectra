@@ -1,4 +1,8 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -8,33 +12,37 @@ using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
-using Spectra.Domain.MasterData.ServicesMD;
+using Spectra.Domain.MasterData.Sections;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.Queries
 {
-    public class GetMedicalProvderListQuery : QueryPaginationParam, IRequest<OperationResult>
+    public class GetEmployeeListByHeadDepartmentQuery :QueryPaginationParam, IRequest<OperationResult>
     {
-        public string? Search { get; set; }
+        public string Search { get; set; }
         public JobTypes? JobType { get; set; }
         public string? MainSpecializationId { get; set; }
-
-        public class GetMedicalProvderListQueryHandler(IBaseMongoDbRepository<Employee> doctorRepository,
-            IWebHostEnvironment webHostEnvironment,
-            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetMedicalProvderListQuery, OperationResult>
+        public class GetEmployeeListByHeadDepartmentQueryHandler(ICurrentUser currentUser,
+            IBaseMongoDbRepository<Employee> employeeRepository,
+             IWebHostEnvironment webHostEnvironment,
+            IHttpContextAccessor httpContextAccessor,
+            IBaseMongoDbRepository<Section> sectionRepository) : IRequestHandler<GetEmployeeListByHeadDepartmentQuery, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<Employee> _doctorRepository = doctorRepository;
+            private readonly ICurrentUser _currentUser = currentUser;
+            private readonly IBaseMongoDbRepository<Employee> _employeeRepository = employeeRepository;
             private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
             private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+            private readonly IBaseMongoDbRepository<Section> _sectionRepository = sectionRepository;
 
-            public async Task<OperationResult> Handle(GetMedicalProvderListQuery request, CancellationToken cancellationToken)
+            public async Task<OperationResult> Handle(GetEmployeeListByHeadDepartmentQuery request, CancellationToken cancellationToken)
             {
-                var collection = await _doctorRepository.GetCollectionAsync();
+                var userEmployee = await _employeeRepository.GetAsync(e => e.UserId == _currentUser.Id);
+                var (sectionData,sectionTotal) = await _sectionRepository.GetAllAsync(s => s.HeadDoctorId == userEmployee.Id);
+                var collection = await _employeeRepository.GetCollectionAsync();
                 var filterBuilder = Builders<Employee>.Filter;
-                var filter = filterBuilder.Empty;
+                var filter = filterBuilder.AnyIn("SectionId", sectionData.Select(s => s.Id).ToArray());
 
                 if (!string.IsNullOrWhiteSpace(request.Search))
                 {
@@ -61,7 +69,6 @@ namespace Spectra.Application.Employees.Queries
                     filter &= filterBuilder.Eq(s => s.JobType, request.JobType.Value);
                 }
 
-
                 var total = await collection.CountDocumentsAsync(filter);
                 var data = await collection.Find(filter)
                     .SortByDescending(s => s.Id)
@@ -75,6 +82,7 @@ namespace Spectra.Application.Employees.Queries
                 }
 
                 return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>(dtos, total, request.MaxCount));
+
             }
         }
     }

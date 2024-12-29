@@ -26,11 +26,11 @@ namespace Spectra.Application.Contracts.Queries
             {
                 var contract = await _contractRepository.GetAsync(c => c.Id == request.Id) ?? throw new NotFoundException("Contracts", request.Id);
 
-                if (contract.Sections is null || contract.Sections.Count <= 0 )
+                if (contract.Sections is null || contract.Sections.Count == 0 )
                 {
                     contract.InfoSection = new ContractEmployeeInfoSection
                     {
-                        ArName = $"تم الاتفاق بين كل من {contract.EmployeeName} و سبيكترا",
+                        ArName = $"تم الاتفاق بين كل من (الطرف الثانى){contract.EmployeeName} و شركة مستقبل الرعاية الطبية(الطرف الاول)",
                         ArDate=$"انه فى تاريخ  {contract.AcceptingDate}",
                     };
 
@@ -208,6 +208,15 @@ namespace Spectra.Application.Contracts.Queries
                         {
                             ArTitle=service.ArName,
                             ArDescription=service.ArTerms
+                        });
+                    }
+
+                    foreach (var service in currentVersion.FreelancingServices)
+                    {
+                        contract.Sections.Add(new ContractTextSection
+                        {
+                            ArTitle = service.ArName,
+                            ArDescription = service.ArTerms
                         });
                     }
                 }
