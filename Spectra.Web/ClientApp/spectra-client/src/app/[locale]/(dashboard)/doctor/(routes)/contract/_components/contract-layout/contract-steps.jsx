@@ -4,9 +4,13 @@ import { Stepper } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 
 import CorrectICon from '@/assets/icons/correct';
+import FalseIcon from '@/assets/icons/false';
+import { cn } from '@/lib/utils';
 
 export const ContractSteps = ({ active }) => {
   const t = useTranslations('contract_obj');
+
+  const tg = useTranslations('general_obj');
 
   return (
     <Stepper
@@ -27,8 +31,14 @@ export const ContractSteps = ({ active }) => {
     >
       <Stepper.Step label={t('join_request')} />
       <Stepper.Step label={t('data_fill')} />
-      <Stepper.Step label={t('under_review')} />
-      <Stepper.Step label={t('accepted')} />
+      <Stepper.Step label={t('contracting')} />
+      <Stepper.Step
+        completedIcon={active === 4 && <FalseIcon />}
+        label={active === 4 ? tg('canceled') : tg('accepted')}
+        classNames={{
+          stepIcon: cn(active === 4 && 'data-[completed]:bg-red'),
+        }}
+      />
     </Stepper>
   );
 };

@@ -1,5 +1,4 @@
 // CSS IMPORTS
-import './globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/dropzone/styles.css';
@@ -8,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'react-phone-input-2/lib/material.css';
+import './globals.css';
 
 // COMPONENTS IMPORTS
 import { routing } from '@/i18n/routing';

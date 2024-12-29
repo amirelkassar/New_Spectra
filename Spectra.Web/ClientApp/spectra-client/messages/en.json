@@ -26,6 +26,10 @@
   "join_as_doctor": "Join as a doctor",
   "hello": "Hello",
   "general_obj": {
+    "doc_prefix": "Dr.",
+    "from": "From",
+    "by": "By",
+    "last_modified": "Last Modified",
     "all": "All",
     "edit": "Edit",
     "save": "Save",
@@ -146,7 +150,14 @@
     "content": "Package content",
     "goals": "Package goals",
     "photo": "Package photo",
-    "diagnostic_packages": "Diagnostic Packages"
+    "behavioralAndNutrition": "Behavioral and Nutrition Issues",
+    "learningDifficulties": "Learning Difficulties",
+    "skillAndBehaviorDevelopment": "Skill and Behavioral Development",
+    "psychologicalSupport": "Psychological Support and Therapy",
+    "behavioralModification": "Behavioral Modification (ABA)",
+    "occupationalAndSensory": "Occupational Therapy and Sensory Integration",
+    "speechAndCommunication": "Speech, Communication, and Language Therapy",
+    "diagnostic": "Diagnostic Packages"
   },
   "contract_obj": {
     "contracts": "Contracts",
@@ -155,7 +166,10 @@
     "current_copy": "Current copy",
     "active": "Active",
     "draft": "Draft",
+    "reject": "Reject",
     "draft_date": "Draft date",
+    "reject_date": "Reject date",
+    "cancel_contract": "Cancel contract",
     "copy_num": "Copy number",
     "send_join_request": "Send join request",
     "join_request": "Join request",
@@ -185,6 +199,7 @@
     "accepted_by_department_head": "Accepted by department head",
     "accepted_by_doctor": "Accepted by doctor",
     "sign_msg": "Please sign using the mouse, laptop trackpad, or by touch on your mobile screen.",
-    "no_actions_available_for_this_version": "No actions are currently available for version number"
+    "no_actions_available_for_this_version": "No actions are currently available for version number",
+    "contracting": "Contracting"
   }
 }

@@ -26,6 +26,10 @@
   "join_as_doctor": "انضم كأخصائي",
   "hello": "مرحبا",
   "general_obj": {
+    "doc_prefix": "د.",
+    "from": "من",
+    "by": "بواسطة",
+    "last_modified": "آخر تعديل",
     "edit": "تعديل",
     "save": "حفظ",
     "delete": "حذف",
@@ -62,8 +66,8 @@
     "delete_confirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه.",
     "yes_sure": "نعم، أنا متأكد",
     "no": "لا",
-    "admin": "مدير",
-    "doctor": "طبيب",
+    "admin": "المدير",
+    "doctor": "الطبيب",
     "department_head": "رئيس القسم",
     "write_message": "اكتب رسالة...",
     "no_messages_yet": "لا توجد رسائل حتى الآن، ابدأ المحادثة بإرسال رسالة.",
@@ -146,7 +150,14 @@
     "content": "محتوي الباقة",
     "goals": "الهدف من الباقة",
     "photo": "الصورة الدعائية",
-    "diagnostic_packages": "الباقات التشخيصية"
+    "behavioralAndNutrition": "سلوكيات ومشاكل التغذية",
+    "learningDifficulties": "صعوبات التعلم",
+    "skillAndBehaviorDevelopment": "التنمية المهارية والسلوكية",
+    "psychologicalSupport": "الدعم والعلاج النفسي",
+    "behavioralModification": "التعديل السلوكي ABA",
+    "occupationalAndSensory": "العلاج الوظيفي والتكامل الحسي",
+    "speechAndCommunication": "التخاطب والتواصل واللغة",
+    "diagnostic": "التشخيصية"
   },
   "contract_obj": {
     "contracts": "العقود",
@@ -156,14 +167,17 @@
     "copy_num": "النسخة رقم",
     "active": "مفعلة",
     "draft": "مسودة",
+    "reject": "مرفوضة",
     "draft_date": "مسودة بتاريخ",
+    "reject_date": "مرفوضة بتاريخ",
+    "cancel_contract": "الغاء العقد",
     "send_join_request": "إرسال طلب الإنضمام",
     "join_request": "طلب انضمام",
     "data_fill": "ملء البيانات",
     "under_review": "قيد المراجعة",
     "accepted": "إتمام العملية",
-    "price_of_service_as_freelancer": "سعر نسبتك كطبيب مستقل",
-    "price_of_service_as_spectra": "سعر نسبتك كطبيب فرد من فريق سبيكترا",
+    "price_of_service_as_freelancer": "سعر نسبتك كطبيب / متخصص مستقل",
+    "price_of_service_as_spectra": "سعر نسبتك كطبيب / متخصص فرد من فريق سبيكترا",
     "services_as_freelancer": "الخدمات كطبيب مستقل",
     "services_as_spectra": "الخدمات كطبيب فرد من فريق سبيكترا",
     "duration": "المدة",
@@ -185,6 +199,7 @@
     "accepted_by_department_head": "تمت الموافقة من قبل رئيس القسم",
     "accepted_by_doctor": "تمت الموافقة من قبل الطبيب",
     "sign_msg": "يرجى التوقيع باستخدام الماوس أو لوحة التتبع الخاصة بجهاز اللابتوب أو باستخدام اللمس علي شاشة المحمول.",
-    "no_actions_available_for_this_version": "لا يوجد اجراءات متاحة حاليا للنسخة رقم"
+    "no_actions_available_for_this_version": "لا يوجد اجراءات متاحة حاليا للنسخة رقم",
+    "contracting": "قيد التعاقد"
   }
 }

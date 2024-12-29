@@ -282,6 +282,10 @@ const ROUTES = {
       TEAM: '/doctor/profile/team',
       EDIT: '/doctor/profile/edit',
     },
+    TEAM: {
+      DASHBOARD: '/doctor/team',
+      VIEW_TEAM: (id) => `/doctor/team/${id}`,
+    },
     CONTRACT: {
       DASHBOARD: '/doctor/contract',
       CONTRACTSNEW: '/doctor/contract/new',

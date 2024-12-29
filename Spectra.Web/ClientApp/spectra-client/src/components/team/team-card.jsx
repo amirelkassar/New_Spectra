@@ -19,7 +19,7 @@ const Avatar = ({ ...props }) => {
     <A
       {...props}
       className={cn(
-        '!size-16 mdl:!size-32 !rounded-full mdl:-mt-20 -mt-14 mx-auto mb-5 shrink-0',
+        'size-16 mdl:size-32 rounded-full mdl:-mt-20 -mt-14 mx-auto mb-5 shrink-0',
         props?.className
       )}
     />

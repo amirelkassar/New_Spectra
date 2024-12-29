@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 
-import { Rating } from '@mantine/core';
+// import { Rating } from '@mantine/core';
 import { Container } from '@/guest/_components/ui';
 
 export const Article = ({ data = [] }) => {
@@ -19,14 +19,34 @@ export const Article = ({ data = [] }) => {
         <h1 className='font-bold text-base mdl:text-3xl'>
           {data?.title[locale]}
         </h1>
-        <span className='text-xs mdl:text-base text-grayDark'>
+
+        {/* <span className='text-xs mdl:text-base text-grayDark'>
           {data?.readCount}{' '}
           {locale === 'ar' ? 'دقائق قراءة' : 'Read Time'}
-        </span>
+        </span> */}
       </div>
 
+      {/* POSTER */}
+      {data?.poster && (
+        <div className='w-full min-h-[436px] max-w-[877px] relative'>
+          <Image
+            src={data.poster}
+            alt='image'
+            fill
+            sizes='width:100%, height:100%'
+            className='w-full h-auto object-cover object-center'
+            priority
+          />
+        </div>
+      )}
+
+      {/* MAIN CONTENT */}
+      <p className='text-sm mdl:text-medium'>
+        {data?.mainContent[locale]}
+      </p>
+
       {/* RATE */}
-      <div className='flex items-center gap-5'>
+      {/* <div className='flex items-center gap-5'>
         {!data?.rate && (
           <span className='text-xs mdl:text-base'>
             {locale === 'ar'
@@ -41,7 +61,7 @@ export const Article = ({ data = [] }) => {
           fractions={2}
           readOnly
         />
-      </div>
+      </div> */}
 
       {/* CONTENT*/}
       <div className='space-y-10'>

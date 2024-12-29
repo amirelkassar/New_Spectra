@@ -16,6 +16,7 @@ import MainIcon from '@/assets/icons/main';
 import ROUTES from '@/routes';
 import ContractsPlus from '@/assets/icons/contracts-plus';
 import { ROLES } from '@/data';
+import TeamEdit from '@/assets/icons/team-edit';
 
 export const useDoctorNav = () => {
   const path = usePathname();
@@ -96,6 +97,13 @@ export const useDoctorNav = () => {
         isActive: path.includes(ROUTES.DOCTOR.PROFILE.DASHBOARD),
         icon: <ProfileIcon />,
         show: true,
+      },
+      {
+        name: 'إدارة الفريق',
+        route: ROUTES.DOCTOR.TEAM.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.TEAM.DASHBOARD),
+        icon: <TeamEdit />,
+        show: roles.includes(ROLES.departmentHead),
       },
       {
         name: 'العقد',

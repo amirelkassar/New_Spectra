@@ -21,7 +21,8 @@ import { PhotoDropzone } from '@/components/photo-dropzone';
 import Button from '@/components/button';
 import { useImagePath } from '@/hooks/use-image-path';
 import MultiSelectInput from '@/components/inputs/multi-select-input';
-import { PACKAGES_TAGS } from '@/data';
+import { PACKAGES_TAGS_AR, PACKAGES_TAGS_EN } from '@/data';
+import { useLocale } from 'next-intl';
 
 export const PackageForm = ({
   form,
@@ -91,6 +92,11 @@ export const PackageForm = ({
 };
 
 const PackageInfo = ({ data, onChange, error, title }) => {
+  const locale = useLocale();
+
+  const PACKAGES_TAGS =
+    locale === 'ar' ? PACKAGES_TAGS_AR : PACKAGES_TAGS_EN;
+
   return (
     <Card className='space-y-7'>
       <div className='flex items-center gap-4 mdl:gap-6'>

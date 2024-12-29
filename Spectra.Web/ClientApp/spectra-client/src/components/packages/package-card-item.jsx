@@ -44,8 +44,8 @@ const PackageList = ({ features = [], ...props }) => {
       )}
     >
       {features.map((feature) => (
-        <li key={feature} className='flex items-center gap-2 py-1'>
-          <CircleCheck className='size-4 text-greenMain' />
+        <li key={feature} className='flex items-start gap-2 py-1'>
+          <CircleCheck className='size-4 text-greenMain shrink-0 mt-1' />
           <span>{feature}</span>
         </li>
       ))}

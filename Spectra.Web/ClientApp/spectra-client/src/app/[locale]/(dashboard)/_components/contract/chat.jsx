@@ -19,8 +19,8 @@ export const Chat = () => {
   return (
     <div
       className={cn(
-        'rounded-xl bg-white w-0 transition-[width,padding,margin] duration-500 ease-in-out shrink-0 text-nowrap overflow-hidden flex flex-col h-[580px]',
-        isOpen && 'me-3 w-80'
+        'rounded-xl bg-white w-0 transition-[width,padding,margin] duration-500 ease-in-out shrink-0 text-nowrap overflow-hidden flex flex-col h-full mdl:h-[650px]',
+        isOpen && 'me-3 w-[calc(100vw-32px)] mdl:w-80'
       )}
     >
       {isOpenDelayed && (

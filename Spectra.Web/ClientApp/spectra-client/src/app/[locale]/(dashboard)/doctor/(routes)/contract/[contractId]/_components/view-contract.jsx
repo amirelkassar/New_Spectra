@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { ContractData } from '@/dashboard/_components/contract/contract-data';
@@ -10,9 +9,10 @@ import { useEmployeeContract } from '@/hooks/queries/employee/contract';
 import { AcceptButton } from '@/dashboard/_components/ui/accept-button';
 import { RejectButton } from '@/dashboard/_components/ui/reject-button';
 import { EditButton } from '@/dashboard/_components/ui/edit-button';
-import { VERSION_STATE } from '@/data';
+import { CONTRACT_STATE, VERSION_STATE } from '@/data';
 import Card from '@/components/card';
-import ROUTES from '@/routes';
+import { useContractVersionActions } from '../../_hooks/use-contract-version-actions';
+import { SignModal } from '@/dashboard/_components/contract/sign-modal';
 
 export const ViewContract = ({ id }) => {
   const query = useEmployeeContract();
@@ -46,39 +46,52 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
       <Actions
         state={state}
         acceptedByEmployee={acceptedByEmployee}
-        id={versionId}
+        versionId={versionId}
+        contractId={contract?.id}
+        contractState={contract?.contractState}
       />
     </ContractData>
   );
 };
 
-const Actions = ({ acceptedByEmployee = false, state, id = '' }) => {
+const Actions = ({
+  acceptedByEmployee = false,
+  state,
+  versionId = '',
+  contractId = '',
+  contractState = '',
+}) => {
   const tg = useTranslations('general_obj');
 
-  const router = useRouter();
+  const { onEdit, onAccept, onReject, isPendingAccept } =
+    useContractVersionActions(versionId, contractId);
 
-  const onEdit = () =>
-    router.push(ROUTES.DOCTOR.CONTRACT.EDIT_CONTRACT(id));
+  const isVersionActive = state === VERSION_STATE.active;
+  const isVersionDraft = state === VERSION_STATE.draft;
+  const isContracting = contractState === CONTRACT_STATE.contracting;
 
-  if (state === VERSION_STATE.draft) return null;
+  if (isVersionDraft) return null;
+  if (!isContracting) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
-        {!acceptedByEmployee && (
-          <AcceptButton className='w-full'>
-            {tg('accept')}
-          </AcceptButton>
+        {!acceptedByEmployee && isVersionActive && (
+          <SignModal isPending={isPendingAccept} onSend={onAccept}>
+            <AcceptButton className='w-full'>
+              {tg('accept')}
+            </AcceptButton>
+          </SignModal>
         )}
       </div>
       <div>
-        {!acceptedByEmployee && (
-          <RejectButton className='w-full'>
+        {!acceptedByEmployee && isVersionActive && (
+          <RejectButton onClick={onReject} className='w-full'>
             {tg('reject')}
           </RejectButton>
         )}
       </div>
       <div>
-        {state === VERSION_STATE.active && (
+        {isVersionActive && (
           <EditButton onClick={onEdit} className='w-full'>
             {tg('edit')}
           </EditButton>

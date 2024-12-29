@@ -22,7 +22,7 @@ export default function ActionsMenu({ children }) {
       width={200}
     >
       <Menu.Target>
-        <div role='button' className='md:p-1'>
+        <div role='button' className='p-2 bg-white w-fit rounded-md'>
           <ThreeDotsIcon />
         </div>
       </Menu.Target>

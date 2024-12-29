@@ -18,4 +18,5 @@ export const CONTRACT_STATE = {
 export const VERSION_STATE = {
   draft: 0,
   active: 1,
+  reject: 2,
 };

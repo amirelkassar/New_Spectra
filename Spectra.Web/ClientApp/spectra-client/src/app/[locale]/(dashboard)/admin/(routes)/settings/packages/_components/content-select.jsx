@@ -27,13 +27,18 @@ export const ContentSelect = ({
 
   const [uniqueItems, setUniqueItems] = useState(() => {
     if (!defaultValue?.length) return [];
-    const unique = [];
-    defaultValue.forEach((item) => {
-      if (!unique.find((i) => i.id === item.id)) {
-        unique.push(item);
+
+    const itemCounts = defaultValue.reduce((acc, item) => {
+      if (acc[item.id]) {
+        acc[item.id].count += 1;
+      } else {
+        acc[item.id] = { ...item, count: 1 };
       }
-    });
-    return unique;
+
+      return acc;
+    }, {});
+
+    return Object.values(itemCounts);
   });
 
   const [search, setSearch] = useState('');
