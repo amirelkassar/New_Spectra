@@ -5,6 +5,7 @@
         public enum ContractVersionStates : byte
         {
             Active = 1,
+            Rejected=2,
             Draft = 0
         }
 

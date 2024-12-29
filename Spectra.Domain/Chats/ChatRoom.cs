@@ -12,6 +12,7 @@ namespace Spectra.Domain.Chats
         public bool IsGroup { get; private set; } = isGroup;
         public string? LastMessage { get; set; }
         public DateTimeOffset? LastMeesageDate { get; set; }
+        public string? Reference { get; set; }
     }
 
     public class ChatMessage(string id, MessageType type,

@@ -43,14 +43,19 @@ namespace Spectra.Application.Contracts.Commands
                 {
                     throw new ContractSignatureNeededException();
                 }
-                else
+                else if (request.Value)
                 {
                     var folderPath = Pathes.GetEmployeesPath();
-
                     contract.HeadSignaturePath = await _documentHellper.CreateAttachment(request.Signature, folderPath);
+                    currentVersion.AcceptedByHead = true;
+                    currentVersion.ChangedByHeadDate = DateTimeOffset.UtcNow;
                 }
-                currentVersion.AcceptedByHead = request.Value;
-                currentVersion.ChangedByHeadDate = DateTimeOffset.UtcNow;
+                else
+                {
+                    currentVersion.AcceptedByHead = false;
+                    currentVersion.ChangedByHeadDate = DateTimeOffset.UtcNow;
+                }
+
 
 
                 if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)

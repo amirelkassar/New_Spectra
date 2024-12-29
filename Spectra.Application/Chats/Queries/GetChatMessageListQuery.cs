@@ -14,7 +14,8 @@ namespace Spectra.Application.Chats.Queries
 {
     public class GetChatMessageListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
-        public string ChatId { get; set; }
+        public string? ChatId { get; set; }
+        public string? Reference { get; set; }
 
         public class GetChatMessageListQueryHandler(IBaseMongoDbRepository<ChatRoom> chatRepository,
             IBaseMongoDbRepository<ChatMessage> messageRepository,
@@ -30,20 +31,36 @@ namespace Spectra.Application.Chats.Queries
             {
                 var chatCollection = await _chatRepository.GetCollectionAsync();
                 var chatFilterBuilder = Builders<ChatRoom>.Filter;
-                var chatFilter = chatFilterBuilder.Eq(c => c.Id, request.ChatId);
-                chatFilter &= chatFilterBuilder.ElemMatch(c => c.Participants, p => p.UserId == _currentUser.Id);
-
-                var chat = await chatCollection.Find(chatFilter).FirstOrDefaultAsync() ?? throw new NotFoundException("Chats", request.ChatId);
+                ChatRoom chat=null;
+                if (!string.IsNullOrWhiteSpace(request.ChatId))
+                {
+                    var chatFilter = chatFilterBuilder.Eq(c => c.Id, request.ChatId);
+                    chatFilter &= chatFilterBuilder.ElemMatch(c => c.Participants, p => p.UserId == _currentUser.Id);
+                    chat = await chatCollection.Find(chatFilter).FirstOrDefaultAsync() ?? throw new NotFoundException("Chats", request.ChatId);
+                }
+                else if(!string.IsNullOrWhiteSpace(request.Reference))
+                {
+                    var chatFilter = chatFilterBuilder.Eq(c => c.Reference, request.Reference);
+                    chatFilter &= chatFilterBuilder.ElemMatch(c => c.Participants, p => p.UserId == _currentUser.Id);
+                    chat = await chatCollection.Find(chatFilter).FirstOrDefaultAsync() ?? throw new NotFoundException("Chats", request.Reference);
+                }
+                else
+                {
+                    throw new NotFoundException("Chats", request.Reference);
+                }
+                   
 
                 var messagesCollection = await _messageRepository.GetCollectionAsync();
                 var sortBuilder = Builders<ChatMessage>.Sort;
                 var sort = sortBuilder.Descending("Created");
+
                 var messages = await messagesCollection
                     .Find(m => m.ChatId == chat.Id)
                     .Sort(sort)
                     .Skip(request.SkipCount)
                     .Limit(request.MaxCount)
                     .ToListAsync();
+
                 var totalMessages = await messagesCollection.CountDocumentsAsync(m => m.ChatId == chat.Id);
 
                 var messagesDto = messages.Adapt<ICollection<MessageReadDto>>();
@@ -53,7 +70,10 @@ namespace Spectra.Application.Chats.Queries
                     dto.FileUrl = EndPointsHelper.GetFileUrl(dto.FileUrl, EndPointsRoutes.Users, _httpContextAccessor);
                 }
 
-                return OperationResult<ICollection<MessageReadDto>>.Success(messagesDto);
+                var chatDto = chat.Adapt<ChatDetailReadDto>();
+                chatDto.Messages = messagesDto;
+
+                return OperationResult<ChatDetailReadDto>.Success(chatDto);
             }
         }
     }

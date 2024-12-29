@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Chats.Dtos;
+using Spectra.Application.Chats.Services;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Chats;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -10,26 +11,14 @@ namespace Spectra.Application.Chats.Commands
     public class AddParticipantToChatRoomCommand : ChatParticipantReadDto, IRequest<OperationResult>
     {
         public string ChatId { get; set; }
-        public class AddParticipantToChatRoomCommandHandler(IBaseMongoDbRepository<ChatRoom> chatRepository) : IRequestHandler<AddParticipantToChatRoomCommand, OperationResult>
+        public string UserId { get; set; }
+        public class AddParticipantToChatRoomCommandHandler(IChatService chatService) : IRequestHandler<AddParticipantToChatRoomCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<ChatRoom> _chatRepository = chatRepository;
+            private readonly IChatService _chatService = chatService;
 
             public async Task<OperationResult> Handle(AddParticipantToChatRoomCommand request, CancellationToken cancellationToken)
             {
-                var chatRoom = await _chatRepository.GetByIdAsync(request.ChatId) ?? throw new NotFoundException(nameof(ChatRoom), request.ChatId);
-                var participant = new ChatRoomParticipant(Ulid.NewUlid().ToString(), request.UserId)
-                {
-                    ExprationDate = request.ExprationDate,
-                    Type = request.Type,
-                    Expried = request.Expried,
-                    CanSend = request.CanSend,
-                };
-                if (participant is not null && !chatRoom.Participants.Any(p => p.UserId == participant.UserId))
-                {
-                    chatRoom.Participants.Add(participant);
-                }
-
-                await _chatRepository.UpdateAsync(chatRoom);
+                await _chatService.AddParticipantToChatAsync(request.ChatId, request.UserId, Domain.Shared.Enums.ChatParticipantType.Participant,null);
 
                 return OperationResult.Success();
             }

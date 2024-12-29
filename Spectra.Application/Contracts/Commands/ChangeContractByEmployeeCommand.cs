@@ -55,7 +55,7 @@ namespace Spectra.Application.Contracts.Commands
                 }
                 else
                 {
-                    currentVersion.State = ContractVersionStates.Draft;
+                    currentVersion.State = ContractVersionStates.Rejected;
                     currentVersion.AcceptedByEmployee = false;
                 }
 

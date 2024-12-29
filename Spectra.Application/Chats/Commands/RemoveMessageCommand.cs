@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using Spectra.Application.Chats.Services;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Chats;
 using Spectra.Domain.Chats.Exceptions;
@@ -13,19 +14,18 @@ namespace Spectra.Application.Chats.Commands
 {
     public class RemoveMessageCommand : IRequest<OperationResult>
     {
+        public string ChatId { get; set; }
         public string MessageId { get; set; }
 
-        public class RemoveMessageCommandHandler(IBaseMongoDbRepository<ChatMessage> messageRepository,
+        public class RemoveMessageCommandHandler(IChatService chatService,
             ICurrentUser currentUser) : IRequestHandler<RemoveMessageCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<ChatMessage> _messageRepository = messageRepository;
+            private readonly IChatService _chatService = chatService;
             private readonly ICurrentUser _currentUser = currentUser;
 
             public async Task<OperationResult> Handle(RemoveMessageCommand request, CancellationToken cancellationToken)
             {
-                var message = await _messageRepository.GetAsync(m => m.Id == request.MessageId && m.SenderId == _currentUser.Id) ?? throw new UserNotAllowedToRemoveMessageException();
-
-                await _messageRepository.DeleteAsync(message.Id);
+                await _chatService.RemoveMessageAsync(request.ChatId, _currentUser.Id, request.MessageId);
 
                 return OperationResult.Success();
             }

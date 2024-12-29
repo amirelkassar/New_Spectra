@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Chats.Services;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
 using Spectra.Domain.Chats;
@@ -17,38 +18,17 @@ namespace Spectra.Application.Chats.Commands
         public string? Content { get; set; }
         public IFormFile? File { get; set; }
 
-        public class CreateMessageCommandHandler(IBaseMongoDbRepository<ChatRoom> chatRepository,
-            IBaseMongoDbRepository<ChatMessage> messageRepository,
-            ICurrentUser currentUser,
-            IDocumentHellper documentHellper) : IRequestHandler<CreateMessageCommand, OperationResult>
+        public class CreateMessageCommandHandler(ICurrentUser currentUser,
+            IChatService chatService) : IRequestHandler<CreateMessageCommand, OperationResult>
         {
-            private readonly IBaseMongoDbRepository<ChatRoom> _chatRepository = chatRepository;
-            private readonly IBaseMongoDbRepository<ChatMessage> _messageRepository = messageRepository;
             private readonly ICurrentUser _currentUser = currentUser;
-            private readonly IDocumentHellper _documentHellper = documentHellper;
+            private readonly IChatService _chatService = chatService;
 
             public async Task<OperationResult> Handle(CreateMessageCommand request, CancellationToken cancellationToken)
             {
-                var chat = await _chatRepository.GetAsync(c => c.Id == request.ChatId && c.Participants.Any(p => p.UserId == _currentUser.Id && p.CanSend == true))
-                    ?? throw new UserNotAllowedToSendMessageException();
+               var messageId= await _chatService.AddMessageAsync(request.ChatId,_currentUser.Id,request.Content,request.Type,request.File);
 
-                string filePath = null;
-
-                if (request.File is not null)
-                {
-                    var folderPath = Path.Combine(Pathes.GetUsersPath(), _currentUser.Id);
-                    filePath = await _documentHellper.CreateAttachment(request.File, folderPath);
-                }
-
-                var message = new ChatMessage(Ulid.NewUlid().ToString(), request.Type, request.ChatId, _currentUser.Id)
-                {
-                    Content = request.Content,
-                    FileUrl = filePath
-                };
-
-                await _messageRepository.AddAsync(message);
-
-                return OperationResult<string>.Success(message.Id);
+                return OperationResult<string>.Success(messageId);
             }
         }
     }

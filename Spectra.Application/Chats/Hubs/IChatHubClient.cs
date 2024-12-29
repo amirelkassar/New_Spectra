@@ -9,6 +9,11 @@ namespace Spectra.Application.Chats.Hubs
 {
     public interface IChatHubClient
     {
-        Task Receive(MessageReadDto input);
+        Task MessageAdded(MessageReadDto input);
+        Task MessageRemoved(MessageReadDto input);
+        Task ParticipantAdded(ChatParticipantReadDto input);
+        Task ParticipantRemoved(ChatParticipantReadDto input);
+        Task ChatCreated(ChatReadDto input);
+        Task ChatDeleted(string id);
     }
 }
