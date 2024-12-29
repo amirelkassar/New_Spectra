@@ -12,8 +12,8 @@ import { ContractSteps } from './contract-steps';
 import { ContractHeader } from './contract-header';
 import { useEmployeeContract } from '@/hooks/queries/employee/contract';
 import { CancelButton } from '@/dashboard/_components/ui/cancel-button';
-import Card from '@/components/card';
 import { useCancelContract } from '../../_hooks/use-cancel-contract';
+import Card from '@/components/card';
 
 export const ContractLayout = ({ children }) => {
   const t = useTranslations('contract_obj');
@@ -46,6 +46,8 @@ const RenderLayout = ({ data = {}, hasData = false, children }) => {
         hasData={hasData}
         contractId={data?.id}
         state={data?.contractState}
+        canceledBy={data?.canceldByUsername}
+        cancelingDate={data?.cancelingDate}
       />
 
       <div className='flex overflow-hidden flex-1'>
@@ -57,12 +59,22 @@ const RenderLayout = ({ data = {}, hasData = false, children }) => {
   );
 };
 
-const Steps = ({ hasData = false, contractId = '', state }) => {
+const Steps = ({
+  hasData = false,
+  contractId = '',
+  canceledBy = '',
+  cancelingDate = '',
+  state,
+}) => {
   const { activeStep } = useActiveStep({ hasData, state });
 
   return (
     <Card>
-      <ContractHeader activeStep={activeStep} />
+      <ContractHeader
+        activeStep={activeStep}
+        canceledBy={canceledBy}
+        cancelingDate={cancelingDate}
+      />
 
       <ContractSteps active={activeStep} />
 

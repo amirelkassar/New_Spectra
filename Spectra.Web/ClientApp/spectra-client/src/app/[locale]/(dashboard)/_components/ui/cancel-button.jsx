@@ -6,7 +6,7 @@ export const CancelButton = ({ children, ...props }) => {
     <Button
       {...props}
       className={cn(
-        'border-red hover:border-red text-red hover:ring-red',
+        'border-red capitalize hover:border-red text-red hover:ring-red',
         props?.className
       )}
     >

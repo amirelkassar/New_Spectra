@@ -9,6 +9,8 @@ import { useImagePath } from '@/hooks/use-image-path';
 import { useDate } from '@/hooks/use-date';
 import { ContractStatus } from '@/dashboard/_components/contract/contract-status';
 import { ChatsButton } from '@/dashboard/_components/contract/ui';
+import { useTranslations } from 'next-intl';
+import { CONTRACT_STATE } from '@/data';
 
 export const DoctorDataCard = ({
   employeeId = '',
@@ -19,12 +21,18 @@ export const DoctorDataCard = ({
   created = '',
   href = '',
   showChatButton = false,
+  canceldByUsername = '',
+  cancelingDate = '',
 }) => {
   const router = useRouter();
 
+  const tg = useTranslations('general_obj');
+
   const path = useImagePath(imagePath);
 
-  const { fullYear } = useDate(created);
+  const { fullYear: contractDate } = useDate(created);
+
+  const { fullYear: cancelDate } = useDate(cancelingDate);
 
   const handleClick = useCallback(() => {
     if (!href) return;
@@ -53,9 +61,24 @@ export const DoctorDataCard = ({
 
         <span>{jobTitle}</span>
 
-        <span>{fullYear}</span>
+        <span>{contractDate}</span>
 
-        <ContractStatus state={contractState} />
+        <div className='flex items-center gap-3 flex-wrap'>
+          <ContractStatus state={contractState} />
+          {contractState === CONTRACT_STATE.canceled && (
+            <>
+              <span className='text-xs mdl:text-base text-grayDark capitalize'>
+                {tg('from')} {tg('doc_prefix')} {canceldByUsername}{' '}
+                <span
+                  className='inline-block ltr:ml-4 rtl:mr-4'
+                  dir='ltr'
+                >
+                  {cancelDate}
+                </span>
+              </span>
+            </>
+          )}
+        </div>
       </div>
 
       {showChatButton && <ChatsButton />}

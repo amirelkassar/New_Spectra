@@ -9,7 +9,7 @@ import { useEmployeeContract } from '@/hooks/queries/employee/contract';
 import { AcceptButton } from '@/dashboard/_components/ui/accept-button';
 import { RejectButton } from '@/dashboard/_components/ui/reject-button';
 import { EditButton } from '@/dashboard/_components/ui/edit-button';
-import { VERSION_STATE } from '@/data';
+import { CONTRACT_STATE, VERSION_STATE } from '@/data';
 import Card from '@/components/card';
 import { useContractVersionActions } from '../../_hooks/use-contract-version-actions';
 import { SignModal } from '@/dashboard/_components/contract/sign-modal';
@@ -47,7 +47,8 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
         state={state}
         acceptedByEmployee={acceptedByEmployee}
         versionId={versionId}
-        contractId={contract.id}
+        contractId={contract?.id}
+        contractState={contract?.contractState}
       />
     </ContractData>
   );
@@ -58,17 +59,23 @@ const Actions = ({
   state,
   versionId = '',
   contractId = '',
+  contractState = '',
 }) => {
   const tg = useTranslations('general_obj');
 
   const { onEdit, onAccept, onReject, isPendingAccept } =
     useContractVersionActions(versionId, contractId);
 
-  if (state === VERSION_STATE.draft) return null;
+  const isVersionActive = state === VERSION_STATE.active;
+  const isVersionDraft = state === VERSION_STATE.draft;
+  const isContracting = contractState === CONTRACT_STATE.contracting;
+
+  if (isVersionDraft) return null;
+  if (!isContracting) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1'>
       <div>
-        {!acceptedByEmployee && (
+        {!acceptedByEmployee && isVersionActive && (
           <SignModal isPending={isPendingAccept} onSend={onAccept}>
             <AcceptButton className='w-full'>
               {tg('accept')}
@@ -77,14 +84,14 @@ const Actions = ({
         )}
       </div>
       <div>
-        {!acceptedByEmployee && (
+        {!acceptedByEmployee && isVersionActive && (
           <RejectButton onClick={onReject} className='w-full'>
             {tg('reject')}
           </RejectButton>
         )}
       </div>
       <div>
-        {state === VERSION_STATE.active && (
+        {isVersionActive && (
           <EditButton onClick={onEdit} className='w-full'>
             {tg('edit')}
           </EditButton>

@@ -26,6 +26,10 @@
   "join_as_doctor": "Join as a doctor",
   "hello": "Hello",
   "general_obj": {
+    "doc_prefix": "Dr.",
+    "from": "From",
+    "by": "By",
+    "last_modified": "Last Modified",
     "all": "All",
     "edit": "Edit",
     "save": "Save",
