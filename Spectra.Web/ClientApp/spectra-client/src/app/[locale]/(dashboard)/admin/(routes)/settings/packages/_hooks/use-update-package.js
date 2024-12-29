@@ -22,7 +22,7 @@ export const useUpdatePackage = ({ initialValues }) => {
     isError,
     isPending,
     reset,
-  } = useUpdatePackageQuery();
+  } = useUpdatePackageQuery(initialValues.id);
 
   const onChange = useCallback(
     (e) => {

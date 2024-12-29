@@ -25,7 +25,7 @@ export const Team = ({ ownerId }) => {
       </div>
       <QueryWrapper query={query}>
         {({ data }) => (
-          <div className='flex flex-wrap gap-4 *:shrink-0'>
+          <div className='grid grid-cols-2 xll:grid-cols-3 gap-4'>
             {data?.map((member) => (
               <TeamMember
                 onDelete={onDelete}
@@ -70,7 +70,7 @@ const TeamMember = ({
         profession={profession}
         rate={rate}
         avatar={path}
-        className='h-full'
+        className='h-full shrink w-full'
       />
 
       <button
@@ -80,7 +80,7 @@ const TeamMember = ({
           onDelete(id);
         }}
         type='button'
-        className='border-red duration-200 hover:shadow-md border rounded-md w-9 md:w-12 h-9 md:h-12 flex items-center justify-center'
+        className='border-red duration-200 hover:shadow-md border rounded-md w-9 mdl:w-12 h-9 mdl:h-12 flex items-center justify-center shrink-0'
       >
         <DeleteIcon className='w-4 md:w-5 h-auto' />
       </button>

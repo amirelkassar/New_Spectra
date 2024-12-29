@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import { CellActions } from './cell-actions';
 import { useImagePath } from '@/hooks/use-image-path';
+import { useRouter } from '@/i18n/routing';
+import ROUTES from '@/routes';
 
 export const DrugsColumns = [
   {
@@ -14,6 +16,7 @@ export const DrugsColumns = [
       <ImageAndNameCell
         name={row.original?.name}
         image={row.original?.imagePath}
+        id={row.original?.id}
       />
     ),
   },
@@ -41,12 +44,21 @@ export const DrugsColumns = [
   },
 ];
 
-const ImageAndNameCell = ({ name, image }) => {
+const ImageAndNameCell = ({ name, image, id }) => {
+  const router = useRouter();
+
   const src = useImagePath(image);
 
   return (
-    <div className='items-center gap-2 lg:gap-5 flex'>
-      <div className='size-7 lg:size-12 flex items-center overflow-hidden'>
+    <div
+      onClick={() => {
+        if (!id) return;
+        router.push(ROUTES.ADMIN.DATAMAIN.DRUGSDETAILS(id));
+      }}
+      role='button'
+      className='items-center gap-2 lg:gap-5 flex'
+    >
+      <div className='size-7 mdl:size-12 flex items-center overflow-hidden shrink-0'>
         {src && (
           <Image
             src={src}

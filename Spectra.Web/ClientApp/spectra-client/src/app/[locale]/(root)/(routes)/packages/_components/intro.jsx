@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from '@/i18n/routing';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Carousel } from '@mantine/carousel';
 
@@ -15,6 +15,7 @@ import CircleCheck from '@/assets/icons/circle-check';
 import PackageTag from '@/assets/icons/pacakge-tag';
 import ArrowLeft from '@/assets/icons/arrow-left';
 import { useMediaQuery } from '@mantine/hooks';
+import { PACKAGES_TAGS_OBJ } from '@/data/packages';
 
 export const Intro = () => {
   const t = useTranslations('packages_obj');
@@ -46,11 +47,35 @@ export const Intro = () => {
 };
 
 const RenderPackages = ({ packages = [] }) => {
+  const filteredPackages = useMemo(
+    () =>
+      Object.entries(PACKAGES_TAGS_OBJ).reduce((acc, [key, tag]) => {
+        // تصفية العناصر بناءً على وجود tag في tags
+        const filteredItems = packages.filter((item) =>
+          item.tags.includes(tag)
+        );
+        acc[key] = filteredItems;
+        return acc;
+      }, {}),
+    [packages]
+  );
+
+  return (
+    <div className='space-y-5 mdl:space-y-10'>
+      {Object.entries(filteredPackages).map(
+        ([key, packages]) =>
+          !!packages?.length && (
+            <Packages key={key} title={key} packages={packages} />
+          )
+      )}
+    </div>
+  );
+};
+
+const Packages = ({ title = '', packages = [] }) => {
   const t = useTranslations('packages_obj');
 
   const router = useRouter();
-
-  const slidesToScroll = useSlideToScroll();
 
   const slides = useMemo(() => {
     return packages.map((item) => (
@@ -76,44 +101,54 @@ const RenderPackages = ({ packages = [] }) => {
       <div className='flex items-center gap-4'>
         <PackageTag className='text-greenMain shrink-0' />
         <h2 className='text-base mdl:text-[28px] font-bold'>
-          {t('diagnostic_packages')}
+          {t(title)}
         </h2>
       </div>
 
-      <div className='max-w-[366px] lg:max-w-[736px] xl:max-w-[1106px] mx-auto min-h-[610px]'>
-        <Carousel
-          key={slidesToScroll}
-          dir='ltr'
-          withIndicators
-          slideSize={{
-            base: '100%',
-            lg: '50%',
-            xl: '33.33%',
-          }}
-          slideGap={20}
-          align='start'
-          slidesToScroll={slidesToScroll}
-          height='100%'
-          classNames={{
-            container: '!ps-4',
-            indicator:
-              '!size-4 !rounded-full !bg-grayMedium data-[active]:!bg-greenMain data-[active]:!size-5',
-            indicators:
-              '!items-center !bottom-12 mdl:!bottom-16 !max-w-[350px] !overflow-hidden !mx-auto',
-            controls:
-              '!top-auto !bottom-10 mdl:!bottom-12 !px-10 lg:!px-32',
-            control: '!group data-[inactive]:!cursor-not-allowed',
-            root: '!static',
-          }}
-          nextControlIcon={<Next />}
-          previousControlIcon={<Previous />}
-        >
-          {slides}
-        </Carousel>
-      </div>
+      <PackagesCarousel>{slides}</PackagesCarousel>
     </div>
   );
 };
+
+const PackagesCarousel = memo(({ children }) => {
+  const slidesToScroll = useSlideToScroll();
+
+  return (
+    <div className='max-w-[366px] lg:max-w-[736px] xl:max-w-[1106px] mx-auto min-h-[610px]'>
+      <Carousel
+        key={slidesToScroll}
+        dir='ltr'
+        withIndicators
+        slideSize={{
+          base: '100%',
+          lg: '50%',
+          xl: '33.33%',
+        }}
+        slideGap={0}
+        align='start'
+        slidesToScroll={slidesToScroll}
+        height='100%'
+        classNames={{
+          container: 'gap-x-3 pb-[10px] lg:pr-[10px] xl:pr-[20px]',
+          indicator:
+            'size-4 rounded-full bg-grayMedium data-[active]:bg-greenMain data-[active]:size-5',
+          indicators:
+            'items-center bottom-12 mdl:bottom-16 max-w-[350px] overflow-hidden mx-auto',
+          controls:
+            'top-auto bottom-10 mdl:bottom-12 px-10 lg:px-40 xl:px-64',
+          control: 'group data-[inactive]:cursor-not-allowed',
+          root: 'static mb-10 mdl:mb-20',
+        }}
+        nextControlIcon={<Next />}
+        previousControlIcon={<Previous />}
+      >
+        {children}
+      </Carousel>
+    </div>
+  );
+});
+
+PackagesCarousel.displayName = 'PackagesCarousel';
 
 const useSlideToScroll = () => {
   const lg = useMediaQuery('(min-width: 960px)');
@@ -161,7 +196,7 @@ const PackageCard = ({
         onView(id);
       }}
       data-id={id}
-      className='rounded-3xl ring-[5px] m-[5px] bg-white ring-blueLight transition-colors hover:ring-transparent p-3 group min-h-[600px] max-w-[350px] flex flex-col cursor-pointer overflow-hidden relative'
+      className='rounded-3xl ring-[5px] m-[5px] bg-white ring-blueLight transition-colors hover:ring-transparent p-3 group h-full min-h-[600px] max-w-[350px] flex flex-col cursor-pointer overflow-hidden relative'
     >
       {/* HOVER BG */}
       <div

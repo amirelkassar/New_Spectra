@@ -1,21 +1,23 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
 export const CellAcceptedBy = ({
   acceptedByAdmin = false,
   acceptedByEmployee = false,
   acceptedByHead = false,
+  className = '',
 }) => {
   const t = useTranslations('general_obj');
 
   return (
-    <div className='flex items-center gap-2'>
-      <Badge aria-checked={acceptedByAdmin}>{t('admin')}</Badge>
+    <div className={cn('flex items-center gap-2', className)}>
+      <Badge aria-checked={acceptedByEmployee}>{t('doctor')}</Badge>
       <Badge aria-checked={acceptedByHead}>
         {t('department_head')}
       </Badge>
-      <Badge aria-checked={acceptedByEmployee}>{t('doctor')}</Badge>
+      <Badge aria-checked={acceptedByAdmin}>{t('admin')}</Badge>
     </div>
   );
 };

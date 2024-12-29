@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import { VERSION_STATE } from '@/data';
+import { CONTRACT_STATE, VERSION_STATE } from '@/data';
 import { NotFound404 } from '@/components/not-found-404';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { AcceptButton } from '@/dashboard/_components/ui/accept-button';
@@ -47,6 +47,7 @@ const ContractVersion = ({ contract = {}, versionId = '' }) => {
       state={state}
       acceptedByHead={acceptedByHead}
       contractId={contract.id}
+      contractState={contract?.contractState}
     />
   );
 };
@@ -57,6 +58,7 @@ const ContractData = ({
   state,
   acceptedByHead = false,
   contractId = '',
+  contractState = '',
 }) => {
   return (
     <div className='space-y-5 h-full pb-2'>
@@ -68,6 +70,7 @@ const ContractData = ({
         state={state}
         acceptedByHead={acceptedByHead}
         contractId={contractId}
+        contractState={contractState}
       />
     </div>
   );
@@ -148,6 +151,7 @@ const Actions = ({
   acceptedByHead = false,
   state,
   contractId = '',
+  contractState = '',
 }) => {
   const tg = useTranslations('general_obj');
 
@@ -156,11 +160,16 @@ const Actions = ({
       contractId,
     });
 
-  if (state === VERSION_STATE.draft) return null;
+  const isVersionActive = state === VERSION_STATE.active;
+  const isVersionDraft = state === VERSION_STATE.draft;
+  const isContracting = contractState === CONTRACT_STATE.contracting;
+
+  if (isVersionDraft) return null;
+  if (!isContracting) return null;
   return (
     <div className='flex flex-col mdl:grid mdl:grid-cols-3 gap-3 *:flex-1 !mt-10'>
       <div>
-        {!acceptedByHead && (
+        {!acceptedByHead && isVersionActive && (
           <SignModal isPending={isPendingAccept} onSend={onAccept}>
             <AcceptButton className='w-full'>
               {tg('accept')}
@@ -169,7 +178,7 @@ const Actions = ({
         )}
       </div>
       <div>
-        {!acceptedByHead && (
+        {!acceptedByHead && isVersionActive && (
           <RejectButton onClick={onReject} className='w-full'>
             {tg('reject')}
           </RejectButton>

@@ -9,16 +9,22 @@ import { ARTICLES } from '@/data';
 const BlogsPage = ({ searchParams }) => {
   const tab = searchParams?.tab || '';
 
+  const importantArticles = ARTICLES;
+  const featuresArticles = ARTICLES.slice(0, 5);
+  const latestArticles = ARTICLES.reverse().slice(0, 5);
+
   return (
     <main>
       <Intro />
-      <FeaturesArticles data={ARTICLES} />
+      <FeaturesArticles data={featuresArticles} />
       <ArticlesTabsBar />
       <Container className='mdl:grid mdl:grid-cols-4 mdl:gap-5 mdl:py-10 py-5'>
         <ImportantArticles
-          data={filterArticlesByTab(ARTICLES, tab)}
+          data={filterArticlesByTab(importantArticles, tab)}
         />
-        <LatestArticles data={filterArticlesByTab(ARTICLES, tab)} />
+        <LatestArticles
+          data={filterArticlesByTab(latestArticles, tab)}
+        />
       </Container>
     </main>
   );

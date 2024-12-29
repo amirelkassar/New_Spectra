@@ -11,7 +11,10 @@ import { settings } from '@/api/admin';
 import { getQueries } from '@/lib/utils';
 import { initialSiteQueries } from '@/hooks/queries/initials';
 
-const initailCustomQueries = null;
+const initailCustomQueries = {
+  skipCount: 0,
+  maxCount: 10,
+};
 
 export const initialQueries =
   initailCustomQueries || initialSiteQueries;
@@ -68,8 +71,8 @@ export const useDeletePackage = (id) => {
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey, initialQueries],
       });
     },
   });
@@ -107,8 +110,8 @@ export const useUpdatePackage = (id) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === initialQueryKey,
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey, id],
       });
     },
     onError: () => {},

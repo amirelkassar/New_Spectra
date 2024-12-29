@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from '@/i18n/routing';
+
 import { QueryWrapper } from '@/components/query-wrapper';
 import { DoctorBadge } from '@/components/team';
 import { useLocale } from 'next-intl';
@@ -7,6 +9,7 @@ import { useImagePath } from '@/hooks/use-image-path';
 import { useProfileEmployeeGroups } from '@/hooks/queries/user/employee-groups';
 import Card from '@/components/card';
 import ADHD from '@/assets/icons/adhd';
+import ROUTES from '@/routes';
 
 export const Team = () => {
   const query = useProfileEmployeeGroups();
@@ -20,12 +23,22 @@ export const Team = () => {
 };
 
 const RenderTeam = ({ team = [] }) => {
+  const router = useRouter();
+
   return (
     <>
       {!!team?.length ? (
-        <div className='flex gap-4 flex-wrap *:shrink-0'>
+        <div className='grid grid-cols-2 xll:grid-cols-3 gap-4'>
           {team.map((member) => (
-            <TeamMember key={member?.id} {...member} />
+            <TeamMember
+              key={member?.id}
+              {...member}
+              onClick={() =>
+                router.push(
+                  ROUTES.DOCTOR.TEAM.VIEW_TEAM(member?.id || '')
+                )
+              }
+            />
           ))}
         </div>
       ) : (
@@ -45,6 +58,7 @@ const TeamMember = ({
   mainSpecializationEnName = '',
   userImage = '',
   rate = '',
+  onClick = () => {},
 }) => {
   const locale = useLocale();
 
@@ -61,7 +75,9 @@ const TeamMember = ({
       profession={profession}
       rate={rate}
       avatar={path}
-      className='h-full'
+      className='shrink'
+      onClick={onClick}
+      role='button'
     />
   );
 };
