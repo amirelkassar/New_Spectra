@@ -7,7 +7,6 @@ import { H1 } from '@/dashboard/_components/ui/h1';
 import { BackButton } from '@/components/buttons/back-button';
 import { DoctorMainInfo } from '@/dashboard/_components/staff/doctor-main-info';
 import { DoctorStatistics } from '@/dashboard/_components/staff/doctor-statistics';
-import ROUTES from '@/routes';
 import Card from '@/components/card';
 
 export const RenderLayout = ({ id = '', children }) => {
@@ -38,7 +37,7 @@ const MedicalProviderMainInfo = ({ data }) => {
   return (
     <Card className='space-y-10'>
       <div className='flex gap-5'>
-        <BackButton href={ROUTES.DOCTOR.STAFF.DASHBOARD} />
+        <BackButton />
         <H1>بيانات مقدم الخدمة</H1>
       </div>
 

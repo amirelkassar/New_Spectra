@@ -5,17 +5,34 @@ import { useCallback } from 'react';
 import { useUserChatAddMessage } from '@/hooks/queries/user/chat';
 import { CHAT_TYPES } from '@/data';
 import { getFormData } from '@/lib/utils';
+import { useAuth } from '@/hooks/use-auth';
 
-export const useAddMessage = (chatId = '', reference = '') => {
-  const {
-    mutate: addMessage,
-    isPending: isAddingMessage,
-    isError: isAddingMessageError,
-  } = useUserChatAddMessage({ chatId, reference });
+export const useAddMessage = (
+  chatId = '',
+  reference = '',
+  setMessages = () => {}
+) => {
+  const { userId } = useAuth();
+
+  const { mutate: addMessage } = useUserChatAddMessage({
+    chatId,
+    reference,
+  });
 
   const onSend = useCallback(
     (formData) => {
       const content = formData.get('message');
+      const tempId = Date.now();
+
+      const newMessage = {
+        tempId,
+        content,
+        status: 'pending',
+        senderId: userId,
+        created: new Date(),
+      };
+
+      setMessages((prev) => [...prev, newMessage]);
 
       const data = {
         chatId,
@@ -24,10 +41,35 @@ export const useAddMessage = (chatId = '', reference = '') => {
       };
 
       const formDataToSend = getFormData(data);
-      addMessage(formDataToSend);
+
+      addMessage(formDataToSend, {
+        onSuccess: (data) => {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.tempId === tempId
+                ? {
+                    ...msg,
+                    id: data?.data?.id,
+                    status: 'sent',
+                    created: data?.data?.created,
+                  }
+                : msg
+            )
+          );
+        },
+        onError: () => {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.tempId === tempId
+                ? { ...msg, status: 'failed' }
+                : msg
+            )
+          );
+        },
+      });
     },
-    [chatId, addMessage]
+    [chatId, addMessage, setMessages, userId]
   );
 
-  return { onSend, isAddingMessage, isAddingMessageError };
+  return { onSend };
 };

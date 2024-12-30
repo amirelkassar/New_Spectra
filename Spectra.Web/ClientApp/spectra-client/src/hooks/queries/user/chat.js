@@ -11,7 +11,10 @@ import { chat } from '@/api/user';
 import { getQueries } from '@/lib/utils';
 import { initialSiteQueries } from '@/hooks/queries/initials';
 
-const initailCustomQueries = null;
+const initailCustomQueries = {
+  skipCount: 0,
+  maxCount: 500,
+};
 
 export const initialQueries =
   initailCustomQueries || initialSiteQueries;

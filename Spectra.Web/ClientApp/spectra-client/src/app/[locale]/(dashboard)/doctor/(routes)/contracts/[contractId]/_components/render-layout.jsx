@@ -55,7 +55,7 @@ const ContractLayout = ({ contract, children }) => {
           />
 
           <div className='flex overflow-hidden flex-1'>
-            <Chat />
+            <Chat contractId={contract?.id} />
 
             <div className='flex-1'>{children}</div>
           </div>

@@ -223,6 +223,13 @@ function getLatestDate({
   changedByEmployeeDate = '',
   changedByHeadDate = '',
 }) {
+  if (
+    !changedByAdminDate &&
+    !changedByEmployeeDate &&
+    !changedByHeadDate
+  )
+    return { latestDate: null, changedBy: null };
+
   const dates = [
     { date: new Date(changedByAdminDate), source: 'admin' },
     { date: new Date(changedByEmployeeDate), source: 'doctor' },
