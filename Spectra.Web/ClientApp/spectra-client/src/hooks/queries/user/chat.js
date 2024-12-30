@@ -1,6 +1,7 @@
 import {
   keepPreviousData,
   QueryClient,
+  useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
@@ -50,7 +51,8 @@ export const useUserChatMessages = (
   params = {
     pageNum: null,
     search: '',
-    ChatId: '',
+    chatId: '',
+    reference: '',
   }
 ) => {
   const queries = getQueries({ params, initialQueries });
@@ -63,7 +65,12 @@ export const useUserChatMessages = (
   });
 };
 
-export const useUserChatAddMessage = () => {
+export const useUserChatAddMessage = (
+  params = {
+    chatId: '',
+    reference: '',
+  }
+) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -71,9 +78,20 @@ export const useUserChatAddMessage = () => {
       return (await apiUser.post(chat.actions.addMessage, data)).data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: [initialQueryKey],
-      });
+      const { chatId, reference } = params;
+
+      if (chatId) {
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[1]?.chatId === chatId,
+        });
+      }
+
+      if (reference) {
+        queryClient.invalidateQueries({
+          predicate: (query) =>
+            query.queryKey[1]?.reference === reference,
+        });
+      }
     },
   });
 };

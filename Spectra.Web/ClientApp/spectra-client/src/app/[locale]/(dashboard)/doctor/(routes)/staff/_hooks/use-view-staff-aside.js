@@ -6,23 +6,23 @@ import { usePathname } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 
-export const useViewTeamAside = () => {
+export const useViewStaffAside = () => {
   const path = usePathname();
 
   const params = useParams();
 
-  const doctorId = params?.doctorId || '';
+  const id = params?.staffId || '';
 
   const items = useMemo(
     () => [
       {
         name: 'البيانات الشخصية',
-        route: ROUTES.DOCTOR.TEAM.VIEW_TEAM(doctorId),
-        isActive: path === ROUTES.DOCTOR.TEAM.VIEW_TEAM(doctorId),
+        route: ROUTES.DOCTOR.STAFF.VIEW_STAFF(id),
+        isActive: path === ROUTES.DOCTOR.STAFF.VIEW_STAFF(id),
         show: true,
       },
     ],
-    [path, doctorId]
+    [path, id]
   );
 
   return {

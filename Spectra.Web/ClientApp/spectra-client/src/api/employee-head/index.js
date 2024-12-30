@@ -9,3 +9,11 @@ export const contract = {
     accept: '/contract/accept',
   },
 };
+
+export const employee = {
+  base: '/employee',
+  list: (queries = {}) => buildQuery('/employee/list', queries),
+  actions: {
+    get: (id) => `/employee?id=${id}`,
+  },
+};

@@ -51,7 +51,7 @@ const ContractLayout = ({ contract, children }) => {
           <DoctorDataCard
             {...contract}
             showChatButton
-            href={ROUTES.DOCTOR.TEAM.VIEW_TEAM(employeeId)}
+            href={ROUTES.DOCTOR.STAFF.VIEW_STAFF(employeeId)}
           />
 
           <div className='flex overflow-hidden flex-1'>

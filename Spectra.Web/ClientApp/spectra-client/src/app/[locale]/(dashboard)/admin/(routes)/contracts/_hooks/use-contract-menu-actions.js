@@ -19,7 +19,7 @@ export const useContractMenuActions = (
 ) => {
   const router = useRouter();
 
-  const locale = useLocale;
+  const locale = useLocale();
 
   const open = useConfirmModalStore((s) => s.open);
 

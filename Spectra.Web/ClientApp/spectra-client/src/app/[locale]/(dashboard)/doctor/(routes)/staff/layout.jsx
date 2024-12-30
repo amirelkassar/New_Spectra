@@ -2,7 +2,7 @@ import { ROLES } from '@/data';
 import { getAuth } from '@/lib/auth';
 import { notFound } from 'next/navigation';
 
-const TeamLayout = async ({ children }) => {
+const StaffLayout = async ({ children }) => {
   const { roles } = await getAuth();
 
   if (!roles.includes(ROLES.departmentHead)) notFound();
@@ -10,4 +10,4 @@ const TeamLayout = async ({ children }) => {
   return children;
 };
 
-export default TeamLayout;
+export default StaffLayout;
