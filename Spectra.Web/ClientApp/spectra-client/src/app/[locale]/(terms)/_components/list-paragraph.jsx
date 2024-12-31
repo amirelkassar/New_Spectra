@@ -5,7 +5,7 @@ export const ListParagraph = ({ children, ...props }) => {
     <p
       {...props}
       className={cn(
-        'text-sm mdl:text-xl text-black',
+        'text-sm mdl:text-xl inline text-black',
         props?.className
       )}
     >

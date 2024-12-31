@@ -5,7 +5,7 @@ export const ListTitle = ({ children, ...props }) => {
     <h3
       {...props}
       className={cn(
-        'text-sm mdl:text-xl font-bold text-black',
+        'text-sm mdl:text-xl font-bold inline text-black',
         props?.className
       )}
     >

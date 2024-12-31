@@ -6,7 +6,6 @@ import * as signalR from '@microsoft/signalr';
 
 import { useToken } from '@/hooks/use-token';
 import { Toast } from '@/components/toast';
-import { initialQueryKey } from '@/hooks/queries/user/notifications';
 
 const LISTENERS = {
   chatCreated: 'ChatCreated',
@@ -41,6 +40,16 @@ export const ChatHub = () => {
         console.log('chatDeleted');
       });
       connection.on(LISTENERS.messageAdded, (message) => {
+        const chatReference = message.chatReference;
+
+        queryClient.refetchQueries({
+          predicate: (query) =>
+            query.queryKey[1]?.reference === chatReference,
+        });
+
+        // queryClient.refetchQueries({
+        //   queryKey: ['user.chat', { reference: chatReference }],
+        // });
         console.log(message);
       });
       connection.on(LISTENERS.messageRemoved, () => {

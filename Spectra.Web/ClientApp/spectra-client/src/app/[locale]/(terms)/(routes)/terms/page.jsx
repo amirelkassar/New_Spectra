@@ -3,6 +3,8 @@ import { useTranslations } from 'next-intl';
 import { BackButton } from '@/components/buttons/back-button';
 import { BackButton as BackButtonEnd } from '@/components/buttons/back-button-end';
 import { H1 } from '../../_components';
+import { Terms } from './terms';
+import { TERMS } from '@/data';
 
 const TermsPage = () => {
   const tg = useTranslations();
@@ -14,7 +16,9 @@ const TermsPage = () => {
         <H1>{tg('terms_and_conditions')}</H1>
       </div>
 
-      <div className='space-y-5'>DATA</div>
+      <div className='space-y-5'>
+        <Terms data={TERMS} />
+      </div>
 
       <BackButtonEnd className='w-full max-w-64'>
         {tg('previous')}
