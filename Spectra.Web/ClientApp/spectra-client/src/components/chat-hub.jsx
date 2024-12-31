@@ -5,7 +5,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import * as signalR from '@microsoft/signalr';
 
 import { useToken } from '@/hooks/use-token';
-import { Toast } from '@/components/toast';
+// import { Toast } from '@/components/toast';
+import { initialQueryKey } from '@/hooks/queries/user/chat';
 
 const LISTENERS = {
   chatCreated: 'ChatCreated',
@@ -23,7 +24,7 @@ export const ChatHub = () => {
 
   useEffect(() => {
     let connection = null;
-    const audio = new Audio('/notification-received.mp3');
+    // const audio = new Audio('/notification-received.mp3');
 
     const connectSignalR = async () => {
       const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/chat`;
@@ -33,34 +34,40 @@ export const ChatHub = () => {
         .configureLogging(signalR.LogLevel.Error)
         .build();
 
-      connection.on(LISTENERS.chatCreated, () => {
-        console.log('chatCreated');
-      });
-      connection.on(LISTENERS.chatDeleted, () => {
-        console.log('chatDeleted');
-      });
-      connection.on(LISTENERS.messageAdded, (message) => {
-        const chatReference = message.chatReference;
+      connection.on(LISTENERS.chatCreated, () => {});
+      connection.on(LISTENERS.chatDeleted, () => {});
+      connection.on(LISTENERS.messageAdded, (newMessage) => {
+        const chatReference = newMessage.chatReference;
 
-        queryClient.refetchQueries({
-          predicate: (query) =>
-            query.queryKey[1]?.reference === chatReference,
-        });
+        queryClient.setQueriesData(
+          {
+            predicate: (query) =>
+              query.queryKey[0] === initialQueryKey &&
+              query.queryKey[1]?.reference === chatReference,
+          },
+          (oldData) => {
+            if (!oldData) return;
 
-        // queryClient.refetchQueries({
-        //   queryKey: ['user.chat', { reference: chatReference }],
-        // });
-        console.log(message);
+            const updatedPages = oldData.pages.map((page, index) =>
+              index === 0
+                ? {
+                    ...page,
+                    messages: {
+                      ...page.messages,
+                      items: [newMessage, ...page.messages.items],
+                    },
+                  }
+                : page
+            );
+
+            return { ...oldData, pages: updatedPages };
+          }
+        );
       });
-      connection.on(LISTENERS.messageRemoved, () => {
-        console.log('messageRemoved');
-      });
-      connection.on(LISTENERS.participantAdded, () => {
-        console.log('participantAdded');
-      });
-      connection.on(LISTENERS.participantRemoved, () => {
-        console.log('participantRemoved');
-      });
+
+      connection.on(LISTENERS.messageRemoved, () => {});
+      connection.on(LISTENERS.participantAdded, () => {});
+      connection.on(LISTENERS.participantRemoved, () => {});
 
       try {
         await connection.start();

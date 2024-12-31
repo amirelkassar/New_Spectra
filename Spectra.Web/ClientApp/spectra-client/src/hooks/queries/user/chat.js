@@ -14,7 +14,7 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = {
   skipCount: 0,
-  maxCount: 5,
+  maxCount: 10,
 };
 
 export const initialQueries =
@@ -88,33 +88,10 @@ export const useUserChatMessages = (
   });
 };
 
-export const useUserChatAddMessage = (
-  params = {
-    chatId: '',
-    reference: '',
-  }
-) => {
-  const queryClient = useQueryClient();
-
+export const useUserChatAddMessage = () => {
   return useMutation({
     mutationFn: async (data) => {
       return (await apiUser.post(chat.actions.addMessage, data)).data;
-    },
-    onSuccess: () => {
-      const { chatId, reference } = params;
-
-      if (chatId) {
-        queryClient.invalidateQueries({
-          predicate: (query) => query.queryKey[1]?.chatId === chatId,
-        });
-      }
-
-      if (reference) {
-        queryClient.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey[1]?.reference === reference,
-        });
-      }
     },
   });
 };

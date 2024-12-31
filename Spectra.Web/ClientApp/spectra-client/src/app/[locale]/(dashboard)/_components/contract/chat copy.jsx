@@ -4,8 +4,11 @@ import {
   forwardRef,
   memo,
   useCallback,
+  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -13,7 +16,6 @@ import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/inputs/textarea';
 import { useDelay } from '@/hooks/use-delay';
 import { useChat } from '@/hooks/use-chat';
-import { Virtuoso } from 'react-virtuoso';
 
 import Avatar from '@/components/avatar';
 import SendIcon from '@/assets/icons/send';
@@ -41,17 +43,9 @@ export const Chat = ({ contractId = '' }) => {
     >
       {isOpenDelayed && (
         <ChatWrapper query={query}>
-          {({
-            messages,
-            totalMessages,
-            totalCount,
-            chatId,
-            reference,
-          }) => (
+          {({ messages, chatId, reference }) => (
             <RenderChat
               initialMessages={messages}
-              totalMessages={totalMessages}
-              totalCount={totalCount}
               chatId={chatId}
               reference={reference}
               query={query}
@@ -77,95 +71,91 @@ const ChatWrapper = memo(({ query, children }) => {
 
   const { id, reference, chatImage, roomName, isGroup } = generalData;
 
-  const totalCount = data.pages[0].messages.totalCount;
-
-  const mergedMessages =
-    data?.pages?.flatMap((page) => page.messages.items).reverse() ||
-    [];
-
-  const totalMessages =
-    data?.pages?.reduce(
-      (total, page) => total + page.messages.items.length,
-      0
-    ) || 0;
-
   return children({
     chatId: id,
     reference,
     chatImage,
     roomName,
     isGroup,
-    messages: mergedMessages,
-    totalMessages,
-    totalCount,
+    messages: data?.pages,
   });
 });
 
 const RenderChat = memo(
-  ({
-    initialMessages = [],
-    totalMessages = 0,
-    totalCount = 0,
-    chatId,
-    reference,
-    query,
-  }) => {
+  ({ initialMessages = [], chatId, reference, query }) => {
     const { hasNextPage, fetchNextPage, isFetchingNextPage } = query;
+
+    const scrollContainerRef = useRef(null);
+
+    const [messages, setMessages] = useState(() => {
+      const mergedMessages = initialMessages.flatMap(
+        (page) => page.messages?.items || []
+      );
+
+      return mergedMessages.reverse();
+    });
 
     const tg = useTranslations('general_obj');
 
     const { userId } = useAuth();
 
-    const virtuosoRef = useRef(null);
+    const { onSend } = useAddMessage(chatId, reference, setMessages);
 
-    const { onSend, onRetry } = useAddMessage(
-      chatId,
-      reference,
-      () => {
-        // virtuosoRef.current?.scrollToIndex({
-        //   index: totalMessages + 1,
-        //   behavior: 'smooth',
-        // });
+    // SCROLL TO BOTTOM WHEN NEW MESSAGE IS SENT
+    const scrollToBottom = useCallback(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop =
+          scrollContainerRef.current.scrollHeight;
       }
-    );
+    }, []);
 
-    // HANDLE FETCH NEXT PAGE
-    const onFetchNextPage = useCallback(() => {
-      if (hasNextPage && !isFetchingNextPage) fetchNextPage();
-    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+    // HANDLE LOAD MORE MESSAGES BUTTON
+    const onLoadMore = useCallback(() => {
+      if (hasNextPage && !isFetchingNextPage) {
+        const scrollContainer = scrollContainerRef.current;
+        const scrollHeightBeforeLoad = scrollContainer.scrollHeight;
+
+        fetchNextPage().then(() => {
+          requestAnimationFrame(() => {
+            const newScrollHeight = scrollContainer.scrollHeight;
+            scrollContainer.scrollTop =
+              newScrollHeight - scrollHeightBeforeLoad;
+          });
+        });
+      }
+    }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
     // LOAD MORE BUTTON TEXT
-    const statusMsg = useMemo(() => {
-      return (
-        <div
-          className={cn(
-            'w-fit mx-auto capitalize text-xs',
-            !hasNextPage && 'text-grayDark'
-          )}
-        >
-          {isFetchingNextPage && tg('loading')}
-          {!hasNextPage && tg('no_more_messages')}
-        </div>
-      );
+    const buttonMsg = useMemo(() => {
+      if (isFetchingNextPage) return tg('loading');
+      if (hasNextPage) return tg('load_more');
+      if (!hasNextPage) return tg('no_more_messages');
     }, [hasNextPage, isFetchingNextPage, tg]);
 
     // RENDER CHAT BODY
     const ChatBody = useMemo(() => {
-      if (!initialMessages.length) {
+      if (!messages.length) {
         return <NoMessages>{tg('no_messages_yet')}</NoMessages>;
       }
 
       return (
-        <div className='flex-1'>
-          <Virtuoso
-            ref={virtuosoRef}
-            data={initialMessages}
-            firstItemIndex={totalCount - totalMessages}
-            initialTopMostItemIndex={initialMessages.length - 1}
-            startReached={onFetchNextPage}
-            followOutput={false}
-            components={{ Header: () => statusMsg }}
-            itemContent={(i, m) => (
+        <div
+          ref={scrollContainerRef}
+          className='flex-1 space-y-3 overflow-y-auto p-1 mdl:p-5'
+        >
+          <div
+            onClick={onLoadMore}
+            className={cn(
+              'w-fit mx-auto capitalize text-xs',
+              hasNextPage &&
+                'cursor-pointer transition hover:underline',
+              !hasNextPage && 'text-grayDark'
+            )}
+          >
+            {buttonMsg}
+          </div>
+          {messages?.map((m, i) => {
+            return (
               <Message
                 key={m?.id || i}
                 data-host={m?.senderId === userId}
@@ -173,27 +163,44 @@ const RenderChat = memo(
                 avatar={m?.senderImage || ''}
                 date={m?.created}
                 status={m?.status || ''}
-                onRetry={() => onRetry(m)}
-                showAvatar={
-                  initialMessages[i - 1]?.senderId !== m?.senderId
-                }
+                onRetry={() => {
+                  const formData = new FormData();
+                  formData.set('message', m.content);
+                  onSend(formData);
+                }}
+                showAvatar={messages[i - 1]?.senderId !== m?.senderId}
               >
                 {m?.content}
               </Message>
-            )}
-          />
+            );
+          })}
         </div>
       );
     }, [
-      initialMessages,
+      messages,
       userId,
       tg,
-      onFetchNextPage,
-      statusMsg,
-      totalMessages,
-      totalCount,
-      onRetry,
+      onSend,
+      onLoadMore,
+      buttonMsg,
+      hasNextPage,
     ]);
+
+    // HANDLE STATE UPDATE ON LOAD MORE MESSAGES OR SEND MESSAGE
+    useEffect(() => {
+      setMessages(() => {
+        const mergedMessages = initialMessages.flatMap(
+          (page) => page.messages?.items || []
+        );
+
+        return mergedMessages.reverse();
+      });
+    }, [initialMessages]);
+
+    // HANDLE SCROLL TO BOTTOM
+    useLayoutEffect(() => {
+      scrollToBottom();
+    }, [scrollToBottom]);
 
     return (
       <div className='h-full flex flex-col'>
@@ -202,6 +209,7 @@ const RenderChat = memo(
         <ChatActions
           onSend={(formData) => {
             onSend(formData);
+            scrollToBottom();
           }}
         />
       </div>
@@ -247,7 +255,7 @@ const Message = forwardRef(
       <div
         ref={ref}
         {...props}
-        className='flex flex-row-reverse gap-3 group data-[host=true]:flex-row max-w-full p-4 pb-0'
+        className='flex flex-row-reverse gap-3 group data-[host=true]:flex-row max-w-full'
       >
         <div>
           <Avatar
