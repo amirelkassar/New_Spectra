@@ -8,6 +8,10 @@ export const SessionProvider = ({ children, initialValue }) => {
   const [session, setSession] = useState(initialValue);
 
   const value = {
+    userId: session?.userId || '',
+    firstName: session?.firstName || '',
+    lastName: session?.lastName || '',
+    email: session?.email || '',
     roles: session?.roles || [],
     permissions: session?.permissions || [],
     hasActiveContract: session?.hasActiveContract || false,

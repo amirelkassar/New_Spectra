@@ -4,6 +4,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   TextareaProps,
 } from '@mantine/core';
+import { forwardRef } from 'react';
 
 /**
  * @typedef {Object} TextareaProps
@@ -14,9 +15,10 @@ import {
  * @param {TextareaProps} props
  */
 
-export const Textarea = ({ ...props }) => {
+export const Textarea = forwardRef(({ ...props }, ref) => {
   return (
     <MantineTextarea
+      ref={ref}
       {...props}
       size={props.size || 'lg'}
       radius={props.radius || 'md'}
@@ -34,4 +36,6 @@ export const Textarea = ({ ...props }) => {
       label={props.label}
     />
   );
-};
+});
+
+Textarea.displayName = 'Textarea';

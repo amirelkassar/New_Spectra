@@ -51,7 +51,7 @@ const RenderLayout = ({ data = {}, hasData = false, children }) => {
       />
 
       <div className='flex overflow-hidden flex-1'>
-        <Chat />
+        {hasData && <Chat contractId={data?.id} />}
 
         <div className='flex-1'>{children}</div>
       </div>

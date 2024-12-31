@@ -13,6 +13,10 @@ export const useAuth = () => {
   }
 
   const value = {
+    userId: context?.userId || '',
+    firstName: context?.firstName || '',
+    lastName: context?.lastName || '',
+    email: context?.email || '',
     roles: context?.roles || [],
     permissions: context?.permissions || [],
     hasActiveContract: context?.hasActiveContract || false,

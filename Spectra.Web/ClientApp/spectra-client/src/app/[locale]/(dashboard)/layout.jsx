@@ -1,7 +1,8 @@
 import { QueryInvalidateButton } from '@/components/query-invalidate-button';
-import { NotificationsToast } from '@/components/notifications-toast';
+import { NotificationsHub } from '@/components/notifications-hub';
 import { Header } from '@/dashboard/_components/layouts/header';
 import { Sidebar } from '@/dashboard/_components/layouts/sidebar';
+import { ChatHub } from '@/components/chat-hub';
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -14,7 +15,8 @@ const DashboardLayout = ({ children }) => {
         </main>
       </div>
 
-      <NotificationsToast />
+      <NotificationsHub />
+      <ChatHub />
       <QueryInvalidateButton />
     </div>
   );
