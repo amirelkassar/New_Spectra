@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import Card from '@/components/card';
@@ -15,9 +16,12 @@ import { contractsColumns } from './contracts-columns';
 import { StateFilter } from '@/dashboard/_components/contract/state-filter';
 import { CardItem } from '@/dashboard/_components/contract/contracts-table';
 import { CellActions } from './cell-actions';
+import ROUTES from '@/routes';
 
 export const ContractsTable = () => {
   const t = useTranslations('contract_obj');
+
+  const router = useRouter();
 
   const { pageNum, search } = useQueryParams();
 
@@ -47,7 +51,16 @@ export const ContractsTable = () => {
 
               <div className='flex flex-col mt-5 space-y-5 mdl:hidden'>
                 {data?.map((item) => (
-                  <CardItem key={item.id} item={item}>
+                  <CardItem
+                    key={item.id}
+                    item={item}
+                    onClick={() => {
+                      if (!item?.id) return;
+                      router.push(
+                        ROUTES.ADMIN.CONTRACTS.VIEW_CONTRACT(item.id)
+                      );
+                    }}
+                  >
                     <CellActions
                       lastVersionId={item?.lastVersionId}
                       contractId={item.id}

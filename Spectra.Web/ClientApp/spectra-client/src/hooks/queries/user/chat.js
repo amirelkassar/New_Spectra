@@ -1,6 +1,7 @@
 import {
   keepPreviousData,
   QueryClient,
+  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
@@ -13,7 +14,7 @@ import { initialSiteQueries } from '@/hooks/queries/initials';
 
 const initailCustomQueries = {
   skipCount: 0,
-  maxCount: 500,
+  maxCount: 5,
 };
 
 export const initialQueries =
@@ -52,7 +53,6 @@ export const useUserChatList = (
 
 export const useUserChatMessages = (
   params = {
-    pageNum: null,
     search: '',
     chatId: '',
     reference: '',
@@ -60,11 +60,31 @@ export const useUserChatMessages = (
 ) => {
   const queries = getQueries({ params, initialQueries });
 
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: [initialQueryKey, queries],
-    queryFn: async () =>
-      (await apiUser.get(chat.messages(queries))).data,
-    placeholderData: keepPreviousData,
+    queryFn: async ({ pageParam = 1 }) => {
+      const newParams = {
+        ...params,
+        pageNum: pageParam,
+      };
+
+      const queries = getQueries({
+        params: newParams,
+        initialQueries,
+      });
+
+      const response = await apiUser.get(chat.messages(queries));
+      return response.data?.data;
+    },
+    initialPageParam: 1,
+    getNextPageParam: (initialData, pages) => {
+      const totalCount = initialData?.messages?.totalCount;
+      const pageSize = initialData?.messages?.pageSize;
+
+      const totalPages = Math.ceil(totalCount / pageSize);
+
+      return pages.length < totalPages ? pages.length + 1 : undefined;
+    },
   });
 };
 

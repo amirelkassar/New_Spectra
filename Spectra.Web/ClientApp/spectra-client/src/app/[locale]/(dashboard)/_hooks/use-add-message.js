@@ -21,7 +21,8 @@ export const useAddMessage = (
 
   const onSend = useCallback(
     (formData) => {
-      const content = formData.get('message');
+      const content = formData?.get('message');
+      if (!content) return;
       const tempId = Date.now();
 
       const newMessage = {

@@ -8,7 +8,11 @@ import { useTranslations } from 'next-intl';
 import { ContractStatus } from '../contract-status';
 import { CellAcceptedBy } from './cell-accepted-by';
 
-export const CardItem = ({ item = {}, children }) => {
+export const CardItem = ({
+  item = {},
+  onClick = () => {},
+  children,
+}) => {
   const path = useImagePath(item?.imagePath);
 
   const tg = useTranslations('general_obj');
@@ -17,7 +21,7 @@ export const CardItem = ({ item = {}, children }) => {
 
   return (
     <TableCard>
-      <TableCard.Container>
+      <TableCard.Container role='button' onClick={onClick}>
         <TableCard.Body>
           <div className='flex gap-2'>
             <Avatar

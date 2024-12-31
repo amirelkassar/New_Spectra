@@ -8,7 +8,7 @@ import { useToken } from '@/hooks/use-token';
 import { Toast } from '@/components/toast';
 import { initialQueryKey } from '@/hooks/queries/user/notifications';
 
-export const NotificationsToast = () => {
+export const NotificationsHub = () => {
   const { token } = useToken();
 
   const queryClient = useQueryClient();
@@ -43,7 +43,7 @@ export const NotificationsToast = () => {
       }
 
       connection.onclose(() => {
-        console.warn('SignalR connection closed.');
+        console.warn('SignalR Notifications connection closed.');
       });
     };
 
