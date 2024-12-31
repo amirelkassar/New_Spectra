@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
@@ -14,7 +13,7 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Infrastructure.Notifications
 {
-    internal class NotificationService(IHubContext<NotificationHub,INotificationClientHub> notificationContext,
+    internal class NotificationService(IHubContext<NotificationHub, INotificationClientHub> notificationContext,
         UserManager<AppUser> userManager,
         ISender sender) : INotificationService
     {
@@ -26,14 +25,14 @@ namespace Spectra.Infrastructure.Notifications
         {
             var users = await _userManager.GetUsersInRoleAsync(roleName);
             var userIds = users.Select(u => u.Id).ToArray();
-            var notificationRes =(OperationResult<Notification>) await _sender.Send(new CreateNotificationCommand
+            var notificationRes = (OperationResult<Notification>)await _sender.Send(new CreateNotificationCommand
             {
                 Content = content,
                 Title = title,
                 ObjectUrl = objectUrl,
                 SenderId = senderId,
                 Type = type,
-                Receivers= userIds
+                Receivers = userIds
             });
 
             var notification = notificationRes.Data;

@@ -26,8 +26,8 @@ namespace Spectra.Domain.AppUser
 
         public string? CreatedBy { get; private set; }
 
-        public DateTimeOffset? LastModified { get;  set; }
-        public string? LastModifiedBy { get;  set; }
+        public DateTimeOffset? LastModified { get; set; }
+        public string? LastModifiedBy { get; set; }
 
         public void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
 

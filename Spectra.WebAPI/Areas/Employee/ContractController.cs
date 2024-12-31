@@ -1,14 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Application.Chats.Commands;
-using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
-using Spectra.Domain.Shared.Constants;
-using Spectra.Domain.Shared.Enums;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
 
@@ -33,27 +29,6 @@ namespace Spectra.WebAPI.Areas.Employee
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {
             var response = await _mediator.Send(input);
-            var adminUsers = await _userManager.GetUsersInRoleAsync(Roles.SystemAdmin);
-            var adminUser = adminUsers.First();
-            var chatRoomId = await _mediator.Send(new CreateChatRoomCommand
-            {
-                IsGroup = false,
-                RoomName = $"Contract Of {_currentUser.Name}",
-                Participants = [new ChatParticipantReadDto
-                {
-                    CanSend = true,
-                    Expried=false,
-                    Type=ChatParticipantType.Participant,
-                    UserId=_currentUser.Id,
-                },
-                new ChatParticipantReadDto{
-                    CanSend = true,
-                    Expried=false,
-                    Type=ChatParticipantType.Admin,
-                    UserId=adminUser.Id,
-                }]
-            });
-
             return Created("", response);
         }
 

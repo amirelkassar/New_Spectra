@@ -1,13 +1,11 @@
-﻿using System.Net.Mail;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using NAudio.Lame;
+using NAudio.Wave;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Webp;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.GlobalExceptions;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Webp;
-using NAudio.Wave;
-using NAudio.Lame;
 
 namespace Spectra.Application.MasterData.HellperFunc
 {

@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.Xml;
-using FluentValidation;
+﻿using FluentValidation;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +46,7 @@ namespace Spectra.Application.Contracts.Commands
                 {
                     throw new ContractSignatureNeededException();
                 }
-                else if(request.Value)
+                else if (request.Value)
                 {
                     var folderPath = Pathes.GetEmployeesPath();
 
@@ -75,7 +74,7 @@ namespace Spectra.Application.Contracts.Commands
 
                 var response = OperationResult.Success();
 
-                response.AddDomainEvent(new ContractChangeEvent(contract, ContractChangeType.Admin,request.Value));
+                response.AddDomainEvent(new ContractChangeEvent(contract, ContractChangeType.Admin, request.Value));
 
                 return response;
             }

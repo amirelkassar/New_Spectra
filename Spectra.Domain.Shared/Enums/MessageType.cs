@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.Shared.Enums
+﻿namespace Spectra.Domain.Shared.Enums
 {
     public enum MessageType : byte
     {
@@ -12,7 +6,7 @@ namespace Spectra.Domain.Shared.Enums
         Audio = 2,
         Video = 3,
         File = 4,
-        Image=5,
+        Image = 5,
         Ads = 6
     }
 }

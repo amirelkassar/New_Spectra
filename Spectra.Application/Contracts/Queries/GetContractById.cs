@@ -1,8 +1,6 @@
 ﻿using Mapster;
 using MediatR;
 using Spectra.Application.Contracts.DTO;
-using Spectra.Application.Contracts.Repository;
-using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common.Exceptions;

@@ -5,9 +5,9 @@ namespace Spectra.Domain.AppUser.DomainEvents
 {
     public record OnNewUserRegisterEvent : BaseEvent
     {
-        public OnNewUserRegisterEvent(string userId, 
+        public OnNewUserRegisterEvent(string userId,
             string role,
-            string? empId = null, 
+            string? empId = null,
             string? clientId = null) : base(DomainEventType.AfterCommit)
         {
             UserId = userId;

@@ -1,7 +1,5 @@
-﻿using MongoDB.Driver;
-using MongoDB.Bson;
-using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
 
 public static class MongoFilterExtensions
 {

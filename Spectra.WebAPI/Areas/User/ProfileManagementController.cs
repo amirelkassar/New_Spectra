@@ -5,12 +5,10 @@ using Microsoft.Extensions.Logging;
 using Spectra.Application.AppUsers.ProfileManagement.Commands;
 using Spectra.Application.AppUsers.ProfileManagement.Queries;
 using Spectra.Application.Employees.Commands;
-using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.EmployeeGroups.Queries;
 using Spectra.Application.Employees.Queries;
 using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
-using Spectra.Application.ScheduleAppointments.Appointments.Commands;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.WebAPI.Areas.User.Models;
@@ -68,8 +66,8 @@ namespace Spectra.WebAPI.Areas.User
         {
             var response = await _mediator.Send(new DeleteAttachmentCommand
             {
-                UserId= CurrentUser.Id,
-                DocumentId=input.Id
+                UserId = CurrentUser.Id,
+                DocumentId = input.Id
             });
             return NoContent();
         }

@@ -210,7 +210,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             foreach (var group in localGroups)
             {
                 permissoins.AddRange(group.Categories.SelectMany(c => c.Permissions)
-                .Where(p=>permissions.Any(np=>np.Equals(p.LogicalName)))
+                .Where(p => permissions.Any(np => np.Equals(p.LogicalName)))
                 .Select(p => RolePermission.Create(Ulid.NewUlid().ToString(), role.Id, p.LogicalName, p.Id, p.PermissoinCategoryId, group.Id, accessLevel)));
             }
 

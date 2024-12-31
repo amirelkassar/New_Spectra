@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Spectra.Application.Chats.Hubs
@@ -12,5 +7,11 @@ namespace Spectra.Application.Chats.Hubs
     public class ChatHub : Hub<IChatHubClient>
     {
 
+
+        public override Task OnConnectedAsync()
+        {
+            var user = Context.User;
+            return base.OnConnectedAsync();
+        }
     }
 }

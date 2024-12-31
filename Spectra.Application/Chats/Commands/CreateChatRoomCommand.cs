@@ -35,7 +35,7 @@ namespace Spectra.Application.Chats.Commands
                     throw new NotFoundException("users", request.Participants);
                 }
                 request.RoomName ??= $"new chat {DateTimeOffset.UtcNow}";
-                var chatRoom = new ChatRoom(Ulid.NewUlid().ToString(),request.IsGroup)
+                var chatRoom = new ChatRoom(Ulid.NewUlid().ToString(), request.IsGroup)
                 {
                     RoomName = request.RoomName,
                 };

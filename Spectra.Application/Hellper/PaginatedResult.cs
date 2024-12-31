@@ -2,6 +2,11 @@
 {
     public class PaginatedResult<T>
     {
+        public PaginatedResult()
+        {
+            Items = [];
+            TotalCount = 0;
+        }
         public PaginatedResult(IEnumerable<T> items, long total, int pageSize)
         {
             Items = items;

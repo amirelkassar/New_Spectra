@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using MongoDB.Driver;
 using Spectra.Application.Contracts.DTO;
@@ -9,7 +8,6 @@ using Spectra.Domain.Contracts;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 using static Spectra.Domain.Shared.Constants.ContractConses;
-using static Spectra.Domain.Shared.Helpers.PredicateBuilder;
 
 namespace Spectra.Application.Contracts.Queries
 {

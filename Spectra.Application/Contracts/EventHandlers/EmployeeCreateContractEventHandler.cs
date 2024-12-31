@@ -5,7 +5,6 @@ using Spectra.Application.Notifications;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Chats;
 using Spectra.Domain.Contracts.DomainEvents;
-using Spectra.Domain.Notifications;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 

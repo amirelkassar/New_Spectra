@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Domain.MasterData.Articles;
+﻿using Spectra.Domain.MasterData.Articles;
 using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Application.MasterData.Articles.Dtos

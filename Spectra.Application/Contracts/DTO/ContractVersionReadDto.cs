@@ -1,8 +1,4 @@
-﻿using Mapster;
-using Spectra.Application.Employees.Dto;
-using Spectra.Domain.Contracts;
-using Spectra.Domain.Employees;
-using static Spectra.Domain.Shared.Constants.ContractConses;
+﻿using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO
 {

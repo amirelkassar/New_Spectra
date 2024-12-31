@@ -19,9 +19,9 @@ namespace Spectra.Domain.Chats
         string chatId,
         string senderId) : BaseAuditableEntity<string>(id)
     {
-        public MessageType Type { get; } = type;
-        public string ChatId { get; } = chatId;
-        public string SenderId { get; } = senderId;
+        public MessageType Type { get; private set;} = type;
+        public string ChatId { get; private set; } = chatId;
+        public string SenderId { get; private set; } = senderId;
         public string? Content { get; set; }
         public string? FileUrl { get; set; }
     }

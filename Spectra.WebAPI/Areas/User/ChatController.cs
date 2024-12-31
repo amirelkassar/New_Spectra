@@ -33,7 +33,7 @@ namespace Spectra.WebAPI.Areas.User
         public async Task<IActionResult> SendMessageAsync([FromForm] CreateMessageCommand input)
         {
             var response = await _sender.Send(input);
-            return Created("",response);
+            return Created("", response);
         }
 
         [HttpDelete]

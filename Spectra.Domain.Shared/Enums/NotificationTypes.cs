@@ -18,6 +18,6 @@
     {
         Read = 1,
         Unread,
-        Deleted=0
+        Deleted = 0
     }
 }

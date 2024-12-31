@@ -250,7 +250,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
 
         public async Task<OperationResult> FindByIdListAsync(params string[] ids)
         {
-            var users =await _userManager
+            var users = await _userManager
                 .Users
                 .Where(u => ids.Contains(u.Id))
                 .ToArrayAsync();

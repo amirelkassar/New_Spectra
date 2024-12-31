@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,10 +7,8 @@ using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Employees;
-using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
-using Spectra.Domain.Shared.Helpers;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.Queries

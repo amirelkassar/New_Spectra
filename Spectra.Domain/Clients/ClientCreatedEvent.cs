@@ -1,5 +1,4 @@
-﻿using System;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Enums;
 
 

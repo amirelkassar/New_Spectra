@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
@@ -23,7 +18,7 @@ namespace Spectra.Application.MasterData.Articles.Quries
 
             public async Task<OperationResult> Handle(GetArtcileListQuery request, CancellationToken cancellationToken)
             {
-                var (articles,total) = await _articleRepository.GetAllAsync(null, null, request.SkipCount, request.MaxCount);
+                var (articles, total) = await _articleRepository.GetAllAsync(null, null, request.SkipCount, request.MaxCount);
                 var articleDtos = articles.Adapt<ICollection<ArticleReadDto>>();
 
                 return OperationResult<PaginatedResult<ArticleReadDto>>.Success(new PaginatedResult<ArticleReadDto>(articleDtos, total, request.MaxCount));

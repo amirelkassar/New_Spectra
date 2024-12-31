@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,9 +14,9 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Employees.Queries
 {
-    public class GetEmployeeListByHeadDepartmentQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetEmployeeListByHeadDepartmentQuery : QueryPaginationParam, IRequest<OperationResult>
     {
-        public string Search { get; set; }
+        public string? Search { get; set; }
         public JobTypes? JobType { get; set; }
         public string? MainSpecializationId { get; set; }
         public class GetEmployeeListByHeadDepartmentQueryHandler(ICurrentUser currentUser,
@@ -39,10 +34,13 @@ namespace Spectra.Application.Employees.Queries
             public async Task<OperationResult> Handle(GetEmployeeListByHeadDepartmentQuery request, CancellationToken cancellationToken)
             {
                 var userEmployee = await _employeeRepository.GetAsync(e => e.UserId == _currentUser.Id);
-                var (sectionData,sectionTotal) = await _sectionRepository.GetAllAsync(s => s.HeadDoctorId == userEmployee.Id);
+                var (sectionData, sectionTotal) = await _sectionRepository.GetAllAsync(s => s.HeadDoctorId == userEmployee.Id);
+                if (sectionTotal <= 0)
+                    return OperationResult<PaginatedResult<EmployeeListDto>>.Success(new PaginatedResult<EmployeeListDto>());
+
                 var collection = await _employeeRepository.GetCollectionAsync();
                 var filterBuilder = Builders<Employee>.Filter;
-                var filter = filterBuilder.AnyIn("SectionId", sectionData.Select(s => s.Id).ToArray());
+                var filter = filterBuilder.In(e => e.SectionId, sectionData.Select(s => s.Id).ToArray());
 
                 if (!string.IsNullOrWhiteSpace(request.Search))
                 {

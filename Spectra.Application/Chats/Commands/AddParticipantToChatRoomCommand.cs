@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Chats.Services;
-using Spectra.Application.Interfaces;
-using Spectra.Domain.Chats;
-using Spectra.Domain.Shared.Common.Exceptions;
 using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Chats.Commands
@@ -18,7 +15,7 @@ namespace Spectra.Application.Chats.Commands
 
             public async Task<OperationResult> Handle(AddParticipantToChatRoomCommand request, CancellationToken cancellationToken)
             {
-                await _chatService.AddParticipantToChatAsync(request.ChatId, request.UserId, Domain.Shared.Enums.ChatParticipantType.Participant,null);
+                await _chatService.AddParticipantToChatAsync(request.ChatId, request.UserId, Domain.Shared.Enums.ChatParticipantType.Participant, null);
 
                 return OperationResult.Success();
             }

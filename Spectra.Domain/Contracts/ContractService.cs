@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Spectra.Domain.Contracts
+﻿namespace Spectra.Domain.Contracts
 {
     public class ContractService
     {

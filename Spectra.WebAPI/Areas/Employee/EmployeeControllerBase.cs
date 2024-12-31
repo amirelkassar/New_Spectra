@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.WebAPI.Areas.MedicalProvider
 {

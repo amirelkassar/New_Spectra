@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.ServicesMD.Dtos;
-using Spectra.Application.MasterData.ServicesMD;
+using Spectra.Application.MasterData.PlatformServices.Dtos;
 using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
-using Spectra.Domain.Shared.Wrappers;
-using Microsoft.AspNetCore.Http;
-using Spectra.Application.MasterData.PlatformServices.Dtos;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.MasterData.PlatformServices.Queries
 {

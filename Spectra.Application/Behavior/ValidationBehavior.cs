@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Spectra.Application.Messaging;
 
 namespace Spectra.Application.Common
 {
 
     public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators,
         ILogger<ValidationBehavior<TRequest, TResponse>> logger) : IPipelineBehavior<TRequest, TResponse>
-      
+
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
         private readonly ILogger<ValidationBehavior<TRequest, TResponse>> _logger = logger;

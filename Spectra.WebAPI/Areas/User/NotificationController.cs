@@ -20,7 +20,7 @@ namespace Spectra.WebAPI.Areas.User
             {
                 MaxCount = input.MaxCount,
                 SkipCount = input.SkipCount,
-                UserId=CurrentUser.Id,
+                UserId = CurrentUser.Id,
             });
 
             return Ok(response);
@@ -32,8 +32,8 @@ namespace Spectra.WebAPI.Areas.User
             var response = await _mediator.Send(new UpdateNotificationStateCommand
             {
                 Id = id,
-                Status=Domain.Shared.Enums.NotificationChangeStatuses.Read,
-                UserId=CurrentUser.Id
+                Status = Domain.Shared.Enums.NotificationChangeStatuses.Read,
+                UserId = CurrentUser.Id
             });
             return Accepted(response);
         }

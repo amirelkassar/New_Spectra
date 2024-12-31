@@ -10,9 +10,9 @@ namespace Spectra.Domain.Shared.Common
         public BaseEvent(DomainEventType EventType = DomainEventType.AfterCommit)
         {
             this.EventType = EventType;
-            Id= Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
-        public Guid Id { get;private set; }
+        public Guid Id { get; private set; }
         public DomainEventType EventType { get; }
     }
 }

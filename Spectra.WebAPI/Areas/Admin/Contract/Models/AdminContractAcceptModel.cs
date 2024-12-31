@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Application.Contracts.DTO;
-using Spectra.Domain.Contracts;
+﻿using Spectra.Application.Contracts.DTO;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract.Models
 {

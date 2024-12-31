@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO

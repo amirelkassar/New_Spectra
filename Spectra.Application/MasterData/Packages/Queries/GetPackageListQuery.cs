@@ -7,7 +7,6 @@ using Spectra.Application.Hellper;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.Packages.Dtos;
 using Spectra.Domain.MasterData.Packages;
-using Spectra.Domain.MasterData.ServicesMD;
 using Spectra.Domain.Shared.Common;
 using Spectra.Domain.Shared.Wrappers;
 

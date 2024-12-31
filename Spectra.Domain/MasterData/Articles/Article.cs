@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.MasterData.Articles
 {
     public class Article : BaseAuditableEntity<string>
     {
-        public Article(string id):base(id)
+        public Article(string id) : base(id)
         {
             Sections = [];
         }

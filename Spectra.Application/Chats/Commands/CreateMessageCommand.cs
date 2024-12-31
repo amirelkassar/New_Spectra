@@ -1,11 +1,9 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Http;
+using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Chats.Services;
 using Spectra.Application.Interfaces;
-using Spectra.Application.MasterData.HellperFunc;
-using Spectra.Domain.Chats;
-using Spectra.Domain.Chats.Exceptions;
-using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -26,9 +24,10 @@ namespace Spectra.Application.Chats.Commands
 
             public async Task<OperationResult> Handle(CreateMessageCommand request, CancellationToken cancellationToken)
             {
-               var messageId= await _chatService.AddMessageAsync(request.ChatId,_currentUser.Id,request.Content,request.Type,request.File);
+                var message = await _chatService.AddMessageAsync(request.ChatId, _currentUser.Id, request.Content, request.Type, request.File);
+                var messageDto = message.Adapt<MessageReadDto>();
 
-                return OperationResult<string>.Success(messageId);
+                return OperationResult<MessageReadDto>.Success(messageDto);
             }
         }
     }

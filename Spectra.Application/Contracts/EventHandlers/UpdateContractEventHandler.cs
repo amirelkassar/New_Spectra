@@ -31,7 +31,7 @@ namespace Spectra.Application.Contracts.EventHandlers
                                 NotificationTypes.System,
                                 $"/doctor/contract/{contract.Id}");
                     }
-                        break;
+                    break;
                 case ContractChangeType.Doctor:
                     {
                         await _notificationService.PushToRoleAsync(Roles.SystemAdmin,

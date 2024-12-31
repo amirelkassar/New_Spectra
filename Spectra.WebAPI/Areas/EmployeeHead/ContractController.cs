@@ -1,12 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
-using Spectra.Application.Identities.Permissions.Users;
 using Spectra.Application.Interfaces;
-using Spectra.Domain.Shared.Constants;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 
 namespace Spectra.WebAPI.Areas.EmployeeHead
@@ -49,7 +46,7 @@ namespace Spectra.WebAPI.Areas.EmployeeHead
             {
                 Id = input.Id,
                 Value = true,
-                Signature=input.Signature
+                Signature = input.Signature
             });
 
             return Accepted(response);

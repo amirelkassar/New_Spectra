@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Mapster;
+﻿using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
-using SharpCompress.Common;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using Spectra.Application.Chats.Dtos;
 using Spectra.Application.Chats.Hubs;
 using Spectra.Application.Chats.Services;
@@ -26,15 +21,17 @@ namespace Spectra.Infrastructure.Chats
         IBaseMongoDbRepository<ChatRoom> chatRepository,
         IBaseMongoDbRepository<ChatMessage> messageRepository,
         IDocumentHellper documentHellper,
-        IHttpContextAccessor httpContextAccessor) : IChatService
+        IHttpContextAccessor httpContextAccessor,
+        ILogger<ChatService> logger) : IChatService
     {
         private readonly IHubContext<ChatHub, IChatHubClient> _chatHub = chatHub;
         private readonly IBaseMongoDbRepository<ChatRoom> _chatRepository = chatRepository;
         private readonly IBaseMongoDbRepository<ChatMessage> _messageRepository = messageRepository;
         private readonly IDocumentHellper _documentHellper = documentHellper;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly ILogger<ChatService> _logger = logger;
 
-        public async Task<string> AddMessageAsync(string chatId, string userId, string? content = null, MessageType type = MessageType.Text, IFormFile? file = null)
+        public async Task<ChatMessage> AddMessageAsync(string chatId, string userId, string? content = null, MessageType type = MessageType.Text, IFormFile? file = null)
         {
             var chat = await _chatRepository.GetByIdAsync(chatId);
             if (chat.Participants.Any(p => p.UserId == userId))
@@ -53,7 +50,13 @@ namespace Spectra.Infrastructure.Chats
                     FileUrl = filePath
                 };
 
+
                 await _messageRepository.AddAsync(message);
+
+                chat.LastMeesageDate = message.Created;
+                chat.LastMessage = message.Content;
+                
+                await _chatRepository.UpdateAsync(chat);
 
                 var messageDto = message.Adapt<MessageReadDto>();
                 if (!string.IsNullOrWhiteSpace(filePath))
@@ -62,10 +65,14 @@ namespace Spectra.Infrastructure.Chats
                 }
                 var targetParticipants = chat.Participants.Where(p => p.UserId != userId).Select(p => p.UserId).ToArray();
 
-                await _chatHub.Clients.Users(targetParticipants)
+                _logger.LogInformation($"Sending message to {string.Join(',', targetParticipants)}");
+                messageDto.ChatReference = chat.Reference;
+                await _chatHub
+                    .Clients
+                    .Users(targetParticipants)
                     .MessageAdded(messageDto);
 
-                return message.Id;
+                return message;
             }
             else
                 throw new UserNotAllowedToSendMessageException();
@@ -92,6 +99,8 @@ namespace Spectra.Infrastructure.Chats
             var targetParticipants = chatRoom.Participants.Where(p => p.UserId != userId).Select(p => p.UserId).ToArray();
 
             var participantDto = participant.Adapt<ChatParticipantReadDto>();
+
+            _logger.LogInformation($"Sending message to {string.Join(',', targetParticipants)}");
 
             await _chatHub.Clients.Users(targetParticipants)
                    .ParticipantAdded(participantDto);
@@ -124,6 +133,8 @@ namespace Spectra.Infrastructure.Chats
             {
                 await _chatRepository.DeleteAsync(chatId);
                 var targetParticipants = chat.Participants.Select(p => p.UserId).ToArray();
+
+                _logger.LogInformation($"Sending message to {string.Join(',', targetParticipants)}");
                 await _chatHub.Clients.Users(targetParticipants)
                          .ChatDeleted(chatId);
             }
@@ -141,6 +152,8 @@ namespace Spectra.Infrastructure.Chats
                     await _messageRepository.DeleteAsync(messageId);
                     var messageDto = message.Adapt<MessageReadDto>();
                     var targetParticipants = chat.Participants.Where(p => p.UserId != userId).Select(p => p.UserId).ToArray();
+
+                    _logger.LogInformation($"Sending removed message to {string.Join(',', targetParticipants)}");
                     await _chatHub.Clients.Users(targetParticipants)
                         .MessageRemoved(messageDto);
                 }
@@ -161,6 +174,8 @@ namespace Spectra.Infrastructure.Chats
                 var targetParticipants = chat.Participants.Where(p => p.UserId != userId).Select(p => p.UserId).ToArray();
 
                 var participantDto = participant.Adapt<ChatParticipantReadDto>();
+
+                _logger.LogInformation($"Remove Participant notification to {string.Join(',', targetParticipants)}");
 
                 await _chatHub.Clients.Users(targetParticipants)
                        .ParticipantRemoved(participantDto);

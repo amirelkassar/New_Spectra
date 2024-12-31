@@ -24,7 +24,7 @@ namespace Spectra.Application.Contracts.Commands
             {
                 EmploymentContract contract = null;
                 var role = _currentUser.Role;
-                var response= OperationResult.Success();
+                var response = OperationResult.Success();
                 if (role.Equals(Roles.SystemAdmin))
                 {
                     contract = await _contractRepository.GetAsync(c => c.Id == request.Id)

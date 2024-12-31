@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Hellper;
-using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Employees;
@@ -45,7 +39,7 @@ namespace Spectra.Application.Employees.Queries
                 var (sectionData, sectionTotal) = await _sectionRepository.GetAllAsync(s => s.HeadDoctorId == userEmployee.Id);
                 var collection = await _employeeRepository.GetCollectionAsync();
                 var filterBuilder = Builders<Employee>.Filter;
-                var filter = filterBuilder.AnyIn("SectionId", sectionData.Select(s => s.Id).ToArray());
+                var filter = filterBuilder.In(e => e.SectionId, sectionData.Select(s => s.Id).ToArray());
                 filter &= filterBuilder.Eq(e => e.Id, request.Id);
 
                 var employee = await collection.Find(filter).FirstOrDefaultAsync() ?? throw new NotFoundException("Employees", request.Id);

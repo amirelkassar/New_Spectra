@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectra.Domain.Chats;
-using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Application.Chats.Dtos
 {
@@ -13,7 +7,7 @@ namespace Spectra.Application.Chats.Dtos
         public ChatReadDto()
         {
             Participants = [];
-            LastMeesageDate= DateTime.UtcNow;
+            LastMeesageDate = DateTime.UtcNow;
         }
         public string RoomName { get; set; }
         public ICollection<ChatParticipantReadDto> Participants { get; set; }

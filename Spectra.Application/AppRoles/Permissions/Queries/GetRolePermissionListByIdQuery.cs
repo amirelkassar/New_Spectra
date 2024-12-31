@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Spectra.Application.AppRoles.Permissions.Dtos;
@@ -26,7 +21,7 @@ namespace Spectra.Application.AppRoles.Permissions.Queries
 
             public async Task<OperationResult> Handle(GetRolePermissionListByIdQuery request, CancellationToken cancellationToken)
             {
-                var role=await _roleManager.FindByIdAsync(request.Id)?? throw new NotFoundException("Roles",request.Id);
+                var role = await _roleManager.FindByIdAsync(request.Id) ?? throw new NotFoundException("Roles", request.Id);
                 var permissions = await _permissionManager.GetRolePermissionGroups(role.Name);
 
                 var permissionsDtos = permissions.Adapt<IReadOnlyCollection<PermissionGroupReadDto>>();

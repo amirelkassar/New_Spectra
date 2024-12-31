@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using HeyRed.Mime;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
@@ -29,12 +27,12 @@ namespace Spectra.Application.Contracts.Commands
 
             public async Task<OperationResult> Handle(ChangeContractByEmployeeCommand request, CancellationToken cancellationToken)
             {
-                var contract= await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id)
+                var contract = await _contractRepository.GetAsync(c => c.EmployeeUserId == _currentUser.Id)
                             ?? throw new NotFoundException("Contracts", _currentUser.Id);
 
                 var currentVersion = contract.Versions.First(v => v.State == ContractVersionStates.Active);
 
-                if (!string.IsNullOrWhiteSpace(contract.DoctorSignaturePath)) 
+                if (!string.IsNullOrWhiteSpace(contract.DoctorSignaturePath))
                 {
                     await _documentHellper.DeleteAttachment(contract.DoctorSignaturePath);
                 }
@@ -42,7 +40,7 @@ namespace Spectra.Application.Contracts.Commands
                 {
                     throw new ContractSignatureNeededException();
                 }
-                else if(request.Value)
+                else if (request.Value)
                 {
                     var folderPath = Pathes.GetEmployeesPath();
 

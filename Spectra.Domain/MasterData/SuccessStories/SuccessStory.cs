@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.MasterData.SuccessStories
@@ -21,7 +18,7 @@ namespace Spectra.Domain.MasterData.SuccessStories
         public string DiagonseImage { get; set; }
 
         public string BeforeTreatmentPoint1 { get; set; }
-        public string BeforeTreatmentPoint2{ get; set; }
+        public string BeforeTreatmentPoint2 { get; set; }
         public string BeforeTreatmentPoint3 { get; set; }
         public string BeforeTreatmentImage { get; set; }
 

@@ -5,9 +5,14 @@ using Spectra.Domain.Shared.Constants;
 
 namespace Spectra.Infrastructure.Handlers
 {
-    public class CurrentUserHandler(IHttpContextAccessor httpContextAccessor) : ICurrentUser
+    public class CurrentUserHandler : ICurrentUser
     {
-        private readonly HttpContext _context = httpContextAccessor.HttpContext ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+        private readonly HttpContext _context;
+        public CurrentUserHandler(IHttpContextAccessor httpContextAccessor)
+        {
+            if(httpContextAccessor is not null && httpContextAccessor.HttpContext is not null)
+            _context = httpContextAccessor.HttpContext;
+        }
 
         public string Id => _context.User.FindFirst(ClaimTypes.Sid)?.Value;
 

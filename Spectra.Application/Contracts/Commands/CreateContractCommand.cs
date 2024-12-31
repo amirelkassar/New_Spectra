@@ -100,7 +100,7 @@ namespace Spectra.Application.Contracts.Commands
                 }
             }
             //spectra team services
-            foreach (var service in services.Where(s => s.EnableForSpectraTeam == true&& request.SpectraTeamServices.Contains(s.Id)).ToArray())
+            foreach (var service in services.Where(s => s.EnableForSpectraTeam == true && request.SpectraTeamServices.Contains(s.Id)).ToArray())
             {
                 var platformPercentage = 100 - request.SpectraTeamPercentage;
                 if (!contractVerion.SpectraTeamServices.Any(s => s.ServiceId == service.Id))

@@ -59,8 +59,8 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
             {
                 Id = input.Id,
                 Value = true,
-                Signature=input.Signature,
-                TextSections=input.TextSections
+                Signature = input.Signature,
+                TextSections = input.TextSections
             });
 
             return Accepted(response);
@@ -82,7 +82,7 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
                 FreelancingPercentage = input.FreelancingPercentage,
                 SpectraTeamDuration = input.SpectraTeamDuration,
                 SpectraTeamPercentage = input.SpectraTeamPercentage
-                
+
             });
             return Accepted("", response);
         }

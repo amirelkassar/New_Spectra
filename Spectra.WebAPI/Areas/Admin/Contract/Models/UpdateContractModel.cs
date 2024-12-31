@@ -1,6 +1,4 @@
-﻿using Spectra.Application.Contracts.DTO;
-
-namespace Spectra.WebAPI.Areas.Admin.Contract.Models
+﻿namespace Spectra.WebAPI.Areas.Admin.Contract.Models
 {
     public class UpdateContractModel
     {

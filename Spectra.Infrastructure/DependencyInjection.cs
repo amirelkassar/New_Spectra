@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text;
-using DocumentFormat.OpenXml.InkML;
 using MadEyeMatt.AspNetCore.Authorization.Permissions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -181,7 +180,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISectionsRepository, SectionsRepository>();
             //End
             services.AddScoped<IContractRepository, ContractRepository>();
-          //  services.AddScoped<IChatRepository, ChatRepository>();
+            //  services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
@@ -227,7 +226,7 @@ namespace Spectra.Infrastructure
                                if (!string.IsNullOrEmpty(token))
                                    ctx.Token = token;
                            }
-                          
+
 
                            await Task.CompletedTask;
                        },

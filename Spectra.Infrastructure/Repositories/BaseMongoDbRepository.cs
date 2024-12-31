@@ -55,7 +55,7 @@ namespace Spectra.Infrastructure.Repositories
                 .Limit(maxCount);
 
             var total = await _collection.Find(filter, options).CountDocumentsAsync();
-            var data=await query.ToListAsync();
+            var data = await query.ToListAsync();
 
             return (data, total);
         }

@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.PlatformServices.Queries;
-using Spectra.Application.MasterData.ServicesMD.Queries;
-using Spectra.Application.MasterData.ServicesMD.Services;
-using Spectra.Domain.Shared.Common;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {

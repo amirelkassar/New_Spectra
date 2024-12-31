@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using MongoDB.Driver;
 using Spectra.Application.Chats.Dtos;
@@ -15,7 +10,7 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Chats.Queries
 {
-    public class GetChatListQuery :QueryPaginationParam, IRequest<OperationResult>
+    public class GetChatListQuery : QueryPaginationParam, IRequest<OperationResult>
     {
         public class GetChatListQueryHandler(ICurrentUser currentUser,
             IBaseMongoDbRepository<ChatRoom> chatRepository) : IRequestHandler<GetChatListQuery, OperationResult>

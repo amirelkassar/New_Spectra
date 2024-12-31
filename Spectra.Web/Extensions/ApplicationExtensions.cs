@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
+using Spectra.Application.Chats.Hubs;
 using Spectra.Application.Countries.SeedService;
 using Spectra.Application.Hellper;
 using Spectra.Application.Identities;
@@ -15,7 +16,7 @@ namespace Spectra.Web.Extensions
 {
     public static class ApplicationExtensions
     {
-        public static async Task<WebApplication> SetupMiddlewares(this WebApplication application) 
+        public static async Task<WebApplication> SetupMiddlewares(this WebApplication application)
         {
             await SeedDataAsync(application);
             CreateMainPathes(application);
@@ -132,7 +133,7 @@ namespace Spectra.Web.Extensions
         private static void SetupHubs(WebApplication application)
         {
             application.MapHub<NotificationHub>("/hubs/notification");
-            application.MapHub<NotificationHub>("/hubs/chat");
+            application.MapHub<ChatHub>("/hubs/chat");
 
         }
     }

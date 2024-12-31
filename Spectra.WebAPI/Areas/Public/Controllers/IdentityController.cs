@@ -1,11 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.AppUsers.Commands;
 using Spectra.Application.Identities.ApiParams;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Notifications.Hubs;
 
 namespace Spectra.WebAPI.Areas.Public.Controllers
 {

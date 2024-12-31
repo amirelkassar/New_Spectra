@@ -1,7 +1,5 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Spectra.Application.Messaging;
 using Spectra.Domain.Shared.Wrappers;
 namespace Spectra.Application.Behavior
 {

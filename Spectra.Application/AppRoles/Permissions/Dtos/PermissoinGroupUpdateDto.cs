@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Application.AppRoles.Permissions.Dtos
+﻿namespace Spectra.Application.AppRoles.Permissions.Dtos
 {
     public class PermissionGroupUpdateDto
     {
