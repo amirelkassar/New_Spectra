@@ -21,12 +21,14 @@ import {
   FAQDATA,
   SPONSORS,
   STEPS,
-  LAST_NEWS,
   LICENSES,
   STORIES,
+  ARTICLES,
 } from '@/data';
 
 export default function Homepage() {
+  const latestArticles = [...ARTICLES].reverse().slice(0, 3);
+
   return (
     <main>
       <HomeIntro />
@@ -45,7 +47,7 @@ export default function Homepage() {
       <Steps data={STEPS} />
       <FAQ data={FAQDATA} />
       <Sponsors data={SPONSORS} />
-      <LastNews data={LAST_NEWS} />
+      <LastNews data={latestArticles} />
       <Licenses data={LICENSES} />
       <SuccessStories data={STORIES.slice(0, 3)} />
     </main>
