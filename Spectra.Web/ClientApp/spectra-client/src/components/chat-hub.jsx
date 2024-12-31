@@ -40,8 +40,8 @@ export const ChatHub = () => {
       connection.on(LISTENERS.chatDeleted, () => {
         console.log('chatDeleted');
       });
-      connection.on(LISTENERS.messageAdded, () => {
-        console.log('messageAdded');
+      connection.on(LISTENERS.messageAdded, (message) => {
+        console.log(message);
       });
       connection.on(LISTENERS.messageRemoved, () => {
         console.log('messageRemoved');
@@ -52,15 +52,12 @@ export const ChatHub = () => {
       connection.on(LISTENERS.participantRemoved, () => {
         console.log('participantRemoved');
       });
-      connection.on('FakeMessage', () => {
-        console.log('FakeMessage');
-      });
 
       try {
         await connection.start();
-        console.log('SignalR CHAT connected successfully!');
+        // console.log('SignalR CHAT connected successfully!');
       } catch {
-        console.error('SignalR CHAT connection failed: ');
+        // console.error('SignalR CHAT connection failed: ');
       }
 
       connection.onclose(() => {

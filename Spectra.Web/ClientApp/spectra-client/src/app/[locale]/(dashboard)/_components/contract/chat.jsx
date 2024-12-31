@@ -141,7 +141,7 @@ const RenderChat = memo(
       return (
         <div
           ref={scrollContainerRef}
-          className='flex-1 overflow-y-auto space-y-3 p-1 mdl:p-5'
+          className='flex-1 space-y-3 overflow-y-auto p-1 mdl:p-5'
         >
           <div
             onClick={onLoadMore}

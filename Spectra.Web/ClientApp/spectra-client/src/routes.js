@@ -14,6 +14,8 @@ const ROUTES = {
     VIEW_STORY: '/success-stories/:id',
     BLOG: '/blog',
     CONTACT: '/contact',
+    TERMS: '/terms',
+    PRIVACY: '/privacy',
   },
   AUTH: {
     LOGIN: '/login',

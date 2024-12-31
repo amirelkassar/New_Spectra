@@ -144,9 +144,11 @@ const Copyright = () => {
   return (
     <div className='text-xs px-3 mdl:px-5 lg:px-10 mdl:text-base text-black mx-auto py-5 border-t border-t-grayMedium flex gap-10 items-center justify-center mdl:justify-between flex-wrap'>
       <div className='flex items-center gap-x-10 text-center'>
-        <Link href='#'>{t('terms_and_conditions')}</Link>
+        <Link href={ROUTES.ROOT.TERMS}>
+          {t('terms_and_conditions')}
+        </Link>
 
-        <Link href='#'>{t('privacy_policy')}</Link>
+        <Link href={ROUTES.ROOT.PRIVACY}>{t('privacy_policy')}</Link>
 
         <p>©️ {t('copyright')}</p>
       </div>
