@@ -45,7 +45,7 @@ export async function clearToken() {
 /**
  * Decodes a JWT token and extracts specific claims.
  * @param {string} token - The JWT token to decode.
- * @returns {Promise<{ firstName: string, lastName: string, email: string, role: string } | null>}
+ * @returns {Promise<{ userId: string, firstName: string, lastName: string, email: string, role: string } | null>}
  * A promise that resolves to the decoded token data or null if decoding fails.
  */
 
@@ -55,6 +55,10 @@ export async function decodeToken(token) {
     const decoded = decodeJwt(token);
 
     return {
+      userId:
+        decoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'
+        ],
       fistName:
         decoded[
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'

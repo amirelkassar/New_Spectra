@@ -4,10 +4,11 @@ import { useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 
 import { useImagePath } from '@/hooks/use-image-path';
+import { RenderJobType } from '@/dashboard/_components/staff/render-job-type';
 import Avatar from '@/components/avatar';
 import ROUTES from '@/routes';
 
-export const TeamColumns = [
+export const StaffColumns = [
   {
     accessorKey: 'name',
     header: 'الاسم ',
@@ -15,7 +16,14 @@ export const TeamColumns = [
   },
   {
     accessorKey: 'emailaddress',
-    header: 'الايميل',
+    header: 'البريد الإلكتروني',
+  },
+  {
+    accessorKey: 'jobType',
+    header: 'الوظيفة',
+    cell: ({ row }) => (
+      <RenderJobType jobType={row.original?.jobType} />
+    ),
   },
   {
     accessorKey: 'mainSpecialization',
@@ -46,7 +54,7 @@ const CellDoctor = ({ row }) => {
   return (
     <div
       role='button'
-      onClick={() => router.push(ROUTES.DOCTOR.TEAM.VIEW_TEAM(id))}
+      onClick={() => router.push(ROUTES.DOCTOR.STAFF.VIEW_STAFF(id))}
       className='flex items-center gap-5 w-full min-w-max'
     >
       <Avatar

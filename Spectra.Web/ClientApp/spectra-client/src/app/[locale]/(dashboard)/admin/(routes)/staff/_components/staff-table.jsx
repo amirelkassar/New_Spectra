@@ -11,16 +11,13 @@ import { QueryWrapper } from '@/components/query-wrapper';
 import { useQueryParams } from '@/hooks/queries/use-query-params';
 import { DataTable } from '@/components/table/data-table';
 import { Pagination } from '@/components/table/pagination';
-import {
-  CellDate,
-  RenderJobType,
-  StaffColumns,
-} from './staff-columns';
-import { FilterButton } from '@/components/table/filter-button';
-import { FilterType } from '@/components/table/filter-type';
+import { CellDate, StaffColumns } from './staff-columns';
+
 import { StaffCount } from '@/dashboard/_components/ui/staff-count';
 import { TableCard } from '@/components/table/table-card';
 import { EmployeeCellActions } from './employee-cell-actions';
+import { StaffTableFilter } from '@/dashboard/_components/staff/staff-table-filter';
+import { RenderJobType } from '@/dashboard/_components/staff/render-job-type';
 
 export const StaffTable = () => {
   const router = useRouter();
@@ -93,60 +90,6 @@ const Heading = ({ totalCount }) => {
       <Link href={ROUTES.ADMIN.STAFF.STAFF_ADD}>
         <AddButton>اضافة موظف</AddButton>
       </Link>
-    </div>
-  );
-};
-
-const StaffTableFilter = ({
-  type = '',
-  setType = () => {},
-  disabled = false,
-}) => {
-  return (
-    <div className='flex flex-col mdl:flex-row gap-y-4 mdl:gap-x-6 mb-5'>
-      <FilterType>فلتر بالنوع:</FilterType>
-
-      <div className='flex *:flex-1 mdl:*:flex-none'>
-        <FilterButton
-          onClick={() => setType('')}
-          aria-pressed={type === ''}
-          disabled={disabled}
-        >
-          الكل
-        </FilterButton>
-
-        <FilterButton
-          onClick={() => setType('1')}
-          aria-pressed={type === '1'}
-          disabled={disabled}
-        >
-          طبيب
-        </FilterButton>
-
-        <FilterButton
-          onClick={() => setType('2')}
-          aria-pressed={type === '2'}
-          disabled={disabled}
-        >
-          اخصائي
-        </FilterButton>
-
-        <FilterButton
-          onClick={() => setType('3')}
-          aria-pressed={type === '3'}
-          disabled={disabled}
-        >
-          محاسب
-        </FilterButton>
-
-        <FilterButton
-          onClick={() => setType('4')}
-          aria-pressed={type === '4'}
-          disabled={disabled}
-        >
-          سكرتير
-        </FilterButton>
-      </div>
     </div>
   );
 };

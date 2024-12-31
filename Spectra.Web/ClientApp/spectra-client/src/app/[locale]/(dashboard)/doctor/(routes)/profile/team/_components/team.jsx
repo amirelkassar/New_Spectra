@@ -35,7 +35,7 @@ const RenderTeam = ({ team = [] }) => {
               {...member}
               onClick={() =>
                 router.push(
-                  ROUTES.DOCTOR.TEAM.VIEW_TEAM(member?.id || '')
+                  ROUTES.DOCTOR.STAFF.VIEW_STAFF(member?.id || '')
                 )
               }
             />

@@ -13,10 +13,10 @@ import WalletIcon from '@/assets/icons/wallet';
 import ProfileIcon from '@/assets/icons/profile';
 import ChatsIcon from '@/assets/icons/chats';
 import MainIcon from '@/assets/icons/main';
+import StaffIcon from '@/assets/icons/staff';
 import ROUTES from '@/routes';
 import ContractsPlus from '@/assets/icons/contracts-plus';
 import { ROLES } from '@/data';
-import TeamEdit from '@/assets/icons/team-edit';
 
 export const useDoctorNav = () => {
   const path = usePathname();
@@ -99,10 +99,10 @@ export const useDoctorNav = () => {
         show: true,
       },
       {
-        name: 'إدارة الفريق',
-        route: ROUTES.DOCTOR.TEAM.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.TEAM.DASHBOARD),
-        icon: <TeamEdit />,
+        name: 'الموظفين',
+        route: ROUTES.DOCTOR.STAFF.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.STAFF.DASHBOARD),
+        icon: <StaffIcon />,
         show: roles.includes(ROLES.departmentHead),
       },
       {

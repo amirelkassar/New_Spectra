@@ -39,6 +39,9 @@ import {
 } from './contract';
 import { ROLES } from './roles';
 import { ARTICLES } from './blog';
+import { CHAT_TYPES } from './chat';
+import { TERMS } from './terms';
+import { PRIVACY } from './privacy';
 
 export {
   WHAT_WE_CURE,
@@ -80,4 +83,7 @@ export {
   EMAILS,
   PACKAGES_TAGS_AR,
   PACKAGES_TAGS_EN,
+  CHAT_TYPES,
+  TERMS,
+  PRIVACY,
 };

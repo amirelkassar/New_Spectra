@@ -3,6 +3,7 @@
 import { useDate } from '@/hooks/use-date';
 import { EmployeeCellActions } from './employee-cell-actions';
 import { useRouter } from '@/i18n/routing';
+import { RenderJobType } from '@/dashboard/_components/staff/render-job-type';
 import ROUTES from '@/routes';
 
 export const StaffColumns = [
@@ -32,19 +33,6 @@ export const StaffColumns = [
     cell: ({ row }) => <EmployeeCellActions id={row.original?.id} />,
   },
 ];
-
-export const RenderJobType = ({ jobType }) => {
-  switch (String(jobType)) {
-    case '1':
-      return 'طبيب';
-    case '2':
-      return 'اخصائي';
-    case '3':
-      return 'محاسب';
-    case '4':
-      return 'سكرتير';
-  }
-};
 
 export const CellDate = ({ date }) => {
   const { fullYear } = useDate(date);

@@ -14,6 +14,8 @@ const ROUTES = {
     VIEW_STORY: '/success-stories/:id',
     BLOG: '/blog',
     CONTACT: '/contact',
+    TERMS: '/terms',
+    PRIVACY: '/privacy',
   },
   AUTH: {
     LOGIN: '/login',
@@ -282,9 +284,9 @@ const ROUTES = {
       TEAM: '/doctor/profile/team',
       EDIT: '/doctor/profile/edit',
     },
-    TEAM: {
-      DASHBOARD: '/doctor/team',
-      VIEW_TEAM: (id) => `/doctor/team/${id}`,
+    STAFF: {
+      DASHBOARD: '/doctor/staff',
+      VIEW_STAFF: (id) => `/doctor/staff/${id}`,
     },
     CONTRACT: {
       DASHBOARD: '/doctor/contract',
