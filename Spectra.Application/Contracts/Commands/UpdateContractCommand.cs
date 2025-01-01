@@ -68,7 +68,7 @@ namespace Spectra.Application.Contracts.Commands
                 request.FreelancingDuration,
                 request.SpectraTeamDuration)
             {
-                AcceptedByAdmin = request.ModifierRole.Equals(Roles.SystemAdmin),
+                AcceptedByAdmin = false,
                 AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.CustomerSupport }.Any(r => r.Equals(request.ModifierRole)),
                 CreationDate = DateTime.UtcNow,
                 Order = currentVersion.Order + 1,

@@ -4,24 +4,32 @@
     {
         public enum AcademicDegrees : byte
         {
-            DoctorOfMedicine = 1,            // MD
-            BachelorOfMedicine = 2,          // MBBS/MBChB
-            DoctorOfOsteopathicMedicine = 3, // DO
-            BachelorOfDentalSurgery = 4,     // BDS
-            BachelorOfPharmacy = 5,          // BPharm
-            BachelorOfNursing = 6,           // BN
-            MasterOfMedicine = 7,            // MD (Postgraduate)
-            MasterOfSurgery = 8,             // MS
-            MasterOfPublicHealth = 9,        // MPH
-            MasterOfMedicalScience = 10,      // MSc/MedSci
-            DoctorOfPhilosophy = 11,          // PhD
-            DoctorOfMedicalScience = 12,      // DMSc/DMS
-            DoctorOfDentalMedicine = 13,      // DMD
-            DoctorOfDentalSurgery = 14,       // DDS
-            DoctorOfPharmacy = 15,            // PharmD
-            DoctorOfNursingPractice = 16,     // DNP
-            MasterOfClinicalResearch = 17,    // MSCR
-            MasterOfHealthAdministration = 18,// MHA
+            DoctorConsultant = 1,
+            DoctorBoardMD = 2,
+            DoctorSubspecialtyFellowship = 3,
+            DoctorMBBS = 4,
+            SpeechLanguagePathologistBachelor = 5,
+            SpeechLanguagePathologistMaster = 6,
+            SpeechLanguagePathologistPhD = 7,
+            OccupationalTherapistBachelor = 8,
+            OccupationalTherapistMaster = 9,
+            OccupationalTherapistPhD = 10,
+            ClinicalPsychologistPhD = 11,
+            ClinicalPsychologistMaster = 12,
+            ClinicalPsychologistBachelor = 13,
+            AssistantClinicalPsychologist = 14,
+            PsychologistBachelor = 15,
+            SocialWorkerBachelor = 16,
+            FamilyCounsellorBachelor = 17,
+            SpecialEducationBachelor = 18,
+            SpecialEducationMaster = 19,
+            SpecialEducationPhD = 20,
+            ABABCBA = 21,
+            ABAQBA = 22,
+            ABAQASP_ABAT_RBT_BCABA = 23,
+            DieticianBachelor = 24,
+            HealthEducatorBachelor = 25,
+            VocationalRehabilitationSpecialist = 26
         }
     }
 }
