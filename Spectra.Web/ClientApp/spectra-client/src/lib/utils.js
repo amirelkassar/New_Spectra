@@ -249,13 +249,13 @@ export const getRedirectPath = (
     case ROLES.admin:
     case ROLES.customerSupport:
     case ROLES.accountant:
-      return ROUTES.ADMIN.MAIN;
+      return ROUTES.ADMIN.STAFF.HOME;
     case ROLES.doctor:
     case ROLES.specialist:
     case ROLES.departmentHead:
     case ROLES.serviceHead:
       if (!hasActiveContract) return ROUTES.DOCTOR.CONTRACT.DASHBOARD;
-      return ROUTES.DOCTOR.MAIN;
+      return ROUTES.DOCTOR.PROFILE.DASHBOARD;
     case ROLES.client:
       return ROUTES.CLIENT.MAIN.HOME;
     default:

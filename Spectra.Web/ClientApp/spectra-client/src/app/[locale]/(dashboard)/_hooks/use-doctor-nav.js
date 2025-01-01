@@ -25,72 +25,72 @@ export const useDoctorNav = () => {
 
   const links = useMemo(
     () => [
-      {
-        name: 'الرئيسية',
-        route: ROUTES.DOCTOR.MAIN,
-        isActive: path.includes(ROUTES.DOCTOR.MAIN),
-        icon: <MainIcon />,
-        show: true,
-      },
-      {
-        name: 'المواعيد',
-        route: ROUTES.DOCTOR.APPOINTMENTS,
-        isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
-        icon: <Appointments />,
-        show: true,
+      // {
+      //   name: 'الرئيسية',
+      //   route: ROUTES.DOCTOR.MAIN,
+      //   isActive: path.includes(ROUTES.DOCTOR.MAIN),
+      //   icon: <MainIcon />,
+      //   show: true,
+      // },
+      // {
+      //   name: 'المواعيد',
+      //   route: ROUTES.DOCTOR.APPOINTMENTS,
+      //   isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
+      //   icon: <Appointments />,
+      //   show: true,
 
-        nestedLinks: [
-          {
-            name: 'المواعيد القادمة',
-            route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
-            isActive: path.includes(
-              ROUTES.DOCTOR.APPOINTMENTSUPCOMING
-            ),
-          },
-          {
-            name: 'المواعيد السابقة',
-            route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
-            isActive: path.includes(
-              ROUTES.DOCTOR.APPOINTMENTSPREVIOUS
-            ),
-          },
-          {
-            name: 'المواعيد الملغاة',
-            route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
-            isActive: path.includes(
-              ROUTES.DOCTOR.APPOINTMENTSCANCELD
-            ),
-          },
-          {
-            name: 'المواعيد المؤجلة',
-            route: ROUTES.DOCTOR.APPOINTMENTSDEFERRED,
-            isActive: path.includes(
-              ROUTES.DOCTOR.APPOINTMENTSDEFERRED
-            ),
-          },
-        ],
-      },
-      {
-        name: 'تقييمات',
-        route: ROUTES.DOCTOR.RATINGS.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.RATINGS.DASHBOARD),
-        icon: <RatingsIcon />,
-        show: true,
-      },
-      {
-        name: 'العملاء',
-        route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
-        icon: <Customer />,
-        show: true,
-      },
-      {
-        name: 'المحفظة',
-        route: ROUTES.DOCTOR.WALLET.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
-        icon: <WalletIcon />,
-        show: true,
-      },
+      //   nestedLinks: [
+      //     {
+      //       name: 'المواعيد القادمة',
+      //       route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
+      //       isActive: path.includes(
+      //         ROUTES.DOCTOR.APPOINTMENTSUPCOMING
+      //       ),
+      //     },
+      //     {
+      //       name: 'المواعيد السابقة',
+      //       route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
+      //       isActive: path.includes(
+      //         ROUTES.DOCTOR.APPOINTMENTSPREVIOUS
+      //       ),
+      //     },
+      //     {
+      //       name: 'المواعيد الملغاة',
+      //       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
+      //       isActive: path.includes(
+      //         ROUTES.DOCTOR.APPOINTMENTSCANCELD
+      //       ),
+      //     },
+      //     {
+      //       name: 'المواعيد المؤجلة',
+      //       route: ROUTES.DOCTOR.APPOINTMENTSDEFERRED,
+      //       isActive: path.includes(
+      //         ROUTES.DOCTOR.APPOINTMENTSDEFERRED
+      //       ),
+      //     },
+      //   ],
+      // },
+      // {
+      //   name: 'تقييمات',
+      //   route: ROUTES.DOCTOR.RATINGS.DASHBOARD,
+      //   isActive: path.includes(ROUTES.DOCTOR.RATINGS.DASHBOARD),
+      //   icon: <RatingsIcon />,
+      //   show: true,
+      // },
+      // {
+      //   name: 'العملاء',
+      //   route: ROUTES.DOCTOR.CLIENTS.DASHBOARD,
+      //   isActive: path.includes(ROUTES.DOCTOR.CLIENTS.DASHBOARD),
+      //   icon: <Customer />,
+      //   show: true,
+      // },
+      // {
+      //   name: 'المحفظة',
+      //   route: ROUTES.DOCTOR.WALLET.DASHBOARD,
+      //   isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
+      //   icon: <WalletIcon />,
+      //   show: true,
+      // },
       {
         name: 'ملف',
         route: ROUTES.DOCTOR.PROFILE.DASHBOARD,
@@ -121,13 +121,13 @@ export const useDoctorNav = () => {
         icon: <ContractsPlus />,
         show: roles.includes(ROLES.departmentHead),
       },
-      {
-        name: 'محادثات',
-        route: ROUTES.DOCTOR.CHATS.DASHBOARD,
-        isActive: path.includes(ROUTES.DOCTOR.CHATS.DASHBOARD),
-        icon: <ChatsIcon />,
-        show: true,
-      },
+      // {
+      //   name: 'محادثات',
+      //   route: ROUTES.DOCTOR.CHATS.DASHBOARD,
+      //   isActive: path.includes(ROUTES.DOCTOR.CHATS.DASHBOARD),
+      //   icon: <ChatsIcon />,
+      //   show: true,
+      // },
 
       {
         name: 'الإعدادات',

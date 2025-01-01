@@ -14,8 +14,8 @@ export const useLogin = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    userEmail: 'admin@profound-group.com',
-    password: 'Admin@1234',
+    userEmail: '',
+    password: '',
   });
 
   const [validationError, setValidationError] = useState({

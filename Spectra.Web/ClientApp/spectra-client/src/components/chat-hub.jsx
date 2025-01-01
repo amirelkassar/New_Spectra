@@ -36,11 +36,13 @@ export const ChatHub = () => {
       connection.on(LISTENERS.chatCreated, () => {});
       connection.on(LISTENERS.chatDeleted, () => {});
       connection.on(LISTENERS.messageAdded, (newMessage) => {
-        const reference = newMessage.chatReference;
+        const reference = newMessage?.chatReference || '';
+        const chatId = newMessage?.id || '';
 
         addMessage({
           newMessage,
           reference,
+          chatId,
         });
       });
 

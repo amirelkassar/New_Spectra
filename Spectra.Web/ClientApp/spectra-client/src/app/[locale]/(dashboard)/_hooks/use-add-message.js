@@ -26,7 +26,11 @@ export const useAddMessage = (
       const newMessage = formData?.get('message');
       if (!newMessage) return;
 
-      const tempMessage = addMessage({ newMessage, reference });
+      const tempMessage = addMessage({
+        newMessage,
+        reference,
+        chatId,
+      });
 
       cb(tempMessage);
 
@@ -45,6 +49,7 @@ export const useAddMessage = (
               status: 'sent',
             },
             reference,
+            chatId,
           });
         },
         onError: () => {
@@ -54,6 +59,7 @@ export const useAddMessage = (
               status: 'failed',
             },
             reference,
+            chatId,
           });
         },
       });

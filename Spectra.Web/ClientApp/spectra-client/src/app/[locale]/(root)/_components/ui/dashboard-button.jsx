@@ -5,9 +5,12 @@ import { Link } from '@/i18n/routing';
 import Dashboard from '@/assets/icons/dashboard';
 import { cn, getRedirectPath } from '@/lib/utils';
 import { useToken } from '@/hooks/use-token';
+import { useAuth } from '@/hooks/use-auth';
 
 export const DashboardButton = ({ children, props }) => {
   const { token } = useToken();
+
+  const { roles, hasActiveContract } = useAuth();
 
   if (!token) return null;
 
