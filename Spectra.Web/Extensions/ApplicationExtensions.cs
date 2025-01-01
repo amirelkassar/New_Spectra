@@ -54,6 +54,7 @@ namespace Spectra.Web.Extensions
                 await countrySeedService.SeedCitiesAsync();
 
                 var settingsSeedService = scope.ServiceProvider.GetRequiredService<ApplicationSettingSeeder>();
+
                 await settingsSeedService.Initialize();
                 var dbContext = scope.ServiceProvider.GetRequiredService<IdentityContext>();
 
