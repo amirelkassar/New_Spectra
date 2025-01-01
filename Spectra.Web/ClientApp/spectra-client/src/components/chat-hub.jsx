@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import * as signalR from '@microsoft/signalr';
 
 import { useToken } from '@/hooks/use-token';
-import { Toast } from '@/components/toast';
+// import { Toast } from '@/components/toast';
+import { useAddMessageLocally } from '@/hooks/queries/user/chat';
 
 const LISTENERS = {
   chatCreated: 'ChatCreated',
@@ -19,11 +19,11 @@ const LISTENERS = {
 export const ChatHub = () => {
   const { token } = useToken();
 
-  const queryClient = useQueryClient();
+  const { mutate: addMessage } = useAddMessageLocally();
 
   useEffect(() => {
     let connection = null;
-    const audio = new Audio('/notification-received.mp3');
+    // const audio = new Audio('/notification-received.mp3');
 
     const connectSignalR = async () => {
       const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/chat`;
@@ -33,34 +33,22 @@ export const ChatHub = () => {
         .configureLogging(signalR.LogLevel.Error)
         .build();
 
-      connection.on(LISTENERS.chatCreated, () => {
-        console.log('chatCreated');
-      });
-      connection.on(LISTENERS.chatDeleted, () => {
-        console.log('chatDeleted');
-      });
-      connection.on(LISTENERS.messageAdded, (message) => {
-        const chatReference = message.chatReference;
+      connection.on(LISTENERS.chatCreated, () => {});
+      connection.on(LISTENERS.chatDeleted, () => {});
+      connection.on(LISTENERS.messageAdded, (newMessage) => {
+        const reference = newMessage?.chatReference || '';
+        const chatId = newMessage?.id || '';
 
-        queryClient.refetchQueries({
-          predicate: (query) =>
-            query.queryKey[1]?.reference === chatReference,
+        addMessage({
+          newMessage,
+          reference,
+          chatId,
         });
+      });
 
-        // queryClient.refetchQueries({
-        //   queryKey: ['user.chat', { reference: chatReference }],
-        // });
-        console.log(message);
-      });
-      connection.on(LISTENERS.messageRemoved, () => {
-        console.log('messageRemoved');
-      });
-      connection.on(LISTENERS.participantAdded, () => {
-        console.log('participantAdded');
-      });
-      connection.on(LISTENERS.participantRemoved, () => {
-        console.log('participantRemoved');
-      });
+      connection.on(LISTENERS.messageRemoved, () => {});
+      connection.on(LISTENERS.participantAdded, () => {});
+      connection.on(LISTENERS.participantRemoved, () => {});
 
       try {
         await connection.start();
@@ -81,5 +69,5 @@ export const ChatHub = () => {
         connection.stop();
       }
     };
-  }, [token, queryClient]);
+  }, [token, addMessage]);
 };

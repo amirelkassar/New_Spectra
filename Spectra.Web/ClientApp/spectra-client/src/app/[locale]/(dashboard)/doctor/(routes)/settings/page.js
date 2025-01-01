@@ -17,49 +17,49 @@ function Page() {
   const locale = useLocale();
 
   const contentSetting = [
-    {
-      title: 'جميع التحويلات',
-      icon: (
-        <TransfersIcon
-          fill='#10B0C1'
-          className={'w-full h-auto max-h-5 '}
-        />
-      ),
-      url: ROUTES.DOCTOR.WALLET.DASHBOARD,
-      type: 'link',
-    },
-    {
-      title: 'تغيير كلمة المرور',
-      icon: <LockIcon className={'w-full h-auto max-h-5'} />,
-      url: ROUTES.DOCTOR.SETTINGS.CHANGEPASSWORD,
-      type: 'link',
-    },
-    {
-      title: 'التنبيهات',
-      icon: <NotificationIcon2 className={'w-full h-auto max-h-5'} />,
-      url: ROUTES.DOCTOR.SETTINGS.NOTIFICATIONS,
-      type: 'link',
-    },
+    // {
+    //   title: 'جميع التحويلات',
+    //   icon: (
+    //     <TransfersIcon
+    //       fill='#10B0C1'
+    //       className={'w-full h-auto max-h-5 '}
+    //     />
+    //   ),
+    //   url: ROUTES.DOCTOR.WALLET.DASHBOARD,
+    //   type: 'link',
+    // },
+    // {
+    //   title: 'تغيير كلمة المرور',
+    //   icon: <LockIcon className={'w-full h-auto max-h-5'} />,
+    //   url: ROUTES.DOCTOR.SETTINGS.CHANGEPASSWORD,
+    //   type: 'link',
+    // },
+    // {
+    //   title: 'التنبيهات',
+    //   icon: <NotificationIcon2 className={'w-full h-auto max-h-5'} />,
+    //   url: ROUTES.DOCTOR.SETTINGS.NOTIFICATIONS,
+    //   type: 'link',
+    // },
   ];
   const contentSetting2 = [
     {
       title: 'الشروط و الاحكام',
       icon: <TermsIcon className={'w-full h-auto max-h-5 '} />,
-      url: ROUTES.DOCTOR.WALLET.DASHBOARD,
+      url: ROUTES.ROOT.TERMS,
       type: 'link',
     },
     {
       title: 'سياسة الخصوصية ',
       icon: <PrivacyIcon className={'w-full h-auto max-h-5'} />,
-      url: ROUTES.DOCTOR.SETTINGS.CHANGEPASSWORD,
+      url: ROUTES.ROOT.PRIVACY,
       type: 'link',
     },
-    {
-      title: 'الشكاوى',
-      icon: <QuestionMarkIcon className={'w-full h-auto max-h-5'} />,
-      url: ROUTES.DOCTOR.SETTINGS.COMPLAINTS,
-      type: 'link',
-    },
+    // {
+    //   title: 'الشكاوى',
+    //   icon: <QuestionMarkIcon className={'w-full h-auto max-h-5'} />,
+    //   url: ROUTES.DOCTOR.SETTINGS.COMPLAINTS,
+    //   type: 'link',
+    // },
   ];
   const LinkSettingPage = ({ item }) => {
     return (

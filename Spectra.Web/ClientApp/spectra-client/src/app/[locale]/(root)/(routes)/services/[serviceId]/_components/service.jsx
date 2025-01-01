@@ -49,7 +49,7 @@ const ServiceItem = ({ data }) => {
     <ViewService>
       <ViewService.Intro className='rounded-none pt-24 mdl:pt-28'>
         <ViewService.Image
-          src={path}
+          src={path || '/packages-details-page-bg.webp'}
           width={1536}
           height={1661}
           alt={data?.enName}

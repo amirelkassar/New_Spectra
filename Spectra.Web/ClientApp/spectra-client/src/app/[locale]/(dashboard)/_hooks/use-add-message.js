@@ -2,75 +2,111 @@
 
 import { useCallback } from 'react';
 
-import { useUserChatAddMessage } from '@/hooks/queries/user/chat';
+import {
+  useUserChatAddMessage,
+  useAddMessageLocally,
+  useUpdateMessageLocally,
+} from '@/hooks/queries/user/chat';
 import { CHAT_TYPES } from '@/data';
 import { getFormData } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
 
 export const useAddMessage = (
   chatId = '',
   reference = '',
-  setMessages = () => {}
+  cb = () => {}
 ) => {
-  const { userId } = useAuth();
+  const { mutate: sendMessage } = useUserChatAddMessage();
 
-  const { mutate: addMessage } = useUserChatAddMessage({
-    chatId,
-    reference,
-  });
+  const { mutate: addMessage } = useAddMessageLocally();
+
+  const { mutate: updateMessage } = useUpdateMessageLocally();
 
   const onSend = useCallback(
     (formData) => {
-      const content = formData?.get('message');
-      if (!content) return;
-      const tempId = Date.now();
+      const newMessage = formData?.get('message');
+      if (!newMessage) return;
 
-      const newMessage = {
-        tempId,
-        content,
-        status: 'pending',
-        senderId: userId,
-        created: new Date(),
-      };
-
-      setMessages((prev) => [...prev, newMessage]);
-
-      const data = {
+      const tempMessage = addMessage({
+        newMessage,
+        reference,
         chatId,
-        content,
+      });
+
+      cb(tempMessage);
+
+      const formDataToSend = getFormData({
+        chatId,
+        content: newMessage,
         type: CHAT_TYPES.text,
-      };
+      });
 
-      const formDataToSend = getFormData(data);
-
-      addMessage(formDataToSend, {
-        onSuccess: (data) => {
-          setMessages((prev) =>
-            prev.map((msg) =>
-              msg.tempId === tempId
-                ? {
-                    ...msg,
-                    id: data?.data?.id,
-                    status: 'sent',
-                    created: data?.data?.created,
-                  }
-                : msg
-            )
-          );
+      sendMessage(formDataToSend, {
+        onSuccess: (realMessage) => {
+          updateMessage({
+            tempId: tempMessage.id,
+            updates: {
+              ...realMessage?.data,
+              status: 'sent',
+            },
+            reference,
+            chatId,
+          });
         },
         onError: () => {
-          setMessages((prev) =>
-            prev.map((msg) =>
-              msg.tempId === tempId
-                ? { ...msg, status: 'failed' }
-                : msg
-            )
-          );
+          updateMessage({
+            tempId: tempMessage.id,
+            updates: {
+              status: 'failed',
+            },
+            reference,
+            chatId,
+          });
         },
       });
     },
-    [chatId, addMessage, setMessages, userId]
+    [chatId, addMessage, cb, reference, sendMessage, updateMessage]
   );
 
-  return { onSend };
+  const onRetry = useCallback(
+    (message) => {
+      updateMessage({
+        tempId: message.id,
+        updates: {
+          status: 'pending',
+        },
+        chatId,
+      });
+
+      const formDataToSend = getFormData({
+        chatId,
+        content: message.content,
+        type: CHAT_TYPES.text,
+      });
+
+      sendMessage(formDataToSend, {
+        onSuccess: (realMessage) => {
+          updateMessage({
+            tempId: message.id,
+            updates: {
+              ...realMessage?.data,
+              status: 'sent',
+            },
+            chatId,
+          });
+        },
+        onError: () => {
+          updateMessage({
+            tempId: message.id,
+            updates: {
+              status: 'failed',
+            },
+            chatId,
+          });
+        },
+      });
+    },
+    [chatId, sendMessage, updateMessage]
+  );
+
+  return { onSend, onRetry };
 };

@@ -17,7 +17,7 @@ export const useChatDate = (date = '') => {
 
   if (!date || typeof date !== 'string') {
     return {
-      formattedDate: '',
+      time: '',
     };
   }
 

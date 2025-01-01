@@ -51,9 +51,9 @@ const RenderPackages = ({ packages = [] }) => {
     () =>
       Object.entries(PACKAGES_TAGS_OBJ).reduce((acc, [key, tag]) => {
         // تصفية العناصر بناءً على وجود tag في tags
-        const filteredItems = packages.filter((item) =>
-          item.tags.includes(tag)
-        );
+        const filteredItems = packages
+          .filter((item) => item.tags.includes(tag))
+          .sort((a, b) => a.price - b.price);
         acc[key] = filteredItems;
         return acc;
       }, {}),

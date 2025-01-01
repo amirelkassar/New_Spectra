@@ -11,10 +11,12 @@ import { apiUser } from '@/api/axios';
 import { chat } from '@/api/user';
 import { getQueries } from '@/lib/utils';
 import { initialSiteQueries } from '@/hooks/queries/initials';
+import { useCallback } from 'react';
+import { useAuth } from '@/hooks/use-auth';
 
 const initailCustomQueries = {
   skipCount: 0,
-  maxCount: 5,
+  maxCount: 10,
 };
 
 export const initialQueries =
@@ -88,35 +90,138 @@ export const useUserChatMessages = (
   });
 };
 
-export const useUserChatAddMessage = (
-  params = {
-    chatId: '',
-    reference: '',
-  }
-) => {
-  const queryClient = useQueryClient();
-
+export const useUserChatAddMessage = () => {
   return useMutation({
     mutationFn: async (data) => {
       return (await apiUser.post(chat.actions.addMessage, data)).data;
     },
-    onSuccess: () => {
-      const { chatId, reference } = params;
-
-      if (chatId) {
-        queryClient.invalidateQueries({
-          predicate: (query) => query.queryKey[1]?.chatId === chatId,
-        });
-      }
-
-      if (reference) {
-        queryClient.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey[1]?.reference === reference,
-        });
-      }
-    },
   });
+};
+
+export const useAddMessageLocally = () => {
+  const queryClient = useQueryClient();
+
+  const { userId, firstName } = useAuth();
+
+  const addMessageLocally = useCallback(
+    (
+      params = {
+        newMessage: '' || {},
+        chatId: '',
+        reference: '',
+      }
+    ) => {
+      if (
+        (!params?.newMessage && !params?.chatId) ||
+        (!params?.newMessage && !params?.reference)
+      ) {
+        throw new Error(
+          'Invalid params, newMessage and chatId or reference are required'
+        );
+      }
+
+      const { newMessage, chatId, reference } = params;
+
+      const tempMessage =
+        typeof newMessage === 'string'
+          ? {
+              id: Date.now(),
+              senderId: userId,
+              senderName: firstName,
+              senderImage: '',
+              created: new Date().toISOString(),
+              content: newMessage,
+              status: 'pending',
+            }
+          : newMessage;
+
+      queryClient.setQueriesData(
+        {
+          predicate: (query) =>
+            (query.queryKey[0] === initialQueryKey &&
+              query.queryKey[1]?.reference === reference) ||
+            (query.queryKey[0] === initialQueryKey &&
+              query.queryKey[1]?.chatId === chatId),
+        },
+        (oldData) => {
+          if (!oldData) return;
+
+          const updatedPages = oldData.pages.map((page, index) =>
+            index === 0
+              ? {
+                  ...page,
+                  messages: {
+                    ...page.messages,
+                    items: [tempMessage, ...page.messages.items],
+                  },
+                }
+              : page
+          );
+
+          return { ...oldData, pages: updatedPages };
+        }
+      );
+
+      return tempMessage;
+    },
+    [queryClient, firstName, userId]
+  );
+
+  return { mutate: addMessageLocally };
+};
+
+export const useUpdateMessageLocally = () => {
+  const queryClient = useQueryClient();
+
+  const updateMessageLocally = useCallback(
+    (
+      params = {
+        tempId: '',
+        updates: {},
+        chatId: '',
+        reference: '',
+      }
+    ) => {
+      if (
+        (!params?.tempId && params?.updates && !params?.chatId) ||
+        (!params?.tempId && params?.updates && !params?.reference)
+      ) {
+        throw new Error(
+          'Invalid params, tempId, updates and chatId or reference are required'
+        );
+      }
+
+      const { tempId, updates, chatId, reference } = params;
+
+      queryClient.setQueriesData(
+        {
+          predicate: (query) =>
+            (query.queryKey[0] === initialQueryKey &&
+              query.queryKey[1]?.reference === reference) ||
+            (query.queryKey[0] === initialQueryKey &&
+              query.queryKey[1]?.chatId === chatId),
+        },
+        (oldData) => {
+          if (!oldData) return;
+
+          const updatedPages = oldData.pages.map((page) => ({
+            ...page,
+            messages: {
+              ...page.messages,
+              items: page.messages.items.map((msg) =>
+                msg.id === tempId ? { ...msg, ...updates } : msg
+              ),
+            },
+          }));
+
+          return { ...oldData, pages: updatedPages };
+        }
+      );
+    },
+    [queryClient]
+  );
+
+  return { mutate: updateMessageLocally };
 };
 
 export const useUserChatDeleteMessage = () => {

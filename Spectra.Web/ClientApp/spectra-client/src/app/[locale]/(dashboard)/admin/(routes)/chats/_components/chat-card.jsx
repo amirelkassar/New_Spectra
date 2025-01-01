@@ -2,43 +2,28 @@
 
 import { memo } from 'react';
 
-import { cn } from '@/lib/utils';
-import { useDelay } from '@/hooks/use-delay';
-import { useChat } from '@/hooks/use-chat';
-
-import { useUserChatMessages } from '@/hooks/queries/user/chat';
-import { useAddMessage } from '@/dashboard/_hooks/use-add-message';
-import { useAuth } from '@/hooks/use-auth';
 import {
-  ChatWrapper,
-  ChatBody,
-  Message,
   ChatActions,
+  ChatBody,
+  ChatWrapper,
+  Message,
 } from '@/dashboard/_components/chat';
+import { useAuth } from '@/hooks/use-auth';
+import { useAddMessage } from '@/dashboard/_hooks/use-add-message';
+import { useUserChatMessages } from '@/hooks/queries/user/chat';
+import Card from '@/components/card';
 
-export const Chat = ({ contractId = '' }) => {
-  const isOpen = useChat((s) => s.isOpen);
-
-  const isOpenDelayed = useDelay(isOpen, 500);
-
+export const ChatCard = ({ id = '' }) => {
   const query = useUserChatMessages({
-    reference: contractId,
+    chatId: id,
   });
 
   return (
-    <div
-      className={cn(
-        'rounded-xl bg-white w-0 transition-[width,padding,margin] duration-500 ease-in-out shrink-0 text-nowrap overflow-hidden',
-        isOpen &&
-          'mdl:me-3 w-full mdl:w-80 h-full max-h-[650px] mdl:min-h-[650px]'
-      )}
-    >
-      {isOpenDelayed && (
-        <ChatWrapper query={query}>
-          {(props) => <RenderChat {...props} />}
-        </ChatWrapper>
-      )}
-    </div>
+    <Card className='h-full'>
+      <ChatWrapper query={query}>
+        {(props) => <RenderChat {...props} />}
+      </ChatWrapper>
+    </Card>
   );
 };
 

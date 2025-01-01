@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
@@ -13,8 +13,6 @@ import { QueryWrapper } from '@/components/query-wrapper';
 
 export const Services = ({ title = '' }) => {
   const locale = useLocale();
-
-  const router = useRouter();
 
   const tg = useTranslations('general_obj');
 
@@ -49,11 +47,7 @@ export const Services = ({ title = '' }) => {
                 {...item}
                 index={index + 1}
                 locale={locale}
-                onClick={() => {
-                  router.push(
-                    ROUTES.ROOT.VIEW_SERVICE.replace(':id', item?.id)
-                  );
-                }}
+                id={item?.id}
               />
             ))}
           </div>
@@ -65,27 +59,29 @@ export const Services = ({ title = '' }) => {
 
 const Service = ({
   index = 1,
+  id = '',
   arName = '',
   enName = '',
   locale = 'ar',
-  onClick = () => {},
 }) => {
   const label = locale === 'ar' ? arName : enName;
   return (
-    <ServiceCard className='border-none'>
-      <ServiceCard.Icon
-        style={{
-          backgroundColor:
-            SERVICESICONS[index]?.bg || SERVICESICONS[1]?.bg,
-          color:
-            SERVICESICONS[index]?.color || SERVICESICONS[1]?.color,
-        }}
-      >
-        {SERVICESICONS[index]?.icon || SERVICESICONS[1]?.icon}
-      </ServiceCard.Icon>
-      <ServiceCard.Label className='cursor-pointer' onClick={onClick}>
-        {label}
-      </ServiceCard.Label>
-    </ServiceCard>
+    <Link href={ROUTES.ROOT.VIEW_SERVICE.replace(':id', id)}>
+      <ServiceCard className='border-none'>
+        <ServiceCard.Icon
+          style={{
+            backgroundColor:
+              SERVICESICONS[index]?.bg || SERVICESICONS[1]?.bg,
+            color:
+              SERVICESICONS[index]?.color || SERVICESICONS[1]?.color,
+          }}
+        >
+          {SERVICESICONS[index]?.icon || SERVICESICONS[1]?.icon}
+        </ServiceCard.Icon>
+        <ServiceCard.Label className='cursor-pointer'>
+          {label}
+        </ServiceCard.Label>
+      </ServiceCard>
+    </Link>
   );
 };

@@ -201,6 +201,10 @@ const ROUTES = {
       UPDATE_TERMS: (contractId, versionId) =>
         `/admin/contracts/${contractId}/version/${versionId}/accept?edit=true`,
     },
+    CHATS: {
+      DASHBOARD: '/admin/chats',
+      VIEW_CHAT: (id) => `/admin/chats/${id}`,
+    },
     SETTINGS: {
       DASHBOARD: '/admin/settings',
       PERMISSIONS: {

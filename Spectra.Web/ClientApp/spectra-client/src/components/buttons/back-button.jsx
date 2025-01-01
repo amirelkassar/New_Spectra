@@ -15,7 +15,7 @@ export const BackButton = ({ href = '', ...props }) => {
         e.preventDefault();
         e.stopPropagation();
         if (props?.onClick) {
-          props.onClick();
+          props.onClick(e);
         } else {
           if (href) {
             router.push(href);

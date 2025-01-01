@@ -3,13 +3,16 @@
 import { Link } from '@/i18n/routing';
 
 import Dashboard from '@/assets/icons/dashboard';
-import { useAuth } from '@/hooks/use-auth';
 import { cn, getRedirectPath } from '@/lib/utils';
+import { useToken } from '@/hooks/use-token';
+import { useAuth } from '@/hooks/use-auth';
 
 export const DashboardButton = ({ children, props }) => {
-  const { hasActiveContract, roles } = useAuth();
+  const { token } = useToken();
 
-  if (!roles?.length) return null;
+  const { roles, hasActiveContract } = useAuth();
+
+  if (!token) return null;
 
   const href = getRedirectPath(roles, hasActiveContract);
 

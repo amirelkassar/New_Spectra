@@ -1,4 +1,4 @@
-import { QueryInvalidateButton } from '@/components/query-invalidate-button';
+// import { QueryInvalidateButton } from '@/components/query-invalidate-button';
 import { NotificationsHub } from '@/components/notifications-hub';
 import { Header } from '@/dashboard/_components/layouts/header';
 import { Sidebar } from '@/dashboard/_components/layouts/sidebar';
@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }) => {
 
       <NotificationsHub />
       <ChatHub />
-      <QueryInvalidateButton />
+      {/* <QueryInvalidateButton /> */}
     </div>
   );
 };

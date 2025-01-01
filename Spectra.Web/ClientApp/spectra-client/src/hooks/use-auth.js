@@ -21,6 +21,7 @@ export const useAuth = () => {
     permissions: context?.permissions || [],
     hasActiveContract: context?.hasActiveContract || false,
     setSession: context?.setSession,
+    clearSession: context?.clearSession,
   };
 
   return value;
