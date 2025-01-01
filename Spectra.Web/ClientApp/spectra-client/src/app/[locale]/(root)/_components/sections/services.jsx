@@ -41,7 +41,7 @@ export const Services = ({ title = '' }) => {
       <QueryWrapper query={query}>
         {({ data }) => (
           <div className='grid grid-cols-2 mdl:grid-cols-4 gap-5'>
-            {data?.slice(0, 3)?.map((item, index) => (
+            {data?.map((item, index) => (
               <Service
                 key={item?.id || item?.enName}
                 {...item}

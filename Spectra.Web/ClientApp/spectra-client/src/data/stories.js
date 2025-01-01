@@ -103,8 +103,8 @@ export const STORIES = [
   {
     id: 'story-2',
     childName: {
-      ar: 'جاسر',
-      en: 'Jaser',
+      ar: 'سيف',
+      en: 'Saif',
     },
     diagnosis: {
       ar: 'اضطراب طيف التوحد',
@@ -186,8 +186,8 @@ export const STORIES = [
       familyReview: {
         image: '/stories/jaser-story.webp',
         title: {
-          ar: 'رأي عائلة جاسر',
-          en: 'Jaser Family Review',
+          ar: 'رأي عائلة سيف',
+          en: 'Saif Family Review',
         },
         text: {
           ar: 'الموقع جدا جدا جميل من ناحية الدكاترة و من ناحية كل شى مرة بطل الفكرة جدا جدا جبارة هى مفيدة للاهالى كانها دراسة ليا انا لانى انا بكون موجودة معه و فاهمة كل شى نوبات الغضب اى تصرف بكون معاه و الدكتور متابعة وتقولى ايش اسوى الموقع جدا جدا جميل الله يجزايكم',
