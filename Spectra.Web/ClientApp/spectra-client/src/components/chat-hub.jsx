@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import * as signalR from '@microsoft/signalr';
 
 import { useToken } from '@/hooks/use-token';
 // import { Toast } from '@/components/toast';
-import { initialQueryKey } from '@/hooks/queries/user/chat';
+import { useAddMessageLocally } from '@/hooks/queries/user/chat';
 
 const LISTENERS = {
   chatCreated: 'ChatCreated',
@@ -20,7 +19,7 @@ const LISTENERS = {
 export const ChatHub = () => {
   const { token } = useToken();
 
-  const queryClient = useQueryClient();
+  const { mutate: addMessage } = useAddMessageLocally();
 
   useEffect(() => {
     let connection = null;
@@ -37,32 +36,12 @@ export const ChatHub = () => {
       connection.on(LISTENERS.chatCreated, () => {});
       connection.on(LISTENERS.chatDeleted, () => {});
       connection.on(LISTENERS.messageAdded, (newMessage) => {
-        const chatReference = newMessage.chatReference;
+        const reference = newMessage.chatReference;
 
-        queryClient.setQueriesData(
-          {
-            predicate: (query) =>
-              query.queryKey[0] === initialQueryKey &&
-              query.queryKey[1]?.reference === chatReference,
-          },
-          (oldData) => {
-            if (!oldData) return;
-
-            const updatedPages = oldData.pages.map((page, index) =>
-              index === 0
-                ? {
-                    ...page,
-                    messages: {
-                      ...page.messages,
-                      items: [newMessage, ...page.messages.items],
-                    },
-                  }
-                : page
-            );
-
-            return { ...oldData, pages: updatedPages };
-          }
-        );
+        addMessage({
+          newMessage,
+          reference,
+        });
       });
 
       connection.on(LISTENERS.messageRemoved, () => {});
@@ -88,5 +67,5 @@ export const ChatHub = () => {
         connection.stop();
       }
     };
-  }, [token, queryClient]);
+  }, [token, addMessage]);
 };

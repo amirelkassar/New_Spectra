@@ -6,7 +6,7 @@ import { useRouter } from '@/i18n/routing';
 import { Toast } from '@/components/toast';
 import { useAuth } from '@/hooks/use-auth';
 import { useToken } from '@/hooks/use-token';
-import { storeToken } from '@/lib/token';
+import { decodeToken, storeToken } from '@/lib/token';
 import { useLoginMutation } from '@/hooks/queries/auth';
 import { getRedirectPath } from '@/lib/utils';
 
@@ -82,24 +82,38 @@ export const useLogin = () => {
         success: 'تم تسجيل الدخول بنجاح',
         loading: 'جاري تسجيل الدخول',
         onSuccess: async (data) => {
-          const isTokenStored = await storeToken(data?.data);
-          const {
-            accessToken,
-            permissions,
-            roles,
-            hasActiveContract,
-          } = data?.data;
+          const [isTokenStored, decodedToken] = await Promise.all([
+            storeToken(data?.data),
+            decodeToken(data?.data.accessToken),
+          ]);
+
+          const userId = decodedToken?.userId || '';
+          const firstName = decodedToken?.firstName || '';
+          const lastName = decodedToken?.lastName || '';
+          const email = decodedToken?.email || '';
+          const accessToken = data?.data.accessToken;
+          const roles = data?.data?.roles || decodedToken?.role || [];
+          const permissions = data?.data?.permissions || [];
+          const hasActiveContract =
+            data?.data?.hasActiveContract || false;
+
           if (isTokenStored) {
             setToken(accessToken);
             setSession({
+              userId,
+              firstName,
+              lastName,
+              email,
               permissions,
               roles,
               hasActiveContract,
             });
+
             const pathToRedirect = getRedirectPath(
               roles,
               hasActiveContract
             );
+
             router.push(pathToRedirect);
           }
         },

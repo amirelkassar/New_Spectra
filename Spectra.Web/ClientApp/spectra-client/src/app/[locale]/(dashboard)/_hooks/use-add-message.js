@@ -4,162 +4,102 @@ import { useCallback } from 'react';
 
 import {
   useUserChatAddMessage,
-  initialQueryKey,
+  useAddMessageLocally,
+  useUpdateMessageLocally,
 } from '@/hooks/queries/user/chat';
 import { CHAT_TYPES } from '@/data';
 import { getFormData } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
-import { useQueryClient } from '@tanstack/react-query';
 
 export const useAddMessage = (
   chatId = '',
   reference = '',
   cb = () => {}
 ) => {
-  const queryClient = useQueryClient();
+  const { mutate: sendMessage } = useUserChatAddMessage();
 
-  const { userId, firstName } = useAuth();
+  const { mutate: addMessage } = useAddMessageLocally();
 
-  const { mutate: addMessage } = useUserChatAddMessage({
-    chatId,
-    reference,
-  });
-
-  const updateMessageStatus = useCallback(
-    (tempId, updates) => {
-      queryClient.setQueriesData(
-        {
-          predicate: (query) =>
-            query.queryKey[0] === initialQueryKey &&
-            query.queryKey[1]?.reference === reference,
-        },
-        (oldData) => {
-          if (!oldData) return;
-
-          const updatedPages = oldData.pages.map((page) => ({
-            ...page,
-            messages: {
-              ...page.messages,
-              items: page.messages.items.map((msg) =>
-                msg.id === tempId ? { ...msg, ...updates } : msg
-              ),
-            },
-          }));
-
-          return { ...oldData, pages: updatedPages };
-        }
-      );
-    },
-    [queryClient, reference]
-  );
-
-  const addMessageLocally = useCallback(
-    (newMessage) => {
-      queryClient.setQueriesData(
-        {
-          predicate: (query) =>
-            query.queryKey[0] === initialQueryKey &&
-            query.queryKey[1]?.reference === reference,
-        },
-        (oldData) => {
-          if (!oldData) return;
-
-          const updatedPages = oldData.pages.map((page, index) =>
-            index === 0
-              ? {
-                  ...page,
-                  messages: {
-                    ...page.messages,
-                    items: [newMessage, ...page.messages.items],
-                  },
-                }
-              : page
-          );
-
-          return { ...oldData, pages: updatedPages };
-        }
-      );
-    },
-    [queryClient, reference]
-  );
+  const { mutate: updateMessage } = useUpdateMessageLocally();
 
   const onSend = useCallback(
     (formData) => {
-      const content = formData?.get('message');
-      if (!content) return;
+      const newMessage = formData?.get('message');
+      if (!newMessage) return;
 
-      const tempMessage = {
-        id: Date.now(),
-        senderId: userId,
-        senderName: firstName,
-        senderImage: '',
-        created: new Date().toISOString(),
-        content,
-        status: 'pending',
-      };
-
-      addMessageLocally(tempMessage);
+      const tempMessage = addMessage({ newMessage, reference });
 
       cb(tempMessage);
 
-      const data = {
+      const formDataToSend = getFormData({
         chatId,
-        content,
+        content: newMessage,
         type: CHAT_TYPES.text,
-      };
+      });
 
-      const formDataToSend = getFormData(data);
-
-      addMessage(formDataToSend, {
+      sendMessage(formDataToSend, {
         onSuccess: (realMessage) => {
-          updateMessageStatus(tempMessage.id, {
-            ...realMessage?.data,
-            status: 'sent',
+          updateMessage({
+            tempId: tempMessage.id,
+            updates: {
+              ...realMessage?.data,
+              status: 'sent',
+            },
+            reference,
           });
         },
         onError: () => {
-          updateMessageStatus(tempMessage.id, { status: 'failed' });
+          updateMessage({
+            tempId: tempMessage.id,
+            updates: {
+              status: 'failed',
+            },
+            reference,
+          });
         },
       });
     },
-    [
-      chatId,
-      addMessage,
-      addMessageLocally,
-      cb,
-      userId,
-      firstName,
-      updateMessageStatus,
-    ]
+    [chatId, addMessage, cb, reference, sendMessage, updateMessage]
   );
 
   const onRetry = useCallback(
     (message) => {
-      updateMessageStatus(message.id, {
-        status: 'pending',
+      updateMessage({
+        tempId: message.id,
+        updates: {
+          status: 'pending',
+        },
+        chatId,
       });
 
-      const data = {
+      const formDataToSend = getFormData({
         chatId,
         content: message.content,
         type: CHAT_TYPES.text,
-      };
+      });
 
-      const formDataToSend = getFormData(data);
-
-      addMessage(formDataToSend, {
+      sendMessage(formDataToSend, {
         onSuccess: (realMessage) => {
-          updateMessageStatus(message.id, {
-            ...realMessage?.data,
-            status: 'sent',
+          updateMessage({
+            tempId: message.id,
+            updates: {
+              ...realMessage?.data,
+              status: 'sent',
+            },
+            chatId,
           });
         },
         onError: () => {
-          updateMessageStatus(message.id, { status: 'failed' });
+          updateMessage({
+            tempId: message.id,
+            updates: {
+              status: 'failed',
+            },
+            chatId,
+          });
         },
       });
     },
-    [chatId, addMessage, updateMessageStatus]
+    [chatId, sendMessage, updateMessage]
   );
 
   return { onSend, onRetry };

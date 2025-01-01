@@ -1,27 +1,20 @@
 'use client';
 
-import {
-  forwardRef,
-  memo,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
-import { useTranslations } from 'next-intl';
+import { memo } from 'react';
 
 import { cn } from '@/lib/utils';
-import { Textarea } from '@/components/inputs/textarea';
 import { useDelay } from '@/hooks/use-delay';
 import { useChat } from '@/hooks/use-chat';
-import { Virtuoso } from 'react-virtuoso';
 
-import Avatar from '@/components/avatar';
-import SendIcon from '@/assets/icons/send';
-import RetryIcon from '@/assets/icons/retry';
 import { useUserChatMessages } from '@/hooks/queries/user/chat';
 import { useAddMessage } from '@/dashboard/_hooks/use-add-message';
 import { useAuth } from '@/hooks/use-auth';
-import { useChatDate } from '@/hooks/use-chat-date';
+import {
+  ChatWrapper,
+  ChatBody,
+  Message,
+  ChatActions,
+} from '@/dashboard/_components/chat';
 
 export const Chat = ({ contractId = '' }) => {
   const isOpen = useChat((s) => s.isOpen);
@@ -36,305 +29,48 @@ export const Chat = ({ contractId = '' }) => {
     <div
       className={cn(
         'rounded-xl bg-white w-0 transition-[width,padding,margin] duration-500 ease-in-out shrink-0 text-nowrap overflow-hidden',
-        isOpen && 'me-3 w-[calc(100vw-32px)] mdl:w-80 h-[650px]'
+        isOpen &&
+          'mdl:me-3 w-full mdl:w-80 h-full max-h-[650px] mdl:min-h-[650px]'
       )}
     >
       {isOpenDelayed && (
         <ChatWrapper query={query}>
-          {({
-            messages,
-            totalMessages,
-            totalCount,
-            chatId,
-            reference,
-          }) => (
-            <RenderChat
-              initialMessages={messages}
-              totalMessages={totalMessages}
-              totalCount={totalCount}
-              chatId={chatId}
-              reference={reference}
-              query={query}
-            />
-          )}
+          {(props) => <RenderChat {...props} />}
         </ChatWrapper>
       )}
     </div>
   );
 };
 
-const ChatWrapper = memo(({ query, children }) => {
-  const tg = useTranslations('general_obj');
+const RenderChat = memo((props) => {
+  const { userId } = useAuth();
 
-  const { data, isPending, isError } = query;
+  const { chatId, reference, messages } = props;
 
-  if (isPending)
-    return <NoMessages>{tg('loading_messages')}</NoMessages>;
+  const { onSend, onRetry } = useAddMessage(chatId, reference);
 
-  if (isError) return <NoMessages>{tg('general_error')}</NoMessages>;
-
-  const generalData = data?.pages[0] || {};
-
-  const { id, reference, chatImage, roomName, isGroup } = generalData;
-
-  const totalCount = data.pages[0].messages.totalCount;
-
-  const mergedMessages =
-    data?.pages?.flatMap((page) => page.messages.items).reverse() ||
-    [];
-
-  const totalMessages =
-    data?.pages?.reduce(
-      (total, page) => total + page.messages.items.length,
-      0
-    ) || 0;
-
-  return children({
-    chatId: id,
-    reference,
-    chatImage,
-    roomName,
-    isGroup,
-    messages: mergedMessages,
-    totalMessages,
-    totalCount,
-  });
-});
-
-const RenderChat = memo(
-  ({
-    initialMessages = [],
-    totalMessages = 0,
-    totalCount = 0,
-    chatId,
-    reference,
-    query,
-  }) => {
-    const { hasNextPage, fetchNextPage, isFetchingNextPage } = query;
-
-    const tg = useTranslations('general_obj');
-
-    const { userId } = useAuth();
-
-    const virtuosoRef = useRef(null);
-
-    const { onSend, onRetry } = useAddMessage(
-      chatId,
-      reference,
-      () => {
-        // virtuosoRef.current?.scrollToIndex({
-        //   index: totalMessages + 1,
-        //   behavior: 'smooth',
-        // });
-      }
-    );
-
-    // HANDLE FETCH NEXT PAGE
-    const onFetchNextPage = useCallback(() => {
-      if (hasNextPage && !isFetchingNextPage) fetchNextPage();
-    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
-    // LOAD MORE BUTTON TEXT
-    const statusMsg = useMemo(() => {
-      return (
-        <div
-          className={cn(
-            'w-fit mx-auto capitalize text-xs',
-            !hasNextPage && 'text-grayDark'
-          )}
-        >
-          {isFetchingNextPage && tg('loading')}
-          {!hasNextPage && tg('no_more_messages')}
-        </div>
-      );
-    }, [hasNextPage, isFetchingNextPage, tg]);
-
-    // RENDER CHAT BODY
-    const ChatBody = useMemo(() => {
-      if (!initialMessages.length) {
-        return <NoMessages>{tg('no_messages_yet')}</NoMessages>;
-      }
-
-      return (
-        <div className='flex-1'>
-          <Virtuoso
-            ref={virtuosoRef}
-            data={initialMessages}
-            firstItemIndex={totalCount - totalMessages}
-            initialTopMostItemIndex={initialMessages.length - 1}
-            startReached={onFetchNextPage}
-            followOutput={false}
-            components={{ Header: () => statusMsg }}
-            itemContent={(i, m) => (
-              <Message
-                key={m?.id || i}
-                data-host={m?.senderId === userId}
-                name={m?.senderName || ''}
-                avatar={m?.senderImage || ''}
-                date={m?.created}
-                status={m?.status || ''}
-                onRetry={() => onRetry(m)}
-                showAvatar={
-                  initialMessages[i - 1]?.senderId !== m?.senderId
-                }
-              >
-                {m?.content}
-              </Message>
-            )}
-          />
-        </div>
-      );
-    }, [
-      initialMessages,
-      userId,
-      tg,
-      onFetchNextPage,
-      statusMsg,
-      totalMessages,
-      totalCount,
-      onRetry,
-    ]);
-
-    return (
-      <div className='h-full flex flex-col'>
-        {ChatBody}
-
-        <ChatActions
-          onSend={(formData) => {
-            onSend(formData);
-          }}
-        />
-      </div>
-    );
-  }
-);
-
-const NoMessages = memo(({ children }) => {
   return (
-    <div className='flex-1 h-full p-1 mdl:p-5 flex items-center justify-center'>
-      <p className='text-wrap text-center text-grayDark'>
-        {children}
-      </p>
+    <div className='h-full flex flex-col gap-3'>
+      <ChatBody {...props}>
+        {({ m, i }) => (
+          <Message
+            key={m?.id || i}
+            data-host={m?.senderId === userId}
+            name={m?.senderName || ''}
+            avatar={m?.senderImage || ''}
+            date={m?.created}
+            status={m?.status || ''}
+            onRetry={() => onRetry(m)}
+            showAvatar={messages[i - 1]?.senderId !== m?.senderId}
+          >
+            {m?.content}
+          </Message>
+        )}
+      </ChatBody>
+
+      <ChatActions onSend={(formData) => onSend(formData)} />
     </div>
   );
 });
 
-const Message = forwardRef(
-  (
-    {
-      children,
-      name = '',
-      avatar = '',
-      date = '',
-      status = '',
-      showAvatar = false,
-      onRetry = () => {},
-      ...props
-    },
-    ref
-  ) => {
-    const tg = useTranslations('general_obj');
-
-    const { time } = useChatDate(date);
-
-    const statusText =
-      {
-        pending: tg('sending'),
-        failed: tg('fail_to_send_try_again'),
-      }[status] || time;
-
-    return (
-      <div
-        ref={ref}
-        {...props}
-        className='flex flex-row-reverse gap-3 group data-[host=true]:flex-row max-w-full p-4 pb-0'
-      >
-        <div>
-          <Avatar
-            className={cn(
-              'size-11 shrink-0 invisible',
-              showAvatar && 'visible'
-            )}
-            src={avatar}
-            name={name}
-          />
-        </div>
-
-        <div className='bg-greenMain shrink-1 rounded-lg text-white text-xs lg:text-base px-3 py-2 group-data-[host=true]:bg-grayLight group-data-[host=true]:text-black w-full text-wrap'>
-          <p>{children}</p>
-          <span
-            className={cn(
-              'text-xs ms-auto w-fit flex items-center gap-1 mt-1',
-              status === 'failed' && 'text-red cursor-pointer',
-              status === 'pending' && 'text-grayDark'
-            )}
-            onClick={status === 'failed' ? onRetry : undefined}
-          >
-            {status === 'failed' && (
-              <RetryIcon className='text-red size-4' />
-            )}
-            {statusText}
-          </span>
-        </div>
-      </div>
-    );
-  }
-);
-
-const ChatActions = memo(
-  ({ disabled = false, onSend = () => {} }) => {
-    const tg = useTranslations('general_obj');
-
-    const textareaRef = useRef(null);
-
-    return (
-      <form
-        action={(formData) => {
-          onSend(formData);
-          if (!textareaRef.current) return;
-          textareaRef.current.value = '';
-        }}
-        className='flex items-center gap-5 p-1 mdl:p-5'
-      >
-        <div className='relative flex-1'>
-          <Textarea
-            ref={textareaRef}
-            size='xs'
-            radius='md'
-            classNames={{
-              input: 'pe-12',
-            }}
-            placeholder={tg('write_message')}
-            disabled={disabled}
-            name='message'
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                e.stopPropagation();
-                const formData = new FormData();
-                formData.set(e.target.name, e.target.value);
-                onSend(formData);
-                if (!textareaRef.current) return;
-                textareaRef.current.value = '';
-              }
-            }}
-          />
-        </div>
-
-        <button
-          disabled={disabled}
-          className='disabled:opacity-50 disabled:cursor-not-allowed'
-          type='submit'
-        >
-          <SendIcon />
-        </button>
-      </form>
-    );
-  }
-);
-
-ChatWrapper.displayName = 'ChatWrapper';
 RenderChat.displayName = 'RenderChat';
-NoMessages.displayName = 'NoMessages';
-Message.displayName = 'Message';
-ChatActions.displayName = 'ChatActions';

@@ -10,6 +10,7 @@ import { clearToken } from '@/lib/token';
 import { useQueryClient } from '@tanstack/react-query';
 
 import ROUTES from '@/routes';
+import { useAuth } from '@/hooks/use-auth';
 
 export const useLoginMutation = (data) => {
   return useMutation({
@@ -32,6 +33,7 @@ export const useRegisterMedicalProviderMutation = () => {
 export const useLogout = () => {
   const router = useRouter();
   const { setToken } = useToken();
+  const { clearSession } = useAuth();
   const queryClient = useQueryClient();
 
   const logout = async () => {
@@ -39,9 +41,8 @@ export const useLogout = () => {
 
     if (isTokenDeleted) {
       setToken(null);
-
+      clearSession();
       queryClient.clear();
-
       router.push(ROUTES.AUTH.LOGIN);
     }
   };
