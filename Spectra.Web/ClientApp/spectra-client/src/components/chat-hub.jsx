@@ -37,7 +37,7 @@ export const ChatHub = () => {
       connection.on(LISTENERS.chatDeleted, () => {});
       connection.on(LISTENERS.messageAdded, (newMessage) => {
         const reference = newMessage?.chatReference || '';
-        const chatId = newMessage?.id || '';
+        const chatId = newMessage?.chatId || '';
 
         addMessage({
           newMessage,

@@ -61,7 +61,7 @@ const RenderChat = memo((props) => {
             date={m?.created}
             status={m?.status || ''}
             onRetry={() => onRetry(m)}
-            showAvatar={messages[i - 1]?.senderId !== m?.senderId}
+            showAvatar={messages[i + 1]?.senderId !== m?.senderId}
           >
             {m?.content}
           </Message>
