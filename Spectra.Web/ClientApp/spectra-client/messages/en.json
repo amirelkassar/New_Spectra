@@ -28,6 +28,7 @@
   "previous": "Previous",
   "general_obj": {
     "doc_prefix": "Dr.",
+    "no_notifications": "It's all quiet here",
     "from": "From",
     "by": "By",
     "last_modified": "Last Modified",
