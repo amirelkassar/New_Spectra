@@ -52,6 +52,7 @@ export const ChatBody = forwardRef(
       throw new Error('ChatBody must have a children prop');
 
     if (!totalCount) return <NoMessages />;
+
     return (
       <Virtuoso
         ref={ref}

@@ -95,7 +95,7 @@ const RenderChats = ({ data = [], children }) => {
 
       <div
         className={cn(
-          'lg:col-span-3 lg:static lg:top-auto lg:end-auto lg:h-auto absolute top-0 end-0 w-full h-full transition-transform -translate-x-full lg:translate-x-0 lg:transform-none lg:transition-none',
+          'lg:col-span-3 lg:static lg:top-auto lg:end-auto lg:h-auto absolute top-0 end-0 w-full h-[calc(100%-50px)] mdl:h-full transition-transform -translate-x-full lg:translate-x-0 lg:transform-none lg:transition-none',
           isOpen && 'translate-x-0'
         )}
       >

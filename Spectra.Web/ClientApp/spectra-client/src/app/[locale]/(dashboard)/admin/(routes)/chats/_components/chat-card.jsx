@@ -31,7 +31,7 @@ export const ChatCard = ({ id = '' }) => {
 const RenderChat = memo((props) => {
   const { userId } = useAuth();
 
-  const { chatId, reference, messages, chatImage, roomName } = props;
+  const { chatId, reference, chatImage, roomName } = props;
 
   const { onSend, onRetry } = useAddMessage(chatId, reference);
 
@@ -49,7 +49,7 @@ const RenderChat = memo((props) => {
             date={m?.created}
             status={m?.status || ''}
             onRetry={() => onRetry(m)}
-            showAvatar={messages[i - 1]?.senderId !== m?.senderId}
+            showAvatar={true}
           >
             {m?.content}
           </Message>
