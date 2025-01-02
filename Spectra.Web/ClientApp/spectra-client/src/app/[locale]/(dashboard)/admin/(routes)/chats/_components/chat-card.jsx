@@ -5,6 +5,7 @@ import { memo } from 'react';
 import {
   ChatActions,
   ChatBody,
+  ChatHeader,
   ChatWrapper,
   Message,
 } from '@/dashboard/_components/chat';
@@ -30,12 +31,14 @@ export const ChatCard = ({ id = '' }) => {
 const RenderChat = memo((props) => {
   const { userId } = useAuth();
 
-  const { chatId, reference, messages } = props;
+  const { chatId, reference, messages, chatImage, roomName } = props;
 
   const { onSend, onRetry } = useAddMessage(chatId, reference);
 
   return (
     <div className='h-full flex flex-col gap-3'>
+      <ChatHeader chatImage={chatImage} roomName={roomName} />
+
       <ChatBody {...props}>
         {({ m, i }) => (
           <Message

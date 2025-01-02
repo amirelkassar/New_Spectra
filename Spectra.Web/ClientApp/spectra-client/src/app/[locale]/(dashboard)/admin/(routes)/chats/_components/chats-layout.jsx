@@ -14,6 +14,7 @@ import { useImagePath } from '@/hooks/use-image-path';
 import ROUTES from '@/routes';
 import Card from '@/components/card';
 import Avatar from '@/components/avatar';
+import { useTranslations } from 'next-intl';
 
 const ChatsLayoutContext = createContext(null);
 
@@ -105,11 +106,13 @@ const RenderChats = ({ data = [], children }) => {
 };
 
 const Header = () => {
-  const { close } = useChatsLayout();
+  const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
   const path = usePathname();
+
+  const { close } = useChatsLayout();
 
   const showBackButton = path !== ROUTES.ADMIN.CHATS.DASHBOARD;
 
@@ -123,21 +126,23 @@ const Header = () => {
           }}
         />
       )}
-      <H1>المحادثات</H1>
+      <H1>{tg('chats')}</H1>
     </div>
   );
 };
 
 const ChatList = ({ data = [] }) => {
-  const { open } = useChatsLayout();
+  const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
   const pathName = usePathname();
 
+  const { open } = useChatsLayout();
+
   return (
-    <Card title='رسائل' className='h-full'>
-      <div className='border-t border-grayDark pt-3'>
+    <Card title={tg('messages')} className='h-full'>
+      <div className='border-t border-grayDark pt-3 max-h-[260px] overflow-y-auto'>
         {data.map((chat) => (
           <ChatItem
             key={chat.id}
@@ -157,9 +162,13 @@ const ChatList = ({ data = [] }) => {
 };
 
 const GroupChatList = ({ data = [] }) => {
+  const tg = useTranslations('general_obj');
+
   return (
-    <Card title='مجموعة' className='h-full'>
-      GROUP CHAT LIST
+    <Card title={tg('groups')} className='h-full'>
+      <div className='border-t border-grayDark pt-3 max-h-[260px] overflow-y-auto'>
+        {JSON.stringify(data)}
+      </div>
     </Card>
   );
 };
@@ -194,7 +203,7 @@ const ChatItem = ({
       />
 
       <div className='space-y-1 flex-1'>
-        <h3 className='font-bold'>{roomName}</h3>
+        <h3 className='font-bold capitalize'>{roomName}</h3>
         <p className='text-grayDark'>
           {lastMessage && `${lastMessage} . `}
           {time}

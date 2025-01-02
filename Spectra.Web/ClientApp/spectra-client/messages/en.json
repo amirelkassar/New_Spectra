@@ -106,7 +106,11 @@
     "phone_number": "Phone number",
     "message": "Message",
     "or_by": "Or by",
-    "follow_us_on": "Follow us on"
+    "follow_us_on": "Follow us on",
+    "select_conversation": "Select a conversation from the list to view its content",
+    "chats": "Chats",
+    "messages": "Messages",
+    "groups": "Groups"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",

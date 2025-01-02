@@ -22,7 +22,7 @@ export const NotificationsHub = () => {
 
       connection = new signalR.HubConnectionBuilder()
         .withUrl(HUB_URL, { accessTokenFactory: () => token })
-        .configureLogging(signalR.LogLevel.Error)
+        .configureLogging(signalR.LogLevel.None)
         .build();
 
       connection.on('Receive', (message) => {

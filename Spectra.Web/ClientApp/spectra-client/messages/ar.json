@@ -106,7 +106,11 @@
     "phone_number": "رقم الهاتف",
     "message": "الرسالة",
     "or_by": "أو من خلال",
-    "follow_us_on": "تابعنا على"
+    "follow_us_on": "تابعنا على",
+    "select_conversation": "اختر المحادثة من القائمة لعرض محتواها",
+    "chats": "المحادثات",
+    "messages": "الرسائل",
+    "groups": "المجموعات"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
