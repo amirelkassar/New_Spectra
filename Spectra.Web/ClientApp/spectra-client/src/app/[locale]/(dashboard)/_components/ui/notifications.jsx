@@ -2,6 +2,7 @@
 
 import {
   forwardRef,
+  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -42,7 +43,6 @@ export const Notifications = () => {
     hasNextPage,
     isFetchingNextPage,
     isPending,
-    isSuccess,
     isError,
     refetch,
   } = useNotifications();
@@ -61,75 +61,47 @@ export const Notifications = () => {
   );
 
   const dropdownContent = useMemo(() => {
-    return (
-      <div
-        ref={containerRef}
-        className='min-w-[calc(100vw-26px)] h-[400px] overflow-y-auto mdl:min-w-[650px] flex flex-col p-4'
-      >
-        {isPending && <Loader />}
-        {isError && (
-          <ServerError
-            onRetry={refetch}
-            classNames={{ icon: 'size-60 mb-5', container: 'h-auto' }}
-          />
-        )}
-        {isSuccess &&
-          data?.pages?.map((page, pageIndex) => {
-            if (!page.data?.totalCount)
-              return (
-                <div
-                  key={pageIndex}
-                  className='w-full h-full flex justify-center items-center text-grayDark'
-                >
-                  لا يوجد اشعارات
-                </div>
-              );
+    if (isPending) return <Loader />;
 
-            return (
-              <div key={pageIndex}>
-                {page.data?.items?.map((notification, index) => {
-                  const isLastItem =
-                    pageIndex === data.pages.length - 1 &&
-                    index === page.data.items.length - 1;
+    if (isError)
+      return (
+        <ServerError
+          onRetry={refetch}
+          classNames={{ icon: 'size-60 mb-5', container: 'h-auto' }}
+        />
+      );
 
-                  return (
-                    <NotificationItem
-                      key={notification.id}
-                      ref={isLastItem ? ref : null}
-                      onClick={() =>
-                        onNotificationClick(notification)
-                      }
-                      {...notification}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
-        {isFetchingNextPage && (
-          <div className='w-fit mx-auto'>
-            <Spinner className='text-grayDark size-7 animate-spin' />
-          </div>
-        )}
-      </div>
-    );
-  }, [
-    data,
-    onNotificationClick,
-    ref,
-    isFetchingNextPage,
-    isPending,
-    isSuccess,
-    isError,
-    refetch,
-  ]);
+    const totalCount = data?.pages[0]?.data?.totalCount;
+
+    if (!totalCount)
+      return (
+        <div
+          key={pageIndex}
+          className='w-full h-full flex justify-center items-center text-grayDark'
+        >
+          لا يوجد اشعارات
+        </div>
+      );
+
+    const mergedNotifications =
+      data?.pages.flatMap((page) => page?.data?.items) || [];
+
+    return mergedNotifications.map((notification, index) => (
+      <NotificationItem
+        key={notification.id}
+        ref={mergedNotifications?.length - 1 === index ? ref : null}
+        onClick={() => onNotificationClick(notification)}
+        {...notification}
+      />
+    ));
+  }, [data, onNotificationClick, ref, isPending, isError, refetch]);
 
   // Trigger fetchNextPage when last element is visible
   useEffect(() => {
-    if (entry?.isIntersecting && hasNextPage) {
+    if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [entry, hasNextPage, fetchNextPage]);
+  }, [entry, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <Popover
@@ -151,62 +123,77 @@ export const Notifications = () => {
         </button>
       </Popover.Target>
 
-      <Popover.Dropdown>{dropdownContent}</Popover.Dropdown>
+      <Popover.Dropdown>
+        <div
+          ref={containerRef}
+          className='min-w-[calc(100vw-26px)] h-[400px] overflow-y-auto mdl:min-w-[650px] flex flex-col p-4 *:shrink-0'
+        >
+          {dropdownContent}
+
+          {isFetchingNextPage && (
+            <div className='w-fit mx-auto'>
+              <Spinner className='text-grayDark size-7 animate-spin' />
+            </div>
+          )}
+        </div>
+      </Popover.Dropdown>
     </Popover>
   );
 };
 
-const NotificationItem = forwardRef(
-  (
-    {
-      title = '',
-      content = '',
-      created = '',
-      status = 2,
-      onClick = () => {},
-    },
-    ref
-  ) => {
-    const { timeFromNow } = useDate(created);
+const NotificationItem = memo(
+  forwardRef(
+    (
+      {
+        title = '',
+        content = '',
+        created = '',
+        status = 2,
+        onClick = () => {},
+      },
+      ref
+    ) => {
+      const { timeFromNow } = useDate(created);
 
-    const isNew = status === 2;
+      const isNew = status === 2;
 
-    return (
-      <>
-        <Notification
-          ref={ref}
-          radius={3}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onClick(e);
-          }}
-          classNames={{
-            root: 'shadow-none cursor-pointer transition hover:bg-blueLighter',
-            description: 'flex items-center gap-4',
-          }}
-          withCloseButton={false}
-          color={isNew ? '#10B0C1' : '#939393'}
-        >
-          <div className='flex-1'>
-            <h4 className='font-bold text-sm mdl:text-base'>
-              {title}
-            </h4>
-            <p className='text-xs mdl:text-base text-grayDark'>
-              {content}
-            </p>
-          </div>
+      return (
+        <>
+          <Notification
+            ref={ref}
+            radius={3}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClick(e);
+            }}
+            classNames={{
+              root: 'shadow-none cursor-pointer transition hover:bg-blueLighter',
+              description: 'flex items-center gap-4',
+            }}
+            withCloseButton={false}
+            color={isNew ? '#10B0C1' : '#939393'}
+          >
+            <div className='flex-1'>
+              <h4 className='font-bold text-sm mdl:text-base'>
+                {title}
+              </h4>
+              <p className='text-xs mdl:text-base text-grayDark'>
+                {content}
+              </p>
+            </div>
 
-          <time>{timeFromNow}</time>
-        </Notification>
+            <time>{timeFromNow}</time>
+          </Notification>
 
-        <Divider
-          my='sm'
-          className='border-grayLight border-2 last:border-none'
-        />
-      </>
-    );
-  }
+          <Divider
+            my='sm'
+            className='border-grayLight border-2 last:border-none'
+          />
+        </>
+      );
+    }
+  )
 );
 
 NotificationItem.displayName = 'NotificationItem';
