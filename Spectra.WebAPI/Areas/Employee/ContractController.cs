@@ -25,6 +25,8 @@ namespace Spectra.WebAPI.Areas.Employee
             return Ok(response);
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateContractCommand input)
         {

@@ -1,4 +1,5 @@
-﻿using Spectra.Domain.Shared.Common;
+﻿using Spectra.Domain.Contracts;
+using Spectra.Domain.Shared.Common;
 using static Spectra.Domain.Shared.Constants.ContractConses;
 
 namespace Spectra.Application.Contracts.DTO
@@ -29,5 +30,7 @@ namespace Spectra.Application.Contracts.DTO
         public string? AdminSignaturePath { get; set; }
         public string? HeadSignaturePath { get; set; }
         public ICollection<ContractVersionReadDto> Versions { get; set; }
+        public ContractEmployeeInfoSection InfoSection { get; set; }
+        public ICollection<ContractTextSectionDto> Sections { get; set; }
     }
 }

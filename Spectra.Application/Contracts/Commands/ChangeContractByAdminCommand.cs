@@ -54,7 +54,7 @@ namespace Spectra.Application.Contracts.Commands
                     currentVersion.AcceptedByAdmin = true;
                     currentVersion.ChangedByAdminDate = DateTimeOffset.UtcNow;
 
-                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee)
                     {
                         contract.Accept();
                         contract.Sections = request.TextSections.Adapt<ICollection<ContractTextSection>>();
