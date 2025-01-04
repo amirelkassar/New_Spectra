@@ -1,19 +1,17 @@
 'use client';
 
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { createContext, useContext, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { H1 } from '@/admin/_components/ui';
+import { ChatList } from '@/dashboard/_components/chat';
 import { BackButton } from '@/components/buttons/back-button';
 import { QueryWrapper } from '@/components/query-wrapper';
 import { useUserChatList } from '@/hooks/queries/user/chat';
-import { useChatDate } from '@/hooks/use-chat-date';
-import { useImagePath } from '@/hooks/use-image-path';
 import ROUTES from '@/routes';
-import Card from '@/components/card';
-import Avatar from '@/components/avatar';
 
 const ChatsLayoutContext = createContext(null);
 
@@ -75,26 +73,15 @@ const RenderChats = ({ data = [], children }) => {
 
   return (
     <div className='flex-1 lg:grid lg:grid-cols-5 lg:gap-5 relative'>
-      <div className='lg:col-span-2 flex flex-col gap-5 h-full'>
-        <div className='flex-1'>
-          <ChatList data={chatList} />
-        </div>
+      <div className='lg:col-span-2 gap-5 grid grid-rows-2'>
+        <MessagesChatList data={chatList} />
 
-        <div
-          className={cn(
-            'lg:hidden w-full my-8 h-[1px] bg-grayMedium',
-            isOpen && 'hidden'
-          )}
-        />
-
-        <div className='flex-1'>
-          <GroupChatList data={groupChatList} />
-        </div>
+        <GroupChatList data={groupChatList} />
       </div>
 
       <div
         className={cn(
-          'lg:col-span-3 lg:static lg:top-auto lg:end-auto lg:h-auto absolute top-0 end-0 w-full h-full transition-transform -translate-x-full lg:translate-x-0 lg:transform-none lg:transition-none',
+          'lg:col-span-3 lg:static lg:top-auto lg:end-auto lg:h-auto absolute top-0 end-0 w-full h-[calc(100%-50px)] mdl:h-full transition-transform -translate-x-full lg:translate-x-0 lg:transform-none lg:transition-none',
           isOpen && 'translate-x-0'
         )}
       >
@@ -105,11 +92,13 @@ const RenderChats = ({ data = [], children }) => {
 };
 
 const Header = () => {
-  const { close } = useChatsLayout();
+  const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
   const path = usePathname();
+
+  const { close } = useChatsLayout();
 
   const showBackButton = path !== ROUTES.ADMIN.CHATS.DASHBOARD;
 
@@ -123,23 +112,25 @@ const Header = () => {
           }}
         />
       )}
-      <H1>المحادثات</H1>
+      <H1>{tg('chats')}</H1>
     </div>
   );
 };
 
-const ChatList = ({ data = [] }) => {
-  const { open } = useChatsLayout();
+const MessagesChatList = ({ data = [] }) => {
+  const tg = useTranslations('general_obj');
 
   const router = useRouter();
 
   const pathName = usePathname();
 
+  const { open } = useChatsLayout();
+
   return (
-    <Card title='رسائل' className='h-full'>
-      <div className='border-t border-grayDark pt-3'>
-        {data.map((chat) => (
-          <ChatItem
+    <ChatList title={tg('messages')}>
+      {!!data.length ? (
+        data.map((chat) => (
+          <ChatList.Item
             key={chat.id}
             {...chat}
             isActive={
@@ -150,56 +141,46 @@ const ChatList = ({ data = [] }) => {
               open();
             }}
           />
-        ))}
-      </div>
-    </Card>
+        ))
+      ) : (
+        <ChatList.NoMessages>
+          {tg('no_messages_yet')}
+        </ChatList.NoMessages>
+      )}
+    </ChatList>
   );
 };
 
 const GroupChatList = ({ data = [] }) => {
-  return (
-    <Card title='مجموعة' className='h-full'>
-      GROUP CHAT LIST
-    </Card>
-  );
-};
+  const tg = useTranslations('general_obj');
 
-const ChatItem = ({
-  chatImage = '',
-  roomName = '',
-  lastMessage = '',
-  lastMeesageDate = '',
-  className = '',
-  isActive = false,
-  onClick = () => {},
-}) => {
-  const { time } = useChatDate(lastMeesageDate);
+  const router = useRouter();
 
-  const path = useImagePath(chatImage);
+  const pathName = usePathname();
+
+  const { open } = useChatsLayout();
 
   return (
-    <div
-      onClick={onClick}
-      role='button'
-      className={cn(
-        'flex items-center gap-4 p-3 border-b-2 border-grayLight last:border-transparent transition-colors hover:bg-blueLighter rounded-md',
-        isActive && 'bg-blueLighter',
-        className
+    <ChatList title={tg('groups')}>
+      {!!data.length ? (
+        data.map((chat) => (
+          <ChatList.Item
+            key={chat.id}
+            {...chat}
+            isActive={
+              pathName === ROUTES.ADMIN.CHATS.VIEW_CHAT(chat.id)
+            }
+            onClick={() => {
+              router.push(ROUTES.ADMIN.CHATS.VIEW_CHAT(chat.id));
+              open();
+            }}
+          />
+        ))
+      ) : (
+        <ChatList.NoMessages>
+          {tg('no_groups_yet')}
+        </ChatList.NoMessages>
       )}
-    >
-      <Avatar
-        src={path}
-        name={roomName}
-        className='size-14 rounded-full shrink-0'
-      />
-
-      <div className='space-y-1 flex-1'>
-        <h3 className='font-bold'>{roomName}</h3>
-        <p className='text-grayDark'>
-          {lastMessage && `${lastMessage} . `}
-          {time}
-        </p>
-      </div>
-    </div>
+    </ChatList>
   );
 };

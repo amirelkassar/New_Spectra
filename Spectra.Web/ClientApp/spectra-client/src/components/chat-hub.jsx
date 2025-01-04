@@ -30,14 +30,14 @@ export const ChatHub = () => {
 
       connection = new signalR.HubConnectionBuilder()
         .withUrl(HUB_URL, { accessTokenFactory: () => token })
-        .configureLogging(signalR.LogLevel.Error)
+        .configureLogging(signalR.LogLevel.None)
         .build();
 
       connection.on(LISTENERS.chatCreated, () => {});
       connection.on(LISTENERS.chatDeleted, () => {});
       connection.on(LISTENERS.messageAdded, (newMessage) => {
         const reference = newMessage?.chatReference || '';
-        const chatId = newMessage?.id || '';
+        const chatId = newMessage?.chatId || '';
 
         addMessage({
           newMessage,

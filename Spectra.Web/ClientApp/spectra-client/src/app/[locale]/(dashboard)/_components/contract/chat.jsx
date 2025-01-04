@@ -30,7 +30,7 @@ export const Chat = ({ contractId = '' }) => {
       className={cn(
         'rounded-xl bg-white w-0 transition-[width,padding,margin] duration-500 ease-in-out shrink-0 text-nowrap overflow-hidden',
         isOpen &&
-          'mdl:me-3 w-full mdl:w-80 h-full max-h-[650px] mdl:min-h-[650px]'
+          'mdl:me-3 w-full mdl:w-80 h-full mdl:max-h-[650px] mdl:min-h-[650px]'
       )}
     >
       {isOpenDelayed && (
@@ -45,27 +45,31 @@ export const Chat = ({ contractId = '' }) => {
 const RenderChat = memo((props) => {
   const { userId } = useAuth();
 
-  const { chatId, reference, messages } = props;
+  const { chatId, reference } = props;
 
   const { onSend, onRetry } = useAddMessage(chatId, reference);
 
   return (
     <div className='h-full flex flex-col gap-3'>
       <ChatBody {...props}>
-        {({ m, i }) => (
-          <Message
-            key={m?.id || i}
-            data-host={m?.senderId === userId}
-            name={m?.senderName || ''}
-            avatar={m?.senderImage || ''}
-            date={m?.created}
-            status={m?.status || ''}
-            onRetry={() => onRetry(m)}
-            showAvatar={messages[i - 1]?.senderId !== m?.senderId}
-          >
-            {m?.content}
-          </Message>
-        )}
+        {({ m, i }) => {
+          const isMyMessage = m?.senderId === userId;
+
+          return (
+            <Message
+              key={m?.id || i}
+              data-host={isMyMessage}
+              name={m?.senderName || ''}
+              avatar={m?.senderImage || ''}
+              date={m?.created}
+              status={m?.status || ''}
+              onRetry={() => onRetry(m)}
+              showAvatar={true}
+            >
+              {m?.content}
+            </Message>
+          );
+        }}
       </ChatBody>
 
       <ChatActions onSend={(formData) => onSend(formData)} />

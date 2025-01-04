@@ -2,37 +2,32 @@
 
 import {
   forwardRef,
+  memo,
   useCallback,
-  useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { Popover } from '@mantine/core';
 import { Divider } from '@mantine/core';
-import { useDate } from '@/hooks/use-date';
 import { useRouter } from '@/i18n/routing';
 import { Notification } from '@mantine/core';
-import { useIntersection } from '@mantine/hooks';
+import { Virtuoso } from 'react-virtuoso';
+import { useTranslations } from 'next-intl';
 
-import Loader from '@/components/loader';
-import NotificationIcon from '@/assets/icons/notification';
+import { useDate } from '@/hooks/use-date';
 import { ServerError } from '@/components/server-error';
 import {
   useMakeNotificationRead,
   useNotifications,
 } from '@/hooks/queries/user/notifications';
+import Loader from '@/components/loader';
 import Spinner from '@/assets/icons/spinner';
+import NotificationIcon from '@/assets/icons/notification';
 
 export const Notifications = () => {
   const router = useRouter();
 
-  const containerRef = useRef(null);
-
-  const { ref, entry } = useIntersection({
-    root: containerRef?.current,
-    threshold: 1,
-  });
+  const tg = useTranslations('general_obj');
 
   const [opened, setOpened] = useState(false);
 
@@ -42,7 +37,6 @@ export const Notifications = () => {
     hasNextPage,
     isFetchingNextPage,
     isPending,
-    isSuccess,
     isError,
     refetch,
   } = useNotifications();
@@ -60,76 +54,66 @@ export const Notifications = () => {
     [makeNotificationRead, router]
   );
 
-  const dropdownContent = useMemo(() => {
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const Content = useMemo(() => {
+    if (isPending) return <Loader />;
+
+    if (isError)
+      return (
+        <ServerError
+          onRetry={refetch}
+          classNames={{ icon: 'size-60 mb-5', container: 'h-auto' }}
+        />
+      );
+
+    const totalCount = data?.pages[0]?.data?.totalCount;
+
+    if (!totalCount)
+      return (
+        <div
+          key={pageIndex}
+          className='w-full h-full flex justify-center items-center text-grayDark'
+        >
+          {tg('no_notifications')}
+        </div>
+      );
+
+    const mergedNotifications =
+      data?.pages.flatMap((page) => page?.data?.items) || [];
+
     return (
-      <div
-        ref={containerRef}
-        className='min-w-[calc(100vw-26px)] h-[400px] overflow-y-auto mdl:min-w-[650px] flex flex-col p-4'
-      >
-        {isPending && <Loader />}
-        {isError && (
-          <ServerError
-            onRetry={refetch}
-            classNames={{ icon: 'size-60 mb-5', container: 'h-auto' }}
-          />
-        )}
-        {isSuccess &&
-          data?.pages?.map((page, pageIndex) => {
-            if (!page.data?.totalCount)
-              return (
-                <div
-                  key={pageIndex}
-                  className='w-full h-full flex justify-center items-center text-grayDark'
-                >
-                  لا يوجد اشعارات
-                </div>
-              );
-
-            return (
-              <div key={pageIndex}>
-                {page.data?.items?.map((notification, index) => {
-                  const isLastItem =
-                    pageIndex === data.pages.length - 1 &&
-                    index === page.data.items.length - 1;
-
-                  return (
-                    <NotificationItem
-                      key={notification.id}
-                      ref={isLastItem ? ref : null}
-                      onClick={() =>
-                        onNotificationClick(notification)
-                      }
-                      {...notification}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
-        {isFetchingNextPage && (
-          <div className='w-fit mx-auto'>
-            <Spinner className='text-grayDark size-7 animate-spin' />
-          </div>
-        )}
-      </div>
+      <Virtuoso
+        data={mergedNotifications}
+        endReached={loadMore}
+        components={{
+          Footer: () => <Loading isFetching={isFetchingNextPage} />,
+        }}
+        itemContent={(index, notification) => {
+          return (
+            <NotificationItem
+              key={notification.id || index}
+              {...notification}
+              onClick={() => onNotificationClick(notification)}
+            />
+          );
+        }}
+      />
     );
   }, [
     data,
     onNotificationClick,
-    ref,
-    isFetchingNextPage,
     isPending,
-    isSuccess,
     isError,
     refetch,
+    loadMore,
+    isFetchingNextPage,
+    tg,
   ]);
-
-  // Trigger fetchNextPage when last element is visible
-  useEffect(() => {
-    if (entry?.isIntersecting && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [entry, hasNextPage, fetchNextPage]);
 
   return (
     <Popover
@@ -151,62 +135,79 @@ export const Notifications = () => {
         </button>
       </Popover.Target>
 
-      <Popover.Dropdown>{dropdownContent}</Popover.Dropdown>
+      <Popover.Dropdown>
+        <div className='min-w-[calc(100vw-26px)] h-[400px] overflow-y-auto mdl:min-w-[650px] flex flex-col p-4 *:shrink-0'>
+          {Content}
+        </div>
+      </Popover.Dropdown>
     </Popover>
   );
 };
 
-const NotificationItem = forwardRef(
-  (
-    {
-      title = '',
-      content = '',
-      created = '',
-      status = 2,
-      onClick = () => {},
-    },
-    ref
-  ) => {
-    const { timeFromNow } = useDate(created);
+const NotificationItem = memo(
+  forwardRef(
+    (
+      {
+        title = '',
+        content = '',
+        created = '',
+        status = 2,
+        onClick = () => {},
+      },
+      ref
+    ) => {
+      const { timeFromNow } = useDate(created);
 
-    const isNew = status === 2;
+      const isNew = status === 2;
 
-    return (
-      <>
-        <Notification
-          ref={ref}
-          radius={3}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onClick(e);
-          }}
-          classNames={{
-            root: 'shadow-none cursor-pointer transition hover:bg-blueLighter',
-            description: 'flex items-center gap-4',
-          }}
-          withCloseButton={false}
-          color={isNew ? '#10B0C1' : '#939393'}
-        >
-          <div className='flex-1'>
-            <h4 className='font-bold text-sm mdl:text-base'>
-              {title}
-            </h4>
-            <p className='text-xs mdl:text-base text-grayDark'>
-              {content}
-            </p>
-          </div>
+      return (
+        <>
+          <Notification
+            ref={ref}
+            radius={3}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClick(e);
+            }}
+            classNames={{
+              root: 'shadow-none cursor-pointer transition hover:bg-blueLighter',
+              description: 'flex items-center gap-4',
+            }}
+            withCloseButton={false}
+            color={isNew ? '#10B0C1' : '#939393'}
+          >
+            <div className='flex-1'>
+              <h4 className='font-bold text-sm mdl:text-base'>
+                {title}
+              </h4>
+              <p className='text-xs mdl:text-base text-grayDark'>
+                {content}
+              </p>
+            </div>
 
-          <time>{timeFromNow}</time>
-        </Notification>
+            <time>{timeFromNow}</time>
+          </Notification>
 
-        <Divider
-          my='sm'
-          className='border-grayLight border-2 last:border-none'
-        />
-      </>
-    );
-  }
+          <Divider
+            my='sm'
+            className='border-grayLight border-2 last:border-none'
+          />
+        </>
+      );
+    }
+  )
 );
 
 NotificationItem.displayName = 'NotificationItem';
+
+const Loading = memo(({ isFetching }) => {
+  if (!isFetching) return <></>;
+  return (
+    <div className='w-fit mx-auto'>
+      <Spinner className='text-grayDark size-7 animate-spin' />
+    </div>
+  );
+});
+
+Loading.displayName = 'Loading';

@@ -15,14 +15,16 @@ export const NotificationsHub = () => {
 
   useEffect(() => {
     let connection = null;
-    const audio = new Audio('/notification-received.mp3');
+    const audio = new Audio(
+      '/notification-received.mp3?v=' + new Date().getTime()
+    );
 
     const connectSignalR = async () => {
       const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/notification`;
 
       connection = new signalR.HubConnectionBuilder()
         .withUrl(HUB_URL, { accessTokenFactory: () => token })
-        .configureLogging(signalR.LogLevel.Error)
+        .configureLogging(signalR.LogLevel.None)
         .build();
 
       connection.on('Receive', (message) => {

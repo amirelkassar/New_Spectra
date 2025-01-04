@@ -711,3 +711,9 @@ Preloader Area CSS
 .react-draggable.react-draggable-dragging {
   cursor: grabbing;
 }
+
+@media print {
+  .page-break {
+    page-break-before: always;
+  }
+}

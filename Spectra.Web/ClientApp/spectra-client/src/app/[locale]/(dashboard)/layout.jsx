@@ -2,7 +2,6 @@
 import { NotificationsHub } from '@/components/notifications-hub';
 import { Header } from '@/dashboard/_components/layouts/header';
 import { Sidebar } from '@/dashboard/_components/layouts/sidebar';
-import { ChatHub } from '@/components/chat-hub';
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -16,7 +15,6 @@ const DashboardLayout = ({ children }) => {
       </div>
 
       <NotificationsHub />
-      <ChatHub />
       {/* <QueryInvalidateButton /> */}
     </div>
   );

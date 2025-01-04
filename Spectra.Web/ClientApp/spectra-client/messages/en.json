@@ -28,6 +28,7 @@
   "previous": "Previous",
   "general_obj": {
     "doc_prefix": "Dr.",
+    "no_notifications": "It's all quiet here",
     "from": "From",
     "by": "By",
     "last_modified": "Last Modified",
@@ -105,7 +106,12 @@
     "phone_number": "Phone number",
     "message": "Message",
     "or_by": "Or by",
-    "follow_us_on": "Follow us on"
+    "follow_us_on": "Follow us on",
+    "select_conversation": "Select a conversation from the list to view its content",
+    "chats": "Chats",
+    "messages": "Messages",
+    "groups": "Groups",
+    "no_groups_yet": "No groups yet"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",

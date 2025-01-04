@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { forwardRef, useCallback, useMemo } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import { NoMessages } from './no-messages';
@@ -22,6 +22,8 @@ export const ChatBody = forwardRef(
   ) => {
     const tg = useTranslations('general_obj');
 
+    const [isAtBottom, setIsAtBottom] = useState(true);
+
     // HANDLE FETCH NEXT PAGE
     const onFetchNextPage = useCallback(() => {
       if (hasNextPage && !isFetchingNextPage) fetchNextPage();
@@ -41,18 +43,25 @@ export const ChatBody = forwardRef(
       );
     }, [hasNextPage, isFetchingNextPage, tg]);
 
+    const firstItemIndex = useMemo(() => {
+      const index = totalCount - totalMessages;
+      return index > 0 ? index : 0;
+    }, [totalCount, totalMessages]);
+
     if (!children)
       throw new Error('ChatBody must have a children prop');
 
     if (!totalCount) return <NoMessages />;
+
     return (
       <Virtuoso
         ref={ref}
         data={messages}
-        firstItemIndex={totalCount - totalMessages}
+        firstItemIndex={firstItemIndex}
         initialTopMostItemIndex={messages.length - 1}
         startReached={onFetchNextPage}
-        followOutput={false}
+        followOutput={isAtBottom}
+        atBottomStateChange={setIsAtBottom}
         components={{ Header: () => statusMsg }}
         itemContent={(i, m) => {
           return children({

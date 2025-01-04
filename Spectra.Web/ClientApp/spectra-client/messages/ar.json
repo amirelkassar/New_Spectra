@@ -28,6 +28,7 @@
   "previous": "السابق",
   "general_obj": {
     "doc_prefix": "د.",
+    "no_notifications": "كل شيء هادئ هنا",
     "from": "من",
     "by": "بواسطة",
     "last_modified": "آخر تعديل",
@@ -105,7 +106,12 @@
     "phone_number": "رقم الهاتف",
     "message": "الرسالة",
     "or_by": "أو من خلال",
-    "follow_us_on": "تابعنا على"
+    "follow_us_on": "تابعنا على",
+    "select_conversation": "اختر المحادثة من القائمة لعرض محتواها",
+    "chats": "المحادثات",
+    "messages": "الرسائل",
+    "groups": "المجموعات",
+    "no_groups_yet": "لا يوجد مجموعات حتي الان"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
