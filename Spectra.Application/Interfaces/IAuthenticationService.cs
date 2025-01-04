@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Spectra.Application.Identities.ApiParams;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-
+        Task<OperationResult> LoginAsync(LoginAPIParam input);
+        Task<OperationResult> RefreshTokenAsync(string token);
+        Task<OperationResult> ValidateUserAsync(LoginAPIParam input);
     }
 }

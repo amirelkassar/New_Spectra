@@ -21,6 +21,9 @@ const SelectBox = ({
   isObject = false,
   displayedKey,
   isOptional = false,
+  error,
+  labelClassName,
+  optionsShow,
   ...rest
 }) => {
   const key = (option) => (isObject ? option.id : option);
@@ -44,7 +47,7 @@ const SelectBox = ({
                 اختياري
               </div>
             )}
-            <Label>{label}</Label>
+            <Label className={clsx(labelClassName)}>{label}</Label>
             <ListboxButton
               className={clsx(
                 "default-field relative z-0 w-full transition flex items-center justify-between gap-3",
@@ -74,24 +77,47 @@ const SelectBox = ({
                 "text-black  absolute z-10 w-full px-0 space-y-1  max-h-[200px] overflow-auto bg-white mt-2 p-1 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none "
               }
             >
-              {options.map((option) => (
-                <ListboxOption
-                  as={"li"}
-                  key={key(option)}
-                  value={option}
-                  className={clsx(
-                    "hover:bg-gray cursor-pointer group px-3 py-1 transition flex items-center justify-between",
-                    option === selectedOption && "bg-gray"
-                  )}
-                >
-                  {displayedValue(option)}
-                  <div className="flex items-center justify-center bg-greenMain size-4 opacity-0 group-data-[selected]:opacity-100 transition rounded-sm">
-                    <CheckIcon width={"12"} height={"12"} />
-                  </div>
-                </ListboxOption>
-              ))}
+               
+              {options.map((option) =>
+              
+                optionsShow === 2 ? (
+                  <ListboxOption
+                    as={"li"}
+                    key={option.id}
+                    value={option.id}
+                    className={clsx(
+                      "hover:bg-gray cursor-pointer group px-3 py-1 transition flex items-center justify-between",
+                      option.id === selectedOption && "bg-gray"
+                    )}
+                  >
+                    <div className="flex items-center justify-between gap-3 flex-1">
+                      <p>{option.value}</p>
+                      <p>{option.name}</p>
+                    </div>
+                    <div className="flex items-center justify-center bg-greenMain size-4 opacity-0 group-data-[selected]:opacity-100 transition rounded-sm">
+                      <CheckIcon width={"12"} height={"12"} />
+                    </div>
+                  </ListboxOption>
+                ) : (
+                  <ListboxOption
+                    as={"li"}
+                    key={key(option)}
+                    value={option}
+                    className={clsx(
+                      "hover:bg-gray cursor-pointer group px-3 py-1 transition flex items-center justify-between",
+                      option === selectedOption && "bg-gray"
+                    )}
+                  >
+                    {displayedValue(option)}
+                    <div className="flex items-center justify-center bg-greenMain size-4 opacity-0 group-data-[selected]:opacity-100 transition rounded-sm">
+                      <CheckIcon width={"12"} height={"12"} />
+                    </div>
+                  </ListboxOption>
+                )
+              )}
             </ListboxOptions>
           </Transition>
+          {error && <p className="text-red whitespace-pre-line">{error}</p>}
         </>
       )}
     </Listbox>

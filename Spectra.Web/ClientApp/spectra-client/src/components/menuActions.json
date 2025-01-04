@@ -1,0 +1,73 @@
+[
+  {
+    "label": "قبول",
+    "icon": "CheckCircleIcon",
+    "type": "btn",
+    "action": "acceptTask",
+    "color": "#10B0C1"
+  },
+  {
+    "label": "رفض",
+    "icon": "CancelIcon",
+    "type": "btn",
+    "action": "rejectTask",
+    "color": "#FF3D3D"
+  },
+  {
+    "label": "عرض",
+    "icon": "VisibilityIcon",
+    "type": "link",
+    "link": "/view-details"
+  },
+  {
+    "label": "الغاء الميعاد",
+    "icon": "DeleteIcon",
+    "type": "btn",
+    "action": "deleteTask",
+    "color": "#FF3D3D"
+  },
+  {
+    "label": "اعادة الجدولة",
+    "icon": "<ReschedulingIcon />",
+    "type": "btn",
+    "action": "reassignTask"
+  },
+  {
+    "label": "تقييم",
+    "icon": "<StarIcon />",
+    "type": "btn",
+    "action": "evaluateTask"
+  },
+  {
+    "label": "تعديل",
+    "icon": "<EditIcon />",
+    "type": "btn",
+    "action": "editTask"
+  },
+  {
+    "label": "تصدير",
+    "icon": "<ExportIcon />",
+    "type": "btn",
+    "action": "exportTask"
+  },
+  {
+    "label": "طباعة",
+    "icon": "<PrintIcon />",
+    "type": "btn",
+    "action": "printTask"
+  },
+  {
+    "label": "مسح",
+    "icon": "DeleteIcon",
+    "type": "btn",
+    "action": "deleteTask",
+    "color": "#FF3D3D"
+  },
+
+  {
+    "label": "انشاء",
+    "icon": "CreateIcon",
+    "type": "link",
+    "link": "/view-details"
+  }
+]

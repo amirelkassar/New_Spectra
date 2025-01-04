@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Spectra.Domain.Shared.Common;
+using static Spectra.Domain.Shared.Constants.ContractConses;
+
+namespace Spectra.Domain.Contracts
+{
+    public class EmploymentContract : BaseAuditableEntity<string>
+    {
+        protected EmploymentContract() { }
+        private EmploymentContract(string id,
+        string employeeId,
+        string employeeName,
+        string employeeUserId,
+        string headId,
+        string headName,
+        string headUserId,
+        string titel,
+        ContractStates contractCase,
+        ICollection<ContractVersion> versions) : base(id)
+        {
+            Id = id;
+            Titel = titel;
+            EmployeeId = employeeId;
+            EmployeeName = employeeName;
+            EmployeeUserId = employeeUserId;
+            EmployeeHeadId = headId;
+            EmployeeHeadName = headName;
+            EmployeeHeadUserId = headUserId;
+            Versions = versions;
+            ContractState = ContractStates.Contracting;
+            Sections = [];
+        }
+        public string Titel { get; set; }
+        public ContractStates ContractState { get; private set; }
+        public string EmployeeId { get; private set; }
+        public string EmployeeUserId { get; private set; }
+        public string EmployeeHeadUserId { get; private set; }
+        public string EmployeeHeadId { get; private set; }
+        public string EmployeeHeadName { get; private set; }
+        public string EmployeeName { get; private set; }
+        public string JobDescription { get; set; }
+        public string JobTitle { get; set; }
+        public DateTimeOffset? AcceptingDate { get; private set; }
+        public DateTimeOffset? CancelingDate { get; private set; }
+        public string? CanceldByUserId { get; set; }
+        public string? CanceldByUsername { get; set; }
+        public string? CancelReason { get; set; }
+        public string Content { get; set; }
+        public string? DoctorSignaturePath { get; set; }
+        public string? AdminSignaturePath { get; set; }
+        public string? HeadSignaturePath { get; set; }
+        public ContractEmployeeInfoSection InfoSection { get; set; }
+        public ICollection<ContractTextSection> Sections { get; set; }
+        public ICollection<ContractVersion> Versions { get; private set; }
+
+        public static EmploymentContract Create(string id,
+            string employeeId,
+            string employeeName,
+            string employeeUserId,
+            string headId,
+            string headName,
+            string headUserId,
+            string titel,
+            ContractStates contractCase,
+            ICollection<ContractVersion> versions)
+        {
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
+            ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
+            ArgumentNullException.ThrowIfNull(employeeId, nameof(employeeId));
+            ArgumentNullException.ThrowIfNull(employeeUserId, nameof(employeeUserId));
+            ArgumentNullException.ThrowIfNull(headId, nameof(headId));
+            ArgumentNullException.ThrowIfNull(headName, nameof(headName));
+            ArgumentNullException.ThrowIfNull(headUserId, nameof(headUserId));
+            ArgumentNullException.ThrowIfNull(titel, nameof(titel));
+            ArgumentNullException.ThrowIfNull(contractCase, nameof(contractCase));
+            ArgumentNullException.ThrowIfNull(versions, nameof(versions));
+
+            return new EmploymentContract(id, employeeId, employeeName, employeeUserId, headId, headName, headUserId, titel, contractCase, versions);
+        }
+
+        public void Accept()
+        {
+            ContractState = ContractStates.Accepted;
+            AcceptingDate = DateTime.UtcNow;
+        }
+
+        public void Cancel(string userId, string username, string? reason = default)
+        {
+            ContractState = ContractStates.Canceled;
+            CancelingDate = DateTime.UtcNow;
+            CanceldByUserId = userId;
+            CanceldByUsername = username;
+            CancelReason = reason;
+            var lastVersion = Versions.FirstOrDefault(v => v.State == ContractVersionStates.Active);
+            lastVersion.AcceptedByEmployee = false;
+            lastVersion.AcceptedByAdmin = false;
+        }
+    }
+
+}
+
+
+

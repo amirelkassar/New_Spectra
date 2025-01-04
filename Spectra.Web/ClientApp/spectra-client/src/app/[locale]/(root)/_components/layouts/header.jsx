@@ -1,0 +1,18 @@
+import {
+  MobileHeader,
+  XlScreenHeader,
+} from '@/guest/_components/layouts';
+
+export const Header = async () => {
+  return (
+    <header
+      role='banner'
+      aria-label='Site header'
+      className='w-full py-8 absolute top-0 start-0 z-50 px-5 xl:px-10'
+    >
+      <XlScreenHeader />
+
+      <MobileHeader />
+    </header>
+  );
+};

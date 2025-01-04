@@ -1,32 +1,47 @@
-import clsx from "clsx";
-import React from "react";
+import { cn } from '@/lib/utils';
+import React from 'react';
 
-const Button = ({ className, variant = "primary", children, ...rest }) => {
+const Button = ({
+  className = '',
+  variant = 'primary',
+  children,
+  ...rest
+}) => {
   const baseClasses =
-    "flex items-center justify-center gap-5  transition-all  px-7 ";
+    'flex items-center disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none justify-center gap-3 transition-all px-7';
 
-  let variantClasses = "";
+  let variantClasses = '';
 
   switch (variant) {
-    case "primary":
+    case 'primary':
       variantClasses =
-        "border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain rounded-xl py-3";
+        'border border-grayDark hover:border-greenMain ring-1 ring-transparent hover:ring-greenMain font-bold rounded-xl py-3 text-sm mdl:text-base';
       break;
-    case "secondary":
-      variantClasses = "bg-greenMain text-white rounded-xl py-3";
-      break;
-    case "ternary":
+    case 'secondary':
       variantClasses =
-        "border border-greenMain text-greenMain rounded-full py-2";
+        'bg-greenMain hover:bg-greenMain/90 text-white rounded-xl py-3 font-bold text-sm mdl:text-base';
       break;
+    case 'ternary':
+      variantClasses =
+        'border border-greenMain text-greenMain rounded-full py-2';
+      break;
+    case 'blueLight':
+      variantClasses =
+        'rounded-xl py-2 mdl:py-3 px-4 mdl:px-7 text-black bg-blueLight font-bold mdl:text-base text-xs';
+      break;
+    case 'ghost':
+      variantClasses =
+        'bg-transparent rounded-lg p-3 text-xs font-bold lg:text-base transition hover:bg-grayMedium/50';
+      break;
+
     default:
-      variantClasses = "";
+      variantClasses = '';
   }
 
   return (
     <button
-      type="button"
-      className={clsx(baseClasses, variantClasses, className)}
+      type='button'
+      className={cn(baseClasses, variantClasses, className)}
       {...rest}
     >
       {children}

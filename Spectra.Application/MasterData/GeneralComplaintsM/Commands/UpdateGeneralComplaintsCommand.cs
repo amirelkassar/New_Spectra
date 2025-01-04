@@ -1,0 +1,71 @@
+﻿using FluentValidation;
+using MediatR;
+using Spectra.Application.Interfaces;
+using Spectra.Application.Messaging;
+using Spectra.Domain.MasterData.GeneralComplaints;
+using Spectra.Domain.Shared.Common.Exceptions;
+using Spectra.Domain.Shared.Wrappers;
+
+namespace Spectra.Application.MasterData.GeneralComplaintsM.Commands
+{
+    public class UpdateGeneralComplaintsCommand : ICommand<OperationResult<Unit>>
+    {
+        public string Id { get; set; }
+
+        public string Code1 { get; set; }
+        public string ComplaintName { get; set; }
+        public string DescriptionOfTheComplaint { get; set; }
+
+
+    }
+
+    public class UpdateGeneralComplaintsCommandHandler : IRequestHandler<UpdateGeneralComplaintsCommand, OperationResult<Unit>>
+    {
+
+        private readonly IBaseMongoDbRepository<GeneralComplaint> _generalComplaintRepository;
+
+        public UpdateGeneralComplaintsCommandHandler(IBaseMongoDbRepository<GeneralComplaint> generalComplaintRepository)
+        {
+
+            _generalComplaintRepository = generalComplaintRepository;
+        }
+
+
+
+        public async Task<OperationResult<Unit>> Handle(UpdateGeneralComplaintsCommand request, CancellationToken cancellationToken)
+        {
+
+
+            var generalComplaint = await _generalComplaintRepository.GetByIdAsync(request.Id);
+            var names = await _generalComplaintRepository.GetAllAsync(b => b.ComplaintName == request.ComplaintName && b.Id != request.Id);
+            if (names.data.Any())
+            {
+                throw new DbErrorException(" this's Name is a ready exists");
+            }
+
+            generalComplaint.Code1 = request.Code1;
+            generalComplaint.ComplaintName = request.ComplaintName;
+            generalComplaint.DescriptionOfTheComplaint = request.DescriptionOfTheComplaint;
+
+
+            await _generalComplaintRepository.UpdateAsync(generalComplaint);
+            return OperationResult<Unit>.Success(Unit.Value);
+
+
+        }
+
+    }
+    public class UpdateGeneralComplaintsCommandValidator : AbstractValidator<UpdateGeneralComplaintsCommand>
+    {
+        public UpdateGeneralComplaintsCommandValidator()
+        {
+
+            RuleFor(x => x.ComplaintName)
+                .NotEmpty().WithMessage("Complaint name is required.")
+                .MaximumLength(100).WithMessage("Complaint name must be less than 100 characters.");
+            RuleFor(x => x.Code1)
+               .NotEmpty().WithMessage("Complaint name is required.")
+               .MaximumLength(20).WithMessage("Complaint name must be less than 20 characters.");
+        }
+    }
+}

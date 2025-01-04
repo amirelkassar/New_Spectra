@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Common
 {
-    public abstract class BaseAuditableEntity<TKey> : BaseEntity<TKey>
+    public abstract class BaseAuditableEntity<TKey> : BaseEntity<TKey>, IBaseAuditableEntity<TKey>
     {
-        protected BaseAuditableEntity(string? createdBy = null) : base()
+        protected BaseAuditableEntity() : base() { }
+        protected BaseAuditableEntity(TKey id) : base(id)
         {
-            CreatedBy = createdBy;
             Created = DateTimeOffset.UtcNow;
         }
         protected BaseAuditableEntity(TKey id, string? createdBy = null) : base(id)
@@ -18,12 +14,17 @@ namespace Spectra.Domain.Shared.Common
             CreatedBy = createdBy;
             Created = DateTimeOffset.UtcNow;
         }
-        public DateTimeOffset Created { get; private set; }
 
-        public string? CreatedBy { get; private set; }
+        public DateTimeOffset? LastModified { get; set; }
 
-        public DateTimeOffset? LastModified { get; private set; }
+        public string? LastModifiedBy { get; set; }
+    }
 
-        public string? LastModifiedBy { get; private set; }
+    public interface IBaseAuditableEntity<TKey> : IBaseEntity<TKey>
+    {
+
+        DateTimeOffset? LastModified { get; set; }
+        string? LastModifiedBy { get; set; }
+
     }
 }

@@ -15,12 +15,20 @@ try
     {
         app.UseDeveloperExceptionPage();
     }
-    app.UseIdentityServer();
     using (var scope = app.Services.CreateScope())
     {
         var seedDataService = scope.ServiceProvider.GetService<SeedDataService>();
         await seedDataService.SeedAsync();
     }
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseIdentityServer();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapDefaultControllerRoute()
+        .RequireAuthorization();
+
     await app.RunAsync();
 
 

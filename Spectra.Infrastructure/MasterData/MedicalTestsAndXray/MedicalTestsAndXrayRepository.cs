@@ -1,0 +1,52 @@
+﻿using System.Linq.Expressions;
+using MongoDB.Driver;
+using Spectra.Application.Interfaces;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using Spectra.Domain.Shared.Common.Exceptions;
+
+namespace Spectra.Infrastructure.MasterData.MedicalTestsAndXray
+{
+    public class MedicalTestsAndXrayRepository : IMedicalTestsAndXrayRepository
+    {
+
+        private readonly IMongoCollection<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray> _medicalTestsAndXrays;
+
+        public MedicalTestsAndXrayRepository(IMongoDbService mongoDbService)
+        {
+            var database = mongoDbService.DataBase;
+            _medicalTestsAndXrays = database.GetCollection<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>("MedicalTestAndXrays");
+        }
+        public async Task<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray> GetByIdAsync(string id)
+        {
+
+            var entity = await _medicalTestsAndXrays.Find(c => c.Id == id).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new NotFoundException("MedicalTestsAndXray", id);
+            }
+            return entity;
+        }
+
+        public async Task AddAsync(Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray medicalTestsAndXrays)
+        {
+            await _medicalTestsAndXrays.InsertOneAsync(medicalTestsAndXrays);
+        }
+
+        public async Task UpdateAsync(Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray medicalTestsAndXrays)
+        {
+            await _medicalTestsAndXrays.ReplaceOneAsync(c => c.Id == medicalTestsAndXrays.Id, medicalTestsAndXrays);
+        }
+
+        public async Task DeleteAsync(Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray medicalTestsAndXrays)
+        {
+            await _medicalTestsAndXrays.DeleteOneAsync(c => c.Id == medicalTestsAndXrays.Id);
+        }
+
+        public async Task<IEnumerable<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray>> GetAllAsync(Expression<Func<Domain.MasterData.MedicalTestsAndXrays.MedicalTestAndXray, bool>> filter = null, FindOptions options = null)
+        {
+            filter ??= _ => true;
+            return await _medicalTestsAndXrays.Find(filter, options).ToListAsync();
+        }
+    }
+}
+

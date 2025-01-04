@@ -1,0 +1,49 @@
+import { Select } from '@mantine/core';
+// eslint-disable-next-line no-unused-vars
+import { SelectProps } from '@mantine/core';
+
+import { cn } from '@/lib/utils';
+import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
+
+/**
+ * @typedef {Object} SelectProps
+
+ */
+
+/**
+ * @param {SelectProps} props
+ */
+
+const SelectInput = ({ ...props }) => {
+  return (
+    <Select
+      {...props}
+      checkIconPosition={props.checkIconPosition || 'right'}
+      allowDeselect={props.allowDeselect || false}
+      rightSection={
+        <ArrowDownBlack className='group-data-[size=sm]:size-3' />
+      }
+      nothingFoundMessage={
+        props.nothingFoundMessage ?? '!No Data Found'
+      }
+      classNames={{
+        ...props.classNames,
+        input: cn(
+          'rounded-lg group focus:border-greenMain placeholder:font-normal peer',
+          props.classNames?.input
+        ),
+        label: cn(
+          'text-base mdl:text-xl mb-2 ps-1',
+          props.classNames?.label
+        ),
+        section: cn(
+          'peer-data-[expanded=true]:rotate-180 transition-transform',
+          props.classNames?.section
+        ),
+        wrapper: cn('group', props.classNames?.wrapper),
+      }}
+    />
+  );
+};
+
+export default SelectInput;

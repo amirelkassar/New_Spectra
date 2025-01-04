@@ -1,22 +1,318 @@
 const ROUTES = {
-  HOME: "/",
-  AUTH: {
-    LOGIN: "/login",
-    SIGNUP_FAMILY: "/signup/family",
-    SIGNUP_ORG: "/signup/organization",
-    SIGNUP_PROVIDER: "/signup/provider",
-    FORGOT_PASSWORD: "/forgot-password",
-    RESET_PASSWORD: "/reset-password",
+  HOME: '/',
+  ROOT: {
+    HOME: '/',
+    ABOUT: '/about',
+    TEAM: '/team',
+    SERVICES: '/services',
+    VIEW_SERVICE: '/services/:id',
+    PACKAGES: '/packages',
+    VIEW_PACKAGE: '/packages/:id',
+    TREATMENT: '/treatment',
+    VIEW_TREATMENT: '/treatment/:id',
+    SUCCESS_STORIES: '/success-stories',
+    VIEW_STORY: '/success-stories/:id',
+    BLOG: '/blog',
+    CONTACT: '/contact',
+    TERMS: '/terms',
+    PRIVACY: '/privacy',
   },
-  DASHBOARD: {
-    MAIN: "/main",
-    APPOINTMENTS: "/appointments",
-    REQUESTS: "/requests",
-    CLIENTS: "/clients",
-    REPORST: "/reports",
-    PERMISSIONS: "/permissions",
-    CONTENT: "/content",
-    PLANS: "/plans",
+  AUTH: {
+    LOGIN: '/login',
+    SIGNUP_FAMILY: '/signup/family',
+    SIGNUP_ORG: '/signup/organization',
+    SIGNUP_PROVIDER: '/signup/provider',
+    FORGOT_PASSWORD: '/forgot-password',
+    RESET_PASSWORD: '/reset-password',
+  },
+  CLIENT: {
+    MAIN: {
+      HOME: '/client/main',
+      EARLY_CHECK: '/client/main/early-check',
+      TEAM: '/client/main/team',
+    },
+    CONTROL_MENU: '/client/control',
+    PROFILE: {
+      FAMILY: '/client/profile/family',
+      ORG: '/client/profile/org',
+      VIEW_ORG_CLIENT: '/client/profile/org/family/:id',
+      VIEW_ORG_CHILD: '/client/profile/org/child/:id',
+    },
+    PACKAGES: '/client/packages',
+    SERVICE_REQUEST: {
+      HOME: '/client/service-request',
+      SERVICES: '/client/service-request/#services',
+      VIEW_SERVICE: '/client/service-request/services/:id',
+    },
+    SCHEDULES: '/client/schedules',
+    STEPS: '/client/steps',
+    TEAM: {
+      HOME: '/client/team',
+      VIEW_DOCTOR: '/client/team/:id',
+      BOOK_APPOINTMENT: '/client/team/:id/book',
+    },
+    REPORTS: '/client/reports',
+    CHATS: '/client/chats',
+    WALLET: '/client/wallet',
+    SETTINGS: {
+      HOME: '/client/settings',
+      CHANGE_PASSWORD: '/client/settings/change-password',
+      TERMS_AND_CONDITIONS: '/client/settings/terms-and-conditions',
+      PRIVACY_POLICY: '/client/settings/privacy-policy',
+      COMPLAINTS: '/client/settings/complaints',
+    },
+    NOTIFICATIONS: '/client/notifications',
+  },
+  ADMIN: {
+    MAIN: '/admin/main',
+    APPOINTMENTS: '/admin/appointments',
+    APPOINTMENTSDETAILS: (id) => `/admin/appointments/${id}`,
+    REQUESTS: '/admin/requests',
+    REQUESTSNEW: '/admin/requests/new',
+    REQUESTSREJECTED: '/admin/requests/rejected',
+    REQUESTSID: (id) => `/admin/requests/${id}`,
+    REQUESTSIDEdit: (id) => `/admin/requests/${id}/edit`,
+    CLIENTS: {
+      DASHBOARD: '/admin/clients',
+      ORGANIZATION: {
+        DETAILS: (id) => `/admin/clients/organization/${id}/details`,
+        DETAILSEDIT: (id) =>
+          `/admin/clients/organization/${id}/details/edit`,
+        EMPLOYEE: (id) =>
+          `/admin/clients/organization/${id}/employee`,
+        CLIENTS: (id) => `/admin/clients/organization/${id}/clients`,
+        DOCTORS: (id) => `/admin/clients/organization/${id}/doctors`,
+        DOCTORSDETAILS: (id, id2) =>
+          `/admin/clients/organization/${id}/doctors/${id2}`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/organization/${id}/appointments`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/organization/${id}/prescriptions`,
+        CONTRACTS: (id) =>
+          `/admin/clients/organization/${id}/contracts`,
+        PATIENTS: (id, id2) =>
+          `/admin/clients/organization/${id}/clients/${id2}/patients`,
+        PATIENTSEDIT: (id, id2) =>
+          `/admin/clients/organization/${id}/clients/${id2}/patients/edit`,
+      },
+      FAMILY: {
+        DETAILS: (id) => `/admin/clients/family/${id}/details`,
+        DETAILSEDIT: (id) =>
+          `/admin/clients/family/${id}/details/edit`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/family/${id}/appointments`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/family/${id}/prescriptions`,
+        PRESCRIPTIONSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}`,
+        PRESCRIPTIONSEDIT: (id, id2) =>
+          `/admin/clients/family/${id}/prescriptions/${id2}/edit`,
+        REPORTS: (id) => `/admin/clients/family/${id}/reports`,
+        REPORTSDETAILS: (id, id2) =>
+          `/admin/clients/family/${id}/reports/${id2}`,
+        PATIENTS: (id) => `/admin/clients/family/${id}/patients`,
+        PATIENTSEDIT: (id) =>
+          `/admin/clients/family/${id}/patients/edit`,
+      },
+      PATIENTSDETAILS: {
+        DASHBOARD: (id) => `/admin/clients/patientDetails/${id}`,
+        APPOINTMENTS: (id) =>
+          `/admin/clients/patientDetails/${id}/appointments`,
+        PRESCRIPTIONS: (id) =>
+          `/admin/clients/patientDetails/${id}/prescriptions`,
+        REPORTS: (id) =>
+          `/admin/clients/patientDetails/${id}/reports`,
+        REPORTSID: (id, id2) =>
+          `/admin/clients/patientDetails/${id}/reports/${id2}`,
+      },
+    },
+    STAFF: {
+      HOME: '/admin/staff',
+      STAFF_ADD: `/admin/staff/add`,
+      STAFF_ID: (id) => `/admin/staff/${id}`,
+      STAFF_ID_EDIT: (id) => `/admin/staff/${id}?edit=true`,
+      STAFF_ID_APPOINTMENTS: (id) =>
+        `/admin/staff/${id}/appointments`,
+      STAFF_ID_CONTRACTS: (id) => `/admin/staff/${id}/contract`,
+      STAFF_ID_PRESCRIPTIONS: (id) =>
+        `/admin/staff/${id}/prescriptions`,
+      STAFF_ID_CLIENTS: (id) => `/admin/staff/${id}/clients`,
+      STAFF_ID_TEAM: (id) => `/admin/staff/${id}/team`,
+    },
+    REPORT: {
+      DASHBOARD: '/admin/reports',
+      REPORTID: (id) => `/admin/reports/${id}`,
+    },
+    DATAMAIN: {
+      HOME: '/admin/main-data',
+      DRUGSADD: '/admin/main-data/add-drugs',
+      DRUGSDETAILS: (id) => `/admin/main-data/${id}`,
+      DRUGSDETAILSEDIT: (id) => `/admin/main-data/${id}/edit`,
+      SPECIALTIES: '/admin/main-data/doctors-specialties',
+      SPECIALTIESID: (id) =>
+        `/admin/main-data/doctors-specialties/${id}`,
+      SPECIALTIESIDEDIT: (id) =>
+        `/admin/main-data/doctors-specialties/${id}/edit`,
+      SPECIALTIESADD: '/admin/main-data/doctors-specialties/add',
+      ANALYSISRUMORS: '/admin/main-data/analysis-rumors',
+      ANALYSISRUMORSDETAILS: (id) =>
+        `/admin/main-data/analysis-rumors/${id}`,
+      ANALYSISRUMORSDETAILSEDIT: (id) =>
+        `/admin/main-data/analysis-rumors/${id}/edit`,
+      ANALYSISRUMORSADD: '/admin/main-data/analysis-rumors/add',
+      DIAGNOSTICS: '/admin/main-data/diagnostics',
+      DIAGNOSTICSADD: '/admin/main-data/diagnostics/add',
+      DIAGNOSTICSDETAILS: (id) =>
+        `/admin/main-data/diagnostics/${id}`,
+      DIAGNOSTICSDETAILSEDIT: (id) =>
+        `/admin/main-data/diagnostics/${id}/edit`,
+      COMPLAINTS: '/admin/main-data/complaints',
+      COMPLAINTSDETAILS: (id) => `/admin/main-data/complaints/${id}`,
+      COMPLAINTSDETAILSEDIT: (id) =>
+        `/admin/main-data/complaints/${id}/edit`,
+      COMPLAINTSADD: '/admin/main-data/complaints/add',
+      SERVICES: '/admin/main-data/services',
+      SERVICESADD: '/admin/main-data/services/add',
+      SERVICESDETAILS: (id) => `/admin/main-data/services/${id}`,
+      SERVICESDETAILSEDIT: (id) =>
+        `/admin/main-data/services/${id}/edit`,
+      TESTSINTERIOR: '/admin/main-data/testsInterior',
+      TESTSINTERIORDETAILS: (id) =>
+        `/admin/main-data/testsInterior/${id}`,
+      TESTSINTERIORDETAILSEDIT: (id) =>
+        `/admin/main-data/testsInterior/${id}/edit`,
+      TESTSINTERIORADD: '/admin/main-data/testsInterior/add',
+      DEPARTMENTS: '/admin/main-data/departments',
+      DEPARTMENTSDETAILS: (id) =>
+        `/admin/main-data/departments/${id}`,
+      DEPARTMENTSDETAILSEDIT: (id) =>
+        `/admin/main-data/departments/${id}/edit`,
+      DEPARTMENTSADD: '/admin/main-data/departments/add',
+    },
+    CONTRACTS: {
+      DASHBOARD: '/admin/contracts',
+      VIEW_CONTRACT: (id) => `/admin/contracts/${id}`,
+      VIEW_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}`,
+      UPDATE_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/edit`,
+      ACCEPT_VERSION: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/accept`,
+      UPDATE_TERMS: (contractId, versionId) =>
+        `/admin/contracts/${contractId}/version/${versionId}/accept?edit=true`,
+    },
+    CHATS: {
+      DASHBOARD: '/admin/chats',
+      VIEW_CHAT: (id) => `/admin/chats/${id}`,
+    },
+    SETTINGS: {
+      DASHBOARD: '/admin/settings',
+      PERMISSIONS: {
+        DASHBOARD: '/admin/settings/permissions',
+        USERS: '/admin/settings/permissions/users',
+        PERMISSIONSEDIT: (id) =>
+          `/admin/settings/permissions/${id}/edit`,
+        PERMISSIONSUSEREDIT: (id) =>
+          `/admin/settings/permissions/users/${id}/edit`,
+      },
+      CONTENT: {
+        DASHBOARD: '/admin/settings/content',
+        BANNERSAD: '/admin/settings/content/bannersAD',
+        MEDICAL: '/admin/settings/content/medicalSpecialties',
+        MEDICALID: (id) =>
+          `/admin/settings/content/medicalSpecialties/${id}`,
+        ARTICLES: '/admin/settings/content/articles',
+        ADDARTICLES: '/admin/settings/content/articles/add-articles',
+        EDITARTICLES: (id) =>
+          `/admin/settings/content/articles/${id}`,
+        STORIES: '/admin/settings/content/stories',
+        STORIESID: (id) => `/admin/settings/content/stories/${id}`,
+        STORIESADD: '/admin/settings/content/stories/add',
+      },
+      PACKAGES: {
+        DASHBOARD: '/admin/settings/packages',
+        PACKAGESDETAILS: (id) => `/admin/settings/packages/${id}`,
+        PACKAGESEDIT: (id) => `/admin/settings/packages/${id}/edit`,
+        PACKAGESADD: '/admin/settings/packages/add',
+      },
+      COMPLAINTS: {
+        DASHBOARD: '/admin/settings/complaints',
+        COMPLAINTSDETAILS: (id) => `/admin/settings/complaints/${id}`,
+      },
+    },
+  },
+  DOCTOR: {
+    MAIN: '/doctor/main',
+    APPOINTMENTS: '/doctor/appointments',
+    APPOINTMENTSCANCELD: '/doctor/appointments/cancelled',
+    APPOINTMENTSCALENDAR: '/doctor/appointments/calendar',
+    APPOINTMENTSDEFERRED: '/doctor/appointments/deferred',
+    APPOINTMENTSUPCOMING: '/doctor/appointments/upcoming',
+    APPOINTMENTSPREVIOUS: '/doctor/appointments/previous',
+    APPOINTMENTSWORK: '/doctor/appointments/appointmentsWork',
+    APPOINTMENTSWORKID: (id) =>
+      `/doctor/appointments/appointmentsWork/${id}`,
+    APPOINTMENTSWORKADD: '/doctor/appointments/appointmentsWork/add',
+    RATINGS: {
+      DASHBOARD: '/doctor/ratings',
+    },
+    CLIENTS: {
+      DASHBOARD: '/doctor/clients',
+      PRESCRIPTIONS: '/doctor/clients/prescriptions',
+      REPORT: '/doctor/clients/reports',
+      INVITATIONCODE: '/doctor/clients/invitationCode',
+      DETAILS: (id) => `/doctor/clients/${id}/details`,
+      REPORTPATIENTS: (id) => `/doctor/clients/${id}/reports`,
+      REPORTPATIENTSDETAILS: (id, id2) =>
+        `/doctor/clients/${id}/reports/${id2}`,
+      PRESCRIPTIONSPATIENTS: (id) =>
+        `/doctor/clients/${id}/prescriptions`,
+      PRESCRIPTIONSPATIENTSDETAILS: (id, id2) =>
+        `/doctor/clients/${id}/prescriptions/${id2}`,
+      ACTIVITIESSPATIENTS: (id) => `/doctor/clients/${id}/activities`,
+      ADDREPORTPATIENTS: (id) => `/doctor/clients/${id}/addReport`,
+      ADDPRESCRIPTIONSPATIENTS: (id) =>
+        `/doctor/clients/${id}/addPrescriptions`,
+      PATIENTSDETAILS: {
+        DETAILS: (id) =>
+          `/doctor/clients/patientDetails/${id}/details`,
+        EDIT: (id) => `/doctor/clients/patientDetails/${id}/edit`,
+      },
+    },
+    WALLET: {
+      DASHBOARD: '/doctor/wallet',
+    },
+    PROFILE: {
+      DASHBOARD: '/doctor/profile',
+      CERTIFICATES: '/doctor/profile/certificates',
+      TEAM: '/doctor/profile/team',
+      EDIT: '/doctor/profile/edit',
+    },
+    STAFF: {
+      DASHBOARD: '/doctor/staff',
+      VIEW_STAFF: (id) => `/doctor/staff/${id}`,
+    },
+    CONTRACT: {
+      DASHBOARD: '/doctor/contract',
+      CONTRACTSNEW: '/doctor/contract/new',
+      CONTRACTSID: (id) => `/doctor/contract/${id}`,
+      EDIT_CONTRACT: (id) => `/doctor/contract/${id}/edit`,
+    },
+    CONTRACTS: {
+      DASHBOARD: '/doctor/contracts',
+      VIEW_CONTRACT: (id) => `/doctor/contracts/${id}`,
+      VIEW_VERSION: (contractId, versionId) =>
+        `/doctor/contracts/${contractId}/version/${versionId}`,
+    },
+    CHATS: {
+      DASHBOARD: '/doctor/chats',
+    },
+    SETTINGS: {
+      DASHBOARD: '/doctor/settings',
+      CHANGEPASSWORD: '/doctor/settings/change-password',
+      NOTIFICATIONS: '/doctor/settings/notifications',
+      COMPLAINTS: '/doctor/settings/complaints',
+    },
   },
 };
 

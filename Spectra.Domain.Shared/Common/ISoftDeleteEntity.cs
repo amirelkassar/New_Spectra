@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spectra.Domain.Shared.Common
 {
@@ -10,6 +6,6 @@ namespace Spectra.Domain.Shared.Common
     {
         DateTimeOffset? Deleted { get; }
         string? DeletedBy { get; }
-        string? Reason {  get; }
+        string? Reason { get; }
     }
 }

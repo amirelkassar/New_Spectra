@@ -1,121 +1,121 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Net;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Spectra.Domain.Shared.Common.Exceptions;
-using System.Net;
+using Spectra.Domain.Shared.Wrappers;
+
 
 namespace Spectra.WebAPI.Middlewares
 {
     public class GlobalExceptionHandlerMiddleware
-	{
-		private readonly RequestDelegate _next;
+    {
+        private readonly RequestDelegate _next;
 
-		public GlobalExceptionHandlerMiddleware(RequestDelegate next)
-		{
-			_next = next;
-		}
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
 
-		public async Task InvokeAsync(HttpContext context)
-		{
-			try
-			{
-				await _next(context);
-			}
-			catch (Exception ex)
-			{
-				await HandleExceptionAsync(context, ex);
-			}
-		}
+        public async Task InvokeAsync(HttpContext context)
+        {
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+        }
 
-		private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-		{
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        {
             var errorCode = "Unknown";
             var success = false;
             var errorCollection = new Dictionary<string, string[]>();
 
-            string? errorMessage;
             HttpStatusCode statusCode;
-            string? errorType;
+            string errorType;
+
             switch (exception)
             {
+                case FluentValidation.ValidationException validationException:
+                    errorType = "ValidationError";
+                    statusCode = HttpStatusCode.UnprocessableEntity;
+
+
+                    errorCollection = validationException.Errors
+                       .GroupBy(e => e.PropertyName)
+                       .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+                    break;
+
                 case RequestErrorException _:
                     errorType = "RequestError";
-                    errorMessage = exception.Message;
+                    errorCollection = new Dictionary<string, string[]>
+                {
+                    { "RequestError", new[] { exception.Message } }
+                };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
 
                 case DbErrorException _:
                     errorType = "DbError";
-                    errorMessage = exception.Message;
-                    statusCode = HttpStatusCode.InternalServerError;
+                    errorCollection = new Dictionary<string, string[]>
+                {
+                    { "DbError", new[] { exception.Message } }
+                };
+                    statusCode = HttpStatusCode.BadRequest;
+
+                    errorType = "RequestError";
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "RequestError", new[] { exception.Message } }
+            };
+                    statusCode = HttpStatusCode.BadRequest;
                     break;
 
-                case ValidationException validationException:
-                    errorType = "ValidationError";
-                    errorMessage = "One or more validation errors occurred.";
-                    statusCode = HttpStatusCode.UnprocessableEntity;
-                    errorCollection = (Dictionary<string, string[]>)validationException.Errors;
-                    break;
                 case NotFoundException notFoundException:
                     errorType = "NotFoundError";
-                    errorMessage = notFoundException.Message;
+                    errorCollection = new Dictionary<string, string[]>
+                {
+                    { "NotFoundError", new[] { notFoundException.Message } }
+                };
                     statusCode = HttpStatusCode.NotFound;
                     break;
-
-                case ForbiddenAccessException forbiddenAccessException:
-                    errorType = "ForbiddenAccessError";
-                    errorMessage = forbiddenAccessException.Message;
-                    statusCode = HttpStatusCode.Forbidden;
-                    break;
-
-                case NoDefaultValueException noDefaultValueException:
-                    errorType = "NoDefaultValueError";
-                    errorMessage = noDefaultValueException.Message;
+                case AlreadyExistException alreadyExistException:
+                    errorType = "AlreadyExistException";
+                    errorCollection = new Dictionary<string, string[]>
+                    {
+                        { alreadyExistException.Key, new[] { alreadyExistException.Value } }
+                    };
                     statusCode = HttpStatusCode.BadRequest;
                     break;
-
-                case InvalidValueException invalidValueException:
-                    errorType = "InvalidValueError";
-                    errorMessage = invalidValueException.Message;
-                    statusCode = HttpStatusCode.BadRequest;
+                case UnauthorizedAccessException unauthorizedAccessException:
+                    errorType = "UnauthorizedAccessException";
+                    errorCollection = new Dictionary<string, string[]>
+                    {
+                        { "token", new[] { "unthorized user ot token not found" } }
+                    };
+                    statusCode = HttpStatusCode.Unauthorized;
                     break;
-
-                case InvalidRequestException invalidRequestException:
-                    errorType = "InvalidRequestError";
-                    errorMessage = invalidRequestException.Message;
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
-
-                case NotImplementedFeatureException notImplementedFeatureException:
-                    errorType = "NotImplementedFeatureError";
-                    errorMessage = notImplementedFeatureException.Message;
-                    statusCode = HttpStatusCode.NotImplemented;
-                    break;
-
                 default:
                     errorType = "UnknownError";
-                    errorMessage = exception.Message;
+                    errorCollection = new Dictionary<string, string[]>
+            {
+                { "UnknownError", new[] { exception.Message } }
+            };
                     statusCode = HttpStatusCode.InternalServerError;
                     break;
             }
 
-            var errorResponse = new
-			{
-				error = new
-				{
-					errorType,
-					errorCode,
-					errorMessage,
-					success,
-					errorCollection
-				}
-			};
+            var errorrs = OperationResult<Exception>.Failure(errorCollection, (int)statusCode, errorType);
+            var jsonResponsee = JsonConvert.SerializeObject(errorrs);
 
-			var jsonResponse = JsonConvert.SerializeObject(errorResponse);
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
 
-			context.Response.ContentType = "application/json";
-			context.Response.StatusCode = (int)statusCode;
+            return context.Response.WriteAsync(jsonResponsee);
 
-			return context.Response.WriteAsync(jsonResponse);
-		}
-	}
+        }
+    }
 }

@@ -1,14 +1,10 @@
 ﻿using MediatR;
-using Spectra.Application.Countries.DTOs;
-using Spectra.Application.Countries.States.DTOs;
-using Spectra.Application.Interfaces.IServices;
-using Spectra.Application.Countries.States.Queries;
-using Spectra.Application.Countries.Queries;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using Spectra.Application.Countries.Cities.DTOs;
 using Spectra.Application.Countries.Cities.Queries;
+using Spectra.Application.Countries.DTOs;
+using Spectra.Application.Countries.Queries;
+using Spectra.Application.Countries.States.DTOs;
+using Spectra.Application.Countries.States.Queries;
 
 namespace Spectra.Application.Countries.Services
 {

@@ -8,7 +8,7 @@ namespace Spectra.IdentityServer.Data
     {
         public AuthOperationDbContext(DbContextOptions options, OperationalStoreOptions storeOptions) : base(options, storeOptions)
         {
-            
+
         }
     }
 }

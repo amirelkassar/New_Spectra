@@ -1,49 +1,49 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Spectra.Application.Behavior;
 using Spectra.Application.Common;
+using Spectra.Application.Countries;
 using Spectra.Application.Countries.Services;
-using Spectra.Application.Interfaces.IRepository;
-using Spectra.Application.Interfaces.IServices;
-using Spectra.Application.Messaging;
-using Spectra.Application.Services;
+using Spectra.Application.Identities;
+using Spectra.Application.Settings.AppSettings;
 using Spectra.Domain;
 using Spectra.Infrastructure.PipelineBehaviors;
-using System.Reflection;
 
 namespace Spectra.Application
 {
     public static class DependencyInjection
-	{
-		public static IServiceCollection ConfigureApplication(this IServiceCollection services,
-			IConfiguration configuration)
-		{
-			//Domain
-			services.ConfigureDomain(configuration);
-			// Register FluentValidation
-			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    {
+        public static IServiceCollection ConfigureApplication(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            //Domain
+            services.ConfigureDomain(configuration);
+            // Register FluentValidation
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-			services.AddScoped<ICountryService, CountryService>();
-			//Register the Mediator
-			services.AddMediatR(cfg =>
+            services.AddScoped<ICountryService, CountryService>();
+
+            services.AddScoped<ApplicationSettingSeeder>();
+            services.AddScoped<IdentitySeeder>();
+            //Register the Mediator
+            services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehavior<,>));
-
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery, object>), typeof(AuthorizationBehavior<IAuthorizedQuery, object>));
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedQuery<object>, object>), typeof(AuthorizationBehavior<IAuthorizedQuery<object>, object>));
-
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand, object>), typeof(AuthorizationBehavior<IAuthorizedCommand, object>));
-                //cfg.AddBehavior(typeof(IPipelineBehavior<IAuthorizedCommand<object>, object>), typeof(AuthorizationBehavior<IAuthorizedCommand<object>, object>));
-
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(EventDispatcherBehavior<,>));
+
             });
 
-			return services;
+            TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+            return services;
 
-		}
+        }
 
-	}
+    }
 }

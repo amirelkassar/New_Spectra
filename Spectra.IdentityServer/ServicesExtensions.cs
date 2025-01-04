@@ -15,6 +15,8 @@ namespace Spectra.IdentityServer
             var connectionString = configuration.GetConnectionString("AuthCS");
             var migrationsAssembly = Assembly.GetExecutingAssembly().GetName().Name;
 
+            services.AddControllersWithViews();
+
             services.AddDbContext<AuthDataDbContext>(options =>
             options.UseSqlServer(connectionString));
 
@@ -39,7 +41,7 @@ namespace Spectra.IdentityServer
             //adding identity server configs
             var identitySettings = configuration.GetSection("IdentityServerSetting").Get<IdentityServerSetting>();
             if (identitySettings is not null)
-            services.AddSingleton(identitySettings);
+                services.AddSingleton(identitySettings);
 
             services.AddIdentityServer(options =>
             {

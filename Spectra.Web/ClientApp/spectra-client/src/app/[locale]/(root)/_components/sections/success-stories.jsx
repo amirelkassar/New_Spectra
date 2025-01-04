@@ -1,0 +1,73 @@
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { Link } from '@/i18n/routing';
+
+import { Container, SectionHeading } from '@/guest/_components/ui';
+import ArrowLeft from '@/assets/icons/arrow-left';
+import ROUTES from '@/routes';
+
+export const SuccessStories = ({ data = [], title = '' }) => {
+  const tg = useTranslations('guest_obj');
+
+  const locale = useLocale();
+
+  const titleValue = title || tg('success_stories');
+
+  if (!data.length) return null;
+  return (
+    <Container
+      aria-label='Success Stories'
+      aria-labelledby='success-stories'
+      id='success-stories'
+    >
+      <SectionHeading
+        id='success-stories'
+        className='mb-10 text-center'
+      >
+        {titleValue}
+      </SectionHeading>
+      <div className='grid grid-cols-2 mdl:grid-cols-3 gap-5'>
+        {data.map((item) => (
+          <Story key={item.id} {...item} locale={locale} />
+        ))}
+      </div>
+    </Container>
+  );
+};
+
+const Story = ({
+  childName = {},
+  diagnosis = {},
+  image = '',
+  id = '',
+  locale = 'ar',
+}) => {
+  return (
+    <div className='space-y-2'>
+      <Link href={`${ROUTES.ROOT.SUCCESS_STORIES}/${id}`}>
+        <div className='h-40 mdl:h-72 w-full rounded-lg overflow-hidden relative'>
+          <Image
+            src={image}
+            alt={id}
+            priority={false}
+            sizes='width: 384px; height: 288px;'
+            fill
+            className='w-full h-full object-cover object-right'
+          />
+        </div>
+      </Link>
+
+      <div className='flex items-center justify-between px-5'>
+        <div>
+          <p className='text-black text-sm mdl:text-medium font-bold'>
+            {childName[locale]}
+          </p>
+          <p className='text-black text-sm mdl:text-medium'>
+            {diagnosis[locale]}
+          </p>
+        </div>
+        <ArrowLeft className='ltr:rotate-180' />
+      </div>
+    </div>
+  );
+};

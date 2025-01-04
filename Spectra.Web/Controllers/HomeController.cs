@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Interfaces;
 
 namespace Spectra.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class HomeController(ISnomedService snomedService) : ControllerBase
     {
+        private readonly ISnomedService _snomedService = snomedService;
+
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetAsync()
         {
-            var user=HttpContext.User;
-            return Ok();
+            return Ok(await _snomedService.GetAll("speech"));
         }
     }
 }

@@ -1,43 +1,309 @@
-﻿using MediatR;
+﻿using System.Reflection;
+using System.Text;
+using MadEyeMatt.AspNetCore.Authorization.Permissions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Spectra.Application.Chats.Services;
+using Spectra.Application.Clients;
+using Spectra.Application.Clients.Services;
+using Spectra.Application.Commons.Dtos;
+using Spectra.Application.Contracts.Repository;
+using Spectra.Application.Contracts.Services;
+using Spectra.Application.Countries;
+using Spectra.Application.Countries.Cities;
+using Spectra.Application.Countries.SeedService;
+using Spectra.Application.Countries.States;
+using Spectra.Application.Documents;
+using Spectra.Application.Employees.Services;
+using Spectra.Application.Identities;
 using Spectra.Application.Interfaces;
-using Spectra.Application.Interfaces.IRepository;
+using Spectra.Application.MasterData.DiagnoseCommend;
+using Spectra.Application.MasterData.DiagnoseCommend.Services;
+using Spectra.Application.MasterData.Drug.Services;
+using Spectra.Application.MasterData.GeneralComplaintsM;
+using Spectra.Application.MasterData.GeneralComplaintsM.Services;
+using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.MasterData.InternalExaminations;
+using Spectra.Application.MasterData.InternalExaminations.Services;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData;
+using Spectra.Application.MasterData.MedicalTestsAndXraysMasterData.Services;
+using Spectra.Application.MasterData.Sections;
+using Spectra.Application.MasterData.Sections.Service;
+using Spectra.Application.MasterData.ServicesMD;
+using Spectra.Application.MasterData.ServicesMD.Services;
+using Spectra.Application.MasterData.SpecializationCommend;
+using Spectra.Application.MasterData.SpecializationCommend.Services;
+using Spectra.Application.MasterData.UploadExcel.Services;
+using Spectra.Application.Notifications;
+using Spectra.Application.Patients;
+using Spectra.Application.ScheduleAppointments.Appointments;
+using Spectra.Application.ScheduleAppointments.Appointments.Services;
+using Spectra.Application.ScheduleAppointments.DoctorSchedules;
+using Spectra.Application.Settings.AppSettings;
+using Spectra.Application.Settings.MedicalSpecialties;
+using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Domain.AppRole;
+using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.OptionDtos;
+using Spectra.Infrastructure.Chats;
+using Spectra.Infrastructure.Clients;
+using Spectra.Infrastructure.Contracts;
+using Spectra.Infrastructure.Countries;
+using Spectra.Infrastructure.Countries.Cities;
+using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
+using Spectra.Infrastructure.DoctorSchedules.DoctorSchedules;
+using Spectra.Infrastructure.Documents;
+using Spectra.Infrastructure.EmailSenders;
+using Spectra.Infrastructure.Employees.MedicalStaff;
+using Spectra.Infrastructure.MasterData.Diagnoses;
+using Spectra.Infrastructure.MasterData.Drug;
+using Spectra.Infrastructure.MasterData.ExcelFile;
+using Spectra.Infrastructure.MasterData.GeneralComplaint;
+using Spectra.Infrastructure.MasterData.InternalExaminations;
+using Spectra.Infrastructure.MasterData.MedicalTestsAndXray;
+using Spectra.Infrastructure.MasterData.sections;
+using Spectra.Infrastructure.MasterData.Sections;
+using Spectra.Infrastructure.MasterData.ServicesM;
+using Spectra.Infrastructure.MasterData.ServicesMD;
+using Spectra.Infrastructure.MasterData.Specialization;
+using Spectra.Infrastructure.MedicalPatientProfiles;
+using Spectra.Infrastructure.Notifications;
+using Spectra.Infrastructure.Patients;
 using Spectra.Infrastructure.Repositories;
-using Spectra.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Spectra.Infrastructure.ScheduleAppointments.Appointments;
+using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
+using Spectra.Infrastructure.Services.IdentityServices;
+using Spectra.Infrastructure.Services.SnomedServices;
+using Spectra.Infrastructure.Settings.AppSettings;
+using Spectra.Infrastructure.Settings.MedicalSpecialties;
 
 namespace Spectra.Infrastructure
 {
-	public static class DependencyInjection
-	{
+    public static class DependencyInjection
+    {
+        public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.ConfigureDataBase(configuration);
 
-		public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services,
-			IConfiguration configuration)
-		{
-			services.ConfigureDataBase(configuration);
+            services.ConfigureCountriesNow(configuration);
 
-			services.AddScoped<ICountryRepository, CountryRepository>();
-			services.AddScoped<IClientRepository, ClientRepository>();
-			services.AddScoped<IPatientRepository, PatientRepository>();
+            services.ConfigureRepositories();
 
-			services.AddScoped<SeedService>();
+            services.ConfigureSeedServices();
 
-			services.AddHttpClient();
-			return services;
-		}
-		private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
-			IConfiguration configuration)
-		{
-			services.AddScoped<IMongoDbService, MongoDbService>(); 
-			return services;
-		}
-	}
+            services.ConfigureApplicationServices();
+
+            services.AddHttpClient();
+            services.ConfigureAuth(configuration);
+            services.ConfigureDataAccess(configuration);
+            services.AddDataProtection();
+            services.ConfigureSignalrServices();
+            services.ConfigureEmailServices(configuration);
+            services.ConfigureSnomedServices();
+            return services;
+        }
+        private static IServiceCollection ConfigureDataBase(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddScoped<IMongoDbService, MongoDbService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureCountriesNow(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var countriesNow = configuration
+                .GetSection("ThirdParty")
+                .GetSection(nameof(CountriesNow));
+            services.Configure<CountriesNow>(countriesNow);
+            return services;
+        }
+
+        private static IServiceCollection ConfigureEmailServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailSettings = new EmailSettingDto();
+            configuration.GetSection("EmailSettings").Bind(emailSettings);
+            services.AddScoped<IEmailSender, FluentEmailSender>();
+            services.AddFluentEmail(emailSettings.FromEmail, emailSettings.FromName)
+                .AddSmtpSender(emailSettings.Host, emailSettings.Port, emailSettings.Username, emailSettings.Password)
+               .AddRazorRenderer();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IDrugService, DrugService>();
+            services.AddScoped<ISpecializationService, SpecializationService>();
+            services.AddScoped<IDiagnosesService, DiagnosesService>();
+            services.AddScoped<IMedicalTestsAndXrayService, MedicalTestsAndXrayService>();
+            services.AddScoped<IGeneralComplaintService, GeneralComplaintService>();
+            services.AddScoped<IExcelProcessingService, ExcelProcessingService>();
+            services.AddScoped<IServiceMDService, ServiceMDService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IContractService, ContractService>();
+            services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IInternalExaminationService, InternalExaminationService>();
+            services.AddScoped<ISectionsService, SectionsService>();
+            services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
+            services.AddScoped<IPermissionManager, PermissionManager>();
+            services.AddScoped<IDocumentHellper, DocumentHellper>();
+            services.AddScoped<INotificationService, NotificationService>();
+            return services;
+        }
+        private static IServiceCollection ConfigureRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
+            //MastarData Start
+            services.AddScoped<ISpecializationsRepository, SpecializationsRepository>();
+            services.AddScoped<IDiagnoseRepository, DiagnoseRepository>();
+            services.AddScoped<IMedicalTestsAndXrayRepository, MedicalTestsAndXrayRepository>();
+            services.AddScoped<IGeneralComplaintRepository, GeneralComplaintRepository>();
+            services.AddScoped<IServiceMDRepository, ServiceMDRepository>();
+            services.AddScoped<ISectionsRepository, SectionsRepository>();
+            //End
+            services.AddScoped<IContractRepository, ContractRepository>();
+            //  services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+            services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
+            services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
+            services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
+
+            services.AddScoped<ISettingRepository, SettingRepository>();
+
+            services.AddScoped(typeof(IBaseMongoDbRepository<>), typeof(BaseMongoDbRepository<>));
+
+            return services;
+        }
+        private static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(opts =>
+               {
+
+                   opts.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidIssuer = configuration["Jwt:Issuer"],
+                       ValidAudience = configuration["Jwt:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? "")),
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = false,
+                       ValidateIssuerSigningKey = true
+                   };
+
+                   opts.Events = new JwtBearerEvents
+                   {
+                       OnMessageReceived = async ctx =>
+                       {
+                           var path = ctx.HttpContext.Request.Path;
+                           if (path.StartsWithSegments("/hubs"))
+                           {
+                               var accessToken = ctx.Request.Query["access_token"];
+                               ctx.Token = accessToken;
+                           }
+                           else
+                           {
+                               var token = ctx.Request.Query["token"].FirstOrDefault();
+                               if (!string.IsNullOrEmpty(token))
+                                   ctx.Token = token;
+                           }
+
+
+                           await Task.CompletedTask;
+                       },
+                       OnAuthenticationFailed = async ctx =>
+                       {
+                           Log.Error("Authentication failed: {Exception}", ctx.Exception.ToString());
+                           await Task.CompletedTask;
+                       },
+
+                   };
+               });
+
+
+            services.AddPermissionsAuthorization();
+            services.AddIdentityCore<AppUser>(config =>
+            {
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireLowercase = true;
+                config.Password.RequireUppercase = true;
+                config.Password.RequireDigit = true;
+            })
+            .AddRoles<AppRole>()
+            .AddEntityFrameworkStores<IdentityContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddDbContext<IdentityContext>(config =>
+            {
+                config.UseNpgsql(configuration.GetConnectionString("IdentityConnection"), ctx =>
+                {
+                    ctx.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
+                });
+            });
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IIdentityService, IdentityService>();
+
+            return services;
+        }
+        private static IServiceCollection ConfigureDataAccess(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("IdentityConnection");
+
+            services.AddDbContext<IdentityContext>((sp, options) =>
+            {
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+                options.EnableServiceProviderCaching();
+                options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
+            });
+
+            return services;
+        }
+        private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
+        {
+            services.AddScoped<ICountrySeedService, CountrySeedService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureSnomedServices(this IServiceCollection services)
+        {
+            services.AddHttpClient(nameof(ISnomedService), config =>
+            {
+                config.BaseAddress = new Uri("https://browser.ihtsdotools.org/snowstorm/snomed-ct/");
+            });
+            services.AddScoped<ISnomedService, SnomedService>();
+            return services;
+        }
+
+        private static IServiceCollection ConfigureSignalrServices(this IServiceCollection services)
+        {
+            services.AddSignalR(config =>
+            {
+                config.EnableDetailedErrors = true;
+                config.StatefulReconnectBufferSize = 100000;
+            });
+            services.AddSingleton<IUserIdProvider, SignalRUserIdProvider>();
+            return services;
+        }
+    }
 }

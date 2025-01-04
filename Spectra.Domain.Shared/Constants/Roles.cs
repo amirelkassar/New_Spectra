@@ -1,14 +1,24 @@
 ﻿namespace Spectra.Domain.Shared.Constants
 {
-    public abstract class Roles
+    public static class Roles
     {
-        public const string Administrator = nameof(Administrator);
+        public const string SystemAdmin = nameof(SystemAdmin);
         public const string User = nameof(User);
         public const string Doctor = nameof(Doctor);
-        public const string FreeLancerDoctor = nameof(FreeLancerDoctor);
+        public const string Specialist = nameof(Specialist);
+        public const string DepartmentHead = nameof(DepartmentHead);
+        public const string ServiceHead = nameof(ServiceHead);
         public const string Client = nameof(Client);
-        public const string EntityClient = nameof(EntityClient);
         public const string CustomerSupport = nameof(CustomerSupport);
         public const string Accountant = nameof(Accountant);
+
+        public const string EmployeesRoles = $"{Doctor},{Specialist},{Accountant},{CustomerSupport}";
+    }
+
+    public enum AccessLevel
+    {
+        All = 1,
+        Department = 2,
+        Self = 3
     }
 }

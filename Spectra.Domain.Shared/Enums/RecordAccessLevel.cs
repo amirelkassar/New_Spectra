@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spectra.Domain.Shared.Enums
+﻿namespace Spectra.Domain.Shared.Enums
 {
     public enum RecordAccessLevel : byte
     {
@@ -17,6 +11,6 @@ namespace Spectra.Domain.Shared.Enums
         Assign = 6,
         Export = 7,
         Print = 8,
-        Send=9
+        Send = 9
     }
 }
