@@ -5,6 +5,11 @@ import TeamIcon from '@/assets/icons/team';
 import FollowUpIcon from '@/assets/icons/followup';
 import HandshakeIcon from '@/assets/icons/handshake';
 import Watching from '@/assets/icons/watching';
+import HeartIcon from '@/assets/icons/heart';
+import PhonePlus from '@/assets/icons/phone-plus';
+import FirstAid from '@/assets/icons/first-aid';
+import Report from '@/assets/icons/report';
+import ScreenPlus from '@/assets/icons/screen-plus';
 
 export const SERVICES_1 = [
   {
@@ -14,17 +19,13 @@ export const SERVICES_1 = [
   },
   {
     color: 'bg-greenMain/10',
-    icon: (
-      <TeamIcon className='size-6 mdl:size-11 text-greenMain' />
-    ),
+    icon: <TeamIcon className='size-6 mdl:size-11 text-greenMain' />,
     label: `خدمات التشخيص الطبي 
     عبر فرق متعددة التخصصات`,
   },
   {
     color: 'bg-purple/10',
-    icon: (
-      <FollowUpIcon className='size-6 mdl:size-11 text-purple' />
-    ),
+    icon: <FollowUpIcon className='size-6 mdl:size-11 text-purple' />,
     label: 'خدمات المتابعة الدوائية',
   },
   {
@@ -67,8 +68,7 @@ export const SERVICES = [
       {
         id: '3',
         label: 'سعر الخدمة:',
-        value:
-          'نقدم خدمة الكشف المبكر مجاناً لفترة محدودة.',
+        value: 'نقدم خدمة الكشف المبكر مجاناً لفترة محدودة.',
       },
       {
         id: '4',
@@ -152,24 +152,44 @@ export const SERVICES = [
 
 export const SERVICESICONS = {
   1: {
-    icon: <Watching className='size-4 mdl:size-5' />,
-    color: '#6FC1BF',
-    bg: 'rgba(111, 193, 191, 0.18)',
-  },
-  2: {
-    icon: <TeamIcon className='size-4 mdl:size-5' />,
+    icon: <HeartIcon className='size-4 mdl:size-5' />,
     color: '#FF3D3D',
     bg: 'rgba(235, 67, 53, 0.18)',
   },
-  3: {
-    icon: <FollowUpIcon className='size-4 mdl:size-5' />,
+  2: {
+    icon: <TeamIcon className='size-4 mdl:size-5' />,
     color: '#6FC1BF',
     bg: 'rgba(111, 193, 191, 0.18)',
   },
-  4: {
-    icon: <HandshakeIcon className='size-4 mdl:size-5' />,
+  3: {
+    icon: <FollowUpIcon className='size-4 mdl:size-5' />,
     color: '#8A22A0',
     bg: 'rgba(138, 34, 160, 0.18)',
+  },
+  4: {
+    icon: <PhonePlus className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  5: {
+    icon: <FirstAid className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  6: {
+    icon: <Report className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  7: {
+    icon: <HandshakeIcon className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
+  },
+  8: {
+    icon: <ScreenPlus className='size-4 mdl:size-5' />,
+    color: '#6FC1BF',
+    bg: 'rgba(111, 193, 191, 0.18)',
   },
 };
 

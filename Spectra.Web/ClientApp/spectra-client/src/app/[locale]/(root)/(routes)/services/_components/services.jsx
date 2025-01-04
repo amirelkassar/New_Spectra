@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import ROUTES from '@/routes';
 import { ServiceCard } from '@/components/services';
-import { SERVICESICONS } from '@/lib/demoData';
+import { SERVICESICONS } from '@/data';
 import { Container, SectionHeading } from '@/guest/_components/ui';
 import { usePublicServices } from '@/hooks/queries/public/services';
 import { QueryWrapper } from '@/components/query-wrapper';

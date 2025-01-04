@@ -4,6 +4,7 @@ import { ChatWrapper } from './chat-wrapper';
 import { Message } from './message';
 import { NoMessages } from './no-messages';
 import { ChatHeader } from './chat-header';
+import { ChatList } from './chat-list';
 
 export {
   ChatActions,
@@ -12,4 +13,5 @@ export {
   ChatWrapper,
   Message,
   NoMessages,
+  ChatList,
 };

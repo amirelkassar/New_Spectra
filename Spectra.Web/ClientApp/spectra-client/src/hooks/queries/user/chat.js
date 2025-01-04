@@ -162,6 +162,10 @@ export const useAddMessageLocally = () => {
         }
       );
 
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, initialQueries],
+      });
+
       return tempMessage;
     },
     [queryClient, firstName, userId]

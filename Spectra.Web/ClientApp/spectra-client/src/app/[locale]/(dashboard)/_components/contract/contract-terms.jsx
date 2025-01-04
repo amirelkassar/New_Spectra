@@ -18,10 +18,10 @@ export const ContractTerms = () => {
   // const adminSignaturePath = terms.adminSignaturePath || '';
   // const headSignaturePath = terms.headSignaturePath || '';
 
-  const nameKey = locale === 'en' ? 'enName' : 'arName';
-  const dateKey = locale === 'en' ? 'enDate' : 'arDate';
-  const titleKey = locale === 'en' ? 'enTitle' : 'arTitle';
-  const pointsKey = locale === 'en' ? 'enPoints' : 'arPoints';
+  const nameKey = locale === 'en' ? 'arName' : 'arName';
+  const dateKey = locale === 'en' ? 'arDate' : 'arDate';
+  const titleKey = locale === 'en' ? 'arTitle' : 'arTitle';
+  const pointsKey = locale === 'en' ? 'arPoints' : 'arPoints';
   // const descriptionKey =
   //   locale === 'en' ? 'enDescription' : 'arDescription';
 

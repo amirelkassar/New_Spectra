@@ -8,6 +8,8 @@ export const staff = {
     buildQuery('/employees/medical-provider-list', queries),
   groupMemberList: (ownerId) =>
     `/employees/group-member?ownerId=${ownerId}`,
+  contract: (employeeId) =>
+    `/employees/employee-contract?employeeId=${employeeId}`,
   actions: {
     add: '/employees',
     addAttachment: '/employees/attachment',

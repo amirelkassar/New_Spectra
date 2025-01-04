@@ -110,7 +110,8 @@
     "select_conversation": "Select a conversation from the list to view its content",
     "chats": "Chats",
     "messages": "Messages",
-    "groups": "Groups"
+    "groups": "Groups",
+    "no_groups_yet": "No groups yet"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",

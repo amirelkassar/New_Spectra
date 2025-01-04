@@ -133,7 +133,7 @@ const ROUTES = {
       STAFF_ID_EDIT: (id) => `/admin/staff/${id}?edit=true`,
       STAFF_ID_APPOINTMENTS: (id) =>
         `/admin/staff/${id}/appointments`,
-      STAFF_ID_CONTRACTS: (id) => `/admin/staff/${id}/contracts`,
+      STAFF_ID_CONTRACTS: (id) => `/admin/staff/${id}/contract`,
       STAFF_ID_PRESCRIPTIONS: (id) =>
         `/admin/staff/${id}/prescriptions`,
       STAFF_ID_CLIENTS: (id) => `/admin/staff/${id}/clients`,
