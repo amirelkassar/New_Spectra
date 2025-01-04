@@ -47,7 +47,7 @@ export const useUserChatList = (
   const queries = getQueries({ params, initialQueries });
 
   return useQuery({
-    queryKey: [initialQueryKey, queries],
+    queryKey: [initialQueryKey + '.list', queries],
     queryFn: () => getUserChatList(queries),
     placeholderData: keepPreviousData,
   });
@@ -162,8 +162,8 @@ export const useAddMessageLocally = () => {
         }
       );
 
-      queryClient.invalidateQueries({
-        queryKey: [initialQueryKey, initialQueries],
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey + '.list', initialQueries],
       });
 
       return tempMessage;
