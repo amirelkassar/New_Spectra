@@ -10,7 +10,7 @@ try
     builder.Host.UseSerilog((context, loggerConfig)
     => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-    builder.Services.ConfigureWebHost(builder.Configuration);
+    builder.Services.ConfigureWebHost(builder.Configuration,builder.Environment);
 
     var app = builder.Build();
     Log.Information("All Services Initalized!");

@@ -9,17 +9,18 @@ namespace Spectra.Web
     public static class DependencyInjection
     {
         public static IServiceCollection ConfigureWebHost(this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,IWebHostEnvironment webHostEnvironment)
         {
             services.AddControllers()
                 .AddNewtonsoftJson(opts => opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
-            services.ConfigureApplication(configuration);
+            services.ConfigureApplication(configuration, webHostEnvironment);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
             ConfigureSwagger(services, configuration);
             ConfigureCors(services, configuration);
+
             return services;
         }
 

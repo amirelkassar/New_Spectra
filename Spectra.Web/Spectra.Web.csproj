@@ -5,8 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <PreserveCompilationContext>true</PreserveCompilationContext>
     <DocumentationFile>..\Spectra.WebAPI\SpectraApiDocs.xml</DocumentationFile>
   </PropertyGroup>
+
 
   <ItemGroup>
     <Compile Remove="ClientApp\**" />
@@ -21,6 +23,16 @@
     <None Remove="ClientApp\**" />
     <None Remove="Services\**" />
     <None Remove="wwwroot\Documents\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Remove="libwkhtmltox.dll" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <EmbeddedResource Include="libwkhtmltox.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,11 +53,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\Spectra.WebAPI\Spectra.WebAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Spectra.WebAPI\Spectra.WebAPI.csproj" />
+    <Folder Include="wwwroot\Documents\SystemFiles\" />
   </ItemGroup>
 
 </Project>

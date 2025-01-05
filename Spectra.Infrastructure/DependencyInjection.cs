@@ -48,6 +48,7 @@ using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
@@ -83,6 +84,7 @@ using Spectra.Infrastructure.Services.IdentityServices;
 using Spectra.Infrastructure.Services.SnomedServices;
 using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
+using Spectra.Infrastructure.Templates;
 
 namespace Spectra.Infrastructure
 {
@@ -282,6 +284,7 @@ namespace Spectra.Infrastructure
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();
+            services.AddScoped<ITemplateService, TemplateService>();
             return services;
         }
 
