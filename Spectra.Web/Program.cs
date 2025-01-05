@@ -7,6 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 try
 {
+    Console.WriteLine($"Loading Appliation Settings for env : {builder.Environment.EnvironmentName} ...");
+    builder.Configuration
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+    Console.WriteLine("Settings Loaded!");
+
+
     builder.Host.UseSerilog((context, loggerConfig)
     => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
