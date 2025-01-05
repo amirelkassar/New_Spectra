@@ -78,6 +78,7 @@ export const SpecializationMultiSelect = ({
         ...props.classNames,
         label: cn(
           'text-xs md:text-base mdl:text-base mb-2 ps-0',
+          props?.size === 'lg' && 'text-sm md:text-xl mdl:text-xl',
           props.classNames?.label
         ),
         input: cn('mdl:rounded-xl', props.classNames?.input),

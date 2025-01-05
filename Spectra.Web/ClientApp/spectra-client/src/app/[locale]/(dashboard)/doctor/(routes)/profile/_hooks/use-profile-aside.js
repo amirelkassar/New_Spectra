@@ -30,6 +30,12 @@ export const UseProfileAside = ({ jobType }) => {
         isActive: path.includes(ROUTES.DOCTOR.PROFILE.TEAM),
         show: jobType === 1,
       },
+      {
+        name: 'العقد',
+        route: ROUTES.DOCTOR.PROFILE.CONTRACT,
+        isActive: path.includes(ROUTES.DOCTOR.PROFILE.CONTRACT),
+        show: true,
+      },
     ],
     [path, jobType]
   );
