@@ -4,12 +4,20 @@ import { Divider } from '@mantine/core';
 import { ContractA4 } from '@/dashboard/_components/contract/contract-a4';
 import { CONTRACT_STATE, VERSION_STATE } from '@/data';
 import { NotFound404 } from '@/components/not-found-404';
+import { SectionTitle } from '@/dashboard/_components/ui/section-title';
 import Card from '@/components/card';
+import Button from '@/components/button';
+import Download from '@/assets/icons/download';
 
 export const AcceptedContractA4Content = ({
   contractData = {},
   employeeData = {},
+  onDownload = () => {},
+  isDownloading = false,
 }) => {
+  const t = useTranslations('contract_obj');
+  const tg = useTranslations('general_obj');
+
   const state = contractData?.contractState || 0;
 
   if (state !== CONTRACT_STATE.accepted)
@@ -26,6 +34,7 @@ export const AcceptedContractA4Content = ({
       </Card>
     );
 
+  const contractId = contractData?.id || '';
   const name = `${employeeData?.firstName} ${
     employeeData?.lastName || ''
   }`;
@@ -51,7 +60,26 @@ export const AcceptedContractA4Content = ({
 
   return (
     <div className='space-y-5 h-full'>
-      <Card className='overflow-auto'>
+      <Card className='overflow-auto space-y-5'>
+        <div className='flex items-center justify-between'>
+          <SectionTitle>{t('contract')}</SectionTitle>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onDownload({
+                filename: `عقد الطبيب ${name}.pdf`,
+                contractId,
+              });
+            }}
+            disabled={isDownloading}
+            variant='blueLight'
+          >
+            <Download />
+            {tg('download')}
+          </Button>
+        </div>
+
         <ContractA4>
           <Info
             name={name}
@@ -114,7 +142,7 @@ export const AcceptedContractA4Content = ({
         </ContractA4>
       </Card>
 
-      <Card className='overflow-hidden'>
+      <Card className='overflow-auto'>
         <ContractA4>
           {!!contractTerms.length && (
             <div className='space-y-5 page-break print:pt-[164px]'>
@@ -211,9 +239,9 @@ const Service = ({ name = '', price = '', net = '', terms = '' }) => {
   return (
     <li className='space-y-2'>
       <div className='inline-block *:inline-block'>
-        <span className='w-[300px] text-wrap'>{name}</span>
-        <span className='font-bold ms-10'>{price} SAR</span>
-        <span className='ms-20'>
+        <span className='w-36 mdl:w-[300px] text-wrap'>{name}</span>
+        <span className='font-bold ms-5 mdl:ms-10'>{price} SAR</span>
+        <span className='ms-5 mdl:ms-20'>
           صافي الدخل: <span className='font-bold'>{net} SAR</span>
         </span>
       </div>

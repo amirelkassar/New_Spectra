@@ -142,7 +142,8 @@
     "approved_by": "مرخص / معتمد من",
     "certificates": "الشهادات",
     "upload": "رفع",
-    "upload_file": "رفع ملف"
+    "upload_file": "رفع ملف",
+    "download": "تحميل"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",

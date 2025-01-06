@@ -142,7 +142,8 @@
     "approved_by": "Approved by",
     "certificates": "Certificates",
     "upload": "Upload",
-    "upload_file": "Upload file"
+    "upload_file": "Upload file",
+    "download": "Download"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",

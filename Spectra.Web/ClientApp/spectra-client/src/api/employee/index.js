@@ -7,5 +7,6 @@ export const contract = {
     cancel: '/contract/cancel',
     reject: '/contract/reject',
     accept: '/contract/accept',
+    download: '/contract/download',
   },
 };

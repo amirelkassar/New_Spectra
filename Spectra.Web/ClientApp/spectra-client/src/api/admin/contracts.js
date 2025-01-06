@@ -11,5 +11,6 @@ export const contract = {
     cancel: '/contract/cancel',
     reject: '/contract/reject',
     accept: '/contract/accept',
+    download: (id) => `/contract/download?contractId=${id}`,
   },
 };
