@@ -143,7 +143,15 @@
     "certificates": "الشهادات",
     "upload": "رفع",
     "upload_file": "رفع ملف",
-    "download": "تحميل"
+    "download": "تحميل",
+    "reset_password_heading": "اعادة تعيين كلمة المرور الخاصة بك",
+    "reset_password_subheading": "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رابطا يحتوي على التعليمات",
+    "reset_password_sent_heading": "تم ارسال رابط اعادة التعيين",
+    "reset_password_sent_subheading": "قم بفتح الرابط اللي وصل الى بريدك الالكتروني",
+    "resend_prompt": "لم يصلك؟ ..",
+    "resend": "اعادة ارسال",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",

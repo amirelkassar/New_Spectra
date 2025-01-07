@@ -143,7 +143,15 @@
     "certificates": "Certificates",
     "upload": "Upload",
     "upload_file": "Upload file",
-    "download": "Download"
+    "download": "Download",
+    "reset_password_heading": "Reset your password",
+    "reset_password_subheading": "Enter your email address below, and we will send you a link with instructions.",
+    "reset_password_sent_heading": "Password reset link sent",
+    "reset_password_sent_subheading": "Open the link sent to your email.",
+    "resend_prompt": "Didn't receive it? ..",
+    "resend": "Resend",
+    "new_password": "New password",
+    "confirm_new_password": "Confirm new password"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
