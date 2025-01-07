@@ -10,8 +10,9 @@ namespace Spectra.Application.Templates.Models
 {
     public class EmployeeContractTemplateModel
     {
-        public string CompanyName { get; set; }
+        public CompanyInfoModel CompanyInfo { get; set; }
         public EmployeeByIdDto Employee { get; set; }
         public ContractReadDto Contract { get; set; }
+        public ContractVersionReadDto ActiveVersion { get; set; }
     }
 }

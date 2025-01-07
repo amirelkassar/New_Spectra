@@ -2,6 +2,9 @@
 using Spectra.Application.Interfaces;
 using Spectra.Application.Templates.Service;
 using Spectra.Application.Templates.Models;
+using MediatR;
+using Spectra.Application.Contracts.Queries;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Web.Controllers
 {
@@ -10,12 +13,12 @@ namespace Spectra.Web.Controllers
     public class HomeController : ControllerBase
     {
         private readonly ISnomedService _snomedService;
-        private readonly ITemplateService _templateService;
+        private readonly ISender _sender;
 
-        public HomeController(ISnomedService snomedService, ITemplateService templateService)
+        public HomeController(ISnomedService snomedService,ISender sender)
         {
             _snomedService = snomedService;
-            _templateService = templateService;
+            _sender = sender;
         }
 
         [HttpGet]
@@ -24,15 +27,11 @@ namespace Spectra.Web.Controllers
             return Ok(await _snomedService.GetAll("speech"));
         }
         [HttpGet("template")]
-        public async Task<IActionResult> GetContractTemplate()
+        public async Task<IActionResult> GetContractTemplate([FromQuery] string contractId)
         {
 
-            var model = new EmployeeContractTemplateModel()
-            {
-                CompanyName = "شركة المستقبل للرعاية الصحية"
-            };
-            var pdf = await _templateService.GetContractTemplateAsync(model);
-            return File(pdf, "Application/Pdf", "test.pdf");
+            var response = (OperationResult<byte[]>) await _sender.Send(new GetContractTemplateQuery {ContractId= contractId });
+            return File(response.Data, "Application/Pdf", "test.pdf");
         }
     }
 }
