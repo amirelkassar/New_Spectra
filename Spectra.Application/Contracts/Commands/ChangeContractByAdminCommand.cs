@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Spectra.Application.Contracts.DTO;
 using Spectra.Application.Interfaces;
 using Spectra.Application.MasterData.HellperFunc;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.Contracts;
 using Spectra.Domain.Contracts.DomainEvents;
 using Spectra.Domain.Contracts.Exceptions;
@@ -24,11 +25,9 @@ namespace Spectra.Application.Contracts.Commands
         public ICollection<ContractTextSectionCreateDto>? TextSections { get; set; }
 
         public class AcceptContractByAdminCommandHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository,
-            ICurrentUser currentUser,
             IDocumentHellper documentHellper) : IRequestHandler<ChangeContractByAdminCommand, OperationResult>
         {
             private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository = contractRepository;
-            private readonly ICurrentUser _currentUser = currentUser;
             private readonly IDocumentHellper _documentHellper = documentHellper;
 
             public async Task<OperationResult> Handle(ChangeContractByAdminCommand request, CancellationToken cancellationToken)

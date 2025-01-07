@@ -1,19 +1,31 @@
 ﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Spectra.Application.Commons.Dtos;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Notifications;
+using Spectra.Application.Templates.Models;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.Contracts.DomainEvents;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 
 namespace Spectra.Application.Contracts.EventHandlers
 {
-    public class ContractAcceptEventHandler(INotificationService notificationService) : INotificationHandler<ContractChangeEvent>
+    public class ContractAcceptEventHandler(INotificationService notificationService,
+        ITemplateService templateService,
+            IEmailSender emailSender,
+            IBaseMongoDbRepository<Employee> employeeRepository) : INotificationHandler<ContractChangeEvent>
     {
         private readonly INotificationService _notificationService = notificationService;
+        private readonly ITemplateService _templateService = templateService;
+        private readonly IEmailSender _emailSender = emailSender;
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepository = employeeRepository;
 
         public async Task Handle(ContractChangeEvent notification, CancellationToken cancellationToken)
         {
             var contract = notification.Contract;
-
+            var employee = await _employeeRepository.GetByIdAsync(contract.EmployeeId);
             switch (notification.Type)
             {
                 case ContractChangeType.Admin:
@@ -80,6 +92,14 @@ namespace Spectra.Application.Contracts.EventHandlers
                     }
                     break;
             }
+
+            var model = new ContractSignedEmailTemplateModel
+            {
+                UserFullName=$"{employee.Name.FirstName} {employee.Name.LastName}",
+            };
+
+            var template = await _templateService.GetEmailTemplateAsync("ContractSignedEmailTemplate.cshtml", model);
+            await _emailSender.SendAsync(new EmailMetadata(employee.EmailAddress.Emailaddress,"no-reply congrats , spectra accepted your contract",template));
         }
     }
 }
