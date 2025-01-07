@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Documents\SystemFiles\Templates\EmployeeContractTemplate.cshtml" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

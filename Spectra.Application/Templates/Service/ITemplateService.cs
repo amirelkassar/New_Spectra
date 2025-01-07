@@ -9,6 +9,8 @@ namespace Spectra.Application.Templates.Service
 {
     public interface ITemplateService
     {
-        Task<byte[]> GetContractTemplateAsync(EmployeeContractTemplateModel model);
+        Task<byte[]> GetPdfTemplateAsync<T>(string templateName,T model);
+        Task<string> GetEmailTemplateAsync<T>(string templateName, T model);
+
     }
 }

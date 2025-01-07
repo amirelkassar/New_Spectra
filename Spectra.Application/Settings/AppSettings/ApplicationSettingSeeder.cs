@@ -23,13 +23,13 @@ namespace Spectra.Application.Settings.AppSettings
                 await _settingService.CreateSettingAsync(EmailSettings.Host, "smtp.hostinger.com", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Port))
-                await _settingService.CreateSettingAsync(EmailSettings.Port, "465", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.Port, "587", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.UseDefaultCredentials))
-                await _settingService.CreateSettingAsync(EmailSettings.UseDefaultCredentials, "true", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.UseDefaultCredentials, "false", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.EmailAddress))
-                await _settingService.CreateSettingAsync(EmailSettings.EmailAddress, "tech@profound-group.com", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.EmailAddress, "test.spectra@profound-group.com", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Name))
                 await _settingService.CreateSettingAsync(EmailSettings.Name, "Spectra", false, group: EmailSettings.Group);

@@ -69,7 +69,7 @@ namespace Spectra.Application.Contracts.Queries
                     ActiveVersion= employmentContract.Versions.First(v=>v.State==Domain.Shared.Constants.ContractConses.ContractVersionStates.Active).Adapt<ContractVersionReadDto>()
                 };
 
-                var template=await _templateService.GetContractTemplateAsync(model);
+                var template=await _templateService.GetPdfTemplateAsync("EmployeeContractTemplate.cshtml", model);
 
                 return OperationResult<byte[]>.Success(template);
             }

@@ -38,6 +38,26 @@ namespace Spectra.WebAPI.Areas.Public.Controllers
         }
 
         [HttpPost]
+        [Route("forget-password")]
+        public async Task<IActionResult> ForgetPasswordAsync([FromBody] ForgetPasswordRequest input)
+        {
+            var response = await _mediator.Send(input);
+            return response.SuccessOpration
+                ? Created("", response)
+                : BadRequest(response);
+        }
+
+        [HttpPost]
+        [Route("reset-password")]
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest input)
+        {
+            var response = await _mediator.Send(input);
+            return response.SuccessOpration
+                ? Created("", response)
+                : BadRequest(response);
+        }
+
+        [HttpPost]
         [Route("register-medical-provider")]
         public async Task<IActionResult> RegisterMedicalProviderAsync([FromForm] RegisterMedicalProvider input)
         {
