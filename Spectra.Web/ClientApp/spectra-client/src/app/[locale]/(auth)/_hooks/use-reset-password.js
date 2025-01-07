@@ -6,11 +6,7 @@ import { useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
-import {
-  notFound,
-  useParams,
-  useSearchParams,
-} from 'next/navigation';
+import { notFound, useSearchParams } from 'next/navigation';
 
 import { Toast } from '@/components/toast';
 import { passwordValidation } from '@/lib/utils';
@@ -34,10 +30,10 @@ export const useResetPassword = () => {
 
   const locale = useLocale();
 
-  const token = useParams()?.token || '';
+  const searchParams = useSearchParams();
 
-  const email =
-    useSearchParams()?.get('email')?.toLocaleLowerCase() || '';
+  const email = searchParams?.get('email')?.toLocaleLowerCase() || '';
+  const token = searchParams?.get('token') || '';
 
   const form = useForm({
     resolver: zodResolver(Schema),
@@ -50,7 +46,7 @@ export const useResetPassword = () => {
   const { mutateAsync: resetPassword, isPending } =
     useResetPasswordMutation();
 
-  if (!email) notFound();
+  if (!email && !token) notFound();
 
   const onConfirm = useCallback(
     async ({ newPassword }) => {
@@ -65,7 +61,11 @@ export const useResetPassword = () => {
           locale === 'ar'
             ? 'تم استعادة كلمة المرور بنجاح'
             : 'Password reset successfully',
-        onSuccess: () => router.replace(ROUTES.AUTH.LOGIN),
+        onSuccess: () => {
+          sessionStorage.setItem('loginEmail', email);
+          sessionStorage.setItem('loginPassword', newPassword);
+          router.replace(ROUTES.AUTH.LOGIN);
+        },
       });
     },
     [email, token, router, resetPassword, locale]

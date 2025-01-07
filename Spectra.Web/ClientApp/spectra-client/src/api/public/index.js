@@ -38,7 +38,7 @@ export const medicalProviders = {
 export const identity = {
   login: '/login',
   registerClient: '/register-client',
-  registerMedicalProvider: '/register-medicalprovider',
+  registerMedicalProvider: '/register-medical-provider',
   forgetPassword: '/forget-password',
   resetPassword: '/reset-password',
 };

@@ -63,11 +63,13 @@ export const useForgetPassword = () => {
 
   useEffect(() => {
     if (countdown > 0) {
-      const timer = setTimeout(
-        () => setCountdown((prev) => prev - 1),
-        1000
-      );
-      return () => clearTimeout(timer);
+      const timer = setTimeout(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+      };
     }
   }, [countdown]);
 
