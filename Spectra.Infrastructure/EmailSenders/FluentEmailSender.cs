@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using FluentEmail.Core;
 using FluentEmail.Smtp;
+using Mapster;
 using Microsoft.Extensions.Logging;
 using Spectra.Application.Commons.Dtos;
 using Spectra.Application.Interfaces;
@@ -28,11 +29,30 @@ namespace Spectra.Infrastructure.EmailSenders
         {
             using (var smtpClient = await SetupSenderAsync())
             {
-                var response = await _fluentEmail
+                var email = _fluentEmail
                .To(input.ToAddress)
                .Subject(input.Subject)
-               .Body(input.Body,true)
-               .SendAsync();
+               .Body(input.Body, true);
+
+                if (input.Attachments != null)
+                {
+                    foreach (var item in input.Attachments)
+                    {
+                        _logger.LogInformation("Data is {0}", item.Data is not null);
+
+                        if(item.Data is not null)
+                        email.Attach(new FluentEmail.Core.Models.Attachment
+                        {
+                            Filename = item.Filename,
+                            IsInline = item.IsInline,
+                            ContentType = item.ContentType,
+                            Data = item.Data
+                        });
+                    }
+                }
+
+                var response = await email.SendAsync();
+
                 return response.Successful;
             }
         }
@@ -51,7 +71,7 @@ namespace Spectra.Infrastructure.EmailSenders
                 });
 
                 await Task.CompletedTask;
-            } 
+            }
         }
 
         private async Task<SmtpClient> SetupSenderAsync()
