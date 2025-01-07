@@ -11,11 +11,12 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import ROUTES from '@/routes';
 import { useAuth } from '@/hooks/use-auth';
+import { identity } from '@/api/public';
 
 export const useLoginMutation = (data) => {
   return useMutation({
     mutationFn: async () => {
-      return (await apiAuth.post('/login', data)).data;
+      return (await apiAuth.post(identity.login, data)).data;
     },
   });
 };
@@ -24,8 +25,25 @@ export const useRegisterMedicalProviderMutation = () => {
   return useMutation({
     mutationFn: async (formData) => {
       return (
-        await apiAuth.post('/register-medical-provider', formData)
+        await apiAuth.post(identity.registerMedicalProvider, formData)
       ).data;
+    },
+  });
+};
+
+export const useForgetPasswordMutation = () => {
+  return useMutation({
+    mutationFn: async (email) => {
+      return (await apiAuth.post(identity.forgetPassword, email))
+        .data;
+    },
+  });
+};
+
+export const useResetPasswordMutation = () => {
+  return useMutation({
+    mutationFn: async (data) => {
+      return (await apiAuth.post(identity.resetPassword, data)).data;
     },
   });
 };

@@ -6,26 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { IMAGE_MIME_TYPE, PDF_MIME_TYPE } from '@mantine/dropzone';
 import { useCallback } from 'react';
 import { useRegisterMedicalProviderMutation } from '@/hooks/queries/auth';
-import { getErrors, getFormData } from '@/lib/utils';
+import {
+  getErrors,
+  getFormData,
+  passwordValidation,
+} from '@/lib/utils';
 import { Toast } from '@/components/toast';
 import { useRouter } from '@/i18n/routing';
 import ROUTES from '@/routes';
-
-const passwordValidation = z
-  .string()
-  .min(8, 'Password must be at least 8 characters long')
-  .regex(
-    /[A-Z]/,
-    'Password must contain at least one uppercase letter'
-  )
-  .regex(
-    /[a-z]/,
-    'Password must contain at least one lowercase letter'
-  )
-  .regex(
-    /[!@#$%^&*(),.?":{}|<>]/,
-    'Password must contain at least one special character'
-  );
 
 const stepOneSchema = z
   .object({

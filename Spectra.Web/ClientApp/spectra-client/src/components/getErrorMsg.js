@@ -18,6 +18,9 @@ const GetErrorMsg = (error, title) => {
   if (title === 'general') {
     if (code === 401 || code === 403)
       return 'لا تملك الصلاحيات الكافية';
+
+    if (code === 500) return 'حدث خطأ ما';
+
     const generalError = generalErrorKeys.find(
       (key) => messages[key]
     );
