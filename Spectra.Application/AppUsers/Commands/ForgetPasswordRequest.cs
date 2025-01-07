@@ -43,7 +43,7 @@ namespace Spectra.Application.AppUsers.Commands
                 var tokenResults = await _identityService.GenerateForgetPasswordTokenAsync(user.Email);
 
 
-                var resetUrl = $"{webClient.Url}ar/reset-password?token={tokenResults.Data}&email={request.Email}";
+                var resetUrl = $"{webClient.Url}ar/reset-password?token={HttpUtility.UrlEncode(tokenResults.Data)}&email={request.Email}";
 
                 var emailModel = new PasswordResetEmailTemplateModel
                 {

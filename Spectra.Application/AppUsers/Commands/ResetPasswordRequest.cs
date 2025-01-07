@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Web;
+using FluentValidation;
 using MediatR;
 using Spectra.Application.Identities;
 using Spectra.Domain.AppUser;
@@ -27,7 +28,7 @@ namespace Spectra.Application.AppUsers.Commands
 
                 var user = userResults.Data;
 
-
+                var token=HttpUtility.UrlDecode(request.Token);
                 return await _identityService.ResetPasswordAsync(user.Id, request.Token, request.NewPassword);
             }
         }
