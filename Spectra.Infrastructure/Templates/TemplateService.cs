@@ -16,9 +16,11 @@ namespace Spectra.Infrastructure.Templates
         private readonly RazorLightEngine _razorLightEngine = razorLightEngine;
         private readonly SynchronizedConverter _synchronizedConverter = synchronizedConverter;
 
-        public async Task<byte[]> GetContractTemplateAsync(EmployeeContractTemplateModel model)
+        public async Task<string> GetEmailTemplateAsync<T>(string templateName, T model) => await _razorLightEngine.CompileRenderAsync(templateName, model);
+
+        public async Task<byte[]> GetPdfTemplateAsync<T>(string templateName, T model)
         {
-            var template = await _razorLightEngine.CompileRenderAsync("EmployeeContractTemplate.cshtml", model);
+            var template = await _razorLightEngine.CompileRenderAsync(templateName, model);
 
             var pdfDocument = new HtmlToPdfDocument
             {

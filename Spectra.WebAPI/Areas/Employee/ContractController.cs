@@ -5,6 +5,7 @@ using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 using Spectra.WebAPI.Areas.MedicalProvider;
 
@@ -25,6 +26,16 @@ namespace Spectra.WebAPI.Areas.Employee
             return Ok(response);
         }
 
+
+        [HttpPost("download")]
+        public async Task<ActionResult> DownloadAsync()
+        {
+            var contract = (OperationResult<byte[]>)await mediator.Send(new GetContractTemplateQuery
+            {
+                UserId = _currentUser.Id
+            });
+            return File(contract.Data, "Application/Pdf", $"{contract.OperationId}.pdf");
+        }
 
 
         [HttpPost]

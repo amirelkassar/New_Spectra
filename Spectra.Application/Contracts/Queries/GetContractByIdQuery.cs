@@ -11,21 +11,21 @@ using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Contracts.Queries
 {
-    public class GetContractById : IRequest<OperationResult>
+    public class GetContractByIdQuery : IRequest<OperationResult>
     {
         public string Id { get; set; }
 
         public class GetContractByIdHandler(IBaseMongoDbRepository<EmploymentContract> contractRepository,
             ICurrentUser currentUser,
             IWebHostEnvironment webHostEnvironment,
-            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetContractById, OperationResult>
+            IHttpContextAccessor httpContextAccessor) : IRequestHandler<GetContractByIdQuery, OperationResult>
         {
             private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository = contractRepository;
             private readonly ICurrentUser _currentUser = currentUser;
             private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
             private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
-            public async Task<OperationResult> Handle(GetContractById request, CancellationToken cancellationToken)
+            public async Task<OperationResult> Handle(GetContractByIdQuery request, CancellationToken cancellationToken)
             {
                 var contract = await _contractRepository.GetAsync(c => c.Id == request.Id) ?? throw new NotFoundException("Contracts", request.Id);
 
