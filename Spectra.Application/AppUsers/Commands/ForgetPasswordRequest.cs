@@ -45,7 +45,7 @@ namespace Spectra.Application.AppUsers.Commands
 
                 var resetUrl = $"{webClient.Url}ar/reset-password?token={HttpUtility.UrlEncode(tokenResults.Data)}&email={request.Email}";
 
-                var emailModel = new PasswordResetEmailTemplateModel
+                var emailModel = new ForgetPasswordEmailTemplateModel
                 {
                     Token= tokenResults.Data,
                     Email= request.Email,

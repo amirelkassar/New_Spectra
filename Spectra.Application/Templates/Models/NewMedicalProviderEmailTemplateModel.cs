@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Spectra.Application.Templates.Models
 {
-    public class PasswordResetEmailTemplateModel
+    public class NewMedicalProviderEmailTemplateModel
     {
         public CompanyInfoModel CompanyInfo { get; set; }
         public string UserFullName { get; set; }
-        public string LoginPage { get; set; }
+        public string DashboardLink { get; set; }
     }
 }
