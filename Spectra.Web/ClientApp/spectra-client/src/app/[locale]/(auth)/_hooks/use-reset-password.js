@@ -66,6 +66,22 @@ export const useResetPassword = () => {
           sessionStorage.setItem('loginPassword', newPassword);
           router.replace(ROUTES.AUTH.LOGIN);
         },
+        onError: (error) => {
+          const code = error?.response?.data?.code;
+          const errors = error?.response?.data?.errors;
+          const isInvalidToken = !!errors?.InvalidToken?.length;
+          if (code === 400 && isInvalidToken) {
+            router.replace(ROUTES.AUTH.FORGOT_PASSWORD);
+            return locale === 'ar'
+              ? 'الرمز المرسل غير صالح او منتهي'
+              : 'The code sent is invalid or expired';
+          }
+
+          router.replace(ROUTES.AUTH.FORGOT_PASSWORD);
+          return locale === 'ar'
+            ? 'حدث خطأ ما برجاء المحاولة مرة اخري, اذا استمرت المشكلة تواصل مع الدعم'
+            : 'An error occurred, please try again, if the problem persists, please contact support';
+        },
       });
     },
     [email, token, router, resetPassword, locale]
