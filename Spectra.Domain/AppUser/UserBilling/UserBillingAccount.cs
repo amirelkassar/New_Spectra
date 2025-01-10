@@ -7,9 +7,9 @@ using Spectra.Domain.Shared.Common;
 
 namespace Spectra.Domain.AppUser.UserBilling
 {
-    public class UserPaymentAccount : BaseAuditableEntity<string>
+    public class UserBillingAccount : BaseAuditableEntity<string>
     {
-        public UserPaymentAccount(string id,
+        public UserBillingAccount(string id,
             string userId,
             string bankName,
             string accountNumber,
