@@ -11,6 +11,7 @@ using Spectra.Application.Identities.Dtos;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Contracts;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Wrappers;
 
@@ -21,6 +22,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         private readonly UserManager<AppUser> _userManager;
         private readonly IPermissionManager _permission;
         private readonly IBaseMongoDbRepository<EmploymentContract> _contractRepository;
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepository;
         private readonly int _expDays;
         private readonly string _key;
         private readonly byte[] _keyBytes;
@@ -33,7 +35,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         IHttpContextAccessor httpContextAccessor,
         UserManager<AppUser> userManager,
         IPermissionManager permission,
-        IBaseMongoDbRepository<EmploymentContract> contractRepository)
+        IBaseMongoDbRepository<EmploymentContract> contractRepository,
+        IBaseMongoDbRepository<Employee> employeeRepository)
         {
             _key = configuration["Jwt:Key"];
             _expDays = int.Parse(configuration["Jwt:ExpiryDays"]);
@@ -43,6 +46,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             _userManager = userManager;
             _permission = permission;
             _contractRepository = contractRepository;
+            _employeeRepository = employeeRepository;
         }
         public async Task<OperationResult> LoginAsync(LoginAPIParam input)
         {
@@ -99,6 +103,7 @@ namespace Spectra.Infrastructure.Services.IdentityServices
         }
         private async Task<ICollection<Claim>> LoadClaims()
         {
+            var employee = await _employeeRepository.GetAsync(e => e.UserId == _user.Id);
             //user data
             var userclaims = new List<Claim>
             {
@@ -110,6 +115,10 @@ namespace Spectra.Infrastructure.Services.IdentityServices
                 new(CustomClaims.Aud,_audience),
                 new(CustomClaims.Iss,_issuer),
             };
+            if (employee != null) 
+            {
+                userclaims.Add(new Claim(CustomClaims.EmployeeId, employee.Id));
+            }
             //user roles
             _roles = await _userManager.GetRolesAsync(_user);
             foreach (var role in _roles)
