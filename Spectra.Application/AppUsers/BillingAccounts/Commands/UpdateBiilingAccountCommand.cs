@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using FluentValidation;
 using MediatR;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser.UserBilling;
@@ -17,10 +19,10 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
         public string AccountHolderName { get; set; }
-        public string Branch { get; set; }
+        public string? Branch { get; set; }
         public string Country { get; set; }
         public string CountryCode { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public bool Default { get; set; }
 
         public class UpdateBiilingAccountCommandHandler(ICurrentUser currentUser, IBaseMongoDbRepository<UserBillingAccount> accountRepository) : IRequestHandler<UpdateBiilingAccountCommand, OperationResult>
@@ -55,6 +57,41 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
 
                 return OperationResult.Success();
             }
+        }
+    }
+
+    public class UpdateBiilingAccountCommandValidator : AbstractValidator<UpdateBiilingAccountCommand>
+    {
+        public UpdateBiilingAccountCommandValidator()
+        {
+            RuleFor(a => a.Id)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(a => a.BankName)
+                    .NotEmpty()
+                    .NotNull();
+
+            RuleFor(a => a.AccountNumber)
+                .NotNull()
+                .NotEmpty()
+                .Must(a => Regex.IsMatch(a, @"^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$"));
+
+            RuleFor(a => a.AccountHolderName)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(a => a.Country)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(a => a.CountryCode)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(a => a.Default)
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

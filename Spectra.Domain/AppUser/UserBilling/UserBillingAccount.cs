@@ -11,31 +11,29 @@ namespace Spectra.Domain.AppUser.UserBilling
     {
         public UserBillingAccount(string id,
             string userId,
-            string bankName,
             string accountNumber,
             string accountName,
-            string branch,
+            string bank,
             string country,
-            string city)
+            string countryCode)
         {
             Id = id;
             UserId = userId;
-            BankName = bankName;
+            BankName = bank;
             AccountNumber = accountNumber;
             AccountHolderName = accountName;
-            Branch = branch;
             Country = country;
-            City = city;
+            CountryCode = countryCode;
             Default = false;
         }
         public string UserId { get; private set; }
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
         public string AccountHolderName { get; set; }
-        public string Branch { get; set; }
+        public string? Branch { get; set; }
         public string Country { get; set; }
         public string CountryCode { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public bool Default { get; set; }
 
     }
