@@ -25,6 +25,17 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
 
                 await _accountRepository.DeleteAsync(account.Id);
 
+                if(account.Default)
+                {
+                    var accounts = await _accountRepository.GetAllAsync(a => a.UserId == _currentUser.Id && a.Id != account.Id);
+                    if (accounts.data is not null && accounts.data.Any())
+                    {
+                        var nextDefaultAccount = accounts.data.FirstOrDefault();
+                        nextDefaultAccount.Default = true;
+                        await _accountRepository.UpdateAsync(nextDefaultAccount);
+                    }
+                }
+
                 return OperationResult.Success();
             }
         }

@@ -19,6 +19,7 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
         public string AccountHolderName { get; set; }
         public string Branch { get; set; }
         public string Country { get; set; }
+        public string CountryCode { get; set; }
         public string City { get; set; }
         public bool Default { get; set; }
 
@@ -36,6 +37,7 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
                 account.AccountHolderName = request.AccountHolderName;
                 account.Country = request.Country;
                 account.City = request.City;
+                account.CountryCode = request.CountryCode;
                 account.Default = request.Default;
 
                 await _accountRepository.UpdateAsync(account);
