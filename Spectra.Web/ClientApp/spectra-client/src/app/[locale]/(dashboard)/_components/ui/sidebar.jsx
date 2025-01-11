@@ -17,6 +17,7 @@ import LogoutIcon from '@/assets/icons/logOut';
 import { useLogout } from '@/hooks/queries/auth';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import { Collapse } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 export const Sidebar = ({ links = [] }) => {
   const { isOpen, close } = useSidebarStore();
@@ -129,6 +130,8 @@ const NavLinks = ({ link }) => {
 };
 
 const Logout = () => {
+  const t = useTranslations();
+
   const { isOpen } = useSidebarStore();
 
   const { logout } = useLogout();
@@ -143,7 +146,7 @@ const Logout = () => {
       </span>
 
       <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
-        تسجيل الخروج
+        {t('logout')}
       </span>
     </button>
   );

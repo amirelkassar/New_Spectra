@@ -1,7 +1,8 @@
 'use client';
 
-import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
+import { usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 import { useAuth } from '@/hooks/use-auth';
 import Appointments from '@/assets/icons/appointments';
@@ -19,6 +20,8 @@ import ContractsPlus from '@/assets/icons/contracts-plus';
 import { ROLES } from '@/data';
 
 export const useDoctorNav = () => {
+  const t = useTranslations();
+
   const path = usePathname();
 
   const { roles } = useAuth();
@@ -85,28 +88,28 @@ export const useDoctorNav = () => {
       //   show: true,
       // },
       {
-        name: 'المحفظة',
+        name: t('wallet'),
         route: ROUTES.DOCTOR.WALLET.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
         icon: <WalletIcon />,
         show: true,
       },
       {
-        name: 'ملف',
+        name: t('profile'),
         route: ROUTES.DOCTOR.PROFILE.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.PROFILE.DASHBOARD),
         icon: <ProfileIcon />,
         show: true,
       },
       {
-        name: 'الموظفين',
+        name: t('staff'),
         route: ROUTES.DOCTOR.STAFF.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.STAFF.DASHBOARD),
         icon: <StaffIcon />,
         show: roles.includes(ROLES.departmentHead),
       },
       {
-        name: 'العقد',
+        name: t('contract'),
         route: ROUTES.DOCTOR.CONTRACT.DASHBOARD,
         isActive:
           path.includes(ROUTES.DOCTOR.CONTRACT.DASHBOARD) &&
@@ -115,7 +118,7 @@ export const useDoctorNav = () => {
         show: true,
       },
       {
-        name: 'العقود',
+        name: t('contracts'),
         route: ROUTES.DOCTOR.CONTRACTS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.CONTRACTS.DASHBOARD),
         icon: <ContractsPlus />,
@@ -130,14 +133,14 @@ export const useDoctorNav = () => {
       // },
 
       {
-        name: 'الإعدادات',
+        name: t('settings'),
         route: ROUTES.DOCTOR.SETTINGS.DASHBOARD,
         isActive: path.includes(ROUTES.DOCTOR.SETTINGS.DASHBOARD),
         icon: <SettingsIcon />,
         show: true,
       },
     ],
-    [path, roles]
+    [path, roles, t]
   );
 
   return {
