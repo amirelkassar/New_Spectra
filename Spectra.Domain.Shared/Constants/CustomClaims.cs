@@ -3,6 +3,7 @@
     public class CustomClaims
     {
         public const string Surname = nameof(Surname);
+        public const string EmployeeId = nameof(EmployeeId);
         public const string ClientId = nameof(ClientId);
         public const string Username = nameof(Username);
         public const string PhoneConfirmed = nameof(PhoneConfirmed);

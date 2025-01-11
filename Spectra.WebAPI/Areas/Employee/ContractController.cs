@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
@@ -11,13 +12,16 @@ using Spectra.WebAPI.Areas.MedicalProvider;
 
 namespace Spectra.WebAPI.Areas.Employee
 {
-    public class ContractController(IMediator mediator,
+    public class ContractController(ISender mediator,
         ICurrentUser currentUser,
-        UserManager<AppUser> userManager) : EmployeeControllerBase
+        UserManager<AppUser> userManager,
+        ILogger<ContractController> logger) : EmployeeControllerBase<ContractController>(logger,currentUser)
     {
-        private readonly IMediator _mediator = mediator;
-        private readonly ICurrentUser _currentUser = currentUser;
+        private readonly ISender _mediator = mediator;
         private readonly UserManager<AppUser> _userManager = userManager;
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> GetAsync()
@@ -32,7 +36,7 @@ namespace Spectra.WebAPI.Areas.Employee
         {
             var contract = (OperationResult<byte[]>)await mediator.Send(new GetContractTemplateQuery
             {
-                UserId = _currentUser.Id
+                UserId = CurrentUser.Id
             });
             return File(contract.Data, "Application/Pdf", $"{contract.OperationId}.pdf");
         }
@@ -52,10 +56,10 @@ namespace Spectra.WebAPI.Areas.Employee
             {
                 Id = input.Id,
                 DaysOfWork = input.DaysOfWork,
-                EmployeeUserId = _currentUser.Id,
+                EmployeeUserId = CurrentUser.Id,
                 FreelancingServices = input.FreelancingServices,
                 HoursOfWork = input.HoursOfWork,
-                ModifierRole = _currentUser.Role,
+                ModifierRole = CurrentUser.Role,
                 SpectraTeamServices = input.SpectraTeamServices,
                 FreelancingDuration = input.FreelancingDuration,
                 FreelancingPercentage = input.FreelancingPercentage,

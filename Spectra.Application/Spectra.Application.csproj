@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Admin\Commands\" />
     <Folder Include="Chats\EventHandlers\" />
     <Folder Include="MasterData\TreatmentTypes\" />
     <Folder Include="MasterData\SuccessStories\" />
