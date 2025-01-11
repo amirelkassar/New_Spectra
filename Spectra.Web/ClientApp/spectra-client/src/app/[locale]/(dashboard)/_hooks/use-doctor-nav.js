@@ -84,13 +84,13 @@ export const useDoctorNav = () => {
       //   icon: <Customer />,
       //   show: true,
       // },
-      // {
-      //   name: 'المحفظة',
-      //   route: ROUTES.DOCTOR.WALLET.DASHBOARD,
-      //   isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
-      //   icon: <WalletIcon />,
-      //   show: true,
-      // },
+      {
+        name: 'المحفظة',
+        route: ROUTES.DOCTOR.WALLET.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.WALLET.DASHBOARD),
+        icon: <WalletIcon />,
+        show: true,
+      },
       {
         name: 'ملف',
         route: ROUTES.DOCTOR.PROFILE.DASHBOARD,

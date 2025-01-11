@@ -3,7 +3,7 @@ import { Divider } from '@mantine/core';
 import { MyAccounts } from './_components/my-accounts';
 import { MyCards } from './_components/my-cards';
 import { AllTransactions } from './_components/all-transactions';
-import { Container } from '@/app/[locale]/(dashboard)/client/_components/ui';
+import { Container } from '@/client/_components/ui';
 import { MyWallet } from './_components/my-wallet';
 
 const WalletPage = () => {

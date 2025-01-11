@@ -1,6 +1,6 @@
 import Card from '@/components/card';
-import { BankAccount } from './bank-account';
-import { Section } from '@/app/[locale]/(dashboard)/client/_components/ui';
+import { BankAccount } from '@/dashboard/_components/payments';
+import { Section } from '@/client/_components/ui';
 
 const myAcconutData = [
   {

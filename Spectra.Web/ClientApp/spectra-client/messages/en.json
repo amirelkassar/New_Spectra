@@ -259,5 +259,17 @@
     "no_actions_available_for_this_version": "No actions are currently available for version number",
     "contracting": "Contracting",
     "no_accepted_contract": "Sorry, there is no accepted version of the contract yet. Please proceed to the Contracts Department for follow-up."
+  },
+  "payments_obj": {
+    "my_bank_accounts": "My bank accounts",
+    "add_account": "Add account",
+    "no_accounts": "No accounts found",
+    "bank_name": "Bank name",
+    "account_number": "Account number",
+    "account_holder_name": "Account holder name",
+    "branch": "Branch",
+    "set_as_primary_account": "Set as primary account",
+    "view_account": "View account",
+    "update_account": "Update account"
   }
 }

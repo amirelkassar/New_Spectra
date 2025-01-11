@@ -259,5 +259,17 @@
     "no_actions_available_for_this_version": "لا يوجد اجراءات متاحة حاليا للنسخة رقم",
     "contracting": "قيد التعاقد",
     "no_accepted_contract": "عذرًا، لا توجد نسخة مقبولة من العقد حتى الآن. يُرجى التوجه إلى قسم العقود للمتابعة."
+  },
+  "payments_obj": {
+    "my_bank_accounts": "حساباتي البنكية",
+    "add_account": "اضافة حساب",
+    "no_accounts": "لا يوجد حسابات",
+    "bank_name": "اسم البنك",
+    "account_number": "رقم الحساب",
+    "account_holder_name": "اسم مالك الحساب",
+    "branch": "الفرع",
+    "set_as_primary_account": "تعيين كحساب اساسي",
+    "view_account": "تفاصيل الحساب",
+    "update_account": "تعديل الحساب"
   }
 }
