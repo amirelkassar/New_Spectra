@@ -14,6 +14,18 @@
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
+  "control": "Control Panel",
+  "profile": "Profile",
+  "service_request": "Service Request",
+  "appointments": "Appointments",
+  "team": "Team",
+  "chat": "Chat",
+  "wallet": "Wallet",
+  "settings": "Settings",
+  "staff": "Staff",
+  "contract": "Contract",
+  "contracts": "Contracts",
+  "main_data": "Main Data",
   "terms_and_conditions": "Terms and Conditions",
   "privacy_policy": "Privacy Policy",
   "copyright": "All rights reserved to Spectra Medical Center",
@@ -151,7 +163,8 @@
     "resend_prompt": "Didn't receive it? ..",
     "resend": "Resend",
     "new_password": "New password",
-    "confirm_new_password": "Confirm new password"
+    "confirm_new_password": "Confirm new password",
+    "my_wallet": "My wallet"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -259,5 +272,25 @@
     "no_actions_available_for_this_version": "No actions are currently available for version number",
     "contracting": "Contracting",
     "no_accepted_contract": "Sorry, there is no accepted version of the contract yet. Please proceed to the Contracts Department for follow-up."
+  },
+  "payments_obj": {
+    "my_bank_accounts": "My bank accounts",
+    "add_account": "Add account",
+    "no_accounts": "No accounts found",
+    "bank_name": "Bank name",
+    "account_number": "Account number",
+    "account_holder_name": "Account holder name",
+    "branch": "Branch",
+    "set_as_primary_account": "Set as primary account",
+    "view_account": "View account",
+    "update_account": "Update account",
+    "current_balance": "Current balance",
+    "used": "Used",
+    "deposits": "Deposits",
+    "transactions_count": "Transactions count",
+    "wallet_deposit": "Wallet deposit",
+    "all_transactions": "All transactions",
+    "no_transactions": "No transactions found!",
+    "today": "Today"
   }
 }
