@@ -1,7 +1,8 @@
 'use client';
 
-import { memo, useMemo, useState } from 'react';
+import { Modal } from '@mantine/core';
 import { useTranslations } from 'next-intl';
+import { memo, useMemo, useState } from 'react';
 
 import { AddButton } from '@/components/buttons/add-button';
 import {
@@ -21,7 +22,6 @@ import {
   useUpdateAccount,
 } from '@/dashboard/_hooks/payments';
 import Card from '@/components/card';
-import { Modal } from '@mantine/core';
 import CloseIcon from '@/assets/icons/close';
 
 export const MyAccounts = () => {

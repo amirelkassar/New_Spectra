@@ -151,7 +151,8 @@
     "resend_prompt": "لم يصلك؟ ..",
     "resend": "اعادة ارسال",
     "new_password": "كلمة المرور الجديدة",
-    "confirm_new_password": "تأكيد كلمة المرور الجديدة"
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+    "my_wallet": "محفظتي"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
@@ -270,6 +271,14 @@
     "branch": "الفرع",
     "set_as_primary_account": "تعيين كحساب اساسي",
     "view_account": "تفاصيل الحساب",
-    "update_account": "تعديل الحساب"
+    "update_account": "تعديل الحساب",
+    "current_balance": "الرصيد الحالي",
+    "used": "المستخدم",
+    "deposits": "الإيداعات",
+    "transactions_count": "عدد التحويلات",
+    "wallet_deposit": "إيداع في المحفظة",
+    "all_transactions": "جميع التحويلات",
+    "no_transactions": "لا توجد تحويلات",
+    "today": "اليوم"
   }
 }

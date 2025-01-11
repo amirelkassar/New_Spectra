@@ -151,7 +151,8 @@
     "resend_prompt": "Didn't receive it? ..",
     "resend": "Resend",
     "new_password": "New password",
-    "confirm_new_password": "Confirm new password"
+    "confirm_new_password": "Confirm new password",
+    "my_wallet": "My wallet"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -270,6 +271,14 @@
     "branch": "Branch",
     "set_as_primary_account": "Set as primary account",
     "view_account": "View account",
-    "update_account": "Update account"
+    "update_account": "Update account",
+    "current_balance": "Current balance",
+    "used": "Used",
+    "deposits": "Deposits",
+    "transactions_count": "Transactions count",
+    "wallet_deposit": "Wallet deposit",
+    "all_transactions": "All transactions",
+    "no_transactions": "No transactions found!",
+    "today": "Today"
   }
 }

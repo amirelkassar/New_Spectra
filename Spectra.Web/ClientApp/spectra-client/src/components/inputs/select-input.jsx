@@ -16,9 +16,12 @@ import { forwardRef } from 'react';
  */
 
 const SelectInput = forwardRef(({ ...props }, ref) => {
+  const readOnly = props.readOnly || false;
+
   return (
     <Select
       {...props}
+      readOnly={false}
       ref={ref}
       checkIconPosition={props.checkIconPosition || 'right'}
       allowDeselect={props.allowDeselect || false}
@@ -31,7 +34,9 @@ const SelectInput = forwardRef(({ ...props }, ref) => {
       classNames={{
         ...props.classNames,
         input: cn(
-          'rounded-lg group focus:border-greenMain placeholder:font-normal peer read-only:border-transparent read-only:p-0 read-only:focus:border-transparent read-only:focus-within:border-transparent read-only:font-bold',
+          'rounded-lg group focus:border-greenMain placeholder:font-normal peer',
+          readOnly &&
+            'border-transparent p-0 focus:border-transparent focus-within:border-transparent font-bold',
           props.classNames?.input
         ),
         label: cn(
@@ -39,7 +44,8 @@ const SelectInput = forwardRef(({ ...props }, ref) => {
           props.classNames?.label
         ),
         section: cn(
-          'peer-data-[expanded=true]:rotate-180 transition-transform peer-read-only:hidden',
+          'peer-data-[expanded=true]:rotate-180 transition-transform',
+          readOnly && 'hidden',
           props.classNames?.section
         ),
         wrapper: cn('group', props.classNames?.wrapper),

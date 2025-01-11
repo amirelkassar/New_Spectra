@@ -53,13 +53,26 @@ export const useUserAccountById = (id) => {
   });
 };
 
-export const useUserWallet = () => {
-  const queryKey = 'user.billingManagement.wallet';
+const walletQueryKey = 'user.billingManagement.wallet';
 
+export const getUserWallet = async () =>
+  (await apiUser.get(billingManagement.wallet)).data;
+
+export const prefetchUserWallet = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [walletQueryKey],
+    queryFn: getUserWallet,
+  });
+
+  return queryClient;
+};
+
+export const useUserWallet = () => {
   return useQuery({
-    queryKey: [queryKey],
-    queryFn: async () =>
-      (await apiUser.get(billingManagement.wallet)).data,
+    queryKey: [walletQueryKey],
+    queryFn: getUserWallet,
     placeholderData: keepPreviousData,
   });
 };
