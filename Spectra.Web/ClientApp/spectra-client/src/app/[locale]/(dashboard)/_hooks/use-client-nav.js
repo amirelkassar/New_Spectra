@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
 
@@ -18,24 +19,26 @@ import Hand from '@/assets/icons/hand';
 export const useClientNav = () => {
   const path = usePathname();
 
+  const t = useTranslations();
+
   const links = useMemo(
     () => [
       {
-        name: 'الرئيسية',
+        name: t('home'),
         route: ROUTES.CLIENT.MAIN.HOME,
         isActive: path.includes(ROUTES.CLIENT.MAIN.HOME),
         icon: <MainIcon />,
         show: true,
       },
       {
-        name: 'قائمة التحكم',
+        name: t('control'),
         route: ROUTES.CLIENT.CONTROL_MENU,
         isActive: path.includes(ROUTES.CLIENT.CONTROL_MENU),
         icon: <ControlIcon />,
         show: true,
       },
       {
-        name: 'ملفي',
+        name: t('profile'),
         route: ROUTES.CLIENT.PROFILE.FAMILY,
         isActive:
           path.includes(ROUTES.CLIENT.PROFILE.FAMILY) ||
@@ -44,21 +47,21 @@ export const useClientNav = () => {
         show: true,
       },
       {
-        name: 'الباقات',
+        name: t('packages'),
         route: ROUTES.CLIENT.PACKAGES,
         isActive: path.includes(ROUTES.CLIENT.PACKAGES),
         icon: <HeartIcon />,
         show: true,
       },
       {
-        name: 'طلب الخدمة',
+        name: t('service_request'),
         route: ROUTES.CLIENT.SERVICE_REQUEST.HOME,
         isActive: path.includes(ROUTES.CLIENT.SERVICE_REQUEST.HOME),
         icon: <Hand />,
         show: true,
       },
       {
-        name: 'المواعيد',
+        name: t('appointments'),
         route: ROUTES.CLIENT.SCHEDULES,
         isActive: path.includes(ROUTES.CLIENT.SCHEDULES),
         icon: <ClockIcon2 />,
@@ -66,7 +69,7 @@ export const useClientNav = () => {
       },
 
       {
-        name: 'الفريق',
+        name: t('team'),
         route: ROUTES.CLIENT.TEAM.HOME,
         isActive: path.includes(ROUTES.CLIENT.TEAM.HOME),
         icon: <StaffIcon />,
@@ -79,28 +82,28 @@ export const useClientNav = () => {
       //   icon: <ReportsIcon />,
       // },
       {
-        name: 'محادثات',
+        name: t('chat'),
         route: ROUTES.CLIENT.CHATS,
         isActive: path.includes(ROUTES.CLIENT.CHATS),
         icon: <ChatIcon />,
         show: true,
       },
       {
-        name: 'المحفظة',
+        name: t('wallet'),
         route: ROUTES.CLIENT.WALLET,
         isActive: path.includes(ROUTES.CLIENT.WALLET),
         icon: <WalletIcon />,
         show: true,
       },
       {
-        name: 'الإعدادات',
+        name: t('settings'),
         route: ROUTES.CLIENT.SETTINGS.HOME,
         isActive: path.includes(ROUTES.CLIENT.SETTINGS.HOME),
         icon: <SettingsIcon />,
         show: true,
       },
     ],
-    [path]
+    [path, t]
   );
 
   return {

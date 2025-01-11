@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Modal } from '@mantine/core';
 
@@ -9,13 +10,17 @@ import Button from '@/components/button';
 export const ConfirmModal = () => {
   const tg = useTranslations('general_obj');
 
-  const { isOpen, close, message, icon, onConfirm, isPending } =
+  const [pending, setPending] = useState(false);
+
+  const { isOpen, close, message, icon, onConfirm } =
     useConfirmModalStore();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
+    setPending(true);
     await onConfirm();
     close();
+    setPending(false);
   };
 
   return (
@@ -40,11 +45,11 @@ export const ConfirmModal = () => {
           <Button
             variant='secondary'
             onClick={handleSumbit}
-            disabled={isPending}
+            disabled={pending}
           >
             {tg('yes_sure')}
           </Button>
-          <Button disabled={isPending} onClick={close}>
+          <Button disabled={pending} onClick={close}>
             {tg('no')}
           </Button>
         </div>

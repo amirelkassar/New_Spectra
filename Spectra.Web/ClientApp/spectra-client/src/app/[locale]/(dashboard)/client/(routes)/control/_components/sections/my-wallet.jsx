@@ -2,7 +2,7 @@ import {
   Section,
   SectionTitle,
 } from '@/app/[locale]/(dashboard)/client/_components/ui';
-import { Wallet } from '@/app/[locale]/(dashboard)/client/_components/payments';
+import { Wallet } from '@/app/[locale]/(dashboard)/_components/payments';
 
 export const MyWallet = () => {
   return (
