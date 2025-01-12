@@ -19,6 +19,6 @@ export const scheduleTime = {
   actions: {
     add: '/scheduleTime',
     update: '/scheduleTime',
-    delete: (day) => `/scheduleTime?day=${day}`,
+    delete: (id) => `/scheduleTime?id=${id}`,
   },
 };
