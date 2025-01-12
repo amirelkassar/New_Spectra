@@ -14,14 +14,18 @@ const Schema = z.object({
   bankName: z
     .string()
     .min(3, 'Bank name must be at least 3 characters long'),
-  accountNumber: z.string().min(1, 'Account number is required'),
+  accountNumber: z
+    .string()
+    .min(1, 'Account number is required')
+    .regex(
+      /^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/,
+      'Invalid account number'
+    ),
   accountHolderName: z
     .string()
     .min(1, 'Account holder name is required'),
-  branch: z.string().min(1, 'Branch name is required'),
   country: z.string().min(1, 'Country is required'),
   countryCode: z.string().optional(),
-  city: z.string().min(1, 'City is required'),
   default: z.boolean().optional(),
 });
 
@@ -35,10 +39,8 @@ export const useUpdateAccount = ({ initialValues }) => {
       bankName: initialValues?.bankName || '',
       accountNumber: initialValues?.accountNumber || '',
       accountHolderName: initialValues?.accountHolderName || '',
-      branch: initialValues?.branch || '',
       countryCode: initialValues?.countryCode || '',
       country: initialValues?.country || '',
-      city: initialValues?.city || '',
       default: initialValues?.default || false,
     },
   });

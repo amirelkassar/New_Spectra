@@ -278,7 +278,7 @@
     "add_account": "Add account",
     "no_accounts": "No accounts found",
     "bank_name": "Bank name",
-    "account_number": "Account number",
+    "account_number": "International account number ( IBAN )",
     "account_holder_name": "Account holder name",
     "branch": "Branch",
     "set_as_primary_account": "Set as primary account",
