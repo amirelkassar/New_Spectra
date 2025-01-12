@@ -8,11 +8,6 @@ import {
 
 import { apiEmployee } from '@/api/axios';
 import { scheduleTime } from '@/api/employee';
-import { initialSiteQueries } from '@/hooks/queries/initials';
-
-const customQueries = null;
-
-export const initialQueries = customQueries || initialSiteQueries;
 
 export const initialQueryKey = 'employee.scheduleTime';
 
@@ -23,7 +18,7 @@ export const prefetchScheduleTimeList = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [initialQueryKey, initialQueries],
+    queryKey: [initialQueryKey],
     queryFn: getScheduleTimeList,
   });
 
@@ -46,7 +41,7 @@ export const useAddScheduleTime = () => {
       (await apiEmployee.post(scheduleTime.actions.add, data)).data,
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: [initialQueryKey, initialQueries],
+        queryKey: [initialQueryKey],
       });
     },
   });
@@ -58,7 +53,7 @@ export const useUpdateScheduleTime = () => {
       (await apiEmployee.put(scheduleTime.actions.update, data)).data,
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: [initialQueryKey, initialQueries],
+        queryKey: [initialQueryKey],
       });
     },
   });
@@ -73,7 +68,7 @@ export const useDeleteScheduleTime = () => {
         .data,
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: [initialQueryKey, initialQueries],
+        queryKey: [initialQueryKey],
       });
     },
   });

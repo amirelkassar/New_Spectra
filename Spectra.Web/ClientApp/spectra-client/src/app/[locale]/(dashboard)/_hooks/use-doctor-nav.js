@@ -35,44 +35,29 @@ export const useDoctorNav = () => {
       //   icon: <MainIcon />,
       //   show: true,
       // },
-      // {
-      //   name: 'المواعيد',
-      //   route: ROUTES.DOCTOR.APPOINTMENTS,
-      //   isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS),
-      //   icon: <Appointments />,
-      //   show: true,
-
-      //   nestedLinks: [
-      //     {
-      //       name: 'المواعيد القادمة',
-      //       route: ROUTES.DOCTOR.APPOINTMENTSUPCOMING,
-      //       isActive: path.includes(
-      //         ROUTES.DOCTOR.APPOINTMENTSUPCOMING
-      //       ),
-      //     },
-      //     {
-      //       name: 'المواعيد السابقة',
-      //       route: ROUTES.DOCTOR.APPOINTMENTSPREVIOUS,
-      //       isActive: path.includes(
-      //         ROUTES.DOCTOR.APPOINTMENTSPREVIOUS
-      //       ),
-      //     },
-      //     {
-      //       name: 'المواعيد الملغاة',
-      //       route: ROUTES.DOCTOR.APPOINTMENTSCANCELD,
-      //       isActive: path.includes(
-      //         ROUTES.DOCTOR.APPOINTMENTSCANCELD
-      //       ),
-      //     },
-      //     {
-      //       name: 'المواعيد المؤجلة',
-      //       route: ROUTES.DOCTOR.APPOINTMENTSDEFERRED,
-      //       isActive: path.includes(
-      //         ROUTES.DOCTOR.APPOINTMENTSDEFERRED
-      //       ),
-      //     },
-      //   ],
-      // },
+      {
+        name: t('appointments'),
+        route: ROUTES.DOCTOR.APPOINTMENTS.DASHBOARD,
+        isActive: path.includes(ROUTES.DOCTOR.APPOINTMENTS.DASHBOARD),
+        icon: <Appointments />,
+        show: true,
+        nestedLinks: [
+          {
+            name: t('work_schedule'),
+            route: ROUTES.DOCTOR.APPOINTMENTS.WORK_SCHEDULE.DASHBOARD,
+            isActive: path.includes(
+              ROUTES.DOCTOR.APPOINTMENTS.WORK_SCHEDULE.DASHBOARD
+            ),
+          },
+          {
+            name: t('clients_schedule'),
+            route: ROUTES.DOCTOR.APPOINTMENTS.CLIENTS_SCHEDULE,
+            isActive: path.includes(
+              ROUTES.DOCTOR.APPOINTMENTS.CLIENTS_SCHEDULE
+            ),
+          },
+        ],
+      },
       // {
       //   name: 'تقييمات',
       //   route: ROUTES.DOCTOR.RATINGS.DASHBOARD,

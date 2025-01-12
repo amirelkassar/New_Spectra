@@ -243,16 +243,16 @@ const ROUTES = {
   },
   DOCTOR: {
     MAIN: '/doctor/main',
-    APPOINTMENTS: '/doctor/appointments',
-    APPOINTMENTSCANCELD: '/doctor/appointments/cancelled',
-    APPOINTMENTSCALENDAR: '/doctor/appointments/calendar',
-    APPOINTMENTSDEFERRED: '/doctor/appointments/deferred',
-    APPOINTMENTSUPCOMING: '/doctor/appointments/upcoming',
-    APPOINTMENTSPREVIOUS: '/doctor/appointments/previous',
-    APPOINTMENTSWORK: '/doctor/appointments/appointmentsWork',
-    APPOINTMENTSWORKID: (id) =>
-      `/doctor/appointments/appointmentsWork/${id}`,
-    APPOINTMENTSWORKADD: '/doctor/appointments/appointmentsWork/add',
+    APPOINTMENTS: {
+      DASHBOARD: '/doctor/appointments',
+      CALENDAR: '/doctor/appointments/calendar',
+      CLIENTS_SCHEDULE: '/doctor/appointments/clients-schedule',
+      WORK_SCHEDULE: {
+        DASHBOARD: '/doctor/appointments/work-schedule',
+        ADD: '/doctor/appointments/work-schedule/add',
+        EDIT: (id) => `/doctor/appointments/work-schedule/${id}/edit`,
+      },
+    },
     RATINGS: {
       DASHBOARD: '/doctor/ratings',
     },
