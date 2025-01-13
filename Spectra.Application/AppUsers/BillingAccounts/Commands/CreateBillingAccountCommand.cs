@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Text.RegularExpressions;
+using FluentValidation;
+using MediatR;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.AppUser.UserBilling;
 using Spectra.Domain.Shared.Common.Exceptions;
@@ -11,10 +13,10 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
         public string AccountHolderName { get; set; }
-        public string Branch { get; set; }
+        public string? Branch { get; set; }
         public string Country { get; set; }
         public string CountryCode { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public bool Default { get; set; }
 
         public class CreateBillingAccountCommandHandler(ICurrentUser currentUser, IBaseMongoDbRepository<UserBillingAccount> accountRepository) : IRequestHandler<CreateBillingAccountCommand, OperationResult>
@@ -29,15 +31,13 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
 
                 var billingAccount = new UserBillingAccount(Ulid.NewUlid().ToString(),
                     _currentUser.Id,
-                    request.BankName,
                     request.AccountNumber,
                     request.AccountHolderName,
-                    request.Branch,
+                    request.BankName,
                     request.Country,
-                    request.City)
+                    request.CountryCode)
                 {
                     Default = request.Default,
-                    CountryCode=request.CountryCode,
                 };
 
                 await _accountRepository.AddAsync(billingAccount);
@@ -54,6 +54,37 @@ namespace Spectra.Application.AppUsers.BillingAccounts.Commands
                 }
 
                 return OperationResult<string>.Success(billingAccount.Id);
+            }
+        }
+
+        public class CreateBillingAccountCommandValidator : AbstractValidator<CreateBillingAccountCommand>
+        {
+            public CreateBillingAccountCommandValidator()
+            {
+                RuleFor(a => a.BankName)
+                    .NotEmpty()
+                    .NotNull();
+
+                RuleFor(a => a.AccountNumber)
+                    .NotNull()
+                    .NotEmpty()
+                    .Must(a => Regex.IsMatch(a, @"^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$"));
+
+                RuleFor(a => a.AccountHolderName)
+                    .NotEmpty()
+                    .NotNull();
+
+                RuleFor(a => a.Country)
+                    .NotNull()
+                    .NotEmpty();
+
+                RuleFor(a => a.CountryCode)
+                    .NotEmpty()
+                    .NotNull();
+
+                RuleFor(a => a.Default)
+                    .NotEmpty()
+                    .NotNull();
             }
         }
     }

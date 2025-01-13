@@ -18,7 +18,13 @@ namespace Spectra.Application.AppUsers.UserWallets.Queries
 
             public async Task<OperationResult> Handle(GetUserWalletQuery request, CancellationToken cancellationToken)
             {
-                var wallet = await _walletRepository.GetAsync(w => w.UserId == _currentUser.Id) ?? throw new NotFoundException("UserWallets", _currentUser.Id);
+                var wallet = await _walletRepository.GetAsync(w => w.UserId == _currentUser.Id);
+                if (wallet == null) 
+                {
+                    wallet = new UserWallet(Ulid.NewUlid().ToString(),
+                        _currentUser.Id);
+                    await _walletRepository.AddAsync(wallet);
+                }
 
                 return OperationResult<WalletReadDto>.Success(wallet.Adapt<WalletReadDto>());
 

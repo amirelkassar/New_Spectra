@@ -13,7 +13,7 @@ namespace Spectra.Application.Employees.ScheduleTimes.Commands
 {
     public class UpdateScheduleTimeCommand : IRequest<OperationResult>
     {
-        public DayOfWeek Day { get; private set; }
+        public string Id { get; set; }
         public TimeSpan From { get; set; }
         public TimeSpan To { get; set; }
 
@@ -23,10 +23,10 @@ namespace Spectra.Application.Employees.ScheduleTimes.Commands
             private readonly IBaseMongoDbRepository<ScheduleTime> _scheduleTimeRepository = scheduleTimeRepository;
             public async Task<OperationResult> Handle(UpdateScheduleTimeCommand request, CancellationToken cancellationToken)
             {
-                if (!await _scheduleTimeRepository.Exists(s => s.UserId == _currentUser.Id && s.Day == request.Day))
-                    throw new NotFoundException(nameof(ScheduleTime), request.Day.ToString());
+                if (!await _scheduleTimeRepository.Exists(s => s.UserId == _currentUser.Id && s.Id==request.Id))
+                    throw new NotFoundException(nameof(ScheduleTime), request.Id);
 
-                var scheduleTime = await _scheduleTimeRepository.GetAsync(s => s.UserId == _currentUser.Id && s.Day == request.Day);
+                var scheduleTime = await _scheduleTimeRepository.GetAsync(s => s.UserId == _currentUser.Id && s.Id == request.Id);
 
                 scheduleTime.From = request.From;
                 scheduleTime.To = request.To;
