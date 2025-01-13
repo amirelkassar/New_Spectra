@@ -37,3 +37,16 @@ export const chat = {
     deleteMessage: (id) => `/chat/message?messageId=${id}`,
   },
 };
+
+export const billingManagement = {
+  base: '/billing-management',
+  accountList: (queries = {}) =>
+    buildQuery('/billingManagement/account-list', queries),
+  wallet: '/billingManagement/wallet',
+  actions: {
+    get: (id) => `/billingManagement/account?id=${id}`,
+    add: '/billingManagement/account',
+    update: '/billingManagement/account',
+    delete: (id) => `/billingManagement/account?id=${id}`,
+  },
+};

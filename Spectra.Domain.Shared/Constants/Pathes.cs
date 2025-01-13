@@ -7,6 +7,8 @@ namespace Spectra.Domain.Shared.Constants
         private const string _base = "Documents";
         public static string GetEmployeesPath() => Path.Combine(_base, "Employees");
         public static string GetSystemFilesPath() => Path.Combine(_base, "SystemFiles");
+        public static string GetTemplatesPath() => Path.Combine(GetSystemFilesPath(), "Templates");
+
         public static string GetSucessStoriesPath() => Path.Combine(GetSystemFilesPath(), "SucessStories");
         public static string GetPackagesPath() => Path.Combine(GetSystemFilesPath(), "Packages");
         public static string GetArticlesPath() => Path.Combine(GetSystemFilesPath(), "Articles");

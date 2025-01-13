@@ -6,7 +6,5 @@
         public string EnName { get; set; }
         public string ArDate { get; set; }
         public string EnDate { get; set; }
-
-
     }
 }

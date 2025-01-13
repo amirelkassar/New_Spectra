@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import Button from '../button';
 import ArrowRight from '@/assets/icons/arrow-right';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 /**
  * @typedef {Object} FileInputProps
@@ -16,6 +17,8 @@ import { cn } from '@/lib/utils';
  */
 
 const FileInput = ({ size = 'md', ...props }) => {
+  const tg = useTranslations('general_obj');
+
   const ref = useRef(null);
 
   return (
@@ -44,7 +47,7 @@ const FileInput = ({ size = 'md', ...props }) => {
           )}
         >
           <ArrowRight />
-          رفع ملف
+          {tg('upload_file')}
         </Button>
       </div>
       {props?.error && (

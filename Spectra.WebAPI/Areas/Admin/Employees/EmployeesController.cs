@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.EmployeeGroups.Commands;
@@ -19,6 +20,16 @@ namespace Spectra.WebAPI.Areas.Admin.Employees
         public async Task<IActionResult> GetEmployeeListAsync([FromQuery] GetEmployeeListQuery input)
         {
             var response = await _employeeService.GetEmployeeListAsync(input);
+            return Ok(response);
+        }
+
+        [HttpGet("employee-contract")]
+        public async Task<IActionResult> GetContractAsync([FromQuery] string employeeId)
+        {
+            var response = await _mediator.Send(new GetContractByEmployeeIdQuery
+            {
+                EmployeeId = employeeId
+            });
             return Ok(response);
         }
 

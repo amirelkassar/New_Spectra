@@ -5,7 +5,7 @@ export const SectionTitle = ({ children, ...props }) => {
     <h2
       {...props}
       className={cn(
-        'text-base mdl:text-xl font-bold',
+        'text-base mdl:text-xl font-bold capitalize',
         props?.className
       )}
     >

@@ -1,19 +1,38 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using Spectra.Application.Commons.Dtos;
+using Spectra.Application.Contracts.Queries;
+using Spectra.Application.Interfaces;
 using Spectra.Application.Notifications;
+using Spectra.Application.Templates.Models;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.Contracts.DomainEvents;
+using Spectra.Domain.Employees;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
+using Spectra.Domain.Shared.Wrappers;
 
 namespace Spectra.Application.Contracts.EventHandlers
 {
-    public class ContractAcceptEventHandler(INotificationService notificationService) : INotificationHandler<ContractChangeEvent>
+    public class ContractAcceptEventHandler(INotificationService notificationService,
+        ITemplateService templateService,
+            IEmailSender emailSender,
+            IBaseMongoDbRepository<Employee> employeeRepository,
+            ISender sender,
+            ILogger<ContractAcceptEventHandler> logger) : INotificationHandler<ContractChangeEvent>
     {
         private readonly INotificationService _notificationService = notificationService;
+        private readonly ITemplateService _templateService = templateService;
+        private readonly IEmailSender _emailSender = emailSender;
+        private readonly IBaseMongoDbRepository<Employee> _employeeRepository = employeeRepository;
+        private readonly ISender _sender = sender;
+        private readonly ILogger<ContractAcceptEventHandler> _logger = logger;
 
         public async Task Handle(ContractChangeEvent notification, CancellationToken cancellationToken)
         {
             var contract = notification.Contract;
 
+            var employee = await _employeeRepository.GetByIdAsync(contract.EmployeeId);
             switch (notification.Type)
             {
                 case ContractChangeType.Admin:
@@ -80,6 +99,24 @@ namespace Spectra.Application.Contracts.EventHandlers
                     }
                     break;
             }
+
+            if (contract.ContractState==ContractConses.ContractStates.Accepted)
+            {
+                var contractPdfResult = (OperationResult<byte[]>)await _sender.Send(new GetContractTemplateQuery { UserId = employee.UserId });
+
+                using var stream = new MemoryStream(contractPdfResult.Data);
+
+                var emailAttachment = new EmailAttachment($"{employee.Id}.pdf", "application/pdf", stream);
+
+                var model = new ContractSignedEmailTemplateModel
+                {
+                    UserFullName = $"{employee.Name.FirstName} {employee.Name.LastName}",
+                };
+
+                var template = await _templateService.GetEmailTemplateAsync("ContractSignedEmailTemplate.cshtml", model);
+                await _emailSender.SendAsync(new EmailMetadata(employee.EmailAddress.Emailaddress, "no-reply congrats , spectra accepted your contract", template, [emailAttachment]));
+            }
+           
         }
     }
 }

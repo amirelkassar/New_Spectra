@@ -100,3 +100,26 @@ export const useAcceptEmployeeContract = () => {
     onError: () => {},
   });
 };
+
+export const useDownloadEmployeeContract = () => {
+  return useMutation({
+    mutationFn: async ({ filename }) => {
+      const blob = (
+        await apiEmployee.post(
+          contract.actions.download,
+          {},
+          { responseType: 'blob' }
+        )
+      ).data;
+
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = filename || 'downloaded-file';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    },
+  });
+};

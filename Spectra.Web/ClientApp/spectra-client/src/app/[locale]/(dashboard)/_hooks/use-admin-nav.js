@@ -1,7 +1,8 @@
 'use client';
 
-import { usePathname } from '@/i18n/routing';
 import { useMemo } from 'react';
+import { usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 import MainIcon from '@/assets/icons/main';
 import SettingsIcon from '@/assets/icons/settings';
@@ -15,6 +16,8 @@ import DatabaseIcon from '@/assets/icons/database';
 import ContractsIcon from '@/assets/icons/contracts';
 
 export const useAdminNav = () => {
+  const t = useTranslations();
+
   const path = usePathname();
 
   const links = useMemo(
@@ -48,7 +51,7 @@ export const useAdminNav = () => {
       //   show: true,
       // },
       {
-        name: 'الموظفين',
+        name: t('staff'),
         route: ROUTES.ADMIN.STAFF.HOME,
         isActive: path.includes(ROUTES.ADMIN.STAFF.HOME),
         icon: <StaffIcon />,
@@ -62,28 +65,28 @@ export const useAdminNav = () => {
       //   show: true,
       // },
       {
-        name: 'البيانات الرئيسية',
+        name: t('main_data'),
         route: ROUTES.ADMIN.DATAMAIN.HOME,
         isActive: path.includes(ROUTES.ADMIN.DATAMAIN.HOME),
         icon: <DatabaseIcon />,
         show: true,
       },
       {
-        name: 'العقود',
+        name: t('contracts'),
         route: ROUTES.ADMIN.CONTRACTS.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.CONTRACTS.DASHBOARD),
         icon: <ContractsIcon />,
         show: true,
       },
       {
-        name: 'محادثات',
+        name: t('chat'),
         route: ROUTES.ADMIN.CHATS.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.CHATS.DASHBOARD),
         icon: <ChatIcon />,
         show: true,
       },
       {
-        name: 'الإعدادات',
+        name: t('settings'),
         route: ROUTES.ADMIN.SETTINGS.DASHBOARD,
         isActive: path.includes(ROUTES.ADMIN.SETTINGS.DASHBOARD),
         icon: <SettingsIcon />,
@@ -91,7 +94,7 @@ export const useAdminNav = () => {
         show: true,
       },
     ],
-    [path]
+    [path, t]
   );
 
   return {

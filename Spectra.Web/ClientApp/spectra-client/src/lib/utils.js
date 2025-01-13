@@ -6,6 +6,7 @@ import 'dayjs/locale/ar';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { serialize } from 'object-to-formdata';
 import { twMerge } from 'tailwind-merge';
+import { z } from 'zod';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -262,3 +263,19 @@ export const getRedirectPath = (
       return ROUTES.HOME;
   }
 };
+
+export const passwordValidation = z
+  .string()
+  .min(8, 'Password must be at least 8 characters long')
+  .regex(
+    /[A-Z]/,
+    'Password must contain at least one uppercase letter'
+  )
+  .regex(
+    /[a-z]/,
+    'Password must contain at least one lowercase letter'
+  )
+  .regex(
+    /[!@#$%^&*(),.?":{}|<>]/,
+    'Password must contain at least one special character'
+  );

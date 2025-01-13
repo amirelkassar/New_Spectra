@@ -2,12 +2,18 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Spectra.Application.Commons.Dtos;
 using Spectra.Application.Employees.Commands;
 using Spectra.Application.Employees.Dto;
 using Spectra.Application.Employees.Services;
+using Spectra.Application.Interfaces;
+using Spectra.Application.Templates.Models;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.Shared.Constants;
 using Spectra.Domain.Shared.Enums;
 using Spectra.Domain.Shared.Helpers;
+using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Domain.Shared.Wrappers;
 using Spectra.Domain.ValueObjects;
 using static Spectra.Domain.Shared.Constants.EmployeesConsts;
@@ -64,12 +70,19 @@ namespace Spectra.Application.AppUsers.Commands
         [Required]
         public IFormFile Certification { get; set; }
 
-        public class RegisterMedicalProviderHandler(IEmployeeService medicalProviderService) : IRequestHandler<RegisterMedicalProvider, OperationResult>
+        public class RegisterMedicalProviderHandler(IEmployeeService medicalProviderService,
+            ITemplateService templateService,
+            IEmailSender emailSender,
+            IServiceProvider serviceProvider) : IRequestHandler<RegisterMedicalProvider, OperationResult>
         {
             private readonly IEmployeeService _medicalProviderService = medicalProviderService;
+            private readonly ITemplateService _templateService = templateService;
+            private readonly IEmailSender _emailSender = emailSender;
+            private readonly IServiceProvider _serviceProvider = serviceProvider;
 
             public async Task<OperationResult> Handle(RegisterMedicalProvider request, CancellationToken cancellationToken)
             {
+                var webClient = _serviceProvider.GetKeyedService<ClientSide>("spectra_web");
                 var role = request.JobType switch
                 {
                     JobTypes.Doctor => Roles.Doctor,
@@ -103,6 +116,15 @@ namespace Spectra.Application.AppUsers.Commands
 
                 if (medicalProviderResults.SuccessOpration)
                 {
+                    var emailModel = new NewMedicalProviderEmailTemplateModel
+                    {
+                        UserFullName=request.Name,
+                        DashboardLink=$"{webClient.Url}ar/doctor/profile"
+                    };
+
+                    var template = await _templateService.GetEmailTemplateAsync("NewMedicalProviderEmailTemplate.cshtml", emailModel);
+                    await _emailSender.SendAsync(new EmailMetadata(request.EmailAddress, "no-reply welcome to spectra", template));
+
                     var empId = ((OperationResult<string>)medicalProviderResults).Data;
                     if (request.Certification is not null && request.Certification.Length >= 0)
                     {

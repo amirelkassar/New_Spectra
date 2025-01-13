@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 using Spectra.Application;
+using Spectra.Domain.Shared.OptionDtos;
 using Spectra.Infrastructure;
 using Spectra.Web.Models;
 using Spectra.WebAPI;
@@ -9,17 +10,18 @@ namespace Spectra.Web
     public static class DependencyInjection
     {
         public static IServiceCollection ConfigureWebHost(this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             services.AddControllers()
                 .AddNewtonsoftJson(opts => opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
-            services.ConfigureApplication(configuration);
+            services.ConfigureApplication(configuration, webHostEnvironment);
             services.ConfigureInfrastructure(configuration);
             services.ConfigureWebAPIs(configuration);
             ConfigureSwagger(services, configuration);
             ConfigureCors(services, configuration);
+            AddClientSides(services, configuration);
             return services;
         }
 
@@ -72,6 +74,18 @@ namespace Spectra.Web
                     c.IncludeXmlComments(filePath);
                 }
             });
+        }
+
+        private static void AddClientSides(IServiceCollection services, IConfiguration configuration)
+        {
+            List<ClientSide> clients = configuration.GetSection("Clients").Get<List<ClientSide>>();
+
+            var webClient = clients.FirstOrDefault(c => c.ClientId.Equals("spectra_web"));
+
+            if (webClient != null)
+            {
+                services.AddKeyedSingleton("spectra_web", webClient);
+            }
         }
 
         private static void ConfigureIdentityServerSettings(IServiceCollection services, IConfiguration configuration)

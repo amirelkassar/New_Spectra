@@ -4,6 +4,7 @@ using Spectra.Application.Contracts.Commands;
 using Spectra.Application.Contracts.Queries;
 using Spectra.Application.Interfaces;
 using Spectra.Domain.Shared.Constants;
+using Spectra.Domain.Shared.Wrappers;
 using Spectra.WebAPI.Areas.Admin.Contract.Models;
 
 namespace Spectra.WebAPI.Areas.Admin.Contract
@@ -20,10 +21,20 @@ namespace Spectra.WebAPI.Areas.Admin.Contract
         }
 
         [HttpGet()]
-        public async Task<ActionResult> GetAsync([FromQuery] GetContractById input)
+        public async Task<ActionResult> GetAsync([FromQuery] GetContractByIdQuery input)
         {
             var contract = await mediator.Send(input);
             return Ok(contract);
+        }
+
+        [HttpPost("download")]
+        public async Task<ActionResult> DownloadAsync([FromQuery] string contractId)
+        {
+            var contract = (OperationResult<byte[]>)await mediator.Send(new GetContractTemplateQuery
+            {
+                ContractId = contractId
+            });
+            return File(contract.Data, "Application/Pdf", $"{contract.OperationId}.pdf");
         }
 
         [HttpGet("text")]

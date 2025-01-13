@@ -48,7 +48,7 @@ namespace Spectra.Application.Contracts.Commands
                     currentVersion.AcceptedByEmployee = request.Value;
                     currentVersion.ChangedByEmployeeDate = DateTimeOffset.UtcNow;
 
-                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee && currentVersion.AcceptedByHead)
+                    if (currentVersion.AcceptedByAdmin && currentVersion.AcceptedByEmployee)
                         contract.Accept();
                 }
                 else

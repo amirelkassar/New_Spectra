@@ -1,9 +1,13 @@
+import { Logo } from '@/components/logo';
+import { NotFound404 } from '@/components/not-found-404';
+
 const NotFound = () => {
   return (
-    <main className='h-screen flex flex-col justify-center items-center text-center bg-black'>
-      <h1 className='text-white text-2xl mdl:text-4xl'>
-        404 | Page Not Found
-      </h1>
+    <main className='h-screen flex flex-col p-4 mdl:p-8'>
+      <Logo />
+      <div className='flex-1 flex justify-center items-center'>
+        <NotFound404 toHome className='h-fit flex-none' />
+      </div>
     </main>
   );
 };

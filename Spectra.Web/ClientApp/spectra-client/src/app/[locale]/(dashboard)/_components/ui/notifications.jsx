@@ -75,10 +75,7 @@ export const Notifications = () => {
 
     if (!totalCount)
       return (
-        <div
-          key={pageIndex}
-          className='w-full h-full flex justify-center items-center text-grayDark'
-        >
+        <div className='w-full h-full flex justify-center items-center text-grayDark'>
           {tg('no_notifications')}
         </div>
       );

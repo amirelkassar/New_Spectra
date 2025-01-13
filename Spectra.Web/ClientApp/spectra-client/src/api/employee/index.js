@@ -1,3 +1,5 @@
+import { buildQuery } from '@/lib/utils';
+
 export const contract = {
   base: '/contract',
   get: '/contract',
@@ -7,5 +9,16 @@ export const contract = {
     cancel: '/contract/cancel',
     reject: '/contract/reject',
     accept: '/contract/accept',
+    download: '/contract/download',
+  },
+};
+
+export const scheduleTime = {
+  base: '/scheduleTime',
+  list: (queries = {}) => buildQuery('/scheduleTime/list', queries),
+  actions: {
+    add: '/scheduleTime',
+    update: '/scheduleTime',
+    delete: (id) => `/scheduleTime?id=${id}`,
   },
 };

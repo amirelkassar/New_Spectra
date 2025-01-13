@@ -42,6 +42,7 @@ import { ARTICLES } from './blog';
 import { CHAT_TYPES } from './chat';
 import { TERMS } from './terms';
 import { PRIVACY } from './privacy';
+import { WEEK_DAYS_ENUMS, WEEK_DAYS } from './appointments';
 
 export {
   WHAT_WE_CURE,
@@ -86,4 +87,6 @@ export {
   CHAT_TYPES,
   TERMS,
   PRIVACY,
+  WEEK_DAYS_ENUMS,
+  WEEK_DAYS,
 };

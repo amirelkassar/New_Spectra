@@ -4,6 +4,7 @@ import { SelectProps } from '@mantine/core';
 
 import { cn } from '@/lib/utils';
 import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
+import { forwardRef } from 'react';
 
 /**
  * @typedef {Object} SelectProps
@@ -14,10 +15,14 @@ import { ArrowDownBlack } from '@/assets/icons/arrow-down-main-green';
  * @param {SelectProps} props
  */
 
-const SelectInput = ({ ...props }) => {
+const SelectInput = forwardRef(({ ...props }, ref) => {
+  const readOnly = props.readOnly || false;
+
   return (
     <Select
       {...props}
+      readOnly={false}
+      ref={ref}
       checkIconPosition={props.checkIconPosition || 'right'}
       allowDeselect={props.allowDeselect || false}
       rightSection={
@@ -30,6 +35,8 @@ const SelectInput = ({ ...props }) => {
         ...props.classNames,
         input: cn(
           'rounded-lg group focus:border-greenMain placeholder:font-normal peer',
+          readOnly &&
+            'border-transparent p-0 focus:border-transparent focus-within:border-transparent font-bold',
           props.classNames?.input
         ),
         label: cn(
@@ -38,12 +45,15 @@ const SelectInput = ({ ...props }) => {
         ),
         section: cn(
           'peer-data-[expanded=true]:rotate-180 transition-transform',
+          readOnly && 'hidden',
           props.classNames?.section
         ),
         wrapper: cn('group', props.classNames?.wrapper),
       }}
     />
   );
-};
+});
+
+SelectInput.displayName = 'SelectInput';
 
 export default SelectInput;
