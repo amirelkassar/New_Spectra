@@ -3,12 +3,22 @@
 import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
+import { AppointmentsSummary } from '@/dashboard/_components/appointments';
 import { GradientNoiseCard } from '@/components/gradient-noise-card';
 import ArrowWhite from '@/assets/icons/arrowWhite';
 import CalendarTimeIcon from '@/assets/icons/calendarTime';
 import ROUTES from '@/routes';
 
-export const TodayWorkSchedule = () => {
+export const Summary = () => {
+  return (
+    <>
+      <AppointmentsSummary />
+      <TodayWorkSchedule />
+    </>
+  );
+};
+
+const TodayWorkSchedule = () => {
   const tg = useTranslations('general_obj');
 
   const t = useTranslations('appointments_obj');

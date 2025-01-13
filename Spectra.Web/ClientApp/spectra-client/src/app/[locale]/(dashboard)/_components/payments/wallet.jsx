@@ -6,7 +6,7 @@ import { GradientCard } from '@/components/gradient-card';
 
 import DollarCircle from '@/assets/icons/dollar-circle';
 import UpDown from '@/assets/icons/up-down';
-import Button from '@/components/button';
+// import Button from '@/components/button';
 
 export const Wallet = ({
   data = {
@@ -16,7 +16,7 @@ export const Wallet = ({
     used: 3500,
   },
   currancy = 'SAR',
-  onAddBalance = () => {},
+  // onAddBalance = () => {},
 }) => {
   const t = useTranslations('payments_obj');
 
@@ -33,7 +33,7 @@ export const Wallet = ({
           </span>
         </div>
 
-        <div className='w-full max-w-80 shrink'>
+        {/* <div className='w-full max-w-80 shrink'>
           <Button
             type='button'
             onClick={onAddBalance}
@@ -42,10 +42,10 @@ export const Wallet = ({
           >
             {t('wallet_deposit')}
           </Button>
-        </div>
+        </div> */}
       </div>
 
-      <div className='grid grid-cols-3 gap-5'>
+      <div className='grid grid-cols-2 gap-5'>
         <StatusCard
           label={t('used')}
           value={data.used.toLocaleString()}
@@ -56,10 +56,10 @@ export const Wallet = ({
           value={data.deposits.toLocaleString()}
           currancy={currancy}
         />
-        <StatusCard
+        {/* <StatusCard
           label={t('transactions_count')}
           value={data.transfers}
-        />
+        /> */}
       </div>
     </GradientCard>
   );

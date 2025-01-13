@@ -74,7 +74,7 @@ const NavLinks = ({ link }) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   const onClick = () => {
-    if (isOpen && match && !link.nestedLinks?.length) close();
+    if (isOpen && match) close();
     if (!!link.nestedLinks?.length && isOpen && path === link.route)
       toggle();
   };
