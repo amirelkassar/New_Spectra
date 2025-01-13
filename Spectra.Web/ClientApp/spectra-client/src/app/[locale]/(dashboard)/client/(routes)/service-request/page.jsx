@@ -2,7 +2,7 @@ import {
   Container,
   H1,
 } from '@/app/[locale]/(dashboard)/client/_components/ui';
-import { ChildSelect } from '@/app/[locale]/(dashboard)/client/_components/child';
+import { ChildSelect } from '@/client/_components/child';
 import { Subscriptions } from './_components/subscriptions';
 import { OurServices } from './_components/our-services';
 import { CHILDS, PROGRESS } from '@/data';

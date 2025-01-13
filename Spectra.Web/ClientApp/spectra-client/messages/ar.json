@@ -18,6 +18,8 @@
   "profile": "ملفي",
   "service_request": "طلب الخدمة",
   "appointments": "المواعيد",
+  "work_schedule": "مواعيد العمل",
+  "clients_schedule": "مواعيد العملاء",
   "team": "الفريق",
   "chat": "المحادثات",
   "wallet": "المحفظة",
@@ -42,6 +44,7 @@
     "doc_prefix": "د.",
     "no_notifications": "كل شيء هادئ هنا",
     "from": "من",
+    "to": "إلى",
     "by": "بواسطة",
     "last_modified": "آخر تعديل",
     "edit": "تعديل",
@@ -164,7 +167,15 @@
     "resend": "اعادة ارسال",
     "new_password": "كلمة المرور الجديدة",
     "confirm_new_password": "تأكيد كلمة المرور الجديدة",
-    "my_wallet": "محفظتي"
+    "my_wallet": "محفظتي",
+    "new": "جديد",
+    "examination": "كشف",
+    "session": "جلسة",
+    "add": "اضافة",
+    "child_name": "اسم الطفل",
+    "session_type": "نوع الجلسة",
+    "date": "التاريخ",
+    "time": "التوقيت"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
@@ -278,7 +289,7 @@
     "add_account": "اضافة حساب",
     "no_accounts": "لا يوجد حسابات",
     "bank_name": "اسم البنك",
-    "account_number": "رقم الحساب",
+    "account_number": "رقم الحساب الدولي ( IBAN )",
     "account_holder_name": "اسم مالك الحساب",
     "branch": "الفرع",
     "set_as_primary_account": "تعيين كحساب اساسي",
@@ -292,5 +303,15 @@
     "all_transactions": "جميع التحويلات",
     "no_transactions": "لا توجد تحويلات",
     "today": "اليوم"
+  },
+  "appointments_obj": {
+    "no_appointments": "لا يوجد مواعيد",
+    "no_appointments_for_this_day": "لا يوجد مواعيد لهذا اليوم",
+    "today_work_schedule": "مواعيد العمل الخاصة بك اليوم",
+    "work_schedule": "مواعيد العمل",
+    "clients_schedule": "مواعيد العملاء",
+    "add_appointment": "إضافة موعد",
+    "edit_appointment": "تعديل موعد",
+    "all_appointments": "جميع المواعيد"
   }
 }

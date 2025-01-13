@@ -11,115 +11,67 @@ import { scheduleTime } from '@/api/employee';
 
 export const initialQueryKey = 'employee.scheduleTime';
 
-export const getSceduleTimeList = async () =>
-  (await apiEmployee.get(contract.get)).data;
+export const getScheduleTimeList = async () =>
+  (await apiEmployee.get(scheduleTime.list())).data;
 
-export const prefetchEmployeeContract = async () => {
+export const prefetchScheduleTimeList = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: [initialQueryKey],
-    queryFn: getEmployeeContract,
+    queryFn: getScheduleTimeList,
   });
 
   return queryClient;
 };
 
-export const useEmployeeContract = () => {
+export const useScheduleTimeList = () => {
   return useQuery({
     queryKey: [initialQueryKey],
-    queryFn: getEmployeeContract,
+    queryFn: getScheduleTimeList,
     placeholderData: keepPreviousData,
   });
 };
 
-export const useUpateEmployeeContract = () => {
-  return useMutation({
-    mutationFn: async (data) =>
-      await apiEmployee.put(contract.actions.update, data),
-    onError: () => {},
-  });
-};
-
-export const useAddEmployeeContract = () => {
+export const useAddScheduleTime = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) =>
-      (await apiEmployee.post(contract.actions.add, data)).data,
+      (await apiEmployee.post(scheduleTime.actions.add, data)).data,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },
-    onError: () => {},
   });
 };
 
-export const useCancelEmployeeContract = () => {
+export const useUpdateScheduleTime = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data) =>
-      (await apiEmployee.post(contract.actions.cancel, data)).data,
+      (await apiEmployee.put(scheduleTime.actions.update, data)).data,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
     },
-    onError: () => {},
   });
 };
 
-export const useRejectEmployeeContract = () => {
+export const useDeleteScheduleTime = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data) =>
-      (await apiEmployee.post(contract.actions.reject, data)).data,
+    mutationFn: async (id) =>
+      (await apiEmployee.delete(scheduleTime.actions.delete(id)))
+        .data,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: [initialQueryKey],
       });
-    },
-    onError: () => {},
-  });
-};
-
-export const useAcceptEmployeeContract = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (data) =>
-      (await apiEmployee.post(contract.actions.accept, data)).data,
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: [initialQueryKey],
-      });
-    },
-    onError: () => {},
-  });
-};
-
-export const useDownloadEmployeeContract = () => {
-  return useMutation({
-    mutationFn: async ({ filename }) => {
-      const blob = (
-        await apiEmployee.post(
-          contract.actions.download,
-          {},
-          { responseType: 'blob' }
-        )
-      ).data;
-
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = filename || 'downloaded-file';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
     },
   });
 };

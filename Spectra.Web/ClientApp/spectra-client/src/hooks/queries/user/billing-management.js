@@ -11,7 +11,10 @@ import { billingManagement } from '@/api/user';
 import { initialSiteQueries } from '../initials';
 import { getQueries } from '@/lib/utils';
 
-const customQueries = null;
+const customQueries = {
+  skipCount: 0,
+  maxCount: 10,
+};
 
 export const initialQueries = customQueries || initialSiteQueries;
 

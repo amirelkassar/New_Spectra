@@ -18,6 +18,8 @@
   "profile": "Profile",
   "service_request": "Service Request",
   "appointments": "Appointments",
+  "work_schedule": "Work Schedule",
+  "clients_schedule": "Clients Schedule",
   "team": "Team",
   "chat": "Chat",
   "wallet": "Wallet",
@@ -42,6 +44,7 @@
     "doc_prefix": "Dr.",
     "no_notifications": "It's all quiet here",
     "from": "From",
+    "to": "To",
     "by": "By",
     "last_modified": "Last Modified",
     "all": "All",
@@ -164,7 +167,15 @@
     "resend": "Resend",
     "new_password": "New password",
     "confirm_new_password": "Confirm new password",
-    "my_wallet": "My wallet"
+    "my_wallet": "My wallet",
+    "new": "New",
+    "examination": "Examination",
+    "session": "Session",
+    "add": "Add",
+    "child_name": "Child name",
+    "session_type": "Session type",
+    "date": "Date",
+    "time": "Time"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -278,7 +289,7 @@
     "add_account": "Add account",
     "no_accounts": "No accounts found",
     "bank_name": "Bank name",
-    "account_number": "Account number",
+    "account_number": "International account number ( IBAN )",
     "account_holder_name": "Account holder name",
     "branch": "Branch",
     "set_as_primary_account": "Set as primary account",
@@ -292,5 +303,15 @@
     "all_transactions": "All transactions",
     "no_transactions": "No transactions found!",
     "today": "Today"
+  },
+  "appointments_obj": {
+    "no_appointments": "No appointments found!",
+    "no_appointments_for_this_day": "No appointments for this day",
+    "today_work_schedule": "Today's work schedule",
+    "work_schedule": "Work schedule",
+    "clients_schedule": "Clients Schedule",
+    "add_appointment": "Add appointment",
+    "edit_appointment": "Edit appointment",
+    "all_appointments": "All appointments"
   }
 }
