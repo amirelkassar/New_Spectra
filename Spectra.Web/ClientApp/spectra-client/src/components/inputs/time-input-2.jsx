@@ -19,7 +19,7 @@ export const TimeInput = forwardRef((props, ref) => {
           props?.classNames?.inputWrapper
         ),
         label: cn(
-          'text-base font-normal text-grayDark',
+          'text-base font-normal text-grayDark min-w-12 text-center',
           props?.classNames?.label
         ),
         innerWrapper: cn('h-16', props?.classNames?.innerWrapper),

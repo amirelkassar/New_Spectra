@@ -306,6 +306,7 @@
     "today_work_schedule": "مواعيد العمل الخاصة بك اليوم",
     "work_schedule": "مواعيد العمل",
     "clients_schedule": "مواعيد العملاء",
-    "add_appointment": "إضافة موعد"
+    "add_appointment": "إضافة موعد",
+    "edit_appointment": "تعديل موعد"
   }
 }

@@ -249,8 +249,7 @@ const ROUTES = {
       CLIENTS_SCHEDULE: '/doctor/appointments/clients-schedule',
       WORK_SCHEDULE: {
         DASHBOARD: '/doctor/appointments/work-schedule',
-        ADD: '/doctor/appointments/work-schedule/add',
-        EDIT: (id) => `/doctor/appointments/work-schedule/${id}/edit`,
+        CONTROL: '/doctor/appointments/work-schedule/control',
       },
     },
     RATINGS: {

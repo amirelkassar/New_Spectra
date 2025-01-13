@@ -306,6 +306,7 @@
     "today_work_schedule": "Today's work schedule",
     "work_schedule": "Work schedule",
     "clients_schedule": "Clients Schedule",
-    "add_appointment": "Add appointment"
+    "add_appointment": "Add appointment",
+    "edit_appointment": "Edit appointment"
   }
 }

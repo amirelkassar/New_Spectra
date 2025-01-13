@@ -48,6 +48,8 @@ export const useAddScheduleTime = () => {
 };
 
 export const useUpdateScheduleTime = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data) =>
       (await apiEmployee.put(scheduleTime.actions.update, data)).data,

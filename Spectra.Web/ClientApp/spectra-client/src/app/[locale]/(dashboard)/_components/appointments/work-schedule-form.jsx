@@ -18,7 +18,7 @@ export const WorkScheduleForm = ({ form = {} }) => {
       <div className='flex flex-wrap gap-4 items-center *:shrink-0'>
         {Object.entries(WEEK_DAYS).map(([key, value]) => (
           <Day
-            aria-pressed={form.data.day === key}
+            aria-pressed={form.data.day === +key}
             onClick={() => form.set(key, 'day')}
             key={key}
           >
@@ -49,15 +49,26 @@ export const WorkScheduleForm = ({ form = {} }) => {
         <Button
           type='button'
           variant='secondary'
-          className='max-w-44 w-full mt-5 lg:mt-0 gap-1'
+          className='lg:max-w-44 max-w-xs w-full mt-5 lg:mt-0 gap-1'
           disabled={form.disabled}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            form.onAdd();
+            if (form.action === 'add') {
+              return form.onAdd();
+            }
+
+            return form.onEdit();
           }}
         >
-          <span className='text-xl mdl:text-2xl'>+</span> {t('add')}
+          {form.action === 'add' ? (
+            <>
+              <span className='text-xl mdl:text-2xl'>+</span>{' '}
+              {t('add')}
+            </>
+          ) : (
+            t('edit')
+          )}
         </Button>
       </div>
     </div>
@@ -68,7 +79,7 @@ const Day = ({ children, ...props }) => (
   <div
     {...props}
     role='button'
-    className='rounded-xl bg-blueLight py-2 px-4 font-bold text-xs mdl:text-base aria-pressed:bg-greenMain aria-pressed:text-white w-fit min-w-32 text-center'
+    className='rounded-xl bg-blueLight py-2 px-2 font-bold text-xs mdl:text-base aria-pressed:bg-greenMain aria-pressed:text-white w-fit min-w-28 mdl:min-w-32 text-center'
   >
     {children}
   </div>

@@ -42,7 +42,7 @@ export const TodayWorkSchedule = () => {
         </div>
       </div>
 
-      <ArrowWhite className='shrink-0' />
+      <ArrowWhite className='shrink-0 ltr:rotate-180' />
     </GradientNoiseCard>
   );
 };
