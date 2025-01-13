@@ -44,10 +44,10 @@ const TodayWorkSchedule = () => {
 
         <div className='flex items-center gap-5 lg:gap-10'>
           <p className='text-sm mdl:text-xl font-bold'>
-            {tg('from')} / 00 :8 ص
+            {tg('from')} / --
           </p>
           <p className=' text-sm mdl:text-xl font-bold'>
-            {tg('to')} / 00 :4 م
+            {tg('to')} / --
           </p>
         </div>
       </div>
