@@ -171,7 +171,11 @@
     "new": "New",
     "examination": "Examination",
     "session": "Session",
-    "add": "Add"
+    "add": "Add",
+    "child_name": "Child name",
+    "session_type": "Session type",
+    "date": "Date",
+    "time": "Time"
   },
   "guest_obj": {
     "spectra_intro": "We embrace their excellence <br/> with love and creativity",
@@ -307,6 +311,7 @@
     "work_schedule": "Work schedule",
     "clients_schedule": "Clients Schedule",
     "add_appointment": "Add appointment",
-    "edit_appointment": "Edit appointment"
+    "edit_appointment": "Edit appointment",
+    "all_appointments": "All appointments"
   }
 }

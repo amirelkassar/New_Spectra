@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
 import { DataTable } from '@/components/table/data-table';
 import { TableCard } from '@/components/table/table-card';
 import {
@@ -9,7 +10,7 @@ import {
   TableItem,
 } from '@/dashboard/_components/appointments/clients-schedule-table';
 
-export const ClientsSchedule = () => {
+export const ClientsScheduleTable = () => {
   const t = useTranslations('appointments_obj');
 
   return (

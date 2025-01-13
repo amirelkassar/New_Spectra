@@ -171,7 +171,11 @@
     "new": "جديد",
     "examination": "كشف",
     "session": "جلسة",
-    "add": "اضافة"
+    "add": "اضافة",
+    "child_name": "اسم الطفل",
+    "session_type": "نوع الجلسة",
+    "date": "التاريخ",
+    "time": "التوقيت"
   },
   "guest_obj": {
     "spectra_intro": "نحتضن تميزهم <br/> بحب و إبداع",
@@ -307,6 +311,7 @@
     "work_schedule": "مواعيد العمل",
     "clients_schedule": "مواعيد العملاء",
     "add_appointment": "إضافة موعد",
-    "edit_appointment": "تعديل موعد"
+    "edit_appointment": "تعديل موعد",
+    "all_appointments": "جميع المواعيد"
   }
 }
