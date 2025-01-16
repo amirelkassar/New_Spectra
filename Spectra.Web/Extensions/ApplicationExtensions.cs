@@ -82,6 +82,7 @@ namespace Spectra.Web.Extensions
 
         private static void SetupFileProviders(WebApplication application)
         {
+            application.UseStaticFiles();
 
             application.UseStaticFiles(new StaticFileOptions
             {

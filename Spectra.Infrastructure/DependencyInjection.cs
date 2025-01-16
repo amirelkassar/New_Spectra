@@ -42,12 +42,10 @@ using Spectra.Application.MasterData.SpecializationCommend.Services;
 using Spectra.Application.MasterData.UploadExcel.Services;
 using Spectra.Application.Notifications;
 using Spectra.Application.Patients;
-using Spectra.Application.ScheduleAppointments.Appointments;
-using Spectra.Application.ScheduleAppointments.Appointments.Services;
-using Spectra.Application.ScheduleAppointments.DoctorSchedules;
 using Spectra.Application.Settings.AppSettings;
 using Spectra.Application.Settings.MedicalSpecialties;
 using Spectra.Application.Settings.MedicalSpecialties.Services;
+using Spectra.Application.Templates.Service;
 using Spectra.Domain.AppRole;
 using Spectra.Domain.AppUser;
 using Spectra.Domain.Shared.OptionDtos;
@@ -58,7 +56,6 @@ using Spectra.Infrastructure.Countries;
 using Spectra.Infrastructure.Countries.Cities;
 using Spectra.Infrastructure.Countries.States;
 using Spectra.Infrastructure.Data;
-using Spectra.Infrastructure.DoctorSchedules.DoctorSchedules;
 using Spectra.Infrastructure.Documents;
 using Spectra.Infrastructure.EmailSenders;
 using Spectra.Infrastructure.Employees.MedicalStaff;
@@ -73,16 +70,14 @@ using Spectra.Infrastructure.MasterData.Sections;
 using Spectra.Infrastructure.MasterData.ServicesM;
 using Spectra.Infrastructure.MasterData.ServicesMD;
 using Spectra.Infrastructure.MasterData.Specialization;
-using Spectra.Infrastructure.MedicalPatientProfiles;
 using Spectra.Infrastructure.Notifications;
 using Spectra.Infrastructure.Patients;
 using Spectra.Infrastructure.Repositories;
-using Spectra.Infrastructure.ScheduleAppointments.Appointments;
-using Spectra.Infrastructure.ScheduleDoctorSchedule.DoctorSchedules;
 using Spectra.Infrastructure.Services.IdentityServices;
 using Spectra.Infrastructure.Services.SnomedServices;
 using Spectra.Infrastructure.Settings.AppSettings;
 using Spectra.Infrastructure.Settings.MedicalSpecialties;
+using Spectra.Infrastructure.Templates;
 
 namespace Spectra.Infrastructure
 {
@@ -153,8 +148,6 @@ namespace Spectra.Infrastructure
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IContractService, ContractService>();
             services.AddScoped<IChatService, ChatService>();
-            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
-            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IInternalExaminationService, InternalExaminationService>();
             services.AddScoped<ISectionsService, SectionsService>();
             services.AddScoped<IMedicalSpecialtiesService, MedicalSpecialtiesService>();
@@ -180,11 +173,7 @@ namespace Spectra.Infrastructure
             services.AddScoped<ISectionsRepository, SectionsRepository>();
             //End
             services.AddScoped<IContractRepository, ContractRepository>();
-            //  services.AddScoped<IChatRepository, ChatRepository>();
-            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
             services.AddScoped<IInternalExaminationRepository, InternalExaminationRepository>();
-            services.AddScoped<IMedicalPatientProfileRepository, MedicalPatientProfileRepository>();
             services.AddScoped<IMedicalSpecialtiesRepository, MedicalSpecialtiesRepository>();
 
             services.AddScoped<ISettingRepository, SettingRepository>();
@@ -282,6 +271,7 @@ namespace Spectra.Infrastructure
         private static IServiceCollection ConfigureSeedServices(this IServiceCollection services)
         {
             services.AddScoped<ICountrySeedService, CountrySeedService>();
+            services.AddScoped<ITemplateService, TemplateService>();
             return services;
         }
 

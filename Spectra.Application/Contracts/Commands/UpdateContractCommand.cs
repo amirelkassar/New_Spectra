@@ -69,7 +69,7 @@ namespace Spectra.Application.Contracts.Commands
                 request.SpectraTeamDuration)
             {
                 AcceptedByAdmin = false,
-                AcceptedByEmployee = new string[] { Roles.Accountant, Roles.Specialist, Roles.Doctor, Roles.CustomerSupport }.Any(r => r.Equals(request.ModifierRole)),
+                AcceptedByEmployee = false,
                 CreationDate = DateTime.UtcNow,
                 Order = currentVersion.Order + 1,
                 State = ContractVersionStates.Active

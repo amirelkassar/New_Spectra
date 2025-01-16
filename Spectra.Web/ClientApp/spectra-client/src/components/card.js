@@ -21,7 +21,7 @@ const Card = ({
           {title && (
             <h2
               id={titleId}
-              className='text-base font-bold mdl:text-xl mb-3'
+              className='text-base font-bold mdl:text-xl mb-3 capitalize'
             >
               {title}
             </h2>

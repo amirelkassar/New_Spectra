@@ -1,6 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 import TextInput from '@/components/inputs/text-input';
 import PasswordInput from '@/components/inputs/password-input';
@@ -11,6 +12,8 @@ import { useLogin } from '../../../_hooks/use-login';
 import GetErrorMsg from '@/components/getErrorMsg';
 
 export const LoginForm = () => {
+  const tg = useTranslations('general_obj');
+
   const {
     formData,
     login,
@@ -25,12 +28,20 @@ export const LoginForm = () => {
       <FormErrorMessage message={GetErrorMsg(error, 'general')} />
 
       <TextInput
-        label='البريد الالكتروني'
+        label={tg('email')}
         placeholder='john.doe@example.com'
         size='lg'
         id='userEmail'
         name='userEmail'
         autoComplete='off'
+        styles={{
+          input: {
+            direction: 'ltr',
+          },
+        }}
+        classNames={{
+          input: 'text-left',
+        }}
         value={formData.userEmail}
         onChange={onChange}
         error={
@@ -41,7 +52,7 @@ export const LoginForm = () => {
       />
 
       <PasswordInput
-        label='كلمة المرور'
+        label={tg('password')}
         placeholder='********'
         size='lg'
         id='password'
@@ -59,7 +70,7 @@ export const LoginForm = () => {
         className='block w-fit text-xl transition-all hover:underline'
         href={ROUTES.AUTH.FORGOT_PASSWORD}
       >
-        نسيت كلمة السر؟
+        {tg('forgot_password')}
       </Link>
 
       <Button
@@ -68,7 +79,7 @@ export const LoginForm = () => {
         className='w-full font-bold'
         type='submit'
       >
-        تسجيل الدخول
+        {tg('login')}
       </Button>
     </form>
   );

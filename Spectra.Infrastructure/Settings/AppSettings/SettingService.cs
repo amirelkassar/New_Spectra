@@ -72,6 +72,16 @@ namespace Spectra.Infrastructure.Settings.AppSettings
             return setting;
         }
 
+        public async Task<T> GetValueAsync<T>(string name)
+        {
+            var setting = await _settingRepository.GetByNameAsync(name);
+            if (setting.Encrypted)
+            {
+                setting.Value = _dataProtector.Unprotect(setting.Value);
+            }
+            return (T)Convert.ChangeType(setting.Value,typeof(T));
+        }
+
         public async Task<ApplicationSetting> SetValueAsync(string name, string value, string? description = null)
         {
             var setting = await _settingRepository.GetByNameAsync(name) ?? throw new NotFoundException("ApplicationSetting", name);

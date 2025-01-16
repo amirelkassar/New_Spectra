@@ -34,6 +34,8 @@ namespace Spectra.Infrastructure.Handlers
 
         public string Role => _context.User.FindFirst(ClaimTypes.Role)?.Value;
 
+        public string EmployeeId => _context.User.FindFirst(CustomClaims.EmployeeId)?.Value;
+
         public bool IsInRole(string role)
         {
             return _context.User.IsInRole(role);

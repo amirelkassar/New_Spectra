@@ -1,77 +1,84 @@
 'use client';
 
-import { useState } from 'react';
-import { FormTitle } from '../../../_components/form-title';
+import { useTranslations } from 'next-intl';
 
-import CheckHeartIcon from '@/assets/icons/check-heart';
-import TextInput from '@/components/inputs/text-input';
-import MobileInput from '@/components/inputs/mobile-input';
+import { FormTitle } from '../../../_components/form-title';
+import { useForgetPassword } from '../../../_hooks/use-forget-password';
 import Button from '@/components/button';
+import TextInput from '@/components/inputs/text-input';
+import CheckHeartIcon from '@/assets/icons/check-heart';
 
 export const ForgotForm = () => {
-  const [success, setSuccess] = useState(false);
+  const tg = useTranslations('general_obj');
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setSuccess(true);
-  };
+  const { form, success, onSend, onResend, isPending, countdown } =
+    useForgetPassword();
 
   if (success)
-    return <SuccessUi onResend={() => setSuccess(false)} />;
-  else
     return (
-      <form
-        onSubmit={onSubmit}
-        className='flex flex-col lg:max-w-xl gap-5 h-[80vh] mdl:h-[68vh]'
-      >
-        <FormTitle
-          heading={'اعادة تعيين كلمة المرور الخاصة بك'}
-          subheading='أدخل عنوان بريدك الإلكتروني أدناه او رقم الواتساب وسنرسل لك رابطا يحتوي على التعليمات'
-        />
-
-        <TextInput
-          label='البريد الالكترونى'
-          placeholder='البريد الالكترونى'
-          size='lg'
-        />
-
-        <span className='text-xl text-greenMain block'>
-          أو
-        </span>
-
-        <MobileInput
-          size='lg'
-          label='رقم الواتساب'
-          placeholder='رقم الهاتف'
-        />
-
-        <div className='flex-1 flex items-end'>
-          <Button
-            type='submit'
-            className='font-bold w-full block'
-            variant='secondary'
-          >
-            ارسال
-          </Button>
-        </div>
-      </form>
+      <SuccessUi
+        onResend={onResend}
+        countdown={countdown}
+        isPending={isPending}
+      />
     );
+
+  return (
+    <form
+      onSubmit={form.handleSubmit(onSend)}
+      className='flex flex-col lg:max-w-xl gap-5 h-[80vh] mdl:h-[68vh]'
+    >
+      <FormTitle
+        heading={tg('reset_password_heading')}
+        subheading={tg('reset_password_subheading')}
+      />
+
+      <TextInput
+        label={tg('email')}
+        placeholder={tg('email')}
+        size='lg'
+        {...form.register('email')}
+        error={form.formState.errors.email?.message}
+      />
+
+      <div className='flex-1 flex items-end'>
+        <Button
+          type='submit'
+          className='font-bold w-full block'
+          variant='secondary'
+          disabled={form.formState.isSubmitting}
+        >
+          {tg('send')}
+        </Button>
+      </div>
+    </form>
+  );
 };
 
-const SuccessUi = ({ onResend = () => {} }) => {
+const SuccessUi = ({
+  onResend = () => {},
+  countdown = 0,
+  isPending = false,
+}) => {
+  const tg = useTranslations('general_obj');
+
   return (
     <div className='flex flex-col gap-10 items-center mdl:items-start'>
       <FormTitle
-        heading={'تم ارسال رابط اعادة التعيين'}
-        subheading='قم بفتح الرابط اللي وصل الى بريدك الالكتروني'
+        heading={tg('reset_password_sent_heading')}
+        subheading={tg('reset_password_sent_subheading')}
       />
 
       <CheckHeartIcon />
 
       <div className='text-base font-bold mdl:font-normal mdl:text-xl'>
-        <span>لم يصلك؟ ..</span>
-        <button onClick={onResend} className='text-red'>
-          اعادة ارسال
+        <span>{tg('resend_prompt')} </span>
+        <button
+          onClick={onResend}
+          className='text-red transition hover:underline disabled:text-grayDark disabled:hover:no-underline disabled:cursor-not-allowed'
+          disabled={countdown > 0 || isPending}
+        >
+          {countdown > 0 ? `${countdown}s` : tg('resend')}
         </button>
       </div>
     </div>

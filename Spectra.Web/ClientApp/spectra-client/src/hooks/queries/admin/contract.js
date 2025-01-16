@@ -137,3 +137,30 @@ export const useAdminAcceptContract = () => {
     onError: () => {},
   });
 };
+
+export const useAdminDownloadEmployeeContract = () => {
+  return useMutation({
+    mutationFn: async ({ filename, contractId }) => {
+      try {
+        const blob = (
+          await apiAdmin.post(
+            contract.actions.download(contractId),
+            {},
+            { responseType: 'blob' }
+          )
+        ).data;
+
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename || 'downloaded-file';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  });
+};

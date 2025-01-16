@@ -216,6 +216,7 @@ namespace Spectra.Application.Contracts.Queries
                     }
                 }
 
+                await _contractRepository.UpdateAsync(contract);
                 var textSection = contract.Adapt<ContractTextReadDto>();
 
                 return OperationResult<ContractTextReadDto>.Success(textSection);

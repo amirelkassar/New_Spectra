@@ -153,8 +153,8 @@ namespace Spectra.Infrastructure.Services.IdentityServices
             var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                await _userManager.ResetPasswordAsync(user, token, newPassword);
-                return OperationResult.Success();
+               var results= await _userManager.ResetPasswordAsync(user, token, newPassword);
+                return results.ToApplicationResult();
             }
             throw new NotFoundException(userId, nameof(user));
         }

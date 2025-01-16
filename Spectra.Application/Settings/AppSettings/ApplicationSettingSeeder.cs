@@ -20,22 +20,22 @@ namespace Spectra.Application.Settings.AppSettings
         private async Task AddEmailSettings()
         {
             if (!await _settingService.AnyAsync(EmailSettings.Host))
-                await _settingService.CreateSettingAsync(EmailSettings.Host, "127.0.0.1", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.Host, "smtp.hostinger.com", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Port))
-                await _settingService.CreateSettingAsync(EmailSettings.Port, "567", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.Port, "587", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.UseDefaultCredentials))
-                await _settingService.CreateSettingAsync(EmailSettings.UseDefaultCredentials, "true", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.UseDefaultCredentials, "false", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.EmailAddress))
-                await _settingService.CreateSettingAsync(EmailSettings.EmailAddress, "tech@profound-group.com", false, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.EmailAddress, "test.spectra@profound-group.com", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Name))
                 await _settingService.CreateSettingAsync(EmailSettings.Name, "Spectra", false, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.Password))
-                await _settingService.CreateSettingAsync(EmailSettings.Password, "Testing@1234", true, group: EmailSettings.Group);
+                await _settingService.CreateSettingAsync(EmailSettings.Password, "uY4lSQjZWyH:", true, group: EmailSettings.Group);
 
             if (!await _settingService.AnyAsync(EmailSettings.UseSSL))
                 await _settingService.CreateSettingAsync(EmailSettings.UseSSL, "true", true, group: EmailSettings.Group);

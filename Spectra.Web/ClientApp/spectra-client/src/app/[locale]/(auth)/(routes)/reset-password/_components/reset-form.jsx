@@ -1,33 +1,38 @@
 'use client';
 
-import PasswordInput from '@/components/inputs/password-input';
-import Button from '@/components/button';
+import { useTranslations } from 'next-intl';
+
 import { FormTitle } from '../../../_components/form-title';
+import { useResetPassword } from '../../../_hooks/use-reset-password';
+import Button from '@/components/button';
+import PasswordInput from '@/components/inputs/password-input';
 
 export const ResetForm = () => {
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
+  const tg = useTranslations('general_obj');
+
+  const { form, onConfirm, isPending } = useResetPassword();
 
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={form.handleSubmit(onConfirm)}
       className='flex flex-col lg:max-w-xl gap-5 h-[80vh] mdl:h-[68vh]'
     >
-      <FormTitle
-        heading={'اعادة تعيين كلمة المرور الخاصة بك'}
+      <FormTitle heading={tg('reset_password_heading')} />
+
+      <PasswordInput
+        label={tg('new_password')}
+        placeholder={tg('password')}
+        size='lg'
+        {...form.register('newPassword')}
+        error={form.formState.errors.newPassword?.message}
       />
 
       <PasswordInput
-        label='كلمة المرور الجديدة'
-        placeholder='ادخل كلمة المرور الجديدة'
+        label={tg('confirm_new_password')}
+        placeholder={tg('confirm_password')}
         size='lg'
-      />
-
-      <PasswordInput
-        label='تأكيد كلمة المرور الجديدة'
-        placeholder='ادخل كلمة المرور الجديدة'
-        size='lg'
+        {...form.register('confirmPassword')}
+        error={form.formState.errors.confirmPassword?.message}
       />
 
       <div className='flex flex-1 items-end'>
@@ -35,8 +40,9 @@ export const ResetForm = () => {
           variant='secondary'
           type='submit'
           className='w-full font-bold'
+          disabled={isPending}
         >
-          تأكيد
+          {tg('confirm')}
         </Button>
       </div>
     </form>

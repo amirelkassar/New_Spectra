@@ -3,6 +3,7 @@
     public interface ICurrentUser
     {
         string Id { get; }
+        string EmployeeId { get; }
         string Name { get; }
         string Username { get; }
         string Email { get; }

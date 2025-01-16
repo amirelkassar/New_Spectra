@@ -34,3 +34,11 @@ export const medicalProviders = {
     get: (id) => `/medicalprovider?id=${id}`,
   },
 };
+
+export const identity = {
+  login: '/login',
+  registerClient: '/register-client',
+  registerMedicalProvider: '/register-medical-provider',
+  forgetPassword: '/forget-password',
+  resetPassword: '/reset-password',
+};

@@ -26,11 +26,7 @@ namespace Spectra.Application.Validator
         public PhoneNumberValidator()
         {
             RuleFor(x => x.PhoneNumbers)
-                .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\d+$").WithMessage("Phone number must contain only digits.");
-
-            RuleFor(x => x.CountryCode)
-                .NotEmpty().WithMessage("Country code is required.");
+                .NotEmpty().WithMessage("Phone number is required.");
         }
     }
     public class EmailAddressValidator : AbstractValidator<EmailAddress>
@@ -51,18 +47,6 @@ namespace Spectra.Application.Validator
 
             RuleFor(x => x.City)
                 .NotEmpty().WithMessage("City is required.");
-
-
-
-            RuleFor(x => x.PostalCode)
-
-                .Matches(@"^\d{5,6}$").WithMessage("Postal code must be between 5 and 6 digits.");
-
-            RuleFor(x => x.Floor)
-                .MaximumLength(10).When(x => !string.IsNullOrEmpty(x.Floor)).WithMessage("Floor must not exceed 10 characters.");
-
-            RuleFor(x => x.CommonMark)
-                .MaximumLength(100).When(x => !string.IsNullOrEmpty(x.CommonMark)).WithMessage("Common mark must not exceed 100 characters.");
         }
     }
     public class OrganizationValidator : AbstractValidator<Organization>

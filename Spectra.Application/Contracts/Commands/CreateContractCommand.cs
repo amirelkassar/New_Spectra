@@ -71,7 +71,7 @@ namespace Spectra.Application.Contracts.Commands
             {
                 Order = 1,
                 AcceptedByAdmin = false,
-                AcceptedByEmployee = true,
+                AcceptedByEmployee = false,
                 CreationDate = DateTime.UtcNow,
                 State = ContractVersionStates.Active,
             };

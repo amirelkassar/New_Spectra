@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { FormTitle } from '../../../_components/form-title';
 import Button from '@/components/button';
@@ -21,6 +22,8 @@ import { AcademicDegreeSelect } from '@/components/inputs/academic-degree-select
 const MemowizedFormTitle = memo(FormTitle);
 
 export const ProForm = () => {
+  const tg = useTranslations('general_obj');
+
   const [step, setStep] = useState(1);
 
   const { stepOneForm, stepTwoForm, onSubmit, isPending } =
@@ -40,7 +43,7 @@ export const ProForm = () => {
     <form className='space-y-5 lg:max-w-xl'>
       <MemowizedFormTitle
         currentStep={step}
-        heading={'املأ بيانات مقدم الخدمة'}
+        heading={tg('enter_medical_provider_data')}
       />
 
       {step === 1 && <StepOne form={stepOneForm} />}
@@ -55,7 +58,7 @@ export const ProForm = () => {
             onClick={stepOneForm.handleSubmit(onNext)}
             className='w-full'
           >
-            التالي
+            {tg('next')}
           </Button>
         )}
 
@@ -68,7 +71,7 @@ export const ProForm = () => {
               onClick={stepTwoForm.handleSubmit(onSubmit)}
               disabled={isPending}
             >
-              تأكيد
+              {tg('confirm')}
             </Button>
 
             <Button
@@ -80,7 +83,7 @@ export const ProForm = () => {
               }}
               disabled={isPending}
             >
-              السابق
+              {tg('previous')}
             </Button>
           </div>
         )}
@@ -90,6 +93,8 @@ export const ProForm = () => {
 };
 
 const StepOne = memo(({ form = {} }) => {
+  const tg = useTranslations('general_obj');
+
   const {
     register,
     formState: { errors },
@@ -98,16 +103,16 @@ const StepOne = memo(({ form = {} }) => {
   return (
     <div className={cn('space-y-5')}>
       <TextInput
-        label='الاسم'
-        placeholder='ادخل الاسم الاول'
+        label={tg('first_name')}
+        placeholder={`${tg('enter')} ${tg('first_name')}`}
         size='lg'
         error={errors?.name?.message}
         {...register('name')}
       />
 
       <GenderSelect
-        label='اختر النوع'
-        placeholder='اختر النوع'
+        label={tg('gender')}
+        placeholder={`${tg('select')} ${'gender'}`}
         size='lg'
         error={errors?.gender?.message}
         value={form.watch('gender')}
@@ -118,8 +123,8 @@ const StepOne = memo(({ form = {} }) => {
       />
 
       <CountrySelect
-        label='اختر البلد'
-        placeholder='اختر البلد'
+        label={tg('country')}
+        placeholder={`${tg('select')} ${tg('country')}`}
         size='lg'
         error={errors?.country?.message}
         onChange={(value) => {
@@ -136,8 +141,8 @@ const StepOne = memo(({ form = {} }) => {
         }
       />
       <StateSelect
-        label='اختر المدينة'
-        placeholder='اختر المدينة'
+        label={tg('city')}
+        placeholder={`${tg('select')} ${tg('city')}`}
         size='lg'
         countryCode={form.watch('countryCode')}
         error={errors?.city?.message}
@@ -149,8 +154,8 @@ const StepOne = memo(({ form = {} }) => {
       />
 
       <TextInput
-        label='العنوان'
-        placeholder='ادخل العنوان'
+        label={tg('address')}
+        placeholder={`${tg('enter')} ${tg('address')}`}
         size='lg'
         error={errors?.address?.message}
         {...register('address')}
@@ -158,7 +163,8 @@ const StepOne = memo(({ form = {} }) => {
 
       <MobileInput
         size='lg'
-        placeholder='رقم الهاتف'
+        label={tg('phone_number')}
+        placeholder={`${tg('enter')} ${tg('phone_number')}`}
         error={errors?.phone?.message}
         value={form.watch('phone')}
         onChange={(value) => {
@@ -168,23 +174,23 @@ const StepOne = memo(({ form = {} }) => {
       />
 
       <TextInput
-        label='رقم الهوية'
-        placeholder='ادخل رقم الهوية'
+        label={tg('national_id')}
+        placeholder={`${tg('enter')} ${tg('national_id')}`}
         size='lg'
         error={errors?.nationalId?.message}
         {...register('nationalId')}
       />
 
       <TextInput
-        label='البريد الالكترونى'
-        placeholder='ادخل البريد الالكترونى'
+        label={tg('email')}
+        placeholder={`${tg('enter')} ${tg('email')}`}
         size='lg'
         error={errors?.emailAddress?.message}
         {...register('emailAddress')}
       />
 
       <PasswordInput
-        label='كلمة المرور'
+        label={tg('password')}
         size='lg'
         placeholder='*********'
         error={errors?.password?.message}
@@ -192,7 +198,7 @@ const StepOne = memo(({ form = {} }) => {
       />
 
       <PasswordInput
-        label='تاكيد كلمة المرور'
+        label={tg('confirm_password')}
         size='lg'
         placeholder='*********'
         error={errors?.confirmPassword?.message}
@@ -205,6 +211,8 @@ const StepOne = memo(({ form = {} }) => {
 StepOne.displayName = 'StepOne';
 
 const StepTwo = memo(({ form = {} }) => {
+  const tg = useTranslations('general_obj');
+
   const {
     register,
     formState: { errors },
@@ -213,8 +221,8 @@ const StepTwo = memo(({ form = {} }) => {
   return (
     <div className={cn('space-y-5')}>
       <SelectInput
-        label='طبيب / اخصائى'
-        placeholder='اختر المهنة الخاصة بك'
+        label={tg('doctor_or_specialist')}
+        placeholder={`${tg('select')} ${tg('proffession')}`}
         data={[
           { label: 'Doctor', value: '1' },
           { label: 'Specialist', value: '2' },
@@ -229,16 +237,16 @@ const StepTwo = memo(({ form = {} }) => {
       />
 
       <TextInput
-        label='الوظيفة'
-        placeholder='ادخل الوظيفة'
+        label={tg('proffession')}
+        placeholder={`${tg('enter')} ${tg('proffession')}`}
         size='lg'
         error={errors?.jobName?.message}
         {...register('jobName')}
       />
 
       <SpecializationSingleSelect
-        label='التخصص الرئيسي'
-        placeholder='اختر تخصصك'
+        label={tg('main_specialization')}
+        placeholder={`${tg('select')} ${tg('main_specialization')}`}
         size='lg'
         error={errors?.mainSpecializationId?.message}
         value={form.watch('mainSpecializationId')}
@@ -249,8 +257,8 @@ const StepTwo = memo(({ form = {} }) => {
       />
 
       <SpecializationMultiSelect
-        label='التخصصات الفرعية'
-        placeholder='اختر التخصصات'
+        label={tg('other_specializations')}
+        placeholder={`${tg('select')} ${tg('other_specializations')}`}
         size='lg'
         error={errors?.specializations?.message}
         defaultValue={form.watch('specializations')}
@@ -261,8 +269,8 @@ const StepTwo = memo(({ form = {} }) => {
       />
 
       <AcademicDegreeSelect
-        label='الدرجة العلمية'
-        placeholder='ادخل الدرجة العلمية'
+        label={tg('medical_degree')}
+        placeholder={`${tg('select')} ${tg('medical_degree')}`}
         size='lg'
         error={errors?.academicDegree?.message}
         value={form.watch('academicDegree')}
@@ -273,8 +281,8 @@ const StepTwo = memo(({ form = {} }) => {
       />
 
       <TextInput
-        label='سنوات الخبرة'
-        placeholder='ادخل عدد سنوات الخبرة'
+        label={tg('exp_years')}
+        placeholder={`${tg('enter')} ${tg('exp_years')}`}
         type='number'
         size='lg'
         error={errors?.experienceYears?.message}
@@ -282,25 +290,25 @@ const StepTwo = memo(({ form = {} }) => {
       />
 
       <TextInput
-        label='رقم الترخيص/الاعتماد'
-        placeholder='ادخل رقم الترخيص او الاعتماد'
+        label={tg('license_number')}
+        placeholder={`${tg('enter')} ${tg('license_number')}`}
         size='lg'
         error={errors?.licenseNumber?.message}
         {...register('licenseNumber')}
       />
 
       <TextInput
-        label='مرخص / معتمد من'
-        placeholder='ادخل جهة الترخيص او الاعتماد'
+        label={tg('approved_by')}
+        placeholder={`${tg('enter')} ${tg('approved_by')}`}
         size='lg'
         error={errors?.approvedBy?.message}
         {...register('approvedBy')}
       />
 
       <FileInput
-        label='الشهادات'
+        label={tg('certificates')}
         size='lg'
-        placeholder='ادخل الشهادات الحاصل عليها'
+        placeholder={`${tg('upload')} ${tg('certificates')}`}
         error={errors?.certification?.message}
         value={form.watch('certification')}
         onChange={(value) => {

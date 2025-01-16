@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import {
   useClickOutside,
   useDisclosure,
@@ -17,6 +17,7 @@ import LogoutIcon from '@/assets/icons/logOut';
 import { useLogout } from '@/hooks/queries/auth';
 import ArrowDownIcon from '@/assets/icons/arrow-down';
 import { Collapse } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 export const Sidebar = ({ links = [] }) => {
   const { isOpen, close } = useSidebarStore();
@@ -64,6 +65,8 @@ export const Sidebar = ({ links = [] }) => {
 };
 
 const NavLinks = ({ link }) => {
+  const path = usePathname();
+
   const { isOpen, close } = useSidebarStore();
 
   const match = useMediaQuery('(max-width: 960px)');
@@ -71,38 +74,50 @@ const NavLinks = ({ link }) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   const onClick = () => {
-    if (isOpen && match && !link.nestedLinks?.length) close();
-    if (!!link.nestedLinks?.length && isOpen) toggle();
+    if (isOpen && match) close();
+    if (!!link.nestedLinks?.length && isOpen && path === link.route)
+      toggle();
   };
 
   return (
     <li className='relative lg:min-h-11'>
-      <Link
+      <div
         onClick={onClick}
         className='flex items-center gap-3 text-sm lg:text-lg p-2 font-bold relative w-fit rounded-lg group'
-        href={link.route}
       >
-        {/* LINK ICON */}
-        <span
-          className={cn(
-            'size-5 group-hover:fill-greenMain group-hover:text-greenMain flex items-center justify-center lg:mt-1',
-            link.isActive && 'fill-greenMain text-greenMain'
-          )}
-        >
-          {link.icon}
-        </span>
+        <Link href={link.route} className='flex items-center gap-3'>
+          {/* LINK ICON */}
+          <span
+            className={cn(
+              'size-5 group-hover:fill-greenMain group-hover:text-greenMain flex items-center justify-center',
+              link.isActive && 'fill-greenMain text-greenMain'
+            )}
+          >
+            {link.icon}
+          </span>
 
-        {/* LINK LABEL */}
-        <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
-          {link.name}
-        </span>
+          {/* LINK LABEL */}
+          <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
+            {link.name}
+          </span>
+        </Link>
 
         {!!link?.nestedLinks?.length && isOpen && (
-          <ArrowDownIcon
-            className={cn('transition', opened && 'rotate-180')}
-          />
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              toggle();
+            }}
+          >
+            <ArrowDownIcon
+              className={cn(
+                'transition cursor-pointer',
+                opened && 'rotate-180'
+              )}
+            />
+          </div>
         )}
-      </Link>
+      </div>
 
       {!!link.nestedLinks?.length && isOpen && (
         <Collapse in={opened}>
@@ -129,6 +144,8 @@ const NavLinks = ({ link }) => {
 };
 
 const Logout = () => {
+  const t = useTranslations();
+
   const { isOpen } = useSidebarStore();
 
   const { logout } = useLogout();
@@ -143,7 +160,7 @@ const Logout = () => {
       </span>
 
       <span className={cn('text-nowrap', !isOpen && 'lg:hidden')}>
-        تسجيل الخروج
+        {t('logout')}
       </span>
     </button>
   );

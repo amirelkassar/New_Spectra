@@ -8,7 +8,7 @@ export const ContractA4 = forwardRef(({ children }, ref) => {
   return (
     <div
       ref={ref}
-      className='relative bg-white text-black w-[210mm] h-[297mm] mx-auto flex flex-col gap-5 contract-a4'
+      className='relative bg-white text-black flex flex-col gap-5 contract-a4'
     >
       <Header />
 
@@ -25,7 +25,7 @@ const Header = ({ className = '' }) => (
   <div
     dir='rtl'
     className={cn(
-      'space-y-5 p-8 print:fixed print:top-0 print:left-0 print:right-0',
+      'space-y-5 p-4 lg:p-8 print:fixed print:top-0 print:left-0 print:right-0',
       className
     )}
   >
@@ -44,7 +44,7 @@ const Header = ({ className = '' }) => (
 const Content = ({ children }) => (
   <div
     dir='rtl'
-    className='flex-1 px-8 overflow-y-scroll print:overflow-clip text-xs print:pt-[164px] print:break-before-page'
+    className='flex-1 px-4 lg:px-8 print:overflow-clip text-xs print:pt-[164px] print:break-before-page'
   >
     {children}
   </div>
@@ -54,7 +54,7 @@ const Footer = ({ className = '' }) => (
   <div
     dir='ltr'
     className={cn(
-      'border-t-2 border-greenMain flex items-center justify-between p-8 print:fixed print:bottom-0 print:left-0 print:right-0',
+      'border-t-2 text-xs mdl:text-base border-greenMain flex items-center justify-between p-4 lg:p-8 print:fixed print:bottom-0 print:left-0 print:right-0',
       className
     )}
   >
