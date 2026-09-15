@@ -188,4 +188,14 @@ The solution root also contains the following non-project artifacts relevant to 
 - `azure-pipelines.yml`
 - `.editorconfig`
 
+### Docker deployment
+
+The active `Spectra.Web` host can be built and run with Docker Compose. The Compose stack starts the ASP.NET Core application, MongoDB, and PostgreSQL with persistent database volumes:
+
+```bash
+docker compose up --build
+```
+
+The application is available at `http://localhost:8080`, with Swagger at `http://localhost:8080/swagger`. Copy `.env.example` to `.env` before using Docker Compose and replace the development secrets. PDF generation currently depends on the Windows `libwkhtmltox.dll`; a Linux-compatible native wkhtmltopdf library is required before that feature can run in the Linux-based container.
+
 This document is an architectural overview and source inventory. For endpoint-level contracts, use the controller and DTO definitions under `Spectra.WebAPI` and `Spectra.Application`; for database details, use the corresponding migration folders and DbContext configuration.
