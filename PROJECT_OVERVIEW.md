@@ -2,7 +2,7 @@
 
 **Repository:** Spectra
 **Solution:** `SpectraWorkspace.sln`
-**Target runtime:** .NET 8 (`global.json` pins SDK `8.0.307`, rolling forward to the latest feature band)
+**Target runtime:** .NET 10 (`global.json` pins SDK `10.0.400-preview.0.26322.102`, rolling forward to the latest feature band)
 **Document scope:** Solution and source inventory reviewed on 2026-09-15
 
 ## 1. Product and Architecture Summary
